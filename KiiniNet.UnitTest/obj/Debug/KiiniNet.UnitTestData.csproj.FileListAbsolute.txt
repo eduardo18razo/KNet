@@ -1,0 +1,28 @@
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.UnitTest.dll.config
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.UnitTest.dll
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.UnitTest.pdb
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.Entities.dll
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Core.dll
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Data.dll
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Business.Utils.dll
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.Entities.pdb
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Core.pdb
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Data.pdb
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Business.Utils.pdb
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTestData.csprojResolveAssemblyReference.cache
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTest.dll
+D:\KiiniNet\App\KinniNet\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTest.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTestData.csprojResolveAssemblyReference.cache
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.UnitTest.dll.config
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.UnitTest.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.UnitTest.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.Entities.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Data.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.Entities.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Data.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTest.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTest.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Core.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Business.Utils.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Core.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Business.Utils.pdb

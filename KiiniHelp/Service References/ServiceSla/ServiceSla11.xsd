@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:15277/ServiceSla.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceSla.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfParametrosTelefonos">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ParametrosTelefonos" nillable="true" type="tns:ParametrosTelefonos" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfParametrosTelefonos" nillable="true" type="tns:ArrayOfParametrosTelefonos" />
+  <xs:complexType name="ParametrosTelefonos">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTipoTelefono" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="NumeroTelefonos" type="xs:int" />
+      <xs:element minOccurs="0" name="Obligatorios" type="xs:int" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoTelefono" nillable="true" type="q1:TipoTelefono" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q2:TipoUsuario" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ParametrosTelefonos" nillable="true" type="tns:ParametrosTelefonos" />
+</xs:schema>

@@ -1,0 +1,91 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Usuarios.master.cs" Inherits="KiiniHelp.UsuariosMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="BootStrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="BootStrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="BootStrap/css/CheckBoxStyle.css" rel="stylesheet" />
+    <link href="BootStrap/css/Calendar.css" rel="stylesheet" />
+    <link href="BootStrap/css/DropDown.css" rel="stylesheet" />
+    <link href="BootStrap/css/divs.css" rel="stylesheet" />
+    <link href="BootStrap/css/FileInput.css" rel="stylesheet" />
+    <link href="BootStrap/css/simple-sidebar.css" rel="stylesheet" />
+    <link href="BootStrap/css/jquery.treegrid.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
+            <Scripts>
+                <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
+                <asp:ScriptReference Path="~/BootStrap/js/bootstrap.min.js" />
+            </Scripts>
+        </asp:ScriptManager>
+        <div id="wrapper">
+
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="#">Inicio
+                        </a>
+                    </li>
+                    <asp:Repeater runat="server" ID="rptMenu" OnItemDataBound="rptMenu_OnItemDataBound">
+                        <ItemTemplate>
+                            <li> 
+                                <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' runat="server" Text='<%# Eval("Descripcion") %>' style="color: white; font-size: 20px" />
+                                <ul class="dropdown-menu">
+                                    <asp:Repeater runat="server" ID="rptSubMenu">
+                                        <ItemTemplate>
+                                            <li class="sidebar-brand">
+                                                <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' runat="server" Text='<%# Eval("Descripcion") %>' style="color: white; font-size: 20px"  />
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </ul>
+                            </li>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div>
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                hola
+                            </asp:ContentPlaceHolder>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+
+        <!-- Menu Toggle Script -->
+        <script>
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+
+    </form>
+</body>
+</html>

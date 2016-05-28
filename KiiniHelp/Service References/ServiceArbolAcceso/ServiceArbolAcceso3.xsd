@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
+  <xs:element name="ObtenerNivel1">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel1Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="ObtenerNivel1Result" nillable="true" type="q1:ArrayOfNivel1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel2">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idNivel1" type="xs:int" />
+        <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel2Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="ObtenerNivel2Result" nillable="true" type="q2:ArrayOfNivel2" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel3">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idNivel2" type="xs:int" />
+        <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel3Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="ObtenerNivel3Result" nillable="true" type="q3:ArrayOfNivel3" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel4">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idNivel3" type="xs:int" />
+        <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel4Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="ObtenerNivel4Result" nillable="true" type="q4:ArrayOfNivel4" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel5">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idNivel4" type="xs:int" />
+        <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel5Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="ObtenerNivel5Result" nillable="true" type="q5:ArrayOfNivel5" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel6">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idNivel5" type="xs:int" />
+        <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel6Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="ObtenerNivel6Result" nillable="true" type="q6:ArrayOfNivel6" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel7">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idNivel6" type="xs:int" />
+        <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerNivel7Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="ObtenerNivel7Result" nillable="true" type="q7:ArrayOfNivel7" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EsNodoTerminal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel1" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel2" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel3" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel4" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel5" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel6" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel7" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EsNodoTerminalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EsNodoTerminalResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GuardarArbol">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="arbol" nillable="true" type="q8:ArbolAcceso" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GuardarArbolResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerArblodesAccesoByGruposUsuario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerArblodesAccesoByGruposUsuarioResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ObtenerArblodesAccesoByGruposUsuarioResult" nillable="true" type="q9:ArrayOfArbolAcceso" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerArbolAcceso">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idArbol" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerArbolAccesoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ObtenerArbolAccesoResult" nillable="true" type="q10:ArbolAcceso" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

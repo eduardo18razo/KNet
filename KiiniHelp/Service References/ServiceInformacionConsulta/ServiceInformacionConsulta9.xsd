@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KinniNet.Business.Utils" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
+  <xs:element name="ObtenerInformacionConsulta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KinniNet.Business.Utils" minOccurs="0" name="tipoinfoConsulta" type="q1:BusinessVariables.EnumTiposInformacionConsulta" />
+        <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerInformacionConsultaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerInformacionConsultaResult" nillable="true" type="q2:ArrayOfInformacionConsulta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerInformacionConsultaArbol">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idArbol" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerInformacionConsultaArbolResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerInformacionConsultaArbolResult" nillable="true" type="q3:ArrayOfInformacionConsulta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerInformacionConsultaById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idInformacion" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerInformacionConsultaByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerInformacionConsultaByIdResult" nillable="true" type="q4:InformacionConsulta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GuardarInformacionConsulta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="informacion" nillable="true" type="q5:InformacionConsulta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GuardarInformacionConsultaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GuardarHit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GuardarHitResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

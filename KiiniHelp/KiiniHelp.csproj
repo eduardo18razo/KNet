@@ -1,0 +1,1909 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1577A609-84BE-4949-9868-F54DF4EBA60B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KiiniHelp</RootNamespace>
+    <AssemblyName>KiiniHelp</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SigmaToolBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Downloads\RichTextBox_7_November_2012\Control_dll\SigmaToolBox.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.1.4.12333\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.0.0\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Winthusiasm.HtmlEditor, Version=1.9.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Winthusiasm.HtmlEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Administracion\ArbolesAecceso\FrmAltaArbolAcceso.aspx" />
+    <Content Include="Administracion\Default.aspx" />
+    <Content Include="BootStrap\css\accordion-menu.css" />
+    <Content Include="BootStrap\css\bootstrap-theme.css" />
+    <Content Include="BootStrap\css\bootstrap-theme.min.css" />
+    <Content Include="BootStrap\css\bootstrap.css" />
+    <Content Include="BootStrap\css\bootstrap.min.css" />
+    <Content Include="BootStrap\css\Calendar.css" />
+    <Content Include="BootStrap\css\CheckBoxStyle.css" />
+    <Content Include="BootStrap\css\divs.css" />
+    <Content Include="BootStrap\css\DropDown.css" />
+    <Content Include="BootStrap\css\FileInput.css" />
+    <Content Include="BootStrap\css\jquery.treegrid.css" />
+    <Content Include="BootStrap\css\simple-sidebar.css" />
+    <Content Include="BootStrap\css\super-panel.css" />
+    <Content Include="BootStrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="BootStrap\js\accordion-menu.js" />
+    <Content Include="BootStrap\js\bootstrap.js" />
+    <Content Include="BootStrap\js\bootstrap.min.js" />
+    <None Include="BootStrap\js\jquery-1.4.1-vsdoc.js" />
+    <Content Include="BootStrap\js\jquery-1.4.1.js" />
+    <Content Include="BootStrap\js\jquery-1.4.1.min.js" />
+    <Content Include="BootStrap\js\jquery-1.5.2.min.js" />
+    <Content Include="BootStrap\js\jquery-2.1.1.min.js" />
+    <Content Include="BootStrap\js\super-panel.js" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="General\FrmIncidentes.aspx" />
+    <Content Include="General\FrmMostrarDocumento.aspx" />
+    <Content Include="General\FrmNodoConsultas.aspx" />
+    <Content Include="General\FrmServicios.aspx" />
+    <Content Include="General\FrmConsultas.aspx" />
+    <Content Include="General\FrmMiInformacion.aspx" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\error.jpg" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\minus.png" />
+    <Content Include="Images\orderedList0.png" />
+    <Content Include="Images\orderedList1.png" />
+    <Content Include="Images\orderedList2.png" />
+    <Content Include="Images\orderedList3.png" />
+    <Content Include="Images\orderedList4.png" />
+    <Content Include="Images\orderedList5.png" />
+    <Content Include="Images\orderedList6.png" />
+    <Content Include="Images\orderedList7.png" />
+    <Content Include="Images\orderedList8.png" />
+    <Content Include="Images\orderedList9.png" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\plus.png" />
+    <Content Include="Images\select-arrow.png" />
+    <Content Include="Login.aspx" />
+    <Content Include="packages.config" />
+    <Content Include="BootStrap\css\bootstrap-theme.css.map" />
+    <Content Include="BootStrap\css\bootstrap.css.map" />
+    <Content Include="BootStrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="BootStrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="BootStrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="BootStrap\Web.config" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Organizacion.Compania.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Organizacion.Direccion.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Organizacion.Gerencia.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Organizacion.Holding.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Organizacion.Jefatura.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Organizacion.SubDireccion.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Organizacion.SubGerencia.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.Campus.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.Domicilio.Colonia.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.Pais.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.Piso.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.SiteRack.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.SubZona.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.Torre.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.Zona.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Sistema.Rol.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Sistema.TipoGrupo.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Sistema.TipoSubGrupo.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Sistema.TipoTelefono.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Sistema.TipoUsuario.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Usuario.GrupoUsuario.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Operacion.Usuarios.CorreoUsuario.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Operacion.Usuarios.TelefonoUsuario.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.ParametrosTelefonos.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Usuario.SubGrupoUsuario.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Mascaras.TipoCampoMascara.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Sistema.Catalogos.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel1.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel2.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel3.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel4.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel5.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel6.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel7.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Sistema.TipoArbolAcceso.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperSubGurpoUsuario.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio.Colonia.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Mascaras.TipoCampoMascara.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Catalogos.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Rol.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.TipoArbolAcceso.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.TipoGrupo.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.TipoTelefono.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.TipoUsuario.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Mascaras.Mascara.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Nodos.Nivel1.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Nodos.Nivel2.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Nodos.Nivel3.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Nodos.Nivel4.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Nodos.Nivel5.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Nodos.Nivel6.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Nodos.Nivel7.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Organizacion.Compania.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Organizacion.Direccion.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Organizacion.Gerencia.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Organizacion.Holding.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Organizacion.Jefatura.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Organizacion.SubDireccion.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Organizacion.SubGerencia.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Ubicaciones.Campus.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Ubicaciones.Pais.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Ubicaciones.Piso.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Ubicaciones.SiteRack.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Ubicaciones.SubZona.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Ubicaciones.Torre.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Arbol.Ubicaciones.Zona.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.TipoSubGrupo.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.GrupoUsuario.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.SubGrupoUsuario.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.TipoInfConsulta.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Operacion.InformacionConsulta.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.TipoDocumento.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.SLA.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.Encuesta.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.TipoEncuesta.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.SubRol.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Operacion.Usuarios.Usuario.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Operacion.ArbolAcceso.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Menu.datasource" />
+    <Content Include="General\General.master" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Operacion.Ubicacion.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Operacion.Organizacion.datasource" />
+    <None Include="Properties\PublishProfiles\KinniNetWeb.pubxml" />
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso.wsdl" />
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta.disco" />
+    <None Include="Service References\ServiceEncuesta\configuration91.svcinfo" />
+    <None Include="Service References\ServiceEncuesta\configuration.svcinfo" />
+    <None Include="Service References\ServiceEncuesta\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario.disco" />
+    <None Include="Service References\ServiceGrupoUsuario\configuration91.svcinfo" />
+    <None Include="Service References\ServiceGrupoUsuario\configuration.svcinfo" />
+    <None Include="Service References\ServiceGrupoUsuario\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta.disco" />
+    <None Include="Service References\ServiceInformacionConsulta\configuration91.svcinfo" />
+    <None Include="Service References\ServiceInformacionConsulta\configuration.svcinfo" />
+    <None Include="Service References\ServiceInformacionConsulta\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras.disco" />
+    <None Include="Service References\ServiceMascaraAcceso\configuration91.svcinfo" />
+    <None Include="Service References\ServiceMascaraAcceso\configuration.svcinfo" />
+    <None Include="Service References\ServiceMascaraAcceso\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion.wsdl" />
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros.wsdl" />
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity.wsdl" />
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos.wsdl" />
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema.wsdl" />
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles.wsdl" />
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol.wsdl" />
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso.wsdl" />
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara.wsdl" />
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento.wsdl" />
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta.wsdl" />
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo.wsdl" />
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInfConsulta.wsdl" />
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario.wsdl" />
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla.disco" />
+    <None Include="Service References\ServiceSla\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSla\configuration.svcinfo" />
+    <None Include="Service References\ServiceSla\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity.disco" />
+    <None Include="Service References\ServiceSeguridad\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSeguridad\configuration.svcinfo" />
+    <None Include="Service References\ServiceSeguridad\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso.disco" />
+    <None Include="Service References\ServiceArbolAcceso\configuration91.svcinfo" />
+    <None Include="Service References\ServiceArbolAcceso\configuration.svcinfo" />
+    <None Include="Service References\ServiceArbolAcceso\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros.disco" />
+    <None Include="Service References\ServiceParametrosSistema\configuration91.svcinfo" />
+    <None Include="Service References\ServiceParametrosSistema\configuration.svcinfo" />
+    <None Include="Service References\ServiceParametrosSistema\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario.wsdl" />
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion.wsdl" />
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios.disco" />
+    <None Include="Service References\ServiceUsuario\configuration91.svcinfo" />
+    <None Include="Service References\ServiceUsuario\configuration.svcinfo" />
+    <None Include="Service References\ServiceUsuario\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceUbicacion\ServiceUbicacion.disco" />
+    <None Include="Service References\ServiceUbicacion\configuration91.svcinfo" />
+    <None Include="Service References\ServiceUbicacion\configuration.svcinfo" />
+    <None Include="Service References\ServiceUbicacion\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion.disco" />
+    <None Include="Service References\ServiceOrganizacion\configuration91.svcinfo" />
+    <None Include="Service References\ServiceOrganizacion\configuration.svcinfo" />
+    <None Include="Service References\ServiceOrganizacion\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario.disco" />
+    <None Include="Service References\ServiceSubGrupoUsuario\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSubGrupoUsuario\configuration.svcinfo" />
+    <None Include="Service References\ServiceSubGrupoUsuario\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario.disco" />
+    <None Include="Service References\ServiceSistemaTipoUsuario\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoUsuario\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoUsuario\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema.disco" />
+    <None Include="Service References\ServiceSistemaDomicilio\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaDomicilio\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaDomicilio\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles.disco" />
+    <None Include="Service References\ServiceSistemaRol\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaRol\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaRol\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta.disco" />
+    <None Include="Service References\ServiceSistemaTipoEncuesta\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoEncuesta\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoEncuesta\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol.disco" />
+    <None Include="Service References\ServiceSistemaSubRol\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaSubRol\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaSubRol\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta.disco" />
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento.disco" />
+    <None Include="Service References\ServiceSistemaTipoDocumento\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoDocumento\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoDocumento\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara.disco" />
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos.disco" />
+    <None Include="Service References\ServiceSistemaCatalogos\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaCatalogos\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaCatalogos\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo.disco" />
+    <None Include="Service References\ServiceSistemaTipoGrupo\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoGrupo\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoGrupo\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso.disco" />
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="TestUsControl\FrmTest.aspx" />
+    <Content Include="TestUsControl\WebForm1.aspx" />
+    <Content Include="Ticket\FrmTicket.aspx" />
+    <Content Include="UserControls\Altas\AltaGrupoUsuario.ascx" />
+    <Content Include="UserControls\Altas\AltaEncuesta.ascx" />
+    <Content Include="UserControls\Altas\AltaSla.ascx" />
+    <Content Include="UserControls\Genericos\UcCatalogos.ascx" />
+    <Content Include="UserControls\Altas\AltaInformacionConsulta.ascx" />
+    <Content Include="UserControls\Genericos\UcInformacionConsulta.ascx" />
+    <Content Include="UserControls\Genericos\UcMostrarArchivo.ascx" />
+    <Content Include="UserControls\Seleccion\AsociarGrupoUsuario.ascx" />
+    <Content Include="UserControls\Temporal\UcCatalogoNiveles.ascx" />
+    <Content Include="UserControls\Altas\AltaMascaraAcceso.ascx" />
+    <Content Include="UserControls\Temporal\UcMascaraCaptura.ascx" />
+    <Content Include="UserControls\Temporal\UcOrganizacion.ascx" />
+    <Content Include="Administracion\Usuarios\FrmUsuarios.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\_references.js" />
+    <Content Include="Usuarios.Master" />
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta.wsdl" />
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario.wsdl" />
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta.wsdl" />
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras.wsdl" />
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla.wsdl" />
+    <None Include="Service References\ServiceSla\ServiceSla.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSla\ServiceSla9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios.wsdl" />
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Administracion\ArbolesAecceso\FrmAltaArbolAcceso.aspx.cs">
+      <DependentUpon>FrmAltaArbolAcceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\ArbolesAecceso\FrmAltaArbolAcceso.aspx.designer.cs">
+      <DependentUpon>FrmAltaArbolAcceso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Funciones\Documentos.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Funciones\Metodos.cs" />
+    <Compile Include="General\FrmIncidentes.aspx.cs">
+      <DependentUpon>FrmIncidentes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\FrmIncidentes.aspx.designer.cs">
+      <DependentUpon>FrmIncidentes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="General\FrmMostrarDocumento.aspx.cs">
+      <DependentUpon>FrmMostrarDocumento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\FrmMostrarDocumento.aspx.designer.cs">
+      <DependentUpon>FrmMostrarDocumento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="General\FrmNodoConsultas.aspx.cs">
+      <DependentUpon>FrmNodoConsultas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\FrmNodoConsultas.aspx.designer.cs">
+      <DependentUpon>FrmNodoConsultas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="General\FrmServicios.aspx.cs">
+      <DependentUpon>FrmServicios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\FrmServicios.aspx.designer.cs">
+      <DependentUpon>FrmServicios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="General\FrmConsultas.aspx.cs">
+      <DependentUpon>FrmConsultas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\FrmConsultas.aspx.designer.cs">
+      <DependentUpon>FrmConsultas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="General\FrmMiInformacion.aspx.cs">
+      <DependentUpon>FrmMiInformacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\FrmMiInformacion.aspx.designer.cs">
+      <DependentUpon>FrmMiInformacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="General\General.master.cs">
+      <DependentUpon>General.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\General.master.designer.cs">
+      <DependentUpon>General.master</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\ServiceArbolAcceso\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceEncuesta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceGrupoUsuario\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceInformacionConsulta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceMascaraAcceso\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceOrganizacion\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceParametrosSistema\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSeguridad\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaCatalogos\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaDomicilio\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaRol\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaSubRol\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaTipoArbolAcceso\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaTipoCampoMascara\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaTipoDocumento\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaTipoEncuesta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaTipoGrupo\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaTipoInformacionConsulta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaTipoUsuario\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSla\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSubGrupoUsuario\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceUbicacion\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceUsuario\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TestUsControl\FrmTest.aspx.cs">
+      <DependentUpon>FrmTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestUsControl\FrmTest.aspx.designer.cs">
+      <DependentUpon>FrmTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestUsControl\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestUsControl\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ticket\FrmTicket.aspx.cs">
+      <DependentUpon>FrmTicket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ticket\FrmTicket.aspx.designer.cs">
+      <DependentUpon>FrmTicket.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Genericos\UcInformacionConsulta.ascx.cs">
+      <DependentUpon>UcInformacionConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Genericos\UcInformacionConsulta.ascx.designer.cs">
+      <DependentUpon>UcInformacionConsulta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Genericos\UcMostrarArchivo.ascx.cs">
+      <DependentUpon>UcMostrarArchivo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Genericos\UcMostrarArchivo.ascx.designer.cs">
+      <DependentUpon>UcMostrarArchivo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios.Master.cs">
+      <DependentUpon>Usuarios.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Usuarios.Master.designer.cs">
+      <DependentUpon>Usuarios.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\AltaGrupoUsuario.ascx.cs">
+      <DependentUpon>AltaGrupoUsuario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\AltaGrupoUsuario.ascx.designer.cs">
+      <DependentUpon>AltaGrupoUsuario.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\AltaEncuesta.ascx.cs">
+      <DependentUpon>AltaEncuesta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\AltaEncuesta.ascx.designer.cs">
+      <DependentUpon>AltaEncuesta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\AltaSla.ascx.cs">
+      <DependentUpon>AltaSla.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\AltaSla.ascx.designer.cs">
+      <DependentUpon>AltaSla.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Genericos\UcCatalogos.ascx.cs">
+      <DependentUpon>UcCatalogos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Genericos\UcCatalogos.ascx.designer.cs">
+      <DependentUpon>UcCatalogos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\AltaInformacionConsulta.ascx.cs">
+      <DependentUpon>AltaInformacionConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\AltaInformacionConsulta.ascx.designer.cs">
+      <DependentUpon>AltaInformacionConsulta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Seleccion\AsociarGrupoUsuario.ascx.cs">
+      <DependentUpon>AsociarGrupoUsuario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Seleccion\AsociarGrupoUsuario.ascx.designer.cs">
+      <DependentUpon>AsociarGrupoUsuario.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Temporal\UcCatalogoNiveles.ascx.cs">
+      <DependentUpon>UcCatalogoNiveles.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Temporal\UcCatalogoNiveles.ascx.designer.cs">
+      <DependentUpon>UcCatalogoNiveles.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\AltaMascaraAcceso.ascx.cs">
+      <DependentUpon>AltaMascaraAcceso.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\AltaMascaraAcceso.ascx.designer.cs">
+      <DependentUpon>AltaMascaraAcceso.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Temporal\UcMascaraCaptura.ascx.cs">
+      <DependentUpon>UcMascaraCaptura.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Temporal\UcMascaraCaptura.ascx.designer.cs">
+      <DependentUpon>UcMascaraCaptura.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Temporal\UcOrganizacion.ascx.cs">
+      <DependentUpon>UcOrganizacion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Temporal\UcOrganizacion.ascx.designer.cs">
+      <DependentUpon>UcOrganizacion.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\Usuarios\FrmUsuarios.aspx.cs">
+      <DependentUpon>FrmUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Usuarios\FrmUsuarios.aspx.designer.cs">
+      <DependentUpon>FrmUsuarios.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KiiniNet.Entities\KiiniNet.Entities.csproj">
+      <Project>{c003d316-9b3c-44ef-b6b4-48c98936b0a7}</Project>
+      <Name>KiiniNet.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KinniNet.Business.Utils\KinniNet.Business.Utils.csproj">
+      <Project>{911050f0-aacf-4706-8eef-94754856737f}</Project>
+      <Name>KinniNet.Business.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceArbolAcceso\" />
+    <WCFMetadataStorage Include="Service References\ServiceEncuesta\" />
+    <WCFMetadataStorage Include="Service References\ServiceGrupoUsuario\" />
+    <WCFMetadataStorage Include="Service References\ServiceInformacionConsulta\" />
+    <WCFMetadataStorage Include="Service References\ServiceMascaraAcceso\" />
+    <WCFMetadataStorage Include="Service References\ServiceOrganizacion\" />
+    <WCFMetadataStorage Include="Service References\ServiceParametrosSistema\" />
+    <WCFMetadataStorage Include="Service References\ServiceSeguridad\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaCatalogos\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaDomicilio\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaRol\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaSubRol\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaTipoArbolAcceso\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaTipoCampoMascara\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaTipoDocumento\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaTipoEncuesta\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaTipoGrupo\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaTipoInformacionConsulta\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaTipoUsuario\" />
+    <WCFMetadataStorage Include="Service References\ServiceSla\" />
+    <WCFMetadataStorage Include="Service References\ServiceSubGrupoUsuario\" />
+    <WCFMetadataStorage Include="Service References\ServiceUbicacion\" />
+    <WCFMetadataStorage Include="Service References\ServiceUsuario\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.PowerPoint">
+      <Guid>{91493440-5A91-11CF-8700-00AA0060263B}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2820</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2802/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

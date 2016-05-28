@@ -1,0 +1,19 @@
+﻿.verical-center {
+    vertical-align: middle;
+}
+
+.center-content-div {
+    text-align: center;
+}
+
+.izquierda {
+    padding-left: 0;
+    vertical-align: middle;
+}
+
+.margen {
+}
+
+.margen-arriba {
+    margin-top: 5px;
+}

@@ -1,0 +1,83 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="KiiniHelp.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="BootStrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="BootStrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="BootStrap/css/CheckBoxStyle.css" rel="stylesheet" />
+    <link href="BootStrap/css/Calendar.css" rel="stylesheet" />
+    <link href="BootStrap/css/DropDown.css" rel="stylesheet" />
+    <link href="BootStrap/css/divs.css" rel="stylesheet" />
+    <link href="BootStrap/css/FileInput.css" rel="stylesheet" />
+    <script type="text/javascript">
+        function MostrarPopup(modalName) {
+            debugger;
+            $(modalName).modal('show');
+            return true;
+        }
+        function CierraPopup(modalName) {
+            debugger;
+            $(modalName).modal('hide');
+            return true;
+        }
+    </script>
+    
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="container">
+        <div class="container-fluid">
+            <%----%>
+            <form id="form1" runat="server" enctype="multipart/form-data">
+                <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
+                    <Scripts>
+                        <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
+                        <asp:ScriptReference Path="~/BootStrap/js/bootstrap.min.js" />
+                    </Scripts>
+                </asp:ScriptManager>
+                <asp:UpdateProgress ID="updateProgress" runat="server">
+                    <ProgressTemplate>
+                        <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #000000; opacity: 1.0;">
+                            <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="~/Images/loading.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="padding: 10px; position: fixed; top: 25%; left: 35%; border: 10px;" />
+                        </div>
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+                <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <asp:HyperLink NavigateUrl="~/Default.aspx" CssClass="navbar-brand" runat="server" Text="Inicio"></asp:HyperLink>
+                        </div>
+                        <div class="navbar-collapse collapse" id="bs-nav">
+                            <ul class="nav navbar-nav">
+                                <li runat="server">
+                                    <asp:HyperLink NavigateUrl="~/Administracion/Usuarios/FrmUsuarios.aspx" runat="server" Text="Alta Usuarios" />
+                                </li>
+                                <li runat="server">
+                                    <asp:HyperLink NavigateUrl="~/Administracion/ArbolesAecceso/FrmAltaArbolAcceso.aspx" runat="server" Text="Alta Arbol de Accesos" />
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix clear-fix"></div>
+                    </div>
+                </nav>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

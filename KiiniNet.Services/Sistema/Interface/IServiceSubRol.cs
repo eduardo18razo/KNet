@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ServiceModel;
+using KiiniNet.Entities.Cat.Sistema;
+
+namespace KiiniNet.Services.Sistema.Interface
+{
+    [ServiceContract]
+    public interface IServiceSubRol
+    {
+        [OperationContract]
+        List<SubRol> ObtenerSubRolesByTipoGrupo(int idTipoGrupo, bool insertarSeleccion);
+
+        [OperationContract]
+        SubRol ObtenerSubRolById(int idSubRol);
+
+        [OperationContract]
+        List<SubRol> ObtenerSubRolesByGrupoUsuarioRol(int idGrupoUsuario, int idRol, bool insertarSeleccion);
+
+        [OperationContract]
+        List<SubRol> ObtenerTipoSubRol(int idTipoGrupo, bool insertarSeleccion);
+    }
+}

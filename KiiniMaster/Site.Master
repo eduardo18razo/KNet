@@ -1,0 +1,73 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="KiiniMaster.SiteMaster" %>
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="BootStrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="BootStrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="BootStrap/css/CheckBoxStyle.css" rel="stylesheet" />
+    <link href="BootStrap/css/Calendar.css" rel="stylesheet" />
+    <link href="BootStrap/css/DropDown.css" rel="stylesheet" />
+    
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body style="background-color: #F2F2F2">
+    <div class="container">
+        <div class="container-fluid">
+            <form id="form1" runat="server">
+                <asp:UpdateProgress ID="updateProgress" runat="server">
+                    <ProgressTemplate>
+                        <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #000000; opacity: 0.7;">
+                            <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="~/Imagenes/loading3.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="padding: 10px; position: fixed; top: 25%; left: 35%; border: 10px;" />
+                        </div>
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+                <asp:ScriptManager ID="scripMain" runat="server">
+                    <Scripts>
+                        <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
+                        <asp:ScriptReference Path="~/BootStrap/js/bootstrap.min.js" />
+                    </Scripts>
+                </asp:ScriptManager>
+                <nav class="navbar navbar-inverse" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <asp:HyperLink NavigateUrl="~/Fleteo/WebForms/Pendientes.aspx" CssClass="navbar-brand" runat="server" Text="Home"></asp:HyperLink>
+                        </div>
+                        <div class="navbar-collapse collapse" id="bs-nav">
+                            <ul class="nav navbar-nav">
+                                <li runat="server">
+                                    <asp:HyperLink NavigateUrl="~/BusquedaUbicacion/Busqueda.aspx" runat="server" Text="Busqueda" /></li>
+                                <%--<li runat="server">
+                                    <asp:HyperLink NavigateUrl="~/Fleteo/WebForms/Llegadas.aspx" runat="server" Text="Fletes por Llegar" /></li>
+                                <li runat="server">
+                                    <asp:HyperLink NavigateUrl="~/Fleteo/WebForms/MonitoreoFletes.aspx" runat="server" Text="Fletes Pendientes" /></li>
+                                <li runat="server">
+                                    <asp:HyperLink NavigateUrl="~/Auditoria/MuestroRack.aspx" runat="server" Text="Auditoria" /></li>
+                                <li runat="server">
+                                    <asp:HyperLink NavigateUrl="~/Fleteo/WebForms/MontaCargas.aspx" runat="server" Text="Montacargas" /></li>
+                                <li runat="server">
+                                    <asp:HyperLink NavigateUrl="~/Fleteo/WebForms/RecibirFlete.aspx" runat="server" Text="Recibir Flete" /></li>--%>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    
+                </asp:ContentPlaceHolder>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

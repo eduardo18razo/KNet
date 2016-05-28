@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfInventarioInfConsulta">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InventarioInfConsulta" nillable="true" type="tns:InventarioInfConsulta" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInventarioInfConsulta" nillable="true" type="tns:ArrayOfInventarioInfConsulta" />
+  <xs:complexType name="InventarioInfConsulta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdInfConsulta" type="xs:int" />
+      <xs:element minOccurs="0" name="IdInventario" type="xs:int" />
+      <xs:element minOccurs="0" name="InformacionConsulta" nillable="true" type="tns:InformacionConsulta" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="InventarioArbolAcceso" nillable="true" type="q1:InventarioArbolAcceso" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InventarioInfConsulta" nillable="true" type="tns:InventarioInfConsulta" />
+  <xs:complexType name="InformacionConsulta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTipoDocumento" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTipoInfConsulta" type="xs:int" />
+      <xs:element minOccurs="0" name="InformacionConsultaDatos" nillable="true" type="tns:ArrayOfInformacionConsultaDatos" />
+      <xs:element minOccurs="0" name="InventarioInfConsulta" nillable="true" type="tns:ArrayOfInventarioInfConsulta" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoDocumento" nillable="true" type="q2:TipoDocumento" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoInfConsulta" nillable="true" type="q3:TipoInfConsulta" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="InformacionConsulta" nillable="true" type="tns:InformacionConsulta" />
+  <xs:complexType name="ArrayOfInformacionConsultaDatos">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InformacionConsultaDatos" nillable="true" type="tns:InformacionConsultaDatos" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInformacionConsultaDatos" nillable="true" type="tns:ArrayOfInformacionConsultaDatos" />
+  <xs:complexType name="InformacionConsultaDatos">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdInformacionConsulta" type="xs:int" />
+      <xs:element minOccurs="0" name="IdPadre" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="InformacionConsulta" nillable="true" type="tns:InformacionConsulta" />
+      <xs:element minOccurs="0" name="Orden" nillable="true" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="InformacionConsultaDatos" nillable="true" type="tns:InformacionConsultaDatos" />
+  <xs:complexType name="ArrayOfInformacionConsulta">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InformacionConsulta" nillable="true" type="tns:InformacionConsulta" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInformacionConsulta" nillable="true" type="tns:ArrayOfInformacionConsulta" />
+</xs:schema>

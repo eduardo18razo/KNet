@@ -1,0 +1,23 @@
+﻿
+input[type=file], input[type=file] + input {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid gray;
+    font-size: 15px; padding: 4px;
+}
+input[type=file] + input {
+    padding: 13px;
+    background-color: #eee;
+}
+::-webkit-file-upload-button {
+    -webkit-appearance: none;
+    background-color: #00b7cd;
+    border: 1px solid gray;
+    font-size: 15px; padding: 8px;
+}
+::-ms-browse {
+    background-color: #00b7cd;
+    border: 1px solid gray;
+    font-size: 15px; padding: 8px;
+}
+input[type=file]::-ms-value { border: none;  }

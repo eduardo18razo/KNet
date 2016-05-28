@@ -1,0 +1,9 @@
+D:\KiiniNet\App\KinniNet\KinniNet.Business.Utils\bin\Debug\KinniNet.Business.Utils.dll
+D:\KiiniNet\App\KinniNet\KinniNet.Business.Utils\bin\Debug\KinniNet.Business.Utils.pdb
+D:\KiiniNet\App\KinniNet\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.dll
+D:\KiiniNet\App\KinniNet\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KinniNet.Business.Utils\bin\Debug\KinniNet.Business.Utils.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KinniNet.Business.Utils\bin\Debug\KinniNet.Business.Utils.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.csprojResolveAssemblyReference.cache
