@@ -20,3 +20,14 @@ C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\Kin
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KinniNet.Business\obj\Debug\KinniNet.Core.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KinniNet.Business\obj\Debug\KinniNet.Core.dll
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KinniNet.Business\obj\Debug\KinniNet.Core.pdb
+D:\KiiniNet\Actual\KinniNet.Business\bin\Debug\KinniNet.Core.dll
+D:\KiiniNet\Actual\KinniNet.Business\bin\Debug\KinniNet.Core.pdb
+D:\KiiniNet\Actual\KinniNet.Business\bin\Debug\KiiniNet.Entities.dll
+D:\KiiniNet\Actual\KinniNet.Business\bin\Debug\KinniNet.Business.Utils.dll
+D:\KiiniNet\Actual\KinniNet.Business\bin\Debug\KinniNet.Data.dll
+D:\KiiniNet\Actual\KinniNet.Business\bin\Debug\KiiniNet.Entities.pdb
+D:\KiiniNet\Actual\KinniNet.Business\bin\Debug\KinniNet.Business.Utils.pdb
+D:\KiiniNet\Actual\KinniNet.Business\bin\Debug\KinniNet.Data.pdb
+D:\KiiniNet\Actual\KinniNet.Business\obj\Debug\KinniNet.Core.csprojResolveAssemblyReference.cache
+D:\KiiniNet\Actual\KinniNet.Business\obj\Debug\KinniNet.Core.dll
+D:\KiiniNet\Actual\KinniNet.Business\obj\Debug\KinniNet.Core.pdb

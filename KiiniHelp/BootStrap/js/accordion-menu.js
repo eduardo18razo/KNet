@@ -1,3 +1,4 @@
+/// <reference path="accordion-menu.js" />
 
 var amenuOptions =
 {

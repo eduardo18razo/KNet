@@ -26,3 +26,17 @@ C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\Kii
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.Services\obj\Debug\KiiniNet.Services.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.Services\obj\Debug\KiiniNet.Services.dll
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniNet.Services\obj\Debug\KiiniNet.Services.pdb
+D:\KiiniNet\Actual\KiiniNet.Services\bin\Debug\KiiniNet.Services.dll.config
+D:\KiiniNet\Actual\KiiniNet.Services\bin\Debug\KiiniNet.Services.dll
+D:\KiiniNet\Actual\KiiniNet.Services\bin\Debug\KiiniNet.Services.pdb
+D:\KiiniNet\Actual\KiiniNet.Services\bin\Debug\KiiniNet.Entities.dll
+D:\KiiniNet\Actual\KiiniNet.Services\bin\Debug\KinniNet.Business.Utils.dll
+D:\KiiniNet\Actual\KiiniNet.Services\bin\Debug\KinniNet.Core.dll
+D:\KiiniNet\Actual\KiiniNet.Services\bin\Debug\KinniNet.Data.dll
+D:\KiiniNet\Actual\KiiniNet.Services\bin\Debug\KiiniNet.Entities.pdb
+D:\KiiniNet\Actual\KiiniNet.Services\bin\Debug\KinniNet.Business.Utils.pdb
+D:\KiiniNet\Actual\KiiniNet.Services\bin\Debug\KinniNet.Core.pdb
+D:\KiiniNet\Actual\KiiniNet.Services\bin\Debug\KinniNet.Data.pdb
+D:\KiiniNet\Actual\KiiniNet.Services\obj\Debug\KiiniNet.Services.csprojResolveAssemblyReference.cache
+D:\KiiniNet\Actual\KiiniNet.Services\obj\Debug\KiiniNet.Services.dll
+D:\KiiniNet\Actual\KiiniNet.Services\obj\Debug\KiiniNet.Services.pdb

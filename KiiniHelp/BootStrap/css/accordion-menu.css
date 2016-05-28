@@ -25,11 +25,21 @@
 /*2nd-level*/
 #accordion li li > a, #accordion li li > div {
     padding-left:30px;
-    padding-top:8px;padding-bottom:8px;
+    /*padding-top:8px;padding-bottom:8px;*/
 }
 
-/*3rd-level*/
+/*3-level*/
 #accordion li li li > a, #accordion li li li > div { padding-left:50px; }
+/*4-level*/
+#accordion li li li li > a, #accordion li li li li> div { padding-left:70px; }
+/*5-level*/
+#accordion li li li li li> a, #accordion li li li li li> div { padding-left:90px; }
+/*6-level*/
+#accordion li li li li li li> a, #accordion li li li li li li> div { padding-left:110px; }
+/*7-level*/
+#accordion li li li li li li li> a, #accordion li li li li li li li> div { padding-left:130px; padding-bottom:10px;}
+/*8rd-level*/
+#accordion li li li li li li li li> a, #accordion li li li li li li li> div { padding-left:130px; padding-bottom:10px;}
 
 
 /*---------- Other styles ------*/
@@ -39,10 +49,10 @@
     font-family:'Lucida Grande', Geneva, Candara, Tahoma, sans-serif;
     font-weight:bold;
     font-size:large;
-    color:#eee;
+    color:white;
 }
 #accordion .active > div{
-    color:#ffda3f;
+    color:white;
 }
 
 #accordion li {
@@ -71,11 +81,11 @@
     transition:color 0.3s;
 }
 #accordion a:hover {
-    color:#ffda3f;
+    color:white;
 }
 #accordion a.active {
-    color:#ffda3f;
-    background-color:#243a46;
+    color:white;
+    background-color:transparent;
 }
 
 
@@ -104,7 +114,7 @@
     border-bottom:none;
     border-right: 6px solid transparent;
     border-left-color: transparent;
-    border-top-color:initial;
+    border-top-color:white;
 }
 
 #accordion li {

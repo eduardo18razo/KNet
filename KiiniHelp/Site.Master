@@ -28,7 +28,7 @@
             return true;
         }
     </script>
-    
+
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -41,6 +41,8 @@
                     <Scripts>
                         <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
                         <asp:ScriptReference Path="~/BootStrap/js/bootstrap.min.js" />
+                        <asp:ScriptReference Path="~/BootStrap/js/accordion-menu.js" />
+                        <asp:ScriptReference Path="~/BootStrap/js/super-panel.js" />
                     </Scripts>
                 </asp:ScriptManager>
                 <asp:UpdateProgress ID="updateProgress" runat="server">
