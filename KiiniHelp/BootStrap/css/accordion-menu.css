@@ -3,6 +3,8 @@
 #accordion {
     visibility:hidden;
     background:#314f60;
+    -webkit-box-shadow:rgba(0,0,0,0.3) 0 0 90px inset;
+    -ms-box-shadow:rgba(0,0,0,0.3) 0 0 90px inset;
     box-shadow:rgba(0,0,0,0.3) 0 0 90px inset;
     margin-top: 39px;
 }
@@ -78,8 +80,13 @@
     text-decoration:none;
     display:block;
     line-height:1;
+    -webkit-transition:color 0.3s;
+    -moz-transition:color 0.3s;
+    -ms-transition:color 0.3s;
+    -o-transition:color 0.3s;
     transition:color 0.3s;
 }
+
 #accordion a:hover {
     color:white;
 }
@@ -94,7 +101,7 @@
 #accordion div.caret {
     color:inherit;
     display:inline-block;
-    margin-bottom:0px;
+    margin-bottom:0;
     margin-right:12px;
     width: 0;
     height: 0;
@@ -122,5 +129,6 @@
     -mos-user-select:none;
     -webkit-user-select:none;
     -o-user-select:none;
+    -moz-user-select:none;
     user-select:none;
 }
