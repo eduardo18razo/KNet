@@ -46,6 +46,34 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public Encuesta ObtenerEncuesta(int idencuesta)
+        {
+            Encuesta result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Encuesta.SingleOrDefault(w => w.Id == idencuesta);
+                if (result != null)
+                {
+                    db.LoadProperty(result, "EncuestaPregunta");
+                    //foreach (EncuestaPregunta pregunta in result.EncuestaPregunta)
+                    //{
+                    //    db.LoadProperty(pregunta, "Pregunta");
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
         public void GuardarEncuesta(Encuesta encuesta)
         {
             DataBaseModelContext db = new DataBaseModelContext();

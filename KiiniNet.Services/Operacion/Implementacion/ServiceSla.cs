@@ -8,7 +8,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
 {
     public class ServiceSla : IServiceSla
     {
-        public List<SLA> ObtenerSla(bool insertarSeleccion)
+        public List<Sla> ObtenerSla(bool insertarSeleccion)
         {
             try
             {
@@ -23,7 +23,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public void Guardar(SLA sla)
+        public void Guardar(Sla sla)
         {
             try
             {

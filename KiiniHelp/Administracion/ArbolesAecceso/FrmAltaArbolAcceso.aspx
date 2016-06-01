@@ -233,7 +233,7 @@
                                     <div class="panel-body">
                                         <asp:Repeater runat="server" ID="rptInformacion" OnItemDataBound="rptInformacion_OnItemDataBound">
                                             <ItemTemplate>
-                                                <div class="row center-content-div">
+                                                <div class="row ">
                                                     <asp:Label runat="server" ID="lblIndex" Text='<%# Container.ItemIndex %>' Visible="False"></asp:Label>
                                                     <asp:Label runat="server" Text='<%# Eval("TipoInfConsulta.Id") %>' Visible="False" ID="lblIdTipoInformacion"></asp:Label>
                                                     <div class="col-sm-3 control-label" style="width: 180px">

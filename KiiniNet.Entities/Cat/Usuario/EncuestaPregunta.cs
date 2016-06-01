@@ -1,5 +1,7 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Operacion;
 
 namespace KiiniNet.Entities.Cat.Usuario
 {
@@ -16,5 +18,7 @@ namespace KiiniNet.Entities.Cat.Usuario
         public virtual Encuesta Encuesta { get; set; }
         [DataMember]
         public decimal Ponderacion { get; set; }
+        [DataMember]
+        public List<RespuestaEncuesta> RespuestaEncuesta { get; set; } 
     }
 }

@@ -46,6 +46,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Operacion\Implementacion\ServiceTicket.cs" />
+    <Compile Include="Operacion\Interface\IServiceTicket.cs" />
     <Compile Include="Sistema\Implementacion\ServiceCatalogos.cs" />
     <Compile Include="Sistema\Implementacion\ServiceDomicilioSistema.cs" />
     <Compile Include="Sistema\Implementacion\ServiceRoles.cs" />

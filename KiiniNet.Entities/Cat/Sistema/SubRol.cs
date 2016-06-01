@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Usuario;
+using KiiniNet.Entities.Operacion;
 
 namespace KiiniNet.Entities.Cat.Sistema
 {

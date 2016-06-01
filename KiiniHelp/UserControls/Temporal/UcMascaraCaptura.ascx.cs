@@ -28,7 +28,7 @@ namespace KiiniHelp.UserControls.Temporal
 
             if ((myControl != null))
             {
-                if ((myControl.ClientID.ToString() == "btnAddTextBox"))
+                if ((myControl.ClientID == "btnAddTextBox"))
                 {
 
                 }
@@ -38,12 +38,16 @@ namespace KiiniHelp.UserControls.Temporal
         {
             base.OnInit(e);
             _lstControles = new List<Control>();
-            IdMascara = ((FrmTicket)Page).IdMascara;
+            IdMascara = (int)((FrmTicket)Page).IdMascara;
             Mascara mascara = _servicioMascaras.ObtenerMascaraCaptura(IdMascara);
-            btnGuardar.CommandArgument = mascara.ComandoInsertar;
-            lblDescripcionMascara.Text = mascara.Descripcion;
-            PintaControles(mascara.CampoMascara);
-            Session["MascaraActiva"] = mascara;
+            if (mascara != null)
+            {
+                hfComandoInsertar.Value = mascara.ComandoInsertar;
+                hfComandoActualizar.Value = mascara.ComandoInsertar;
+                lblDescripcionMascara.Text = mascara.Descripcion;
+                PintaControles(mascara.CampoMascara);
+                Session["MascaraActiva"] = mascara;
+            }
         }
 
         public static Control GetPostBackControl(Page thePage)
@@ -73,6 +77,110 @@ namespace KiiniHelp.UserControls.Temporal
         {
             get { return Convert.ToInt32(hfIdMascara.Value); }
             set { hfIdMascara.Value = value.ToString(); }
+        }
+
+        public string ComandoInsertar
+        {
+            get { return hfComandoInsertar.Value; }
+        }
+
+        public string ComandoActualizar
+        {
+            get { return hfComandoActualizar.Value; }
+        }
+
+        public List<HelperCampoMascaraCaptura> ObtenerCapturaMascara()
+        {
+            List<HelperCampoMascaraCaptura> lstCamposCapturados;
+            try
+            {
+                ValidaMascaraCaptura();
+                Mascara mascara = (Mascara)Session["MascaraActiva"];
+                string nombreControl = null;
+                lstCamposCapturados = new List<HelperCampoMascaraCaptura>();
+                foreach (CampoMascara campo in mascara.CampoMascara)
+                {
+                    bool campoTexto = true;
+                    switch (campo.TipoCampoMascara.Descripcion)
+                    {
+                        case "ALFANUMERICO":
+                            nombreControl = "txt" + campo.NombreCampo;
+                            break;
+                        case "DECIMAL":
+                            nombreControl = "txt" + campo.NombreCampo;
+                            break;
+                        case "ENTERO":
+                            nombreControl = "txt" + campo.NombreCampo;
+                            break;
+                        case "FECHA":
+                            nombreControl = "txt" + campo.NombreCampo;
+                            break;
+                        case "HORA":
+                            nombreControl = "txt" + campo.NombreCampo;
+                            break;
+                        case "MONEDA":
+                            nombreControl = "txt" + campo.NombreCampo;
+                            break;
+                        case "CATALOGO":
+                            nombreControl = "ddl" + campo.NombreCampo;
+                            campoTexto = false;
+                            break;
+                        case "SI/NO":
+                            nombreControl = "chk" + campo.NombreCampo;
+                            campoTexto = false;
+                            break;
+                    }
+
+                    if (campoTexto && nombreControl != null)
+                    {
+                        TextBox txt = (TextBox)divControles.FindControl(nombreControl);
+                        if (txt != null)
+                        {
+                            HelperCampoMascaraCaptura campoCapturado = new HelperCampoMascaraCaptura
+                            {
+                                NombreCampo = campo.NombreCampo,
+                                Valor = txt.Text.Trim().ToUpper()
+                            };
+                            lstCamposCapturados.Add(campoCapturado);
+                        }
+                    }
+                    else if (!campoTexto)
+                    {
+                        switch (campo.TipoCampoMascara.Descripcion)
+                        {
+                            case "CATALOGO":
+                                DropDownList ddl = (DropDownList)divControles.FindControl(nombreControl);
+                                if (ddl != null)
+                                {
+                                    HelperCampoMascaraCaptura campoCapturado = new HelperCampoMascaraCaptura
+                                    {
+                                        NombreCampo = campo.NombreCampo,
+                                        Valor = ddl.SelectedValue
+                                    };
+                                    lstCamposCapturados.Add(campoCapturado);
+                                }
+                                break;
+                            case "SI/NO":
+                                CheckBox chk = (CheckBox)divControles.FindControl(nombreControl);
+                                if (chk != null)
+                                {
+                                    HelperCampoMascaraCaptura campoCapturado = new HelperCampoMascaraCaptura
+                                    {
+                                        NombreCampo = campo.NombreCampo,
+                                        Valor = chk.Checked.ToString()
+                                    };
+                                    lstCamposCapturados.Add(campoCapturado);
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return lstCamposCapturados;
         }
 
         public void PintaControles(List<CampoMascara> lstControles)
@@ -235,15 +343,11 @@ namespace KiiniHelp.UserControls.Temporal
             if (!IsPostBack)
             {
 
-                //Mascara mascara = _servicioMascaras.ObtenerMascaraCaptura(IdMascara);
-                //btnGuardar.CommandArgument = mascara.ComandoInsertar;
-                //lblDescripcionMascara.Text = mascara.Descripcion;
-                //PintaControles(mascara.CampoMascara);
-                //Session["MascaraActiva"] = mascara;
+
             }
         }
 
-        private void ValidaMascaraCaptura()
+        public void ValidaMascaraCaptura()
         {
             try
             {
@@ -279,8 +383,8 @@ namespace KiiniHelp.UserControls.Temporal
                                 //TODO: AGREGAR VALOR MINIMO A ESQUEMA
                                 //if (decimal.Parse(txtDecimal.Text.Trim()) < campo.LongitudMinima)
                                 //    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (decimal.Parse(txtDecimal.Text.Trim()) > campo.LongitudMaxima)
-                                    throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+                                if (decimal.Parse(txtDecimal.Text.Trim()) > campo.ValorMaximo)
+                                    throw new Exception(string.Format("Campo {0} debe se menor o igual a {1}", campo.Descripcion, campo.ValorMaximo));
 
                             }
                             break;
@@ -295,8 +399,8 @@ namespace KiiniHelp.UserControls.Temporal
                                 //TODO: AGREGAR VALOR MINIMO A ESQUEMA
                                 //if (txtEntero.Text.Trim().Length < campo.LongitudMinima)
                                 //    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (int.Parse(txtEntero.Text.Trim()) > campo.LongitudMaxima)
-                                    throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+                                if (int.Parse(txtEntero.Text.Trim()) > campo.ValorMaximo)
+                                    throw new Exception(string.Format("Campo {0} debe se menor o igual a {1}", campo.Descripcion, campo.ValorMaximo));
 
                             }
                             break;
@@ -365,98 +469,6 @@ namespace KiiniHelp.UserControls.Temporal
                                         throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
                             }
                             break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        protected void btnGuardar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                ValidaMascaraCaptura();
-                Mascara mascara = (Mascara)Session["MascaraActiva"];
-                string nombreControl = null;
-                List<HelperCampoMascaraCaptura> lstCamposCapturados = new List<HelperCampoMascaraCaptura>();
-                foreach (CampoMascara campo in mascara.CampoMascara)
-                {
-                    bool campoTexto = true;
-                    switch (campo.TipoCampoMascara.Descripcion)
-                    {
-                        case "ALFANUMERICO":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "DECIMAL":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "ENTERO":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "FECHA":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "HORA":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "MONEDA":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "CATALOGO":
-                            nombreControl = "ddl" + campo.NombreCampo;
-                            campoTexto = false;
-                            break;
-                        case "SI/NO":
-                            nombreControl = "chk" + campo.NombreCampo;
-                            campoTexto = false;
-                            break;
-                    }
-
-                    if (campoTexto && nombreControl != null)
-                    {
-                        TextBox txt = (TextBox)divControles.FindControl(nombreControl);
-                        if (txt != null)
-                        {
-                            HelperCampoMascaraCaptura campoCapturado = new HelperCampoMascaraCaptura
-                            {
-                                NombreCampo = campo.NombreCampo,
-                                Valor = txt.Text
-                            };
-                            lstCamposCapturados.Add(campoCapturado);
-                        }
-                    }
-                    else if (!campoTexto)
-                    {
-                        switch (campo.TipoCampoMascara.Descripcion)
-                        {
-                            case "CATALOGO":
-                                DropDownList ddl = (DropDownList)divControles.FindControl(nombreControl);
-                                if (ddl != null)
-                                {
-                                    HelperCampoMascaraCaptura campoCapturado = new HelperCampoMascaraCaptura
-                                    {
-                                        NombreCampo = campo.NombreCampo,
-                                        Valor = ddl.SelectedValue
-                                    };
-                                    lstCamposCapturados.Add(campoCapturado);
-                                }
-                                break;
-                            case "SI/NO":
-                                CheckBox chk = (CheckBox)divControles.FindControl(nombreControl);
-                                if (chk != null)
-                                {
-                                    HelperCampoMascaraCaptura campoCapturado = new HelperCampoMascaraCaptura
-                                    {
-                                        NombreCampo = campo.NombreCampo,
-                                        Valor = chk.Checked.ToString()
-                                    };
-                                    lstCamposCapturados.Add(campoCapturado);
-                                }
-                                break;
-                        }
                     }
                 }
             }

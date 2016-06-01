@@ -4,6 +4,7 @@ using KiiniNet.Entities.Cat.Arbol.Nodos;
 using KiiniNet.Entities.Cat.Arbol.Organizacion;
 using KiiniNet.Entities.Cat.Arbol.Ubicaciones;
 using KiiniNet.Entities.Cat.Operacion;
+using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Parametros;
 
 namespace KiiniNet.Entities.Cat.Sistema
@@ -82,6 +83,8 @@ namespace KiiniNet.Entities.Cat.Sistema
         public virtual List<Nivel7> Nivel7 { get; set; }
         [DataMember]
         public virtual List<ArbolAcceso> ArbolAcceso { get; set; }
+        [DataMember]
+        public virtual List<Ticket> Ticket { get; set; }
 
 
     }

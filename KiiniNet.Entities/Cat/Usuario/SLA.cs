@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
-using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Operacion;
 
 namespace KiiniNet.Entities.Cat.Usuario
 {
     [DataContract(IsReference = true)]
-    public class SLA
+    public class Sla
     {
         [DataMember]
         public int Id { get; set; }
@@ -15,9 +15,14 @@ namespace KiiniNet.Entities.Cat.Usuario
         [DataMember]
         public decimal TiempoHoraProceso { get; set; }
         [DataMember]
+        public bool Detallado { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
 
         [DataMember]
         public virtual List<InventarioArbolAcceso> InventarioArbolAcceso { get; set; }
+
+        [DataMember]
+        public virtual List<SlaDetalle> SlaDetalle { get; set; }
     }
 }

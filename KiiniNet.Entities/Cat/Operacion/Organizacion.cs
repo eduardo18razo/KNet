@@ -50,6 +50,8 @@ namespace KiiniNet.Entities.Cat.Operacion
         public virtual Jefatura Jefatura { get; set; }
         [DataMember]
         public virtual List<HitConsulta> HitConsulta { get; set; }
+        [DataMember]
+        public virtual List<Ticket> Ticket { get; set; }
 
     }
 }

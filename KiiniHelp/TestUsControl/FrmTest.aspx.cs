@@ -20,8 +20,6 @@ namespace KiiniHelp.TestUsControl
                 ////Write the file directly to the HTTP content output stream.
                 //Response.WriteFile(FilePath);
                 //Response.End();
-                UcMascaraCaptura.IdMascara = 1;
-
             }
         }
 

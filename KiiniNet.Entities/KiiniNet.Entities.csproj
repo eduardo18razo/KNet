@@ -79,7 +79,7 @@
     <Compile Include="Cat\Arbol\Organizacion\SubDireccion.cs" />
     <Compile Include="Cat\Sistema\Rol.cs" />
     <Compile Include="Cat\Sistema\SubRol.cs" />
-    <Compile Include="Cat\Usuario\SLA.cs" />
+    <Compile Include="Cat\Usuario\Sla.cs" />
     <Compile Include="Cat\Usuario\SubGrupoUsuario.cs" />
     <Compile Include="Helper\HelperCampoMascaraCaptura.cs" />
     <Compile Include="Helper\HelperSubGurpoUsuario.cs" />
@@ -88,6 +88,11 @@
     <Compile Include="Operacion\InformacionConsulta.cs" />
     <Compile Include="Operacion\InformacionConsultaDatos.cs" />
     <Compile Include="Operacion\InventarioInfConsulta.cs" />
+    <Compile Include="Operacion\RespuestaEncuesta.cs" />
+    <Compile Include="Operacion\SLADetalle.cs" />
+    <Compile Include="Operacion\SlaEstimadoTicket.cs" />
+    <Compile Include="Operacion\SlaEstimadoTicketDetalle.cs" />
+    <Compile Include="Operacion\Ticket.cs" />
     <Compile Include="Operacion\Usuarios\TelefonoUsuario.cs" />
     <Compile Include="Cat\Sistema\TipoTelefono.cs" />
     <Compile Include="Cat\Arbol\Ubicaciones\Domicilio\Colonia.cs" />

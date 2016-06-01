@@ -40,7 +40,7 @@ namespace KinniNet.Core.Operacion
                 string queryCamposTabla = string.Empty;
                 foreach (CampoMascara campoMascara in mascara.CampoMascara)
                 {
-                    
+
                     TipoCampoMascara tmpTipoCampoMascara = db.TipoCampoMascara.SingleOrDefault(f => f.Id == campoMascara.IdTipoCampoMascara);
                     if (tmpTipoCampoMascara == null) continue;
                     switch (tmpTipoCampoMascara.TipoDatoSql)
@@ -56,14 +56,18 @@ namespace KinniNet.Core.Operacion
                 }
                 string qryCrearTablas = String.Format("CREATE TABLE {0} ( \n" +
                                                       "Id int IDENTITY(1,1) NOT NULL, \n" +
+                                                      "IdTicket int NOT NULL," +
                                                       "{1}" +
                                                       "Habilitado BIT \n" +
                                                       "CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED \n" +
                                                       "( \n" +
                                                       "\t[Id] ASC \n" +
                                                       ")WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY] \n" +
-                                                      ") ON [PRIMARY] \n", mascara.NombreTabla, queryCamposTabla);
-                db.ExecuteStoreCommand(qryCrearTablas);
+                                                      ") ON [PRIMARY] \n" +
+                                                      "ALTER TABLE [dbo].[{0}]  WITH CHECK ADD  CONSTRAINT [FK_{0}_Ticket] FOREIGN KEY([IdTicket]) \n" +
+                                                      "REFERENCES [dbo].[Ticket] ([Id])\n" +
+                                                      "ALTER TABLE [dbo].[{0}] CHECK CONSTRAINT [FK_{0}_Ticket]\n", mascara.NombreTabla, queryCamposTabla);
+                    db.ExecuteStoreCommand(qryCrearTablas);
             }
             catch (Exception ex)
             {
@@ -81,9 +85,9 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                string queryParametros = string.Empty;
-                string queryCampos = string.Empty;
-                string queryValues = string.Empty;
+                string queryParametros = "@IDTICKET int, ";
+                string queryCampos = "IDTICKET, ";
+                string queryValues = "@IDTICKET, ";
                 int paramsCount = mascara.NoCampos;
                 int contadorParametros = 0;
                 foreach (CampoMascara campoMascara in mascara.CampoMascara)
@@ -91,7 +95,16 @@ namespace KinniNet.Core.Operacion
                     contadorParametros++;
                     TipoCampoMascara tmpTipoCampoMascara = db.TipoCampoMascara.SingleOrDefault(f => f.Id == campoMascara.IdTipoCampoMascara);
                     if (tmpTipoCampoMascara == null) continue;
-                    queryParametros += String.Format("@{0} {1}", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
+                    switch (tmpTipoCampoMascara.TipoDatoSql)
+                    {
+                        case "NVARCHAR":
+                            queryParametros += String.Format("@{0} {1}({2})", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, campoMascara.LongitudMaxima);
+                            break;
+                        default:
+                            queryParametros += String.Format("@{0} {1}", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
+                            break;
+                    }
+                    
                     queryCampos += String.Format("{0}", campoMascara.NombreCampo);
                     queryValues += String.Format("@{0}", campoMascara.NombreCampo);
                     if (contadorParametros < paramsCount)
@@ -258,7 +271,7 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-        
+
         public void Dispose()
         {
         }

@@ -1039,6 +1039,16 @@
     <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario9.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceTicket\ServiceTicket.wsdl" />
+    <None Include="Service References\ServiceTicket\ServiceTicket.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceTicket\ServiceTicket1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceTicket\ServiceTicket2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceUbicacion\ServiceUbicacion.wsdl" />
     <None Include="Service References\ServiceUbicacion\ServiceUbicacion.xsd">
       <SubType>Designer</SubType>
@@ -1181,6 +1191,13 @@
     <None Include="Service References\ServiceSistemaTipoArbolAcceso\configuration91.svcinfo" />
     <None Include="Service References\ServiceSistemaTipoArbolAcceso\configuration.svcinfo" />
     <None Include="Service References\ServiceSistemaTipoArbolAcceso\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceTicket\ServiceTicket.disco" />
+    <None Include="Service References\ServiceTicket\configuration91.svcinfo" />
+    <None Include="Service References\ServiceTicket\configuration.svcinfo" />
+    <None Include="Service References\ServiceTicket\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -1646,6 +1663,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ServiceTicket\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ServiceUbicacion\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1824,6 +1846,7 @@
     <WCFMetadataStorage Include="Service References\ServiceSistemaTipoUsuario\" />
     <WCFMetadataStorage Include="Service References\ServiceSla\" />
     <WCFMetadataStorage Include="Service References\ServiceSubGrupoUsuario\" />
+    <WCFMetadataStorage Include="Service References\ServiceTicket\" />
     <WCFMetadataStorage Include="Service References\ServiceUbicacion\" />
     <WCFMetadataStorage Include="Service References\ServiceUsuario\" />
   </ItemGroup>

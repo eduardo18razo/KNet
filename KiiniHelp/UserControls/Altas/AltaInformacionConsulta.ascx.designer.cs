@@ -7,11 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using Winthusiasm.HtmlEditor;
-
 namespace KiiniHelp.UserControls.Altas {
     
     
@@ -24,7 +19,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected UpdatePanel upInfo;
+        protected global::System.Web.UI.UpdatePanel upInfo;
         
         /// <summary>
         /// panelAlert control.
@@ -33,7 +28,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlGenericControl panelAlert;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlert;
         
         /// <summary>
         /// rptHeaderError control.
@@ -42,7 +37,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Repeater rptHeaderError;
+        protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
         
         /// <summary>
         /// txtDescripcion control.
@@ -51,7 +46,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtDescripcion;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
         
         /// <summary>
         /// ddlTipoInformacion control.
@@ -60,7 +55,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected DropDownList ddlTipoInformacion;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoInformacion;
         
         /// <summary>
         /// divPropietrario control.
@@ -69,7 +64,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlGenericControl divPropietrario;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPropietrario;
         
         /// <summary>
         /// txtEditor control.
@@ -78,7 +73,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlEditor txtEditor;
+        protected global::Winthusiasm.HtmlEditor.HtmlEditor txtEditor;
         
         /// <summary>
         /// divDocumento control.
@@ -87,7 +82,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlGenericControl divDocumento;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDocumento;
         
         /// <summary>
         /// ddlTipoDocumento control.
@@ -96,7 +91,16 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected DropDownList ddlTipoDocumento;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumento;
+        
+        /// <summary>
+        /// divUploadDocumento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUploadDocumento;
         
         /// <summary>
         /// fuFile control.
@@ -105,7 +109,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected FileUpload fuFile;
+        protected global::System.Web.UI.WebControls.FileUpload fuFile;
         
         /// <summary>
         /// divUrl control.
@@ -114,7 +118,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlGenericControl divUrl;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUrl;
         
         /// <summary>
         /// txtDescripcionUrl control.
@@ -123,7 +127,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtDescripcionUrl;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcionUrl;
         
         /// <summary>
         /// btnGuardar control.
@@ -132,7 +136,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Button btnGuardar;
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
         
         /// <summary>
         /// btnLimpiar control.
@@ -141,6 +145,6 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Button btnLimpiar;
+        protected global::System.Web.UI.WebControls.Button btnLimpiar;
     }
 }

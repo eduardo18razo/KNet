@@ -31,6 +31,24 @@ namespace KiiniHelp.UserControls.Temporal {
         protected global::System.Web.UI.WebControls.HiddenField hfIdMascara;
         
         /// <summary>
+        /// hfComandoInsertar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfComandoInsertar;
+        
+        /// <summary>
+        /// hfComandoActualizar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfComandoActualizar;
+        
+        /// <summary>
         /// lblDescripcionMascara control.
         /// </summary>
         /// <remarks>
@@ -47,14 +65,5 @@ namespace KiiniHelp.UserControls.Temporal {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divControles;
-        
-        /// <summary>
-        /// btnGuardar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
     }
 }

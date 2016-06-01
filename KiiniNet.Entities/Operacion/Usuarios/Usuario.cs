@@ -61,5 +61,7 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public virtual List<UsuarioGrupo> UsuarioGrupo { get; set; }
         [DataMember]
         public virtual List<HitConsulta> HitConsulta { get; set; }
+        [DataMember]
+        public virtual List<Ticket> Ticket { get; set; }
     }
 }

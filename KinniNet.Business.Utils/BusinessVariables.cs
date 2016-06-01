@@ -27,9 +27,9 @@ namespace KinniNet.Business.Utils
         }
         public enum EnumTiposInformacionConsulta
         {
-            Propietario = 1,
+            Texto = 1,
             Documento = 2,
-            Paginahtml = 3,
+            PaginaHtml = 3,
             Servicio = 4
         }
 

@@ -80,7 +80,7 @@ namespace KiiniHelp.UserControls.Altas
                     throw new Exception("Debe especificar una descripción");
                 if (chkEstimado.Checked || txtTiempo.Text.Trim() == string.Empty)
                     throw new Exception("Debe especificar un tiempo");
-                SLA sla = new SLA();
+                Sla sla = new Sla();
                 sla.Descripcion = txtDescripcion.Text.Trim();
                 sla.TiempoHoraProceso = Convert.ToDecimal(txtTiempo.Text.Trim().Replace(":", "."));
                 sla.Habilitado = true;

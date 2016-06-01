@@ -15,6 +15,7 @@ namespace KiiniNet.UnitTest
         {
             try
             {
+                DataBaseModelContext db = new DataBaseModelContext();
                 BusinessSecurity.Menus bs = new BusinessSecurity.Menus();
                 bs.ObtenerMenuUsuario(3);
             }

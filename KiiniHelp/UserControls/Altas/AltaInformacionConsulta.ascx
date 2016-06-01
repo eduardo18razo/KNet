@@ -56,10 +56,10 @@
                         <div class="form-group">
                             <asp:Label runat="server" Text="Tipo de Documento" CssClass="col-sm-2 control-label" />
                             <div class="col-sm-10">
-                                <asp:DropDownList runat="server" ID="ddlTipoDocumento" CssClass="DropSelect" AutoPostBack="True" />
+                                <asp:DropDownList runat="server" ID="ddlTipoDocumento" CssClass="DropSelect" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoDocumento_OnSelectedIndexChanged" />
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" runat="server" ID="divUploadDocumento">
                             <asp:Label runat="server" Text="Archivo" CssClass="col-sm-2 control-label" />
                             <div class="col-sm-10">
                                 <%--<ajax:AsyncFileUpload ID="afuArchivo" runat="server" UploaderStyle="Traditional" OnUploadedComplete="afuArchivo_OnUploadedComplete" PersistFile="True"  />--%>

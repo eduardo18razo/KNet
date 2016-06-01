@@ -157,7 +157,7 @@ namespace KiiniHelp.UserControls.Altas
                     divCatalgo.Visible = tipoCampo.Catalogo;
                 }
 
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#agregarCampoMascara\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAgregarCampoMascara\");", true);
             }
             catch (Exception ex)
             {
@@ -178,7 +178,7 @@ namespace KiiniHelp.UserControls.Altas
                     throw new Exception("Debe especificar una descripcion");
                 Regex rgx = new Regex("[0-9]");
 
-                if(rgx.IsMatch(txtDescripcionCampo.Text.Trim()))
+                if (rgx.IsMatch(txtDescripcionCampo.Text.Trim()))
                     throw new Exception("La descripcion no puede contener numeros.");
 
                 if (divLongitudes.Visible)
@@ -193,15 +193,15 @@ namespace KiiniHelp.UserControls.Altas
                     }
                 }
 
-                if(divCatalgo.Visible)
-                    if(ddlCatalogosCampo.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (divCatalgo.Visible)
+                    if (ddlCatalogosCampo.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                         throw new Exception("Debe especificar un catalogo");
 
-                if(divMoneda.Visible)
+                if (divMoneda.Visible)
                     if (txtSimboloMoneda.Text.Trim() == string.Empty)
                         throw new Exception("Debe especificar una descripcion de moneda");
 
-                if(divValorMaximo.Visible)
+                if (divValorMaximo.Visible)
                     if (txtValorMaximo.Text.Trim() == string.Empty)
                         throw new Exception("Debe especificar un valor maximo");
 
@@ -214,24 +214,21 @@ namespace KiiniHelp.UserControls.Altas
                 {
                     IdCatalogo = tipoCampo.Catalogo ? Convert.ToInt32(ddlCatalogosCampo.SelectedValue) : (int?)null,
                     IdTipoCampoMascara = tipoCampo.Id,
-                    Descripcion = txtDescripcionCampo.Text,
+                    Descripcion = txtDescripcionCampo.Text.Trim().ToUpper(),
                     Requerido = chkRequerido.Checked,
                     LongitudMinima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMinima.Text.Trim()) : (int?)null,
                     LongitudMaxima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMaxima.Text.Trim()) : (int?)null,
-                    SimboloMoneda = tipoCampo.SimboloMoneda ? txtSimboloMoneda.Text.Trim() : null,
-                    ValorMaximo = tipoCampo.ValorMaximo ? Convert.ToInt32(txtValorMaximo.Text.Trim()) : (int?)null,
-                    TipoCampoMascara = tipoCampo
-
-
+                    SimboloMoneda = tipoCampo.SimboloMoneda ? txtSimboloMoneda.Text.Trim().ToUpper() : null,
+                    ValorMaximo = tipoCampo.ValorMaximo ? Convert.ToInt32(txtValorMaximo.Text.Trim()) : (int?)null
                 });
 
                 rptControles.DataSource = tmpMascara.CampoMascara;
                 rptControles.DataBind();
                 Session["MascaraAlta"] = tmpMascara;
                 ddlTipoCampo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
-                upControlesMascara.Update();
                 LimpiarModalCampo();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#agregarCampoMascara\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAgregarCampoMascara\");", true);
+                //upControlesMascara.Update();
             }
             catch (Exception ex)
             {

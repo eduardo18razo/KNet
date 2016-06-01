@@ -208,7 +208,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdArbolAcceso" Type="int" Nullable="false" />
     <Property Name="IdMascara" Type="int" />
-    <Property Name="IdSLA" Type="int" />
+    <Property Name="IdSla" Type="int" />
     <Property Name="IdEncuesta" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
   </EntityType>
@@ -373,6 +373,16 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="RespuestaEncuesta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTicket" Type="int" Nullable="false" />
+    <Property Name="IdEncuesta" Type="int" />
+    <Property Name="IdPregunta" Type="int" />
+    <Property Name="Ponderacion" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
   <EntityType Name="RespuestaTipoEncuesta">
     <Key>
       <PropertyRef Name="Id" />
@@ -424,14 +434,50 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
-  <EntityType Name="SLA">
+  <EntityType Name="Sla">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="TiempoHoraProceso" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Detallado" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SlaDetalle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSla" Type="int" />
+    <Property Name="IdSubRol" Type="int" />
+    <Property Name="TiempoProceso" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="SlaEstimadoTicket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTicket" Type="int" />
+    <Property Name="FechaInicio" Type="datetime" />
+    <Property Name="FechaFin" Type="datetime" />
+    <Property Name="FechaInicioProceso" Type="datetime" />
+    <Property Name="FechaFinProceso" Type="datetime" />
+    <Property Name="TiempoHoraProceso" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TiempoRetenido" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TiempoDesface" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Terminado" Type="bit" />
+  </EntityType>
+  <EntityType Name="SlaEstimadoTicketDetalle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSlaEstimadoTicket" Type="int" />
+    <Property Name="IdSubRol" Type="int" />
+    <Property Name="TiempoProceso" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="HoraInicio" Type="datetime" />
+    <Property Name="HoraFin" Type="datetime" />
   </EntityType>
   <EntityType Name="SubDireccion">
     <Key>
@@ -487,6 +533,22 @@
     <Property Name="IdUsuario" Type="int" Nullable="false" />
     <Property Name="Numero" Type="nvarchar" MaxLength="15" Nullable="false" />
     <Property Name="Extension" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Ticket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoUsuario" Type="int" Nullable="false" />
+    <Property Name="IdTipoArbolAcceso" Type="int" Nullable="false" />
+    <Property Name="IdArbolAcceso" Type="int" Nullable="false" />
+    <Property Name="IdUsuario" Type="int" Nullable="false" />
+    <Property Name="IdOrganizacion" Type="int" Nullable="false" />
+    <Property Name="IdUbicacion" Type="int" Nullable="false" />
+    <Property Name="IdMascara" Type="int" />
+    <Property Name="IdEncuesta" Type="int" />
+    <Property Name="IdSlaEstimadoTicket" Type="int" />
+    <Property Name="IdRespuestaEncuesta" Type="int" />
   </EntityType>
   <EntityType Name="TipoArbolAcceso">
     <Key>
@@ -996,14 +1058,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_InventarioArbolAcceso_SLA">
-    <End Role="SLA" Type="Self.SLA" Multiplicity="0..1" />
+    <End Role="Sla" Type="Self.Sla" Multiplicity="0..1" />
     <End Role="InventarioArbolAcceso" Type="Self.InventarioArbolAcceso" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="SLA">
+      <Principal Role="Sla">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="InventarioArbolAcceso">
-        <PropertyRef Name="IdSLA" />
+        <PropertyRef Name="IdSla" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1355,6 +1417,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SlaDetalle_SLA">
+    <End Role="Sla" Type="Self.Sla" Multiplicity="0..1" />
+    <End Role="SlaDetalle" Type="Self.SlaDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sla">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SlaDetalle">
+        <PropertyRef Name="IdSla" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket">
+    <End Role="SlaEstimadoTicket" Type="Self.SlaEstimadoTicket" Multiplicity="0..1" />
+    <End Role="SlaEstimadoTicketDetalle" Type="Self.SlaEstimadoTicketDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SlaEstimadoTicket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SlaEstimadoTicketDetalle">
+        <PropertyRef Name="IdSlaEstimadoTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SubDireccion_TipoUsuario">
     <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
     <End Role="SubDireccion" Type="Self.SubDireccion" Multiplicity="*" />
@@ -1571,6 +1657,66 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tblRespuestaEncuesta_tblEncuesta">
+    <End Role="Encuesta" Type="Self.Encuesta" Multiplicity="0..1" />
+    <End Role="RespuestaEncuesta" Type="Self.RespuestaEncuesta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Encuesta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RespuestaEncuesta">
+        <PropertyRef Name="IdEncuesta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRespuestaEncuesta_tblEncuestaPregunta">
+    <End Role="EncuestaPregunta" Type="Self.EncuestaPregunta" Multiplicity="0..1" />
+    <End Role="RespuestaEncuesta" Type="Self.RespuestaEncuesta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EncuestaPregunta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RespuestaEncuesta">
+        <PropertyRef Name="IdPregunta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblRespuestaEncuesta_tblTicket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="1" />
+    <End Role="RespuestaEncuesta" Type="Self.RespuestaEncuesta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RespuestaEncuesta">
+        <PropertyRef Name="IdTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTicket_tblArbolAcceso">
+    <End Role="ArbolAcceso" Type="Self.ArbolAcceso" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArbolAcceso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdArbolAcceso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblTicket_tblSLAEstimadoTicket">
+    <End Role="SlaEstimadoTicket" Type="Self.SlaEstimadoTicket" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SlaEstimadoTicket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdSlaEstimadoTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TelefonoUsuario_TipoTelefono">
     <End Role="TipoTelefono" Type="Self.TipoTelefono" Multiplicity="0..1" />
     <End Role="TelefonoUsuario" Type="Self.TelefonoUsuario" Multiplicity="*" />
@@ -1591,6 +1737,90 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="TelefonoUsuario">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Encuesta">
+    <End Role="Encuesta" Type="Self.Encuesta" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Encuesta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdEncuesta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Mascara">
+    <End Role="Mascara" Type="Self.Mascara" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mascara">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdMascara" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Organizacion">
+    <End Role="Organizacion" Type="Self.Organizacion" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdOrganizacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_TipoArbolAcceso">
+    <End Role="TipoArbolAcceso" Type="Self.TipoArbolAcceso" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoArbolAcceso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdTipoArbolAcceso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_TipoUsuario">
+    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Ubicacion">
+    <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ubicacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdUbicacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
         <PropertyRef Name="IdUsuario" />
       </Dependent>
     </ReferentialConstraint>
@@ -1862,19 +2092,24 @@
     <EntitySet Name="ParametrosAplicaciones" EntityType="Self.ParametrosAplicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametrosTelefonos" EntityType="Self.ParametrosTelefonos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Piso" EntityType="Self.Piso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RespuestaEncuesta" EntityType="Self.RespuestaEncuesta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RespuestaTipoEncuesta" EntityType="Self.RespuestaTipoEncuesta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RolMenu" EntityType="Self.RolMenu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RolTipoGrupo" EntityType="Self.RolTipoGrupo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RolTipoUsuario" EntityType="Self.RolTipoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SiteRack" EntityType="Self.SiteRack" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="SLA" EntityType="Self.SLA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sla" EntityType="Self.Sla" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SlaDetalle" EntityType="Self.SlaDetalle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SlaEstimadoTicket" EntityType="Self.SlaEstimadoTicket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SlaEstimadoTicketDetalle" EntityType="Self.SlaEstimadoTicketDetalle" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubDireccion" EntityType="Self.SubDireccion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubGerencia" EntityType="Self.SubGerencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubGrupoUsuario" EntityType="Self.SubGrupoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubRol" EntityType="Self.SubRol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubZona" EntityType="Self.SubZona" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TelefonoUsuario" EntityType="Self.TelefonoUsuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoArbolAcceso" EntityType="Self.TipoArbolAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoCampoMascara" EntityType="Self.TipoCampoMascara" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
@@ -2010,7 +2245,7 @@
       <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
     </AssociationSet>
     <AssociationSet Name="FK_InventarioArbolAcceso_SLA" Association="Self.FK_InventarioArbolAcceso_SLA">
-      <End Role="SLA" EntitySet="SLA" />
+      <End Role="Sla" EntitySet="Sla" />
       <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
     </AssociationSet>
     <AssociationSet Name="FK_InventarioInfConsulta_InformacionConsulta" Association="Self.FK_InventarioInfConsulta_InformacionConsulta">
@@ -2129,6 +2364,14 @@
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="SiteRack" EntitySet="SiteRack" />
     </AssociationSet>
+    <AssociationSet Name="FK_SlaDetalle_SLA" Association="Self.FK_SlaDetalle_SLA">
+      <End Role="Sla" EntitySet="Sla" />
+      <End Role="SlaDetalle" EntitySet="SlaDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket" Association="Self.FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket">
+      <End Role="SlaEstimadoTicket" EntitySet="SlaEstimadoTicket" />
+      <End Role="SlaEstimadoTicketDetalle" EntitySet="SlaEstimadoTicketDetalle" />
+    </AssociationSet>
     <AssociationSet Name="FK_SubDireccion_TipoUsuario" Association="Self.FK_SubDireccion_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="SubDireccion" EntitySet="SubDireccion" />
@@ -2201,6 +2444,26 @@
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="ParametrosTelefonos" EntitySet="ParametrosTelefonos" />
     </AssociationSet>
+    <AssociationSet Name="FK_tblRespuestaEncuesta_tblEncuesta" Association="Self.FK_tblRespuestaEncuesta_tblEncuesta">
+      <End Role="Encuesta" EntitySet="Encuesta" />
+      <End Role="RespuestaEncuesta" EntitySet="RespuestaEncuesta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRespuestaEncuesta_tblEncuestaPregunta" Association="Self.FK_tblRespuestaEncuesta_tblEncuestaPregunta">
+      <End Role="EncuestaPregunta" EntitySet="EncuestaPregunta" />
+      <End Role="RespuestaEncuesta" EntitySet="RespuestaEncuesta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblRespuestaEncuesta_tblTicket" Association="Self.FK_tblRespuestaEncuesta_tblTicket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="RespuestaEncuesta" EntitySet="RespuestaEncuesta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTicket_tblArbolAcceso" Association="Self.FK_tblTicket_tblArbolAcceso">
+      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblTicket_tblSLAEstimadoTicket" Association="Self.FK_tblTicket_tblSLAEstimadoTicket">
+      <End Role="SlaEstimadoTicket" EntitySet="SlaEstimadoTicket" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
     <AssociationSet Name="FK_TelefonoUsuario_TipoTelefono" Association="Self.FK_TelefonoUsuario_TipoTelefono">
       <End Role="TipoTelefono" EntitySet="TipoTelefono" />
       <End Role="TelefonoUsuario" EntitySet="TelefonoUsuario" />
@@ -2208,6 +2471,34 @@
     <AssociationSet Name="FK_TelefonoUsuario_Usuario" Association="Self.FK_TelefonoUsuario_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="TelefonoUsuario" EntitySet="TelefonoUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Encuesta" Association="Self.FK_Ticket_Encuesta">
+      <End Role="Encuesta" EntitySet="Encuesta" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Mascara" Association="Self.FK_Ticket_Mascara">
+      <End Role="Mascara" EntitySet="Mascara" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Organizacion" Association="Self.FK_Ticket_Organizacion">
+      <End Role="Organizacion" EntitySet="Organizacion" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_TipoArbolAcceso" Association="Self.FK_Ticket_TipoArbolAcceso">
+      <End Role="TipoArbolAcceso" EntitySet="TipoArbolAcceso" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_TipoUsuario" Association="Self.FK_Ticket_TipoUsuario">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Ubicacion" Association="Self.FK_Ticket_Ubicacion">
+      <End Role="Ubicacion" EntitySet="Ubicacion" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Usuario" Association="Self.FK_Ticket_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>
     <AssociationSet Name="FK_Torre_TipoUsuario" Association="Self.FK_Torre_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />

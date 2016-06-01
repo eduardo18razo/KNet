@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
+using KiiniNet.Entities.Operacion;
 
 namespace KiiniNet.Entities.Cat.Mascaras
 {
@@ -26,5 +27,7 @@ namespace KiiniNet.Entities.Cat.Mascaras
         public virtual List<CampoMascara> CampoMascara { get; set; }
         [DataMember]
         public virtual List<InventarioArbolAcceso> InventarioArbolAcceso { get; set; }
+        [DataMember]
+        public virtual List<Ticket> Ticket { get; set; }
     }
 }

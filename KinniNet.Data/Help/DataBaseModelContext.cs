@@ -96,7 +96,8 @@ namespace KinniNet.Data.Help
                 _arbolAcceso = CreateObjectSet<ArbolAcceso>();
                 _informacionConsulta = CreateObjectSet<InformacionConsulta>();
                 _informacionConsultaDatos = CreateObjectSet<InformacionConsultaDatos>();
-                _sla = CreateObjectSet<SLA>();
+                _sla = CreateObjectSet<Sla>();
+                _slaDetalle = CreateObjectSet<SlaDetalle>();
                 _encuesta = CreateObjectSet<Encuesta>();
                 _encuestaPregunta = CreateObjectSet<EncuestaPregunta>();
                 _inventarioArbolAcceso = CreateObjectSet<InventarioArbolAcceso>();
@@ -104,6 +105,10 @@ namespace KinniNet.Data.Help
                 _grupoUsuarioInventarioArbol = CreateObjectSet<GrupoUsuarioInventarioArbol>();
                 _hitConsulta = CreateObjectSet<HitConsulta>();
                 _hitGrupoUsuario = CreateObjectSet<HitGrupoUsuario>();
+                _respuestaEncuesta= CreateObjectSet<RespuestaEncuesta>();
+                _slaEstimadoTicket = CreateObjectSet<SlaEstimadoTicket>();
+                _slaEstimadoTicketDetalle = CreateObjectSet<SlaEstimadoTicketDetalle>();
+                _ticket= CreateObjectSet<Ticket>();
 
             }
             catch (Exception ex)
@@ -259,11 +264,19 @@ namespace KinniNet.Data.Help
             }
         }
 
-        public ObjectSet<SLA> SLA
+        public ObjectSet<Sla> Sla
         {
             get
             {
                 return _sla;
+            }
+        }
+
+        public ObjectSet<SlaDetalle> SlaDetalle
+        {
+            get
+            {
+                return _slaDetalle;
             }
         }
 
@@ -323,6 +336,38 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<RespuestaEncuesta> RespuestaEncuesta
+        {
+            get
+            {
+                return _respuestaEncuesta;
+            }
+        }
+
+        public ObjectSet<SlaEstimadoTicket> SlaEstimadoTicket
+        {
+            get
+            {
+                return _slaEstimadoTicket;
+            }
+        }
+
+        public ObjectSet<SlaEstimadoTicketDetalle> SlaEstimadoTicketDetalle
+        {
+            get
+            {
+                return _slaEstimadoTicketDetalle;
+            }
+        }
+
+        public ObjectSet<Ticket> Ticket
+        {
+            get
+            {
+                return _ticket;
+            }
+        }
+
 
 
         private ObjectSet<Usuario> _usuario;
@@ -338,7 +383,8 @@ namespace KinniNet.Data.Help
         private ObjectSet<ArbolAcceso> _arbolAcceso;
         private ObjectSet<InformacionConsulta> _informacionConsulta;
         private ObjectSet<InformacionConsultaDatos> _informacionConsultaDatos;
-        private ObjectSet<SLA> _sla;
+        private ObjectSet<Sla> _sla;
+        private ObjectSet<SlaDetalle> _slaDetalle;
 
         private ObjectSet<Encuesta> _encuesta;
         private ObjectSet<EncuestaPregunta> _encuestaPregunta;
@@ -347,6 +393,10 @@ namespace KinniNet.Data.Help
         private ObjectSet<GrupoUsuarioInventarioArbol> _grupoUsuarioInventarioArbol;
         private ObjectSet<HitConsulta> _hitConsulta;
         private ObjectSet<HitGrupoUsuario> _hitGrupoUsuario;
+        private ObjectSet<RespuestaEncuesta> _respuestaEncuesta ;
+        private ObjectSet<SlaEstimadoTicket> _slaEstimadoTicket;
+        private ObjectSet<SlaEstimadoTicketDetalle> _slaEstimadoTicketDetalle;
+        private ObjectSet<Ticket> _ticket;
 
         #region Mascara
         public ObjectSet<Mascara> Mascara

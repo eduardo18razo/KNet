@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3efbb63b-b6bf-408a-85e5-d3db1ec04fdf" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:15277/ServiceTicket.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceTicket.xsd" MetadataType="Schema" ID="08fb44dd-6184-4693-a16f-5e0697517d98" SourceId="1" SourceUrl="http://localhost:15277/ServiceTicket.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceTicket1.xsd" MetadataType="Schema" ID="297ffd11-2abf-486b-9ac4-0a95c2ae53c7" SourceId="1" SourceUrl="http://localhost:15277/ServiceTicket.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceTicket.disco" MetadataType="Disco" ID="51943850-ed77-4810-97eb-694d19bcb32e" SourceId="1" SourceUrl="http://localhost:15277/ServiceTicket.svc?disco" />
+    <MetadataFile FileName="ServiceTicket2.xsd" MetadataType="Schema" ID="73eba779-55f5-4fad-8dc2-1592b3cb1015" SourceId="1" SourceUrl="http://localhost:15277/ServiceTicket.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceTicket.wsdl" MetadataType="Wsdl" ID="0a00eedb-2451-468d-badd-53c7c532f8f7" SourceId="1" SourceUrl="http://localhost:15277/ServiceTicket.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

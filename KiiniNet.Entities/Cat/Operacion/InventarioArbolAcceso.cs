@@ -17,7 +17,7 @@ namespace KiiniNet.Entities.Cat.Operacion
         [DataMember]
         public int? IdMascara { get; set; }
         [DataMember]
-        public int? IdSLA { get; set; }
+        public int? IdSla { get; set; }
         
         [DataMember]
         public int? IdEncuesta { get; set; }
@@ -29,7 +29,7 @@ namespace KiiniNet.Entities.Cat.Operacion
         [DataMember]
         public virtual Mascara Mascara { get; set; }
         [DataMember]
-        public virtual SLA SLA { get; set; }
+        public virtual Sla Sla { get; set; }
         
        
         [DataMember]

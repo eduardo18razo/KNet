@@ -18,17 +18,17 @@ namespace KinniNet.Core.Operacion
         {
             _proxy = proxy;
         }
-        public List<SLA> ObtenerSla(bool insertarSeleccion)
+        public List<Sla> ObtenerSla(bool insertarSeleccion)
         {
-            List<SLA> result;
+            List<Sla> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.SLA.Where(w => w.Habilitado).OrderBy(o => o.Descripcion).ToList();
+                result = db.Sla.Where(w => w.Habilitado).OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
-                        new SLA
+                        new Sla
                         {
                             Id = BusinessVariables.ComboBoxCatalogo.Value,
                             Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
@@ -45,7 +45,28 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public void Guardar(SLA sla)
+        public Sla ObtenerSla(int idSla)
+        {
+            Sla result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Sla.SingleOrDefault(w => w.Id == idSla);
+                db.LoadProperty(result, "SlaDetalle");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public void Guardar(Sla sla)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
@@ -55,7 +76,7 @@ namespace KinniNet.Core.Operacion
                 sla.Habilitado = true;
                 sla.Descripcion = sla.Descripcion.ToUpper();
                 if (sla.Id == 0)
-                    db.SLA.AddObject(sla);
+                    db.Sla.AddObject(sla);
                 db.SaveChanges();
             }
             catch (Exception ex)

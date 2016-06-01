@@ -13,12 +13,12 @@ namespace KiiniHelp.TestUsControl {
     public partial class FrmTest {
         
         /// <summary>
-        /// UcMascaraCaptura control.
+        /// AltaMascaraAcceso control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Temporal.UcMascaraCaptura UcMascaraCaptura;
+        protected global::KiiniHelp.UserControls.Altas.AltaMascaraAcceso AltaMascaraAcceso;
     }
 }

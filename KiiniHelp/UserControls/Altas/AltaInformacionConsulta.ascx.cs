@@ -58,7 +58,7 @@ namespace KiiniHelp.UserControls.Altas
                     throw new Exception("Debe especificar una descripción");
                 switch (tipoInformacion)
                 {
-                    case BusinessVariables.EnumTiposInformacionConsulta.Propietario:
+                    case BusinessVariables.EnumTiposInformacionConsulta.Texto:
                         if (txtEditor.Text.Trim() == string.Empty)
                             throw new Exception("Debe especificar un contenido");
                         break;
@@ -66,7 +66,7 @@ namespace KiiniHelp.UserControls.Altas
                         if (!fuFile.HasFile)
                             throw new Exception("Debe especificar un documento");
                         break;
-                    case BusinessVariables.EnumTiposInformacionConsulta.Paginahtml:
+                    case BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                         if (txtDescripcionUrl.Text.Trim() == string.Empty)
                             throw new Exception("Debe especificar una url de pagina");
                         break;
@@ -121,8 +121,9 @@ namespace KiiniHelp.UserControls.Altas
             {
                 switch (Convert.ToInt32(ddlTipoInformacion.SelectedValue))
                 {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Propietario:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
                         divPropietrario.Visible = true;
+                        divUploadDocumento.Visible = false;
                         divDocumento.Visible = false;
                         divUrl.Visible = false;
                         break;
@@ -131,14 +132,16 @@ namespace KiiniHelp.UserControls.Altas
                         divDocumento.Visible = true;
                         divUrl.Visible = false;
                         break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Paginahtml:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                         divPropietrario.Visible = false;
                         divDocumento.Visible = false;
+                        divUploadDocumento.Visible = false;
                         divUrl.Visible = true;
                         break;
                     default:
                         divPropietrario.Visible = false;
                         divDocumento.Visible = false;
+                        divUploadDocumento.Visible = false;
                         divUrl.Visible = false;
                         break;
                 }
@@ -167,8 +170,8 @@ namespace KiiniHelp.UserControls.Altas
                 };
                 switch (Convert.ToInt32(ddlTipoInformacion.SelectedValue))
                 {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Propietario:
-                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.Propietario);
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.Texto);
                         informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos { Descripcion = txtEditor.Text, Orden = 1 });
                         break;
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
@@ -177,8 +180,8 @@ namespace KiiniHelp.UserControls.Altas
                         afuArchivo_OnUploadedComplete(null, null);
                         informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos { Descripcion = fuFile.PostedFile.FileName, Orden = 1 });
                         break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Paginahtml:
-                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.Paginahtml);
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml);
                         informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos { Descripcion = txtDescripcionUrl.Text.Trim(), Orden = 1 });
                         break;
                     default:
@@ -237,6 +240,23 @@ namespace KiiniHelp.UserControls.Altas
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        protected void ddlTipoDocumento_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                divUploadDocumento.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
     }

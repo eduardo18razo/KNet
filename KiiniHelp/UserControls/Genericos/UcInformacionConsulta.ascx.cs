@@ -77,7 +77,7 @@ namespace KiiniHelp.UserControls.Genericos
                     InformacionConsulta ic = _servicioInformacionConsulta.ObtenerInformacionConsultaById(Convert.ToInt32(btn.CommandArgument));
                     switch (ic.IdTipoInfConsulta)
                     {
-                        case (int)BusinessVariables.EnumTiposInformacionConsulta.Propietario:
+                        case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
                             lblContenido.Text = string.Empty;
                             foreach (InformacionConsultaDatos contenindo in ic.InformacionConsultaDatos.OrderBy(o => o.Orden))
                             {
@@ -104,7 +104,7 @@ namespace KiiniHelp.UserControls.Genericos
                             }
                             ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalMuestraInformacion\");", true);
                             break;
-                        case (int)BusinessVariables.EnumTiposInformacionConsulta.Paginahtml:
+                        case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                             string url = ic.InformacionConsultaDatos.OrderBy(o => o.Orden).Aggregate(string.Empty, (current, contenindo) => current + contenindo.Descripcion);
                             if (btn.CommandName == "0")
                             {

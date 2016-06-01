@@ -8,9 +8,9 @@ namespace KiiniNet.Services.Operacion.Interface
     public interface IServiceSla
     {
         [OperationContract]
-        List<SLA> ObtenerSla(bool insertarSeleccion);
+        List<Sla> ObtenerSla(bool insertarSeleccion);
 
         [OperationContract]
-        void Guardar(SLA sla);
+        void Guardar(Sla sla);
     }
 }

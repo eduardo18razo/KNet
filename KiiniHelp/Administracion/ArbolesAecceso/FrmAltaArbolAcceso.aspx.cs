@@ -115,13 +115,13 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
                     Label lbl = (Label)item.FindControl("lblIdTipoInformacion");
                     switch (int.Parse(lbl.Text))
                     {
-                        case (int)BusinessVariables.EnumTiposInformacionConsulta.Propietario:
+                        case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
                             ddl = (DropDownList)item.FindControl("ddlPropietario");
                             break;
                         case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
                             ddl = (DropDownList)item.FindControl("ddlDocumento");
                             break;
-                        case (int)BusinessVariables.EnumTiposInformacionConsulta.Paginahtml:
+                        case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                             ddl = (DropDownList)item.FindControl("ddlUrl");
                             break;
                     }
@@ -589,7 +589,7 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
                         arbol.InventarioArbolAcceso = new List<InventarioArbolAcceso>();
                         arbol.InventarioArbolAcceso.Add(new InventarioArbolAcceso());
                         arbol.InventarioArbolAcceso[0].IdMascara = Convert.ToInt32(ddlMascaraAcceso.SelectedValue);
-                        arbol.InventarioArbolAcceso[0].IdSLA = Convert.ToInt32(ddlSla.SelectedValue);
+                        arbol.InventarioArbolAcceso[0].IdSla = Convert.ToInt32(ddlSla.SelectedValue);
                         arbol.InventarioArbolAcceso[0].GrupoUsuarioInventarioArbol = new List<GrupoUsuarioInventarioArbol>();
                         foreach (RepeaterItem item in AsociarGrupoUsuario.GruposAsociados)
                         {
@@ -617,13 +617,13 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
                                 DropDownList ddl = null;
                                 switch (Convert.ToInt32(lblId.Text))
                                 {
-                                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Propietario:
+                                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
                                         ddl = (DropDownList)item.FindControl("ddlPropietario");
                                         break;
                                     case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
                                         ddl = (DropDownList)item.FindControl("ddlDocumento");
                                         break;
-                                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Paginahtml:
+                                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                                         ddl = (DropDownList)item.FindControl("ddlUrl");
                                         break;
                                 }
@@ -824,9 +824,9 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
                 DropDownList ddlDocumento = (DropDownList)e.Item.FindControl("ddlDocumento");
                 DropDownList ddlUrl = (DropDownList)e.Item.FindControl("ddlUrl");
                 if (ddlPropietario == null && ddlDocumento == null && ddlUrl == null) return;
-                Metodos.LlenaComboCatalogo(ddlPropietario, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.Propietario, true));
+                Metodos.LlenaComboCatalogo(ddlPropietario, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.Texto, true));
                 Metodos.LlenaComboCatalogo(ddlDocumento, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.Documento, true));
-                Metodos.LlenaComboCatalogo(ddlUrl, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.Paginahtml, true));
+                Metodos.LlenaComboCatalogo(ddlUrl, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml, true));
             }
             catch (Exception ex)
             {
@@ -847,17 +847,18 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
                 Button btn;
                 CheckBox chk = (CheckBox)sender;
                 if (chk == null) return;
-                switch (chk.Text)
+                BusinessVariables.EnumTiposInformacionConsulta seleccion = Metodos.Enumeradores.GetStringEnum<BusinessVariables.EnumTiposInformacionConsulta>(chk.Text);
+                switch (seleccion)
                 {
-                    case "PROPIETARIO":
+                    case BusinessVariables.EnumTiposInformacionConsulta.Texto:
                         ddl = (DropDownList)rptInformacion.Items[0].FindControl("ddlPropietario");
                         btn = (Button)rptInformacion.Items[0].FindControl("btnAgregarPropietario");
                         break;
-                    case "DOCUMENTO":
+                    case BusinessVariables.EnumTiposInformacionConsulta.Documento:
                         ddl = (DropDownList)rptInformacion.Items[1].FindControl("ddlDocumento");
                         btn = (Button)rptInformacion.Items[1].FindControl("btnAgregarDocumento");
                         break;
-                    case "PAGINA HTML":
+                    case BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                         ddl = (DropDownList)rptInformacion.Items[2].FindControl("ddlUrl");
                         btn = (Button)rptInformacion.Items[2].FindControl("btnAgregarUrl");
                         break;

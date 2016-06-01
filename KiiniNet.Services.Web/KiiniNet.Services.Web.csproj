@@ -60,6 +60,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ServiceTicket.svc" />
     <Content Include="ServiceCatalogosSistema.svc" />
     <Content Include="ServiceArbolAcceso.svc" />
     <Content Include="ServiceEncuesta.svc" />

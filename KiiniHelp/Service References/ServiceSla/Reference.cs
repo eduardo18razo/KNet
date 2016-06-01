@@ -23,10 +23,10 @@ namespace KiiniHelp.ServiceSla {
     public interface IServiceSla {
         
         [OperationContract(Action="http://tempuri.org/IServiceSla/ObtenerSla", ReplyAction="http://tempuri.org/IServiceSla/ObtenerSlaResponse")]
-        List<SLA> ObtenerSla(bool insertarSeleccion);
+        List<Sla> ObtenerSla(bool insertarSeleccion);
         
         [OperationContract(Action="http://tempuri.org/IServiceSla/Guardar", ReplyAction="http://tempuri.org/IServiceSla/GuardarResponse")]
-        void Guardar(SLA sla);
+        void Guardar(Sla sla);
     }
     
     [GeneratedCode("System.ServiceModel", "4.0.0.0")]
@@ -56,11 +56,11 @@ namespace KiiniHelp.ServiceSla {
                 base(binding, remoteAddress) {
         }
         
-        public List<SLA> ObtenerSla(bool insertarSeleccion) {
+        public List<Sla> ObtenerSla(bool insertarSeleccion) {
             return base.Channel.ObtenerSla(insertarSeleccion);
         }
         
-        public void Guardar(SLA sla) {
+        public void Guardar(Sla sla) {
             base.Channel.Guardar(sla);
         }
     }

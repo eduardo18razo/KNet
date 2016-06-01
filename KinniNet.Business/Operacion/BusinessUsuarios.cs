@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Data.Help;
 
@@ -10,6 +11,25 @@ namespace KinniNet.Core.Operacion
         public BusinessUsuarios(bool proxy = false)
         {
             _proxy = proxy;
+        }
+
+        public Usuario ObtenerUsuario(int idUsuario)
+        {
+            Usuario result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                result = db.Usuario.SingleOrDefault(s => s.Id == idUsuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
         }
 
         public void GuardarUsuario(Usuario usuario)

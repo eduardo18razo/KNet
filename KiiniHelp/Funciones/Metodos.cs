@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Web.UI.WebControls;
 using KinniNet.Business.Utils;
@@ -7,6 +8,34 @@ namespace KiiniHelp.Funciones
 {
     public static class Metodos
     {
+        public static class Strings
+        {
+            public static string CastToEnum(string input)
+            {
+                if (String.IsNullOrEmpty(input))
+                    throw new ArgumentException("Cadena vacia");
+                string[] cadena = input.Trim().Split(' ');
+                input = string.Empty;
+                foreach (string word  in cadena)
+                {
+                    input += word.First().ToString().ToUpper() + word.Trim().Substring(1);
+                }
+                
+                return input;
+            }
+        }
+
+        public static class Enumeradores
+        {
+            public static T GetStringEnum<T>(string cadena)
+            {
+                return (T) Enum.Parse(typeof (T), Strings.CastToEnum(cadena.ToLower()));
+            }
+            public static T GetValueEnumFromString<T>(string cadena)
+            {
+                return (T)Enum.Parse(typeof(T), Strings.CastToEnum(cadena.ToLower()));
+            }
+        }
         public static void LimpiarCombo(DropDownList ddl)
         {
             try
@@ -133,6 +162,8 @@ namespace KiiniHelp.Funciones
                 throw new Exception(sb.ToString());
             return true;
         }
+
+        
 
     }
 }

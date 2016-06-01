@@ -13,6 +13,24 @@ namespace KiiniHelp.Ticket {
     public partial class FrmTicket {
         
         /// <summary>
+        /// panelAlert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlert;
+        
+        /// <summary>
+        /// rptHeaderError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
+        
+        /// <summary>
         /// hfIdMascara control.
         /// </summary>
         /// <remarks>
@@ -22,6 +40,24 @@ namespace KiiniHelp.Ticket {
         protected global::System.Web.UI.WebControls.HiddenField hfIdMascara;
         
         /// <summary>
+        /// hfIdEncuesta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdEncuesta;
+        
+        /// <summary>
+        /// hfIdSla control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdSla;
+        
+        /// <summary>
         /// UcMascaraCaptura control.
         /// </summary>
         /// <remarks>
@@ -29,5 +65,23 @@ namespace KiiniHelp.Ticket {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::KiiniHelp.UserControls.Temporal.UcMascaraCaptura UcMascaraCaptura;
+        
+        /// <summary>
+        /// btnGuardar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        
+        /// <summary>
+        /// btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
     }
 }
