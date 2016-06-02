@@ -187,14 +187,14 @@
                                             </div>
                                         </div>
                                         <br />
-                                        <div runat="server" id="divNodoTerminal" visible="False">
-                                            <div class="panel panel-primary center-content-div" runat="server" id="divDatos" visible="True">
+                                        <div >
+                                            <div class="panel panel-primary center-content-div">
                                                 <div class="panel-heading">
                                                     Información
                                                 </div>
                                                 <div class="panel-body">
-                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Consulta" ID="btnModalConsultas" data-toggle="modal" data-target="#modalConsultas" runat="server"></asp:Button>
-                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Ticket" ID="btnMocalTicket" data-toggle="modal" data-target="#modalTicket" runat="server"></asp:Button>
+                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Consulta" ID="btnModalConsultas" data-toggle="modal" data-target="#modalConsultas" runat="server" Visible="False"></asp:Button>
+                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Ticket" ID="btnMocalTicket" data-toggle="modal" data-target="#modalTicket" runat="server" Visible="False"></asp:Button>
                                                     <asp:Button type="button" class="btn btn-primary btn-lg " Text="Grupos" ID="btnModalGrupos" data-toggle="modal" data-target="#modalGruposNodo" runat="server"></asp:Button>
                                                 </div>
                                             </div>

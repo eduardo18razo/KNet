@@ -25,8 +25,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result =
-                    db.GrupoUsuario.Where(w => w.IdTipoGrupo == idTipoGrupo && w.Habilitado)
+                result = db.GrupoUsuario.Where(w => w.IdTipoGrupo == idTipoGrupo && w.Habilitado && w.Sistema)
                         .OrderBy(o => o.Descripcion)
                         .ToList();
                 if (insertarSeleccion)
@@ -36,6 +35,71 @@ namespace KinniNet.Core.Operacion
                             Id = BusinessVariables.ComboBoxCatalogo.Value,
                             Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
                         });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<GrupoUsuario> ObtenerGruposUsuarioSistema()
+        {
+            List<GrupoUsuario> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.GrupoUsuario.Where(w => w.Habilitado && w.Sistema && w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Administrador)
+                        .OrderBy(o => o.Id)
+                        .ToList();
+                foreach (GrupoUsuario grupo in result)
+                {
+                    db.LoadProperty(grupo, "TipoGrupo");
+                    db.LoadProperty(grupo.TipoGrupo, "RolTipoGrupo");
+                    db.LoadProperty(grupo, "SubGrupoUsuario");
+                    foreach (SubGrupoUsuario subGrupo in grupo.SubGrupoUsuario)
+                    {
+                        db.LoadProperty(subGrupo, "SubRol");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<GrupoUsuario> ObtenerGruposUsuarioSistemaNivelArbol()
+        {
+            List<GrupoUsuario> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                db.GrupoUsuarioInventarioArbol.Where(w => w.InventarioArbolAcceso.ArbolAcceso.Nivel1.Id == 1);
+                result = db.GrupoUsuario.Where(w => w.Habilitado && w.Sistema && w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Administrador)
+                        .OrderBy(o => o.Id)
+                        .ToList();
+                foreach (GrupoUsuario grupo in result)
+                {
+                    db.LoadProperty(grupo, "TipoGrupo");
+                    db.LoadProperty(grupo.TipoGrupo, "RolTipoGrupo");
+                    db.LoadProperty(grupo, "SubGrupoUsuario");
+                    foreach (SubGrupoUsuario subGrupo in grupo.SubGrupoUsuario)
+                    {
+                        db.LoadProperty(subGrupo, "SubRol");
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -153,6 +217,6 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        
+
     }
 }

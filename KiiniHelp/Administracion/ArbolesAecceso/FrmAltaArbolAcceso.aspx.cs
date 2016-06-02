@@ -581,16 +581,39 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
                         EsTerminal = chkNivelTerminal.Checked,
                         Habilitado = chkNivelHabilitado.Checked
                     };
+                    arbol.InventarioArbolAcceso = new List<InventarioArbolAcceso> { new InventarioArbolAcceso() };
+                    arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol = new List<GrupoUsuarioInventarioArbol>();
+                    if (AsociarGrupoUsuario.GruposAsociados.Count > 0)
+                    {
+                        
+                        
+
+                        foreach (RepeaterItem item in AsociarGrupoUsuario.GruposAsociados)
+                        {
+                            Label lblIdGrupoUsuario = (Label) item.FindControl("lblIdGrupoUsuario");
+                            Label lblIdRol = (Label) item.FindControl("lblIdTipoSubGrupo");
+                            Label lblIdSubGrupoUsuario = (Label) item.FindControl("lblIdSubGrupo");
+                            if (lblIdGrupoUsuario != null && lblIdRol != null && lblIdSubGrupoUsuario != null)
+                            {
+                                arbol.InventarioArbolAcceso[0].GrupoUsuarioInventarioArbol.Add(new GrupoUsuarioInventarioArbol
+                                {
+                                    IdGrupoUsuario = Convert.ToInt32(lblIdGrupoUsuario.Text),
+                                    IdRol = Convert.ToInt32(lblIdRol.Text),
+                                    IdSubGrupoUsuario =
+                                        lblIdSubGrupoUsuario.Text.Trim() == string.Empty
+                                            ? (int?) null
+                                            : Convert.ToInt32(lblIdSubGrupoUsuario.Text)
+                                });
+                            }
+                        }
+                    }
                     if (chkNivelTerminal.Checked)
                     {
                         ValidaCapturaConsulta();
                         ValidaCapturaTicket();
                         ValidaCapturaGrupos();
-                        arbol.InventarioArbolAcceso = new List<InventarioArbolAcceso>();
-                        arbol.InventarioArbolAcceso.Add(new InventarioArbolAcceso());
-                        arbol.InventarioArbolAcceso[0].IdMascara = Convert.ToInt32(ddlMascaraAcceso.SelectedValue);
-                        arbol.InventarioArbolAcceso[0].IdSla = Convert.ToInt32(ddlSla.SelectedValue);
-                        arbol.InventarioArbolAcceso[0].GrupoUsuarioInventarioArbol = new List<GrupoUsuarioInventarioArbol>();
+                        arbol.InventarioArbolAcceso.First().IdMascara = Convert.ToInt32(ddlMascaraAcceso.SelectedValue);
+                        arbol.InventarioArbolAcceso.First().IdSla = Convert.ToInt32(ddlSla.SelectedValue);
                         foreach (RepeaterItem item in AsociarGrupoUsuario.GruposAsociados)
                         {
                             Label lblIdGrupoUsuario = (Label)item.FindControl("lblIdGrupoUsuario");
@@ -598,7 +621,7 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
                             Label lblIdSubGrupoUsuario = (Label)item.FindControl("lblIdSubGrupo");
                             if (lblIdGrupoUsuario != null && lblIdRol != null && lblIdSubGrupoUsuario != null)
                             {
-                                arbol.InventarioArbolAcceso[0].GrupoUsuarioInventarioArbol.Add(new GrupoUsuarioInventarioArbol
+                                arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Add(new GrupoUsuarioInventarioArbol
                                 {
                                     IdGrupoUsuario = Convert.ToInt32(lblIdGrupoUsuario.Text),
                                     IdRol = Convert.ToInt32(lblIdRol.Text),
@@ -606,9 +629,9 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
                                 });
                             }
                         }
-                        arbol.InventarioArbolAcceso[0].Descripcion = txtDescripcionNivel.Text.Trim();
-                        arbol.InventarioArbolAcceso[0].IdEncuesta = Convert.ToInt32(ddlEncuesta.SelectedValue) == BusinessVariables.ComboBoxCatalogo.Value ? (int?)null : Convert.ToInt32(ddlEncuesta.SelectedValue);
-                        arbol.InventarioArbolAcceso[0].InventarioInfConsulta = new List<InventarioInfConsulta>();
+                        arbol.InventarioArbolAcceso.First().Descripcion = txtDescripcionNivel.Text.Trim();
+                        arbol.InventarioArbolAcceso.First().IdEncuesta = Convert.ToInt32(ddlEncuesta.SelectedValue) == BusinessVariables.ComboBoxCatalogo.Value ? (int?)null : Convert.ToInt32(ddlEncuesta.SelectedValue);
+                        arbol.InventarioArbolAcceso.First().InventarioInfConsulta = new List<InventarioInfConsulta>();
                         foreach (RepeaterItem item in rptInformacion.Items)
                         {
                             if (((CheckBox)item.FindControl("chkInfoConsulta")).Checked)
@@ -781,8 +804,19 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
         {
             try
             {
-                divNodoTerminal.Visible = chkNivelTerminal.Checked;
+                btnModalConsultas.Visible = chkNivelTerminal.Checked;
+                btnMocalTicket.Visible = chkNivelTerminal.Checked;
+                //Grupos
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Acceso, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeOperación, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.EspecialDeConsulta, true);
+                AsociarGrupoUsuario.Limpiar();
+
                 if (!chkNivelTerminal.Checked) return;
+
 
                 //Información de Consulta
                 List<InformacionConsulta> infoCons = _servicioSistemaTipoInformacionConsulta.ObtenerTipoInformacionConsulta(false).Select(tipoInf => new InformacionConsulta { TipoInfConsulta = tipoInf }).ToList();
@@ -794,14 +828,6 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
                 Metodos.LlenaComboCatalogo(ddlSla, _servicioSla.ObtenerSla(true));
                 Metodos.LlenaComboCatalogo(ddlEncuesta, _servicioEncuesta.ObtenerEncuestas(true));
 
-                //Grupos
-
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento, true);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeOperación, true);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, true);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, true);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.EspecialDeConsulta, true);
-                AsociarGrupoUsuario.Limpiar();
                 upGrupos.Update();
             }
             catch (Exception ex)
@@ -963,7 +989,6 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
                 AlertaNivel = _lstError;
             }
         }
-        #endregion Cerrar Modales
 
         protected void btnCerrarModalAltaGrupoUsuario_OnClick(object sender, EventArgs e)
         {
@@ -1035,6 +1060,7 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
                 AlertaNivel = _lstError;
             }
         }
+        #endregion Cerrar Modales
     }
 }
 

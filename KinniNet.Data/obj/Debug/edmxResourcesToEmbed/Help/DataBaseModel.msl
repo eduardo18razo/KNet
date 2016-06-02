@@ -112,16 +112,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="GrupoUsuario">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.GrupoUsuario">
-        <MappingFragment StoreEntitySet="GrupoUsuario">
-          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="IdTipoGrupo" ColumnName="IdTipoGrupo" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Holding">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.Holding">
         <MappingFragment StoreEntitySet="Holding">
@@ -764,6 +754,17 @@
           <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
           <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
           <ScalarProperty Name="IdTicket" ColumnName="IdTicket" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrupoUsuario">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.GrupoUsuario">
+        <MappingFragment StoreEntitySet="GrupoUsuario">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Sistema" ColumnName="Sistema" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdTipoGrupo" ColumnName="IdTipoGrupo" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

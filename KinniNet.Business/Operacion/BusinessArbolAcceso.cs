@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using KiiniNet.Entities.Cat.Arbol.Nodos;
 using KiiniNet.Entities.Cat.Operacion;
+using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
@@ -235,7 +236,34 @@ namespace KinniNet.Core.Operacion
                     arbol.Nivel7.Descripcion = arbol.Nivel7.Descripcion.ToUpper();
                     arbol.Nivel7.Habilitado = arbol.Nivel7.Habilitado;
                 }
-
+                if (arbol.InventarioArbolAcceso != null && !arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Any())
+                {
+                    foreach (GrupoUsuario grupo in new BusinessGrupoUsuario().ObtenerGruposUsuarioSistema())
+                    {
+                        if (grupo.SubGrupoUsuario.Any())
+                        {
+                            foreach (SubGrupoUsuario subGrupo in grupo.SubGrupoUsuario)
+                            {
+                                arbol.InventarioArbolAcceso[0].GrupoUsuarioInventarioArbol.Add(new GrupoUsuarioInventarioArbol
+                                {
+                                    IdGrupoUsuario = grupo.Id,
+                                    IdRol = subGrupo.SubRol.IdRol,
+                                    IdSubGrupoUsuario = subGrupo.Id
+                                });
+                            }
+                        }
+                        else
+                        {
+                            arbol.InventarioArbolAcceso[0].GrupoUsuarioInventarioArbol.Add(new GrupoUsuarioInventarioArbol
+                            {
+                                IdGrupoUsuario = grupo.Id,
+                                IdRol = grupo.TipoGrupo.RolTipoGrupo.First().IdRol,
+                                IdSubGrupoUsuario = null
+                            });
+                        }
+                    }
+                }
+            
                 if (arbol.Id == 0)
                     db.ArbolAcceso.AddObject(arbol);
                 db.SaveChanges();

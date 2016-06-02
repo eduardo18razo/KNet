@@ -12,7 +12,6 @@
     <EntitySet Name="EncuestaPregunta" EntityType="KiiniNet_v2Model.EncuestaPregunta" />
     <EntitySet Name="Estado" EntityType="KiiniNet_v2Model.Estado" />
     <EntitySet Name="Gerencia" EntityType="KiiniNet_v2Model.Gerencia" />
-    <EntitySet Name="GrupoUsuario" EntityType="KiiniNet_v2Model.GrupoUsuario" />
     <EntitySet Name="Holding" EntityType="KiiniNet_v2Model.Holding" />
     <EntitySet Name="InformacionConsulta" EntityType="KiiniNet_v2Model.InformacionConsulta" />
     <EntitySet Name="InformacionConsultaDatos" EntityType="KiiniNet_v2Model.InformacionConsultaDatos" />
@@ -108,14 +107,6 @@
     <AssociationSet Name="FK_Organizacion_Gerencia" Association="KiiniNet_v2Model.FK_Organizacion_Gerencia">
       <End Role="Gerencia" EntitySet="Gerencia" />
       <End Role="Organizacion" EntitySet="Organizacion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_GrupoUsuario_TipoGrupo1" Association="KiiniNet_v2Model.FK_GrupoUsuario_TipoGrupo1">
-      <End Role="TipoGrupo" EntitySet="TipoGrupo" />
-      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UsuarioGrupo_GrupoUsuario" Association="KiiniNet_v2Model.FK_UsuarioGrupo_GrupoUsuario">
-      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
-      <End Role="UsuarioGrupo" EntitySet="UsuarioGrupo" />
     </AssociationSet>
     <AssociationSet Name="FK_Holding_TipoUsuario" Association="KiiniNet_v2Model.FK_Holding_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
@@ -278,15 +269,7 @@
       <End Role="Ubicacion" EntitySet="Ubicacion" />
     </AssociationSet>
     <EntitySet Name="GrupoUsuarioInventarioArbol" EntityType="KiiniNet_v2Model.GrupoUsuarioInventarioArbol" />
-    <AssociationSet Name="FK_GrupoUsuarioInventarioArbol_GrupoUsuario" Association="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_GrupoUsuario">
-      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
-      <End Role="GrupoUsuarioInventarioArbol" EntitySet="GrupoUsuarioInventarioArbol" />
-    </AssociationSet>
     <EntitySet Name="SubGrupoUsuario" EntityType="KiiniNet_v2Model.SubGrupoUsuario" />
-    <AssociationSet Name="FK_SubGrupoUsuario_GrupoUsuario" Association="KiiniNet_v2Model.FK_SubGrupoUsuario_GrupoUsuario">
-      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
-      <End Role="SubGrupoUsuario" EntitySet="SubGrupoUsuario" />
-    </AssociationSet>
     <AssociationSet Name="FK_GrupoUsuarioInventarioArbol_SubGrupoUsuario" Association="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_SubGrupoUsuario">
       <End Role="SubGrupoUsuario" EntitySet="SubGrupoUsuario" />
       <End Role="GrupoUsuarioInventarioArbol" EntitySet="GrupoUsuarioInventarioArbol" />
@@ -523,6 +506,23 @@
       <End Role="SlaEstimadoTicket" EntitySet="SlaEstimadoTicket" />
       <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>
+    <EntitySet Name="GrupoUsuario" EntityType="KiiniNet_v2Model.GrupoUsuario" />
+    <AssociationSet Name="FK_GrupoUsuario_TipoGrupo1" Association="KiiniNet_v2Model.FK_GrupoUsuario_TipoGrupo1">
+      <End Role="TipoGrupo" EntitySet="TipoGrupo" />
+      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GrupoUsuarioInventarioArbol_GrupoUsuario" Association="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_GrupoUsuario">
+      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+      <End Role="GrupoUsuarioInventarioArbol" EntitySet="GrupoUsuarioInventarioArbol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubGrupoUsuario_GrupoUsuario" Association="KiiniNet_v2Model.FK_SubGrupoUsuario_GrupoUsuario">
+      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+      <End Role="SubGrupoUsuario" EntitySet="SubGrupoUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioGrupo_GrupoUsuario" Association="KiiniNet_v2Model.FK_UsuarioGrupo_GrupoUsuario">
+      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+      <End Role="UsuarioGrupo" EntitySet="UsuarioGrupo" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Campus">
     <Key>
@@ -646,19 +646,6 @@
     <Property Name="Habilitado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_Gerencia_TipoUsuario" FromRole="Gerencia" ToRole="TipoUsuario" />
     <NavigationProperty Name="Organizacion" Relationship="KiiniNet_v2Model.FK_Organizacion_Gerencia" FromRole="Gerencia" ToRole="Organizacion" />
-  </EntityType>
-  <EntityType Name="GrupoUsuario">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdTipoGrupo" Type="Int32" />
-    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Habilitado" Type="Boolean" />
-    <NavigationProperty Name="TipoGrupo" Relationship="KiiniNet_v2Model.FK_GrupoUsuario_TipoGrupo1" FromRole="GrupoUsuario" ToRole="TipoGrupo" />
-    <NavigationProperty Name="UsuarioGrupo" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_GrupoUsuario" FromRole="GrupoUsuario" ToRole="UsuarioGrupo" />
-    <NavigationProperty Name="GrupoUsuarioInventarioArbol" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_GrupoUsuario" FromRole="GrupoUsuario" ToRole="GrupoUsuarioInventarioArbol" />
-    <NavigationProperty Name="SubGrupoUsuario" Relationship="KiiniNet_v2Model.FK_SubGrupoUsuario_GrupoUsuario" FromRole="GrupoUsuario" ToRole="SubGrupoUsuario" />
   </EntityType>
   <EntityType Name="Holding">
     <Key>
@@ -1024,8 +1011,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Habilitado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_GrupoUsuario_TipoGrupo1" FromRole="TipoGrupo" ToRole="GrupoUsuario" />
     <NavigationProperty Name="RolTipoGrupo" Relationship="KiiniNet_v2Model.FK_RolTipoGrupo_TipoGrupo" FromRole="TipoGrupo" ToRole="RolTipoGrupo" />
+    <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_GrupoUsuario_TipoGrupo1" FromRole="TipoGrupo" ToRole="GrupoUsuario" />
   </EntityType>
   <EntityType Name="TipoInfConsulta">
     <Key>
@@ -1135,10 +1122,10 @@
     <Property Name="IdRol" Type="Int32" />
     <Property Name="IdGrupoUsuario" Type="Int32" />
     <Property Name="IdSubGrupoUsuario" Type="Int32" />
-    <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_GrupoUsuario" FromRole="UsuarioGrupo" ToRole="GrupoUsuario" />
     <NavigationProperty Name="SubGrupoUsuario" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_SubGrupoUsuario" FromRole="UsuarioGrupo" ToRole="SubGrupoUsuario" />
     <NavigationProperty Name="Rol" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_Rol" FromRole="UsuarioGrupo" ToRole="Rol" />
     <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_Usuario" FromRole="UsuarioGrupo" ToRole="Usuario" />
+    <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_GrupoUsuario" FromRole="UsuarioGrupo" ToRole="GrupoUsuario" />
   </EntityType>
   <EntityType Name="UsuarioRol">
     <Key>
@@ -1326,30 +1313,6 @@
       </Principal>
       <Dependent Role="Organizacion">
         <PropertyRef Name="IdGerencia" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_GrupoUsuario_TipoGrupo1">
-    <End Type="KiiniNet_v2Model.TipoGrupo" Role="TipoGrupo" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoGrupo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="GrupoUsuario">
-        <PropertyRef Name="IdTipoGrupo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UsuarioGrupo_GrupoUsuario">
-    <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.UsuarioGrupo" Role="UsuarioGrupo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GrupoUsuario">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="UsuarioGrupo">
-        <PropertyRef Name="IdGrupoUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1842,23 +1805,11 @@
     <Property Name="IdRol" Type="Int32" Nullable="false" />
     <Property Name="IdGrupoUsuario" Type="Int32" Nullable="false" />
     <Property Name="IdSubGrupoUsuario" Type="Int32" />
-    <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_GrupoUsuario" FromRole="GrupoUsuarioInventarioArbol" ToRole="GrupoUsuario" />
     <NavigationProperty Name="SubGrupoUsuario" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_SubGrupoUsuario" FromRole="GrupoUsuarioInventarioArbol" ToRole="SubGrupoUsuario" />
     <NavigationProperty Name="Rol" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_Rol" FromRole="GrupoUsuarioInventarioArbol" ToRole="Rol" />
     <NavigationProperty Name="InventarioArbolAcceso" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_InventarioArbolAcceso" FromRole="GrupoUsuarioInventarioArbol" ToRole="InventarioArbolAcceso" />
+    <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_GrupoUsuario" FromRole="GrupoUsuarioInventarioArbol" ToRole="GrupoUsuario" />
   </EntityType>
-  <Association Name="FK_GrupoUsuarioInventarioArbol_GrupoUsuario">
-    <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="1" />
-    <End Type="KiiniNet_v2Model.GrupoUsuarioInventarioArbol" Role="GrupoUsuarioInventarioArbol" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GrupoUsuario">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="GrupoUsuarioInventarioArbol">
-        <PropertyRef Name="IdGrupoUsuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="SubGrupoUsuario">
     <Key>
       <PropertyRef Name="Id" />
@@ -1867,23 +1818,11 @@
     <Property Name="IdGrupoUsuario" Type="Int32" />
     <Property Name="IdSubRol" Type="Int32" />
     <Property Name="Habilitado" Type="Boolean" />
-    <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_SubGrupoUsuario_GrupoUsuario" FromRole="SubGrupoUsuario" ToRole="GrupoUsuario" />
     <NavigationProperty Name="GrupoUsuarioInventarioArbol" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_SubGrupoUsuario" FromRole="SubGrupoUsuario" ToRole="GrupoUsuarioInventarioArbol" />
     <NavigationProperty Name="SubRol" Relationship="KiiniNet_v2Model.FK_SubGrupoUsuario_SubRol" FromRole="SubGrupoUsuario" ToRole="SubRol" />
     <NavigationProperty Name="UsuarioGrupo" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_SubGrupoUsuario" FromRole="SubGrupoUsuario" ToRole="UsuarioGrupo" />
+    <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_SubGrupoUsuario_GrupoUsuario" FromRole="SubGrupoUsuario" ToRole="GrupoUsuario" />
   </EntityType>
-  <Association Name="FK_SubGrupoUsuario_GrupoUsuario">
-    <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.SubGrupoUsuario" Role="SubGrupoUsuario" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GrupoUsuario">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SubGrupoUsuario">
-        <PropertyRef Name="IdGrupoUsuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_GrupoUsuarioInventarioArbol_SubGrupoUsuario">
     <End Type="KiiniNet_v2Model.SubGrupoUsuario" Role="SubGrupoUsuario" Multiplicity="0..1" />
     <End Type="KiiniNet_v2Model.GrupoUsuarioInventarioArbol" Role="GrupoUsuarioInventarioArbol" Multiplicity="*" />
@@ -2800,6 +2739,68 @@
       </Principal>
       <Dependent Role="Ticket">
         <PropertyRef Name="IdSlaEstimadoTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="GrupoUsuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoGrupo" Type="Int32" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sistema" Type="Boolean" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="TipoGrupo" Relationship="KiiniNet_v2Model.FK_GrupoUsuario_TipoGrupo1" FromRole="GrupoUsuario" ToRole="TipoGrupo" />
+    <NavigationProperty Name="GrupoUsuarioInventarioArbol" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_GrupoUsuario" FromRole="GrupoUsuario" ToRole="GrupoUsuarioInventarioArbol" />
+    <NavigationProperty Name="SubGrupoUsuario" Relationship="KiiniNet_v2Model.FK_SubGrupoUsuario_GrupoUsuario" FromRole="GrupoUsuario" ToRole="SubGrupoUsuario" />
+    <NavigationProperty Name="UsuarioGrupo" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_GrupoUsuario" FromRole="GrupoUsuario" ToRole="UsuarioGrupo" />
+  </EntityType>
+  <Association Name="FK_GrupoUsuario_TipoGrupo1">
+    <End Type="KiiniNet_v2Model.TipoGrupo" Role="TipoGrupo" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoGrupo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GrupoUsuario">
+        <PropertyRef Name="IdTipoGrupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GrupoUsuarioInventarioArbol_GrupoUsuario">
+    <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.GrupoUsuarioInventarioArbol" Role="GrupoUsuarioInventarioArbol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GrupoUsuarioInventarioArbol">
+        <PropertyRef Name="IdGrupoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubGrupoUsuario_GrupoUsuario">
+    <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.SubGrupoUsuario" Role="SubGrupoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubGrupoUsuario">
+        <PropertyRef Name="IdGrupoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioGrupo_GrupoUsuario">
+    <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.UsuarioGrupo" Role="UsuarioGrupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsuarioGrupo">
+        <PropertyRef Name="IdGrupoUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

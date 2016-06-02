@@ -140,6 +140,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdTipoGrupo" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sistema" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="GrupoUsuarioInventarioArbol">

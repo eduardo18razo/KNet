@@ -16,6 +16,8 @@ namespace KiiniNet.Entities.Cat.Usuario
         [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
+        public bool Sistema { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
 
         
