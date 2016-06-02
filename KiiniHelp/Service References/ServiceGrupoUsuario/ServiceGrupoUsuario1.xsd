@@ -86,4 +86,37 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerGruposUsuarioSistema">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerGruposUsuarioSistemaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposUsuarioSistemaResult" nillable="true" type="q7:ArrayOfGrupoUsuario" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerGruposUsuarioNivel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idtipoArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel1" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel2" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel3" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel4" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel5" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel6" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel7" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerGruposUsuarioNivelResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposUsuarioNivelResult" nillable="true" type="q8:ArrayOfGrupoUsuario" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

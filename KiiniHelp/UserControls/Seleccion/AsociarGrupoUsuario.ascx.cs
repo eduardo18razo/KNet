@@ -24,7 +24,6 @@ namespace KiiniHelp.UserControls.Seleccion
         readonly ServiceSubGrupoUsuarioClient _servicioSubGrupoUsuario = new ServiceSubGrupoUsuarioClient();
         private List<string> _lstError = new List<string>();
 
-
         public bool Administrador
         {
             get { return divGrupoAdministrador.Visible; }
@@ -102,6 +101,36 @@ namespace KiiniHelp.UserControls.Seleccion
             _lstError.Add("Debe asignar la menos un grupo");
             AlertaGrupos = _lstError;
             return false;
+        }
+
+        public void ObtenerGruposHerencia(int idTipoArbolAcceso, int? nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7)
+        {
+            try
+            {
+                List<GrupoUsuario> lst;
+                if (nivel1 == null)
+                    lst = _servicioGrupoUsuario.ObtenerGruposUsuarioSistema();
+                else
+                    lst = _servicioGrupoUsuario.ObtenerGruposUsuarioNivel(idTipoArbolAcceso, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
+                foreach (GrupoUsuario grupo in lst)
+                {
+                    if (grupo.SubGrupoUsuario.Any())
+                    {
+                        foreach (SubGrupoUsuario subGrupo in grupo.SubGrupoUsuario)
+                        {
+                            AsignarGrupo(grupo, subGrupo.SubRol.IdRol, subGrupo.Id);
+                        }
+                    }
+                    else
+                    {
+                        AsignarGrupo(grupo, grupo.TipoGrupo.RolTipoGrupo.First().IdRol, null);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void Limpiar()
@@ -566,11 +595,11 @@ namespace KiiniHelp.UserControls.Seleccion
                 {
                     case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
                         bool permitir = chklbxSubRoles.Items.Cast<ListItem>().Any(item => int.Parse(item.Value) == (int)BusinessVariables.EnumSubRoles.Supervisor && item.Selected);
-                    if (!permitir)
-                        foreach (ListItem item in chklbxSubRoles.Items)
-                        {
-                            item.Selected = int.Parse(item.Value) == value;
-                        }
+                        if (!permitir)
+                            foreach (ListItem item in chklbxSubRoles.Items)
+                            {
+                                item.Selected = int.Parse(item.Value) == value;
+                            }
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento:
                         foreach (ListItem item in chklbxSubRoles.Items)

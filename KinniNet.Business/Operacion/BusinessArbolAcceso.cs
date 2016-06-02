@@ -201,69 +201,85 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el embebido
                 arbol.Habilitado = true;
+                List<GrupoUsuario> lstGrupoUsuario = null;
                 if (arbol.Nivel1 != null)
                 {
                     arbol.Nivel1.Descripcion = arbol.Nivel1.Descripcion.ToUpper();
                     arbol.Nivel1.Habilitado = arbol.Nivel1.Habilitado;
+                    if (!arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Any())
+                        lstGrupoUsuario = new BusinessGrupoUsuario().ObtenerGruposUsuarioSistema();
                 }
                 if (arbol.Nivel2 != null)
                 {
                     arbol.Nivel2.Descripcion = arbol.Nivel2.Descripcion.ToUpper();
                     arbol.Nivel2.Habilitado = arbol.Nivel2.Habilitado;
+                    if (!arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Any())
+                        lstGrupoUsuario = new BusinessGrupoUsuario().ObtenerGruposUsuarioNivel(arbol.IdTipoArbolAcceso, arbol.IdNivel1, null, null, null, null, null, null);
                 }
                 if (arbol.Nivel3 != null)
                 {
                     arbol.Nivel3.Descripcion = arbol.Nivel3.Descripcion.ToUpper();
                     arbol.Nivel3.Habilitado = arbol.Nivel3.Habilitado;
+                    if (!arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Any())
+                        lstGrupoUsuario = new BusinessGrupoUsuario().ObtenerGruposUsuarioNivel(arbol.IdTipoArbolAcceso, arbol.IdNivel1, arbol.IdNivel2, null, null, null, null, null);
                 }
                 if (arbol.Nivel4 != null)
                 {
                     arbol.Nivel4.Descripcion = arbol.Nivel4.Descripcion.ToUpper();
                     arbol.Nivel4.Habilitado = arbol.Nivel4.Habilitado;
+                    if (!arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Any())
+                        lstGrupoUsuario = new BusinessGrupoUsuario().ObtenerGruposUsuarioNivel(arbol.IdTipoArbolAcceso, arbol.IdNivel1, arbol.IdNivel2, arbol.IdNivel3, null, null, null, null);
                 }
                 if (arbol.Nivel5 != null)
                 {
                     arbol.Nivel5.Descripcion = arbol.Nivel5.Descripcion.ToUpper();
                     arbol.Nivel5.Habilitado = arbol.Nivel5.Habilitado;
+                    if (!arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Any())
+                        lstGrupoUsuario = new BusinessGrupoUsuario().ObtenerGruposUsuarioNivel(arbol.IdTipoArbolAcceso, arbol.IdNivel1, arbol.IdNivel2, arbol.IdNivel3, arbol.IdNivel4, null, null, null);
                 }
                 if (arbol.Nivel6 != null)
                 {
                     arbol.Nivel6.Descripcion = arbol.Nivel6.Descripcion.ToUpper();
                     arbol.Nivel6.Habilitado = arbol.Nivel6.Habilitado;
+                    if (!arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Any())
+                        lstGrupoUsuario = new BusinessGrupoUsuario().ObtenerGruposUsuarioNivel(arbol.IdTipoArbolAcceso, arbol.IdNivel1, arbol.IdNivel2, arbol.IdNivel3, arbol.IdNivel4, arbol.IdNivel5, null, null);
                 }
                 if (arbol.Nivel7 != null)
                 {
                     arbol.Nivel7.Descripcion = arbol.Nivel7.Descripcion.ToUpper();
                     arbol.Nivel7.Habilitado = arbol.Nivel7.Habilitado;
+                    if (!arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Any())
+                        lstGrupoUsuario = new BusinessGrupoUsuario().ObtenerGruposUsuarioNivel(arbol.IdTipoArbolAcceso, arbol.IdNivel1, arbol.IdNivel2, arbol.IdNivel3, arbol.IdNivel4, arbol.IdNivel5, arbol.IdNivel6, null);
                 }
                 if (arbol.InventarioArbolAcceso != null && !arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Any())
                 {
-                    foreach (GrupoUsuario grupo in new BusinessGrupoUsuario().ObtenerGruposUsuarioSistema())
-                    {
-                        if (grupo.SubGrupoUsuario.Any())
+                    if (lstGrupoUsuario != null)
+                        foreach (GrupoUsuario grupo in lstGrupoUsuario)
                         {
-                            foreach (SubGrupoUsuario subGrupo in grupo.SubGrupoUsuario)
+                            if (grupo.SubGrupoUsuario.Any())
+                            {
+                                foreach (SubGrupoUsuario subGrupo in grupo.SubGrupoUsuario)
+                                {
+                                    arbol.InventarioArbolAcceso[0].GrupoUsuarioInventarioArbol.Add(new GrupoUsuarioInventarioArbol
+                                    {
+                                        IdGrupoUsuario = grupo.Id,
+                                        IdRol = subGrupo.SubRol.IdRol,
+                                        IdSubGrupoUsuario = subGrupo.Id
+                                    });
+                                }
+                            }
+                            else
                             {
                                 arbol.InventarioArbolAcceso[0].GrupoUsuarioInventarioArbol.Add(new GrupoUsuarioInventarioArbol
                                 {
                                     IdGrupoUsuario = grupo.Id,
-                                    IdRol = subGrupo.SubRol.IdRol,
-                                    IdSubGrupoUsuario = subGrupo.Id
+                                    IdRol = grupo.TipoGrupo.RolTipoGrupo.First().IdRol,
+                                    IdSubGrupoUsuario = null
                                 });
                             }
                         }
-                        else
-                        {
-                            arbol.InventarioArbolAcceso[0].GrupoUsuarioInventarioArbol.Add(new GrupoUsuarioInventarioArbol
-                            {
-                                IdGrupoUsuario = grupo.Id,
-                                IdRol = grupo.TipoGrupo.RolTipoGrupo.First().IdRol,
-                                IdSubGrupoUsuario = null
-                            });
-                        }
-                    }
                 }
-            
+
                 if (arbol.Id == 0)
                     db.ArbolAcceso.AddObject(arbol);
                 db.SaveChanges();
@@ -360,7 +376,7 @@ namespace KinniNet.Core.Operacion
                 IQueryable<GrupoUsuarioInventarioArbol> qry = from ac in db.ArbolAcceso
                                                               join iac in db.InventarioArbolAcceso on ac.Id equals iac.IdArbolAcceso
                                                               join guia in db.GrupoUsuarioInventarioArbol on iac.Id equals guia.IdInventarioArbolAcceso
-                                                              select guia ;
+                                                              select guia;
                 result = qry.Distinct().ToList();
             }
             catch (Exception ex)

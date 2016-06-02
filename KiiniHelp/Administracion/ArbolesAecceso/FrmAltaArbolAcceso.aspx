@@ -182,6 +182,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <asp:CheckBox runat="server" ID="chkNivelHabilitado" Text="Habilitado" Checked="True" Visible="False" />
+                                                    <asp:CheckBox runat="server" ID="chkHerencia" Text="Heredar Padre" OnCheckedChanged="chkHerencia_OnCheckedChanged" AutoPostBack="True"/>
                                                     <asp:CheckBox runat="server" ID="chkNivelTerminal" CssClass="col-sm-3" Text="Es Nodo terminal" Checked="False" Visible="True" AutoPostBack="True" OnCheckedChanged="chkNivelTerminal_OnCheckedChanged" />
                                                 </div>
                                             </div>

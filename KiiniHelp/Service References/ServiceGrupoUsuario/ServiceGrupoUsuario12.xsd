@@ -1,141 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
-  <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
   <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:complexType name="ArrayOfCampus">
+  <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
+  <xs:complexType name="TipoUsuario">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Campus" nillable="true" type="tns:Campus" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfCampus" nillable="true" type="tns:ArrayOfCampus" />
-  <xs:complexType name="Campus">
-    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ArbolAcceso" nillable="true" type="q1:ArrayOfArbolAcceso" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" minOccurs="0" name="Campus" nillable="true" type="q2:ArrayOfCampus" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" minOccurs="0" name="Compania" nillable="true" type="q3:ArrayOfCompania" />
+      <xs:element minOccurs="0" name="CorreosObligatorios" type="xs:int" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" minOccurs="0" name="Domicilio" nillable="true" type="q1:ArrayOfDomicilio" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" minOccurs="0" name="Direccion" nillable="true" type="q4:ArrayOfDireccion" />
+      <xs:element minOccurs="0" name="EsResidente" type="xs:boolean" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" minOccurs="0" name="Gerencia" nillable="true" type="q5:ArrayOfGerencia" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" minOccurs="0" name="Holding" nillable="true" type="q6:ArrayOfHolding" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q2:TipoUsuario" />
-      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Ubicacion" nillable="true" type="q3:ArrayOfUbicacion" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" minOccurs="0" name="Jefatura" nillable="true" type="q7:ArrayOfJefatura" />
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="Nivel1" nillable="true" type="q8:ArrayOfNivel1" />
+      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="Nivel2" nillable="true" type="q9:ArrayOfNivel2" />
+      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="Nivel3" nillable="true" type="q10:ArrayOfNivel3" />
+      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="Nivel4" nillable="true" type="q11:ArrayOfNivel4" />
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="Nivel5" nillable="true" type="q12:ArrayOfNivel5" />
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="Nivel6" nillable="true" type="q13:ArrayOfNivel6" />
+      <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" minOccurs="0" name="Nivel7" nillable="true" type="q14:ArrayOfNivel7" />
+      <xs:element minOccurs="0" name="NumeroCorreos" type="xs:int" />
+      <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Organizacion" nillable="true" type="q15:ArrayOfOrganizacion" />
+      <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" minOccurs="0" name="Pais" nillable="true" type="q16:ArrayOfPais" />
+      <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="ParametrosTelefonos" nillable="true" type="q17:ArrayOfParametrosTelefonos" />
+      <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" minOccurs="0" name="Piso" nillable="true" type="q18:ArrayOfPiso" />
+      <xs:element minOccurs="0" name="RolTipoUsuario" nillable="true" type="tns:ArrayOfRolTipoUsuario" />
+      <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" minOccurs="0" name="SiteRack" nillable="true" type="q19:ArrayOfSiteRack" />
+      <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" minOccurs="0" name="SubDireccion" nillable="true" type="q20:ArrayOfSubDireccion" />
+      <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" minOccurs="0" name="SubGerencia" nillable="true" type="q21:ArrayOfSubGerencia" />
+      <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" minOccurs="0" name="SubZona" nillable="true" type="q22:ArrayOfSubZona" />
+      <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="Ticket" nillable="true" type="q23:ArrayOfTicket" />
+      <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" minOccurs="0" name="Torre" nillable="true" type="q24:ArrayOfTorre" />
+      <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Ubicacion" nillable="true" type="q25:ArrayOfUbicacion" />
+      <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="Usuario" nillable="true" type="q26:ArrayOfUsuario" />
+      <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" minOccurs="0" name="Zona" nillable="true" type="q27:ArrayOfZona" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="Campus" nillable="true" type="tns:Campus" />
-  <xs:complexType name="Pais">
+  <xs:element name="TipoUsuario" nillable="true" type="tns:TipoUsuario" />
+  <xs:complexType name="TipoEncuesta">
     <xs:sequence>
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="Encuesta" nillable="true" type="q28:ArrayOfEncuesta" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
-      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q4:TipoUsuario" />
-      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Ubicacion" nillable="true" type="q5:ArrayOfUbicacion" />
+      <xs:element minOccurs="0" name="RespuestaTipoEncuesta" nillable="true" type="tns:ArrayOfRespuestaTipoEncuesta" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="Pais" nillable="true" type="tns:Pais" />
-  <xs:complexType name="Piso">
+  <xs:element name="TipoEncuesta" nillable="true" type="tns:TipoEncuesta" />
+  <xs:complexType name="ArrayOfRespuestaTipoEncuesta">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RespuestaTipoEncuesta" nillable="true" type="tns:RespuestaTipoEncuesta" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRespuestaTipoEncuesta" nillable="true" type="tns:ArrayOfRespuestaTipoEncuesta" />
+  <xs:complexType name="RespuestaTipoEncuesta">
+    <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
-      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q6:TipoUsuario" />
-      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Ubicacion" nillable="true" type="q7:ArrayOfUbicacion" />
+      <xs:element minOccurs="0" name="IdTipoEncuesta" type="xs:int" />
+      <xs:element minOccurs="0" name="Respuesta" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TipoDatoSql" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TipoEncuesta" nillable="true" type="tns:TipoEncuesta" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="Piso" nillable="true" type="tns:Piso" />
-  <xs:complexType name="SiteRack">
+  <xs:element name="RespuestaTipoEncuesta" nillable="true" type="tns:RespuestaTipoEncuesta" />
+  <xs:complexType name="Catalogos">
     <xs:sequence>
+      <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" minOccurs="0" name="CampoMascara" nillable="true" type="q29:ArrayOfCampoMascara" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EsMascaraCaptura" type="xs:boolean" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
-      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q8:TipoUsuario" />
-      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Ubicacion" nillable="true" type="q9:ArrayOfUbicacion" />
+      <xs:element minOccurs="0" name="Tabla" nillable="true" type="xs:string" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="SiteRack" nillable="true" type="tns:SiteRack" />
-  <xs:complexType name="SubZona">
+  <xs:element name="Catalogos" nillable="true" type="tns:Catalogos" />
+  <xs:complexType name="TipoArbolAcceso">
     <xs:sequence>
+      <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ArbolAcceso" nillable="true" type="q30:ArrayOfArbolAcceso" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
-      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q10:TipoUsuario" />
-      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Ubicacion" nillable="true" type="q11:ArrayOfUbicacion" />
+      <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="Ticket" nillable="true" type="q31:ArrayOfTicket" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="SubZona" nillable="true" type="tns:SubZona" />
-  <xs:complexType name="Torre">
+  <xs:element name="TipoArbolAcceso" nillable="true" type="tns:TipoArbolAcceso" />
+  <xs:complexType name="TipoTelefono">
     <xs:sequence>
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
-      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q12:TipoUsuario" />
-      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Ubicacion" nillable="true" type="q13:ArrayOfUbicacion" />
+      <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="ParametrosTelefonos" nillable="true" type="q32:ArrayOfParametrosTelefonos" />
+      <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="TelefonoUsuario" nillable="true" type="q33:ArrayOfTelefonoUsuario" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="Torre" nillable="true" type="tns:Torre" />
-  <xs:complexType name="Zona">
+  <xs:element name="TipoTelefono" nillable="true" type="tns:TipoTelefono" />
+  <xs:complexType name="Rol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EsUnico" type="xs:boolean" />
+      <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="GrupoUsuarioInventarioArbol" nillable="true" type="q34:ArrayOfGrupoUsuarioInventarioArbol" />
+      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="RolMenu" nillable="true" type="tns:ArrayOfRolMenu" />
+      <xs:element minOccurs="0" name="RolTipoGrupo" nillable="true" type="tns:ArrayOfRolTipoGrupo" />
+      <xs:element minOccurs="0" name="RolTipoUsuario" nillable="true" type="tns:ArrayOfRolTipoUsuario" />
+      <xs:element minOccurs="0" name="SubRol" nillable="true" type="tns:ArrayOfSubRol" />
+      <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="UsuarioGrupo" nillable="true" type="q35:ArrayOfUsuarioGrupo" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Rol" nillable="true" type="tns:Rol" />
+  <xs:complexType name="ArrayOfRolMenu">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RolMenu" nillable="true" type="tns:RolMenu" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRolMenu" nillable="true" type="tns:ArrayOfRolMenu" />
+  <xs:complexType name="RolMenu">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdMenu" type="xs:int" />
+      <xs:element minOccurs="0" name="IdRol" type="xs:int" />
+      <xs:element minOccurs="0" name="Menu" nillable="true" type="tns:Menu" />
+      <xs:element minOccurs="0" name="Rol" nillable="true" type="tns:Rol" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="RolMenu" nillable="true" type="tns:RolMenu" />
+  <xs:complexType name="Menu">
     <xs:sequence>
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
-      <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q14:TipoUsuario" />
-      <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Ubicacion" nillable="true" type="q15:ArrayOfUbicacion" />
+      <xs:element minOccurs="0" name="IdPadre" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Menu1" nillable="true" type="tns:ArrayOfMenu" />
+      <xs:element minOccurs="0" name="Menu2" nillable="true" type="tns:Menu" />
+      <xs:element minOccurs="0" name="RolMenu" nillable="true" type="tns:ArrayOfRolMenu" />
+      <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="Zona" nillable="true" type="tns:Zona" />
-  <xs:complexType name="ArrayOfPais">
+  <xs:element name="Menu" nillable="true" type="tns:Menu" />
+  <xs:complexType name="ArrayOfMenu">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Pais" nillable="true" type="tns:Pais" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Menu" nillable="true" type="tns:Menu" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfPais" nillable="true" type="tns:ArrayOfPais" />
-  <xs:complexType name="ArrayOfPiso">
+  <xs:element name="ArrayOfMenu" nillable="true" type="tns:ArrayOfMenu" />
+  <xs:complexType name="ArrayOfRolTipoGrupo">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Piso" nillable="true" type="tns:Piso" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RolTipoGrupo" nillable="true" type="tns:RolTipoGrupo" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfPiso" nillable="true" type="tns:ArrayOfPiso" />
-  <xs:complexType name="ArrayOfSiteRack">
+  <xs:element name="ArrayOfRolTipoGrupo" nillable="true" type="tns:ArrayOfRolTipoGrupo" />
+  <xs:complexType name="RolTipoGrupo">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SiteRack" nillable="true" type="tns:SiteRack" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdRol" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTipoGrupo" type="xs:int" />
+      <xs:element minOccurs="0" name="Rol" nillable="true" type="tns:Rol" />
+      <xs:element minOccurs="0" name="TipoGrupo" nillable="true" type="tns:TipoGrupo" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="RolTipoGrupo" nillable="true" type="tns:RolTipoGrupo" />
+  <xs:complexType name="TipoGrupo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="GrupoUsuario" nillable="true" type="q36:ArrayOfGrupoUsuario" />
+      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="RolTipoGrupo" nillable="true" type="tns:ArrayOfRolTipoGrupo" />
+      <xs:element minOccurs="0" name="TipoSubGrupo" nillable="true" type="tns:ArrayOfSubRol" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="TipoGrupo" nillable="true" type="tns:TipoGrupo" />
+  <xs:complexType name="ArrayOfSubRol">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SubRol" nillable="true" type="tns:SubRol" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfSiteRack" nillable="true" type="tns:ArrayOfSiteRack" />
-  <xs:complexType name="ArrayOfSubZona">
+  <xs:element name="ArrayOfSubRol" nillable="true" type="tns:ArrayOfSubRol" />
+  <xs:complexType name="SubRol">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SubZona" nillable="true" type="tns:SubZona" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="GrupoUsuarioInventarioArbol" nillable="true" type="q37:ArrayOfGrupoUsuarioInventarioArbol" />
+      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdRol" type="xs:int" />
+      <xs:element minOccurs="0" name="Rol" nillable="true" type="tns:Rol" />
+      <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="SubGrupoUsuario" nillable="true" type="q38:ArrayOfSubGrupoUsuario" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="SubRol" nillable="true" type="tns:SubRol" />
+  <xs:complexType name="ArrayOfRolTipoUsuario">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RolTipoUsuario" nillable="true" type="tns:RolTipoUsuario" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfSubZona" nillable="true" type="tns:ArrayOfSubZona" />
-  <xs:complexType name="ArrayOfTorre">
+  <xs:element name="ArrayOfRolTipoUsuario" nillable="true" type="tns:ArrayOfRolTipoUsuario" />
+  <xs:complexType name="RolTipoUsuario">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Torre" nillable="true" type="tns:Torre" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdRol" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="Rol" nillable="true" type="tns:Rol" />
+      <xs:element minOccurs="0" name="TipoUsuario" nillable="true" type="tns:TipoUsuario" />
+      <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="UsuarioRol" nillable="true" type="q39:ArrayOfUsuarioRol" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="ArrayOfTorre" nillable="true" type="tns:ArrayOfTorre" />
-  <xs:complexType name="ArrayOfZona">
+  <xs:element name="RolTipoUsuario" nillable="true" type="tns:RolTipoUsuario" />
+  <xs:complexType name="TipoDocumento">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Zona" nillable="true" type="tns:Zona" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Extension" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="InformacionConsulta" nillable="true" type="q40:ArrayOfInformacionConsulta" />
     </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="ArrayOfZona" nillable="true" type="tns:ArrayOfZona" />
+  <xs:element name="TipoDocumento" nillable="true" type="tns:TipoDocumento" />
+  <xs:complexType name="TipoInfConsulta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EsBaseDatos" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EsDirectorio" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EsServicio" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EsUrl" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="InformacionConsulta" nillable="true" type="q41:ArrayOfInformacionConsulta" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="TipoInfConsulta" nillable="true" type="tns:TipoInfConsulta" />
 </xs:schema>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
@@ -57,6 +58,68 @@ namespace KinniNet.Core.Operacion
                 result = db.GrupoUsuario.Where(w => w.Habilitado && w.Sistema && w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Administrador)
                         .OrderBy(o => o.Id)
                         .ToList();
+                foreach (GrupoUsuario grupo in result)
+                {
+                    db.LoadProperty(grupo, "TipoGrupo");
+                    db.LoadProperty(grupo.TipoGrupo, "RolTipoGrupo");
+                    db.LoadProperty(grupo, "SubGrupoUsuario");
+                    foreach (SubGrupoUsuario subGrupo in grupo.SubGrupoUsuario)
+                    {
+                        db.LoadProperty(subGrupo, "SubRol");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<GrupoUsuario> ObtenerGruposUsuarioNivel(int idtipoArbol, int? nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7)
+        {
+            List<GrupoUsuario> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                var qry = db.GrupoUsuarioInventarioArbol.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdTipoArbolAcceso == idtipoArbol && w.InventarioArbolAcceso.ArbolAcceso.IdNivel1 == nivel1);
+                if (nivel2.HasValue)
+                    qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel2 == nivel2);
+                else
+                    qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel2 == null);
+
+                if (nivel3.HasValue)
+                    qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel3 == nivel3);
+                else
+                    qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel3 == null);
+
+                if (nivel4.HasValue)
+                    qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel4 == nivel4);
+                else
+                    qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel4 == null);
+
+                if (nivel5.HasValue)
+                    qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel5 == nivel5);
+                else
+                    qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel5 == null);
+
+                if (nivel6.HasValue)
+                    qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel6 == nivel6);
+                else
+                    qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel6 == null);
+
+                if (nivel7.HasValue)
+                    qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel7 == nivel7);
+                else
+                    qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel7 == null);
+
+                result = qry.Select(s=>s.GrupoUsuario).ToList();
+                
                 foreach (GrupoUsuario grupo in result)
                 {
                     db.LoadProperty(grupo, "TipoGrupo");

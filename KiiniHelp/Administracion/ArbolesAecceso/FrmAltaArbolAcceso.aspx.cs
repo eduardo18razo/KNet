@@ -67,6 +67,7 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
                 List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true);
                 Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
                 Metodos.LlenaComboCatalogo(ddlTipoUsuarioNivel, lstTipoUsuario);
+                chkNivelTerminal_OnCheckedChanged(chkNivelTerminal, null);
             }
             catch (Exception ex)
             {
@@ -571,7 +572,8 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
 
                 if (Metodos.ValidaCapturaCatalogo(txtDescripcionNivel.Text))
                 {
-
+                    if (!chkHerencia.Checked)
+                        AsociarGrupoUsuario.ValidaCapturaGrupos();
                     int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                     int idTipoArbolAcceso = Convert.ToInt32(ddlTipoArbol.SelectedValue);
                     ArbolAcceso arbol = new ArbolAcceso
@@ -1061,6 +1063,123 @@ namespace KiiniHelp.Administracion.ArbolesAecceso
             }
         }
         #endregion Cerrar Modales
+
+        protected void chkHerencia_OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                AsociarGrupoUsuario.Limpiar();
+                if (!chkHerencia.Checked)
+                {
+                    return;
+                }
+                int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
+                int idTipoArbolAcceso = Convert.ToInt32(ddlTipoArbol.SelectedValue);
+                ArbolAcceso arbol = new ArbolAcceso
+                {
+                    IdTipoUsuario = idTipoUsuario,
+                    IdTipoArbolAcceso = idTipoArbolAcceso,
+                    EsTerminal = chkNivelTerminal.Checked,
+                    Habilitado = chkNivelHabilitado.Checked
+                };
+                switch (int.Parse(hfCatalogo.Value))
+                {
+                    case 1:
+                        arbol.Nivel1 = new Nivel1
+                        {
+                            IdTipoUsuario = idTipoUsuario,
+                            Descripcion = txtDescripcionNivel.Text.Trim(),
+                            Habilitado = chkNivelHabilitado.Checked
+                        };
+                        AsociarGrupoUsuario.ObtenerGruposHerencia(idTipoArbolAcceso, null, null, null, null, null, null, null);
+                        break;
+                    case 2:
+                        arbol.IdNivel1 = Convert.ToInt32(ddlNivel1.SelectedValue);
+                        arbol.Nivel2 = new Nivel2
+                        {
+                            IdTipoUsuario = idTipoUsuario,
+                            Descripcion = txtDescripcionNivel.Text.Trim(),
+                            Habilitado = chkNivelHabilitado.Checked
+                        };
+                        AsociarGrupoUsuario.ObtenerGruposHerencia(idTipoArbolAcceso, arbol.IdNivel1, null, null, null, null, null, null);
+                        break;
+                    case 3:
+                        arbol.IdNivel1 = Convert.ToInt32(ddlNivel1.SelectedValue);
+                        arbol.IdNivel2 = Convert.ToInt32(ddlNivel2.SelectedValue);
+                        arbol.Nivel3 = new Nivel3
+                        {
+                            IdTipoUsuario = idTipoUsuario,
+                            Descripcion = txtDescripcionNivel.Text.Trim(),
+                            Habilitado = chkNivelHabilitado.Checked
+                        };
+                        AsociarGrupoUsuario.ObtenerGruposHerencia(idTipoArbolAcceso, arbol.IdNivel1, arbol.IdNivel2, null, null, null, null, null);
+                        break;
+                    case 4:
+                        arbol.IdNivel1 = Convert.ToInt32(ddlNivel1.SelectedValue);
+                        arbol.IdNivel2 = Convert.ToInt32(ddlNivel2.SelectedValue);
+                        arbol.IdNivel3 = Convert.ToInt32(ddlNivel3.SelectedValue);
+                        arbol.Nivel4 = new Nivel4
+                        {
+                            IdTipoUsuario = idTipoUsuario,
+                            Descripcion = txtDescripcionNivel.Text.Trim(),
+                            Habilitado = chkNivelHabilitado.Checked
+                        };
+                        AsociarGrupoUsuario.ObtenerGruposHerencia(idTipoArbolAcceso, arbol.IdNivel1, arbol.IdNivel2, arbol.IdNivel3, null, null, null, null);
+                        break;
+                    case 5:
+                        arbol.IdNivel1 = Convert.ToInt32(ddlNivel1.SelectedValue);
+                        arbol.IdNivel2 = Convert.ToInt32(ddlNivel2.SelectedValue);
+                        arbol.IdNivel3 = Convert.ToInt32(ddlNivel3.SelectedValue);
+                        arbol.IdNivel4 = Convert.ToInt32(ddlNivel4.SelectedValue);
+                        arbol.Nivel5 = new Nivel5
+                        {
+                            IdTipoUsuario = idTipoUsuario,
+                            Descripcion = txtDescripcionNivel.Text.Trim(),
+                            Habilitado = chkNivelHabilitado.Checked
+                        };
+                        AsociarGrupoUsuario.ObtenerGruposHerencia(idTipoArbolAcceso, arbol.IdNivel1, arbol.IdNivel2, arbol.IdNivel3, arbol.IdNivel4, null, null, null);
+                        break;
+                    case 6:
+                        arbol.IdNivel1 = Convert.ToInt32(ddlNivel1.SelectedValue);
+                        arbol.IdNivel2 = Convert.ToInt32(ddlNivel2.SelectedValue);
+                        arbol.IdNivel3 = Convert.ToInt32(ddlNivel3.SelectedValue);
+                        arbol.IdNivel4 = Convert.ToInt32(ddlNivel4.SelectedValue);
+                        arbol.IdNivel5 = Convert.ToInt32(ddlNivel5.SelectedValue);
+                        arbol.Nivel6 = new Nivel6
+                        {
+                            IdTipoUsuario = idTipoUsuario,
+                            Descripcion = txtDescripcionNivel.Text.Trim(),
+                            Habilitado = chkNivelHabilitado.Checked
+                        };
+                        AsociarGrupoUsuario.ObtenerGruposHerencia(idTipoArbolAcceso, arbol.IdNivel1, arbol.IdNivel2, arbol.IdNivel3, arbol.IdNivel4, arbol.IdNivel5, null, null);
+                        break;
+                    case 7:
+                        arbol.IdNivel1 = Convert.ToInt32(ddlNivel1.SelectedValue);
+                        arbol.IdNivel2 = Convert.ToInt32(ddlNivel2.SelectedValue);
+                        arbol.IdNivel3 = Convert.ToInt32(ddlNivel3.SelectedValue);
+                        arbol.IdNivel4 = Convert.ToInt32(ddlNivel4.SelectedValue);
+                        arbol.IdNivel5 = Convert.ToInt32(ddlNivel5.SelectedValue);
+                        arbol.IdNivel6 = Convert.ToInt32(ddlNivel6.SelectedValue);
+                        arbol.Nivel7 = new Nivel7
+                        {
+                            IdTipoUsuario = idTipoUsuario,
+                            Descripcion = txtDescripcionNivel.Text.Trim(),
+                            Habilitado = chkNivelHabilitado.Checked
+                        };
+                        AsociarGrupoUsuario.ObtenerGruposHerencia(idTipoArbolAcceso, arbol.IdNivel1, arbol.IdNivel2, arbol.IdNivel3, arbol.IdNivel4, arbol.IdNivel5, arbol.IdNivel6, null);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
     }
 }
 
