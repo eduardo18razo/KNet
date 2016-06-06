@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FrmAltaArbolAcceso.aspx.cs" Inherits="KiiniHelp.Administracion.ArbolesAecceso.FrmAltaArbolAcceso" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion/Administracion.master" AutoEventWireup="true" CodeBehind="FrmAltaArbolAcceso.aspx.cs" Inherits="KiiniHelp.Administracion.ArbolesAecceso.FrmAltaArbolAcceso" %>
 
 <%@ Register Src="~/UserControls/Altas/AltaInformacionConsulta.ascx" TagPrefix="uc1" TagName="UcAltaInformacionConsulta" %>
 <%@ Register Src="~/UserControls/Altas/AltaSla.ascx" TagPrefix="uc" TagName="UcSla" %>
@@ -8,11 +8,11 @@
 
 
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContentAdministracion" runat="server">
     <title>Alta de Arboles de Acceso</title>
 
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContentAdministracion" runat="server">
     <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <asp:UpdatePanel runat="server">
@@ -358,7 +358,7 @@
             </div>
 
             <div class="modal fade" id="modalAltaInfCons" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <asp:UpdatePanel ID="upModalAltaInfCons" runat="server">
+                <asp:UpdatePanel ID="upModalAltaInfCons" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">

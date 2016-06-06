@@ -118,7 +118,7 @@ namespace KinniNet.Core.Operacion
                 else
                     qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel7 == null);
 
-                result = qry.Select(s=>s.GrupoUsuario).ToList();
+                result = qry.Select(s=>s.GrupoUsuario).Distinct().ToList();
                 
                 foreach (GrupoUsuario grupo in result)
                 {

@@ -4,6 +4,7 @@
     <ContentTemplate>
         <asp:UpdatePanel ID="upGrupos" runat="server">
             <ContentTemplate>
+                <asp:HiddenField runat="server" ID="hfTipoUsuario"/>
                 <header class="modal-header" id="panelAlertaGrupos" runat="server" visible="false">
                     <div class="alert alert-danger">
                         <div>
@@ -120,7 +121,7 @@
                             </div>
                         </div>
                         <div class="panel-footer" style="text-align: center">
-                            <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-success" Text="Limpiar" OnClick="btnLimpiar_OnClick"/>
+                            <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-success" Text="Limpiar" OnClick="btnLimpiar_OnClick" />
                         </div>
                     </div>
                 </div>

@@ -28,19 +28,21 @@
             return true;
         }
     </script>
-    
+
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <div class="container">
+     <asp:ContentPlaceHolder runat="server" ID="contentGeneral">
+        <div class="container">
         <div class="container-fluid">
-            <%----%>
             <form id="form1" runat="server" enctype="multipart/form-data">
                 <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
                     <Scripts>
                         <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
                         <asp:ScriptReference Path="~/BootStrap/js/bootstrap.min.js" />
+                        <asp:ScriptReference Path="~/BootStrap/js/accordion-menu.js" />
+                        <asp:ScriptReference Path="~/BootStrap/js/super-panel.js" />
                     </Scripts>
                 </asp:ScriptManager>
                 <asp:UpdateProgress ID="updateProgress" runat="server">
@@ -79,5 +81,6 @@
             </form>
         </div>
     </div>
+    </asp:ContentPlaceHolder>
 </body>
 </html>

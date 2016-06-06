@@ -31,5 +31,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 return negocio.ObtenerMascarasAcceso(insertarSeleccion);
             }
         }
+
+        public List<BusinessMascaras.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla)
+        {
+            using (BusinessMascaras negocio = new BusinessMascaras())
+            {
+                return negocio.ObtenerCatalogoCampoMascara(tabla);
+            }
+        }
     }
 }

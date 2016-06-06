@@ -118,7 +118,7 @@ namespace KinniNet.Core.Security
                                                 join rm in db.RolMenu on rtu.IdRol equals rm.IdRol
                                                 join m in db.Menu on rm.IdMenu equals m.Id
                                                 where ur.IdUsuario == idUsuario
-                                                select m).ToList();
+                                                select m).OrderBy(o=>o.Id).Distinct().ToList();
                     foreach (Menu menu in result)
                     {
                         List<ArbolAcceso> lstArboles = null;

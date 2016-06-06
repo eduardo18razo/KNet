@@ -63,8 +63,8 @@ namespace KiiniHelp.UserControls.Altas
                             throw new Exception("Debe especificar un contenido");
                         break;
                     case BusinessVariables.EnumTiposInformacionConsulta.Documento:
-                        if (!fuFile.HasFile)
-                            throw new Exception("Debe especificar un documento");
+                        //if (!fuFile.HasFile)
+                        //    throw new Exception("Debe especificar un documento");
                         break;
                     case BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                         if (txtDescripcionUrl.Text.Trim() == string.Empty)
@@ -177,15 +177,14 @@ namespace KiiniHelp.UserControls.Altas
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
                         ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.Documento);
                         informacion.IdTipoDocumento = Convert.ToInt32(ddlTipoDocumento.SelectedValue);
-                        afuArchivo_OnUploadedComplete(null, null);
-                        informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos { Descripcion = fuFile.PostedFile.FileName, Orden = 1 });
+                        informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos { Descripcion = afuArchivo.FileName, Orden = 1 });
                         break;
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                         ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml);
                         informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos { Descripcion = txtDescripcionUrl.Text.Trim(), Orden = 1 });
                         break;
                     default:
-                        throw new Exception("Seeleccione un tipo de información");
+                        throw new Exception("Seleccione un tipo de información");
                 }
                 _servicioInformacionConsulta.GuardarInformacionConsulta(informacion);
                 LimpiarCampos();
@@ -200,7 +199,7 @@ namespace KiiniHelp.UserControls.Altas
                 AlertaGeneral = _lstError;
             }
         }
-        
+
         protected void btnLimpiar_OnClick(object sender, EventArgs e)
         {
             try
@@ -223,23 +222,44 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 TipoDocumento tipoDocto = _servicioSistemaTipoDocumento.ObtenerTiposDocumentoId(int.Parse(ddlTipoDocumento.SelectedValue));
-                string[] validFileTypes = tipoDocto.Extension.Split(',');
-                string ext = Path.GetExtension(fuFile.PostedFile.FileName);
-                bool isValidFile = validFileTypes.Any(t => ext.ToLower() == t.ToLower());
-                if (!isValidFile)
+                bool fileOk = false;
+                var path = Server.MapPath("~/Uploads/");
+                if (afuArchivo.HasFile)
                 {
-                    throw new Exception("Archivo con formato Invalido");
+                    string extension = Path.GetExtension(afuArchivo.FileName);
+                    if (extension != null)
+                    {
+                        var fileExtension =extension.ToLower();
+                        string[] allowedExtensions = tipoDocto.Extension.Split(',');
+                        foreach (string t in allowedExtensions.Where(t => fileExtension == t))
+                        {
+                            fileOk = true;
+                        }
+                    }
                 }
-                else
+
+                if (fileOk)
                 {
-                    string path = Server.MapPath("~/Uploads/") + fuFile.PostedFile.FileName;
-                    fuFile.SaveAs(path);
+                    try
+                    {
+                        hfFileName.Value = afuArchivo.FileName;
+                        afuArchivo.PostedFile.SaveAs(path + afuArchivo.FileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
                 }
-                upInfo.Update();
+
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 

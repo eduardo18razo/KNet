@@ -135,6 +135,7 @@
     <Content Include="BootStrap\js\accordion-menu.js" />
     <Content Include="BootStrap\js\bootstrap.js" />
     <Content Include="BootStrap\js\bootstrap.min.js" />
+    <Content Include="Administracion\Administracion.master" />
     <None Include="BootStrap\js\jquery-1.4.1-vsdoc.js" />
     <Content Include="BootStrap\js\jquery-1.4.1.js" />
     <Content Include="BootStrap\js\jquery-1.4.1.min.js" />
@@ -401,12 +402,18 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Service References\ServiceMascaraAcceso\KiiniHelp.ServiceMascaraAcceso.BusinessMascarasCatalogoGenerico.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras.disco" />
     <None Include="Service References\ServiceMascaraAcceso\configuration91.svcinfo" />
     <None Include="Service References\ServiceMascaraAcceso\configuration.svcinfo" />
     <None Include="Service References\ServiceMascaraAcceso\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras13.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion.wsdl" />
     <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion.xsd">
@@ -1473,6 +1480,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administracion\Administracion.master.cs">
+      <DependentUpon>Administracion.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Administracion.master.designer.cs">
+      <DependentUpon>Administracion.master</DependentUpon>
+    </Compile>
     <Compile Include="Administracion\ArbolesAecceso\FrmAltaArbolAcceso.aspx.cs">
       <DependentUpon>FrmAltaArbolAcceso.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

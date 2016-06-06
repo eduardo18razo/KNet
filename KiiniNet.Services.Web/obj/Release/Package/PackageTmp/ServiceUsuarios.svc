@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="KiiniNet.Services.Operacion.ServiceUsuarios"%>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="KiiniNet.Services.Operacion.Implementacion.ServiceUsuarios"%>

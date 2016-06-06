@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="KiiniNet.Services.Security.ServiceSecurity"%>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="KiiniNet.Services.Security.Implementacion.ServiceSecurity"%>

@@ -46,7 +46,7 @@ namespace KiiniHelp.General
             string randomName = DateTime.Now.Ticks.ToString();
             object htmlFilePath = Server.MapPath(rutaTemporales) + randomName + ".htm";
             string directoryPath = Server.MapPath(rutaTemporales) + randomName + "_archivos";
-            object fileName = rutaArchivosCarga + nombrearchivo;
+            object fileName = Server.MapPath(rutaArchivosCarga) + nombrearchivo;
 
             ApplicationClass applicationclass = new ApplicationClass();
             applicationclass.Documents.Open(ref fileName, ref readOnly, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref  missingType, ref missingType, ref missingType, ref isVisible, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType);

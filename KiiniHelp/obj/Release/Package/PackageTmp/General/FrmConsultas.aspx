@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <style type="text/css">
-        .rootNode {
+        /*.rootNode {
             font-size: 18px;
             padding: 5px;
             color: #000;
@@ -53,11 +53,11 @@
 
             .selectNode :hover {
                 color: #000;
-            }
+            }*/
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:TreeView runat="server" ID="tvArbol" Style="width: 350px" ExpandImageUrl="../Images/plus.png" CollapseImageUrl="../Images/minus.png">
+    <asp:TreeView runat="server" ID="tvArbol" Style="width: 350px" ExpandImageUrl="../Images/plus.png" CollapseImageUrl="../Images/minus.png" OnTreeNodeCheckChanged="tvArbol_OnTreeNodeCheckChanged" OnSelectedNodeChanged="tvArbol_OnSelectedNodeChanged">
         <LeafNodeStyle CssClass="leafNode" />
         <NodeStyle CssClass="treeNode" />
         <RootNodeStyle CssClass="rootNode" />

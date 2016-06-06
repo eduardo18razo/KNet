@@ -33,9 +33,9 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <div class="container">
+     <asp:ContentPlaceHolder runat="server" ID="contentGeneral">
+        <div class="container">
         <div class="container-fluid">
-            <%----%>
             <form id="form1" runat="server" enctype="multipart/form-data">
                 <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
                     <Scripts>
@@ -81,5 +81,6 @@
             </form>
         </div>
     </div>
+    </asp:ContentPlaceHolder>
 </body>
 </html>

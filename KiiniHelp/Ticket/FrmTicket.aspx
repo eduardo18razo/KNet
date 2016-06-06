@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmTicket.aspx.cs" Inherits="KiiniHelp.Ticket.FrmTicket" %>
 
 <%@ Register Src="~/UserControls/Temporal/UcMascaraCaptura.ascx" TagPrefix="uc1" TagName="UcMascaraCaptura" %>
+<%@ Register Src="~/UserControls/Genericos/UcInformacionConsulta.ascx" TagPrefix="uc1" TagName="UcInformacionConsulta" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -29,11 +31,14 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:HiddenField runat="server" ID="hfIdMascara" />
+                    <asp:HiddenField runat="server" ID="hfIdConsulta" />
                     <asp:HiddenField runat="server" ID="hfIdEncuesta" />
                     <asp:HiddenField runat="server" ID="hfIdSla" />
 
                 </div>
+
                 <div class="panel-body">
+                    <uc1:UcInformacionConsulta runat="server" ID="UcInformacionConsulta" />
                     <uc1:UcMascaraCaptura runat="server" ID="UcMascaraCaptura" />
 
                 </div>

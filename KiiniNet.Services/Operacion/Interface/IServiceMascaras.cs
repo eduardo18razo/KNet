@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Mascaras;
+using KinniNet.Core.Operacion;
 
 namespace KiiniNet.Services.Operacion.Interface
 {
@@ -16,5 +17,7 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<Mascara> ObtenerMascarasAcceso(bool insertarSeleccion);
+        [OperationContract]
+        List<BusinessMascaras.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla);
     }
 }

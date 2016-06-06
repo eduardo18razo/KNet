@@ -9,68 +9,71 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <_PublishTargetUrl>C:\Users\Eduardo\Documents\KiiniNet\Web</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="Administracion/Administracion.master">
+      <publishTime>06/03/2016 11:16:28</publishTime>
+    </File>
     <File Include="Administracion/ArbolesAecceso/FrmAltaArbolAcceso.aspx">
-      <publishTime>05/19/2016 10:15:12</publishTime>
+      <publishTime>06/03/2016 11:21:29</publishTime>
     </File>
     <File Include="Administracion/Default.aspx">
-      <publishTime>05/19/2016 10:14:40</publishTime>
+      <publishTime>06/03/2016 11:07:02</publishTime>
     </File>
     <File Include="Administracion/Usuarios/FrmUsuarios.aspx">
-      <publishTime>05/19/2016 10:15:12</publishTime>
+      <publishTime>06/03/2016 11:04:25</publishTime>
     </File>
     <File Include="ArbolesAecceso/FrmAltaArbolAcceso.aspx">
       <publishTime>05/17/2016 11:17:35</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
-      <publishTime>03/30/2016 18:04:40</publishTime>
+      <publishTime>05/30/2016 08:49:39</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>03/28/2016 12:35:50</publishTime>
+      <publishTime>05/30/2016 08:50:02</publishTime>
     </File>
     <File Include="bin/CuteEditor.dll">
       <publishTime>03/09/2016 10:46:06</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.AspNet.dll">
-      <publishTime>03/28/2016 12:36:10</publishTime>
+      <publishTime>05/30/2016 08:49:54</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.Core.dll">
-      <publishTime>03/28/2016 12:36:06</publishTime>
+      <publishTime>05/30/2016 08:49:54</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OAuth.Consumer.dll">
-      <publishTime>03/28/2016 12:36:08</publishTime>
+      <publishTime>05/30/2016 08:49:54</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OAuth.dll">
-      <publishTime>03/28/2016 12:36:08</publishTime>
+      <publishTime>05/30/2016 08:49:54</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OpenId.dll">
-      <publishTime>03/28/2016 12:36:10</publishTime>
+      <publishTime>05/30/2016 08:49:54</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OpenId.RelyingParty.dll">
-      <publishTime>03/28/2016 12:36:10</publishTime>
+      <publishTime>05/30/2016 08:49:55</publishTime>
     </File>
     <File Include="bin/es/System.Web.Optimization.resources.dll">
-      <publishTime>03/28/2016 12:36:22</publishTime>
+      <publishTime>05/30/2016 08:50:02</publishTime>
     </File>
     <File Include="bin/es/System.Web.Providers.resources.dll">
-      <publishTime>03/28/2016 12:36:22</publishTime>
+      <publishTime>05/30/2016 08:50:00</publishTime>
     </File>
     <File Include="bin/FreeTextBox.dll">
       <publishTime>01/29/2011 05:51:50</publishTime>
     </File>
     <File Include="bin/KiiniHelp.dll">
-      <publishTime>05/19/2016 17:39:04</publishTime>
+      <publishTime>06/03/2016 16:43:18</publishTime>
     </File>
     <File Include="bin/KiiniNet.Entities.dll">
-      <publishTime>05/19/2016 17:38:53</publishTime>
+      <publishTime>06/03/2016 09:32:22</publishTime>
     </File>
     <File Include="bin/KinniNet.Business.Utils.dll">
-      <publishTime>05/19/2016 17:38:53</publishTime>
+      <publishTime>06/03/2016 09:32:24</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Web.Optimization.WebForms.dll">
-      <publishTime>03/28/2016 12:36:18</publishTime>
+      <publishTime>05/30/2016 08:50:02</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>03/28/2016 12:36:06</publishTime>
+      <publishTime>05/30/2016 08:50:02</publishTime>
     </File>
     <File Include="bin/SigmaToolBox.dll">
       <publishTime>03/10/2009 04:23:46</publishTime>
@@ -79,253 +82,265 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/09/2013 11:04:48</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>03/28/2016 12:35:54</publishTime>
+      <publishTime>05/30/2016 08:50:02</publishTime>
     </File>
     <File Include="bin/System.Web.Providers.dll">
-      <publishTime>03/28/2016 12:35:52</publishTime>
+      <publishTime>05/30/2016 08:50:00</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>03/28/2016 12:35:50</publishTime>
+      <publishTime>05/30/2016 08:50:02</publishTime>
     </File>
     <File Include="bin/Winthusiasm.HtmlEditor.dll">
-      <publishTime>06/15/2012 09:37:46</publishTime>
+      <publishTime>05/30/2016 08:49:40</publishTime>
+    </File>
+    <File Include="BootStrap/css/accordion-menu.css">
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/bootstrap-theme.css">
-      <publishTime>04/01/2016 10:11:46</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/bootstrap-theme.css.map">
-      <publishTime>04/01/2016 10:11:46</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/bootstrap-theme.min.css">
-      <publishTime>04/22/2016 16:30:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/bootstrap.css">
-      <publishTime>05/19/2016 16:15:44</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/bootstrap.css.map">
-      <publishTime>04/01/2016 10:11:46</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/bootstrap.min.css">
-      <publishTime>05/19/2016 16:16:25</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/Calendar.css">
-      <publishTime>04/01/2016 10:11:46</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/CheckBoxStyle.css">
-      <publishTime>04/01/2016 10:11:46</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/divs.css">
-      <publishTime>04/22/2016 13:41:22</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/DropDown.css">
-      <publishTime>04/27/2016 16:06:32</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/FileInput.css">
-      <publishTime>04/27/2016 11:30:46</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/jquery.treegrid.css">
-      <publishTime>05/19/2016 16:30:48</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/simple-sidebar.css">
-      <publishTime>05/19/2016 16:17:25</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
+    </File>
+    <File Include="BootStrap/css/super-panel.css">
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/fonts/glyphicons-halflings-regular.eot">
-      <publishTime>04/01/2016 10:11:48</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/fonts/glyphicons-halflings-regular.svg">
-      <publishTime>04/01/2016 10:11:48</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>04/01/2016 10:11:48</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/fonts/glyphicons-halflings-regular.woff">
-      <publishTime>04/01/2016 10:11:48</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
+    </File>
+    <File Include="BootStrap/js/accordion-menu.js">
+      <publishTime>06/03/2016 16:00:14</publishTime>
     </File>
     <File Include="BootStrap/js/bootstrap.js">
-      <publishTime>04/01/2016 10:11:48</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/js/bootstrap.min.js">
-      <publishTime>04/01/2016 10:11:48</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/js/jquery-1.4.1.js">
-      <publishTime>04/01/2016 10:11:48</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/js/jquery-1.4.1.min.js">
-      <publishTime>04/01/2016 10:11:48</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/js/jquery-1.5.2.min.js">
-      <publishTime>04/01/2016 10:11:48</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/js/jquery-2.1.1.min.js">
-      <publishTime>04/01/2016 10:11:48</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
+    </File>
+    <File Include="BootStrap/js/super-panel.js">
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/Web.config">
-      <publishTime>04/01/2016 10:11:48</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_glass_65_ffffff_1x400.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_glass_95_fef1ec_1x400.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-icons_222222_256x240.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-icons_2e83ff_256x240.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-icons_454545_256x240.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-icons_888888_256x240.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/images/ui-icons_cd0a0a_256x240.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery-ui.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.accordion.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.all.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.autocomplete.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.base.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.button.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.core.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.datepicker.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.dialog.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.progressbar.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.resizable.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.selectable.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.slider.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.tabs.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.theme.css">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-bg_flat_0_aaaaaa_40x100.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-bg_flat_75_ffffff_40x100.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-bg_glass_55_fbf9ee_1x400.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-bg_glass_65_ffffff_1x400.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-bg_glass_75_dadada_1x400.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-bg_glass_75_e6e6e6_1x400.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-bg_glass_95_fef1ec_1x400.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-bg_highlight-soft_75_cccccc_1x100.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-icons_222222_256x240.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-icons_2e83ff_256x240.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-icons_454545_256x240.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-icons_888888_256x240.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/images/ui-icons_cd0a0a_256x240.png">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery-ui.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery.ui.accordion.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery.ui.autocomplete.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery.ui.button.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery.ui.core.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery.ui.datepicker.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery.ui.dialog.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery.ui.progressbar.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery.ui.resizable.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery.ui.selectable.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery.ui.slider.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery.ui.tabs.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="Content/themes/base/minified/jquery.ui.theme.min.css">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="CuteSoft_Client/CuteEditor/Blank.cep">
       <publishTime>12/07/2006 00:26:22</publishTime>
@@ -4987,19 +5002,31 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/04/2011 03:38:38</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>04/26/2016 12:30:08</publishTime>
+      <publishTime>06/03/2016 11:10:40</publishTime>
     </File>
     <File Include="General/FrmConsultas.aspx">
-      <publishTime>05/19/2016 17:28:04</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
+    </File>
+    <File Include="General/FrmIncidentes.aspx">
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="General/FrmMiInformacion.aspx">
-      <publishTime>05/19/2016 16:05:16</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
+    </File>
+    <File Include="General/FrmMostrarDocumento.aspx">
+      <publishTime>05/30/2016 08:49:34</publishTime>
+    </File>
+    <File Include="General/FrmNodoConsultas.aspx">
+      <publishTime>05/30/2016 08:49:34</publishTime>
+    </File>
+    <File Include="General/FrmServicios.aspx">
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="General/General.master">
-      <publishTime>05/19/2016 15:41:41</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Imagenes/arrowhead-left.png">
       <publishTime>07/10/2015 14:36:52</publishTime>
@@ -5026,406 +5053,418 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/13/2015 17:39:36</publishTime>
     </File>
     <File Include="Images/accent.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/bullet.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/error.jpg">
-      <publishTime>04/15/2016 09:58:22</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/heroAccent.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/loading.gif">
-      <publishTime>04/13/2016 15:45:58</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/minus.png">
-      <publishTime>05/19/2016 17:12:00</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/orderedList0.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/orderedList1.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/orderedList2.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/orderedList3.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/orderedList4.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/orderedList5.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/orderedList6.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/orderedList7.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/orderedList8.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/orderedList9.png">
-      <publishTime>03/30/2016 16:14:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/plus.png">
-      <publishTime>05/19/2016 17:11:36</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Images/select-arrow.png">
-      <publishTime>04/13/2016 15:49:52</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Login.aspx">
-      <publishTime>05/19/2016 09:02:01</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>05/10/2016 09:16:21</publishTime>
+      <publishTime>05/30/2016 08:49:43</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Nodos.Nivel1.datasource">
-      <publishTime>04/25/2016 15:13:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Nodos.Nivel2.datasource">
-      <publishTime>04/25/2016 15:13:58</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Nodos.Nivel3.datasource">
-      <publishTime>04/25/2016 15:13:58</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Nodos.Nivel4.datasource">
-      <publishTime>04/25/2016 15:13:58</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Nodos.Nivel5.datasource">
-      <publishTime>04/25/2016 15:13:58</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Nodos.Nivel6.datasource">
-      <publishTime>04/25/2016 15:14:00</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Nodos.Nivel7.datasource">
-      <publishTime>04/25/2016 15:14:00</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Organizacion.Compania.datasource">
-      <publishTime>04/25/2016 15:13:54</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Organizacion.Direccion.datasource">
-      <publishTime>04/25/2016 15:13:54</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Organizacion.Gerencia.datasource">
-      <publishTime>04/25/2016 15:13:54</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Organizacion.Holding.datasource">
-      <publishTime>04/25/2016 15:13:52</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Organizacion.Jefatura.datasource">
-      <publishTime>04/25/2016 15:13:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Organizacion.SubDireccion.datasource">
-      <publishTime>04/25/2016 15:13:54</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Organizacion.SubGerencia.datasource">
-      <publishTime>04/25/2016 15:13:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Campus.datasource">
-      <publishTime>04/25/2016 15:13:50</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio.Colonia.datasource">
-      <publishTime>04/22/2016 10:12:40</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Pais.datasource">
-      <publishTime>04/25/2016 15:13:48</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Piso.datasource">
-      <publishTime>04/25/2016 15:13:50</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Ubicaciones.SiteRack.datasource">
-      <publishTime>04/25/2016 15:13:52</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Ubicaciones.SubZona.datasource">
-      <publishTime>04/25/2016 15:13:52</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Torre.datasource">
-      <publishTime>04/25/2016 15:13:50</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Zona.datasource">
-      <publishTime>04/25/2016 15:13:52</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Mascaras.Mascara.datasource">
-      <publishTime>04/25/2016 12:55:26</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Mascaras.TipoCampoMascara.datasource">
-      <publishTime>04/22/2016 10:12:42</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Operacion.ArbolAcceso.datasource">
-      <publishTime>05/18/2016 16:38:23</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
+    </File>
+    <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Operacion.Organizacion.datasource">
+      <publishTime>05/30/2016 08:49:34</publishTime>
+    </File>
+    <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Operacion.Ubicacion.datasource">
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.Catalogos.datasource">
-      <publishTime>04/22/2016 10:12:42</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.Menu.datasource">
-      <publishTime>05/19/2016 09:45:34</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.Rol.datasource">
-      <publishTime>04/22/2016 10:12:40</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.SubRol.datasource">
-      <publishTime>05/11/2016 19:08:32</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.TipoArbolAcceso.datasource">
-      <publishTime>04/22/2016 10:12:42</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.TipoDocumento.datasource">
-      <publishTime>04/27/2016 12:02:06</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.TipoEncuesta.datasource">
-      <publishTime>05/03/2016 09:51:53</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.TipoGrupo.datasource">
-      <publishTime>04/22/2016 10:12:40</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.TipoInfConsulta.datasource">
-      <publishTime>04/25/2016 17:35:54</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.TipoSubGrupo.datasource">
-      <publishTime>04/25/2016 15:13:46</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.TipoTelefono.datasource">
-      <publishTime>04/22/2016 10:12:40</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.TipoUsuario.datasource">
-      <publishTime>04/22/2016 10:12:38</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Usuario.Encuesta.datasource">
-      <publishTime>05/02/2016 10:18:20</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Usuario.GrupoUsuario.datasource">
-      <publishTime>04/25/2016 15:13:48</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Usuario.SLA.datasource">
-      <publishTime>04/28/2016 11:35:02</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Usuario.SubGrupoUsuario.datasource">
-      <publishTime>04/25/2016 15:13:56</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel1.datasource">
-      <publishTime>04/19/2016 11:00:30</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel2.datasource">
-      <publishTime>04/19/2016 11:00:30</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel3.datasource">
-      <publishTime>04/19/2016 11:00:30</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel4.datasource">
-      <publishTime>04/19/2016 11:00:30</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel5.datasource">
-      <publishTime>04/19/2016 11:00:30</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel6.datasource">
-      <publishTime>04/19/2016 11:00:30</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Nodos.Nivel7.datasource">
-      <publishTime>04/19/2016 11:00:30</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Organizacion.Compania.datasource">
-      <publishTime>04/11/2016 21:33:38</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Organizacion.Direccion.datasource">
-      <publishTime>04/11/2016 21:33:38</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Organizacion.Gerencia.datasource">
-      <publishTime>04/11/2016 21:33:38</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Organizacion.Holding.datasource">
-      <publishTime>04/11/2016 21:33:38</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Organizacion.Jefatura.datasource">
-      <publishTime>04/11/2016 21:33:38</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Organizacion.SubDireccion.datasource">
-      <publishTime>04/11/2016 21:33:38</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Organizacion.SubGerencia.datasource">
-      <publishTime>04/11/2016 21:33:38</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.Campus.datasource">
-      <publishTime>04/11/2016 21:33:36</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.Domicilio.Colonia.datasource">
-      <publishTime>04/11/2016 21:33:34</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.Pais.datasource">
-      <publishTime>04/11/2016 21:33:34</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.Piso.datasource">
-      <publishTime>04/11/2016 21:33:36</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.SiteRack.datasource">
-      <publishTime>04/11/2016 21:33:36</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.SubZona.datasource">
-      <publishTime>04/11/2016 21:33:36</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.Torre.datasource">
-      <publishTime>04/11/2016 21:33:36</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Arbol.Ubicaciones.Zona.datasource">
-      <publishTime>04/11/2016 21:33:36</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Mascaras.TipoCampoMascara.datasource">
-      <publishTime>04/18/2016 11:30:36</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Sistema.Catalogos.datasource">
-      <publishTime>04/18/2016 12:06:16</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Sistema.Rol.datasource">
-      <publishTime>04/11/2016 21:33:34</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Sistema.TipoArbolAcceso.datasource">
-      <publishTime>04/19/2016 17:22:02</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Sistema.TipoGrupo.datasource">
-      <publishTime>04/11/2016 21:33:34</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Sistema.TipoSubGrupo.datasource">
-      <publishTime>04/11/2016 21:33:34</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Sistema.TipoTelefono.datasource">
-      <publishTime>04/11/2016 21:33:34</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Sistema.TipoUsuario.datasource">
-      <publishTime>04/11/2016 21:33:32</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Usuario.GrupoUsuario.datasource">
-      <publishTime>04/11/2016 21:33:34</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Catalogos.Usuario.SubGrupoUsuario.datasource">
-      <publishTime>04/12/2016 17:39:14</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Helper.HelperSubGurpoUsuario.datasource">
-      <publishTime>04/20/2016 08:57:38</publishTime>
+      <publishTime>05/30/2016 08:49:34</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Operacion.InformacionConsulta.datasource">
-      <publishTime>04/26/2016 12:20:28</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Operacion.Usuarios.CorreoUsuario.datasource">
-      <publishTime>04/11/2016 21:33:40</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Operacion.Usuarios.TelefonoUsuario.datasource">
-      <publishTime>04/11/2016 21:33:40</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Operacion.Usuarios.Usuario.datasource">
-      <publishTime>05/18/2016 13:05:07</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Parametros.ParametrosTelefonos.datasource">
-      <publishTime>04/11/2016 21:33:40</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/jquery-1.8.2.js">
-      <publishTime>03/30/2016 16:14:58</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/jquery-1.8.2.min.js">
-      <publishTime>03/30/2016 16:14:58</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/jquery-ui-1.8.24.js">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/jquery-ui-1.8.24.min.js">
-      <publishTime>03/30/2016 16:15:10</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.6.2.js">
-      <publishTime>03/30/2016 16:15:12</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/DetailsView.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/Focus.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/GridView.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/Menu.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/MenuStandards.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjax.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxApplicationServices.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxComponentModel.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxCore.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxGlobalization.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxHistory.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxNetwork.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxSerialization.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxTimer.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxWebForms.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxWebServices.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/SmartNav.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/TreeView.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/WebForms.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/WebParts.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
     </File>
     <File Include="Scripts/WebForms/WebUIValidation.js">
-      <publishTime>03/30/2016 16:15:16</publishTime>
+      <publishTime>05/30/2016 08:49:35</publishTime>
+    </File>
+    <File Include="Service References/ServiceMascaraAcceso/KiiniHelp.ServiceMascaraAcceso.BusinessMascarasCatalogoGenerico.datasource">
+      <publishTime>06/03/2016 16:23:14</publishTime>
     </File>
     <File Include="Site.Master">
-      <publishTime>05/19/2016 17:16:28</publishTime>
+      <publishTime>06/03/2016 11:04:26</publishTime>
     </File>
     <File Include="Site.Mobile.Master">
       <publishTime>03/30/2016 16:15:22</publishTime>
     </File>
     <File Include="TestUsControl/FrmTest.aspx">
-      <publishTime>05/17/2016 17:20:16</publishTime>
+      <publishTime>05/31/2016 11:07:07</publishTime>
     </File>
     <File Include="TestUsControl/WebForm1.aspx">
-      <publishTime>05/18/2016 14:59:02</publishTime>
+      <publishTime>05/30/2016 08:49:38</publishTime>
+    </File>
+    <File Include="Ticket/FrmTicket.aspx">
+      <publishTime>06/03/2016 09:31:54</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaEncuesta.ascx">
-      <publishTime>05/16/2016 10:15:09</publishTime>
+      <publishTime>05/30/2016 08:49:38</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaGrupoUsuario.ascx">
-      <publishTime>05/17/2016 12:23:36</publishTime>
+      <publishTime>05/30/2016 08:49:38</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaInformacionConsulta.ascx">
-      <publishTime>05/17/2016 17:28:29</publishTime>
+      <publishTime>06/03/2016 14:37:25</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaMascaraAcceso.ascx">
-      <publishTime>05/16/2016 10:16:11</publishTime>
+      <publishTime>06/03/2016 09:08:04</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaSla.ascx">
-      <publishTime>05/16/2016 10:17:00</publishTime>
+      <publishTime>05/30/2016 08:49:38</publishTime>
     </File>
     <File Include="UserControls/Altas/UcAltaGrupos.ascx">
       <publishTime>04/28/2016 19:44:56</publishTime>
@@ -5443,28 +5482,34 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/06/2016 13:42:10</publishTime>
     </File>
     <File Include="UserControls/Genericos/UcCatalogos.ascx">
-      <publishTime>04/28/2016 00:09:52</publishTime>
+      <publishTime>05/30/2016 08:49:38</publishTime>
+    </File>
+    <File Include="UserControls/Genericos/UcInformacionConsulta.ascx">
+      <publishTime>05/30/2016 08:49:38</publishTime>
+    </File>
+    <File Include="UserControls/Genericos/UcMostrarArchivo.ascx">
+      <publishTime>05/30/2016 08:49:38</publishTime>
     </File>
     <File Include="UserControls/Seleccion/AsociarGrupoUsuario.ascx">
-      <publishTime>05/17/2016 13:43:56</publishTime>
+      <publishTime>06/02/2016 12:52:29</publishTime>
     </File>
     <File Include="UserControls/Temporal/UcCatalogoNiveles.ascx">
-      <publishTime>04/28/2016 09:10:26</publishTime>
+      <publishTime>05/30/2016 08:49:38</publishTime>
     </File>
     <File Include="UserControls/Temporal/UcMascaraCaptura.ascx">
-      <publishTime>04/28/2016 09:10:26</publishTime>
+      <publishTime>05/31/2016 10:04:43</publishTime>
     </File>
     <File Include="UserControls/Temporal/UcOrganizacion.ascx">
-      <publishTime>04/28/2016 09:10:26</publishTime>
+      <publishTime>05/30/2016 08:49:38</publishTime>
     </File>
     <File Include="Usuarios.Master">
-      <publishTime>05/19/2016 17:31:25</publishTime>
+      <publishTime>06/03/2016 11:08:45</publishTime>
     </File>
     <File Include="Usuarios/FrmUsuarios.aspx">
       <publishTime>05/17/2016 11:17:35</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/19/2016 17:39:06</publishTime>
+      <publishTime>06/03/2016 15:35:08</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -36,16 +36,23 @@
 
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" enctype="multipart/form-data">
         <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
             <Scripts>
                 <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
                 <asp:ScriptReference Path="~/BootStrap/js/bootstrap.min.js" />
                 <asp:ScriptReference Path="~/BootStrap/js/accordion-menu.js" />
                 <asp:ScriptReference Path="~/BootStrap/js/super-panel.js" />
-
             </Scripts>
         </asp:ScriptManager>
+        <asp:UpdateProgress ID="updateProgress" runat="server">
+            <ProgressTemplate>
+                <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #000000; opacity: 1.0;">
+                    <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="~/Images/loading.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="padding: 10px; position: fixed; top: 25%; left: 35%; border: 10px;" />
+                </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
+
         <header style="font-size: 0; display: block; background: #314f60; line-height: 60px; height: 60px; text-align: right; position: relative; border: 1px solid #000;">
             <span data-panel="panel1" class="panel-button"></span>
             <a class="logo" href="http://www.kiininet.com/">KiiniNet</a>
@@ -57,7 +64,7 @@
                         <asp:Repeater runat="server" ID="rptMenu" OnItemDataBound="rptMenu_OnItemDataBound">
                             <ItemTemplate>
                                 <li>
-                                    <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>'/>
+                                    <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
 
                                     <div runat="server" visible='<%# Eval("Menu1") !=null %>'><%# Eval("Descripcion") %></div>
                                     <ul>

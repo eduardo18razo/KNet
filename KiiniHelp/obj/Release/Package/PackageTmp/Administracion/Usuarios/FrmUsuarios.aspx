@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FrmUsuarios.aspx.cs" Inherits="KiiniHelp.Administracion.Usuarios.FrmUsuarios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion/Administracion.master" AutoEventWireup="true" CodeBehind="FrmUsuarios.aspx.cs" Inherits="KiiniHelp.Administracion.Usuarios.FrmUsuarios" %>
 
 <%@ Register Src="~/UserControls/Seleccion/AsociarGrupoUsuario.ascx" TagPrefix="uc" TagName="AsociarGrupoUsuario" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContentAdministracion" runat="server">
     <title>Alta Usuarios</title>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="MainContentAdministracion" runat="server">
     <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <asp:UpdatePanel runat="server">

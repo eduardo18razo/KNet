@@ -40,6 +40,15 @@ namespace KiiniHelp.Ticket {
         protected global::System.Web.UI.WebControls.HiddenField hfIdMascara;
         
         /// <summary>
+        /// hfIdConsulta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdConsulta;
+        
+        /// <summary>
         /// hfIdEncuesta control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,15 @@ namespace KiiniHelp.Ticket {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfIdSla;
+        
+        /// <summary>
+        /// UcInformacionConsulta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Genericos.UcInformacionConsulta UcInformacionConsulta;
         
         /// <summary>
         /// UcMascaraCaptura control.

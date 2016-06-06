@@ -1,8 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AltaInformacionConsulta.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.AltaInformacionConsulta" %>
 <%@ Register Assembly="Winthusiasm.HtmlEditor" Namespace="Winthusiasm.HtmlEditor" TagPrefix="ctrlExterno" %>
 <%@ Register TagPrefix="ajax" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
-<asp:UpdatePanel runat="server" ID="upInfo" UpdateMode="Conditional">
+<asp:UpdatePanel runat="server" ID="upInfo">
     <ContentTemplate>
+        <asp:HiddenField runat="server" ID="hfFileName"/>
         <header id="panelAlert" runat="server" visible="False">
             <div class="alert alert-danger">
                 <div>
@@ -57,14 +58,14 @@
                         <div class="form-group">
                             <asp:Label runat="server" Text="Tipo de Documento" CssClass="col-sm-2 control-label" />
                             <div class="col-sm-10">
-                                <asp:DropDownList runat="server" ID="ddlTipoDocumento" CssClass="DropSelect" AutoPostBack="True" />
+                                <asp:DropDownList runat="server" ID="ddlTipoDocumento" CssClass="DropSelect" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoDocumento_OnSelectedIndexChanged" />
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" runat="server" id="divUploadDocumento" visible="False">
                             <asp:Label runat="server" Text="Archivo" CssClass="col-sm-2 control-label" />
                             <div class="col-sm-10">
-                                <%--<ajax:AsyncFileUpload ID="afuArchivo" runat="server" UploaderStyle="Traditional" OnUploadedComplete="afuArchivo_OnUploadedComplete" PersistFile="True"  />--%>
-                                <asp:FileUpload runat="server" ID="fuFile"></asp:FileUpload>
+                                <ajax:AsyncFileUpload ID="afuArchivo" runat="server" UploaderStyle="Traditional" OnUploadedComplete="afuArchivo_OnUploadedComplete" PersistFile="True"  />
+                                <%--<asp:FileUpload runat="server" ID="fuFile"></asp:FileUpload>--%>
                             </div>
                         </div>
                     </div>
@@ -85,9 +86,5 @@
                 <asp:Button runat="server" CssClass="btn btn-danger btn-lg" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick" />
             </div>
         </div>
-
     </ContentTemplate>
-    <Triggers>
-        <asp:PostBackTrigger ControlID="btnGuardar" />
-    </Triggers>
 </asp:UpdatePanel>

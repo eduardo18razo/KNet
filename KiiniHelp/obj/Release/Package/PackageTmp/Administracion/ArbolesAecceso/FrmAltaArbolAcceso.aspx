@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FrmAltaArbolAcceso.aspx.cs" Inherits="KiiniHelp.Administracion.ArbolesAecceso.FrmAltaArbolAcceso" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion/Administracion.master" AutoEventWireup="true" CodeBehind="FrmAltaArbolAcceso.aspx.cs" Inherits="KiiniHelp.Administracion.ArbolesAecceso.FrmAltaArbolAcceso" %>
 
 <%@ Register Src="~/UserControls/Altas/AltaInformacionConsulta.ascx" TagPrefix="uc1" TagName="UcAltaInformacionConsulta" %>
 <%@ Register Src="~/UserControls/Altas/AltaSla.ascx" TagPrefix="uc" TagName="UcSla" %>
@@ -8,11 +8,11 @@
 
 
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContentAdministracion" runat="server">
     <title>Alta de Arboles de Acceso</title>
 
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContentAdministracion" runat="server">
     <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <asp:UpdatePanel runat="server">
@@ -182,19 +182,20 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <asp:CheckBox runat="server" ID="chkNivelHabilitado" Text="Habilitado" Checked="True" Visible="False" />
+                                                    <asp:CheckBox runat="server" ID="chkHerencia" Text="Heredar Padre" OnCheckedChanged="chkHerencia_OnCheckedChanged" AutoPostBack="True"/>
                                                     <asp:CheckBox runat="server" ID="chkNivelTerminal" CssClass="col-sm-3" Text="Es Nodo terminal" Checked="False" Visible="True" AutoPostBack="True" OnCheckedChanged="chkNivelTerminal_OnCheckedChanged" />
                                                 </div>
                                             </div>
                                         </div>
                                         <br />
-                                        <div runat="server" id="divNodoTerminal" visible="False">
-                                            <div class="panel panel-primary center-content-div" runat="server" id="divDatos" visible="True">
+                                        <div >
+                                            <div class="panel panel-primary center-content-div">
                                                 <div class="panel-heading">
                                                     Información
                                                 </div>
                                                 <div class="panel-body">
-                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Consulta" ID="btnModalConsultas" data-toggle="modal" data-target="#modalConsultas" runat="server"></asp:Button>
-                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Ticket" ID="btnMocalTicket" data-toggle="modal" data-target="#modalTicket" runat="server"></asp:Button>
+                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Consulta" ID="btnModalConsultas" data-toggle="modal" data-target="#modalConsultas" runat="server" Visible="False"></asp:Button>
+                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Ticket" ID="btnMocalTicket" data-toggle="modal" data-target="#modalTicket" runat="server" Visible="False"></asp:Button>
                                                     <asp:Button type="button" class="btn btn-primary btn-lg " Text="Grupos" ID="btnModalGrupos" data-toggle="modal" data-target="#modalGruposNodo" runat="server"></asp:Button>
                                                 </div>
                                             </div>
@@ -233,7 +234,7 @@
                                     <div class="panel-body">
                                         <asp:Repeater runat="server" ID="rptInformacion" OnItemDataBound="rptInformacion_OnItemDataBound">
                                             <ItemTemplate>
-                                                <div class="row center-content-div">
+                                                <div class="row ">
                                                     <asp:Label runat="server" ID="lblIndex" Text='<%# Container.ItemIndex %>' Visible="False"></asp:Label>
                                                     <asp:Label runat="server" Text='<%# Eval("TipoInfConsulta.Id") %>' Visible="False" ID="lblIdTipoInformacion"></asp:Label>
                                                     <div class="col-sm-3 control-label" style="width: 180px">
@@ -357,7 +358,7 @@
             </div>
 
             <div class="modal fade" id="modalAltaInfCons" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <asp:UpdatePanel ID="upModalAltaInfCons" runat="server">
+                <asp:UpdatePanel ID="upModalAltaInfCons" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">

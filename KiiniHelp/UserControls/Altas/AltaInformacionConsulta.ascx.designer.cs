@@ -22,6 +22,15 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.UpdatePanel upInfo;
         
         /// <summary>
+        /// hfFileName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfFileName;
+        
+        /// <summary>
         /// panelAlert control.
         /// </summary>
         /// <remarks>
@@ -103,13 +112,13 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUploadDocumento;
         
         /// <summary>
-        /// fuFile control.
+        /// afuArchivo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuFile;
+        protected global::AjaxControlToolkit.AsyncFileUpload afuArchivo;
         
         /// <summary>
         /// divUrl control.

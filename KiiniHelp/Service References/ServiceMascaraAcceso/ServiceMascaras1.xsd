@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:15277/ServiceMascaras.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceMascaras.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KinniNet.Core.Operacion" />
   <xs:element name="CrearMascara">
     <xs:complexType>
       <xs:sequence>
@@ -38,6 +39,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" minOccurs="0" name="ObtenerMascarasAccesoResult" nillable="true" type="q3:ArrayOfMascara" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerCatalogoCampoMascara">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tabla" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerCatalogoCampoMascaraResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KinniNet.Core.Operacion" minOccurs="0" name="ObtenerCatalogoCampoMascaraResult" nillable="true" type="q4:ArrayOfBusinessMascaras.CatalogoGenerico" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

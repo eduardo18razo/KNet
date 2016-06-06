@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Objects;
 using System.Data.SqlClient;
 using System.Linq;
 using KiiniNet.Entities.Cat.Mascaras;
@@ -318,6 +319,7 @@ namespace KinniNet.Core.Operacion
                     foreach (CampoMascara campoMascara in result.CampoMascara)
                     {
                         db.LoadProperty(campoMascara, "TipoCampoMascara");
+                        db.LoadProperty(campoMascara, "Catalogos");
                     }
                 }
             }
@@ -326,6 +328,31 @@ namespace KinniNet.Core.Operacion
                 throw new Exception(ex.Message);
             }
             return result;
+        }
+
+        public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla)
+        {
+            List<CatalogoGenerico> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                result = db.ExecuteStoreQuery<CatalogoGenerico>("ObtenerCatalogoSistema '" + tabla + "'").ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public class CatalogoGenerico
+        {
+            public int Id { get; set; }
+            public string Descripcion { get; set; }
         }
     }
 }

@@ -29,7 +29,28 @@ namespace KiiniHelp.Ticket
                 rptHeaderError.DataBind();
             }
         }
-
+        public int? IdConsulta
+        {
+            get
+            {
+                int result = 0;
+                if (hfIdConsulta.Value != string.Empty)
+                    result = Convert.ToInt32(hfIdConsulta.Value);
+                else
+                    result = (int)Session["IdConsultaTicket"];
+                return result;
+            }
+            set
+            {
+                if (hfIdConsulta != null)
+                {
+                    hfIdConsulta.Value = value.ToString();
+                    Session.Remove("IdConsultaTicket");
+                }
+                else
+                    Session["IdConsultaTicket"] = value;
+            }
+        }
         public int? IdMascara
         {
             get
@@ -124,6 +145,7 @@ namespace KiiniHelp.Ticket
                 AlertaGeneral = new List<string>();
                 if (!IsPostBack)
                 {
+                    UcInformacionConsulta.IdArbol = ((ArbolAcceso) Session["ArbolAcceso"]).Id;
                     if (IdMascara == 0)
                     {
                         UcMascaraCaptura.Visible = false;
