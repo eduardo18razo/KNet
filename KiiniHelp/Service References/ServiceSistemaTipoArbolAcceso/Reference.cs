@@ -8,24 +8,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using KiiniNet.Entities.Cat.Sistema;
+
 namespace KiiniHelp.ServiceSistemaTipoArbolAcceso {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceSistemaTipoArbolAcceso.IServiceTipoArbolAcceso")]
+    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
+    [ServiceContract(ConfigurationName="ServiceSistemaTipoArbolAcceso.IServiceTipoArbolAcceso")]
     public interface IServiceTipoArbolAcceso {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAcceso", ReplyAction="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoArbolAcceso> ObtenerTiposArbolAcceso(bool insertarSeleccion);
+        [OperationContract(Action="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAcceso", ReplyAction="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoResponse")]
+        List<TipoArbolAcceso> ObtenerTiposArbolAcceso(bool insertarSeleccion);
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceTipoArbolAccesoChannel : KiiniHelp.ServiceSistemaTipoArbolAcceso.IServiceTipoArbolAcceso, System.ServiceModel.IClientChannel {
+    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceTipoArbolAccesoChannel : IServiceTipoArbolAcceso, IClientChannel {
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceTipoArbolAccesoClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceSistemaTipoArbolAcceso.IServiceTipoArbolAcceso>, KiiniHelp.ServiceSistemaTipoArbolAcceso.IServiceTipoArbolAcceso {
+    [DebuggerStepThrough()]
+    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceTipoArbolAccesoClient : ClientBase<IServiceTipoArbolAcceso>, IServiceTipoArbolAcceso {
         
         public ServiceTipoArbolAccesoClient() {
         }
@@ -38,15 +45,15 @@ namespace KiiniHelp.ServiceSistemaTipoArbolAcceso {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceTipoArbolAccesoClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ServiceTipoArbolAccesoClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceTipoArbolAccesoClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ServiceTipoArbolAccesoClient(Binding binding, EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoArbolAcceso> ObtenerTiposArbolAcceso(bool insertarSeleccion) {
+        public List<TipoArbolAcceso> ObtenerTiposArbolAcceso(bool insertarSeleccion) {
             return base.Channel.ObtenerTiposArbolAcceso(insertarSeleccion);
         }
     }

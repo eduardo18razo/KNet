@@ -40,20 +40,21 @@ namespace KiiniHelp.UserControls.Genericos
                     ArbolAcceso arbol = _servicioArbolAcceso.ObtenerArbolAcceso(IdArbol);
                     rptInformacionConsulta.DataSource = _servicioInformacionConsulta.ObtenerInformacionConsultaArbol(IdArbol);
                     rptInformacionConsulta.DataBind();
+                    lbltitleArbol.Text = "CONSULTA > ";
                     if (arbol.Nivel1 != null)
-                        lbltitleArbol.Text = arbol.Nivel1.Descripcion;
+                        lbltitleArbol.Text += arbol.Nivel1.Descripcion;
                     if (arbol.Nivel2 != null)
-                        lbltitleArbol.Text += arbol.Nivel2.Descripcion;
+                        lbltitleArbol.Text += " > " + arbol.Nivel2.Descripcion;
                     if (arbol.Nivel3 != null)
-                        lbltitleArbol.Text += arbol.Nivel3.Descripcion;
+                        lbltitleArbol.Text += " > " + arbol.Nivel3.Descripcion;
                     if (arbol.Nivel4 != null)
-                        lbltitleArbol.Text += arbol.Nivel4.Descripcion;
+                        lbltitleArbol.Text += " > " + arbol.Nivel4.Descripcion;
                     if (arbol.Nivel5 != null)
-                        lbltitleArbol.Text += arbol.Nivel5.Descripcion;
+                        lbltitleArbol.Text += " > " + arbol.Nivel5.Descripcion;
                     if (arbol.Nivel6 != null)
-                        lbltitleArbol.Text += arbol.Nivel6.Descripcion;
+                        lbltitleArbol.Text += " > " + arbol.Nivel6.Descripcion;
                     if (arbol.Nivel7 != null)
-                        lbltitleArbol.Text += arbol.Nivel7.Descripcion;
+                        lbltitleArbol.Text += " > " + arbol.Nivel7.Descripcion;
                 }
             }
             catch (Exception ex)

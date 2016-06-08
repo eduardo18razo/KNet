@@ -83,6 +83,7 @@
     <Compile Include="Cat\Usuario\SubGrupoUsuario.cs" />
     <Compile Include="Helper\HelperCampoMascaraCaptura.cs" />
     <Compile Include="Helper\HelperSubGurpoUsuario.cs" />
+    <Compile Include="Operacion\Area.cs" />
     <Compile Include="Operacion\HitConsulta.cs" />
     <Compile Include="Operacion\HitGrupoUsuario.cs" />
     <Compile Include="Operacion\InformacionConsulta.cs" />

@@ -44,15 +44,16 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
         #endregion Alertas
+
         private void LlenaCombos()
         {
             try
             {
                 Metodos.LlenaComboCatalogo(ddlTipoCampo, _servicioSistemaTipoCampoMascara.ObtenerTipoCampoMascara(true));
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(e.Message);
             }
         }
 
@@ -68,9 +69,9 @@ namespace KiiniHelp.UserControls.Altas
                 txtSimboloMoneda.Text = string.Empty;
                 ddlCatalogosCampo.SelectedIndex = ddlCatalogosCampo.SelectedIndex >= 1 ? BusinessVariables.ComboBoxCatalogo.Index : -1;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(e.Message);
             }
         }
         private void LimpiarMascara()
@@ -89,9 +90,9 @@ namespace KiiniHelp.UserControls.Altas
                 rptControles.DataSource = ((Mascara)Session["MascaraAlta"]).CampoMascara;
                 rptControles.DataBind();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(e.Message);
             }
         }
 
@@ -219,7 +220,8 @@ namespace KiiniHelp.UserControls.Altas
                     LongitudMinima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMinima.Text.Trim()) : (int?)null,
                     LongitudMaxima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMaxima.Text.Trim()) : (int?)null,
                     SimboloMoneda = tipoCampo.SimboloMoneda ? txtSimboloMoneda.Text.Trim().ToUpper() : null,
-                    ValorMaximo = tipoCampo.ValorMaximo ? Convert.ToInt32(txtValorMaximo.Text.Trim()) : (int?)null
+                    ValorMaximo = tipoCampo.ValorMaximo ? Convert.ToInt32(txtValorMaximo.Text.Trim()) : (int?)null,
+                    TipoCampoMascara = tipoCampo
                 });
 
                 rptControles.DataSource = tmpMascara.CampoMascara;
@@ -228,7 +230,6 @@ namespace KiiniHelp.UserControls.Altas
                 ddlTipoCampo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
                 LimpiarModalCampo();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAgregarCampoMascara\");", true);
-                //upControlesMascara.Update();
             }
             catch (Exception ex)
             {

@@ -8,7 +8,6 @@ using KiiniHelp.ServiceGrupoUsuario;
 using KiiniHelp.ServiceSistemaSubRol;
 using KiiniHelp.ServiceSistemaTipoGrupo;
 using KiiniHelp.ServiceSubGrupoUsuario;
-using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
@@ -75,6 +74,12 @@ namespace KiiniHelp.UserControls.Seleccion
             { HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, value); }
         }
 
+        public int IdTipoUsuario
+        {
+            get { return Convert.ToInt32(hfTipoUsuario.Value); }
+            set { hfTipoUsuario.Value = value.ToString(); }
+        }
+
         public RepeaterItemCollection GruposAsociados
         {
             get { return rptUsuarioGrupo.Items; }
@@ -103,16 +108,11 @@ namespace KiiniHelp.UserControls.Seleccion
             return false;
         }
 
-        public void ObtenerGruposHerencia(int idTipoArbolAcceso, int? nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7)
+        private void ObtenerGruposHerencia()
         {
             try
             {
-                List<GrupoUsuario> lst;
-                if (nivel1 == null)
-                    lst = _servicioGrupoUsuario.ObtenerGruposUsuarioSistema();
-                else
-                    lst = _servicioGrupoUsuario.ObtenerGruposUsuarioNivel(idTipoArbolAcceso, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
-                foreach (GrupoUsuario grupo in lst)
+                foreach (GrupoUsuario grupo in _servicioGrupoUsuario.ObtenerGruposUsuarioSistema(IdTipoUsuario))
                 {
                     if (grupo.SubGrupoUsuario.Any())
                     {
@@ -127,9 +127,9 @@ namespace KiiniHelp.UserControls.Seleccion
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(e.Message);
             }
         }
 
@@ -156,75 +156,59 @@ namespace KiiniHelp.UserControls.Seleccion
                 if (Desarrollo)
                     ddlGrupoResponsableDesarrollo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                throw new Exception(e.Message);
             }
         }
 
         public void HabilitaGrupos(int idRol, bool visible)
         {
-            switch (idRol)
-            {
-                case (int)BusinessVariables.EnumRoles.Administrador:
-                    divGrupoAdministrador.Visible = visible;
-                    if (visible)
-                        Metodos.LlenaComboCatalogo(ddlGrupoAdministrador, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
-                    break;
-                case (int)BusinessVariables.EnumRoles.Acceso:
-                    divGrupoAcceso.Visible = visible;
-                    if (visible)
-                        Metodos.LlenaComboCatalogo(ddlGrupoAcceso, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
-                    break;
-                case (int)BusinessVariables.EnumRoles.EspecialDeConsulta:
-                    divGrupoEspConsulta.Visible = visible;
-                    if (visible)
-                        Metodos.LlenaComboCatalogo(ddlGrupoEspecialConsulta, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
-                    break;
-                case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
-                    divGrupoRespAtencion.Visible = visible;
-                    if (visible)
-                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableAtencion, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
-                    break;
-                case (int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento:
-                    divGrupoRespMtto.Visible = visible;
-                    if (visible)
-                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableMantenimiento, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
-                    break;
-                case (int)BusinessVariables.EnumRoles.ResponsableDeOperación:
-                    divGrupoRespOperacion.Visible = visible;
-                    if (visible)
-                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableOperacion, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
-                    break;
-                case (int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo:
-                    divGrupoRespDesarrollo.Visible = visible;
-                    if (visible)
-                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableDesarrollo, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
-                    break;
-            }
-        }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            _lstError = new List<string>();
-        }
-
-        protected void btnCerrarGrupos_OnClick(object sender, EventArgs e)
-        {
             try
             {
-                ValidaCapturaGrupos();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalGrupos\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
+                switch (idRol)
                 {
-                    _lstError = new List<string>();
+                    case (int)BusinessVariables.EnumRoles.Administrador:
+                        divGrupoAdministrador.Visible = visible;
+                        if (visible)
+                            Metodos.LlenaComboCatalogo(ddlGrupoAdministrador, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.Acceso:
+                        divGrupoAcceso.Visible = visible;
+                        if (visible)
+                            Metodos.LlenaComboCatalogo(ddlGrupoAcceso, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.EspecialDeConsulta:
+                        divGrupoEspConsulta.Visible = visible;
+                        if (visible)
+                            Metodos.LlenaComboCatalogo(ddlGrupoEspecialConsulta, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
+                        divGrupoRespAtencion.Visible = visible;
+                        if (visible)
+                            Metodos.LlenaComboCatalogo(ddlGrupoResponsableAtencion, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento:
+                        divGrupoRespMtto.Visible = visible;
+                        if (visible)
+                            Metodos.LlenaComboCatalogo(ddlGrupoResponsableMantenimiento, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.ResponsableDeOperación:
+                        divGrupoRespOperacion.Visible = visible;
+                        if (visible)
+                            Metodos.LlenaComboCatalogo(ddlGrupoResponsableOperacion, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo:
+                        divGrupoRespDesarrollo.Visible = visible;
+                        if (visible)
+                            Metodos.LlenaComboCatalogo(ddlGrupoResponsableDesarrollo, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                        break;
                 }
-                _lstError.Add(ex.Message);
-                AlertaGrupos = _lstError;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 
@@ -237,14 +221,9 @@ namespace KiiniHelp.UserControls.Seleccion
                 if (btn == null) return;
                 int operacion;
                 int.TryParse(btn.CommandArgument, out operacion);
-
                 GrupoUsuario grupoUsuario = null;
-                Rol rol = null;
-                SubRol subRol = null;
                 List<HelperSubGurpoUsuario> lstSubRoles = new List<HelperSubGurpoUsuario>();
-
                 int idGrupoUsuario = 0, idRol = 0;
-
                 switch (operacion)
                 {
                     case (int)BusinessVariables.EnumRoles.Administrador:
@@ -333,10 +312,7 @@ namespace KiiniHelp.UserControls.Seleccion
         {
             try
             {
-                List<UsuarioGrupo> lst = (List<UsuarioGrupo>)Session["UsuarioGrupo"];
-                if (lst == null)
-                    lst = new List<UsuarioGrupo>();
-
+                List<UsuarioGrupo> lst = (List<UsuarioGrupo>)Session["UsuarioGrupo"] ?? new List<UsuarioGrupo>();
                 if (grupoUsuario != null)
                 {
                     if (lst.Any(a => a.IdGrupoUsuario == grupoUsuario.Id && a.IdSubGrupoUsuario == idSubGrupoUsuario && a.IdRol == idRol))
@@ -351,7 +327,6 @@ namespace KiiniHelp.UserControls.Seleccion
                         SubGrupoUsuario = idSubGrupoUsuario != null ? _servicioSubGrupoUsuario.ObtenerSubGrupoUsuario(grupoUsuario.Id, (int)idSubGrupoUsuario) : null
                     });
                 }
-
                 Session["UsuarioGrupo"] = lst;
                 rptUsuarioGrupo.DataSource = lst;
                 rptUsuarioGrupo.DataBind();
@@ -396,37 +371,37 @@ namespace KiiniHelp.UserControls.Seleccion
                     case (int)BusinessVariables.EnumRoles.Administrador:
                         divGrupoAdministrador.Visible = true;
                         Metodos.LlenaComboCatalogo(ddlGrupoAdministrador,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
+                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
                         break;
                     case (int)BusinessVariables.EnumRoles.Acceso:
                         divGrupoAcceso.Visible = true;
                         Metodos.LlenaComboCatalogo(ddlGrupoAcceso,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
+                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
                         break;
                     case (int)BusinessVariables.EnumRoles.EspecialDeConsulta:
                         divGrupoEspConsulta.Visible = true;
                         Metodos.LlenaComboCatalogo(ddlGrupoEspecialConsulta,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
+                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
                         divGrupoRespAtencion.Visible = true;
                         Metodos.LlenaComboCatalogo(ddlGrupoResponsableAtencion,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
+                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento:
                         divGrupoRespMtto.Visible = true;
                         Metodos.LlenaComboCatalogo(ddlGrupoResponsableMantenimiento,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
+                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeOperación:
                         divGrupoRespOperacion.Visible = true;
                         Metodos.LlenaComboCatalogo(ddlGrupoResponsableOperacion,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
+                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo:
                         divGrupoRespDesarrollo.Visible = true;
                         Metodos.LlenaComboCatalogo(ddlGrupoResponsableDesarrollo,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true));
+                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
                         break;
                 }
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaGrupoUsuarios\");", true);
@@ -452,12 +427,8 @@ namespace KiiniHelp.UserControls.Seleccion
                 Button btn = (Button)sender;
                 if (btn == null) return;
                 int operacion = Convert.ToInt32(hfOperacion.Value);
-
                 GrupoUsuario grupoUsuario = null;
-                Rol rol = null;
-                SubRol subRol = null;
-
-                int idGrupoUsuario = 0, idRol = 0;
+                int idGrupoUsuario, idRol = 0;
 
                 switch (operacion)
                 {
@@ -562,6 +533,41 @@ namespace KiiniHelp.UserControls.Seleccion
         }
         #endregion SubRoles
 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                _lstError = new List<string>();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGrupos = _lstError;
+            }
+        }
+
+        protected void btnCerrarGrupos_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ValidaCapturaGrupos();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalGrupos\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGrupos = _lstError;
+            }
+        }
+
         protected void btnLimpiar_OnClick(object sender, EventArgs e)
         {
             try
@@ -585,7 +591,7 @@ namespace KiiniHelp.UserControls.Seleccion
             {
                 int value = 0;
                 string result = Request.Form["__EVENTTARGET"];
-                string[] checkedBox = result.Split('$'); ;
+                string[] checkedBox = result.Split('$');
                 int index = int.Parse(checkedBox[checkedBox.Length - 1]);
                 if (chklbxSubRoles.Items[index].Selected)
                 {
@@ -609,6 +615,28 @@ namespace KiiniHelp.UserControls.Seleccion
                         break;
                 }
 
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGrupos = _lstError;
+            }
+        }
+
+        protected void chkAsignarGruposSistema_OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Limpiar();
+                if (!chkAsignarGruposSistema.Checked)
+                {
+                    return;
+                }
+                ObtenerGruposHerencia();
             }
             catch (Exception ex)
             {

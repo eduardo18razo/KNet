@@ -19,14 +19,14 @@ namespace KinniNet.Core.Operacion
         {
             _proxy = proxy;
         }
-        public List<GrupoUsuario> ObtenerGruposUsuario(int idTipoGrupo, bool insertarSeleccion)
+        public List<GrupoUsuario> ObtenerGruposUsuarioTipoUsuario(int idTipoGrupo, int idTipoUsuario, bool insertarSeleccion)
         {
             List<GrupoUsuario> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.GrupoUsuario.Where(w => w.IdTipoGrupo == idTipoGrupo && w.Habilitado && w.Sistema)
+                result = db.GrupoUsuario.Where(w => w.IdTipoGrupo == idTipoGrupo && w.IdTipoUsuario == idTipoUsuario && w.Habilitado)
                         .OrderBy(o => o.Descripcion)
                         .ToList();
                 if (insertarSeleccion)
@@ -48,14 +48,14 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public List<GrupoUsuario> ObtenerGruposUsuarioSistema()
+        public List<GrupoUsuario> ObtenerGruposUsuarioSistema(int idTipoUsuario)
         {
             List<GrupoUsuario> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.GrupoUsuario.Where(w => w.Habilitado && w.Sistema && w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Administrador)
+                result = db.GrupoUsuario.Where(w => w.Habilitado &&w.IdTipoUsuario == idTipoUsuario && w.Sistema && w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Administrador)
                         .OrderBy(o => o.Id)
                         .ToList();
                 foreach (GrupoUsuario grupo in result)
@@ -202,14 +202,14 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, bool insertarSeleccion)
+        public List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, int idTipoUsuario, bool insertarSeleccion)
         {
             List<GrupoUsuario> result = new List<GrupoUsuario>();
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.RolTipoGrupo.Where(w => w.Rol.Habilitado && w.IdRol == idRol).SelectMany(s => s.TipoGrupo.GrupoUsuario).ToList();
+                result = db.RolTipoGrupo.Where(w => w.Rol.Habilitado && w.IdRol == idRol).SelectMany(s => s.TipoGrupo.GrupoUsuario).Where(w => w.IdTipoUsuario == idTipoUsuario).ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
                         new GrupoUsuario
@@ -234,7 +234,13 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
+                
                 grupoUsuario.Descripcion = grupoUsuario.Descripcion.ToUpper();
+                string[] wordOfName = grupoUsuario.Descripcion.Split(' ');
+                if (wordOfName.Any(word => db.GrupoUsuario.Any(a => a.Descripcion.Contains(word) && a.Sistema)))
+                {
+                    throw new Exception("La descripcion no puede contener nombres del sistema");
+                }
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el que viene embebido
                 grupoUsuario.Habilitado = true;

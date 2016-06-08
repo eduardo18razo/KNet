@@ -23,13 +23,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, bool insertarSeleccion)
+        public List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, int idTipoUsuario, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
                 {
-                    return negocio.ObtenerGruposUsuarioByIdRol(idRol, insertarSeleccion);
+                    return negocio.ObtenerGruposUsuarioByIdRol(idRol, idTipoUsuario, insertarSeleccion);
                 }
             }
             catch (Exception ex)
@@ -38,13 +38,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<GrupoUsuario> ObtenerGruposUsuario(int idTipoGrupo, bool insertarSeleccion)
+        public List<GrupoUsuario> ObtenerGruposUsuarioTipoUsuario(int idTipoGrupo, int idTipoUsuario, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
                 {
-                    return negocio.ObtenerGruposUsuario(idTipoGrupo, insertarSeleccion);
+                    return negocio.ObtenerGruposUsuarioTipoUsuario(idTipoGrupo, idTipoUsuario, insertarSeleccion);
                 }
             }
             catch (Exception ex)
@@ -66,22 +66,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
-
-        public GrupoUsuario ObtenerGrupoUsuario(int idGrupoUsuario)
-        {
-            try
-            {
-                using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
-                {
-                    return negocio.ObtenerGrupoUsuario(idGrupoUsuario);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
+        
         public GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario)
         {
             try
@@ -97,13 +82,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<GrupoUsuario> ObtenerGruposUsuarioSistema()
+        public List<GrupoUsuario> ObtenerGruposUsuarioSistema(int idTipoUsuario)
         {
             try
             {
                 using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
                 {
-                    return negocio.ObtenerGruposUsuarioSistema();
+                    return negocio.ObtenerGruposUsuarioSistema(idTipoUsuario);
                 }
             }
             catch (Exception ex)

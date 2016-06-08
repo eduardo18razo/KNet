@@ -147,8 +147,8 @@ namespace KiiniHelp.UserControls.Altas
                 ValidaCapturaGrupoUsuario();
                 GrupoUsuario grupoUsuario = new GrupoUsuario
                 {
+                    IdTipoUsuario = IdTipoGrugo,
                     IdTipoGrupo = Convert.ToInt32(IdTipoGrugo),
-
                     Descripcion = txtDescripcionGrupoUsuario.Text,
                     Habilitado = chkHabilitado.Checked,
                     SubGrupoUsuario = new List<SubGrupoUsuario>()

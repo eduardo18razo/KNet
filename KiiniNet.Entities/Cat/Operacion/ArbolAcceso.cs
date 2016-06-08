@@ -12,6 +12,8 @@ namespace KiiniNet.Entities.Cat.Operacion
         [DataMember]
         public int Id { get; set; }
         [DataMember]
+        public int IdArea { get; set; }
+        [DataMember]
         public int IdTipoUsuario { get; set; }
         [DataMember]
         public int IdTipoArbolAcceso { get; set; }
@@ -58,9 +60,10 @@ namespace KiiniNet.Entities.Cat.Operacion
         public virtual List<InventarioArbolAcceso> InventarioArbolAcceso { get; set; }
         [DataMember]
         public virtual List<HitConsulta> HitConsulta { get; set; }
-
         [DataMember]
         public virtual List<Ticket> Ticket { get; set; }
+        [DataMember]
+        public virtual Area Area { get; set; }
 
 
     }

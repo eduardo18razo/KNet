@@ -14,13 +14,16 @@ namespace KiiniNet.Entities.Cat.Usuario
         [DataMember]
         public int IdTipoGrupo { get; set; }
         [DataMember]
+        public int IdTipoUsuario { get; set; }
+        [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
         public bool Sistema { get; set; }
         [DataMember]
         public bool Habilitado { get; set; }
 
-        
+        [DataMember]
+        public virtual TipoUsuario TipoUsuario { get; set; }
         [DataMember]
         public virtual TipoGrupo TipoGrupo { get; set; }
         [DataMember]

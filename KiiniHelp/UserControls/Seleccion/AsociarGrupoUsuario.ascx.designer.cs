@@ -49,6 +49,15 @@ namespace KiiniHelp.UserControls.Seleccion {
         protected global::System.Web.UI.WebControls.Repeater rptErrorGrupos;
         
         /// <summary>
+        /// chkAsignarGruposSistema control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkAsignarGruposSistema;
+        
+        /// <summary>
         /// divGrupoAdministrador control.
         /// </summary>
         /// <remarks>

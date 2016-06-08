@@ -1,39 +1,12 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="Administracion.master.cs" Inherits="KiiniHelp.Administracion.Administracion" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <asp:ContentPlaceHolder ID="HeadContentAdministracion" runat="server">
     </asp:ContentPlaceHolder>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <asp:ContentPlaceHolder runat="server" ID="contentGeneral">
-        <div class="container">
-        <div class="container-fluid">
-                <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <%--<asp:HyperLink NavigateUrl="~/Default.aspx" CssClass="navbar-brand" runat="server" Text="Inicio"></asp:HyperLink>--%>
-                        </div>
-                        <div class="navbar-collapse collapse" id="bs-nav">
-                            <ul class="nav navbar-nav">
-                                <li runat="server">
-                                    <asp:HyperLink NavigateUrl="~/Administracion/Usuarios/FrmUsuarios.aspx" runat="server" Text="Alta Usuarios" />
-                                </li>
-                                <li runat="server">
-                                    <asp:HyperLink NavigateUrl="~/Administracion/ArbolesAecceso/FrmAltaArbolAcceso.aspx" runat="server" Text="Alta Arbol de Accesos" />
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="clearfix clear-fix"></div>
-                    </div>
-                </nav>
-                <asp:ContentPlaceHolder ID="MainContentAdministracion" runat="server">
-                </asp:ContentPlaceHolder>
-        </div>
-    </div>
+    <asp:ContentPlaceHolder runat="server" ID="contentGeneral">
+        <asp:ContentPlaceHolder ID="MainContentAdministracion" runat="server">
+        </asp:ContentPlaceHolder>
     </asp:ContentPlaceHolder>
 </asp:Content>

@@ -15,6 +15,6 @@ namespace KiiniNet.Services.Security.Interface
         Usuario GetUserDataAutenticate(string user, string password);
 
         [OperationContract]
-        List<Menu> ObtenerMenuUsuario(int idUsuario);
+        List<Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles);
     }
 }

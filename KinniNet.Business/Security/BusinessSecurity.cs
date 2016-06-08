@@ -58,28 +58,35 @@ namespace KinniNet.Core.Security
                 try
                 {
                     db.ContextOptions.ProxyCreationEnabled = _proxy;
+                    if (db.Usuario.Count(w => w.NombreUsuario == user && w.Password == password) > 1)
+                        throw new Exception("");
                     result = db.Usuario.SingleOrDefault(w => w.NombreUsuario == user && w.Password == password);
                     if (result != null)
                     {
-                        db.LoadProperty(result, "CorreoUsuario");
-                        db.LoadProperty(result, "TelefonoUsuario");
+                        //db.LoadProperty(result, "CorreoUsuario");
+                        //db.LoadProperty(result, "TelefonoUsuario");
                         db.LoadProperty(result, "Organizacion");
                         db.LoadProperty(result, "Ubicacion");
                         db.LoadProperty(result, "TipoUsuario");
-                        db.LoadProperty(result, "UsuarioGrupo");
-                        foreach (UsuarioGrupo grupo in result.UsuarioGrupo)
-                        {
-                            db.LoadProperty(grupo, "GrupoUsuario");
-                            if (grupo.GrupoUsuario != null)
-                                db.LoadProperty(grupo.GrupoUsuario, "GrupoUsuarioInventarioArbol");
-                            foreach (GrupoUsuarioInventarioArbol inventarioArbol in grupo.GrupoUsuario.GrupoUsuarioInventarioArbol)
-                            {
-                                db.LoadProperty(inventarioArbol, "InventarioArbolAcceso");
-                                if (inventarioArbol.InventarioArbolAcceso != null)
-                                    db.LoadProperty(inventarioArbol.InventarioArbolAcceso, "ArbolAcceso");
-                            }
-                        }
+                        //db.LoadProperty(result, "UsuarioGrupo");
+                        //foreach (UsuarioGrupo grupo in result.UsuarioGrupo)
+                        //{
+                        //    db.LoadProperty(grupo, "GrupoUsuario");
+                        //    if (grupo.GrupoUsuario != null)
+                        //        db.LoadProperty(grupo.GrupoUsuario, "GrupoUsuarioInventarioArbol");
+                        //    foreach (GrupoUsuarioInventarioArbol inventarioArbol in grupo.GrupoUsuario.GrupoUsuarioInventarioArbol)
+                        //    {
+                        //        db.LoadProperty(inventarioArbol, "InventarioArbolAcceso");
+                        //        if (inventarioArbol.InventarioArbolAcceso != null)
+                        //            db.LoadProperty(inventarioArbol.InventarioArbolAcceso, "ArbolAcceso");
+                        //    }
+                        //}
                         db.LoadProperty(result, "UsuarioRol");
+                        foreach (UsuarioRol rol in result.UsuarioRol)
+                        {
+                            db.LoadProperty(rol, "RolTipoUsuario");
+                        }
+
                     }
                 }
                 catch (Exception ex)
@@ -106,7 +113,7 @@ namespace KinniNet.Core.Security
 
             }
 
-            public List<Menu> ObtenerMenuUsuario(int idUsuario)
+            public List<Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles)
             {
                 List<Menu> result;
                 DataBaseModelContext db = new DataBaseModelContext();
@@ -118,25 +125,56 @@ namespace KinniNet.Core.Security
                                                 join rm in db.RolMenu on rtu.IdRol equals rm.IdRol
                                                 join m in db.Menu on rm.IdMenu equals m.Id
                                                 where ur.IdUsuario == idUsuario
-                                                select m).OrderBy(o=>o.Id).Distinct().ToList();
+                                                select m).OrderBy(o => o.Id).Distinct().ToList();
                     foreach (Menu menu in result)
                     {
-                        List<ArbolAcceso> lstArboles = null;
-                        switch (menu.Id)
+                        db.LoadProperty(menu, "Menu1");
+                        if (menu.Menu1.Count == 0) menu.Menu1 = null;
+                        if (menu.Menu1 == null) continue;
+                        foreach (Menu menu1 in menu.Menu1)
                         {
-                            case (int)BusinessVariables.EnumMenu.Consultas:
-                                lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.Consultas).Distinct().ToList();
-                                GeneraSubMenus(menu, lstArboles, db, "~/General/FrmNodoConsultas.aspx?IdArbol=");
-                                break;
-                            case (int)BusinessVariables.EnumMenu.Servicio:
-                                lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.Servicio).Distinct().ToList();
-                                GeneraSubMenus(menu, lstArboles, db, "~/Ticket/FrmTicket.aspx?IdArbol=");
-                                break;
-                            case (int)BusinessVariables.EnumMenu.Incidentes:
-                                lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.Incidentes).Distinct().ToList();
-                                GeneraSubMenus(menu, lstArboles, db, "~/Ticket/FrmTicket.aspx?IdArbol=");
-                                break;
+                            db.LoadProperty(menu1, "Menu1");
+                            if (menu1.Menu1.Count == 0) menu1.Menu1 = null;
+                            if (menu1.Menu1 == null) continue;
+                            foreach (Menu menu2 in menu1.Menu1)
+                            {
+                                db.LoadProperty(menu2, "Menu1");
+                                if (menu2.Menu1.Count == 0) menu2.Menu1 = null;
+                                if (menu2.Menu1 == null) continue;
+                                foreach (Menu menu3 in menu2.Menu1)
+                                {
+                                    db.LoadProperty(menu3, "Menu1");
+                                    if (menu3.Menu1.Count == 0) menu3.Menu1 = null;
+                                }
+                            }
                         }
+                    }
+                    if (arboles)
+                        foreach (Menu menu in result)
+                        {
+
+                            List<ArbolAcceso> lstArboles = null;
+                            switch (menu.Id)
+                            {
+                                case (int)BusinessVariables.EnumMenu.Consultas:
+                                    lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.Consultas, idArea).Distinct().ToList();
+                                    GeneraSubMenus(menu, lstArboles, db, "~/General/FrmNodoConsultas.aspx?IdArbol=");
+                                    break;
+                                case (int)BusinessVariables.EnumMenu.Servicio:
+                                    lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.Servicio, idArea).Distinct().ToList();
+                                    GeneraSubMenus(menu, lstArboles, db, "~/Ticket/FrmTicket.aspx?IdArbol=");
+                                    break;
+                                case (int)BusinessVariables.EnumMenu.Incidentes:
+                                    lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.Incidentes, idArea).Distinct().ToList();
+                                    GeneraSubMenus(menu, lstArboles, db, "~/Ticket/FrmTicket.aspx?IdArbol=");
+                                    break;
+                            }
+                        }
+                    else
+                    {
+                        result.Remove(result.SingleOrDefault(s => s.Id == (int)BusinessVariables.EnumMenu.Consultas));
+                        result.Remove(result.SingleOrDefault(s => s.Id == (int)BusinessVariables.EnumMenu.Servicio));
+                        result.Remove(result.SingleOrDefault(s => s.Id == (int)BusinessVariables.EnumMenu.Incidentes));
                     }
                 }
                 catch (Exception ex)

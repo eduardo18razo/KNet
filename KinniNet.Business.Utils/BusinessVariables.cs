@@ -4,6 +4,7 @@ namespace KinniNet.Business.Utils
 {
     public static class BusinessVariables
     {
+        
         public static class ComboBoxCatalogo
         {
             public static int Index = 0;

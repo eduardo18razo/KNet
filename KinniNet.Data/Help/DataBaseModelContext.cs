@@ -105,10 +105,11 @@ namespace KinniNet.Data.Help
                 _grupoUsuarioInventarioArbol = CreateObjectSet<GrupoUsuarioInventarioArbol>();
                 _hitConsulta = CreateObjectSet<HitConsulta>();
                 _hitGrupoUsuario = CreateObjectSet<HitGrupoUsuario>();
-                _respuestaEncuesta= CreateObjectSet<RespuestaEncuesta>();
+                _respuestaEncuesta = CreateObjectSet<RespuestaEncuesta>();
                 _slaEstimadoTicket = CreateObjectSet<SlaEstimadoTicket>();
                 _slaEstimadoTicketDetalle = CreateObjectSet<SlaEstimadoTicketDetalle>();
-                _ticket= CreateObjectSet<Ticket>();
+                _ticket = CreateObjectSet<Ticket>();
+                _area = CreateObjectSet<Area>();
 
             }
             catch (Exception ex)
@@ -368,6 +369,14 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<Area> Area
+        {
+            get
+            {
+                return _area;
+            }
+        }
+
 
 
         private ObjectSet<Usuario> _usuario;
@@ -393,10 +402,11 @@ namespace KinniNet.Data.Help
         private ObjectSet<GrupoUsuarioInventarioArbol> _grupoUsuarioInventarioArbol;
         private ObjectSet<HitConsulta> _hitConsulta;
         private ObjectSet<HitGrupoUsuario> _hitGrupoUsuario;
-        private ObjectSet<RespuestaEncuesta> _respuestaEncuesta ;
+        private ObjectSet<RespuestaEncuesta> _respuestaEncuesta;
         private ObjectSet<SlaEstimadoTicket> _slaEstimadoTicket;
         private ObjectSet<SlaEstimadoTicketDetalle> _slaEstimadoTicketDetalle;
         private ObjectSet<Ticket> _ticket;
+        private ObjectSet<Area> _area;
 
         #region Mascara
         public ObjectSet<Mascara> Mascara

@@ -91,15 +91,15 @@
                                                 <br />
                                                 <div class="form-inline">
                                                     <asp:Label ID="Label4" runat="server" Text="Apellido Paterno" class="col-sm-2 control-label izquierda"></asp:Label>
-                                                    <asp:TextBox ID="txtAp" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <asp:TextBox ID="txtAp" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100"></asp:TextBox>
                                                 </div>
                                                 <div class="form-inline margen-arriba">
                                                     <asp:Label ID="Label5" runat="server" Text="Apellido Materno" class="col-sm-2 control-label izquierda"></asp:Label>
-                                                    <asp:TextBox ID="txtAm" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <asp:TextBox ID="txtAm" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100"></asp:TextBox>
                                                 </div>
                                                 <div class="form-inline margen-arriba">
                                                     <asp:Label ID="Label6" runat="server" Text="Nombre" class="col-sm-2 control-label izquierda"></asp:Label>
-                                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100"></asp:TextBox>
                                                 </div>
                                                 <div class="form-inline">
                                                     <div class="form-group margen-arriba">
@@ -134,10 +134,10 @@
                                                                         <asp:Label runat="server"><%# Eval("TipoTelefono.Descripcion") %></asp:Label>
                                                                     </div>
                                                                     <div class="col-xs-5 col-md-3">
-                                                                        <asp:TextBox runat="server" ID="txtNumero" Text='<%# Eval("Numero") %>' CssClass="form-control" />
+                                                                        <asp:TextBox runat="server" ID="txtNumero" Text='<%# Eval("Numero") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="10"/>
                                                                     </div>
-                                                                    <div class="col-xs-4 col-md-2">
-                                                                        <asp:TextBox runat="server" ID="txtExtension" Text='<%# Eval("Extension") %>' CssClass="form-control" />
+                                                                    <div class="col-xs-4 col-md-3" runat="server" Visible='<%# Eval("TipoTelefono.Extension") %>'>
+                                                                        <asp:TextBox runat="server" ID="txtExtension" Text='<%# Eval("Extension") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="40"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -158,7 +158,7 @@
                                                             <div style="border-radius: 20px; margin-bottom: 5px; height: auto">
                                                                 <div class="row">
                                                                     <div class="col-xs-8 col-md-6">
-                                                                        <asp:TextBox runat="server" ID="txtCorreo" Text='<%# Eval("Correo") %>' CssClass="form-control" Style="text-transform: lowercase" />
+                                                                        <asp:TextBox runat="server" ID="txtCorreo" Text='<%# Eval("Correo") %>' CssClass="form-control" Style="text-transform: lowercase" onkeypress="return ValidaCampo(this,13)"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -486,7 +486,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Codigo Postal</label>
-                                                <asp:TextBox runat="server" ID="txtCp" placeholder="CODIGO POSTAL" AutoPostBack="True" OnTextChanged="txtCp_OnTextChanged" class="form-control" />
+                                                <asp:TextBox runat="server" ID="txtCp" placeholder="CODIGO POSTAL" AutoPostBack="True" OnTextChanged="txtCp_OnTextChanged" class="form-control" onkeypress="return ValidaCampo(this,2)"/>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Colonia</label>

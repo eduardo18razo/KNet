@@ -40,6 +40,8 @@ namespace KinniNet.Core.Operacion
                 usuario.ApellidoPaterno = usuario.ApellidoPaterno.ToUpper();
                 usuario.ApellidoMaterno = usuario.ApellidoMaterno.ToUpper();
                 usuario.Nombre = usuario.Nombre.ToUpper();
+                usuario.NombreUsuario = usuario.Nombre.Substring(0, 1).ToLower() + usuario.ApellidoPaterno.ToLower();
+                usuario.Password = usuario.Nombre.Substring(0, 1).ToLower() + usuario.ApellidoPaterno.ToLower();
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 if (usuario.Id == 0)
                 {

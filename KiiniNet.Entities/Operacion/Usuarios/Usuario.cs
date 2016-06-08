@@ -63,5 +63,10 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public virtual List<HitConsulta> HitConsulta { get; set; }
         [DataMember]
         public virtual List<Ticket> Ticket { get; set; }
+
+        public string NombreCompleto
+        {
+            get { return ApellidoPaterno + " " + ApellidoMaterno + " " + Nombre; }
+        }
     }
 }

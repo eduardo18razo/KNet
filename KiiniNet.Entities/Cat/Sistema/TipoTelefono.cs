@@ -13,6 +13,8 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
+        public bool Extension { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
 
         [DataMember]

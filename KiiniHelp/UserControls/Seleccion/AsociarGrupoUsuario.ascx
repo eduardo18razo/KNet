@@ -34,6 +34,11 @@
                         <div class="panel-body">
                             <div class="panel">
                                 <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-1">
+                                            <asp:CheckBox runat="server" ID="chkAsignarGruposSistema" AutoPostBack="True" OnCheckedChanged="chkAsignarGruposSistema_OnCheckedChanged" Text="Asignar grupos del sistema"/>
+                                        </div>
+                                    </div>
                                     <div class="form-group" runat="server" id="divGrupoAdministrador" visible="False">
                                         <div class="col-sm-offset-1">
                                             <asp:Label runat="server" Text="Administrador" class="col-sm-3 control-label"></asp:Label>

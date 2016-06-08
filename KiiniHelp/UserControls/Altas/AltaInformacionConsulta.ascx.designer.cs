@@ -7,6 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using AjaxControlToolkit;
+using Winthusiasm.HtmlEditor;
+
 namespace KiiniHelp.UserControls.Altas {
     
     
@@ -19,7 +25,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upInfo;
+        protected UpdatePanel upInfo;
         
         /// <summary>
         /// hfFileName control.
@@ -28,7 +34,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfFileName;
+        protected HiddenField hfFileName;
         
         /// <summary>
         /// panelAlert control.
@@ -37,7 +43,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlert;
+        protected HtmlGenericControl panelAlert;
         
         /// <summary>
         /// rptHeaderError control.
@@ -46,7 +52,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
+        protected Repeater rptHeaderError;
         
         /// <summary>
         /// txtDescripcion control.
@@ -55,7 +61,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+        protected TextBox txtDescripcion;
         
         /// <summary>
         /// ddlTipoInformacion control.
@@ -64,7 +70,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoInformacion;
+        protected DropDownList ddlTipoInformacion;
         
         /// <summary>
         /// divPropietrario control.
@@ -73,7 +79,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPropietrario;
+        protected HtmlGenericControl divPropietrario;
         
         /// <summary>
         /// txtEditor control.
@@ -82,7 +88,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Winthusiasm.HtmlEditor.HtmlEditor txtEditor;
+        protected HtmlEditor txtEditor;
         
         /// <summary>
         /// divDocumento control.
@@ -91,7 +97,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDocumento;
+        protected HtmlGenericControl divDocumento;
         
         /// <summary>
         /// ddlTipoDocumento control.
@@ -100,7 +106,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumento;
+        protected DropDownList ddlTipoDocumento;
         
         /// <summary>
         /// divUploadDocumento control.
@@ -109,7 +115,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUploadDocumento;
+        protected HtmlGenericControl divUploadDocumento;
         
         /// <summary>
         /// afuArchivo control.
@@ -118,7 +124,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AsyncFileUpload afuArchivo;
+        protected AsyncFileUpload afuArchivo;
         
         /// <summary>
         /// divUrl control.
@@ -127,7 +133,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUrl;
+        protected HtmlGenericControl divUrl;
         
         /// <summary>
         /// txtDescripcionUrl control.
@@ -136,7 +142,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcionUrl;
+        protected TextBox txtDescripcionUrl;
         
         /// <summary>
         /// btnGuardar control.
@@ -145,7 +151,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        protected Button btnGuardar;
         
         /// <summary>
         /// btnLimpiar control.
@@ -154,6 +160,6 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLimpiar;
+        protected Button btnLimpiar;
     }
 }

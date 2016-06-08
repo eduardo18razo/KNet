@@ -17,11 +17,11 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposUsuario_InputMessage">
-    <wsdl:part name="parameters" element="tns:ObtenerGruposUsuario" />
+  <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposUsuarioTipoUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerGruposUsuarioTipoUsuario" />
   </wsdl:message>
-  <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposUsuario_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ObtenerGruposUsuarioResponse" />
+  <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposUsuarioTipoUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerGruposUsuarioTipoUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposUsuarioByIdTipoSubGrupo_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerGruposUsuarioByIdTipoSubGrupo" />
@@ -40,12 +40,6 @@
   </wsdl:message>
   <wsdl:message name="IServiceGrupoUsuario_GuardarGrupoUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:GuardarGrupoUsuarioResponse" />
-  </wsdl:message>
-  <wsdl:message name="IServiceGrupoUsuario_ObtenerGrupoUsuario_InputMessage">
-    <wsdl:part name="parameters" element="tns:ObtenerGrupoUsuario" />
-  </wsdl:message>
-  <wsdl:message name="IServiceGrupoUsuario_ObtenerGrupoUsuario_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ObtenerGrupoUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceGrupoUsuario_ObtenerGrupoUsuarioById_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerGrupoUsuarioById" />
@@ -66,9 +60,9 @@
     <wsdl:part name="parameters" element="tns:ObtenerGruposUsuarioNivelResponse" />
   </wsdl:message>
   <wsdl:portType name="IServiceGrupoUsuario">
-    <wsdl:operation name="ObtenerGruposUsuario">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuario" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuario_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioResponse" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuario_OutputMessage" />
+    <wsdl:operation name="ObtenerGruposUsuarioTipoUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioTipoUsuario" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuarioTipoUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioTipoUsuarioResponse" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuarioTipoUsuario_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ObtenerGruposUsuarioByIdTipoSubGrupo">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioByIdTipoSubGrupo" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuarioByIdTipoSubGrupo_InputMessage" />
@@ -81,10 +75,6 @@
     <wsdl:operation name="GuardarGrupoUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/GuardarGrupoUsuario" message="tns:IServiceGrupoUsuario_GuardarGrupoUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/GuardarGrupoUsuarioResponse" message="tns:IServiceGrupoUsuario_GuardarGrupoUsuario_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ObtenerGrupoUsuario">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupoUsuario" message="tns:IServiceGrupoUsuario_ObtenerGrupoUsuario_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupoUsuarioResponse" message="tns:IServiceGrupoUsuario_ObtenerGrupoUsuario_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ObtenerGrupoUsuarioById">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupoUsuarioById" message="tns:IServiceGrupoUsuario_ObtenerGrupoUsuarioById_InputMessage" />
@@ -101,8 +91,8 @@
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceGrupoUsuario">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="ObtenerGruposUsuario">
-      <soap:operation soapAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuario" style="document" />
+    <wsdl:operation name="ObtenerGruposUsuarioTipoUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioTipoUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -130,15 +120,6 @@
     </wsdl:operation>
     <wsdl:operation name="GuardarGrupoUsuario">
       <soap:operation soapAction="http://tempuri.org/IServiceGrupoUsuario/GuardarGrupoUsuario" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ObtenerGrupoUsuario">
-      <soap:operation soapAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupoUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -7,6 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+
 namespace KiiniHelp.UserControls.Genericos {
     
     
@@ -19,7 +23,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlAlertaGeneral;
+        protected HtmlGenericControl pnlAlertaGeneral;
         
         /// <summary>
         /// rptErrorGeneral control.
@@ -28,7 +32,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptErrorGeneral;
+        protected Repeater rptErrorGeneral;
         
         /// <summary>
         /// lbltitleArbol control.
@@ -37,7 +41,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbltitleArbol;
+        protected Label lbltitleArbol;
         
         /// <summary>
         /// dfIdGrupo control.
@@ -46,7 +50,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField dfIdGrupo;
+        protected HiddenField dfIdGrupo;
         
         /// <summary>
         /// rptInformacionConsulta control.
@@ -55,7 +59,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptInformacionConsulta;
+        protected Repeater rptInformacionConsulta;
         
         /// <summary>
         /// upMostrarInformacion control.
@@ -64,7 +68,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upMostrarInformacion;
+        protected UpdatePanel upMostrarInformacion;
         
         /// <summary>
         /// panelAlertaModal control.
@@ -73,7 +77,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlertaModal;
+        protected HtmlGenericControl panelAlertaModal;
         
         /// <summary>
         /// rptErrorModal control.
@@ -82,7 +86,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptErrorModal;
+        protected Repeater rptErrorModal;
         
         /// <summary>
         /// hfIdArbol control.
@@ -91,7 +95,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdArbol;
+        protected HiddenField hfIdArbol;
         
         /// <summary>
         /// divPropuetario control.
@@ -100,7 +104,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPropuetario;
+        protected HtmlGenericControl divPropuetario;
         
         /// <summary>
         /// lblContenido control.
@@ -109,7 +113,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblContenido;
+        protected Label lblContenido;
         
         /// <summary>
         /// divInfoDocto control.
@@ -118,7 +122,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divInfoDocto;
+        protected HtmlGenericControl divInfoDocto;
         
         /// <summary>
         /// ifDoctos control.
@@ -127,7 +131,7 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ifDoctos;
+        protected HtmlGenericControl ifDoctos;
         
         /// <summary>
         /// btnCerrarModalInfo control.
@@ -136,6 +140,6 @@ namespace KiiniHelp.UserControls.Genericos {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarModalInfo;
+        protected Button btnCerrarModalInfo;
     }
 }

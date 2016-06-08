@@ -8,23 +8,21 @@ namespace KiiniNet.Services.Operacion.Interface
     public interface IServiceGrupoUsuario
     {
         [OperationContract]
-        List<GrupoUsuario> ObtenerGruposUsuario(int idTipoGrupo, bool insertarSeleccion);
+        List<GrupoUsuario> ObtenerGruposUsuarioTipoUsuario(int idTipoGrupo, int idTipoUsuario, bool insertarSeleccion);
 
         [OperationContract]
         List<GrupoUsuario> ObtenerGruposUsuarioByIdTipoSubGrupo(int idTipoSubgrupo, bool insertarSeleccion);
 
         [OperationContract]
-        List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, bool insertarSeleccion);
+        List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, int idTipoUsuario, bool insertarSeleccion);
 
         [OperationContract]
         void GuardarGrupoUsuario(GrupoUsuario grupoUsuario);
 
         [OperationContract]
-        GrupoUsuario ObtenerGrupoUsuario(int idGrupoUsuario);
-        [OperationContract]
         GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario);
         [OperationContract]
-        List<GrupoUsuario> ObtenerGruposUsuarioSistema();
+        List<GrupoUsuario> ObtenerGruposUsuarioSistema(int idTipoUsuario);
         [OperationContract]
         List<GrupoUsuario> ObtenerGruposUsuarioNivel(int idtipoArbol, int? nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7);
     }

@@ -7,10 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-
 namespace KiiniHelp {
     
     
@@ -23,7 +19,7 @@ namespace KiiniHelp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
         /// scripMain control.
@@ -32,7 +28,7 @@ namespace KiiniHelp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected ScriptManager scripMain;
+        protected global::System.Web.UI.ScriptManager scripMain;
         
         /// <summary>
         /// pnlAlerta control.
@@ -41,7 +37,7 @@ namespace KiiniHelp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlGenericControl pnlAlerta;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlAlerta;
         
         /// <summary>
         /// rptErrorGeneral control.
@@ -50,7 +46,7 @@ namespace KiiniHelp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Repeater rptErrorGeneral;
+        protected global::System.Web.UI.WebControls.Repeater rptErrorGeneral;
         
         /// <summary>
         /// txtUsuario control.
@@ -59,7 +55,7 @@ namespace KiiniHelp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtUsuario;
+        protected global::System.Web.UI.WebControls.TextBox txtUsuario;
         
         /// <summary>
         /// txtpwd control.
@@ -68,7 +64,7 @@ namespace KiiniHelp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtpwd;
+        protected global::System.Web.UI.WebControls.TextBox txtpwd;
         
         /// <summary>
         /// lblmsg control.
@@ -77,7 +73,7 @@ namespace KiiniHelp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Label lblmsg;
+        protected global::System.Web.UI.WebControls.Label lblmsg;
         
         /// <summary>
         /// btnLogin control.
@@ -86,6 +82,6 @@ namespace KiiniHelp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Button btnLogin;
+        protected global::System.Web.UI.WebControls.Button btnLogin;
     }
 }

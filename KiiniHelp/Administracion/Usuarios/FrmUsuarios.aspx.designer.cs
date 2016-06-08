@@ -7,6 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using KiiniHelp.UserControls.Seleccion;
+
 namespace KiiniHelp.Administracion.Usuarios {
     
     
@@ -19,7 +24,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upGeneral;
+        protected UpdatePanel upGeneral;
         
         /// <summary>
         /// panelAlertaGeneral control.
@@ -28,7 +33,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlertaGeneral;
+        protected HtmlGenericControl panelAlertaGeneral;
         
         /// <summary>
         /// rptErrorGeneral control.
@@ -37,7 +42,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptErrorGeneral;
+        protected Repeater rptErrorGeneral;
         
         /// <summary>
         /// Label1 control.
@@ -46,7 +51,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected Label Label1;
         
         /// <summary>
         /// ddlTipoUsuario control.
@@ -55,7 +60,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoUsuario;
+        protected DropDownList ddlTipoUsuario;
         
         /// <summary>
         /// divDatos control.
@@ -64,7 +69,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDatos;
+        protected HtmlGenericControl divDatos;
         
         /// <summary>
         /// btnModalDatosGenerales control.
@@ -73,7 +78,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalDatosGenerales;
+        protected Button btnModalDatosGenerales;
         
         /// <summary>
         /// btnModalOrganizacion control.
@@ -82,7 +87,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalOrganizacion;
+        protected Button btnModalOrganizacion;
         
         /// <summary>
         /// btnModalUbicacion control.
@@ -91,7 +96,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalUbicacion;
+        protected Button btnModalUbicacion;
         
         /// <summary>
         /// btnModalRoles control.
@@ -100,7 +105,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalRoles;
+        protected Button btnModalRoles;
         
         /// <summary>
         /// btnModalGrupos control.
@@ -109,7 +114,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalGrupos;
+        protected Button btnModalGrupos;
         
         /// <summary>
         /// btnGuardar control.
@@ -118,7 +123,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        protected Button btnGuardar;
         
         /// <summary>
         /// upDatosGenerales control.
@@ -127,7 +132,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upDatosGenerales;
+        protected UpdatePanel upDatosGenerales;
         
         /// <summary>
         /// panelAlertaModalDg control.
@@ -136,7 +141,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlertaModalDg;
+        protected HtmlGenericControl panelAlertaModalDg;
         
         /// <summary>
         /// rptErrorDg control.
@@ -145,7 +150,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptErrorDg;
+        protected Repeater rptErrorDg;
         
         /// <summary>
         /// Label4 control.
@@ -154,7 +159,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected Label Label4;
         
         /// <summary>
         /// txtAp control.
@@ -163,7 +168,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAp;
+        protected TextBox txtAp;
         
         /// <summary>
         /// Label5 control.
@@ -172,7 +177,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected Label Label5;
         
         /// <summary>
         /// txtAm control.
@@ -181,7 +186,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAm;
+        protected TextBox txtAm;
         
         /// <summary>
         /// Label6 control.
@@ -190,7 +195,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
+        protected Label Label6;
         
         /// <summary>
         /// txtNombre control.
@@ -199,7 +204,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombre;
+        protected TextBox txtNombre;
         
         /// <summary>
         /// chkDirectoriActivo control.
@@ -208,7 +213,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkDirectoriActivo;
+        protected CheckBox chkDirectoriActivo;
         
         /// <summary>
         /// rptTelefonos control.
@@ -217,7 +222,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptTelefonos;
+        protected Repeater rptTelefonos;
         
         /// <summary>
         /// rptCorreos control.
@@ -226,7 +231,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptCorreos;
+        protected Repeater rptCorreos;
         
         /// <summary>
         /// btnAceptarDatosGenerales control.
@@ -235,7 +240,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAceptarDatosGenerales;
+        protected Button btnAceptarDatosGenerales;
         
         /// <summary>
         /// btnCerrarDatosGenerales control.
@@ -244,7 +249,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarDatosGenerales;
+        protected Button btnCerrarDatosGenerales;
         
         /// <summary>
         /// upOrganizacion control.
@@ -253,7 +258,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upOrganizacion;
+        protected UpdatePanel upOrganizacion;
         
         /// <summary>
         /// panelAlertaOrganizacion control.
@@ -262,7 +267,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlertaOrganizacion;
+        protected HtmlGenericControl panelAlertaOrganizacion;
         
         /// <summary>
         /// rptErrorOrganizacion control.
@@ -271,7 +276,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptErrorOrganizacion;
+        protected Repeater rptErrorOrganizacion;
         
         /// <summary>
         /// ddlHolding control.
@@ -280,7 +285,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlHolding;
+        protected DropDownList ddlHolding;
         
         /// <summary>
         /// ddlCompañia control.
@@ -289,7 +294,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCompañia;
+        protected DropDownList ddlCompañia;
         
         /// <summary>
         /// btnCompania control.
@@ -298,7 +303,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCompania;
+        protected Button btnCompania;
         
         /// <summary>
         /// ddlDireccion control.
@@ -307,7 +312,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDireccion;
+        protected DropDownList ddlDireccion;
         
         /// <summary>
         /// btnDireccion control.
@@ -316,7 +321,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDireccion;
+        protected Button btnDireccion;
         
         /// <summary>
         /// ddlSubDireccion control.
@@ -325,7 +330,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSubDireccion;
+        protected DropDownList ddlSubDireccion;
         
         /// <summary>
         /// btnSubDireccion control.
@@ -334,7 +339,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubDireccion;
+        protected Button btnSubDireccion;
         
         /// <summary>
         /// ddlGerencia control.
@@ -343,7 +348,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlGerencia;
+        protected DropDownList ddlGerencia;
         
         /// <summary>
         /// btnGerencia control.
@@ -352,7 +357,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGerencia;
+        protected Button btnGerencia;
         
         /// <summary>
         /// ddlSubGerencia control.
@@ -361,7 +366,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSubGerencia;
+        protected DropDownList ddlSubGerencia;
         
         /// <summary>
         /// btnSubGerencia control.
@@ -370,7 +375,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubGerencia;
+        protected Button btnSubGerencia;
         
         /// <summary>
         /// ddlJefatura control.
@@ -379,7 +384,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlJefatura;
+        protected DropDownList ddlJefatura;
         
         /// <summary>
         /// btnJefatura control.
@@ -388,7 +393,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnJefatura;
+        protected Button btnJefatura;
         
         /// <summary>
         /// btnCerrarOrganizacion control.
@@ -397,7 +402,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarOrganizacion;
+        protected Button btnCerrarOrganizacion;
         
         /// <summary>
         /// Button1 control.
@@ -406,7 +411,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected Button Button1;
         
         /// <summary>
         /// upUbicacion control.
@@ -415,7 +420,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upUbicacion;
+        protected UpdatePanel upUbicacion;
         
         /// <summary>
         /// panelAlertaUbicacion control.
@@ -424,7 +429,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlertaUbicacion;
+        protected HtmlGenericControl panelAlertaUbicacion;
         
         /// <summary>
         /// rptErrorUbicacion control.
@@ -433,7 +438,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptErrorUbicacion;
+        protected Repeater rptErrorUbicacion;
         
         /// <summary>
         /// ddlpais control.
@@ -442,7 +447,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlpais;
+        protected DropDownList ddlpais;
         
         /// <summary>
         /// ddlCampus control.
@@ -451,7 +456,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCampus;
+        protected DropDownList ddlCampus;
         
         /// <summary>
         /// ddlTorre control.
@@ -460,7 +465,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTorre;
+        protected DropDownList ddlTorre;
         
         /// <summary>
         /// btnAddTorre control.
@@ -469,7 +474,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddTorre;
+        protected Button btnAddTorre;
         
         /// <summary>
         /// ddlPiso control.
@@ -478,7 +483,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPiso;
+        protected DropDownList ddlPiso;
         
         /// <summary>
         /// btnAddPiso control.
@@ -487,7 +492,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddPiso;
+        protected Button btnAddPiso;
         
         /// <summary>
         /// ddlZona control.
@@ -496,7 +501,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlZona;
+        protected DropDownList ddlZona;
         
         /// <summary>
         /// btnAddZona control.
@@ -505,7 +510,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddZona;
+        protected Button btnAddZona;
         
         /// <summary>
         /// ddlSubZona control.
@@ -514,7 +519,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSubZona;
+        protected DropDownList ddlSubZona;
         
         /// <summary>
         /// btnAddSubZona control.
@@ -523,7 +528,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddSubZona;
+        protected Button btnAddSubZona;
         
         /// <summary>
         /// ddlSiteRack control.
@@ -532,7 +537,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSiteRack;
+        protected DropDownList ddlSiteRack;
         
         /// <summary>
         /// btnAddSite control.
@@ -541,7 +546,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddSite;
+        protected Button btnAddSite;
         
         /// <summary>
         /// btnAceptarUbicaciones control.
@@ -550,7 +555,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAceptarUbicaciones;
+        protected Button btnAceptarUbicaciones;
         
         /// <summary>
         /// btnCerrarUbicacion control.
@@ -559,7 +564,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarUbicacion;
+        protected Button btnCerrarUbicacion;
         
         /// <summary>
         /// upRoles control.
@@ -568,7 +573,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upRoles;
+        protected UpdatePanel upRoles;
         
         /// <summary>
         /// panelAlertaRoles control.
@@ -577,7 +582,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlertaRoles;
+        protected HtmlGenericControl panelAlertaRoles;
         
         /// <summary>
         /// rptErrorRoles control.
@@ -586,7 +591,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptErrorRoles;
+        protected Repeater rptErrorRoles;
         
         /// <summary>
         /// chklbxRoles control.
@@ -595,7 +600,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList chklbxRoles;
+        protected CheckBoxList chklbxRoles;
         
         /// <summary>
         /// btnAceptarRoles control.
@@ -604,7 +609,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAceptarRoles;
+        protected Button btnAceptarRoles;
         
         /// <summary>
         /// btnCerrarRoles control.
@@ -613,7 +618,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarRoles;
+        protected Button btnCerrarRoles;
         
         /// <summary>
         /// upGrupos control.
@@ -622,7 +627,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upGrupos;
+        protected UpdatePanel upGrupos;
         
         /// <summary>
         /// AsociarGrupoUsuario control.
@@ -631,7 +636,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Seleccion.AsociarGrupoUsuario AsociarGrupoUsuario;
+        protected AsociarGrupoUsuario AsociarGrupoUsuario;
         
         /// <summary>
         /// btnCerrarGrupos control.
@@ -640,7 +645,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarGrupos;
+        protected Button btnCerrarGrupos;
         
         /// <summary>
         /// upCampus control.
@@ -649,7 +654,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upCampus;
+        protected UpdatePanel upCampus;
         
         /// <summary>
         /// panelAlertaCampus control.
@@ -658,7 +663,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlertaCampus;
+        protected HtmlGenericControl panelAlertaCampus;
         
         /// <summary>
         /// rptErrorCampus control.
@@ -667,7 +672,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptErrorCampus;
+        protected Repeater rptErrorCampus;
         
         /// <summary>
         /// ddlTipoUsuarioCampus control.
@@ -676,7 +681,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoUsuarioCampus;
+        protected DropDownList ddlTipoUsuarioCampus;
         
         /// <summary>
         /// txtDescripcionCampus control.
@@ -685,7 +690,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcionCampus;
+        protected TextBox txtDescripcionCampus;
         
         /// <summary>
         /// chkHabilitado control.
@@ -694,7 +699,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkHabilitado;
+        protected CheckBox chkHabilitado;
         
         /// <summary>
         /// txtCp control.
@@ -703,7 +708,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCp;
+        protected TextBox txtCp;
         
         /// <summary>
         /// ddlColonia control.
@@ -712,7 +717,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlColonia;
+        protected DropDownList ddlColonia;
         
         /// <summary>
         /// txtCalle control.
@@ -721,7 +726,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCalle;
+        protected TextBox txtCalle;
         
         /// <summary>
         /// txtNoExt control.
@@ -730,7 +735,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNoExt;
+        protected TextBox txtNoExt;
         
         /// <summary>
         /// txtNoInt control.
@@ -739,7 +744,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNoInt;
+        protected TextBox txtNoInt;
         
         /// <summary>
         /// btnCrearCampus control.
@@ -748,7 +753,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCrearCampus;
+        protected Button btnCrearCampus;
         
         /// <summary>
         /// btnCancelarCampus control.
@@ -757,7 +762,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarCampus;
+        protected Button btnCancelarCampus;
         
         /// <summary>
         /// upCatlogos control.
@@ -766,7 +771,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upCatlogos;
+        protected UpdatePanel upCatlogos;
         
         /// <summary>
         /// panelAlertaCatalogo control.
@@ -775,7 +780,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlertaCatalogo;
+        protected HtmlGenericControl panelAlertaCatalogo;
         
         /// <summary>
         /// rptErrorCatalogo control.
@@ -784,7 +789,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptErrorCatalogo;
+        protected Repeater rptErrorCatalogo;
         
         /// <summary>
         /// lblTitleCatalogo control.
@@ -793,7 +798,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTitleCatalogo;
+        protected Label lblTitleCatalogo;
         
         /// <summary>
         /// hfCatalogo control.
@@ -802,7 +807,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfCatalogo;
+        protected HiddenField hfCatalogo;
         
         /// <summary>
         /// ddlTipoUsuarioCatalogo control.
@@ -811,7 +816,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoUsuarioCatalogo;
+        protected DropDownList ddlTipoUsuarioCatalogo;
         
         /// <summary>
         /// txtDescripcionCatalogo control.
@@ -820,7 +825,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcionCatalogo;
+        protected TextBox txtDescripcionCatalogo;
         
         /// <summary>
         /// CheckBox1 control.
@@ -829,7 +834,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox1;
+        protected CheckBox CheckBox1;
         
         /// <summary>
         /// btnGuardarCatalogo control.
@@ -838,7 +843,7 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardarCatalogo;
+        protected Button btnGuardarCatalogo;
         
         /// <summary>
         /// btnCancelarCatalogo control.
@@ -847,6 +852,6 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarCatalogo;
+        protected Button btnCancelarCatalogo;
     }
 }

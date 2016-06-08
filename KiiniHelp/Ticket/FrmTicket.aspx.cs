@@ -5,7 +5,6 @@ using System.Web.UI;
 using KiiniHelp.ServiceArbolAcceso;
 using KiiniHelp.ServiceMascaraAcceso;
 using KiiniHelp.ServiceTicket;
-using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
@@ -145,7 +144,23 @@ namespace KiiniHelp.Ticket
                 AlertaGeneral = new List<string>();
                 if (!IsPostBack)
                 {
-                    UcInformacionConsulta.IdArbol = ((ArbolAcceso) Session["ArbolAcceso"]).Id;
+                    ArbolAcceso arbol = ((ArbolAcceso) Session["ArbolAcceso"]);
+                    UcInformacionConsulta.IdArbol = arbol.Id;
+                    lblTicketDescripcion.Text = "TICKET";
+                    if (arbol.Nivel1 != null)
+                        lblTicketDescripcion.Text += arbol.Nivel1.Descripcion;
+                    if (arbol.Nivel2 != null)
+                        lblTicketDescripcion.Text += " > " + arbol.Nivel2.Descripcion;
+                    if (arbol.Nivel3 != null)
+                        lblTicketDescripcion.Text += " > " + arbol.Nivel3.Descripcion;
+                    if (arbol.Nivel4 != null)
+                        lblTicketDescripcion.Text += " > " + arbol.Nivel4.Descripcion;
+                    if (arbol.Nivel5 != null)
+                        lblTicketDescripcion.Text += " > " + arbol.Nivel5.Descripcion;
+                    if (arbol.Nivel6 != null)
+                        lblTicketDescripcion.Text += " > " + arbol.Nivel6.Descripcion;
+                    if (arbol.Nivel7 != null)
+                        lblTicketDescripcion.Text += " > " + arbol.Nivel7.Descripcion;
                     if (IdMascara == 0)
                     {
                         UcMascaraCaptura.Visible = false;

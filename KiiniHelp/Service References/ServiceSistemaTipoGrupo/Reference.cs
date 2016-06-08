@@ -8,27 +8,34 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using KiiniNet.Entities.Cat.Sistema;
+
 namespace KiiniHelp.ServiceSistemaTipoGrupo {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceSistemaTipoGrupo.IServiceTipoGrupo")]
+    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
+    [ServiceContract(ConfigurationName="ServiceSistemaTipoGrupo.IServiceTipoGrupo")]
     public interface IServiceTipoGrupo {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGrupo", ReplyAction="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGrupoResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoGrupo> ObtenerTiposGrupo(bool insertarSeleccion);
+        [OperationContract(Action="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGrupo", ReplyAction="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGrupoResponse")]
+        List<TipoGrupo> ObtenerTiposGrupo(bool insertarSeleccion);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByRol", ReplyAction="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByRolResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoGrupo> ObtenerTiposGruposByRol(int idrol, bool insertarSeleccion);
+        [OperationContract(Action="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByRol", ReplyAction="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByRolResponse")]
+        List<TipoGrupo> ObtenerTiposGruposByRol(int idrol, bool insertarSeleccion);
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceTipoGrupoChannel : KiiniHelp.ServiceSistemaTipoGrupo.IServiceTipoGrupo, System.ServiceModel.IClientChannel {
+    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceTipoGrupoChannel : IServiceTipoGrupo, IClientChannel {
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceTipoGrupoClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceSistemaTipoGrupo.IServiceTipoGrupo>, KiiniHelp.ServiceSistemaTipoGrupo.IServiceTipoGrupo {
+    [DebuggerStepThrough()]
+    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceTipoGrupoClient : ClientBase<IServiceTipoGrupo>, IServiceTipoGrupo {
         
         public ServiceTipoGrupoClient() {
         }
@@ -41,19 +48,19 @@ namespace KiiniHelp.ServiceSistemaTipoGrupo {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceTipoGrupoClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ServiceTipoGrupoClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceTipoGrupoClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ServiceTipoGrupoClient(Binding binding, EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoGrupo> ObtenerTiposGrupo(bool insertarSeleccion) {
+        public List<TipoGrupo> ObtenerTiposGrupo(bool insertarSeleccion) {
             return base.Channel.ObtenerTiposGrupo(insertarSeleccion);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoGrupo> ObtenerTiposGruposByRol(int idrol, bool insertarSeleccion) {
+        public List<TipoGrupo> ObtenerTiposGruposByRol(int idrol, bool insertarSeleccion) {
             return base.Channel.ObtenerTiposGruposByRol(idrol, insertarSeleccion);
         }
     }

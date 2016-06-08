@@ -6,15 +6,10 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using AjaxControlToolkit;
 using KiiniHelp.ServiceMascaraAcceso;
-using KiiniHelp.TestUsControl;
 using KiiniHelp.Ticket;
 using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Helper;
 using KinniNet.Business.Utils;
-using Microsoft.Ajax.Utilities;
-using Microsoft.Office.Interop.Word;
-using CheckBox = System.Web.UI.WebControls.CheckBox;
-using Page = System.Web.UI.Page;
 
 namespace KiiniHelp.UserControls.Temporal
 {
@@ -24,7 +19,7 @@ namespace KiiniHelp.UserControls.Temporal
         private List<Control> _lstControles;
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            Control myControl = GetPostBackControl(this.Page);
+            Control myControl = GetPostBackControl(Page);
 
             if ((myControl != null))
             {
@@ -38,7 +33,8 @@ namespace KiiniHelp.UserControls.Temporal
         {
             base.OnInit(e);
             _lstControles = new List<Control>();
-            IdMascara = (int)((FrmTicket)Page).IdMascara;
+            int? idMascara = ((FrmTicket)Page).IdMascara;
+            if (idMascara != null) IdMascara = (int)idMascara;
             Mascara mascara = _servicioMascaras.ObtenerMascaraCaptura(IdMascara);
             if (mascara != null)
             {
@@ -60,9 +56,9 @@ namespace KiiniHelp.UserControls.Temporal
             }
             else
             {
-                foreach (string Item in thePage.Request.Form)
+                foreach (string item in thePage.Request.Form)
                 {
-                    Control c = thePage.FindControl(Item);
+                    Control c = thePage.FindControl(item);
                     if (((c) is Button))
                     {
                         myControl = c;

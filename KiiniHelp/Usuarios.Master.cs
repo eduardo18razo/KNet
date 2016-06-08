@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceArbolAcceso;
 using KiiniHelp.ServiceSeguridad;
-using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 using Menu = KiiniNet.Entities.Cat.Sistema.Menu;
@@ -18,11 +17,17 @@ namespace KiiniHelp
         readonly ServiceSecurityClient _servicioSeguridad = new ServiceSecurityClient();
         readonly ServiceArbolAccesoClient _servicioArbolAcceso = new ServiceArbolAccesoClient();
         
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack && Session["UserData"] != null)
             {
-                rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(((Usuario)Session["UserData"]).Id);
+                Usuario usuario = ((Usuario) Session["UserData"]);
+                lblUsuario.Text = usuario.NombreCompleto;
+                int areaSeleccionada = 0;
+                if (Session["AreaSeleccionada"] != null)
+                    areaSeleccionada = int.Parse(Session["AreaSeleccionada"].ToString());
+                rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, areaSeleccionada, areaSeleccionada != 0 );
                 rptMenu.DataBind();
             }
         }
@@ -145,6 +150,37 @@ namespace KiiniHelp
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        protected void btnsOut_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Session.RemoveAll();
+                Session.Clear();
+                Session.Abandon();
+                FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        protected void btnArea_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Usuario user = (Usuario) Session["UserData"];
+                List<int> roles = user.UsuarioRol.Select(s => s.RolTipoUsuario.IdRol).ToList();
+                Response.Redirect(roles.Any(a => a == (int)BusinessVariables.EnumRoles.Administrador) ? "~/Administracion/Default.aspx" : "~/General/Default.aspx");
+            }
+            catch (Exception)
+            {
+                
+                throw;
             }
         }
     }

@@ -20,17 +20,6 @@ C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\Kin
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KinniNet.Data\obj\Debug\KinniNet.Data.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KinniNet.Data\obj\Debug\KinniNet.Data.dll
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KinniNet.Data\obj\Debug\KinniNet.Data.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\KinniNet.Data.dll.config
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\KinniNet.Data.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\KinniNet.Data.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\EntityFramework.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\KiiniNet.Entities.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\KiiniNet.Entities.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\EntityFramework.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\es\EntityFramework.resources.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\obj\Debug\KinniNet.Data.csprojResolveAssemblyReference.cache
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\obj\Debug\KinniNet.Data.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\obj\Debug\KinniNet.Data.pdb
 D:\KiiniNet\Actual\KinniNet.Data\bin\Debug\KinniNet.Data.dll.config
 D:\KiiniNet\Actual\KinniNet.Data\bin\Debug\KinniNet.Data.dll
 D:\KiiniNet\Actual\KinniNet.Data\bin\Debug\KinniNet.Data.pdb
@@ -42,3 +31,14 @@ D:\KiiniNet\Actual\KinniNet.Data\bin\Debug\es\EntityFramework.resources.dll
 D:\KiiniNet\Actual\KinniNet.Data\obj\Debug\KinniNet.Data.csprojResolveAssemblyReference.cache
 D:\KiiniNet\Actual\KinniNet.Data\obj\Debug\KinniNet.Data.dll
 D:\KiiniNet\Actual\KinniNet.Data\obj\Debug\KinniNet.Data.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\KinniNet.Data.dll.config
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\KinniNet.Data.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\KinniNet.Data.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\EntityFramework.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\KiiniNet.Entities.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\KiiniNet.Entities.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\EntityFramework.xml
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\bin\Debug\es\EntityFramework.resources.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\obj\Debug\KinniNet.Data.csprojResolveAssemblyReference.cache
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\obj\Debug\KinniNet.Data.dll
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Data\obj\Debug\KinniNet.Data.pdb

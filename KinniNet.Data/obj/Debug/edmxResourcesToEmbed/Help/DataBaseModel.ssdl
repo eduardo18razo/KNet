@@ -5,6 +5,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdArea" Type="int" Nullable="false" />
     <Property Name="IdTipoUsuario" Type="int" Nullable="false" />
     <Property Name="IdTipoArbolAcceso" Type="int" Nullable="false" />
     <Property Name="IdNivel1" Type="int" Nullable="false" />
@@ -16,6 +17,14 @@
     <Property Name="IdNivel7" Type="int" />
     <Property Name="EsTerminal" Type="bit" Nullable="false" />
     <Property Name="Habilitado" Type="bit" />
+  </EntityType>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="CampoMascara">
     <Key>
@@ -138,6 +147,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoUsuario" Type="int" />
     <Property Name="IdTipoGrupo" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Sistema" Type="bit" />
@@ -618,6 +628,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Extension" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="TipoUsuario">
@@ -698,6 +709,18 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
+  <Association Name="FK_ArbolAcceso_Area">
+    <End Role="Area" Type="Self.Area" Multiplicity="1" />
+    <End Role="ArbolAcceso" Type="Self.ArbolAcceso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArbolAcceso">
+        <PropertyRef Name="IdArea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ArbolAcceso_Nivel1">
     <End Role="Nivel1" Type="Self.Nivel1" Multiplicity="1" />
     <End Role="ArbolAcceso" Type="Self.ArbolAcceso" Multiplicity="*" />
@@ -899,6 +922,18 @@
       </Principal>
       <Dependent Role="GrupoUsuario">
         <PropertyRef Name="IdTipoGrupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GrupoUsuario_TipoUsuario">
+    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
+    <End Role="GrupoUsuario" Type="Self.GrupoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GrupoUsuario">
+        <PropertyRef Name="IdTipoUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2056,6 +2091,7 @@
   </Association>
   <EntityContainer Name="KiiniNet_v2ModelStoreContainer">
     <EntitySet Name="ArbolAcceso" EntityType="Self.ArbolAcceso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CampoMascara" EntityType="Self.CampoMascara" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Campus" EntityType="Self.Campus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Catalogos" EntityType="Self.Catalogos" Schema="dbo" store:Type="Tables" />
@@ -2125,6 +2161,10 @@
     <EntitySet Name="UsuarioGrupo" EntityType="Self.UsuarioGrupo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Zona" EntityType="Self.Zona" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ArbolAcceso_Area" Association="Self.FK_ArbolAcceso_Area">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+    </AssociationSet>
     <AssociationSet Name="FK_ArbolAcceso_Nivel1" Association="Self.FK_ArbolAcceso_Nivel1">
       <End Role="Nivel1" EntitySet="Nivel1" />
       <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
@@ -2191,6 +2231,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_GrupoUsuario_TipoGrupo1" Association="Self.FK_GrupoUsuario_TipoGrupo1">
       <End Role="TipoGrupo" EntitySet="TipoGrupo" />
+      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GrupoUsuario_TipoUsuario" Association="Self.FK_GrupoUsuario_TipoUsuario">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
     </AssociationSet>
     <AssociationSet Name="FK_GrupoUsuarioInventarioArbol_GrupoUsuario" Association="Self.FK_GrupoUsuarioInventarioArbol_GrupoUsuario">

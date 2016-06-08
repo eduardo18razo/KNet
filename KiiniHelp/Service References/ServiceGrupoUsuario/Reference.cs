@@ -8,46 +8,51 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using KiiniNet.Entities.Cat.Usuario;
+
 namespace KiiniHelp.ServiceGrupoUsuario {
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceGrupoUsuario.IServiceGrupoUsuario")]
+    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
+    [ServiceContract(ConfigurationName="ServiceGrupoUsuario.IServiceGrupoUsuario")]
     public interface IServiceGrupoUsuario {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuario", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuario(int idTipoGrupo, bool insertarSeleccion);
+        [OperationContract(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioTipoUsuario", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioTipoUsuarioResponse")]
+        List<GrupoUsuario> ObtenerGruposUsuarioTipoUsuario(int idTipoGrupo, int idTipoUsuario, bool insertarSeleccion);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioByIdTipoSubGrupo", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioByIdTipoSubGrupoRespo" +
+        [OperationContract(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioByIdTipoSubGrupo", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioByIdTipoSubGrupoRespo" +
             "nse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioByIdTipoSubGrupo(int idTipoSubgrupo, bool insertarSeleccion);
+        List<GrupoUsuario> ObtenerGruposUsuarioByIdTipoSubGrupo(int idTipoSubgrupo, bool insertarSeleccion);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioByIdRol", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioByIdRolResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, bool insertarSeleccion);
+        [OperationContract(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioByIdRol", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioByIdRolResponse")]
+        List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, int idTipoUsuario, bool insertarSeleccion);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/GuardarGrupoUsuario", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/GuardarGrupoUsuarioResponse")]
-        void GuardarGrupoUsuario(KiiniNet.Entities.Cat.Usuario.GrupoUsuario grupoUsuario);
+        [OperationContract(Action="http://tempuri.org/IServiceGrupoUsuario/GuardarGrupoUsuario", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/GuardarGrupoUsuarioResponse")]
+        void GuardarGrupoUsuario(GrupoUsuario grupoUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupoUsuario", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupoUsuarioResponse")]
-        KiiniNet.Entities.Cat.Usuario.GrupoUsuario ObtenerGrupoUsuario(int idGrupoUsuario);
+        [OperationContract(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupoUsuarioById", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupoUsuarioByIdResponse")]
+        GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupoUsuarioById", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupoUsuarioByIdResponse")]
-        KiiniNet.Entities.Cat.Usuario.GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario);
+        [OperationContract(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioSistema", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioSistemaResponse")]
+        List<GrupoUsuario> ObtenerGruposUsuarioSistema(int idTipoUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioSistema", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioSistemaResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioSistema();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioNivel", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioNivelResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioNivel(int idtipoArbol, System.Nullable<int> nivel1, System.Nullable<int> nivel2, System.Nullable<int> nivel3, System.Nullable<int> nivel4, System.Nullable<int> nivel5, System.Nullable<int> nivel6, System.Nullable<int> nivel7);
+        [OperationContract(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioNivel", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioNivelResponse")]
+        List<GrupoUsuario> ObtenerGruposUsuarioNivel(int idtipoArbol, Nullable<int> nivel1, Nullable<int> nivel2, Nullable<int> nivel3, Nullable<int> nivel4, Nullable<int> nivel5, Nullable<int> nivel6, Nullable<int> nivel7);
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceGrupoUsuarioChannel : KiiniHelp.ServiceGrupoUsuario.IServiceGrupoUsuario, System.ServiceModel.IClientChannel {
+    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceGrupoUsuarioChannel : IServiceGrupoUsuario, IClientChannel {
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceGrupoUsuarioClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceGrupoUsuario.IServiceGrupoUsuario>, KiiniHelp.ServiceGrupoUsuario.IServiceGrupoUsuario {
+    [DebuggerStepThrough()]
+    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceGrupoUsuarioClient : ClientBase<IServiceGrupoUsuario>, IServiceGrupoUsuario {
         
         public ServiceGrupoUsuarioClient() {
         }
@@ -60,43 +65,39 @@ namespace KiiniHelp.ServiceGrupoUsuario {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceGrupoUsuarioClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ServiceGrupoUsuarioClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceGrupoUsuarioClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ServiceGrupoUsuarioClient(Binding binding, EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuario(int idTipoGrupo, bool insertarSeleccion) {
-            return base.Channel.ObtenerGruposUsuario(idTipoGrupo, insertarSeleccion);
+        public List<GrupoUsuario> ObtenerGruposUsuarioTipoUsuario(int idTipoGrupo, int idTipoUsuario, bool insertarSeleccion) {
+            return base.Channel.ObtenerGruposUsuarioTipoUsuario(idTipoGrupo, idTipoUsuario, insertarSeleccion);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioByIdTipoSubGrupo(int idTipoSubgrupo, bool insertarSeleccion) {
+        public List<GrupoUsuario> ObtenerGruposUsuarioByIdTipoSubGrupo(int idTipoSubgrupo, bool insertarSeleccion) {
             return base.Channel.ObtenerGruposUsuarioByIdTipoSubGrupo(idTipoSubgrupo, insertarSeleccion);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, bool insertarSeleccion) {
-            return base.Channel.ObtenerGruposUsuarioByIdRol(idRol, insertarSeleccion);
+        public List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, int idTipoUsuario, bool insertarSeleccion) {
+            return base.Channel.ObtenerGruposUsuarioByIdRol(idRol, idTipoUsuario, insertarSeleccion);
         }
         
-        public void GuardarGrupoUsuario(KiiniNet.Entities.Cat.Usuario.GrupoUsuario grupoUsuario) {
+        public void GuardarGrupoUsuario(GrupoUsuario grupoUsuario) {
             base.Channel.GuardarGrupoUsuario(grupoUsuario);
         }
         
-        public KiiniNet.Entities.Cat.Usuario.GrupoUsuario ObtenerGrupoUsuario(int idGrupoUsuario) {
-            return base.Channel.ObtenerGrupoUsuario(idGrupoUsuario);
-        }
-        
-        public KiiniNet.Entities.Cat.Usuario.GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario) {
+        public GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario) {
             return base.Channel.ObtenerGrupoUsuarioById(idGrupoUsuario);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioSistema() {
-            return base.Channel.ObtenerGruposUsuarioSistema();
+        public List<GrupoUsuario> ObtenerGruposUsuarioSistema(int idTipoUsuario) {
+            return base.Channel.ObtenerGruposUsuarioSistema(idTipoUsuario);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioNivel(int idtipoArbol, System.Nullable<int> nivel1, System.Nullable<int> nivel2, System.Nullable<int> nivel3, System.Nullable<int> nivel4, System.Nullable<int> nivel5, System.Nullable<int> nivel6, System.Nullable<int> nivel7) {
+        public List<GrupoUsuario> ObtenerGruposUsuarioNivel(int idtipoArbol, Nullable<int> nivel1, Nullable<int> nivel2, Nullable<int> nivel3, Nullable<int> nivel4, Nullable<int> nivel5, Nullable<int> nivel6, Nullable<int> nivel7) {
             return base.Channel.ObtenerGruposUsuarioNivel(idtipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
         }
     }

@@ -53,7 +53,7 @@ namespace KiiniHelp.ServiceArbolAcceso {
         
         [OperationContract(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArblodesAccesoByGruposUsuario", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerArblodesAccesoByGruposUsuarioRespon" +
             "se")]
-        List<ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol);
+        List<ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea);
         
         [OperationContract(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolAcceso", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolAccesoResponse")]
         ArbolAcceso ObtenerArbolAcceso(int idArbol);
@@ -122,8 +122,8 @@ namespace KiiniHelp.ServiceArbolAcceso {
             base.Channel.GuardarArbol(arbol);
         }
         
-        public List<ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol) {
-            return base.Channel.ObtenerArblodesAccesoByGruposUsuario(idUsuario, idTipoArbol);
+        public List<ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea) {
+            return base.Channel.ObtenerArblodesAccesoByGruposUsuario(idUsuario, idTipoArbol, idArea);
         }
         
         public ArbolAcceso ObtenerArbolAcceso(int idArbol) {

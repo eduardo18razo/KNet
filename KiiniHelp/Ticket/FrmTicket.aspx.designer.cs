@@ -7,6 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using KiiniHelp.UserControls.Genericos;
+using KiiniHelp.UserControls.Temporal;
+
 namespace KiiniHelp.Ticket {
     
     
@@ -19,7 +24,7 @@ namespace KiiniHelp.Ticket {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlert;
+        protected HtmlGenericControl panelAlert;
         
         /// <summary>
         /// rptHeaderError control.
@@ -28,7 +33,7 @@ namespace KiiniHelp.Ticket {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
+        protected Repeater rptHeaderError;
         
         /// <summary>
         /// hfIdMascara control.
@@ -37,7 +42,7 @@ namespace KiiniHelp.Ticket {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdMascara;
+        protected HiddenField hfIdMascara;
         
         /// <summary>
         /// hfIdConsulta control.
@@ -46,7 +51,7 @@ namespace KiiniHelp.Ticket {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdConsulta;
+        protected HiddenField hfIdConsulta;
         
         /// <summary>
         /// hfIdEncuesta control.
@@ -55,7 +60,7 @@ namespace KiiniHelp.Ticket {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdEncuesta;
+        protected HiddenField hfIdEncuesta;
         
         /// <summary>
         /// hfIdSla control.
@@ -64,7 +69,16 @@ namespace KiiniHelp.Ticket {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdSla;
+        protected HiddenField hfIdSla;
+        
+        /// <summary>
+        /// lblTicketDescripcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected Label lblTicketDescripcion;
         
         /// <summary>
         /// UcInformacionConsulta control.
@@ -73,7 +87,7 @@ namespace KiiniHelp.Ticket {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Genericos.UcInformacionConsulta UcInformacionConsulta;
+        protected UcInformacionConsulta UcInformacionConsulta;
         
         /// <summary>
         /// UcMascaraCaptura control.
@@ -82,7 +96,7 @@ namespace KiiniHelp.Ticket {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Temporal.UcMascaraCaptura UcMascaraCaptura;
+        protected UcMascaraCaptura UcMascaraCaptura;
         
         /// <summary>
         /// btnGuardar control.
@@ -91,7 +105,7 @@ namespace KiiniHelp.Ticket {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        protected Button btnGuardar;
         
         /// <summary>
         /// btnCancelar control.
@@ -100,6 +114,6 @@ namespace KiiniHelp.Ticket {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        protected Button btnCancelar;
     }
 }

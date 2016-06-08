@@ -7,6 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+
 namespace KiiniHelp.UserControls.Temporal {
     
     
@@ -19,7 +23,7 @@ namespace KiiniHelp.UserControls.Temporal {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upMascara;
+        protected UpdatePanel upMascara;
         
         /// <summary>
         /// hfIdMascara control.
@@ -28,7 +32,7 @@ namespace KiiniHelp.UserControls.Temporal {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdMascara;
+        protected HiddenField hfIdMascara;
         
         /// <summary>
         /// hfComandoInsertar control.
@@ -37,7 +41,7 @@ namespace KiiniHelp.UserControls.Temporal {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfComandoInsertar;
+        protected HiddenField hfComandoInsertar;
         
         /// <summary>
         /// hfComandoActualizar control.
@@ -46,7 +50,7 @@ namespace KiiniHelp.UserControls.Temporal {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfComandoActualizar;
+        protected HiddenField hfComandoActualizar;
         
         /// <summary>
         /// lblDescripcionMascara control.
@@ -55,7 +59,7 @@ namespace KiiniHelp.UserControls.Temporal {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescripcionMascara;
+        protected Label lblDescripcionMascara;
         
         /// <summary>
         /// divControles control.
@@ -64,6 +68,6 @@ namespace KiiniHelp.UserControls.Temporal {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divControles;
+        protected HtmlGenericControl divControles;
     }
 }

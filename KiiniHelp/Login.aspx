@@ -13,7 +13,7 @@
     <link href="BootStrap/css/divs.css" rel="stylesheet" />
     <link href="BootStrap/css/FileInput.css" rel="stylesheet" />
 </head>
-<body>
+<body >
     <form id="form1" runat="server">
         <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
             <Scripts>
@@ -51,13 +51,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="txtUsuario">Usuario</label>
                                 <div class="col-sm-10">
-                                    <asp:TextBox class="form-control" ID="txtUsuario" placeholder="UserName" runat="server"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="txtUsuario" placeholder="UserName" runat="server" style="text-transform: none"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="txtpwd">Contraseña</label>
                                 <div class="col-sm-10">
-                                    <asp:TextBox class="form-control" ID="txtpwd" placeholder="Enter Password" runat="server" TextMode="Password"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="txtpwd" placeholder="Enter Password" runat="server" TextMode="Password" style="text-transform: none"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-group">

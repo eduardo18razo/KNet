@@ -294,14 +294,18 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 ParametrosTelefonos parametroTipoTelefono = lstParamTelefonos.Single(s => s.IdTipoTelefono == telefono.IdTipoTelefono);
                 if (telefonoUsuario.Count(c => c.IdTipoTelefono == telefono.IdTipoTelefono && c.Numero.Trim() != string.Empty) < parametroTipoTelefono.Obligatorios)
-                    sb.AppendLine(String.Format("<li>Debe capturar al menos {0} telefono(s) de {1}.</li>", parametroTipoTelefono.Obligatorios, parametroTipoTelefono.TipoTelefono.Descripcion));
+                {
+                    sb.AppendLine(String.Format("<li>Debe capturar al menos {0} telefono(s) de {1}.</li>",
+                        parametroTipoTelefono.Obligatorios, parametroTipoTelefono.TipoTelefono.Descripcion));
+                    break;
+                }
             }
 
             List<CorreoUsuario> correos = rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox)item.FindControl("txtCorreo")).Where(correo => correo != null & correo.Text.Trim() != string.Empty).Select(correo => new CorreoUsuario { Correo = correo.Text.Trim() }).ToList();
             //TODO: Implementar metodo unico
             TipoUsuario paramCorreos = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(false).SingleOrDefault(s => s.Id == int.Parse(ddlTipoUsuario.SelectedValue));
             if (paramCorreos != null && (correos.Count(c => c.Correo != string.Empty) < paramCorreos.CorreosObligatorios))
-                sb.AppendLine(String.Format("<li>debe captura al menos {0} correo(s).</li>.", paramCorreos.CorreosObligatorios));
+                sb.AppendLine(String.Format("<li>Debe captura al menos {0} correo(s).</li>.", paramCorreos.CorreosObligatorios));
 
             if (sb.ToString() != string.Empty)
             {
@@ -399,7 +403,6 @@ namespace KiiniHelp.Administracion.Usuarios
                     Session["UsuarioTemporal"] = null;
                     Session["UsuarioGrupo"] = null;
                 }
-
             }
             catch (Exception ex)
             {
@@ -598,7 +601,7 @@ namespace KiiniHelp.Administracion.Usuarios
                     }
                 }
                 List<object> lst = new List<object>();
-
+                
                 foreach (ListItem item in chklbxRoles.Items.Cast<ListItem>())
                 {
                     AsociarGrupoUsuario.HabilitaGrupos(Convert.ToInt32(item.Value), item.Selected);
@@ -637,7 +640,7 @@ namespace KiiniHelp.Administracion.Usuarios
                     LlenaComboOrganizacion(idTipoUsuario);
                     LlenaComboUbicacion(idTipoUsuario);
                     Metodos.LlenaListBoxCatalogo(chklbxRoles, _servicioSistemaRol.ObtenerRoles(idTipoUsuario, false));
-
+                    AsociarGrupoUsuario.IdTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                     Session["UsuarioTemporal"] = new Usuario();
                     divDatos.Visible = true;
                 }
@@ -1331,6 +1334,12 @@ namespace KiiniHelp.Administracion.Usuarios
                 ValidaCapturaDatosGenerales();
                 btnModalDatosGenerales.CssClass = "btn btn-success btn-lg";
                 btnModalOrganizacion.CssClass = "btn btn-primary btn-lg";
+                btnModalUbicacion.CssClass = "btn btn-primary btn-lg";
+                btnModalUbicacion.Enabled = false;
+                btnModalRoles.CssClass = "btn btn-primary btn-lg";
+                btnModalRoles.Enabled = false;
+                btnModalGrupos.CssClass = "btn btn-primary btn-lg";
+                btnModalGrupos.Enabled = false;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalDatosGenerales\");", true);
                 upOrganizacion.Update();
             }
@@ -1352,6 +1361,11 @@ namespace KiiniHelp.Administracion.Usuarios
                 ValidaCapturaOrganizacion();
                 btnModalOrganizacion.CssClass = "btn btn-success btn-lg";
                 btnModalUbicacion.CssClass = "btn btn-primary btn-lg";
+                btnModalUbicacion.Enabled = true;
+                btnModalRoles.CssClass = "btn btn-primary btn-lg";
+                btnModalRoles.Enabled = false;
+                btnModalGrupos.CssClass = "btn btn-primary btn-lg";
+                btnModalGrupos.Enabled = false;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalOrganizacion\");", true);
                 upUbicacion.Update();
             }
@@ -1372,6 +1386,10 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 ValidaCapturaUbicacion();
                 btnModalUbicacion.CssClass = "btn btn-success btn-lg";
+                btnModalRoles.CssClass = "btn btn-primary btn-lg";
+                btnModalRoles.Enabled = true;
+                btnModalGrupos.CssClass = "btn btn-primary btn-lg";
+                btnModalGrupos.Enabled = false;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalUbicacion\");", true);
                 btnModalRoles.CssClass = "btn btn-primary btn-lg";
                 upRoles.Update();
@@ -1393,6 +1411,7 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 ValidaCapturaRoles();
                 btnModalRoles.CssClass = "btn btn-success btn-lg";
+                btnModalGrupos.Enabled = true;
                 btnModalGrupos.CssClass = "btn btn-primary btn-lg";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalRoles\");", true);
             }

@@ -30,7 +30,7 @@ namespace KiiniHelp.ServiceSeguridad {
         Usuario GetUserDataAutenticate(string user, string password);
         
         [OperationContract(Action="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuario", ReplyAction="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuarioResponse")]
-        List<Menu> ObtenerMenuUsuario(int idUsuario);
+        List<Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles);
     }
     
     [GeneratedCode("System.ServiceModel", "4.0.0.0")]
@@ -68,8 +68,8 @@ namespace KiiniHelp.ServiceSeguridad {
             return base.Channel.GetUserDataAutenticate(user, password);
         }
         
-        public List<Menu> ObtenerMenuUsuario(int idUsuario) {
-            return base.Channel.ObtenerMenuUsuario(idUsuario);
+        public List<Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles) {
+            return base.Channel.ObtenerMenuUsuario(idUsuario, idArea, arboles);
         }
     }
 }

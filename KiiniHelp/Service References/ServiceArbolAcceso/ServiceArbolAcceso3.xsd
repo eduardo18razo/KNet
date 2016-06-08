@@ -159,6 +159,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="idArea" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -227,6 +227,7 @@ namespace KinniNet.Core.Operacion
                     campoMascara.Descripcion = campoMascara.Descripcion.Trim().ToUpper();
                     campoMascara.NombreCampo = campoMascara.Descripcion.Trim().ToUpper().Replace(" ", "");
                     campoMascara.SimboloMoneda = campoMascara.SimboloMoneda == null ? null : campoMascara.SimboloMoneda.Trim().ToUpper();
+                    campoMascara.TipoCampoMascara = null;
                 }
                 mascara.NombreTabla = (BusinessVariables.ParametrosMascaraCaptura.PrefijoTabla + mascara.Descripcion).Replace(" ", string.Empty);
                 mascara.ComandoInsertar = (BusinessVariables.ParametrosMascaraCaptura.PrefijoComandoInsertar + mascara.Descripcion).Replace(" ", string.Empty);

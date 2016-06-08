@@ -138,13 +138,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol)
+        public List<ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea)
         {
             try
             {
                 using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
                 {
-                    return negocio.ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, idTipoArbol);
+                    return negocio.ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, idTipoArbol, idArea);
                 }
             }
             catch (Exception ex)

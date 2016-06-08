@@ -48,7 +48,7 @@
                             <asp:Label runat="server" Text="Contenido" CssClass="col-sm-2 control-label" />
                             <div class="col-sm-10">
                                 <ctrlExterno:HtmlEditor runat="Server" ID="txtEditor" Toolbars="Select#Format,Select#Font,Select#Size:ForeColor,BackColor;Bold,Italic,Underline|Left,Center,Right,Justify|OrderedList,BulletedList|
-                                    Indent,Outdent|Rule|Subscript,Superscript:Link,Image" />
+                                    Outdent,Indent|Rule|Subscript,Superscript:Link,Image" />
                             </div>
                         </div>
                     </div>

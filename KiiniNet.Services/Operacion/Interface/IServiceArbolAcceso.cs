@@ -27,7 +27,7 @@ namespace KiiniNet.Services.Operacion.Interface
         [OperationContract]
         void GuardarArbol(ArbolAcceso arbol);
         [OperationContract]
-        List<ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol);
+        List<ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea);
         [OperationContract]
         ArbolAcceso ObtenerArbolAcceso(int idArbol);
     }

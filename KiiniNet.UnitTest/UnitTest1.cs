@@ -19,7 +19,7 @@ namespace KiiniNet.UnitTest
                 var test = new BusinessMascaras().ObtenerCatalogoCampoMascara("TipoUsuario");
                 DataBaseModelContext db = new DataBaseModelContext();
                 BusinessSecurity.Menus bs = new BusinessSecurity.Menus();
-                bs.ObtenerMenuUsuario(3);
+                //bs.ObtenerMenuUsuario(3);
             }
             catch (Exception ex)
             {

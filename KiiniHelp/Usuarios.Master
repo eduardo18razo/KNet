@@ -1,9 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Usuarios.master.cs" Inherits="KiiniHelp.UsuariosMaster" %>
 
-<%@ Import Namespace="System.ComponentModel" %>
-
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
@@ -14,7 +11,6 @@
     <link href="BootStrap/css/DropDown.css" rel="stylesheet" />
     <link href="BootStrap/css/divs.css" rel="stylesheet" />
     <link href="BootStrap/css/FileInput.css" rel="stylesheet" />
-    <link href="BootStrap/css/simple-sidebar.css" rel="stylesheet" />
     <link href="BootStrap/css/jquery.treegrid.css" rel="stylesheet" />
     <link href="BootStrap/css/super-panel.css" rel="stylesheet" />
     <link href="BootStrap/css/accordion-menu.css" rel="stylesheet" />
@@ -30,13 +26,12 @@
             return true;
         }
     </script>
-
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-
 </head>
 <body>
     <form id="form1" runat="server" enctype="multipart/form-data">
+        <script type="text/javascript" src="<%= ResolveUrl("~/BootStrap/js/validation.js") %>"></script>
         <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
             <Scripts>
                 <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
@@ -52,14 +47,22 @@
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
-
-        <header style="font-size: 0; display: block; background: #314f60; line-height: 60px; height: 60px; text-align: right; position: relative; border: 1px solid #000;">
+        <header id="headerNav">
             <span data-panel="panel1" class="panel-button"></span>
-            <a class="logo" href="http://www.kiininet.com/">KiiniNet</a>
+            <div class="logo" id="logo">
+                <asp:Label runat="server" ID="lblUsuario" />
+            </div>
+            <span id="top-nav">
+                <asp:Button runat="server" CssClass="btn btn-sm btn-success" ID="btnArea" Text="Cambiar area" OnClick="btnArea_OnClick" />
+                <asp:Button runat="server" CssClass="btn btn-sm btn-success" ID="btnsOut" Text="Cerrar Sesion" OnClick="btnsOut_OnClick" style="margin-left: 10px; margin-right: 10px" />
+            </span>
         </header>
+
+
+
         <div id="panel1">
             <div id="accordion">
-                <ul>
+                <ul style="color: transparent">
                     <li>
                         <asp:Repeater runat="server" ID="rptMenu" OnItemDataBound="rptMenu_OnItemDataBound">
                             <ItemTemplate>
@@ -71,7 +74,7 @@
                                         <asp:Repeater runat="server" ID="rptSubMenu1" OnItemDataBound="rptSubMenu1_OnItemDataBound">
                                             <ItemTemplate>
                                                 <li>
-                                                    <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                    <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") == null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
                                                     <div runat="server" visible='<%# Eval("Menu1") !=null %>'><%# Eval("Descripcion") %></div>
                                                     <ul>
                                                         <asp:Repeater runat="server" ID="rptSubMenu2" OnItemDataBound="rptSubMenu2_OnItemDataBound">
@@ -145,9 +148,10 @@
                 </ul>
             </div>
         </div>
-
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
+        <div style="width: 95%; margin: 0 auto; margin-top: 50px">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
         <!-- Menu Toggle Script -->
         <script>
             $("#menu-toggle").click(function (e) {
@@ -155,7 +159,8 @@
                 $("#wrapper").toggleClass("toggled");
             });
         </script>
-
     </form>
 </body>
 </html>
+
+
