@@ -8,34 +8,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using KiiniNet.Entities.Operacion;
-
 namespace KiiniHelp.ServiceArea {
     
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    [ServiceContract(ConfigurationName="ServiceArea.IServiceArea")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceArea.IServiceArea")]
     public interface IServiceArea {
         
-        [OperationContract(Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuario", ReplyAction="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioResponse")]
-        List<Area> ObtenerAreasUsuario(int idUsuario);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuario", ReplyAction="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuario(int idUsuario);
         
-        [OperationContract(Action="http://tempuri.org/IServiceArea/ObtenerAreas", ReplyAction="http://tempuri.org/IServiceArea/ObtenerAreasResponse")]
-        List<Area> ObtenerAreas(bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/ObtenerAreas", ReplyAction="http://tempuri.org/IServiceArea/ObtenerAreasResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreas(bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/Guardar", ReplyAction="http://tempuri.org/IServiceArea/GuardarResponse")]
+        void Guardar(KiiniNet.Entities.Operacion.Area area);
     }
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceAreaChannel : IServiceArea, IClientChannel {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceAreaChannel : KiiniHelp.ServiceArea.IServiceArea, System.ServiceModel.IClientChannel {
     }
     
-    [DebuggerStepThrough()]
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceAreaClient : ClientBase<IServiceArea>, IServiceArea {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceAreaClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceArea.IServiceArea>, KiiniHelp.ServiceArea.IServiceArea {
         
         public ServiceAreaClient() {
         }
@@ -48,20 +44,24 @@ namespace KiiniHelp.ServiceArea {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceAreaClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
+        public ServiceAreaClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceAreaClient(Binding binding, EndpointAddress remoteAddress) : 
+        public ServiceAreaClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public List<Area> ObtenerAreasUsuario(int idUsuario) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuario(int idUsuario) {
             return base.Channel.ObtenerAreasUsuario(idUsuario);
         }
         
-        public List<Area> ObtenerAreas(bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreas(bool insertarSeleccion) {
             return base.Channel.ObtenerAreas(insertarSeleccion);
+        }
+        
+        public void Guardar(KiiniNet.Entities.Operacion.Area area) {
+            base.Channel.Guardar(area);
         }
     }
 }

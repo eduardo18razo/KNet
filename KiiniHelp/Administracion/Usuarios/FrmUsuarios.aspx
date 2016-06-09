@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administracion/Administracion.master" AutoEventWireup="true" CodeBehind="FrmUsuarios.aspx.cs" Inherits="KiiniHelp.Administracion.Usuarios.FrmUsuarios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmUsuarios.aspx.cs" Inherits="KiiniHelp.Administracion.Usuarios.FrmUsuarios" %>
 
 <%@ Register Src="~/UserControls/Seleccion/AsociarGrupoUsuario.ascx" TagPrefix="uc" TagName="AsociarGrupoUsuario" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContentAdministracion" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Alta Usuarios</title>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="MainContentAdministracion" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <asp:UpdatePanel runat="server">
@@ -264,7 +264,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-offset-1">
                                                 <asp:Label for="ddlJefatura" class="col-sm-3 control-label" runat="server">Jefatura</asp:Label>
-                                                <asp:DropDownList runat="server" ID="ddlJefatura" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlJefatura_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
+                                                <asp:DropDownList runat="server" ID="ddlJefatura" Width="450px" CssClass="DropSelect" AutoPostBack="True" AppendDataBoundItems="True" />
                                                 <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" OnClick="OnClick" ID="btnJefatura" CommandName="Jefatura" CommandArgument="14" />
                                             </div>
                                         </div>

@@ -236,10 +236,9 @@ namespace KinniNet.Core.Operacion
             {
                 
                 grupoUsuario.Descripcion = grupoUsuario.Descripcion.ToUpper();
-                string[] wordOfName = grupoUsuario.Descripcion.Split(' ');
-                if (wordOfName.Any(word => db.GrupoUsuario.Any(a => a.Descripcion.Contains(word) && a.Sistema)))
+                if (db.GrupoUsuario.Any(a => a.Descripcion == grupoUsuario.Descripcion && a.IdTipoGrupo == grupoUsuario.IdTipoGrupo))
                 {
-                    throw new Exception("La descripcion no puede contener nombres del sistema");
+                    throw new Exception("Ya existe un Grupo con esta descripcion");
                 }
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el que viene embebido

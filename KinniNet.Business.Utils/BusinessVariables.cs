@@ -24,7 +24,8 @@ namespace KinniNet.Business.Utils
         public enum EnumTiposDocumento
         {
             Word = 1,
-            PowerPoint = 2
+            PowerPoint = 2,
+            Excel = 3
         }
         public enum EnumTiposInformacionConsulta
         {

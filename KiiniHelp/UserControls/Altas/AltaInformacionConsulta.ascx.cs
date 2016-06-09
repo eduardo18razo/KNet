@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Web.UI;
 using AjaxControlToolkit;
 using KiiniHelp.Funciones;
@@ -11,6 +13,7 @@ using KiiniHelp.ServiceSistemaTipoInformacionConsulta;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
+using Microsoft.Office.Interop.Word;
 
 namespace KiiniHelp.UserControls.Altas
 {
@@ -223,7 +226,7 @@ namespace KiiniHelp.UserControls.Altas
             {
                 TipoDocumento tipoDocto = _servicioSistemaTipoDocumento.ObtenerTiposDocumentoId(int.Parse(ddlTipoDocumento.SelectedValue));
                 bool fileOk = false;
-                var path = Server.MapPath("~/Uploads/");
+                var path = Server.MapPath(ConfigurationManager.AppSettings["PathInformacionConsultaOriginal"]);
                 if (afuArchivo.HasFile)
                 {
                     string extension = Path.GetExtension(afuArchivo.FileName);
@@ -244,6 +247,19 @@ namespace KiiniHelp.UserControls.Altas
                     {
                         hfFileName.Value = afuArchivo.FileName;
                         afuArchivo.PostedFile.SaveAs(path + afuArchivo.FileName);
+                        switch (int.Parse(ddlTipoDocumento.SelectedValue))
+                        {
+                            case (int)BusinessVariables.EnumTiposDocumento.Word:
+                                ConvertirWord(afuArchivo.FileName);
+                                break;
+                            case (int)BusinessVariables.EnumTiposDocumento.PowerPoint:
+                                //ConvertirExcel(afuArchivo.FileName);
+                                break;
+                            case (int)BusinessVariables.EnumTiposDocumento.Excel:
+                                ConvertirExcel(afuArchivo.FileName);
+                                break;
+                        }
+                        
                     }
                     catch (Exception ex)
                     {
@@ -279,5 +295,72 @@ namespace KiiniHelp.UserControls.Altas
                 AlertaGeneral = _lstError;
             }
         }
+
+        private void ConvertirWord(string nombrearchivo)
+        {
+            try
+            {
+                string rutaHtml = ConfigurationManager.AppSettings["PathInformacionConsultaHtml"];
+                string rutaArchivosCarga = ConfigurationManager.AppSettings["PathInformacionConsultaOriginal"];
+                object missingType = Type.Missing;
+                object readOnly = true;
+                object isVisible = false;
+                object documentFormat = 8;
+                string randomName = DateTime.Now.Ticks.ToString();
+                object htmlFilePath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) + ".htm";
+                string directoryPath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) + "_archivos";
+                object fileName = Server.MapPath(rutaArchivosCarga) + nombrearchivo;
+
+                ApplicationClass applicationclass = new ApplicationClass();
+                applicationclass.Documents.Open(ref fileName, ref readOnly, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref  missingType, ref missingType, ref missingType, ref isVisible, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType);
+                applicationclass.Visible = false;
+                Document document = applicationclass.ActiveDocument;
+                document.SaveAs(ref htmlFilePath, ref documentFormat, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType);
+                document.Close(ref missingType, ref missingType, ref missingType);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        private void ConvertirExcel(string nombrearchivo)
+        {
+            try
+            {
+                string rutaHtml = ConfigurationManager.AppSettings["PathInformacionConsultaHtml"];
+                string rutaArchivosCarga = ConfigurationManager.AppSettings["PathInformacionConsultaOriginal"];
+                object missingType = Type.Missing;
+                //object readOnly = true;
+                //object isVisible = false;
+                object documentFormat = 8;
+                string randomName = DateTime.Now.Ticks.ToString();
+                object htmlFilePath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) + ".htm";
+                string directoryPath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) + "_archivos";
+                string fileName = Server.MapPath(rutaArchivosCarga) + nombrearchivo;
+
+                Microsoft.Office.Interop.Excel.ApplicationClass xls = new Microsoft.Office.Interop.Excel.ApplicationClass();
+                xls.Workbooks.Open(fileName,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing);
+                xls.Visible = false;
+                Microsoft.Office.Interop.Excel.Workbook wb = xls.ActiveWorkbook;
+                wb.SaveAs(htmlFilePath, Microsoft.Office.Interop.Excel.XlFileFormat.xlHtml, Type.Missing, Type.Missing,
+               false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
+               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                wb.Close();
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+        }
+
+        
+
+//       
+//wbook.Close();
     }
 }

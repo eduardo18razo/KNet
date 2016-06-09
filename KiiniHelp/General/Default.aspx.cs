@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceArea;
+using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniHelp.General
@@ -31,7 +32,9 @@ namespace KiiniHelp.General
             {
                 if (!IsPostBack)
                 {
-                    rptAreas.DataSource = _servicioArea.ObtenerAreasUsuario(((Usuario)Session["UserData"]).Id);
+                    List<Area> lstAreas = _servicioArea.ObtenerAreasUsuario(((Usuario)Session["UserData"]).Id);
+                    divAreas.Visible = lstAreas.Count > 0;
+                    rptAreas.DataSource = lstAreas;
                     rptAreas.DataBind();
                 }
             }

@@ -7,10 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-
 namespace KiiniHelp.General {
     
     
@@ -23,7 +19,7 @@ namespace KiiniHelp.General {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected UpdatePanel upAreas;
+        protected global::System.Web.UI.UpdatePanel upAreas;
         
         /// <summary>
         /// panelAlert control.
@@ -32,7 +28,7 @@ namespace KiiniHelp.General {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlGenericControl panelAlert;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlert;
         
         /// <summary>
         /// rptHeaderError control.
@@ -41,7 +37,16 @@ namespace KiiniHelp.General {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Repeater rptHeaderError;
+        protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
+        
+        /// <summary>
+        /// divAreas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAreas;
         
         /// <summary>
         /// rptAreas control.
@@ -50,6 +55,6 @@ namespace KiiniHelp.General {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Repeater rptAreas;
+        protected global::System.Web.UI.WebControls.Repeater rptAreas;
     }
 }

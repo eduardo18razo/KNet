@@ -15,5 +15,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<Area> ObtenerAreas(bool insertarSeleccion);
+
+        [OperationContract]
+        void Guardar(Area area);
     }
 }

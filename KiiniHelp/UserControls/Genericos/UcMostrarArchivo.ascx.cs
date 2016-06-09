@@ -37,15 +37,21 @@ namespace KiiniHelp.UserControls.Genericos
         {
             try
             {
+                string nombreDocto = Request.QueryString["NombreDocumento"];
+                int tipoInformacion = Convert.ToInt32(Request.QueryString["TipoDocumento"]);
+                string directorio = Server.MapPath("~/General");
                 if (!IsPostBack)
                 {
-                    Documentos doctos = new Documentos();
-                    switch (TipoInformacion)
+                    switch (tipoInformacion)
                     {
                         case (int)BusinessVariables.EnumTiposDocumento.Word:
-                            doctos.MostrarWord(NombreDocumento);
+                            Documentos.MostrarDocumento(nombreDocto, Page, directorio);
                             break;
                         case (int)BusinessVariables.EnumTiposDocumento.PowerPoint:
+                            Documentos.MostrarDocumento(nombreDocto, Page, directorio);
+                            break;
+                        case (int)BusinessVariables.EnumTiposDocumento.Excel:
+                            Documentos.MostrarDocumento(nombreDocto, Page, directorio);
                             break;
                     }
                 }

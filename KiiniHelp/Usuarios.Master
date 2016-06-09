@@ -25,6 +25,11 @@
             $(modalName).modal('hide');
             return true;
         }
+        function OpenWindow(url) {
+            debugger;
+            window.open(url, "test", 'type=fullWindow, fullscreen, height=700,width=760');
+        }
+
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -54,7 +59,7 @@
             </div>
             <span id="top-nav">
                 <asp:Button runat="server" CssClass="btn btn-sm btn-success" ID="btnArea" Text="Cambiar area" OnClick="btnArea_OnClick" />
-                <asp:Button runat="server" CssClass="btn btn-sm btn-success" ID="btnsOut" Text="Cerrar Sesion" OnClick="btnsOut_OnClick" style="margin-left: 10px; margin-right: 10px" />
+                <asp:Button runat="server" CssClass="btn btn-sm btn-success" ID="btnsOut" Text="Cerrar Sesion" OnClick="btnsOut_OnClick" Style="margin-left: 10px; margin-right: 10px" />
             </span>
         </header>
 

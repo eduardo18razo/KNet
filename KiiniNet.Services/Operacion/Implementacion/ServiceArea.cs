@@ -39,5 +39,20 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public void Guardar(Area area)
+        {
+            try
+            {
+                using (BusinessArea negocio = new BusinessArea())
+                {
+                    negocio.Guardar(area);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

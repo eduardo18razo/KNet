@@ -80,5 +80,28 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public void Guardar(Area area)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                //TODO: Cambiar habilitado por el embebido
+                area.Habilitado = true;
+                area.Descripcion = area.Descripcion.ToUpper();
+                if (area.Id == 0)
+                    db.Area.AddObject(area);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
     }
 }

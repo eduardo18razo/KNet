@@ -36,7 +36,7 @@
                                     <div class="form-group">
                                         <div class="form-inline verical-center">
                                             <asp:Label runat="server" Text="Nombre" CssClass="col-sm-2 izquierda control-label" />
-                                            <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
+                                            <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" onkeypress="return ValidaCampo(this,1)"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -45,8 +45,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
                                     <div class="row">
@@ -87,7 +85,7 @@
                                                         <%# (bool) Eval("Requerido") ? "SI" : "NO" %>
                                                     </div>
 
-                                                    <div class="col-xs-4 col-md-2 center-content-div" style="width: 200px; padding-left: 0;">
+                                                    <div class="col-xs-4 col-md-2 " style="width: 200px; padding-left: 0;">
                                                         <%# Eval("Descripcion") %>
                                                     </div>
 
@@ -156,7 +154,7 @@
                                 <div class="panel panel-body">
                                     <div class="form-group">
                                         <asp:Label runat="server" Text="Descripcion" />
-                                        <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control input-lg"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control input-lg" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
                                     </div>
                                     <div class="form-group">
                                         <asp:CheckBox runat="server" ID="chkRequerido" AutoPostBack="False" Text="Campo obligatorio" />

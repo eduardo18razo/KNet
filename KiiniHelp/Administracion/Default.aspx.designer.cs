@@ -7,9 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
 namespace KiiniHelp.Administracion {
     
     
@@ -22,7 +19,34 @@ namespace KiiniHelp.Administracion {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected UpdatePanel upAreas;
+        protected global::System.Web.UI.UpdatePanel upAreas;
+        
+        /// <summary>
+        /// panelAlert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlert;
+        
+        /// <summary>
+        /// rptHeaderError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
+        
+        /// <summary>
+        /// divAreas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAreas;
         
         /// <summary>
         /// rptAreas control.
@@ -31,15 +55,6 @@ namespace KiiniHelp.Administracion {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Repeater rptAreas;
-        
-        /// <summary>
-        /// btnCerraGrupos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected Button btnCerraGrupos;
+        protected global::System.Web.UI.WebControls.Repeater rptAreas;
     }
 }

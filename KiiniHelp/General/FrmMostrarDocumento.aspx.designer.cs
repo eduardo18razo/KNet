@@ -7,9 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-
 namespace KiiniHelp.General {
     
     
@@ -22,7 +19,7 @@ namespace KiiniHelp.General {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
         /// scripMain control.
@@ -31,6 +28,6 @@ namespace KiiniHelp.General {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected ScriptManager scripMain;
+        protected global::System.Web.UI.ScriptManager scripMain;
     }
 }

@@ -407,6 +407,22 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 AlertaGeneral = _lstError;
             }
         }
+        protected void btnAddArea_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalGrupos\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
         protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -1257,6 +1273,27 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
             }
         }
         #endregion Cerrar Modales
+
+        protected void btnCerrarAreas_OnClick(object sender, EventArgs e)
+        {
+
+            {
+                try
+                {
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalGrupos\");", true);
+                    LlenaCombos();
+                }
+                catch (Exception ex)
+                {
+                    if (_lstError == null)
+                    {
+                        _lstError = new List<string>();
+                    }
+                    _lstError.Add(ex.Message);
+                    AlertaNivel = _lstError;
+                }
+            }
+        }
     }
 }
 

@@ -134,7 +134,6 @@
     <Content Include="BootStrap\js\accordion-menu.js" />
     <Content Include="BootStrap\js\bootstrap.js" />
     <Content Include="BootStrap\js\bootstrap.min.js" />
-    <Content Include="Administracion\Administracion.master" />
     <Content Include="General\Web.config" />
     <Content Include="Administracion\Web.config" />
     <None Include="BootStrap\js\jquery-1.4.1-vsdoc.js" />
@@ -311,7 +310,6 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Operacion.Usuarios.Usuario.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Operacion.ArbolAcceso.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Menu.datasource" />
-    <Content Include="General\General.master" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Operacion.Ubicacion.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Operacion.Organizacion.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Operacion.Area.datasource" />
@@ -1261,6 +1259,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Ticket\FrmTicket.aspx" />
+    <Content Include="UserControls\Altas\AltaArea.ascx" />
     <Content Include="UserControls\Altas\AltaGrupoUsuario.ascx" />
     <Content Include="UserControls\Altas\AltaEncuesta.ascx" />
     <Content Include="UserControls\Altas\AltaSla.ascx" />
@@ -1531,13 +1530,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administracion\Administracion.master.cs">
-      <DependentUpon>Administracion.master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Administracion\Administracion.master.designer.cs">
-      <DependentUpon>Administracion.master</DependentUpon>
-    </Compile>
     <Compile Include="Administracion\ArbolesAcceso\FrmAltaArbolAcceso.aspx.cs">
       <DependentUpon>FrmAltaArbolAcceso.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1559,9 +1551,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Funciones\Documentos.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="Funciones\Documentos.cs" />
     <Compile Include="Funciones\Metodos.cs" />
     <Compile Include="General\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -1591,13 +1581,6 @@
     <Compile Include="General\FrmMiInformacion.aspx.designer.cs">
       <DependentUpon>FrmMiInformacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="General\General.master.cs">
-      <DependentUpon>General.master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="General\General.master.designer.cs">
-      <DependentUpon>General.master</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1609,6 +1592,13 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Public\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Public\Public.Master.cs">
       <DependentUpon>Public.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1748,6 +1738,13 @@
     <Compile Include="Ticket\FrmTicket.aspx.designer.cs">
       <DependentUpon>FrmTicket.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Altas\AltaArea.ascx.cs">
+      <DependentUpon>AltaArea.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\AltaArea.ascx.designer.cs">
+      <DependentUpon>AltaArea.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Genericos\UcInformacionConsulta.ascx.cs">
       <DependentUpon>UcInformacionConsulta.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1849,6 +1846,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Repositorio\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KiiniNet.Entities\KiiniNet.Entities.csproj">

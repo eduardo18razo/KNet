@@ -4,7 +4,7 @@
     <ContentTemplate>
         <asp:UpdatePanel ID="upGrupos" runat="server">
             <ContentTemplate>
-                <asp:HiddenField runat="server" ID="hfTipoUsuario"/>
+                <asp:HiddenField runat="server" ID="hfTipoUsuario" />
                 <header class="modal-header" id="panelAlertaGrupos" runat="server" visible="false">
                     <div class="alert alert-danger">
                         <div>
@@ -36,7 +36,7 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <div class="col-sm-offset-1">
-                                            <asp:CheckBox runat="server" ID="chkAsignarGruposSistema" AutoPostBack="True" OnCheckedChanged="chkAsignarGruposSistema_OnCheckedChanged" Text="Asignar grupos del sistema"/>
+                                            <asp:CheckBox runat="server" ID="chkAsignarGruposSistema" AutoPostBack="True" OnCheckedChanged="chkAsignarGruposSistema_OnCheckedChanged" Text="Asignar grupos del sistema" />
                                         </div>
                                     </div>
                                     <div class="form-group" runat="server" id="divGrupoAdministrador" visible="False">
@@ -113,12 +113,12 @@
                                             <div class="row form-control" style="margin-top: 5px">
                                                 <asp:Label runat="server" ID="lblIdTipoSubGrupo" Text='<%# Eval("grupoUsuario.TipoGrupo.Id") %>' Visible="False" />
                                                 <asp:Label runat="server" Text='<%# Eval("grupoUsuario.TipoGrupo.Descripcion") %>' Style="width: 50%" />
-                                                - 
-                                                                <asp:Label runat="server" ID="lblIdGrupoUsuario" Text='<%# Eval("GrupoUsuario.Id") %>' Visible="False" />
+                                                > 
+                                                <asp:Label runat="server" ID="lblIdGrupoUsuario" Text='<%# Eval("GrupoUsuario.Id") %>' Visible="False" />
                                                 <asp:Label runat="server" Text='<%# Eval("GrupoUsuario.Descripcion") %>' Style="width: 50%" />
-
+                                                >
                                                 <asp:Label runat="server" ID="lblIdSubGrupo" Text='<%# Eval("SubGrupoUsuario.Id") %>' Visible="False" />
-                                                <asp:Label runat="server" Text='<%# Eval("SubGrupoUsuario.Id") %>' Style="width: 50%" />
+                                                <asp:Label runat="server" Text='<%# Eval("SubGrupoUsuario.SubRol.Descripcion") %>' Style="width: 50%" />
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>

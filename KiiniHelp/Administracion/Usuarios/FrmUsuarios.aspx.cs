@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
@@ -91,7 +92,7 @@ namespace KiiniHelp.Administracion.Usuarios
             }
         }
 
-        
+
 
         private List<string> AlertaCampus
         {
@@ -264,12 +265,13 @@ namespace KiiniHelp.Administracion.Usuarios
             }
         }
 
+
         #region Validaciones
 
         private void ValidaCapturaDatosGenerales()
         {
             StringBuilder sb = new StringBuilder();
-            
+
             if (txtAp.Text.Trim() == string.Empty)
                 sb.AppendLine("<li>Apellido Paterno es un campo obligatorio.</li>");
             if (txtAm.Text.Trim() == string.Empty)
@@ -301,7 +303,13 @@ namespace KiiniHelp.Administracion.Usuarios
                 }
             }
 
+            if ((from txtCorreo in rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox)item.FindControl("txtCorreo")) where txtCorreo.Text.Trim() != string.Empty select Regex.IsMatch(txtCorreo.Text.Trim(), @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z")).Any(isEmail => !isEmail))
+            {
+                throw new Exception("Formato de correo invalido");
+            }
+
             List<CorreoUsuario> correos = rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox)item.FindControl("txtCorreo")).Where(correo => correo != null & correo.Text.Trim() != string.Empty).Select(correo => new CorreoUsuario { Correo = correo.Text.Trim() }).ToList();
+            
             //TODO: Implementar metodo unico
             TipoUsuario paramCorreos = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(false).SingleOrDefault(s => s.Id == int.Parse(ddlTipoUsuario.SelectedValue));
             if (paramCorreos != null && (correos.Count(c => c.Correo != string.Empty) < paramCorreos.CorreosObligatorios))
@@ -601,7 +609,7 @@ namespace KiiniHelp.Administracion.Usuarios
                     }
                 }
                 List<object> lst = new List<object>();
-                
+
                 foreach (ListItem item in chklbxRoles.Items.Cast<ListItem>())
                 {
                     AsociarGrupoUsuario.HabilitaGrupos(Convert.ToInt32(item.Value), item.Selected);
@@ -660,14 +668,21 @@ namespace KiiniHelp.Administracion.Usuarios
                 AlertaGeneral = _lstError;
             }
         }
-
+        #region Ubicacion
         protected void ddlpais_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlCampus);
+                Metodos.LimpiarCombo(ddlTorre);
+                Metodos.LimpiarCombo(ddlPiso);
+                Metodos.LimpiarCombo(ddlZona);
+                Metodos.LimpiarCombo(ddlSubZona);
+                Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlCampus, _servicioUbicacion.ObtenerCampus(idTipoUsuario, id, true));
+                
             }
             catch (Exception ex)
             {
@@ -686,11 +701,13 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlTorre);
+                Metodos.LimpiarCombo(ddlPiso);
+                Metodos.LimpiarCombo(ddlZona);
+                Metodos.LimpiarCombo(ddlSubZona);
+                Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlTorre, _servicioUbicacion.ObtenerTorres(idTipoUsuario, id, true));
-                FiltraCombo((DropDownList)sender, ddlPiso, null);
-                FiltraCombo((DropDownList)sender, ddlZona, null);
-                FiltraCombo((DropDownList)sender, ddlSubZona, null);
-                FiltraCombo((DropDownList)sender, ddlSiteRack, null);
+                
             }
             catch (Exception ex)
             {
@@ -709,10 +726,11 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlPiso);
+                Metodos.LimpiarCombo(ddlZona);
+                Metodos.LimpiarCombo(ddlSubZona);
+                Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlPiso, _servicioUbicacion.ObtenerPisos(idTipoUsuario, id, true));
-                FiltraCombo((DropDownList)sender, ddlZona, null);
-                FiltraCombo((DropDownList)sender, ddlSubZona, null);
-                FiltraCombo((DropDownList)sender, ddlSiteRack, null);
             }
             catch (Exception ex)
             {
@@ -731,9 +749,10 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlZona);
+                Metodos.LimpiarCombo(ddlSubZona);
+                Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlZona, _servicioUbicacion.ObtenerZonas(idTipoUsuario, id, true));
-                FiltraCombo((DropDownList)sender, ddlSubZona, null);
-                FiltraCombo((DropDownList)sender, ddlSiteRack, null);
             }
             catch (Exception ex)
             {
@@ -752,8 +771,9 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlSubZona);
+                Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlSubZona, _servicioUbicacion.ObtenerSubZonas(idTipoUsuario, id, true));
-                FiltraCombo((DropDownList)sender, ddlSiteRack, null);
             }
             catch (Exception ex)
             {
@@ -772,6 +792,7 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlSiteRack, _servicioUbicacion.ObtenerSiteRacks(idTipoUsuario, id, true));
             }
             catch (Exception ex)
@@ -784,13 +805,21 @@ namespace KiiniHelp.Administracion.Usuarios
                 AlertaUbicacion = _lstError;
             }
         }
+        #endregion Ubicacion
 
+        #region Organizacion
         protected void ddlHolding_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlCompañia);
+                Metodos.LimpiarCombo(ddlDireccion);
+                Metodos.LimpiarCombo(ddlSubDireccion);
+                Metodos.LimpiarCombo(ddlGerencia);
+                Metodos.LimpiarCombo(ddlSubGerencia);
+                Metodos.LimpiarCombo(ddlJefatura);
                 FiltraCombo((DropDownList)sender, ddlCompañia, _servicioOrganizacion.ObtenerCompañias(idTipoUsuario, id, true));
             }
             catch (Exception ex)
@@ -810,6 +839,11 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlDireccion);
+                Metodos.LimpiarCombo(ddlSubDireccion);
+                Metodos.LimpiarCombo(ddlGerencia);
+                Metodos.LimpiarCombo(ddlSubGerencia);
+                Metodos.LimpiarCombo(ddlJefatura);
                 FiltraCombo((DropDownList)sender, ddlDireccion, _servicioOrganizacion.ObtenerDirecciones(idTipoUsuario, id, true));
             }
             catch (Exception ex)
@@ -829,6 +863,10 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlSubDireccion);
+                Metodos.LimpiarCombo(ddlGerencia);
+                Metodos.LimpiarCombo(ddlSubGerencia);
+                Metodos.LimpiarCombo(ddlJefatura);
                 FiltraCombo((DropDownList)sender, ddlSubDireccion, _servicioOrganizacion.ObtenerSubDirecciones(idTipoUsuario, id, true));
             }
             catch (Exception ex)
@@ -848,6 +886,9 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlGerencia);
+                Metodos.LimpiarCombo(ddlSubGerencia);
+                Metodos.LimpiarCombo(ddlJefatura);
                 FiltraCombo((DropDownList)sender, ddlGerencia, _servicioOrganizacion.ObtenerGerencias(idTipoUsuario, id, true));
             }
             catch (Exception ex)
@@ -867,6 +908,8 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlSubGerencia);
+                Metodos.LimpiarCombo(ddlJefatura);
                 FiltraCombo((DropDownList)sender, ddlSubGerencia, _servicioOrganizacion.ObtenerSubGerencias(idTipoUsuario, id, true));
             }
             catch (Exception ex)
@@ -886,6 +929,7 @@ namespace KiiniHelp.Administracion.Usuarios
             {
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlJefatura);
                 FiltraCombo((DropDownList)sender, ddlJefatura, _servicioOrganizacion.ObtenerJefaturas(idTipoUsuario, id, true));
             }
             catch (Exception ex)
@@ -898,11 +942,7 @@ namespace KiiniHelp.Administracion.Usuarios
                 AlertaOrganizacion = _lstError;
             }
         }
-
-        protected void ddlJefatura_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
+        #endregion Organizacion
         #endregion dropDownList
 
         #region botones guardar crear
@@ -1428,7 +1468,7 @@ namespace KiiniHelp.Administracion.Usuarios
 
 
         #endregion botones cerrar Cancelar
-        
+
         protected void btnCerrarGrupos_OnClick(object sender, EventArgs e)
         {
             try
@@ -1444,6 +1484,7 @@ namespace KiiniHelp.Administracion.Usuarios
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
+                
             }
         }
     }

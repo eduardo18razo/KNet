@@ -46,8 +46,8 @@
 <div class="modal fade" id="modalMuestraInformacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <asp:UpdatePanel ID="upMostrarInformacion" runat="server">
         <ContentTemplate>
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+            <div class="modal-dialog modal-lg" style="width: 90%;">
+                <div class="modal-content" style="width: 100%;">
                     <div class="modal-header" id="panelAlertaModal" runat="server" visible="False">
                         <div class="alert alert-danger">
                             <div>
@@ -73,11 +73,11 @@
                             <asp:Label runat="server" ID="lblContenido" ></asp:Label>
                         </div>
                         <div runat="server" ID="divInfoDocto" Visible="False">
-                            <iframe runat="server" ID="ifDoctos" scrolling="yes" frameborder="0" style="border:none; overflow:hidden; width:896px; height:500px;" allowTransparency="true"></iframe>
+                            <iframe runat="server" ID="ifDoctos" scrolling="yes" frameborder="0" style="border:none; overflow:hidden; width:100%; height:700px;" allowTransparency="true"></iframe>
                         </div>
                     </div>
                     <div class="modal-footer" style="text-align: center">
-                        <asp:Button ID="btnCerrarModalInfo" runat="server" CssClass="btn btn-lg btn-danger" Text="Cerrar" OnClick="btnCerrarModalInfo_OnClick" />
+                        <asp:Button ID="btnCerrarModalInfo" runat="server" CssClass="btn btn-lg btn-danger" Text="Cerrar" OnClick="btnCerrarModalInfo_OnClick" data-dismiss="modal" />
                     </div>
 
                 </div>

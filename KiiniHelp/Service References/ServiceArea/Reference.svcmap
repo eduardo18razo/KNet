@@ -31,12 +31,12 @@
     <MetadataFile FileName="ServiceArea4.xsd" MetadataType="Schema" ID="87c407ce-d390-4f99-a8ff-9bd9b6e6354b" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd11" />
     <MetadataFile FileName="ServiceArea5.xsd" MetadataType="Schema" ID="8ca801ae-c168-4410-a70e-a21a396edb38" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd12" />
     <MetadataFile FileName="ServiceArea6.xsd" MetadataType="Schema" ID="e46c8219-01c1-4c30-995b-1eca7e7763f7" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd6" />
-    <MetadataFile FileName="ServiceArea7.xsd" MetadataType="Schema" ID="3721c9e9-cd63-4923-87da-b05e04e86645" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd9" />
+    <MetadataFile FileName="ServiceArea11.xsd" MetadataType="Schema" ID="ddbd9fcd-8653-49af-84a1-edabfe7d7ed6" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd10" />
     <MetadataFile FileName="ServiceArea8.xsd" MetadataType="Schema" ID="116940e6-3a80-4d40-8026-c27e0799a658" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd5" />
     <MetadataFile FileName="ServiceArea.wsdl" MetadataType="Wsdl" ID="3a04281f-1a9a-46c1-8df7-97ff3aa3d594" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?wsdl" />
     <MetadataFile FileName="ServiceArea9.xsd" MetadataType="Schema" ID="a4c401a1-80a9-42af-9e2d-691ef513592c" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd8" />
     <MetadataFile FileName="ServiceArea10.xsd" MetadataType="Schema" ID="fb83ff1b-cccf-4272-8cad-aef40ab277e5" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd1" />
-    <MetadataFile FileName="ServiceArea11.xsd" MetadataType="Schema" ID="ddbd9fcd-8653-49af-84a1-edabfe7d7ed6" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd10" />
+    <MetadataFile FileName="ServiceArea7.xsd" MetadataType="Schema" ID="3721c9e9-cd63-4923-87da-b05e04e86645" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd9" />
     <MetadataFile FileName="ServiceArea12.xsd" MetadataType="Schema" ID="534c69c2-8621-4ed0-952c-ad1036a1dc0d" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd3" />
   </Metadata>
   <Extensions>

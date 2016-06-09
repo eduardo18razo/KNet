@@ -59,28 +59,13 @@ namespace KinniNet.Core.Security
                 {
                     db.ContextOptions.ProxyCreationEnabled = _proxy;
                     if (db.Usuario.Count(w => w.NombreUsuario == user && w.Password == password) > 1)
-                        throw new Exception("");
+                        throw new Exception("Error al obtener informacion consulte a su Administrador");
                     result = db.Usuario.SingleOrDefault(w => w.NombreUsuario == user && w.Password == password);
                     if (result != null)
                     {
-                        //db.LoadProperty(result, "CorreoUsuario");
-                        //db.LoadProperty(result, "TelefonoUsuario");
                         db.LoadProperty(result, "Organizacion");
                         db.LoadProperty(result, "Ubicacion");
                         db.LoadProperty(result, "TipoUsuario");
-                        //db.LoadProperty(result, "UsuarioGrupo");
-                        //foreach (UsuarioGrupo grupo in result.UsuarioGrupo)
-                        //{
-                        //    db.LoadProperty(grupo, "GrupoUsuario");
-                        //    if (grupo.GrupoUsuario != null)
-                        //        db.LoadProperty(grupo.GrupoUsuario, "GrupoUsuarioInventarioArbol");
-                        //    foreach (GrupoUsuarioInventarioArbol inventarioArbol in grupo.GrupoUsuario.GrupoUsuarioInventarioArbol)
-                        //    {
-                        //        db.LoadProperty(inventarioArbol, "InventarioArbolAcceso");
-                        //        if (inventarioArbol.InventarioArbolAcceso != null)
-                        //            db.LoadProperty(inventarioArbol.InventarioArbolAcceso, "ArbolAcceso");
-                        //    }
-                        //}
                         db.LoadProperty(result, "UsuarioRol");
                         foreach (UsuarioRol rol in result.UsuarioRol)
                         {
@@ -91,7 +76,7 @@ namespace KinniNet.Core.Security
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception((ex.InnerException).Message);
+                    throw new Exception(ex.Message);
                 }
                 finally
                 {

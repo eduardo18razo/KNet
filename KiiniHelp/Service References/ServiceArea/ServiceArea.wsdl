@@ -29,6 +29,12 @@
   <wsdl:message name="IServiceArea_ObtenerAreas_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerAreasResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceArea_Guardar_InputMessage">
+    <wsdl:part name="parameters" element="tns:Guardar" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArea_Guardar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceArea">
     <wsdl:operation name="ObtenerAreasUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuario" message="tns:IServiceArea_ObtenerAreasUsuario_InputMessage" />
@@ -37,6 +43,10 @@
     <wsdl:operation name="ObtenerAreas">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceArea/ObtenerAreas" message="tns:IServiceArea_ObtenerAreas_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceArea/ObtenerAreasResponse" message="tns:IServiceArea_ObtenerAreas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Guardar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceArea/Guardar" message="tns:IServiceArea_Guardar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceArea/GuardarResponse" message="tns:IServiceArea_Guardar_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceArea">
@@ -52,6 +62,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerAreas">
       <soap:operation soapAction="http://tempuri.org/IServiceArea/ObtenerAreas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Guardar">
+      <soap:operation soapAction="http://tempuri.org/IServiceArea/Guardar" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

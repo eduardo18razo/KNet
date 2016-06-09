@@ -99,6 +99,8 @@ D:\KiiniNet\Actual\KiiniHelp\obj\Debug\KiiniHelp.csprojResolveAssemblyReference.
 D:\KiiniNet\Actual\KiiniHelp\obj\Debug\KiiniHelp.csproj.ResolveComReference.cache
 D:\KiiniNet\Actual\KiiniHelp\obj\Debug\KiiniHelp.dll
 D:\KiiniNet\Actual\KiiniHelp\obj\Debug\KiiniHelp.pdb
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\obj\Debug\KiiniHelp.csprojResolveAssemblyReference.cache
+C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\obj\Debug\KiiniHelp.csproj.ResolveComReference.cache
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\KiiniHelp.dll.config
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\KiiniHelp.dll
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\KiiniHelp.pdb
@@ -129,7 +131,5 @@ C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\Kii
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\System.Net.Http.xml
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\es\System.Web.Optimization.resources.dll
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\es\System.Web.Providers.resources.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\obj\Debug\KiiniHelp.csprojResolveAssemblyReference.cache
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\obj\Debug\KiiniHelp.csproj.ResolveComReference.cache
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\obj\Debug\KiiniHelp.dll
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\obj\Debug\KiiniHelp.pdb

@@ -40,6 +40,15 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
         
         /// <summary>
+        /// upSeleccionArea control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upSeleccionArea;
+        
+        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>
@@ -623,5 +632,32 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCerrarEncuesta;
+        
+        /// <summary>
+        /// upModalAltaAreas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upModalAltaAreas;
+        
+        /// <summary>
+        /// AltaAreas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Altas.AltaArea AltaAreas;
+        
+        /// <summary>
+        /// btnCerrarGrupos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCerrarGrupos;
     }
 }

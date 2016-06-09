@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
@@ -98,14 +99,52 @@ namespace KiiniHelp.UserControls.Seleccion
 
         public bool ValidaCapturaGrupos()
         {
-            if (rptUsuarioGrupo.Items.Count > 0) return true;
-            if (_lstError == null)
+            StringBuilder sb = new StringBuilder(); 
+            try
             {
-                _lstError = new List<string>();
+                if (Administrador)
+                    if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.Administrador) <= 0)
+                        sb.AppendLine("<li>Debe asignar al menos un grupo de Tipo Administrador.</li>");
+                if (Acceso)
+                    if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.Acceso) <= 0)
+                        sb.AppendLine("<li>Debe asignar al menos un grupo de Tipo Acceso.</li>");
+                if (EspecialConsulta)
+                    if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.EspecialDeConsulta) <= 0)
+                        sb.AppendLine("<li>Debe asignar al menos un grupo de Tipo Especial de consulta.</li>");
+                if (Atencion)
+                    if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.ResponsableDeAtención) <= 0)
+                        sb.AppendLine("<li>Debe asignar al menos un grupo de Tipo Responsable de Atención.</li>");
+                if (Mtto)
+                    if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento) <= 0)
+                        sb.AppendLine("<li>Debe asignar al menos un grupo de Tipo Responsable de Mantenimiento.</li>");
+                if (Operacion)
+                    if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.ResponsableDeOperación) <= 0)
+                        sb.AppendLine("<li>Debe asignar al menos un grupo de Tipo Responsable de Operación.</li>");
+                if (Desarrollo)
+                    if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo) <= 0)
+                        sb.AppendLine("<li>Debe asignar al menos un grupo de Tipo Responsable de Desarrollo.</li>");
+
+                if (sb.ToString() != string.Empty)
+                {
+                    sb.Append("</ul>");
+                    sb.Insert(0, "<ul>");
+                    sb.Insert(0, "<h3>Asignación de Grupos</h3>");
+                    throw new Exception(sb.ToString());
+                }
             }
-            _lstError.Add("Debe asignar la menos un grupo");
-            AlertaGrupos = _lstError;
-            return false;
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGrupos = _lstError;
+                return false;
+            }
+
+            
+            return true;
         }
 
         private void ObtenerGruposHerencia()

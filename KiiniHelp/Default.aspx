@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="KiiniHelp.Default" %>
 
+<%@ Register Src="~/UserControls/Altas/AltaArea.ascx" TagPrefix="uc1" TagName="AltaArea" %>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -39,6 +42,7 @@
             <asp:LinkButton runat="server" CssClass="btn btn-lg btn-primary" Text="Cliente Invitado" PostBackUrl="~/Public/Default.aspx" />
             <asp:LinkButton runat="server" CssClass="btn btn-lg btn-primary" Text="Proveedor Invitado" PostBackUrl="~/Public/Default.aspx" />
         </div>
+        <uc1:AltaArea runat="server" ID="AltaArea" />
         <div class="well" style="text-align: center"> 
             <asp:LinkButton runat="server" CssClass="btn btn-lg btn-success" Text="Ingresar" PostBackUrl="Login.aspx"/>
         </div>

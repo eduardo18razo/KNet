@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceArea;
+using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniHelp.Administracion
@@ -9,12 +12,40 @@ namespace KiiniHelp.Administracion
     public partial class Default : Page
     {
         readonly ServiceAreaClient _servicioArea = new ServiceAreaClient();
+
+        private List<string> _lstError = new List<string>();
+
+        private List<string> AlertaGeneral
+        {
+            set
+            {
+                panelAlert.Visible = value.Any();
+                if (!panelAlert.Visible) return;
+                rptHeaderError.DataSource = value;
+                rptHeaderError.DataBind();
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                rptAreas.DataSource = _servicioArea.ObtenerAreasUsuario(((Usuario)Session["UserData"]).Id);
-                rptAreas.DataBind();
+                if (!IsPostBack)
+                {
+                    List<Area> lstAreas = _servicioArea.ObtenerAreasUsuario(((Usuario)Session["UserData"]).Id);
+                    divAreas.Visible = lstAreas.Count > 0;
+                    rptAreas.DataSource = lstAreas;
+                    rptAreas.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
         protected void btnArea_OnClick(object sender, EventArgs e)
@@ -25,12 +56,17 @@ namespace KiiniHelp.Administracion
                 if (btn != null)
                 {
                     Session["AreaSeleccionada"] = btn.CommandArgument;
-                    Response.Redirect("");
+                    Response.Redirect("~/General/Default.aspx");
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
     }

@@ -7,9 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-
 namespace KiiniHelp {
     
     
@@ -22,7 +19,7 @@ namespace KiiniHelp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
         /// scripMain control.
@@ -31,6 +28,15 @@ namespace KiiniHelp {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected ScriptManager scripMain;
+        protected global::System.Web.UI.ScriptManager scripMain;
+        
+        /// <summary>
+        /// AltaArea control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Altas.AltaArea AltaArea;
     }
 }
