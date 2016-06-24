@@ -8,34 +8,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using KiiniNet.Entities.Cat.Sistema;
-
 namespace KiiniHelp.ServiceSistemaTipoUsuario {
     
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    [ServiceContract(ConfigurationName="ServiceSistemaTipoUsuario.IServiceTipoUsuario")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceSistemaTipoUsuario.IServiceTipoUsuario")]
     public interface IServiceTipoUsuario {
         
-        [OperationContract(Action="http://tempuri.org/IServiceTipoUsuario/ObtenerTiposUsuarioResidentes", ReplyAction="http://tempuri.org/IServiceTipoUsuario/ObtenerTiposUsuarioResidentesResponse")]
-        List<TipoUsuario> ObtenerTiposUsuarioResidentes(bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoUsuario/ObtenerTiposUsuarioResidentes", ReplyAction="http://tempuri.org/IServiceTipoUsuario/ObtenerTiposUsuarioResidentesResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoUsuario> ObtenerTiposUsuarioResidentes(bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceTipoUsuario/ObtenerTiposUsuarioInvitados", ReplyAction="http://tempuri.org/IServiceTipoUsuario/ObtenerTiposUsuarioInvitadosResponse")]
-        List<TipoUsuario> ObtenerTiposUsuarioInvitados(bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoUsuario/ObtenerTiposUsuarioInvitados", ReplyAction="http://tempuri.org/IServiceTipoUsuario/ObtenerTiposUsuarioInvitadosResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoUsuario> ObtenerTiposUsuarioInvitados(bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoUsuario/ObtenerTiposUsuario", ReplyAction="http://tempuri.org/IServiceTipoUsuario/ObtenerTiposUsuarioResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoUsuario> ObtenerTiposUsuario(bool insertarSeleccion);
     }
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceTipoUsuarioChannel : IServiceTipoUsuario, IClientChannel {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceTipoUsuarioChannel : KiiniHelp.ServiceSistemaTipoUsuario.IServiceTipoUsuario, System.ServiceModel.IClientChannel {
     }
     
-    [DebuggerStepThrough()]
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceTipoUsuarioClient : ClientBase<IServiceTipoUsuario>, IServiceTipoUsuario {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceTipoUsuarioClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceSistemaTipoUsuario.IServiceTipoUsuario>, KiiniHelp.ServiceSistemaTipoUsuario.IServiceTipoUsuario {
         
         public ServiceTipoUsuarioClient() {
         }
@@ -48,20 +44,24 @@ namespace KiiniHelp.ServiceSistemaTipoUsuario {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceTipoUsuarioClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
+        public ServiceTipoUsuarioClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceTipoUsuarioClient(Binding binding, EndpointAddress remoteAddress) : 
+        public ServiceTipoUsuarioClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public List<TipoUsuario> ObtenerTiposUsuarioResidentes(bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoUsuario> ObtenerTiposUsuarioResidentes(bool insertarSeleccion) {
             return base.Channel.ObtenerTiposUsuarioResidentes(insertarSeleccion);
         }
         
-        public List<TipoUsuario> ObtenerTiposUsuarioInvitados(bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoUsuario> ObtenerTiposUsuarioInvitados(bool insertarSeleccion) {
             return base.Channel.ObtenerTiposUsuarioInvitados(insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoUsuario> ObtenerTiposUsuario(bool insertarSeleccion) {
+            return base.Channel.ObtenerTiposUsuario(insertarSeleccion);
         }
     }
 }

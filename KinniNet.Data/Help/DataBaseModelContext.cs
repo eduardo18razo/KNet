@@ -50,6 +50,8 @@ namespace KinniNet.Data.Help
                 _respuestaTipoEncuesta = CreateObjectSet<RespuestaTipoEncuesta>();
                 _menu = CreateObjectSet<Menu>();
                 _rolMenu = CreateObjectSet<RolMenu>();
+                _estatusTicket = CreateObjectSet<EstatusTicket>();
+                _estatusAsignacion = CreateObjectSet<EstatusAsignacion>();
 
                 //Ubicacion
                 _pais = CreateObjectSet<Pais>();
@@ -579,6 +581,22 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<EstatusTicket> EstatusTicket
+        {
+            get
+            {
+                return _estatusTicket;
+            }
+        }
+
+        public ObjectSet<EstatusAsignacion> EstatusAsignacion
+        {
+            get
+            {
+                return _estatusAsignacion;
+            }
+        }
+
 
         private ObjectSet<TipoUsuario> _tipoUsuario;
         private ObjectSet<Pais> _pais;
@@ -598,6 +616,9 @@ namespace KinniNet.Data.Help
         private ObjectSet<RespuestaTipoEncuesta> _respuestaTipoEncuesta;
         private ObjectSet<Menu> _menu;
         private ObjectSet<RolMenu> _rolMenu;
+
+        private ObjectSet<EstatusTicket> _estatusTicket;
+        private ObjectSet<EstatusAsignacion> _estatusAsignacion;
 
         #endregion Systema
 

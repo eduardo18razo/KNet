@@ -36,7 +36,7 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <div class="col-sm-offset-1">
-                                            <asp:CheckBox runat="server" ID="chkAsignarGruposSistema" AutoPostBack="True" OnCheckedChanged="chkAsignarGruposSistema_OnCheckedChanged" Text="Asignar grupos del sistema" />
+                                            <asp:CheckBox runat="server" ID="chkAsignarGruposSistema" AutoPostBack="True" OnCheckedChanged="chkAsignarGruposSistema_OnCheckedChanged" Text="Asignar grupos del sistema" Visible="False" />
                                         </div>
                                     </div>
                                     <div class="form-group" runat="server" id="divGrupoAdministrador" visible="False">
@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="form-group" runat="server" id="divGrupoRespOperacion" visible="False">
                                         <div class="col-sm-offset-1">
-                                            <asp:Label runat="server" Text="Responsable de Operación" class="col-sm-3 control-label"></asp:Label>
+                                            <asp:Label runat="server" Text="Dueño del producto" class="col-sm-3 control-label"></asp:Label>
                                             <asp:DropDownList runat="server" Width="250px" ID="ddlGrupoResponsableOperacion" CssClass="DropSelect" AutoPostBack="True" />
                                             <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="6" />
                                             <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="6" />
@@ -144,7 +144,7 @@
         <ContentTemplate>
             <div class="modal-dialog modal-md">
                 <div class="modal-content">
-                    <uc:AltaGrupoUsuario runat="server" ID="ucltaGrupoUsuario" />
+                    <uc:AltaGrupoUsuario runat="server" ID="ucAltaGrupoUsuario" />
                     <div class="modal-footer">
                         <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarModalAltaGrupoUsuario" Text="Cerrar" OnClick="btnCerrarModalAltaGrupoUsuario_OnClick" />
                     </div>

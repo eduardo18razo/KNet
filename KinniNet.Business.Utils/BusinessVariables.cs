@@ -4,7 +4,7 @@ namespace KinniNet.Business.Utils
 {
     public static class BusinessVariables
     {
-        
+
         public static class ComboBoxCatalogo
         {
             public static int Index = 0;
@@ -19,6 +19,37 @@ namespace KinniNet.Business.Utils
             public static string PrefijoComandoInsertar = "uspInsert";
             public static string PrefijoComandoActualizar = "uspUpdate";
 
+        }
+
+        public static class EnumeradoresKiiniNet
+        {
+            public enum EnumEstatusTicket
+            {
+                Abierto = 1,
+                Cancelado = 2,
+                ReTipificado = 3,
+                ReAbierto = 4,
+                Resuelto = 5,
+                Cerrado = 6
+            }
+
+            public enum EnumEstatusAsignacion
+            {
+                PorAsignar = 1,
+                Asignado = 2,
+                ReAsignado = 3,
+                Escalado = 4,
+                Autoasignado = 5
+            }
+        }
+        public enum EnumTiposUsuario
+        {
+            Empleado = 1,
+            EmpleadoInvitado = 2,
+            Cliente = 3,
+            ClienteInvitado = 4,
+            Proveedor = 5,
+            ProveedorInvitado = 6,
         }
 
         public enum EnumTiposDocumento

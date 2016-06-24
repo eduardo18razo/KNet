@@ -8,78 +8,72 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using KiiniNet.Entities.Cat.Arbol.Organizacion;
-using KiiniNet.Entities.Cat.Operacion;
-
 namespace KiiniHelp.ServiceOrganizacion {
     
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    [ServiceContract(ConfigurationName="ServiceOrganizacion.IServiceOrganizacion")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceOrganizacion.IServiceOrganizacion")]
     public interface IServiceOrganizacion {
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/ObtenerHoldings", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerHoldingsResponse")]
-        List<Holding> ObtenerHoldings(int idTipoUsuario, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerHoldings", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerHoldingsResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.Holding> ObtenerHoldings(int idTipoUsuario, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/ObtenerCompañias", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerCompañiasResponse")]
-        List<Compania> ObtenerCompañias(int idTipoUsuario, int idHolding, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerCompañias", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerCompañiasResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.Compania> ObtenerCompañias(int idTipoUsuario, int idHolding, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/ObtenerDirecciones", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerDireccionesResponse")]
-        List<Direccion> ObtenerDirecciones(int idTipoUsuario, int idCompañia, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerDirecciones", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerDireccionesResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.Direccion> ObtenerDirecciones(int idTipoUsuario, int idCompañia, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/ObtenerSubDirecciones", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerSubDireccionesResponse")]
-        List<SubDireccion> ObtenerSubDirecciones(int idTipoUsuario, int idDireccoin, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerSubDirecciones", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerSubDireccionesResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.SubDireccion> ObtenerSubDirecciones(int idTipoUsuario, int idDireccoin, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/ObtenerGerencias", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerGerenciasResponse")]
-        List<Gerencia> ObtenerGerencias(int idTipoUsuario, int idSubdireccion, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerGerencias", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerGerenciasResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.Gerencia> ObtenerGerencias(int idTipoUsuario, int idSubdireccion, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/ObtenerSubGerencias", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerSubGerenciasResponse")]
-        List<SubGerencia> ObtenerSubGerencias(int idTipoUsuario, int idGerencia, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerSubGerencias", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerSubGerenciasResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.SubGerencia> ObtenerSubGerencias(int idTipoUsuario, int idGerencia, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/ObtenerJefaturas", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerJefaturasResponse")]
-        List<Jefatura> ObtenerJefaturas(int idTipoUsuario, int idSubGerencia, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerJefaturas", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerJefaturasResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.Jefatura> ObtenerJefaturas(int idTipoUsuario, int idSubGerencia, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacion", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionResponse")]
-        Organizacion ObtenerOrganizacion(int idHolding, Nullable<int> idCompania, Nullable<int> idDireccion, Nullable<int> idSubDireccion, Nullable<int> idGerencia, Nullable<int> idSubGerencia, Nullable<int> idJefatura);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacion", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionResponse")]
+        KiiniNet.Entities.Cat.Operacion.Organizacion ObtenerOrganizacion(int idHolding, System.Nullable<int> idCompania, System.Nullable<int> idDireccion, System.Nullable<int> idSubDireccion, System.Nullable<int> idGerencia, System.Nullable<int> idSubGerencia, System.Nullable<int> idJefatura);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/GuardarOrganizacion", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarOrganizacionResponse")]
-        void GuardarOrganizacion(Organizacion organizacion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/GuardarOrganizacion", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarOrganizacionResponse")]
+        void GuardarOrganizacion(KiiniNet.Entities.Cat.Operacion.Organizacion organizacion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/GuardarHolding", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarHoldingResponse")]
-        void GuardarHolding(Holding entidad);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/GuardarHolding", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarHoldingResponse")]
+        void GuardarHolding(KiiniNet.Entities.Cat.Arbol.Organizacion.Holding entidad);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/GuardarCompania", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarCompaniaResponse")]
-        void GuardarCompania(Compania entidad);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/GuardarCompania", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarCompaniaResponse")]
+        void GuardarCompania(KiiniNet.Entities.Cat.Arbol.Organizacion.Compania entidad);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/GuardarDireccion", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarDireccionResponse")]
-        void GuardarDireccion(Direccion entidad);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/GuardarDireccion", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarDireccionResponse")]
+        void GuardarDireccion(KiiniNet.Entities.Cat.Arbol.Organizacion.Direccion entidad);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/GuardarSubDireccion", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarSubDireccionResponse")]
-        void GuardarSubDireccion(SubDireccion entidad);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/GuardarSubDireccion", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarSubDireccionResponse")]
+        void GuardarSubDireccion(KiiniNet.Entities.Cat.Arbol.Organizacion.SubDireccion entidad);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/GuardarGerencia", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarGerenciaResponse")]
-        void GuardarGerencia(Gerencia entidad);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/GuardarGerencia", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarGerenciaResponse")]
+        void GuardarGerencia(KiiniNet.Entities.Cat.Arbol.Organizacion.Gerencia entidad);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/GuardarSubGerencia", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarSubGerenciaResponse")]
-        void GuardarSubGerencia(SubGerencia entidad);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/GuardarSubGerencia", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarSubGerenciaResponse")]
+        void GuardarSubGerencia(KiiniNet.Entities.Cat.Arbol.Organizacion.SubGerencia entidad);
         
-        [OperationContract(Action="http://tempuri.org/IServiceOrganizacion/GuardarJefatura", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarJefaturaResponse")]
-        void GuardarJefatura(Jefatura entidad);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/GuardarJefatura", ReplyAction="http://tempuri.org/IServiceOrganizacion/GuardarJefaturaResponse")]
+        void GuardarJefatura(KiiniNet.Entities.Cat.Arbol.Organizacion.Jefatura entidad);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionUsuario", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionUsuarioResponse")]
+        KiiniNet.Entities.Cat.Operacion.Organizacion ObtenerOrganizacionUsuario(int idOrganizacion);
     }
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceOrganizacionChannel : IServiceOrganizacion, IClientChannel {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceOrganizacionChannel : KiiniHelp.ServiceOrganizacion.IServiceOrganizacion, System.ServiceModel.IClientChannel {
     }
     
-    [DebuggerStepThrough()]
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceOrganizacionClient : ClientBase<IServiceOrganizacion>, IServiceOrganizacion {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceOrganizacionClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceOrganizacion.IServiceOrganizacion>, KiiniHelp.ServiceOrganizacion.IServiceOrganizacion {
         
         public ServiceOrganizacionClient() {
         }
@@ -92,76 +86,80 @@ namespace KiiniHelp.ServiceOrganizacion {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceOrganizacionClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
+        public ServiceOrganizacionClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceOrganizacionClient(Binding binding, EndpointAddress remoteAddress) : 
+        public ServiceOrganizacionClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public List<Holding> ObtenerHoldings(int idTipoUsuario, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.Holding> ObtenerHoldings(int idTipoUsuario, bool insertarSeleccion) {
             return base.Channel.ObtenerHoldings(idTipoUsuario, insertarSeleccion);
         }
         
-        public List<Compania> ObtenerCompañias(int idTipoUsuario, int idHolding, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.Compania> ObtenerCompañias(int idTipoUsuario, int idHolding, bool insertarSeleccion) {
             return base.Channel.ObtenerCompañias(idTipoUsuario, idHolding, insertarSeleccion);
         }
         
-        public List<Direccion> ObtenerDirecciones(int idTipoUsuario, int idCompañia, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.Direccion> ObtenerDirecciones(int idTipoUsuario, int idCompañia, bool insertarSeleccion) {
             return base.Channel.ObtenerDirecciones(idTipoUsuario, idCompañia, insertarSeleccion);
         }
         
-        public List<SubDireccion> ObtenerSubDirecciones(int idTipoUsuario, int idDireccoin, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.SubDireccion> ObtenerSubDirecciones(int idTipoUsuario, int idDireccoin, bool insertarSeleccion) {
             return base.Channel.ObtenerSubDirecciones(idTipoUsuario, idDireccoin, insertarSeleccion);
         }
         
-        public List<Gerencia> ObtenerGerencias(int idTipoUsuario, int idSubdireccion, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.Gerencia> ObtenerGerencias(int idTipoUsuario, int idSubdireccion, bool insertarSeleccion) {
             return base.Channel.ObtenerGerencias(idTipoUsuario, idSubdireccion, insertarSeleccion);
         }
         
-        public List<SubGerencia> ObtenerSubGerencias(int idTipoUsuario, int idGerencia, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.SubGerencia> ObtenerSubGerencias(int idTipoUsuario, int idGerencia, bool insertarSeleccion) {
             return base.Channel.ObtenerSubGerencias(idTipoUsuario, idGerencia, insertarSeleccion);
         }
         
-        public List<Jefatura> ObtenerJefaturas(int idTipoUsuario, int idSubGerencia, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Organizacion.Jefatura> ObtenerJefaturas(int idTipoUsuario, int idSubGerencia, bool insertarSeleccion) {
             return base.Channel.ObtenerJefaturas(idTipoUsuario, idSubGerencia, insertarSeleccion);
         }
         
-        public Organizacion ObtenerOrganizacion(int idHolding, Nullable<int> idCompania, Nullable<int> idDireccion, Nullable<int> idSubDireccion, Nullable<int> idGerencia, Nullable<int> idSubGerencia, Nullable<int> idJefatura) {
+        public KiiniNet.Entities.Cat.Operacion.Organizacion ObtenerOrganizacion(int idHolding, System.Nullable<int> idCompania, System.Nullable<int> idDireccion, System.Nullable<int> idSubDireccion, System.Nullable<int> idGerencia, System.Nullable<int> idSubGerencia, System.Nullable<int> idJefatura) {
             return base.Channel.ObtenerOrganizacion(idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
         }
         
-        public void GuardarOrganizacion(Organizacion organizacion) {
+        public void GuardarOrganizacion(KiiniNet.Entities.Cat.Operacion.Organizacion organizacion) {
             base.Channel.GuardarOrganizacion(organizacion);
         }
         
-        public void GuardarHolding(Holding entidad) {
+        public void GuardarHolding(KiiniNet.Entities.Cat.Arbol.Organizacion.Holding entidad) {
             base.Channel.GuardarHolding(entidad);
         }
         
-        public void GuardarCompania(Compania entidad) {
+        public void GuardarCompania(KiiniNet.Entities.Cat.Arbol.Organizacion.Compania entidad) {
             base.Channel.GuardarCompania(entidad);
         }
         
-        public void GuardarDireccion(Direccion entidad) {
+        public void GuardarDireccion(KiiniNet.Entities.Cat.Arbol.Organizacion.Direccion entidad) {
             base.Channel.GuardarDireccion(entidad);
         }
         
-        public void GuardarSubDireccion(SubDireccion entidad) {
+        public void GuardarSubDireccion(KiiniNet.Entities.Cat.Arbol.Organizacion.SubDireccion entidad) {
             base.Channel.GuardarSubDireccion(entidad);
         }
         
-        public void GuardarGerencia(Gerencia entidad) {
+        public void GuardarGerencia(KiiniNet.Entities.Cat.Arbol.Organizacion.Gerencia entidad) {
             base.Channel.GuardarGerencia(entidad);
         }
         
-        public void GuardarSubGerencia(SubGerencia entidad) {
+        public void GuardarSubGerencia(KiiniNet.Entities.Cat.Arbol.Organizacion.SubGerencia entidad) {
             base.Channel.GuardarSubGerencia(entidad);
         }
         
-        public void GuardarJefatura(Jefatura entidad) {
+        public void GuardarJefatura(KiiniNet.Entities.Cat.Arbol.Organizacion.Jefatura entidad) {
             base.Channel.GuardarJefatura(entidad);
+        }
+        
+        public KiiniNet.Entities.Cat.Operacion.Organizacion ObtenerOrganizacionUsuario(int idOrganizacion) {
+            return base.Channel.ObtenerOrganizacionUsuario(idOrganizacion);
         }
     }
 }

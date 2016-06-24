@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
+using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
 
@@ -47,7 +49,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<GrupoUsuario> ObtenerGruposUsuarioSistema(int idTipoUsuario)
         {
             List<GrupoUsuario> result;
@@ -55,7 +56,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.GrupoUsuario.Where(w => w.Habilitado &&w.IdTipoUsuario == idTipoUsuario && w.Sistema && w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Administrador)
+                result = db.GrupoUsuario.Where(w => w.Habilitado && w.IdTipoUsuario == idTipoUsuario && w.Sistema && w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Administrador)
                         .OrderBy(o => o.Id)
                         .ToList();
                 foreach (GrupoUsuario grupo in result)
@@ -118,8 +119,8 @@ namespace KinniNet.Core.Operacion
                 else
                     qry = qry.Where(w => w.InventarioArbolAcceso.ArbolAcceso.IdNivel7 == null);
 
-                result = qry.Select(s=>s.GrupoUsuario).Distinct().ToList();
-                
+                result = qry.Select(s => s.GrupoUsuario).Distinct().ToList();
+
                 foreach (GrupoUsuario grupo in result)
                 {
                     db.LoadProperty(grupo, "TipoGrupo");
@@ -234,7 +235,7 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                
+
                 grupoUsuario.Descripcion = grupoUsuario.Descripcion.ToUpper();
                 if (db.GrupoUsuario.Any(a => a.Descripcion == grupoUsuario.Descripcion && a.IdTipoGrupo == grupoUsuario.IdTipoGrupo))
                 {
@@ -273,6 +274,40 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.GrupoUsuario.SingleOrDefault(s => s.Id == idGrupoUsuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<UsuarioGrupo> ObtenerGruposDeUsuario(int idUsuario)
+        {
+            List<UsuarioGrupo> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = ((IQueryable<UsuarioGrupo>)from ug in db.UsuarioGrupo
+                                                    join gu in db.GrupoUsuario on ug.IdGrupoUsuario equals gu.Id into joingroups
+                                                    from sgu in db.SubGrupoUsuario.Where(w => w.Id == ug.IdSubGrupoUsuario).DefaultIfEmpty()
+                                                    from sr in db.SubRol.Where(w => w.Id == sgu.IdSubRol).DefaultIfEmpty()
+                                                    where ug.IdUsuario == idUsuario
+                                                    select ug).ToList();
+
+                //result = db.UsuarioGrupo.Where(w=>w.IdUsuario == idUsuario).Select(s=>s.GrupoUsuario).ToList();
+                foreach (UsuarioGrupo grupo in result)
+                {
+                    db.LoadProperty(grupo, "GrupoUsuario");
+                    db.LoadProperty(grupo, "SubGrupoUsuario");
+                    if (grupo.SubGrupoUsuario != null)
+                        db.LoadProperty(grupo.SubGrupoUsuario, "SubRol");
+                }
             }
             catch (Exception ex)
             {

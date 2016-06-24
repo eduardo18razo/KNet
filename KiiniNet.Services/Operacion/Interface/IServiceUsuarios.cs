@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniNet.Services.Operacion.Interface
@@ -9,5 +10,11 @@ namespace KiiniNet.Services.Operacion.Interface
     {
         [OperationContract]
         void GuardarUsuario(Usuario usuario);
+
+        [OperationContract]
+        List<Usuario> ObtenerUsuarios();
+
+        [OperationContract]
+        Usuario ObtenerDetalleUsuario(int idUsuario);
     }
 }

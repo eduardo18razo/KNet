@@ -31,6 +31,15 @@ namespace KiiniHelp {
         protected global::System.Web.UI.ScriptManager scripMain;
         
         /// <summary>
+        /// updateProgress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updateProgress;
+        
+        /// <summary>
         /// pnlAlerta control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace KiiniHelp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtpwd;
+        
+        /// <summary>
+        /// lnkBtnRecuperar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkBtnRecuperar;
         
         /// <summary>
         /// lblmsg control.

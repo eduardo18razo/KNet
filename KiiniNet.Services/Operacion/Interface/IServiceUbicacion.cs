@@ -34,5 +34,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void GuardarUbicacion(Ubicacion ubicacion);
+
+        [OperationContract]
+        Ubicacion ObtenerUbicacionUsuario(int idUbicacion);
     }
 }

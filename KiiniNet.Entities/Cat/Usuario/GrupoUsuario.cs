@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion.Usuarios;
+using KiiniNet.Entities.Parametros;
 
 namespace KiiniNet.Entities.Cat.Usuario
 {
@@ -19,6 +20,8 @@ namespace KiiniNet.Entities.Cat.Usuario
         public string Descripcion { get; set; }
         [DataMember]
         public bool Sistema { get; set; }
+        [DataMember]
+        public bool TieneSupervisor { get; set; }
         [DataMember]
         public bool Habilitado { get; set; }
 
@@ -44,5 +47,7 @@ namespace KiiniNet.Entities.Cat.Usuario
         public virtual List<UsuarioGrupo> UsuarioGrupo { get; set; }
         [DataMember]
         public virtual List<GrupoUsuarioInventarioArbol> GrupoUsuarioInventarioArbol { get; set; }
+        [DataMember]
+        public List<EstatusSubRolGeneral> EstatusSubRolGeneral { get; set; }
     }
 }

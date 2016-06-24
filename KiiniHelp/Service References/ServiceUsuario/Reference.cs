@@ -8,30 +8,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using KiiniNet.Entities.Operacion.Usuarios;
-
 namespace KiiniHelp.ServiceUsuario {
     
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    [ServiceContract(ConfigurationName="ServiceUsuario.IServiceUsuarios")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceUsuario.IServiceUsuarios")]
     public interface IServiceUsuarios {
         
-        [OperationContract(Action="http://tempuri.org/IServiceUsuarios/GuardarUsuario", ReplyAction="http://tempuri.org/IServiceUsuarios/GuardarUsuarioResponse")]
-        void GuardarUsuario(Usuario usuario);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/GuardarUsuario", ReplyAction="http://tempuri.org/IServiceUsuarios/GuardarUsuarioResponse")]
+        void GuardarUsuario(KiiniNet.Entities.Operacion.Usuarios.Usuario usuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ObtenerUsuarios", ReplyAction="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> ObtenerUsuarios();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ObtenerDetalleUsuario", ReplyAction="http://tempuri.org/IServiceUsuarios/ObtenerDetalleUsuarioResponse")]
+        KiiniNet.Entities.Operacion.Usuarios.Usuario ObtenerDetalleUsuario(int idUsuario);
     }
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceUsuariosChannel : IServiceUsuarios, IClientChannel {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceUsuariosChannel : KiiniHelp.ServiceUsuario.IServiceUsuarios, System.ServiceModel.IClientChannel {
     }
     
-    [DebuggerStepThrough()]
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceUsuariosClient : ClientBase<IServiceUsuarios>, IServiceUsuarios {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceUsuariosClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceUsuario.IServiceUsuarios>, KiiniHelp.ServiceUsuario.IServiceUsuarios {
         
         public ServiceUsuariosClient() {
         }
@@ -44,16 +44,24 @@ namespace KiiniHelp.ServiceUsuario {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceUsuariosClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
+        public ServiceUsuariosClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceUsuariosClient(Binding binding, EndpointAddress remoteAddress) : 
+        public ServiceUsuariosClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public void GuardarUsuario(Usuario usuario) {
+        public void GuardarUsuario(KiiniNet.Entities.Operacion.Usuarios.Usuario usuario) {
             base.Channel.GuardarUsuario(usuario);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> ObtenerUsuarios() {
+            return base.Channel.ObtenerUsuarios();
+        }
+        
+        public KiiniNet.Entities.Operacion.Usuarios.Usuario ObtenerDetalleUsuario(int idUsuario) {
+            return base.Channel.ObtenerDetalleUsuario(idUsuario);
         }
     }
 }

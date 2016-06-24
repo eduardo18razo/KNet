@@ -55,5 +55,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void GuardarJefatura(Jefatura entidad);
+
+        [OperationContract]
+        Organizacion ObtenerOrganizacionUsuario(int idOrganizacion);
     }
 }

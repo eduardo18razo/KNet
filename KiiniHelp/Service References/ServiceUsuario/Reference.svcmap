@@ -23,19 +23,19 @@
     <MetadataSource Address="http://localhost:15277/ServiceUsuarios.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ServiceUsuarios.xsd" MetadataType="Schema" ID="af64cffb-9648-4194-ac4c-23cb10ba7686" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd6" />
     <MetadataFile FileName="ServiceUsuarios1.xsd" MetadataType="Schema" ID="d5a3f976-d421-412e-855a-e54c87775d79" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd0" />
     <MetadataFile FileName="ServiceUsuarios2.xsd" MetadataType="Schema" ID="c81e33b4-4e44-4e48-b21c-7b25cceae743" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd9" />
     <MetadataFile FileName="ServiceUsuarios3.xsd" MetadataType="Schema" ID="6e427660-f0bd-4e25-8786-527df5d98de7" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd12" />
     <MetadataFile FileName="ServiceUsuarios4.xsd" MetadataType="Schema" ID="ad80c3a8-0281-4d08-b4dc-be25f206219f" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd11" />
     <MetadataFile FileName="ServiceUsuarios5.xsd" MetadataType="Schema" ID="6e0e51c8-b247-44ea-93f3-6aa905da2068" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd7" />
     <MetadataFile FileName="ServiceUsuarios6.xsd" MetadataType="Schema" ID="620fc464-be94-4fdb-8e47-7d6441421206" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd3" />
-    <MetadataFile FileName="ServiceUsuarios.disco" MetadataType="Disco" ID="f245cb0d-7141-4c67-8318-6427744cb505" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?disco" />
+    <MetadataFile FileName="ServiceUsuarios11.xsd" MetadataType="Schema" ID="5f310e62-c52b-4a87-a7a1-ce9af611160d" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd1" />
     <MetadataFile FileName="ServiceUsuarios7.xsd" MetadataType="Schema" ID="e12b610a-f275-4410-ad35-ecf79c41244f" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd5" />
     <MetadataFile FileName="ServiceUsuarios8.xsd" MetadataType="Schema" ID="1294cbc1-9fb2-41b8-a710-5e28aea08234" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd2" />
     <MetadataFile FileName="ServiceUsuarios9.xsd" MetadataType="Schema" ID="fc92679c-7ce9-4922-b815-ded82c8173cd" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd8" />
+    <MetadataFile FileName="ServiceUsuarios.disco" MetadataType="Disco" ID="f245cb0d-7141-4c67-8318-6427744cb505" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?disco" />
     <MetadataFile FileName="ServiceUsuarios10.xsd" MetadataType="Schema" ID="0f961a89-be37-4cb3-86f9-872a75d1b508" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd10" />
-    <MetadataFile FileName="ServiceUsuarios11.xsd" MetadataType="Schema" ID="5f310e62-c52b-4a87-a7a1-ce9af611160d" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceUsuarios.xsd" MetadataType="Schema" ID="af64cffb-9648-4194-ac4c-23cb10ba7686" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd6" />
     <MetadataFile FileName="ServiceUsuarios.wsdl" MetadataType="Wsdl" ID="8791a15c-16a5-4894-8723-e321d42965d1" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?wsdl" />
     <MetadataFile FileName="ServiceUsuarios12.xsd" MetadataType="Schema" ID="5db0a1e1-9767-4c58-b6b2-c1a7264e195b" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd4" />
   </Metadata>

@@ -31,12 +31,12 @@ namespace KiiniHelp {
         protected global::System.Web.UI.ScriptManager scripMain;
         
         /// <summary>
-        /// AltaArea control.
+        /// updateProgress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.AltaArea AltaArea;
+        protected global::System.Web.UI.UpdateProgress updateProgress;
     }
 }

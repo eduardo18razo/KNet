@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using KiiniNet.Entities.Helper;
+using KiiniNet.Entities.Operacion;
 
 namespace KiiniNet.Services.Operacion.Interface
 {
@@ -8,7 +9,10 @@ namespace KiiniNet.Services.Operacion.Interface
     public interface IServiceTicket
     {
         [OperationContract]
-        void Guardar(int idUsuario, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura);
+        void CrearTicket(int idUsuario, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura);
+
+        [OperationContract]
+        List<HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize);
     }
 
 }

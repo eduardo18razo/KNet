@@ -87,5 +87,22 @@ namespace KiiniHelp
                 AlertaGeneral = _lstError;
             }
         }
+
+        protected void lnkBtnRecuperar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
     }
 }

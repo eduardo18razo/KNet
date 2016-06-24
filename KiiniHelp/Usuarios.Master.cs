@@ -24,6 +24,7 @@ namespace KiiniHelp
             {
                 Usuario usuario = ((Usuario) Session["UserData"]);
                 lblUsuario.Text = usuario.NombreCompleto;
+                lblTipoUsr.Text = usuario.TipoUsuario.Descripcion;
                 int areaSeleccionada = 0;
                 if (Session["AreaSeleccionada"] != null)
                     areaSeleccionada = int.Parse(Session["AreaSeleccionada"].ToString());
@@ -165,7 +166,7 @@ namespace KiiniHelp
             }
             catch (Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message);
             }
         }
 

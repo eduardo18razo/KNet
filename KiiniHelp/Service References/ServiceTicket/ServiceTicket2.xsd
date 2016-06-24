@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
   <xs:complexType name="ArrayOfHelperCampoMascaraCaptura">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="HelperCampoMascaraCaptura" nillable="true" type="tns:HelperCampoMascaraCaptura" />
@@ -14,4 +15,28 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="HelperCampoMascaraCaptura" nillable="true" type="tns:HelperCampoMascaraCaptura" />
+  <xs:complexType name="ArrayOfHelperTickets">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HelperTickets" nillable="true" type="tns:HelperTickets" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHelperTickets" nillable="true" type="tns:ArrayOfHelperTickets" />
+  <xs:complexType name="HelperTickets">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacion" nillable="true" type="q1:EstatusAsignacion" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusTicket" nillable="true" type="q2:EstatusTicket" />
+      <xs:element minOccurs="0" name="FechaHora" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GrupoAsignado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdTicket" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuarioAsignado" type="xs:int" />
+      <xs:element minOccurs="0" name="NivelUsuarioAsignado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreUsuario" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumeroTicket" type="xs:int" />
+      <xs:element minOccurs="0" name="Tipificacion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Total" type="xs:int" />
+      <xs:element minOccurs="0" name="UsuarioAsignado" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HelperTickets" nillable="true" type="tns:HelperTickets" />
 </xs:schema>

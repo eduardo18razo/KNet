@@ -67,6 +67,15 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         protected global::System.Web.UI.WebControls.DropDownList ddlArea;
         
         /// <summary>
+        /// btnAddArea control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddArea;
+        
+        /// <summary>
         /// upArbolAcceso control.
         /// </summary>
         /// <remarks>
@@ -373,13 +382,13 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         protected global::System.Web.UI.WebControls.Button btnModalConsultas;
         
         /// <summary>
-        /// btnMocalTicket control.
+        /// btnModalTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnMocalTicket;
+        protected global::System.Web.UI.WebControls.Button btnModalTicket;
         
         /// <summary>
         /// btnModalGrupos control.
@@ -427,6 +436,24 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         protected global::System.Web.UI.UpdatePanel upConsultas;
         
         /// <summary>
+        /// panelAlertaInfoConsulta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlertaInfoConsulta;
+        
+        /// <summary>
+        /// rptErrorInfoConsulta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptErrorInfoConsulta;
+        
+        /// <summary>
         /// rptInformacion control.
         /// </summary>
         /// <remarks>
@@ -452,6 +479,24 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upTocket;
+        
+        /// <summary>
+        /// panelAlertaTicket control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlertaTicket;
+        
+        /// <summary>
+        /// rptErrorTicket control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptErrorTicket;
         
         /// <summary>
         /// div1 control.

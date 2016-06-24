@@ -411,9 +411,9 @@ namespace KiiniHelp.UserControls.Temporal
                             {
                                 try
                                 {
-                                    DateTime.Parse(txtFecha.Text.Trim());
+                                    var d = DateTime.Parse(txtFecha.Text.Trim());
                                 }
-                                catch (Exception ex)
+                                catch 
                                 {
                                     throw new Exception(string.Format("Campo {0} contiene una fecha no valida", campo.Descripcion));
                                 }
@@ -434,7 +434,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 {
                                     DateTime.TryParseExact(txtHora.Text.Trim(), "HHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out outTime);
                                 }
-                                catch (Exception ex)
+                                catch
                                 {
                                     throw new Exception(string.Format("Campo {0} contiene una hora no valida", campo.Descripcion));
                                 }

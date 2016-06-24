@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Usuario;
+using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniNet.Services.Operacion.Interface
 {
@@ -21,9 +22,14 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario);
+        
         [OperationContract]
         List<GrupoUsuario> ObtenerGruposUsuarioSistema(int idTipoUsuario);
+        
         [OperationContract]
         List<GrupoUsuario> ObtenerGruposUsuarioNivel(int idtipoArbol, int? nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7);
+
+        [OperationContract]
+        List<UsuarioGrupo> ObtenerGruposDeUsuario(int idUsuario);
     }
 }

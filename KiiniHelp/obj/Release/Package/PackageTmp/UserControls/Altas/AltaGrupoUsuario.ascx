@@ -27,12 +27,13 @@
             <div class="panel-body">
                 <div>
                     <asp:HiddenField runat="server" ID="hfIdGrupo" />
+                    <asp:HiddenField runat="server" ID="hfIdTipoUsuario" />
                     <asp:HiddenField runat="server" ID="hfIdTipoSubGrupo" />
                     <div>
                         <div class="form-group">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Descripcion</label>
-                                <asp:TextBox runat="server" ID="txtDescripcionGrupoUsuario" placeholder="DESCRIPCION" class="form-control" />
+                                <asp:TextBox runat="server" ID="txtDescripcionGrupoUsuario" placeholder="DESCRIPCION" class="form-control" onkeydown = "return (event.keyCode!=13);"/>
                             </div>
                             <div class="form-group">
                                 <asp:CheckBox runat="server" ID="chkHabilitado" Checked="True" Visible="False" />

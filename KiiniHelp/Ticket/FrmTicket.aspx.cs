@@ -132,9 +132,6 @@ namespace KiiniHelp.Ticket
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            int idMascara = 1;
-            //int idMascara = Convert.ToInt32(Request.QueryString["MascaraId"]);
-            IdMascara = idMascara;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -166,6 +163,7 @@ namespace KiiniHelp.Ticket
                         UcMascaraCaptura.Visible = false;
                         btnGuardar.CommandArgument = UcMascaraCaptura.ComandoInsertar;
                     }
+                    UcInformacionConsulta.Visible = arbol.InventarioArbolAcceso.First().InventarioInfConsulta.Any();
                 }
             }
             catch (Exception ex)
@@ -185,7 +183,7 @@ namespace KiiniHelp.Ticket
             {
                 
                 List<HelperCampoMascaraCaptura> capturaMascara = UcMascaraCaptura.ObtenerCapturaMascara();
-                _servicioTicket.Guardar(((Usuario)Session["UserData"]).Id, Convert.ToInt32(Request.QueryString["IdArbol"]), capturaMascara);
+                _servicioTicket.CrearTicket(((Usuario)Session["UserData"]).Id, Convert.ToInt32(Request.QueryString["IdArbol"]), capturaMascara);
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Arbol.Organizacion;
 using KiiniNet.Entities.Cat.Sistema;
@@ -7,7 +8,7 @@ using KiiniNet.Entities.Operacion;
 namespace KiiniNet.Entities.Cat.Operacion
 {
     [DataContract(IsReference = true)]
-    public class Organizacion
+    public class Organizacion : IDisposable
     {
         [DataMember]
         public int Id { get; set; }
@@ -53,5 +54,9 @@ namespace KiiniNet.Entities.Cat.Operacion
         [DataMember]
         public virtual List<Ticket> Ticket { get; set; }
 
+        public void Dispose()
+        {
+            
+        }
     }
 }

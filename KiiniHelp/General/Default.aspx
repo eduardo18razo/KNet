@@ -29,7 +29,7 @@
                     <h4>Boton Rojo</h4>
                 </div>
                 <div class="panel-body">
-                    <asp:Repeater runat="server" ID="rptAreas">
+                    <asp:Repeater runat="server" ID="rptAreas" OnItemDataBound="rptAreas_OnItemDataBound">
                         <ItemTemplate>
                             <asp:Button ID="btnArea" runat="server" CssClass="btn btn-lg btn-primary" Text='<%# Eval("Descripcion") %>' CommandArgument='<%# Eval("Id") %>' OnClick="btnArea_OnClick" />
                         </ItemTemplate>

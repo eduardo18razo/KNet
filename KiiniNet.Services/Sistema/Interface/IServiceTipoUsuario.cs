@@ -11,5 +11,8 @@ namespace KiiniNet.Services.Sistema.Interface
         List<TipoUsuario> ObtenerTiposUsuarioResidentes(bool insertarSeleccion);
         [OperationContract]
         List<TipoUsuario> ObtenerTiposUsuarioInvitados(bool insertarSeleccion);
+
+        [OperationContract]
+        List<TipoUsuario> ObtenerTiposUsuario(bool insertarSeleccion);
     }
 }

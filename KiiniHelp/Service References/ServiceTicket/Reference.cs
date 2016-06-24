@@ -8,31 +8,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using KiiniNet.Entities.Helper;
-
 namespace KiiniHelp.ServiceTicket {
     
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    [ServiceContract(ConfigurationName="ServiceTicket.IServiceTicket")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceTicket.IServiceTicket")]
     public interface IServiceTicket {
         
-        [OperationContract(Action="http://tempuri.org/IServiceTicket/Guardar", ReplyAction="http://tempuri.org/IServiceTicket/GuardarResponse")]
-        void Guardar(int idUsuario, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/CrearTicket", ReplyAction="http://tempuri.org/IServiceTicket/CrearTicketResponse")]
+        void CrearTicket(int idUsuario, int idArbol, System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperCampoMascaraCaptura> lstCaptura);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/ObtenerTickets", ReplyAction="http://tempuri.org/IServiceTicket/ObtenerTicketsResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize);
     }
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceTicketChannel : IServiceTicket, IClientChannel {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceTicketChannel : KiiniHelp.ServiceTicket.IServiceTicket, System.ServiceModel.IClientChannel {
     }
     
-    [DebuggerStepThrough()]
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceTicketClient : ClientBase<IServiceTicket>, IServiceTicket {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceTicketClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceTicket.IServiceTicket>, KiiniHelp.ServiceTicket.IServiceTicket {
         
         public ServiceTicketClient() {
         }
@@ -45,16 +41,20 @@ namespace KiiniHelp.ServiceTicket {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceTicketClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
+        public ServiceTicketClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceTicketClient(Binding binding, EndpointAddress remoteAddress) : 
+        public ServiceTicketClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public void Guardar(int idUsuario, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura) {
-            base.Channel.Guardar(idUsuario, idArbol, lstCaptura);
+        public void CrearTicket(int idUsuario, int idArbol, System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperCampoMascaraCaptura> lstCaptura) {
+            base.Channel.CrearTicket(idUsuario, idArbol, lstCaptura);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize) {
+            return base.Channel.ObtenerTickets(idUsuario, pageIndex, pageSize);
         }
     }
 }

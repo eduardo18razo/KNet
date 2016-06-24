@@ -138,7 +138,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.Ubicacion.Where(w => w.IdZona == idZona).SelectMany(ubicacion => db.SubZona.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == ubicacion.IdZona && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
+                result = db.Ubicacion.Where(w => w.IdZona == idZona).SelectMany(ubicacion => db.SubZona.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == ubicacion.IdSubZona && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new SubZona { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
@@ -271,18 +271,83 @@ namespace KinniNet.Core.Operacion
             }
         }
 
-        public Ubicacion ObtenerUbicacionUsuario(int idUsuario)
+        public Ubicacion ObtenerUbicacionUsuario(int idUbicacion)
         {
-            Ubicacion result = null;
+            Ubicacion result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Ubicacion.SingleOrDefault(w => w.Id == idUbicacion && w.Habilitado);
+                if (result != null)
+                {
+                    db.LoadProperty(result, "Pais");
+                    db.LoadProperty(result, "Campus");
+                    db.LoadProperty(result, "Torre");
+                    db.LoadProperty(result, "Piso");
+                    db.LoadProperty(result, "Zona");
+                    db.LoadProperty(result, "SubZona");
+                    db.LoadProperty(result, "SiteRack");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public string ObtenerDescripcionUbicacionUsuario(int idUsuario, bool ultimoNivel)
+        {
+            string result = null;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
                 Usuario usuario = db.Usuario.SingleOrDefault(w => w.Id == idUsuario && w.Habilitado);
                 if (usuario != null)
                 {
-                    db.LoadProperty(usuario, "Ubicacion");
-                    result = usuario.Ubicacion;
+                    if (usuario.Ubicacion != null)
+                    {
+                        if (ultimoNivel)
+                        {
+                            if (usuario.Ubicacion.Pais != null)
+                                result = usuario.Ubicacion.Pais.Descripcion;
+                            if (usuario.Ubicacion.Campus != null)
+                                result = usuario.Ubicacion.Campus.Descripcion;
+                            if (usuario.Ubicacion.Torre != null)
+                                result = usuario.Ubicacion.Torre.Descripcion;
+                            if (usuario.Ubicacion.Piso != null)
+                                result = usuario.Ubicacion.Piso.Descripcion;
+                            if (usuario.Ubicacion.Zona != null)
+                                result = usuario.Ubicacion.Zona.Descripcion;
+                            if (usuario.Ubicacion.SubZona != null)
+                                result = usuario.Ubicacion.SubZona.Descripcion;
+                            if (usuario.Ubicacion.SiteRack != null)
+                                result = usuario.Ubicacion.SiteRack.Descripcion;
+                        }
+                        else
+                        {
+                            if (usuario.Ubicacion.Pais != null)
+                                result += usuario.Ubicacion.Pais.Descripcion;
+                            if (usuario.Ubicacion.Campus != null)
+                                result += ">" + usuario.Ubicacion.Campus.Descripcion;
+                            if (usuario.Ubicacion.Torre != null)
+                                result += ">" + usuario.Ubicacion.Torre.Descripcion;
+                            if (usuario.Ubicacion.Piso != null)
+                                result += ">" + usuario.Ubicacion.Piso.Descripcion;
+                            if (usuario.Ubicacion.Zona != null)
+                                result += ">" + usuario.Ubicacion.Zona.Descripcion;
+                            if (usuario.Ubicacion.SubZona != null)
+                                result += ">" + usuario.Ubicacion.SubZona.Descripcion;
+                            if (usuario.Ubicacion.SiteRack != null)
+                                result += ">" + usuario.Ubicacion.SiteRack.Descripcion;
+                        }
+                    }
                 }
             }
             catch (Exception ex)

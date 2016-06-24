@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using KiiniNet.Entities.Cat.Usuario;
+using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
 
@@ -104,6 +105,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
                 {
                     return negocio.ObtenerGruposUsuarioNivel(idtipoArbol,  nivel1,  nivel2,  nivel3,  nivel4,  nivel5,  nivel6,  nivel7);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<UsuarioGrupo> ObtenerGruposDeUsuario(int idUsuario)
+        {
+            try
+            {
+                using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
+                {
+                    return negocio.ObtenerGruposDeUsuario(idUsuario);
                 }
             }
             catch (Exception ex)

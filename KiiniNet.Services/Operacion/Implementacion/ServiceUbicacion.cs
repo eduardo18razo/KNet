@@ -120,7 +120,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             {
                 using (BusinessUbicacion negocio = new BusinessUbicacion())
                 {
-                    return negocio.ObtenerUbicacion(idPais,  idCampus,  idTorre,  idPiso,  idZona,  idSubZona, idSiteRack);
+                    return negocio.ObtenerUbicacion(idPais, idCampus, idTorre, idPiso, idZona, idSubZona, idSiteRack);
                 }
             }
             catch (Exception ex)
@@ -136,6 +136,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessUbicacion negocio = new BusinessUbicacion())
                 {
                     negocio.GuardarUbicacion(ubicacion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Ubicacion ObtenerUbicacionUsuario(int idUbicacion)
+        {
+            try
+            {
+                using (BusinessUbicacion negocio = new BusinessUbicacion())
+                {
+                    return negocio.ObtenerUbicacionUsuario(idUbicacion);
                 }
             }
             catch (Exception ex)

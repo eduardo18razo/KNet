@@ -47,6 +47,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 if (!panelAlert.Visible) return;
                 rptHeaderError.DataSource = value;
                 rptHeaderError.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "UpScroll();", true);
             }
         }
         private List<string> AlertaNivel
@@ -57,6 +58,29 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 if (!panelAlertaNivel.Visible) return;
                 rptErrorNivel.DataSource = value;
                 rptErrorNivel.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "UpScroll();", true);
+            }
+        }
+        private List<string> AlertaInfoConsulta
+        {
+            set
+            {
+                panelAlertaInfoConsulta.Visible = value.Any();
+                if (!panelAlertaInfoConsulta.Visible) return;
+                rptErrorInfoConsulta.DataSource = value;
+                rptErrorInfoConsulta.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "UpScroll();", true);
+            }
+        }
+        private List<string> AlertaTicket
+        {
+            set
+            {
+                panelAlertaTicket.Visible = value.Any();
+                if (!panelAlertaTicket.Visible) return;
+                rptErrorTicket.DataSource = value;
+                rptErrorTicket.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "UpScroll();", true);
             }
         }
         #endregion Propiedades privadas
@@ -93,6 +117,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
             try
             {
                 StringBuilder sb = new StringBuilder();
+
                 if ((from RepeaterItem item in rptInformacion.Items select (CheckBox)item.FindControl("chkInfoConsulta")).Count(chk => chk.Checked) <= 0)
                 {
                     sb.AppendLine("<li>Debe especificar al menos un tipo de información de consulta.</li>");
@@ -191,15 +216,21 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                     throw new Exception("Seleccione un tipo de arbol");
                 }
                 Button lbtn = sender;
+                int nivel = 7;
                 switch (lbtn.CommandArgument)
                 {
+                    case "1":
+                        nivel = 1;
+                        break;
                     case "2":
+                        nivel = 2;
                         if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 1");
                         }
                         break;
                     case "3":
+                        nivel = 3;
                         if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 1");
@@ -210,6 +241,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                         }
                         break;
                     case "4":
+                        nivel = 4;
                         if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 1");
@@ -224,6 +256,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                         }
                         break;
                     case "5":
+                        nivel = 5;
                         if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 1");
@@ -242,6 +275,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                         }
                         break;
                     case "6":
+                        nivel = 6;
                         if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 1");
@@ -264,6 +298,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                         }
                         break;
                     case "7":
+                        nivel = 7;
                         if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 1");
@@ -290,7 +325,35 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                         }
                         break;
                 }
-                lblTitleCatalogo.Text = lbtn.CommandName;
+                string sTitle = string.Empty;
+                switch (nivel)
+                {
+                    case 1:
+                        sTitle = ddlTipoArbol.SelectedItem.Text + ">";
+                        break;
+                    case 2:
+                        sTitle = ddlTipoArbol.SelectedItem.Text + ">" + ddlNivel1.SelectedItem.Text + ">" + (esTerminal ? ddlNivel2.SelectedItem.Text + ">" : ">");
+                        break;
+                    case 3:
+                        sTitle = ddlTipoArbol.SelectedItem.Text + ">" + ddlNivel1.SelectedItem.Text + ">" + ddlNivel2.SelectedItem.Text + ">" + (esTerminal ? ddlNivel3.SelectedItem.Text + ">" : ">");
+                        break;
+                    case 4:
+                        sTitle = ddlTipoArbol.SelectedItem.Text + ">" + ddlNivel1.SelectedItem.Text + ">" + ddlNivel2.SelectedItem.Text + ">" + ddlNivel3.SelectedItem.Text + ">" + (esTerminal ? ddlNivel4.SelectedItem.Text + ">" : ">");
+                        break;
+                    case 5:
+                        sTitle = ddlTipoArbol.SelectedItem.Text + ">" + ddlNivel1.SelectedItem.Text + ">" + ddlNivel2.SelectedItem.Text + ">" + ddlNivel3.SelectedItem.Text + ">" + ddlNivel4.SelectedItem.Text + ">" + (esTerminal ? ddlNivel5.SelectedItem.Text + ">" : ">");
+                        break;
+                    case 6:
+                        sTitle = ddlTipoArbol.SelectedItem.Text + ">" + ddlNivel1.SelectedItem.Text + ">" + ddlNivel2.SelectedItem.Text + ">" + ddlNivel3.SelectedItem.Text + ">" + ddlNivel4.SelectedItem.Text + ">" + ddlNivel5.SelectedItem.Text + ">" + (esTerminal ? ddlNivel6.SelectedItem.Text + ">" : ">");
+                        break;
+                    case 7:
+                        sTitle = ddlTipoArbol.SelectedItem.Text + ">" + ddlNivel1.SelectedItem.Text + ">" + ddlNivel2.SelectedItem.Text + ">" + ddlNivel3.SelectedItem.Text + ">" + ddlNivel4.SelectedItem.Text + ">" + ddlNivel5.SelectedItem.Text + ">" + ddlNivel6.SelectedItem.Text + ">";
+                        break;
+                    default:
+                        throw new Exception("Error al intentar agregar. Intente Nuevamente");
+                }
+                sTitle += lbtn.CommandName;
+                lblTitleCatalogo.Text = sTitle;
                 hfCatalogo.Value = lbtn.CommandArgument;
                 ddlTipoUsuarioNivel.SelectedIndex = ddlTipoUsuario.SelectedIndex;
                 chkNivelTerminal.Checked = esTerminal;
@@ -315,6 +378,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
             {
                 AlertaGeneral = new List<string>();
                 AlertaNivel = new List<string>();
+                AlertaInfoConsulta = new List<string>();
                 if (!IsPostBack)
                 {
                     LlenaCombos();
@@ -393,7 +457,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 btnAddOpti6.Enabled = false;
                 btnAddOpti7.Enabled = false;
                 if (ddlArea.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index) return;
-                List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true);
+                List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuario(true);
                 Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
                 Metodos.LlenaComboCatalogo(ddlTipoUsuarioNivel, lstTipoUsuario);
             }
@@ -453,7 +517,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                     Metodos.LlenaComboCatalogo(ddlTipoArbol, _servicioSistemaTipoArbol.ObtenerTiposArbolAcceso(true));
                     AsociarGrupoUsuario.IdTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -510,6 +574,17 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                     btnAddMenu6.Enabled = false;
                     btnAddOpti6.Enabled = false;
                     btnAddOpti7.Enabled = false;
+                }
+                switch (int.Parse(ddlTipoArbol.SelectedValue))
+                {
+                    case (int)BusinessVariables.EnumTipoArbol.Consultas:
+                        btnModalConsultas.Visible = true;
+                        btnModalTicket.Visible = false;
+                        break;
+                    default:
+                        btnModalConsultas.Visible = false;
+                        btnModalTicket.Visible = true;
+                        break;
                 }
 
             }
@@ -820,12 +895,14 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                     };
                     if (chkNivelTerminal.Checked)
                     {
-                        ValidaCapturaConsulta();
-                        ValidaCapturaTicket();
+                        if (int.Parse(ddlTipoArbol.SelectedValue) == (int)BusinessVariables.EnumTipoArbol.Consultas)
+                            ValidaCapturaConsulta();
+                        if (int.Parse(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas)
+                            ValidaCapturaTicket();
                         ValidaCapturaGrupos();
                         arbol.InventarioArbolAcceso = new List<InventarioArbolAcceso> { new InventarioArbolAcceso() };
-                        arbol.InventarioArbolAcceso.First().IdMascara = Convert.ToInt32(ddlMascaraAcceso.SelectedValue);
-                        arbol.InventarioArbolAcceso.First().IdSla = Convert.ToInt32(ddlSla.SelectedValue);
+                        arbol.InventarioArbolAcceso.First().IdMascara = Convert.ToInt32(ddlMascaraAcceso.SelectedValue) == 0 ? (int?)null : Convert.ToInt32(ddlMascaraAcceso.SelectedValue);
+                        arbol.InventarioArbolAcceso.First().IdSla = Convert.ToInt32(ddlSla.SelectedValue) == 0 ? (int?)null : Convert.ToInt32(ddlSla.SelectedValue);
                         arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol = new List<GrupoUsuarioInventarioArbol>();
                         foreach (RepeaterItem item in AsociarGrupoUsuario.GruposAsociados)
                         {
@@ -844,6 +921,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                         }
                         arbol.InventarioArbolAcceso.First().Descripcion = txtDescripcionNivel.Text.Trim();
                         arbol.InventarioArbolAcceso.First().IdEncuesta = Convert.ToInt32(ddlEncuesta.SelectedValue) == BusinessVariables.ComboBoxCatalogo.Value ? (int?)null : Convert.ToInt32(ddlEncuesta.SelectedValue);
+
                         arbol.InventarioArbolAcceso.First().InventarioInfConsulta = new List<InventarioInfConsulta>();
                         foreach (RepeaterItem item in rptInformacion.Items)
                         {
@@ -1226,6 +1304,17 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
         {
             try
             {
+                ValidaCapturaConsulta();
+                if (int.Parse(ddlTipoArbol.SelectedValue) == (int)BusinessVariables.EnumTipoArbol.Consultas)
+                {
+                    btnModalConsultas.CssClass = "btn btn-primary btn-lg";
+                    btnModalGrupos.Enabled = true;
+                }
+                else
+                {
+                    btnModalTicket.Enabled = true;
+                }
+                btnModalConsultas.CssClass = "btn btn-success btn-lg";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalConsultas\");", true);
             }
             catch (Exception ex)
@@ -1235,7 +1324,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaNivel = _lstError;
+                AlertaInfoConsulta = _lstError;
             }
         }
 
@@ -1243,6 +1332,9 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
         {
             try
             {
+                ValidaCapturaTicket();
+                btnModalGrupos.Enabled = true;
+                btnModalTicket.CssClass = "btn btn-success btn-lg";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalTicket\");", true);
             }
             catch (Exception ex)
@@ -1252,7 +1344,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaNivel = _lstError;
+                AlertaTicket = _lstError;
             }
         }
 
@@ -1260,6 +1352,8 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
         {
             try
             {
+                ValidaCapturaGrupos();
+                btnModalGrupos.CssClass = "btn btn-success btn-lg";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalGruposNodo\");", true);
             }
             catch (Exception ex)
@@ -1272,7 +1366,6 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 AlertaNivel = _lstError;
             }
         }
-        #endregion Cerrar Modales
 
         protected void btnCerrarAreas_OnClick(object sender, EventArgs e)
         {
@@ -1294,6 +1387,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 }
             }
         }
+        #endregion Cerrar Modales
     }
 }
 

@@ -23,6 +23,7 @@ namespace KiiniHelp.UserControls.Seleccion
         readonly ServiceGrupoUsuarioClient _servicioGrupoUsuario = new ServiceGrupoUsuarioClient();
         readonly ServiceSubGrupoUsuarioClient _servicioSubGrupoUsuario = new ServiceSubGrupoUsuarioClient();
         private List<string> _lstError = new List<string>();
+        public string Modal { get; set; }
 
         public bool Administrador
         {
@@ -94,6 +95,7 @@ namespace KiiniHelp.UserControls.Seleccion
                 if (!panelAlertaGrupos.Visible) return;
                 rptErrorGrupos.DataSource = value;
                 rptErrorGrupos.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "Subirscroll(\"" + Modal +"\");", true);
             }
         }
 
@@ -385,7 +387,8 @@ namespace KiiniHelp.UserControls.Seleccion
                 if (btn.CommandArgument != "0")
                 {
                     btnCerrarModalAltaGrupoUsuario.CommandArgument = btn.CommandArgument;
-                    ucltaGrupoUsuario.IdTipoGrugo = int.Parse(btn.CommandArgument);
+                    ucAltaGrupoUsuario.IdTipoUsuario = IdTipoUsuario;
+                    ucAltaGrupoUsuario.IdTipoGrupo = int.Parse(btn.CommandArgument);
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaGrupoUsuarios\");", true);
                 }
             }

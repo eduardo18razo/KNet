@@ -389,5 +389,40 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
+
+        public string ObtenerTipificacion(int idArbol)
+        {
+            string result = string.Empty;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
+            ArbolAcceso arbol = db.ArbolAcceso.SingleOrDefault(w => w.Habilitado && w.Id == idArbol);
+                if (arbol == null) return null;
+                if (arbol.Nivel1 != null)
+                    result = arbol.Nivel1.Descripcion;
+                if (arbol.Nivel2 != null)
+                    result = arbol.Nivel2.Descripcion;
+                if (arbol.Nivel3 != null)
+                    result = arbol.Nivel3.Descripcion;
+                if (arbol.Nivel4 != null)
+                    result = arbol.Nivel4.Descripcion;
+                if (arbol.Nivel5 != null)
+                    result = arbol.Nivel5.Descripcion;
+                if (arbol.Nivel6 != null)
+                    result = arbol.Nivel6.Descripcion;
+                if (arbol.Nivel7 != null)
+                    result = arbol.Nivel7.Descripcion;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
     }
 }

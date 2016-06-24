@@ -1,4 +1,5 @@
-﻿using KiiniNet.Entities.Operacion.Usuarios;
+﻿using System.Collections.Generic;
+using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
 
@@ -12,6 +13,22 @@ namespace KiiniNet.Services.Operacion.Implementacion
             using (BusinessUsuarios negocio = new BusinessUsuarios())
             {
                 negocio.GuardarUsuario(usuario);
+            }
+        }
+
+        public List<Usuario> ObtenerUsuarios()
+        {
+            using (BusinessUsuarios negocio = new BusinessUsuarios())
+            {
+                return negocio.ObtenerUsuarios();
+            }
+        }
+
+        public Usuario ObtenerDetalleUsuario(int idUsuario)
+        {
+            using (BusinessUsuarios negocio = new BusinessUsuarios())
+            {
+               return negocio.ObtenerDetalleUsuario(idUsuario);
             }
         }
     }

@@ -8,38 +8,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using KiiniNet.Entities.Cat.Sistema;
-using KiiniNet.Entities.Operacion.Usuarios;
-
 namespace KiiniHelp.ServiceSeguridad {
     
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    [ServiceContract(ConfigurationName="ServiceSeguridad.IServiceSecurity")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceSeguridad.IServiceSecurity")]
     public interface IServiceSecurity {
         
-        [OperationContract(Action="http://tempuri.org/IServiceSecurity/Autenticate", ReplyAction="http://tempuri.org/IServiceSecurity/AutenticateResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/Autenticate", ReplyAction="http://tempuri.org/IServiceSecurity/AutenticateResponse")]
         bool Autenticate(string user, string password);
         
-        [OperationContract(Action="http://tempuri.org/IServiceSecurity/GetUserDataAutenticate", ReplyAction="http://tempuri.org/IServiceSecurity/GetUserDataAutenticateResponse")]
-        Usuario GetUserDataAutenticate(string user, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/GetUserDataAutenticate", ReplyAction="http://tempuri.org/IServiceSecurity/GetUserDataAutenticateResponse")]
+        KiiniNet.Entities.Operacion.Usuarios.Usuario GetUserDataAutenticate(string user, string password);
         
-        [OperationContract(Action="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuario", ReplyAction="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuarioResponse")]
-        List<Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuario", ReplyAction="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuarioResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles);
     }
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceSecurityChannel : IServiceSecurity, IClientChannel {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceSecurityChannel : KiiniHelp.ServiceSeguridad.IServiceSecurity, System.ServiceModel.IClientChannel {
     }
     
-    [DebuggerStepThrough()]
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceSecurityClient : ClientBase<IServiceSecurity>, IServiceSecurity {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceSecurityClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceSeguridad.IServiceSecurity>, KiiniHelp.ServiceSeguridad.IServiceSecurity {
         
         public ServiceSecurityClient() {
         }
@@ -52,11 +44,11 @@ namespace KiiniHelp.ServiceSeguridad {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceSecurityClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
+        public ServiceSecurityClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceSecurityClient(Binding binding, EndpointAddress remoteAddress) : 
+        public ServiceSecurityClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
@@ -64,11 +56,11 @@ namespace KiiniHelp.ServiceSeguridad {
             return base.Channel.Autenticate(user, password);
         }
         
-        public Usuario GetUserDataAutenticate(string user, string password) {
+        public KiiniNet.Entities.Operacion.Usuarios.Usuario GetUserDataAutenticate(string user, string password) {
             return base.Channel.GetUserDataAutenticate(user, password);
         }
         
-        public List<Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles) {
             return base.Channel.ObtenerMenuUsuario(idUsuario, idArea, arboles);
         }
     }

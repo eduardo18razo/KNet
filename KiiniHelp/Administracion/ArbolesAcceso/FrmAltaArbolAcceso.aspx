@@ -12,6 +12,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <asp:UpdatePanel runat="server">
@@ -47,102 +48,103 @@
                                         <div class="form-horizontal verical-center center-content-div">
                                             <asp:Label ID="Label2" runat="server" Text="Area" class="col-sm-s control-label" />
                                             <asp:DropDownList runat="server" ID="ddlArea" CssClass="DropSelect" OnSelectedIndexChanged="ddlArea_OnSelectedIndexChanged" AutoPostBack="true" />
+                                            <asp:Button runat="server" ID="btnAddArea" Text="Agregar" CssClass="btn btn-primary btn-xs" OnClick="btnAddArea_OnClick" />
                                         </div>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
 
                             </div>
-                        <%--ARBOL DE ACCESO--%>
-                        <div class="well center-block">
-                            <asp:UpdatePanel ID="upArbolAcceso" runat="server" UpdateMode="Conditional">
-                                <ContentTemplate>
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">
-                                            Datos generales
-                                        </div>
-                                        <div class="panel-body">
+                            <%--ARBOL DE ACCESO--%>
+                            <div class="well center-block">
+                                <asp:UpdatePanel ID="upArbolAcceso" runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                Datos generales
+                                            </div>
                                             <div class="panel-body">
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-1">
-                                                        <asp:Label runat="server" for="ddlTipoArbol" class="col-sm-3 control-label">Tipo de Usuario</asp:Label>
-                                                        <asp:DropDownList runat="server" ID="ddlTipoUsuario" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" AutoPostBack="true" />
-                                                        <%--<asp:Button runat="server" ID="btnAddArea" Text="Agregar" CssClass="btn btn-primary btn-xs" OnClick="btnAddArea_OnClick" />--%>
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-1">
+                                                            <asp:Label runat="server" for="ddlTipoArbol" class="col-sm-3 control-label">Tipo de Usuario Autorizado</asp:Label>
+                                                            <asp:DropDownList runat="server" ID="ddlTipoUsuario" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" AutoPostBack="true" />
+                                                            <%----%>
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-1">
-                                                        <asp:Label runat="server" for="ddlTipoArbol" class="col-sm-3 control-label">Tipo</asp:Label>
-                                                        <asp:DropDownList runat="server" ID="ddlTipoArbol" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlTipoArbol_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-1">
+                                                            <asp:Label runat="server" for="ddlTipoArbol" class="col-sm-3 control-label">Tipo de Servicio</asp:Label>
+                                                            <asp:DropDownList runat="server" ID="ddlTipoArbol" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlTipoArbol_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-1">
-                                                        <asp:Label runat="server" for="ddlNivel1" class="col-sm-3 control-label">SubMenu/Opcion 1</asp:Label>
-                                                        <asp:DropDownList runat="server" ID="ddlNivel1" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlNivel1_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                        <asp:Button runat="server" ID="btnAddMenu1" Text="Agregar SubMenu" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelSubMenu" CommandName="Nivel 1" CommandArgument="1" Enabled="False" />
-                                                        <asp:Button runat="server" ID="btnAddOpti1" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Nivel 1" CommandArgument="1" Enabled="False" />
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-1">
+                                                            <asp:Label runat="server" for="ddlNivel1" class="col-sm-3 control-label">SubMenu/Opcion 1</asp:Label>
+                                                            <asp:DropDownList runat="server" ID="ddlNivel1" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlNivel1_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
+                                                            <asp:Button runat="server" ID="btnAddMenu1" Text="Agregar SubMenu" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelSubMenu" CommandName="Menu" CommandArgument="1" Enabled="False" />
+                                                            <asp:Button runat="server" ID="btnAddOpti1" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Opcion" CommandArgument="1" Enabled="False" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-1">
-                                                        <asp:Label runat="server" for="ddlNivel2" class="col-sm-3 control-label">SubMenu/Opcion 2</asp:Label>
-                                                        <asp:DropDownList runat="server" ID="ddlNivel2" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlNivel2_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                        <asp:Button runat="server" ID="btnAddMenu2" Text="Agregar SubMenu" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelSubMenu" CommandName="Nivel 2" CommandArgument="2" Enabled="False" />
-                                                        <asp:Button runat="server" ID="btnAddOpti2" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Nivel 2" CommandArgument="2" Enabled="False" />
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-1">
+                                                            <asp:Label runat="server" for="ddlNivel2" class="col-sm-3 control-label">SubMenu/Opcion 2</asp:Label>
+                                                            <asp:DropDownList runat="server" ID="ddlNivel2" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlNivel2_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
+                                                            <asp:Button runat="server" ID="btnAddMenu2" Text="Agregar SubMenu" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelSubMenu" CommandName="Menu" CommandArgument="2" Enabled="False" />
+                                                            <asp:Button runat="server" ID="btnAddOpti2" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Opcion" CommandArgument="2" Enabled="False" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-1">
-                                                        <asp:Label runat="server" for="ddlNivel3" class="col-sm-3 control-label">SubMenu/Opcion 3</asp:Label>
-                                                        <asp:DropDownList runat="server" ID="ddlNivel3" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlNivel3_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                        <asp:Button runat="server" ID="btnAddMenu3" Text="Agregar SubMenu" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelSubMenu" CommandName="Nivel 3" CommandArgument="3" Enabled="False" />
-                                                        <asp:Button runat="server" ID="btnAddOpti3" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Nivel 3" CommandArgument="3" Enabled="False" />
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-1">
+                                                            <asp:Label runat="server" for="ddlNivel3" class="col-sm-3 control-label">SubMenu/Opcion 3</asp:Label>
+                                                            <asp:DropDownList runat="server" ID="ddlNivel3" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlNivel3_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
+                                                            <asp:Button runat="server" ID="btnAddMenu3" Text="Agregar SubMenu" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelSubMenu" CommandName="Menu" CommandArgument="3" Enabled="False" />
+                                                            <asp:Button runat="server" ID="btnAddOpti3" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Opcion" CommandArgument="3" Enabled="False" />
 
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-1">
-                                                        <asp:Label runat="server" for="ddlNivel4" class="col-sm-3 control-label">SubMenu/Opcion 4</asp:Label>
-                                                        <asp:DropDownList runat="server" ID="ddlNivel4" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlNivel4_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                        <asp:Button runat="server" ID="btnAddMenu4" Text="Agregar SubMenu" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelSubMenu" CommandName="Nivel 4" CommandArgument="4" Enabled="False" />
-                                                        <asp:Button runat="server" ID="btnAddOpti4" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Nivel 4" CommandArgument="4" Enabled="False" />
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-1">
+                                                            <asp:Label runat="server" for="ddlNivel4" class="col-sm-3 control-label">SubMenu/Opcion 4</asp:Label>
+                                                            <asp:DropDownList runat="server" ID="ddlNivel4" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlNivel4_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
+                                                            <asp:Button runat="server" ID="btnAddMenu4" Text="Agregar SubMenu" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelSubMenu" CommandName="Menu" CommandArgument="4" Enabled="False" />
+                                                            <asp:Button runat="server" ID="btnAddOpti4" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Opcion" CommandArgument="4" Enabled="False" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-1">
-                                                        <asp:Label runat="server" for="ddlNivel5" class="col-sm-3 control-label">SubMenu/Opcion 5</asp:Label>
-                                                        <asp:DropDownList runat="server" ID="ddlNivel5" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlNivel5_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                        <asp:Button runat="server" ID="btnAddMenu5" Text="Agregar SubMenu" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelSubMenu" CommandName="Nivel 5" CommandArgument="5" Enabled="False" />
-                                                        <asp:Button runat="server" ID="btnAddOpti5" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Nivel 5" CommandArgument="5" Enabled="False" />
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-1">
+                                                            <asp:Label runat="server" for="ddlNivel5" class="col-sm-3 control-label">SubMenu/Opcion 5</asp:Label>
+                                                            <asp:DropDownList runat="server" ID="ddlNivel5" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlNivel5_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
+                                                            <asp:Button runat="server" ID="btnAddMenu5" Text="Agregar SubMenu" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelSubMenu" CommandName="Menu" CommandArgument="5" Enabled="False" />
+                                                            <asp:Button runat="server" ID="btnAddOpti5" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Opcion" CommandArgument="5" Enabled="False" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-1">
-                                                        <asp:Label runat="server" for="ddlNivel6" class="col-sm-3 control-label">SubMenu/Opcion 6</asp:Label>
-                                                        <asp:DropDownList runat="server" ID="ddlNivel6" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlNivel6_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                        <asp:Button runat="server" ID="btnAddMenu6" Text="Agregar SubMenu" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelSubMenu" CommandName="Nivel 6" CommandArgument="6" Enabled="False" />
-                                                        <asp:Button runat="server" ID="btnAddOpti6" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Nivel 6" CommandArgument="6" Enabled="False" />
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-1">
+                                                            <asp:Label runat="server" for="ddlNivel6" class="col-sm-3 control-label">SubMenu/Opcion 6</asp:Label>
+                                                            <asp:DropDownList runat="server" ID="ddlNivel6" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlNivel6_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
+                                                            <asp:Button runat="server" ID="btnAddMenu6" Text="Agregar SubMenu" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelSubMenu" CommandName="Menu" CommandArgument="6" Enabled="False" />
+                                                            <asp:Button runat="server" ID="btnAddOpti6" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Opcion" CommandArgument="6" Enabled="False" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-offset-1">
-                                                        <asp:Label runat="server" for="ddlNivel7" class="col-sm-3 control-label">SubMenu/Opcion 7</asp:Label>
-                                                        <asp:DropDownList runat="server" ID="ddlNivel7" Width="450px" CssClass="DropSelect" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                        <asp:Button runat="server" ID="btnAddOpti7" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Nivel 7" CommandArgument="7" Enabled="False" />
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-1">
+                                                            <asp:Label runat="server" for="ddlNivel7" class="col-sm-3 control-label">SubMenu/Opcion 7</asp:Label>
+                                                            <asp:DropDownList runat="server" ID="ddlNivel7" Width="450px" CssClass="DropSelect" AutoPostBack="True" AppendDataBoundItems="True" />
+                                                            <asp:Button runat="server" ID="btnAddOpti7" Text="Agregar Opcion" CssClass="btn btn-primary btn-xs" OnClick="OnClickNivelOpcion" CommandName="Opcion" CommandArgument="7" Enabled="False" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
                         </div>
-                    </div>
-                    <div class="panel-footer">
-                        <div class="clearfix clear-fix"></div>
-                    </div>
+                        <div class="panel-footer">
+                            <div class="clearfix clear-fix"></div>
+                        </div>
 
                     </div>
                 </ContentTemplate>
@@ -150,7 +152,7 @@
 
             <%--MODAL CATALOGO NIVELES--%>
             <div class="modal fade" id="editNivel" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <asp:UpdatePanel ID="upNivel" runat="server">
+                <asp:UpdatePanel ID="upNivel" runat="server" >
                     <ContentTemplate>
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -197,7 +199,7 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">Descripcion</label>
                                                     <div class="col-sm-4">
-                                                        <asp:TextBox runat="server" ID="txtDescripcionNivel" placeholder="DESCRIPCION" class="form-control" />
+                                                        <asp:TextBox runat="server" ID="txtDescripcionNivel" placeholder="DESCRIPCION" class="form-control" onkeydown = "return (event.keyCode!=13);"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -214,7 +216,7 @@
                                                 </div>
                                                 <div class="panel-body">
                                                     <asp:Button type="button" class="btn btn-primary btn-lg " Text="Consulta" ID="btnModalConsultas" data-toggle="modal" data-target="#modalConsultas" runat="server"></asp:Button>
-                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Ticket" ID="btnMocalTicket" data-toggle="modal" data-target="#modalTicket" runat="server"></asp:Button>
+                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Ticket" ID="btnModalTicket" data-toggle="modal" data-target="#modalTicket" runat="server" ></asp:Button>
                                                     <asp:Button type="button" class="btn btn-primary btn-lg " Text="Grupos" ID="btnModalGrupos" data-toggle="modal" data-target="#modalGruposNodo" runat="server"></asp:Button>
                                                 </div>
                                             </div>
@@ -240,6 +242,28 @@
                     <ContentTemplate>
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
+                                <div class="modal-header" id="panelAlertaInfoConsulta" runat="server" visible="false">
+                                    <div class="alert alert-danger">
+                                        <div>
+                                            <div style="float: left">
+                                                <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
+                                            </div>
+                                            <div style="float: left">
+                                                <h3>Error</h3>
+                                            </div>
+                                            <div class="clearfix clear-fix" />
+                                        </div>
+                                        <asp:Repeater runat="server" ID="rptErrorInfoConsulta">
+                                            <ItemTemplate>
+                                                <div class="row">
+                                                    <ul>
+                                                        <li><%# Container.DataItem %></li>
+                                                    </ul>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                </div>
                                 <div class="panel panel-primary">
                                     <div class="panel-heading">
                                         <div class="col-sm-3 control-label">
@@ -305,6 +329,28 @@
                     <ContentTemplate>
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
+                                <div class="modal-header" id="panelAlertaTicket" runat="server" visible="false">
+                                    <div class="alert alert-danger">
+                                        <div>
+                                            <div style="float: left">
+                                                <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
+                                            </div>
+                                            <div style="float: left">
+                                                <h3>Error</h3>
+                                            </div>
+                                            <div class="clearfix clear-fix" />
+                                        </div>
+                                        <asp:Repeater runat="server" ID="rptErrorTicket">
+                                            <ItemTemplate>
+                                                <div class="row">
+                                                    <ul>
+                                                        <li><%# Container.DataItem %></li>
+                                                    </ul>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                </div>
                                 <%--TICKET--%>
                                 <div class="panel panel-primary" runat="server" id="div1" visible="True">
                                     <div class="panel-heading">
@@ -444,23 +490,23 @@
                 </asp:UpdatePanel>
             </div>
 
-            <%--AREA--%>
-            <div class="modal fade" id="modalGrupos" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <asp:UpdatePanel ID="upModalAltaAreas" runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <uc:AltaArea runat="server" ID="AltaAreas" />
-                                </div>
-                                <div class="modal-footer">
-                                    <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarGrupos" Text="Cerrar" OnClick="btnCerrarAreas_OnClick" />
-                                </div>
-                            </div>
-                        </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
+
         </ContentTemplate>
     </asp:UpdatePanel>
+    <%--AREA--%>
+    <div class="modal fade" id="modalGrupos" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <asp:UpdatePanel ID="upModalAltaAreas" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                            <uc:AltaArea runat="server" ID="AltaAreas" />
+                        <div class="modal-footer">
+                            <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarGrupos" Text="Cerrar" OnClick="btnCerrarAreas_OnClick" />
+                        </div>
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
+
 </asp:Content>

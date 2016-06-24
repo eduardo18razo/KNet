@@ -36,6 +36,12 @@ namespace KiiniNet.Entities.Operacion
         public int? IdSlaEstimadoTicket { get; set; }
         [DataMember]
         public int? IdRespuestaEncuesta { get; set; }
+        [DataMember]
+        public int IdEstatusTicket { get; set; }
+        [DataMember]
+        public int IdEstatusAsignacion { get; set; }
+        [DataMember]
+        public DateTime FechaHora { get; set; }
 
         [DataMember]
         public virtual TipoUsuario TipoUsuario { get; set; }
@@ -57,5 +63,9 @@ namespace KiiniNet.Entities.Operacion
         public virtual SlaEstimadoTicket SlaEstimadoTicket { get; set; }
         [DataMember]
         public virtual List<RespuestaEncuesta> RespuestaEncuesta { get; set; }
+        [DataMember]
+        public virtual EstatusTicket EstatusTicket { get; set; }
+        [DataMember]
+        public virtual EstatusAsignacion EstatusAsignacion { get; set; }
     }
 }

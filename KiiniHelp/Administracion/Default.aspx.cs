@@ -36,6 +36,11 @@ namespace KiiniHelp.Administracion
                     divAreas.Visible = lstAreas.Count > 0;
                     rptAreas.DataSource = lstAreas;
                     rptAreas.DataBind();
+                    if (Session["AreaSeleccionada"] == null) return;
+                    foreach (Button btn in rptAreas.Items.Cast<RepeaterItem>().Select(item => (Button)item.FindControl("btnArea")).Where(btn => btn.CommandArgument == Session["AreaSeleccionada"].ToString()))
+                    {
+                        btn.CssClass = "btn btn-lg btn-success";
+                    }
                 }
             }
             catch (Exception ex)
@@ -57,6 +62,28 @@ namespace KiiniHelp.Administracion
                 {
                     Session["AreaSeleccionada"] = btn.CommandArgument;
                     Response.Redirect("~/General/Default.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void rptAreas_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                if (Session["AreaSeleccionada"] == null) return;
+
+                if (((Button)e.Item.FindControl("btnArea")).CommandArgument == (string)Session["AreaSeleccionada"])
+                {
+                    ((Button)e.Item.FindControl("btnArea")).CssClass = "btn btn-lg btn-success";
                 }
             }
             catch (Exception ex)

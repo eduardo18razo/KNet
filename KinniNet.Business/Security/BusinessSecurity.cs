@@ -161,6 +161,17 @@ namespace KinniNet.Core.Security
                         result.Remove(result.SingleOrDefault(s => s.Id == (int)BusinessVariables.EnumMenu.Servicio));
                         result.Remove(result.SingleOrDefault(s => s.Id == (int)BusinessVariables.EnumMenu.Incidentes));
                     }
+
+                    Menu menus = result.SingleOrDefault(s => s.Id == (int)BusinessVariables.EnumMenu.Consultas);
+                    if (menus != null && menus.Menu1 == null)
+                        result.Remove(result.SingleOrDefault(s => s.Id == (int)BusinessVariables.EnumMenu.Consultas));
+                    menus = result.SingleOrDefault(s => s.Id == (int) BusinessVariables.EnumMenu.Servicio); 
+                    if (menus != null && menus.Menu1 == null)
+                        result.Remove(result.SingleOrDefault(s => s.Id == (int)BusinessVariables.EnumMenu.Servicio));
+
+                    menus = result.SingleOrDefault(s => s.Id == (int) BusinessVariables.EnumMenu.Incidentes);
+                    if (menus != null && menus.Menu1 == null)
+                        result.Remove(result.SingleOrDefault(s => s.Id == (int)BusinessVariables.EnumMenu.Incidentes));
                 }
                 catch (Exception ex)
                 {

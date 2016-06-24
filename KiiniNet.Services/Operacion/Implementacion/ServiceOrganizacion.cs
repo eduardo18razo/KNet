@@ -120,7 +120,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             {
                 using (BusinessOrganizacion negocio = new BusinessOrganizacion())
                 {
-                    return negocio.ObtenerOrganizacion(idHolding,  idCompania,  idDireccion,  idSubDireccion,  idGerencia,  idSubGerencia, idJefatura);
+                    return negocio.ObtenerOrganizacion(idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
                 }
             }
             catch (Exception ex)
@@ -241,6 +241,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessOrganizacion negocio = new BusinessOrganizacion())
                 {
                     negocio.GuardarJefatura(entidad);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Organizacion ObtenerOrganizacionUsuario(int idOrganizacion)
+        {
+            try
+            {
+                using (BusinessOrganizacion negocio = new BusinessOrganizacion())
+                {
+                    return negocio.ObtenerOrganizacionUsuario(idOrganizacion);
                 }
             }
             catch (Exception ex)

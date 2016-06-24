@@ -65,10 +65,14 @@ namespace KiiniHelp.UserControls.Temporal
                     Metodos.LlenaComboCatalogo(ddlHolding, _serivicioOrganizacion.ObtenerHoldings(IdTipoUsuario, true));
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
             }
         }
         protected void ddlHolding_OnSelectedIndexChanged(object sender, EventArgs e)

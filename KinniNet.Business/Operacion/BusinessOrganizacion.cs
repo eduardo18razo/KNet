@@ -153,7 +153,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.Organizacion.Where(w => w.IdSubDireccion == idSubGerencia).SelectMany(organizacion => db.Jefatura.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == organizacion.IdGerencia && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
+                result = db.Organizacion.Where(w => w.IdSubGerencia == idSubGerencia).SelectMany(organizacion => db.Jefatura.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == organizacion.IdJefatura && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Jefatura { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
@@ -462,18 +462,83 @@ namespace KinniNet.Core.Operacion
             }
         }
 
-        public Organizacion ObtenerOrganizacionUsuario(int idUsuario)
+        public Organizacion ObtenerOrganizacionUsuario(int idOrganizacion)
         {
             Organizacion result = null;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Organizacion.SingleOrDefault(w => w.Id == idOrganizacion && w.Habilitado);
+                if (result != null)
+                {
+                    db.LoadProperty(result, "Holding");
+                    db.LoadProperty(result, "Compania");
+                    db.LoadProperty(result, "Direccion");
+                    db.LoadProperty(result, "SubDireccion");
+                    db.LoadProperty(result, "Gerencia");
+                    db.LoadProperty(result, "SubGerencia");
+                    db.LoadProperty(result, "Jefatura");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public string ObtenerDescripcionOrganizacionUsuario(int idUsuario, bool ultimoNivel)
+        {
+            string result = null;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
                 Usuario usuario = db.Usuario.SingleOrDefault(w => w.Id == idUsuario && w.Habilitado);
                 if (usuario != null)
                 {
-                    db.LoadProperty(usuario, "Organizacion");
-                    result = usuario.Organizacion;
+                    if (usuario.Organizacion != null)
+                    {
+                        if (ultimoNivel)
+                        {
+                            if (usuario.Organizacion.Holding != null)
+                                result = usuario.Organizacion.Holding.Descripcion;
+                            if (usuario.Organizacion.Compania != null)
+                                result = usuario.Organizacion.Compania.Descripcion;
+                            if (usuario.Organizacion.Direccion != null)
+                                result = usuario.Organizacion.Direccion.Descripcion;
+                            if (usuario.Organizacion.SubDireccion != null)
+                                result = usuario.Organizacion.SubDireccion.Descripcion;
+                            if (usuario.Organizacion.Gerencia != null)
+                                result = usuario.Organizacion.Gerencia.Descripcion;
+                            if (usuario.Organizacion.SubGerencia != null)
+                                result = usuario.Organizacion.SubGerencia.Descripcion;
+                            if (usuario.Organizacion.Jefatura != null)
+                                result = usuario.Organizacion.Jefatura.Descripcion;
+                        }
+                        else
+                        {
+                            if (usuario.Organizacion.Holding != null)
+                                result += usuario.Organizacion.Holding.Descripcion;
+                            if (usuario.Organizacion.Compania != null)
+                                result += ">" + usuario.Organizacion.Compania.Descripcion;
+                            if (usuario.Organizacion.Direccion != null)
+                                result += ">" + usuario.Organizacion.Direccion.Descripcion;
+                            if (usuario.Organizacion.SubDireccion != null)
+                                result += ">" + usuario.Organizacion.SubDireccion.Descripcion;
+                            if (usuario.Organizacion.Gerencia != null)
+                                result += ">" + usuario.Organizacion.Gerencia.Descripcion;
+                            if (usuario.Organizacion.SubGerencia != null)
+                                result += ">" + usuario.Organizacion.SubGerencia.Descripcion;
+                            if (usuario.Organizacion.Jefatura != null)
+                                result += ">" + usuario.Organizacion.Jefatura.Descripcion;
+                        }
+                    }
                 }
             }
             catch (Exception ex)

@@ -133,6 +133,22 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="EstatusAsignacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
+  <EntityType Name="EstatusTicket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
   <EntityType Name="Gerencia">
     <Key>
       <PropertyRef Name="Id" />
@@ -560,6 +576,9 @@
     <Property Name="IdEncuesta" Type="int" />
     <Property Name="IdSlaEstimadoTicket" Type="int" />
     <Property Name="IdRespuestaEncuesta" Type="int" />
+    <Property Name="IdEstatusTicket" Type="int" Nullable="false" />
+    <Property Name="IdEstatusAsignacion" Type="int" Nullable="false" />
+    <Property Name="FechaHora" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="TipoArbolAcceso">
     <Key>
@@ -1789,6 +1808,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Ticket_EstatusAsignacion">
+    <End Role="EstatusAsignacion" Type="Self.EstatusAsignacion" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusAsignacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdEstatusAsignacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_EstatusTicket">
+    <End Role="EstatusTicket" Type="Self.EstatusTicket" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusTicket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdEstatusTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Ticket_Mascara">
     <End Role="Mascara" Type="Self.Mascara" Multiplicity="0..1" />
     <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
@@ -2103,6 +2146,8 @@
     <EntitySet Name="Encuesta" EntityType="Self.Encuesta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EncuestaPregunta" EntityType="Self.EncuestaPregunta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstatusAsignacion" EntityType="Self.EstatusAsignacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstatusTicket" EntityType="Self.EstatusTicket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Gerencia" EntityType="Self.Gerencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoUsuario" EntityType="Self.GrupoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoUsuarioInventarioArbol" EntityType="Self.GrupoUsuarioInventarioArbol" Schema="dbo" store:Type="Tables" />
@@ -2519,6 +2564,14 @@
     </AssociationSet>
     <AssociationSet Name="FK_Ticket_Encuesta" Association="Self.FK_Ticket_Encuesta">
       <End Role="Encuesta" EntitySet="Encuesta" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_EstatusAsignacion" Association="Self.FK_Ticket_EstatusAsignacion">
+      <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_EstatusTicket" Association="Self.FK_Ticket_EstatusTicket">
+      <End Role="EstatusTicket" EntitySet="EstatusTicket" />
       <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>
     <AssociationSet Name="FK_Ticket_Mascara" Association="Self.FK_Ticket_Mascara">

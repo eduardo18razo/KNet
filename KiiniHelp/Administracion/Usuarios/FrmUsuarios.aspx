@@ -48,7 +48,9 @@
                             </div>
                         </div>
                         <div class="panel-footer">
+                            <asp:Button CssClass="btn btn-lg btn-danger" ID="btnCancelar" runat="server" Text="Cancelar" Style="float: right; margin-left: 25px" OnClick="btnCancelar_OnClick"></asp:Button>
                             <asp:Button CssClass="btn btn-lg btn-success" ID="btnGuardar" runat="server" Text="Guardar" Style="float: right" OnClick="btnGuardar_OnClick"></asp:Button>
+
                             <div class="clearfix clear-fix"></div>
                         </div>
                     </div>
@@ -134,10 +136,10 @@
                                                                         <asp:Label runat="server"><%# Eval("TipoTelefono.Descripcion") %></asp:Label>
                                                                     </div>
                                                                     <div class="col-xs-5 col-md-3">
-                                                                        <asp:TextBox runat="server" ID="txtNumero" Text='<%# Eval("Numero") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="10"/>
+                                                                        <asp:TextBox runat="server" ID="txtNumero" Text='<%# Eval("Numero") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="10" />
                                                                     </div>
-                                                                    <div class="col-xs-4 col-md-3" runat="server" Visible='<%# Eval("TipoTelefono.Extension") %>'>
-                                                                        <asp:TextBox runat="server" ID="txtExtension" Text='<%# Eval("Extension") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="40"/>
+                                                                    <div class="col-xs-4 col-md-3" runat="server" visible='<%# Eval("TipoTelefono.Extension") %>'>
+                                                                        <asp:TextBox runat="server" ID="txtExtension" Text='<%# Eval("Extension") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="40" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -158,7 +160,7 @@
                                                             <div style="border-radius: 20px; margin-bottom: 5px; height: auto">
                                                                 <div class="row">
                                                                     <div class="col-xs-8 col-md-6">
-                                                                        <asp:TextBox runat="server" ID="txtCorreo" Text='<%# Eval("Correo") %>' CssClass="form-control" Style="text-transform: lowercase" onkeypress="return ValidaCampo(this,13)"/>
+                                                                        <asp:TextBox runat="server" ID="txtCorreo" Text='<%# Eval("Correo") %>' CssClass="form-control" Style="text-transform: lowercase" onkeypress="return ValidaCampo(this,13)" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -218,6 +220,7 @@
                                             <div class="col-sm-offset-1">
                                                 <asp:Label for="ddlHolding" class="col-sm-3 control-label" runat="server">Holding</asp:Label>
                                                 <asp:DropDownList runat="server" ID="ddlHolding" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlHolding_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
+                                                <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" OnClick="OnClick" ID="btnAltaHolding" CommandName="Holding" CommandArgument="99" />
                                             </div>
                                         </div>
                                         <br />
@@ -430,7 +433,7 @@
                     <ContentTemplate>
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
-                                <uc:AsociarGrupoUsuario runat="server" ID="AsociarGrupoUsuario" />
+                                <uc:AsociarGrupoUsuario runat="server" ID="AsociarGrupoUsuario" Modal="#modalGrupos"/>
                                 <div class="modal-footer">
                                     <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarGrupos" Text="Cerrar" OnClick="btnCerrarGrupos_OnClick" />
                                 </div>
@@ -479,14 +482,14 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Descripcion</label>
-                                                <asp:TextBox runat="server" ID="txtDescripcionCampus" placeholder="DESCRIPCION" class="form-control" />
+                                                <asp:TextBox runat="server" ID="txtDescripcionCampus" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13);" />
                                             </div>
                                             <div class="form-group">
                                                 <asp:CheckBox runat="server" ID="chkHabilitado" Checked="True" Visible="False" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Codigo Postal</label>
-                                                <asp:TextBox runat="server" ID="txtCp" placeholder="CODIGO POSTAL" AutoPostBack="True" OnTextChanged="txtCp_OnTextChanged" class="form-control" onkeypress="return ValidaCampo(this,2)"/>
+                                                <asp:TextBox runat="server" ID="txtCp" placeholder="CODIGO POSTAL" AutoPostBack="True" OnTextChanged="txtCp_OnTextChanged" class="form-control" onkeypress="return ValidaCampo(this,2)" onkeydown="return (event.keyCode!=13);" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">Colonia</label>
@@ -495,15 +498,15 @@
                                             <div class="form-group">
 
                                                 <label class="col-sm-3 control-label">Calle</label>
-                                                <asp:TextBox runat="server" ID="txtCalle" placeholder="CALLE" class="form-control" />
+                                                <asp:TextBox runat="server" ID="txtCalle" placeholder="CALLE" class="form-control" onkeydown="return (event.keyCode!=13);" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">Numero Exterior</label>
-                                                <asp:TextBox runat="server" ID="txtNoExt" placeholder="NUMERO EXTERIOR" class="form-control" />
+                                                <asp:TextBox runat="server" ID="txtNoExt" placeholder="NUMERO EXTERIOR" class="form-control" onkeydown="return (event.keyCode!=13);" />
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">Numero Interior</label>
-                                                <asp:TextBox runat="server" ID="txtNoInt" placeholder="NUMERO " class="form-control" />
+                                                <asp:TextBox runat="server" ID="txtNoInt" placeholder="NUMERO " class="form-control" onkeydown="return (event.keyCode!=13);" />
                                             </div>
                                         </div>
                                     </div>
@@ -556,15 +559,15 @@
                                     </div>
                                     <div class="panel-body">
                                         <asp:HiddenField runat="server" ID="hfCatalogo" />
-                                        <div>
+                                        <div role="form">
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">Tipo de Usuario</label>
-                                                    <asp:DropDownList runat="server" ID="ddlTipoUsuarioCatalogo" CssClass="DropSelect" />
+                                                    <asp:DropDownList runat="server" ID="ddlTipoUsuarioCatalogo" CssClass="DropSelect" Enabled="False" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">Descripcion</label>
-                                                    <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="DESCRIPCION" class="form-control" />
+                                                    <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13);" />
                                                 </div>
                                                 <div class="form-group">
                                                     <asp:CheckBox runat="server" ID="CheckBox1" Checked="True" Visible="False" />

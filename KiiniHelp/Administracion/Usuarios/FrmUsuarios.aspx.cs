@@ -302,10 +302,17 @@ namespace KiiniHelp.Administracion.Usuarios
                     break;
                 }
             }
-
-            if ((from txtCorreo in rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox)item.FindControl("txtCorreo")) where txtCorreo.Text.Trim() != string.Empty select Regex.IsMatch(txtCorreo.Text.Trim(), @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z")).Any(isEmail => !isEmail))
+            var sFormato = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            List<TextBox> lstCorreos =rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox) item.FindControl("txtCorreo")).Where(w => w.Text != string.Empty).ToList();
+            foreach (TextBox txtMail in lstCorreos)
             {
-                throw new Exception("Formato de correo invalido");
+                if (!Regex.IsMatch(txtMail.Text.Trim(), sFormato))
+                {
+                    if (Regex.Replace(txtMail.Text.Trim(), sFormato, String.Empty).Length != 0)
+                    {
+                        throw new Exception("Formato de correo invalido");
+                    }
+                }
             }
 
             List<CorreoUsuario> correos = rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox)item.FindControl("txtCorreo")).Where(correo => correo != null & correo.Text.Trim() != string.Empty).Select(correo => new CorreoUsuario { Correo = correo.Text.Trim() }).ToList();
@@ -499,8 +506,6 @@ namespace KiiniHelp.Administracion.Usuarios
                             throw new Exception();
                         if (ddlSubZona.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                             throw new Exception();
-                        if (ddlSiteRack.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
-                            throw new Exception();
                         break;
 
                     case "9":
@@ -559,7 +564,7 @@ namespace KiiniHelp.Administracion.Usuarios
                         break;
                 }
             }
-            catch (Exception ex)
+            catch 
             {
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoUbicacion\");", true);
                 throw new Exception("Debe de Seleccionarse un Padre para esta Operacion");
@@ -577,7 +582,7 @@ namespace KiiniHelp.Administracion.Usuarios
                 else
                 {
                     ValidaSeleccionCatalogo(lbtn.CommandArgument);
-                    lblTitleCatalogo.Text = lbtn.CommandName;
+                    lblTitleCatalogo.Text = ObtenerRuta(lbtn.CommandArgument, lbtn.CommandName.ToUpper());
                     hfCatalogo.Value = lbtn.CommandArgument;
                     ddlTipoUsuarioCatalogo.SelectedIndex = ddlTipoUsuario.SelectedIndex;
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoUbicacion\");", true);
@@ -595,6 +600,53 @@ namespace KiiniHelp.Administracion.Usuarios
                 else
                     AlertaUbicacion = _lstError;
             }
+        }
+
+        public string ObtenerRuta(string command, string modulo)
+        {
+            string result = "<h3>ALTA NUEVA " + modulo + "</h3><span style=\"font-size: x-small;\">";
+            switch (command)
+            {
+                case "0":
+                    result += ddlpais.SelectedItem.Text + ">" + ddlCampus.SelectedItem.Text;
+                    break;
+                case "3":
+                    result += ddlpais.SelectedItem.Text + ">" + ddlCampus.SelectedItem.Text;
+                    break;
+                case "4":
+                    result += ddlpais.SelectedItem.Text + ">" + ddlCampus.SelectedItem.Text + ">" + ddlTorre.SelectedItem.Text;
+                    break;
+                case "5":
+                    result += ddlpais.SelectedItem.Text + ">" + ddlCampus.SelectedItem.Text + ">" + ddlTorre.SelectedItem.Text + ">" + ddlPiso.SelectedItem.Text;
+                    break;
+                case "6":
+                    result += ddlpais.SelectedItem.Text + ">" + ddlCampus.SelectedItem.Text + ">" + ddlTorre.SelectedItem.Text + ">" + ddlPiso.SelectedItem.Text + ">" + ddlZona.SelectedItem.Text;
+                    break;
+                case "7":
+                    result += ddlpais.SelectedItem.Text + ">" + ddlCampus.SelectedItem.Text + ">" + ddlTorre.SelectedItem.Text + ">" + ddlPiso.SelectedItem.Text + ">" + ddlZona.SelectedItem.Text + ">" + ddlSubZona.SelectedItem.Text;
+                    break;
+
+                case "9":
+                    result += ddlHolding.SelectedItem.Text;
+                    break;
+                case "10":
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text;
+                    break;
+                case "11":
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text;
+                    break;
+                case "12":
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text;
+                    break;
+                case "13":
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text + ">" + ddlGerencia.SelectedItem.Text;
+                    break;
+                case "14":
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text + ">" + ddlGerencia.SelectedItem.Text + ">" + ddlSubGerencia.SelectedItem.Text;
+                    break;
+            }
+            result += "</span>";
+            return result;
         }
 
         protected void chkKbxRoles_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -650,13 +702,16 @@ namespace KiiniHelp.Administracion.Usuarios
                     Metodos.LlenaListBoxCatalogo(chklbxRoles, _servicioSistemaRol.ObtenerRoles(idTipoUsuario, false));
                     AsociarGrupoUsuario.IdTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                     Session["UsuarioTemporal"] = new Usuario();
+                    LimpiarPantalla();
                     divDatos.Visible = true;
-                }
+                    upGeneral.Update();
+                 }
                 else
                 {
                     LimpiarPantalla();
                     divDatos.Visible = false;
                 }
+                btnAltaHolding.Visible = int.Parse(ddlTipoUsuario.SelectedValue) != (int) BusinessVariables.EnumTiposUsuario.Empleado;
             }
             catch (Exception ex)
             {
@@ -1113,6 +1168,18 @@ namespace KiiniHelp.Administracion.Usuarios
                             LlenaComboOrganizacion(Convert.ToInt32(ddlTipoUsuarioCatalogo.SelectedValue));
                             upOrganizacion.Update();
                             break;
+                        case 99:
+                            organizacion.Holding =  new Holding
+                            {
+                                IdTipoUsuario = Convert.ToInt32(ddlTipoUsuarioCatalogo.SelectedValue),
+                                Descripcion = txtDescripcionCatalogo.Text.Trim(),
+                                Habilitado = chkHabilitado.Checked
+                            };
+                            _servicioOrganizacion.GuardarOrganizacion(organizacion);
+                            LlenaComboOrganizacion(idTipoUsuario);
+                            ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
+                            upOrganizacion.Update();
+                            break;
                         case 9:
                             organizacion.IdHolding = Convert.ToInt32(ddlHolding.SelectedValue);
                             organizacion.Compania = new Compania
@@ -1485,6 +1552,24 @@ namespace KiiniHelp.Administracion.Usuarios
                 }
                 _lstError.Add(ex.Message);
                 
+            }
+        }
+
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ddlTipoUsuario.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
     }

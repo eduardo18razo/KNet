@@ -59,6 +59,12 @@
   <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposUsuarioNivel_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerGruposUsuarioNivelResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposDeUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerGruposDeUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposDeUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerGruposDeUsuarioResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceGrupoUsuario">
     <wsdl:operation name="ObtenerGruposUsuarioTipoUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioTipoUsuario" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuarioTipoUsuario_InputMessage" />
@@ -87,6 +93,10 @@
     <wsdl:operation name="ObtenerGruposUsuarioNivel">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioNivel" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuarioNivel_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioNivelResponse" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuarioNivel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerGruposDeUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposDeUsuario" message="tns:IServiceGrupoUsuario_ObtenerGruposDeUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposDeUsuarioResponse" message="tns:IServiceGrupoUsuario_ObtenerGruposDeUsuario_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceGrupoUsuario">
@@ -147,6 +157,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerGruposUsuarioNivel">
       <soap:operation soapAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioNivel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerGruposDeUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposDeUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

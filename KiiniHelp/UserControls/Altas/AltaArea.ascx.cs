@@ -83,7 +83,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-
+                LimpiarCampos();
             }
             catch (Exception ex)
             {

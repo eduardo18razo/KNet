@@ -7,10 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-
 namespace KiiniHelp.UserControls.Altas {
     
     
@@ -23,7 +19,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected UpdatePanel upGrupoUsuario;
+        protected global::System.Web.UI.UpdatePanel upGrupoUsuario;
         
         /// <summary>
         /// panelAlerta control.
@@ -32,7 +28,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlGenericControl panelAlerta;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlerta;
         
         /// <summary>
         /// rptErrorGeneral control.
@@ -41,7 +37,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Repeater rptErrorGeneral;
+        protected global::System.Web.UI.WebControls.Repeater rptErrorGeneral;
         
         /// <summary>
         /// lblTitle control.
@@ -50,7 +46,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Label lblTitle;
+        protected global::System.Web.UI.WebControls.Label lblTitle;
         
         /// <summary>
         /// hfIdGrupo control.
@@ -59,7 +55,16 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HiddenField hfIdGrupo;
+        protected global::System.Web.UI.WebControls.HiddenField hfIdGrupo;
+        
+        /// <summary>
+        /// hfIdTipoUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdTipoUsuario;
         
         /// <summary>
         /// hfIdTipoSubGrupo control.
@@ -68,7 +73,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HiddenField hfIdTipoSubGrupo;
+        protected global::System.Web.UI.WebControls.HiddenField hfIdTipoSubGrupo;
         
         /// <summary>
         /// txtDescripcionGrupoUsuario control.
@@ -77,7 +82,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtDescripcionGrupoUsuario;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcionGrupoUsuario;
         
         /// <summary>
         /// chkHabilitado control.
@@ -86,7 +91,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected CheckBox chkHabilitado;
+        protected global::System.Web.UI.WebControls.CheckBox chkHabilitado;
         
         /// <summary>
         /// divSubRoles control.
@@ -95,7 +100,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlGenericControl divSubRoles;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSubRoles;
         
         /// <summary>
         /// hfOperacion control.
@@ -104,7 +109,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HiddenField hfOperacion;
+        protected global::System.Web.UI.WebControls.HiddenField hfOperacion;
         
         /// <summary>
         /// chklbxSubRoles control.
@@ -113,7 +118,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected CheckBoxList chklbxSubRoles;
+        protected global::System.Web.UI.WebControls.CheckBoxList chklbxSubRoles;
         
         /// <summary>
         /// btnGuardar control.
@@ -122,7 +127,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Button btnGuardar;
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
         
         /// <summary>
         /// btnLimpiar control.
@@ -131,6 +136,6 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Button btnLimpiar;
+        protected global::System.Web.UI.WebControls.Button btnLimpiar;
     }
 }

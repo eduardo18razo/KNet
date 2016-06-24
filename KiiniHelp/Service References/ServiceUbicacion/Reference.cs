@@ -8,57 +8,51 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using KiiniNet.Entities.Cat.Arbol.Ubicaciones;
-using KiiniNet.Entities.Cat.Operacion;
-
 namespace KiiniHelp.ServiceUbicacion {
     
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    [ServiceContract(ConfigurationName="ServiceUbicacion.IServiceUbicacion")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceUbicacion.IServiceUbicacion")]
     public interface IServiceUbicacion {
         
-        [OperationContract(Action="http://tempuri.org/IServiceUbicacion/ObtenerPais", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerPaisResponse")]
-        List<Pais> ObtenerPais(int idTipoUsuario, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerPais", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerPaisResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.Pais> ObtenerPais(int idTipoUsuario, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceUbicacion/ObtenerCampus", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerCampusResponse")]
-        List<Campus> ObtenerCampus(int idTipoUsuario, int idPais, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerCampus", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerCampusResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.Campus> ObtenerCampus(int idTipoUsuario, int idPais, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceUbicacion/ObtenerTorres", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerTorresResponse")]
-        List<Torre> ObtenerTorres(int idTipoUsuario, int idCampus, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerTorres", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerTorresResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.Torre> ObtenerTorres(int idTipoUsuario, int idCampus, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceUbicacion/ObtenerPisos", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerPisosResponse")]
-        List<Piso> ObtenerPisos(int idTipoUsuario, int idTorre, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerPisos", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerPisosResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.Piso> ObtenerPisos(int idTipoUsuario, int idTorre, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceUbicacion/ObtenerZonas", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerZonasResponse")]
-        List<Zona> ObtenerZonas(int idTipoUsuario, int idPiso, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerZonas", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerZonasResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.Zona> ObtenerZonas(int idTipoUsuario, int idPiso, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceUbicacion/ObtenerSubZonas", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerSubZonasResponse")]
-        List<SubZona> ObtenerSubZonas(int idTipoUsuario, int idZona, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerSubZonas", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerSubZonasResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.SubZona> ObtenerSubZonas(int idTipoUsuario, int idZona, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceUbicacion/ObtenerSiteRacks", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerSiteRacksResponse")]
-        List<SiteRack> ObtenerSiteRacks(int idTipoUsuario, int idSubZona, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerSiteRacks", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerSiteRacksResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.SiteRack> ObtenerSiteRacks(int idTipoUsuario, int idSubZona, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacion", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionResponse")]
-        Ubicacion ObtenerUbicacion(int idPais, Nullable<int> idCampus, Nullable<int> idTorre, Nullable<int> idPiso, Nullable<int> idZona, Nullable<int> idSubZona, Nullable<int> idSiteRack);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacion", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionResponse")]
+        KiiniNet.Entities.Cat.Operacion.Ubicacion ObtenerUbicacion(int idPais, System.Nullable<int> idCampus, System.Nullable<int> idTorre, System.Nullable<int> idPiso, System.Nullable<int> idZona, System.Nullable<int> idSubZona, System.Nullable<int> idSiteRack);
         
-        [OperationContract(Action="http://tempuri.org/IServiceUbicacion/GuardarUbicacion", ReplyAction="http://tempuri.org/IServiceUbicacion/GuardarUbicacionResponse")]
-        void GuardarUbicacion(Ubicacion ubicacion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/GuardarUbicacion", ReplyAction="http://tempuri.org/IServiceUbicacion/GuardarUbicacionResponse")]
+        void GuardarUbicacion(KiiniNet.Entities.Cat.Operacion.Ubicacion ubicacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionUsuario", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionUsuarioResponse")]
+        KiiniNet.Entities.Cat.Operacion.Ubicacion ObtenerUbicacionUsuario(int idUbicacion);
     }
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceUbicacionChannel : IServiceUbicacion, IClientChannel {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceUbicacionChannel : KiiniHelp.ServiceUbicacion.IServiceUbicacion, System.ServiceModel.IClientChannel {
     }
     
-    [DebuggerStepThrough()]
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceUbicacionClient : ClientBase<IServiceUbicacion>, IServiceUbicacion {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceUbicacionClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceUbicacion.IServiceUbicacion>, KiiniHelp.ServiceUbicacion.IServiceUbicacion {
         
         public ServiceUbicacionClient() {
         }
@@ -71,48 +65,52 @@ namespace KiiniHelp.ServiceUbicacion {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceUbicacionClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
+        public ServiceUbicacionClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceUbicacionClient(Binding binding, EndpointAddress remoteAddress) : 
+        public ServiceUbicacionClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public List<Pais> ObtenerPais(int idTipoUsuario, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.Pais> ObtenerPais(int idTipoUsuario, bool insertarSeleccion) {
             return base.Channel.ObtenerPais(idTipoUsuario, insertarSeleccion);
         }
         
-        public List<Campus> ObtenerCampus(int idTipoUsuario, int idPais, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.Campus> ObtenerCampus(int idTipoUsuario, int idPais, bool insertarSeleccion) {
             return base.Channel.ObtenerCampus(idTipoUsuario, idPais, insertarSeleccion);
         }
         
-        public List<Torre> ObtenerTorres(int idTipoUsuario, int idCampus, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.Torre> ObtenerTorres(int idTipoUsuario, int idCampus, bool insertarSeleccion) {
             return base.Channel.ObtenerTorres(idTipoUsuario, idCampus, insertarSeleccion);
         }
         
-        public List<Piso> ObtenerPisos(int idTipoUsuario, int idTorre, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.Piso> ObtenerPisos(int idTipoUsuario, int idTorre, bool insertarSeleccion) {
             return base.Channel.ObtenerPisos(idTipoUsuario, idTorre, insertarSeleccion);
         }
         
-        public List<Zona> ObtenerZonas(int idTipoUsuario, int idPiso, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.Zona> ObtenerZonas(int idTipoUsuario, int idPiso, bool insertarSeleccion) {
             return base.Channel.ObtenerZonas(idTipoUsuario, idPiso, insertarSeleccion);
         }
         
-        public List<SubZona> ObtenerSubZonas(int idTipoUsuario, int idZona, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.SubZona> ObtenerSubZonas(int idTipoUsuario, int idZona, bool insertarSeleccion) {
             return base.Channel.ObtenerSubZonas(idTipoUsuario, idZona, insertarSeleccion);
         }
         
-        public List<SiteRack> ObtenerSiteRacks(int idTipoUsuario, int idSubZona, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Ubicaciones.SiteRack> ObtenerSiteRacks(int idTipoUsuario, int idSubZona, bool insertarSeleccion) {
             return base.Channel.ObtenerSiteRacks(idTipoUsuario, idSubZona, insertarSeleccion);
         }
         
-        public Ubicacion ObtenerUbicacion(int idPais, Nullable<int> idCampus, Nullable<int> idTorre, Nullable<int> idPiso, Nullable<int> idZona, Nullable<int> idSubZona, Nullable<int> idSiteRack) {
+        public KiiniNet.Entities.Cat.Operacion.Ubicacion ObtenerUbicacion(int idPais, System.Nullable<int> idCampus, System.Nullable<int> idTorre, System.Nullable<int> idPiso, System.Nullable<int> idZona, System.Nullable<int> idSubZona, System.Nullable<int> idSiteRack) {
             return base.Channel.ObtenerUbicacion(idPais, idCampus, idTorre, idPiso, idZona, idSubZona, idSiteRack);
         }
         
-        public void GuardarUbicacion(Ubicacion ubicacion) {
+        public void GuardarUbicacion(KiiniNet.Entities.Cat.Operacion.Ubicacion ubicacion) {
             base.Channel.GuardarUbicacion(ubicacion);
+        }
+        
+        public KiiniNet.Entities.Cat.Operacion.Ubicacion ObtenerUbicacionUsuario(int idUbicacion) {
+            return base.Channel.ObtenerUbicacionUsuario(idUbicacion);
         }
     }
 }

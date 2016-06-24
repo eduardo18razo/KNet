@@ -30,7 +30,7 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        public int IdTipoGrugo
+        public int IdTipoGrupo
         {
             get { return Convert.ToInt32(hfIdGrupo.Value); }
             set
@@ -67,7 +67,7 @@ namespace KiiniHelp.UserControls.Altas
                 {
                     try
                     {
-                        switch (IdTipoGrugo)
+                        switch (IdTipoGrupo)
                         {
                             case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento:
                                 foreach (ListItem item in chklbxSubRoles.Items.Cast<ListItem>().Where(item => int.Parse(item.Value) == (int)BusinessVariables.EnumSubRoles.Dueño))
@@ -98,6 +98,12 @@ namespace KiiniHelp.UserControls.Altas
                     }
                 }
             }
+        }
+
+        public int IdTipoUsuario
+        {
+            get { return Convert.ToInt32(hfIdTipoUsuario.Value); }
+            set { hfIdTipoUsuario.Value = value.ToString(); }
         }
 
         private void ValidaCapturaGrupoUsuario()
@@ -147,8 +153,8 @@ namespace KiiniHelp.UserControls.Altas
                 ValidaCapturaGrupoUsuario();
                 GrupoUsuario grupoUsuario = new GrupoUsuario
                 {
-                    IdTipoUsuario = IdTipoGrugo,
-                    IdTipoGrupo = Convert.ToInt32(IdTipoGrugo),
+                    IdTipoUsuario = IdTipoUsuario,
+                    IdTipoGrupo = Convert.ToInt32(IdTipoGrupo),
                     Descripcion = txtDescripcionGrupoUsuario.Text,
                     Habilitado = chkHabilitado.Checked,
                     SubGrupoUsuario = new List<SubGrupoUsuario>()
@@ -160,9 +166,10 @@ namespace KiiniHelp.UserControls.Altas
                         IdSubRol = Convert.ToInt32(item.Value)
                     });
                 }
+                grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
                 _servicioGrupoUsuario.GuardarGrupoUsuario(grupoUsuario);
                 LimpiarCampos();
-                IdTipoGrugo = Convert.ToInt32(hfIdGrupo.Value);
+                IdTipoGrupo = Convert.ToInt32(hfIdGrupo.Value);
             }
             catch (Exception ex)
             {

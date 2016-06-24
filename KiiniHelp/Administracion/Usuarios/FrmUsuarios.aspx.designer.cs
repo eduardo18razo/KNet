@@ -112,6 +112,15 @@ namespace KiiniHelp.Administracion.Usuarios {
         protected global::System.Web.UI.WebControls.Button btnModalGrupos;
         
         /// <summary>
+        /// btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        
+        /// <summary>
         /// btnGuardar control.
         /// </summary>
         /// <remarks>
@@ -281,6 +290,15 @@ namespace KiiniHelp.Administracion.Usuarios {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlHolding;
+        
+        /// <summary>
+        /// btnAltaHolding control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAltaHolding;
         
         /// <summary>
         /// ddlCompañia control.

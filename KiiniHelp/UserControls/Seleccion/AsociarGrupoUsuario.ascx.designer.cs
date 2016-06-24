@@ -211,13 +211,13 @@ namespace KiiniHelp.UserControls.Seleccion {
         protected global::System.Web.UI.UpdatePanel upAltaGrupo;
         
         /// <summary>
-        /// ucltaGrupoUsuario control.
+        /// ucAltaGrupoUsuario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.AltaGrupoUsuario ucltaGrupoUsuario;
+        protected global::KiiniHelp.UserControls.Altas.AltaGrupoUsuario ucAltaGrupoUsuario;
         
         /// <summary>
         /// btnCerrarModalAltaGrupoUsuario control.
