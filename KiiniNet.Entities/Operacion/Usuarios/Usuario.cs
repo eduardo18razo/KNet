@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Operacion.Tickets;
 
 namespace KiiniNet.Entities.Operacion.Usuarios
 {
@@ -63,6 +64,13 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public virtual List<HitConsulta> HitConsulta { get; set; }
         [DataMember]
         public virtual List<Ticket> Ticket { get; set; }
+        [DataMember]
+        public virtual List<TicketEstatus> TicketEstatus { get; set; }
+        [DataMember]
+        public virtual List<TicketAsignacion> TicketAsigno { get; set; }
+        [DataMember]
+        public virtual List<TicketAsignacion> TicketAsignado { get; set; }
+
 
         public string NombreCompleto { get { return ApellidoPaterno + " " + ApellidoMaterno + " " + Nombre; } }
 
@@ -73,5 +81,7 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public string UbicacionCompleta { get; set; }
 
         public string UbicacionFinal { get; set; }
+
+        
     }
 }

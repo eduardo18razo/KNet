@@ -21,35 +21,39 @@ namespace KiiniHelp.Operacion
             try
             {
                 List<HelperTickets> lst = _servicioTickets.ObtenerTickets(((Usuario)Session["UserData"]).Id, pageIndex, _pageSize);
-                foreach (KeyValuePair<string, string> filtro in filtros)
+                if (lst != null)
                 {
-                    switch (filtro.Key)
+                    foreach (KeyValuePair<string, string> filtro in filtros)
                     {
-                        case "NumeroTicket":
-                            lst = lst.Where(w => w.NumeroTicket == int.Parse(filtro.Value)).ToList();
-                            break;
+                        switch (filtro.Key)
+                        {
+                            case "NumeroTicket":
+                                lst = lst.Where(w => w.NumeroTicket == int.Parse(filtro.Value)).ToList();
+                                break;
+                        }
                     }
+                    if (orden && asc)
+                        switch (ordering)
+                        {
+                            case "DateTime":
+                                lst = lst.OrderBy(o => o.FechaHora).ToList();
+                                break;
+                        }
+                    else
+                        switch (ordering)
+                        {
+                            case "DateTime":
+                                lst = lst.OrderByDescending(o => o.FechaHora).ToList();
+                                break;
+                        }
+
+                    ViewState["Tipificaciones"] = lst.Select(s => s.Tipificacion).Distinct().ToList();
+                    rptTickets.DataSource = lst;
+                    rptTickets.DataBind();
+                    if (lst.Count == 0 && pageIndex == 1) return;
+                    int recordCount = pageIndex*_pageSize;
+                    GeneraPaginado(recordCount, pageIndex);
                 }
-                if (orden && asc)
-                    switch (ordering)
-                    {
-                        case "DateTime":
-                            lst = lst.OrderBy(o => o.FechaHora).ToList();
-                            break;
-                    }
-                else
-                    switch (ordering)
-                    {
-                        case "DateTime":
-                            lst = lst.OrderByDescending(o => o.FechaHora).ToList();
-                            break;
-                    }
-                ViewState["Tipificaciones"] = lst.Select(s => s.Tipificacion).Distinct().ToList();
-                rptTickets.DataSource = lst;
-                rptTickets.DataBind();
-                if (lst.Count == 0 && pageIndex == 1) return;
-                int recordCount = pageIndex * _pageSize;
-                GeneraPaginado(recordCount, pageIndex);
             }
             catch (Exception e)
             {
@@ -106,28 +110,28 @@ namespace KiiniHelp.Operacion
         {
             try
             {
-                DropDownList ddlEstatus = (DropDownList)e.Item.FindControl("ddlEstatus");
-                DropDownList ddlAsignacion = (DropDownList)e.Item.FindControl("ddlAsignacion");
-                DropDownList ddlTipificacion = (DropDownList)e.Item.FindControl("ddlTipificacion");
-                if (ddlEstatus != null)
-                {
-                    ddlEstatus.DataSource = _servicioEstatus.ObtenerEstatusTicket(true);
-                    ddlEstatus.DataTextField = "Descripcion";
-                    ddlEstatus.DataValueField = "Id";
-                    ddlEstatus.DataBind();
-                }
-                if (ddlAsignacion != null)
-                {
-                    ddlAsignacion.DataSource = _servicioEstatus.ObtenerEstatusAsignacion(true);
-                    ddlAsignacion.DataTextField = "Descripcion";
-                    ddlAsignacion.DataValueField = "Id";
-                    ddlAsignacion.DataBind();
-                }
-                if (ddlTipificacion != null)
-                {
-                    ddlTipificacion.DataSource = ViewState["Tipificaciones"];
-                    ddlTipificacion.DataBind();
-                }
+                //DropDownList ddlEstatus = (DropDownList)e.Item.FindControl("ddlEstatus");
+                //DropDownList ddlAsignacion = (DropDownList)e.Item.FindControl("ddlAsignacion");
+                //DropDownList ddlTipificacion = (DropDownList)e.Item.FindControl("ddlTipificacion");
+                //if (ddlEstatus != null)
+                //{
+                //    ddlEstatus.DataSource = _servicioEstatus.ObtenerEstatusTicket(true);
+                //    ddlEstatus.DataTextField = "Descripcion";
+                //    ddlEstatus.DataValueField = "Id";
+                //    ddlEstatus.DataBind();
+                //}
+                //if (ddlAsignacion != null)
+                //{
+                //    ddlAsignacion.DataSource = _servicioEstatus.ObtenerEstatusAsignacion(true);
+                //    ddlAsignacion.DataTextField = "Descripcion";
+                //    ddlAsignacion.DataValueField = "Id";
+                //    ddlAsignacion.DataBind();
+                //}
+                //if (ddlTipificacion != null)
+                //{
+                //    ddlTipificacion.DataSource = ViewState["Tipificaciones"];
+                //    ddlTipificacion.DataBind();
+                //}
             }
             catch (Exception ex)
             {
@@ -169,7 +173,7 @@ namespace KiiniHelp.Operacion
                 else
                     dictionary.Add("NumeroTicket", ((TextBox)sender).Text);
                 ViewState["Filtros"] = dictionary;
-                ((TextBox) sender).Text = ((TextBox) sender).Text;
+                ((TextBox)sender).Text = ((TextBox)sender).Text;
                 ObtenerTicketsPage(int.Parse(ViewState["PageIndex"].ToString()), (Dictionary<string, string>)ViewState["Filtros"], true, ViewState["Sortorder"].ToString() == "ASC", ViewState["Column"].ToString());
             }
             catch (Exception ex)
@@ -182,8 +186,8 @@ namespace KiiniHelp.Operacion
         {
             try
             {
-                UcDetalleUsuario1.IdUsuario = Convert.ToInt32(((LinkButton) sender).CommandArgument);
-                
+                UcDetalleUsuario1.IdUsuario = Convert.ToInt32(((LinkButton)sender).CommandArgument);
+
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalDetalleUsuario\");", true);
             }
             catch (Exception ex)
@@ -206,14 +210,30 @@ namespace KiiniHelp.Operacion
 
         protected void btnCambiarEstatus_OnClick(object sender, EventArgs e)
         {
-            
+            try
+            {
+                UcDetalleUsuario1.IdUsuario = Convert.ToInt32(((LinkButton)sender).CommandArgument);
 
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalCambiarEstatus\");", true);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         protected void btnAsignar_OnClick(object sender, EventArgs e)
         {
-            
+            try
+            {
+                UcDetalleUsuario1.IdUsuario = Convert.ToInt32(((LinkButton)sender).CommandArgument);
 
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAsignar\");", true);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using KiiniNet.Entities.Cat.Arbol.Ubicaciones;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Operacion.Tickets;
 using KiiniNet.Entities.Parametros;
 
 namespace KiiniNet.Entities.Cat.Sistema

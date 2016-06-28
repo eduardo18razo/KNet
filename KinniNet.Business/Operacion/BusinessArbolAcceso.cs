@@ -348,6 +348,12 @@ namespace KinniNet.Core.Operacion
                 db.LoadProperty(result, "InventarioArbolAcceso");
                 foreach (InventarioArbolAcceso inventarioArbol in result.InventarioArbolAcceso)
                 {
+                    db.LoadProperty(inventarioArbol, "GrupoUsuarioInventarioArbol");
+                    foreach (GrupoUsuarioInventarioArbol gpo in inventarioArbol.GrupoUsuarioInventarioArbol)
+                    {
+                        db.LoadProperty(gpo, "GrupoUsuario");
+                        db.LoadProperty(gpo, "SubGrupoUsuario");
+                    }
                     db.LoadProperty(inventarioArbol, "InventarioInfConsulta");
                     foreach (InventarioInfConsulta inventarioInformacion in inventarioArbol.InventarioInfConsulta)
                     {

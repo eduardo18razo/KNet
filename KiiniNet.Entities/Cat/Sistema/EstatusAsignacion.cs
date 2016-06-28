@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Operacion.Tickets;
 
 namespace KiiniNet.Entities.Cat.Sistema
 {
@@ -16,5 +17,7 @@ namespace KiiniNet.Entities.Cat.Sistema
         public bool Habilitado { get; set; }
         [DataMember]
         public List<Ticket> Ticket { get; set; }
+        [DataMember]
+        public virtual List<TicketAsignacion> TicketAsignacion { get; set; }
     }
 }

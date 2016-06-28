@@ -6,6 +6,7 @@ using System.Text;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Operacion.Tickets;
 
 namespace KiiniNet.Entities.Cat.Usuario
 {

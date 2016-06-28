@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Usuarios;
 
-namespace KiiniNet.Entities.Operacion
+namespace KiiniNet.Entities.Operacion.Tickets
 {
     [DataContract(IsReference = true)]
     public class Ticket
@@ -67,5 +65,13 @@ namespace KiiniNet.Entities.Operacion
         public virtual EstatusTicket EstatusTicket { get; set; }
         [DataMember]
         public virtual EstatusAsignacion EstatusAsignacion { get; set; }
+
+        [DataMember]
+        public virtual List<TicketGrupoUsuario> TicketGrupoUsuario { get; set; }
+        [DataMember]
+        public virtual List<TicketEstatus> TicketEstatus { get; set; }
+        [DataMember]
+        public virtual List<TicketAsignacion> TicketAsignacion { get; set; }
+
     }
 }

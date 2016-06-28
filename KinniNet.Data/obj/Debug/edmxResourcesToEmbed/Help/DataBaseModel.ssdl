@@ -149,6 +149,17 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
+  <EntityType Name="EstatusTicketSubRolGeneral">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdGrupoUsuario" Type="int" Nullable="false" />
+    <Property Name="IdSubRol" Type="int" Nullable="false" />
+    <Property Name="IdEstatusTicket" Type="int" Nullable="false" />
+    <Property Name="Orden" Type="int" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="Gerencia">
     <Key>
       <PropertyRef Name="Id" />
@@ -167,6 +178,7 @@
     <Property Name="IdTipoGrupo" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Sistema" Type="bit" />
+    <Property Name="TieneSupervisor" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="GrupoUsuarioInventarioArbol">
@@ -580,6 +592,36 @@
     <Property Name="IdEstatusAsignacion" Type="int" Nullable="false" />
     <Property Name="FechaHora" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="TicketAsignacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTicket" Type="int" Nullable="false" />
+    <Property Name="IdEstatusAsignacion" Type="int" Nullable="false" />
+    <Property Name="IdUsuarioAsigno" Type="int" />
+    <Property Name="IdUsuarioAsignado" Type="int" />
+    <Property Name="FechaAsignacion" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TicketEstatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTicket" Type="int" Nullable="false" />
+    <Property Name="IdEstatus" Type="int" Nullable="false" />
+    <Property Name="IdUsuarioMovimiento" Type="int" Nullable="false" />
+    <Property Name="FechaMovimiento" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TicketGrupoUsuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTicket" Type="int" Nullable="false" />
+    <Property Name="IdGrupoUsuario" Type="int" Nullable="false" />
+    <Property Name="IdSubGrupoUsuario" Type="int" />
+  </EntityType>
   <EntityType Name="TipoArbolAcceso">
     <Key>
       <PropertyRef Name="Id" />
@@ -917,6 +959,42 @@
       </Principal>
       <Dependent Role="EncuestaPregunta">
         <PropertyRef Name="IdEncuesta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusSubRolGeneral_EstatusTicket">
+    <End Role="EstatusTicket" Type="Self.EstatusTicket" Multiplicity="1" />
+    <End Role="EstatusTicketSubRolGeneral" Type="Self.EstatusTicketSubRolGeneral" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusTicket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusTicketSubRolGeneral">
+        <PropertyRef Name="IdEstatusTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusSubRolGeneral_GrupoUsuario">
+    <End Role="GrupoUsuario" Type="Self.GrupoUsuario" Multiplicity="1" />
+    <End Role="EstatusTicketSubRolGeneral" Type="Self.EstatusTicketSubRolGeneral" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusTicketSubRolGeneral">
+        <PropertyRef Name="IdGrupoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusSubRolGeneral_SubRol">
+    <End Role="SubRol" Type="Self.SubRol" Multiplicity="1" />
+    <End Role="EstatusTicketSubRolGeneral" Type="Self.EstatusTicketSubRolGeneral" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubRol">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusTicketSubRolGeneral">
+        <PropertyRef Name="IdSubRol" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1904,6 +1982,126 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TicketAsignacion_EstatusAsignacion">
+    <End Role="EstatusAsignacion" Type="Self.EstatusAsignacion" Multiplicity="1" />
+    <End Role="TicketAsignacion" Type="Self.TicketAsignacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusAsignacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketAsignacion">
+        <PropertyRef Name="IdEstatusAsignacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketAsignacion_Ticket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="1" />
+    <End Role="TicketAsignacion" Type="Self.TicketAsignacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketAsignacion">
+        <PropertyRef Name="IdTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketAsignacion_UsuarioAsignado">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="TicketAsignacion" Type="Self.TicketAsignacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketAsignacion">
+        <PropertyRef Name="IdUsuarioAsignado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketAsignacion_UsuarioAsigno">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="TicketAsignacion" Type="Self.TicketAsignacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketAsignacion">
+        <PropertyRef Name="IdUsuarioAsigno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketEstatus_EstatusTicket">
+    <End Role="EstatusTicket" Type="Self.EstatusTicket" Multiplicity="1" />
+    <End Role="TicketEstatus" Type="Self.TicketEstatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusTicket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketEstatus">
+        <PropertyRef Name="IdEstatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketEstatus_Ticket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="1" />
+    <End Role="TicketEstatus" Type="Self.TicketEstatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketEstatus">
+        <PropertyRef Name="IdTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketEstatus_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="TicketEstatus" Type="Self.TicketEstatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketEstatus">
+        <PropertyRef Name="IdUsuarioMovimiento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketGrupoUsuario_GrupoUsuario">
+    <End Role="GrupoUsuario" Type="Self.GrupoUsuario" Multiplicity="1" />
+    <End Role="TicketGrupoUsuario" Type="Self.TicketGrupoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketGrupoUsuario">
+        <PropertyRef Name="IdGrupoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketGrupoUsuario_SubGrupoUsuario">
+    <End Role="SubGrupoUsuario" Type="Self.SubGrupoUsuario" Multiplicity="0..1" />
+    <End Role="TicketGrupoUsuario" Type="Self.TicketGrupoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubGrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketGrupoUsuario">
+        <PropertyRef Name="IdSubGrupoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketGrupoUsuario_Ticket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="1" />
+    <End Role="TicketGrupoUsuario" Type="Self.TicketGrupoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketGrupoUsuario">
+        <PropertyRef Name="IdTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Torre_TipoUsuario">
     <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
     <End Role="Torre" Type="Self.Torre" Multiplicity="*" />
@@ -2148,6 +2346,7 @@
     <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstatusAsignacion" EntityType="Self.EstatusAsignacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstatusTicket" EntityType="Self.EstatusTicket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstatusTicketSubRolGeneral" EntityType="Self.EstatusTicketSubRolGeneral" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Gerencia" EntityType="Self.Gerencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoUsuario" EntityType="Self.GrupoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoUsuarioInventarioArbol" EntityType="Self.GrupoUsuarioInventarioArbol" Schema="dbo" store:Type="Tables" />
@@ -2192,6 +2391,9 @@
     <EntitySet Name="SubZona" EntityType="Self.SubZona" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TelefonoUsuario" EntityType="Self.TelefonoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketAsignacion" EntityType="Self.TicketAsignacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketEstatus" EntityType="Self.TicketEstatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketGrupoUsuario" EntityType="Self.TicketGrupoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoArbolAcceso" EntityType="Self.TipoArbolAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoCampoMascara" EntityType="Self.TipoCampoMascara" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
@@ -2269,6 +2471,18 @@
     <AssociationSet Name="FK_EncuestaPregunta_Encuesta" Association="Self.FK_EncuestaPregunta_Encuesta">
       <End Role="Encuesta" EntitySet="Encuesta" />
       <End Role="EncuestaPregunta" EntitySet="EncuestaPregunta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusSubRolGeneral_EstatusTicket" Association="Self.FK_EstatusSubRolGeneral_EstatusTicket">
+      <End Role="EstatusTicket" EntitySet="EstatusTicket" />
+      <End Role="EstatusTicketSubRolGeneral" EntitySet="EstatusTicketSubRolGeneral" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusSubRolGeneral_GrupoUsuario" Association="Self.FK_EstatusSubRolGeneral_GrupoUsuario">
+      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+      <End Role="EstatusTicketSubRolGeneral" EntitySet="EstatusTicketSubRolGeneral" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusSubRolGeneral_SubRol" Association="Self.FK_EstatusSubRolGeneral_SubRol">
+      <End Role="SubRol" EntitySet="SubRol" />
+      <End Role="EstatusTicketSubRolGeneral" EntitySet="EstatusTicketSubRolGeneral" />
     </AssociationSet>
     <AssociationSet Name="FK_Gerencia_TipoUsuario" Association="Self.FK_Gerencia_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
@@ -2597,6 +2811,46 @@
     <AssociationSet Name="FK_Ticket_Usuario" Association="Self.FK_Ticket_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketAsignacion_EstatusAsignacion" Association="Self.FK_TicketAsignacion_EstatusAsignacion">
+      <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
+      <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketAsignacion_Ticket" Association="Self.FK_TicketAsignacion_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketAsignacion_UsuarioAsignado" Association="Self.FK_TicketAsignacion_UsuarioAsignado">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketAsignacion_UsuarioAsigno" Association="Self.FK_TicketAsignacion_UsuarioAsigno">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketEstatus_EstatusTicket" Association="Self.FK_TicketEstatus_EstatusTicket">
+      <End Role="EstatusTicket" EntitySet="EstatusTicket" />
+      <End Role="TicketEstatus" EntitySet="TicketEstatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketEstatus_Ticket" Association="Self.FK_TicketEstatus_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="TicketEstatus" EntitySet="TicketEstatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketEstatus_Usuario" Association="Self.FK_TicketEstatus_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="TicketEstatus" EntitySet="TicketEstatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketGrupoUsuario_GrupoUsuario" Association="Self.FK_TicketGrupoUsuario_GrupoUsuario">
+      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+      <End Role="TicketGrupoUsuario" EntitySet="TicketGrupoUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketGrupoUsuario_SubGrupoUsuario" Association="Self.FK_TicketGrupoUsuario_SubGrupoUsuario">
+      <End Role="SubGrupoUsuario" EntitySet="SubGrupoUsuario" />
+      <End Role="TicketGrupoUsuario" EntitySet="TicketGrupoUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketGrupoUsuario_Ticket" Association="Self.FK_TicketGrupoUsuario_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="TicketGrupoUsuario" EntitySet="TicketGrupoUsuario" />
     </AssociationSet>
     <AssociationSet Name="FK_Torre_TipoUsuario" Association="Self.FK_Torre_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />

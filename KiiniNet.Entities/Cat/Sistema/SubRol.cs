@@ -26,7 +26,8 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public virtual List<GrupoUsuarioInventarioArbol> GrupoUsuarioInventarioArbol { get; set; }
         [DataMember]
-        public List<EstatusSubRolGeneral> EstatusSubRolGeneral { get; set; }
+        public List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneral { get; set; }
+
 
     }
 }

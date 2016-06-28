@@ -2,6 +2,8 @@
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Operacion.Tickets;
 using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniNet.Entities.Cat.Usuario
@@ -26,5 +28,7 @@ namespace KiiniNet.Entities.Cat.Usuario
         public virtual List<UsuarioGrupo> UsuarioGrupo { get; set; }
         [DataMember]
         public virtual List<GrupoUsuarioInventarioArbol> GrupoUsuarioInventarioArbol { get; set; }
+        [DataMember]
+        public virtual List<TicketGrupoUsuario> TicketGrupoUsuario { get; set; }
     }
 }

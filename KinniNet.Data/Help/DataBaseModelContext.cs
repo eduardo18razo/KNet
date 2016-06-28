@@ -13,6 +13,7 @@ using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Operacion.Tickets;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
 
@@ -20,6 +21,8 @@ namespace KinniNet.Data.Help
 {
     public class DataBaseModelContext : ObjectContext
     {
+        private readonly EntityConnection _connection;
+        private readonly string _connectionString;
         private const string ConnectionString = "name=connection";
         private const string ContainerName = "connection";
 
@@ -111,7 +114,9 @@ namespace KinniNet.Data.Help
                 _slaEstimadoTicket = CreateObjectSet<SlaEstimadoTicket>();
                 _slaEstimadoTicketDetalle = CreateObjectSet<SlaEstimadoTicketDetalle>();
                 _ticket = CreateObjectSet<Ticket>();
+                _ticketGrupoUsuario = CreateObjectSet<TicketGrupoUsuario>();
                 _area = CreateObjectSet<Area>();
+                _estatusTicketSubRolGeneral = CreateObjectSet<EstatusTicketSubRolGeneral>();
 
             }
             catch (Exception ex)
@@ -125,26 +130,26 @@ namespace KinniNet.Data.Help
         public DataBaseModelContext(string connectionString)
             : base(ConnectionString, ContainerName)
         {
+            _connectionString = connectionString;
         }
 
         public DataBaseModelContext(EntityConnection connection)
             : base(ConnectionString, ContainerName)
         {
+            _connection = connection;
         }
 
         public static string DecryptedConnectionString
         {
             get
             {
-                byte[] ToD, Denc;
-
                 if (string.IsNullOrEmpty(ConfigurationManager.ConnectionStrings["GastosConnection"].ToString()))
                     throw new Exception("No se encuentra cadena de conexion");
 
-                ToD = Convert.FromBase64String(ConfigurationManager.ConnectionStrings["GastosConnection"].ToString());
+                var toD = Convert.FromBase64String(ConfigurationManager.ConnectionStrings["GastosConnection"].ToString());
 
-                Denc = ProtectedData.Unprotect(ToD, null, DataProtectionScope.LocalMachine);
-                string cadena = Encoding.ASCII.GetString(Denc).Replace("&quot;", "\"");
+                var denc = ProtectedData.Unprotect(toD, null, DataProtectionScope.LocalMachine);
+                string cadena = Encoding.ASCII.GetString(denc).Replace("&quot;", "\"");
                 //System.Xml.Linq.XDocument x1 = System.Xml.Linq.XDocument.Parse(x);
                 return cadena;
             }
@@ -160,7 +165,7 @@ namespace KinniNet.Data.Help
             }
         }
 
-        private ObjectSet<ParametrosTelefonos> _parametrosTelefonos;
+        private readonly ObjectSet<ParametrosTelefonos> _parametrosTelefonos;
 
         #region Operativo
         public ObjectSet<Usuario> Usuario
@@ -371,6 +376,14 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<TicketGrupoUsuario> TicketGrupoUsuario
+        {
+            get
+            {
+                return _ticketGrupoUsuario;
+            }
+        }
+
         public ObjectSet<Area> Area
         {
             get
@@ -379,36 +392,46 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneral
+        {
+            get
+            {
+                return _estatusTicketSubRolGeneral;
+            }
+        }
 
 
-        private ObjectSet<Usuario> _usuario;
-        private ObjectSet<Ubicacion> _ubicacion;
-        private ObjectSet<Organizacion> _organizacion;
-        private ObjectSet<Domicilio> _domicilio;
-        private ObjectSet<CorreoUsuario> _correoUsuario;
-        private ObjectSet<TelefonoUsuario> _telefonoUsuario;
-        private ObjectSet<UsuarioRol> _usuarioRol;
-        private ObjectSet<UsuarioGrupo> _usuarioGrupo;
-        private ObjectSet<TipoCampoMascara> _tipoCampoMascara;
-        private ObjectSet<Catalogos> _catalogos;
-        private ObjectSet<ArbolAcceso> _arbolAcceso;
-        private ObjectSet<InformacionConsulta> _informacionConsulta;
-        private ObjectSet<InformacionConsultaDatos> _informacionConsultaDatos;
-        private ObjectSet<Sla> _sla;
-        private ObjectSet<SlaDetalle> _slaDetalle;
 
-        private ObjectSet<Encuesta> _encuesta;
-        private ObjectSet<EncuestaPregunta> _encuestaPregunta;
-        private ObjectSet<InventarioArbolAcceso> _inventarioArbolAcceso;
-        private ObjectSet<InventarioInfConsulta> _inventarioInfConsulta;
-        private ObjectSet<GrupoUsuarioInventarioArbol> _grupoUsuarioInventarioArbol;
-        private ObjectSet<HitConsulta> _hitConsulta;
-        private ObjectSet<HitGrupoUsuario> _hitGrupoUsuario;
-        private ObjectSet<RespuestaEncuesta> _respuestaEncuesta;
-        private ObjectSet<SlaEstimadoTicket> _slaEstimadoTicket;
-        private ObjectSet<SlaEstimadoTicketDetalle> _slaEstimadoTicketDetalle;
-        private ObjectSet<Ticket> _ticket;
-        private ObjectSet<Area> _area;
+        private readonly ObjectSet<Usuario> _usuario;
+        private readonly ObjectSet<Ubicacion> _ubicacion;
+        private readonly ObjectSet<Organizacion> _organizacion;
+        private readonly ObjectSet<Domicilio> _domicilio;
+        private readonly ObjectSet<CorreoUsuario> _correoUsuario;
+        private readonly ObjectSet<TelefonoUsuario> _telefonoUsuario;
+        private readonly ObjectSet<UsuarioRol> _usuarioRol;
+        private readonly ObjectSet<UsuarioGrupo> _usuarioGrupo;
+        private readonly ObjectSet<TipoCampoMascara> _tipoCampoMascara;
+        private readonly ObjectSet<Catalogos> _catalogos;
+        private readonly ObjectSet<ArbolAcceso> _arbolAcceso;
+        private readonly ObjectSet<InformacionConsulta> _informacionConsulta;
+        private readonly ObjectSet<InformacionConsultaDatos> _informacionConsultaDatos;
+        private readonly ObjectSet<Sla> _sla;
+        private readonly ObjectSet<SlaDetalle> _slaDetalle;
+
+        private readonly ObjectSet<Encuesta> _encuesta;
+        private readonly ObjectSet<EncuestaPregunta> _encuestaPregunta;
+        private readonly ObjectSet<InventarioArbolAcceso> _inventarioArbolAcceso;
+        private readonly ObjectSet<InventarioInfConsulta> _inventarioInfConsulta;
+        private readonly ObjectSet<GrupoUsuarioInventarioArbol> _grupoUsuarioInventarioArbol;
+        private readonly ObjectSet<HitConsulta> _hitConsulta;
+        private readonly ObjectSet<HitGrupoUsuario> _hitGrupoUsuario;
+        private readonly ObjectSet<RespuestaEncuesta> _respuestaEncuesta;
+        private readonly ObjectSet<SlaEstimadoTicket> _slaEstimadoTicket;
+        private readonly ObjectSet<SlaEstimadoTicketDetalle> _slaEstimadoTicketDetalle;
+        private readonly ObjectSet<Ticket> _ticket;
+        private readonly ObjectSet<TicketGrupoUsuario> _ticketGrupoUsuario;
+        private readonly ObjectSet<Area> _area;
+        private readonly ObjectSet<EstatusTicketSubRolGeneral> _estatusTicketSubRolGeneral;
 
         #region Mascara
         public ObjectSet<Mascara> Mascara
@@ -427,8 +450,8 @@ namespace KinniNet.Data.Help
             }
         }
 
-        private ObjectSet<Mascara> _mascara;
-        private ObjectSet<CampoMascara> _campoMascara;
+        private readonly ObjectSet<Mascara> _mascara;
+        private readonly ObjectSet<CampoMascara> _campoMascara;
         #endregion Mascara
 
 
@@ -598,27 +621,27 @@ namespace KinniNet.Data.Help
         }
 
 
-        private ObjectSet<TipoUsuario> _tipoUsuario;
-        private ObjectSet<Pais> _pais;
-        private ObjectSet<Colonia> _colonia;
-        private ObjectSet<Municipio> _municipio;
-        private ObjectSet<Estado> _estado;
-        private ObjectSet<TipoTelefono> _tipoTelefono;
-        private ObjectSet<Rol> _rol;
-        private ObjectSet<RolTipoUsuario> _rolTipoUsuario;
-        private ObjectSet<RolTipoGrupo> _rolTipoGrupo;
-        private ObjectSet<TipoGrupo> _tipoGrupo;
-        private ObjectSet<SubRol> _subRol;
-        private ObjectSet<TipoArbolAcceso> _tipoArbolAcceso;
-        private ObjectSet<TipoInfConsulta> _tipoInfConsulta;
-        private ObjectSet<TipoDocumento> _tipoDocumento;
-        private ObjectSet<TipoEncuesta> _tipoEncuesta;
-        private ObjectSet<RespuestaTipoEncuesta> _respuestaTipoEncuesta;
-        private ObjectSet<Menu> _menu;
-        private ObjectSet<RolMenu> _rolMenu;
+        private readonly ObjectSet<TipoUsuario> _tipoUsuario;
+        private readonly ObjectSet<Pais> _pais;
+        private readonly ObjectSet<Colonia> _colonia;
+        private readonly ObjectSet<Municipio> _municipio;
+        private readonly ObjectSet<Estado> _estado;
+        private readonly ObjectSet<TipoTelefono> _tipoTelefono;
+        private readonly ObjectSet<Rol> _rol;
+        private readonly ObjectSet<RolTipoUsuario> _rolTipoUsuario;
+        private readonly ObjectSet<RolTipoGrupo> _rolTipoGrupo;
+        private readonly ObjectSet<TipoGrupo> _tipoGrupo;
+        private readonly ObjectSet<SubRol> _subRol;
+        private readonly ObjectSet<TipoArbolAcceso> _tipoArbolAcceso;
+        private readonly ObjectSet<TipoInfConsulta> _tipoInfConsulta;
+        private readonly ObjectSet<TipoDocumento> _tipoDocumento;
+        private readonly ObjectSet<TipoEncuesta> _tipoEncuesta;
+        private readonly ObjectSet<RespuestaTipoEncuesta> _respuestaTipoEncuesta;
+        private readonly ObjectSet<Menu> _menu;
+        private readonly ObjectSet<RolMenu> _rolMenu;
 
-        private ObjectSet<EstatusTicket> _estatusTicket;
-        private ObjectSet<EstatusAsignacion> _estatusAsignacion;
+        private readonly ObjectSet<EstatusTicket> _estatusTicket;
+        private readonly ObjectSet<EstatusAsignacion> _estatusAsignacion;
 
         #endregion Systema
 
@@ -640,9 +663,9 @@ namespace KinniNet.Data.Help
             }
         }
 
-        private ObjectSet<GrupoUsuario> _grupoUsuario;
+        private readonly ObjectSet<GrupoUsuario> _grupoUsuario;
 
-        private ObjectSet<SubGrupoUsuario> _subGrupoUsuario;
+        private readonly ObjectSet<SubGrupoUsuario> _subGrupoUsuario;
 
 
         #region Ubicacion
@@ -694,12 +717,12 @@ namespace KinniNet.Data.Help
             }
         }
 
-        private ObjectSet<Campus> _campus;
-        private ObjectSet<Torre> _torre;
-        private ObjectSet<Piso> _piso;
-        private ObjectSet<Zona> _zona;
-        private ObjectSet<SubZona> _subZona;
-        private ObjectSet<SiteRack> _siteRack;
+        private readonly ObjectSet<Campus> _campus;
+        private readonly ObjectSet<Torre> _torre;
+        private readonly ObjectSet<Piso> _piso;
+        private readonly ObjectSet<Zona> _zona;
+        private readonly ObjectSet<SubZona> _subZona;
+        private readonly ObjectSet<SiteRack> _siteRack;
         #endregion Ubicacion
 
         #region Organizacion
@@ -759,13 +782,13 @@ namespace KinniNet.Data.Help
             }
         }
 
-        private ObjectSet<Holding> _holding;
-        private ObjectSet<Compania> _compania;
-        private ObjectSet<Direccion> _direccion;
-        private ObjectSet<SubDireccion> _subDireccion;
-        private ObjectSet<Gerencia> _gerencia;
-        private ObjectSet<SubGerencia> _subGerencia;
-        private ObjectSet<Jefatura> _jefatura;
+        private readonly ObjectSet<Holding> _holding;
+        private readonly ObjectSet<Compania> _compania;
+        private readonly ObjectSet<Direccion> _direccion;
+        private readonly ObjectSet<SubDireccion> _subDireccion;
+        private readonly ObjectSet<Gerencia> _gerencia;
+        private readonly ObjectSet<SubGerencia> _subGerencia;
+        private readonly ObjectSet<Jefatura> _jefatura;
 
         #endregion Organizacion
 
@@ -822,13 +845,13 @@ namespace KinniNet.Data.Help
                 return _nivel7;
             }
         }
-        private ObjectSet<Nivel1> _nivel1;
-        private ObjectSet<Nivel2> _nivel2;
-        private ObjectSet<Nivel3> _nivel3;
-        private ObjectSet<Nivel4> _nivel4;
-        private ObjectSet<Nivel5> _nivel5;
-        private ObjectSet<Nivel6> _nivel6;
-        private ObjectSet<Nivel7> _nivel7;
+        private readonly ObjectSet<Nivel1> _nivel1;
+        private readonly ObjectSet<Nivel2> _nivel2;
+        private readonly ObjectSet<Nivel3> _nivel3;
+        private readonly ObjectSet<Nivel4> _nivel4;
+        private readonly ObjectSet<Nivel5> _nivel5;
+        private readonly ObjectSet<Nivel6> _nivel6;
+        private readonly ObjectSet<Nivel7> _nivel7;
         #endregion ArbolesAcceso
 
         #endregion Usuario

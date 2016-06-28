@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
-using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Usuarios;
+using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
 
@@ -150,7 +149,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                db.GrupoUsuarioInventarioArbol.Where(w => w.InventarioArbolAcceso.ArbolAcceso.Nivel1.Id == 1);
+                //db.GrupoUsuarioInventarioArbol.Where(w => w.InventarioArbolAcceso.ArbolAcceso.Nivel1.Id == 1);
                 result = db.GrupoUsuario.Where(w => w.Habilitado && w.Sistema && w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Administrador)
                         .OrderBy(o => o.Id)
                         .ToList();
@@ -244,15 +243,11 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el que viene embebido
                 grupoUsuario.Habilitado = true;
+                grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
                 if (grupoUsuario.Id == 0)
-                    db.GrupoUsuario.AddObject(grupoUsuario);
-                else
                 {
-                    GrupoUsuario tmpJefatura = db.GrupoUsuario.SingleOrDefault(s => s.Id == grupoUsuario.Id);
-                    if (tmpJefatura == null) return;
-                    tmpJefatura.IdTipoGrupo = grupoUsuario.IdTipoGrupo;
-                    tmpJefatura.Descripcion = grupoUsuario.Descripcion;
-                    tmpJefatura.Habilitado = grupoUsuario.Habilitado;
+                    grupoUsuario.EstatusTicketSubRolGeneral = GeneraEstatusGrupoDefault(grupoUsuario);
+                    db.GrupoUsuario.AddObject(grupoUsuario);
                 }
                 db.SaveChanges();
             }
@@ -320,6 +315,112 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        private List<EstatusTicketSubRolGeneral> GeneraEstatusGrupoDefault(GrupoUsuario grupo)
+        {
+            List<EstatusTicketSubRolGeneral> result = null;
+            try
+            {
+                result = new List<EstatusTicketSubRolGeneral>();
+                if (grupo.TieneSupervisor)
+                    foreach (SubGrupoUsuario subGpo in grupo.SubGrupoUsuario)
+                    {
+                        switch (subGpo.IdSubRol)
+                        {
+                            case (int)BusinessVariables.EnumSubRoles.Supervisor:
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 1, Habilitado = true });
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 2, Habilitado = true });
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 3, Habilitado = true });
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.PrimererNivel:
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 1, Habilitado = true });
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.SegundoNivel:
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 1, Habilitado = true });
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.TercerNivel:
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 1, Habilitado = true });
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.CuartoNivel:
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 1, Habilitado = true });
+                                break;
+                        }
+                    }
+                else
+                    foreach (SubGrupoUsuario subGpo in grupo.SubGrupoUsuario)
+                    {
+                        switch (subGpo.IdSubRol)
+                        {
+                            case (int)BusinessVariables.EnumSubRoles.PrimererNivel:
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 1, Habilitado = true });
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 2, Habilitado = true });
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 3, Habilitado = true });
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.SegundoNivel:
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 1, Habilitado = true });
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 2, Habilitado = true });
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 3, Habilitado = true });
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.TercerNivel:
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 1, Habilitado = true });
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 2, Habilitado = true });
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 3, Habilitado = true });
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.CuartoNivel:
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 1, Habilitado = true });
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 2, Habilitado = true });
+                                result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 3, Habilitado = true });
+                                break;
+                        }
+                    }
 
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return result;
+        }
+
+        private void GeneraAsignacionesGrupoDefault(GrupoUsuario grupo)
+        {
+            try
+            {
+                foreach (SubGrupoUsuario subGpo in grupo.SubGrupoUsuario)
+                {
+                    if (grupo.TieneSupervisor)
+                        switch (subGpo.IdSubRol)
+                        {
+                            case (int)BusinessVariables.EnumSubRoles.Supervisor:
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.PrimererNivel:
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.SegundoNivel:
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.TercerNivel:
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.CuartoNivel:
+                                break;
+                        }
+                    else
+                        switch (subGpo.IdSubRol)
+                        {
+                            case (int)BusinessVariables.EnumSubRoles.Supervisor:
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.PrimererNivel:
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.SegundoNivel:
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.TercerNivel:
+                                break;
+                            case (int)BusinessVariables.EnumSubRoles.CuartoNivel:
+                                break;
+                        }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

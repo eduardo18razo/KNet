@@ -19,5 +19,7 @@ namespace KiiniNet.Entities.Helper
         public EstatusTicket EstatusTicket { get; set; }
         public EstatusAsignacion EstatusAsignacion { get; set; }
         public int Total { get; set; }
+
+        public bool EsPropietario { get; set; }
     }
 }

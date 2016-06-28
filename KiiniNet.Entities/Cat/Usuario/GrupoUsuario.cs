@@ -2,6 +2,8 @@
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Operacion.Tickets;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
 
@@ -48,6 +50,8 @@ namespace KiiniNet.Entities.Cat.Usuario
         [DataMember]
         public virtual List<GrupoUsuarioInventarioArbol> GrupoUsuarioInventarioArbol { get; set; }
         [DataMember]
-        public List<EstatusSubRolGeneral> EstatusSubRolGeneral { get; set; }
+        public virtual List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneral { get; set; }
+        [DataMember]
+        public virtual List<TicketGrupoUsuario> TicketGrupoUsuario { get; set; }
     }
 }

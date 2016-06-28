@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using KiiniNet.Entities.Cat.Sistema;
 
-namespace KiiniNet.Entities.Operacion
+namespace KiiniNet.Entities.Operacion.Tickets
 {
     [DataContract(IsReference = true)]
     public class SlaEstimadoTicket

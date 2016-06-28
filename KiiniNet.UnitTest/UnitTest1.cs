@@ -16,7 +16,7 @@ namespace KiiniNet.UnitTest
         {
             try
             {
-                var test = new BusinessMascaras().ObtenerCatalogoCampoMascara("TipoUsuario");
+                //var test = new BusinessMascaras().ObtenerCatalogoCampoMascara("TipoUsuario");
                 DataBaseModelContext db = new DataBaseModelContext();
                 BusinessSecurity.Menus bs = new BusinessSecurity.Menus();
                 //bs.ObtenerMenuUsuario(3);

@@ -38,14 +38,5 @@ namespace KiiniHelp.Operacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::KiiniHelp.UserControls.Detalles.UcDetalleUsuario UcDetalleUsuario1;
-        
-        /// <summary>
-        /// UcDetalleUsuario2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::KiiniHelp.UserControls.Detalles.UcDetalleUsuario UcDetalleUsuario2;
     }
 }

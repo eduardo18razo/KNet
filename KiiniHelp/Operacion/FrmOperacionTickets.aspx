@@ -52,9 +52,9 @@
                                 <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("NivelUsuarioAsignado") %>' />
                                 <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusTicket.Descripcion") %>' />
                                 <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusAsignacion.Descripcion") %>' />
-                                <asp:DropDownList CssClass="col-xs-1 dropdown" runat="server" ID="ddlEstatus" Visible="False"/>
+                                <%--<asp:DropDownList CssClass="col-xs-1 dropdown" runat="server" ID="ddlEstatus" Visible="False"/>--%>
                                 <asp:LinkButton runat="server" CssClass="col-xs-1" Text="Cambiar Estatus" ID="btnCambiarEstatus" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnCambiarEstatus_OnClick"/>
-                                <asp:DropDownList CssClass="col-xs-1 dropdown" runat="server" ID="ddlAsignacion" Visible="False" />
+                                <%--<asp:DropDownList CssClass="col-xs-1 dropdown" runat="server" ID="ddlAsignacion" Visible="False" />--%>
                                 <asp:LinkButton runat="server" CssClass="col-xs-1" Text="Asignar" ID="btnAsignar" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnAsignar_OnClick"/>
                             </div>
                         </ItemTemplate>
@@ -93,12 +93,25 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-body">
-                            <uc1:UcDetalleUsuario runat="server" ID="UcDetalleUsuario2" />
+                            
                         </div>
                     </div>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-
+    
+    <div class="modal fade" id="modalAsignar" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            
+                        </div>
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
 </asp:Content>

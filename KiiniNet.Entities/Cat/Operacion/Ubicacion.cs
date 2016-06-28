@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Arbol.Ubicaciones;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Operacion.Tickets;
 
 namespace KiiniNet.Entities.Cat.Operacion
 {

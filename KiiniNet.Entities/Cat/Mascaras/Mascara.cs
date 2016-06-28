@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Operacion.Tickets;
 
 namespace KiiniNet.Entities.Cat.Mascaras
 {

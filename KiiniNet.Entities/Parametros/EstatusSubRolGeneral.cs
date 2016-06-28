@@ -5,7 +5,7 @@ using KiiniNet.Entities.Cat.Usuario;
 namespace KiiniNet.Entities.Parametros
 {
     [DataContract(IsReference = true)]
-    public class EstatusSubRolGeneral
+    public class EstatusTicketSubRolGeneral
     {
         [DataMember]
         public int Id { get; set; }

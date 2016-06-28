@@ -3,30 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
-using KiiniNet.Entities.Cat.Usuario;
-using KiiniNet.Entities.Operacion.Tickets;
+using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Operacion.Usuarios;
 
-namespace KiiniNet.Entities.Operacion
+namespace KiiniNet.Entities.Operacion.Tickets
 {
     [DataContract(IsReference = true)]
-    public class RespuestaEncuesta
+    public class TicketEstatus
     {
         [DataMember]
         public int Id { get; set; }
+
         [DataMember]
         public int IdTicket { get; set; }
+
         [DataMember]
-        public int IdEncuesta { get; set; }
+        public int IdEstatus { get; set; }
+
         [DataMember]
-        public int IdPregunta { get; set; }
+        public DateTime FechaMovimiento { get; set; }
+
         [DataMember]
-        public decimal Ponderacion { get; set; }
+        public int IdUsuarioMovimiento { get; set; }
+
         [DataMember]
         public virtual Ticket Ticket { get; set; }
 
         [DataMember]
-        public virtual Encuesta Encuesta { get; set; }
+        public virtual EstatusTicket EstatusTicket { get; set; }
+
         [DataMember]
-        public virtual EncuestaPregunta EncuestaPregunta { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }
