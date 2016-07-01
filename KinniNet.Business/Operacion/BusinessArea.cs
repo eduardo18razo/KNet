@@ -34,7 +34,7 @@ namespace KinniNet.Core.Operacion
                     join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
                     join gu in db.GrupoUsuario on guia.IdGrupoUsuario equals gu.Id
                     join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
-                    where ug.IdUsuario == idUsuario
+                    where ug.IdUsuario == idUsuario && guia.IdRol == (int)BusinessVariables.EnumRoles.Acceso
                     select a).Distinct().ToList();
             }
             catch (Exception ex)

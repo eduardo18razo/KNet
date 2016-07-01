@@ -14,8 +14,19 @@ namespace KiiniHelp.Operacion
     {
         readonly ServiceTicketClient _servicioTickets = new ServiceTicketClient();
         readonly ServiceEstatusClient _servicioEstatus = new ServiceEstatusClient();
-
+        private List<string> _lstError = new List<string>();
         private int _pageSize = 20;
+        private List<string> AlertaGeneral
+        {
+            set
+            {
+                pnlAlertaGeneral.Visible = value.Any();
+                if (!pnlAlertaGeneral.Visible) return;
+                rptErrorGeneral.DataSource = value;
+                rptErrorGeneral.DataBind();
+            }
+        }
+
         private void ObtenerTicketsPage(int pageIndex, Dictionary<string, string> filtros, bool orden, bool asc, string ordering = "")
         {
             try
@@ -51,7 +62,7 @@ namespace KiiniHelp.Operacion
                     rptTickets.DataSource = lst;
                     rptTickets.DataBind();
                     if (lst.Count == 0 && pageIndex == 1) return;
-                    int recordCount = pageIndex*_pageSize;
+                    int recordCount = pageIndex * _pageSize;
                     GeneraPaginado(recordCount, pageIndex);
                 }
             }
@@ -87,23 +98,48 @@ namespace KiiniHelp.Operacion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                ViewState["Column"] = "DateTime";
-                ViewState["Sortorder"] = "ASC";
-                ViewState["PageIndex"] = "0";
-                ViewState["Filtros"] = new Dictionary<string, string>();
-                ObtenerTicketsPage(int.Parse(ViewState["PageIndex"].ToString()), (Dictionary<string, string>)ViewState["Filtros"], true, ViewState["Sortorder"].ToString() == "ASC", ViewState["Column"].ToString());
+                _lstError = new List<string>();
+                if (!IsPostBack)
+                {
+                    ViewState["Column"] = "DateTime";
+                    ViewState["Sortorder"] = "ASC";
+                    ViewState["PageIndex"] = "0";
+                    ViewState["Filtros"] = new Dictionary<string, string>();
+                    ObtenerTicketsPage(int.Parse(ViewState["PageIndex"].ToString()), (Dictionary<string, string>)ViewState["Filtros"], true, ViewState["Sortorder"].ToString() == "ASC", ViewState["Column"].ToString());
 
+                }
+                UcDetalleUsuario.OnCerraModal += UcDetalleUsuario1OnOnCerraModal;
             }
-            UcDetalleUsuario1.OnCerraModal += UcDetalleUsuario1OnOnCerraModal;
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
         }
 
         protected void Page_Changed(object sender, EventArgs e)
         {
-            int pageIndex = int.Parse(((LinkButton)(sender)).CommandArgument);
-            ViewState["PageIndex"] = pageIndex;
-            ObtenerTicketsPage(int.Parse(ViewState["PageIndex"].ToString()), (Dictionary<string, string>)ViewState["Filtros"], true, ViewState["Sortorder"].ToString() == "ASC", ViewState["Column"].ToString());
+            try
+            {
+                int pageIndex = int.Parse(((LinkButton)(sender)).CommandArgument);
+                ViewState["PageIndex"] = pageIndex;
+                ObtenerTicketsPage(int.Parse(ViewState["PageIndex"].ToString()), (Dictionary<string, string>)ViewState["Filtros"], true, ViewState["Sortorder"].ToString() == "ASC", ViewState["Column"].ToString());
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
         }
 
         protected void rptTickets_OnItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -135,7 +171,12 @@ namespace KiiniHelp.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
@@ -159,7 +200,12 @@ namespace KiiniHelp.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
@@ -178,7 +224,12 @@ namespace KiiniHelp.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
@@ -186,13 +237,17 @@ namespace KiiniHelp.Operacion
         {
             try
             {
-                UcDetalleUsuario1.IdUsuario = Convert.ToInt32(((LinkButton)sender).CommandArgument);
-
+                UcDetalleUsuario.IdUsuario = Convert.ToInt32(((LinkButton)sender).CommandArgument);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalDetalleUsuario\");", true);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
@@ -204,7 +259,12 @@ namespace KiiniHelp.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
@@ -212,13 +272,19 @@ namespace KiiniHelp.Operacion
         {
             try
             {
-                UcDetalleUsuario1.IdUsuario = Convert.ToInt32(((LinkButton)sender).CommandArgument);
-
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalCambiarEstatus\");", true);
+                UcCambiarEstatusTicket.EsPropietario = true;
+                UcCambiarEstatusTicket.IdTicket = Convert.ToInt32(((LinkButton)sender).CommandArgument);
+                UcCambiarEstatusTicket.IdUsuario = ((Usuario)Session["UserData"]).Id;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalEstatusCambio\");", true);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
@@ -226,13 +292,55 @@ namespace KiiniHelp.Operacion
         {
             try
             {
-                UcDetalleUsuario1.IdUsuario = Convert.ToInt32(((LinkButton)sender).CommandArgument);
-
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAsignar\");", true);
+                UcCambiarEstatusAsignacion.EsPropietario = Convert.ToBoolean(((Label)rptTickets.Items[((RepeaterItem)((LinkButton)sender).NamingContainer).ItemIndex].FindControl("lblEsPropietario")).Text);
+                UcCambiarEstatusAsignacion.IdTicket = Convert.ToInt32(((LinkButton)sender).CommandArgument);
+                UcCambiarEstatusAsignacion.IdGrupo = Convert.ToInt32(((Label)rptTickets.Items[((RepeaterItem)((LinkButton)sender).NamingContainer).ItemIndex].FindControl("lblIdGrupoAsignado")).Text);
+                UcCambiarEstatusAsignacion.IdUsuario = ((Usuario)Session["UserData"]).Id;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAsignacionCambio\");", true);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void btnautoAsignar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                _servicioTickets.AutoAsignarTicket(Convert.ToInt32(((LinkButton)sender).CommandArgument), ((Usuario)Session["UserData"]).Id);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void lbntIdticket_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                UcDetalleTicket.IdTicket = Convert.ToInt32(((LinkButton)sender).CommandArgument);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalDetalleTicket\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
     }

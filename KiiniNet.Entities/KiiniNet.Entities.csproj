@@ -84,6 +84,7 @@
     <Compile Include="Cat\Usuario\Sla.cs" />
     <Compile Include="Cat\Usuario\SubGrupoUsuario.cs" />
     <Compile Include="Helper\HelperCampoMascaraCaptura.cs" />
+    <Compile Include="Helper\HelperDetalleTicket.cs" />
     <Compile Include="Helper\HelperSubGurpoUsuario.cs" />
     <Compile Include="Helper\HelperTickets.cs" />
     <Compile Include="Operacion\Area.cs" />
@@ -117,7 +118,10 @@
     <Compile Include="Operacion\Usuarios\CorreoUsuario.cs" />
     <Compile Include="Cat\Operacion\Organizacion.cs" />
     <Compile Include="Parametros\Aplicaciones.cs" />
-    <Compile Include="Parametros\EstatusSubRolGeneral.cs" />
+    <Compile Include="Parametros\EstatusAsignacionSubRolGeneral.cs" />
+    <Compile Include="Parametros\EstatusAsignacionSubRolGeneralDefault.cs" />
+    <Compile Include="Parametros\EstatusTicketSubRolGeneral.cs" />
+    <Compile Include="Parametros\EstatusTicketSubRolGeneralDefault.cs" />
     <Compile Include="Parametros\ParametrosAplicacion.cs" />
     <Compile Include="Parametros\ParametrosTelefonos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

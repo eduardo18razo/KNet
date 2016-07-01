@@ -13,7 +13,14 @@ namespace KiiniHelp.Test
         {
             try
             {
-                UcDetalleGrupoUsuario.IdUsuario = 2;
+                UcDetalleTicket.IdTicket = 1;
+                //UcCambiarEstatusTicket.IdTicket = 1;
+                //UcCambiarEstatusTicket.IdUsuario = 2;
+                //UcCambiarEstatusTicket.EsPropietario = true;
+                //UcCambiarEstatusTicket1.IdTicket = 1;
+                //UcCambiarEstatusTicket1.IdUsuario = 2;
+                //UcCambiarEstatusTicket1.EsPropietario = true;
+                //UcDetalleGrupoUsuario.IdUsuario = 2;
                 //UcDetalleOrganizacion.IdOrganizacion = 54;
                 //UcDetalleUbicacion.IdUbicacion = 64;
                 //UcDetalleUsuario1.OnCerraModal += UcDetalleUsuarioOnOnCerraModal;
@@ -30,7 +37,7 @@ namespace KiiniHelp.Test
         {
             try
             {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalDetalleUsuario\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalOrganizacion\");", true);
                 upPrincipal.Update();
             }
             catch (Exception)
@@ -43,7 +50,7 @@ namespace KiiniHelp.Test
         {
             try
             {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalDetalleUsuario\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalOrganizacion\");", true);
                 upPrincipal.Update();
             }
             catch (Exception)

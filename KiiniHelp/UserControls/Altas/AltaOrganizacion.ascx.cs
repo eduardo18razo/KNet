@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Web.UI;
@@ -12,15 +11,17 @@ using KiiniNet.Entities.Cat.Arbol.Organizacion;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
 using KinniNet.Business.Utils;
-using Microsoft.Vbe.Interop;
 
 namespace KiiniHelp.UserControls.Altas
 {
-    public partial class AltaOrganizacion : UserControl
+    public partial class AltaOrganizacion : UserControl, IControllerModal
     {
         readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
         readonly ServiceOrganizacionClient _servicioOrganizacion = new ServiceOrganizacionClient();
         private List<string> _lstError = new List<string>();
+
+        public event DelegateAceptarModal OnAceptarModal;
+        public event DelegateCerrarModal OnCerraModal;
 
         public int IdTipoUsuario
         {
@@ -28,7 +29,16 @@ namespace KiiniHelp.UserControls.Altas
             {
                 return FromModal ? Convert.ToInt32(hfTipoUsuario.Value) : Convert.ToInt32(ddlTipoUsuario.SelectedValue);
             }
-            set { hfTipoUsuario.Value = value.ToString(); }
+            set
+            {
+                hfTipoUsuario.Value = value.ToString();
+                if (FromModal)
+                {
+                    LlenaComboOrganizacion(IdTipoUsuario);
+                    LlenaCombos();
+                }
+
+            }
         }
         public bool FromModal
         {
@@ -44,7 +54,44 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        private List<string> AlertaOrganizacion
+        public Organizacion ObtenerOrganizacion()
+        {
+            Organizacion organizacion;
+            try
+            {
+                organizacion = new Organizacion
+                {
+                    IdTipoUsuario = IdTipoUsuario,
+                    IdHolding = Convert.ToInt32(ddlHolding.SelectedValue)
+                };
+
+                if (ddlCompañia.SelectedValue != string.Empty & ddlCompañia.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                    organizacion.IdCompania = Convert.ToInt32(ddlCompañia.SelectedValue);
+
+                if (ddlDireccion.SelectedValue != string.Empty & ddlDireccion.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                    organizacion.IdDireccion = Convert.ToInt32(ddlDireccion.SelectedValue);
+
+                if (ddlSubDireccion.SelectedValue != string.Empty & ddlSubDireccion.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                    organizacion.IdSubDireccion = Convert.ToInt32(ddlSubDireccion.SelectedValue);
+
+                if (ddlGerencia.SelectedValue != string.Empty & ddlGerencia.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                    organizacion.IdGerencia = Convert.ToInt32(ddlGerencia.SelectedValue);
+
+                if (ddlSubGerencia.SelectedValue != string.Empty & ddlSubGerencia.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                    organizacion.IdSubGerencia = Convert.ToInt32(ddlSubGerencia.SelectedValue);
+
+                if (ddlJefatura.SelectedValue != string.Empty & ddlJefatura.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                    organizacion.IdJefatura = Convert.ToInt32(ddlJefatura.SelectedValue);
+
+            }
+            catch
+            {
+                throw new Exception("Error al obtener Organizacion intente nuevamente.");
+            }
+            return organizacion;
+        }
+
+        public List<string> AlertaOrganizacion
         {
             set
             {
@@ -70,14 +117,10 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-
-                if (!IsPostBack)
-                {
-                    List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true);
-                    if (!FromModal)
-                        Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
-                    Metodos.LlenaComboCatalogo(ddlTipoUsuarioCatalogo, lstTipoUsuario);
-                }
+                List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true);
+                if (!FromModal)
+                    Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
+                Metodos.LlenaComboCatalogo(ddlTipoUsuarioCatalogo, lstTipoUsuario);
 
             }
             catch (Exception e)
@@ -95,10 +138,10 @@ namespace KiiniHelp.UserControls.Altas
                 ddlHolding.SelectedIndex = 1;
                 ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
 
-                throw new Exception(e.Message);
+                throw new Exception(ex.Message);
             }
         }
 
@@ -127,7 +170,7 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        private void ValidaCapturaOrganizacion()
+        public void ValidaCapturaOrganizacion()
         {
             StringBuilder sb = new StringBuilder();
             if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
@@ -149,13 +192,16 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 AlertaOrganizacion = new List<string>();
+                AlertaCatalogos = new List<string>();
                 if (!IsPostBack)
                 {
                     divTipoUsuario.Visible = !FromModal;
                     if (FromModal)
+                    {
                         LlenaComboOrganizacion(IdTipoUsuario);
-                    LlenaCombos();
+                    }
                 }
+                //LlenaCombos();
             }
             catch (Exception ex)
             {
@@ -183,6 +229,7 @@ namespace KiiniHelp.UserControls.Altas
                 {
                     LlenaComboOrganizacion(IdTipoUsuario);
                 }
+                btnAltaHolding.Visible = int.Parse(ddlTipoUsuario.SelectedValue) != (int)BusinessVariables.EnumTiposUsuario.Empleado;
             }
             catch (Exception ex)
             {
@@ -199,6 +246,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                int idTipoUsuario = IdTipoUsuario;
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
                 Metodos.LimpiarCombo(ddlCompañia);
                 Metodos.LimpiarCombo(ddlDireccion);
@@ -206,7 +254,7 @@ namespace KiiniHelp.UserControls.Altas
                 Metodos.LimpiarCombo(ddlGerencia);
                 Metodos.LimpiarCombo(ddlSubGerencia);
                 Metodos.LimpiarCombo(ddlJefatura);
-                FiltraCombo((DropDownList)sender, ddlCompañia, _servicioOrganizacion.ObtenerCompañias(IdTipoUsuario, id, true));
+                FiltraCombo((DropDownList)sender, ddlCompañia, _servicioOrganizacion.ObtenerCompañias(idTipoUsuario, id, true));
             }
             catch (Exception ex)
             {
@@ -223,13 +271,14 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                int idTipoUsuario = IdTipoUsuario;
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
                 Metodos.LimpiarCombo(ddlDireccion);
                 Metodos.LimpiarCombo(ddlSubDireccion);
                 Metodos.LimpiarCombo(ddlGerencia);
                 Metodos.LimpiarCombo(ddlSubGerencia);
                 Metodos.LimpiarCombo(ddlJefatura);
-                FiltraCombo((DropDownList)sender, ddlDireccion, _servicioOrganizacion.ObtenerDirecciones(IdTipoUsuario, id, true));
+                FiltraCombo((DropDownList)sender, ddlDireccion, _servicioOrganizacion.ObtenerDirecciones(idTipoUsuario, id, true));
             }
             catch (Exception ex)
             {
@@ -246,12 +295,13 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                int idTipoUsuario = IdTipoUsuario;
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
                 Metodos.LimpiarCombo(ddlSubDireccion);
                 Metodos.LimpiarCombo(ddlGerencia);
                 Metodos.LimpiarCombo(ddlSubGerencia);
                 Metodos.LimpiarCombo(ddlJefatura);
-                FiltraCombo((DropDownList)sender, ddlSubDireccion, _servicioOrganizacion.ObtenerSubDirecciones(IdTipoUsuario, id, true));
+                FiltraCombo((DropDownList)sender, ddlSubDireccion, _servicioOrganizacion.ObtenerSubDirecciones(idTipoUsuario, id, true));
             }
             catch (Exception ex)
             {
@@ -268,11 +318,12 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                int idTipoUsuario = IdTipoUsuario;
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
                 Metodos.LimpiarCombo(ddlGerencia);
                 Metodos.LimpiarCombo(ddlSubGerencia);
                 Metodos.LimpiarCombo(ddlJefatura);
-                FiltraCombo((DropDownList)sender, ddlGerencia, _servicioOrganizacion.ObtenerGerencias(IdTipoUsuario, id, true));
+                FiltraCombo((DropDownList)sender, ddlGerencia, _servicioOrganizacion.ObtenerGerencias(idTipoUsuario, id, true));
             }
             catch (Exception ex)
             {
@@ -289,10 +340,11 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                int idTipoUsuario = IdTipoUsuario;
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
                 Metodos.LimpiarCombo(ddlSubGerencia);
                 Metodos.LimpiarCombo(ddlJefatura);
-                FiltraCombo((DropDownList)sender, ddlSubGerencia, _servicioOrganizacion.ObtenerSubGerencias(IdTipoUsuario, id, true));
+                FiltraCombo((DropDownList)sender, ddlSubGerencia, _servicioOrganizacion.ObtenerSubGerencias(idTipoUsuario, id, true));
             }
             catch (Exception ex)
             {
@@ -309,9 +361,10 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                int idTipoUsuario = IdTipoUsuario;
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
                 Metodos.LimpiarCombo(ddlJefatura);
-                FiltraCombo((DropDownList)sender, ddlJefatura, _servicioOrganizacion.ObtenerJefaturas(IdTipoUsuario, id, true));
+                FiltraCombo((DropDownList)sender, ddlJefatura, _servicioOrganizacion.ObtenerJefaturas(idTipoUsuario, id, true));
             }
             catch (Exception ex)
             {
@@ -324,20 +377,14 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        protected void btnCerrarOrganizacion_OnClick(object sender, EventArgs e)
+        protected void btnAceptarOrganizacion_OnClick(object sender, EventArgs e)
         {
             try
             {
-                ValidaCapturaOrganizacion();
-                //btnModalOrganizacion.CssClass = "btn btn-success btn-lg";
-                //btnModalUbicacion.CssClass = "btn btn-primary btn-lg";
-                //btnModalUbicacion.Enabled = true;
-                //btnModalRoles.CssClass = "btn btn-primary btn-lg";
-                //btnModalRoles.Enabled = false;
-                //btnModalGrupos.CssClass = "btn btn-primary btn-lg";
-                //btnModalGrupos.Enabled = false;
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalOrganizacion\");", true);
-                //upUbicacion.Update();
+                if (OnAceptarModal != null)
+                {
+                    OnAceptarModal();
+                }
             }
             catch (Exception ex)
             {
@@ -360,7 +407,7 @@ namespace KiiniHelp.UserControls.Altas
                 lblTitleCatalogo.Text = ObtenerRuta(lbtn.CommandArgument, lbtn.CommandName.ToUpper());
                 hfCatalogo.Value = lbtn.CommandArgument;
                 ddlTipoUsuarioCatalogo.SelectedValue = IdTipoUsuario.ToString();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoUbicacion\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoOrganizacion\");", true);
             }
             catch (Exception ex)
             {
@@ -405,7 +452,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                if (IdTipoUsuario<=0)
+                if (IdTipoUsuario <= 0)
                     throw new Exception("Debe seleccionar un Tipo de usuario");
                 switch (command)
                 {
@@ -467,7 +514,7 @@ namespace KiiniHelp.UserControls.Altas
             }
             catch
             {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoUbicacion\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoOrganizacion\");", true);
                 throw new Exception("Debe de seleccionarse un Padre para esta Operación");
             }
         }
@@ -503,15 +550,16 @@ namespace KiiniHelp.UserControls.Altas
                     };
                     switch (int.Parse(hfCatalogo.Value))
                     {
-                        case 8:
+                        case 99:
                             organizacion.Holding = new Holding
                             {
-                                IdTipoUsuario = IdTipoUsuario,
+                                IdTipoUsuario = Convert.ToInt32(ddlTipoUsuarioCatalogo.SelectedValue),
                                 Descripcion = txtDescripcionCatalogo.Text.Trim(),
                                 Habilitado = chkHabilitado.Checked
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
                             LlenaComboOrganizacion(Convert.ToInt32(ddlTipoUsuarioCatalogo.SelectedValue));
+                            ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
                             upOrganizacion.Update();
                             break;
                         case 9:
@@ -603,7 +651,7 @@ namespace KiiniHelp.UserControls.Altas
                             break;
                     }
                     LimpiaCatalogo();
-                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoUbicacion\");", true);
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoOrganizacion\");", true);
                 }
             }
             catch (Exception ex)
@@ -620,6 +668,7 @@ namespace KiiniHelp.UserControls.Altas
         protected void btnCancelarCatalogo_OnClick(object sender, EventArgs e)
         {
             LimpiaCatalogo();
+            ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoOrganizacion\");", true);
         }
         #endregion
     }

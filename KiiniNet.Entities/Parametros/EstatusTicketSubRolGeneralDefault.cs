@@ -5,7 +5,7 @@ using KiiniNet.Entities.Cat.Usuario;
 namespace KiiniNet.Entities.Parametros
 {
     [DataContract(IsReference = true)]
-    public class EstatusTicketSubRolGeneral
+    public class EstatusTicketSubRolGeneralDefault
     {
         [DataMember]
         public int Id { get; set; }
@@ -18,6 +18,10 @@ namespace KiiniNet.Entities.Parametros
         [DataMember]
         public int Orden { get; set; }
         [DataMember]
+        public bool TieneSupervisor { get; set; }
+        [DataMember]
+        public bool Propietario { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
 
         [DataMember]
@@ -26,6 +30,5 @@ namespace KiiniNet.Entities.Parametros
         public GrupoUsuario GrupoUsuario { get; set; }
         [DataMember]
         public SubRol SubRol { get; set; }
-        
     }
 }

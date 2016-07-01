@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Linq;
 using KinniNet.Core.Operacion;
 using KinniNet.Core.Security;
 using KinniNet.Data.Help;
@@ -18,7 +16,7 @@ namespace KiiniNet.UnitTest
             {
                 //var test = new BusinessMascaras().ObtenerCatalogoCampoMascara("TipoUsuario");
                 DataBaseModelContext db = new DataBaseModelContext();
-                BusinessSecurity.Menus bs = new BusinessSecurity.Menus();
+                //new BusinessTicket().ObtenerDetalleTicket(1);
                 //bs.ObtenerMenuUsuario(3);
             }
             catch (Exception ex)

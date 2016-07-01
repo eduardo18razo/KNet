@@ -23,10 +23,12 @@
   <xs:element name="ArrayOfHelperTickets" nillable="true" type="tns:ArrayOfHelperTickets" />
   <xs:complexType name="HelperTickets">
     <xs:sequence>
+      <xs:element minOccurs="0" name="EsPropietario" type="xs:boolean" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacion" nillable="true" type="q1:EstatusAsignacion" />
       <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusTicket" nillable="true" type="q2:EstatusTicket" />
       <xs:element minOccurs="0" name="FechaHora" type="xs:dateTime" />
       <xs:element minOccurs="0" name="GrupoAsignado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdGrupoAsignado" type="xs:int" />
       <xs:element minOccurs="0" name="IdTicket" type="xs:int" />
       <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="IdUsuarioAsignado" type="xs:int" />
@@ -39,4 +41,46 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="HelperTickets" nillable="true" type="tns:HelperTickets" />
+  <xs:complexType name="HelperDetalleTicket">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AsignacionActual" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AsignacionesDetalle" nillable="true" type="tns:ArrayOfHelperAsignacionesDetalle" />
+      <xs:element minOccurs="0" name="EstatusActual" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EstatusDetalle" nillable="true" type="tns:ArrayOfHelperEstatusDetalle" />
+      <xs:element minOccurs="0" name="FechaCreacion" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdEstatusAsignacion" type="xs:int" />
+      <xs:element minOccurs="0" name="IdEstatusTicket" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTicket" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HelperDetalleTicket" nillable="true" type="tns:HelperDetalleTicket" />
+  <xs:complexType name="ArrayOfHelperAsignacionesDetalle">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HelperAsignacionesDetalle" nillable="true" type="tns:HelperAsignacionesDetalle" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHelperAsignacionesDetalle" nillable="true" type="tns:ArrayOfHelperAsignacionesDetalle" />
+  <xs:complexType name="HelperAsignacionesDetalle">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaMovimiento" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UsuarioAsignado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UsuarioAsigno" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HelperAsignacionesDetalle" nillable="true" type="tns:HelperAsignacionesDetalle" />
+  <xs:complexType name="ArrayOfHelperEstatusDetalle">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HelperEstatusDetalle" nillable="true" type="tns:HelperEstatusDetalle" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHelperEstatusDetalle" nillable="true" type="tns:ArrayOfHelperEstatusDetalle" />
+  <xs:complexType name="HelperEstatusDetalle">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaMovimiento" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UsuarioMovimiento" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HelperEstatusDetalle" nillable="true" type="tns:HelperEstatusDetalle" />
 </xs:schema>

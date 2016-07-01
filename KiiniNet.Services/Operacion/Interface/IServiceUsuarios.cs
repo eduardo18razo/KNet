@@ -16,5 +16,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         Usuario ObtenerDetalleUsuario(int idUsuario);
+
+        [OperationContract]
+        List<Usuario> ObtenerUsuariosByGrupo(int idGrupo, int idNivel);
     }
 }

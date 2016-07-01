@@ -8,13 +8,14 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceUsuarios_GuardarUsuario_InputMessage">
@@ -35,6 +36,12 @@
   <wsdl:message name="IServiceUsuarios_ObtenerDetalleUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerDetalleUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ObtenerUsuariosByGrupo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUsuariosByGrupo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ObtenerUsuariosByGrupo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUsuariosByGrupoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceUsuarios">
     <wsdl:operation name="GuardarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/GuardarUsuario" message="tns:IServiceUsuarios_GuardarUsuario_InputMessage" />
@@ -47,6 +54,10 @@
     <wsdl:operation name="ObtenerDetalleUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerDetalleUsuario" message="tns:IServiceUsuarios_ObtenerDetalleUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerDetalleUsuarioResponse" message="tns:IServiceUsuarios_ObtenerDetalleUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUsuariosByGrupo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosByGrupo" message="tns:IServiceUsuarios_ObtenerUsuariosByGrupo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosByGrupoResponse" message="tns:IServiceUsuarios_ObtenerUsuariosByGrupo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceUsuarios">
@@ -71,6 +82,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerDetalleUsuario">
       <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ObtenerDetalleUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUsuariosByGrupo">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosByGrupo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

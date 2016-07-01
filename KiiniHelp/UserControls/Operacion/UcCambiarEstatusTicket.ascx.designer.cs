@@ -13,6 +13,24 @@ namespace KiiniHelp.UserControls.Operacion {
     public partial class UcCambiarEstatusTicket {
         
         /// <summary>
+        /// panelAlertaGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlertaGeneral;
+        
+        /// <summary>
+        /// rptErrorGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptErrorGeneral;
+        
+        /// <summary>
         /// lblIdticket control.
         /// </summary>
         /// <remarks>
@@ -22,12 +40,30 @@ namespace KiiniHelp.UserControls.Operacion {
         protected global::System.Web.UI.WebControls.Label lblIdticket;
         
         /// <summary>
-        /// Label1 control.
+        /// ddlEstatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEstatus;
+        
+        /// <summary>
+        /// btnAceptar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAceptar;
+        
+        /// <summary>
+        /// btnCerrar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCerrar;
     }
 }

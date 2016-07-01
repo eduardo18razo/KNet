@@ -117,6 +117,9 @@ namespace KinniNet.Data.Help
                 _ticketGrupoUsuario = CreateObjectSet<TicketGrupoUsuario>();
                 _area = CreateObjectSet<Area>();
                 _estatusTicketSubRolGeneral = CreateObjectSet<EstatusTicketSubRolGeneral>();
+                _estatusAsignacionSubRolGeneral = CreateObjectSet<EstatusAsignacionSubRolGeneral>();
+                _estatusTicketSubRolGeneralDefault = CreateObjectSet<EstatusTicketSubRolGeneralDefault>();
+                _estatusAsignacionSubRolGeneralDefault = CreateObjectSet<EstatusAsignacionSubRolGeneralDefault>();
 
             }
             catch (Exception ex)
@@ -400,6 +403,30 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<EstatusAsignacionSubRolGeneral> EstatusAsignacionSubRolGeneral
+        {
+            get
+            {
+                return _estatusAsignacionSubRolGeneral;
+            }
+        }
+
+        public ObjectSet<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefault
+        {
+            get
+            {
+                return _estatusTicketSubRolGeneralDefault;
+            }
+        }
+
+        public ObjectSet<EstatusAsignacionSubRolGeneralDefault> EstatusAsignacionSubRolGeneralDefault
+        {
+            get
+            {
+                return _estatusAsignacionSubRolGeneralDefault;
+            }
+        }
+
 
 
         private readonly ObjectSet<Usuario> _usuario;
@@ -432,6 +459,9 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<TicketGrupoUsuario> _ticketGrupoUsuario;
         private readonly ObjectSet<Area> _area;
         private readonly ObjectSet<EstatusTicketSubRolGeneral> _estatusTicketSubRolGeneral;
+        private readonly ObjectSet<EstatusAsignacionSubRolGeneral> _estatusAsignacionSubRolGeneral;
+        private readonly ObjectSet<EstatusTicketSubRolGeneralDefault> _estatusTicketSubRolGeneralDefault;
+        private readonly ObjectSet<EstatusAsignacionSubRolGeneralDefault> _estatusAsignacionSubRolGeneralDefault;
 
         #region Mascara
         public ObjectSet<Mascara> Mascara

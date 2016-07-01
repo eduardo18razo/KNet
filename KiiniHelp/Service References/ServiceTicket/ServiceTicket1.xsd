@@ -31,4 +31,60 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CambiarEstatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTicket" type="xs:int" />
+        <xs:element minOccurs="0" name="idEstatus" type="xs:int" />
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CambiarEstatusResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AutoAsignarTicket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTicket" type="xs:int" />
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AutoAsignarTicketResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CambiarAsignacionTicket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTicket" type="xs:int" />
+        <xs:element minOccurs="0" name="idEstatusAsignacion" type="xs:int" />
+        <xs:element minOccurs="0" name="idUsuarioAsignado" type="xs:int" />
+        <xs:element minOccurs="0" name="idUsuarioAsigna" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CambiarAsignacionTicketResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerDetalleTicket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTicket" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerDetalleTicketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerDetalleTicketResult" nillable="true" type="q3:HelperDetalleTicket" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

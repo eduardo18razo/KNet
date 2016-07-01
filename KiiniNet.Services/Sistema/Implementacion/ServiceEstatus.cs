@@ -37,5 +37,35 @@ namespace KiiniNet.Services.Sistema.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<EstatusTicket> ObtenerEstatusTicketUsuario(int idUsuario, bool esPropietario, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessEstatus negocio = new BusinessEstatus())
+                {
+                    return negocio.ObtenerEstatusTicketUsuario(idUsuario, esPropietario, insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int idSubRol, int estatusAsignacionActual, bool esPropietario, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessEstatus negocio = new BusinessEstatus())
+                {
+                    return negocio.ObtenerEstatusAsignacionUsuario(idUsuario,  idSubRol,  estatusAsignacionActual,  esPropietario,  insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

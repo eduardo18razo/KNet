@@ -20,6 +20,18 @@ namespace KiiniHelp.ServiceTicket {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/ObtenerTickets", ReplyAction="http://tempuri.org/IServiceTicket/ObtenerTicketsResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/CambiarEstatus", ReplyAction="http://tempuri.org/IServiceTicket/CambiarEstatusResponse")]
+        void CambiarEstatus(int idTicket, int idEstatus, int idUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/AutoAsignarTicket", ReplyAction="http://tempuri.org/IServiceTicket/AutoAsignarTicketResponse")]
+        void AutoAsignarTicket(int idTicket, int idUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/CambiarAsignacionTicket", ReplyAction="http://tempuri.org/IServiceTicket/CambiarAsignacionTicketResponse")]
+        void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idUsuarioAsigna);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicket", ReplyAction="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketResponse")]
+        KiiniNet.Entities.Helper.HelperDetalleTicket ObtenerDetalleTicket(int idTicket);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +67,22 @@ namespace KiiniHelp.ServiceTicket {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize) {
             return base.Channel.ObtenerTickets(idUsuario, pageIndex, pageSize);
+        }
+        
+        public void CambiarEstatus(int idTicket, int idEstatus, int idUsuario) {
+            base.Channel.CambiarEstatus(idTicket, idEstatus, idUsuario);
+        }
+        
+        public void AutoAsignarTicket(int idTicket, int idUsuario) {
+            base.Channel.AutoAsignarTicket(idTicket, idUsuario);
+        }
+        
+        public void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idUsuarioAsigna) {
+            base.Channel.CambiarAsignacionTicket(idTicket, idEstatusAsignacion, idUsuarioAsignado, idUsuarioAsigna);
+        }
+        
+        public KiiniNet.Entities.Helper.HelperDetalleTicket ObtenerDetalleTicket(int idTicket) {
+            return base.Channel.ObtenerDetalleTicket(idTicket);
         }
     }
 }

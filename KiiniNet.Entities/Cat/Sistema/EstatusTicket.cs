@@ -21,5 +21,8 @@ namespace KiiniNet.Entities.Cat.Sistema
 
         [DataMember]
         public List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneral { get; set; }
+
+        [DataMember]
+        public List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefault { get; set; }
     }
 }

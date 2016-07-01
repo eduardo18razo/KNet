@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using KiiniNet.Entities.Helper;
-using KiiniNet.Entities.Operacion;
 
 namespace KiiniNet.Services.Operacion.Interface
 {
@@ -13,6 +12,18 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize);
+
+        [OperationContract]
+        void CambiarEstatus(int idTicket, int idEstatus, int idUsuario);
+        
+        [OperationContract]
+        void AutoAsignarTicket(int idTicket,  int idUsuario);
+
+        [OperationContract]
+        void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idUsuarioAsigna);
+
+        [OperationContract]
+        HelperDetalleTicket ObtenerDetalleTicket(int idTicket);
     }
 
 }

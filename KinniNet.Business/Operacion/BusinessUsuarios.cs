@@ -97,6 +97,36 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public List<Usuario> ObtenerUsuariosByGrupo(int idGrupo, int idNivel)
+        {
+            List<Usuario> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = (db.Usuario.Join(db.UsuarioGrupo, u => u.Id, ug => ug.IdUsuario, (u, ug) => new {u, ug})
+                    .Where(@t => @t.ug.IdGrupoUsuario == idGrupo && @t.ug.SubGrupoUsuario.IdSubRol == idNivel)
+                    .Select(@t => @t.u)).Distinct().ToList();
+                //foreach (Usuario usuario in result)
+                //{
+                //    db.LoadProperty(usuario, "TipoUsuario");
+                //    usuario.OrganizacionFinal = new BusinessOrganizacion().ObtenerDescripcionOrganizacionUsuario(usuario.Id, true);
+                //    usuario.OrganizacionCompleta = new BusinessOrganizacion().ObtenerDescripcionOrganizacionUsuario(usuario.Id, false);
+                //    usuario.UbicacionFinal = new BusinessUbicacion().ObtenerDescripcionUbicacionUsuario(usuario.Id, true);
+                //    usuario.UbicacionCompleta = new BusinessUbicacion().ObtenerDescripcionUbicacionUsuario(usuario.Id, false);
+                //}
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
 
         public Usuario ObtenerDetalleUsuario(int idUsuario)
         {

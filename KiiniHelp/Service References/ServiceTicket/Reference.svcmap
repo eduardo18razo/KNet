@@ -24,6 +24,7 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="ServiceTicket3.xsd" MetadataType="Schema" ID="912d382d-24c4-41f1-89b4-2ff377b4e320" SourceId="1" SourceUrl="http://localhost:15277/ServiceTicket.svc?xsd=xsd10" />
+    <MetadataFile FileName="ServiceTicket4.xsd" MetadataType="Schema" ID="938ad8c2-3ce9-4609-ae87-fe3311f2e3c3" SourceId="1" SourceUrl="http://localhost:15277/ServiceTicket.svc?xsd=xsd14" />
     <MetadataFile FileName="ServiceTicket31.xsd" MetadataType="Schema" ID="6d6f741c-4bef-4e7c-a4f3-09e9bb9c62ad" SourceId="1" SourceUrl="http://localhost:15277/ServiceTicket.svc?xsd=xsd11" />
     <MetadataFile FileName="ServiceTicket.disco" MetadataType="Disco" ID="51943850-ed77-4810-97eb-694d19bcb32e" SourceId="1" SourceUrl="http://localhost:15277/ServiceTicket.svc?disco" />
     <MetadataFile FileName="ServiceTicket.wsdl" MetadataType="Wsdl" ID="0a00eedb-2451-468d-badd-53c7c532f8f7" SourceId="1" SourceUrl="http://localhost:15277/ServiceTicket.svc?wsdl" />

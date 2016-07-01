@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="274a177c190245e2b35a53a2cf71a3b9" Name="Diagram1" ZoomLevel="178">
+      <Diagram DiagramId="274a177c190245e2b35a53a2cf71a3b9" Name="Diagram1" ZoomLevel="105">
         <EntityTypeShape EntityType="KiiniNet_v2Model.TipoSubGrupo" Width="1.5" PointX="5.875" PointY="58.25" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TipoSubGrupo_TipoGrupo" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Campus" Width="1.5" PointX="3" PointY="83.125" />
@@ -176,12 +176,10 @@
         <EntityTypeShape EntityType="KiiniNet_v2Model.TipoTelefono" Width="1.5" PointX="3.375" PointY="3.875" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_tblParamTelefonos_tblCatTipoTelefono" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TelefonoUsuario_TipoTelefono" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusAsignacion" Width="1.5" PointX="12.5" PointY="87.875" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusTicket" Width="1.5" PointX="12.5" PointY="69.25" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Ticket" Width="1.5" PointX="15.75" PointY="66.5" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_tblTicket_tblArbolAcceso" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Encuesta" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_EstatusAsignacion" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_EstatusTicket" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Mascara" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Organizacion" />
@@ -206,14 +204,29 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketGrupoUsuario_Ticket" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketEstatus_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.TicketAsignacion" Width="2" PointX="18" PointY="68" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_TicketAsignacion_EstatusAsignacion" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketAsignacion_Ticket" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketAsignacion_UsuarioAsignado" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketAsignacion_UsuarioAsigno" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusTicketSubRolGeneral" Width="1.5" PointX="15.75" PointY="62.625" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusTicketSubRolGeneral" Width="1.5" PointX="15.75" PointY="62.5" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusTicketSubRolGeneralDefault" Width="1.5" PointX="20.75" PointY="63.5" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusSubRolGeneral_EstatusTicket" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_EstatusTicket" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusSubRolGeneral_GrupoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusSubRolGeneral_SubRol" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_GrupoUsuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_SubRol" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusAsignacionSubRolGeneral" Width="2.625" PointX="14.75" PointY="73.875" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusAsignacionSubRolGeneralDefault" Width="2.375" PointX="14.75" PointY="78.25" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_GrupoUsuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_SubRol" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_SubRol" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusAsignacion" Width="3.125" PointX="20" PointY="75.875" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion1" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion1" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_EstatusAsignacion" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_TicketAsignacion_EstatusAsignacion" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

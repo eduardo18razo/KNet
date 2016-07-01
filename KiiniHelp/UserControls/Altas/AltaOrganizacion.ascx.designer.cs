@@ -76,6 +76,15 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.WebControls.DropDownList ddlHolding;
         
         /// <summary>
+        /// btnAltaHolding control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAltaHolding;
+        
+        /// <summary>
         /// ddlCompañia control.
         /// </summary>
         /// <remarks>
@@ -184,22 +193,22 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.WebControls.Button btnJefatura;
         
         /// <summary>
-        /// btnCerrarOrganizacion control.
+        /// btnAceptar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarOrganizacion;
+        protected global::System.Web.UI.WebControls.Button btnAceptar;
         
         /// <summary>
-        /// Button1 control.
+        /// btnCerrar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnCerrar;
         
         /// <summary>
         /// upCatlogos control.

@@ -24,6 +24,7 @@
     </style>
     <script type="text/javascript">
         function MostrarPopup(modalName) {
+            debugger;
             $(modalName).modal({ backdrop: 'static', keyboard: false });
             $(modalName).modal('show');
             return true;

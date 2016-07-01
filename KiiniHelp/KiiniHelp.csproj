@@ -146,7 +146,9 @@
     <Content Include="BootStrap\js\sidebar_menu.js" />
     <Content Include="BootStrap\js\vmenuModule.js" />
     <Content Include="General\Web.config" />
-    <Content Include="Administracion\Web.config" />
+    <Content Include="Administracion\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="BootStrap\js\jquery-1.4.1-vsdoc.js" />
     <Content Include="BootStrap\js\jquery-1.4.1.js" />
     <Content Include="BootStrap\js\jquery-1.4.1.min.js" />
@@ -334,6 +336,7 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.EstatusTicket.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperTickets.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Operacion.Usuarios.UsuarioGrupo.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperDetalleTicket.datasource" />
     <None Include="Properties\PublishProfiles\KinniNetWeb.pubxml" />
     <Content Include="Public\Default.aspx" />
     <Content Include="Public\Public.Master" />
@@ -700,6 +703,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaEstatus\ServiceEstatus12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaEstatus\ServiceEstatus13.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaEstatus\ServiceEstatus2.xsd">
@@ -1200,6 +1206,9 @@
     <None Include="Service References\ServiceTicket\ServiceTicket39.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceTicket\ServiceTicket4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceUbicacion\ServiceUbicacion.wsdl" />
     <None Include="Service References\ServiceUbicacion\ServiceUbicacion.xsd">
       <SubType>Designer</SubType>
@@ -1366,21 +1375,23 @@
     <Content Include="UserControls\Altas\AltaEncuesta.ascx" />
     <Content Include="UserControls\Altas\AltaOrganizacion.ascx" />
     <Content Include="UserControls\Altas\AltaSla.ascx" />
+    <Content Include="UserControls\Altas\UcAltaUbicacion.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaUsuarios.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleGrupoUsuario.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleOrganizacion.ascx" />
+    <Content Include="UserControls\Detalles\UcDetalleTicket.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleUbicacion.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleUsuario.ascx" />
     <Content Include="UserControls\Genericos\UcCatalogos.ascx" />
     <Content Include="UserControls\Altas\AltaInformacionConsulta.ascx" />
     <Content Include="UserControls\Genericos\UcInformacionConsulta.ascx" />
     <Content Include="UserControls\Genericos\UcMostrarArchivo.ascx" />
+    <Content Include="UserControls\Operacion\UcCambiarEstatusAsignacion.ascx" />
     <Content Include="UserControls\Operacion\UcCambiarEstatusTicket.ascx" />
     <Content Include="UserControls\Seleccion\AsociarGrupoUsuario.ascx" />
     <Content Include="UserControls\Temporal\UcCatalogoNiveles.ascx" />
     <Content Include="UserControls\Altas\AltaMascaraAcceso.ascx" />
     <Content Include="UserControls\Temporal\UcMascaraCaptura.ascx" />
-    <Content Include="UserControls\Temporal\UcOrganizacion.ascx" />
     <Content Include="Administracion\Usuarios\FrmUsuarios.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -1604,6 +1615,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceUsuario\ServiceUsuarios12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios13.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceUsuario\ServiceUsuarios2.xsd">
@@ -1895,6 +1909,13 @@
     <Compile Include="UserControls\Altas\AltaOrganizacion.ascx.designer.cs">
       <DependentUpon>AltaOrganizacion.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Altas\UcAltaUbicacion.ascx.cs">
+      <DependentUpon>UcAltaUbicacion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaUbicacion.ascx.designer.cs">
+      <DependentUpon>UcAltaUbicacion.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaUsuarios.ascx.cs">
       <DependentUpon>UcConsultaUsuarios.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1915,6 +1936,13 @@
     </Compile>
     <Compile Include="UserControls\Detalles\UcDetalleOrganizacion.ascx.designer.cs">
       <DependentUpon>UcDetalleOrganizacion.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Detalles\UcDetalleTicket.ascx.cs">
+      <DependentUpon>UcDetalleTicket.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Detalles\UcDetalleTicket.ascx.designer.cs">
+      <DependentUpon>UcDetalleTicket.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Detalles\UcDetalleUbicacion.ascx.cs">
       <DependentUpon>UcDetalleUbicacion.ascx</DependentUpon>
@@ -1943,6 +1971,13 @@
     </Compile>
     <Compile Include="UserControls\Genericos\UcMostrarArchivo.ascx.designer.cs">
       <DependentUpon>UcMostrarArchivo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Operacion\UcCambiarEstatusAsignacion.ascx.cs">
+      <DependentUpon>UcCambiarEstatusAsignacion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Operacion\UcCambiarEstatusAsignacion.ascx.designer.cs">
+      <DependentUpon>UcCambiarEstatusAsignacion.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Operacion\UcCambiarEstatusTicket.ascx.cs">
       <DependentUpon>UcCambiarEstatusTicket.ascx</DependentUpon>
@@ -2020,13 +2055,6 @@
     </Compile>
     <Compile Include="UserControls\Temporal\UcMascaraCaptura.ascx.designer.cs">
       <DependentUpon>UcMascaraCaptura.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Temporal\UcOrganizacion.ascx.cs">
-      <DependentUpon>UcOrganizacion.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControls\Temporal\UcOrganizacion.ascx.designer.cs">
-      <DependentUpon>UcOrganizacion.ascx</DependentUpon>
     </Compile>
     <Compile Include="Administracion\Usuarios\FrmUsuarios.aspx.cs">
       <DependentUpon>FrmUsuarios.aspx</DependentUpon>

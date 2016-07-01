@@ -9,6 +9,7 @@ namespace KiiniNet.Entities.Helper
         public int IdTicket { get; set; }
         public int IdUsuario { get; set; }
         public int IdUsuarioAsignado { get; set; }
+        public int IdGrupoAsignado { get; set; }
         public DateTime FechaHora { get; set; }
         public int NumeroTicket { get; set; }
         public string NombreUsuario { get; set; }

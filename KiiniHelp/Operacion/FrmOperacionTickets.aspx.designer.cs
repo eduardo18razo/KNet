@@ -13,6 +13,24 @@ namespace KiiniHelp.Operacion {
     public partial class FrmOperacionTickets {
         
         /// <summary>
+        /// pnlAlertaGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlAlertaGeneral;
+        
+        /// <summary>
+        /// rptErrorGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptErrorGeneral;
+        
+        /// <summary>
         /// rptTickets control.
         /// </summary>
         /// <remarks>
@@ -31,12 +49,39 @@ namespace KiiniHelp.Operacion {
         protected global::System.Web.UI.WebControls.Repeater rptPager;
         
         /// <summary>
-        /// UcDetalleUsuario1 control.
+        /// UcDetalleTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Detalles.UcDetalleUsuario UcDetalleUsuario1;
+        protected global::KiiniHelp.UserControls.Detalles.UcDetalleTicket UcDetalleTicket;
+        
+        /// <summary>
+        /// UcCambiarEstatusAsignacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Operacion.UcCambiarEstatusAsignacion UcCambiarEstatusAsignacion;
+        
+        /// <summary>
+        /// UcCambiarEstatusTicket control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Operacion.UcCambiarEstatusTicket UcCambiarEstatusTicket;
+        
+        /// <summary>
+        /// UcDetalleUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Detalles.UcDetalleUsuario UcDetalleUsuario;
     }
 }

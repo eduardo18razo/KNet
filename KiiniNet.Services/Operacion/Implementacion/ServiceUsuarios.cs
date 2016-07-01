@@ -31,5 +31,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
                return negocio.ObtenerDetalleUsuario(idUsuario);
             }
         }
+
+        public List<Usuario> ObtenerUsuariosByGrupo(int idGrupo, int idNivel)
+        {
+            using (BusinessUsuarios negocio = new BusinessUsuarios())
+            {
+                return negocio.ObtenerUsuariosByGrupo(idGrupo, idNivel);
+            }
+        }
     }
 }

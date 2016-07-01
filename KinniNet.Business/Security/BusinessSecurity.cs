@@ -71,6 +71,11 @@ namespace KinniNet.Core.Security
                         {
                             db.LoadProperty(rol, "RolTipoUsuario");
                         }
+                        db.LoadProperty(result, "UsuarioGrupo");
+                        foreach (UsuarioGrupo grupo in result.UsuarioGrupo)
+                        {
+                            db.LoadProperty(grupo, "SubGrupoUsuario");
+                        }
 
                     }
                 }

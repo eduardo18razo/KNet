@@ -5,6 +5,12 @@
 <%@ Register Src="~/UserControls/Detalles/UcDetalleUbicacion.ascx" TagPrefix="uc1" TagName="UcDetalleUbicacion" %>
 <%@ Register Src="~/UserControls/Detalles/UcDetalleOrganizacion.ascx" TagPrefix="uc1" TagName="UcDetalleOrganizacion" %>
 <%@ Register Src="~/UserControls/Detalles/UcDetalleGrupoUsuario.ascx" TagPrefix="uc1" TagName="UcDetalleGrupoUsuario" %>
+<%@ Register Src="~/UserControls/Altas/UcAltaUbicacion.ascx" TagPrefix="uc1" TagName="UcAltaUbicacion" %>
+<%@ Register Src="~/UserControls/Operacion/UcCambiarEstatusTicket.ascx" TagPrefix="uc1" TagName="UcCambiarEstatusTicket" %>
+<%@ Register Src="~/UserControls/Detalles/UcDetalleTicket.ascx" TagPrefix="uc1" TagName="UcDetalleTicket" %>
+
+
+
 
 
 
@@ -69,7 +75,7 @@
                 <asp:ScriptReference Path="~/BootStrap/js/super-panel.js" />
             </Scripts>
         </asp:ScriptManager>
-       <%-- <nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
+        <%-- <nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
             <a class="navmenu-brand" href="#">Brand</a>
             <ul class="nav navmenu-nav">
                 <li class="active"><a href="#">Home</a></li>
@@ -77,27 +83,26 @@
                 <li><a href="#">Link</a></li>
             </ul>
         </nav>--%>
-        
+
 
         <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="upPrincipal">
             <ContentTemplate>
-                <asp:Button type="button" class="btn btn-primary btn-lg" Text="Grupos" ID="btnOnModal" runat="server" OnClick="btnOnModal_OnClick"/>
-                <uc1:UcDetalleGrupoUsuario runat="server" id="UcDetalleGrupoUsuario" />
+                
+                <%--<uc1:UcCambiarEstatusTicket runat="server" ID="UcCambiarEstatusTicket" />--%>
+                <%--<uc1:UcAltaUbicacion runat="server" ID="UcAltaUbicacion" FromModal="False" />--%>
+                <%--<uc1:AltaOrganizacion runat="server" ID="AltaOrganizacion" FromModal="False" />--%>
+                <asp:Button type="button" class="btn btn-primary btn-lg" Text="Organizacion" ID="btnOnModal" runat="server" OnClick="btnOnModal_OnClick" />
+                <%--<uc1:UcDetalleGrupoUsuario runat="server" id="UcDetalleGrupoUsuario" />--%>
                 <%--<uc1:UcDetalleOrganizacion runat="server" id="UcDetalleOrganizacion" />
                 <uc1:UcDetalleUbicacion runat="server" id="UcDetalleUbicacion" />--%>
             </ContentTemplate>
         </asp:UpdatePanel>
-        <div class="modal fade" id="modalDetalleUsuario" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-            <asp:UpdatePanel runat="server">
+        <div class="modal fade" id="modalOrganizacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <asp:UpdatePanel ID="upOrganizacion" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
-                    <div class="modal-dialog modal-lg">
-
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <uc1:UcDetalleUsuario runat="server" ID="UcDetalleUsuario1" />
-                            </div>
-                        </div>
-                    </div>
+                    <uc1:UcDetalleTicket runat="server" id="UcDetalleTicket" />
+                    <%--<uc1:UcCambiarEstatusTicket runat="server" ID="UcCambiarEstatusTicket1" />--%>
+                    <%--<uc1:UcAltaUbicacion runat="server" ID="UcAltaUbicacionModal" FromModal="True" />--%>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

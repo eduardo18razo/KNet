@@ -470,7 +470,6 @@
       <End Role="TipoTelefono" EntitySet="TipoTelefono" />
       <End Role="TelefonoUsuario" EntitySet="TelefonoUsuario" />
     </AssociationSet>
-    <EntitySet Name="EstatusAsignacion" EntityType="KiiniNet_v2Model.EstatusAsignacion" />
     <EntitySet Name="EstatusTicket" EntityType="KiiniNet_v2Model.EstatusTicket" />
     <EntitySet Name="Ticket" EntityType="KiiniNet_v2Model.Ticket" />
     <AssociationSet Name="FK_tblTicket_tblArbolAcceso" Association="KiiniNet_v2Model.FK_tblTicket_tblArbolAcceso">
@@ -479,10 +478,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_Ticket_Encuesta" Association="KiiniNet_v2Model.FK_Ticket_Encuesta">
       <End Role="Encuesta" EntitySet="Encuesta" />
-      <End Role="Ticket" EntitySet="Ticket" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Ticket_EstatusAsignacion" Association="KiiniNet_v2Model.FK_Ticket_EstatusAsignacion">
-      <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
       <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>
     <AssociationSet Name="FK_Ticket_EstatusTicket" Association="KiiniNet_v2Model.FK_Ticket_EstatusTicket">
@@ -569,10 +564,6 @@
       <End Role="TicketEstatus" EntitySet="TicketEstatus" />
     </AssociationSet>
     <EntitySet Name="TicketAsignacion" EntityType="KiiniNet_v2Model.TicketAsignacion" />
-    <AssociationSet Name="FK_TicketAsignacion_EstatusAsignacion" Association="KiiniNet_v2Model.FK_TicketAsignacion_EstatusAsignacion">
-      <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
-      <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
-    </AssociationSet>
     <AssociationSet Name="FK_TicketAsignacion_Ticket" Association="KiiniNet_v2Model.FK_TicketAsignacion_Ticket">
       <End Role="Ticket" EntitySet="Ticket" />
       <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
@@ -586,9 +577,14 @@
       <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
     </AssociationSet>
     <EntitySet Name="EstatusTicketSubRolGeneral" EntityType="KiiniNet_v2Model.EstatusTicketSubRolGeneral" />
+    <EntitySet Name="EstatusTicketSubRolGeneralDefault" EntityType="KiiniNet_v2Model.EstatusTicketSubRolGeneralDefault" />
     <AssociationSet Name="FK_EstatusSubRolGeneral_EstatusTicket" Association="KiiniNet_v2Model.FK_EstatusSubRolGeneral_EstatusTicket">
       <End Role="EstatusTicket" EntitySet="EstatusTicket" />
       <End Role="EstatusTicketSubRolGeneral" EntitySet="EstatusTicketSubRolGeneral" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusTicketSubRolGeneralDefault_EstatusTicket" Association="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_EstatusTicket">
+      <End Role="EstatusTicket" EntitySet="EstatusTicket" />
+      <End Role="EstatusTicketSubRolGeneralDefault" EntitySet="EstatusTicketSubRolGeneralDefault" />
     </AssociationSet>
     <AssociationSet Name="FK_EstatusSubRolGeneral_GrupoUsuario" Association="KiiniNet_v2Model.FK_EstatusSubRolGeneral_GrupoUsuario">
       <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
@@ -597,6 +593,53 @@
     <AssociationSet Name="FK_EstatusSubRolGeneral_SubRol" Association="KiiniNet_v2Model.FK_EstatusSubRolGeneral_SubRol">
       <End Role="SubRol" EntitySet="SubRol" />
       <End Role="EstatusTicketSubRolGeneral" EntitySet="EstatusTicketSubRolGeneral" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusTicketSubRolGeneralDefault_GrupoUsuario" Association="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_GrupoUsuario">
+      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+      <End Role="EstatusTicketSubRolGeneralDefault" EntitySet="EstatusTicketSubRolGeneralDefault" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusTicketSubRolGeneralDefault_SubRol" Association="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_SubRol">
+      <End Role="SubRol" EntitySet="SubRol" />
+      <End Role="EstatusTicketSubRolGeneralDefault" EntitySet="EstatusTicketSubRolGeneralDefault" />
+    </AssociationSet>
+    <EntitySet Name="EstatusAsignacionSubRolGeneral" EntityType="KiiniNet_v2Model.EstatusAsignacionSubRolGeneral" />
+    <EntitySet Name="EstatusAsignacionSubRolGeneralDefault" EntityType="KiiniNet_v2Model.EstatusAsignacionSubRolGeneralDefault" />
+    <AssociationSet Name="FK_EstatusAsignacionSubRolGeneral_GrupoUsuario" Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_GrupoUsuario">
+      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+      <End Role="EstatusAsignacionSubRolGeneral" EntitySet="EstatusAsignacionSubRolGeneral" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusAsignacionSubRolGeneral_SubRol" Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_SubRol">
+      <End Role="SubRol" EntitySet="SubRol" />
+      <End Role="EstatusAsignacionSubRolGeneral" EntitySet="EstatusAsignacionSubRolGeneral" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusAsignacionSubRolGeneralDefault_SubRol" Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_SubRol">
+      <End Role="SubRol" EntitySet="SubRol" />
+      <End Role="EstatusAsignacionSubRolGeneralDefault" EntitySet="EstatusAsignacionSubRolGeneralDefault" />
+    </AssociationSet>
+    <EntitySet Name="EstatusAsignacion" EntityType="KiiniNet_v2Model.EstatusAsignacion" />
+    <AssociationSet Name="FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion" Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion">
+      <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
+      <End Role="EstatusAsignacionSubRolGeneral" EntitySet="EstatusAsignacionSubRolGeneral" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion1" Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion1">
+      <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
+      <End Role="EstatusAsignacionSubRolGeneral" EntitySet="EstatusAsignacionSubRolGeneral" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion" Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion">
+      <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
+      <End Role="EstatusAsignacionSubRolGeneralDefault" EntitySet="EstatusAsignacionSubRolGeneralDefault" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion1" Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion1">
+      <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
+      <End Role="EstatusAsignacionSubRolGeneralDefault" EntitySet="EstatusAsignacionSubRolGeneralDefault" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_EstatusAsignacion" Association="KiiniNet_v2Model.FK_Ticket_EstatusAsignacion">
+      <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketAsignacion_EstatusAsignacion" Association="KiiniNet_v2Model.FK_TicketAsignacion_EstatusAsignacion">
+      <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
+      <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Campus">
@@ -1009,6 +1052,9 @@
     <NavigationProperty Name="SubGrupoUsuario" Relationship="KiiniNet_v2Model.FK_SubGrupoUsuario_SubRol" FromRole="SubRol" ToRole="SubGrupoUsuario" />
     <NavigationProperty Name="Rol" Relationship="KiiniNet_v2Model.FK_SubRol_Rol" FromRole="SubRol" ToRole="Rol" />
     <NavigationProperty Name="EstatusTicketSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusSubRolGeneral_SubRol" FromRole="SubRol" ToRole="EstatusTicketSubRolGeneral" />
+    <NavigationProperty Name="EstatusTicketSubRolGeneralDefault" Relationship="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_SubRol" FromRole="SubRol" ToRole="EstatusTicketSubRolGeneralDefault" />
+    <NavigationProperty Name="EstatusAsignacionSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_SubRol" FromRole="SubRol" ToRole="EstatusAsignacionSubRolGeneral" />
+    <NavigationProperty Name="EstatusAsignacionSubRolGeneralDefault" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_SubRol" FromRole="SubRol" ToRole="EstatusAsignacionSubRolGeneralDefault" />
   </EntityType>
   <EntityType Name="SubZona">
     <Key>
@@ -2701,16 +2747,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="EstatusAsignacion">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Habilitado" Type="Boolean" />
-    <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_Ticket_EstatusAsignacion" FromRole="EstatusAsignacion" ToRole="Ticket" />
-    <NavigationProperty Name="TicketAsignacion" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_EstatusAsignacion" FromRole="EstatusAsignacion" ToRole="TicketAsignacion" />
-  </EntityType>
   <EntityType Name="EstatusTicket">
     <Key>
       <PropertyRef Name="Id" />
@@ -2721,6 +2757,7 @@
     <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_Ticket_EstatusTicket" FromRole="EstatusTicket" ToRole="Ticket" />
     <NavigationProperty Name="TicketEstatus" Relationship="KiiniNet_v2Model.FK_TicketEstatus_EstatusTicket" FromRole="EstatusTicket" ToRole="TicketEstatus" />
     <NavigationProperty Name="EstatusTicketSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusSubRolGeneral_EstatusTicket" FromRole="EstatusTicket" ToRole="EstatusTicketSubRolGeneral" />
+    <NavigationProperty Name="EstatusTicketSubRolGeneralDefault" Relationship="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_EstatusTicket" FromRole="EstatusTicket" ToRole="EstatusTicketSubRolGeneralDefault" />
   </EntityType>
   <EntityType Name="Ticket">
     <Key>
@@ -2742,7 +2779,6 @@
     <Property Name="FechaHora" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_tblTicket_tblArbolAcceso" FromRole="Ticket" ToRole="ArbolAcceso" />
     <NavigationProperty Name="Encuesta" Relationship="KiiniNet_v2Model.FK_Ticket_Encuesta" FromRole="Ticket" ToRole="Encuesta" />
-    <NavigationProperty Name="EstatusAsignacion" Relationship="KiiniNet_v2Model.FK_Ticket_EstatusAsignacion" FromRole="Ticket" ToRole="EstatusAsignacion" />
     <NavigationProperty Name="EstatusTicket" Relationship="KiiniNet_v2Model.FK_Ticket_EstatusTicket" FromRole="Ticket" ToRole="EstatusTicket" />
     <NavigationProperty Name="Mascara" Relationship="KiiniNet_v2Model.FK_Ticket_Mascara" FromRole="Ticket" ToRole="Mascara" />
     <NavigationProperty Name="Organizacion" Relationship="KiiniNet_v2Model.FK_Ticket_Organizacion" FromRole="Ticket" ToRole="Organizacion" />
@@ -2755,6 +2791,7 @@
     <NavigationProperty Name="TicketEstatus" Relationship="KiiniNet_v2Model.FK_TicketEstatus_Ticket" FromRole="Ticket" ToRole="TicketEstatus" />
     <NavigationProperty Name="TicketGrupoUsuario" Relationship="KiiniNet_v2Model.FK_TicketGrupoUsuario_Ticket" FromRole="Ticket" ToRole="TicketGrupoUsuario" />
     <NavigationProperty Name="TicketAsignacion" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_Ticket" FromRole="Ticket" ToRole="TicketAsignacion" />
+    <NavigationProperty Name="EstatusAsignacion" Relationship="KiiniNet_v2Model.FK_Ticket_EstatusAsignacion" FromRole="Ticket" ToRole="EstatusAsignacion" />
   </EntityType>
   <Association Name="FK_tblTicket_tblArbolAcceso">
     <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="1" />
@@ -2777,18 +2814,6 @@
       </Principal>
       <Dependent Role="Ticket">
         <PropertyRef Name="IdEncuesta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Ticket_EstatusAsignacion">
-    <End Type="KiiniNet_v2Model.EstatusAsignacion" Role="EstatusAsignacion" Multiplicity="1" />
-    <End Type="KiiniNet_v2Model.Ticket" Role="Ticket" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EstatusAsignacion">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Ticket">
-        <PropertyRef Name="IdEstatusAsignacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2918,6 +2943,8 @@
     <NavigationProperty Name="UsuarioGrupo" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_GrupoUsuario" FromRole="GrupoUsuario" ToRole="UsuarioGrupo" />
     <NavigationProperty Name="TicketGrupoUsuario" Relationship="KiiniNet_v2Model.FK_TicketGrupoUsuario_GrupoUsuario" FromRole="GrupoUsuario" ToRole="TicketGrupoUsuario" />
     <NavigationProperty Name="EstatusTicketSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusSubRolGeneral_GrupoUsuario" FromRole="GrupoUsuario" ToRole="EstatusTicketSubRolGeneral" />
+    <NavigationProperty Name="EstatusTicketSubRolGeneralDefault" Relationship="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_GrupoUsuario" FromRole="GrupoUsuario" ToRole="EstatusTicketSubRolGeneralDefault" />
+    <NavigationProperty Name="EstatusAsignacionSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_GrupoUsuario" FromRole="GrupoUsuario" ToRole="EstatusAsignacionSubRolGeneral" />
   </EntityType>
   <Association Name="FK_GrupoUsuario_TipoGrupo1">
     <End Type="KiiniNet_v2Model.TipoGrupo" Role="TipoGrupo" Multiplicity="0..1" />
@@ -3086,23 +3113,11 @@
     <Property Name="IdUsuarioAsigno" Type="Int32" />
     <Property Name="IdUsuarioAsignado" Type="Int32" />
     <Property Name="FechaAsignacion" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="EstatusAsignacion" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_EstatusAsignacion" FromRole="TicketAsignacion" ToRole="EstatusAsignacion" />
     <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_Ticket" FromRole="TicketAsignacion" ToRole="Ticket" />
     <NavigationProperty Name="UsuarioAsignado" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_UsuarioAsignado" FromRole="TicketAsignacion" ToRole="Usuario" />
     <NavigationProperty Name="UsuarioAsigno" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_UsuarioAsigno" FromRole="TicketAsignacion" ToRole="Usuario" />
+    <NavigationProperty Name="EstatusAsignacion" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_EstatusAsignacion" FromRole="TicketAsignacion" ToRole="EstatusAsignacion" />
   </EntityType>
-  <Association Name="FK_TicketAsignacion_EstatusAsignacion">
-    <End Type="KiiniNet_v2Model.EstatusAsignacion" Role="EstatusAsignacion" Multiplicity="1" />
-    <End Type="KiiniNet_v2Model.TicketAsignacion" Role="TicketAsignacion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EstatusAsignacion">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TicketAsignacion">
-        <PropertyRef Name="IdEstatusAsignacion" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TicketAsignacion_Ticket">
     <End Type="KiiniNet_v2Model.Ticket" Role="Ticket" Multiplicity="1" />
     <End Type="KiiniNet_v2Model.TicketAsignacion" Role="TicketAsignacion" Multiplicity="*" />
@@ -3148,10 +3163,28 @@
     <Property Name="IdSubRol" Type="Int32" Nullable="false" />
     <Property Name="IdEstatusTicket" Type="Int32" Nullable="false" />
     <Property Name="Orden" Type="Int32" Nullable="false" />
+    <Property Name="TieneSupervisor" Type="Boolean" />
+    <Property Name="Propietario" Type="Boolean" Nullable="false" />
     <Property Name="Habilitado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="EstatusTicket" Relationship="KiiniNet_v2Model.FK_EstatusSubRolGeneral_EstatusTicket" FromRole="EstatusTicketSubRolGeneral" ToRole="EstatusTicket" />
     <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_EstatusSubRolGeneral_GrupoUsuario" FromRole="EstatusTicketSubRolGeneral" ToRole="GrupoUsuario" />
     <NavigationProperty Name="SubRol" Relationship="KiiniNet_v2Model.FK_EstatusSubRolGeneral_SubRol" FromRole="EstatusTicketSubRolGeneral" ToRole="SubRol" />
+  </EntityType>
+  <EntityType Name="EstatusTicketSubRolGeneralDefault">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdGrupoUsuario" Type="Int32" />
+    <Property Name="IdSubRol" Type="Int32" />
+    <Property Name="IdEstatusTicket" Type="Int32" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="TieneSupervisor" Type="Boolean" />
+    <Property Name="Propietario" Type="Boolean" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="EstatusTicket" Relationship="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_EstatusTicket" FromRole="EstatusTicketSubRolGeneralDefault" ToRole="EstatusTicket" />
+    <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_GrupoUsuario" FromRole="EstatusTicketSubRolGeneralDefault" ToRole="GrupoUsuario" />
+    <NavigationProperty Name="SubRol" Relationship="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_SubRol" FromRole="EstatusTicketSubRolGeneralDefault" ToRole="SubRol" />
   </EntityType>
   <Association Name="FK_EstatusSubRolGeneral_EstatusTicket">
     <End Type="KiiniNet_v2Model.EstatusTicket" Role="EstatusTicket" Multiplicity="1" />
@@ -3161,6 +3194,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="EstatusTicketSubRolGeneral">
+        <PropertyRef Name="IdEstatusTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusTicketSubRolGeneralDefault_EstatusTicket">
+    <End Type="KiiniNet_v2Model.EstatusTicket" Role="EstatusTicket" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.EstatusTicketSubRolGeneralDefault" Role="EstatusTicketSubRolGeneralDefault" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusTicket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusTicketSubRolGeneralDefault">
         <PropertyRef Name="IdEstatusTicket" />
       </Dependent>
     </ReferentialConstraint>
@@ -3186,6 +3231,186 @@
       </Principal>
       <Dependent Role="EstatusTicketSubRolGeneral">
         <PropertyRef Name="IdSubRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusTicketSubRolGeneralDefault_GrupoUsuario">
+    <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.EstatusTicketSubRolGeneralDefault" Role="EstatusTicketSubRolGeneralDefault" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusTicketSubRolGeneralDefault">
+        <PropertyRef Name="IdGrupoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusTicketSubRolGeneralDefault_SubRol">
+    <End Type="KiiniNet_v2Model.SubRol" Role="SubRol" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.EstatusTicketSubRolGeneralDefault" Role="EstatusTicketSubRolGeneralDefault" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubRol">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusTicketSubRolGeneralDefault">
+        <PropertyRef Name="IdSubRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EstatusAsignacionSubRolGeneral">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdGrupoUsuario" Type="Int32" Nullable="false" />
+    <Property Name="IdSubRol" Type="Int32" Nullable="false" />
+    <Property Name="IdEstatusAsignacionActual" Type="Int32" Nullable="false" />
+    <Property Name="IdEstatusAsignacionAccion" Type="Int32" />
+    <Property Name="Orden" Type="Int32" Nullable="false" />
+    <Property Name="TieneSupervisor" Type="Boolean" />
+    <Property Name="Propietario" Type="Boolean" Nullable="false" />
+    <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_GrupoUsuario" FromRole="EstatusAsignacionSubRolGeneral" ToRole="GrupoUsuario" />
+    <NavigationProperty Name="SubRol" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_SubRol" FromRole="EstatusAsignacionSubRolGeneral" ToRole="SubRol" />
+    <NavigationProperty Name="EstatusAsignacionActual" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion" FromRole="EstatusAsignacionSubRolGeneral" ToRole="EstatusAsignacion" />
+    <NavigationProperty Name="EstatusAsignacionAccion" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion1" FromRole="EstatusAsignacionSubRolGeneral" ToRole="EstatusAsignacion" />
+  </EntityType>
+  <EntityType Name="EstatusAsignacionSubRolGeneralDefault">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdSubRol" Type="Int32" />
+    <Property Name="IdEstatusAsignacionActual" Type="Int32" />
+    <Property Name="IdEstatusAsignacionAccion" Type="Int32" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="TieneSupervisor" Type="Boolean" />
+    <Property Name="Propietario" Type="Boolean" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="SubRol" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_SubRol" FromRole="EstatusAsignacionSubRolGeneralDefault" ToRole="SubRol" />
+    <NavigationProperty Name="EstatusAsignacionActual" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion" FromRole="EstatusAsignacionSubRolGeneralDefault" ToRole="EstatusAsignacion" />
+    <NavigationProperty Name="EstatusAsignacionAccion" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion1" FromRole="EstatusAsignacionSubRolGeneralDefault" ToRole="EstatusAsignacion" />
+  </EntityType>
+  <Association Name="FK_EstatusAsignacionSubRolGeneral_GrupoUsuario">
+    <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.EstatusAsignacionSubRolGeneral" Role="EstatusAsignacionSubRolGeneral" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusAsignacionSubRolGeneral">
+        <PropertyRef Name="IdGrupoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusAsignacionSubRolGeneral_SubRol">
+    <End Type="KiiniNet_v2Model.SubRol" Role="SubRol" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.EstatusAsignacionSubRolGeneral" Role="EstatusAsignacionSubRolGeneral" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubRol">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusAsignacionSubRolGeneral">
+        <PropertyRef Name="IdSubRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusAsignacionSubRolGeneralDefault_SubRol">
+    <End Type="KiiniNet_v2Model.SubRol" Role="SubRol" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.EstatusAsignacionSubRolGeneralDefault" Role="EstatusAsignacionSubRolGeneralDefault" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubRol">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusAsignacionSubRolGeneralDefault">
+        <PropertyRef Name="IdSubRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EstatusAsignacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="EstatusAsignacionSubRolGeneralActual" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion" FromRole="EstatusAsignacion" ToRole="EstatusAsignacionSubRolGeneral" />
+    <NavigationProperty Name="EstatusAsignacionSubRolGeneralAccion" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion1" FromRole="EstatusAsignacion" ToRole="EstatusAsignacionSubRolGeneral" />
+    <NavigationProperty Name="EstatusAsignacionSubRolGeneralDefaultActual" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion" FromRole="EstatusAsignacion" ToRole="EstatusAsignacionSubRolGeneralDefault" />
+    <NavigationProperty Name="EstatusAsignacionSubRolGeneralDefaultAccion" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion1" FromRole="EstatusAsignacion" ToRole="EstatusAsignacionSubRolGeneralDefault" />
+    <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_Ticket_EstatusAsignacion" FromRole="EstatusAsignacion" ToRole="Ticket" />
+    <NavigationProperty Name="TicketAsignacion" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_EstatusAsignacion" FromRole="EstatusAsignacion" ToRole="TicketAsignacion" />
+  </EntityType>
+  <Association Name="FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion">
+    <End Type="KiiniNet_v2Model.EstatusAsignacion" Role="EstatusAsignacion" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.EstatusAsignacionSubRolGeneral" Role="EstatusAsignacionSubRolGeneral" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusAsignacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusAsignacionSubRolGeneral">
+        <PropertyRef Name="IdEstatusAsignacionActual" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion1">
+    <End Type="KiiniNet_v2Model.EstatusAsignacion" Role="EstatusAsignacion" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.EstatusAsignacionSubRolGeneral" Role="EstatusAsignacionSubRolGeneral" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusAsignacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusAsignacionSubRolGeneral">
+        <PropertyRef Name="IdEstatusAsignacionAccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion">
+    <End Type="KiiniNet_v2Model.EstatusAsignacion" Role="EstatusAsignacion" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.EstatusAsignacionSubRolGeneralDefault" Role="EstatusAsignacionSubRolGeneralDefault" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusAsignacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusAsignacionSubRolGeneralDefault">
+        <PropertyRef Name="IdEstatusAsignacionActual" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion1">
+    <End Type="KiiniNet_v2Model.EstatusAsignacion" Role="EstatusAsignacion" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.EstatusAsignacionSubRolGeneralDefault" Role="EstatusAsignacionSubRolGeneralDefault" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusAsignacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusAsignacionSubRolGeneralDefault">
+        <PropertyRef Name="IdEstatusAsignacionAccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_EstatusAsignacion">
+    <End Type="KiiniNet_v2Model.EstatusAsignacion" Role="EstatusAsignacion" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.Ticket" Role="Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusAsignacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdEstatusAsignacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketAsignacion_EstatusAsignacion">
+    <End Type="KiiniNet_v2Model.EstatusAsignacion" Role="EstatusAsignacion" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.TicketAsignacion" Role="TicketAsignacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstatusAsignacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketAsignacion">
+        <PropertyRef Name="IdEstatusAsignacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

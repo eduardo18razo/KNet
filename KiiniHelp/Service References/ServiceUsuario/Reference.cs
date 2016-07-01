@@ -23,6 +23,9 @@ namespace KiiniHelp.ServiceUsuario {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ObtenerDetalleUsuario", ReplyAction="http://tempuri.org/IServiceUsuarios/ObtenerDetalleUsuarioResponse")]
         KiiniNet.Entities.Operacion.Usuarios.Usuario ObtenerDetalleUsuario(int idUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosByGrupo", ReplyAction="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosByGrupoResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> ObtenerUsuariosByGrupo(int idGrupo, int idNivel);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -62,6 +65,10 @@ namespace KiiniHelp.ServiceUsuario {
         
         public KiiniNet.Entities.Operacion.Usuarios.Usuario ObtenerDetalleUsuario(int idUsuario) {
             return base.Channel.ObtenerDetalleUsuario(idUsuario);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> ObtenerUsuariosByGrupo(int idGrupo, int idNivel) {
+            return base.Channel.ObtenerUsuariosByGrupo(idGrupo, idNivel);
         }
     }
 }

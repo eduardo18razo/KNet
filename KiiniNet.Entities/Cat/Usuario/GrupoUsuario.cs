@@ -52,6 +52,10 @@ namespace KiiniNet.Entities.Cat.Usuario
         [DataMember]
         public virtual List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneral { get; set; }
         [DataMember]
+        public List<EstatusAsignacionSubRolGeneral> EstatusAsignacionSubRolGeneral { get; set; }
+        [DataMember]
+        public List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefault { get; set; }
+        [DataMember]
         public virtual List<TicketGrupoUsuario> TicketGrupoUsuario { get; set; }
     }
 }

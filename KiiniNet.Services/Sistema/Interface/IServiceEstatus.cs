@@ -11,5 +11,11 @@ namespace KiiniNet.Services.Sistema.Interface
         List<EstatusTicket> ObtenerEstatusTicket(bool insertarSeleccion);
         [OperationContract]
         List<EstatusAsignacion> ObtenerEstatusAsignacion(bool insertarSeleccion);
+
+        [OperationContract]
+        List<EstatusTicket> ObtenerEstatusTicketUsuario(int idUsuario, bool esPropietario, bool insertarSeleccion);
+
+        [OperationContract]
+        List<EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int idSubRol, int estatusAsignacionActual, bool esPropietario, bool insertarSeleccion);
     }
 }

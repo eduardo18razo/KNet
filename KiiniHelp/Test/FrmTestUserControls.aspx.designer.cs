@@ -49,21 +49,21 @@ namespace KiiniHelp.Test {
         protected global::System.Web.UI.WebControls.Button btnOnModal;
         
         /// <summary>
-        /// UcDetalleGrupoUsuario control.
+        /// upOrganizacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Detalles.UcDetalleGrupoUsuario UcDetalleGrupoUsuario;
+        protected global::System.Web.UI.UpdatePanel upOrganizacion;
         
         /// <summary>
-        /// UcDetalleUsuario1 control.
+        /// UcDetalleTicket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Detalles.UcDetalleUsuario UcDetalleUsuario1;
+        protected global::KiiniHelp.UserControls.Detalles.UcDetalleTicket UcDetalleTicket;
     }
 }

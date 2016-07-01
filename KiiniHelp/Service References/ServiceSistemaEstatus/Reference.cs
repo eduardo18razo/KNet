@@ -20,6 +20,12 @@ namespace KiiniHelp.ServiceSistemaEstatus {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEstatus/ObtenerEstatusAsignacion", ReplyAction="http://tempuri.org/IServiceEstatus/ObtenerEstatusAsignacionResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusAsignacion> ObtenerEstatusAsignacion(bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEstatus/ObtenerEstatusTicketUsuario", ReplyAction="http://tempuri.org/IServiceEstatus/ObtenerEstatusTicketUsuarioResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusTicket> ObtenerEstatusTicketUsuario(int idUsuario, bool esPropietario, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEstatus/ObtenerEstatusAsignacionUsuario", ReplyAction="http://tempuri.org/IServiceEstatus/ObtenerEstatusAsignacionUsuarioResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int idSubRol, bool esPropietario, bool insertarSeleccion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +61,14 @@ namespace KiiniHelp.ServiceSistemaEstatus {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusAsignacion> ObtenerEstatusAsignacion(bool insertarSeleccion) {
             return base.Channel.ObtenerEstatusAsignacion(insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusTicket> ObtenerEstatusTicketUsuario(int idUsuario, bool esPropietario, bool insertarSeleccion) {
+            return base.Channel.ObtenerEstatusTicketUsuario(idUsuario, esPropietario, insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int idSubRol, bool esPropietario, bool insertarSeleccion) {
+            return base.Channel.ObtenerEstatusAsignacionUsuario(idUsuario, idSubRol, esPropietario, insertarSeleccion);
         }
     }
 }

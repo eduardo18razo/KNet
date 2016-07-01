@@ -9,7 +9,7 @@ using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniHelp.UserControls.Detalles
 {
-    public partial class UcDetalleUsuario : System.Web.UI.UserControl, IControllerModal
+    public partial class UcDetalleUsuario : UserControl, IControllerModal
     {
         private List<string> _lstError = new List<string>();
 
@@ -63,6 +63,7 @@ namespace KiiniHelp.UserControls.Detalles
             }
         }
 
+        public event DelegateAceptarModal OnAceptarModal;
         public event DelegateCerrarModal OnCerraModal;
 
         protected void btnCerrarModal_OnClick(object sender, EventArgs e)

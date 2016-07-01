@@ -3,11 +3,11 @@
 <asp:UpdatePanel runat="server">
     <ContentTemplate>
         <div class="panel panel-primary">
-            <div class="panel-body">
+            <div >
                 <asp:Repeater runat="server" ID="rptUserGroups" OnItemDataBound="rptUserGroups_OnItemDataBound">
                     <ItemTemplate>
                         <div class="row">
-                            <asp:Label runat="server" Text='<%#Eval("GrupoUsuario.Descripcion") %>'></asp:Label>
+                            <asp:Label runat="server" Text='<%#Eval("GrupoUsuario.Descripcion") %>' CssClass="form-control"></asp:Label>
                             <div class="panel panel-primary" style="margin-left: 20px" runat="server" visible='<%# Eval("SubGrupoUsuario") != null %>'>
                                 <div class="panel-heading">
                                     SubRol
