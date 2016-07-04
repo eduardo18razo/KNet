@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web.UI;
 using KiiniHelp.ServiceGrupoUsuario;
 using KiiniHelp.ServiceSistemaEstatus;
+using KiiniHelp.ServiceSistemaSubRol;
 using KiiniHelp.ServiceTicket;
 using KiiniHelp.ServiceUsuario;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Usuarios;
+using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Operacion
@@ -18,6 +20,7 @@ namespace KiiniHelp.UserControls.Operacion
         private readonly ServiceEstatusClient _servicioEstatus = new ServiceEstatusClient();
         private readonly ServiceTicketClient _servicioTicketClient = new ServiceTicketClient();
         private readonly ServiceUsuariosClient _servicioUsuarios = new ServiceUsuariosClient();
+        private readonly ServiceSubRolClient _servicioSubRol = new ServiceSubRolClient();
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateCerrarModal OnCerraModal;
 
@@ -35,7 +38,6 @@ namespace KiiniHelp.UserControls.Operacion
             set
             {
                 ViewState["IdGrupoTicket"] = value;
-                LLenaUsuarios();
             }
         }
         public int IdUsuario
@@ -48,17 +50,19 @@ namespace KiiniHelp.UserControls.Operacion
             }
         }
 
+        public int IdEstatusAsignacionActual
+        {
+            get { return Convert.ToInt32(ViewState["IdEstatusAsignacionActual"]); }
+            set
+            {
+                ViewState["IdEstatusAsignacionActual"] = value;
+            }
+        }
+
         public bool EsPropietario
         {
             get { return Convert.ToBoolean(lblEsPropietrio.Text); }
-            set
-            {
-                lblEsPropietrio.Text = value.ToString();
-                divUsuariosNivel1.Visible = value;
-                divUsuariosNivel2.Visible = value;
-                divUsuariosNivel3.Visible = value;
-                divUsuariosNivel4.Visible = value;
-            }
+            set { lblEsPropietrio.Text = value.ToString(); }
         }
 
         private void LLenaEstatus()
@@ -66,15 +70,21 @@ namespace KiiniHelp.UserControls.Operacion
             try
             {
                 List<EstatusAsignacion> lstEstatus = new List<EstatusAsignacion>();
-                foreach (SubGrupoUsuario subRol in ((Usuario)Session["UserData"]).UsuarioGrupo.Select(s => s.SubGrupoUsuario))
+                foreach (SubGrupoUsuario subRol in ((Usuario)Session["UserData"]).UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Select(s => s.SubGrupoUsuario))
                 {
-                    lstEstatus.AddRange(_servicioEstatus.ObtenerEstatusAsignacionUsuario(IdUsuario, subRol.IdSubRol, EsPropietario, true));
+                    lstEstatus.AddRange(_servicioEstatus.ObtenerEstatusAsignacionUsuario(IdUsuario, subRol.IdSubRol, IdEstatusAsignacionActual, EsPropietario, true));
                 }
                 lstEstatus = lstEstatus.Distinct().ToList();
                 ddlEstatus.DataSource = lstEstatus;
                 ddlEstatus.DataTextField = "Descripcion";
                 ddlEstatus.DataValueField = "Id";
                 ddlEstatus.DataBind();
+                divUsuariosNivel1.Visible = false;
+                divUsuariosNivel2.Visible = false;
+                divUsuariosNivel3.Visible = false;
+                divUsuariosNivel4.Visible = false;
+                divUsuariosSupervisor.Visible = false;
+
             }
             catch (Exception e)
             {
@@ -86,36 +96,104 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
-                bool supervisor = false;
-                foreach (SubGrupoUsuario subRol in ((Usuario)Session["UserData"]).UsuarioGrupo.Select(s => s.SubGrupoUsuario))
-                {
-                    supervisor = subRol.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor;
-                    if (supervisor) break;
-                }
+                divUsuariosNivel1.Visible = false;
+                divUsuariosNivel2.Visible = false;
+                divUsuariosNivel3.Visible = false;
+                divUsuariosNivel4.Visible = false;
+                divUsuariosSupervisor.Visible = false;
+
+                List<int> lstSubRoles = ((Usuario)Session["UserData"]).UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Select(s => s.SubGrupoUsuario).Select(subRol => subRol.IdSubRol).ToList();
+
+                var supervisor = lstSubRoles.Contains((int)BusinessVariables.EnumSubRoles.Supervisor);
+                var primerNivel = lstSubRoles.Contains((int)BusinessVariables.EnumSubRoles.PrimererNivel);
+                var segundoNivel = lstSubRoles.Contains((int)BusinessVariables.EnumSubRoles.SegundoNivel);
+                var tercerNivel = lstSubRoles.Contains((int)BusinessVariables.EnumSubRoles.TercerNivel);
+                var cuartoNivel = lstSubRoles.Contains((int)BusinessVariables.EnumSubRoles.CuartoNivel);
+                int statusSeleccionado = Convert.ToInt32(ddlEstatus.SelectedValue);
                 if (!EsPropietario && !supervisor) return;
-                rbtnlUsuariosGrupoNivel1.DataSource = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo, (int)BusinessVariables.EnumSubRoles.PrimererNivel);
-                rbtnlUsuariosGrupoNivel1.DataTextField = "NombreCompleto";
-                rbtnlUsuariosGrupoNivel1.DataValueField = "Id";
-                rbtnlUsuariosGrupoNivel1.DataBind();
-                divUsuariosNivel1.Visible = rbtnlUsuariosGrupoNivel1.Items.Count > 0;
+                List<Usuario> lstUsuarios;
+                List<SubRolEscalacionPermitida> lstAsignacionesPermitidas = new List<SubRolEscalacionPermitida>();
+                foreach (int subRol in lstSubRoles)
+                {
+                    lstAsignacionesPermitidas.AddRange(_servicioSubRol.ObtenerEscalacion(subRol));
+                }
 
-                rbtnlUsuariosGrupoNivel2.DataSource = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo, (int)BusinessVariables.EnumSubRoles.SegundoNivel);
-                rbtnlUsuariosGrupoNivel2.DataTextField = "NombreCompleto";
-                rbtnlUsuariosGrupoNivel2.DataValueField = "Id";
-                rbtnlUsuariosGrupoNivel2.DataBind();
-                divUsuariosNivel2.Visible = rbtnlUsuariosGrupoNivel1.Items.Count > 0;
+                //if ((supervisor && statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.ReAsignado && EsPropietario)
+                //    || (supervisor && (statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Escalado || statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Asignado)))
+                //{
+                if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.Supervisor))
+                {
+                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo, (int)BusinessVariables.EnumSubRoles.Supervisor);
+                    rbtnlSupervisor.DataSource = lstUsuarios;
+                    rbtnlSupervisor.DataTextField = "NombreCompleto";
+                    rbtnlSupervisor.DataValueField = "Id";
+                    rbtnlSupervisor.DataBind();
+                    divUsuariosSupervisor.Visible = lstUsuarios.Count > 0;
+                }
+                //}
 
-                rbtnlUsuariosGrupoNivel3.DataSource = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo, (int)BusinessVariables.EnumSubRoles.TercerNivel);
-                rbtnlUsuariosGrupoNivel3.DataTextField = "NombreCompleto";
-                rbtnlUsuariosGrupoNivel3.DataValueField = "Id";
-                rbtnlUsuariosGrupoNivel3.DataBind();
-                divUsuariosNivel3.Visible = rbtnlUsuariosGrupoNivel1.Items.Count > 0;
+                //if ((primerNivel && statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.ReAsignado)
+                //    || (supervisor && (statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Escalado || statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Asignado)))
+                //{
+                if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.PrimererNivel))
+                {
+                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo,
+                        (int)BusinessVariables.EnumSubRoles.PrimererNivel);
+                    rbtnlUsuariosGrupoNivel1.DataSource = lstUsuarios;
+                    rbtnlUsuariosGrupoNivel1.DataTextField = "NombreCompleto";
+                    rbtnlUsuariosGrupoNivel1.DataValueField = "Id";
+                    rbtnlUsuariosGrupoNivel1.DataBind();
+                    divUsuariosNivel1.Visible = lstUsuarios.Count > 0;
+                }
+                //}
 
-                rbtnlUsuariosGrupoNivel4.DataSource = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo, (int)BusinessVariables.EnumSubRoles.CuartoNivel);
-                rbtnlUsuariosGrupoNivel4.DataTextField = "NombreCompleto";
-                rbtnlUsuariosGrupoNivel4.DataValueField = "Id";
-                rbtnlUsuariosGrupoNivel4.DataBind();
-                divUsuariosNivel4.Visible = rbtnlUsuariosGrupoNivel1.Items.Count > 0;
+                //if ((segundoNivel && statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.ReAsignado)
+                //    || (primerNivel && statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Escalado)
+                //    || (supervisor && (statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Escalado || statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Asignado)))
+                //{
+                if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.SegundoNivel))
+                {
+                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo,
+                        (int)BusinessVariables.EnumSubRoles.SegundoNivel);
+                    rbtnlUsuariosGrupoNivel2.DataSource = lstUsuarios;
+                    rbtnlUsuariosGrupoNivel2.DataTextField = "NombreCompleto";
+                    rbtnlUsuariosGrupoNivel2.DataValueField = "Id";
+                    rbtnlUsuariosGrupoNivel2.DataBind();
+                    divUsuariosNivel2.Visible = lstUsuarios.Count > 0;
+                }
+                //}
+
+                //if ((tercerNivel && statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.ReAsignado)
+                //    || (segundoNivel && statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Escalado)
+                //    || (supervisor && (statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Escalado || statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Asignado)))
+                //{
+                if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.TercerNivel))
+                {
+                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo,
+                        (int)BusinessVariables.EnumSubRoles.TercerNivel);
+                    rbtnlUsuariosGrupoNivel3.DataSource = lstUsuarios;
+                    rbtnlUsuariosGrupoNivel3.DataTextField = "NombreCompleto";
+                    rbtnlUsuariosGrupoNivel3.DataValueField = "Id";
+                    rbtnlUsuariosGrupoNivel3.DataBind();
+                    divUsuariosNivel3.Visible = lstUsuarios.Count > 0;
+                }
+                //}
+
+                //if ((cuartoNivel && statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.ReAsignado)
+                //    || (tercerNivel && statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Escalado)
+                //    || (supervisor && (statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Escalado || statusSeleccionado == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Asignado)))
+                //{
+                if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.CuartoNivel))
+                {
+                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo,
+                        (int)BusinessVariables.EnumSubRoles.CuartoNivel);
+                    rbtnlUsuariosGrupoNivel4.DataSource = lstUsuarios;
+                    rbtnlUsuariosGrupoNivel4.DataTextField = "NombreCompleto";
+                    rbtnlUsuariosGrupoNivel4.DataValueField = "Id";
+                    rbtnlUsuariosGrupoNivel4.DataBind();
+                    divUsuariosNivel4.Visible = lstUsuarios.Count > 0;
+                }
+                //}
             }
             catch (Exception e)
             {
@@ -139,6 +217,9 @@ namespace KiiniHelp.UserControls.Operacion
             int result = 0;
             try
             {
+
+                if (rbtnlSupervisor.SelectedItem != null)
+                    result = Convert.ToInt32(rbtnlSupervisor.SelectedValue);
                 if (rbtnlUsuariosGrupoNivel1.SelectedItem != null)
                     result = Convert.ToInt32(rbtnlUsuariosGrupoNivel1.SelectedValue);
                 if (rbtnlUsuariosGrupoNivel2.SelectedItem != null)
@@ -147,6 +228,10 @@ namespace KiiniHelp.UserControls.Operacion
                     result = Convert.ToInt32(rbtnlUsuariosGrupoNivel3.SelectedValue);
                 if (rbtnlUsuariosGrupoNivel4.SelectedItem != null)
                     result = Convert.ToInt32(rbtnlUsuariosGrupoNivel4.SelectedValue);
+                if (result == 0 && ddlEstatus.SelectedValue == ((int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Autoasignado).ToString())
+                    result = ((Usuario)Session["UserData"]).Id;
+                else if (result == 0 && ddlEstatus.SelectedValue != ((int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Autoasignado).ToString())
+                    throw new Exception("Seleccione un usuario");
             }
             catch (Exception e)
             {
@@ -181,12 +266,18 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
-                if (OnAceptarModal != null)
-                    OnAceptarModal();
+
                 if (ddlEstatus.SelectedValue != BusinessVariables.ComboBoxCatalogo.Value.ToString())
                 {
                     _servicioTicketClient.CambiarAsignacionTicket(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuarioSeleccionado(), ((Usuario)Session["UserData"]).Id);
                 }
+                rbtnlSupervisor.ClearSelection();
+                rbtnlUsuariosGrupoNivel1.ClearSelection();
+                rbtnlUsuariosGrupoNivel2.ClearSelection();
+                rbtnlUsuariosGrupoNivel3.ClearSelection();
+                rbtnlUsuariosGrupoNivel4.ClearSelection();
+                if (OnAceptarModal != null)
+                    OnAceptarModal();
             }
             catch (Exception ex)
             {
@@ -207,6 +298,7 @@ namespace KiiniHelp.UserControls.Operacion
                 rbtnlUsuariosGrupoNivel2.ClearSelection();
                 rbtnlUsuariosGrupoNivel3.ClearSelection();
                 rbtnlUsuariosGrupoNivel4.ClearSelection();
+                rbtnlSupervisor.ClearSelection();
             }
             catch (Exception ex)
             {
@@ -226,6 +318,7 @@ namespace KiiniHelp.UserControls.Operacion
                 rbtnlUsuariosGrupoNivel1.ClearSelection();
                 rbtnlUsuariosGrupoNivel3.ClearSelection();
                 rbtnlUsuariosGrupoNivel4.ClearSelection();
+                rbtnlSupervisor.ClearSelection();
             }
             catch (Exception ex)
             {
@@ -245,6 +338,7 @@ namespace KiiniHelp.UserControls.Operacion
                 rbtnlUsuariosGrupoNivel1.ClearSelection();
                 rbtnlUsuariosGrupoNivel2.ClearSelection();
                 rbtnlUsuariosGrupoNivel4.ClearSelection();
+                rbtnlSupervisor.ClearSelection();
             }
             catch (Exception ex)
             {
@@ -264,6 +358,45 @@ namespace KiiniHelp.UserControls.Operacion
                 rbtnlUsuariosGrupoNivel1.ClearSelection();
                 rbtnlUsuariosGrupoNivel2.ClearSelection();
                 rbtnlUsuariosGrupoNivel3.ClearSelection();
+                rbtnlSupervisor.ClearSelection();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void ddlEstatus_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (int.Parse(ddlEstatus.SelectedValue) != (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Autoasignado)
+                    LLenaUsuarios();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void rbtnlSupervisor_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                rbtnlUsuariosGrupoNivel1.ClearSelection();
+                rbtnlUsuariosGrupoNivel2.ClearSelection();
+                rbtnlUsuariosGrupoNivel3.ClearSelection();
+                rbtnlUsuariosGrupoNivel4.ClearSelection();
             }
             catch (Exception ex)
             {

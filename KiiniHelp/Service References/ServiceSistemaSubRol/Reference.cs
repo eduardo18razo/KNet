@@ -8,40 +8,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using KiiniNet.Entities.Cat.Sistema;
-
 namespace KiiniHelp.ServiceSistemaSubRol {
     
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    [ServiceContract(ConfigurationName="ServiceSistemaSubRol.IServiceSubRol")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceSistemaSubRol.IServiceSubRol")]
     public interface IServiceSubRol {
         
-        [OperationContract(Action="http://tempuri.org/IServiceSubRol/ObtenerSubRolesByTipoGrupo", ReplyAction="http://tempuri.org/IServiceSubRol/ObtenerSubRolesByTipoGrupoResponse")]
-        List<SubRol> ObtenerSubRolesByTipoGrupo(int idTipoGrupo, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSubRol/ObtenerSubRolesByTipoGrupo", ReplyAction="http://tempuri.org/IServiceSubRol/ObtenerSubRolesByTipoGrupoResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.SubRol> ObtenerSubRolesByTipoGrupo(int idTipoGrupo, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceSubRol/ObtenerSubRolById", ReplyAction="http://tempuri.org/IServiceSubRol/ObtenerSubRolByIdResponse")]
-        SubRol ObtenerSubRolById(int idSubRol);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSubRol/ObtenerSubRolById", ReplyAction="http://tempuri.org/IServiceSubRol/ObtenerSubRolByIdResponse")]
+        KiiniNet.Entities.Cat.Sistema.SubRol ObtenerSubRolById(int idSubRol);
         
-        [OperationContract(Action="http://tempuri.org/IServiceSubRol/ObtenerSubRolesByGrupoUsuarioRol", ReplyAction="http://tempuri.org/IServiceSubRol/ObtenerSubRolesByGrupoUsuarioRolResponse")]
-        List<SubRol> ObtenerSubRolesByGrupoUsuarioRol(int idGrupoUsuario, int idRol, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSubRol/ObtenerSubRolesByGrupoUsuarioRol", ReplyAction="http://tempuri.org/IServiceSubRol/ObtenerSubRolesByGrupoUsuarioRolResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.SubRol> ObtenerSubRolesByGrupoUsuarioRol(int idGrupoUsuario, int idRol, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceSubRol/ObtenerTipoSubRol", ReplyAction="http://tempuri.org/IServiceSubRol/ObtenerTipoSubRolResponse")]
-        List<SubRol> ObtenerTipoSubRol(int idTipoGrupo, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSubRol/ObtenerTipoSubRol", ReplyAction="http://tempuri.org/IServiceSubRol/ObtenerTipoSubRolResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.SubRol> ObtenerTipoSubRol(int idTipoGrupo, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSubRol/ObtenerEscalacion", ReplyAction="http://tempuri.org/IServiceSubRol/ObtenerEscalacionResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Parametros.SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol);
     }
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceSubRolChannel : IServiceSubRol, IClientChannel {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceSubRolChannel : KiiniHelp.ServiceSistemaSubRol.IServiceSubRol, System.ServiceModel.IClientChannel {
     }
     
-    [DebuggerStepThrough()]
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceSubRolClient : ClientBase<IServiceSubRol>, IServiceSubRol {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceSubRolClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceSistemaSubRol.IServiceSubRol>, KiiniHelp.ServiceSistemaSubRol.IServiceSubRol {
         
         public ServiceSubRolClient() {
         }
@@ -54,28 +50,32 @@ namespace KiiniHelp.ServiceSistemaSubRol {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceSubRolClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
+        public ServiceSubRolClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceSubRolClient(Binding binding, EndpointAddress remoteAddress) : 
+        public ServiceSubRolClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public List<SubRol> ObtenerSubRolesByTipoGrupo(int idTipoGrupo, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.SubRol> ObtenerSubRolesByTipoGrupo(int idTipoGrupo, bool insertarSeleccion) {
             return base.Channel.ObtenerSubRolesByTipoGrupo(idTipoGrupo, insertarSeleccion);
         }
         
-        public SubRol ObtenerSubRolById(int idSubRol) {
+        public KiiniNet.Entities.Cat.Sistema.SubRol ObtenerSubRolById(int idSubRol) {
             return base.Channel.ObtenerSubRolById(idSubRol);
         }
         
-        public List<SubRol> ObtenerSubRolesByGrupoUsuarioRol(int idGrupoUsuario, int idRol, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.SubRol> ObtenerSubRolesByGrupoUsuarioRol(int idGrupoUsuario, int idRol, bool insertarSeleccion) {
             return base.Channel.ObtenerSubRolesByGrupoUsuarioRol(idGrupoUsuario, idRol, insertarSeleccion);
         }
         
-        public List<SubRol> ObtenerTipoSubRol(int idTipoGrupo, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.SubRol> ObtenerTipoSubRol(int idTipoGrupo, bool insertarSeleccion) {
             return base.Channel.ObtenerTipoSubRol(idTipoGrupo, insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol) {
+            return base.Channel.ObtenerEscalacion(idSubRol);
         }
     }
 }

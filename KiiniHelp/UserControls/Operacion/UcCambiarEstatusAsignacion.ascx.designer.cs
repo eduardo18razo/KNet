@@ -58,6 +58,24 @@ namespace KiiniHelp.UserControls.Operacion {
         protected global::System.Web.UI.WebControls.DropDownList ddlEstatus;
         
         /// <summary>
+        /// divUsuariosSupervisor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUsuariosSupervisor;
+        
+        /// <summary>
+        /// rbtnlSupervisor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rbtnlSupervisor;
+        
+        /// <summary>
         /// divUsuariosNivel1 control.
         /// </summary>
         /// <remarks>

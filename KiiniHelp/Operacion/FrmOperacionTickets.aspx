@@ -12,7 +12,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:UpdatePanel runat="server">
+    <asp:UpdatePanel runat="server" >
         <ContentTemplate>
             <header class="modal-header" id="pnlAlertaGeneral" runat="server" visible="false">
                 <div class="alert alert-danger">
@@ -68,7 +68,7 @@
                                 <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdUsuario") %>' Visible="False" />
                                 <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdUsuarioAsignado") %>' Visible="False" />
                                 <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusTicket.Id") %>' Visible="False" />
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusAsignacion.Id") %>' Visible="False" />
+                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusAsignacion.Id") %>' Visible="False" ID="lblEstatusAsignacionActual"/>
                                 <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdGrupoAsignado") %>' Visible="False" ID="lblIdGrupoAsignado"/>
                                 <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EsPropietario") %>' Visible="False" ID="lblEsPropietario"/>
                                 <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("FechaHora") %>' />
@@ -80,8 +80,8 @@
                                 <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("NivelUsuarioAsignado") %>' />
                                 <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusTicket.Descripcion") %>' />
                                 <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusAsignacion.Descripcion") %>' />
-                                <asp:LinkButton runat="server" CssClass='<%# (bool) Eval("EsPropietario") ? "col-xs-1 btn btn-sm btn-primary " : "col-xs-1 btn btn-sm btn-primary disabled" %>' Text="Cambiar estatus" ID="btnCambiarEstatus" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnCambiarEstatus_OnClick" Enabled='<%#Eval("EsPropietario") %>' />
-                                <asp:LinkButton runat="server" CssClass="col-xs-1 btn btn-sm btn-primary" Text="Cambiar Asignacion" ID="btnAsignar" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnAsignar_OnClick" />
+                                <asp:LinkButton runat="server" CssClass='<%# (bool) Eval("EsPropietario") ? int.Parse(Eval("EstatusTicket.Id").ToString()) == 5 || int.Parse(Eval("EstatusTicket.Id").ToString()) == 6 || int.Parse(Eval("EstatusTicket.Id").ToString()) == 2 ? "col-xs-1 btn btn-sm btn-primary disabled" : "col-xs-1 btn btn-sm btn-primary" : "col-xs-1 btn btn-sm btn-primary disabled" %>' Text="Cambiar estatus" ID="btnCambiarEstatus" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnCambiarEstatus_OnClick" Enabled='<%#Eval("EsPropietario") %>' />
+                                <asp:LinkButton runat="server" CssClass='<%# (bool) Eval("EsPropietario") ? int.Parse(Eval("EstatusTicket.Id").ToString()) == 5 || int.Parse(Eval("EstatusTicket.Id").ToString()) == 6 || int.Parse(Eval("EstatusTicket.Id").ToString()) == 2 ? "col-xs-1 btn btn-sm btn-primary disabled" : "col-xs-1 btn btn-sm btn-primary" : (!(bool) Eval("EsPropietario") && int.Parse(Eval("EstatusAsignacion.Id").ToString()) == 1 && int.Parse(Eval("IdUsuarioAsignado").ToString()) == 0) ? "col-xs-1 btn btn-sm btn-primary " : "col-xs-1 btn btn-sm btn-primary disabled" %>' Text="Cambiar Asignacion" ID="btnAsignar" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnAsignar_OnClick" />
                                 <%--<asp:LinkButton runat="server" CssClass="col-xs-1 btn btn-sm btn-primary" Text="Auto Asignar" ID="btnautoAsignar" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnautoAsignar_OnClick" Visible='<%# !(bool)Eval("EsPropietario") %>' />--%>
                             </div>
                         </ItemTemplate>

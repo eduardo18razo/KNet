@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
 
@@ -112,6 +113,26 @@ namespace KinniNet.Core.Sistema
                             Id = BusinessVariables.ComboBoxCatalogo.Value,
                             Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
                         });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol)
+        {
+            List<SubRolEscalacionPermitida> result = null;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.SubRolEscalacionPermitida.Where(w => w.IdSubRol == idSubRol && w.Habilitado).ToList();
             }
             catch (Exception ex)
             {

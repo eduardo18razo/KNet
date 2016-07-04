@@ -10,8 +10,6 @@ namespace KiiniNet.Entities.Parametros
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public int IdGrupoUsuario { get; set; }
-        [DataMember]
         public int IdSubRol { get; set; }
         [DataMember]
         public int IdEstatusTicket { get; set; }

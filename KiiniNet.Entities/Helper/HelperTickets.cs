@@ -4,6 +4,7 @@ using KiiniNet.Entities.Cat.Sistema;
 
 namespace KiiniNet.Entities.Helper
 {
+    [Serializable]
     public class HelperTickets
     {
         public int IdTicket { get; set; }

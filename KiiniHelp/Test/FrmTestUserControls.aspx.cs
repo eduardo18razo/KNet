@@ -13,7 +13,7 @@ namespace KiiniHelp.Test
         {
             try
             {
-                UcDetalleTicket.IdTicket = 1;
+                //UcDetalleTicket.IdTicket = 1;
                 //UcCambiarEstatusTicket.IdTicket = 1;
                 //UcCambiarEstatusTicket.IdUsuario = 2;
                 //UcCambiarEstatusTicket.EsPropietario = true;

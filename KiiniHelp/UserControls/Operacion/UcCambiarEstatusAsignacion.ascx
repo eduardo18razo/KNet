@@ -38,10 +38,25 @@
                     </div>
                     <div class="form-group">
                         <asp:Label runat="server" Text="Estatus Asignacion" CssClass="col-xs-3" />
-                        <asp:DropDownList runat="server" ID="ddlEstatus" CssClass="DropSelect" />
+                        <asp:DropDownList runat="server" ID="ddlEstatus" CssClass="DropSelect" AutoPostBack="True" OnSelectedIndexChanged="ddlEstatus_OnSelectedIndexChanged"/>
                     </div>
                     
-                    <div class="form-group" runat="server" ID="divUsuariosNivel1">
+                     <div class="form-group" runat="server" ID="divUsuariosSupervisor" Visible="False">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading" role="tab" id="headingSupervisor">
+                                <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSupervisor" aria-expanded="false" aria-controls="collapseFive" style="cursor: pointer">
+                                    <div class="col-xs-12 col-sm-12">Usuarios Supervisor</div>
+                                </div>
+                            </div>
+                            <div id="collapseSupervisor" class="panel-collapse" role="tabpanel" aria-labelledby="headingSupervisor">
+                                <div class="panel-body">
+                                    <asp:RadioButtonList runat="server" SelectionMode="Single" ID="rbtnlSupervisor" OnSelectedIndexChanged="rbtnlSupervisor_OnSelectedIndexChanged" AutoPostBack="True"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" runat="server" ID="divUsuariosNivel1" Visible="False">
                         <div class="panel panel-primary">
                             <div class="panel-heading" role="tab" id="headingNivel1">
                                 <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNivel1" aria-expanded="false" aria-controls="collapseOne" style="cursor: pointer">
@@ -56,7 +71,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group" runat="server" ID="divUsuariosNivel2">
+                    <div class="form-group" runat="server" ID="divUsuariosNivel2" Visible="False">
                         <div class="panel panel-primary">
                             <div class="panel-heading" role="tab" id="headingNivel2">
                                 <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNivel2" aria-expanded="false" aria-controls="collapseTwo" style="cursor: pointer">
@@ -71,7 +86,7 @@
                         </div>
                     </div>
                     
-                    <div class="form-group" runat="server" ID="divUsuariosNivel3">
+                    <div class="form-group" runat="server" ID="divUsuariosNivel3" Visible="False">
                         <div class="panel panel-primary">
                             <div class="panel-heading" role="tab" id="headingNivel3">
                                 <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNivel3" aria-expanded="false" aria-controls="collapseThree" style="cursor: pointer">
@@ -86,7 +101,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group" runat="server" ID="divUsuariosNivel4">
+                    <div class="form-group" runat="server" ID="divUsuariosNivel4" Visible="False">
                         <div class="panel panel-primary">
                             <div class="panel-heading" role="tab" id="headingNivel4">
                                 <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNivel4" aria-expanded="false" aria-controls="collapseFour" style="cursor: pointer">
@@ -100,6 +115,8 @@
                             </div>
                         </div>
                     </div>
+                    
+                   
 
                 </div>
             </div>

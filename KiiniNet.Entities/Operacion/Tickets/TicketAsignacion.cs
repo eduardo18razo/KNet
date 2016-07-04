@@ -20,6 +20,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         public int? IdUsuarioAsignado { get; set; }
         [DataMember]
         public DateTime FechaAsignacion { get; set; }
+        [DataMember]
+        public string Comentarios { get; set; }
 
         [DataMember]
         public virtual Ticket Ticket { get; set; }

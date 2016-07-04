@@ -337,6 +337,7 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperTickets.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Operacion.Usuarios.UsuarioGrupo.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperDetalleTicket.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.SubRolEscalacionPermitida.datasource" />
     <None Include="Properties\PublishProfiles\KinniNetWeb.pubxml" />
     <Content Include="Public\Default.aspx" />
     <Content Include="Public\Public.Master" />
@@ -786,6 +787,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol13.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaSubRol\ServiceSubRol2.xsd">

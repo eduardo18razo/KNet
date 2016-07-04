@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Parametros;
 using KiiniNet.Services.Sistema.Interface;
 using KinniNet.Core.Sistema;
 
@@ -58,6 +59,21 @@ namespace KiiniNet.Services.Sistema.Implementacion
         public List<SubRol> ObtenerTipoSubRol(int idTipoGrupo, bool insertarSeleccion)
         {
             return null;
+        }
+
+        public List<SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol)
+        {
+            try
+            {
+                using (BusinessSubRol negocio = new BusinessSubRol())
+                {
+                    return negocio.ObtenerEscalacion(idSubRol);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

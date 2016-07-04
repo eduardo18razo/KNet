@@ -25,7 +25,7 @@ namespace KiiniHelp.ServiceSistemaEstatus {
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusTicket> ObtenerEstatusTicketUsuario(int idUsuario, bool esPropietario, bool insertarSeleccion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEstatus/ObtenerEstatusAsignacionUsuario", ReplyAction="http://tempuri.org/IServiceEstatus/ObtenerEstatusAsignacionUsuarioResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int idSubRol, bool esPropietario, bool insertarSeleccion);
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int idSubRol, int estatusAsignacionActual, bool esPropietario, bool insertarSeleccion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -67,8 +67,8 @@ namespace KiiniHelp.ServiceSistemaEstatus {
             return base.Channel.ObtenerEstatusTicketUsuario(idUsuario, esPropietario, insertarSeleccion);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int idSubRol, bool esPropietario, bool insertarSeleccion) {
-            return base.Channel.ObtenerEstatusAsignacionUsuario(idUsuario, idSubRol, esPropietario, insertarSeleccion);
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int idSubRol, int estatusAsignacionActual, bool esPropietario, bool insertarSeleccion) {
+            return base.Channel.ObtenerEstatusAsignacionUsuario(idUsuario, idSubRol, estatusAsignacionActual, esPropietario, insertarSeleccion);
         }
     }
 }

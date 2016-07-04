@@ -56,6 +56,9 @@ namespace KinniNet.Data.Help
                 _estatusTicket = CreateObjectSet<EstatusTicket>();
                 _estatusAsignacion = CreateObjectSet<EstatusAsignacion>();
 
+                //Parametros
+                _subRolEscalacionPermitida = CreateObjectSet<SubRolEscalacionPermitida>();
+
                 //Ubicacion
                 _pais = CreateObjectSet<Pais>();
                 _campus = CreateObjectSet<Campus>();
@@ -674,6 +677,16 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<EstatusAsignacion> _estatusAsignacion;
 
         #endregion Systema
+
+        public ObjectSet<SubRolEscalacionPermitida> SubRolEscalacionPermitida
+        {
+            get
+            {
+                return _subRolEscalacionPermitida;
+            }
+        }
+
+        private readonly ObjectSet<SubRolEscalacionPermitida> _subRolEscalacionPermitida;
 
         #region Usuario
 

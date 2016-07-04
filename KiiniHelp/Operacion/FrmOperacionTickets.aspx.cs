@@ -110,7 +110,14 @@ namespace KiiniHelp.Operacion
                     ObtenerTicketsPage(int.Parse(ViewState["PageIndex"].ToString()), (Dictionary<string, string>)ViewState["Filtros"], true, ViewState["Sortorder"].ToString() == "ASC", ViewState["Column"].ToString());
 
                 }
+                UcDetalleUsuario.OnAceptarModal += UcDetalleUsuario_OnAceptarModal;
                 UcDetalleUsuario.OnCerraModal += UcDetalleUsuario1OnOnCerraModal;
+
+                UcCambiarEstatusTicket.OnAceptarModal += UcCambiarEstatusTicket_OnAceptarModal;
+                UcCambiarEstatusTicket.OnCerraModal += UcCambiarEstatusTicket_OnCerraModal;
+
+                UcCambiarEstatusAsignacion.OnAceptarModal += UcCambiarEstatusAsignacion_OnAceptarModal;
+                UcCambiarEstatusAsignacion.OnCerraModal += UcCambiarEstatusAsignacion_OnCerraModal;
             }
             catch (Exception ex)
             {
@@ -251,11 +258,97 @@ namespace KiiniHelp.Operacion
             }
         }
 
+        void UcDetalleUsuario_OnAceptarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalDetalleUsuario\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
         private void UcDetalleUsuario1OnOnCerraModal()
         {
             try
             {
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalDetalleUsuario\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        void UcCambiarEstatusTicket_OnAceptarModal()
+        {
+            try
+            {
+                ObtenerTicketsPage(int.Parse(ViewState["PageIndex"].ToString()), (Dictionary<string, string>)ViewState["Filtros"], true, ViewState["Sortorder"].ToString() == "ASC", ViewState["Column"].ToString());
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEstatusCambio\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+        void UcCambiarEstatusTicket_OnCerraModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEstatusCambio\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        void UcCambiarEstatusAsignacion_OnCerraModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAsignacionCambio\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        void UcCambiarEstatusAsignacion_OnAceptarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAsignacionCambio\");", true);
+                ObtenerTicketsPage(int.Parse(ViewState["PageIndex"].ToString()), (Dictionary<string, string>)ViewState["Filtros"], true, ViewState["Sortorder"].ToString() == "ASC", ViewState["Column"].ToString());
             }
             catch (Exception ex)
             {
@@ -292,6 +385,7 @@ namespace KiiniHelp.Operacion
         {
             try
             {
+                UcCambiarEstatusAsignacion.IdEstatusAsignacionActual = Convert.ToInt32(((Label)rptTickets.Items[((RepeaterItem)((LinkButton)sender).NamingContainer).ItemIndex].FindControl("lblEstatusAsignacionActual")).Text);
                 UcCambiarEstatusAsignacion.EsPropietario = Convert.ToBoolean(((Label)rptTickets.Items[((RepeaterItem)((LinkButton)sender).NamingContainer).ItemIndex].FindControl("lblEsPropietario")).Text);
                 UcCambiarEstatusAsignacion.IdTicket = Convert.ToInt32(((LinkButton)sender).CommandArgument);
                 UcCambiarEstatusAsignacion.IdGrupo = Convert.ToInt32(((Label)rptTickets.Items[((RepeaterItem)((LinkButton)sender).NamingContainer).ItemIndex].FindControl("lblIdGrupoAsignado")).Text);

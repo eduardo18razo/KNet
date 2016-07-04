@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Parametros;
 
 namespace KiiniNet.Services.Sistema.Interface
 {
@@ -19,5 +20,8 @@ namespace KiiniNet.Services.Sistema.Interface
 
         [OperationContract]
         List<SubRol> ObtenerTipoSubRol(int idTipoGrupo, bool insertarSeleccion);
+
+        [OperationContract]
+        List<SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol);
     }
 }

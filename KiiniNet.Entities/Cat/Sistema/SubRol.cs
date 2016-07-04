@@ -33,5 +33,9 @@ namespace KiiniNet.Entities.Cat.Sistema
         public List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefault { get; set; }
         [DataMember]
         public List<EstatusAsignacionSubRolGeneralDefault> EstatusAsignacionSubRolGeneralDefault { get; set; }
+        [DataMember]
+        public List<SubRolEscalacionPermitida> SubRolEscalacionPermitida { get; set; }
+        [DataMember]
+        public List<SubRolEscalacionPermitida> SubRolEscalacionPermitidaPermitido { get; set; }
     }
 }

@@ -26,6 +26,7 @@
     <MetadataFile FileName="ServiceSubRol.xsd" MetadataType="Schema" ID="ca206593-add8-44c8-a649-00f0e96b2b18" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceSubRol.svc?xsd=xsd8" />
     <MetadataFile FileName="ServiceSubRol1.xsd" MetadataType="Schema" ID="1123320a-a126-44bb-95ea-14a2c7219a72" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceSubRol.svc?xsd=xsd9" />
     <MetadataFile FileName="ServiceSubRol2.xsd" MetadataType="Schema" ID="869c3bae-78b3-4299-af54-e2840bf15a8d" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceSubRol.svc?xsd=xsd12" />
+    <MetadataFile FileName="ServiceSubRol13.xsd" MetadataType="Schema" ID="99d097c2-7ab8-476f-be78-05a5e8453266" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceSubRol.svc?xsd=xsd13" />
     <MetadataFile FileName="ServiceSubRol3.xsd" MetadataType="Schema" ID="7f84e6bf-f155-43db-86b5-4094deed3707" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceSubRol.svc?xsd=xsd0" />
     <MetadataFile FileName="ServiceSubRol4.xsd" MetadataType="Schema" ID="9d066b1a-ae81-4597-9d25-f6173127b975" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceSubRol.svc?xsd=xsd1" />
     <MetadataFile FileName="ServiceSubRol5.xsd" MetadataType="Schema" ID="1dac1ed1-71b3-42cd-9faa-6532384abff6" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceSubRol.svc?xsd=xsd2" />
