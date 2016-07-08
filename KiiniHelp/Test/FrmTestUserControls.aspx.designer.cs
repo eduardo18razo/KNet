@@ -31,39 +31,12 @@ namespace KiiniHelp.Test {
         protected global::System.Web.UI.ScriptManager scripMain;
         
         /// <summary>
-        /// upPrincipal control.
+        /// UcConsultaOrganizacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upPrincipal;
-        
-        /// <summary>
-        /// btnOnModal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOnModal;
-        
-        /// <summary>
-        /// upOrganizacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upOrganizacion;
-        
-        /// <summary>
-        /// UcDetalleTicket control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::KiiniHelp.UserControls.Detalles.UcDetalleTicket UcDetalleTicket;
+        protected global::KiiniHelp.UserControls.Consultas.UcConsultaOrganizacion UcConsultaOrganizacion;
     }
 }

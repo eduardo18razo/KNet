@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using KiiniHelp.ServiceArea;
 using KiiniNet.Entities.Operacion;
 
 namespace KiiniHelp.UserControls.Altas
 {
-    public partial class AltaArea : System.Web.UI.UserControl
+    public partial class AltaArea : UserControl, IControllerModal
     {
         readonly ServiceAreaClient _servicioArea = new ServiceAreaClient();
         private List<string> _lstError = new List<string>();
+        public event DelegateAceptarModal OnAceptarModal;
+        public event DelegateLimpiarModal OnLimpiarModal;
+        public event DelegateCancelarModal OnCancelarModal;
+
         private List<string> Alerta
         {
             set
@@ -29,14 +31,12 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 txtDescripcionAreas.Text = String.Empty;
-
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -67,6 +67,8 @@ namespace KiiniHelp.UserControls.Altas
                 sla.Habilitado = true;
                 _servicioArea.Guardar(sla);
                 LimpiarCampos();
+                if (OnAceptarModal != null)
+                    OnAceptarModal();
             }
             catch (Exception ex)
             {
@@ -84,6 +86,27 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 LimpiarCampos();
+                if (OnLimpiarModal != null)
+                    OnLimpiarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LimpiarCampos();
+                if (OnCancelarModal != null)
+                    OnCancelarModal();
             }
             catch (Exception ex)
             {

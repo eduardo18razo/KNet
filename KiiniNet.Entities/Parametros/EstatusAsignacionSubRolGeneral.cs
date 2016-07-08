@@ -18,6 +18,8 @@ namespace KiiniNet.Entities.Parametros
         [DataMember]
         public int IdEstatusAsignacionAccion { get; set; }
         [DataMember]
+        public bool ComentarioObligado { get; set; }
+        [DataMember]
         public int Orden { get; set; }
         [DataMember]
         public bool TieneSupervisor { get; set; }

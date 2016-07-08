@@ -231,9 +231,46 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 List<Ticket> lstTickets = new List<Ticket>();
 
-                foreach (int grupo in db.UsuarioGrupo.Where(ug => ug.IdUsuario == idUsuario && ug.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdGrupoUsuario).Distinct())
+                bool supervisor = db.SubGrupoUsuario.Join(db.UsuarioGrupo, sgu => sgu.Id, ug => ug.IdSubGrupoUsuario, (sgu, ug) => new { sgu, ug })
+                        .Any(@t => @t.sgu.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor && @t.ug.IdUsuario == idUsuario);
+
+                List<int?> lstEstatusPermitidos = new List<int?>();
+                List<int> lstGrupos = db.UsuarioGrupo.Where(ug => ug.IdUsuario == idUsuario && ug.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdGrupoUsuario).Distinct().ToList();
+                foreach (int idGrupo in lstGrupos)
                 {
-                    lstTickets.AddRange(db.Ticket.Join(db.TicketGrupoUsuario, t => t.Id, tg => tg.IdTicket, (t, tg) => new { t, tg }).Where(@t1 => @t1.tg.IdGrupoUsuario == grupo).Select(@t1 => @t1.t).Distinct().ToList());
+                    lstEstatusPermitidos.AddRange((db.EstatusAsignacionSubRolGeneral.Join(db.GrupoUsuario, easrg => easrg.IdGrupoUsuario,
+                        gu => gu.Id, (easrg, gu) => new { easrg, gu })
+                        .Join(db.UsuarioGrupo, @t => @t.gu.Id, ug => ug.IdGrupoUsuario, (@t, ug) => new { @t, ug })
+                        .Where(@t => @t.ug.IdGrupoUsuario == idGrupo && @t.@t.easrg.IdSubRol == 6 &&
+                                     @t.@t.easrg.TieneSupervisor == @t.@t.gu.TieneSupervisor && @t.@t.easrg.Habilitado &&
+                                     @t.ug.IdUsuario == idUsuario).Select(@t => (int?)@t.@t.easrg.IdEstatusAsignacionActual)).Distinct().ToList());
+                }
+                if (lstEstatusPermitidos.Contains((int?)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar))
+                    lstEstatusPermitidos.Add(null);
+
+                foreach (int grupo in lstGrupos)
+                {
+
+                    foreach (int? estatusPermitido in lstEstatusPermitidos)
+                    {
+                        if (supervisor)
+                            lstTickets.AddRange(db.Ticket.Join(db.TicketGrupoUsuario, t => t.Id, tg => tg.IdTicket, (t, tg) => new { t, tg })
+                                    .Where(@t1 => @t1.tg.IdGrupoUsuario == grupo && @t1.t.IdEstatusAsignacion == estatusPermitido)
+                                    .Select(@t1 => @t1.t)
+                                    .Distinct()
+                                    .ToList());
+                            //if (estatusPermitido == null)
+                        else if (estatusPermitido == null)
+                            lstTickets.AddRange(db.Ticket.Join(db.TicketAsignacion.OrderByDescending(o => o.Id).Take(1), t => t.Id, ta => ta.IdTicket, (t, ta) => new { t, ta })
+                                    .Join(db.TicketGrupoUsuario, @t1 => @t1.t.Id, tgu => tgu.IdTicket, (@t1, tgu) => new { @t1, tgu })
+                                    .Where(@t1 => @t1.tgu.IdGrupoUsuario == grupo && @t1.@t1.ta.IdUsuarioAsignado == null && @t1.t1.t.IdEstatusAsignacion == estatusPermitido)
+                                    .Select(@t1 => @t1.@t1.t).Distinct().ToList());
+                        else
+                            lstTickets.AddRange(db.Ticket.Join(db.TicketAsignacion.OrderByDescending(o => o.Id).Take(1), t => t.Id, ta => ta.IdTicket, (t, ta) => new { t, ta })
+                                    .Join(db.TicketGrupoUsuario, @t1 => @t1.t.Id, tgu => tgu.IdTicket, (@t1, tgu) => new { @t1, tgu })
+                                    .Where(@t1 => @t1.tgu.IdGrupoUsuario == grupo && @t1.@t1.ta.IdUsuarioAsignado == null && @t1.t1.t.IdEstatusAsignacion == estatusPermitido)
+                                    .Select(@t1 => @t1.@t1.t).Distinct().ToList());
+                    }
                 }
                 int totalRegistros = lstTickets.Count;
                 //TODO: Actualizar propiedades faltantes de asignacion
@@ -272,66 +309,21 @@ namespace KinniNet.Core.Operacion
                         string nivelAsignado = string.Empty;
 
                         HelperTickets hticket = new HelperTickets();
-                        //{
                         hticket.IdTicket = ticket.Id;
                         hticket.IdUsuario = ticket.IdUsuario;
-                        hticket.IdGrupoAsignado =
-                            ticket.ArbolAcceso.InventarioArbolAcceso.First()
-                                .GrupoUsuarioInventarioArbol.Where(
-                                    s =>
-                                        s.GrupoUsuario.IdTipoGrupo ==
-                                        (int) BusinessVariables.EnumTiposGrupos.ResponsableDeAtención)
-                                .Distinct()
-                                .First()
-                                .GrupoUsuario.Id;
-                        hticket.FechaHora = (DateTime) ticket.FechaHora;
+                        hticket.IdGrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Distinct().First().GrupoUsuario.Id;
+                        hticket.FechaHora = (DateTime)ticket.FechaHora;
                         hticket.NumeroTicket = ticket.Id;
                         hticket.NombreUsuario = ticket.Usuario.NombreCompleto;
                         hticket.Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(ticket.IdArbolAcceso);
-                        hticket.GrupoAsignado =
-                            ticket.ArbolAcceso.InventarioArbolAcceso.First()
-                                .GrupoUsuarioInventarioArbol.Where(
-                                    s =>
-                                        s.GrupoUsuario.IdTipoGrupo ==
-                                        (int) BusinessVariables.EnumTiposGrupos.ResponsableDeAtención)
-                                .Distinct()
-                                .First()
-                                .GrupoUsuario.Descripcion;
+                        hticket.GrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Distinct().First().GrupoUsuario.Descripcion;
                         hticket.EstatusTicket = ticket.EstatusTicket;
                         hticket.EstatusAsignacion = ticket.EstatusAsignacion;
-                        var z = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado !=
-                                                    null
-                            ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.Id
-                            : 0;
-                        hticket.IdUsuarioAsignado = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado !=
-                                                    null
-                            ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.Id
-                            : 0;
-                        var y = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado !=
-                                                  null
-                            ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.NombreCompleto
-                            : "";
-                        hticket.UsuarioAsignado = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado !=
-                                                  null
-                            ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.NombreCompleto
-                            : "";
-                        
-                        var test = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null
-                            ? ticket.TicketAsignacion.OrderBy(o => o.Id)
-                                .Last()
-                                .UsuarioAsignado.UsuarioGrupo.Where(w=>w.SubGrupoUsuario != null).Aggregate(nivelAsignado, (current, usuarioAsignado) => current + usuarioAsignado.SubGrupoUsuario.SubRol.Descripcion)
-                            : "";
-                        hticket.NivelUsuarioAsignado =
-                            ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null
-                                ? ticket.TicketAsignacion.OrderBy(o => o.Id)
-                                    .Last()
-                                    .UsuarioAsignado.UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Aggregate(nivelAsignado,
-                                        (current, usuarioAsignado) =>
-                                            current + usuarioAsignado.SubGrupoUsuario.SubRol.Descripcion)
-                                : "";
+                        hticket.IdUsuarioAsignado = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.Id : 0;
+                        hticket.UsuarioAsignado = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.NombreCompleto : "";
+                        hticket.NivelUsuarioAsignado = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Aggregate(nivelAsignado, (current, usuarioAsignado) => current + usuarioAsignado.SubGrupoUsuario.SubRol.Descripcion) : "";
                         hticket.EsPropietario = idUsuario == ticket.TicketAsignacion.Last().IdUsuarioAsignado;
                         hticket.Total = totalRegistros;
-                        //};
                         result.Add(hticket);
                     }
                 }

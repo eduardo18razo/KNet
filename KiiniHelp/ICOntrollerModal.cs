@@ -1,10 +1,12 @@
 ﻿namespace KiiniHelp
 {
     public delegate void DelegateAceptarModal();
-    public delegate void DelegateCerrarModal();
+    public delegate void DelegateLimpiarModal();
+    public delegate void DelegateCancelarModal();
     public interface IControllerModal
     {
         event DelegateAceptarModal OnAceptarModal;
-        event DelegateCerrarModal OnCerraModal;
+        event DelegateLimpiarModal OnLimpiarModal;
+        event DelegateCancelarModal OnCancelarModal;
     }
 }

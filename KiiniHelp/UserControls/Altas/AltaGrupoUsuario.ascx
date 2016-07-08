@@ -53,8 +53,9 @@
                 </div>
             </div>
             <div class="panel-footer" style="text-align: center">
-                <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-lg btn-success" Text="Guardar" OnClick="btnGuardar_OnClick" />
-                <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-lg btn-danger" Text="Limpiar" OnClick="btnLimpiar_OnClick" />
+                <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-success" Text="Guardar" OnClick="btnGuardar_OnClick" />
+                <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-danger" Text="Limpiar" OnClick="btnLimpiar_OnClick" />
+                <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancelar_OnClick" />
             </div>
         </div>
     </ContentTemplate>

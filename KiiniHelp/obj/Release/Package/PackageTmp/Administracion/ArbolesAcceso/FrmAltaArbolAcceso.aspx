@@ -152,7 +152,7 @@
 
             <%--MODAL CATALOGO NIVELES--%>
             <div class="modal fade" id="editNivel" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <asp:UpdatePanel ID="upNivel" runat="server" >
+                <asp:UpdatePanel ID="upNivel" runat="server">
                     <ContentTemplate>
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -199,7 +199,7 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">Descripcion</label>
                                                     <div class="col-sm-4">
-                                                        <asp:TextBox runat="server" ID="txtDescripcionNivel" placeholder="DESCRIPCION" class="form-control" onkeydown = "return (event.keyCode!=13);"/>
+                                                        <asp:TextBox runat="server" ID="txtDescripcionNivel" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13);" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -215,19 +215,17 @@
                                                     Información
                                                 </div>
                                                 <div class="panel-body">
-                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Consulta" ID="btnModalConsultas" data-toggle="modal" data-target="#modalConsultas" runat="server"></asp:Button>
-                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Ticket" ID="btnModalTicket" data-toggle="modal" data-target="#modalTicket" runat="server" ></asp:Button>
-                                                    <asp:Button type="button" class="btn btn-primary btn-lg " Text="Grupos" ID="btnModalGrupos" data-toggle="modal" data-target="#modalGruposNodo" runat="server"></asp:Button>
+                                                    <asp:Button type="button" class="btn btn-primary " Text="Consulta" ID="btnModalConsultas" data-toggle="modal" data-target="#modalConsultas" data-backdrop="static" data-keyboard="false" runat="server"></asp:Button>
+                                                    <asp:Button type="button" class="btn btn-primary " Text="Ticket" ID="btnModalTicket" data-toggle="modal" data-target="#modalTicket" data-backdrop="static" data-keyboard="false" runat="server"></asp:Button>
+                                                    <asp:Button type="button" class="btn btn-primary " Text="Grupos" ID="btnModalGrupos" data-toggle="modal" data-target="#modalGruposNodo" data-backdrop="static" data-keyboard="false" runat="server"></asp:Button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="panel-footer" style="text-align: center">
-                                        <asp:Button ID="btnGuardarNivel" runat="server" CssClass="btn btn-lg btn-success" Text="Guardar" OnClick="btnGuardarNivel_OnClick" />
-                                        <asp:Button ID="btnLimpiarNivel" runat="server" CssClass="btn btn-lg btn-danger" Text="Limpiar" OnClick="btnLimpiarNivel_OnClick" />
-                                    </div>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer" style="text-align: center">
+                                    <asp:Button ID="btnGuardarNivel" runat="server" CssClass="btn btn-lg btn-success" Text="Guardar" OnClick="btnGuardarNivel_OnClick" />
+                                        <asp:Button ID="btnLimpiarNivel" runat="server" CssClass="btn btn-lg btn-danger" Text="Limpiar" OnClick="btnLimpiarNivel_OnClick" />
                                     <asp:Button ID="btnCancelarNivel" runat="server" CssClass="btn btn-lg btn-danger" Text="Cancelar" OnClick="btnCancelarNivel_OnClick" />
                                 </div>
                             </div>
@@ -315,7 +313,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarConsultas" Text="Cerrar" OnClick="btnCerrarConsultas_OnClick" />
+                                    <asp:Button runat="server" CssClass="btn btn-danger" ID="btnCerrarConsultas" Text="Cerrar" OnClick="btnCerrarConsultas_OnClick" />
                                 </div>
                             </div>
                         </div>
@@ -366,7 +364,7 @@
                                                         <asp:DropDownList runat="server" ID="ddlMascaraAcceso" class="form-control" Style="width: 100%" />
                                                     </div>
                                                     <div class="col-sm-1">
-                                                        <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAltaMascara" />
+                                                        <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAltaMascara" data-keyboard="false"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -378,7 +376,7 @@
                                                         <asp:DropDownList runat="server" ID="ddlSla" class="form-control" Style="width: 100%" />
                                                     </div>
                                                     <div class="col-sm-1">
-                                                        <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAltaSla" />
+                                                        <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAltaSla" data-keyboard="false"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -390,7 +388,7 @@
                                                         <asp:DropDownList runat="server" ID="ddlEncuesta" class="form-control" Style="width: 100%" />
                                                     </div>
                                                     <div class="col-sm-1">
-                                                        <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAltaEncuesta" />
+                                                        <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAltaEncuesta" data-keyboard="false"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -398,7 +396,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarTicket" Text="Cerrar" OnClick="btnCerrarTicket_OnClick" />
+                                    <asp:Button runat="server" CssClass="btn btn-danger" ID="btnCerrarTicket" Text="Cerrar" OnClick="btnCerrarTicket_OnClick" />
                                 </div>
                             </div>
                         </div>
@@ -430,9 +428,6 @@
                                 <div class="modal-body">
                                     <uc1:UcAltaInformacionConsulta runat="server" ID="UcAltaInformacionConsulta" />
                                 </div>
-                                <div class="modal-footer">
-                                    <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerraraltaInformacion" Text="Cerrar" OnClick="btnCerraraltaInformacion_OnClick" />
-                                </div>
                             </div>
                         </div>
                     </ContentTemplate>
@@ -442,13 +437,10 @@
             <div class="modal fade" id="modalAltaMascara" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <div class="modal-dialog modal-lg" style="width: 1300px">
-                            <div class="modal-content">
+                        <div class="modal-dialog modal-lg" style="width: 1300px; height: 500px">
+                            <div class="modal-content" style="height: 100%">
                                 <div class="modal-body">
                                     <uc:UcAltaMascaraAcceso runat="server" ID="UcAltaMascaraAcceso" />
-                                </div>
-                                <div class="modal-footer">
-                                    <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarModalAltaMascara" Text="Cerrar" OnClick="btnCerrarModalAltaMascara_OnClick" />
                                 </div>
                             </div>
                         </div>
@@ -464,9 +456,6 @@
                                 <div class="modal-body">
                                     <uc:UcSla runat="server" ID="UcSla" />
                                 </div>
-                                <div class="modal-footer">
-                                    <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarAltaSla" Text="Cerrar" OnClick="btnCerrarAltaSla_OnClick" />
-                                </div>
                             </div>
                         </div>
                     </ContentTemplate>
@@ -481,9 +470,6 @@
                                 <div class="modal-body">
                                     <uc:UcEncuesta runat="server" ID="UcEncuesta" />
                                 </div>
-                                <div class="modal-footer">
-                                    <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarEncuesta" Text="Cerrar" OnClick="btnCerrarEncuesta_OnClick" />
-                                </div>
                             </div>
                         </div>
                     </ContentTemplate>
@@ -494,15 +480,12 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     <%--AREA--%>
-    <div class="modal fade" id="modalGrupos" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal fade" id="modalAreas" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <asp:UpdatePanel ID="upModalAltaAreas" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
-                            <uc:AltaArea runat="server" ID="AltaAreas" />
-                        <div class="modal-footer">
-                            <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarGrupos" Text="Cerrar" OnClick="btnCerrarAreas_OnClick" />
-                        </div>
+                        <uc:AltaArea runat="server" ID="AltaAreas" />
                     </div>
                 </div>
             </ContentTemplate>

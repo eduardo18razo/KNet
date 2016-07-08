@@ -158,5 +158,20 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<Ubicacion> ObtenerOrganizaciones()
+        {
+            try
+            {
+                using (BusinessUbicacion negocio = new BusinessUbicacion())
+                {
+                    return negocio.ObtenerOrganizaciones();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

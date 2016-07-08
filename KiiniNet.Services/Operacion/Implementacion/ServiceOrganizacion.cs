@@ -263,5 +263,65 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<Organizacion> ObtenerOrganizaciones(int? idTipoUsuario, int? idHolding, int? idCompania, int? idDireccion, int? idSubDireccion, int? idGerencia, int? idSubGerencia, int? idJefatura)
+        {
+            try
+            {
+                using (BusinessOrganizacion negocio = new BusinessOrganizacion())
+                {
+                    return negocio.ObtenerOrganizaciones(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void HabilitarOrganizacion(int idOrganizacion, bool habilitado)
+        {
+            try
+            {
+                using (BusinessOrganizacion negocio = new BusinessOrganizacion())
+                {
+                    negocio.HabilitarOrganizacion(idOrganizacion, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Organizacion ObtenerOrganizacionById(int idOrganizacion)
+        {
+            try
+            {
+                using (BusinessOrganizacion negocio = new BusinessOrganizacion())
+                {
+                    return negocio.ObtenerOrganizacionById(idOrganizacion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ActualizarOrganizacion(Organizacion org)
+        {
+            try
+            {
+                using (BusinessOrganizacion negocio = new BusinessOrganizacion())
+                {
+                    negocio.ActualizarOrganizacion(org);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

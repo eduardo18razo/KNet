@@ -9,7 +9,7 @@ using KiiniNet.Entities.Operacion.Tickets;
 namespace KiiniNet.Entities.Cat.Operacion
 {
     [DataContract(IsReference = true)]
-    public class Organizacion : IDisposable
+    public class Organizacion 
     {
         [DataMember]
         public int Id { get; set; }
@@ -55,9 +55,5 @@ namespace KiiniNet.Entities.Cat.Operacion
         [DataMember]
         public virtual List<Ticket> Ticket { get; set; }
 
-        public void Dispose()
-        {
-            
-        }
     }
 }

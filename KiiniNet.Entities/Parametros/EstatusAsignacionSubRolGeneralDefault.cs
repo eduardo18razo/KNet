@@ -1,6 +1,5 @@
 ﻿using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Sistema;
-using KiiniNet.Entities.Cat.Usuario;
 
 namespace KiiniNet.Entities.Parametros
 {
@@ -15,6 +14,8 @@ namespace KiiniNet.Entities.Parametros
         public int IdEstatusAsignacionActual { get; set; }
         [DataMember]
         public int IdEstatusAsignacionAccion { get; set; }
+        [DataMember]
+        public bool ComentarioObligado { get; set; }
         [DataMember]
         public int Orden { get; set; }
         [DataMember]

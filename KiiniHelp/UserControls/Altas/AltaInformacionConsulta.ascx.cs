@@ -17,11 +17,17 @@ using Microsoft.Office.Interop.Word;
 
 namespace KiiniHelp.UserControls.Altas
 {
-    public partial class AltaInformacionConsulta : UserControl
+    public partial class AltaInformacionConsulta : UserControl, IControllerModal
     {
-        readonly ServiceTipoInfConsultaClient _servicioCatalogosSistema = new ServiceTipoInfConsultaClient();
-        readonly ServiceTipoDocumentoClient _servicioSistemaTipoDocumento = new ServiceTipoDocumentoClient();
-        readonly ServiceInformacionConsultaClient _servicioInformacionConsulta = new ServiceInformacionConsultaClient();
+        public event DelegateAceptarModal OnAceptarModal;
+        public event DelegateLimpiarModal OnLimpiarModal;
+        public event DelegateCancelarModal OnCancelarModal;
+
+        private readonly ServiceTipoInfConsultaClient _servicioCatalogosSistema = new ServiceTipoInfConsultaClient();
+        private readonly ServiceTipoDocumentoClient _servicioSistemaTipoDocumento = new ServiceTipoDocumentoClient();
+
+        private readonly ServiceInformacionConsultaClient _servicioInformacionConsulta =
+            new ServiceInformacionConsultaClient();
 
         private List<string> _lstError = new List<string>();
 
@@ -40,7 +46,8 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                Metodos.LlenaComboCatalogo(ddlTipoInformacion, _servicioCatalogosSistema.ObtenerTipoInformacionConsulta(true));
+                Metodos.LlenaComboCatalogo(ddlTipoInformacion,
+                    _servicioCatalogosSistema.ObtenerTipoInformacionConsulta(true));
                 Metodos.LlenaComboCatalogo(ddlTipoDocumento, _servicioSistemaTipoDocumento.ObtenerTipoDocumentos(true));
             }
             catch (Exception ex)
@@ -53,6 +60,7 @@ namespace KiiniHelp.UserControls.Altas
                 AlertaGeneral = _lstError;
             }
         }
+
         public void ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta tipoInformacion)
         {
             try
@@ -80,6 +88,7 @@ namespace KiiniHelp.UserControls.Altas
                 throw new Exception(ex.Message);
             }
         }
+
         private void LimpiarCampos()
         {
             try
@@ -124,18 +133,18 @@ namespace KiiniHelp.UserControls.Altas
             {
                 switch (Convert.ToInt32(ddlTipoInformacion.SelectedValue))
                 {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                    case (int) BusinessVariables.EnumTiposInformacionConsulta.Texto:
                         divPropietrario.Visible = true;
                         divUploadDocumento.Visible = false;
                         divDocumento.Visible = false;
                         divUrl.Visible = false;
                         break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                    case (int) BusinessVariables.EnumTiposInformacionConsulta.Documento:
                         divPropietrario.Visible = false;
                         divDocumento.Visible = true;
                         divUrl.Visible = false;
                         break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                    case (int) BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                         divPropietrario.Visible = false;
                         divDocumento.Visible = false;
                         divUploadDocumento.Visible = false;
@@ -160,71 +169,12 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        protected void btnGuardar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                InformacionConsulta informacion = new InformacionConsulta
-                {
-                    Descripcion = txtDescripcion.Text.Trim(),
-                    Habilitado = true,
-                    IdTipoInfConsulta = Convert.ToInt32(ddlTipoInformacion.SelectedValue),
-                    InformacionConsultaDatos = new List<InformacionConsultaDatos>()
-                };
-                switch (Convert.ToInt32(ddlTipoInformacion.SelectedValue))
-                {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
-                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.Texto);
-                        informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos { Descripcion = txtEditor.Text, Orden = 1 });
-                        break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
-                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.Documento);
-                        informacion.IdTipoDocumento = Convert.ToInt32(ddlTipoDocumento.SelectedValue);
-                        informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos { Descripcion = afuArchivo.FileName, Orden = 1 });
-                        break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
-                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml);
-                        informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos { Descripcion = txtDescripcionUrl.Text.Trim(), Orden = 1 });
-                        break;
-                    default:
-                        throw new Exception("Seleccione un tipo de información");
-                }
-                _servicioInformacionConsulta.GuardarInformacionConsulta(informacion);
-                LimpiarCampos();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
-
-        protected void btnLimpiar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                LimpiarCampos();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
-
         protected void afuArchivo_OnUploadedComplete(object sender, AsyncFileUploadEventArgs e)
         {
             try
             {
-                TipoDocumento tipoDocto = _servicioSistemaTipoDocumento.ObtenerTiposDocumentoId(int.Parse(ddlTipoDocumento.SelectedValue));
+                TipoDocumento tipoDocto =
+                    _servicioSistemaTipoDocumento.ObtenerTiposDocumentoId(int.Parse(ddlTipoDocumento.SelectedValue));
                 bool fileOk = false;
                 var path = Server.MapPath(ConfigurationManager.AppSettings["PathInformacionConsultaOriginal"]);
                 if (afuArchivo.HasFile)
@@ -232,7 +182,7 @@ namespace KiiniHelp.UserControls.Altas
                     string extension = Path.GetExtension(afuArchivo.FileName);
                     if (extension != null)
                     {
-                        var fileExtension =extension.ToLower();
+                        var fileExtension = extension.ToLower();
                         string[] allowedExtensions = tipoDocto.Extension.Split(',');
                         foreach (string t in allowedExtensions.Where(t => fileExtension == t))
                         {
@@ -249,17 +199,17 @@ namespace KiiniHelp.UserControls.Altas
                         afuArchivo.PostedFile.SaveAs(path + afuArchivo.FileName);
                         switch (int.Parse(ddlTipoDocumento.SelectedValue))
                         {
-                            case (int)BusinessVariables.EnumTiposDocumento.Word:
+                            case (int) BusinessVariables.EnumTiposDocumento.Word:
                                 ConvertirWord(afuArchivo.FileName);
                                 break;
-                            case (int)BusinessVariables.EnumTiposDocumento.PowerPoint:
+                            case (int) BusinessVariables.EnumTiposDocumento.PowerPoint:
                                 //ConvertirExcel(afuArchivo.FileName);
                                 break;
-                            case (int)BusinessVariables.EnumTiposDocumento.Excel:
+                            case (int) BusinessVariables.EnumTiposDocumento.Excel:
                                 ConvertirExcel(afuArchivo.FileName);
                                 break;
                         }
-                        
+
                     }
                     catch (Exception ex)
                     {
@@ -307,15 +257,21 @@ namespace KiiniHelp.UserControls.Altas
                 object isVisible = false;
                 object documentFormat = 8;
                 string randomName = DateTime.Now.Ticks.ToString();
-                object htmlFilePath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) + ".htm";
-                string directoryPath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) + "_archivos";
+                object htmlFilePath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) +
+                                      ".htm";
+                string directoryPath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) +
+                                       "_archivos";
                 object fileName = Server.MapPath(rutaArchivosCarga) + nombrearchivo;
 
                 ApplicationClass applicationclass = new ApplicationClass();
-                applicationclass.Documents.Open(ref fileName, ref readOnly, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref  missingType, ref missingType, ref missingType, ref isVisible, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType);
+                applicationclass.Documents.Open(ref fileName, ref readOnly, ref missingType, ref missingType,
+                    ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType,
+                    ref isVisible, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType);
                 applicationclass.Visible = false;
                 Document document = applicationclass.ActiveDocument;
-                document.SaveAs(ref htmlFilePath, ref documentFormat, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType);
+                document.SaveAs(ref htmlFilePath, ref documentFormat, ref missingType, ref missingType, ref missingType,
+                    ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType,
+                    ref missingType, ref missingType, ref missingType, ref missingType, ref missingType);
                 document.Close(ref missingType, ref missingType, ref missingType);
             }
             catch (Exception e)
@@ -323,6 +279,7 @@ namespace KiiniHelp.UserControls.Altas
                 throw new Exception(e.Message);
             }
         }
+
         private void ConvertirExcel(string nombrearchivo)
         {
             try
@@ -334,33 +291,126 @@ namespace KiiniHelp.UserControls.Altas
                 //object isVisible = false;
                 object documentFormat = 8;
                 string randomName = DateTime.Now.Ticks.ToString();
-                object htmlFilePath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) + ".htm";
-                string directoryPath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) + "_archivos";
+                object htmlFilePath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) +
+                                      ".htm";
+                string directoryPath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) +
+                                       "_archivos";
                 string fileName = Server.MapPath(rutaArchivosCarga) + nombrearchivo;
 
-                Microsoft.Office.Interop.Excel.ApplicationClass xls = new Microsoft.Office.Interop.Excel.ApplicationClass();
+                Microsoft.Office.Interop.Excel.ApplicationClass xls =
+                    new Microsoft.Office.Interop.Excel.ApplicationClass();
                 xls.Workbooks.Open(fileName,
-                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                Type.Missing, Type.Missing);
+                    Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                    Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                    Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                    Type.Missing, Type.Missing);
                 xls.Visible = false;
                 Microsoft.Office.Interop.Excel.Workbook wb = xls.ActiveWorkbook;
                 wb.SaveAs(htmlFilePath, Microsoft.Office.Interop.Excel.XlFileFormat.xlHtml, Type.Missing, Type.Missing,
-               false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
-               Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                    false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
+                    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
                 wb.Close();
             }
             catch (Exception e)
             {
-                
+
                 throw new Exception(e.Message);
             }
         }
 
-        
+        protected void btnGuardar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                InformacionConsulta informacion = new InformacionConsulta
+                {
+                    Descripcion = txtDescripcion.Text.Trim(),
+                    Habilitado = true,
+                    IdTipoInfConsulta = Convert.ToInt32(ddlTipoInformacion.SelectedValue),
+                    InformacionConsultaDatos = new List<InformacionConsultaDatos>()
+                };
+                switch (Convert.ToInt32(ddlTipoInformacion.SelectedValue))
+                {
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.Texto);
+                        informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos
+                        {
+                            Descripcion = txtEditor.Text,
+                            Orden = 1
+                        });
+                        break;
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.Documento);
+                        informacion.IdTipoDocumento = Convert.ToInt32(ddlTipoDocumento.SelectedValue);
+                        informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos
+                        {
+                            Descripcion = afuArchivo.FileName,
+                            Orden = 1
+                        });
+                        break;
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml);
+                        informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos
+                        {
+                            Descripcion = txtDescripcionUrl.Text.Trim(),
+                            Orden = 1
+                        });
+                        break;
+                    default:
+                        throw new Exception("Seleccione un tipo de información");
+                }
+                _servicioInformacionConsulta.GuardarInformacionConsulta(informacion);
+                LimpiarCampos();
+                if (OnAceptarModal != null)
+                    OnAceptarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
 
-//       
-//wbook.Close();
+        protected void btnLimpiar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LimpiarCampos();
+                if (OnLimpiarModal != null)
+                    OnLimpiarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LimpiarCampos();
+                if (OnCancelarModal != null)
+                    OnCancelarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                UcDetalleUsuario1.OnCerraModal += UcDetalleUsuario1OnOnCerraModal;
+                UcDetalleUsuario1.OnCancelarModal += UcDetalleUsuario1OnOnCancelarModal;
                 rptUsuarios.DataSource = _servicioUsuarios.ObtenerUsuarios();
                 rptUsuarios.DataBind();
             }
@@ -39,7 +39,7 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        private void UcDetalleUsuario1OnOnCerraModal()
+        private void UcDetalleUsuario1OnOnCancelarModal()
         {
             try
             {

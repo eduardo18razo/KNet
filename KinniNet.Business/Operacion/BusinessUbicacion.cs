@@ -301,6 +301,36 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public List<Ubicacion> ObtenerOrganizaciones()
+        {
+            List<Ubicacion> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Ubicacion.ToList();
+                foreach (Ubicacion organizacion in result)
+                {
+                    db.LoadProperty(organizacion, "Pais");
+                    db.LoadProperty(organizacion, "Campus");
+                    db.LoadProperty(organizacion, "Torre");
+                    db.LoadProperty(organizacion, "Piso");
+                    db.LoadProperty(organizacion, "Zona");
+                    db.LoadProperty(organizacion, "SubZona");
+                    db.LoadProperty(organizacion, "SiteRack");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
         public string ObtenerDescripcionUbicacionUsuario(int idUsuario, bool ultimoNivel)
         {
             string result = null;

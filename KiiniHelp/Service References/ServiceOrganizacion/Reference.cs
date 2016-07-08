@@ -65,6 +65,18 @@ namespace KiiniHelp.ServiceOrganizacion {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionUsuario", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionUsuarioResponse")]
         KiiniNet.Entities.Cat.Operacion.Organizacion ObtenerOrganizacionUsuario(int idOrganizacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizaciones", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionesResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Organizacion> ObtenerOrganizaciones(System.Nullable<int> idTipoUsuario, System.Nullable<int> idHolding, System.Nullable<int> idCompania, System.Nullable<int> idDireccion, System.Nullable<int> idSubDireccion, System.Nullable<int> idGerencia, System.Nullable<int> idSubGerencia, System.Nullable<int> idJefatura);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/HabilitarOrganizacion", ReplyAction="http://tempuri.org/IServiceOrganizacion/HabilitarOrganizacionResponse")]
+        void HabilitarOrganizacion(int idOrganizacion, bool habilitado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionById", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionByIdResponse")]
+        KiiniNet.Entities.Cat.Operacion.Organizacion ObtenerOrganizacionById(int idOrganizacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ActualizarOrganizacion", ReplyAction="http://tempuri.org/IServiceOrganizacion/ActualizarOrganizacionResponse")]
+        void ActualizarOrganizacion(KiiniNet.Entities.Cat.Operacion.Organizacion org);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -160,6 +172,22 @@ namespace KiiniHelp.ServiceOrganizacion {
         
         public KiiniNet.Entities.Cat.Operacion.Organizacion ObtenerOrganizacionUsuario(int idOrganizacion) {
             return base.Channel.ObtenerOrganizacionUsuario(idOrganizacion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Organizacion> ObtenerOrganizaciones(System.Nullable<int> idTipoUsuario, System.Nullable<int> idHolding, System.Nullable<int> idCompania, System.Nullable<int> idDireccion, System.Nullable<int> idSubDireccion, System.Nullable<int> idGerencia, System.Nullable<int> idSubGerencia, System.Nullable<int> idJefatura) {
+            return base.Channel.ObtenerOrganizaciones(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
+        }
+        
+        public void HabilitarOrganizacion(int idOrganizacion, bool habilitado) {
+            base.Channel.HabilitarOrganizacion(idOrganizacion, habilitado);
+        }
+        
+        public KiiniNet.Entities.Cat.Operacion.Organizacion ObtenerOrganizacionById(int idOrganizacion) {
+            return base.Channel.ObtenerOrganizacionById(idOrganizacion);
+        }
+        
+        public void ActualizarOrganizacion(KiiniNet.Entities.Cat.Operacion.Organizacion org) {
+            base.Channel.ActualizarOrganizacion(org);
         }
     }
 }

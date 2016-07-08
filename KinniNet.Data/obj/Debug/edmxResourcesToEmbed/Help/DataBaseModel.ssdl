@@ -150,6 +150,7 @@
     <Property Name="IdSubRol" Type="int" Nullable="false" />
     <Property Name="IdEstatusAsignacionActual" Type="int" Nullable="false" />
     <Property Name="IdEstatusAsignacionAccion" Type="int" />
+    <Property Name="ComentarioObligado" Type="bit" />
     <Property Name="Orden" Type="int" Nullable="false" />
     <Property Name="TieneSupervisor" Type="bit" />
     <Property Name="Propietario" Type="bit" Nullable="false" />
@@ -163,6 +164,7 @@
     <Property Name="IdSubRol" Type="int" />
     <Property Name="IdEstatusAsignacionActual" Type="int" />
     <Property Name="IdEstatusAsignacionAccion" Type="int" />
+    <Property Name="ComentarioObligado" Type="bit" />
     <Property Name="Orden" Type="int" />
     <Property Name="TieneSupervisor" Type="bit" />
     <Property Name="Propietario" Type="bit" />
@@ -452,6 +454,14 @@
     <Property Name="IdTipoUsuario" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Puesto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="RespuestaEncuesta">
     <Key>
@@ -793,6 +803,7 @@
     <Property Name="DirectorioActivo" Type="bit" Nullable="false" />
     <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdPuesto" Type="int" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioGrupo">
@@ -2418,6 +2429,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Usuario_Puesto">
+    <End Role="Puesto" Type="Self.Puesto" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Puesto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="IdPuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Usuario_TipoUsuario">
     <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -2572,6 +2595,7 @@
     <EntitySet Name="ParametrosAplicaciones" EntityType="Self.ParametrosAplicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametrosTelefonos" EntityType="Self.ParametrosTelefonos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Piso" EntityType="Self.Piso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Puesto" EntityType="Self.Puesto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RespuestaEncuesta" EntityType="Self.RespuestaEncuesta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RespuestaTipoEncuesta" EntityType="Self.RespuestaTipoEncuesta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
@@ -3138,6 +3162,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Usuario_Organizacion" Association="Self.FK_Usuario_Organizacion">
       <End Role="Organizacion" EntitySet="Organizacion" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_Puesto" Association="Self.FK_Usuario_Puesto">
+      <End Role="Puesto" EntitySet="Puesto" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
     <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">

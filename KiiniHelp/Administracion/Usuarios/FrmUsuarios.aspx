@@ -44,11 +44,11 @@
                                 </div>
                             </div>
                             <div class="well center-content-div" runat="server" id="divDatos" visible="False">
-                                <asp:Button type="button" class="btn btn-primary btn-lg " Text="Datos Generales" ID="btnModalDatosGenerales" data-toggle="modal" data-target="#modalDatosGenerales" runat="server"></asp:Button>
-                                <asp:Button type="button" class="btn btn-primary btn-lg disabled" Text="Organización" ID="btnModalOrganizacion" data-toggle="modal" data-target="#modalOrganizacion" runat="server"></asp:Button>
-                                <asp:Button type="button" class="btn btn-primary btn-lg disabled" Text="Ubicación" ID="btnModalUbicacion" data-toggle="modal" data-target="#modalUbicacion" runat="server"></asp:Button>
-                                <asp:Button type="button" class="btn btn-primary btn-lg disabled" Text="Roles" ID="btnModalRoles" data-toggle="modal" data-target="#modalRoles" runat="server"></asp:Button>
-                                <asp:Button type="button" class="btn btn-primary btn-lg disabled" Text="Grupos" ID="btnModalGrupos" data-toggle="modal" data-target="#modalGrupos" runat="server"></asp:Button>
+                                <asp:Button type="button" class="btn btn-primary btn-lg " Text="Datos Generales" ID="btnModalDatosGenerales" data-toggle="modal" data-target="#modalDatosGenerales" data-backdrop="static" data-keyboard="false" runat="server"></asp:Button>
+                                <asp:Button type="button" class="btn btn-primary btn-lg disabled" Text="Organización" ID="btnModalOrganizacion" data-toggle="modal" data-target="#modalOrganizacion" data-backdrop="static" data-keyboard="false" runat="server"></asp:Button>
+                                <asp:Button type="button" class="btn btn-primary btn-lg disabled" Text="Ubicación" ID="btnModalUbicacion" data-toggle="modal" data-target="#modalUbicacion" data-backdrop="static" data-keyboard="false" runat="server"></asp:Button>
+                                <asp:Button type="button" class="btn btn-primary btn-lg disabled" Text="Roles" ID="btnModalRoles" data-toggle="modal" data-target="#modalRoles" data-backdrop="static" data-keyboard="false" runat="server"></asp:Button>
+                                <asp:Button type="button" class="btn btn-primary btn-lg disabled" Text="Grupos" ID="btnModalGrupos" data-toggle="modal" data-target="#modalGrupos" data-backdrop="static" data-keyboard="false" runat="server"></asp:Button>
                             </div>
                         </div>
                         <div class="panel-footer">
@@ -96,16 +96,17 @@
                                             <div class="form-inline">
                                                 <br />
                                                 <div class="form-inline">
-                                                    <asp:Label ID="Label4" runat="server" Text="Apellido Paterno" class="col-sm-2 control-label izquierda"></asp:Label>
-                                                    <asp:TextBox ID="txtAp" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100"></asp:TextBox>
+                                                    <asp:Label ID="Label4" runat="server" Text="Apellido Paterno" class="col-sm-2 control-label izquierda"/>
+                                                    <asp:TextBox ID="txtAp" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100"/>
                                                 </div>
                                                 <div class="form-inline margen-arriba">
-                                                    <asp:Label ID="Label5" runat="server" Text="Apellido Materno" class="col-sm-2 control-label izquierda"></asp:Label>
-                                                    <asp:TextBox ID="txtAm" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100"></asp:TextBox>
+                                                    <asp:Label ID="Label5" runat="server" Text="Apellido Materno" class="col-sm-2 control-label izquierda"/>
+                                                    <asp:TextBox ID="txtAm" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100"/>
                                                 </div>
                                                 <div class="form-inline margen-arriba">
-                                                    <asp:Label ID="Label6" runat="server" Text="Nombre" class="col-sm-2 control-label izquierda"></asp:Label>
-                                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100"></asp:TextBox>
+                                                    <asp:Label ID="Label6" runat="server" Text="Nombre" class="col-sm-2 control-label izquierda"/>
+
+                                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100"/>
                                                 </div>
                                                 <div class="form-inline">
                                                     <div class="form-group margen-arriba">
@@ -176,7 +177,7 @@
                                     </div>
                                     <div class="panel-footer" style="text-align: center">
                                         <asp:Button ID="btnAceptarDatosGenerales" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnAceptarDatosGenerales_OnClick" />
-                                        <asp:Button ID="btnCerrarDatosGenerales" runat="server" CssClass="btn btn-danger" Text="Cerrar" data-dismiss="modal" />
+                                        <asp:Button ID="btnCerrarDatosGenerales" runat="server" CssClass="btn btn-danger" Text="Cancelar" data-dismiss="modal" />
                                     </div>
                                 </div>
                             </ContentTemplate>
@@ -242,7 +243,7 @@
                                     </div>
                                     <div class="panel-footer" style="text-align: center">
                                         <asp:Button ID="btnAceptarRoles" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnCerrarRoles_OnClick" />
-                                        <asp:Button ID="btnCerrarRoles" runat="server" CssClass="btn btn-danger" Text="Cerrar" OnClick="btnCerrarRoles_OnClick" data-dismiss="modal" />
+                                        <asp:Button ID="btnCerrarRoles" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCerrarRoles_OnClick" data-dismiss="modal" />
                                     </div>
                                 </div>
                             </ContentTemplate>
@@ -259,7 +260,7 @@
                             <div class="modal-content">
                                 <uc:AsociarGrupoUsuario runat="server" ID="AsociarGrupoUsuario" Modal="#modalGrupos" />
                                 <div class="modal-footer">
-                                    <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarGrupos" Text="Cerrar" OnClick="btnCerrarGrupos_OnClick" />
+                                    <asp:Button runat="server" CssClass="btn btn-danger" ID="btnCerrarGrupos" Text="Cerrar" OnClick="btnCerrarGrupos_OnClick" />
                                 </div>
                             </div>
                         </div>

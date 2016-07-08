@@ -16,16 +16,17 @@ using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
 {
-    public partial class UcAltaUbicacion : UserControl
+    public partial class UcAltaUbicacion : UserControl, IControllerModal
     {
+        public event DelegateAceptarModal OnAceptarModal;
+        public event DelegateLimpiarModal OnLimpiarModal;
+        public event DelegateCancelarModal OnCancelarModal;
+
         readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
         readonly ServiceUbicacionClient _servicioUbicacion = new ServiceUbicacionClient();
         readonly ServiceDomicilioSistemaClient _servicioSistemaDomicilio = new ServiceDomicilioSistemaClient();
 
         private List<string> _lstError = new List<string>();
-
-        public event DelegateAceptarModal OnAceptarModal;
-        public event DelegateCerrarModal OnCerraModal;
 
         public int IdTipoUsuario
         {
@@ -783,5 +784,27 @@ namespace KiiniHelp.UserControls.Altas
                 AlertaUbicacion = _lstError;
             }
         }
+
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (OnCancelarModal != null)
+                {
+                    OnCancelarModal();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaUbicacion = _lstError;
+            }
+        }
+
+        
     }
 }

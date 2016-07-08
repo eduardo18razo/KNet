@@ -506,6 +506,9 @@
     <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion13.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion2.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1380,6 +1383,7 @@
     <Content Include="UserControls\Altas\AltaOrganizacion.ascx" />
     <Content Include="UserControls\Altas\AltaSla.ascx" />
     <Content Include="UserControls\Altas\UcAltaUbicacion.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaOrganizacion.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaUsuarios.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleGrupoUsuario.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleOrganizacion.ascx" />
@@ -1919,6 +1923,13 @@
     </Compile>
     <Compile Include="UserControls\Altas\UcAltaUbicacion.ascx.designer.cs">
       <DependentUpon>UcAltaUbicacion.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaOrganizacion.ascx.cs">
+      <DependentUpon>UcConsultaOrganizacion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaOrganizacion.ascx.designer.cs">
+      <DependentUpon>UcConsultaOrganizacion.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaUsuarios.ascx.cs">
       <DependentUpon>UcConsultaUsuarios.ascx</DependentUpon>

@@ -92,7 +92,7 @@
                                             <asp:Label runat="server" Text="Responsable de Desarrollo" class="col-sm-3 control-label"></asp:Label>
                                             <asp:DropDownList runat="server" Width="250px" ID="ddlGrupoResponsableDesarrollo" CssClass="DropSelect" AutoPostBack="True" />
                                             <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="7" />
-                                            <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="7" data-toggle="modal" data-target="#modalAltaGrupoUsuario" />
+                                            <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="7" data-toggle="modal" data-target="#modalAltaGrupoUsuario" data-backdrop="static" data-keyboard="false" />
                                         </div>
                                     </div>
                                     <br />
@@ -146,7 +146,7 @@
                 <div class="modal-content">
                     <uc:AltaGrupoUsuario runat="server" ID="ucAltaGrupoUsuario" />
                     <div class="modal-footer">
-                        <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarModalAltaGrupoUsuario" Text="Cerrar" OnClick="btnCerrarModalAltaGrupoUsuario_OnClick" />
+                        <asp:Button runat="server" CssClass="btn btn-danger" ID="btnCerrarModalAltaGrupoUsuario" Text="Cerrar" OnClick="btnCerrarModalAltaGrupoUsuario_OnClick" />
                     </div>
                 </div>
             </div>

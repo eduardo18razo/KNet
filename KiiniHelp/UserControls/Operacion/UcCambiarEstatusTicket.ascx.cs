@@ -13,7 +13,8 @@ namespace KiiniHelp.UserControls.Operacion
         private readonly ServiceEstatusClient _servicioEstatus = new ServiceEstatusClient();
         private readonly ServiceTicketClient _servicioTicketClient = new ServiceTicketClient();
         public event DelegateAceptarModal OnAceptarModal;
-        public event DelegateCerrarModal OnCerraModal;
+        public event DelegateLimpiarModal OnLimpiarModal;
+        public event DelegateCancelarModal OnCancelarModal;
 
         private List<string> _lstError = new List<string>();
 
@@ -108,5 +109,22 @@ namespace KiiniHelp.UserControls.Operacion
         }
 
 
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+               if (OnCancelarModal != null)
+                   OnCancelarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
     }
 }

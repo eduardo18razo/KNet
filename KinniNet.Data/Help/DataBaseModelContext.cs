@@ -118,6 +118,7 @@ namespace KinniNet.Data.Help
                 _slaEstimadoTicketDetalle = CreateObjectSet<SlaEstimadoTicketDetalle>();
                 _ticket = CreateObjectSet<Ticket>();
                 _ticketGrupoUsuario = CreateObjectSet<TicketGrupoUsuario>();
+                _ticketAsignacion = CreateObjectSet<TicketAsignacion>();
                 _area = CreateObjectSet<Area>();
                 _estatusTicketSubRolGeneral = CreateObjectSet<EstatusTicketSubRolGeneral>();
                 _estatusAsignacionSubRolGeneral = CreateObjectSet<EstatusAsignacionSubRolGeneral>();
@@ -430,6 +431,14 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<TicketAsignacion> TicketAsignacion
+        {
+            get
+            {
+                return _ticketAsignacion;
+            }
+        }
+
 
 
         private readonly ObjectSet<Usuario> _usuario;
@@ -460,6 +469,7 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<SlaEstimadoTicketDetalle> _slaEstimadoTicketDetalle;
         private readonly ObjectSet<Ticket> _ticket;
         private readonly ObjectSet<TicketGrupoUsuario> _ticketGrupoUsuario;
+        private readonly ObjectSet<TicketAsignacion> _ticketAsignacion;
         private readonly ObjectSet<Area> _area;
         private readonly ObjectSet<EstatusTicketSubRolGeneral> _estatusTicketSubRolGeneral;
         private readonly ObjectSet<EstatusAsignacionSubRolGeneral> _estatusAsignacionSubRolGeneral;

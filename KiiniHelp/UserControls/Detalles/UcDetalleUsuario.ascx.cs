@@ -11,6 +11,10 @@ namespace KiiniHelp.UserControls.Detalles
 {
     public partial class UcDetalleUsuario : UserControl, IControllerModal
     {
+        public event DelegateAceptarModal OnAceptarModal;
+        public event DelegateLimpiarModal OnLimpiarModal;
+        public event DelegateCancelarModal OnCancelarModal;
+
         private List<string> _lstError = new List<string>();
 
         public int IdUsuario
@@ -63,16 +67,22 @@ namespace KiiniHelp.UserControls.Detalles
             }
         }
 
-        public event DelegateAceptarModal OnAceptarModal;
-        public event DelegateCerrarModal OnCerraModal;
-
         protected void btnCerrarModal_OnClick(object sender, EventArgs e)
         {
-            if (OnCerraModal != null)
+            try
             {
-                OnCerraModal();
+                if (OnCancelarModal != null)
+                    OnCancelarModal();
             }
-            
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
         }
     }
 }

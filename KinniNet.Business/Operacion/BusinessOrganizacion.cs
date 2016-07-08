@@ -492,6 +492,61 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public List<Organizacion> ObtenerOrganizaciones(int? idTipoUsuario, int? idHolding, int? idCompania, int? idDireccion, int? idSubDireccion, int? idGerencia, int? idSubGerencia, int? idJefatura)
+        {
+            List<Organizacion> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<Organizacion> qry = db.Organizacion;
+                if (idTipoUsuario.HasValue)
+                    qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
+
+                if (idHolding.HasValue)
+                    qry = qry.Where(w => w.IdHolding == idHolding);
+
+                if (idCompania.HasValue)
+                    qry = qry.Where(w => w.IdCompania == idCompania);
+
+                if (idDireccion.HasValue)
+                    qry = qry.Where(w => w.IdDireccion == idDireccion);
+
+                if (idSubDireccion.HasValue)
+                    qry = qry.Where(w => w.IdSubDireccion == idSubDireccion);
+
+                if (idGerencia.HasValue)
+                    qry = qry.Where(w => w.IdGerencia == idGerencia);
+
+                if (idSubGerencia.HasValue)
+                    qry = qry.Where(w => w.IdSubGerencia == idSubGerencia);
+
+                if (idJefatura.HasValue)
+                    qry = qry.Where(w => w.IdJefatura == idJefatura);
+
+                result = qry.ToList();
+                foreach (Organizacion organizacion in result)
+                {
+                    db.LoadProperty(organizacion, "Holding");
+                    db.LoadProperty(organizacion, "Compania");
+                    db.LoadProperty(organizacion, "Direccion");
+                    db.LoadProperty(organizacion, "SubDireccion");
+                    db.LoadProperty(organizacion, "Gerencia");
+                    db.LoadProperty(organizacion, "SubGerencia");
+                    db.LoadProperty(organizacion, "Jefatura");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
         public string ObtenerDescripcionOrganizacionUsuario(int idUsuario, bool ultimoNivel)
         {
             string result = null;
@@ -550,6 +605,100 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
             return result;
+        }
+
+        public void HabilitarOrganizacion(int idOrganizacion, bool habilitado)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Organizacion usuario = db.Organizacion.SingleOrDefault(w => w.Id == idOrganizacion);
+                if (usuario != null) usuario.Habilitado = habilitado;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+        public Organizacion ObtenerOrganizacionById(int idOrganizacion)
+        {
+            Organizacion result = null;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Organizacion.SingleOrDefault(w => w.Id == idOrganizacion);
+                if (result != null)
+                {
+                    db.LoadProperty(result, "Holding");
+                    db.LoadProperty(result, "Compania");
+                    db.LoadProperty(result, "Direccion");
+                    db.LoadProperty(result, "SubDireccion");
+                    db.LoadProperty(result, "Gerencia");
+                    db.LoadProperty(result, "SubGerencia");
+                    db.LoadProperty(result, "Jefatura");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public void ActualizarOrganizacion(Organizacion org)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
+                Organizacion organizacion = db.Organizacion.SingleOrDefault(s => s.Id == org.Id);
+                if (organizacion != null)
+                {
+                    if (organizacion.Holding != null)
+                        organizacion.Holding.Descripcion = org.Holding.Descripcion.ToUpper();
+
+                    if (organizacion.Compania != null)
+                        organizacion.Compania.Descripcion = org.Compania.Descripcion.ToUpper();
+
+                    if (organizacion.Direccion != null)
+                        organizacion.Direccion.Descripcion = org.Direccion.Descripcion.ToUpper();
+
+                    if (organizacion.SubDireccion != null)
+                        organizacion.SubDireccion.Descripcion = org.SubDireccion.Descripcion.ToUpper();
+
+                    if (organizacion.Gerencia != null)
+                        organizacion.Gerencia.Descripcion = org.Gerencia.Descripcion.ToUpper();
+
+                    if (organizacion.SubGerencia != null)
+                        organizacion.SubGerencia.Descripcion = org.SubGerencia.Descripcion.ToUpper();
+
+                    if (organizacion.Jefatura != null)
+                        organizacion.Jefatura.Descripcion = org.Jefatura.Descripcion.ToUpper();
+
+                    if (organizacion.Id == 0)
+                        db.Organizacion.AddObject(organizacion);
+
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
         }
     }
 }

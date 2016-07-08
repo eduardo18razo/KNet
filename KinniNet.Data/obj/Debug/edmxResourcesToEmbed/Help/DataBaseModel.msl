@@ -556,6 +556,7 @@
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="IdPuesto" ColumnName="IdPuesto" />
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
@@ -829,35 +830,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="EstatusAsignacionSubRolGeneral">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.EstatusAsignacionSubRolGeneral">
-        <MappingFragment StoreEntitySet="EstatusAsignacionSubRolGeneral">
-          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="Propietario" ColumnName="Propietario" />
-          <ScalarProperty Name="TieneSupervisor" ColumnName="TieneSupervisor" />
-          <ScalarProperty Name="Orden" ColumnName="Orden" />
-          <ScalarProperty Name="IdEstatusAsignacionAccion" ColumnName="IdEstatusAsignacionAccion" />
-          <ScalarProperty Name="IdEstatusAsignacionActual" ColumnName="IdEstatusAsignacionActual" />
-          <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
-          <ScalarProperty Name="IdGrupoUsuario" ColumnName="IdGrupoUsuario" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EstatusAsignacionSubRolGeneralDefault">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.EstatusAsignacionSubRolGeneralDefault">
-        <MappingFragment StoreEntitySet="EstatusAsignacionSubRolGeneralDefault">
-          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="Propietario" ColumnName="Propietario" />
-          <ScalarProperty Name="TieneSupervisor" ColumnName="TieneSupervisor" />
-          <ScalarProperty Name="Orden" ColumnName="Orden" />
-          <ScalarProperty Name="IdEstatusAsignacionAccion" ColumnName="IdEstatusAsignacionAccion" />
-          <ScalarProperty Name="IdEstatusAsignacionActual" ColumnName="IdEstatusAsignacionActual" />
-          <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="EstatusAsignacion">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.EstatusAsignacion">
         <MappingFragment StoreEntitySet="EstatusAsignacion">
@@ -900,6 +872,46 @@
           <ScalarProperty Name="IdSubRolPermitido" ColumnName="IdSubRolPermitido" />
           <ScalarProperty Name="IdEstatusAsignacion" ColumnName="IdEstatusAsignacion" />
           <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusAsignacionSubRolGeneral">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.EstatusAsignacionSubRolGeneral">
+        <MappingFragment StoreEntitySet="EstatusAsignacionSubRolGeneral">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Propietario" ColumnName="Propietario" />
+          <ScalarProperty Name="TieneSupervisor" ColumnName="TieneSupervisor" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="ComentarioObligado" ColumnName="ComentarioObligado" />
+          <ScalarProperty Name="IdEstatusAsignacionAccion" ColumnName="IdEstatusAsignacionAccion" />
+          <ScalarProperty Name="IdEstatusAsignacionActual" ColumnName="IdEstatusAsignacionActual" />
+          <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
+          <ScalarProperty Name="IdGrupoUsuario" ColumnName="IdGrupoUsuario" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusAsignacionSubRolGeneralDefault">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.EstatusAsignacionSubRolGeneralDefault">
+        <MappingFragment StoreEntitySet="EstatusAsignacionSubRolGeneralDefault">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Propietario" ColumnName="Propietario" />
+          <ScalarProperty Name="TieneSupervisor" ColumnName="TieneSupervisor" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="ComentarioObligado" ColumnName="ComentarioObligado" />
+          <ScalarProperty Name="IdEstatusAsignacionAccion" ColumnName="IdEstatusAsignacionAccion" />
+          <ScalarProperty Name="IdEstatusAsignacionActual" ColumnName="IdEstatusAsignacionActual" />
+          <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Puesto">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.Puesto">
+        <MappingFragment StoreEntitySet="Puesto">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

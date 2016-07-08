@@ -7,10 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using AjaxControlToolkit;
-
 namespace KiiniHelp.UserControls.Altas {
     
     
@@ -23,7 +19,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlGenericControl panelAlert;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlert;
         
         /// <summary>
         /// rptHeaderError control.
@@ -32,7 +28,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Repeater rptHeaderError;
+        protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
         
         /// <summary>
         /// txtDescripcion control.
@@ -41,7 +37,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtDescripcion;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
         
         /// <summary>
         /// chkEstimado control.
@@ -50,7 +46,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected CheckBox chkEstimado;
+        protected global::System.Web.UI.WebControls.CheckBox chkEstimado;
         
         /// <summary>
         /// txtTiempo control.
@@ -59,7 +55,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtTiempo;
+        protected global::System.Web.UI.WebControls.TextBox txtTiempo;
         
         /// <summary>
         /// MaskedEditExtenderTiempo control.
@@ -68,7 +64,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected MaskedEditExtender MaskedEditExtenderTiempo;
+        protected global::AjaxControlToolkit.MaskedEditExtender MaskedEditExtenderTiempo;
         
         /// <summary>
         /// btnGuardar control.
@@ -77,7 +73,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Button btnGuardar;
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
         
         /// <summary>
         /// btnLimpiar control.
@@ -86,6 +82,15 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Button btnLimpiar;
+        protected global::System.Web.UI.WebControls.Button btnLimpiar;
+        
+        /// <summary>
+        /// btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
     }
 }

@@ -12,94 +12,99 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:UpdatePanel runat="server" >
-        <ContentTemplate>
-            <header class="modal-header" id="pnlAlertaGeneral" runat="server" visible="false">
-                <div class="alert alert-danger">
-                    <div>
-                        <div style="float: left">
-                            <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
+    <div class="fullheight">
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <header class="modal-header" id="pnlAlertaGeneral" runat="server" visible="false">
+                    <div class="alert alert-danger">
+                        <div>
+                            <div style="float: left">
+                                <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
+                            </div>
+                            <div style="float: left">
+                                <h3>Error</h3>
+                            </div>
+                            <div class="clearfix clear-fix" />
                         </div>
-                        <div style="float: left">
-                            <h3>Error</h3>
-                        </div>
-                        <div class="clearfix clear-fix" />
+                        <hr />
+                        <asp:Repeater runat="server" ID="rptErrorGeneral">
+                            <ItemTemplate>
+                                <ul>
+                                    <li><%# Container.DataItem %></li>
+                                </ul>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
-                    <hr />
-                    <asp:Repeater runat="server" ID="rptErrorGeneral">
-                        <ItemTemplate>
-                            <ul>
-                                <li><%# Container.DataItem %></li>
-                            </ul>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-            </header>
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3>Operacion de tickets</h3>
-                </div>
-                <div class="panel-body">
-                    <asp:Repeater runat="server" ID="rptTickets" OnItemDataBound="rptTickets_OnItemDataBound" OnItemCommand="rptTickets_OnItemCommand">
-                        <HeaderTemplate>
-                            <div class="row">
-                                <asp:LinkButton CssClass="col-xs-1" runat="server" Text="Fecha y Hora" CommandName="DateTime" />
-                                <div class="col-xs-1 form-group">
-                                    <asp:Label runat="server" Text="Numero Ticket" />
-                                    <%--<asp:TextBox CssClass="form-control" runat="server" ID="txtFilerNumeroTicket" onkeypress="return ValidaCampo(this,2)" OnTextChanged="txtFilerNumeroTicket_OnTextChanged" AutoPostBack="True"--%>
-                                </div>
-                                <asp:Label CssClass="col-xs-1" runat="server" Text="Nombre Usuario" />
-                                <div class="col-xs-1 form-group">
-                                    <asp:Label runat="server" Text="Tipificación" />
-                                    <%--<asp:DropDownList runat="server" CssClass="dropdown" ID="ddlTipificacion" AppendDataBoundItems="True" />--%>
-                                </div>
-                                <asp:Label CssClass="col-xs-1" runat="server" Text="Grupo Asignado" />
-                                <asp:Label CssClass="col-xs-1" runat="server" Text="Usuario Asignado" />
-                                <asp:Label CssClass="col-xs-1" runat="server" Text="Nivel Usuario Asignado" />
+                </header>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3>Operacion de tickets</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading row" style="padding-bottom: 9px; margin: 0 0 20px; padding-left: 0">
+                                <asp:LinkButton CssClass="col-xs-1" runat="server" Text="Fecha y Hora" CommandName="DateTime" Width="10.6%" />
+                                <asp:Label CssClass="col-xs-1" runat="server" Text="Ticket" Width="8%" />
+                                <asp:Label CssClass="col-xs-2" runat="server" Text="Descripcion" Width="14%" />
+                                <asp:Label CssClass="col-xs-2" runat="server" Text="Grupo Asignado" Style="width: 10.6%" />
+                                <asp:Label CssClass="col-xs-1" runat="server" Text="Atendedor" Width="10.6%" />
+                                <asp:Label CssClass="col-xs-1" runat="server" Text="Nivel" Width="6%" />
                                 <asp:Label CssClass="col-xs-1" runat="server" Text="Estatus Ticket" />
-                                <asp:Label CssClass="col-xs-1" runat="server" Text="Estatus Asignacion" />
-                                <asp:Label CssClass="col-xs-1" runat="server" Text="Accion Posible Estatus" />
-                                <asp:Label CssClass="col-xs-1" runat="server" Text="Accion Posible Asignación" />
+                                <asp:Label CssClass="col-xs-1" runat="server" Text="Estatus Asignacion" Width="12%" />
+                                <asp:Label CssClass="col-xs-1" runat="server" Text="Accion Estatus" />
+                                <asp:Label CssClass="col-xs-1" runat="server" Text="Accion Asignación" />
                             </div>
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <div class="row">
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdTicket") %>' Visible="False" />
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdUsuario") %>' Visible="False" />
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdUsuarioAsignado") %>' Visible="False" />
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusTicket.Id") %>' Visible="False" />
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusAsignacion.Id") %>' Visible="False" ID="lblEstatusAsignacionActual"/>
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdGrupoAsignado") %>' Visible="False" ID="lblIdGrupoAsignado"/>
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EsPropietario") %>' Visible="False" ID="lblEsPropietario"/>
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("FechaHora") %>' />
-                                <asp:LinkButton runat="server" CssClass="col-xs-1" Text='<%#Eval("NumeroTicket") %>' ID="lbntIdticket" OnClick="lbntIdticket_OnClick" CommandArgument='<%#Eval("IdTicket") %>'/>
-                                <asp:LinkButton runat="server" CssClass="col-xs-1" Text='<%#Eval("NombreUsuario") %>' ID="btnUsuario" OnClick="btnUsuario_OnClick" CommandArgument='<%#Eval("IdUsuario") %>' />
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("Tipificacion") %>' />
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("GrupoAsignado") %>' />
-                                <asp:LinkButton runat="server" CssClass="col-xs-1" Text='<%#Eval("UsuarioAsignado") %>' ID="btnUsuarioAsignado" OnClick="btnUsuario_OnClick" CommandArgument='<%#Eval("IdUsuario") %>'/>
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("NivelUsuarioAsignado") %>' />
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusTicket.Descripcion") %>' />
-                                <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusAsignacion.Descripcion") %>' />
-                                <asp:LinkButton runat="server" CssClass='<%# (bool) Eval("EsPropietario") ? int.Parse(Eval("EstatusTicket.Id").ToString()) == 5 || int.Parse(Eval("EstatusTicket.Id").ToString()) == 6 || int.Parse(Eval("EstatusTicket.Id").ToString()) == 2 ? "col-xs-1 btn btn-sm btn-primary disabled" : "col-xs-1 btn btn-sm btn-primary" : "col-xs-1 btn btn-sm btn-primary disabled" %>' Text="Cambiar estatus" ID="btnCambiarEstatus" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnCambiarEstatus_OnClick" Enabled='<%#Eval("EsPropietario") %>' />
-                                <asp:LinkButton runat="server" CssClass='<%# (bool) Eval("EsPropietario") ? int.Parse(Eval("EstatusTicket.Id").ToString()) == 5 || int.Parse(Eval("EstatusTicket.Id").ToString()) == 6 || int.Parse(Eval("EstatusTicket.Id").ToString()) == 2 ? "col-xs-1 btn btn-sm btn-primary disabled" : "col-xs-1 btn btn-sm btn-primary" : (!(bool) Eval("EsPropietario") && int.Parse(Eval("EstatusAsignacion.Id").ToString()) == 1 && int.Parse(Eval("IdUsuarioAsignado").ToString()) == 0) ? "col-xs-1 btn btn-sm btn-primary " : "col-xs-1 btn btn-sm btn-primary disabled" %>' Text="Cambiar Asignacion" ID="btnAsignar" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnAsignar_OnClick" />
-                                <%--<asp:LinkButton runat="server" CssClass="col-xs-1 btn btn-sm btn-primary" Text="Auto Asignar" ID="btnautoAsignar" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnautoAsignar_OnClick" Visible='<%# !(bool)Eval("EsPropietario") %>' />--%>
-                            </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
+                            <asp:Repeater runat="server" ID="rptTickets" OnItemDataBound="rptTickets_OnItemDataBound" OnItemCommand="rptTickets_OnItemCommand">
+                                <HeaderTemplate>
+                                    <div class="consultas" style="overflow-y: auto; min-height: 380px;">
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <div class="panel-body row" style="padding-bottom: 9px; margin: 0 0 20px; padding-left: 0">
+                                        <%--ID--%>
+                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdTicket") %>' Visible="False" />
+                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdUsuario") %>' Visible="False" />
+                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdUsuarioAsignado") %>' Visible="False" />
+                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusTicket.Id") %>' Visible="False" />
+                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusAsignacion.Id") %>' Visible="False" ID="lblEstatusAsignacionActual" />
+                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdGrupoAsignado") %>' Visible="False" ID="lblIdGrupoAsignado" />
+                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EsPropietario") %>' Visible="False" ID="lblEsPropietario" />
+                                        <%--Pantalla--%>
+                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("FechaHora",  "{0:dd/MM/yy HH:mm}") %>' Width="10.6%" />
+                                        <asp:LinkButton runat="server" CssClass="col-xs-1" Text='<%#Eval("NumeroTicket") %>' ID="lbntIdticket" OnClick="lbntIdticket_OnClick" CommandArgument='<%#Eval("IdTicket") %>' Width="8%" />
+                                        <asp:Label runat="server" CssClass="col-xs-2" Text='<%#Eval("Tipificacion").ToString().Length > 12 ? Eval("Tipificacion").ToString().Substring(0, 12) : Eval("Tipificacion")%>' Width="14%" />
+                                        <asp:Label runat="server" CssClass="col-xs-2" Style="width: 10.66666667%" Text='<%#Eval("GrupoAsignado") %>' />
+                                        <asp:LinkButton runat="server" CssClass="col-xs-1" Text='<%#Eval("UsuarioAsignado").ToString(). Length > 12 ? Eval("UsuarioAsignado").ToString().Substring(0, 12) : Eval("UsuarioAsignado") %>' ID="btnUsuarioAsignado" OnClick="btnUsuario_OnClick" CommandArgument='<%#Eval("IdUsuario") %>' Width="10.6%" />
+                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("NivelUsuarioAsignado").ToString().Length > 3 ? Eval("NivelUsuarioAsignado").ToString().Substring(0,3)  : Eval("NivelUsuarioAsignado") %>' Width="6%" />
+                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusTicket.Descripcion") %>' />
+                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusAsignacion.Descripcion") %>' Width="12%" />
+                                        <div class="col-xs-1">
+                                            <asp:LinkButton runat="server" CssClass='<%# (bool) Eval("EsPropietario") ? int.Parse(Eval("EstatusTicket.Id").ToString()) == 5 || int.Parse(Eval("EstatusTicket.Id").ToString()) == 6 || int.Parse(Eval("EstatusTicket.Id").ToString()) == 2 ? "btn btn-sm btn-primary disabled" : "btn btn-sm btn-primary" : "btn btn-sm btn-primary disabled" %>' Text="Modificar" ID="btnCambiarEstatus" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnCambiarEstatus_OnClick" Enabled='<%#Eval("EsPropietario") %>' />
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <asp:LinkButton runat="server" CssClass='<%# (bool) Eval("EsPropietario") ? int.Parse(Eval("EstatusTicket.Id").ToString()) == 5 || int.Parse(Eval("EstatusTicket.Id").ToString()) == 6 || int.Parse(Eval("EstatusTicket.Id").ToString()) == 2 ? "btn btn-sm btn-primary disabled" : "btn btn-sm btn-primary" : (!(bool) Eval("EsPropietario") && int.Parse(Eval("EstatusAsignacion.Id").ToString()) == 1 && int.Parse(Eval("IdUsuarioAsignado").ToString()) == 0) ? "btn btn-sm btn-primary " : "btn btn-sm btn-primary disabled" %>' Text="Modificar" ID="btnAsignar" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnAsignar_OnClick" />
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                                <FooterTemplate>
+                                    </div>
+                                </FooterTemplate>
+                            </asp:Repeater>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <asp:Repeater ID="rptPager" runat="server">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="lnkPage" runat="server" Text='<%#Eval("Text") %>' CommandArgument='<%# Eval("Value") %>'
+                                    CssClass='<%# Convert.ToBoolean(Eval("Enabled")) ? "page_enabled" : "page_disabled" %>'
+                                    OnClick="Page_Changed" OnClientClick='<%# !Convert.ToBoolean(Eval("Enabled")) ? "return false;" : "" %>'></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
                 </div>
-                <div class="panel-footer">
-                    <asp:Repeater ID="rptPager" runat="server">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="lnkPage" runat="server" Text='<%#Eval("Text") %>' CommandArgument='<%# Eval("Value") %>'
-                                CssClass='<%# Convert.ToBoolean(Eval("Enabled")) ? "page_enabled" : "page_disabled" %>'
-                                OnClick="Page_Changed" OnClientClick='<%# !Convert.ToBoolean(Eval("Enabled")) ? "return false;" : "" %>'></asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-            </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-    
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
+
     <div class="modal fade" id="modalDetalleTicket" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <asp:UpdatePanel runat="server">
             <ContentTemplate>

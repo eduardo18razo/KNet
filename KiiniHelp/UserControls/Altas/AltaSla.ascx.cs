@@ -7,8 +7,12 @@ using KiiniNet.Entities.Cat.Usuario;
 
 namespace KiiniHelp.UserControls.Altas
 {
-    public partial class AltaSla : UserControl
+    public partial class AltaSla : UserControl, IControllerModal
     {
+        public event DelegateAceptarModal OnAceptarModal;
+        public event DelegateLimpiarModal OnLimpiarModal;
+        public event DelegateCancelarModal OnCancelarModal;
+
         readonly ServiceSlaClient _servicioSla = new ServiceSlaClient();
         private List<string> _lstError = new List<string>();
 
@@ -70,8 +74,7 @@ namespace KiiniHelp.UserControls.Altas
                 Alerta = _lstError;
             }
         }
-
-
+        
         protected void btnGuardar_OnClick(object sender, EventArgs e)
         {
             try
@@ -86,6 +89,8 @@ namespace KiiniHelp.UserControls.Altas
                 sla.Habilitado = true;
                 _servicioSla.Guardar(sla);
                 LimpiarCampos();
+                if (OnAceptarModal != null)
+                    OnAceptarModal();
             }
             catch (Exception ex)
             {
@@ -103,6 +108,28 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 LimpiarCampos();
+                if (OnLimpiarModal != null)
+                    OnLimpiarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LimpiarCampos();
+                if (OnCancelarModal != null)
+                    OnCancelarModal();
             }
             catch (Exception ex)
             {

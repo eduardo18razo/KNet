@@ -115,8 +115,9 @@
 
                     </div>
                     <div class="panel-footer" style="text-align: center">
-                        <asp:Button CssClass="btn btn-lg btn-success" ID="btnGuardar" runat="server" Text="Guardar" OnClick="btnGuardar_OnClick"></asp:Button>
-                        <asp:Button CssClass="btn btn-lg btn-danger" ID="btnLimpiar" runat="server" Text="Limpiar" OnClick="btnLimpiar_OnClick"></asp:Button>
+                        <asp:Button CssClass="btn btn-success" ID="btnGuardar" runat="server" Text="Guardar" OnClick="btnGuardar_OnClick"></asp:Button>
+                        <asp:Button CssClass="btn btn-danger" ID="btnLimpiar" runat="server" Text="Limpiar" OnClick="btnLimpiar_OnClick"></asp:Button>
+                        <asp:Button CssClass="btn btn-danger" ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_OnClick"></asp:Button>
                     </div>
                 </div>
             </ContentTemplate>
@@ -125,8 +126,8 @@
         <div class="modal fade" id="modalAgregarCampoMascara" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
             <asp:UpdatePanel ID="upAgregarCampo" runat="server">
                 <ContentTemplate>
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
+                    <div class="modal-dialog modal-lg" >
+                        <div class="modal-content" >
                             <div class="modal-header" id="panelAlertaAgregarCampo" runat="server" visible="False">
                                 <div class="alert alert-danger">
                                     <div>
@@ -154,7 +155,7 @@
                                 <div class="panel panel-body">
                                     <div class="form-group">
                                         <asp:Label runat="server" Text="Descripcion" />
-                                        <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control input-lg" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control input" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
                                     </div>
                                     <div class="form-group">
                                         <asp:CheckBox runat="server" ID="chkRequerido" AutoPostBack="False" Text="Campo obligatorio" />
@@ -180,8 +181,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer" style="text-align: center">
-                                <asp:Button ID="btnGuardarCampo" runat="server" CssClass="btn btn-lg btn-success" Text="Guardar" OnClick="btnGuardarCampo_OnClick" />
-                                <asp:Button runat="server" CssClass="btn btn-danger btn-lg" Text="Limpiar" ID="btnLimpiarCampo" OnClick="btnLimpiarCampo_OnClick" />
+                                <asp:Button ID="btnGuardarCampo" runat="server" CssClass="btn btn-success" Text="Guardar" OnClick="btnGuardarCampo_OnClick" />
+                                <asp:Button runat="server" CssClass="btn btn-danger" Text="Limpiar" ID="btnLimpiarCampo" OnClick="btnLimpiarCampo_OnClick" />
                             </div>
                         </div>
                     </div>

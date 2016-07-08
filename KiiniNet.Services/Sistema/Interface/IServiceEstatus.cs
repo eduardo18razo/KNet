@@ -17,5 +17,8 @@ namespace KiiniNet.Services.Sistema.Interface
 
         [OperationContract]
         List<EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int idSubRol, int estatusAsignacionActual, bool esPropietario, bool insertarSeleccion);
+
+        [OperationContract]
+        bool HasComentarioObligatorio(int idUsuario, int idSubRol, int estatusAsignacionActual, int estatusAsignar, bool esPropietario);
     }
 }

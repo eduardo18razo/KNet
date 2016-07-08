@@ -31,11 +31,8 @@
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <div class="modal-dialog modal-lg">
-
                 <div class="modal-content">
-                    <div class="modal-body">
-                        <uc1:UcDetalleUsuario runat="server" ID="UcDetalleUsuario1" />
-                    </div>
+                    <uc1:UcDetalleUsuario runat="server" ID="UcDetalleUsuario1" />
                 </div>
             </div>
         </ContentTemplate>

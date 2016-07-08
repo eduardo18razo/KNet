@@ -58,6 +58,15 @@ namespace KiiniHelp.UserControls.Operacion {
         protected global::System.Web.UI.WebControls.DropDownList ddlEstatus;
         
         /// <summary>
+        /// txtComentarios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComentarios;
+        
+        /// <summary>
         /// divUsuariosSupervisor control.
         /// </summary>
         /// <remarks>
@@ -157,12 +166,12 @@ namespace KiiniHelp.UserControls.Operacion {
         protected global::System.Web.UI.WebControls.Button btnAceptar;
         
         /// <summary>
-        /// btnCerrar control.
+        /// btnCancelar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrar;
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
     }
 }

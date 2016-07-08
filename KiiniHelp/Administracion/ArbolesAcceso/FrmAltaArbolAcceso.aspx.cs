@@ -371,6 +371,188 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
 
         #endregion Metodos
 
+        #region Delegados
+        void AltaAreas_OnAceptarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAreas\");", true);
+                LlenaCombos();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
+
+        void AltaAreas_OnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAreas\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
+
+        void UcAltaInformacionConsulta_OnAceptarModal()
+        {
+            try
+            {
+                rptInformacion.DataSource = null;
+                rptInformacion.DataBind();
+                List<InformacionConsulta> infoCons = _servicioSistemaTipoInformacionConsulta.ObtenerTipoInformacionConsulta(false).Select(tipoInf => new InformacionConsulta { TipoInfConsulta = tipoInf }).ToList();
+                rptInformacion.DataSource = infoCons;
+                rptInformacion.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaInfCons\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
+
+        void UcAltaInformacionConsulta_OnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaInfCons\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
+
+        void UcAltaMascaraAcceso_OnAceptarModal()
+        {
+            try
+            {
+                Metodos.LlenaComboCatalogo(ddlMascaraAcceso, _servicioMascaras.ObtenerMascarasAcceso(true));
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaMascara\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
+
+        void UcAltaMascaraAcceso_OnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaMascara\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
+
+        void UcSla_OnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaSla\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
+
+        void UcSla_OnAceptarModal()
+        {
+            try
+            {
+                Metodos.LlenaComboCatalogo(ddlSla, _servicioSla.ObtenerSla(true));
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaSla\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
+
+        void UcEncuesta_OnAceptarModal()
+        {
+            try
+            {
+                Metodos.LlenaComboCatalogo(ddlEncuesta, _servicioEncuesta.ObtenerEncuestas(true));
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaEncuesta\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
+
+        void UcEncuesta_OnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaEncuesta\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
+
+        #endregion Delegados
+
         #region Eventos
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -379,6 +561,20 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 AlertaGeneral = new List<string>();
                 AlertaNivel = new List<string>();
                 AlertaInfoConsulta = new List<string>();
+                AltaAreas.OnCancelarModal += AltaAreas_OnCancelarModal;
+                AltaAreas.OnAceptarModal += AltaAreas_OnAceptarModal;
+
+                UcAltaInformacionConsulta.OnAceptarModal += UcAltaInformacionConsulta_OnAceptarModal;
+                UcAltaInformacionConsulta.OnCancelarModal += UcAltaInformacionConsulta_OnCancelarModal;
+
+                UcAltaMascaraAcceso.OnAceptarModal += UcAltaMascaraAcceso_OnAceptarModal;
+                UcAltaMascaraAcceso.OnCancelarModal += UcAltaMascaraAcceso_OnCancelarModal;
+
+                UcSla.OnAceptarModal += UcSla_OnAceptarModal;
+                UcSla.OnCancelarModal += UcSla_OnCancelarModal;
+
+                UcEncuesta.OnAceptarModal += UcEncuesta_OnAceptarModal;
+                UcEncuesta.OnCancelarModal += UcEncuesta_OnCancelarModal;
                 if (!IsPostBack)
                 {
                     LlenaCombos();
@@ -471,11 +667,13 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 AlertaGeneral = _lstError;
             }
         }
+
+        #region MuestraModales
         protected void btnAddArea_OnClick(object sender, EventArgs e)
         {
             try
             {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalGrupos\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAreas\");", true);
             }
             catch (Exception ex)
             {
@@ -487,6 +685,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 AlertaGeneral = _lstError;
             }
         }
+        #endregion MuestraModales
         protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -1204,82 +1403,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
         #endregion Eventos#endregion Eventos
 
         #region Cerrar Modales
-        protected void btnCerraraltaInformacion_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                rptInformacion.DataSource = null;
-                rptInformacion.DataBind();
-                List<InformacionConsulta> infoCons = _servicioSistemaTipoInformacionConsulta.ObtenerTipoInformacionConsulta(false).Select(tipoInf => new InformacionConsulta { TipoInfConsulta = tipoInf }).ToList();
-                rptInformacion.DataSource = infoCons;
-                rptInformacion.DataBind();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaInfCons\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaNivel = _lstError;
-            }
-        }
-
-        protected void btnCerrarModalAltaMascara_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                Metodos.LlenaComboCatalogo(ddlMascaraAcceso, _servicioMascaras.ObtenerMascarasAcceso(true));
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaMascara\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaNivel = _lstError;
-            }
-        }
-
-        protected void btnCerrarAltaSla_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                Metodos.LlenaComboCatalogo(ddlSla, _servicioSla.ObtenerSla(true));
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaSla\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaNivel = _lstError;
-            }
-        }
-
-        protected void btnCerrarEncuesta_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                Metodos.LlenaComboCatalogo(ddlEncuesta, _servicioEncuesta.ObtenerEncuestas(true));
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaEncuesta\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaNivel = _lstError;
-            }
-        }
-
+        
         protected void btnCerrarModalAltaGrupoUsuario_OnClick(object sender, EventArgs e)
         {
             try
@@ -1367,26 +1491,6 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
             }
         }
 
-        protected void btnCerrarAreas_OnClick(object sender, EventArgs e)
-        {
-
-            {
-                try
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalGrupos\");", true);
-                    LlenaCombos();
-                }
-                catch (Exception ex)
-                {
-                    if (_lstError == null)
-                    {
-                        _lstError = new List<string>();
-                    }
-                    _lstError.Add(ex.Message);
-                    AlertaNivel = _lstError;
-                }
-            }
-        }
         #endregion Cerrar Modales
     }
 }

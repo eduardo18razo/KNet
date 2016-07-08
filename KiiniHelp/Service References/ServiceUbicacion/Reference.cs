@@ -44,6 +44,9 @@ namespace KiiniHelp.ServiceUbicacion {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionUsuario", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionUsuarioResponse")]
         KiiniNet.Entities.Cat.Operacion.Ubicacion ObtenerUbicacionUsuario(int idUbicacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerOrganizaciones", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerOrganizacionesResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Ubicacion> ObtenerOrganizaciones();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +114,10 @@ namespace KiiniHelp.ServiceUbicacion {
         
         public KiiniNet.Entities.Cat.Operacion.Ubicacion ObtenerUbicacionUsuario(int idUbicacion) {
             return base.Channel.ObtenerUbicacionUsuario(idUbicacion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Ubicacion> ObtenerOrganizaciones() {
+            return base.Channel.ObtenerOrganizaciones();
         }
     }
 }

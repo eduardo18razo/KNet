@@ -2,9 +2,6 @@
 <%@ Register Src="~/UserControls/Detalles/UcDetalleUbicacion.ascx" TagPrefix="uc1" TagName="UcDetalleUbicacion" %>
 <%@ Register Src="~/UserControls/Detalles/UcDetalleOrganizacion.ascx" TagPrefix="uc1" TagName="UcDetalleOrganizacion" %>
 <%@ Register Src="~/UserControls/Detalles/UcDetalleGrupoUsuario.ascx" TagPrefix="uc1" TagName="UcDetalleGrupoUsuario" %>
-
-
-
 <asp:UpdatePanel runat="server">
     <ContentTemplate>
         <header class="modal-header" id="pnlAlertaGeneral" runat="server" visible="false">

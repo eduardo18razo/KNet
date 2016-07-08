@@ -114,24 +114,14 @@ namespace KinniNet.Core.Sistema
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-
-                //join ea in db.EstatusAsignacion on easg.IdEstatusAsignacionActual equals ea.Id
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = (from easg in db.EstatusAsignacionSubRolGeneral
                         join ea in db.EstatusAsignacion on easg.IdEstatusAsignacionActual equals ea.Id
                         join ea1 in db.EstatusAsignacion on easg.IdEstatusAsignacionAccion equals ea1.Id
                         join ug in db.UsuarioGrupo on easg.IdGrupoUsuario equals ug.IdGrupoUsuario
                         where ug.IdUsuario == idUsuario && easg.IdSubRol == idSubRol &&
-                              easg.IdEstatusAsignacionActual == estatusAsignacionActual && easg.Habilitado && easg.Propietario
+                              easg.IdEstatusAsignacionActual == estatusAsignacionActual && easg.Habilitado && easg.Propietario == esPropietario
                         select ea1).ToList();
-                //join ug in db.UsuarioGrupo on easg.IdGrupoUsuario equals ug.IdGrupoUsuario
-                //where ug.IdUsuario == idUsuario && easg.IdSubRol == idSubRol && easg.Habilitado && easg.Propietario && easg.IdEstatusAsignacionActual == estatusAsignacionActual
-                //select ea).Distinct().ToList();
-                //result = (db.EstatusAsignacionSubRolGeneral.Join(db.EstatusAsignacion, easg => easg.IdEstatusAsignacion, et => et.Id, (easg, et) => new { easg, et })
-                //    .Join(db.UsuarioGrupo, @t => @t.easg.IdGrupoUsuario, ug => ug.IdGrupoUsuario, (@t, ug) => new { @t, ug })
-                //    .Where(@t => @t.ug.IdUsuario == idUsuario && @t.t.easg.IdSubRol == idSubRol && @t.@t.easg.Habilitado && @t.@t.easg.Propietario == esPropietario)
-                //    .OrderBy(o => o.t.easg.Orden)
-                //    .Select(@t => @t.@t.et)).Distinct().ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
                         new EstatusAsignacion
@@ -151,6 +141,29 @@ namespace KinniNet.Core.Sistema
             return result;
         }
 
-
+        public bool HasComentarioObligatorio(int idUsuario, int idSubRol, int estatusAsignacionActual, int estatusAsignar, bool esPropietario)
+        {
+            bool result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                result = (from easg in db.EstatusAsignacionSubRolGeneral
+                          join ea in db.EstatusAsignacion on easg.IdEstatusAsignacionActual equals ea.Id
+                          join ea1 in db.EstatusAsignacion on easg.IdEstatusAsignacionAccion equals ea1.Id
+                          join ug in db.UsuarioGrupo on easg.IdGrupoUsuario equals ug.IdGrupoUsuario
+                          where ug.IdUsuario == idUsuario && easg.IdSubRol == idSubRol &&
+                                easg.IdEstatusAsignacionActual == estatusAsignacionActual && easg.IdEstatusAsignacionAccion == estatusAsignar && easg.Propietario == esPropietario
+                          select easg.ComentarioObligado).Any();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
     }
 }

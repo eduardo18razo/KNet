@@ -26,6 +26,9 @@ namespace KiiniHelp.ServiceSistemaEstatus {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEstatus/ObtenerEstatusAsignacionUsuario", ReplyAction="http://tempuri.org/IServiceEstatus/ObtenerEstatusAsignacionUsuarioResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int idSubRol, int estatusAsignacionActual, bool esPropietario, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEstatus/HasComentarioObligatorio", ReplyAction="http://tempuri.org/IServiceEstatus/HasComentarioObligatorioResponse")]
+        bool HasComentarioObligatorio(int idUsuario, int idSubRol, int estatusAsignacionActual, int estatusAsignar, bool esPropietario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +72,10 @@ namespace KiiniHelp.ServiceSistemaEstatus {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int idSubRol, int estatusAsignacionActual, bool esPropietario, bool insertarSeleccion) {
             return base.Channel.ObtenerEstatusAsignacionUsuario(idUsuario, idSubRol, estatusAsignacionActual, esPropietario, insertarSeleccion);
+        }
+        
+        public bool HasComentarioObligatorio(int idUsuario, int idSubRol, int estatusAsignacionActual, int estatusAsignar, bool esPropietario) {
+            return base.Channel.HasComentarioObligatorio(idUsuario, idSubRol, estatusAsignacionActual, estatusAsignar, esPropietario);
         }
     }
 }

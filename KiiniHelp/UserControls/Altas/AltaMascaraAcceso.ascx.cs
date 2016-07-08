@@ -13,8 +13,12 @@ using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
 {
-    public partial class AltaMascaraAcceso : UserControl
+    public partial class AltaMascaraAcceso : UserControl, IControllerModal
     {
+        public event DelegateAceptarModal OnAceptarModal;
+        public event DelegateLimpiarModal OnLimpiarModal;
+        public event DelegateCancelarModal OnCancelarModal;
+
         readonly ServiceTipoCampoMascaraClient _servicioSistemaTipoCampoMascara = new ServiceTipoCampoMascaraClient();
         readonly ServiceCatalogosClient _servicioSistemaCatalogos = new ServiceCatalogosClient();
         readonly ServiceMascarasClient _servicioMascaras = new ServiceMascarasClient();
@@ -254,6 +258,8 @@ namespace KiiniHelp.UserControls.Altas
                 nuevaMascara.Descripcion = txtNombre.Text.Trim();
                 _servicioMascaras.CrearMascara(nuevaMascara);
                 LimpiarMascara();
+                if (OnAceptarModal != null)
+                    OnAceptarModal();
             }
             catch (Exception ex)
             {
@@ -288,6 +294,27 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 LimpiarMascara();
+                if (OnLimpiarModal != null)
+                    OnLimpiarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LimpiarMascara();
+                if (OnCancelarModal != null)
+                    OnCancelarModal();
             }
             catch (Exception ex)
             {

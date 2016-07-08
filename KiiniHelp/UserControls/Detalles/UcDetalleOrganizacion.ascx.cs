@@ -15,24 +15,22 @@ namespace KiiniHelp.UserControls.Detalles
         {
             set
             {
-                using (Organizacion ub = new ServiceOrganizacionClient().ObtenerOrganizacionUsuario(value))
-                {
-                    if (ub == null) return;
-                    if (ub.Holding != null)
-                        lblPais.Text = ub.Holding.Descripcion;
-                    if (ub.Compania != null)
-                        lblCampus.Text = ub.Compania.Descripcion;
-                    if (ub.Direccion != null)
-                        lblTorre.Text = ub.Direccion.Descripcion;
-                    if (ub.SubDireccion != null)
-                        lblPiso.Text = ub.SubDireccion.Descripcion;
-                    if (ub.Gerencia != null)
-                        lblZona.Text = ub.Gerencia.Descripcion;
-                    if (ub.SubGerencia != null)
-                        lblSubZona.Text = ub.SubGerencia.Descripcion;
-                    if (ub.Jefatura != null)
-                        lblsite.Text = ub.Jefatura.Descripcion;
-                }
+                Organizacion ub = new ServiceOrganizacionClient().ObtenerOrganizacionUsuario(value);
+                if (ub == null) return;
+                if (ub.Holding != null)
+                    lblPais.Text = ub.Holding.Descripcion;
+                if (ub.Compania != null)
+                    lblCampus.Text = ub.Compania.Descripcion;
+                if (ub.Direccion != null)
+                    lblTorre.Text = ub.Direccion.Descripcion;
+                if (ub.SubDireccion != null)
+                    lblPiso.Text = ub.SubDireccion.Descripcion;
+                if (ub.Gerencia != null)
+                    lblZona.Text = ub.Gerencia.Descripcion;
+                if (ub.SubGerencia != null)
+                    lblSubZona.Text = ub.SubGerencia.Descripcion;
+                if (ub.Jefatura != null)
+                    lblsite.Text = ub.Jefatura.Descripcion;
             }
         }
 

@@ -21,7 +21,7 @@ namespace KiiniHelp.Administracion.Usuarios
     public partial class FrmUsuarios : Page
     {
         readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
-        
+
         readonly ServiceRolesClient _servicioSistemaRol = new ServiceRolesClient();
         readonly ServiceParametrosClient _servicioParametros = new ServiceParametrosClient();
         readonly ServiceUsuariosClient _servicioUsuarios = new ServiceUsuariosClient();
@@ -89,7 +89,7 @@ namespace KiiniHelp.Administracion.Usuarios
             }
         }
 
-        
+
 
         private void LimpiarPantalla()
         {
@@ -154,7 +154,7 @@ namespace KiiniHelp.Administracion.Usuarios
                 }
             }
             var sFormato = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
-            List<TextBox> lstCorreos =rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox) item.FindControl("txtCorreo")).Where(w => w.Text != string.Empty).ToList();
+            List<TextBox> lstCorreos = rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox)item.FindControl("txtCorreo")).Where(w => w.Text != string.Empty).ToList();
             foreach (TextBox txtMail in lstCorreos)
             {
                 if (!Regex.IsMatch(txtMail.Text.Trim(), sFormato))
@@ -167,7 +167,7 @@ namespace KiiniHelp.Administracion.Usuarios
             }
 
             List<CorreoUsuario> correos = rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox)item.FindControl("txtCorreo")).Where(correo => correo != null & correo.Text.Trim() != string.Empty).Select(correo => new CorreoUsuario { Correo = correo.Text.Trim() }).ToList();
-            
+
             //TODO: Implementar metodo unico
             TipoUsuario paramCorreos = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(false).SingleOrDefault(s => s.Id == int.Parse(ddlTipoUsuario.SelectedValue));
             if (paramCorreos != null && (correos.Count(c => c.Correo != string.Empty) < paramCorreos.CorreosObligatorios))
@@ -227,8 +227,12 @@ namespace KiiniHelp.Administracion.Usuarios
                 AlertaGeneral = new List<string>();
                 AlertaDatosGenerales = new List<string>();
                 AlertaRoles = new List<string>();
-                ucOrganizacion.OnAceptarModal += BtnAceptarOrganizacionOnClick;
-                UcUbicacion.OnAceptarModal += BtnAceptarUbicacionOnClick;
+                ucOrganizacion.OnAceptarModal += ucOrganizacion_OnAceptarModal;
+                ucOrganizacion.OnCancelarModal += ucOrganizacion_OnCancelarModal;
+                UcUbicacion.OnAceptarModal += UcUbicacion_OnAceptarModal;
+                UcUbicacion.OnCancelarModal += UcUbicacion_OnCancelarModal;
+
+                
                 if (!IsPostBack)
                 {
                     LlenaCombos();
@@ -246,6 +250,10 @@ namespace KiiniHelp.Administracion.Usuarios
                 AlertaGeneral = _lstError;
             }
         }
+
+        
+
+
 
         protected void chkKbxRoles_OnSelectedIndexChanged(object sender, EventArgs e)
         {
@@ -301,13 +309,13 @@ namespace KiiniHelp.Administracion.Usuarios
                     ucOrganizacion.IdTipoUsuario = idTipoUsuario;
                     UcUbicacion.IdTipoUsuario = idTipoUsuario;
                     upGeneral.Update();
-                 }
+                }
                 else
                 {
                     LimpiarPantalla();
                     divDatos.Visible = false;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -437,57 +445,6 @@ namespace KiiniHelp.Administracion.Usuarios
             }
         }
 
-        protected void BtnAceptarOrganizacionOnClick()
-        {
-            try
-            {
-                ucOrganizacion.ValidaCapturaOrganizacion();
-                btnModalOrganizacion.CssClass = "btn btn-success btn-lg";
-                btnModalUbicacion.CssClass = "btn btn-primary btn-lg";
-                btnModalUbicacion.Enabled = true;
-                btnModalRoles.CssClass = "btn btn-primary btn-lg";
-                btnModalRoles.Enabled = false;
-                btnModalGrupos.CssClass = "btn btn-primary btn-lg";
-                btnModalGrupos.Enabled = false;
-                upUbicacion.Update();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalOrganizacion\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                ucOrganizacion.AlertaOrganizacion = _lstError;
-
-            }
-        }
-
-        protected void BtnAceptarUbicacionOnClick()
-        {
-            try
-            {
-                UcUbicacion.ValidaCapturaUbicacion();
-                btnModalUbicacion.CssClass = "btn btn-success btn-lg";
-                btnModalRoles.CssClass = "btn btn-primary btn-lg";
-                btnModalRoles.Enabled = true;
-                btnModalGrupos.CssClass = "btn btn-primary btn-lg";
-                btnModalGrupos.Enabled = false;
-                btnModalRoles.CssClass = "btn btn-primary btn-lg";
-                upRoles.Update();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalUbicacion\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                UcUbicacion.AlertaUbicacion = _lstError;
-            }
-        }
 
         protected void btnCerrarRoles_OnClick(object sender, EventArgs e)
         {
@@ -528,7 +485,7 @@ namespace KiiniHelp.Administracion.Usuarios
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                
+
             }
         }
 
@@ -549,5 +506,94 @@ namespace KiiniHelp.Administracion.Usuarios
                 AlertaGeneral = _lstError;
             }
         }
+
+        #region Delegados
+        void UcUbicacion_OnAceptarModal()
+        {
+            try
+            {
+                UcUbicacion.ValidaCapturaUbicacion();
+                btnModalUbicacion.CssClass = "btn btn-success btn-lg";
+                btnModalRoles.CssClass = "btn btn-primary btn-lg";
+                btnModalRoles.Enabled = true;
+                btnModalGrupos.CssClass = "btn btn-primary btn-lg";
+                btnModalGrupos.Enabled = false;
+                btnModalRoles.CssClass = "btn btn-primary btn-lg";
+                upRoles.Update();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalUbicacion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                UcUbicacion.AlertaUbicacion = _lstError;
+            }
+            
+        }
+        void UcUbicacion_OnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalUbicacion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                UcUbicacion.AlertaUbicacion = _lstError;
+            }
+        }
+
+        void ucOrganizacion_OnAceptarModal()
+        {
+            try
+            {
+                ucOrganizacion.ValidaCapturaOrganizacion();
+                btnModalOrganizacion.CssClass = "btn btn-success btn-lg";
+                btnModalUbicacion.CssClass = "btn btn-primary btn-lg";
+                btnModalUbicacion.Enabled = true;
+                btnModalRoles.CssClass = "btn btn-primary btn-lg";
+                btnModalRoles.Enabled = false;
+                btnModalGrupos.CssClass = "btn btn-primary btn-lg";
+                btnModalGrupos.Enabled = false;
+                upUbicacion.Update();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalOrganizacion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                ucOrganizacion.AlertaOrganizacion = _lstError;
+
+            }
+        }
+
+        void ucOrganizacion_OnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalOrganizacion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                ucOrganizacion.AlertaOrganizacion = _lstError;
+
+            }
+        }
+        #endregion Delegados
     }
 }

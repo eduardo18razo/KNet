@@ -96,6 +96,7 @@
   <xs:element name="ArrayOfTicketAsignacion" nillable="true" type="tns:ArrayOfTicketAsignacion" />
   <xs:complexType name="TicketAsignacion">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Comentarios" nillable="true" type="xs:string" />
       <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacion" nillable="true" type="q12:EstatusAsignacion" />
       <xs:element minOccurs="0" name="FechaAsignacion" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />

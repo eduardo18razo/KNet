@@ -20,24 +20,24 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:15277/ServiceUbicacion.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:15277/ServiceUbicacion.svc/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ServiceUbicacion.xsd" MetadataType="Schema" ID="d24d34bc-1f27-4a09-a2d1-11eb0efa8440" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd11" />
-    <MetadataFile FileName="ServiceUbicacion1.xsd" MetadataType="Schema" ID="2a051a74-f1cd-4c98-9d74-8f816d70e4e3" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd10" />
-    <MetadataFile FileName="ServiceUbicacion2.xsd" MetadataType="Schema" ID="28b0fbf7-d0e9-43a8-b226-f9fe94687763" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd4" />
-    <MetadataFile FileName="ServiceUbicacion3.xsd" MetadataType="Schema" ID="2a06b0fd-2af4-45df-aec5-7a21fbe0c864" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd2" />
-    <MetadataFile FileName="ServiceUbicacion.wsdl" MetadataType="Wsdl" ID="8e737d4a-a65d-41d5-b009-a4a01e84459e" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?wsdl" />
-    <MetadataFile FileName="ServiceUbicacion4.xsd" MetadataType="Schema" ID="9a28ee45-2f36-4881-95ed-f6161bfe6a30" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd0" />
-    <MetadataFile FileName="ServiceUbicacion5.xsd" MetadataType="Schema" ID="c8b21ff3-74ee-4798-b3dd-070359a18714" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd9" />
-    <MetadataFile FileName="ServiceUbicacion6.xsd" MetadataType="Schema" ID="43cb1941-1805-4bd1-82fc-7df74edcae5e" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd7" />
-    <MetadataFile FileName="ServiceUbicacion7.xsd" MetadataType="Schema" ID="f870ed9f-5944-4734-9b19-074fff8e04ae" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd5" />
-    <MetadataFile FileName="ServiceUbicacion8.xsd" MetadataType="Schema" ID="659cf876-5c18-48f8-8e47-275c65619c5c" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd3" />
-    <MetadataFile FileName="ServiceUbicacion9.xsd" MetadataType="Schema" ID="e31776c4-ef26-44a3-8655-6d4e5e2f23ff" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd1" />
-    <MetadataFile FileName="ServiceUbicacion10.xsd" MetadataType="Schema" ID="e0084925-355f-4f70-82ea-b6fa15d953c6" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd6" />
-    <MetadataFile FileName="ServiceUbicacion11.xsd" MetadataType="Schema" ID="925bc058-c8df-4a72-a803-be9b594ff823" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd8" />
-    <MetadataFile FileName="ServiceUbicacion.disco" MetadataType="Disco" ID="84249961-c574-41a2-807d-a505781f004e" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?disco" />
-    <MetadataFile FileName="ServiceUbicacion12.xsd" MetadataType="Schema" ID="a87658cc-c02a-41da-b664-3e45067a50f0" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc?xsd=xsd12" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="acd0a678-d361-4d80-8464-387abce23682" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="8a2176cf-2d15-4ebf-81f3-115f05fb03ce" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="63a8d80a-8c32-4b02-acc0-b57bae7ed612" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="KiiniNet.Entities.Cat.Arbol.Ubicaciones.xsd" MetadataType="Schema" ID="e1e931a8-5db2-4255-9543-120cc5c70aa1" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="KiiniNet.Entities.Cat.Sistema.xsd" MetadataType="Schema" ID="8a834f02-edef-4be6-a98b-a99c5b0ab931" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="KiiniNet.Entities.Cat.Operacion.xsd" MetadataType="Schema" ID="3846b4c8-cb19-48b2-8080-f5d5d409520a" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="KiiniNet.Entities.Operacion.xsd" MetadataType="Schema" ID="5f2d5159-9d25-46e0-b568-3f47ad4cbc1f" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="KiiniNet.Entities.Cat.Arbol.Organizacion.xsd" MetadataType="Schema" ID="12097ff4-b9fa-4660-80db-8953be4c4380" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="KiiniNet.Entities.Operacion.Tickets.xsd" MetadataType="Schema" ID="2b2f6e96-d953-4a91-be1c-06686401b41b" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="KiiniNet.Entities.Cat.Usuario.xsd" MetadataType="Schema" ID="52aa4d6b-8917-466b-b4be-64faed546590" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="KiiniNet.Entities.Parametros.xsd" MetadataType="Schema" ID="b8a3fb31-83ed-4c10-bca4-dae0bc2c0516" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="KiiniNet.Entities.Operacion.Usuarios.xsd" MetadataType="Schema" ID="9ddbad85-a398-4706-b18d-042f49faf862" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio.xsd" MetadataType="Schema" ID="a3e0a313-1428-4bcc-a901-7619e4491b45" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="KiiniNet.Entities.Cat.Mascaras.xsd" MetadataType="Schema" ID="55cac605-f9ec-4498-9972-da1f75cf44b8" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
+    <MetadataFile FileName="KiiniNet.Entities.Cat.Arbol.Nodos.xsd" MetadataType="Schema" ID="b65a76da-4340-43c9-86a0-b5b073a30f29" SourceId="1" SourceUrl="http://localhost:15277/ServiceUbicacion.svc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -111,13 +111,13 @@ namespace KiiniHelp.Operacion
 
                 }
                 UcDetalleUsuario.OnAceptarModal += UcDetalleUsuario_OnAceptarModal;
-                UcDetalleUsuario.OnCerraModal += UcDetalleUsuario1OnOnCerraModal;
+                UcDetalleUsuario.OnCancelarModal += UcDetalleUsuario1OnOnCancelarModal;
 
                 UcCambiarEstatusTicket.OnAceptarModal += UcCambiarEstatusTicket_OnAceptarModal;
-                UcCambiarEstatusTicket.OnCerraModal += UcCambiarEstatusTicket_OnCerraModal;
+                UcCambiarEstatusTicket.OnCancelarModal += UcCambiarEstatusTicketOnCancelarModal;
 
                 UcCambiarEstatusAsignacion.OnAceptarModal += UcCambiarEstatusAsignacion_OnAceptarModal;
-                UcCambiarEstatusAsignacion.OnCerraModal += UcCambiarEstatusAsignacion_OnCerraModal;
+                UcCambiarEstatusAsignacion.OnCancelarModal += UcCambiarEstatusAsignacionOnCancelarModal;
             }
             catch (Exception ex)
             {
@@ -275,7 +275,7 @@ namespace KiiniHelp.Operacion
             }
         }
 
-        private void UcDetalleUsuario1OnOnCerraModal()
+        private void UcDetalleUsuario1OnOnCancelarModal()
         {
             try
             {
@@ -309,7 +309,7 @@ namespace KiiniHelp.Operacion
                 AlertaGeneral = _lstError;
             }
         }
-        void UcCambiarEstatusTicket_OnCerraModal()
+        void UcCambiarEstatusTicketOnCancelarModal()
         {
             try
             {
@@ -326,7 +326,7 @@ namespace KiiniHelp.Operacion
             }
         }
 
-        void UcCambiarEstatusAsignacion_OnCerraModal()
+        void UcCambiarEstatusAsignacionOnCancelarModal()
         {
             try
             {

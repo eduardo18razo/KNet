@@ -37,8 +37,8 @@ namespace KiiniHelp.Test
         {
             try
             {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalOrganizacion\");", true);
-                upPrincipal.Update();
+                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalOrganizacion\");", true);
+                //upPrincipal.Update();
             }
             catch (Exception)
             {
@@ -50,8 +50,8 @@ namespace KiiniHelp.Test
         {
             try
             {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalOrganizacion\");", true);
-                upPrincipal.Update();
+                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalOrganizacion\");", true);
+                //upPrincipal.Update();
             }
             catch (Exception)
             {

@@ -43,7 +43,7 @@
                 </div>
                 <div class="panel-footer" style="text-align: center">
                     <asp:Button ID="btnAceptar" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnAceptar_OnClick" />
-                    <asp:Button ID="btnCerrar" runat="server" CssClass="btn btn-danger" Text="Cerrar" data-dismiss="modal" />
+                    <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancelar_OnClick" />
                 </div>
             </div>
     </ContentTemplate>

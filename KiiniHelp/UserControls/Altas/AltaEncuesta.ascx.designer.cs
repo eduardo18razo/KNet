@@ -7,10 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-
 namespace KiiniHelp.UserControls.Altas {
     
     
@@ -23,7 +19,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected UpdatePanel upEncuesta;
+        protected global::System.Web.UI.UpdatePanel upEncuesta;
         
         /// <summary>
         /// panelAlerta control.
@@ -32,7 +28,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HtmlGenericControl panelAlerta;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlerta;
         
         /// <summary>
         /// rptErrorGrupoUsuario control.
@@ -41,7 +37,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Repeater rptErrorGrupoUsuario;
+        protected global::System.Web.UI.WebControls.Repeater rptErrorGrupoUsuario;
         
         /// <summary>
         /// dfIdGrupo control.
@@ -50,7 +46,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HiddenField dfIdGrupo;
+        protected global::System.Web.UI.WebControls.HiddenField dfIdGrupo;
         
         /// <summary>
         /// dfModalPadre control.
@@ -59,7 +55,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected HiddenField dfModalPadre;
+        protected global::System.Web.UI.WebControls.HiddenField dfModalPadre;
         
         /// <summary>
         /// ddlTipoEncuesta control.
@@ -68,7 +64,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected DropDownList ddlTipoEncuesta;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoEncuesta;
         
         /// <summary>
         /// txtDescripcionEncuesta control.
@@ -77,7 +73,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtDescripcionEncuesta;
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcionEncuesta;
         
         /// <summary>
         /// chkPonderacion control.
@@ -86,7 +82,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected CheckBox chkPonderacion;
+        protected global::System.Web.UI.WebControls.CheckBox chkPonderacion;
         
         /// <summary>
         /// txtIdPregunta control.
@@ -95,7 +91,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtIdPregunta;
+        protected global::System.Web.UI.WebControls.TextBox txtIdPregunta;
         
         /// <summary>
         /// Label4 control.
@@ -104,7 +100,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Label Label4;
+        protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
         /// txtPregunta control.
@@ -113,7 +109,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtPregunta;
+        protected global::System.Web.UI.WebControls.TextBox txtPregunta;
         
         /// <summary>
         /// Label5 control.
@@ -122,7 +118,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Label Label5;
+        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
         /// txtPonderacion control.
@@ -131,7 +127,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected TextBox txtPonderacion;
+        protected global::System.Web.UI.WebControls.TextBox txtPonderacion;
         
         /// <summary>
         /// btnAddPregunta control.
@@ -140,7 +136,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Button btnAddPregunta;
+        protected global::System.Web.UI.WebControls.Button btnAddPregunta;
         
         /// <summary>
         /// rptPreguntas control.
@@ -149,7 +145,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Repeater rptPreguntas;
+        protected global::System.Web.UI.WebControls.Repeater rptPreguntas;
         
         /// <summary>
         /// btnGuardarEncuesta control.
@@ -158,7 +154,7 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Button btnGuardarEncuesta;
+        protected global::System.Web.UI.WebControls.Button btnGuardarEncuesta;
         
         /// <summary>
         /// btnLimpiarEncuesta control.
@@ -167,6 +163,15 @@ namespace KiiniHelp.UserControls.Altas {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Button btnLimpiarEncuesta;
+        protected global::System.Web.UI.WebControls.Button btnLimpiarEncuesta;
+        
+        /// <summary>
+        /// btnCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
     }
 }

@@ -589,15 +589,6 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         protected global::KiiniHelp.UserControls.Altas.AltaInformacionConsulta UcAltaInformacionConsulta;
         
         /// <summary>
-        /// btnCerraraltaInformacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerraraltaInformacion;
-        
-        /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
@@ -614,15 +605,6 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::KiiniHelp.UserControls.Altas.AltaMascaraAcceso UcAltaMascaraAcceso;
-        
-        /// <summary>
-        /// btnCerrarModalAltaMascara control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarModalAltaMascara;
         
         /// <summary>
         /// upModalAltaSla control.
@@ -643,15 +625,6 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         protected global::KiiniHelp.UserControls.Altas.AltaSla UcSla;
         
         /// <summary>
-        /// btnCerrarAltaSla control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarAltaSla;
-        
-        /// <summary>
         /// UpdatePanel2 control.
         /// </summary>
         /// <remarks>
@@ -670,15 +643,6 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         protected global::KiiniHelp.UserControls.Altas.AltaEncuesta UcEncuesta;
         
         /// <summary>
-        /// btnCerrarEncuesta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarEncuesta;
-        
-        /// <summary>
         /// upModalAltaAreas control.
         /// </summary>
         /// <remarks>
@@ -695,14 +659,5 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::KiiniHelp.UserControls.Altas.AltaArea AltaAreas;
-        
-        /// <summary>
-        /// btnCerrarGrupos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerrarGrupos;
     }
 }

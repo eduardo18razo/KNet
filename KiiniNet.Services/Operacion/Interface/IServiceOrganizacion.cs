@@ -58,5 +58,17 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         Organizacion ObtenerOrganizacionUsuario(int idOrganizacion);
+
+        [OperationContract]
+        List<Organizacion> ObtenerOrganizaciones(int? idTipoUsuario, int? idHolding, int? idCompania, int? idDireccion, int? idSubDireccion, int? idGerencia, int? idSubGerencia, int? idJefatura);
+
+        [OperationContract]
+        void HabilitarOrganizacion(int idOrganizacion, bool habilitado);
+
+        [OperationContract]
+        Organizacion ObtenerOrganizacionById(int idOrganizacion);
+
+        [OperationContract]
+        void ActualizarOrganizacion(Organizacion org);
     }
 }

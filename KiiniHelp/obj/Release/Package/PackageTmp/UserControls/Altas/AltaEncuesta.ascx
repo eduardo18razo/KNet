@@ -97,6 +97,7 @@
             <div class="panel-footer" style="text-align: center">
                 <asp:Button ID="btnGuardarEncuesta" runat="server" CssClass="btn btn-lg btn-success" Text="Guardar" OnClick="btnGuardarEncuesta_OnClick" />
                 <asp:Button ID="btnLimpiarEncuesta" runat="server" CssClass="btn btn-lg btn-danger" Text="Limpiar" OnClick="btnLimpiarEncuesta_OnClick" />
+                <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-lg btn-danger" Text="Cancelar" OnClick="btnCancelar_OnClick" />
             </div>
         </div>
     </ContentTemplate>

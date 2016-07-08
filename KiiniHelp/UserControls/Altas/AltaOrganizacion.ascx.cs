@@ -21,7 +21,8 @@ namespace KiiniHelp.UserControls.Altas
         private List<string> _lstError = new List<string>();
 
         public event DelegateAceptarModal OnAceptarModal;
-        public event DelegateCerrarModal OnCerraModal;
+        public event DelegateLimpiarModal OnLimpiarModal;
+        public event DelegateCancelarModal OnCancelarModal;
 
         public int IdTipoUsuario
         {
@@ -377,26 +378,6 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        protected void btnAceptarOrganizacion_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (OnAceptarModal != null)
-                {
-                    OnAceptarModal();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
         protected void OnClick(object sender, EventArgs e)
         {
             try
@@ -671,5 +652,43 @@ namespace KiiniHelp.UserControls.Altas
             ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoOrganizacion\");", true);
         }
         #endregion
+
+        protected void btnAceptarOrganizacion_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (OnAceptarModal != null)
+                {
+                    OnAceptarModal();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (OnCancelarModal != null)
+                    OnCancelarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
     }
 }

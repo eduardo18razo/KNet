@@ -13,8 +13,12 @@ using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
 {
-    public partial class AltaGrupoUsuario : UserControl
+    public partial class AltaGrupoUsuario : UserControl, IControllerModal
     {
+        public event DelegateAceptarModal OnAceptarModal;
+        public event DelegateLimpiarModal OnLimpiarModal;
+        public event DelegateCancelarModal OnCancelarModal;
+
         readonly ServiceGrupoUsuarioClient _servicioGrupoUsuario = new ServiceGrupoUsuarioClient();
         readonly ServiceSubRolClient _servicioSistemaSubRol = new ServiceSubRolClient();
         private List<string> _lstError = new List<string>();
@@ -146,59 +150,6 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        protected void btnGuardar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                ValidaCapturaGrupoUsuario();
-                GrupoUsuario grupoUsuario = new GrupoUsuario
-                {
-                    IdTipoUsuario = IdTipoUsuario,
-                    IdTipoGrupo = Convert.ToInt32(IdTipoGrupo),
-                    Descripcion = txtDescripcionGrupoUsuario.Text,
-                    Habilitado = chkHabilitado.Checked,
-                    SubGrupoUsuario = new List<SubGrupoUsuario>()
-                };
-                foreach (ListItem item in chklbxSubRoles.Items.Cast<ListItem>().Where(item => item.Selected))
-                {
-                    grupoUsuario.SubGrupoUsuario.Add(new SubGrupoUsuario
-                    {
-                        IdSubRol = Convert.ToInt32(item.Value)
-                    });
-                }
-                grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
-                _servicioGrupoUsuario.GuardarGrupoUsuario(grupoUsuario);
-                LimpiarCampos();
-                IdTipoGrupo = Convert.ToInt32(hfIdGrupo.Value);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnLimpiar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                LimpiarCampos();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-        
         protected void chklbxSubRoles_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -237,6 +188,82 @@ namespace KiiniHelp.UserControls.Altas
                         break;
                 }
 
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnGuardar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ValidaCapturaGrupoUsuario();
+                GrupoUsuario grupoUsuario = new GrupoUsuario
+                {
+                    IdTipoUsuario = IdTipoUsuario,
+                    IdTipoGrupo = Convert.ToInt32(IdTipoGrupo),
+                    Descripcion = txtDescripcionGrupoUsuario.Text,
+                    Habilitado = chkHabilitado.Checked,
+                    SubGrupoUsuario = new List<SubGrupoUsuario>()
+                };
+                foreach (ListItem item in chklbxSubRoles.Items.Cast<ListItem>().Where(item => item.Selected))
+                {
+                    grupoUsuario.SubGrupoUsuario.Add(new SubGrupoUsuario
+                    {
+                        IdSubRol = Convert.ToInt32(item.Value)
+                    });
+                }
+                grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
+                _servicioGrupoUsuario.GuardarGrupoUsuario(grupoUsuario);
+                LimpiarCampos();
+                IdTipoGrupo = Convert.ToInt32(hfIdGrupo.Value);
+                if (OnAceptarModal != null)
+                    OnAceptarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnLimpiar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LimpiarCampos();
+                if (OnLimpiarModal != null)
+                    OnLimpiarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LimpiarCampos();
+                if (OnCancelarModal != null)
+                    OnCancelarModal();
             }
             catch (Exception ex)
             {

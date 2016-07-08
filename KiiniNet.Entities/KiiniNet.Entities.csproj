@@ -81,6 +81,7 @@
     <Compile Include="Cat\Arbol\Organizacion\SubDireccion.cs" />
     <Compile Include="Cat\Sistema\Rol.cs" />
     <Compile Include="Cat\Sistema\SubRol.cs" />
+    <Compile Include="Cat\Usuario\Puesto.cs" />
     <Compile Include="Cat\Usuario\Sla.cs" />
     <Compile Include="Cat\Usuario\SubGrupoUsuario.cs" />
     <Compile Include="Helper\HelperCampoMascaraCaptura.cs" />

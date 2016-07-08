@@ -40,6 +40,7 @@
                             <div class="col-sm-offset-1">
                                 <asp:Label for="ddlHolding" class="col-sm-3 control-label" runat="server">Holding</asp:Label>
                                 <asp:DropDownList runat="server" ID="ddlHolding" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlHolding_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
+                                <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" OnClick="OnClick" ID="btnAltaHolding" CommandName="Holding" CommandArgument="99" />
                             </div>
                         </div>
                         <br />
@@ -92,8 +93,8 @@
                         </div>
                     </div>
                     <div class="panel-footer" style="text-align: center">
-                        <asp:Button ID="btnCerrarOrganizacion" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnCerrarOrganizacion_OnClick" />
-                        <asp:Button ID="Button1" runat="server" CssClass="btn btn-danger" Text="Cerrar" data-dismiss="modal" />
+                        <asp:Button ID="btnAceptar" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnAceptarOrganizacion_OnClick" />
+                        <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancelar_OnClick" />
                     </div>
                 </div>
             </div>
@@ -102,7 +103,7 @@
 </asp:UpdatePanel>
 
 <%--MODAL CATALOGOS--%>
-<div class="modal fade" id="editCatalogoUbicacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div class="modal fade" id="editCatalogoOrganizacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <asp:UpdatePanel ID="upCatlogos" runat="server">
         <ContentTemplate>
             <div class="modal-dialog">
@@ -145,7 +146,7 @@
                                 <div class="form-group">
                                     <label for="txtDescripcionCatalogo" class="col-sm-2 control-label">Descripcion</label>
                                     <div class="col-sm-10">
-                                        <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13);" />
+                                        <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +155,7 @@
                     </div>
                     <div class="panel-footer" style="text-align: center">
                         <asp:Button ID="btnGuardarCatalogo" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnGuardarCatalogo_OnClick" />
-                        <asp:Button ID="btnCancelarCatalogo" runat="server" CssClass="btn btn-danger" Text="Cancelar" data-dismiss="modal" OnClick="btnCancelarCatalogo_OnClick" />
+                        <asp:Button ID="btnCancelarCatalogo" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancelarCatalogo_OnClick" />
                     </div>
                 </div>
             </div>
