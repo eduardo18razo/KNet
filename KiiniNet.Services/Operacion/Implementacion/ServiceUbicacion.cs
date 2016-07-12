@@ -159,13 +159,58 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<Ubicacion> ObtenerOrganizaciones()
+        public List<Ubicacion> ObtenerUbicaciones(int? idTipoUsuario, int? idPais, int? idCampus, int? idTorre, int? idPiso, int? idZona, int? idSubZona, int? idSiteRack)
         {
             try
             {
                 using (BusinessUbicacion negocio = new BusinessUbicacion())
                 {
-                    return negocio.ObtenerOrganizaciones();
+                    return negocio.ObtenerUbicaciones(idTipoUsuario, idPais, idCampus, idTorre, idPiso, idZona, idSubZona, idSiteRack);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ActualizarUbicacion(Ubicacion ub)
+        {
+            try
+            {
+                using (BusinessUbicacion negocio = new BusinessUbicacion())
+                {
+                    negocio.ActualizarUbicacion(ub);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Ubicacion ObtenerUbicacionById(int idUbicacion)
+        {
+            try
+            {
+                using (BusinessUbicacion negocio = new BusinessUbicacion())
+                {
+                    return negocio.ObtenerUbicacionById(idUbicacion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void HabilitarUbicacion(int idUbicacion, bool habilitado)
+        {
+            try
+            {
+                using (BusinessUbicacion negocio = new BusinessUbicacion())
+                {
+                    negocio.HabilitarUbicacion(idUbicacion, habilitado);
                 }
             }
             catch (Exception ex)

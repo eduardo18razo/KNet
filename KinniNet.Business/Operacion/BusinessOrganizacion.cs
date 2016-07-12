@@ -612,8 +612,8 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                Organizacion usuario = db.Organizacion.SingleOrDefault(w => w.Id == idOrganizacion);
-                if (usuario != null) usuario.Habilitado = habilitado;
+                Organizacion org = db.Organizacion.SingleOrDefault(w => w.Id == idOrganizacion);
+                if (org != null) org.Habilitado = habilitado;
                 db.SaveChanges();
             }
             catch (Exception ex)

@@ -45,8 +45,17 @@ namespace KiiniHelp.ServiceUbicacion {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionUsuario", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionUsuarioResponse")]
         KiiniNet.Entities.Cat.Operacion.Ubicacion ObtenerUbicacionUsuario(int idUbicacion);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerOrganizaciones", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerOrganizacionesResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Ubicacion> ObtenerOrganizaciones();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicaciones", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionesResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Ubicacion> ObtenerUbicaciones(System.Nullable<int> idTipoUsuario, System.Nullable<int> idPais, System.Nullable<int> idCampus, System.Nullable<int> idTorre, System.Nullable<int> idPiso, System.Nullable<int> idZona, System.Nullable<int> idSubZona, System.Nullable<int> idSiteRack);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ActualizarUbicacion", ReplyAction="http://tempuri.org/IServiceUbicacion/ActualizarUbicacionResponse")]
+        void ActualizarUbicacion(KiiniNet.Entities.Cat.Operacion.Ubicacion ub);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionById", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionByIdResponse")]
+        KiiniNet.Entities.Cat.Operacion.Ubicacion ObtenerUbicacionById(int idUbicacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/HabilitarUbicacion", ReplyAction="http://tempuri.org/IServiceUbicacion/HabilitarUbicacionResponse")]
+        void HabilitarUbicacion(int idUbicacion, bool habilitado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -116,8 +125,20 @@ namespace KiiniHelp.ServiceUbicacion {
             return base.Channel.ObtenerUbicacionUsuario(idUbicacion);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Ubicacion> ObtenerOrganizaciones() {
-            return base.Channel.ObtenerOrganizaciones();
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Ubicacion> ObtenerUbicaciones(System.Nullable<int> idTipoUsuario, System.Nullable<int> idPais, System.Nullable<int> idCampus, System.Nullable<int> idTorre, System.Nullable<int> idPiso, System.Nullable<int> idZona, System.Nullable<int> idSubZona, System.Nullable<int> idSiteRack) {
+            return base.Channel.ObtenerUbicaciones(idTipoUsuario, idPais, idCampus, idTorre, idPiso, idZona, idSubZona, idSiteRack);
+        }
+        
+        public void ActualizarUbicacion(KiiniNet.Entities.Cat.Operacion.Ubicacion ub) {
+            base.Channel.ActualizarUbicacion(ub);
+        }
+        
+        public KiiniNet.Entities.Cat.Operacion.Ubicacion ObtenerUbicacionById(int idUbicacion) {
+            return base.Channel.ObtenerUbicacionById(idUbicacion);
+        }
+        
+        public void HabilitarUbicacion(int idUbicacion, bool habilitado) {
+            base.Channel.HabilitarUbicacion(idUbicacion, habilitado);
         }
     }
 }

@@ -251,10 +251,6 @@ namespace KiiniHelp.Administracion.Usuarios
             }
         }
 
-        
-
-
-
         protected void chkKbxRoles_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try

@@ -12,7 +12,7 @@ namespace KiiniNet.Services.Operacion.Interface
         void GuardarUsuario(Usuario usuario);
 
         [OperationContract]
-        List<Usuario> ObtenerUsuarios();
+        List<Usuario> ObtenerUsuarios(int? idTipoUsuario);
 
         [OperationContract]
         Usuario ObtenerDetalleUsuario(int idUsuario);

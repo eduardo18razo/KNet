@@ -167,5 +167,50 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<ArbolAcceso> ObtenerArbolesAccesoAll(int? idArea, int? idTipoUsuario, int? idTipoArbol, int? nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7)
+        {
+            try
+            {
+                using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
+                {
+                    return negocio.ObtenerArbolesAccesoAll(idArea, idTipoUsuario, idTipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void HabilitarArbol(int idArbol, bool habilitado)
+        {
+            try
+            {
+                using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
+                {
+                    negocio.HabilitarArbol(idArbol, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ActualizardArbol(ArbolAcceso arbolAcceso)
+        {
+            try
+            {
+                using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
+                {
+                    negocio.ActualizardArbol(arbolAcceso);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

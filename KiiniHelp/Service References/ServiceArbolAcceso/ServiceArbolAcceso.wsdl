@@ -11,10 +11,11 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceArbolAcceso_ObtenerNivel1_InputMessage">
@@ -83,6 +84,24 @@
   <wsdl:message name="IServiceArbolAcceso_ObtenerArbolAcceso_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerArbolAccesoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceArbolAcceso_ObtenerArbolesAccesoAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerArbolesAccesoAll" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArbolAcceso_ObtenerArbolesAccesoAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerArbolesAccesoAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArbolAcceso_HabilitarArbol_InputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarArbol" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArbolAcceso_HabilitarArbol_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarArbolResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArbolAcceso_ActualizardArbol_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizardArbol" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArbolAcceso_ActualizardArbol_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizardArbolResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceArbolAcceso">
     <wsdl:operation name="ObtenerNivel1">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel1" message="tns:IServiceArbolAcceso_ObtenerNivel1_InputMessage" />
@@ -127,6 +146,18 @@
     <wsdl:operation name="ObtenerArbolAcceso">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolAcceso" message="tns:IServiceArbolAcceso_ObtenerArbolAcceso_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolAccesoResponse" message="tns:IServiceArbolAcceso_ObtenerArbolAcceso_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerArbolesAccesoAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoAll" message="tns:IServiceArbolAcceso_ObtenerArbolesAccesoAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoAllResponse" message="tns:IServiceArbolAcceso_ObtenerArbolesAccesoAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HabilitarArbol">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceArbolAcceso/HabilitarArbol" message="tns:IServiceArbolAcceso_HabilitarArbol_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceArbolAcceso/HabilitarArbolResponse" message="tns:IServiceArbolAcceso_HabilitarArbol_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizardArbol">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ActualizardArbol" message="tns:IServiceArbolAcceso_ActualizardArbol_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ActualizardArbolResponse" message="tns:IServiceArbolAcceso_ActualizardArbol_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceArbolAcceso">
@@ -223,6 +254,33 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerArbolAcceso">
       <soap:operation soapAction="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolAcceso" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerArbolesAccesoAll">
+      <soap:operation soapAction="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HabilitarArbol">
+      <soap:operation soapAction="http://tempuri.org/IServiceArbolAcceso/HabilitarArbol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizardArbol">
+      <soap:operation soapAction="http://tempuri.org/IServiceArbolAcceso/ActualizardArbol" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

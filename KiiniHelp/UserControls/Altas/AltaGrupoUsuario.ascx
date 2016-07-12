@@ -22,7 +22,7 @@
         </header>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <asp:Label runat="server" Text="Alta Grupo de Usaurio" ID="lblTitle"></asp:Label>
+                <asp:Label runat="server" Text="Alta Grupo de Usuario" ID="lblTitle"></asp:Label>
             </div>
             <div class="panel-body">
                 <div>

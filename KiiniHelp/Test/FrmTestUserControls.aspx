@@ -1,6 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmTestUserControls.aspx.cs" Inherits="KiiniHelp.Test.FrmTestUserControls" %>
 
 <%@ Register Src="~/UserControls/Consultas/UcConsultaOrganizacion.ascx" TagPrefix="uc1" TagName="UcConsultaOrganizacion" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaUbicaciones.ascx" TagPrefix="uc1" TagName="UcConsultaUbicaciones" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaUsuarios.ascx" TagPrefix="uc1" TagName="UcConsultaUsuarios" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaGrupos.ascx" TagPrefix="uc1" TagName="UcConsultaGrupos" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaArboles.ascx" TagPrefix="uc1" TagName="UcConsultaArboles" %>
+
+
+
+
 
 <!DOCTYPE html>
 
@@ -79,11 +87,6 @@
             </Scripts>
         </asp:ScriptManager>
         <div id="full">
-            <%--<asp:UpdatePanel runat="server">
-                <ContentTemplate>--%>
-                    <uc1:UcConsultaOrganizacion runat="server" ID="UcConsultaOrganizacion" />
-                <%--</ContentTemplate>
-            </asp:UpdatePanel>--%>
         </div>
     </form>
 </body>

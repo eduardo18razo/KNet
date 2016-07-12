@@ -74,7 +74,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             {
                 using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
                 {
-                    return negocio.ObtenerGrupoUsuario(idGrupoUsuario);
+                    return negocio.ObtenerGrupoUsuarioById(idGrupoUsuario);
                 }
             }
             catch (Exception ex)
@@ -120,6 +120,51 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
                 {
                     return negocio.ObtenerGruposDeUsuario(idUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void HabilitarGrupo(int idGrupo, bool habilitado)
+        {
+            try
+            {
+                using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
+                {
+                    negocio.HabilitarGrupo(idGrupo, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<GrupoUsuario> ObtenerGruposUsuarioAll(int? idTipoUsuario, int? idTipoGrupo)
+        {
+            try
+            {
+                using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
+                {
+                    return negocio.ObtenerGruposUsuarioAll(idTipoUsuario, idTipoGrupo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ActualizarGrupo(GrupoUsuario gpo)
+        {
+            try
+            {
+                using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
+                {
+                    negocio.ActualizarGrupo(gpo);
                 }
             }
             catch (Exception ex)

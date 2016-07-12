@@ -19,7 +19,7 @@ namespace KiiniHelp.ServiceUsuario {
         void GuardarUsuario(KiiniNet.Entities.Operacion.Usuarios.Usuario usuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ObtenerUsuarios", ReplyAction="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> ObtenerUsuarios();
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> ObtenerUsuarios(System.Nullable<int> idTipoUsuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ObtenerDetalleUsuario", ReplyAction="http://tempuri.org/IServiceUsuarios/ObtenerDetalleUsuarioResponse")]
         KiiniNet.Entities.Operacion.Usuarios.Usuario ObtenerDetalleUsuario(int idUsuario);
@@ -59,8 +59,8 @@ namespace KiiniHelp.ServiceUsuario {
             base.Channel.GuardarUsuario(usuario);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> ObtenerUsuarios() {
-            return base.Channel.ObtenerUsuarios();
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> ObtenerUsuarios(System.Nullable<int> idTipoUsuario) {
+            return base.Channel.ObtenerUsuarios(idTipoUsuario);
         }
         
         public KiiniNet.Entities.Operacion.Usuarios.Usuario ObtenerDetalleUsuario(int idUsuario) {

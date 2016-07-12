@@ -13,7 +13,7 @@ using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Consultas
 {
-    public partial class UcConsultaOrganizacion : UserControl
+    public partial class UcConsultaOrganizacion : UserControl, IControllerModal
     {
         readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
         readonly ServiceOrganizacionClient _servicioOrganizacion = new ServiceOrganizacionClient();
@@ -723,5 +723,8 @@ namespace KiiniHelp.UserControls.Consultas
         }
 
 
+        public event DelegateAceptarModal OnAceptarModal;
+        public event DelegateLimpiarModal OnLimpiarModal;
+        public event DelegateCancelarModal OnCancelarModal;
     }
 }

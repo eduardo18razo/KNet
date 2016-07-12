@@ -110,6 +110,37 @@ namespace KiiniHelp.UserControls.Altas
             set { hfIdTipoUsuario.Value = value.ToString(); }
         }
 
+        public bool Alta
+        {
+            get { return Convert.ToBoolean(ViewState["Alta"].ToString()); }
+            set
+            {
+                ViewState["Alta"] = value.ToString();
+                chklbxSubRoles.Visible = value;
+            }
+        }
+
+        public GrupoUsuario GrupoUsuario
+        {
+            get { return (GrupoUsuario)Session["GrupoUsuarioEditar"]; }
+            set
+            {
+                Session["GrupoUsuarioEditar"] = value;
+                IdTipoUsuario = value.IdTipoUsuario;
+                IdTipoGrupo = value.IdTipoGrupo;
+                txtDescripcionGrupoUsuario.Text = value.Descripcion;
+                chklbxSubRoles.ClearSelection();
+                if (value.SubGrupoUsuario == null) return;
+                foreach (SubGrupoUsuario subGrupo in value.SubGrupoUsuario)
+                {
+                    foreach (ListItem item in chklbxSubRoles.Items.Cast<ListItem>().Where(item => item.Selected))
+                    {
+                        item.Selected = subGrupo.Id == int.Parse(item.Value);
+                    }
+                }
+            }
+        }
+
         private void ValidaCapturaGrupoUsuario()
         {
             StringBuilder sb = new StringBuilder();
@@ -126,6 +157,7 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 txtDescripcionGrupoUsuario.Text = String.Empty;
+                chklbxSubRoles.ClearSelection();
             }
             catch (Exception ex)
             {
@@ -205,23 +237,46 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 ValidaCapturaGrupoUsuario();
-                GrupoUsuario grupoUsuario = new GrupoUsuario
+                GrupoUsuario grupoUsuario;
+                if (Alta)
                 {
-                    IdTipoUsuario = IdTipoUsuario,
-                    IdTipoGrupo = Convert.ToInt32(IdTipoGrupo),
-                    Descripcion = txtDescripcionGrupoUsuario.Text,
-                    Habilitado = chkHabilitado.Checked,
-                    SubGrupoUsuario = new List<SubGrupoUsuario>()
-                };
-                foreach (ListItem item in chklbxSubRoles.Items.Cast<ListItem>().Where(item => item.Selected))
-                {
-                    grupoUsuario.SubGrupoUsuario.Add(new SubGrupoUsuario
+                    grupoUsuario = new GrupoUsuario
                     {
-                        IdSubRol = Convert.ToInt32(item.Value)
-                    });
+                        IdTipoUsuario = IdTipoUsuario,
+                        IdTipoGrupo = Convert.ToInt32(IdTipoGrupo),
+                        Descripcion = txtDescripcionGrupoUsuario.Text,
+                        Habilitado = chkHabilitado.Checked,
+                        SubGrupoUsuario = new List<SubGrupoUsuario>()
+                    };
+                    foreach (ListItem item in chklbxSubRoles.Items.Cast<ListItem>().Where(item => item.Selected))
+                    {
+                        grupoUsuario.SubGrupoUsuario.Add(new SubGrupoUsuario
+                        {
+                            IdSubRol = Convert.ToInt32(item.Value)
+                        });
+                    }
+                    grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
+                    _servicioGrupoUsuario.GuardarGrupoUsuario(grupoUsuario);
                 }
-                grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
-                _servicioGrupoUsuario.GuardarGrupoUsuario(grupoUsuario);
+                else
+                {
+                    grupoUsuario = GrupoUsuario;
+                    //foreach (ListItem item in chklbxSubRoles.Items.Cast<ListItem>().Where(item => item.Selected))
+                    //{
+                    //    grupoUsuario.SubGrupoUsuario.Add(new SubGrupoUsuario
+                    //    {
+                    //        IdSubRol = Convert.ToInt32(item.Value)
+                    //    });
+                    //}
+                    grupoUsuario.Descripcion = txtDescripcionGrupoUsuario.Text;
+                    if (grupoUsuario.SubGrupoUsuario != null)
+                        grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
+                    _servicioGrupoUsuario.ActualizarGrupo(grupoUsuario);
+
+                }
+
+
+
                 LimpiarCampos();
                 IdTipoGrupo = Convert.ToInt32(hfIdGrupo.Value);
                 if (OnAceptarModal != null)

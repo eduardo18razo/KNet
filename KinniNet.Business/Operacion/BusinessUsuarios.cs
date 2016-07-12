@@ -68,14 +68,17 @@ namespace KinniNet.Core.Operacion
             }
         }
 
-        public List<Usuario> ObtenerUsuarios()
+        public List<Usuario> ObtenerUsuarios(int? idTipoUsuario)
         {
             List<Usuario> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.Usuario.ToList();
+                IQueryable<Usuario> qry = db.Usuario;
+                if (idTipoUsuario != null)
+                    qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
+                result = qry.ToList();
                 foreach (Usuario usuario in result)
                 {
                     db.LoadProperty(usuario, "TipoUsuario");
@@ -173,7 +176,5 @@ namespace KinniNet.Core.Operacion
         {
 
         }
-
-        
     }
 }

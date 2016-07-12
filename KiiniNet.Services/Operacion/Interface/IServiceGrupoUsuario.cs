@@ -31,5 +31,14 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<UsuarioGrupo> ObtenerGruposDeUsuario(int idUsuario);
+        
+        [OperationContract]
+        void HabilitarGrupo(int idGrupo, bool habilitado);
+
+        [OperationContract]
+        List<GrupoUsuario> ObtenerGruposUsuarioAll(int? idTipoUsuario, int? idTipoGrupo);
+
+        [OperationContract]
+        void ActualizarGrupo(GrupoUsuario gpo);
     }
 }

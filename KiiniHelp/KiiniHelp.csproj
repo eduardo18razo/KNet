@@ -120,6 +120,9 @@
     <Content Include="Administracion\ArbolesAcceso\FrmAltaArbolAcceso.aspx" />
     <Content Include="Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx" />
     <Content Include="Administracion\Default.aspx" />
+    <Content Include="Administracion\Grupos\FrmConsultaGrupos.aspx" />
+    <Content Include="Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx" />
+    <Content Include="Administracion\Ubicaciones\FrmConsultaUbicaciones.aspx" />
     <Content Include="Administracion\Usuarios\FrmConsultaUsuarios.aspx" />
     <Content Include="BootStrap\css\accordion-menu.css" />
     <Content Include="BootStrap\css\bootstrap-theme.css" />
@@ -385,6 +388,9 @@
     <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso13.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso2.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -462,6 +468,9 @@
     <None Include="Service References\ServiceGrupoUsuario\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario13.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta.disco" />
     <None Include="Service References\ServiceInformacionConsulta\configuration91.svcinfo" />
@@ -1216,6 +1225,49 @@
     <None Include="Service References\ServiceTicket\ServiceTicket4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Cat.Arbol.Nodos1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Cat.Arbol.Organizacion1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Cat.Arbol.Ubicaciones1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Cat.Mascaras1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Cat.Operacion1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Cat.Sistema1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Cat.Usuario1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Operacion.Tickets1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Operacion.Usuarios1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Operacion1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Parametros1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\service1.wsdl" />
+    <None Include="Service References\ServiceUbicacion\service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceUbicacion\service21.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceUbicacion\ServiceUbicacion.wsdl" />
     <None Include="Service References\ServiceUbicacion\ServiceUbicacion.xsd">
       <SubType>Designer</SubType>
@@ -1383,8 +1435,12 @@
     <Content Include="UserControls\Altas\AltaOrganizacion.ascx" />
     <Content Include="UserControls\Altas\AltaSla.ascx" />
     <Content Include="UserControls\Altas\UcAltaUbicacion.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaArboles.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaGrupos.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaMascaras.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaOrganizacion.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaUsuarios.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaUbicaciones.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleGrupoUsuario.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleOrganizacion.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleTicket.ascx" />
@@ -1682,6 +1738,27 @@
     <Compile Include="Administracion\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administracion\Grupos\FrmConsultaGrupos.aspx.cs">
+      <DependentUpon>FrmConsultaGrupos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Grupos\FrmConsultaGrupos.aspx.designer.cs">
+      <DependentUpon>FrmConsultaGrupos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx.cs">
+      <DependentUpon>FrmConsultaOrganizaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx.designer.cs">
+      <DependentUpon>FrmConsultaOrganizaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\Ubicaciones\FrmConsultaUbicaciones.aspx.cs">
+      <DependentUpon>FrmConsultaUbicaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Ubicaciones\FrmConsultaUbicaciones.aspx.designer.cs">
+      <DependentUpon>FrmConsultaUbicaciones.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administracion\Usuarios\FrmConsultaUsuarios.aspx.cs">
       <DependentUpon>FrmConsultaUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1924,6 +2001,27 @@
     <Compile Include="UserControls\Altas\UcAltaUbicacion.ascx.designer.cs">
       <DependentUpon>UcAltaUbicacion.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaArboles.ascx.cs">
+      <DependentUpon>UcConsultaArboles.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaArboles.ascx.designer.cs">
+      <DependentUpon>UcConsultaArboles.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaGrupos.ascx.cs">
+      <DependentUpon>UcConsultaGrupos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaGrupos.ascx.designer.cs">
+      <DependentUpon>UcConsultaGrupos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaMascaras.ascx.cs">
+      <DependentUpon>UcConsultaMascaras.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaMascaras.ascx.designer.cs">
+      <DependentUpon>UcConsultaMascaras.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaOrganizacion.ascx.cs">
       <DependentUpon>UcConsultaOrganizacion.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1937,6 +2035,13 @@
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaUsuarios.ascx.designer.cs">
       <DependentUpon>UcConsultaUsuarios.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaUbicaciones.ascx.cs">
+      <DependentUpon>UcConsultaUbicaciones.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaUbicaciones.ascx.designer.cs">
+      <DependentUpon>UcConsultaUbicaciones.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Detalles\UcDetalleGrupoUsuario.ascx.cs">
       <DependentUpon>UcDetalleGrupoUsuario.ascx</DependentUpon>

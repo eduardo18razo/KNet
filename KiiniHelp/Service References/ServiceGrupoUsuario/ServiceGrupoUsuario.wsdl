@@ -5,16 +5,17 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposUsuarioTipoUsuario_InputMessage">
@@ -65,6 +66,24 @@
   <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposDeUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerGruposDeUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceGrupoUsuario_HabilitarGrupo_InputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarGrupo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGrupoUsuario_HabilitarGrupo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarGrupoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposUsuarioAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerGruposUsuarioAll" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposUsuarioAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerGruposUsuarioAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGrupoUsuario_ActualizarGrupo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarGrupo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGrupoUsuario_ActualizarGrupo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarGrupoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceGrupoUsuario">
     <wsdl:operation name="ObtenerGruposUsuarioTipoUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioTipoUsuario" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuarioTipoUsuario_InputMessage" />
@@ -97,6 +116,18 @@
     <wsdl:operation name="ObtenerGruposDeUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposDeUsuario" message="tns:IServiceGrupoUsuario_ObtenerGruposDeUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposDeUsuarioResponse" message="tns:IServiceGrupoUsuario_ObtenerGruposDeUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HabilitarGrupo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/HabilitarGrupo" message="tns:IServiceGrupoUsuario_HabilitarGrupo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/HabilitarGrupoResponse" message="tns:IServiceGrupoUsuario_HabilitarGrupo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerGruposUsuarioAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioAll" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuarioAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioAllResponse" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuarioAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarGrupo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ActualizarGrupo" message="tns:IServiceGrupoUsuario_ActualizarGrupo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ActualizarGrupoResponse" message="tns:IServiceGrupoUsuario_ActualizarGrupo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceGrupoUsuario">
@@ -166,6 +197,33 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerGruposDeUsuario">
       <soap:operation soapAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposDeUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HabilitarGrupo">
+      <soap:operation soapAction="http://tempuri.org/IServiceGrupoUsuario/HabilitarGrupo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerGruposUsuarioAll">
+      <soap:operation soapAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarGrupo">
+      <soap:operation soapAction="http://tempuri.org/IServiceGrupoUsuario/ActualizarGrupo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

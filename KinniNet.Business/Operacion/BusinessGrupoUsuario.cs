@@ -16,6 +16,7 @@ namespace KinniNet.Core.Operacion
         {
 
         }
+
         public BusinessGrupoUsuario(bool proxy = false)
         {
             _proxy = proxy;
@@ -235,7 +236,7 @@ namespace KinniNet.Core.Operacion
             try
             {
 
-                grupoUsuario.Descripcion = grupoUsuario.Descripcion.ToUpper();
+                grupoUsuario.Descripcion = grupoUsuario.Descripcion.Trim().ToUpper();
                 if (db.GrupoUsuario.Any(a => a.Descripcion == grupoUsuario.Descripcion && a.IdTipoGrupo == grupoUsuario.IdTipoGrupo))
                 {
                     throw new Exception("Ya existe un Grupo con esta descripcion");
@@ -262,7 +263,7 @@ namespace KinniNet.Core.Operacion
             }
         }
 
-        public GrupoUsuario ObtenerGrupoUsuario(int idGrupoUsuario)
+        public GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario)
         {
             GrupoUsuario result;
             DataBaseModelContext db = new DataBaseModelContext();
@@ -270,6 +271,11 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.GrupoUsuario.SingleOrDefault(s => s.Id == idGrupoUsuario);
+                if (result != null)
+                {
+                    db.LoadProperty(result, "TipoUsuario");
+                    db.LoadProperty(result, "TipoGrupo");
+                }
             }
             catch (Exception ex)
             {
@@ -437,6 +443,76 @@ namespace KinniNet.Core.Operacion
             }
             finally { db.Dispose(); }
             return result;
+        }
+        
+        public void HabilitarGrupo(int idGrupo, bool habilitado)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                GrupoUsuario grpo = db.GrupoUsuario.SingleOrDefault(w => w.Id == idGrupo);
+                if (grpo != null) grpo.Habilitado = habilitado;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public List<GrupoUsuario> ObtenerGruposUsuarioAll(int? idTipoUsuario, int? idTipoGrupo)
+        {
+            List<GrupoUsuario> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<GrupoUsuario> qry = db.GrupoUsuario;
+                if (idTipoUsuario != null)
+                    qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
+
+                if (idTipoGrupo != null)
+                    qry = qry.Where(w => w.IdTipoGrupo == idTipoGrupo);
+
+                result = qry.ToList();
+                foreach (GrupoUsuario grupo in result)
+                {
+                    db.LoadProperty(grupo, "TipoUsuario");
+                    db.LoadProperty(grupo, "TipoGrupo");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public void ActualizarGrupo(GrupoUsuario gpo)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                GrupoUsuario grupo = db.GrupoUsuario.SingleOrDefault(w => w.Id == gpo.Id);
+                if (grupo != null) grupo.Descripcion = gpo.Descripcion.Trim().ToUpper();
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
         }
     }
 }

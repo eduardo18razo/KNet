@@ -16,11 +16,11 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<Usuario> ObtenerUsuarios()
+        public List<Usuario> ObtenerUsuarios(int? idTipoUsuario)
         {
             using (BusinessUsuarios negocio = new BusinessUsuarios())
             {
-                return negocio.ObtenerUsuarios();
+                return negocio.ObtenerUsuarios(idTipoUsuario);
             }
         }
 

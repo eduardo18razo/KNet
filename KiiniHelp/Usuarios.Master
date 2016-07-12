@@ -42,8 +42,10 @@
 
     </script>
     <style type="text/css">
-        html {
+        html, body {
             height: 100%;
+            margin: 0px;
+            padding: 0px;
         }
 
         * {
@@ -60,30 +62,38 @@
             right: 0px; /*A la izquierda deje un espacio de 0px*/
             bottom: 0px; /*Abajo deje un espacio de 0px*/
             height: 50px; /*alto del div*/
-            z-index: 0;
+            z-index: -1;
             height: 150px;
             padding-right: 0px;
+        }
+
+        #contextMenu {
+            position: absolute;
+            display: none;
+            background: gray;
+        }
+
+        #full, #form1 {
+            height: 100%;
         }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body style="background: url('../Images/backgroud.jpg'); background-size: 100% auto;" >
+<body style="background: url('../Images/backgroud.jpg');">
     <form id="form1" runat="server" enctype="multipart/form-data">
-        
-            <script type="text/javascript" src="<%= ResolveUrl("~/BootStrap/js/validation.js") %>"></script>
-            <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
-                <Scripts>
-                    <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
-                    <asp:ScriptReference Path="~/BootStrap/js/bootstrap.min.js" />
-                    <asp:ScriptReference Path="~/BootStrap/js/vmenuModule.js" />
-                    <asp:ScriptReference Path="~/BootStrap/js/accordion-menu.js" />
-                    <asp:ScriptReference Path="~/BootStrap/js/super-panel.js" />
-                </Scripts>
-            </asp:ScriptManager>
-            <div id="inferior">
-                <img src="../Images/logoKiininet.jpg" height="150" style="float: right; opacity: .6" />
-            </div>
+
+        <script type="text/javascript" src="<%= ResolveUrl("~/BootStrap/js/validation.js") %>"></script>
+        <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
+            <Scripts>
+                <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
+                <asp:ScriptReference Path="~/BootStrap/js/bootstrap.min.js" />
+                <asp:ScriptReference Path="~/BootStrap/js/vmenuModule.js" />
+                <asp:ScriptReference Path="~/BootStrap/js/accordion-menu.js" />
+                <asp:ScriptReference Path="~/BootStrap/js/super-panel.js" />
+            </Scripts>
+        </asp:ScriptManager>
+        <div id="full">
             <asp:UpdateProgress ID="updateProgress" runat="server">
                 <ProgressTemplate>
                     <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #000000; opacity: 1.0;">
@@ -91,9 +101,7 @@
                     </div>
                 </ProgressTemplate>
             </asp:UpdateProgress>
-            <%--<asp:UpdatePanel runat="server">
-            <ContentTemplate>--%>
-            <header id="headerNav">
+            <div id="headerNav">
                 <span data-panel="panel1" class="panel-button"></span>
                 <div class="logo" id="logo">
                     <div id="headerNavInfoDiv">
@@ -110,10 +118,9 @@
                     <asp:Button runat="server" CssClass="btn btn-sm btn-success" ID="btnArea" Text="Cambiar area" OnClick="btnArea_OnClick" />
                     <asp:Button runat="server" CssClass="btn btn-sm btn-success" ID="btnsOut" Text="Cerrar Sesion" OnClick="btnsOut_OnClick" Style="margin-left: 10px; margin-right: 10px" />
                 </span>
-            </header>
+            </div>
             <div id="panel1">
                 <div id="accordion">
-                    <%--<div class="u-vmenu">--%>
                     <ul style="color: transparent">
                         <li>
                             <asp:Repeater runat="server" ID="rptMenu" OnItemDataBound="rptMenu_OnItemDataBound">
@@ -198,13 +205,10 @@
                     </ul>
                 </div>
             </div>
-            <div style="width: 95%; margin: 0 auto; margin-top: 50px; padding-top: 20px" class="fullheight">
+            <div style="width: 95%; margin: 0 auto; margin-top: 0; padding-top: 75px;height: 100%;">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
-            <%--</ContentTemplate>
-        </asp:UpdatePanel>--%>
-            <!-- Menu Toggle Script -->
             <script>
                 $("#menu-toggle").click(function (e) {
                     e.preventDefault();
@@ -228,7 +232,11 @@
                     });
                 });
             </script>
+        </div>
     </form>
+    <div id="inferior">
+        <img src="../Images/logoKiininet.jpg" height="150" style="float: right; opacity: .6" />
+    </div>
 </body>
 </html>
 

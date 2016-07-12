@@ -18,6 +18,7 @@
                 });
             });
             $("body").on("contextmenu", "table tr", function (e) {
+                debugger;
                 $contextMenu.css({
                     display: "block",
                     left: e.pageX,
@@ -41,9 +42,9 @@
                     }
                 }
                 alta = !baja;
-                document.getElementById("UcConsultaOrganizacion_btnBaja").style.display = baja ? 'block' : 'none';
-                document.getElementById("UcConsultaOrganizacion_btnAlta").style.display = alta ? 'block' : 'none';
-                var elementId = document.getElementById("UcConsultaOrganizacion_hfId");
+                document.getElementById("<%= this.FindControl("btnBaja").ClientID %>").style.display = baja ? 'block' : 'none';
+                document.getElementById("<%= this.FindControl("btnAlta").ClientID %>").style.display = alta ? 'block' : 'none';
+                var elementId = document.getElementById("<%= this.FindControl("hfId").ClientID %>");
                 elementId.value = e.target.parentElement.id;
                 return false;
             });
@@ -100,7 +101,6 @@
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">
-                        <div class="panel-body"></div>
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="headingFiltros">
                                 <h4 class="panel-title">
@@ -148,11 +148,9 @@
                         </div>
 
                         <div class="panel panel-primary">
-                            <%--ScrollBars="Horizontal" Height="100%" Style="text-align: right; min-height: 10%" Width="100%"--%>
                             <div class="panel-body">
                                 <asp:Repeater runat="server" ID="rptResultados">
                                     <HeaderTemplate>
-                                        <%--<panel ID="Panel1" runat="server" ScrollBars="Horizontal" Style="height: 94%">--%>
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader">
                                             <thead>
                                                 <tr align="center">

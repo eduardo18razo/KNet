@@ -389,6 +389,7 @@ namespace KiiniHelp.UserControls.Seleccion
                     btnCerrarModalAltaGrupoUsuario.CommandArgument = btn.CommandArgument;
                     ucAltaGrupoUsuario.IdTipoUsuario = IdTipoUsuario;
                     ucAltaGrupoUsuario.IdTipoGrupo = int.Parse(btn.CommandArgument);
+                    ucAltaGrupoUsuario.Alta = true;
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaGrupoUsuarios\");", true);
                 }
             }

@@ -29,6 +29,7 @@
     <MetadataFile FileName="ServiceGrupoUsuario3.xsd" MetadataType="Schema" ID="9ddcc97a-aba2-4eca-a31a-10d665c67b06" SourceId="1" SourceUrl="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd3" />
     <MetadataFile FileName="ServiceGrupoUsuario4.xsd" MetadataType="Schema" ID="f1c7d8dc-7183-470a-b923-44e8c77278fd" SourceId="1" SourceUrl="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd10" />
     <MetadataFile FileName="ServiceGrupoUsuario5.xsd" MetadataType="Schema" ID="46e31dde-4bcd-4c2d-866f-4427df49a349" SourceId="1" SourceUrl="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd11" />
+    <MetadataFile FileName="ServiceGrupoUsuario13.xsd" MetadataType="Schema" ID="a596ab93-801a-4635-8cb1-cef9a2f3851c" SourceId="1" SourceUrl="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd13" />
     <MetadataFile FileName="ServiceGrupoUsuario6.xsd" MetadataType="Schema" ID="b30cd15e-2b4d-41ee-8ec1-19315b7e55c2" SourceId="1" SourceUrl="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd9" />
     <MetadataFile FileName="ServiceGrupoUsuario.disco" MetadataType="Disco" ID="f4a8048e-8b00-426f-aec6-b922ab73c7f5" SourceId="1" SourceUrl="http://localhost:15277/ServiceGrupoUsuario.svc?disco" />
     <MetadataFile FileName="ServiceGrupoUsuario7.xsd" MetadataType="Schema" ID="ee744046-12af-4f97-a794-16e2788ee423" SourceId="1" SourceUrl="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd7" />

@@ -39,6 +39,14 @@ namespace KiiniNet.Services.Operacion.Interface
         Ubicacion ObtenerUbicacionUsuario(int idUbicacion);
 
         [OperationContract]
-        List<Ubicacion> ObtenerOrganizaciones();
+        List<Ubicacion> ObtenerUbicaciones(int? idTipoUsuario, int? idPais, int? idCampus, int? idTorre, int? idPiso, int? idZona, int? idSubZona, int? idSiteRack);
+
+        [OperationContract]
+        void ActualizarUbicacion(Ubicacion ub);
+
+        [OperationContract]
+        Ubicacion ObtenerUbicacionById(int idUbicacion);
+        [OperationContract]
+        void HabilitarUbicacion(int idUbicacion, bool habilitado);
     }
 }

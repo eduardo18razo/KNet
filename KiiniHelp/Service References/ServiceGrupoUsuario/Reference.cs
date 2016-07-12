@@ -39,6 +39,15 @@ namespace KiiniHelp.ServiceGrupoUsuario {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposDeUsuario", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposDeUsuarioResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.UsuarioGrupo> ObtenerGruposDeUsuario(int idUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/HabilitarGrupo", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/HabilitarGrupoResponse")]
+        void HabilitarGrupo(int idGrupo, bool habilitado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioAll", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioAllResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioAll(System.Nullable<int> idTipoUsuario, System.Nullable<int> idTipoGrupo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ActualizarGrupo", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ActualizarGrupoResponse")]
+        void ActualizarGrupo(KiiniNet.Entities.Cat.Usuario.GrupoUsuario gpo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -98,6 +107,18 @@ namespace KiiniHelp.ServiceGrupoUsuario {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.UsuarioGrupo> ObtenerGruposDeUsuario(int idUsuario) {
             return base.Channel.ObtenerGruposDeUsuario(idUsuario);
+        }
+        
+        public void HabilitarGrupo(int idGrupo, bool habilitado) {
+            base.Channel.HabilitarGrupo(idGrupo, habilitado);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioAll(System.Nullable<int> idTipoUsuario, System.Nullable<int> idTipoGrupo) {
+            return base.Channel.ObtenerGruposUsuarioAll(idTipoUsuario, idTipoGrupo);
+        }
+        
+        public void ActualizarGrupo(KiiniNet.Entities.Cat.Usuario.GrupoUsuario gpo) {
+            base.Channel.ActualizarGrupo(gpo);
         }
     }
 }

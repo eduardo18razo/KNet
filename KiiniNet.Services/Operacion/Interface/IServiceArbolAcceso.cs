@@ -30,5 +30,13 @@ namespace KiiniNet.Services.Operacion.Interface
         List<ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea);
         [OperationContract]
         ArbolAcceso ObtenerArbolAcceso(int idArbol);
+
+        [OperationContract]
+        List<ArbolAcceso> ObtenerArbolesAccesoAll(int? idArea, int? idTipoUsuario, int? idTipoArbol, int? nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7);
+
+        [OperationContract]
+        void HabilitarArbol(int idArbol, bool habilitado);
+        [OperationContract]
+        void ActualizardArbol(ArbolAcceso arbolAcceso);
     }
 }

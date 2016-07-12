@@ -181,6 +181,7 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
                 var qry = db.Ubicacion.Where(w => w.IdPais == idPais);
                 if (idCampus.HasValue)
                     qry = qry.Where(w => w.IdCampus == idCampus);
@@ -216,7 +217,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception)
             {
-                throw new Exception("Error al Obtener Organizacion");
+                throw new Exception("Error al Obtener Ubicacion");
             }
             finally
             {
@@ -301,23 +302,48 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public List<Ubicacion> ObtenerOrganizaciones()
+        public List<Ubicacion> ObtenerUbicaciones(int? idTipoUsuario, int? idPais, int? idCampus, int? idTorre, int? idPiso, int? idZona, int? idSubZona, int? idSiteRack)
         {
             List<Ubicacion> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.Ubicacion.ToList();
-                foreach (Ubicacion organizacion in result)
+                IQueryable<Ubicacion> qry = db.Ubicacion;
+                if (idTipoUsuario.HasValue)
+                    qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
+
+                if (idPais.HasValue)
+                    qry = qry.Where(w => w.IdPais == idPais);
+
+                if (idCampus.HasValue)
+                    qry = qry.Where(w => w.IdCampus == idCampus);
+
+                if (idTorre.HasValue)
+                    qry = qry.Where(w => w.IdTorre == idTorre);
+
+                if (idPiso.HasValue)
+                    qry = qry.Where(w => w.IdPiso == idPiso);
+
+                if (idZona.HasValue)
+                    qry = qry.Where(w => w.IdZona == idZona);
+
+                if (idSubZona.HasValue)
+                    qry = qry.Where(w => w.IdSubZona == idSubZona);
+
+                if (idSiteRack.HasValue)
+                    qry = qry.Where(w => w.IdSiteRack == idSiteRack);
+
+                result = qry.ToList();
+                foreach (Ubicacion ubicacion in result)
                 {
-                    db.LoadProperty(organizacion, "Pais");
-                    db.LoadProperty(organizacion, "Campus");
-                    db.LoadProperty(organizacion, "Torre");
-                    db.LoadProperty(organizacion, "Piso");
-                    db.LoadProperty(organizacion, "Zona");
-                    db.LoadProperty(organizacion, "SubZona");
-                    db.LoadProperty(organizacion, "SiteRack");
+                    db.LoadProperty(ubicacion, "Pais");
+                    db.LoadProperty(ubicacion, "Campus");
+                    db.LoadProperty(ubicacion, "Torre");
+                    db.LoadProperty(ubicacion, "Piso");
+                    db.LoadProperty(ubicacion, "Zona");
+                    db.LoadProperty(ubicacion, "SubZona");
+                    db.LoadProperty(ubicacion, "SiteRack");
                 }
             }
             catch (Exception ex)
@@ -390,5 +416,100 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
+
+        public void ActualizarUbicacion(Ubicacion ub)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
+                Ubicacion ubicacion = db.Ubicacion.SingleOrDefault(s => s.Id == ub.Id);
+                if (ubicacion != null)
+                {
+                    if (ubicacion.Pais != null)
+                        ubicacion.Pais.Descripcion = ub.Pais.Descripcion.ToUpper();
+
+                    if (ubicacion.Campus != null)
+                        ubicacion.Campus.Descripcion = ub.Campus.Descripcion.ToUpper();
+
+                    if (ubicacion.Torre != null)
+                        ubicacion.Torre.Descripcion = ub.Torre.Descripcion.ToUpper();
+
+                    if (ubicacion.Piso != null)
+                        ubicacion.Piso.Descripcion = ub.Piso.Descripcion.ToUpper();
+
+                    if (ubicacion.Zona != null)
+                        ubicacion.Zona.Descripcion = ub.Zona.Descripcion.ToUpper();
+
+                    if (ubicacion.SubZona != null)
+                        ubicacion.SubZona.Descripcion = ub.SubZona.Descripcion.ToUpper();
+
+                    if (ubicacion.SiteRack != null)
+                        ubicacion.SiteRack.Descripcion = ub.SiteRack.Descripcion.ToUpper();
+
+                    if (ubicacion.Id == 0)
+                        db.Ubicacion.AddObject(ubicacion);
+
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public Ubicacion ObtenerUbicacionById(int idUbicacion)
+        {
+            Ubicacion result = null;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Ubicacion.SingleOrDefault(w => w.Id == idUbicacion);
+                if (result != null)
+                {
+                    db.LoadProperty(result, "Pais");
+                    db.LoadProperty(result, "Campus");
+                    db.LoadProperty(result, "Torre");
+                    db.LoadProperty(result, "Piso");
+                    db.LoadProperty(result, "Zona");
+                    db.LoadProperty(result, "SubZona");
+                    db.LoadProperty(result, "SiteRack");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        public void HabilitarUbicacion(int idUbicacion, bool habilitado)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Ubicacion ub = db.Ubicacion.SingleOrDefault(w => w.Id == idUbicacion);
+                if (ub != null) ub.Habilitado = habilitado;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
     }
 }
