@@ -40,17 +40,3 @@ D:\KiiniNet\Actual\KiiniNet.UnitTest\bin\Debug\KinniNet.Business.Utils.pdb
 D:\KiiniNet\Actual\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTestData.csprojResolveAssemblyReference.cache
 D:\KiiniNet\Actual\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTest.dll
 D:\KiiniNet\Actual\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTest.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.UnitTest.dll.config
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.UnitTest.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.UnitTest.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.Entities.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Core.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Data.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Business.Utils.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\bin\Debug\KiiniNet.Entities.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Core.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Data.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\bin\Debug\KinniNet.Business.Utils.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTestData.csprojResolveAssemblyReference.cache
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTest.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTest.pdb

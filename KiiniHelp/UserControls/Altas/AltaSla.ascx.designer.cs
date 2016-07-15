@@ -31,6 +31,15 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
         
         /// <summary>
+        /// ddlGrupo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlGrupo;
+        
+        /// <summary>
         /// txtDescripcion control.
         /// </summary>
         /// <remarks>
@@ -49,22 +58,40 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.WebControls.CheckBox chkEstimado;
         
         /// <summary>
-        /// txtTiempo control.
+        /// divSimple control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTiempo;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSimple;
         
         /// <summary>
-        /// MaskedEditExtenderTiempo control.
+        /// txtTiempoTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender MaskedEditExtenderTiempo;
+        protected global::System.Web.UI.WebControls.TextBox txtTiempoTotal;
+        
+        /// <summary>
+        /// divDetalle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDetalle;
+        
+        /// <summary>
+        /// rptSubRoles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptSubRoles;
         
         /// <summary>
         /// btnGuardar control.

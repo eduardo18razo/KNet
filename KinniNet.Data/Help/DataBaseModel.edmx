@@ -441,6 +441,20 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
           <Property Name="Activa" Type="bit" />
         </EntityType>
+        <EntityType Name="ParametrosSla">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MinimoDias" Type="int" Nullable="false" />
+          <Property Name="MinimoHoras" Type="int" Nullable="false" />
+          <Property Name="MinimoMinutos" Type="int" Nullable="false" />
+          <Property Name="MinimoSegundos" Type="int" Nullable="false" />
+          <Property Name="MaximoDias" Type="int" Nullable="false" />
+          <Property Name="MaximoHoras" Type="int" Nullable="false" />
+          <Property Name="MaximoMinutos" Type="int" Nullable="false" />
+          <Property Name="MaximoSegundos" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ParametrosTelefonos">
           <Key>
             <PropertyRef Name="Id" />
@@ -535,6 +549,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dias" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Horas" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Minutos" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Segundos" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TiempoHoraProceso" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Detallado" Type="bit" />
           <Property Name="Habilitado" Type="bit" Nullable="false" />
@@ -546,7 +564,11 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdSla" Type="int" />
           <Property Name="IdSubRol" Type="int" />
-          <Property Name="TiempoProceso" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Dias" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Horas" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Minutos" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Segundos" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TiempoProceso" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="SlaEstimadoTicket">
           <Key>
@@ -558,6 +580,10 @@
           <Property Name="FechaFin" Type="datetime" />
           <Property Name="FechaInicioProceso" Type="datetime" />
           <Property Name="FechaFinProceso" Type="datetime" />
+          <Property Name="Dias" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Horas" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Minutos" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Segundos" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TiempoHoraProceso" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TiempoRetenido" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TiempoDesface" Type="decimal" Precision="18" Scale="2" />
@@ -570,7 +596,11 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdSlaEstimadoTicket" Type="int" />
           <Property Name="IdSubRol" Type="int" />
-          <Property Name="TiempoProceso" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Dias" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Horas" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Minutos" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Segundos" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TiempoProceso" Type="decimal" Precision="18" Scale="2" />
           <Property Name="HoraInicio" Type="datetime" />
           <Property Name="HoraFin" Type="datetime" />
         </EntityType>
@@ -2598,6 +2628,7 @@
           <EntitySet Name="Organizacion" EntityType="Self.Organizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParametrosAplicaciones" EntityType="Self.ParametrosAplicaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParametrosSla" EntityType="Self.ParametrosSla" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParametrosTelefonos" EntityType="Self.ParametrosTelefonos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Piso" EntityType="Self.Piso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Puesto" EntityType="Self.Puesto" Schema="dbo" store:Type="Tables" />
@@ -3593,9 +3624,6 @@
             <End Role="RespuestaEncuesta" EntitySet="RespuestaEncuesta" />
           </AssociationSet>
           <EntitySet Name="InventarioArbolAcceso" EntityType="KiiniNet_v2Model.InventarioArbolAcceso" />
-          <EntitySet Name="Sla" EntityType="KiiniNet_v2Model.Sla" />
-          <EntitySet Name="SlaDetalle" EntityType="KiiniNet_v2Model.SlaDetalle" />
-          <EntitySet Name="SlaEstimadoTicketDetalle" EntityType="KiiniNet_v2Model.SlaEstimadoTicketDetalle" />
           <AssociationSet Name="FK_InventarioArbolAcceso_Encuesta" Association="KiiniNet_v2Model.FK_InventarioArbolAcceso_Encuesta">
             <End Role="Encuesta" EntitySet="Encuesta" />
             <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
@@ -3604,10 +3632,6 @@
             <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
             <End Role="GrupoUsuarioInventarioArbol" EntitySet="GrupoUsuarioInventarioArbol" />
           </AssociationSet>
-          <AssociationSet Name="FK_InventarioArbolAcceso_SLA" Association="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA">
-            <End Role="Sla" EntitySet="Sla" />
-            <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
-          </AssociationSet>
           <AssociationSet Name="FK_InventarioInfConsulta_InventarioArbolAcceso" Association="KiiniNet_v2Model.FK_InventarioInfConsulta_InventarioArbolAcceso">
             <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
             <End Role="InventarioInfConsulta" EntitySet="InventarioInfConsulta" />
@@ -3615,15 +3639,6 @@
           <AssociationSet Name="FK_tblInventarioArbolAcceso_tblMascara" Association="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblMascara">
             <End Role="Mascara" EntitySet="Mascara" />
             <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SlaDetalle_SLA" Association="KiiniNet_v2Model.FK_SlaDetalle_SLA">
-            <End Role="Sla" EntitySet="Sla" />
-            <End Role="SlaDetalle" EntitySet="SlaDetalle" />
-          </AssociationSet>
-          <EntitySet Name="SlaEstimadoTicket" EntityType="KiiniNet_v2Model.SlaEstimadoTicket" />
-          <AssociationSet Name="FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket" Association="KiiniNet_v2Model.FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket">
-            <End Role="SlaEstimadoTicket" EntitySet="SlaEstimadoTicket" />
-            <End Role="SlaEstimadoTicketDetalle" EntitySet="SlaEstimadoTicketDetalle" />
           </AssociationSet>
           <EntitySet Name="ArbolAcceso" EntityType="KiiniNet_v2Model.ArbolAcceso" />
           <EntitySet Name="Area" EntityType="KiiniNet_v2Model.Area" />
@@ -3709,10 +3724,6 @@
           <AssociationSet Name="FK_tblRespuestaEncuesta_tblTicket" Association="KiiniNet_v2Model.FK_tblRespuestaEncuesta_tblTicket">
             <End Role="Ticket" EntitySet="Ticket" />
             <End Role="RespuestaEncuesta" EntitySet="RespuestaEncuesta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblTicket_tblSLAEstimadoTicket" Association="KiiniNet_v2Model.FK_tblTicket_tblSLAEstimadoTicket">
-            <End Role="SlaEstimadoTicket" EntitySet="SlaEstimadoTicket" />
-            <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
           <AssociationSet Name="FK_Ticket_TipoArbolAcceso" Association="KiiniNet_v2Model.FK_Ticket_TipoArbolAcceso">
             <End Role="TipoArbolAcceso" EntitySet="TipoArbolAcceso" />
@@ -3868,6 +3879,27 @@
           <AssociationSet Name="FK_Usuario_Puesto" Association="KiiniNet_v2Model.FK_Usuario_Puesto">
             <End Role="Puesto" EntitySet="Puesto" />
             <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <EntitySet Name="ParametrosSla" EntityType="KiiniNet_v2Model.ParametrosSla" />
+          <EntitySet Name="Sla" EntityType="KiiniNet_v2Model.Sla" />
+          <EntitySet Name="SlaDetalle" EntityType="KiiniNet_v2Model.SlaDetalle" />
+          <EntitySet Name="SlaEstimadoTicket" EntityType="KiiniNet_v2Model.SlaEstimadoTicket" />
+          <EntitySet Name="SlaEstimadoTicketDetalle" EntityType="KiiniNet_v2Model.SlaEstimadoTicketDetalle" />
+          <AssociationSet Name="FK_InventarioArbolAcceso_SLA" Association="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA">
+            <End Role="Sla" EntitySet="Sla" />
+            <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SlaDetalle_SLA" Association="KiiniNet_v2Model.FK_SlaDetalle_SLA">
+            <End Role="Sla" EntitySet="Sla" />
+            <End Role="SlaDetalle" EntitySet="SlaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket" Association="KiiniNet_v2Model.FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket">
+            <End Role="SlaEstimadoTicket" EntitySet="SlaEstimadoTicket" />
+            <End Role="SlaEstimadoTicketDetalle" EntitySet="SlaEstimadoTicketDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblTicket_tblSLAEstimadoTicket" Association="KiiniNet_v2Model.FK_tblTicket_tblSLAEstimadoTicket">
+            <End Role="SlaEstimadoTicket" EntitySet="SlaEstimadoTicket" />
+            <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Campus">
@@ -5620,44 +5652,10 @@
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Encuesta" Relationship="KiiniNet_v2Model.FK_InventarioArbolAcceso_Encuesta" FromRole="InventarioArbolAcceso" ToRole="Encuesta" />
           <NavigationProperty Name="GrupoUsuarioInventarioArbol" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_InventarioArbolAcceso" FromRole="InventarioArbolAcceso" ToRole="GrupoUsuarioInventarioArbol" />
-          <NavigationProperty Name="Sla" Relationship="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA" FromRole="InventarioArbolAcceso" ToRole="Sla" />
           <NavigationProperty Name="InventarioInfConsulta" Relationship="KiiniNet_v2Model.FK_InventarioInfConsulta_InventarioArbolAcceso" FromRole="InventarioArbolAcceso" ToRole="InventarioInfConsulta" />
           <NavigationProperty Name="Mascara" Relationship="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblMascara" FromRole="InventarioArbolAcceso" ToRole="Mascara" />
           <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblArbolAcceso" FromRole="InventarioArbolAcceso" ToRole="ArbolAcceso" />
-        </EntityType>
-        <EntityType Name="Sla">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TiempoHoraProceso" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Habilitado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="InventarioArbolAcceso" Relationship="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA" FromRole="Sla" ToRole="InventarioArbolAcceso" />
-          <NavigationProperty Name="SlaDetalle" Relationship="KiiniNet_v2Model.FK_SlaDetalle_SLA" FromRole="Sla" ToRole="SlaDetalle" />
-          <Property Name="Detallado" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="SlaDetalle">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdSla" Type="Int32" />
-          <Property Name="IdSubRol" Type="Int32" />
-          <Property Name="TiempoProceso" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Sla" Relationship="KiiniNet_v2Model.FK_SlaDetalle_SLA" FromRole="SlaDetalle" ToRole="Sla" />
-        </EntityType>
-        <EntityType Name="SlaEstimadoTicketDetalle">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdSlaEstimadoTicket" Type="Int32" />
-          <Property Name="IdSubRol" Type="Int32" />
-          <Property Name="TiempoProceso" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="HoraInicio" Type="DateTime" Precision="3" ConcurrencyMode="Fixed" />
-          <Property Name="HoraFin" Type="DateTime" Precision="3" ConcurrencyMode="Fixed" />
-          <NavigationProperty Name="SlaEstimadoTicket" Relationship="KiiniNet_v2Model.FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket" FromRole="SlaEstimadoTicketDetalle" ToRole="SlaEstimadoTicket" />
+          <NavigationProperty Name="Sla" Relationship="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA" FromRole="InventarioArbolAcceso" ToRole="Sla" />
         </EntityType>
         <Association Name="FK_InventarioArbolAcceso_Encuesta">
           <End Type="KiiniNet_v2Model.Encuesta" Role="Encuesta" Multiplicity="0..1" />
@@ -5683,18 +5681,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_InventarioArbolAcceso_SLA">
-          <End Type="KiiniNet_v2Model.Sla" Role="Sla" Multiplicity="0..1" />
-          <End Type="KiiniNet_v2Model.InventarioArbolAcceso" Role="InventarioArbolAcceso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sla">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="InventarioArbolAcceso">
-              <PropertyRef Name="IdSla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_InventarioInfConsulta_InventarioArbolAcceso">
           <End Type="KiiniNet_v2Model.InventarioArbolAcceso" Role="InventarioArbolAcceso" Multiplicity="1" />
           <End Type="KiiniNet_v2Model.InventarioInfConsulta" Role="InventarioInfConsulta" Multiplicity="*" />
@@ -5716,47 +5702,6 @@
             </Principal>
             <Dependent Role="InventarioArbolAcceso">
               <PropertyRef Name="IdMascara" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SlaDetalle_SLA">
-          <End Type="KiiniNet_v2Model.Sla" Role="Sla" Multiplicity="0..1" />
-          <End Type="KiiniNet_v2Model.SlaDetalle" Role="SlaDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sla">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SlaDetalle">
-              <PropertyRef Name="IdSla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="SlaEstimadoTicket">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdTicket" Type="Int32" />
-          <Property Name="FechaInicio" Type="DateTime" Precision="3" ConcurrencyMode="Fixed" />
-          <Property Name="FechaFin" Type="DateTime" Precision="3" ConcurrencyMode="Fixed" />
-          <Property Name="FechaInicioProceso" Type="DateTime" Precision="3" ConcurrencyMode="Fixed" />
-          <Property Name="FechaFinProceso" Type="DateTime" Precision="3" ConcurrencyMode="Fixed" />
-          <Property Name="TiempoHoraProceso" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TiempoRetenido" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TiempoDesface" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Terminado" Type="Boolean" />
-          <NavigationProperty Name="SlaEstimadoTicketDetalle" Relationship="KiiniNet_v2Model.FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket" FromRole="SlaEstimadoTicket" ToRole="SlaEstimadoTicketDetalle" />
-          <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_tblTicket_tblSLAEstimadoTicket" FromRole="SlaEstimadoTicket" ToRole="Ticket" />
-        </EntityType>
-        <Association Name="FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket">
-          <End Type="KiiniNet_v2Model.SlaEstimadoTicket" Role="SlaEstimadoTicket" Multiplicity="0..1" />
-          <End Type="KiiniNet_v2Model.SlaEstimadoTicketDetalle" Role="SlaEstimadoTicketDetalle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SlaEstimadoTicket">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SlaEstimadoTicketDetalle">
-              <PropertyRef Name="IdSlaEstimadoTicket" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6015,7 +5960,6 @@
           <NavigationProperty Name="Mascara" Relationship="KiiniNet_v2Model.FK_Ticket_Mascara" FromRole="Ticket" ToRole="Mascara" />
           <NavigationProperty Name="Organizacion" Relationship="KiiniNet_v2Model.FK_Ticket_Organizacion" FromRole="Ticket" ToRole="Organizacion" />
           <NavigationProperty Name="RespuestaEncuesta" Relationship="KiiniNet_v2Model.FK_tblRespuestaEncuesta_tblTicket" FromRole="Ticket" ToRole="RespuestaEncuesta" />
-          <NavigationProperty Name="SlaEstimadoTicket" Relationship="KiiniNet_v2Model.FK_tblTicket_tblSLAEstimadoTicket" FromRole="Ticket" ToRole="SlaEstimadoTicket" />
           <NavigationProperty Name="TipoArbolAcceso" Relationship="KiiniNet_v2Model.FK_Ticket_TipoArbolAcceso" FromRole="Ticket" ToRole="TipoArbolAcceso" />
           <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_Ticket_TipoUsuario" FromRole="Ticket" ToRole="TipoUsuario" />
           <NavigationProperty Name="Ubicacion" Relationship="KiiniNet_v2Model.FK_Ticket_Ubicacion" FromRole="Ticket" ToRole="Ubicacion" />
@@ -6024,6 +5968,7 @@
           <NavigationProperty Name="TicketGrupoUsuario" Relationship="KiiniNet_v2Model.FK_TicketGrupoUsuario_Ticket" FromRole="Ticket" ToRole="TicketGrupoUsuario" />
           <NavigationProperty Name="EstatusAsignacion" Relationship="KiiniNet_v2Model.FK_Ticket_EstatusAsignacion" FromRole="Ticket" ToRole="EstatusAsignacion" />
           <NavigationProperty Name="TicketAsignacion" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_Ticket" FromRole="Ticket" ToRole="TicketAsignacion" />
+          <NavigationProperty Name="SlaEstimadoTicket" Relationship="KiiniNet_v2Model.FK_tblTicket_tblSLAEstimadoTicket" FromRole="Ticket" ToRole="SlaEstimadoTicket" />
         </EntityType>
         <Association Name="FK_tblTicket_tblArbolAcceso">
           <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="1" />
@@ -6094,18 +6039,6 @@
             </Principal>
             <Dependent Role="RespuestaEncuesta">
               <PropertyRef Name="IdTicket" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblTicket_tblSLAEstimadoTicket">
-          <End Type="KiiniNet_v2Model.SlaEstimadoTicket" Role="SlaEstimadoTicket" Multiplicity="0..1" />
-          <End Type="KiiniNet_v2Model.Ticket" Role="Ticket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SlaEstimadoTicket">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Ticket">
-              <PropertyRef Name="IdSlaEstimadoTicket" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6702,6 +6635,135 @@
             </Principal>
             <Dependent Role="Usuario">
               <PropertyRef Name="IdPuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ParametrosSla">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MinimoDias" Type="Int32" Nullable="false" />
+          <Property Name="MinimoHoras" Type="Int32" Nullable="false" />
+          <Property Name="MinimoMinutos" Type="Int32" Nullable="false" />
+          <Property Name="MinimoSegundos" Type="Int32" Nullable="false" />
+          <Property Name="MaximoDias" Type="Int32" Nullable="false" />
+          <Property Name="MaximoHoras" Type="Int32" Nullable="false" />
+          <Property Name="MaximoMinutos" Type="Int32" Nullable="false" />
+          <Property Name="MaximoSegundos" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sla">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dias" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Horas" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Minutos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Segundos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TiempoHoraProceso" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Detallado" Type="Boolean" />
+          <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="InventarioArbolAcceso" Relationship="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA" FromRole="Sla" ToRole="InventarioArbolAcceso" />
+          <NavigationProperty Name="SlaDetalle" Relationship="KiiniNet_v2Model.FK_SlaDetalle_SLA" FromRole="Sla" ToRole="SlaDetalle" />
+        </EntityType>
+        <EntityType Name="SlaDetalle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSla" Type="Int32" />
+          <Property Name="IdSubRol" Type="Int32" />
+          <Property Name="Dias" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Horas" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Minutos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Segundos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TiempoProceso" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Sla" Relationship="KiiniNet_v2Model.FK_SlaDetalle_SLA" FromRole="SlaDetalle" ToRole="Sla" />
+        </EntityType>
+        <EntityType Name="SlaEstimadoTicket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTicket" Type="Int32" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Precision="3" />
+          <Property Name="FechaInicioProceso" Type="DateTime" Precision="3" />
+          <Property Name="FechaFinProceso" Type="DateTime" Precision="3" />
+          <Property Name="Dias" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Horas" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Minutos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Segundos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TiempoHoraProceso" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TiempoRetenido" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TiempoDesface" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Terminado" Type="Boolean" />
+          <NavigationProperty Name="SlaEstimadoTicketDetalle" Relationship="KiiniNet_v2Model.FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket" FromRole="SlaEstimadoTicket" ToRole="SlaEstimadoTicketDetalle" />
+          <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_tblTicket_tblSLAEstimadoTicket" FromRole="SlaEstimadoTicket" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="SlaEstimadoTicketDetalle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSlaEstimadoTicket" Type="Int32" />
+          <Property Name="IdSubRol" Type="Int32" />
+          <Property Name="Dias" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Horas" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Minutos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Segundos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TiempoProceso" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="HoraInicio" Type="DateTime" Precision="3" />
+          <Property Name="HoraFin" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SlaEstimadoTicket" Relationship="KiiniNet_v2Model.FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket" FromRole="SlaEstimadoTicketDetalle" ToRole="SlaEstimadoTicket" />
+        </EntityType>
+        <Association Name="FK_InventarioArbolAcceso_SLA">
+          <End Type="KiiniNet_v2Model.Sla" Role="Sla" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.InventarioArbolAcceso" Role="InventarioArbolAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sla">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventarioArbolAcceso">
+              <PropertyRef Name="IdSla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SlaDetalle_SLA">
+          <End Type="KiiniNet_v2Model.Sla" Role="Sla" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.SlaDetalle" Role="SlaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sla">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SlaDetalle">
+              <PropertyRef Name="IdSla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket">
+          <End Type="KiiniNet_v2Model.SlaEstimadoTicket" Role="SlaEstimadoTicket" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.SlaEstimadoTicketDetalle" Role="SlaEstimadoTicketDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlaEstimadoTicket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SlaEstimadoTicketDetalle">
+              <PropertyRef Name="IdSlaEstimadoTicket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblTicket_tblSLAEstimadoTicket">
+          <End Type="KiiniNet_v2Model.SlaEstimadoTicket" Role="SlaEstimadoTicket" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlaEstimadoTicket">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="IdSlaEstimadoTicket" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7376,55 +7438,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sla">
-            <EntityTypeMapping TypeName="KiiniNet_v2Model.Sla">
-              <MappingFragment StoreEntitySet="Sla">
-                <ScalarProperty Name="Detallado" ColumnName="Detallado" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="TiempoHoraProceso" ColumnName="TiempoHoraProceso" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SlaDetalle">
-            <EntityTypeMapping TypeName="KiiniNet_v2Model.SlaDetalle">
-              <MappingFragment StoreEntitySet="SlaDetalle">
-                <ScalarProperty Name="TiempoProceso" ColumnName="TiempoProceso" />
-                <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
-                <ScalarProperty Name="IdSla" ColumnName="IdSla" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SlaEstimadoTicketDetalle">
-            <EntityTypeMapping TypeName="KiiniNet_v2Model.SlaEstimadoTicketDetalle">
-              <MappingFragment StoreEntitySet="SlaEstimadoTicketDetalle">
-                <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
-                <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
-                <ScalarProperty Name="TiempoProceso" ColumnName="TiempoProceso" />
-                <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
-                <ScalarProperty Name="IdSlaEstimadoTicket" ColumnName="IdSlaEstimadoTicket" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SlaEstimadoTicket">
-            <EntityTypeMapping TypeName="KiiniNet_v2Model.SlaEstimadoTicket">
-              <MappingFragment StoreEntitySet="SlaEstimadoTicket">
-                <ScalarProperty Name="Terminado" ColumnName="Terminado" />
-                <ScalarProperty Name="TiempoDesface" ColumnName="TiempoDesface" />
-                <ScalarProperty Name="TiempoRetenido" ColumnName="TiempoRetenido" />
-                <ScalarProperty Name="TiempoHoraProceso" ColumnName="TiempoHoraProceso" />
-                <ScalarProperty Name="FechaFinProceso" ColumnName="FechaFinProceso" />
-                <ScalarProperty Name="FechaInicioProceso" ColumnName="FechaInicioProceso" />
-                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="IdTicket" ColumnName="IdTicket" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ArbolAcceso">
             <EntityTypeMapping TypeName="KiiniNet_v2Model.ArbolAcceso">
               <MappingFragment StoreEntitySet="ArbolAcceso">
@@ -7622,6 +7635,86 @@
               <MappingFragment StoreEntitySet="Puesto">
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParametrosSla">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.ParametrosSla">
+              <MappingFragment StoreEntitySet="ParametrosSla">
+                <ScalarProperty Name="MaximoSegundos" ColumnName="MaximoSegundos" />
+                <ScalarProperty Name="MaximoMinutos" ColumnName="MaximoMinutos" />
+                <ScalarProperty Name="MaximoHoras" ColumnName="MaximoHoras" />
+                <ScalarProperty Name="MaximoDias" ColumnName="MaximoDias" />
+                <ScalarProperty Name="MinimoSegundos" ColumnName="MinimoSegundos" />
+                <ScalarProperty Name="MinimoMinutos" ColumnName="MinimoMinutos" />
+                <ScalarProperty Name="MinimoHoras" ColumnName="MinimoHoras" />
+                <ScalarProperty Name="MinimoDias" ColumnName="MinimoDias" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sla">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.Sla">
+              <MappingFragment StoreEntitySet="Sla">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Detallado" ColumnName="Detallado" />
+                <ScalarProperty Name="TiempoHoraProceso" ColumnName="TiempoHoraProceso" />
+                <ScalarProperty Name="Segundos" ColumnName="Segundos" />
+                <ScalarProperty Name="Minutos" ColumnName="Minutos" />
+                <ScalarProperty Name="Horas" ColumnName="Horas" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlaDetalle">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.SlaDetalle">
+              <MappingFragment StoreEntitySet="SlaDetalle">
+                <ScalarProperty Name="TiempoProceso" ColumnName="TiempoProceso" />
+                <ScalarProperty Name="Segundos" ColumnName="Segundos" />
+                <ScalarProperty Name="Minutos" ColumnName="Minutos" />
+                <ScalarProperty Name="Horas" ColumnName="Horas" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
+                <ScalarProperty Name="IdSla" ColumnName="IdSla" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlaEstimadoTicket">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.SlaEstimadoTicket">
+              <MappingFragment StoreEntitySet="SlaEstimadoTicket">
+                <ScalarProperty Name="Terminado" ColumnName="Terminado" />
+                <ScalarProperty Name="TiempoDesface" ColumnName="TiempoDesface" />
+                <ScalarProperty Name="TiempoRetenido" ColumnName="TiempoRetenido" />
+                <ScalarProperty Name="TiempoHoraProceso" ColumnName="TiempoHoraProceso" />
+                <ScalarProperty Name="Segundos" ColumnName="Segundos" />
+                <ScalarProperty Name="Minutos" ColumnName="Minutos" />
+                <ScalarProperty Name="Horas" ColumnName="Horas" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="FechaFinProceso" ColumnName="FechaFinProceso" />
+                <ScalarProperty Name="FechaInicioProceso" ColumnName="FechaInicioProceso" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="IdTicket" ColumnName="IdTicket" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlaEstimadoTicketDetalle">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.SlaEstimadoTicketDetalle">
+              <MappingFragment StoreEntitySet="SlaEstimadoTicketDetalle">
+                <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
+                <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+                <ScalarProperty Name="TiempoProceso" ColumnName="TiempoProceso" />
+                <ScalarProperty Name="Segundos" ColumnName="Segundos" />
+                <ScalarProperty Name="Minutos" ColumnName="Minutos" />
+                <ScalarProperty Name="Horas" ColumnName="Horas" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
+                <ScalarProperty Name="IdSlaEstimadoTicket" ColumnName="IdSlaEstimadoTicket" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

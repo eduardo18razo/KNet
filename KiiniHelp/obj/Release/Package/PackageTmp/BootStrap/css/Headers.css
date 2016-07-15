@@ -2,12 +2,14 @@
     border: 1px solid #314f60;
     background: #314f60;
     width: 100%;
-    position: fixed;
-    margin-top: -50px;
+    position: absolute;
+    margin-top: 0px;
     font-size: 0; 
     display: block; 
     height: 60px; 
-    text-align: right; 
+    text-align: right;
+    z-index: 1049;
+
 }
 #headerNav .logo {
     float:left;
@@ -61,7 +63,7 @@
 /*---- panel ----*/
 #panel1 {
     position:fixed;
-    z-index:9000;
+    z-index:1048;
     top:0;
     left:0;
     width:35%;height:100%;

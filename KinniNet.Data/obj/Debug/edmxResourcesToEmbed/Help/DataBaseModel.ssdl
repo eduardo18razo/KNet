@@ -436,6 +436,20 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Activa" Type="bit" />
   </EntityType>
+  <EntityType Name="ParametrosSla">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MinimoDias" Type="int" Nullable="false" />
+    <Property Name="MinimoHoras" Type="int" Nullable="false" />
+    <Property Name="MinimoMinutos" Type="int" Nullable="false" />
+    <Property Name="MinimoSegundos" Type="int" Nullable="false" />
+    <Property Name="MaximoDias" Type="int" Nullable="false" />
+    <Property Name="MaximoHoras" Type="int" Nullable="false" />
+    <Property Name="MaximoMinutos" Type="int" Nullable="false" />
+    <Property Name="MaximoSegundos" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="ParametrosTelefonos">
     <Key>
       <PropertyRef Name="Id" />
@@ -530,6 +544,10 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Dias" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Horas" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Minutos" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Segundos" Type="decimal" Precision="18" Scale="2" />
     <Property Name="TiempoHoraProceso" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="Detallado" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
@@ -541,7 +559,11 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdSla" Type="int" />
     <Property Name="IdSubRol" Type="int" />
-    <Property Name="TiempoProceso" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Dias" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Horas" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Minutos" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Segundos" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TiempoProceso" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="SlaEstimadoTicket">
     <Key>
@@ -553,6 +575,10 @@
     <Property Name="FechaFin" Type="datetime" />
     <Property Name="FechaInicioProceso" Type="datetime" />
     <Property Name="FechaFinProceso" Type="datetime" />
+    <Property Name="Dias" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Horas" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Minutos" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Segundos" Type="decimal" Precision="18" Scale="2" />
     <Property Name="TiempoHoraProceso" Type="decimal" Precision="18" Scale="2" />
     <Property Name="TiempoRetenido" Type="decimal" Precision="18" Scale="2" />
     <Property Name="TiempoDesface" Type="decimal" Precision="18" Scale="2" />
@@ -565,7 +591,11 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdSlaEstimadoTicket" Type="int" />
     <Property Name="IdSubRol" Type="int" />
-    <Property Name="TiempoProceso" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Dias" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Horas" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Minutos" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Segundos" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TiempoProceso" Type="decimal" Precision="18" Scale="2" />
     <Property Name="HoraInicio" Type="datetime" />
     <Property Name="HoraFin" Type="datetime" />
   </EntityType>
@@ -2593,6 +2623,7 @@
     <EntitySet Name="Organizacion" EntityType="Self.Organizacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametrosAplicaciones" EntityType="Self.ParametrosAplicaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ParametrosSla" EntityType="Self.ParametrosSla" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametrosTelefonos" EntityType="Self.ParametrosTelefonos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Piso" EntityType="Self.Piso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Puesto" EntityType="Self.Puesto" Schema="dbo" store:Type="Tables" />

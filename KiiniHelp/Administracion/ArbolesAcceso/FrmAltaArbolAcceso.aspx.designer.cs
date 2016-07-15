@@ -400,6 +400,33 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         protected global::System.Web.UI.WebControls.Button btnModalGrupos;
         
         /// <summary>
+        /// btnModalSla control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalSla;
+        
+        /// <summary>
+        /// btnModalInforme control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalInforme;
+        
+        /// <summary>
+        /// btnModalEncuesta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalEncuesta;
+        
+        /// <summary>
         /// btnGuardarNivel control.
         /// </summary>
         /// <remarks>
@@ -517,24 +544,6 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         protected global::System.Web.UI.WebControls.DropDownList ddlMascaraAcceso;
         
         /// <summary>
-        /// ddlSla control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSla;
-        
-        /// <summary>
-        /// ddlEncuesta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEncuesta;
-        
-        /// <summary>
         /// btnCerrarTicket control.
         /// </summary>
         /// <remarks>
@@ -571,6 +580,87 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         protected global::System.Web.UI.WebControls.Button btnCerraGrupos;
         
         /// <summary>
+        /// UpdatePanel4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel4;
+        
+        /// <summary>
+        /// UcSla control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Altas.AltaSla UcSla;
+        
+        /// <summary>
+        /// UpdatePanel5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel5;
+        
+        /// <summary>
+        /// UpdatePanel3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+        
+        /// <summary>
+        /// Div2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div2;
+        
+        /// <summary>
+        /// Repeater1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater Repeater1;
+        
+        /// <summary>
+        /// div3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div3;
+        
+        /// <summary>
+        /// ddlEncuesta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEncuesta;
+        
+        /// <summary>
+        /// btnCerrarEncuesta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCerrarEncuesta;
+        
+        /// <summary>
         /// upModalAltaInfCons control.
         /// </summary>
         /// <remarks>
@@ -605,24 +695,6 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::KiiniHelp.UserControls.Altas.AltaMascaraAcceso UcAltaMascaraAcceso;
-        
-        /// <summary>
-        /// upModalAltaSla control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upModalAltaSla;
-        
-        /// <summary>
-        /// UcSla control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.AltaSla UcSla;
         
         /// <summary>
         /// UpdatePanel2 control.

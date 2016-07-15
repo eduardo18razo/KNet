@@ -8,35 +8,31 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using KiiniNet.Entities.Cat.Usuario;
-using KiiniNet.Entities.Helper;
-
 namespace KiiniHelp.ServiceSubGrupoUsuario {
     
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    [ServiceContract(ConfigurationName="ServiceSubGrupoUsuario.IServiceSubGrupoUsuario")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceSubGrupoUsuario.IServiceSubGrupoUsuario")]
     public interface IServiceSubGrupoUsuario {
         
-        [OperationContract(Action="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGruposUsuario", ReplyAction="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGruposUsuarioResponse")]
-        List<HelperSubGurpoUsuario> ObtenerSubGruposUsuario(int idGrupoUsuario, bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGruposUsuario", ReplyAction="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGruposUsuarioResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperSubGurpoUsuario> ObtenerSubGruposUsuario(int idGrupoUsuario, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGrupoUsuario", ReplyAction="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGrupoUsuarioResponse")]
-        SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubRol);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGruposUsuarioByIdGrupo", ReplyAction="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGruposUsuarioByIdGrupoRespon" +
+            "se")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.SubGrupoUsuario> ObtenerSubGruposUsuarioByIdGrupo(int idGrupoUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGrupoUsuario", ReplyAction="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGrupoUsuarioResponse")]
+        KiiniNet.Entities.Cat.Usuario.SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubRol);
     }
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceSubGrupoUsuarioChannel : IServiceSubGrupoUsuario, IClientChannel {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceSubGrupoUsuarioChannel : KiiniHelp.ServiceSubGrupoUsuario.IServiceSubGrupoUsuario, System.ServiceModel.IClientChannel {
     }
     
-    [DebuggerStepThrough()]
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceSubGrupoUsuarioClient : ClientBase<IServiceSubGrupoUsuario>, IServiceSubGrupoUsuario {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceSubGrupoUsuarioClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceSubGrupoUsuario.IServiceSubGrupoUsuario>, KiiniHelp.ServiceSubGrupoUsuario.IServiceSubGrupoUsuario {
         
         public ServiceSubGrupoUsuarioClient() {
         }
@@ -49,19 +45,23 @@ namespace KiiniHelp.ServiceSubGrupoUsuario {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceSubGrupoUsuarioClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
+        public ServiceSubGrupoUsuarioClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceSubGrupoUsuarioClient(Binding binding, EndpointAddress remoteAddress) : 
+        public ServiceSubGrupoUsuarioClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public List<HelperSubGurpoUsuario> ObtenerSubGruposUsuario(int idGrupoUsuario, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperSubGurpoUsuario> ObtenerSubGruposUsuario(int idGrupoUsuario, bool insertarSeleccion) {
             return base.Channel.ObtenerSubGruposUsuario(idGrupoUsuario, insertarSeleccion);
         }
         
-        public SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubRol) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.SubGrupoUsuario> ObtenerSubGruposUsuarioByIdGrupo(int idGrupoUsuario) {
+            return base.Channel.ObtenerSubGruposUsuarioByIdGrupo(idGrupoUsuario);
+        }
+        
+        public KiiniNet.Entities.Cat.Usuario.SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubRol) {
             return base.Channel.ObtenerSubGrupoUsuario(idGrupoUsuario, idSubRol);
         }
     }

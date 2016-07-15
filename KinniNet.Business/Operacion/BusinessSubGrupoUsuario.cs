@@ -19,6 +19,31 @@ namespace KinniNet.Core.Operacion
         {
             _proxy = proxy;
         }
+
+        public List<SubGrupoUsuario> ObtenerSubGruposUsuarioByIdGrupo(int idGrupoUsuario)
+        {
+            List<SubGrupoUsuario> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.SubGrupoUsuario.Where(w => w.IdGrupoUsuario == idGrupoUsuario).ToList();
+                foreach (SubGrupoUsuario subGrupo in result)
+                {
+                    db.LoadProperty(subGrupo, "SubRol");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
         public List<HelperSubGurpoUsuario> ObtenerSubGruposUsuario(int idGrupoUsuario, bool insertarSeleccion)
         {
             //TODO: REVISAR  METODO

@@ -124,6 +124,7 @@
     <Compile Include="Parametros\EstatusTicketSubRolGeneral.cs" />
     <Compile Include="Parametros\EstatusTicketSubRolGeneralDefault.cs" />
     <Compile Include="Parametros\ParametrosAplicacion.cs" />
+    <Compile Include="Parametros\ParametrosSla.cs" />
     <Compile Include="Parametros\ParametrosTelefonos.cs" />
     <Compile Include="Parametros\SubRolEscalacionPermitida.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

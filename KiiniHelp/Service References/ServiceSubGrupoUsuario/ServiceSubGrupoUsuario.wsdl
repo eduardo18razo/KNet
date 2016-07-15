@@ -6,16 +6,17 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceSubGrupoUsuario_ObtenerSubGruposUsuario_InputMessage">
@@ -23,6 +24,12 @@
   </wsdl:message>
   <wsdl:message name="IServiceSubGrupoUsuario_ObtenerSubGruposUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerSubGruposUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSubGrupoUsuario_ObtenerSubGruposUsuarioByIdGrupo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerSubGruposUsuarioByIdGrupo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSubGrupoUsuario_ObtenerSubGruposUsuarioByIdGrupo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerSubGruposUsuarioByIdGrupoResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceSubGrupoUsuario_ObtenerSubGrupoUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerSubGrupoUsuario" />
@@ -35,6 +42,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGruposUsuario" message="tns:IServiceSubGrupoUsuario_ObtenerSubGruposUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGruposUsuarioResponse" message="tns:IServiceSubGrupoUsuario_ObtenerSubGruposUsuario_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ObtenerSubGruposUsuarioByIdGrupo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGruposUsuarioByIdGrupo" message="tns:IServiceSubGrupoUsuario_ObtenerSubGruposUsuarioByIdGrupo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGruposUsuarioByIdGrupoResponse" message="tns:IServiceSubGrupoUsuario_ObtenerSubGruposUsuarioByIdGrupo_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ObtenerSubGrupoUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGrupoUsuario" message="tns:IServiceSubGrupoUsuario_ObtenerSubGrupoUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGrupoUsuarioResponse" message="tns:IServiceSubGrupoUsuario_ObtenerSubGrupoUsuario_OutputMessage" />
@@ -44,6 +55,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ObtenerSubGruposUsuario">
       <soap:operation soapAction="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGruposUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerSubGruposUsuarioByIdGrupo">
+      <soap:operation soapAction="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGruposUsuarioByIdGrupo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -5,6 +5,8 @@
 <%@ Register Src="~/UserControls/Consultas/UcConsultaUsuarios.ascx" TagPrefix="uc1" TagName="UcConsultaUsuarios" %>
 <%@ Register Src="~/UserControls/Consultas/UcConsultaGrupos.ascx" TagPrefix="uc1" TagName="UcConsultaGrupos" %>
 <%@ Register Src="~/UserControls/Consultas/UcConsultaArboles.ascx" TagPrefix="uc1" TagName="UcConsultaArboles" %>
+<%@ Register Src="~/UserControls/Altas/AltaSla.ascx" TagPrefix="uc1" TagName="AltaSla" %>
+
 
 
 
@@ -48,6 +50,10 @@
             display: none;
             background: gray;
         }
+
+        .borderless td, .borderless th {
+            border: none;
+        }
     </style>
     <script type="text/javascript">
         function MostrarPopup(modalName) {
@@ -87,6 +93,7 @@
             </Scripts>
         </asp:ScriptManager>
         <div id="full">
+            <uc1:AltaSla runat="server" ID="AltaSla" />
         </div>
     </form>
 </body>

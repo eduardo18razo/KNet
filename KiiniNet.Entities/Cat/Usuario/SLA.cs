@@ -13,6 +13,14 @@ namespace KiiniNet.Entities.Cat.Usuario
         [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
+        public decimal? Dias { get; set; }
+        [DataMember]
+        public decimal? Horas { get; set; }
+        [DataMember]
+        public decimal? Minutos { get; set; }
+        [DataMember]
+        public decimal? Segundos { get; set; }
+        [DataMember]
         public decimal TiempoHoraProceso { get; set; }
         [DataMember]
         public bool Detallado { get; set; }

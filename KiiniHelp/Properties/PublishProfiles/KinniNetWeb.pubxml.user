@@ -13,16 +13,25 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>06/03/2016 11:16:28</publishTime>
     </File>
     <File Include="Administracion/ArbolesAcceso/FrmAltaArbolAcceso.aspx">
-      <publishTime>07/05/2016 12:52:36</publishTime>
+      <publishTime>07/12/2016 09:43:09</publishTime>
     </File>
     <File Include="Administracion/ArbolesAcceso/FrmConsultaArbolAcceso.aspx">
-      <publishTime>06/13/2016 14:55:56</publishTime>
+      <publishTime>07/12/2016 12:36:46</publishTime>
     </File>
     <File Include="Administracion/ArbolesAecceso/FrmAltaArbolAcceso.aspx">
       <publishTime>06/03/2016 11:21:29</publishTime>
     </File>
     <File Include="Administracion/Default.aspx">
       <publishTime>06/13/2016 12:22:52</publishTime>
+    </File>
+    <File Include="Administracion/Grupos/FrmConsultaGrupos.aspx">
+      <publishTime>07/12/2016 16:37:10</publishTime>
+    </File>
+    <File Include="Administracion/Organizaciones/FrmConsultaOrganizaciones.aspx">
+      <publishTime>07/12/2016 12:36:59</publishTime>
+    </File>
+    <File Include="Administracion/Ubicaciones/FrmConsultaUbicaciones.aspx">
+      <publishTime>07/11/2016 17:42:33</publishTime>
     </File>
     <File Include="Administracion/Usuarios/FrmConsultaUsuarios.aspx">
       <publishTime>06/28/2016 17:02:51</publishTime>
@@ -31,7 +40,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/05/2016 12:15:08</publishTime>
     </File>
     <File Include="Administracion/Web.config">
-      <publishTime>07/04/2016 12:25:33</publishTime>
+      <publishTime>07/07/2016 08:28:28</publishTime>
     </File>
     <File Include="ArbolesAecceso/FrmAltaArbolAcceso.aspx">
       <publishTime>05/17/2016 11:17:35</publishTime>
@@ -73,10 +82,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>01/29/2011 05:51:50</publishTime>
     </File>
     <File Include="bin/KiiniHelp.dll">
-      <publishTime>07/05/2016 12:53:12</publishTime>
+      <publishTime>07/14/2016 13:14:58</publishTime>
     </File>
     <File Include="bin/KiiniNet.Entities.dll">
-      <publishTime>07/05/2016 12:53:07</publishTime>
+      <publishTime>07/14/2016 13:14:07</publishTime>
     </File>
     <File Include="bin/KinniNet.Business.Utils.dll">
       <publishTime>06/20/2016 11:54:55</publishTime>
@@ -118,13 +127,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/bootstrap.css">
-      <publishTime>05/30/2016 08:49:33</publishTime>
+      <publishTime>07/07/2016 10:09:47</publishTime>
     </File>
     <File Include="BootStrap/css/bootstrap.css.map">
       <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/bootstrap.min.css">
-      <publishTime>05/30/2016 08:49:33</publishTime>
+      <publishTime>07/07/2016 17:37:47</publishTime>
     </File>
     <File Include="BootStrap/css/Calendar.css">
       <publishTime>05/30/2016 08:49:33</publishTime>
@@ -133,7 +142,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/divs.css">
-      <publishTime>05/30/2016 08:49:33</publishTime>
+      <publishTime>07/06/2016 17:03:38</publishTime>
     </File>
     <File Include="BootStrap/css/DropDown.css">
       <publishTime>07/05/2016 10:28:06</publishTime>
@@ -142,7 +151,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/30/2016 08:49:33</publishTime>
     </File>
     <File Include="BootStrap/css/Headers.css">
-      <publishTime>06/15/2016 17:39:25</publishTime>
+      <publishTime>07/12/2016 16:32:50</publishTime>
     </File>
     <File Include="BootStrap/css/jquery.treegrid.css">
       <publishTime>05/30/2016 08:49:33</publishTime>
@@ -5161,7 +5170,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>06/13/2016 09:16:23</publishTime>
     </File>
     <File Include="Operacion/FrmOperacionTickets.aspx">
-      <publishTime>07/04/2016 16:53:06</publishTime>
+      <publishTime>07/07/2016 09:35:39</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>05/30/2016 08:49:43</publishTime>
@@ -5530,7 +5539,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>03/30/2016 16:15:22</publishTime>
     </File>
     <File Include="Test/FrmTestUserControls.aspx">
-      <publishTime>07/01/2016 13:59:27</publishTime>
+      <publishTime>07/13/2016 15:48:14</publishTime>
     </File>
     <File Include="TestUsControl/FrmTest.aspx">
       <publishTime>05/31/2016 11:07:07</publishTime>
@@ -5551,7 +5560,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/05/2016 11:29:23</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaGrupoUsuario.ascx">
-      <publishTime>07/05/2016 12:15:27</publishTime>
+      <publishTime>07/11/2016 13:01:36</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaInformacionConsulta.ascx">
       <publishTime>07/05/2016 12:22:35</publishTime>
@@ -5563,7 +5572,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/05/2016 11:37:05</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaSla.ascx">
-      <publishTime>07/05/2016 11:42:59</publishTime>
+      <publishTime>07/14/2016 13:11:27</publishTime>
     </File>
     <File Include="UserControls/Altas/UcAltaGrupos.ascx">
       <publishTime>04/28/2016 19:44:56</publishTime>
@@ -5583,8 +5592,23 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="UserControls/Altas/UcSla.ascx">
       <publishTime>05/06/2016 13:42:10</publishTime>
     </File>
+    <File Include="UserControls/Consultas/UcConsultaArboles.ascx">
+      <publishTime>07/12/2016 15:09:18</publishTime>
+    </File>
+    <File Include="UserControls/Consultas/UcConsultaGrupos.ascx">
+      <publishTime>07/12/2016 15:10:16</publishTime>
+    </File>
+    <File Include="UserControls/Consultas/UcConsultaMascaras.ascx">
+      <publishTime>07/12/2016 12:19:53</publishTime>
+    </File>
+    <File Include="UserControls/Consultas/UcConsultaOrganizacion.ascx">
+      <publishTime>07/12/2016 14:49:21</publishTime>
+    </File>
+    <File Include="UserControls/Consultas/UcConsultaUbicaciones.ascx">
+      <publishTime>07/12/2016 14:49:21</publishTime>
+    </File>
     <File Include="UserControls/Consultas/UcConsultaUsuarios.ascx">
-      <publishTime>06/28/2016 16:55:17</publishTime>
+      <publishTime>07/12/2016 15:11:20</publishTime>
     </File>
     <File Include="UserControls/Detalles/UcDetalleGrupoUsuario.ascx">
       <publishTime>06/28/2016 16:50:23</publishTime>
@@ -5620,7 +5644,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/05/2016 12:16:19</publishTime>
     </File>
     <File Include="UserControls/Temporal/UcCatalogoNiveles.ascx">
-      <publishTime>05/30/2016 08:49:38</publishTime>
+      <publishTime>07/11/2016 11:44:46</publishTime>
     </File>
     <File Include="UserControls/Temporal/UcMascaraCaptura.ascx">
       <publishTime>05/31/2016 10:04:43</publishTime>
@@ -5629,13 +5653,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>05/30/2016 08:49:38</publishTime>
     </File>
     <File Include="Usuarios.Master">
-      <publishTime>06/29/2016 14:26:42</publishTime>
+      <publishTime>07/12/2016 15:49:06</publishTime>
     </File>
     <File Include="Usuarios/FrmUsuarios.aspx">
       <publishTime>05/17/2016 11:17:35</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/05/2016 12:53:13</publishTime>
+      <publishTime>07/14/2016 13:14:58</publishTime>
     </File>
   </ItemGroup>
 </Project>

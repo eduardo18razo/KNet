@@ -99,5 +99,25 @@ namespace KinniNet.Core.Parametros
             }
             return result;
         }
+
+        public ParametrosSla ObtenerParametrosSla()
+        {
+            ParametrosSla result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.ParametrosSla.First();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
     }
 }

@@ -58,6 +58,7 @@ namespace KinniNet.Data.Help
 
                 //Parametros
                 _subRolEscalacionPermitida = CreateObjectSet<SubRolEscalacionPermitida>();
+                _parametrosSla = CreateObjectSet<ParametrosSla>();
 
                 //Ubicacion
                 _pais = CreateObjectSet<Pais>();
@@ -695,8 +696,16 @@ namespace KinniNet.Data.Help
                 return _subRolEscalacionPermitida;
             }
         }
+        public ObjectSet<ParametrosSla> ParametrosSla
+        {
+            get
+            {
+                return _parametrosSla;
+            }
+        }
 
         private readonly ObjectSet<SubRolEscalacionPermitida> _subRolEscalacionPermitida;
+        private readonly ObjectSet<ParametrosSla> _parametrosSla;
 
         #region Usuario
 

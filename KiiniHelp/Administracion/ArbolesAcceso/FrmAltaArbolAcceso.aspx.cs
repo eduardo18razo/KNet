@@ -166,8 +166,25 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 StringBuilder sb = new StringBuilder();
                 if (ddlMascaraAcceso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                     sb.AppendLine("<li>Debe especificar una mascara de captura.</li>");
-                if (ddlSla.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
-                    sb.AppendLine("<li>Debe especificar un SLA.</li>");
+
+                if (sb.ToString() != string.Empty)
+                {
+                    sb.Append("</ul>");
+                    sb.Insert(0, "<ul>");
+                    sb.Insert(0, "<h3>Ticket</h3>");
+                    throw new Exception(sb.ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        private void ValidaCapturaEncuesta()
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
                 if (ddlEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                     sb.AppendLine("<li>Debe especificar una encuesta.</li>");
                 if (sb.ToString() != string.Empty)
@@ -183,6 +200,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 throw new Exception(e.Message);
             }
         }
+
         private void ValidaCapturaGrupos()
         {
             try
@@ -485,7 +503,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
         {
             try
             {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaSla\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalSla\");", true);
             }
             catch (Exception ex)
             {
@@ -502,8 +520,10 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
         {
             try
             {
-                Metodos.LlenaComboCatalogo(ddlSla, _servicioSla.ObtenerSla(true));
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaSla\");", true);
+                btnModalSla.CssClass = "btn btn-success";
+                btnModalInforme.CssClass = "btn btn-primary";
+                btnModalEncuesta.CssClass = "btn btn-primary";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalSla\");", true);
             }
             catch (Exception ex)
             {
@@ -1097,11 +1117,14 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                         if (int.Parse(ddlTipoArbol.SelectedValue) == (int)BusinessVariables.EnumTipoArbol.Consultas)
                             ValidaCapturaConsulta();
                         if (int.Parse(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas)
+                        {
                             ValidaCapturaTicket();
+                            ValidaCapturaEncuesta();
+                        }
                         ValidaCapturaGrupos();
                         arbol.InventarioArbolAcceso = new List<InventarioArbolAcceso> { new InventarioArbolAcceso() };
                         arbol.InventarioArbolAcceso.First().IdMascara = Convert.ToInt32(ddlMascaraAcceso.SelectedValue) == 0 ? (int?)null : Convert.ToInt32(ddlMascaraAcceso.SelectedValue);
-                        arbol.InventarioArbolAcceso.First().IdSla = Convert.ToInt32(ddlSla.SelectedValue) == 0 ? (int?)null : Convert.ToInt32(ddlSla.SelectedValue);
+                        arbol.InventarioArbolAcceso.First().Sla = UcSla.Sla;
                         arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol = new List<GrupoUsuarioInventarioArbol>();
                         foreach (RepeaterItem item in AsociarGrupoUsuario.GruposAsociados)
                         {
@@ -1303,18 +1326,24 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.EspecialDeConsulta, true);
                 AsociarGrupoUsuario.Limpiar();
+                btnModalConsultas.Visible = Convert.ToInt32(ddlTipoArbol.SelectedValue) == (int)BusinessVariables.EnumTipoArbol.Consultas;
+                btnModalTicket.Visible = chkNivelTerminal.Checked && Convert.ToInt32(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas;
+                btnModalSla.Visible = chkNivelTerminal.Checked && Convert.ToInt32(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas;
+                btnModalInforme.Visible = chkNivelTerminal.Checked && Convert.ToInt32(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas;
+                btnModalEncuesta.Visible = chkNivelTerminal.Checked && Convert.ToInt32(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas;
 
-                if (!chkNivelTerminal.Checked) return;
+                if (!chkNivelTerminal.Checked)
+                {
+                    //Información de Consulta
+                    List<InformacionConsulta> infoCons = _servicioSistemaTipoInformacionConsulta.ObtenerTipoInformacionConsulta(false).Select(tipoInf => new InformacionConsulta { TipoInfConsulta = tipoInf }).ToList();
+                    rptInformacion.DataSource = infoCons;
+                    rptInformacion.DataBind();
 
-
-                //Información de Consulta
-                List<InformacionConsulta> infoCons = _servicioSistemaTipoInformacionConsulta.ObtenerTipoInformacionConsulta(false).Select(tipoInf => new InformacionConsulta { TipoInfConsulta = tipoInf }).ToList();
-                rptInformacion.DataSource = infoCons;
-                rptInformacion.DataBind();
+                    return;
+                }
 
                 //Ticket
                 Metodos.LlenaComboCatalogo(ddlMascaraAcceso, _servicioMascaras.ObtenerMascarasAcceso(true));
-                Metodos.LlenaComboCatalogo(ddlSla, _servicioSla.ObtenerSla(true));
                 Metodos.LlenaComboCatalogo(ddlEncuesta, _servicioEncuesta.ObtenerEncuestas(true));
 
                 upGrupos.Update();
@@ -1403,7 +1432,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
         #endregion Eventos#endregion Eventos
 
         #region Cerrar Modales
-        
+
         protected void btnCerrarModalAltaGrupoUsuario_OnClick(object sender, EventArgs e)
         {
             try
@@ -1429,16 +1458,8 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
             try
             {
                 ValidaCapturaConsulta();
-                if (int.Parse(ddlTipoArbol.SelectedValue) == (int)BusinessVariables.EnumTipoArbol.Consultas)
-                {
-                    btnModalConsultas.CssClass = "btn btn-primary btn-lg";
-                    btnModalGrupos.Enabled = true;
-                }
-                else
-                {
-                    btnModalTicket.Enabled = true;
-                }
-                btnModalConsultas.CssClass = "btn btn-success btn-lg";
+                btnModalGrupos.CssClass = "btn btn-primary";
+                btnModalConsultas.CssClass = "btn btn-success";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalConsultas\");", true);
             }
             catch (Exception ex)
@@ -1457,8 +1478,8 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
             try
             {
                 ValidaCapturaTicket();
-                btnModalGrupos.Enabled = true;
-                btnModalTicket.CssClass = "btn btn-success btn-lg";
+                btnModalTicket.CssClass = "btn btn-success";
+                btnModalGrupos.CssClass = "btn btn-primary";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalTicket\");", true);
             }
             catch (Exception ex)
@@ -1477,7 +1498,19 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
             try
             {
                 ValidaCapturaGrupos();
-                btnModalGrupos.CssClass = "btn btn-success btn-lg";
+                btnModalGrupos.CssClass = "btn btn-success";
+                btnModalSla.CssClass = "btn btn-primary";
+                int idGrupo = 0;
+                foreach (RepeaterItem item in AsociarGrupoUsuario.GruposAsociados)
+                        {
+                            Label lblIdGrupoUsuario = (Label)item.FindControl("lblIdGrupoUsuario");
+                            Label lblIdRol = (Label)item.FindControl("lblIdTipoSubGrupo");
+                            Label lblIdSubGrupoUsuario = (Label)item.FindControl("lblIdSubGrupo");
+                            if (Convert.ToInt32(lblIdRol.Text) ==
+                                (int) BusinessVariables.EnumRoles.ResponsableDeMantenimiento)
+                                idGrupo = Convert.ToInt32(lblIdGrupoUsuario.Text);
+                        }
+                UcSla.IdGrupo = idGrupo;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalGruposNodo\");", true);
             }
             catch (Exception ex)
@@ -1492,6 +1525,122 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
         }
 
         #endregion Cerrar Modales
+
+        #region Abre modales Maestros
+        protected void btnModalConsultas_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                btnModalGrupos.CssClass = "btn btn-primary disabled";
+                btnModalConsultas.CssClass = "btn btn-primary";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalConsultas\");", true);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        protected void btnModalTicket_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                btnModalTicket.CssClass = "btn btn-primary";
+                btnModalGrupos.CssClass = "btn btn-primary disabled";
+                btnModalSla.CssClass = "btn btn-primary disabled";
+                btnModalInforme.CssClass = "btn btn-primary disabled";
+                btnModalEncuesta.CssClass = "btn btn-primary disabled";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalTicket\");", true);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        protected void btnModalGrupos_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                btnModalGrupos.CssClass = "btn btn-primary";
+                btnModalSla.CssClass = "btn btn-primary disabled";
+                btnModalInforme.CssClass = "btn btn-primary disabled";
+                btnModalEncuesta.CssClass = "btn btn-primary disabled";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalGruposNodo\");", true);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        protected void btnModalSla_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                btnModalSla.CssClass = "btn btn-primary";
+                btnModalInforme.CssClass = "btn btn-primary disabled";
+                btnModalEncuesta.CssClass = "btn btn-primary disabled";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalSla\");", true);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        protected void btnModalInforme_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                btnModalInforme.CssClass = "btn btn-primary";
+                btnModalEncuesta.CssClass = "btn btn-primary disabled";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalTiempoInforme\");", true);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        protected void btnModalEncuesta_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                btnModalEncuesta.CssClass = "btn btn-primary";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalEncuesta\");", true);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+        #endregion Abre modales Maestros
+
+
+        protected void btnCerrarEncuesta_OnClick(object o, EventArgs e)
+        {
+            try
+            {
+                ValidaCapturaTicket();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEncuesta\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaTicket = _lstError;
+            }
+        }
     }
 }
 

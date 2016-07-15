@@ -17,6 +17,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerSubGruposUsuarioByIdGrupo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idGrupoUsuario" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerSubGruposUsuarioByIdGrupoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerSubGruposUsuarioByIdGrupoResult" nillable="true" type="q2:ArrayOfSubGrupoUsuario" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ObtenerSubGrupoUsuario">
     <xs:complexType>
       <xs:sequence>
@@ -28,7 +42,7 @@
   <xs:element name="ObtenerSubGrupoUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerSubGrupoUsuarioResult" nillable="true" type="q2:SubGrupoUsuario" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerSubGrupoUsuarioResult" nillable="true" type="q3:SubGrupoUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -13,6 +13,8 @@ namespace KiiniHelp.Test
         {
             try
             {
+                if(!IsPostBack)
+                AltaSla.IdGrupo = 10;
                 //UcDetalleTicket.IdTicket = 1;
                 //UcCambiarEstatusTicket.IdTicket = 1;
                 //UcCambiarEstatusTicket.IdUsuario = 2;

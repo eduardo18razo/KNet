@@ -666,55 +666,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Sla">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.Sla">
-        <MappingFragment StoreEntitySet="Sla">
-          <ScalarProperty Name="Detallado" ColumnName="Detallado" />
-          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="TiempoHoraProceso" ColumnName="TiempoHoraProceso" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SlaDetalle">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.SlaDetalle">
-        <MappingFragment StoreEntitySet="SlaDetalle">
-          <ScalarProperty Name="TiempoProceso" ColumnName="TiempoProceso" />
-          <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
-          <ScalarProperty Name="IdSla" ColumnName="IdSla" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SlaEstimadoTicketDetalle">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.SlaEstimadoTicketDetalle">
-        <MappingFragment StoreEntitySet="SlaEstimadoTicketDetalle">
-          <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
-          <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
-          <ScalarProperty Name="TiempoProceso" ColumnName="TiempoProceso" />
-          <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
-          <ScalarProperty Name="IdSlaEstimadoTicket" ColumnName="IdSlaEstimadoTicket" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SlaEstimadoTicket">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.SlaEstimadoTicket">
-        <MappingFragment StoreEntitySet="SlaEstimadoTicket">
-          <ScalarProperty Name="Terminado" ColumnName="Terminado" />
-          <ScalarProperty Name="TiempoDesface" ColumnName="TiempoDesface" />
-          <ScalarProperty Name="TiempoRetenido" ColumnName="TiempoRetenido" />
-          <ScalarProperty Name="TiempoHoraProceso" ColumnName="TiempoHoraProceso" />
-          <ScalarProperty Name="FechaFinProceso" ColumnName="FechaFinProceso" />
-          <ScalarProperty Name="FechaInicioProceso" ColumnName="FechaInicioProceso" />
-          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-          <ScalarProperty Name="IdTicket" ColumnName="IdTicket" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ArbolAcceso">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.ArbolAcceso">
         <MappingFragment StoreEntitySet="ArbolAcceso">
@@ -912,6 +863,86 @@
         <MappingFragment StoreEntitySet="Puesto">
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ParametrosSla">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.ParametrosSla">
+        <MappingFragment StoreEntitySet="ParametrosSla">
+          <ScalarProperty Name="MaximoSegundos" ColumnName="MaximoSegundos" />
+          <ScalarProperty Name="MaximoMinutos" ColumnName="MaximoMinutos" />
+          <ScalarProperty Name="MaximoHoras" ColumnName="MaximoHoras" />
+          <ScalarProperty Name="MaximoDias" ColumnName="MaximoDias" />
+          <ScalarProperty Name="MinimoSegundos" ColumnName="MinimoSegundos" />
+          <ScalarProperty Name="MinimoMinutos" ColumnName="MinimoMinutos" />
+          <ScalarProperty Name="MinimoHoras" ColumnName="MinimoHoras" />
+          <ScalarProperty Name="MinimoDias" ColumnName="MinimoDias" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sla">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.Sla">
+        <MappingFragment StoreEntitySet="Sla">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Detallado" ColumnName="Detallado" />
+          <ScalarProperty Name="TiempoHoraProceso" ColumnName="TiempoHoraProceso" />
+          <ScalarProperty Name="Segundos" ColumnName="Segundos" />
+          <ScalarProperty Name="Minutos" ColumnName="Minutos" />
+          <ScalarProperty Name="Horas" ColumnName="Horas" />
+          <ScalarProperty Name="Dias" ColumnName="Dias" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SlaDetalle">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.SlaDetalle">
+        <MappingFragment StoreEntitySet="SlaDetalle">
+          <ScalarProperty Name="TiempoProceso" ColumnName="TiempoProceso" />
+          <ScalarProperty Name="Segundos" ColumnName="Segundos" />
+          <ScalarProperty Name="Minutos" ColumnName="Minutos" />
+          <ScalarProperty Name="Horas" ColumnName="Horas" />
+          <ScalarProperty Name="Dias" ColumnName="Dias" />
+          <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
+          <ScalarProperty Name="IdSla" ColumnName="IdSla" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SlaEstimadoTicket">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.SlaEstimadoTicket">
+        <MappingFragment StoreEntitySet="SlaEstimadoTicket">
+          <ScalarProperty Name="Terminado" ColumnName="Terminado" />
+          <ScalarProperty Name="TiempoDesface" ColumnName="TiempoDesface" />
+          <ScalarProperty Name="TiempoRetenido" ColumnName="TiempoRetenido" />
+          <ScalarProperty Name="TiempoHoraProceso" ColumnName="TiempoHoraProceso" />
+          <ScalarProperty Name="Segundos" ColumnName="Segundos" />
+          <ScalarProperty Name="Minutos" ColumnName="Minutos" />
+          <ScalarProperty Name="Horas" ColumnName="Horas" />
+          <ScalarProperty Name="Dias" ColumnName="Dias" />
+          <ScalarProperty Name="FechaFinProceso" ColumnName="FechaFinProceso" />
+          <ScalarProperty Name="FechaInicioProceso" ColumnName="FechaInicioProceso" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="IdTicket" ColumnName="IdTicket" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SlaEstimadoTicketDetalle">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.SlaEstimadoTicketDetalle">
+        <MappingFragment StoreEntitySet="SlaEstimadoTicketDetalle">
+          <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
+          <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+          <ScalarProperty Name="TiempoProceso" ColumnName="TiempoProceso" />
+          <ScalarProperty Name="Segundos" ColumnName="Segundos" />
+          <ScalarProperty Name="Minutos" ColumnName="Minutos" />
+          <ScalarProperty Name="Horas" ColumnName="Horas" />
+          <ScalarProperty Name="Dias" ColumnName="Dias" />
+          <ScalarProperty Name="IdSubRol" ColumnName="IdSubRol" />
+          <ScalarProperty Name="IdSlaEstimadoTicket" ColumnName="IdSlaEstimadoTicket" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

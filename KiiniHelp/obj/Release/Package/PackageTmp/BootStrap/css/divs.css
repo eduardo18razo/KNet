@@ -17,3 +17,10 @@
 .margen-arriba {
     margin-top: 5px;
 }
+
+
+@media \0screen {
+  div { 
+  	height: auto; /* for ie 8 */
+  }
+}

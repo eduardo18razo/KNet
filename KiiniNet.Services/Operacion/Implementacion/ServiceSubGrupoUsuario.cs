@@ -9,6 +9,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
 {
     public class ServiceSubGrupoUsuario : IServiceSubGrupoUsuario
     {
+        public List<SubGrupoUsuario> ObtenerSubGruposUsuarioByIdGrupo(int idGrupoUsuario)
+        {
+            try
+            {
+                using (BusinessSubGrupoUsuario negocio = new BusinessSubGrupoUsuario())
+                {
+                    return negocio.ObtenerSubGruposUsuarioByIdGrupo(idGrupoUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<HelperSubGurpoUsuario> ObtenerSubGruposUsuario(int idGrupoUsuario, bool insertarSeleccion)
         {
             try

@@ -20,6 +20,14 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public DateTime? FechaFinProceso { get; set; }
         [DataMember]
+        public decimal Dias { get; set; }
+        [DataMember]
+        public decimal Horas { get; set; }
+        [DataMember]
+        public decimal Minutos { get; set; }
+        [DataMember]
+        public decimal Segundos { get; set; }
+        [DataMember]
         public decimal TiempoHoraProceso { get; set; }
         [DataMember]
         public decimal TiempoRetenido { get; set; }

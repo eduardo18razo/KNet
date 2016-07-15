@@ -33,6 +33,7 @@
     <MetadataFile FileName="ServiceSubGrupoUsuario7.xsd" MetadataType="Schema" ID="7134264d-332a-4678-ac5f-077e24923a16" SourceId="1" SourceUrl="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd4" />
     <MetadataFile FileName="ServiceSubGrupoUsuario8.xsd" MetadataType="Schema" ID="fe3dd1b5-8ca8-4e6b-849d-ab5ca5d35819" SourceId="1" SourceUrl="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd12" />
     <MetadataFile FileName="ServiceSubGrupoUsuario9.xsd" MetadataType="Schema" ID="292025f9-b67c-4135-a076-38cd6abf3607" SourceId="1" SourceUrl="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd9" />
+    <MetadataFile FileName="ServiceSubGrupoUsuario14.xsd" MetadataType="Schema" ID="12906188-a83c-4304-9bce-ecfb9ff74f89" SourceId="1" SourceUrl="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd14" />
     <MetadataFile FileName="ServiceSubGrupoUsuario10.xsd" MetadataType="Schema" ID="6bb04604-d4c1-453e-9449-e69af8678582" SourceId="1" SourceUrl="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd1" />
     <MetadataFile FileName="ServiceSubGrupoUsuario11.xsd" MetadataType="Schema" ID="8cf0c7f3-36b1-4a7c-adf7-8849f8a41493" SourceId="1" SourceUrl="http://localhost:15277/ServiceSubGrupoUsuario.svc?xsd=xsd5" />
     <MetadataFile FileName="ServiceSubGrupoUsuario.wsdl" MetadataType="Wsdl" ID="d55bb52e-1325-4ee4-b3a0-9e02e82bac1c" SourceId="1" SourceUrl="http://localhost:15277/ServiceSubGrupoUsuario.svc?wsdl" />

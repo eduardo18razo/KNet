@@ -66,7 +66,7 @@
                                                 <div class="panel-body">
                                                     <div class="form-group">
                                                         <div class="col-sm-offset-1">
-                                                            <asp:Label runat="server" for="ddlTipoArbol" class="col-sm-3 control-label">Tipo de Usuario Autorizado</asp:Label>
+                                                            <asp:Label runat="server" for="ddlTipoUsuario" class="col-sm-3 control-label">Tipo de Usuario Autorizado</asp:Label>
                                                             <asp:DropDownList runat="server" ID="ddlTipoUsuario" Width="450px" CssClass="DropSelect" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" AutoPostBack="true" />
                                                             <%----%>
                                                         </div>

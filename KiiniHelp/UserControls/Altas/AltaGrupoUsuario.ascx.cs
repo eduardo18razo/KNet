@@ -43,25 +43,25 @@ namespace KiiniHelp.UserControls.Altas
                 switch (value)
                 {
                     case (int)BusinessVariables.EnumTiposGrupos.Administrador:
-                        lblTitle.Text = "Alta Grupo de Usaurio de tipo Administrador";
+                        lblTitle.Text = "Alta Grupo de Usuario de tipo Administrador";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.Acceso:
-                        lblTitle.Text = "Alta Grupo de Usaurio de tipo Acceso";
+                        lblTitle.Text = "Alta Grupo de Usuario de tipo Acceso";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta:
-                        lblTitle.Text = "Alta Grupo de Usaurio de tipo Especial de consulta";
+                        lblTitle.Text = "Alta Grupo de Usuario de tipo Especial de consulta";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención:
                         lblTitle.Text = "Alta Grupo de Usaurio de tipo Responsable de atención";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento:
-                        lblTitle.Text = "Alta Grupo de Usaurio de tipo Responsable de Mantenimiento";
+                        lblTitle.Text = "Alta Grupo de Usuario de tipo Responsable de Mantenimiento";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeOperación:
-                        lblTitle.Text = "Alta Grupo de Usaurio de tipo Responsable de Operación";
+                        lblTitle.Text = "Alta Grupo de Usuario de tipo Responsable de Operación";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
-                        lblTitle.Text = "Alta Grupo de Usaurio de tipo Responsable de Desarrollo";
+                        lblTitle.Text = "Alta Grupo de Usuario de tipo Responsable de Desarrollo";
                         break;
                 }
                 List<SubRol> lstRoles = _servicioSistemaSubRol.ObtenerSubRolesByTipoGrupo(value, false);
