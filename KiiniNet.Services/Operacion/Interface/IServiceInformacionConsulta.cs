@@ -22,5 +22,11 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void GuardarHit(int idArbol, int idUsuario);
+
+        [OperationContract]
+        List<InformacionConsulta> ObtenerConsulta(int? idTipoInformacionConsulta, int? idTipoDocumento);
+
+        [OperationContract]
+        void HabilitarInformacion(int idInformacion, bool habilitado);
     }
 }

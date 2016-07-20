@@ -8,34 +8,33 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using KiiniNet.Entities.Cat.Usuario;
-
 namespace KiiniHelp.ServiceEncuesta {
     
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    [ServiceContract(ConfigurationName="ServiceEncuesta.IServiceEncuesta")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceEncuesta.IServiceEncuesta")]
     public interface IServiceEncuesta {
         
-        [OperationContract(Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestas", ReplyAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasResponse")]
-        List<Encuesta> ObtenerEncuestas(bool insertarSeleccion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestas", ReplyAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Encuesta> ObtenerEncuestas(bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceEncuesta/GuardarEncuesta", ReplyAction="http://tempuri.org/IServiceEncuesta/GuardarEncuestaResponse")]
-        void GuardarEncuesta(Encuesta encuesta);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/GuardarEncuesta", ReplyAction="http://tempuri.org/IServiceEncuesta/GuardarEncuestaResponse")]
+        void GuardarEncuesta(KiiniNet.Entities.Cat.Usuario.Encuesta encuesta);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/Consulta", ReplyAction="http://tempuri.org/IServiceEncuesta/ConsultaResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Encuesta> Consulta(string descripcion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/HabilitarEncuesta", ReplyAction="http://tempuri.org/IServiceEncuesta/HabilitarEncuestaResponse")]
+        void HabilitarEncuesta(int idencuesta, bool habilitado);
     }
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceEncuestaChannel : IServiceEncuesta, IClientChannel {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceEncuestaChannel : KiiniHelp.ServiceEncuesta.IServiceEncuesta, System.ServiceModel.IClientChannel {
     }
     
-    [DebuggerStepThrough()]
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceEncuestaClient : ClientBase<IServiceEncuesta>, IServiceEncuesta {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceEncuestaClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceEncuesta.IServiceEncuesta>, KiiniHelp.ServiceEncuesta.IServiceEncuesta {
         
         public ServiceEncuestaClient() {
         }
@@ -48,20 +47,28 @@ namespace KiiniHelp.ServiceEncuesta {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceEncuestaClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
+        public ServiceEncuestaClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceEncuestaClient(Binding binding, EndpointAddress remoteAddress) : 
+        public ServiceEncuestaClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public List<Encuesta> ObtenerEncuestas(bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Encuesta> ObtenerEncuestas(bool insertarSeleccion) {
             return base.Channel.ObtenerEncuestas(insertarSeleccion);
         }
         
-        public void GuardarEncuesta(Encuesta encuesta) {
+        public void GuardarEncuesta(KiiniNet.Entities.Cat.Usuario.Encuesta encuesta) {
             base.Channel.GuardarEncuesta(encuesta);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Encuesta> Consulta(string descripcion) {
+            return base.Channel.Consulta(descripcion);
+        }
+        
+        public void HabilitarEncuesta(int idencuesta, bool habilitado) {
+            base.Channel.HabilitarEncuesta(idencuesta, habilitado);
         }
     }
 }

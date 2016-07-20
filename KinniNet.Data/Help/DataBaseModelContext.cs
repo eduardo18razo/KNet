@@ -55,6 +55,7 @@ namespace KinniNet.Data.Help
                 _rolMenu = CreateObjectSet<RolMenu>();
                 _estatusTicket = CreateObjectSet<EstatusTicket>();
                 _estatusAsignacion = CreateObjectSet<EstatusAsignacion>();
+                _tipoNotificacion = CreateObjectSet<TipoNotificacion>();
 
                 //Parametros
                 _subRolEscalacionPermitida = CreateObjectSet<SubRolEscalacionPermitida>();
@@ -664,6 +665,14 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<TipoNotificacion> TipoNotificacion
+        {
+            get
+            {
+                return _tipoNotificacion;
+            }
+        }
+
 
         private readonly ObjectSet<TipoUsuario> _tipoUsuario;
         private readonly ObjectSet<Pais> _pais;
@@ -686,6 +695,7 @@ namespace KinniNet.Data.Help
 
         private readonly ObjectSet<EstatusTicket> _estatusTicket;
         private readonly ObjectSet<EstatusAsignacion> _estatusAsignacion;
+        private readonly ObjectSet<TipoNotificacion> _tipoNotificacion;
 
         #endregion Systema
 

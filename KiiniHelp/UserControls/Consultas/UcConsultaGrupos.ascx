@@ -9,11 +9,11 @@
             });
         };
 
-        function ContextMenu() {
-            var $contextMenu = $("#contextMenu");
+        function contextMenuGrupo() {
+            var $contextMenuGrupo = $("#contextMenuGrupo");
             $("body").on("click", function (e) {
                 debugger;
-                $contextMenu.hide();
+                $contextMenuGrupo.hide();
                 var table = $("#tblHeader");
                 table.find('tr').each(function (i, ev) {
                     $(this).css('background', "transparent");
@@ -21,7 +21,7 @@
             });
             $("body").on("contextmenu", "table tr", function (e) {
                 debugger;
-                $contextMenu.css({
+                $contextMenuGrupo.css({
                     display: "block",
                     left: e.pageX,
                     top: e.pageY
@@ -51,15 +51,15 @@
                 return false;
             });
 
-            $contextMenu.on("click", "button", function () {
+            $contextMenuGrupo.on("click", "button", function () {
                 debugger;
-                $contextMenu.hide();
+                $contextMenuGrupo.hide();
             });
         };
     </script>
     <asp:UpdatePanel runat="server" style="height: 100%">
         <ContentTemplate>
-            <div id="contextMenu" class="panel-heading">
+            <div id="contextMenuGrupo" class="panel-heading contextMenu">
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-primary" Text="Baja" ID="btnBaja" OnClick="btnBaja_OnClick" />
@@ -160,11 +160,11 @@
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()" contextmenu="contextMenu"><%# Eval("TipoUsuario.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("TipoGrupo.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# (bool) Eval("TieneSupervisor") ? "SI" : "NO" %></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()" contextmenu="contextMenu"><%# Eval("TipoUsuario.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()"><%# Eval("TipoGrupo.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()"><%# Eval("Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()"><%# (bool) Eval("TieneSupervisor") ? "SI" : "NO" %></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>

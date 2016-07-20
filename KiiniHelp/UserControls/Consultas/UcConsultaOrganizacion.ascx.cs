@@ -15,10 +15,16 @@ namespace KiiniHelp.UserControls.Consultas
 {
     public partial class UcConsultaOrganizacion : UserControl, IControllerModal
     {
+        public delegate void DelegateSeleccionOrganizacionModal();
         readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
         readonly ServiceOrganizacionClient _servicioOrganizacion = new ServiceOrganizacionClient();
         private List<string> _lstError = new List<string>();
 
+        public bool Modal
+        {
+            get { return Convert.ToBoolean(hfModal.Value); }
+            set { hfModal.Value = value.ToString(); }
+        }
         public int IdTipoUsuario
         {
             get { return Convert.ToInt32(ddlTipoUsuario.SelectedValue); }
@@ -44,6 +50,16 @@ namespace KiiniHelp.UserControls.Consultas
                 if (!panelAlertaCatalogo.Visible) return;
                 rptErrorCatalogo.DataSource = value;
                 rptErrorCatalogo.DataBind();
+            }
+        }
+
+        public int OrganizacionSeleccionada
+        {
+            get
+            {
+                if (ViewState["OrganizacionSeleccionada"] == null || ViewState["OrganizacionSeleccionada"].ToString().Trim() == string.Empty)
+                    throw new Exception("Debe Seleccionar una organización");
+                return (int) ViewState["OrganizacionSeleccionada"];
             }
         }
 
@@ -155,6 +171,8 @@ namespace KiiniHelp.UserControls.Consultas
                 LlenaCombos();
                 LlenaOrganizaciones();
             }
+            if (Request["__EVENTTARGET"] == "SeleccionarOrganizacion")
+                Seleccionar(Convert.ToInt32(Request["__EVENTARGUMENT"]));
         }
 
         protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -722,7 +740,14 @@ namespace KiiniHelp.UserControls.Consultas
             return result;
         }
 
+        private void Seleccionar(int id)
+        {
+            ViewState["OrganizacionSeleccionada"] = id;
+            if (OnSeleccionOrganizacionModal != null)
+                OnSeleccionOrganizacionModal();
+        }
 
+        public event DelegateSeleccionOrganizacionModal OnSeleccionOrganizacionModal;
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;

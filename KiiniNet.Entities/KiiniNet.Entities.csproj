@@ -69,6 +69,7 @@
     <Compile Include="Cat\Sistema\TipoEncuesta.cs" />
     <Compile Include="Cat\Sistema\TipoGrupo.cs" />
     <Compile Include="Cat\Sistema\TipoInfConsulta.cs" />
+    <Compile Include="Cat\Sistema\TipoNotificacion.cs" />
     <Compile Include="Cat\Usuario\Encuesta.cs" />
     <Compile Include="Cat\Usuario\EncuestaPregunta.cs" />
     <Compile Include="Cat\Usuario\GrupoUsuario.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Operacion\Tickets\TicketGrupoUsuario.cs" />
     <Compile Include="Operacion\Tickets\TicketAsignacion.cs" />
     <Compile Include="Operacion\Tickets\TicketEstatus.cs" />
+    <Compile Include="Operacion\TiempoInformeArbol.cs" />
     <Compile Include="Operacion\Usuarios\TelefonoUsuario.cs" />
     <Compile Include="Cat\Sistema\TipoTelefono.cs" />
     <Compile Include="Cat\Arbol\Ubicaciones\Domicilio\Colonia.cs" />

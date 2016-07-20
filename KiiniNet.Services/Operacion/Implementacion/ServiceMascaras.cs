@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
@@ -37,6 +38,36 @@ namespace KiiniNet.Services.Operacion.Implementacion
             using (BusinessMascaras negocio = new BusinessMascaras())
             {
                 return negocio.ObtenerCatalogoCampoMascara(tabla);
+            }
+        }
+
+        public List<Mascara> Consulta(string descripcion)
+        {
+            try
+            {
+                using (BusinessMascaras negocio = new BusinessMascaras())
+                {
+                    return negocio.Consulta(descripcion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void HabilitarMascara(int idMascara, bool habilitado)
+        {
+            try
+            {
+                using (BusinessMascaras negocio = new BusinessMascaras())
+                {
+                    negocio.HabilitarMascara(idMascara, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

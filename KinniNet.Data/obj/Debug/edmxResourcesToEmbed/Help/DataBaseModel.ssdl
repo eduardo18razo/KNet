@@ -714,6 +714,22 @@
     <Property Name="IdGrupoUsuario" Type="int" Nullable="false" />
     <Property Name="IdSubGrupoUsuario" Type="int" />
   </EntityType>
+  <EntityType Name="TiempoInformeArbol">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdArbol" Type="int" />
+    <Property Name="IdTipoGrupo" Type="int" />
+    <Property Name="IdGrupoUsuario" Type="int" />
+    <Property Name="Dias" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Horas" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Minutos" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Segundos" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TiempoNotificacion" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IdTipoNotificacion" Type="int" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
   <EntityType Name="TipoArbolAcceso">
     <Key>
       <PropertyRef Name="Id" />
@@ -774,6 +790,14 @@
     <Property Name="EsUrl" Type="bit" />
     <Property Name="EsServicio" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
+  </EntityType>
+  <EntityType Name="TipoNotificacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TipoTelefono">
     <Key>
@@ -2339,6 +2363,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TiempoInformeArbol_ArbolAcceso">
+    <End Role="ArbolAcceso" Type="Self.ArbolAcceso" Multiplicity="0..1" />
+    <End Role="TiempoInformeArbol" Type="Self.TiempoInformeArbol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArbolAcceso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TiempoInformeArbol">
+        <PropertyRef Name="IdArbol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TiempoInformeArbol_GrupoUsuario">
+    <End Role="GrupoUsuario" Type="Self.GrupoUsuario" Multiplicity="0..1" />
+    <End Role="TiempoInformeArbol" Type="Self.TiempoInformeArbol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TiempoInformeArbol">
+        <PropertyRef Name="IdGrupoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TiempoInformeArbol_TipoGrupo">
+    <End Role="TipoGrupo" Type="Self.TipoGrupo" Multiplicity="0..1" />
+    <End Role="TiempoInformeArbol" Type="Self.TiempoInformeArbol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoGrupo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TiempoInformeArbol">
+        <PropertyRef Name="IdTipoGrupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TiempoInformeArbol_TipoNotificacion">
+    <End Role="TipoNotificacion" Type="Self.TipoNotificacion" Multiplicity="0..1" />
+    <End Role="TiempoInformeArbol" Type="Self.TiempoInformeArbol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoNotificacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TiempoInformeArbol">
+        <PropertyRef Name="IdTipoNotificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Torre_TipoUsuario">
     <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
     <End Role="Torre" Type="Self.Torre" Multiplicity="*" />
@@ -2649,12 +2721,14 @@
     <EntitySet Name="TicketAsignacion" EntityType="Self.TicketAsignacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TicketEstatus" EntityType="Self.TicketEstatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TicketGrupoUsuario" EntityType="Self.TicketGrupoUsuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiempoInformeArbol" EntityType="Self.TiempoInformeArbol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoArbolAcceso" EntityType="Self.TipoArbolAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoCampoMascara" EntityType="Self.TipoCampoMascara" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoEncuesta" EntityType="Self.TipoEncuesta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoGrupo" EntityType="Self.TipoGrupo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoInfConsulta" EntityType="Self.TipoInfConsulta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoNotificacion" EntityType="Self.TipoNotificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoTelefono" EntityType="Self.TipoTelefono" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Torre" EntityType="Self.Torre" Schema="dbo" store:Type="Tables" />
@@ -3154,6 +3228,22 @@
     <AssociationSet Name="FK_TicketGrupoUsuario_Ticket" Association="Self.FK_TicketGrupoUsuario_Ticket">
       <End Role="Ticket" EntitySet="Ticket" />
       <End Role="TicketGrupoUsuario" EntitySet="TicketGrupoUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TiempoInformeArbol_ArbolAcceso" Association="Self.FK_TiempoInformeArbol_ArbolAcceso">
+      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+      <End Role="TiempoInformeArbol" EntitySet="TiempoInformeArbol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TiempoInformeArbol_GrupoUsuario" Association="Self.FK_TiempoInformeArbol_GrupoUsuario">
+      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+      <End Role="TiempoInformeArbol" EntitySet="TiempoInformeArbol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TiempoInformeArbol_TipoGrupo" Association="Self.FK_TiempoInformeArbol_TipoGrupo">
+      <End Role="TipoGrupo" EntitySet="TipoGrupo" />
+      <End Role="TiempoInformeArbol" EntitySet="TiempoInformeArbol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TiempoInformeArbol_TipoNotificacion" Association="Self.FK_TiempoInformeArbol_TipoNotificacion">
+      <End Role="TipoNotificacion" EntitySet="TipoNotificacion" />
+      <End Role="TiempoInformeArbol" EntitySet="TiempoInformeArbol" />
     </AssociationSet>
     <AssociationSet Name="FK_Torre_TipoUsuario" Association="Self.FK_Torre_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />

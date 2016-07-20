@@ -8,48 +8,46 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using KiiniNet.Entities.Operacion;
-using KinniNet.Business.Utils;
-
 namespace KiiniHelp.ServiceInformacionConsulta {
     
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    [ServiceContract(ConfigurationName="ServiceInformacionConsulta.IServiceInformacionConsulta")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceInformacionConsulta.IServiceInformacionConsulta")]
     public interface IServiceInformacionConsulta {
         
-        [OperationContract(Action="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsulta", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsultaResponse" +
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsulta", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsultaResponse" +
             "")]
-        List<InformacionConsulta> ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta tipoinfoConsulta, bool insertarSeleccion);
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.InformacionConsulta> ObtenerInformacionConsulta(KinniNet.Business.Utils.BusinessVariables.EnumTiposInformacionConsulta tipoinfoConsulta, bool insertarSeleccion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsultaArbol", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsultaArbolRes" +
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsultaArbol", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsultaArbolRes" +
             "ponse")]
-        List<InformacionConsulta> ObtenerInformacionConsultaArbol(int idArbol);
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.InformacionConsulta> ObtenerInformacionConsultaArbol(int idArbol);
         
-        [OperationContract(Action="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsultaById", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsultaByIdResp" +
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsultaById", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsultaByIdResp" +
             "onse")]
-        InformacionConsulta ObtenerInformacionConsultaById(int idInformacion);
+        KiiniNet.Entities.Operacion.InformacionConsulta ObtenerInformacionConsultaById(int idInformacion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceInformacionConsulta/GuardarInformacionConsulta", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/GuardarInformacionConsultaResponse" +
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/GuardarInformacionConsulta", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/GuardarInformacionConsultaResponse" +
             "")]
-        void GuardarInformacionConsulta(InformacionConsulta informacion);
+        void GuardarInformacionConsulta(KiiniNet.Entities.Operacion.InformacionConsulta informacion);
         
-        [OperationContract(Action="http://tempuri.org/IServiceInformacionConsulta/GuardarHit", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/GuardarHitResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/GuardarHit", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/GuardarHitResponse")]
         void GuardarHit(int idArbol, int idUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/ObtenerConsulta", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/ObtenerConsultaResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.InformacionConsulta> ObtenerConsulta(System.Nullable<int> idTipoInformacionConsulta, System.Nullable<int> idTipoDocumento);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/HabilitarInformacion", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/HabilitarInformacionResponse")]
+        void HabilitarInformacion(int idInformacion, bool habilitado);
     }
     
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceInformacionConsultaChannel : IServiceInformacionConsulta, IClientChannel {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IServiceInformacionConsultaChannel : KiiniHelp.ServiceInformacionConsulta.IServiceInformacionConsulta, System.ServiceModel.IClientChannel {
     }
     
-    [DebuggerStepThrough()]
-    [GeneratedCode("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceInformacionConsultaClient : ClientBase<IServiceInformacionConsulta>, IServiceInformacionConsulta {
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ServiceInformacionConsultaClient : System.ServiceModel.ClientBase<KiiniHelp.ServiceInformacionConsulta.IServiceInformacionConsulta>, KiiniHelp.ServiceInformacionConsulta.IServiceInformacionConsulta {
         
         public ServiceInformacionConsultaClient() {
         }
@@ -62,32 +60,40 @@ namespace KiiniHelp.ServiceInformacionConsulta {
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceInformacionConsultaClient(string endpointConfigurationName, EndpointAddress remoteAddress) : 
+        public ServiceInformacionConsultaClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceInformacionConsultaClient(Binding binding, EndpointAddress remoteAddress) : 
+        public ServiceInformacionConsultaClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public List<InformacionConsulta> ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta tipoinfoConsulta, bool insertarSeleccion) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.InformacionConsulta> ObtenerInformacionConsulta(KinniNet.Business.Utils.BusinessVariables.EnumTiposInformacionConsulta tipoinfoConsulta, bool insertarSeleccion) {
             return base.Channel.ObtenerInformacionConsulta(tipoinfoConsulta, insertarSeleccion);
         }
         
-        public List<InformacionConsulta> ObtenerInformacionConsultaArbol(int idArbol) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.InformacionConsulta> ObtenerInformacionConsultaArbol(int idArbol) {
             return base.Channel.ObtenerInformacionConsultaArbol(idArbol);
         }
         
-        public InformacionConsulta ObtenerInformacionConsultaById(int idInformacion) {
+        public KiiniNet.Entities.Operacion.InformacionConsulta ObtenerInformacionConsultaById(int idInformacion) {
             return base.Channel.ObtenerInformacionConsultaById(idInformacion);
         }
         
-        public void GuardarInformacionConsulta(InformacionConsulta informacion) {
+        public void GuardarInformacionConsulta(KiiniNet.Entities.Operacion.InformacionConsulta informacion) {
             base.Channel.GuardarInformacionConsulta(informacion);
         }
         
         public void GuardarHit(int idArbol, int idUsuario) {
             base.Channel.GuardarHit(idArbol, idUsuario);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.InformacionConsulta> ObtenerConsulta(System.Nullable<int> idTipoInformacionConsulta, System.Nullable<int> idTipoDocumento) {
+            return base.Channel.ObtenerConsulta(idTipoInformacionConsulta, idTipoDocumento);
+        }
+        
+        public void HabilitarInformacion(int idInformacion, bool habilitado) {
+            base.Channel.HabilitarInformacion(idInformacion, habilitado);
         }
     }
 }

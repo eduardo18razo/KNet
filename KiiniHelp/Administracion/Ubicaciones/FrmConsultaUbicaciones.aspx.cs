@@ -11,7 +11,7 @@ namespace KiiniHelp.Administracion.Ubicaciones
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            UcConsultaUbicaciones.Modal = false;
         }
     }
 }

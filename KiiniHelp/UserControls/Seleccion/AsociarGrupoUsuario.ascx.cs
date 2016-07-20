@@ -9,6 +9,7 @@ using KiiniHelp.ServiceGrupoUsuario;
 using KiiniHelp.ServiceSistemaSubRol;
 using KiiniHelp.ServiceSistemaTipoGrupo;
 using KiiniHelp.ServiceSubGrupoUsuario;
+using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
@@ -24,6 +25,13 @@ namespace KiiniHelp.UserControls.Seleccion
         readonly ServiceSubGrupoUsuarioClient _servicioSubGrupoUsuario = new ServiceSubGrupoUsuarioClient();
         private List<string> _lstError = new List<string>();
         public string Modal { get; set; }
+
+        public bool AsignacionAutomatica
+        {
+            get { return Convert.ToBoolean(hfAsignacionAutomatica.Value); }
+            set
+            { hfAsignacionAutomatica.Value = value.ToString(); }
+        }
 
         public bool Administrador
         {
@@ -95,7 +103,7 @@ namespace KiiniHelp.UserControls.Seleccion
                 if (!panelAlertaGrupos.Visible) return;
                 rptErrorGrupos.DataSource = value;
                 rptErrorGrupos.DataBind();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "Subirscroll(\"" + Modal +"\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "UpScroll(\"" + Modal + "\");", true);
             }
         }
 
@@ -329,10 +337,20 @@ namespace KiiniHelp.UserControls.Seleccion
                 {
                     if (lstSubRoles.Count > 0)
                     {
-                        hfOperacion.Value = operacion.ToString();
-                        lblTitleSubRoles.Text = String.Format("Seleccione Sub Rol de Grupo {0}", grupoUsuario.Descripcion);
-                        Metodos.LlenaListBoxCatalogo(chklbxSubRoles, _servicioSistemaSubRoles.ObtenerSubRolesByGrupoUsuarioRol(idGrupoUsuario, idRol, false));
-                        ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalSeleccionRol\");", true);
+                        if (AsignacionAutomatica)
+                        {
+                            foreach (SubRol sbRol in _servicioSistemaSubRoles.ObtenerSubRolesByGrupoUsuarioRol(idGrupoUsuario, idRol, false))
+                            {
+                                AsignarGrupo(grupoUsuario, idRol, sbRol.Id);
+                            }
+                        }
+                        else
+                        {
+                            hfOperacion.Value = operacion.ToString();
+                            lblTitleSubRoles.Text = String.Format("Seleccione Sub Rol de Grupo {0}", grupoUsuario.Descripcion);
+                            Metodos.LlenaListBoxCatalogo(chklbxSubRoles, _servicioSistemaSubRoles.ObtenerSubRolesByGrupoUsuarioRol(idGrupoUsuario, idRol, false));
+                            ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script", "MostrarPopup(\"#modalSeleccionRol\");", true);
+                        }
                         return;
                     }
                     AsignarGrupo(grupoUsuario, idRol, null);

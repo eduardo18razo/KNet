@@ -265,13 +265,13 @@ namespace KiiniHelp.Administracion.Usuarios {
         protected global::System.Web.UI.UpdatePanel upOrganizacion;
         
         /// <summary>
-        /// ucOrganizacion control.
+        /// UcConsultaOrganizacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.AltaOrganizacion ucOrganizacion;
+        protected global::KiiniHelp.UserControls.Consultas.UcConsultaOrganizacion UcConsultaOrganizacion;
         
         /// <summary>
         /// upUbicacion control.
@@ -283,13 +283,13 @@ namespace KiiniHelp.Administracion.Usuarios {
         protected global::System.Web.UI.UpdatePanel upUbicacion;
         
         /// <summary>
-        /// UcUbicacion control.
+        /// UcConsultaUbicaciones control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.UcAltaUbicacion UcUbicacion;
+        protected global::KiiniHelp.UserControls.Consultas.UcConsultaUbicaciones UcConsultaUbicaciones;
         
         /// <summary>
         /// upRoles control.

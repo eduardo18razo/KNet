@@ -3,7 +3,7 @@
   <xs:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:simpleType name="BusinessVariables.EnumTiposInformacionConsulta">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="Propietario">
+      <xs:enumeration value="Texto">
         <xs:annotation>
           <xs:appinfo>
             <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
@@ -17,7 +17,7 @@
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="Paginahtml">
+      <xs:enumeration value="PaginaHtml">
         <xs:annotation>
           <xs:appinfo>
             <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>

@@ -21,7 +21,6 @@
  */
 (function($) {
     $.fn.vmenuModule = function (option) {
-        debugger;
         var options = $.extend({
 				Speed: 220,
 				autostart: true,

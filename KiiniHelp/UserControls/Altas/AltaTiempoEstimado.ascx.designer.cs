@@ -31,67 +31,220 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
         
         /// <summary>
-        /// ddlGrupo control.
+        /// chkDueno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlGrupo;
+        protected global::System.Web.UI.WebControls.CheckBox chkDueno;
         
         /// <summary>
-        /// txtDescripcion control.
+        /// txtDuenoDias control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+        protected global::System.Web.UI.WebControls.TextBox txtDuenoDias;
         
         /// <summary>
-        /// chkEstimado control.
+        /// txtDuenoHoras control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkEstimado;
+        protected global::System.Web.UI.WebControls.TextBox txtDuenoHoras;
         
         /// <summary>
-        /// divSimple control.
+        /// txtDuenoMinutos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSimple;
+        protected global::System.Web.UI.WebControls.TextBox txtDuenoMinutos;
         
         /// <summary>
-        /// txtTiempoTotal control.
+        /// txtDuenoSegundos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTiempoTotal;
+        protected global::System.Web.UI.WebControls.TextBox txtDuenoSegundos;
         
         /// <summary>
-        /// divDetalle control.
+        /// ddlDuenoVia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDetalle;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDuenoVia;
         
         /// <summary>
-        /// rptSubRoles control.
+        /// chkMtto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptSubRoles;
+        protected global::System.Web.UI.WebControls.CheckBox chkMtto;
+        
+        /// <summary>
+        /// txtMttoDias control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMttoDias;
+        
+        /// <summary>
+        /// txtMttoHoras control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMttoHoras;
+        
+        /// <summary>
+        /// txtMttoMinutos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMttoMinutos;
+        
+        /// <summary>
+        /// txtMttoSegundos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMttoSegundos;
+        
+        /// <summary>
+        /// ddlMttoVia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMttoVia;
+        
+        /// <summary>
+        /// chkDesarrollo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkDesarrollo;
+        
+        /// <summary>
+        /// txtDesarrolloDias control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDesarrolloDias;
+        
+        /// <summary>
+        /// txtDesarrolloHoras control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDesarrolloHoras;
+        
+        /// <summary>
+        /// txtDesarrolloMinutos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDesarrolloMinutos;
+        
+        /// <summary>
+        /// txtDesarrolloSegundos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDesarrolloSegundos;
+        
+        /// <summary>
+        /// ddlDesarrolloVia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDesarrolloVia;
+        
+        /// <summary>
+        /// chkConsulta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkConsulta;
+        
+        /// <summary>
+        /// txtConsultaDias control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtConsultaDias;
+        
+        /// <summary>
+        /// txtConsultaHoras control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtConsultaHoras;
+        
+        /// <summary>
+        /// txtConsultaMinutos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtConsultaMinutos;
+        
+        /// <summary>
+        /// txtConsultaSegundos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtConsultaSegundos;
+        
+        /// <summary>
+        /// ddlConsultaVia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlConsultaVia;
         
         /// <summary>
         /// btnGuardar control.

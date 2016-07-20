@@ -1,17 +1,17 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaUbicaciones.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaUbicaciones" %>
 <div style="height: 100%;">
     <script>
-        function dbClic(e) {
-            $('#tblHeader').find('tr').dblclick(function (e) {
-                alert(e.target.parentElement.id);
-            });
+        function dbClicUbicacion(e) {
+            debugger;
+            __doPostBack('SeleccionarUbicacion', e.parentElement.id);
         };
 
-        function ContextMenu() {
-            var $contextMenu = $("#contextMenu");
+        function contextMenuUbicaciones() {
+
+            var $contextMenuUbicaciones = $("#contextMenuUbicaciones");
             $("body").on("click", function (e) {
                 //debugger;
-                $contextMenu.hide();
+                $contextMenuUbicaciones.hide();
                 var table = $("#tblHeader");
                 table.find('tr').each(function (i, ev) {
                     $(this).css('background', "transparent");
@@ -19,10 +19,23 @@
             });
             $("body").on("contextmenu", "table tr", function (e) {
                 debugger;
-                $contextMenu.css({
+                if (document.getElementById("<%= this.FindControl("hfModal").ClientID %>").value.toLowerCase() === "true") {
+                    if (e.pageX > 239)
+                        positionx = e.pageX - 239;
+                    else
+                        positionx = 239 - e.pageX;
+                    if (e.pageY > 31)
+                        positiony = e.pageY - 31;
+                    else
+                        positiony = 31 - e.pageY;
+                } else {
+                    positionx = e.pageX;
+                    positiony = e.pageY;
+                }
+                $contextMenuUbicaciones.css({
                     display: "block",
-                    left: e.pageX,
-                    top: e.pageY
+                    left: positionx,
+                    top: positiony
                 });
                 var baja = false;
                 var alta = false;
@@ -49,15 +62,16 @@
                 return false;
             });
 
-            $contextMenu.on("click", "button", function () {
+            $contextMenuUbicaciones.on("click", "button", function () {
                 debugger;
-                $contextMenu.hide();
+                $contextMenuUbicaciones.hide();
             });
         };
     </script>
     <asp:UpdatePanel runat="server" style="height: 100%" ID="upGeneral">
         <ContentTemplate>
-            <div id="contextMenu" class="panel-heading">
+            <div id="contextMenuUbicaciones" class="panel-heading contextMenu">
+                <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfModal" />
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-primary" Text="Baja" ID="btnBaja" OnClick="btnBaja_OnClick" ClientIDMode="Inherit" />
@@ -178,14 +192,14 @@
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()" contextmenu="contextMenu"><%# Eval("Pais.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu"><%# Eval("Campus.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu"><%# Eval("Torre.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu"><%# Eval("Piso.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu"><%# Eval("Zona.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu"><%# Eval("SubZona.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu"><%# Eval("SiteRack.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Pais.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Campus.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Torre.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Piso.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Zona.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SubZona.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SiteRack.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>

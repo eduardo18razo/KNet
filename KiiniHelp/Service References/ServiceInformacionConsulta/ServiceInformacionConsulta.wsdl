@@ -11,11 +11,12 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceInformacionConsulta_ObtenerInformacionConsulta_InputMessage">
@@ -48,6 +49,18 @@
   <wsdl:message name="IServiceInformacionConsulta_GuardarHit_OutputMessage">
     <wsdl:part name="parameters" element="tns:GuardarHitResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceInformacionConsulta_ObtenerConsulta_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerConsulta" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInformacionConsulta_ObtenerConsulta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerConsultaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInformacionConsulta_HabilitarInformacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarInformacion" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInformacionConsulta_HabilitarInformacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarInformacionResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceInformacionConsulta">
     <wsdl:operation name="ObtenerInformacionConsulta">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceInformacionConsulta/ObtenerInformacionConsulta" message="tns:IServiceInformacionConsulta_ObtenerInformacionConsulta_InputMessage" />
@@ -68,6 +81,14 @@
     <wsdl:operation name="GuardarHit">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceInformacionConsulta/GuardarHit" message="tns:IServiceInformacionConsulta_GuardarHit_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceInformacionConsulta/GuardarHitResponse" message="tns:IServiceInformacionConsulta_GuardarHit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerConsulta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInformacionConsulta/ObtenerConsulta" message="tns:IServiceInformacionConsulta_ObtenerConsulta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInformacionConsulta/ObtenerConsultaResponse" message="tns:IServiceInformacionConsulta_ObtenerConsulta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HabilitarInformacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInformacionConsulta/HabilitarInformacion" message="tns:IServiceInformacionConsulta_HabilitarInformacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInformacionConsulta/HabilitarInformacionResponse" message="tns:IServiceInformacionConsulta_HabilitarInformacion_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceInformacionConsulta">
@@ -110,6 +131,24 @@
     </wsdl:operation>
     <wsdl:operation name="GuardarHit">
       <soap:operation soapAction="http://tempuri.org/IServiceInformacionConsulta/GuardarHit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerConsulta">
+      <soap:operation soapAction="http://tempuri.org/IServiceInformacionConsulta/ObtenerConsulta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HabilitarInformacion">
+      <soap:operation soapAction="http://tempuri.org/IServiceInformacionConsulta/HabilitarInformacion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

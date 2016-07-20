@@ -1,14 +1,13 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaOrganizacion.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaOrganizacion" %>
 <div style="height: 100%;">
     <script>
-        function dbClic(e) {
-            $('#tblHeader').find('tr').dblclick(function (e) {
-                alert(e.target.parentElement.id);
-            });
+        function dbClicOrganizacion(e) {
+            debugger;
+            __doPostBack('SeleccionarOrganizacion', e.parentElement.id);
         };
 
-        function ContextMenu() {
-            var $contextMenu = $("#contextMenu");
+        function ContextMenuOrganizacion() {
+            var $contextMenu = $("#contextMenuOrganizacion");
             $("body").on("click", function (e) {
                 //debugger;
                 $contextMenu.hide();
@@ -19,11 +18,27 @@
             });
             $("body").on("contextmenu", "table tr", function (e) {
                 debugger;
+                var positionx = 0;
+                var positiony = 0;
+                if (document.getElementById("<%= this.FindControl("hfModal").ClientID %>").value.toLowerCase() === "true") {
+                    if (e.pageX > 239)
+                        positionx = e.pageX - 239;
+                    else
+                        positionx = 239 - e.pageX;
+                    if (e.pageY > 31)
+                        positiony = e.pageY - 31;
+                    else
+                        positiony = 31 - e.pageY;
+                } else {
+                    positionx = e.pageX;
+                    positiony = e.pageY;
+                }
                 $contextMenu.css({
                     display: "block",
-                    left: e.pageX,
-                    top: e.pageY
+                    left: positionx,
+                    top: positiony
                 });
+
                 var baja = false;
                 var alta = false;
                 var parent = e.target.parentElement;
@@ -57,7 +72,8 @@
     </script>
     <asp:UpdatePanel runat="server" style="height: 100%">
         <ContentTemplate>
-            <div id="contextMenu" class="panel-heading">
+            <div id="contextMenuOrganizacion" class="panel-heading contextMenu">
+                <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfModal" />
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-primary" Text="Baja" ID="btnBaja" OnClick="btnBaja_OnClick" />
@@ -131,12 +147,12 @@
                                             </div>
                                             <div class="form-group">
                                                 <asp:DropDownList runat="server" ID="ddlHolding" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlHolding_OnSelectedIndexChanged" />
-                                                <asp:DropDownList runat="server" ID="ddlCompañia" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlCompañia_OnSelectedIndexChanged"/>
+                                                <asp:DropDownList runat="server" ID="ddlCompañia" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlCompañia_OnSelectedIndexChanged" />
                                                 <asp:DropDownList runat="server" ID="ddlDireccion" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlDirecion_OnSelectedIndexChanged" />
-                                                <asp:DropDownList runat="server" ID="ddlSubDireccion" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlSubDireccion_OnSelectedIndexChanged"/>
-                                                <asp:DropDownList runat="server" ID="ddlGerencia" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlGerencia_OnSelectedIndexChanged"/>
-                                                <asp:DropDownList runat="server" ID="ddlSubGerencia" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlSubGerencia_OnSelectedIndexChanged"/>
-                                                <asp:DropDownList runat="server" ID="ddlJefatura" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlJefatura_OnSelectedIndexChanged"/>
+                                                <asp:DropDownList runat="server" ID="ddlSubDireccion" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlSubDireccion_OnSelectedIndexChanged" />
+                                                <asp:DropDownList runat="server" ID="ddlGerencia" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlGerencia_OnSelectedIndexChanged" />
+                                                <asp:DropDownList runat="server" ID="ddlSubGerencia" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlSubGerencia_OnSelectedIndexChanged" />
+                                                <asp:DropDownList runat="server" ID="ddlJefatura" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlJefatura_OnSelectedIndexChanged" />
                                             </div>
                                             <div class="form-group">
                                                 <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Holding" Width="14%" OnClick="btnNew_OnClick" Visible="False" />
@@ -176,14 +192,14 @@
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()" contextmenu="contextMenu"><%# Eval("Holding.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu"><%# Eval("Compania.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu"><%# Eval("Direccion.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu"><%# Eval("SubDireccion.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu"><%# Eval("Gerencia.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu"><%# Eval("SubGerencia.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu"><%# Eval("Jefatura.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" contextmenu="contextMenu" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Holding.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Compania.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Direccion.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("SubDireccion.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Gerencia.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("SubGerencia.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Jefatura.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>

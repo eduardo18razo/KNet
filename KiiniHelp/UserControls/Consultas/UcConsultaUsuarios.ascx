@@ -2,12 +2,6 @@
 <%@ Register TagPrefix="uc1" TagName="UcDetalleUsuario" Src="~/UserControls/Detalles/UcDetalleUsuario.ascx" %>
 <div style="height: 100%;">
     <script>
-        function dbClic(e) {
-            $('#tblHeader').find('tr').dblclick(function (e) {
-                alert(e.target.parentElement.id);
-            });
-        };
-
         function ContextMenu() {
             var $contextMenu = $("#contextMenu");
             $("body").on("click", function (e) {
@@ -49,7 +43,6 @@
             });
 
             $contextMenu.on("click", "button", function () {
-                debugger;
                 $contextMenu.hide();
             });
         };
@@ -149,10 +142,11 @@
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
                                             <%--oncontextmenu="ContextMenu()" ondblclick="dbClic()"--%>
-                                            <td style="padding: 0;" ><asp:LinkButton style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()" runat="server" Text='<%#Eval("NombreCompleto") %>' ID="LinkButton1" OnClick="btnUsuario_OnClick" CommandArgument='<%#Eval("Id") %>' /></td>
+                                            <td style="padding: 0;">
+                                                <asp:LinkButton Style="padding: 0;" runat="server" Text='<%#Eval("NombreCompleto") %>' ID="LinkButton1" OnClick="btnUsuario_OnClick" CommandArgument='<%#Eval("Id") %>' /></td>
                                             <td style="padding: 0;" ><%# Eval("TipoUsuario.Descripcion")%></td>
                                             <td style="padding: 0;" ><%# (bool) Eval("DirectorioActivo") ? "Opcion" : "Menu"%></td>
-                                            <td style="padding: 0;"  id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0;" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>
@@ -168,16 +162,16 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     <div class="modal fade" id="modalDetalleUsuario" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-    <asp:UpdatePanel runat="server">
-        <ContentTemplate>
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <uc1:UcDetalleUsuario runat="server" ID="UcDetalleUsuario1" />
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <uc1:UcDetalleUsuario runat="server" ID="UcDetalleUsuario1" />
+                    </div>
                 </div>
-            </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-</div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
 </div>
 
 

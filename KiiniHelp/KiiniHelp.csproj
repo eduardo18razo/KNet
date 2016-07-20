@@ -120,7 +120,10 @@
     <Content Include="Administracion\ArbolesAcceso\FrmAltaArbolAcceso.aspx" />
     <Content Include="Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx" />
     <Content Include="Administracion\Default.aspx" />
+    <Content Include="Administracion\Encuestas\FrmConsultaEncuestas.aspx" />
     <Content Include="Administracion\Grupos\FrmConsultaGrupos.aspx" />
+    <Content Include="Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx" />
+    <Content Include="Administracion\Mascaras\FrmConsultaMascaraAcceso.aspx" />
     <Content Include="Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx" />
     <Content Include="Administracion\Ubicaciones\FrmConsultaUbicaciones.aspx" />
     <Content Include="Administracion\Usuarios\FrmConsultaUsuarios.aspx" />
@@ -341,6 +344,7 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Operacion.Usuarios.UsuarioGrupo.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperDetalleTicket.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.SubRolEscalacionPermitida.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.TipoNotificacion.datasource" />
     <None Include="Properties\PublishProfiles\KinniNetWeb.pubxml" />
     <Content Include="Public\Default.aspx" />
     <Content Include="Public\Public.Master" />
@@ -462,6 +466,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta13.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario.disco" />
     <None Include="Service References\ServiceGrupoUsuario\configuration91.svcinfo" />
     <None Include="Service References\ServiceGrupoUsuario\configuration.svcinfo" />
@@ -489,6 +496,9 @@
     <Content Include="Service References\ServiceMascaraAcceso\KiiniHelp.ServiceMascaraAcceso.BusinessMascarasCatalogoGenerico.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta14.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras.disco" />
     <None Include="Service References\ServiceMascaraAcceso\configuration91.svcinfo" />
     <None Include="Service References\ServiceMascaraAcceso\configuration.svcinfo" />
@@ -497,6 +507,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras14.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion.wsdl" />
@@ -743,6 +756,16 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaEstatus\ServiceEstatus9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaNotificacion\KiiniNet.Entities.Cat.Sistema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaNotificacion\service.wsdl" />
+    <None Include="Service References\ServiceSistemaNotificacion\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaNotificacion\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaRol\ServiceRoles.wsdl" />
@@ -1430,6 +1453,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\ServiceSistemaNotificacion\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaNotificacion\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaNotificacion\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Test\FrmTestUserControls.aspx" />
     <Content Include="Ticket\FrmTicket.aspx" />
     <Content Include="UserControls\Altas\AltaArea.ascx" />
@@ -1440,7 +1469,9 @@
     <Content Include="UserControls\Altas\AltaSla.ascx" />
     <Content Include="UserControls\Altas\UcAltaUbicacion.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaArboles.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaEncuesta.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaGrupos.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaInformacionConsulta.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaMascaras.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaOrganizacion.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaUsuarios.ascx" />
@@ -1461,7 +1492,9 @@
     <Content Include="UserControls\Altas\AltaMascaraAcceso.ascx" />
     <Content Include="UserControls\Temporal\UcMascaraCaptura.ascx" />
     <Content Include="Administracion\Usuarios\FrmUsuarios.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\_references.js" />
@@ -1742,12 +1775,33 @@
     <Compile Include="Administracion\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administracion\Encuestas\FrmConsultaEncuestas.aspx.cs">
+      <DependentUpon>FrmConsultaEncuestas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Encuestas\FrmConsultaEncuestas.aspx.designer.cs">
+      <DependentUpon>FrmConsultaEncuestas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administracion\Grupos\FrmConsultaGrupos.aspx.cs">
       <DependentUpon>FrmConsultaGrupos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Administracion\Grupos\FrmConsultaGrupos.aspx.designer.cs">
       <DependentUpon>FrmConsultaGrupos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx.cs">
+      <DependentUpon>FrmConsultaInformacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx.designer.cs">
+      <DependentUpon>FrmConsultaInformacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion\Mascaras\FrmConsultaMascaraAcceso.aspx.cs">
+      <DependentUpon>FrmConsultaMascaraAcceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administracion\Mascaras\FrmConsultaMascaraAcceso.aspx.designer.cs">
+      <DependentUpon>FrmConsultaMascaraAcceso.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx.cs">
       <DependentUpon>FrmConsultaOrganizaciones.aspx</DependentUpon>
@@ -1900,6 +1954,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ServiceSistemaNotificacion\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ServiceSistemaRol\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2026,12 +2085,26 @@
     <Compile Include="UserControls\Consultas\UcConsultaArboles.ascx.designer.cs">
       <DependentUpon>UcConsultaArboles.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaEncuesta.ascx.cs">
+      <DependentUpon>UcConsultaEncuesta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaEncuesta.ascx.designer.cs">
+      <DependentUpon>UcConsultaEncuesta.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaGrupos.ascx.cs">
       <DependentUpon>UcConsultaGrupos.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaGrupos.ascx.designer.cs">
       <DependentUpon>UcConsultaGrupos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaInformacionConsulta.ascx.cs">
+      <DependentUpon>UcConsultaInformacionConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaInformacionConsulta.ascx.designer.cs">
+      <DependentUpon>UcConsultaInformacionConsulta.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaMascaras.ascx.cs">
       <DependentUpon>UcConsultaMascaras.ascx</DependentUpon>
@@ -2225,6 +2298,7 @@
     <WCFMetadataStorage Include="Service References\ServiceSistemaCatalogos\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaDomicilio\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaEstatus\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaNotificacion\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaRol\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaSubRol\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaTipoArbolAcceso\" />

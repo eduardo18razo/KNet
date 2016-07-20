@@ -6,6 +6,8 @@
 <%@ Register Src="~/UserControls/Altas/AltaEncuesta.ascx" TagPrefix="uc" TagName="UcEncuesta" %>
 <%@ Register Src="~/UserControls/Seleccion/AsociarGrupoUsuario.ascx" TagPrefix="uc" TagName="AsociarGrupoUsuario" %>
 <%@ Register Src="~/UserControls/Altas/AltaArea.ascx" TagPrefix="uc" TagName="AltaArea" %>
+<%@ Register Src="~/UserControls/Altas/AltaTiempoEstimado.ascx" TagPrefix="uc" TagName="AltaTiempoEstimado" %>
+
 
 
 
@@ -421,7 +423,7 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-body">
-                                    
+                                    <uc:AltaTiempoEstimado runat="server" ID="AltaTiempoEstimado" />
                                 </div>
                             </div>
                         </div>
@@ -529,8 +531,6 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-
-
         </ContentTemplate>
     </asp:UpdatePanel>
     <%--AREA--%>

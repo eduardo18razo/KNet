@@ -49,11 +49,11 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 if (usuario.Id == 0)
                 {
-                    BusinessOrganizacion nOrganizacion = new BusinessOrganizacion();
-                    BusinessUbicacion nUbicacion = new BusinessUbicacion();
+                    //BusinessOrganizacion nOrganizacion = new BusinessOrganizacion();
+                    //BusinessUbicacion nUbicacion = new BusinessUbicacion();
 
-                    usuario.Organizacion = nOrganizacion.ObtenerOrganizacion(usuario.Organizacion.IdHolding, usuario.Organizacion.IdCompania, usuario.Organizacion.IdDireccion, usuario.Organizacion.IdSubDireccion, usuario.Organizacion.IdGerencia, usuario.Organizacion.IdSubGerencia, usuario.Organizacion.IdJefatura);
-                    usuario.Ubicacion = nUbicacion.ObtenerUbicacion(usuario.Ubicacion.IdPais, usuario.Ubicacion.IdCampus, usuario.Ubicacion.IdTorre, usuario.Ubicacion.IdPiso, usuario.Ubicacion.IdZona, usuario.Ubicacion.IdSubZona, usuario.Ubicacion.IdSiteRack);
+                    //usuario.Organizacion = nOrganizacion.ObtenerOrganizacion(usuario.Organizacion.IdHolding, usuario.Organizacion.IdCompania, usuario.Organizacion.IdDireccion, usuario.Organizacion.IdSubDireccion, usuario.Organizacion.IdGerencia, usuario.Organizacion.IdSubGerencia, usuario.Organizacion.IdJefatura);
+                    //usuario.Ubicacion = nUbicacion.ObtenerUbicacion(usuario.Ubicacion.IdPais, usuario.Ubicacion.IdCampus, usuario.Ubicacion.IdTorre, usuario.Ubicacion.IdPiso, usuario.Ubicacion.IdZona, usuario.Ubicacion.IdSubZona, usuario.Ubicacion.IdSiteRack);
                     db.Usuario.AddObject(usuario);
                     db.SaveChanges();
                 }

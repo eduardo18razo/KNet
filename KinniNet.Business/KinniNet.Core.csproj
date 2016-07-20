@@ -59,6 +59,7 @@
     <Compile Include="Security\BusinessSecurity.cs" />
     <Compile Include="Sistema\BusinessDomicilioSistema.cs" />
     <Compile Include="Sistema\BusinessEstatus.cs" />
+    <Compile Include="Sistema\BusinessNotificacion.cs" />
     <Compile Include="Sistema\BusinessRoles.cs" />
     <Compile Include="Sistema\BusinessSubRol.cs" />
     <Compile Include="Sistema\BusinessTipoArbolAcceso.cs" />

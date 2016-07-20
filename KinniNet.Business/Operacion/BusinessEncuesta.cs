@@ -96,5 +96,51 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
         }
+
+        public List<Encuesta> Consulta(string descripcion)
+        {
+            List<Encuesta> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<Encuesta> qry = db.Encuesta;
+                if (descripcion.Trim() != string.Empty)
+                    qry = qry.Where(w => w.Descripcion.Contains(descripcion));
+                result = qry.ToList();
+                foreach (Encuesta encuesta in result)
+                {
+                    db.LoadProperty(encuesta, "TipoEncuesta");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public void HabilitarEncuesta(int idencuesta, bool habilitado)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Encuesta encuesta = db.Encuesta.SingleOrDefault(w => w.Id == idencuesta);
+                if (encuesta != null) encuesta.Habilitado = habilitado;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ using KiiniHelp.Funciones;
 using KiiniHelp.ServiceArbolAcceso;
 using KiiniHelp.ServiceArea;
 using KiiniHelp.ServiceEncuesta;
+using KiiniHelp.ServiceGrupoUsuario;
 using KiiniHelp.ServiceInformacionConsulta;
 using KiiniHelp.ServiceMascaraAcceso;
 using KiiniHelp.ServiceSistemaTipoArbolAcceso;
@@ -34,6 +35,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
         readonly ServiceEncuestaClient _servicioEncuesta = new ServiceEncuestaClient();
         readonly ServiceInformacionConsultaClient _servicioInformacionConsulta = new ServiceInformacionConsultaClient();
         readonly ServiceAreaClient _servicioAreas = new ServiceAreaClient();
+        readonly ServiceGrupoUsuarioClient _servicioGrupoUsuario = new ServiceGrupoUsuarioClient();
 
         private List<string> _lstError = new List<string>();
         #endregion Variables
@@ -522,7 +524,6 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
             {
                 btnModalSla.CssClass = "btn btn-success";
                 btnModalInforme.CssClass = "btn btn-primary";
-                btnModalEncuesta.CssClass = "btn btn-primary";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalSla\");", true);
             }
             catch (Exception ex)
@@ -535,6 +536,43 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 AlertaNivel = _lstError;
             }
         }
+
+        private void AltaTiempoEstimadoOnOnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalTiempoInforme\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
+
+        private void AltaTiempoEstimadoOnOnAceptarModal()
+        {
+            try
+            {
+                btnModalInforme.CssClass = "btn btn-success";
+                btnModalEncuesta.CssClass = "btn btn-primary";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalTiempoInforme\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
+        }
+
 
         void UcEncuesta_OnAceptarModal()
         {
@@ -592,6 +630,9 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
 
                 UcSla.OnAceptarModal += UcSla_OnAceptarModal;
                 UcSla.OnCancelarModal += UcSla_OnCancelarModal;
+
+                AltaTiempoEstimado.OnAceptarModal += AltaTiempoEstimadoOnOnAceptarModal;
+                AltaTiempoEstimado.OnCancelarModal += AltaTiempoEstimadoOnOnCancelarModal;
 
                 UcEncuesta.OnAceptarModal += UcEncuesta_OnAceptarModal;
                 UcEncuesta.OnCancelarModal += UcEncuesta_OnCancelarModal;
@@ -1126,6 +1167,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                         arbol.InventarioArbolAcceso.First().IdMascara = Convert.ToInt32(ddlMascaraAcceso.SelectedValue) == 0 ? (int?)null : Convert.ToInt32(ddlMascaraAcceso.SelectedValue);
                         arbol.InventarioArbolAcceso.First().Sla = UcSla.Sla;
                         arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol = new List<GrupoUsuarioInventarioArbol>();
+                        
                         foreach (RepeaterItem item in AsociarGrupoUsuario.GruposAsociados)
                         {
                             Label lblIdGrupoUsuario = (Label)item.FindControl("lblIdGrupoUsuario");
@@ -1139,6 +1181,68 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                                     IdRol = Convert.ToInt32(lblIdRol.Text),
                                     IdSubGrupoUsuario = lblIdSubGrupoUsuario.Text.Trim() == string.Empty ? (int?)null : Convert.ToInt32(lblIdSubGrupoUsuario.Text)
                                 });
+                                var gpo = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(Convert.ToInt32(lblIdGrupoUsuario.Text));
+                                switch (gpo.IdTipoGrupo)
+                                {
+                                        //TODO: AGREGAR GRUPO DE DUEÑO
+                                    //case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento:
+                                    //    arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
+                                    //    {
+                                    //        IdTipoGrupo = gpo.IdTipoGrupo,
+                                    //        IdGrupoUsuario = gpo.Id,
+                                    //        Dias = AltaTiempoEstimado.TiempoDueño.Dias,
+                                    //        Horas = AltaTiempoEstimado.TiempoDueño.Horas,
+                                    //        Minutos = AltaTiempoEstimado.TiempoDueño.Minutos,
+                                    //        Segundos = AltaTiempoEstimado.TiempoDueño.Segundos,
+                                    //        TiempoNotificacion = AltaTiempoEstimado.TiempoDueño.TiempoNotificacion,
+                                    //        IdTipoNotificacion = AltaTiempoEstimado.TiempoDueño.IdTipoNotificacion
+
+                                    //    });
+                                    //    break;
+                                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento:
+                                        arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
+                                    {
+                                        IdTipoGrupo = gpo.IdTipoGrupo,
+                                        IdGrupoUsuario = gpo.Id,
+                                        Dias = AltaTiempoEstimado.TiempoDueño.Dias,
+                                        Horas = AltaTiempoEstimado.TiempoDueño.Horas,
+                                        Minutos = AltaTiempoEstimado.TiempoDueño.Minutos,
+                                        Segundos = AltaTiempoEstimado.TiempoDueño.Segundos,
+                                        TiempoNotificacion = AltaTiempoEstimado.TiempoDueño.TiempoNotificacion,
+                                        IdTipoNotificacion = AltaTiempoEstimado.TiempoDueño.IdTipoNotificacion
+                                       
+                                    });
+                                        break;
+                                        case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
+                                        arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
+                                    {
+                                        IdTipoGrupo = gpo.IdTipoGrupo,
+                                        IdGrupoUsuario = gpo.Id,
+                                        Dias = AltaTiempoEstimado.TiempoDesarrollo.Dias,
+                                        Horas = AltaTiempoEstimado.TiempoDesarrollo.Horas,
+                                        Minutos = AltaTiempoEstimado.TiempoDesarrollo.Minutos,
+                                        Segundos = AltaTiempoEstimado.TiempoDesarrollo.Segundos,
+                                        TiempoNotificacion = AltaTiempoEstimado.TiempoDesarrollo.TiempoNotificacion,
+                                        IdTipoNotificacion = AltaTiempoEstimado.TiempoDesarrollo.IdTipoNotificacion
+                                       
+                                    });
+                                        break;
+                                        case (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta:
+                                        arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
+                                    {
+                                        IdTipoGrupo = gpo.IdTipoGrupo,
+                                        IdGrupoUsuario = gpo.Id,
+                                        Dias = AltaTiempoEstimado.TiempoConsulta.Dias,
+                                        Horas = AltaTiempoEstimado.TiempoConsulta.Horas,
+                                        Minutos = AltaTiempoEstimado.TiempoConsulta.Minutos,
+                                        Segundos = AltaTiempoEstimado.TiempoConsulta.Segundos,
+                                        TiempoNotificacion = AltaTiempoEstimado.TiempoConsulta.TiempoNotificacion,
+                                        IdTipoNotificacion = AltaTiempoEstimado.TiempoConsulta.IdTipoNotificacion
+                                       
+                                    });
+                                        break;
+                                        
+                                }
                             }
                         }
                         arbol.InventarioArbolAcceso.First().Descripcion = txtDescripcionNivel.Text.Trim();
@@ -1502,14 +1606,12 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 btnModalSla.CssClass = "btn btn-primary";
                 int idGrupo = 0;
                 foreach (RepeaterItem item in AsociarGrupoUsuario.GruposAsociados)
-                        {
-                            Label lblIdGrupoUsuario = (Label)item.FindControl("lblIdGrupoUsuario");
-                            Label lblIdRol = (Label)item.FindControl("lblIdTipoSubGrupo");
-                            Label lblIdSubGrupoUsuario = (Label)item.FindControl("lblIdSubGrupo");
-                            if (Convert.ToInt32(lblIdRol.Text) ==
-                                (int) BusinessVariables.EnumRoles.ResponsableDeMantenimiento)
-                                idGrupo = Convert.ToInt32(lblIdGrupoUsuario.Text);
-                        }
+                {
+                    Label lblIdGrupoUsuario = (Label)item.FindControl("lblIdGrupoUsuario");
+                    Label lblIdRol = (Label)item.FindControl("lblIdTipoSubGrupo");
+                    if (Convert.ToInt32(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.ResponsableDeAtención)
+                        idGrupo = Convert.ToInt32(lblIdGrupoUsuario.Text);
+                }
                 UcSla.IdGrupo = idGrupo;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalGruposNodo\");", true);
             }
@@ -1521,6 +1623,24 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 }
                 _lstError.Add(ex.Message);
                 AlertaNivel = _lstError;
+            }
+        }
+
+        protected void btnCerrarEncuesta_OnClick(object o, EventArgs e)
+        {
+            try
+            {
+                ValidaCapturaTicket();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEncuesta\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaTicket = _lstError;
             }
         }
 
@@ -1568,6 +1688,7 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
                 btnModalSla.CssClass = "btn btn-primary disabled";
                 btnModalInforme.CssClass = "btn btn-primary disabled";
                 btnModalEncuesta.CssClass = "btn btn-primary disabled";
+                AsociarGrupoUsuario.AsignacionAutomatica = true;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalGruposNodo\");", true);
             }
             catch (Exception ex)
@@ -1622,25 +1743,6 @@ namespace KiiniHelp.Administracion.ArbolesAcceso
             }
         }
         #endregion Abre modales Maestros
-
-
-        protected void btnCerrarEncuesta_OnClick(object o, EventArgs e)
-        {
-            try
-            {
-                ValidaCapturaTicket();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEncuesta\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaTicket = _lstError;
-            }
-        }
     }
 }
 

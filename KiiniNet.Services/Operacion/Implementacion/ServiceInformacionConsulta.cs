@@ -83,5 +83,35 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<InformacionConsulta> ObtenerConsulta(int? idTipoInformacionConsulta, int? idTipoDocumento)
+        {
+            try
+            {
+                using (BusinessInformacionConsulta negocio = new BusinessInformacionConsulta())
+                {
+                    return negocio.ObtenerInformacionConsulta( idTipoInformacionConsulta, idTipoDocumento);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void HabilitarInformacion(int idInformacion, bool habilitado)
+        {
+            try
+            {
+                using (BusinessInformacionConsulta negocio = new BusinessInformacionConsulta())
+                {
+                    negocio.HabilitarInformacion(idInformacion, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

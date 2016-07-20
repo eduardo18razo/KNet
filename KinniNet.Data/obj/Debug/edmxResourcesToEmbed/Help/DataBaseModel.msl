@@ -947,5 +947,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TipoNotificacion">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.TipoNotificacion">
+        <MappingFragment StoreEntitySet="TipoNotificacion">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiempoInformeArbol">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.TiempoInformeArbol">
+        <MappingFragment StoreEntitySet="TiempoInformeArbol">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdTipoNotificacion" ColumnName="IdTipoNotificacion" />
+          <ScalarProperty Name="TiempoNotificacion" ColumnName="TiempoNotificacion" />
+          <ScalarProperty Name="Segundos" ColumnName="Segundos" />
+          <ScalarProperty Name="Minutos" ColumnName="Minutos" />
+          <ScalarProperty Name="Horas" ColumnName="Horas" />
+          <ScalarProperty Name="Dias" ColumnName="Dias" />
+          <ScalarProperty Name="IdGrupoUsuario" ColumnName="IdGrupoUsuario" />
+          <ScalarProperty Name="IdTipoGrupo" ColumnName="IdTipoGrupo" />
+          <ScalarProperty Name="IdArbol" ColumnName="IdArbol" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

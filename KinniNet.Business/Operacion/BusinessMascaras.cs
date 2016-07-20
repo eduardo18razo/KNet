@@ -350,6 +350,48 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public List<Mascara> Consulta(string descripcion)
+        {
+            List<Mascara> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<Mascara> qry = db.Mascara;
+                if (descripcion.Trim() != string.Empty)
+                    qry = qry.Where(w => w.Descripcion.Contains(descripcion));
+                result = qry.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public void HabilitarMascara(int idMascara, bool habilitado)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Mascara mascara = db.Mascara.SingleOrDefault(w => w.Id == idMascara);
+                if (mascara != null) mascara.Habilitado = habilitado;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
         public class CatalogoGenerico
         {
             public int Id { get; set; }

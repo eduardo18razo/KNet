@@ -3,6 +3,12 @@
 <%@ Register Src="~/UserControls/Seleccion/AsociarGrupoUsuario.ascx" TagPrefix="uc" TagName="AsociarGrupoUsuario" %>
 <%@ Register Src="~/UserControls/Altas/AltaOrganizacion.ascx" TagPrefix="uc" TagName="AltaOrganizacion" %>
 <%@ Register Src="~/UserControls/Altas/UcAltaUbicacion.ascx" TagPrefix="uc" TagName="UcAltaUbicacion" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaUsuarios.ascx" TagPrefix="uc" TagName="UcConsultaUsuarios" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaOrganizacion.ascx" TagPrefix="uc" TagName="UcConsultaOrganizacion" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaUbicaciones.ascx" TagPrefix="uc" TagName="UcConsultaUbicaciones" %>
+
+
+
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -96,17 +102,17 @@
                                             <div class="form-inline">
                                                 <br />
                                                 <div class="form-inline">
-                                                    <asp:Label ID="Label4" runat="server" Text="Apellido Paterno" class="col-sm-2 control-label izquierda"/>
-                                                    <asp:TextBox ID="txtAp" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100"/>
+                                                    <asp:Label ID="Label4" runat="server" Text="Apellido Paterno" class="col-sm-2 control-label izquierda" />
+                                                    <asp:TextBox ID="txtAp" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100" />
                                                 </div>
                                                 <div class="form-inline margen-arriba">
-                                                    <asp:Label ID="Label5" runat="server" Text="Apellido Materno" class="col-sm-2 control-label izquierda"/>
-                                                    <asp:TextBox ID="txtAm" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100"/>
+                                                    <asp:Label ID="Label5" runat="server" Text="Apellido Materno" class="col-sm-2 control-label izquierda" />
+                                                    <asp:TextBox ID="txtAm" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100" />
                                                 </div>
                                                 <div class="form-inline margen-arriba">
-                                                    <asp:Label ID="Label6" runat="server" Text="Nombre" class="col-sm-2 control-label izquierda"/>
+                                                    <asp:Label ID="Label6" runat="server" Text="Nombre" class="col-sm-2 control-label izquierda" />
 
-                                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100"/>
+                                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100" />
                                                 </div>
                                                 <div class="form-inline">
                                                     <div class="form-group margen-arriba">
@@ -191,20 +197,30 @@
 
             <%--ORGANIZACION--%>
             <div class="modal fade" id="modalOrganizacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <asp:UpdatePanel ID="upOrganizacion" runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
-                        <uc:AltaOrganizacion runat="server" ID="ucOrganizacion" FromModal="True" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                <div class="modal-dialog modal-lg" style="width: 75%">
+                    <div class="modal-content">
+                        <asp:UpdatePanel ID="upOrganizacion" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <%--<uc:AltaOrganizacion runat="server" ID="ucOrganizacion" FromModal="True" />--%>
+                                <uc:UcConsultaOrganizacion runat="server" ID="UcConsultaOrganizacion" />
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
             </div>
 
             <%--UBICACIONES--%>
             <div class="modal fade" id="modalUbicacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <asp:UpdatePanel ID="upUbicacion" runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
-                        <uc:UcAltaUbicacion runat="server" id="UcUbicacion" FromModal="True"/>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                <div class="modal-dialog modal-lg" style="width: 75%">
+                    <div class="modal-content">
+                        <asp:UpdatePanel ID="upUbicacion" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <%--<uc:UcAltaUbicacion runat="server" ID="UcUbicacion" FromModal="True" />--%>
+                                <uc:UcConsultaUbicaciones runat="server" ID="UcConsultaUbicaciones" />
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
             </div>
 
             <%--ROLES--%>

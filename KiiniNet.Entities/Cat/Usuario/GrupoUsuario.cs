@@ -57,5 +57,7 @@ namespace KiiniNet.Entities.Cat.Usuario
         public List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefault { get; set; }
         [DataMember]
         public virtual List<TicketGrupoUsuario> TicketGrupoUsuario { get; set; }
+        [DataMember]
+        public virtual List<TiempoInformeArbol> TiempoInformeArbol { get; set; }
     }
 }

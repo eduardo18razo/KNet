@@ -66,6 +66,9 @@ namespace KiiniNet.Entities.Cat.Operacion
         [DataMember]
         public virtual Area Area { get; set; }
 
+        [DataMember]
+        public virtual List<TiempoInformeArbol> TiempoInformeArbol { get; set; }
+
 
     }
 }

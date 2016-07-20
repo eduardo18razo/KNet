@@ -5,6 +5,7 @@
         <asp:UpdatePanel ID="upGrupos" runat="server">
             <ContentTemplate>
                 <asp:HiddenField runat="server" ID="hfTipoUsuario" />
+                <asp:HiddenField runat="server" ID="hfAsignacionAutomatica" />
                 <header class="modal-header" id="panelAlertaGrupos" runat="server" visible="false">
                     <div class="alert alert-danger">
                         <div>

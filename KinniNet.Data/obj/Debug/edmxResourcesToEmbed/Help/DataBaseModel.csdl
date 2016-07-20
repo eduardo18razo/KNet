@@ -656,6 +656,24 @@
       <End Role="SlaEstimadoTicket" EntitySet="SlaEstimadoTicket" />
       <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>
+    <EntitySet Name="TipoNotificacion" EntityType="KiiniNet_v2Model.TipoNotificacion" />
+    <EntitySet Name="TiempoInformeArbol" EntityType="KiiniNet_v2Model.TiempoInformeArbol" />
+    <AssociationSet Name="FK_TiempoInformeArbol_ArbolAcceso" Association="KiiniNet_v2Model.FK_TiempoInformeArbol_ArbolAcceso">
+      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+      <End Role="TiempoInformeArbol" EntitySet="TiempoInformeArbol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TiempoInformeArbol_GrupoUsuario" Association="KiiniNet_v2Model.FK_TiempoInformeArbol_GrupoUsuario">
+      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+      <End Role="TiempoInformeArbol" EntitySet="TiempoInformeArbol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TiempoInformeArbol_TipoGrupo" Association="KiiniNet_v2Model.FK_TiempoInformeArbol_TipoGrupo">
+      <End Role="TipoGrupo" EntitySet="TipoGrupo" />
+      <End Role="TiempoInformeArbol" EntitySet="TiempoInformeArbol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TiempoInformeArbol_TipoNotificacion" Association="KiiniNet_v2Model.FK_TiempoInformeArbol_TipoNotificacion">
+      <End Role="TipoNotificacion" EntitySet="TipoNotificacion" />
+      <End Role="TiempoInformeArbol" EntitySet="TiempoInformeArbol" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Campus">
     <Key>
@@ -1152,6 +1170,7 @@
     <Property Name="Habilitado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="RolTipoGrupo" Relationship="KiiniNet_v2Model.FK_RolTipoGrupo_TipoGrupo" FromRole="TipoGrupo" ToRole="RolTipoGrupo" />
     <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_GrupoUsuario_TipoGrupo1" FromRole="TipoGrupo" ToRole="GrupoUsuario" />
+    <NavigationProperty Name="TiempoInformeArbol" Relationship="KiiniNet_v2Model.FK_TiempoInformeArbol_TipoGrupo" FromRole="TipoGrupo" ToRole="TiempoInformeArbol" />
   </EntityType>
   <EntityType Name="TipoInfConsulta">
     <Key>
@@ -2490,6 +2509,7 @@
     <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_tblArbolAcceso_tblCatTipoUsuario" FromRole="ArbolAcceso" ToRole="TipoUsuario" />
     <NavigationProperty Name="InventarioArbolAcceso" Relationship="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblArbolAcceso" FromRole="ArbolAcceso" ToRole="InventarioArbolAcceso" />
     <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_tblTicket_tblArbolAcceso" FromRole="ArbolAcceso" ToRole="Ticket" />
+    <NavigationProperty Name="TiempoInformeArbol" Relationship="KiiniNet_v2Model.FK_TiempoInformeArbol_ArbolAcceso" FromRole="ArbolAcceso" ToRole="TiempoInformeArbol" />
   </EntityType>
   <EntityType Name="Area">
     <Key>
@@ -2864,6 +2884,7 @@
     <NavigationProperty Name="TicketGrupoUsuario" Relationship="KiiniNet_v2Model.FK_TicketGrupoUsuario_GrupoUsuario" FromRole="GrupoUsuario" ToRole="TicketGrupoUsuario" />
     <NavigationProperty Name="EstatusTicketSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusSubRolGeneral_GrupoUsuario" FromRole="GrupoUsuario" ToRole="EstatusTicketSubRolGeneral" />
     <NavigationProperty Name="EstatusAsignacionSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_GrupoUsuario" FromRole="GrupoUsuario" ToRole="EstatusAsignacionSubRolGeneral" />
+    <NavigationProperty Name="TiempoInformeArbol" Relationship="KiiniNet_v2Model.FK_TiempoInformeArbol_GrupoUsuario" FromRole="GrupoUsuario" ToRole="TiempoInformeArbol" />
   </EntityType>
   <Association Name="FK_GrupoUsuario_TipoGrupo1">
     <End Type="KiiniNet_v2Model.TipoGrupo" Role="TipoGrupo" Multiplicity="0..1" />
@@ -3519,6 +3540,83 @@
       </Principal>
       <Dependent Role="Ticket">
         <PropertyRef Name="IdSlaEstimadoTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TipoNotificacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="TiempoInformeArbol" Relationship="KiiniNet_v2Model.FK_TiempoInformeArbol_TipoNotificacion" FromRole="TipoNotificacion" ToRole="TiempoInformeArbol" />
+  </EntityType>
+  <EntityType Name="TiempoInformeArbol">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdArbol" Type="Int32" />
+    <Property Name="IdTipoGrupo" Type="Int32" />
+    <Property Name="IdGrupoUsuario" Type="Int32" />
+    <Property Name="Dias" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Horas" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Minutos" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Segundos" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TiempoNotificacion" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdTipoNotificacion" Type="Int32" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_TiempoInformeArbol_ArbolAcceso" FromRole="TiempoInformeArbol" ToRole="ArbolAcceso" />
+    <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_TiempoInformeArbol_GrupoUsuario" FromRole="TiempoInformeArbol" ToRole="GrupoUsuario" />
+    <NavigationProperty Name="TipoGrupo" Relationship="KiiniNet_v2Model.FK_TiempoInformeArbol_TipoGrupo" FromRole="TiempoInformeArbol" ToRole="TipoGrupo" />
+    <NavigationProperty Name="TipoNotificacion" Relationship="KiiniNet_v2Model.FK_TiempoInformeArbol_TipoNotificacion" FromRole="TiempoInformeArbol" ToRole="TipoNotificacion" />
+  </EntityType>
+  <Association Name="FK_TiempoInformeArbol_ArbolAcceso">
+    <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.TiempoInformeArbol" Role="TiempoInformeArbol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArbolAcceso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TiempoInformeArbol">
+        <PropertyRef Name="IdArbol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TiempoInformeArbol_GrupoUsuario">
+    <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.TiempoInformeArbol" Role="TiempoInformeArbol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TiempoInformeArbol">
+        <PropertyRef Name="IdGrupoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TiempoInformeArbol_TipoGrupo">
+    <End Type="KiiniNet_v2Model.TipoGrupo" Role="TipoGrupo" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.TiempoInformeArbol" Role="TiempoInformeArbol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoGrupo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TiempoInformeArbol">
+        <PropertyRef Name="IdTipoGrupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TiempoInformeArbol_TipoNotificacion">
+    <End Type="KiiniNet_v2Model.TipoNotificacion" Role="TipoNotificacion" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.TiempoInformeArbol" Role="TiempoInformeArbol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoNotificacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TiempoInformeArbol">
+        <PropertyRef Name="IdTipoNotificacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -12,5 +12,11 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void GuardarEncuesta(Encuesta encuesta);
+
+        [OperationContract]
+        List<Encuesta> Consulta(string descripcion);
+
+        [OperationContract]
+        void HabilitarEncuesta(int idencuesta, bool habilitado);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using KiiniNet.Entities.Cat.Operacion;
+using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
@@ -123,6 +124,37 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public List<InformacionConsulta> ObtenerInformacionConsulta(int? idTipoInformacionConsulta, int? idTipoDocumento)
+        {
+            List<InformacionConsulta> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<InformacionConsulta> qry = db.InformacionConsulta;
+                if (idTipoInformacionConsulta != null)
+                    qry = qry.Where(w => w.IdTipoInfConsulta == idTipoInformacionConsulta);
+                if (idTipoDocumento != null)
+                    qry = qry.Where(w => w.IdTipoDocumento == idTipoDocumento);
+                result = qry.ToList();
+                foreach (InformacionConsulta consulta in result)
+                {
+                    db.LoadProperty(consulta, "TipoInfConsulta");
+                    db.LoadProperty(consulta, "TipoDocumento");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
         public void GuardarHit(int idArbol, int idUsuario)
         {
             DataBaseModelContext db = new DataBaseModelContext();
@@ -147,6 +179,25 @@ namespace KinniNet.Core.Operacion
 
                 if (hit.Id == 0)
                     db.HitConsulta.AddObject(hit);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public void HabilitarInformacion(int idInformacion, bool habilitado)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                InformacionConsulta inf = db.InformacionConsulta.SingleOrDefault(w => w.Id == idInformacion);
+                if (inf != null) inf.Habilitado = habilitado;
                 db.SaveChanges();
             }
             catch (Exception ex)

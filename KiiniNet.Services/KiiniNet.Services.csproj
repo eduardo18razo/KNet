@@ -50,6 +50,7 @@
     <Compile Include="Operacion\Implementacion\ServiceTicket.cs" />
     <Compile Include="Operacion\Interface\IServiceArea.cs" />
     <Compile Include="Operacion\Interface\IServiceTicket.cs" />
+    <Compile Include="Sistema\Implementacion\ServiceNotificacion.cs" />
     <Compile Include="Sistema\Implementacion\ServiceCatalogos.cs" />
     <Compile Include="Sistema\Implementacion\ServiceDomicilioSistema.cs" />
     <Compile Include="Sistema\Implementacion\ServiceEstatus.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Sistema\Interface\IServiceCatalogos.cs" />
     <Compile Include="Sistema\Interface\IServiceDomicilioSistema.cs" />
     <Compile Include="Sistema\Interface\IServiceEstatus.cs" />
+    <Compile Include="Sistema\Interface\IServiceNotificacion.cs" />
     <Compile Include="Sistema\Interface\IServiceRoles.cs" />
     <Compile Include="Sistema\Interface\IServiceSubRol.cs" />
     <Compile Include="Sistema\Interface\IServiceTipoArbolAcceso.cs" />

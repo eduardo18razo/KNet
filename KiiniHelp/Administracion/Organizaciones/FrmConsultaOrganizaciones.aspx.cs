@@ -11,7 +11,7 @@ namespace KiiniHelp.Administracion.Organizaciones
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            UcConsultaOrganizacion.Modal = false;
         }
     }
 }

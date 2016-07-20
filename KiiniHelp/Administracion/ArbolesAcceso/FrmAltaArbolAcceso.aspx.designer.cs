@@ -607,6 +607,15 @@ namespace KiiniHelp.Administracion.ArbolesAcceso {
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
         
         /// <summary>
+        /// AltaTiempoEstimado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Altas.AltaTiempoEstimado AltaTiempoEstimado;
+        
+        /// <summary>
         /// UpdatePanel3 control.
         /// </summary>
         /// <remarks>

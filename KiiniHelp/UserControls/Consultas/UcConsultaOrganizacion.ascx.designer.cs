@@ -13,6 +13,15 @@ namespace KiiniHelp.UserControls.Consultas {
     public partial class UcConsultaOrganizacion {
         
         /// <summary>
+        /// hfModal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfModal;
+        
+        /// <summary>
         /// hfId control.
         /// </summary>
         /// <remarks>

@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace KiiniHelp.Administracion.Grupos
 {
-    public partial class FrmConsultaGrupos : System.Web.UI.Page
+    public partial class FrmConsultaGrupos : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

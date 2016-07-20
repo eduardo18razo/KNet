@@ -15,12 +15,20 @@ using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Consultas
 {
-    public partial class UcConsultaUbicaciones : UserControl
+    public partial class UcConsultaUbicaciones : UserControl, IControllerModal
     {
         readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
         readonly ServiceUbicacionClient _servicioUbicacion = new ServiceUbicacionClient();
         readonly ServiceDomicilioSistemaClient _servicioSistemaDomicilio = new ServiceDomicilioSistemaClient();
         private List<string> _lstError = new List<string>();
+        public delegate void DelegateSeleccionUbicacionModal();
+        public event DelegateSeleccionUbicacionModal OnSeleccionUbicacionModal;
+
+        public bool Modal
+        {
+            get { return Convert.ToBoolean(hfModal.Value); }
+            set { hfModal.Value = value.ToString(); }
+        }
 
         public int IdTipoUsuario
         {
@@ -47,6 +55,16 @@ namespace KiiniHelp.UserControls.Consultas
                 if (!panelAlertaCampus.Visible) return;
                 rptErrorCampus.DataSource = value;
                 rptErrorCampus.DataBind();
+            }
+        }
+
+        public int UbicacionSeleccionada
+        {
+            get
+            {
+                if (ViewState["UbicacionSeleccionada"] == null || ViewState["UbicacionSeleccionada"].ToString().Trim() == string.Empty)
+                    throw new Exception("Debe Seleccionar una ubicación");
+                return (int)ViewState["UbicacionSeleccionada"];
             }
         }
 
@@ -173,6 +191,8 @@ namespace KiiniHelp.UserControls.Consultas
                     LlenaCombos();
                     LlenaUbicaciones();
                 }
+                if (Request["__EVENTTARGET"] == "SeleccionarUbicacion")
+                    Seleccionar(Convert.ToInt32(Request["__EVENTARGUMENT"]));
             }
             catch (Exception ex)
             {
@@ -902,6 +922,17 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
+        private void Seleccionar(int id)
+        {
+            ViewState["UbicacionSeleccionada"] = id;
+            if (OnSeleccionUbicacionModal != null)
+                OnSeleccionUbicacionModal();
+        }
+
         #endregion Campus
+
+        public event DelegateAceptarModal OnAceptarModal;
+        public event DelegateLimpiarModal OnLimpiarModal;
+        public event DelegateCancelarModal OnCancelarModal;
     }
 }

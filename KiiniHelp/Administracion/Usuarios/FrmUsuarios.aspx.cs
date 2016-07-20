@@ -227,10 +227,15 @@ namespace KiiniHelp.Administracion.Usuarios
                 AlertaGeneral = new List<string>();
                 AlertaDatosGenerales = new List<string>();
                 AlertaRoles = new List<string>();
-                ucOrganizacion.OnAceptarModal += ucOrganizacion_OnAceptarModal;
-                ucOrganizacion.OnCancelarModal += ucOrganizacion_OnCancelarModal;
-                UcUbicacion.OnAceptarModal += UcUbicacion_OnAceptarModal;
-                UcUbicacion.OnCancelarModal += UcUbicacion_OnCancelarModal;
+
+                //UcConsultaOrganizacion.OnAceptarModal += ucOrganizacion_OnAceptarModal;
+                UcConsultaOrganizacion.Modal = true;
+                UcConsultaOrganizacion.OnSeleccionOrganizacionModal += ucOrganizacion_OnAceptarModal;
+                UcConsultaUbicaciones.Modal = true;
+                UcConsultaOrganizacion.OnCancelarModal += ucOrganizacion_OnCancelarModal;
+                //UcConsultaUbicaciones.OnAceptarModal += UcUbicacion_OnAceptarModal;
+                UcConsultaUbicaciones.OnSeleccionUbicacionModal += UcUbicacion_OnAceptarModal;
+                UcConsultaUbicaciones.OnCancelarModal += UcUbicacion_OnCancelarModal;
 
                 
                 if (!IsPostBack)
@@ -268,6 +273,7 @@ namespace KiiniHelp.Administracion.Usuarios
                 {
                     AsociarGrupoUsuario.HabilitaGrupos(Convert.ToInt32(item.Value), item.Selected);
                 }
+                AsociarGrupoUsuario.AsignacionAutomatica = false;
                 lst.Insert(BusinessVariables.ComboBoxCatalogo.Index, new TipoGrupo { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion });
                 Session["UsuarioGrupo"] = new List<UsuarioGrupo>();
                 btnModalGrupos.Visible = true;
@@ -302,8 +308,8 @@ namespace KiiniHelp.Administracion.Usuarios
                     Session["UsuarioTemporal"] = new Usuario();
                     LimpiarPantalla();
                     divDatos.Visible = true;
-                    ucOrganizacion.IdTipoUsuario = idTipoUsuario;
-                    UcUbicacion.IdTipoUsuario = idTipoUsuario;
+                    //ucOrganizacion.IdTipoUsuario = idTipoUsuario;
+                    //UcUbicacion.IdTipoUsuario = idTipoUsuario;
                     upGeneral.Update();
                 }
                 else
@@ -331,8 +337,8 @@ namespace KiiniHelp.Administracion.Usuarios
                 if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                     throw new Exception("Seleccione un tipo de usuario.<br>");
                 ValidaCapturaDatosGenerales();
-                ucOrganizacion.ValidaCapturaOrganizacion();
-                UcUbicacion.ValidaCapturaUbicacion();
+                //ucOrganizacion.ValidaCapturaOrganizacion();
+                //UcUbicacion.ValidaCapturaUbicacion();
                 ValidaCapturaRoles();
                 ValidaCapturaGrupos();
                 Usuario usuario = new Usuario
@@ -365,8 +371,8 @@ namespace KiiniHelp.Administracion.Usuarios
                     usuario.CorreoUsuario.Add(new CorreoUsuario { Correo = correo.Text.Trim() });
                 }
 
-                usuario.Organizacion = ucOrganizacion.ObtenerOrganizacion();
-                usuario.Ubicacion = UcUbicacion.ObtenerUbicacion();
+                usuario.IdOrganizacion = UcConsultaOrganizacion.OrganizacionSeleccionada;
+                usuario.IdUbicacion = UcConsultaUbicaciones.UbicacionSeleccionada;
 
                 #region Rol
                 usuario.UsuarioRol = new List<UsuarioRol>();
@@ -508,7 +514,7 @@ namespace KiiniHelp.Administracion.Usuarios
         {
             try
             {
-                UcUbicacion.ValidaCapturaUbicacion();
+                //UcUbicacion.ValidaCapturaUbicacion();
                 btnModalUbicacion.CssClass = "btn btn-success btn-lg";
                 btnModalRoles.CssClass = "btn btn-primary btn-lg";
                 btnModalRoles.Enabled = true;
@@ -525,7 +531,7 @@ namespace KiiniHelp.Administracion.Usuarios
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                UcUbicacion.AlertaUbicacion = _lstError;
+                //UcUbicacion.AlertaUbicacion = _lstError;
             }
             
         }
@@ -542,7 +548,7 @@ namespace KiiniHelp.Administracion.Usuarios
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                UcUbicacion.AlertaUbicacion = _lstError;
+                //UcUbicacion.AlertaUbicacion = _lstError;
             }
         }
 
@@ -550,7 +556,7 @@ namespace KiiniHelp.Administracion.Usuarios
         {
             try
             {
-                ucOrganizacion.ValidaCapturaOrganizacion();
+                //ucOrganizacion.ValidaCapturaOrganizacion();
                 btnModalOrganizacion.CssClass = "btn btn-success btn-lg";
                 btnModalUbicacion.CssClass = "btn btn-primary btn-lg";
                 btnModalUbicacion.Enabled = true;
@@ -568,7 +574,7 @@ namespace KiiniHelp.Administracion.Usuarios
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                ucOrganizacion.AlertaOrganizacion = _lstError;
+                //ucOrganizacion.AlertaOrganizacion = _lstError;
 
             }
         }
@@ -586,7 +592,7 @@ namespace KiiniHelp.Administracion.Usuarios
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                ucOrganizacion.AlertaOrganizacion = _lstError;
+                //ucOrganizacion.AlertaOrganizacion = _lstError;
 
             }
         }

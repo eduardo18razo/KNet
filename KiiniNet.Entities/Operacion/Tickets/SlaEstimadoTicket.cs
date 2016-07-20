@@ -28,7 +28,7 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public decimal Segundos { get; set; }
         [DataMember]
-        public decimal TiempoHoraProceso { get; set; }
+        public decimal? TiempoHoraProceso { get; set; }
         [DataMember]
         public decimal TiempoRetenido { get; set; }
         [DataMember]

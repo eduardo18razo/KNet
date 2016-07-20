@@ -19,5 +19,11 @@ namespace KiiniNet.Services.Operacion.Interface
         List<Mascara> ObtenerMascarasAcceso(bool insertarSeleccion);
         [OperationContract]
         List<BusinessMascaras.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla);
+
+        [OperationContract]
+        List<Mascara> Consulta(string descripcion);
+
+        [OperationContract]
+        void HabilitarMascara(int idMascara, bool habilitado);
     }
 }
