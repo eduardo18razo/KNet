@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaMascaras.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaMascaras" %>
-<%--<div style="height: 100%;">
+<%@ Register Src="~/UserControls/Altas/AltaMascaraAcceso.ascx" TagPrefix="uc1" TagName="AltaMascaraAcceso" %>
+
+<div style="height: 100%;">
     <script>
         function dbClic(e) {
             $('#tblHeader').find('tr').dblclick(function (e) {
@@ -7,17 +9,17 @@
             });
         };
 
-        function ContextMenu() {
-            var $contextMenu = $("#contextMenu");
+        function ContextMenuMascara() {
+            var $ContextMenuMascara = $("#ContextMenuMascara");
             $("body").on("click", function (e) {
-                $contextMenu.hide();
+                $ContextMenuMascara.hide();
                 var table = $("#tblHeader");
                 table.find('tr').each(function (i, ev) {
                     $(this).css('background', "transparent");
                 });
             });
             $("body").on("contextmenu", "table tr", function (e) {
-                $contextMenu.css({
+                $ContextMenuMascara.css({
                     display: "block",
                     left: e.pageX,
                     top: e.pageY
@@ -47,15 +49,15 @@
                 return false;
             });
 
-            $contextMenu.on("click", "button", function () {
+            $ContextMenuMascara.on("click", "button", function () {
                 debugger;
-                $contextMenu.hide();
+                $ContextMenuMascara.hide();
             });
         };
     </script>
     <asp:UpdatePanel runat="server" style="height: 100%">
         <ContentTemplate>
-            <div id="contextMenu" class="panel-heading">
+            <div id="ContextMenuMascara" class="panel-heading contextMenu">
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-primary" Text="Baja" ID="btnBaja" OnClick="btnBaja_OnClick" />
@@ -65,7 +67,7 @@
 
                 </div>
                 <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" />
+                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" Visible="False"/>
                 </div>
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" />
@@ -95,7 +97,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Consulta Organizacion</h3>
+                    <h3>Consulta Mascaras de Acceso</h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">
@@ -110,41 +112,14 @@
                             <div id="collapseFiltros" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFiltros">
                                 <div class="panel-body">
                                     <div class="form-horizontal">
-                                        <div class="form-horizontal">
-                                            <div class="form-group">
-                                                <asp:Label Width="16%" runat="server" class="col-sm-3 control-label">Producto</asp:Label>
-                                                <asp:Label Width="16%" runat="server" class="col-sm-3 control-label">Tipo de Usuario Autorizado</asp:Label>
-                                                <asp:Label Width="16%" runat="server" class="col-sm-3 control-label">Tipo de Servicio</asp:Label>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <asp:DropDownList runat="server" Width="16%" ID="ddlArea" CssClass="DropSelect" OnSelectedIndexChanged="ddlArea_OnSelectedIndexChanged" AutoPostBack="true" />
-                                                <asp:DropDownList runat="server" Width="16%" CssClass="DropSelect" ID="ddlTipoUsuario" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" AutoPostBack="true" />
-                                                <asp:DropDownList runat="server" Width="16%" CssClass="DropSelect" ID="ddlTipoArbol" OnSelectedIndexChanged="ddlTipoArbol_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                            </div>
-                                            <div class="form-group">
-
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 1</asp:Label>
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 2</asp:Label>
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 3</asp:Label>
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 4</asp:Label>
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 5</asp:Label>
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 6</asp:Label>
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 7</asp:Label>
-                                            </div>
-                                            <div class="form-group">
-
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel1" OnSelectedIndexChanged="ddlNivel1_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel2" OnSelectedIndexChanged="ddlNivel2_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel3" OnSelectedIndexChanged="ddlNivel3_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel4" OnSelectedIndexChanged="ddlNivel4_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel5" OnSelectedIndexChanged="ddlNivel5_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel6" OnSelectedIndexChanged="ddlNivel6_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel7" OnSelectedIndexChanged="ddlNivel7_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Holding" Width="14%" OnClick="btnNew_OnClick" Visible="False" />
-                                            </div>
+                                        <div class="form-group">
+                                            <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Descripcion</asp:Label>
+                                            <asp:TextBox runat="server" ID="txtDescripcion" AutoPostBack="True" OnTextChanged="txtDescripcion_OnTextChanged" CssClass="form-control"></asp:TextBox>
+                                        </div>
+                                        <div class="form-group">
+                                        </div>
+                                        <div class="form-group">
+                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Informacion" Width="14%" OnClick="btnNew_OnClick"/>
                                         </div>
                                     </div>
                                 </div>
@@ -159,27 +134,9 @@
                                             <thead>
                                                 <tr align="center">
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Producto</asp:Label></td>
+                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nombre</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tipo Usuario</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tipo Servicio</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 1</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 2</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 3</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 4</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 5</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 6</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 7</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tipo Opcion</asp:Label></td>
+                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Numero de Campos</asp:Label></td>
                                                     <td>
                                                         <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Habilitado</asp:Label></td>
                                                 </tr>
@@ -188,18 +145,9 @@
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Area.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("TipoUsuario.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("TipoArbolAcceso.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel1.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel2.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel3.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel4.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel5.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel6.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel7.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# (bool) Eval("EsTerminal") ? "Opcion" : "Menu"%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0;" oncontextmenu="ContextMenuMascara()"><%# Eval("Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="ContextMenuMascara()"><%# Eval("NoCampos")%></td>
+                                            <td style="padding: 0;" oncontextmenu="ContextMenuMascara()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>
@@ -214,5 +162,17 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-</div>--%>
+    <%--MODAL ALTA--%>
+    <div class="modal fade" id="modalAltaMascara" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <asp:UpdatePanel ID="upAltaMascara" runat="server">
+            <ContentTemplate>
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <uc1:AltaMascaraAcceso runat="server" ID="AltaMascaraAcceso" />
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
+</div>
 

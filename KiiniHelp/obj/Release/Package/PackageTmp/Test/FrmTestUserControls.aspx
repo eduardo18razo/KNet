@@ -6,6 +6,14 @@
 <%@ Register Src="~/UserControls/Consultas/UcConsultaGrupos.ascx" TagPrefix="uc1" TagName="UcConsultaGrupos" %>
 <%@ Register Src="~/UserControls/Consultas/UcConsultaArboles.ascx" TagPrefix="uc1" TagName="UcConsultaArboles" %>
 <%@ Register Src="~/UserControls/Altas/AltaSla.ascx" TagPrefix="uc1" TagName="AltaSla" %>
+<%@ Register Src="~/UserControls/Altas/AltaTiempoEstimado.ascx" TagPrefix="uc1" TagName="AltaTiempoEstimado" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaInformacionConsulta.ascx" TagPrefix="uc1" TagName="UcConsultaInformacionConsulta" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaMascaras.ascx" TagPrefix="uc1" TagName="UcConsultaMascaras" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaEncuesta.ascx" TagPrefix="uc1" TagName="UcConsultaEncuesta" %>
+
+
+
+
 
 
 
@@ -45,12 +53,11 @@
             height: 100%;
         }
 
-        #contextMenu {
+        .contextMenu {
             position: absolute;
             display: none;
             background: gray;
         }
-
         .borderless td, .borderless th {
             border: none;
         }
@@ -69,7 +76,7 @@
         function OpenWindow(url) {
             window.open(url, "test", 'type=fullWindow, fullscreen, height=700,width=760');
         };
-        function Subirscroll(modalName) {
+        function UpScroll(modalName) {
             debugger;
 
             //$(modalName).scrollTop(0);
@@ -93,7 +100,7 @@
             </Scripts>
         </asp:ScriptManager>
         <div id="full">
-            <uc1:AltaSla runat="server" ID="AltaSla" />
+            <uc1:UcConsultaEncuesta runat="server" id="UcConsultaEncuesta" />
         </div>
     </form>
 </body>

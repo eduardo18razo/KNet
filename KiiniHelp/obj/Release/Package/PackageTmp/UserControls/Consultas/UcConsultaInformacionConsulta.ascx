@@ -1,5 +1,6 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaGrupos.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaGrupos" %>
-<%@ Register TagPrefix="uc" TagName="altagrupousuario" Src="~/UserControls/Altas/AltaGrupoUsuario.ascx" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaInformacionConsulta.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaInformacionConsulta" %>
+<%@ Register Src="~/UserControls/Altas/AltaInformacionConsulta.ascx" TagPrefix="uc1" TagName="AltaInformacionConsulta" %>
+
 <div style="height: 100%;">
     <script>
         function dbClic(e) {
@@ -9,11 +10,11 @@
             });
         };
 
-        function contextMenuGrupo() {
-            var $contextMenuGrupo = $("#contextMenuGrupo");
+        function contextMenuInformacion() {
+            var $contextMenuInformacion = $("#contextMenuInformacion");
             $("body").on("click", function (e) {
                 debugger;
-                $contextMenuGrupo.hide();
+                $contextMenuInformacion.hide();
                 var table = $("#tblHeader");
                 table.find('tr').each(function (i, ev) {
                     $(this).css('background', "transparent");
@@ -21,7 +22,7 @@
             });
             $("body").on("contextmenu", "table tr", function (e) {
                 debugger;
-                $contextMenuGrupo.css({
+                $contextMenuInformacion.css({
                     display: "block",
                     left: e.pageX,
                     top: e.pageY
@@ -51,15 +52,15 @@
                 return false;
             });
 
-            $contextMenuGrupo.on("click", "button", function () {
+            $contextMenuInformacion.on("click", "button", function () {
                 debugger;
-                $contextMenuGrupo.hide();
+                $contextMenuInformacion.hide();
             });
         };
     </script>
     <asp:UpdatePanel runat="server" style="height: 100%">
         <ContentTemplate>
-            <div id="contextMenuGrupo" class="panel-heading contextMenu">
+            <div id="contextMenuInformacion" class="panel-heading contextMenu">
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-primary" Text="Baja" ID="btnBaja" OnClick="btnBaja_OnClick" />
@@ -69,13 +70,13 @@
 
                 </div>
                 <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" />
+                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" Visible="False" />
                 </div>
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" />
                 </div>
             </div>
-            <div class="modal-header" id="panelAlertaOrganizacion" runat="server" visible="false">
+            <div class="modal-header" id="panelAlertaGeneral" runat="server" visible="false">
                 <div class="alert alert-danger" role="alert">
                     <div>
                         <div style="float: left">
@@ -87,7 +88,7 @@
                         <div class="clearfix clear-fix"></div>
                     </div>
                     <hr />
-                    <asp:Repeater runat="server" ID="rptErrorOrganizacion">
+                    <asp:Repeater runat="server" ID="rptErrorGeneral">
                         <ItemTemplate>
                             <ul>
                                 <li><%# Container.DataItem %></li>
@@ -116,21 +117,13 @@
                                     <div class="form-horizontal">
 
                                         <div class="form-group">
-                                            <asp:Label Width="14%" for="ddlTipoUsuario" class="col-xs-1 control-label" runat="server">Tipo de Usuario</asp:Label>
-                                            <asp:DropDownList runat="server" ID="ddlTipoUsuario" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" />
+                                            <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Tipo de Informacion</asp:Label>
+                                            <asp:DropDownList runat="server" ID="ddlTipoInformacion" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoInformacion_OnSelectedIndexChanged" />
                                         </div>
-                                    </div>
-                                    <div class="form-horizontal">
-                                        <div class="form-horizontal">
-                                            <div class="form-group">
-                                                <asp:Label Width="14%" for="ddlTipoGrupo" class="col-xs-1 control-label" runat="server">Rol</asp:Label>
-                                                <asp:DropDownList runat="server" ID="ddlTipoGrupo" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoGrupo_OnSelectedIndexChanged" />
-                                            </div>
-                                            <div class="form-group">
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Holding" Width="14%" OnClick="btnNew_OnClick" Visible="False" />
-                                            </div>
+                                        <div class="form-group">
+                                        </div>
+                                        <div class="form-group">
+                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Informacion" Width="14%" OnClick="btnNew_OnClick"/>
                                         </div>
                                     </div>
                                 </div>
@@ -145,13 +138,11 @@
                                             <thead>
                                                 <tr align="center">
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tipo Usuario</asp:Label></td>
+                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tipo Informacion</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Rol</asp:Label></td>
+                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tipo Documento</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Grupo</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Supervisor</asp:Label></td>
+                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nombre</asp:Label></td>
                                                     <td>
                                                         <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Habilitado</asp:Label></td>
                                                 </tr>
@@ -160,11 +151,10 @@
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()" contextmenu="contextMenu"><%# Eval("TipoUsuario.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()"><%# Eval("TipoGrupo.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()"><%# Eval("Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()"><%# (bool) Eval("TieneSupervisor") ? "SI" : "NO" %></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuInformacion()" ><%# Eval("TipoInfConsulta.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuInformacion()" ><%# Eval("TipoDocumento.Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuInformacion()" ><%# Eval("Descripcion")%></td>
+                                            <td style="padding: 0;" oncontextmenu="contextMenuInformacion()"  id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>
@@ -179,67 +169,16 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <%--MODAL GRUPO USUARIO--%>
-    <div class="modal fade" id="modalAltaGrupoUsuarios" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-        <asp:UpdatePanel ID="upAltaGrupo" runat="server">
+    <%--MODAL ALTA--%>
+    <div class="modal fade" id="modalAltaInformacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <asp:UpdatePanel ID="upAltaInformacion" runat="server">
             <ContentTemplate>
-                <div class="modal-dialog modal-md">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <uc:altagrupousuario runat="server" ID="ucAltaGrupoUsuario" />
-                    </div>
-                </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-    </div>
-
-    <%--MODAL SELECCION DE ROL--%>
-    <div class="modal fade" id="modalSeleccionRol" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-        <asp:UpdatePanel ID="upSubRoles" runat="server">
-            <ContentTemplate>
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header" id="panelAlertaSeleccionRol" runat="server" visible="false">
-                            <div class="alert alert-danger">
-                                <div>
-                                    <div style="float: left">
-                                        <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
-                                    </div>
-                                    <div style="float: left">
-                                        <h3>Error</h3>
-                                    </div>
-                                    <div class="clearfix clear-fix" />
-                                </div>
-                                <asp:Repeater runat="server" ID="rptErrorSeleccionRol">
-                                    <ItemTemplate>
-                                        <div class="row">
-                                            <ul>
-                                                <li><%# Container.DataItem %></li>
-                                            </ul>
-                                        </div>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </div>
-                        </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <asp:Label runat="server" ID="lblTitleSubRoles"></asp:Label>
-                            </div>
-                            <div class="panel-body">
-                                <asp:HiddenField runat="server" ID="hfOperacion" />
-                                <div>
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <asp:CheckBoxList runat="server" ID="chklbxSubRoles" Checked="True" Visible="True" OnSelectedIndexChanged="chklbxSubRoles_OnSelectedIndexChanged" AutoPostBack="True" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <uc1:AltaInformacionConsulta runat="server" ID="AltaInformacionConsulta" />
                     </div>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
 </div>
-
-

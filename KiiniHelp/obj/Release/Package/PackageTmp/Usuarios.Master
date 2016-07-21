@@ -12,13 +12,10 @@
     <link href="BootStrap/css/divs.css" rel="stylesheet" />
     <link href="BootStrap/css/FileInput.css" rel="stylesheet" />
     <link href="BootStrap/css/stylemainmenu.css" rel="stylesheet" />
-    <%--<link href="BootStrap/css/jquery.treegrid.css" rel="stylesheet" />--%>
     <link href="BootStrap/css/Headers.css" rel="stylesheet" />
-    <%--<link href="BootStrap/css/super-panel.css" rel="stylesheet" />--%>
     <link href="BootStrap/css/accordion-menu.css" rel="stylesheet" />
     <script type="text/javascript">
         function MostrarPopup(modalName) {
-            debugger;
             $(modalName).modal({ backdrop: 'static', keyboard: false });
             $(modalName).modal('show');
             return true;
@@ -30,14 +27,79 @@
         function OpenWindow(url) {
             window.open(url, "test", 'type=fullWindow, fullscreen, height=700,width=760');
         };
-        function Subirscroll(modalName) {
-            debugger;
-
-            //$(modalName).scrollTop(0);
-            $(modalName).animate({ scrollTop: 0 }, 'slow');
-
+        function UpScroll(modalName) {
+            $('#' + modalName).animate({ scrollTop: 0 }, 'slow');
             return false;
         };
+
+        function sum() {
+            debugger;
+            var totaldias = 0, totalhoras = 0, totalminutos = 0, totalsegundos = 0;
+            $("#tblHeader > tbody > tr").each(function (indexRow) {
+                var control;
+                $(this).children("td").each(function (indexColumn) {
+                    switch (indexColumn) {
+                        case 2:
+                            control = $(this).find("input[id*=txtDias]");
+                            if (control != null) {
+                                totaldias = totaldias + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                            }
+                            break;
+                        case 3:
+                            control = $(this).find("input[id*=txtHoras]");
+                            if (control != null) {
+                                totalhoras = totalhoras + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                            }
+                            break;
+                        case 4:
+                            control = $(this).find("input[id*=txtMinutos]");
+                            if (control != null) {
+                                totalminutos = totalminutos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                            }
+                            break;
+                        case 5:
+                            control = $(this).find("input[id*=txtSegundos]");
+                            if (control != null) {
+                                totalsegundos = totalsegundos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                            }
+                            break;
+                    }
+
+                });
+            });
+
+            $("#tblHeader > tfoot > tr").each(function (indexRow) {
+                var control;
+                $(this).children("td").each(function (indexColumn) {
+                    switch (indexColumn) {
+                        case 2:
+                            control = $(this).find("input[id*=txtTotalDias]");
+                            if (control != null) {
+                                control.val(totaldias);
+                            }
+                            break;
+                        case 3:
+                            control = $(this).find("input[id*=txtTotalHoras]");
+                            if (control != null) {
+                                control.val(totalhoras);
+                            }
+                            break;
+                        case 4:
+                            control = $(this).find("input[id*=txtTotalMinutos]");
+                            if (control != null) {
+                                control.val(totalminutos);
+                            }
+                            break;
+                        case 5:
+                            control = $(this).find("input[id*=txtTotalSegundos]");
+                            if (control != null) {
+                                control.val(totalsegundos);
+                            }
+                            break;
+                    }
+                });
+            });
+        }
 
 
     </script>
@@ -67,7 +129,7 @@
             padding-right: 0px;
         }
 
-        #contextMenu {
+        .contextMenu {
             position: absolute;
             display: none;
             background: gray;
@@ -76,6 +138,65 @@
         #full, #form1 {
             height: 100%;
         }
+
+
+        .menu {
+            background: transparent;
+            width: 100%;
+            height: 100%;
+            margin-top: -2px;
+        }
+
+            .menu ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                white-space: nowrap;
+            }
+
+                .menu ul li {
+                    padding: 20px;
+                    position: relative;
+                    background-color: #314f60;
+                    border-top: 1px solid rgba(0,0,0,.3);
+                    vertical-align: middle;
+                    cursor: default;
+                    -webkit-transition: all 0.5s;
+                    -o-transition: all 0.5s;
+                    transition: all 0.5s;
+                }
+
+                    .menu ul li:hover {
+                        background-color: #000000;
+                        background-color: rgba(0,0,0,0.5);
+                        ;
+                    }
+
+        .menu > ul > li {
+                border-right: 5px solid #314f60;
+            }
+
+            .menu ul ul {
+                transition: all 0.3s;
+                position: absolute;
+                border-left: 5px solid red;
+                left: 100%;
+                top: -1px;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .menu ul li:hover > ul {
+                opacity: 1;
+                visibility: visible;
+                left: 100%;
+                top: -1px;
+            }
+
+            .menu ul li a {
+                color: #fff;
+                text-decoration: none;
+            }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -120,56 +241,56 @@
                 </span>
             </div>
             <div id="panel1">
-                <div id="accordion">
+                <div class="menu">
                     <ul style="color: transparent">
                         <li>
                             <asp:Repeater runat="server" ID="rptMenu" OnItemDataBound="rptMenu_OnItemDataBound">
                                 <ItemTemplate>
                                     <li>
                                         <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>'><%# Eval("Descripcion") %></div>
+                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
                                         <ul>
                                             <asp:Repeater runat="server" ID="rptSubMenu1" OnItemDataBound="rptSubMenu1_OnItemDataBound">
                                                 <ItemTemplate>
                                                     <li>
                                                         <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") == null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>'><%# Eval("Descripcion") %></div>
+                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
                                                         <ul>
                                                             <asp:Repeater runat="server" ID="rptSubMenu2" OnItemDataBound="rptSubMenu2_OnItemDataBound">
                                                                 <ItemTemplate>
                                                                     <li>
                                                                         <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>'><%# Eval("Descripcion") %></div>
+                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
                                                                         <ul>
                                                                             <asp:Repeater runat="server" ID="rptSubMenu3" OnItemDataBound="rptSubMenu3_OnItemDataBound">
                                                                                 <ItemTemplate>
                                                                                     <li>
                                                                                         <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>'><%# Eval("Descripcion") %></div>
+                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
                                                                                         <ul>
                                                                                             <asp:Repeater runat="server" ID="rptSubMenu4" OnItemDataBound="rptSubMenu4_OnItemDataBound">
                                                                                                 <ItemTemplate>
                                                                                                     <li>
                                                                                                         <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>'><%# Eval("Descripcion") %></div>
+                                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
                                                                                                         <ul>
                                                                                                             <asp:Repeater runat="server" ID="rptSubMenu5" OnItemDataBound="rptSubMenu5_OnItemDataBound">
                                                                                                                 <ItemTemplate>
                                                                                                                     <li>
                                                                                                                         <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>'><%# Eval("Descripcion") %></div>
+                                                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
                                                                                                                         <ul>
                                                                                                                             <asp:Repeater runat="server" ID="rptSubMenu6" OnItemDataBound="rptSubMenu6_OnItemDataBound">
                                                                                                                                 <ItemTemplate>
                                                                                                                                     <li>
                                                                                                                                         <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>'><%# Eval("Descripcion") %></div>
+                                                                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
                                                                                                                                         <ul>
                                                                                                                                             <asp:Repeater runat="server" ID="rptSubMenu7">
                                                                                                                                                 <ItemTemplate>
                                                                                                                                                     <li>
                                                                                                                                                         <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                                                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>'><%# Eval("Descripcion") %></div>
+                                                                                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
                                                                                                                                                     </li>
                                                                                                                                                 </ItemTemplate>
                                                                                                                                             </asp:Repeater>
@@ -205,7 +326,7 @@
                     </ul>
                 </div>
             </div>
-            <div style="width: 95%; margin: 0 auto; margin-top: 0; padding-top: 75px;height: 100%;">
+            <div style="width: 95%; margin: 0 auto; margin-top: 0; padding-top: 75px; height: 100%;">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>

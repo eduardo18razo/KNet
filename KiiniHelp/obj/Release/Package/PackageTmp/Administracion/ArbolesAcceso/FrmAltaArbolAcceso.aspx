@@ -6,6 +6,8 @@
 <%@ Register Src="~/UserControls/Altas/AltaEncuesta.ascx" TagPrefix="uc" TagName="UcEncuesta" %>
 <%@ Register Src="~/UserControls/Seleccion/AsociarGrupoUsuario.ascx" TagPrefix="uc" TagName="AsociarGrupoUsuario" %>
 <%@ Register Src="~/UserControls/Altas/AltaArea.ascx" TagPrefix="uc" TagName="AltaArea" %>
+<%@ Register Src="~/UserControls/Altas/AltaTiempoEstimado.ascx" TagPrefix="uc" TagName="AltaTiempoEstimado" %>
+
 
 
 
@@ -215,9 +217,12 @@
                                                     Información
                                                 </div>
                                                 <div class="panel-body">
-                                                    <asp:Button type="button" class="btn btn-primary " Text="Consulta" ID="btnModalConsultas" data-toggle="modal" data-target="#modalConsultas" data-backdrop="static" data-keyboard="false" runat="server"></asp:Button>
-                                                    <asp:Button type="button" class="btn btn-primary " Text="Ticket" ID="btnModalTicket" data-toggle="modal" data-target="#modalTicket" data-backdrop="static" data-keyboard="false" runat="server"></asp:Button>
-                                                    <asp:Button type="button" class="btn btn-primary " Text="Grupos" ID="btnModalGrupos" data-toggle="modal" data-target="#modalGruposNodo" data-backdrop="static" data-keyboard="false" runat="server"></asp:Button>
+                                                    <asp:Button class="btn btn-primary " runat="server" Text="Consulta" ID="btnModalConsultas" OnClick="btnModalConsultas_OnClick"/>
+                                                    <asp:Button class="btn btn-primary " runat="server" Text="Ticket" ID="btnModalTicket" OnClick="btnModalTicket_OnClick"/>
+                                                    <asp:Button class="btn btn-primary disabled" runat="server" Text="Grupos" ID="btnModalGrupos" OnClick="btnModalGrupos_OnClick"/>
+                                                    <asp:Button class="btn btn-primary disabled" runat="server" Text="SLA" ID="btnModalSla" OnClick="btnModalSla_OnClick"/>
+                                                    <asp:Button class="btn btn-primary disabled" runat="server" Text="Tiempo Informe" ID="btnModalInforme" OnClick="btnModalInforme_OnClick"/>
+                                                    <asp:Button class="btn btn-primary disabled" runat="server" Text="Encuesta" ID="btnModalEncuesta" OnClick="btnModalEncuesta_OnClick"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -225,7 +230,7 @@
                                 </div>
                                 <div class="modal-footer" style="text-align: center">
                                     <asp:Button ID="btnGuardarNivel" runat="server" CssClass="btn btn-lg btn-success" Text="Guardar" OnClick="btnGuardarNivel_OnClick" />
-                                        <asp:Button ID="btnLimpiarNivel" runat="server" CssClass="btn btn-lg btn-danger" Text="Limpiar" OnClick="btnLimpiarNivel_OnClick" />
+                                    <asp:Button ID="btnLimpiarNivel" runat="server" CssClass="btn btn-lg btn-danger" Text="Limpiar" OnClick="btnLimpiarNivel_OnClick" />
                                     <asp:Button ID="btnCancelarNivel" runat="server" CssClass="btn btn-lg btn-danger" Text="Cancelar" OnClick="btnCancelarNivel_OnClick" />
                                 </div>
                             </div>
@@ -352,7 +357,7 @@
                                 <%--TICKET--%>
                                 <div class="panel panel-primary" runat="server" id="div1" visible="True">
                                     <div class="panel-heading">
-                                        Ticket
+                                        Mascar de Captura
                                     </div>
                                     <div class="panel-body">
                                         <div class="form-horizontal">
@@ -364,31 +369,7 @@
                                                         <asp:DropDownList runat="server" ID="ddlMascaraAcceso" class="form-control" Style="width: 100%" />
                                                     </div>
                                                     <div class="col-sm-1">
-                                                        <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAltaMascara" data-keyboard="false"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <%--SLA--%>
-                                            <div class="form-group">
-                                                <div class="form-inline margen-arriba" style="width: 100%">
-                                                    <label class="col-sm-3 control-label" style="width: 180px">SLA</label>
-                                                    <div class="col-sm-4">
-                                                        <asp:DropDownList runat="server" ID="ddlSla" class="form-control" Style="width: 100%" />
-                                                    </div>
-                                                    <div class="col-sm-1">
-                                                        <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAltaSla" data-keyboard="false"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <%--ENCUESTA--%>
-                                            <div class="form-group">
-                                                <div class="form-inline" style="width: 100%">
-                                                    <label class="col-sm-3 control-label" style="width: 180px">Encuesta</label>
-                                                    <div class="col-sm-4">
-                                                        <asp:DropDownList runat="server" ID="ddlEncuesta" class="form-control" Style="width: 100%" />
-                                                    </div>
-                                                    <div class="col-sm-1">
-                                                        <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAltaEncuesta" data-keyboard="false"/>
+                                                        <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAltaMascara" data-keyboard="false" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -413,6 +394,95 @@
                                 <uc:AsociarGrupoUsuario runat="server" ID="AsociarGrupoUsuario" />
                                 <div class="modal-footer">
                                     <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerraGrupos" Text="Cerrar" OnClick="btnCerraGrupos_OnClick" />
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+
+            <%--SLA--%>
+            <div class="modal fade" id="modalSla" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <uc:UcSla runat="server" ID="UcSla" />
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+
+            <%--TIEMPO INFORME--%>
+            <div class="modal fade" id="modalTiempoInforme" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <uc:AltaTiempoEstimado runat="server" ID="AltaTiempoEstimado" />
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+
+            <%--ENCUESTA--%>
+            <div class="modal fade" id="modalEncuesta" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                    <ContentTemplate>
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header" id="Div2" runat="server" visible="false">
+                                    <div class="alert alert-danger">
+                                        <div>
+                                            <div style="float: left">
+                                                <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
+                                            </div>
+                                            <div style="float: left">
+                                                <h3>Error</h3>
+                                            </div>
+                                            <div class="clearfix clear-fix" />
+                                        </div>
+                                        <asp:Repeater runat="server" ID="Repeater1">
+                                            <ItemTemplate>
+                                                <div class="row">
+                                                    <ul>
+                                                        <li><%# Container.DataItem %></li>
+                                                    </ul>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                </div>
+                                <div class="panel panel-primary" runat="server" id="div3" visible="True">
+                                    <div class="panel-heading">
+                                        Encuesta
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-horizontal">
+
+                                            <%--ENCUESTA--%>
+                                            <div class="form-group">
+                                                <div class="form-inline" style="width: 100%">
+                                                    <label class="col-sm-3 control-label" style="width: 180px">Encuesta</label>
+                                                    <div class="col-sm-4">
+                                                        <asp:DropDownList runat="server" ID="ddlEncuesta" class="form-control" Style="width: 100%" />
+                                                    </div>
+                                                    <div class="col-sm-1">
+                                                        <asp:Button runat="server" Text="Agregar" CssClass="btn btn-primary btn-xs" data-toggle="modal" data-target="#modalAltaEncuesta" data-keyboard="false" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <asp:Button runat="server" CssClass="btn btn-danger" ID="btnCerrarEncuesta" Text="Cerrar" OnClick="btnCerrarEncuesta_OnClick" />
                                 </div>
                             </div>
                         </div>
@@ -448,20 +518,6 @@
                 </asp:UpdatePanel>
             </div>
 
-            <div class="modal fade" id="modalAltaSla" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <asp:UpdatePanel ID="upModalAltaSla" runat="server">
-                    <ContentTemplate>
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <uc:UcSla runat="server" ID="UcSla" />
-                                </div>
-                            </div>
-                        </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-
             <div class="modal fade" id="modalAltaEncuesta" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
@@ -475,8 +531,6 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-
-
         </ContentTemplate>
     </asp:UpdatePanel>
     <%--AREA--%>
