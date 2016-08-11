@@ -43,6 +43,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.9.1\lib\net40\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="DayPilot">
+      <HintPath>..\..\..\..\Downloads\TutorialShiftScheduling.VS2010.20130629\TutorialShiftScheduling\TutorialCS\Bin\DayPilot.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="SigmaToolBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -56,7 +62,6 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -117,17 +122,140 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Administracion\ArbolesAcceso\FrmAltaArbolAcceso.aspx" />
-    <Content Include="Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx" />
-    <Content Include="Administracion\Default.aspx" />
-    <Content Include="Administracion\Encuestas\FrmConsultaEncuestas.aspx" />
-    <Content Include="Administracion\Grupos\FrmConsultaGrupos.aspx" />
-    <Content Include="Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx" />
-    <Content Include="Administracion\Mascaras\FrmConsultaMascaraAcceso.aspx" />
-    <Content Include="Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx" />
-    <Content Include="Administracion\Ubicaciones\FrmConsultaUbicaciones.aspx" />
-    <Content Include="Administracion\Usuarios\FrmConsultaUsuarios.aspx" />
-    <Content Include="BootStrap\css\accordion-menu.css" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker.css" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker.min.css" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker.standalone.css" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.css" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.min.css" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.standalone.css" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.standalone.min.css" />
+    <Content Include="BootStrap\js\bootstrap-datepicker.es.min.js" />
+    <Content Include="BootStrap\js\bootstrap-datepicker.js" />
+    <Content Include="BootStrap\js\bootstrap-datepicker.min.js" />
+    <Content Include="BootStrap\js\locales\bootstrap-datepicker.es.min.js" />
+    <Content Include="Consultas\FrmConsulta.aspx" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.ImpactoUrgencia.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Prioridad.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Urgencia.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Impacto.datasource" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker.css.map" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker.min.css.map" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker.standalone.css.map" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker.standalone.min.css.map" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.css.map" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.min.css.map" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.standalone.css.map" />
+    <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.standalone.min.css.map" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.Puesto.datasource" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Service References\ServicePuesto\ServicePuesto.wsdl" />
+    <None Include="Service References\ServicePuesto\ServicePuesto.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Arbol.Nodos.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Arbol.Organizacion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Arbol.Ubicaciones.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Mascaras.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Operacion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Usuario.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Operacion.Tickets.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Operacion.Usuarios.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Operacion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Parametros.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServicePuesto\ServicePuesto.disco" />
+    <None Include="Service References\ServicePuesto\configuration91.svcinfo" />
+    <None Include="Service References\ServicePuesto\configuration.svcinfo" />
+    <None Include="Service References\ServicePuesto\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Test\FrmTest.aspx" />
+    <Content Include="UserControls\Altas\UcAltaDiasFestivos.ascx" />
+    <Content Include="UserControls\Altas\UcAltaPuesto.ascx" />
+    <Content Include="UserControls\Altas\UcHorario.ascx" />
+    <Content Include="UserControls\Seleccion\UcImpactoUrgencia.ascx" />
+    <Content Include="UserControls\UcLogIn.ascx" />
+    <Content Include="Users\Administracion\ArbolesAcceso\FrmAltaArbolAcceso.aspx" />
+    <Content Include="Users\Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx" />
+    <Content Include="Users\Administracion\Encuestas\FrmConsultaEncuestas.aspx" />
+    <Content Include="Users\Administracion\Grupos\FrmConsultaGrupos.aspx" />
+    <Content Include="Users\Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx" />
+    <Content Include="Users\Administracion\Mascaras\FrmConsultaMascaraAcceso.aspx" />
+    <Content Include="Users\Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx" />
+    <Content Include="Users\Administracion\Ubicaciones\FrmConsultaUbicaciones.aspx" />
+    <Content Include="Users\Administracion\Usuarios\FrmConsultaUsuarios.aspx" />
     <Content Include="BootStrap\css\bootstrap-theme.css" />
     <Content Include="BootStrap\css\bootstrap-theme.min.css" />
     <Content Include="BootStrap\css\bootstrap.css" />
@@ -138,21 +266,16 @@
     <Content Include="BootStrap\css\DropDown.css" />
     <Content Include="BootStrap\css\FileInput.css" />
     <Content Include="BootStrap\css\Headers.css" />
-    <Content Include="BootStrap\css\jquery.treegrid.css" />
-    <Content Include="BootStrap\css\simple-sidebar.css" />
     <Content Include="BootStrap\css\stylemainmenu.css" />
     <Content Include="BootStrap\css\super-panel.css">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="BootStrap\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="BootStrap\js\accordion-menu.js" />
     <Content Include="BootStrap\js\bootstrap.js" />
     <Content Include="BootStrap\js\bootstrap.min.js" />
     <Content Include="BootStrap\js\jquery-1.10.2.min.js" />
-    <Content Include="BootStrap\js\sidebar_menu.js" />
-    <Content Include="BootStrap\js\vmenuModule.js" />
-    <Content Include="General\Web.config" />
-    <Content Include="Administracion\Web.config">
+    <Content Include="Users\General\Web.config" />
+    <Content Include="Users\Administracion\Web.config">
       <SubType>Designer</SubType>
     </Content>
     <None Include="BootStrap\js\jquery-1.4.1-vsdoc.js" />
@@ -218,10 +341,9 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Default.aspx" />
-    <Content Include="General\Default.aspx" />
-    <Content Include="General\FrmMostrarDocumento.aspx" />
-    <Content Include="General\FrmNodoConsultas.aspx" />
-    <Content Include="General\FrmMiInformacion.aspx" />
+    <Content Include="Users\General\FrmMostrarDocumento.aspx" />
+    <Content Include="Users\General\FrmNodoConsultas.aspx" />
+    <Content Include="Users\General\FrmMiInformacion.aspx" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\backgroud.jpg" />
     <Content Include="Images\bullet.png" />
@@ -246,8 +368,8 @@
     <Content Include="Images\vmenu\off.png" />
     <Content Include="Images\vmenu\on.png" />
     <Content Include="Images\vmenu\zakladka.png" />
-    <Content Include="Login.aspx" />
-    <Content Include="Operacion\FrmOperacionTickets.aspx" />
+    <Content Include="Users\DashBoard.aspx" />
+    <Content Include="Users\Operacion\FrmOperacionTickets.aspx" />
     <Content Include="packages.config" />
     <Content Include="BootStrap\css\bootstrap-theme.css.map" />
     <Content Include="BootStrap\css\bootstrap.css.map" />
@@ -346,12 +468,7 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.SubRolEscalacionPermitida.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.TipoNotificacion.datasource" />
     <None Include="Properties\PublishProfiles\KinniNetWeb.pubxml" />
-    <Content Include="Public\Default.aspx" />
-    <Content Include="Public\Public.Master" />
-    <Content Include="Public\Web.config" />
-    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
-    <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -433,6 +550,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceArea\ServiceArea12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceArea\ServiceArea13.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceArea\ServiceArea2.xsd">
@@ -611,6 +731,9 @@
     <None Include="Service References\ServiceSeguridad\ServiceSecurity12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceSeguridad\ServiceSecurity13.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSeguridad\ServiceSecurity2.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -756,6 +879,16 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaEstatus\ServiceEstatus9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Sistema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\service.wsdl" />
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaImpactoUrgencia\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaNotificacion\KiiniNet.Entities.Cat.Sistema.xsd">
@@ -1459,8 +1592,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Test\FrmTestUserControls.aspx" />
-    <Content Include="Ticket\FrmTicket.aspx" />
+    <Content Include="Users\Ticket\FrmTicket.aspx" />
     <Content Include="UserControls\Altas\AltaArea.ascx" />
     <Content Include="UserControls\Altas\AltaGrupoUsuario.ascx" />
     <Content Include="UserControls\Altas\AltaEncuesta.ascx" />
@@ -1491,7 +1623,7 @@
     <Content Include="UserControls\Temporal\UcCatalogoNiveles.ascx" />
     <Content Include="UserControls\Altas\AltaMascaraAcceso.ascx" />
     <Content Include="UserControls\Temporal\UcMascaraCaptura.ascx" />
-    <Content Include="Administracion\Usuarios\FrmUsuarios.aspx" />
+    <Content Include="Users\Administracion\Usuarios\FrmUsuarios.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1745,7 +1877,7 @@
     <None Include="Service References\ServiceUsuario\ServiceUsuarios9.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Ticket\Web.config" />
+    <Content Include="Users\Ticket\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1754,74 +1886,126 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administracion\ArbolesAcceso\FrmAltaArbolAcceso.aspx.cs">
+    <Compile Include="Consultas\FrmConsulta.aspx.cs">
+      <DependentUpon>FrmConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\FrmConsulta.aspx.designer.cs">
+      <DependentUpon>FrmConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServicePuesto\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaImpactoUrgencia\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Test\FrmTest.aspx.cs">
+      <DependentUpon>FrmTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\FrmTest.aspx.designer.cs">
+      <DependentUpon>FrmTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaDiasFestivos.ascx.cs">
+      <DependentUpon>UcAltaDiasFestivos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaDiasFestivos.ascx.designer.cs">
+      <DependentUpon>UcAltaDiasFestivos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaPuesto.ascx.cs">
+      <DependentUpon>UcAltaPuesto.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaPuesto.ascx.designer.cs">
+      <DependentUpon>UcAltaPuesto.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcHorario.ascx.cs">
+      <DependentUpon>UcHorario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcHorario.ascx.designer.cs">
+      <DependentUpon>UcHorario.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Seleccion\UcImpactoUrgencia.ascx.cs">
+      <DependentUpon>UcImpactoUrgencia.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Seleccion\UcImpactoUrgencia.ascx.designer.cs">
+      <DependentUpon>UcImpactoUrgencia.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcLogIn.ascx.cs">
+      <DependentUpon>UcLogIn.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcLogIn.ascx.designer.cs">
+      <DependentUpon>UcLogIn.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\ArbolesAcceso\FrmAltaArbolAcceso.aspx.cs">
       <DependentUpon>FrmAltaArbolAcceso.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion\ArbolesAcceso\FrmAltaArbolAcceso.aspx.designer.cs">
+    <Compile Include="Users\Administracion\ArbolesAcceso\FrmAltaArbolAcceso.aspx.designer.cs">
       <DependentUpon>FrmAltaArbolAcceso.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx.cs">
+    <Compile Include="Users\Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx.cs">
       <DependentUpon>FrmConsultaArbolAcceso.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx.designer.cs">
+    <Compile Include="Users\Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx.designer.cs">
       <DependentUpon>FrmConsultaArbolAcceso.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administracion\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Administracion\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Administracion\Encuestas\FrmConsultaEncuestas.aspx.cs">
+    <Compile Include="Users\Administracion\Encuestas\FrmConsultaEncuestas.aspx.cs">
       <DependentUpon>FrmConsultaEncuestas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion\Encuestas\FrmConsultaEncuestas.aspx.designer.cs">
+    <Compile Include="Users\Administracion\Encuestas\FrmConsultaEncuestas.aspx.designer.cs">
       <DependentUpon>FrmConsultaEncuestas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administracion\Grupos\FrmConsultaGrupos.aspx.cs">
+    <Compile Include="Users\Administracion\Grupos\FrmConsultaGrupos.aspx.cs">
       <DependentUpon>FrmConsultaGrupos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion\Grupos\FrmConsultaGrupos.aspx.designer.cs">
+    <Compile Include="Users\Administracion\Grupos\FrmConsultaGrupos.aspx.designer.cs">
       <DependentUpon>FrmConsultaGrupos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx.cs">
+    <Compile Include="Users\Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx.cs">
       <DependentUpon>FrmConsultaInformacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx.designer.cs">
+    <Compile Include="Users\Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx.designer.cs">
       <DependentUpon>FrmConsultaInformacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administracion\Mascaras\FrmConsultaMascaraAcceso.aspx.cs">
+    <Compile Include="Users\Administracion\Mascaras\FrmConsultaMascaraAcceso.aspx.cs">
       <DependentUpon>FrmConsultaMascaraAcceso.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion\Mascaras\FrmConsultaMascaraAcceso.aspx.designer.cs">
+    <Compile Include="Users\Administracion\Mascaras\FrmConsultaMascaraAcceso.aspx.designer.cs">
       <DependentUpon>FrmConsultaMascaraAcceso.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx.cs">
+    <Compile Include="Users\Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx.cs">
       <DependentUpon>FrmConsultaOrganizaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx.designer.cs">
+    <Compile Include="Users\Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx.designer.cs">
       <DependentUpon>FrmConsultaOrganizaciones.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administracion\Ubicaciones\FrmConsultaUbicaciones.aspx.cs">
+    <Compile Include="Users\Administracion\Ubicaciones\FrmConsultaUbicaciones.aspx.cs">
       <DependentUpon>FrmConsultaUbicaciones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion\Ubicaciones\FrmConsultaUbicaciones.aspx.designer.cs">
+    <Compile Include="Users\Administracion\Ubicaciones\FrmConsultaUbicaciones.aspx.designer.cs">
       <DependentUpon>FrmConsultaUbicaciones.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administracion\Usuarios\FrmConsultaUsuarios.aspx.cs">
+    <Compile Include="Users\Administracion\Usuarios\FrmConsultaUsuarios.aspx.cs">
       <DependentUpon>FrmConsultaUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion\Usuarios\FrmConsultaUsuarios.aspx.designer.cs">
+    <Compile Include="Users\Administracion\Usuarios\FrmConsultaUsuarios.aspx.designer.cs">
       <DependentUpon>FrmConsultaUsuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
@@ -1833,67 +2017,46 @@
     </Compile>
     <Compile Include="Funciones\Documentos.cs" />
     <Compile Include="Funciones\Metodos.cs" />
-    <Compile Include="General\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="General\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="General\FrmMostrarDocumento.aspx.cs">
+    <Compile Include="Users\General\FrmMostrarDocumento.aspx.cs">
       <DependentUpon>FrmMostrarDocumento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="General\FrmMostrarDocumento.aspx.designer.cs">
+    <Compile Include="Users\General\FrmMostrarDocumento.aspx.designer.cs">
       <DependentUpon>FrmMostrarDocumento.aspx</DependentUpon>
     </Compile>
-    <Compile Include="General\FrmNodoConsultas.aspx.cs">
+    <Compile Include="Users\General\FrmNodoConsultas.aspx.cs">
       <DependentUpon>FrmNodoConsultas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="General\FrmNodoConsultas.aspx.designer.cs">
+    <Compile Include="Users\General\FrmNodoConsultas.aspx.designer.cs">
       <DependentUpon>FrmNodoConsultas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="General\FrmMiInformacion.aspx.cs">
+    <Compile Include="Users\General\FrmMiInformacion.aspx.cs">
       <DependentUpon>FrmMiInformacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="General\FrmMiInformacion.aspx.designer.cs">
+    <Compile Include="Users\General\FrmMiInformacion.aspx.designer.cs">
       <DependentUpon>FrmMiInformacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IControllerModal.cs" />
-    <Compile Include="Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
+    <Compile Include="Users\DashBoard.aspx.cs">
+      <DependentUpon>DashBoard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
+    <Compile Include="Users\DashBoard.aspx.designer.cs">
+      <DependentUpon>DashBoard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Operacion\FrmOperacionTickets.aspx.cs">
+    <Compile Include="Users\Operacion\FrmOperacionTickets.aspx.cs">
       <DependentUpon>FrmOperacionTickets.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Operacion\FrmOperacionTickets.aspx.designer.cs">
+    <Compile Include="Users\Operacion\FrmOperacionTickets.aspx.designer.cs">
       <DependentUpon>FrmOperacionTickets.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Public\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Public\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Public\Public.Master.cs">
-      <DependentUpon>Public.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Public\Public.Master.designer.cs">
-      <DependentUpon>Public.Master</DependentUpon>
-    </Compile>
     <Compile Include="Service References\ServiceArbolAcceso\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2029,18 +2192,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Test\FrmTestUserControls.aspx.cs">
-      <DependentUpon>FrmTestUserControls.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test\FrmTestUserControls.aspx.designer.cs">
-      <DependentUpon>FrmTestUserControls.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Ticket\FrmTicket.aspx.cs">
+    <Compile Include="Users\Ticket\FrmTicket.aspx.cs">
       <DependentUpon>FrmTicket.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Ticket\FrmTicket.aspx.designer.cs">
+    <Compile Include="Users\Ticket\FrmTicket.aspx.designer.cs">
       <DependentUpon>FrmTicket.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Altas\AltaArea.ascx.cs">
@@ -2260,11 +2416,11 @@
     <Compile Include="UserControls\Temporal\UcMascaraCaptura.ascx.designer.cs">
       <DependentUpon>UcMascaraCaptura.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Administracion\Usuarios\FrmUsuarios.aspx.cs">
+    <Compile Include="Users\Administracion\Usuarios\FrmUsuarios.aspx.cs">
       <DependentUpon>FrmUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Administracion\Usuarios\FrmUsuarios.aspx.designer.cs">
+    <Compile Include="Users\Administracion\Usuarios\FrmUsuarios.aspx.designer.cs">
       <DependentUpon>FrmUsuarios.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -2294,10 +2450,12 @@
     <WCFMetadataStorage Include="Service References\ServiceMascaraAcceso\" />
     <WCFMetadataStorage Include="Service References\ServiceOrganizacion\" />
     <WCFMetadataStorage Include="Service References\ServiceParametrosSistema\" />
+    <WCFMetadataStorage Include="Service References\ServicePuesto\" />
     <WCFMetadataStorage Include="Service References\ServiceSeguridad\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaCatalogos\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaDomicilio\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaEstatus\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaImpactoUrgencia\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaNotificacion\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaRol\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaSubRol\" />

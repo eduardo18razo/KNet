@@ -13,7 +13,7 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public int IdGrupoUsuario { get; set; }
         [DataMember]
-        public int IdSubGrupoUsuario { get; set; }
+        public int? IdSubGrupoUsuario { get; set; }
 
         [DataMember]
         public virtual Ticket Ticket { get; set; }

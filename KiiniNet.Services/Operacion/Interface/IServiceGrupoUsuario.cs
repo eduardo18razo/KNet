@@ -15,7 +15,10 @@ namespace KiiniNet.Services.Operacion.Interface
         List<GrupoUsuario> ObtenerGruposUsuarioByIdTipoSubGrupo(int idTipoSubgrupo, bool insertarSeleccion);
 
         [OperationContract]
-        List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, int idTipoUsuario, bool insertarSeleccion);
+        List<GrupoUsuario> ObtenerGruposUsuarioByIdRolTipoUsuario(int idRol, int idTipoUsuario, bool insertarSeleccion);
+
+        [OperationContract]
+        List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, bool insertarSeleccion);
 
         [OperationContract]
         void GuardarGrupoUsuario(GrupoUsuario grupoUsuario);

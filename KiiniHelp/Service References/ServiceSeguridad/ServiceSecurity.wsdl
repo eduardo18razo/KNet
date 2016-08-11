@@ -8,13 +8,14 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceSecurity_Autenticate_InputMessage">
@@ -29,11 +30,23 @@
   <wsdl:message name="IServiceSecurity_GetUserDataAutenticate_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserDataAutenticateResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceSecurity_GetUserInvitadoDataAutenticate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInvitadoDataAutenticate" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSecurity_GetUserInvitadoDataAutenticate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInvitadoDataAutenticateResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceSecurity_ObtenerMenuUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerMenuUsuario" />
   </wsdl:message>
   <wsdl:message name="IServiceSecurity_ObtenerMenuUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerMenuUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSecurity_ObtenerMenuPublico_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerMenuPublico" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSecurity_ObtenerMenuPublico_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerMenuPublicoResponse" />
   </wsdl:message>
   <wsdl:portType name="IServiceSecurity">
     <wsdl:operation name="Autenticate">
@@ -44,9 +57,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSecurity/GetUserDataAutenticate" message="tns:IServiceSecurity_GetUserDataAutenticate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceSecurity/GetUserDataAutenticateResponse" message="tns:IServiceSecurity_GetUserDataAutenticate_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetUserInvitadoDataAutenticate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSecurity/GetUserInvitadoDataAutenticate" message="tns:IServiceSecurity_GetUserInvitadoDataAutenticate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSecurity/GetUserInvitadoDataAutenticateResponse" message="tns:IServiceSecurity_GetUserInvitadoDataAutenticate_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ObtenerMenuUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuario" message="tns:IServiceSecurity_ObtenerMenuUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuarioResponse" message="tns:IServiceSecurity_ObtenerMenuUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMenuPublico">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSecurity/ObtenerMenuPublico" message="tns:IServiceSecurity_ObtenerMenuPublico_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSecurity/ObtenerMenuPublicoResponse" message="tns:IServiceSecurity_ObtenerMenuPublico_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceSecurity" type="tns:IServiceSecurity">
@@ -69,8 +90,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserInvitadoDataAutenticate">
+      <soap:operation soapAction="http://tempuri.org/IServiceSecurity/GetUserInvitadoDataAutenticate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ObtenerMenuUsuario">
       <soap:operation soapAction="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMenuPublico">
+      <soap:operation soapAction="http://tempuri.org/IServiceSecurity/ObtenerMenuPublico" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

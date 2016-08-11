@@ -71,6 +71,54 @@ namespace KinniNet.Core.Operacion
             }
         }
 
+        public void ActualizarInformacionConsulta(int idInformacionConsulta, InformacionConsulta informacion)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
+                InformacionConsulta info = db.InformacionConsulta.SingleOrDefault(s => s.Id == idInformacionConsulta);
+                if (info == null) return;
+                info.Descripcion = informacion.Descripcion.Trim().ToUpper();
+
+                //TODO: Cambiar habilitado por el embebido
+                info.Habilitado = true;
+                switch (informacion.IdTipoInfConsulta)
+                {
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                        for (int i = 0; i < info.InformacionConsultaDatos.Count; i++)
+                        {
+                            info.InformacionConsultaDatos[i].Descripcion = informacion.InformacionConsultaDatos[i].Descripcion;
+                        }
+                        break;
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                        for (int i = 0; i < info.InformacionConsultaDatos.Count; i++)
+                        {
+                            info.InformacionConsultaDatos[i].Descripcion = informacion.InformacionConsultaDatos[i].Descripcion;
+                        }
+                        break;
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                        for (int i = 0; i < info.InformacionConsultaDatos.Count; i++)
+                        {
+                            info.InformacionConsultaDatos[i].Descripcion = informacion.InformacionConsultaDatos[i].Descripcion;
+                        }
+                        break;
+                    default:
+                        throw new Exception("Seleccione un tipo de información");
+                }
+                
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
         public List<InformacionConsulta> ObtenerInformacionConsultaArbol(int idArbol)
         {
             List<InformacionConsulta> result;
@@ -164,8 +212,8 @@ namespace KinniNet.Core.Operacion
                 HitConsulta hit = new HitConsulta();
                 hit.IdArbolAcceso = idArbol;
                 hit.IdUsuario = idUsuario;
-                hit.IdUbicacion = new BusinessUbicacion().ObtenerUbicacionUsuario(idUsuario).Id;
-                hit.IdOrganizacion = new BusinessOrganizacion().ObtenerOrganizacionUsuario(idUsuario).Id;
+                hit.IdUbicacion = new BusinessUbicacion().ObtenerUbicacionUsuario(new BusinessUsuarios().ObtenerUsuario(idUsuario).IdUbicacion).Id;
+                hit.IdOrganizacion = new BusinessOrganizacion().ObtenerOrganizacionUsuario(new BusinessUsuarios().ObtenerUsuario(idUsuario).IdOrganizacion).Id;
                 hit.HitGrupoUsuario = new List<HitGrupoUsuario>();
                 foreach (GrupoUsuarioInventarioArbol guia in new BusinessArbolAcceso().ObtenerGruposUsuarioArbol(idArbol))
                 {

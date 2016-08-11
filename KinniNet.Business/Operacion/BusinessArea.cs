@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using KiiniNet.Entities.Cat.Operacion;
-using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
@@ -21,7 +18,7 @@ namespace KinniNet.Core.Operacion
         {
             _proxy = proxy;
         }
-        public List<Area> ObtenerAreasUsuario(int idUsuario)
+        public List<Area> ObtenerAreasUsuario(int idUsuario, bool insertarSeleccion)
         {
             List<Area> result;
             DataBaseModelContext db = new DataBaseModelContext();
@@ -36,6 +33,13 @@ namespace KinniNet.Core.Operacion
                     join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
                     where ug.IdUsuario == idUsuario && guia.IdRol == (int)BusinessVariables.EnumRoles.Acceso
                     select a).Distinct().ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                        new Area
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.Value,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                        });
             }
             catch (Exception ex)
             {
@@ -48,9 +52,74 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public List<Area> ObtenerAreasUsuarioPublico(int idTipoUsuario)
+        public List<Area> ObtenerAreasUsuarioPublico(bool insertarSeleccion)
         {
-            return null;
+
+            {
+                List<Area> result;
+                DataBaseModelContext db = new DataBaseModelContext();
+                try
+                {
+                    
+                    db.ContextOptions.ProxyCreationEnabled = _proxy;
+                    result = (from a in db.Area
+                              join aa in db.ArbolAcceso on a.Id equals aa.IdArea
+                              where BusinessVariables.IdsPublicos.Contains(aa.IdTipoUsuario)
+                              select a).Distinct().ToList();
+                    if (insertarSeleccion)
+                        result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                            new Area
+                            {
+                                Id = BusinessVariables.ComboBoxCatalogo.Value,
+                                Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            });
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception((ex.InnerException).Message);
+                }
+                finally
+                {
+                    db.Dispose();
+                }
+                return result;
+            }
+        }
+
+        public List<Area> ObtenerAreasTipoUsuario(int idTipoUsuario, bool insertarSeleccion)
+        {
+
+            {
+                List<Area> result;
+                DataBaseModelContext db = new DataBaseModelContext();
+                try
+                {
+                    int[] idsPublicos = { (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado, (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado, (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado };
+                    db.ContextOptions.ProxyCreationEnabled = _proxy;
+                    result = (from a in db.Area
+                              join aa in db.ArbolAcceso on a.Id equals aa.IdArea
+                              where aa.IdTipoUsuario == idTipoUsuario 
+                              select a).Distinct().ToList();
+                    if (insertarSeleccion)
+                        result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                            new Area
+                            {
+                                Id = BusinessVariables.ComboBoxCatalogo.Value,
+                                Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            });
+                    if (result.Count <= 0)
+                        result = null;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception((ex.InnerException).Message);
+                }
+                finally
+                {
+                    db.Dispose();
+                }
+                return result;
+            }
         }
 
         public List<Area> ObtenerAreas(bool insertarSeleccion)
@@ -88,7 +157,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el embebido
                 area.Habilitado = true;
-                area.Descripcion = area.Descripcion.ToUpper();
+                area.Descripcion = area.Descripcion.Trim().ToUpper();
                 if (area.Id == 0)
                     db.Area.AddObject(area);
                 db.SaveChanges();

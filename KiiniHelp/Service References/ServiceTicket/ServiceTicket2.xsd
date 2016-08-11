@@ -23,21 +23,21 @@
   <xs:element name="ArrayOfHelperTickets" nillable="true" type="tns:ArrayOfHelperTickets" />
   <xs:complexType name="HelperTickets">
     <xs:sequence>
-      <xs:element minOccurs="0" name="EsPropietario" type="xs:boolean" />
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacion" nillable="true" type="q1:EstatusAsignacion" />
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusTicket" nillable="true" type="q2:EstatusTicket" />
-      <xs:element minOccurs="0" name="FechaHora" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="GrupoAsignado" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IdGrupoAsignado" type="xs:int" />
-      <xs:element minOccurs="0" name="IdTicket" type="xs:int" />
-      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
-      <xs:element minOccurs="0" name="IdUsuarioAsignado" type="xs:int" />
-      <xs:element minOccurs="0" name="NivelUsuarioAsignado" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NombreUsuario" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NumeroTicket" type="xs:int" />
-      <xs:element minOccurs="0" name="Tipificacion" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Total" type="xs:int" />
-      <xs:element minOccurs="0" name="UsuarioAsignado" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_EsPropietario_x003E_k__BackingField" type="xs:boolean" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" name="_x003C_EstatusAsignacion_x003E_k__BackingField" nillable="true" type="q1:EstatusAsignacion" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" name="_x003C_EstatusTicket_x003E_k__BackingField" nillable="true" type="q2:EstatusTicket" />
+      <xs:element name="_x003C_FechaHora_x003E_k__BackingField" type="xs:dateTime" />
+      <xs:element name="_x003C_GrupoAsignado_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_IdGrupoAsignado_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_IdTicket_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_IdUsuarioAsignado_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_IdUsuario_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_NivelUsuarioAsignado_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_NombreUsuario_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_NumeroTicket_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_Tipificacion_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Total_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_UsuarioAsignado_x003E_k__BackingField" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="HelperTickets" nillable="true" type="tns:HelperTickets" />

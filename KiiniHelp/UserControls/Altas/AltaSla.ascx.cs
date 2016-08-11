@@ -84,6 +84,7 @@ namespace KiiniHelp.UserControls.Altas
                         detalle.Segundos = Convert.ToDecimal(txtSegundos.Text.Trim());
                         tsegundos += detalle.Segundos;
                     }
+                    detalle.TiempoProceso = (detalle.Dias / 24) + detalle.Horas + (detalle.Minutos / 60) + ((detalle.Minutos / 60) / 60);
                     sla.SlaDetalle.Add(detalle);
                 }
 
@@ -91,8 +92,17 @@ namespace KiiniHelp.UserControls.Altas
                 sla.Horas = tHoras;
                 sla.Minutos = tminutos;
                 sla.Segundos = tsegundos;
-                
+                sla.TiempoHoraProceso = (tDias / 24) + tHoras + (tminutos / 60) + ((tsegundos / 60) / 60);
                 return sla;
+            }
+        }
+
+        public bool FromModal
+        {
+            get { return Convert.ToBoolean(hfFromModal.Value); }
+            set
+            {
+                hfFromModal.Value = value.ToString();
             }
         }
 
@@ -199,6 +209,8 @@ namespace KiiniHelp.UserControls.Altas
                 ValidarCaptura();
                 if (OnAceptarModal != null)
                     OnAceptarModal();
+                if (FromModal)
+                    _servicioSla.Guardar(Sla);
             }
             catch (Exception ex)
             {

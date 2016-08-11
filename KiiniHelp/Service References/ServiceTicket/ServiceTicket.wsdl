@@ -8,14 +8,14 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
     </xsd:schema>
   </wsdl:types>
@@ -55,6 +55,12 @@
   <wsdl:message name="IServiceTicket_ObtenerDetalleTicket_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerDetalleTicketResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceTicket_ObtenerDetalleTicketNoRegistrado_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerDetalleTicketNoRegistrado" />
+  </wsdl:message>
+  <wsdl:message name="IServiceTicket_ObtenerDetalleTicketNoRegistrado_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerDetalleTicketNoRegistradoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceTicket">
     <wsdl:operation name="CrearTicket">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/CrearTicket" message="tns:IServiceTicket_CrearTicket_InputMessage" />
@@ -79,6 +85,10 @@
     <wsdl:operation name="ObtenerDetalleTicket">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicket" message="tns:IServiceTicket_ObtenerDetalleTicket_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketResponse" message="tns:IServiceTicket_ObtenerDetalleTicket_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDetalleTicketNoRegistrado">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketNoRegistrado" message="tns:IServiceTicket_ObtenerDetalleTicketNoRegistrado_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketNoRegistradoResponse" message="tns:IServiceTicket_ObtenerDetalleTicketNoRegistrado_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceTicket">
@@ -130,6 +140,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerDetalleTicket">
       <soap:operation soapAction="http://tempuri.org/IServiceTicket/ObtenerDetalleTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDetalleTicketNoRegistrado">
+      <soap:operation soapAction="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketNoRegistrado" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

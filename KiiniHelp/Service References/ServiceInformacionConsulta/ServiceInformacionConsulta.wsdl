@@ -43,6 +43,12 @@
   <wsdl:message name="IServiceInformacionConsulta_GuardarInformacionConsulta_OutputMessage">
     <wsdl:part name="parameters" element="tns:GuardarInformacionConsultaResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceInformacionConsulta_ActualizarInformacionConsulta_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarInformacionConsulta" />
+  </wsdl:message>
+  <wsdl:message name="IServiceInformacionConsulta_ActualizarInformacionConsulta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarInformacionConsultaResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceInformacionConsulta_GuardarHit_InputMessage">
     <wsdl:part name="parameters" element="tns:GuardarHit" />
   </wsdl:message>
@@ -77,6 +83,10 @@
     <wsdl:operation name="GuardarInformacionConsulta">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceInformacionConsulta/GuardarInformacionConsulta" message="tns:IServiceInformacionConsulta_GuardarInformacionConsulta_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceInformacionConsulta/GuardarInformacionConsultaResponse" message="tns:IServiceInformacionConsulta_GuardarInformacionConsulta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarInformacionConsulta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceInformacionConsulta/ActualizarInformacionConsulta" message="tns:IServiceInformacionConsulta_ActualizarInformacionConsulta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceInformacionConsulta/ActualizarInformacionConsultaResponse" message="tns:IServiceInformacionConsulta_ActualizarInformacionConsulta_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GuardarHit">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceInformacionConsulta/GuardarHit" message="tns:IServiceInformacionConsulta_GuardarHit_InputMessage" />
@@ -122,6 +132,15 @@
     </wsdl:operation>
     <wsdl:operation name="GuardarInformacionConsulta">
       <soap:operation soapAction="http://tempuri.org/IServiceInformacionConsulta/GuardarInformacionConsulta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarInformacionConsulta">
+      <soap:operation soapAction="http://tempuri.org/IServiceInformacionConsulta/ActualizarInformacionConsulta" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

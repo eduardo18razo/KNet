@@ -24,13 +24,28 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, int idTipoUsuario, bool insertarSeleccion)
+        public List<GrupoUsuario> ObtenerGruposUsuarioByIdRolTipoUsuario(int idRol, int idTipoUsuario, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
                 {
-                    return negocio.ObtenerGruposUsuarioByIdRol(idRol, idTipoUsuario, insertarSeleccion);
+                    return negocio.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, idTipoUsuario, insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
+                {
+                    return negocio.ObtenerGruposUsuarioByIdRol(idRol, insertarSeleccion);
                 }
             }
             catch (Exception ex)

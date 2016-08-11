@@ -106,6 +106,40 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
+        public bool EsAlta
+        {
+            get { return Convert.ToBoolean(hfEsAlta.Value); }
+            set { hfEsAlta.Value = value.ToString(); }
+        }
+
+        public int IdInformacionConsulta
+        {
+            get { return Convert.ToInt32(hfIdInformacionConsulta.Value); }
+            set
+            {
+                InformacionConsulta info = _servicioInformacionConsulta.ObtenerInformacionConsultaById(value);
+                if (info == null) throw new Exception("Error al obtener informacion");
+                txtDescripcion.Text = info.Descripcion;
+                ddlTipoInformacion.SelectedValue = info.IdTipoInfConsulta.ToString();
+                ddlTipoInformacion_OnSelectedIndexChanged(ddlTipoInformacion, null);
+                switch (info.IdTipoInfConsulta)
+                {
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                        txtEditor.Text = info.InformacionConsultaDatos.First().Descripcion;
+                        break;
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
+
+                        break;
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                        txtDescripcionUrl.Text = info.InformacionConsultaDatos.First().Descripcion;
+                        break;
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Servicio:
+                        break;
+                }
+                hfIdInformacionConsulta.Value = value.ToString();
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -133,18 +167,18 @@ namespace KiiniHelp.UserControls.Altas
             {
                 switch (Convert.ToInt32(ddlTipoInformacion.SelectedValue))
                 {
-                    case (int) BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
                         divPropietrario.Visible = true;
                         divUploadDocumento.Visible = false;
                         divDocumento.Visible = false;
                         divUrl.Visible = false;
                         break;
-                    case (int) BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
                         divPropietrario.Visible = false;
                         divDocumento.Visible = true;
                         divUrl.Visible = false;
                         break;
-                    case (int) BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                         divPropietrario.Visible = false;
                         divDocumento.Visible = false;
                         divUploadDocumento.Visible = false;
@@ -199,13 +233,13 @@ namespace KiiniHelp.UserControls.Altas
                         afuArchivo.PostedFile.SaveAs(path + afuArchivo.FileName);
                         switch (int.Parse(ddlTipoDocumento.SelectedValue))
                         {
-                            case (int) BusinessVariables.EnumTiposDocumento.Word:
+                            case (int)BusinessVariables.EnumTiposDocumento.Word:
                                 ConvertirWord(afuArchivo.FileName);
                                 break;
-                            case (int) BusinessVariables.EnumTiposDocumento.PowerPoint:
+                            case (int)BusinessVariables.EnumTiposDocumento.PowerPoint:
                                 //ConvertirExcel(afuArchivo.FileName);
                                 break;
-                            case (int) BusinessVariables.EnumTiposDocumento.Excel:
+                            case (int)BusinessVariables.EnumTiposDocumento.Excel:
                                 ConvertirExcel(afuArchivo.FileName);
                                 break;
                         }
@@ -359,7 +393,10 @@ namespace KiiniHelp.UserControls.Altas
                     default:
                         throw new Exception("Seleccione un tipo de información");
                 }
-                _servicioInformacionConsulta.GuardarInformacionConsulta(informacion);
+                if (EsAlta)
+                    _servicioInformacionConsulta.GuardarInformacionConsulta(informacion);
+                else
+                    _servicioInformacionConsulta.ActualizarInformacionConsulta(IdInformacionConsulta, informacion);
                 LimpiarCampos();
                 if (OnAceptarModal != null)
                     OnAceptarModal();

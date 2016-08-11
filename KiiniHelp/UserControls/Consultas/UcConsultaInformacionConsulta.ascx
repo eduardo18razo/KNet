@@ -70,7 +70,7 @@
 
                 </div>
                 <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" Visible="False" />
+                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" />
                 </div>
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" />

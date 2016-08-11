@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
+using KiiniNet.Entities.Parametros;
 
 namespace KiiniNet.Entities.Cat.Sistema
 {
@@ -28,6 +29,18 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public virtual List<GrupoUsuarioInventarioArbol> GrupoUsuarioInventarioArbol { get; set; }
         [DataMember]
-        public virtual List<RolMenu> RolMenu { get; set; } 
+        public virtual List<RolMenu> RolMenu { get; set; }
+
+        [DataMember]
+        public virtual List<EstatusAsignacionSubRolGeneral> EstatusAsignacionSubRolGeneral { get; set; }
+
+        [DataMember]
+        public virtual List<EstatusAsignacionSubRolGeneralDefault> EstatusAsignacionSubRolGeneralDefault { get; set; }
+
+        [DataMember]
+        public virtual List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneral { get; set; }
+
+        [DataMember]
+        public virtual List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefault { get; set; } 
     }
 }

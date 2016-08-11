@@ -46,3 +46,19 @@ C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\Kii
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.Services.Web\obj\Release\KiiniNet.Services.Web.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.Services.Web\obj\Release\KiiniNet.Services.Web.dll
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.Services.Web\obj\Release\KiiniNet.Services.Web.pdb
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KiiniNet.Services.Web.dll.config
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KiiniNet.Services.Web.dll
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KiiniNet.Services.Web.pdb
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KiiniNet.Services.dll
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KiiniNet.Entities.dll
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KinniNet.Business.Utils.dll
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KinniNet.Core.dll
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KinniNet.Data.dll
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KiiniNet.Services.pdb
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KiiniNet.Entities.pdb
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KinniNet.Business.Utils.pdb
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KinniNet.Core.pdb
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\bin\KinniNet.Data.pdb
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\obj\Release\KiiniNet.Services.Web.csprojResolveAssemblyReference.cache
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\obj\Release\KiiniNet.Services.Web.dll
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Services.Web\obj\Release\KiiniNet.Services.Web.pdb

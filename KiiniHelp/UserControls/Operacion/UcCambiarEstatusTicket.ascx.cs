@@ -92,7 +92,7 @@ namespace KiiniHelp.UserControls.Operacion
             {
                 if (ddlEstatus.SelectedValue != BusinessVariables.ComboBoxCatalogo.Value.ToString())
                 {
-                    _servicioTicketClient.CambiarEstatus(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuario);
+                    _servicioTicketClient.CambiarEstatus(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuario, txtComentarios.Text.Trim());
                 }
                 if (OnAceptarModal != null)
                     OnAceptarModal();

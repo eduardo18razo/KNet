@@ -56,6 +56,9 @@ namespace KinniNet.Data.Help
                 _estatusTicket = CreateObjectSet<EstatusTicket>();
                 _estatusAsignacion = CreateObjectSet<EstatusAsignacion>();
                 _tipoNotificacion = CreateObjectSet<TipoNotificacion>();
+                _impacto = CreateObjectSet<Impacto>();
+                _prioridad = CreateObjectSet<Prioridad>();
+                _urgencia = CreateObjectSet<Urgencia>();
 
                 //Parametros
                 _subRolEscalacionPermitida = CreateObjectSet<SubRolEscalacionPermitida>();
@@ -126,6 +129,12 @@ namespace KinniNet.Data.Help
                 _estatusAsignacionSubRolGeneral = CreateObjectSet<EstatusAsignacionSubRolGeneral>();
                 _estatusTicketSubRolGeneralDefault = CreateObjectSet<EstatusTicketSubRolGeneralDefault>();
                 _estatusAsignacionSubRolGeneralDefault = CreateObjectSet<EstatusAsignacionSubRolGeneralDefault>();
+                _horarioSubGrupo = CreateObjectSet<HorarioSubGrupo>();
+                _diaFestivoSubGrupo = CreateObjectSet<DiaFestivoSubGrupo>();
+                _tiempoInformeArbol = CreateObjectSet<TiempoInformeArbol>();
+
+
+                _puesto = CreateObjectSet<Puesto>();
 
             }
             catch (Exception ex)
@@ -441,6 +450,29 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<HorarioSubGrupo> HorarioSubGrupo
+        {
+            get
+            {
+                return _horarioSubGrupo;
+            }
+        }
+        public ObjectSet<DiaFestivoSubGrupo> DiaFestivoSubGrupo
+        {
+            get
+            {
+                return _diaFestivoSubGrupo;
+            }
+        }
+
+        public ObjectSet<TiempoInformeArbol> TiempoInformeArbol
+        {
+            get
+            {
+                return _tiempoInformeArbol;
+            }
+        }
+
 
 
         private readonly ObjectSet<Usuario> _usuario;
@@ -477,6 +509,9 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<EstatusAsignacionSubRolGeneral> _estatusAsignacionSubRolGeneral;
         private readonly ObjectSet<EstatusTicketSubRolGeneralDefault> _estatusTicketSubRolGeneralDefault;
         private readonly ObjectSet<EstatusAsignacionSubRolGeneralDefault> _estatusAsignacionSubRolGeneralDefault;
+        private readonly ObjectSet<HorarioSubGrupo> _horarioSubGrupo;
+        private readonly ObjectSet<DiaFestivoSubGrupo> _diaFestivoSubGrupo;
+        private readonly ObjectSet<TiempoInformeArbol> _tiempoInformeArbol;
 
         #region Mascara
         public ObjectSet<Mascara> Mascara
@@ -673,6 +708,29 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<Impacto> Impacto
+        {
+            get
+            {
+                return _impacto;
+            }
+        }
+        public ObjectSet<Prioridad> Prioridad
+        {
+            get
+            {
+                return _prioridad;
+            }
+        }
+        public ObjectSet<Urgencia> Urgencia
+        {
+            get
+            {
+                return _urgencia;
+            }
+        }
+
+
 
         private readonly ObjectSet<TipoUsuario> _tipoUsuario;
         private readonly ObjectSet<Pais> _pais;
@@ -696,6 +754,10 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<EstatusTicket> _estatusTicket;
         private readonly ObjectSet<EstatusAsignacion> _estatusAsignacion;
         private readonly ObjectSet<TipoNotificacion> _tipoNotificacion;
+
+        private readonly ObjectSet<Impacto> _impacto;
+        private readonly ObjectSet<Prioridad> _prioridad;
+        private readonly ObjectSet<Urgencia> _urgencia;
 
         #endregion Systema
 
@@ -735,9 +797,18 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<Puesto> Puesto
+        {
+            get
+            {
+                return _puesto;
+            }
+        }
+
         private readonly ObjectSet<GrupoUsuario> _grupoUsuario;
 
         private readonly ObjectSet<SubGrupoUsuario> _subGrupoUsuario;
+        private readonly ObjectSet<Puesto> _puesto;
 
 
         #region Ubicacion

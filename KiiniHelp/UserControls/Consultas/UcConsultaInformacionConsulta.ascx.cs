@@ -177,9 +177,9 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                //AltaInformacionConsulta.GrupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(Convert.ToInt32(hfId.Value));
-                //ucAltaGrupoUsuario.Alta = false;
-                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaGrupoUsuarios\");", true);
+                AltaInformacionConsulta.EsAlta = false;
+                AltaInformacionConsulta.IdInformacionConsulta = Convert.ToInt32(hfId.Value);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaInformacion\");", true);
             }
             catch (Exception ex)
             {
@@ -195,6 +195,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                AltaInformacionConsulta.EsAlta = true;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaInformacion\");", true);
             }
             catch (Exception ex)

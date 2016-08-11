@@ -4,6 +4,7 @@
         <asp:HiddenField runat="server" ID="hfIdMascara"/>
         <asp:HiddenField runat="server" ID="hfComandoInsertar"/>
         <asp:HiddenField runat="server" ID="hfComandoActualizar"/>
+        <asp:HiddenField runat="server" ID="hfRandom"/>
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <asp:Label runat="server" ID="lblDescripcionMascara"></asp:Label>

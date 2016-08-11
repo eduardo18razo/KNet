@@ -35,6 +35,7 @@
     <MetadataFile FileName="ServiceArea8.xsd" MetadataType="Schema" ID="116940e6-3a80-4d40-8026-c27e0799a658" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd5" />
     <MetadataFile FileName="ServiceArea.wsdl" MetadataType="Wsdl" ID="3a04281f-1a9a-46c1-8df7-97ff3aa3d594" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?wsdl" />
     <MetadataFile FileName="ServiceArea9.xsd" MetadataType="Schema" ID="a4c401a1-80a9-42af-9e2d-691ef513592c" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd8" />
+    <MetadataFile FileName="ServiceArea13.xsd" MetadataType="Schema" ID="39f4d986-78f1-4083-b699-6dc53aa586d9" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd13" />
     <MetadataFile FileName="ServiceArea10.xsd" MetadataType="Schema" ID="fb83ff1b-cccf-4272-8cad-aef40ab277e5" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd1" />
     <MetadataFile FileName="ServiceArea7.xsd" MetadataType="Schema" ID="3721c9e9-cd63-4923-87da-b05e04e86645" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd9" />
     <MetadataFile FileName="ServiceArea12.xsd" MetadataType="Schema" ID="534c69c2-8621-4ed0-952c-ad1036a1dc0d" SourceId="1" SourceUrl="http://localhost:15277/ServiceArea.svc?xsd=xsd3" />

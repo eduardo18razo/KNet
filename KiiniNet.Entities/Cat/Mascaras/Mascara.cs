@@ -22,6 +22,8 @@ namespace KiiniNet.Entities.Cat.Mascaras
         [DataMember]
         public string ComandoActualizar { get; set; }
         [DataMember]
+        public bool Random { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
 
         [DataMember]

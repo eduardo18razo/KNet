@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
 using KiiniNet.Entities.Operacion;
 
 namespace KiiniNet.Services.Operacion.Interface
@@ -11,7 +8,13 @@ namespace KiiniNet.Services.Operacion.Interface
     public interface IServiceArea
     {
         [OperationContract]
-        List<Area> ObtenerAreasUsuario(int idUsuario);
+        List<Area> ObtenerAreasUsuario(int idUsuario, bool insertarSeleccion);
+
+        [OperationContract]
+        List<Area> ObtenerAreasUsuarioPublico(bool insertarSeleccion);
+        
+        [OperationContract]
+        List<Area> ObtenerAreasTipoUsuario(int idTipoUsuario, bool insertarSeleccion);
 
         [OperationContract]
         List<Area> ObtenerAreas(bool insertarSeleccion);

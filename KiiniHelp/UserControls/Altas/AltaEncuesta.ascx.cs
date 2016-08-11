@@ -52,11 +52,23 @@ namespace KiiniHelp.UserControls.Altas
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Alerta = new List<string>();
-            if (!IsPostBack)
+            try
             {
-                Session["Encuesta"] = new Encuesta();
-                Metodos.LlenaComboCatalogo(ddlTipoEncuesta, _serviceSistemaTipoEncuesta.ObtenerTiposEncuesta(true));
+                Alerta = new List<string>();
+                if (!IsPostBack)
+                {
+                    Session["Encuesta"] = new Encuesta();
+                    Metodos.LlenaComboCatalogo(ddlTipoEncuesta, _serviceSistemaTipoEncuesta.ObtenerTiposEncuesta(true));
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
 

@@ -9,7 +9,9 @@ namespace KiiniNet.Entities.Parametros
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public int IdSubRol { get; set; }
+        public int IdRol { get; set; }
+        [DataMember]
+        public int? IdSubRol { get; set; }
         [DataMember]
         public int IdEstatusAsignacionActual { get; set; }
         [DataMember]
@@ -29,6 +31,8 @@ namespace KiiniNet.Entities.Parametros
         public EstatusAsignacion EstatusAsignacionActual { get; set; }
         [DataMember]
         public EstatusAsignacion EstatusAsignacionAccion { get; set; }
+        [DataMember]
+        public Rol Rol { get; set; }
         [DataMember]
         public SubRol SubRol { get; set; }
     }

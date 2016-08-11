@@ -22,6 +22,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
 
         [DataMember]
         public DateTime FechaMovimiento { get; set; }
+        [DataMember]
+        public String Comentarios { get; set; }
 
         [DataMember]
         public int IdUsuarioMovimiento { get; set; }

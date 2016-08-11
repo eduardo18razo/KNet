@@ -1,0 +1,29 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/CodeStyle/LiveTemplatesUseVar/PreferVar/@EntryValue">False</s:Boolean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=2F6CD228E7124C5CA9874BF32AE0B0C1/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=2F6CD228E7124C5CA9874BF32AE0B0C1/Name/@EntryValue">TesConsultas</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=2F6CD228E7124C5CA9874BF32AE0B0C1/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:KiiniNet.UnitTest.UnitTest1" type="MsTestTestClassElement" TypeName="KiiniNet.UnitTest.UnitTest1" Project="57F1DD03-D379-472B-BF06-1C7EE8637F9C" /&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:KiiniNet.UnitTest.UnitTest1.TesConsultas" ParentId="MsTest:KiiniNet.UnitTest.UnitTest1" type="MsTestTestMethodElement" MethodName="TesConsultas" TypeName="KiiniNet.UnitTest.UnitTest1" Project="57F1DD03-D379-472B-BF06-1C7EE8637F9C" /&gt;&lt;/Elements&gt;&lt;/Session&gt;</s:String>
+	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=33E5467A16E74B38B0409D0D61450926/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=33E5467A16E74B38B0409D0D61450926/Name/@EntryValue">TesConsultas #4</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=33E5467A16E74B38B0409D0D61450926/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:KiiniNet.UnitTest.UnitTest1" type="MsTestTestClassElement" TypeName="KiiniNet.UnitTest.UnitTest1" Project="57F1DD03-D379-472B-BF06-1C7EE8637F9C" /&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:KiiniNet.UnitTest.UnitTest1.TesConsultas" ParentId="MsTest:KiiniNet.UnitTest.UnitTest1" type="MsTestTestMethodElement" MethodName="TesConsultas" TypeName="KiiniNet.UnitTest.UnitTest1" Project="57F1DD03-D379-472B-BF06-1C7EE8637F9C" /&gt;&lt;/Elements&gt;&lt;/Session&gt;</s:String>
+	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=76C7A29AB5B044B2A0A6A24AA9D5A2C1/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=76C7A29AB5B044B2A0A6A24AA9D5A2C1/Name/@EntryValue">TesConsultas #2</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=76C7A29AB5B044B2A0A6A24AA9D5A2C1/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:KiiniNet.UnitTest.UnitTest1" type="MsTestTestClassElement" TypeName="KiiniNet.UnitTest.UnitTest1" Project="57F1DD03-D379-472B-BF06-1C7EE8637F9C" /&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:KiiniNet.UnitTest.UnitTest1.TesConsultas" ParentId="MsTest:KiiniNet.UnitTest.UnitTest1" type="MsTestTestMethodElement" MethodName="TesConsultas" TypeName="KiiniNet.UnitTest.UnitTest1" Project="57F1DD03-D379-472B-BF06-1C7EE8637F9C" /&gt;&lt;/Elements&gt;&lt;/Session&gt;</s:String>
+	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=A92ABB1ED5B14D0CA3DAB121D726496B/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=A92ABB1ED5B14D0CA3DAB121D726496B/Name/@EntryValue">TesConsultas #3</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=A92ABB1ED5B14D0CA3DAB121D726496B/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements /&gt;&lt;/Session&gt;</s:String></wpf:ResourceDictionary>

@@ -13,3 +13,8 @@ C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\Kii
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.Entities\obj\Release\KiiniNet.Entities.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.Entities\obj\Release\KiiniNet.Entities.dll
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniNet.Entities\obj\Release\KiiniNet.Entities.pdb
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Entities\bin\Release\KiiniNet.Entities.dll
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Entities\bin\Release\KiiniNet.Entities.pdb
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Entities\obj\Release\KiiniNet.Entities.csprojResolveAssemblyReference.cache
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Entities\obj\Release\KiiniNet.Entities.dll
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniNet.Entities\obj\Release\KiiniNet.Entities.pdb

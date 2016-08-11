@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AsociarGrupoUsuario.ascx.cs" Inherits="KiiniHelp.UserControls.Seleccion.AsociarGrupoUsuario" %>
 <%@ Register TagPrefix="uc" TagName="AltaGrupoUsuario" Src="~/UserControls/Altas/AltaGrupoUsuario.ascx" %>
+
 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
     <ContentTemplate>
         <asp:UpdatePanel ID="upGrupos" runat="server">
@@ -96,6 +97,53 @@
                                             <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="7" data-toggle="modal" data-target="#modalAltaGrupoUsuario" data-backdrop="static" data-keyboard="false" />
                                         </div>
                                     </div>
+
+
+                                    <div class="form-group" runat="server" id="divUbicacionEmpleado" visible="False">
+                                        <div class="col-sm-offset-1">
+                                            <asp:Label runat="server" Text="Responsable Mtto Ubicacion Empledo" class="col-sm-3 control-label"></asp:Label>
+                                            <asp:DropDownList runat="server" Width="250px" ID="ddlUbicacionEmpleado" CssClass="DropSelect" AutoPostBack="True" />
+                                            <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="8" />
+                                            <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="8" data-toggle="modal" data-target="#modalAltaGrupoUsuario" data-backdrop="static" data-keyboard="false" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" runat="server" id="divOrganizacionEmpleado" visible="False">
+                                        <div class="col-sm-offset-1">
+                                            <asp:Label runat="server" Text="Responsable Mtto Organizacion Empleado" class="col-sm-3 control-label"></asp:Label>
+                                            <asp:DropDownList runat="server" Width="250px" ID="ddlOrganizacionEmpleado" CssClass="DropSelect" AutoPostBack="True" />
+                                            <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="9" />
+                                            <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="9" data-toggle="modal" data-target="#modalAltaGrupoUsuario" data-backdrop="static" data-keyboard="false" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" runat="server" id="divUsuarioEmpleado" visible="False">
+                                        <div class="col-sm-offset-1">
+                                            <asp:Label runat="server" Text="Responsable Mtto Usuario Empleado" class="col-sm-3 control-label"></asp:Label>
+                                            <asp:DropDownList runat="server" Width="250px" ID="ddlUsuarioEmpleado" CssClass="DropSelect" AutoPostBack="True" />
+                                            <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="10" />
+                                            <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="10" data-toggle="modal" data-target="#modalAltaGrupoUsuario" data-backdrop="static" data-keyboard="false" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" runat="server" id="divUsuarioCliente" visible="False">
+                                        <div class="col-sm-offset-1">
+                                            <asp:Label runat="server" Text="Responsable Mtto Usuario Cliente" class="col-sm-3 control-label"></asp:Label>
+                                            <asp:DropDownList runat="server" Width="250px" ID="ddlUsuarioCliente" CssClass="DropSelect" AutoPostBack="True" />
+                                            <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="11" />
+                                            <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="11" data-toggle="modal" data-target="#modalAltaGrupoUsuario" data-backdrop="static" data-keyboard="false" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" runat="server" id="divUsuarioProveedor" visible="False">
+                                        <div class="col-sm-offset-1">
+                                            <asp:Label runat="server" Text="Responsable Mtto Usuario Proveedor" class="col-sm-3 control-label"></asp:Label>
+                                            <asp:DropDownList runat="server" Width="250px" ID="ddlUsuarioProveedor" CssClass="DropSelect" AutoPostBack="True" />
+                                            <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="12" />
+                                            <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="12" data-toggle="modal" data-target="#modalAltaGrupoUsuario" data-backdrop="static" data-keyboard="false" />
+                                        </div>
+                                    </div>
+
                                     <br />
                                     <br />
                                 </div>
@@ -141,14 +189,11 @@
 
 <%--MODAL GRUPO USUARIO--%>
 <div class="modal fade" id="modalAltaGrupoUsuarios" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-    <asp:UpdatePanel ID="upAltaGrupo" runat="server">
+    <asp:UpdatePanel ID="upAltaGrupo" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <div class="modal-dialog modal-md">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <uc:AltaGrupoUsuario runat="server" ID="ucAltaGrupoUsuario" />
-                    <div class="modal-footer">
-                        <asp:Button runat="server" CssClass="btn btn-danger" ID="btnCerrarModalAltaGrupoUsuario" Text="Cerrar" OnClick="btnCerrarModalAltaGrupoUsuario_OnClick" />
-                    </div>
                 </div>
             </div>
         </ContentTemplate>

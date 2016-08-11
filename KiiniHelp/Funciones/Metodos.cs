@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Web.UI.WebControls;
 using KinniNet.Business.Utils;
+using Microsoft.Ajax.Utilities;
 
 namespace KiiniHelp.Funciones
 {
@@ -36,6 +37,9 @@ namespace KiiniHelp.Funciones
                 return (T)Enum.Parse(typeof(T), Strings.CastToEnum(cadena.ToLower()));
             }
         }
+
+        
+
         public static void LimpiarCombo(DropDownList ddl)
         {
             try
@@ -163,7 +167,18 @@ namespace KiiniHelp.Funciones
             return true;
         }
 
-        
+        public static bool HashPermission()
+        {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return true;
+        }
     }
 }

@@ -39,6 +39,21 @@ namespace KiiniNet.Services.Security.Implementacion
             }
         }
 
+        public Usuario GetUserInvitadoDataAutenticate(int idTipoUsuario)
+        {
+            try
+            {
+                using (BusinessSecurity.Autenticacion negocio = new BusinessSecurity.Autenticacion())
+                {
+                    return negocio.GetUserInvitadoDataAutenticate(idTipoUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles)
         {
             try
@@ -46,6 +61,21 @@ namespace KiiniNet.Services.Security.Implementacion
                 using (BusinessSecurity.Menus negocio = new BusinessSecurity.Menus())
                 {
                     return negocio.ObtenerMenuUsuario(idUsuario, idArea, arboles);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Menu> ObtenerMenuPublico(int idTipoUsuario, int idArea, bool arboles)
+        {
+            try
+            {
+                using (BusinessSecurity.Menus negocio = new BusinessSecurity.Menus())
+                {
+                    return negocio.ObtenerMenuPublico(idTipoUsuario, idArea, arboles);
                 }
             }
             catch (Exception ex)

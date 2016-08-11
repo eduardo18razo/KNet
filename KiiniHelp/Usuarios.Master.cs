@@ -5,7 +5,9 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceArbolAcceso;
+using KiiniHelp.ServiceArea;
 using KiiniHelp.ServiceSeguridad;
+using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 using Menu = KiiniNet.Entities.Cat.Sistema.Menu;
@@ -14,25 +16,75 @@ namespace KiiniHelp
 {
     public partial class UsuariosMaster : MasterPage
     {
-        readonly ServiceSecurityClient _servicioSeguridad = new ServiceSecurityClient();
-        readonly ServiceArbolAccesoClient _servicioArbolAcceso = new ServiceArbolAccesoClient();
-        
-        
-        protected void Page_Load(object sender, EventArgs e)
+        private readonly ServiceSecurityClient _servicioSeguridad = new ServiceSecurityClient();
+        private readonly ServiceArbolAccesoClient _servicioArbolAcceso = new ServiceArbolAccesoClient();
+        private readonly ServiceAreaClient _servicioArea = new ServiceAreaClient();
+
+        private List<string> _lstError = new List<string>();
+
+        private List<string> AlertaGeneral
         {
-            if (!IsPostBack && Session["UserData"] != null)
+            set
             {
-                Usuario usuario = ((Usuario) Session["UserData"]);
-                lblUsuario.Text = usuario.NombreCompleto;
-                lblTipoUsr.Text = usuario.TipoUsuario.Descripcion;
-                int areaSeleccionada = 0;
-                if (Session["AreaSeleccionada"] != null)
-                    areaSeleccionada = int.Parse(Session["AreaSeleccionada"].ToString());
-                rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, areaSeleccionada, areaSeleccionada != 0 );
-                rptMenu.DataBind();
+                panelAlert.Visible = value.Any();
+                if (!panelAlert.Visible) return;
+                rptHeaderError.DataSource = value;
+                rptHeaderError.DataBind();
             }
         }
-        
+
+        private void ObtenerAreas()
+        {
+            try
+            {
+                List<Area> lstAreas = _servicioArea.ObtenerAreasUsuario(((Usuario)Session["UserData"]).Id, true);
+                ddlAreas.DataSource = lstAreas;
+                ddlAreas.DataTextField = "Descripcion";
+                ddlAreas.DataValueField = "Id";
+                ddlAreas.DataBind();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Session["AreaSeleccionada"] != null)
+                    ddlAreas.SelectedValue = Session["AreaSeleccionada"].ToString();
+                if (!IsPostBack && Session["UserData"] != null)
+                {
+                    Usuario usuario = ((Usuario)Session["UserData"]);
+                    lblUsuario.Text = usuario.NombreCompleto;
+                    lblTipoUsr.Text = usuario.TipoUsuario.Descripcion;
+                    ObtenerAreas();
+                    int areaSeleccionada = 0;
+                    if (Session["AreaSeleccionada"] != null)
+                        areaSeleccionada = int.Parse(Session["AreaSeleccionada"].ToString());
+                    rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, areaSeleccionada, areaSeleccionada != 0);
+                    rptMenu.DataBind();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
         protected void rptMenu_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             try
@@ -47,7 +99,12 @@ namespace KiiniHelp
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
@@ -64,7 +121,12 @@ namespace KiiniHelp
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
 
         }
@@ -82,7 +144,12 @@ namespace KiiniHelp
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
@@ -99,7 +166,12 @@ namespace KiiniHelp
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
@@ -116,7 +188,12 @@ namespace KiiniHelp
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
@@ -133,7 +210,12 @@ namespace KiiniHelp
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
@@ -150,7 +232,12 @@ namespace KiiniHelp
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
@@ -166,22 +253,38 @@ namespace KiiniHelp
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
 
-        protected void btnArea_OnClick(object sender, EventArgs e)
+        protected void ddlAreas_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                Usuario user = (Usuario) Session["UserData"];
-                List<int> roles = user.UsuarioRol.Select(s => s.RolTipoUsuario.IdRol).ToList();
-                Response.Redirect(roles.Any(a => a == (int)BusinessVariables.EnumRoles.Administrador) ? "~/Administracion/Default.aspx" : "~/General/Default.aspx");
+                if (ddlAreas.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    Usuario usuario = ((Usuario)Session["UserData"]);
+                    Session["AreaSeleccionada"] = ddlAreas.SelectedValue;
+                    int areaSeleccionada = 0;
+                    if (Session["AreaSeleccionada"] != null)
+                        areaSeleccionada = int.Parse(Session["AreaSeleccionada"].ToString());
+                    rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, areaSeleccionada, areaSeleccionada != 0);
+                    rptMenu.DataBind();
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
     }

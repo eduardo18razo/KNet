@@ -30,5 +30,9 @@ namespace KiiniNet.Entities.Cat.Usuario
         public virtual List<GrupoUsuarioInventarioArbol> GrupoUsuarioInventarioArbol { get; set; }
         [DataMember]
         public virtual List<TicketGrupoUsuario> TicketGrupoUsuario { get; set; }
+        [DataMember]
+        public virtual List<HorarioSubGrupo> HorarioSubGrupo { get; set; }
+        [DataMember]
+        public virtual List<DiaFestivoSubGrupo> DiaFestivoSubGrupo { get; set; }
     }
 }

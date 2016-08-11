@@ -376,7 +376,7 @@ namespace KiiniHelp.UserControls.Operacion
                 }
                 if (ddlEstatus.SelectedValue != BusinessVariables.ComboBoxCatalogo.Value.ToString())
                 {
-                    _servicioTicketClient.CambiarAsignacionTicket(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuarioSeleccionado(), ((Usuario)Session["UserData"]).Id);
+                    _servicioTicketClient.CambiarAsignacionTicket(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuarioSeleccionado(), ((Usuario)Session["UserData"]).Id, txtComentarios.Text);
                 }
                 LimpiarPantalla();
                 if (OnAceptarModal != null)

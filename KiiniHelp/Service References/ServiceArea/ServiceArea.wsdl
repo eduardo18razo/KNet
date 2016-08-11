@@ -10,11 +10,12 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd10" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceArea.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceArea_ObtenerAreasUsuario_InputMessage">
@@ -22,6 +23,18 @@
   </wsdl:message>
   <wsdl:message name="IServiceArea_ObtenerAreasUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerAreasUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArea_ObtenerAreasUsuarioPublico_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAreasUsuarioPublico" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArea_ObtenerAreasUsuarioPublico_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAreasUsuarioPublicoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArea_ObtenerAreasTipoUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAreasTipoUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArea_ObtenerAreasTipoUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAreasTipoUsuarioResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceArea_ObtenerAreas_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerAreas" />
@@ -40,6 +53,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuario" message="tns:IServiceArea_ObtenerAreasUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioResponse" message="tns:IServiceArea_ObtenerAreasUsuario_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ObtenerAreasUsuarioPublico">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioPublico" message="tns:IServiceArea_ObtenerAreasUsuarioPublico_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioPublicoResponse" message="tns:IServiceArea_ObtenerAreasUsuarioPublico_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAreasTipoUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceArea/ObtenerAreasTipoUsuario" message="tns:IServiceArea_ObtenerAreasTipoUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceArea/ObtenerAreasTipoUsuarioResponse" message="tns:IServiceArea_ObtenerAreasTipoUsuario_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ObtenerAreas">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceArea/ObtenerAreas" message="tns:IServiceArea_ObtenerAreas_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceArea/ObtenerAreasResponse" message="tns:IServiceArea_ObtenerAreas_OutputMessage" />
@@ -53,6 +74,24 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ObtenerAreasUsuario">
       <soap:operation soapAction="http://tempuri.org/IServiceArea/ObtenerAreasUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAreasUsuarioPublico">
+      <soap:operation soapAction="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioPublico" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAreasTipoUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServiceArea/ObtenerAreasTipoUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

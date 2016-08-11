@@ -69,6 +69,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public void ActualizarInformacionConsulta(int idInformacionConsulta, InformacionConsulta informacion)
+        {
+            try
+            {
+                using (BusinessInformacionConsulta negocio = new BusinessInformacionConsulta())
+                {
+                    negocio.ActualizarInformacionConsulta(idInformacionConsulta, informacion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void GuardarHit(int idArbol, int idUsuario)
         {
             try
@@ -90,7 +105,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             {
                 using (BusinessInformacionConsulta negocio = new BusinessInformacionConsulta())
                 {
-                    return negocio.ObtenerInformacionConsulta( idTipoInformacionConsulta, idTipoDocumento);
+                    return negocio.ObtenerInformacionConsulta(idTipoInformacionConsulta, idTipoDocumento);
                 }
             }
             catch (Exception ex)

@@ -256,6 +256,7 @@ namespace KiiniHelp.UserControls.Altas
                 if (((Mascara)Session["MascaraAlta"]).CampoMascara.Count <= 0)
                     throw new Exception("Debe al menos un campo.");
                 nuevaMascara.Descripcion = txtNombre.Text.Trim();
+                nuevaMascara.Random = chkClaveRegistro.Checked;
                 _servicioMascaras.CrearMascara(nuevaMascara);
                 LimpiarMascara();
                 if (OnAceptarModal != null)

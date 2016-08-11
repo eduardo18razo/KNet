@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace KinniNet.Business.Utils
+﻿namespace KinniNet.Business.Utils
 {
     public static class BusinessVariables
     {
@@ -18,6 +16,11 @@ namespace KinniNet.Business.Utils
             public static string PrefijoTabla = "Mascara";
             public static string PrefijoComandoInsertar = "uspInsert";
             public static string PrefijoComandoActualizar = "uspUpdate";
+            public static string NombreCampoRandom = "CLAVEREGISTRO";
+            public static string TipoCampoRandom = "NVARCHAR(20)";
+            public static string CampoRandom = NombreCampoRandom + " " + TipoCampoRandom;
+            public static string CaracteresCampoRandom = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            public static int LongitudRandom = 4;
 
         }
 
@@ -42,6 +45,14 @@ namespace KinniNet.Business.Utils
                 Autoasignado = 5
             }
         }
+
+        public static int[] IdsPublicos =
+        {
+            (int) EnumTiposUsuario.ClienteInvitado,
+            (int) EnumTiposUsuario.EmpleadoInvitado,
+            (int) EnumTiposUsuario.ProveedorInvitado
+        };
+
         public enum EnumTiposUsuario
         {
             Empleado = 1,
@@ -75,6 +86,11 @@ namespace KinniNet.Business.Utils
             ResponsableDeMantenimiento = 5,
             ResponsableDeOperación = 6,
             ResponsableDeDesarrollo = 7,
+            Responsablemantenimientoubicacionempleado = 8,
+            Responsablemantenimientoorganizacionempleado = 9,
+            Responsablemantenimientousuarioempleado = 10,
+            Responsablemantenimientousuariocliente = 11,
+            Responsablemantenimientousuarioproveedor = 12
         }
 
         public enum EnumRoles
@@ -86,6 +102,11 @@ namespace KinniNet.Business.Utils
             ResponsableDeMantenimiento = 5,
             ResponsableDeOperación = 6,
             ResponsableDeDesarrollo = 7,
+            Responsablemantenimientoubicacionempleado = 8,
+            Responsablemantenimientoorganizacionempleado = 9,
+            Responsablemantenimientousuarioempleado = 10,
+            Responsablemantenimientousuariocliente = 11,
+            Responsablemantenimientousuarioproveedor = 12
         }
 
         public enum EnumSubRoles

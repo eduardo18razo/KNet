@@ -41,7 +41,7 @@ namespace KiiniHelp.UserControls.Consultas
                 if (!panelAlertaGeneral.Visible) return;
                 rptErrorGeneral.DataSource = value;
                 rptErrorGeneral.DataBind();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "UpScroll();", true);
+                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "UpScroll();", true);
             }
         }
 

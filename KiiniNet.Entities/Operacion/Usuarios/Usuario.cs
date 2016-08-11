@@ -33,6 +33,8 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         [DataMember]
         public int? IdPuesto { get; set; }
         [DataMember]
+        public bool Vip { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
         
         [DataMember]

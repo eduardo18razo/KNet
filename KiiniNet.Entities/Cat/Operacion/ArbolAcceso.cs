@@ -18,7 +18,9 @@ namespace KiiniNet.Entities.Cat.Operacion
         public int IdTipoUsuario { get; set; }
         [DataMember]
         public int IdTipoArbolAcceso { get; set; }
-        
+        [DataMember]
+        public int IdImpacto { get; set; }
+
         [DataMember]
         public int? IdNivel1 { get; set; }
         [DataMember]
@@ -40,6 +42,9 @@ namespace KiiniNet.Entities.Cat.Operacion
 
         [DataMember]
         public virtual TipoUsuario TipoUsuario { get; set; }
+        [DataMember]
+        public virtual Impacto Impacto { get; set; }
+
         [DataMember]
         public virtual Nivel1 Nivel1 { get; set; }
         [DataMember]

@@ -8,13 +8,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
 {
     public class ServiceTicket : IServiceTicket
     {
-        public void CrearTicket(int idUsuario, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura)
+        public void CrearTicket(int idUsuario, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, bool campoRandom)
         {
             try
             {
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
-                    negocio.CrearTicket(idUsuario, idArbol, lstCaptura);
+                    negocio.CrearTicket(idUsuario, idArbol, lstCaptura, campoRandom);
                 }
             }
             catch (Exception ex)
@@ -38,13 +38,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public void CambiarEstatus(int idTicket, int idEstatus, int idUsuario)
+        public void CambiarEstatus(int idTicket, int idEstatus, int idUsuario, string comentario)
         {
             try
             {
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
-                    negocio.CambiarEstatus(idTicket, idEstatus, idUsuario);
+                    negocio.CambiarEstatus(idTicket, idEstatus, idUsuario, comentario);
                 }
             }
             catch (Exception ex)
@@ -53,13 +53,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public void AutoAsignarTicket(int idTicket,  int idUsuario)
+        public void AutoAsignarTicket(int idTicket, int idUsuario)
         {
             try
             {
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
-                    negocio.AutoAsignarTicket(idTicket,  idUsuario);
+                    negocio.AutoAsignarTicket(idTicket, idUsuario);
                 }
             }
             catch (Exception ex)
@@ -68,13 +68,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idUsuarioAsigna)
+        public void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idUsuarioAsigna, string comentario)
         {
             try
             {
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
-                    negocio.CambiarAsignacionTicket(idTicket, idEstatusAsignacion, idUsuarioAsignado, idUsuarioAsigna);
+                    negocio.CambiarAsignacionTicket(idTicket, idEstatusAsignacion, idUsuarioAsignado, idUsuarioAsigna, comentario);
                 }
             }
             catch (Exception ex)
@@ -90,6 +90,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
                     return negocio.ObtenerDetalleTicket(idTicket);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public HelperDetalleTicket ObtenerDetalleTicketNoRegistrado(int idTicket, string cveRegistro)
+        {
+            try
+            {
+                using (BusinessTicket negocio = new BusinessTicket())
+                {
+                    return negocio.ObtenerDetalleTicketNoRegistrado(idTicket, cveRegistro);
                 }
             }
             catch (Exception ex)

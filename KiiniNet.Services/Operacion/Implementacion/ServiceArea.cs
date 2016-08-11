@@ -10,13 +10,43 @@ namespace KiiniNet.Services.Operacion.Implementacion
 {
     public  class ServiceArea : IServiceArea
     {
-        public List<Area> ObtenerAreasUsuario(int idUsuario)
+        public List<Area> ObtenerAreasUsuario(int idUsuario, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessArea negocio = new BusinessArea())
                 {
-                    return negocio.ObtenerAreasUsuario(idUsuario);
+                    return negocio.ObtenerAreasUsuario(idUsuario, insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Area> ObtenerAreasUsuarioPublico(bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessArea negocio = new BusinessArea())
+                {
+                    return negocio.ObtenerAreasUsuarioPublico(insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Area> ObtenerAreasTipoUsuario(int idTipoUsuario, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessArea negocio = new BusinessArea())
+                {
+                    return negocio.ObtenerAreasTipoUsuario(idTipoUsuario, insertarSeleccion);
                 }
             }
             catch (Exception ex)

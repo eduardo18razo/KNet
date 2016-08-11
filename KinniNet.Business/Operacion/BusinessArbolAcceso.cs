@@ -237,7 +237,7 @@ namespace KinniNet.Core.Operacion
                     arbol.Nivel7.Descripcion = arbol.Nivel7.Descripcion.ToUpper();
                     arbol.Nivel7.Habilitado = arbol.Nivel7.Habilitado;
                 }
-                if (arbol.EsTerminal)
+                if (arbol.EsTerminal && arbol.IdTipoArbolAcceso != (int)BusinessVariables.EnumTipoArbol.Consultas)
                 {
                     arbol.InventarioArbolAcceso.First().Sla.TiempoHoraProceso =
                         arbol.InventarioArbolAcceso.First().Sla.Dias + 
@@ -270,6 +270,44 @@ namespace KinniNet.Core.Operacion
                                               join guia in db.GrupoUsuarioInventarioArbol on iac.Id equals guia.IdInventarioArbolAcceso
                                               join ug in db.UsuarioGrupo on new { guia.IdRol, guia.IdGrupoUsuario, guia.IdSubGrupoUsuario } equals new { ug.IdRol, ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
                                               where ug.IdUsuario == idUsuario && ac.IdTipoArbolAcceso == idTipoArbol && ac.IdArea == idArea
+                                              && guia.IdRol == (int)BusinessVariables.EnumRoles.Acceso
+                                              select ac;
+                result = qry.ToList();
+                foreach (ArbolAcceso arbol in result)
+                {
+                    db.LoadProperty(arbol, "Area");
+                    db.LoadProperty(arbol, "Nivel1");
+                    db.LoadProperty(arbol, "Nivel2");
+                    db.LoadProperty(arbol, "Nivel3");
+                    db.LoadProperty(arbol, "Nivel4");
+                    db.LoadProperty(arbol, "Nivel5");
+                    db.LoadProperty(arbol, "Nivel6");
+                    db.LoadProperty(arbol, "Nivel7");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<ArbolAcceso> ObtenerArbolesAccesoByTipoUsuarioTipoArbol(int idTipoUsuario, int idTipoArbol, int idArea)
+        {
+            List<ArbolAcceso> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<ArbolAcceso> qry = from ac in db.ArbolAcceso
+                                              join iac in db.InventarioArbolAcceso on ac.Id equals iac.IdArbolAcceso
+                                              join guia in db.GrupoUsuarioInventarioArbol on iac.Id equals guia.IdInventarioArbolAcceso
+                                              join ug in db.UsuarioGrupo on new { guia.IdRol, guia.IdGrupoUsuario, guia.IdSubGrupoUsuario } equals new { ug.IdRol, ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
+                                              where ac.IdTipoUsuario == idTipoUsuario && ac.IdTipoArbolAcceso == idTipoArbol && ac.IdArea == idArea
                                               && guia.IdRol == (int)BusinessVariables.EnumRoles.Acceso
                                               select ac;
                 result = qry.ToList();

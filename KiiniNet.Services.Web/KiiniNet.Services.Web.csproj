@@ -60,6 +60,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ServicePuesto.svc" />
     <Content Include="ServiceArea.svc" />
     <Content Include="ServiceTicket.svc" />
     <Content Include="ServiceCatalogosSistema.svc" />
@@ -87,6 +88,7 @@
     <Content Include="Sistema\ServiceTipoInformacionConsulta.svc" />
     <Content Include="Sistema\ServiceTipoTelefono.svc" />
     <Content Include="Sistema\ServiceNotificacion.svc" />
+    <Content Include="Sistema\ServiceImpactoUrgencia.svc" />
     <Content Include="Sistema\ServiceTipoUsuario.svc" />
     <Content Include="Sistema\ServiceDomicilioSistema.svc" />
     <Content Include="Web.config">

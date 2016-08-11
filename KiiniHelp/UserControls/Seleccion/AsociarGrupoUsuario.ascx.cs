@@ -33,6 +33,7 @@ namespace KiiniHelp.UserControls.Seleccion
             { hfAsignacionAutomatica.Value = value.ToString(); }
         }
 
+
         public bool Administrador
         {
             get { return divGrupoAdministrador.Visible; }
@@ -84,6 +85,42 @@ namespace KiiniHelp.UserControls.Seleccion
             { HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, value); }
         }
 
+        public bool UbicacionEmpleado
+        {
+            get { return divUbicacionEmpleado.Visible; }
+            set
+            { HabilitaGrupos((int)BusinessVariables.EnumRoles.Responsablemantenimientoubicacionempleado, value); }
+        }
+
+
+        public bool OrganizacionEmpleado
+        {
+            get { return divOrganizacionEmpleado.Visible; }
+            set
+            { HabilitaGrupos((int)BusinessVariables.EnumRoles.Responsablemantenimientoorganizacionempleado, value); }
+        }
+
+        public bool UsuarioEmpleado
+        {
+            get { return divUsuarioEmpleado.Visible; }
+            set
+            { HabilitaGrupos((int)BusinessVariables.EnumRoles.Responsablemantenimientousuarioempleado, value); }
+        }
+
+        public bool UsuarioCliente
+        {
+            get { return divUsuarioCliente.Visible; }
+            set
+            { HabilitaGrupos((int)BusinessVariables.EnumRoles.Responsablemantenimientousuariocliente, value); }
+        }
+
+        public bool UsuarioProveedor
+        {
+            get { return divUsuarioProveedor.Visible; }
+            set
+            { HabilitaGrupos((int)BusinessVariables.EnumRoles.Responsablemantenimientousuarioproveedor, value); }
+        }
+
         public int IdTipoUsuario
         {
             get { return Convert.ToInt32(hfTipoUsuario.Value); }
@@ -103,7 +140,7 @@ namespace KiiniHelp.UserControls.Seleccion
                 if (!panelAlertaGrupos.Visible) return;
                 rptErrorGrupos.DataSource = value;
                 rptErrorGrupos.DataBind();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "UpScroll(\"" + Modal + "\");", true);
+                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "UpScroll(\"" + Modal + "\");", true);
             }
         }
 
@@ -221,37 +258,61 @@ namespace KiiniHelp.UserControls.Seleccion
                     case (int)BusinessVariables.EnumRoles.Administrador:
                         divGrupoAdministrador.Visible = visible;
                         if (visible)
-                            Metodos.LlenaComboCatalogo(ddlGrupoAdministrador, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                            Metodos.LlenaComboCatalogo(ddlGrupoAdministrador, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
                         break;
                     case (int)BusinessVariables.EnumRoles.Acceso:
                         divGrupoAcceso.Visible = visible;
                         if (visible)
-                            Metodos.LlenaComboCatalogo(ddlGrupoAcceso, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                            Metodos.LlenaComboCatalogo(ddlGrupoAcceso, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
                         break;
                     case (int)BusinessVariables.EnumRoles.EspecialDeConsulta:
                         divGrupoEspConsulta.Visible = visible;
                         if (visible)
-                            Metodos.LlenaComboCatalogo(ddlGrupoEspecialConsulta, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                            Metodos.LlenaComboCatalogo(ddlGrupoEspecialConsulta, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
                         divGrupoRespAtencion.Visible = visible;
                         if (visible)
-                            Metodos.LlenaComboCatalogo(ddlGrupoResponsableAtencion, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                            Metodos.LlenaComboCatalogo(ddlGrupoResponsableAtencion, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento:
                         divGrupoRespMtto.Visible = visible;
                         if (visible)
-                            Metodos.LlenaComboCatalogo(ddlGrupoResponsableMantenimiento, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                            Metodos.LlenaComboCatalogo(ddlGrupoResponsableMantenimiento, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeOperación:
                         divGrupoRespOperacion.Visible = visible;
                         if (visible)
-                            Metodos.LlenaComboCatalogo(ddlGrupoResponsableOperacion, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                            Metodos.LlenaComboCatalogo(ddlGrupoResponsableOperacion, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
                         break;
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo:
-                        divGrupoRespDesarrollo.Visible = visible;
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientoubicacionempleado:
+                        divUbicacionEmpleado.Visible = visible;
                         if (visible)
-                            Metodos.LlenaComboCatalogo(ddlGrupoResponsableDesarrollo, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
+                            Metodos.LlenaComboCatalogo(ddlUbicacionEmpleado, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientoorganizacionempleado:
+                        divOrganizacionEmpleado.Visible = visible;
+                        if (visible)
+                            Metodos.LlenaComboCatalogo(ddlOrganizacionEmpleado, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientousuariocliente:
+                        divUsuarioCliente.Visible = visible;
+                        if (visible)
+                            Metodos.LlenaComboCatalogo(ddlUsuarioCliente, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientousuarioempleado:
+                        divUsuarioEmpleado.Visible = visible;
+                        if (visible)
+                            Metodos.LlenaComboCatalogo(ddlUsuarioEmpleado, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientousuarioproveedor:
+                        divUsuarioProveedor.Visible = visible;
+                        if (visible)
+                            Metodos.LlenaComboCatalogo(ddlUsuarioProveedor, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
                         break;
                 }
             }
@@ -332,6 +393,47 @@ namespace KiiniHelp.UserControls.Seleccion
                         lstSubRoles = _servicioSubGrupoUsuario.ObtenerSubGruposUsuario(idGrupoUsuario, false);
                         break;
 
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientoorganizacionempleado:
+                        idRol = (int)BusinessVariables.EnumRoles.Responsablemantenimientoorganizacionempleado;
+                        if (ddlOrganizacionEmpleado.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                            throw new Exception("Seleccione un grupo valido");
+                        idGrupoUsuario = Convert.ToInt32(ddlOrganizacionEmpleado.SelectedItem.Value);
+                        grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
+                        lstSubRoles = _servicioSubGrupoUsuario.ObtenerSubGruposUsuario(idGrupoUsuario, false);
+                        break;
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientoubicacionempleado:
+                        idRol = (int)BusinessVariables.EnumRoles.Responsablemantenimientoubicacionempleado;
+                        if (ddlUbicacionEmpleado.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                            throw new Exception("Seleccione un grupo valido");
+                        idGrupoUsuario = Convert.ToInt32(ddlUbicacionEmpleado.SelectedItem.Value);
+                        grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
+                        lstSubRoles = _servicioSubGrupoUsuario.ObtenerSubGruposUsuario(idGrupoUsuario, false);
+                        break;
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientousuariocliente:
+                        idRol = (int)BusinessVariables.EnumRoles.ResponsableDeOperación;
+                        if (ddlUsuarioCliente.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                            throw new Exception("Seleccione un grupo valido");
+                        idGrupoUsuario = Convert.ToInt32(ddlUsuarioCliente.SelectedItem.Value);
+                        grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
+                        lstSubRoles = _servicioSubGrupoUsuario.ObtenerSubGruposUsuario(idGrupoUsuario, false);
+                        break;
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientousuarioempleado:
+                        idRol = (int)BusinessVariables.EnumRoles.ResponsableDeOperación;
+                        if (ddlUsuarioEmpleado.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                            throw new Exception("Seleccione un grupo valido");
+                        idGrupoUsuario = Convert.ToInt32(ddlUsuarioEmpleado.SelectedItem.Value);
+                        grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
+                        lstSubRoles = _servicioSubGrupoUsuario.ObtenerSubGruposUsuario(idGrupoUsuario, false);
+                        break;
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientousuarioproveedor:
+                        idRol = (int)BusinessVariables.EnumRoles.ResponsableDeOperación;
+                        if (ddlUsuarioProveedor.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                            throw new Exception("Seleccione un grupo valido");
+                        idGrupoUsuario = Convert.ToInt32(ddlUsuarioProveedor.SelectedItem.Value);
+                        grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
+                        lstSubRoles = _servicioSubGrupoUsuario.ObtenerSubGruposUsuario(idGrupoUsuario, false);
+                        break;
+
                 }
                 if (grupoUsuario != null)
                 {
@@ -404,7 +506,7 @@ namespace KiiniHelp.UserControls.Seleccion
                 if (sender == null) return;
                 if (btn.CommandArgument != "0")
                 {
-                    btnCerrarModalAltaGrupoUsuario.CommandArgument = btn.CommandArgument;
+                    ucAltaGrupoUsuario.IdRol = Convert.ToInt32(btn.CommandArgument);
                     ucAltaGrupoUsuario.IdTipoUsuario = IdTipoUsuario;
                     ucAltaGrupoUsuario.IdTipoGrupo = int.Parse(btn.CommandArgument);
                     ucAltaGrupoUsuario.Alta = true;
@@ -422,62 +524,6 @@ namespace KiiniHelp.UserControls.Seleccion
             }
         }
 
-        protected void btnCerrarModalAltaGrupoUsuario_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                int idRol = int.Parse(((Button)sender).CommandArgument);
-                switch (idRol)
-                {
-                    case (int)BusinessVariables.EnumRoles.Administrador:
-                        divGrupoAdministrador.Visible = true;
-                        Metodos.LlenaComboCatalogo(ddlGrupoAdministrador,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
-                        break;
-                    case (int)BusinessVariables.EnumRoles.Acceso:
-                        divGrupoAcceso.Visible = true;
-                        Metodos.LlenaComboCatalogo(ddlGrupoAcceso,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
-                        break;
-                    case (int)BusinessVariables.EnumRoles.EspecialDeConsulta:
-                        divGrupoEspConsulta.Visible = true;
-                        Metodos.LlenaComboCatalogo(ddlGrupoEspecialConsulta,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
-                        break;
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
-                        divGrupoRespAtencion.Visible = true;
-                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableAtencion,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
-                        break;
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento:
-                        divGrupoRespMtto.Visible = true;
-                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableMantenimiento,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
-                        break;
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeOperación:
-                        divGrupoRespOperacion.Visible = true;
-                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableOperacion,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
-                        break;
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo:
-                        divGrupoRespDesarrollo.Visible = true;
-                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableDesarrollo,
-                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, IdTipoUsuario, true));
-                        break;
-                }
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaGrupoUsuarios\");", true);
-
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGrupos = _lstError;
-            }
-        }
         #endregion Grupos
 
         #region SubRoles
@@ -598,7 +644,95 @@ namespace KiiniHelp.UserControls.Seleccion
         {
             try
             {
-                _lstError = new List<string>();
+                AlertaGrupos = new List<string>();
+                ucAltaGrupoUsuario.FromOpcion = AsignacionAutomatica;
+                ucAltaGrupoUsuario.OnCancelarModal += ucAltaGrupoUsuario_OnCancelarModal;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGrupos = _lstError;
+            }
+        }
+
+        void ucAltaGrupoUsuario_OnCancelarModal()
+        {
+            try
+            {
+                int idRol = ucAltaGrupoUsuario.IdRol;
+                switch (idRol)
+                {
+                    case (int)BusinessVariables.EnumRoles.Administrador:
+                        divGrupoAdministrador.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlGrupoAdministrador, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.Acceso:
+                        divGrupoAcceso.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlGrupoAcceso,
+                            _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.EspecialDeConsulta:
+                        divGrupoEspConsulta.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlGrupoEspecialConsulta,
+                            AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
+                        divGrupoRespAtencion.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableAtencion,
+                            AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento:
+                        divGrupoRespMtto.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableMantenimiento,
+                            AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.ResponsableDeOperación:
+                        divGrupoRespOperacion.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableOperacion,
+                            AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo:
+                        divGrupoRespDesarrollo.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableDesarrollo,
+                            AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientoubicacionempleado:
+                        divUbicacionEmpleado.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlUbicacionEmpleado,
+                            AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientoorganizacionempleado:
+                        divOrganizacionEmpleado.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlOrganizacionEmpleado,
+                            AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientousuariocliente:
+                        divUsuarioCliente.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlUsuarioCliente,
+                            AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientousuarioempleado:
+                        divUsuarioEmpleado.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlUsuarioEmpleado,
+                            AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+
+                    case (int)BusinessVariables.EnumRoles.Responsablemantenimientousuarioproveedor:
+                        divUsuarioProveedor.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlUsuarioProveedor,
+                            AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+                }
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaGrupoUsuarios\");", true);
+
             }
             catch (Exception ex)
             {

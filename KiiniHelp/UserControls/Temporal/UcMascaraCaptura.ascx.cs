@@ -6,7 +6,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using AjaxControlToolkit;
 using KiiniHelp.ServiceMascaraAcceso;
-using KiiniHelp.Ticket;
+using KiiniHelp.Users.Ticket;
 using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Helper;
 using KinniNet.Business.Utils;
@@ -40,6 +40,7 @@ namespace KiiniHelp.UserControls.Temporal
             {
                 hfComandoInsertar.Value = mascara.ComandoInsertar;
                 hfComandoActualizar.Value = mascara.ComandoInsertar;
+                hfRandom.Value = mascara.Random.ToString();
                 lblDescripcionMascara.Text = mascara.Descripcion;
                 PintaControles(mascara.CampoMascara);
                 Session["MascaraActiva"] = mascara;
@@ -83,6 +84,11 @@ namespace KiiniHelp.UserControls.Temporal
         public string ComandoActualizar
         {
             get { return hfComandoActualizar.Value; }
+        }
+
+        public bool CampoRandom
+        {
+            get { return Convert.ToBoolean(hfRandom.Value); }
         }
 
         public List<HelperCampoMascaraCaptura> ObtenerCapturaMascara()
@@ -132,12 +138,29 @@ namespace KiiniHelp.UserControls.Temporal
                         TextBox txt = (TextBox)divControles.FindControl(nombreControl);
                         if (txt != null)
                         {
-                            HelperCampoMascaraCaptura campoCapturado = new HelperCampoMascaraCaptura
+                            HelperCampoMascaraCaptura campoCapturado;
+                            switch (txt.Attributes["for"])
                             {
-                                NombreCampo = campo.NombreCampo,
-                                Valor = txt.Text.Trim().ToUpper()
-                            };
-                            lstCamposCapturados.Add(campoCapturado);
+                                case "FECHA":
+                                    campoCapturado = new HelperCampoMascaraCaptura
+                                    {
+                                        NombreCampo = campo.NombreCampo,
+                                        Valor = Convert.ToDateTime(txt.Text.Trim().ToUpper()).ToString("yyyy-MM-dd"),
+                                    };
+                                    lstCamposCapturados.Add(campoCapturado);
+                                    break;
+                                    lstCamposCapturados.Add(campoCapturado);
+                                    break;
+                                default:
+                                    campoCapturado = new HelperCampoMascaraCaptura
+                                    {
+                                        NombreCampo = campo.NombreCampo,
+                                        Valor = txt.Text.Trim().ToUpper()
+                                    };
+                                    lstCamposCapturados.Add(campoCapturado);
+                                    break;
+                            }
+
                         }
                     }
                     else if (!campoTexto)
@@ -170,6 +193,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 break;
                         }
                     }
+                    
                 }
             }
             catch (Exception ex)
@@ -267,7 +291,7 @@ namespace KiiniHelp.UserControls.Temporal
                             _lstControles.Add(txtEntero);
                             break;
                         case "FECHA":
-                            lbl.Attributes["for"] = "txt" + campo.NombreCampo;
+                            lbl.Attributes["for"] = "FECHA";
                             createDiv.Controls.Add(lbl);
                             TextBox txtFecha = new TextBox
                             {
@@ -275,6 +299,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 CssClass = "form-control"
                             };
                             txtFecha.Attributes["placeholder"] = campo.Descripcion;
+                            txtFecha.Attributes["for"] = "FECHA";
                             MaskedEditExtender meeFecha = new MaskedEditExtender
                             {
                                 ID = "mee" + campo.NombreCampo,
@@ -302,7 +327,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 ID = "mee" + campo.NombreCampo,
                                 TargetControlID = txtHora.ID,
                                 InputDirection = MaskedEditInputDirection.RightToLeft,
-                                Mask = "23:59:59",
+                                Mask = "99:99:99",
                                 MaskType = MaskedEditType.Time,
                                 AcceptAMPM = false
                             };
@@ -413,7 +438,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 {
                                     var d = DateTime.Parse(txtFecha.Text.Trim());
                                 }
-                                catch 
+                                catch
                                 {
                                     throw new Exception(string.Format("Campo {0} contiene una fecha no valida", campo.Descripcion));
                                 }

@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
@@ -41,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Demonio\BusinessDemonio.cs" />
     <Compile Include="Operacion\BusinessArea.cs" />
+    <Compile Include="Operacion\BusinessPuesto.cs" />
     <Compile Include="Operacion\BusinessTicket.cs" />
     <Compile Include="Sistema\BusinessCatalogos.cs" />
     <Compile Include="Operacion\BusinessArbolAcceso.cs" />
@@ -59,6 +62,7 @@
     <Compile Include="Security\BusinessSecurity.cs" />
     <Compile Include="Sistema\BusinessDomicilioSistema.cs" />
     <Compile Include="Sistema\BusinessEstatus.cs" />
+    <Compile Include="Sistema\BusinessImpactoUrgencia.cs" />
     <Compile Include="Sistema\BusinessNotificacion.cs" />
     <Compile Include="Sistema\BusinessRoles.cs" />
     <Compile Include="Sistema\BusinessSubRol.cs" />

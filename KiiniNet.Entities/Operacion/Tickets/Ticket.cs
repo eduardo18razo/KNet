@@ -21,6 +21,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public int IdArbolAcceso { get; set; }
         [DataMember]
+        public int IdImpacto { get; set; }
+        [DataMember]
         public int IdUsuario { get; set; }
         [DataMember]
         public int IdOrganizacion { get; set; }
@@ -39,7 +41,14 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public int IdEstatusAsignacion { get; set; }
         [DataMember]
-        public DateTime FechaHora { get; set; }
+        public DateTime FechaHoraAlta { get; set; }
+        [DataMember]
+        public DateTime FechaHoraFinProceso { get; set; }
+        [DataMember]
+        public bool Random { get; set; }
+        [DataMember]
+        public string ClaveRegistro { get; set; }
+
 
         [DataMember]
         public virtual TipoUsuario TipoUsuario { get; set; }
@@ -47,6 +56,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         public virtual TipoArbolAcceso TipoArbolAcceso { get; set; }
         [DataMember]
         public virtual ArbolAcceso ArbolAcceso { get; set; }
+        [DataMember]
+        public virtual Impacto Impacto { get; set; }
         [DataMember]
         public virtual Usuario Usuario { get; set; }
         [DataMember]

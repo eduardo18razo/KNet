@@ -13,13 +13,13 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public int IdSubRol { get; set; }
         [DataMember]
-        public decimal Dias { get; set; }
+        public decimal? Dias { get; set; }
         [DataMember]
-        public decimal Horas { get; set; }
+        public decimal? Horas { get; set; }
         [DataMember]
-        public decimal Minutos { get; set; }
+        public decimal? Minutos { get; set; }
         [DataMember]
-        public decimal Segundos { get; set; }
+        public decimal? Segundos { get; set; }
         [DataMember]
         public decimal TiempoProceso { get; set; }
         [DataMember]

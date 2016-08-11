@@ -40,6 +40,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <div class="form-inline verical-center">
+                                            <asp:CheckBox runat="server" ID="chkClaveRegistro" CssClass="form-control" Text="Clave de Registro"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <asp:Label runat="server" Text="Tipo de campo" CssClass="col-sm-2 control-label izquierda"></asp:Label>
                                         <asp:DropDownList runat="server" ID="ddlTipoCampo" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoCampo_OnSelectedIndexChanged" CssClass="DropSelect" />
                                     </div>

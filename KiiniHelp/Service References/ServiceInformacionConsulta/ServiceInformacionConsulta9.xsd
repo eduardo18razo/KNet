@@ -57,6 +57,19 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ActualizarInformacionConsulta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idInformacionConsulta" type="xs:int" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="informacion" nillable="true" type="q6:InformacionConsulta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualizarInformacionConsultaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GuardarHit">
     <xs:complexType>
       <xs:sequence>
@@ -81,7 +94,7 @@
   <xs:element name="ObtenerConsultaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerConsultaResult" nillable="true" type="q6:ArrayOfInformacionConsulta" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerConsultaResult" nillable="true" type="q7:ArrayOfInformacionConsulta" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

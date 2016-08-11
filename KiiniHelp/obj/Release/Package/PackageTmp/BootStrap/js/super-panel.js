@@ -137,13 +137,14 @@ function McSuperPanel(e) {
                 var c = a.getAttribute("data-ajax");
                 if (c) {
                     c = s(c);
+                    debugger;
                     var d = new XMLHttpRequest;
                     d.onreadystatechange = function() {
                         if (d.readyState == 4 && d.status == 200) {
                             var a = d.responseText, b = /^[\s\S]*<body[^>]*>([\s\S]+)<\/body>[\s\S]*$/i;
                             if (b.test(a)) a = a[z](b, "$1");
                             a = a.trim();
-                            window[c[1]].apply(c.splice(0, 2, a), c)
+                            //window[c[1]].apply(c.splice(0, 2, a), c)
                         }
                     };
                     d.open("GET", c[0], true);

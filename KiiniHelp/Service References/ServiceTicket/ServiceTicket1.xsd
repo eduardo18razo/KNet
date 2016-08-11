@@ -7,6 +7,7 @@
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
         <xs:element minOccurs="0" name="idArbol" type="xs:int" />
         <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="lstCaptura" nillable="true" type="q1:ArrayOfHelperCampoMascaraCaptura" />
+        <xs:element minOccurs="0" name="campoRandom" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -37,6 +38,7 @@
         <xs:element minOccurs="0" name="idTicket" type="xs:int" />
         <xs:element minOccurs="0" name="idEstatus" type="xs:int" />
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="comentario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -65,6 +67,7 @@
         <xs:element minOccurs="0" name="idEstatusAsignacion" type="xs:int" />
         <xs:element minOccurs="0" name="idUsuarioAsignado" type="xs:int" />
         <xs:element minOccurs="0" name="idUsuarioAsigna" type="xs:int" />
+        <xs:element minOccurs="0" name="comentario" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -84,6 +87,21 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerDetalleTicketResult" nillable="true" type="q3:HelperDetalleTicket" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerDetalleTicketNoRegistrado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTicket" type="xs:int" />
+        <xs:element minOccurs="0" name="cveRegistro" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerDetalleTicketNoRegistradoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerDetalleTicketNoRegistradoResult" nillable="true" type="q4:HelperDetalleTicket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

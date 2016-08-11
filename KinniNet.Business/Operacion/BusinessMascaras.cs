@@ -60,6 +60,7 @@ namespace KinniNet.Core.Operacion
                                                       "IdTicket int NOT NULL," +
                                                       "{1}" +
                                                       "Habilitado BIT \n" +
+                                                      (mascara.Random ? ", " + BusinessVariables.ParametrosMascaraCaptura.CampoRandom + " \n" : string.Empty) +
                                                       "CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED \n" +
                                                       "( \n" +
                                                       "\t[Id] ASC \n" +
@@ -67,8 +68,9 @@ namespace KinniNet.Core.Operacion
                                                       ") ON [PRIMARY] \n" +
                                                       "ALTER TABLE [dbo].[{0}]  WITH CHECK ADD  CONSTRAINT [FK_{0}_Ticket] FOREIGN KEY([IdTicket]) \n" +
                                                       "REFERENCES [dbo].[Ticket] ([Id])\n" +
-                                                      "ALTER TABLE [dbo].[{0}] CHECK CONSTRAINT [FK_{0}_Ticket]\n", mascara.NombreTabla, queryCamposTabla);
-                    db.ExecuteStoreCommand(qryCrearTablas);
+                                                      "ALTER TABLE [dbo].[{0}] CHECK CONSTRAINT [FK_{0}_Ticket]\n" +
+                                                      "ALTER TABLE [dbo].[{0}] ADD  CONSTRAINT [DF_{0}_habilitado]  DEFAULT ((1)) FOR [Habilitado]", mascara.NombreTabla, queryCamposTabla);
+                db.ExecuteStoreCommand(qryCrearTablas);
             }
             catch (Exception ex)
             {
@@ -94,18 +96,20 @@ namespace KinniNet.Core.Operacion
                 foreach (CampoMascara campoMascara in mascara.CampoMascara)
                 {
                     contadorParametros++;
-                    TipoCampoMascara tmpTipoCampoMascara = db.TipoCampoMascara.SingleOrDefault(f => f.Id == campoMascara.IdTipoCampoMascara);
+                    TipoCampoMascara tmpTipoCampoMascara =
+                        db.TipoCampoMascara.SingleOrDefault(f => f.Id == campoMascara.IdTipoCampoMascara);
                     if (tmpTipoCampoMascara == null) continue;
                     switch (tmpTipoCampoMascara.TipoDatoSql)
                     {
                         case "NVARCHAR":
-                            queryParametros += String.Format("@{0} {1}({2})", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, campoMascara.LongitudMaxima);
+                            queryParametros += String.Format("@{0} {1}({2})", campoMascara.NombreCampo,
+                                tmpTipoCampoMascara.TipoDatoSql, campoMascara.LongitudMaxima);
                             break;
                         default:
-                            queryParametros += String.Format("@{0} {1}", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
+                            queryParametros += String.Format("@{0} {1}", campoMascara.NombreCampo,
+                                tmpTipoCampoMascara.TipoDatoSql);
                             break;
                     }
-                    
                     queryCampos += String.Format("{0}", campoMascara.NombreCampo);
                     queryValues += String.Format("@{0}", campoMascara.NombreCampo);
                     if (contadorParametros < paramsCount)
@@ -114,6 +118,13 @@ namespace KinniNet.Core.Operacion
                         queryCampos += ", \n";
                         queryValues += ", \n";
                     }
+                }
+
+                if (mascara.Random)
+                {
+                    queryParametros += String.Format(", @{0} {1}", BusinessVariables.ParametrosMascaraCaptura.NombreCampoRandom, BusinessVariables.ParametrosMascaraCaptura.TipoCampoRandom);
+                    queryCampos += ", " + BusinessVariables.ParametrosMascaraCaptura.NombreCampoRandom;
+                    queryValues += String.Format(", @{0}", BusinessVariables.ParametrosMascaraCaptura.NombreCampoRandom);
                 }
 
                 string queryStore = string.Format("Create  PROCEDURE {0}( \n" +
@@ -161,6 +172,12 @@ namespace KinniNet.Core.Operacion
                         queryParametros += ", \n";
                         queryCamposValues += ", \n";
                     }
+                }
+
+                if (mascara.Random)
+                {
+                    queryParametros += String.Format(", @{0} {1}", BusinessVariables.ParametrosMascaraCaptura.NombreCampoRandom, BusinessVariables.ParametrosMascaraCaptura.TipoCampoRandom);
+                    queryCamposValues += String.Format(", \n {0} = @{0}", BusinessVariables.ParametrosMascaraCaptura.NombreCampoRandom);
                 }
 
                 string queryStore = string.Format("Create  PROCEDURE {0}( \n" +
