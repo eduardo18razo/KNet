@@ -1,51 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AltaTiempoEstimado.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.AltaTiempoEstimado" %>
-<%--<style>
-    input[type=checkbox] {
-        display: none;
-    }
-
-        input[type=checkbox] + label {
-            content: '\2716';
-            position: relative;
-            background: transparent;
-            height: 30px;
-            width: 30px;
-            display: inline-block;
-            -ms-border-radius: 50%;
-            border-radius: 50%;
-            -webkit-transition: box-shadow 0.4s, border 0.4s;
-            -moz-transition: box-shadow 0.4s, border 0.4s;
-            -ms-transition: box-shadow 0.4s, border 0.4s;
-            -o-transition: box-shadow 0.4s, border 0.4s;
-            transition: box-shadow 0.4s, border 0.4s;
-            border: solid 5px transparent;
-            -webkit-box-shadow: 0 0 1px #000;
-            -ms-box-shadow: 0 0 1px #000;
-            box-shadow: 0 0 1px #000;
-            cursor: pointer;
-        }
-
-        input[type=checkbox]:not(:checked) + label {
-            content: '\2716';
-        }
-
-        input[type=checkbox]:checked + label:after {
-            content: '\2714';
-            height: 1em;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            margin: auto;
-            color: #008000;
-            line-height: 1;
-            font-size: 14px;
-            text-align: center;
-        }
-</style>--%>
 <asp:UpdatePanel runat="server">
     <ContentTemplate>
+        <asp:HiddenField runat="server" ID="hfIdArbol"/>
         <header id="panelAlert" runat="server" visible="False">
             <div class="alert alert-danger">
                 <div>

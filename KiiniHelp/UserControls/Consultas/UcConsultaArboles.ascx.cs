@@ -113,12 +113,50 @@ namespace KiiniHelp.UserControls.Consultas
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            UcAltaArbolAcceso.OnAceptarModal += UcAltaArbolAccesoOnOnAceptarModal;
+            UcAltaArbolAcceso.OnCancelarModal += UcAltaArbolAccesoOnOnCancelarModal;
             if (!IsPostBack)
             {
                 LlenaCombos();
                 LlenaArboles();
             }
         }
+
+        private void UcAltaArbolAccesoOnOnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editOpcion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        private void UcAltaArbolAccesoOnOnAceptarModal()
+        {
+            try
+            {
+                LlenaArboles();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editOpcion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
         protected void ddlArea_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -422,17 +460,9 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                //int nivel = 0;
-                //string descripcion = null;
-                
-                //Organizacion org = _servicioOrganizacion.ObtenerOrganizacionById(Convert.ToInt32(hfId.Value));
-                //Session["OrganizacionSeleccionada"] = org;
-                //lblTitleCatalogo.Text = ObtenerRuta(org, ref nivel, ref descripcion);
-                //txtDescripcionCatalogo.Text = descripcion;
-                //hfCatalogo.Value = nivel.ToString();
-                //hfAlta.Value = false.ToString();
-                //ddlTipoUsuarioCatalogo.SelectedValue = org.IdTipoUsuario.ToString();
-                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoOrganizacion\");", true);
+                UcAltaArbolAcceso.IdArbol = Convert.ToInt32(hfId.Value);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editOpcion\");", true);
+                upOcion.Update();
             }
             catch (Exception ex)
             {

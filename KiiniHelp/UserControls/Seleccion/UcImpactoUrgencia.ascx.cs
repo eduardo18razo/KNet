@@ -86,6 +86,22 @@ namespace KiiniHelp.UserControls.Seleccion
             return result;
         }
 
+        public void SetImpactoUrgencia(int idImpacto)
+        {
+            try
+            {
+                Impacto impacto = _servicioImpactoUrgencia.ObtenerImpactoById(idImpacto);
+                ddlPrioridad.SelectedValue = impacto.IdPrioridad.ToString();
+                ddlUrgencia.SelectedValue = impacto.IdUrgencia.ToString();
+                ddlUrgencia_OnSelectedIndexChanged(ddlUrgencia, null);
+            }
+            catch (Exception ex)
+            {
+                
+                throw new Exception(ex.Message);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try

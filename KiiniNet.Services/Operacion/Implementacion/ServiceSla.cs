@@ -23,6 +23,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public Sla ObtenerSlaById(int idSla)
+        {
+            try
+            {
+                using (BusinessSla negocio = new BusinessSla())
+                {
+                    return negocio.ObtenerSla(idSla);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Guardar(Sla sla)
         {
             try

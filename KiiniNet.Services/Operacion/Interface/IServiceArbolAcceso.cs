@@ -37,6 +37,6 @@ namespace KiiniNet.Services.Operacion.Interface
         [OperationContract]
         void HabilitarArbol(int idArbol, bool habilitado);
         [OperationContract]
-        void ActualizardArbol(ArbolAcceso arbolAcceso);
+        void ActualizardArbol(int idArbolAcceso, ArbolAcceso arbolAcceso, string descripcion);
     }
 }

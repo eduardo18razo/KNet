@@ -11,6 +11,7 @@ using KiiniHelp.ServiceSubGrupoUsuario;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
 {
@@ -58,6 +59,34 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
+        public void SetTiempoEstimado(List<TiempoInformeArbol> tiemposInforme)
+        {
+            try
+            {
+                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento).ToList())
+                {
+                    //if(tiempo.GrupoUsuario.id)
+                    //TiempoDueño = tiempo;
+                }
+                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento).ToList())
+                {
+                    TiempoMantenimiento = tiempo;
+                }
+                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo).ToList())
+                {
+                    TiempoDesarrollo = tiempo;
+                }
+                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta).ToList())
+                {
+                    TiempoConsulta = tiempo;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         private void LlenaCombos()
         {
             try
@@ -93,6 +122,16 @@ namespace KiiniHelp.UserControls.Altas
                 Convert.ToDecimal(txtDuenoDias.Text);
                 return result;
             }
+            set
+            {
+                txtDuenoDias.Text = value.Dias.ToString();
+                txtDuenoHoras.Text = value.Horas.ToString();
+                txtDuenoMinutos.Text = value.Minutos.ToString();
+                txtDuenoSegundos.Text = value.Segundos.ToString();
+                ddlDuenoVia.SelectedValue = value.IdTipoNotificacion.ToString();
+                chkDueno.Checked = true;
+                chkDueno_OnCheckedChanged(chkDueno, null);
+            }
         }
         public TiempoInformeArbol TiempoMantenimiento
         {
@@ -111,6 +150,16 @@ namespace KiiniHelp.UserControls.Altas
                 Convert.ToDecimal(txtMttoHoras.Text) / 8 +
                 Convert.ToDecimal(txtMttoDias.Text);
                 return result;
+            }
+            set
+            {
+                txtMttoDias.Text = value.Dias.ToString();
+                txtMttoHoras.Text = value.Horas.ToString();
+                txtMttoMinutos.Text = value.Minutos.ToString();
+                txtMttoSegundos.Text = value.Segundos.ToString();
+                ddlMttoVia.SelectedValue = value.IdTipoNotificacion.ToString();
+                chkMtto.Checked = true;
+                chkMtto_OnCheckedChanged(chkMtto, null);
             }
         }
         public TiempoInformeArbol TiempoDesarrollo
@@ -131,6 +180,17 @@ namespace KiiniHelp.UserControls.Altas
                 Convert.ToDecimal(txtDesarrolloDias.Text);
                 return result;
             }
+
+            set
+            {
+                txtDesarrolloDias.Text = value.Dias.ToString();
+                txtDesarrolloHoras.Text = value.Horas.ToString();
+                txtDesarrolloMinutos.Text = value.Minutos.ToString();
+                txtDesarrolloSegundos.Text = value.Segundos.ToString();
+                ddlDesarrolloVia.SelectedValue = value.IdTipoNotificacion.ToString();
+                chkDesarrollo.Checked = true;
+                chkDesarrollo_OnCheckedChanged(chkDesarrollo, null);
+            }
         }
         public TiempoInformeArbol TiempoConsulta
         {
@@ -149,6 +209,16 @@ namespace KiiniHelp.UserControls.Altas
                 Convert.ToDecimal(txtConsultaHoras.Text) / 8 +
                 Convert.ToDecimal(txtConsultaDias.Text);
                 return result;
+            }
+            set
+            {
+                txtConsultaDias.Text = value.Dias.ToString();
+                txtConsultaHoras.Text = value.Horas.ToString();
+                txtConsultaMinutos.Text = value.Minutos.ToString();
+                txtConsultaSegundos.Text = value.Segundos.ToString();
+                ddlConsultaVia.SelectedValue = value.IdTipoNotificacion.ToString();
+                chkConsulta.Checked = true;
+                chkConsulta_OnCheckedChanged(chkConsulta, null);
             }
         }
 

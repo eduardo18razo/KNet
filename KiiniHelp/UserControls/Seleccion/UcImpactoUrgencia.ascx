@@ -61,15 +61,11 @@
                         </div>
                         <div class="panel-footer" style="text-align: center">
                             <asp:Button ID="btnAsignar" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnAsignar_OnClick" />
-                            <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-success" Text="Limpiar" OnClick="btnLimpiar_OnClick" />
                             <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancelar_OnClick" />
                         </div>
                     </div>
                 </div>
             </ContentTemplate>
-            <Triggers>
-                <asp:AsyncPostBackTrigger ControlID="btnLimpiar" EventName="Click" />
-            </Triggers>
         </asp:UpdatePanel>
     </ContentTemplate>
 </asp:UpdatePanel>

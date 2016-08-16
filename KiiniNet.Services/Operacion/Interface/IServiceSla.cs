@@ -11,6 +11,9 @@ namespace KiiniNet.Services.Operacion.Interface
         List<Sla> ObtenerSla(bool insertarSeleccion);
 
         [OperationContract]
+        Sla ObtenerSlaById(int idSla);
+
+        [OperationContract]
         void Guardar(Sla sla);
     }
 }

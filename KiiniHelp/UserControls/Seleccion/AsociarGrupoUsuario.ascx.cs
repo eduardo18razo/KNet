@@ -9,6 +9,7 @@ using KiiniHelp.ServiceGrupoUsuario;
 using KiiniHelp.ServiceSistemaSubRol;
 using KiiniHelp.ServiceSistemaTipoGrupo;
 using KiiniHelp.ServiceSubGrupoUsuario;
+using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Helper;
@@ -146,7 +147,7 @@ namespace KiiniHelp.UserControls.Seleccion
 
         public bool ValidaCapturaGrupos()
         {
-            StringBuilder sb = new StringBuilder(); 
+            StringBuilder sb = new StringBuilder();
             try
             {
                 if (Administrador)
@@ -190,7 +191,7 @@ namespace KiiniHelp.UserControls.Seleccion
                 return false;
             }
 
-            
+
             return true;
         }
 
@@ -451,7 +452,7 @@ namespace KiiniHelp.UserControls.Seleccion
                             hfOperacion.Value = operacion.ToString();
                             lblTitleSubRoles.Text = String.Format("Seleccione Sub Rol de Grupo {0}", grupoUsuario.Descripcion);
                             Metodos.LlenaListBoxCatalogo(chklbxSubRoles, _servicioSistemaSubRoles.ObtenerSubRolesByGrupoUsuarioRol(idGrupoUsuario, idRol, false));
-                            ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script", "MostrarPopup(\"#modalSeleccionRol\");", true);
+                            ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalSeleccionRol\");", true);
                         }
                         return;
                     }
@@ -466,6 +467,20 @@ namespace KiiniHelp.UserControls.Seleccion
                 }
                 _lstError.Add(ex.Message);
                 AlertaGrupos = _lstError;
+            }
+        }
+
+        public List<GrupoUsuarioInventarioArbol> GruposAsignados
+        {
+            set
+            {
+                foreach (GrupoUsuarioInventarioArbol gpo in value)
+                {
+                    if (gpo.SubGrupoUsuario != null)
+                        AsignarGrupo(gpo.GrupoUsuario, gpo.IdRol, gpo.SubGrupoUsuario.IdSubRol);
+                    else
+                        AsignarGrupo(gpo.GrupoUsuario, gpo.IdRol, null);
+                }
             }
         }
 

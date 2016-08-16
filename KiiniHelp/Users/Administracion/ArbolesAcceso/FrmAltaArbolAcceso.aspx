@@ -333,7 +333,7 @@
             <div class="modal fade" id="modalTicket" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <asp:UpdatePanel ID="upTocket" runat="server">
                     <ContentTemplate>
-                        <div class="modal-dialog modal-lg">
+                        <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header" id="panelAlertaTicket" runat="server" visible="false">
                                     <div class="alert alert-danger">
@@ -441,7 +441,7 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-body">
-                                    <uc:AltaTiempoEstimado runat="server" ID="AltaTiempoEstimado" />
+                                    <uc:AltaTiempoEstimado runat="server" ID="ucAltaTiempoEstimado" />
                                 </div>
                             </div>
                         </div>

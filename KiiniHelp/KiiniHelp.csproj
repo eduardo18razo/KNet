@@ -148,6 +148,7 @@
     <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.standalone.css.map" />
     <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.standalone.min.css.map" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.Puesto.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.Sla1.datasource" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -242,6 +243,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Test\FrmTest.aspx" />
+    <Content Include="UserControls\Altas\UcAltaArbolAcceso.ascx" />
     <Content Include="UserControls\Altas\UcAltaDiasFestivos.ascx" />
     <Content Include="UserControls\Altas\UcAltaPuesto.ascx" />
     <Content Include="UserControls\Altas\UcHorario.ascx" />
@@ -1292,6 +1294,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\ServiceSla\ServiceSla13.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario.wsdl" />
     <None Include="Service References\ServiceSubGrupoUsuario\ServiceSubGrupoUsuario.xsd">
       <SubType>Designer</SubType>
@@ -1909,6 +1914,13 @@
     </Compile>
     <Compile Include="Test\FrmTest.aspx.designer.cs">
       <DependentUpon>FrmTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaArbolAcceso.ascx.cs">
+      <DependentUpon>UcAltaArbolAcceso.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaArbolAcceso.ascx.designer.cs">
+      <DependentUpon>UcAltaArbolAcceso.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Altas\UcAltaDiasFestivos.ascx.cs">
       <DependentUpon>UcAltaDiasFestivos.ascx</DependentUpon>

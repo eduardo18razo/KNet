@@ -55,6 +55,21 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 informacion.Descripcion = informacion.Descripcion.Trim().ToUpper();
+                switch (informacion.IdTipoInfConsulta)
+                {
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+
+                        break;
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                        
+                        break;
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                        if (!informacion.InformacionConsultaDatos.First().Descripcion.StartsWith("http://"))
+                            informacion.InformacionConsultaDatos.First().Descripcion = "http://" + informacion.InformacionConsultaDatos.First().Descripcion;
+                        break;
+                    default:
+                        throw new Exception("Seleccione un tipo de información");
+                }
                 //TODO: Cambiar habilitado por el embebido
                 informacion.Habilitado = true;
                 if (informacion.Id == 0)
@@ -80,7 +95,8 @@ namespace KinniNet.Core.Operacion
                 InformacionConsulta info = db.InformacionConsulta.SingleOrDefault(s => s.Id == idInformacionConsulta);
                 if (info == null) return;
                 info.Descripcion = informacion.Descripcion.Trim().ToUpper();
-
+                info.IdTipoInfConsulta = informacion.IdTipoInfConsulta;
+                info.IdTipoDocumento = informacion.IdTipoDocumento;
                 //TODO: Cambiar habilitado por el embebido
                 info.Habilitado = true;
                 switch (informacion.IdTipoInfConsulta)
@@ -100,13 +116,14 @@ namespace KinniNet.Core.Operacion
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                         for (int i = 0; i < info.InformacionConsultaDatos.Count; i++)
                         {
-                            info.InformacionConsultaDatos[i].Descripcion = informacion.InformacionConsultaDatos[i].Descripcion;
+                            if (!informacion.InformacionConsultaDatos.First().Descripcion.StartsWith("http://"))
+                                info.InformacionConsultaDatos.First().Descripcion = "http://" + informacion.InformacionConsultaDatos.First().Descripcion;
                         }
                         break;
                     default:
                         throw new Exception("Seleccione un tipo de información");
                 }
-                
+
                 db.SaveChanges();
             }
             catch (Exception ex)
@@ -178,7 +195,7 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                
+
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 IQueryable<InformacionConsulta> qry = db.InformacionConsulta;
                 if (idTipoInformacionConsulta != null)

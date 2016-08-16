@@ -15,6 +15,7 @@
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="InventarioArbolAcceso" nillable="true" type="q1:ArrayOfInventarioArbolAcceso" />
       <xs:element minOccurs="0" name="NoCampos" type="xs:int" />
       <xs:element minOccurs="0" name="NombreTabla" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Random" type="xs:boolean" />
       <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="Ticket" nillable="true" type="q2:ArrayOfTicket" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />

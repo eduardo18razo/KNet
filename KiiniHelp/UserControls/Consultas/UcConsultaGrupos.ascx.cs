@@ -113,6 +113,7 @@ namespace KiiniHelp.UserControls.Consultas
                 LlenaCombos();
                 LlenaGrupos();
             }
+            ucAltaGrupoUsuario.FromOpcion = false;
             ucAltaGrupoUsuario.OnAceptarModal += UcAltaGrupoUsuarioOnOnAceptarModal;
             ucAltaGrupoUsuario.OnCancelarModal += UcAltaGrupoUsuarioOnOnCancelarModal;
         }

@@ -44,6 +44,15 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
+        public int IdSla
+        {
+            get { return Convert.ToInt32(hfIdSla.Value); }
+            set
+            {
+                Sla = _servicioSla.ObtenerSlaById(value);
+                hfIdSla.Value = value.ToString();
+            }
+        }
         public Sla Sla
         {
             get
@@ -94,6 +103,53 @@ namespace KiiniHelp.UserControls.Altas
                 sla.Segundos = tsegundos;
                 sla.TiempoHoraProceso = (tDias / 24) + tHoras + (tminutos / 60) + ((tsegundos / 60) / 60);
                 return sla;
+            }
+            set
+            {
+                txtDescripcion.Text = value.Descripcion;
+                chkEstimado.Checked = value.Detallado;
+                chkEstimado_OnCheckedChanged(chkEstimado, null);
+                if (value.Detallado)
+                {
+                    foreach (SlaDetalle detalle in value.SlaDetalle)
+                    {
+                        foreach (RepeaterItem item in rptSubRoles.Items)
+                        {
+                            var lblIdSubRol = (Label)item.FindControl("lblIdSubRol");
+
+                            if (detalle.IdSubRol == Convert.ToInt32(lblIdSubRol.Text))
+                            {
+                                var txtDias = (TextBox)item.FindControl("txtDias");
+                                var txtHoras = (TextBox)item.FindControl("txtHoras");
+                                var txtMinutos = (TextBox)item.FindControl("txtMinutos");
+                                var txtSegundos = (TextBox)item.FindControl("txtSegundos");
+                                if (txtDias.Text != null)
+                                    txtDias.Text = detalle.Dias.ToString();
+                                if (txtHoras.Text != null)
+                                    txtHoras.Text = detalle.Horas.ToString();
+                                if (txtMinutos.Text != null)
+                                    txtMinutos.Text = detalle.Minutos.ToString();
+                                if (txtSegundos.Text != null)
+                                    txtSegundos.Text = detalle.Segundos.ToString();
+                                break;
+                            }
+                        }
+
+                    }
+
+                    TextBox txtTDias = (TextBox)rptSubRoles.Controls[rptSubRoles.Controls.Count - 1].Controls[0].FindControl("txtTotalDias");
+                    TextBox txtTHors = (TextBox)rptSubRoles.Controls[rptSubRoles.Controls.Count - 1].Controls[0].FindControl("txtTotalHoras");
+                    TextBox txtTMins = (TextBox)rptSubRoles.Controls[rptSubRoles.Controls.Count - 1].Controls[0].FindControl("txtTotalMinutos");
+                    TextBox txtTSegs = (TextBox)rptSubRoles.Controls[rptSubRoles.Controls.Count - 1].Controls[0].FindControl("txtTotalSegundos");
+                    if (txtTDias != null)
+                        txtTDias.Text = Sla.Dias.ToString();
+                    if (txtTHors != null)
+                        txtTHors.Text = Sla.Horas.ToString();
+                    if (txtTMins != null)
+                        txtTMins.Text = Sla.Minutos.ToString();
+                    if (txtTSegs != null)
+                        txtTSegs.Text = Sla.Segundos.ToString();
+                }
             }
         }
 
@@ -209,8 +265,8 @@ namespace KiiniHelp.UserControls.Altas
                 ValidarCaptura();
                 if (OnAceptarModal != null)
                     OnAceptarModal();
-                if (FromModal)
-                    _servicioSla.Guardar(Sla);
+                //if (FromModal)
+                //    _servicioSla.Guardar(Sla);
             }
             catch (Exception ex)
             {

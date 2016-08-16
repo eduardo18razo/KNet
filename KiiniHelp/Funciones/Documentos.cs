@@ -1,11 +1,6 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.IO;
-using System.Net;
 using System.Threading;
-using Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Interop.Word;
-using ApplicationClass = Microsoft.Office.Interop.Word.ApplicationClass;
 using Page = System.Web.UI.Page;
 
 namespace KiiniHelp.Funciones

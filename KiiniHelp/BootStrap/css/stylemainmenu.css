@@ -57,6 +57,7 @@
         visibility: visible;
         left: 100%;
         top: -1px;
+        z-index: 1;
     }
 
     .MenuVertical ul li a {

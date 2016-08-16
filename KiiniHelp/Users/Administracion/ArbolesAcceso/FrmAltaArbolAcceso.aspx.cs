@@ -26,16 +26,16 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
     public partial class FrmAltaArbolAcceso : Page
     {
         #region Variables
-        readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
-        readonly ServiceTipoArbolAccesoClient _servicioSistemaTipoArbol = new ServiceTipoArbolAccesoClient();
-        readonly ServiceTipoInfConsultaClient _servicioSistemaTipoInformacionConsulta = new ServiceTipoInfConsultaClient();
-        readonly ServiceArbolAccesoClient _servicioArbolAcceso = new ServiceArbolAccesoClient();
-        readonly ServiceMascarasClient _servicioMascaras = new ServiceMascarasClient();
-        readonly ServiceSlaClient _servicioSla = new ServiceSlaClient();
-        readonly ServiceEncuestaClient _servicioEncuesta = new ServiceEncuestaClient();
-        readonly ServiceInformacionConsultaClient _servicioInformacionConsulta = new ServiceInformacionConsultaClient();
-        readonly ServiceAreaClient _servicioAreas = new ServiceAreaClient();
-        readonly ServiceGrupoUsuarioClient _servicioGrupoUsuario = new ServiceGrupoUsuarioClient();
+        private readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
+        private readonly ServiceTipoArbolAccesoClient _servicioSistemaTipoArbol = new ServiceTipoArbolAccesoClient();
+        private readonly ServiceTipoInfConsultaClient _servicioSistemaTipoInformacionConsulta = new ServiceTipoInfConsultaClient();
+        private readonly ServiceArbolAccesoClient _servicioArbolAcceso = new ServiceArbolAccesoClient();
+        private readonly ServiceMascarasClient _servicioMascaras = new ServiceMascarasClient();
+        private readonly ServiceSlaClient _servicioSla = new ServiceSlaClient();
+        private readonly ServiceEncuestaClient _servicioEncuesta = new ServiceEncuestaClient();
+        private readonly ServiceInformacionConsultaClient _servicioInformacionConsulta = new ServiceInformacionConsultaClient();
+        private readonly ServiceAreaClient _servicioAreas = new ServiceAreaClient();
+        private readonly ServiceGrupoUsuarioClient _servicioGrupoUsuario = new ServiceGrupoUsuarioClient();
 
         private List<string> _lstError = new List<string>();
         #endregion Variables
@@ -627,20 +627,21 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
 
                 UcAltaMascaraAcceso.OnAceptarModal += UcAltaMascaraAcceso_OnAceptarModal;
                 UcAltaMascaraAcceso.OnCancelarModal += UcAltaMascaraAcceso_OnCancelarModal;
-                
+
                 AsociarGrupoUsuario.AsignacionAutomatica = true;
 
                 UcSla.FromModal = false;
                 UcSla.OnAceptarModal += UcSla_OnAceptarModal;
                 UcSla.OnCancelarModal += UcSla_OnCancelarModal;
 
-                AltaTiempoEstimado.OnAceptarModal += AltaTiempoEstimadoOnOnAceptarModal;
-                AltaTiempoEstimado.OnCancelarModal += AltaTiempoEstimadoOnOnCancelarModal;
+                ucAltaTiempoEstimado.OnAceptarModal += AltaTiempoEstimadoOnOnAceptarModal;
+                ucAltaTiempoEstimado.OnCancelarModal += AltaTiempoEstimadoOnOnCancelarModal;
 
                 UcEncuesta.OnAceptarModal += UcEncuesta_OnAceptarModal;
                 UcEncuesta.OnCancelarModal += UcEncuesta_OnCancelarModal;
 
                 UcImpactoUrgencia.OnAceptarModal += UcImpactoUrgencia_OnAceptarModal;
+                UcImpactoUrgencia.OnCancelarModal += UcImpactoUrgenciaOnOnCancelarModal;
 
                 if (!IsPostBack)
                 {
@@ -674,7 +675,25 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 }
                 _lstError.Add(ex.Message);
                 AlertaNivel = _lstError;
-            }   
+            }
+        }
+
+        private void UcImpactoUrgenciaOnOnCancelarModal()
+        {
+            try
+            {
+                btnModalImpactoUrgencia.CssClass = "btn btn-primary";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalImpacto\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaNivel = _lstError;
+            }
         }
 
         protected void OnClickNivelSubMenu(object sender, EventArgs e)
@@ -1190,11 +1209,11 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                         }
                         ValidaCapturaGrupos();
                         arbol.InventarioArbolAcceso = new List<InventarioArbolAcceso> { new InventarioArbolAcceso() };
-                        if (ddlTipoArbol.SelectedValue != ((int) BusinessVariables.EnumTipoArbol.Consultas).ToString())
+                        if (ddlTipoArbol.SelectedValue != ((int)BusinessVariables.EnumTipoArbol.Consultas).ToString())
                         {
-                            arbol.InventarioArbolAcceso.First().IdMascara = Convert.ToInt32(ddlMascaraAcceso.SelectedValue) == 0 ? (int?) null : Convert.ToInt32(ddlMascaraAcceso.SelectedValue);
+                            arbol.InventarioArbolAcceso.First().IdMascara = Convert.ToInt32(ddlMascaraAcceso.SelectedValue) == 0 ? (int?)null : Convert.ToInt32(ddlMascaraAcceso.SelectedValue);
                             arbol.InventarioArbolAcceso.First().Sla = UcSla.Sla;
-                            arbol.InventarioArbolAcceso.First().IdEncuesta = Convert.ToInt32(ddlEncuesta.SelectedValue) == BusinessVariables.ComboBoxCatalogo.Value ? (int?) null : Convert.ToInt32(ddlEncuesta.SelectedValue);
+                            arbol.InventarioArbolAcceso.First().IdEncuesta = Convert.ToInt32(ddlEncuesta.SelectedValue) == BusinessVariables.ComboBoxCatalogo.Value ? (int?)null : Convert.ToInt32(ddlEncuesta.SelectedValue);
                         }
                         arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol = new List<GrupoUsuarioInventarioArbol>();
                         arbol.TiempoInformeArbol = new List<TiempoInformeArbol>();
@@ -1234,12 +1253,12 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                                     {
                                         IdTipoGrupo = gpo.IdTipoGrupo,
                                         IdGrupoUsuario = gpo.Id,
-                                        Dias = AltaTiempoEstimado.TiempoDueño.Dias,
-                                        Horas = AltaTiempoEstimado.TiempoDueño.Horas,
-                                        Minutos = AltaTiempoEstimado.TiempoDueño.Minutos,
-                                        Segundos = AltaTiempoEstimado.TiempoDueño.Segundos,
-                                        TiempoNotificacion = AltaTiempoEstimado.TiempoDueño.TiempoNotificacion,
-                                        IdTipoNotificacion = AltaTiempoEstimado.TiempoDueño.IdTipoNotificacion
+                                        Dias = ucAltaTiempoEstimado.TiempoDueño.Dias,
+                                        Horas = ucAltaTiempoEstimado.TiempoDueño.Horas,
+                                        Minutos = ucAltaTiempoEstimado.TiempoDueño.Minutos,
+                                        Segundos = ucAltaTiempoEstimado.TiempoDueño.Segundos,
+                                        TiempoNotificacion = ucAltaTiempoEstimado.TiempoDueño.TiempoNotificacion,
+                                        IdTipoNotificacion = ucAltaTiempoEstimado.TiempoDueño.IdTipoNotificacion
 
                                     });
                                         break;
@@ -1248,12 +1267,12 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                                     {
                                         IdTipoGrupo = gpo.IdTipoGrupo,
                                         IdGrupoUsuario = gpo.Id,
-                                        Dias = AltaTiempoEstimado.TiempoDesarrollo.Dias,
-                                        Horas = AltaTiempoEstimado.TiempoDesarrollo.Horas,
-                                        Minutos = AltaTiempoEstimado.TiempoDesarrollo.Minutos,
-                                        Segundos = AltaTiempoEstimado.TiempoDesarrollo.Segundos,
-                                        TiempoNotificacion = AltaTiempoEstimado.TiempoDesarrollo.TiempoNotificacion,
-                                        IdTipoNotificacion = AltaTiempoEstimado.TiempoDesarrollo.IdTipoNotificacion
+                                        Dias = ucAltaTiempoEstimado.TiempoDesarrollo.Dias,
+                                        Horas = ucAltaTiempoEstimado.TiempoDesarrollo.Horas,
+                                        Minutos = ucAltaTiempoEstimado.TiempoDesarrollo.Minutos,
+                                        Segundos = ucAltaTiempoEstimado.TiempoDesarrollo.Segundos,
+                                        TiempoNotificacion = ucAltaTiempoEstimado.TiempoDesarrollo.TiempoNotificacion,
+                                        IdTipoNotificacion = ucAltaTiempoEstimado.TiempoDesarrollo.IdTipoNotificacion
 
                                     });
                                         break;
@@ -1262,12 +1281,12 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                                     {
                                         IdTipoGrupo = gpo.IdTipoGrupo,
                                         IdGrupoUsuario = gpo.Id,
-                                        Dias = AltaTiempoEstimado.TiempoConsulta.Dias,
-                                        Horas = AltaTiempoEstimado.TiempoConsulta.Horas,
-                                        Minutos = AltaTiempoEstimado.TiempoConsulta.Minutos,
-                                        Segundos = AltaTiempoEstimado.TiempoConsulta.Segundos,
-                                        TiempoNotificacion = AltaTiempoEstimado.TiempoConsulta.TiempoNotificacion,
-                                        IdTipoNotificacion = AltaTiempoEstimado.TiempoConsulta.IdTipoNotificacion
+                                        Dias = ucAltaTiempoEstimado.TiempoConsulta.Dias,
+                                        Horas = ucAltaTiempoEstimado.TiempoConsulta.Horas,
+                                        Minutos = ucAltaTiempoEstimado.TiempoConsulta.Minutos,
+                                        Segundos = ucAltaTiempoEstimado.TiempoConsulta.Segundos,
+                                        TiempoNotificacion = ucAltaTiempoEstimado.TiempoConsulta.TiempoNotificacion,
+                                        IdTipoNotificacion = ucAltaTiempoEstimado.TiempoConsulta.IdTipoNotificacion
 
                                     });
                                         break;
@@ -1634,7 +1653,10 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
             {
                 ValidaCapturaGrupos();
                 btnModalGrupos.CssClass = "btn btn-success";
-                btnModalSla.CssClass = "btn btn-primary";
+                if (Convert.ToInt32(ddlTipoArbol.SelectedValue) == (int)BusinessVariables.EnumTipoArbol.Consultas)
+                    btnModalImpactoUrgencia.CssClass = "btn btn-primary";
+                else
+                    btnModalSla.CssClass = "btn btn-primary";
                 int idGrupo = 0;
                 foreach (RepeaterItem item in AsociarGrupoUsuario.GruposAsociados)
                 {
@@ -1777,7 +1799,6 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 throw new Exception(ex.Message);
             }
         }
-        #endregion Abre modales Maestros
 
         protected void btnModalImpactoUrgencia_OnClick(object sender, EventArgs e)
         {
@@ -1793,8 +1814,11 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
 
                 throw new Exception(ex.Message);
             }
-            
+
         }
+        #endregion Abre modales Maestros
+
+        
     }
 }
 

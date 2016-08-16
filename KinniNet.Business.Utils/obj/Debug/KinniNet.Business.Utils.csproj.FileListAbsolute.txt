@@ -14,6 +14,6 @@ C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\Kin
 C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.pdb
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KinniNet.Business.Utils\bin\Debug\KinniNet.Business.Utils.dll
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KinniNet.Business.Utils\bin\Debug\KinniNet.Business.Utils.pdb
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.dll
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.pdb
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.csprojResolveAssemblyReference.cache

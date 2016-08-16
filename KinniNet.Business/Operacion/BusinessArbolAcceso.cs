@@ -240,7 +240,7 @@ namespace KinniNet.Core.Operacion
                 if (arbol.EsTerminal && arbol.IdTipoArbolAcceso != (int)BusinessVariables.EnumTipoArbol.Consultas)
                 {
                     arbol.InventarioArbolAcceso.First().Sla.TiempoHoraProceso =
-                        arbol.InventarioArbolAcceso.First().Sla.Dias + 
+                        arbol.InventarioArbolAcceso.First().Sla.Dias +
                         (arbol.InventarioArbolAcceso.First().Sla.Horas / 8) +
                         ((arbol.InventarioArbolAcceso.First().Sla.Minutos / 24) / 8) +
                         (((arbol.InventarioArbolAcceso.First().Sla.Segundos / 60) / 24) / 8);
@@ -414,6 +414,7 @@ namespace KinniNet.Core.Operacion
                 db.LoadProperty(result, "Nivel6");
                 db.LoadProperty(result, "Nivel7");
                 db.LoadProperty(result, "InventarioArbolAcceso");
+                db.LoadProperty(result, "TiempoInformeArbol");
                 foreach (InventarioArbolAcceso inventarioArbol in result.InventarioArbolAcceso)
                 {
                     db.LoadProperty(inventarioArbol, "GrupoUsuarioInventarioArbol");
@@ -426,6 +427,7 @@ namespace KinniNet.Core.Operacion
                     foreach (InventarioInfConsulta inventarioInformacion in inventarioArbol.InventarioInfConsulta)
                     {
                         db.LoadProperty(inventarioInformacion, "InformacionConsulta");
+                        db.LoadProperty(inventarioInformacion.InformacionConsulta, "TipoInfConsulta");
                     }
                 }
             }
@@ -518,38 +520,124 @@ namespace KinniNet.Core.Operacion
             }
         }
 
-        public void ActualizardArbol(ArbolAcceso arbolAcceso)
+        public void ActualizardArbol(int idArbolAcceso, ArbolAcceso arbolAccesoActualizar, string descripcion)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.LazyLoadingEnabled = true;
-                ArbolAcceso arbol = db.ArbolAcceso.SingleOrDefault(s => s.Id == arbolAcceso.Id);
+                ArbolAcceso arbol = db.ArbolAcceso.SingleOrDefault(s => s.Id == idArbolAcceso);
                 if (arbol != null)
                 {
-                    if (arbol.Nivel1 != null)
-                        arbol.Nivel1.Descripcion = arbolAcceso.Nivel1.Descripcion.ToUpper();
+                    List<GrupoUsuarioInventarioArbol> gpoToRemove = arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(gpo => !arbolAccesoActualizar.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Any(a => a.IdGrupoUsuario == gpo.IdGrupoUsuario && a.IdRol == gpo.IdRol && a.IdSubGrupoUsuario == gpo.IdSubGrupoUsuario)).ToList();
 
-                    if (arbol.Nivel2 != null)
-                        arbol.Nivel2.Descripcion = arbolAcceso.Nivel2.Descripcion.ToUpper();
+                    foreach (GrupoUsuarioInventarioArbol gpo in gpoToRemove)
+                    {
+                        db.GrupoUsuarioInventarioArbol.DeleteObject(gpo);
+                    }
 
-                    if (arbol.Nivel3 != null)
-                        arbol.Nivel3.Descripcion = arbolAcceso.Nivel3.Descripcion.ToUpper();
+                    foreach (GrupoUsuarioInventarioArbol gpo in arbolAccesoActualizar.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(gpo => !arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Any(a => a.IdGrupoUsuario == gpo.IdGrupoUsuario && a.IdRol == gpo.IdRol && a.IdSubGrupoUsuario == gpo.IdSubGrupoUsuario)))
+                    {
+                        arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Add(gpo);
+                    }
 
-                    if (arbol.Nivel4 != null)
-                        arbol.Nivel4.Descripcion = arbolAcceso.Nivel4.Descripcion.ToUpper();
+                    foreach (InventarioInfConsulta infConsulta in arbolAccesoActualizar.InventarioArbolAcceso.First().InventarioInfConsulta)
+                    {
+                        InformacionConsulta info = db.InformacionConsulta.Single(s => s.Id == infConsulta.IdInfConsulta);
+                        arbol.InventarioArbolAcceso.First().InventarioInfConsulta.Single(w => w.InformacionConsulta.IdTipoInfConsulta == info.IdTipoInfConsulta).IdInfConsulta = infConsulta.IdInfConsulta;
+                    }
 
-                    if (arbol.Nivel5 != null)
-                        arbol.Nivel5.Descripcion = arbolAcceso.Nivel5.Descripcion.ToUpper();
+                    if (arbol.IdTipoUsuario != (int) BusinessVariables.EnumTipoArbol.Consultas)
+                    {
+                        arbol.InventarioArbolAcceso.First().Sla.Descripcion =
+                            arbolAccesoActualizar.InventarioArbolAcceso.First().Sla.Descripcion;
+                        arbol.InventarioArbolAcceso.First().Sla.Dias =
+                            arbolAccesoActualizar.InventarioArbolAcceso.First().Sla.Dias;
+                        arbol.InventarioArbolAcceso.First().Sla.Horas =
+                            arbolAccesoActualizar.InventarioArbolAcceso.First().Sla.Horas;
+                        arbol.InventarioArbolAcceso.First().Sla.Minutos =
+                            arbolAccesoActualizar.InventarioArbolAcceso.First().Sla.Minutos;
+                        arbol.InventarioArbolAcceso.First().Sla.Segundos =
+                            arbolAccesoActualizar.InventarioArbolAcceso.First().Sla.Segundos;
+                        arbol.InventarioArbolAcceso.First().Sla.TiempoHoraProceso =
+                            arbolAccesoActualizar.InventarioArbolAcceso.First().Sla.TiempoHoraProceso;
+                        arbol.InventarioArbolAcceso.First().Sla.Detallado =
+                            arbolAccesoActualizar.InventarioArbolAcceso.First().Sla.Detallado;
+                        List<SlaDetalle> slaDetalleRemove = new List<SlaDetalle>();
+                        foreach (SlaDetalle detRemove in arbol.InventarioArbolAcceso.First().Sla.SlaDetalle)
+                        {
 
-                    if (arbol.Nivel6 != null)
-                        arbol.Nivel6.Descripcion = arbolAcceso.Nivel6.Descripcion.ToUpper();
+                        }
+                        if (arbolAccesoActualizar.InventarioArbolAcceso.First().Sla.Detallado)
+                        {
+                            if (arbol.InventarioArbolAcceso.First().Sla.SlaDetalle == null)
+                                arbol.InventarioArbolAcceso.First().Sla.SlaDetalle = new List<SlaDetalle>();
+                        }
+
+                        if (arbol.TiempoInformeArbol.Count > 0)
+                            foreach (TiempoInformeArbol informeArbol in arbolAccesoActualizar.TiempoInformeArbol.Distinct())
+                            {
+                                switch (informeArbol.IdTipoGrupo)
+                                {
+                                    case (int) BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento:
+                                        TiempoInformeArbol tInformeMto = db.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
+                                        tInformeMto = arbol.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
+                                        if (tInformeMto != null)
+                                        {
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).Dias = informeArbol.Dias;
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).Horas = informeArbol.Horas;
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).Minutos = informeArbol.Minutos;
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).Segundos = informeArbol.Segundos;
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).IdTipoNotificacion = informeArbol.IdTipoNotificacion;
+                                        }
+                                        break;
+                                    case (int) BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
+                                        TiempoInformeArbol tInformeDev = db.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
+                                        tInformeDev = arbol.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
+                                        if (tInformeDev != null)
+                                        {
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).Dias = informeArbol.Dias;
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).Horas = informeArbol.Horas;
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).Minutos = informeArbol.Minutos;
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).Segundos = informeArbol.Segundos;
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).IdTipoNotificacion = informeArbol.IdTipoNotificacion;
+                                        }
+                                        break;
+
+                                    case (int) BusinessVariables.EnumTiposGrupos.EspecialDeConsulta:
+                                        TiempoInformeArbol tInformeCons = db.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
+                                        tInformeCons = arbol.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
+                                        if (tInformeCons != null)
+                                        {
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).Dias = informeArbol.Dias;
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).Horas = informeArbol.Horas;
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).Minutos = informeArbol.Minutos;
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).Segundos = informeArbol.Segundos;
+                                            arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).IdTipoNotificacion = informeArbol.IdTipoNotificacion;
+                                        }
+                                        break;
+                                }
+                            }
+                    }
+
+                    arbol.IdImpacto = arbolAccesoActualizar.IdImpacto;
+                    arbol.InventarioArbolAcceso.First().IdMascara = arbolAccesoActualizar.InventarioArbolAcceso.First().IdMascara;
+                    arbol.InventarioArbolAcceso.First().IdEncuesta = arbolAccesoActualizar.InventarioArbolAcceso.First().IdEncuesta;
 
                     if (arbol.Nivel7 != null)
-                        arbol.Nivel7.Descripcion = arbolAcceso.Nivel7.Descripcion.ToUpper();
-
-                    if (arbol.Id == 0)
-                        db.ArbolAcceso.AddObject(arbol);
+                        arbol.Nivel7.Descripcion = descripcion.Trim().ToUpper();
+                    else if (arbol.Nivel6 != null)
+                        arbol.Nivel6.Descripcion = descripcion.Trim().ToUpper();
+                    else if (arbol.Nivel5 != null)
+                        arbol.Nivel5.Descripcion = descripcion.Trim().ToUpper();
+                    else if (arbol.Nivel4 != null)
+                        arbol.Nivel4.Descripcion = descripcion.Trim().ToUpper();
+                    else if (arbol.Nivel3 != null)
+                        arbol.Nivel3.Descripcion = descripcion.Trim().ToUpper();
+                    else if (arbol.Nivel2 != null)
+                        arbol.Nivel2.Descripcion = descripcion.Trim().ToUpper();
+                    else if (arbol.Nivel1 != null)
+                        arbol.Nivel1.Descripcion = descripcion.Trim().ToUpper();
 
                     db.SaveChanges();
                 }

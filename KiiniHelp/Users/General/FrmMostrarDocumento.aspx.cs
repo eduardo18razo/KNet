@@ -13,7 +13,7 @@ namespace KiiniHelp.Users.General
             {
                 string nombreDocto = Request.QueryString["NombreDocumento"];
                 int tipoInformacion = Convert.ToInt32(Request.QueryString["TipoDocumento"]);
-                string directorio = Server.MapPath("~/General/");
+                string directorio = Server.MapPath("~/Users/General/");
                 if (!IsPostBack)
                 {
                     switch (tipoInformacion)

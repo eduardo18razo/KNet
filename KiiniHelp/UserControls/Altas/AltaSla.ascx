@@ -2,6 +2,7 @@
 <asp:UpdatePanel runat="server">
     <ContentTemplate>
         <asp:HiddenField runat="server" ID="hfFromModal"/>
+        <asp:HiddenField runat="server" ID="hfIdSla"/>
         <header id="panelAlert" runat="server" visible="False">
             <div class="alert alert-danger">
                 <div>

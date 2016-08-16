@@ -634,13 +634,13 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso {
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
         
         /// <summary>
-        /// Control AltaTiempoEstimado.
+        /// Control ucAltaTiempoEstimado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.AltaTiempoEstimado AltaTiempoEstimado;
+        protected global::KiiniHelp.UserControls.Altas.AltaTiempoEstimado ucAltaTiempoEstimado;
         
         /// <summary>
         /// Control UpdatePanel3.

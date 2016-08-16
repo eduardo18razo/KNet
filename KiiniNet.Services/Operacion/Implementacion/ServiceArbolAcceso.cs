@@ -198,13 +198,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public void ActualizardArbol(ArbolAcceso arbolAcceso)
+        public void ActualizardArbol(int idArbolAcceso, ArbolAcceso arbolAcceso, string descripcion)
         {
             try
             {
                 using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
                 {
-                    negocio.ActualizardArbol(arbolAcceso);
+                    negocio.ActualizardArbol(idArbolAcceso, arbolAcceso, descripcion);
                 }
             }
             catch (Exception ex)
