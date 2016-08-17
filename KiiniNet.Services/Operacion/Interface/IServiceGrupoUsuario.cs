@@ -43,5 +43,11 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void ActualizarGrupo(GrupoUsuario gpo);
+
+        [OperationContract]
+        List<HorarioSubGrupo> ObtenerHorariosByIdSubGrupo(int idSubGrupo);
+
+        [OperationContract]
+        List<DiaFestivoSubGrupo> ObtenerDiasByIdSubGrupo(int idSubGrupo);
     }
 }

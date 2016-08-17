@@ -41,6 +41,18 @@ namespace KiiniHelp.UserControls.Altas
             get { return rptDias.Items; }
         }
 
+        public void SetDiasFestivosSubRol(List<DiaFestivoSubGrupo> lstDiasfestivos, int idSubRol)
+        {
+            try
+            {
+                IdSubRol = idSubRol;
+                MuestraDias(lstDiasfestivos);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         private void LimpiarCampos()
         {
             try

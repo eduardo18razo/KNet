@@ -52,6 +52,12 @@ namespace KiiniHelp.ServiceGrupoUsuario {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ActualizarGrupo", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ActualizarGrupoResponse")]
         void ActualizarGrupo(KiiniNet.Entities.Cat.Usuario.GrupoUsuario gpo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerHorariosByIdSubGrupo", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerHorariosByIdSubGrupoResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.HorarioSubGrupo> ObtenerHorariosByIdSubGrupo(int idSubGrupo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerDiasByIdSubGrupo", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerDiasByIdSubGrupoResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFestivoSubGrupo> ObtenerDiasByIdSubGrupo(int idSubGrupo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -127,6 +133,14 @@ namespace KiiniHelp.ServiceGrupoUsuario {
         
         public void ActualizarGrupo(KiiniNet.Entities.Cat.Usuario.GrupoUsuario gpo) {
             base.Channel.ActualizarGrupo(gpo);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.HorarioSubGrupo> ObtenerHorariosByIdSubGrupo(int idSubGrupo) {
+            return base.Channel.ObtenerHorariosByIdSubGrupo(idSubGrupo);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFestivoSubGrupo> ObtenerDiasByIdSubGrupo(int idSubGrupo) {
+            return base.Channel.ObtenerDiasByIdSubGrupo(idSubGrupo);
         }
     }
 }

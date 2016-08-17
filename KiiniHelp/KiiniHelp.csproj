@@ -149,6 +149,8 @@
     <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.standalone.min.css.map" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.Puesto.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.Sla1.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.HorarioSubGrupo.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.DiaFestivoSubGrupo.datasource" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />

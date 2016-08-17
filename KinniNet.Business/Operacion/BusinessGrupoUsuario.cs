@@ -302,6 +302,7 @@ namespace KinniNet.Core.Operacion
                 {
                     db.LoadProperty(result, "TipoUsuario");
                     db.LoadProperty(result, "TipoGrupo");
+                    db.LoadProperty(result, "SubGrupoUsuario");
                 }
             }
             catch (Exception ex)
@@ -471,7 +472,7 @@ namespace KinniNet.Core.Operacion
             finally { db.Dispose(); }
             return result;
         }
-        
+
         public void HabilitarGrupo(int idGrupo, bool habilitado)
         {
             DataBaseModelContext db = new DataBaseModelContext();
@@ -489,6 +490,45 @@ namespace KinniNet.Core.Operacion
             {
                 db.Dispose();
             }
+        }
+
+        public List<HorarioSubGrupo> ObtenerHorariosByIdSubGrupo(int idSubGrupo)
+        {
+            List<HorarioSubGrupo> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.HorarioSubGrupo.Where(w => w.IdSubGrupoUsuario == idSubGrupo).ToList();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        public List<DiaFestivoSubGrupo> ObtenerDiasByIdSubGrupo(int idSubGrupo)
+        {
+            List<DiaFestivoSubGrupo> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.DiaFestivoSubGrupo.Where(w => w.IdSubGrupoUsuario == idSubGrupo).ToList();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
         }
 
         public List<GrupoUsuario> ObtenerGruposUsuarioAll(int? idTipoUsuario, int? idTipoGrupo)
@@ -528,8 +568,55 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
+                db.ContextOptions.LazyLoadingEnabled = true;
                 GrupoUsuario grupo = db.GrupoUsuario.SingleOrDefault(w => w.Id == gpo.Id);
-                if (grupo != null) grupo.Descripcion = gpo.Descripcion.Trim().ToUpper();
+                if (grupo != null)
+                {
+                    List<SubGrupoUsuario> sbGpoRemove = (grupo.SubGrupoUsuario.Select(sbGpo => new { sbGpo, sbDelete = gpo.SubGrupoUsuario.SingleOrDefault(s => s.IdGrupoUsuario == sbGpo.IdGrupoUsuario && s.IdSubRol == sbGpo.IdSubRol) }).Where(@t => @t.sbDelete == null).Select(@t => @t.sbGpo)).ToList();
+                    foreach (SubGrupoUsuario subGrupoUsuario in sbGpoRemove)
+                    {
+                        db.SubGrupoUsuario.DeleteObject(subGrupoUsuario);
+                    }
+
+                    foreach (SubGrupoUsuario sbGpoAdd in gpo.SubGrupoUsuario)
+                    {
+                        if (!grupo.SubGrupoUsuario.Any(a => a.IdGrupoUsuario == sbGpoAdd.IdGrupoUsuario && a.IdSubRol == sbGpoAdd.IdSubRol))
+                            grupo.SubGrupoUsuario.Add(sbGpoAdd);
+                    }
+                    foreach (SubGrupoUsuario sbGpoDias in gpo.SubGrupoUsuario)
+                    {
+                        if (sbGpoDias.DiaFestivoSubGrupo != null)
+                            foreach (DiaFestivoSubGrupo diaFestivoSubGrupo in sbGpoDias.DiaFestivoSubGrupo)
+                            {
+                                if (!grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoDias.IdGrupoUsuario && w.IdSubRol == sbGpoDias.IdSubRol).DiaFestivoSubGrupo.Any(a => a.Fecha == diaFestivoSubGrupo.Fecha))
+                                    grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoDias.IdGrupoUsuario && w.IdSubRol == sbGpoDias.IdSubRol).DiaFestivoSubGrupo.Add(diaFestivoSubGrupo);
+                            }
+                    }
+
+                    foreach (SubGrupoUsuario sbGpoDias in gpo.SubGrupoUsuario)
+                    {
+                        if (sbGpoDias.HorarioSubGrupo != null)
+                            foreach (HorarioSubGrupo horarioFestivoSubGrupo in sbGpoDias.HorarioSubGrupo)
+                            {
+                                if (
+                                    !grupo.SubGrupoUsuario.Single(
+                                        w =>
+                                            w.IdGrupoUsuario == sbGpoDias.IdGrupoUsuario && w.IdSubRol == sbGpoDias.IdSubRol)
+                                        .HorarioSubGrupo.Any(a => a.Dia == horarioFestivoSubGrupo.Dia))
+                                    grupo.SubGrupoUsuario.Single(
+                                        w =>
+                                            w.IdGrupoUsuario == sbGpoDias.IdGrupoUsuario && w.IdSubRol == sbGpoDias.IdSubRol)
+                                        .HorarioSubGrupo.Add(horarioFestivoSubGrupo);
+                                else
+                                {
+                                    grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoDias.IdGrupoUsuario && w.IdSubRol == sbGpoDias.IdSubRol).HorarioSubGrupo.Single(a => a.Dia == horarioFestivoSubGrupo.Dia).HoraInicio = horarioFestivoSubGrupo.HoraInicio;
+                                    grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoDias.IdGrupoUsuario && w.IdSubRol == sbGpoDias.IdSubRol).HorarioSubGrupo.Single(a => a.Dia == horarioFestivoSubGrupo.Dia).HoraFin = horarioFestivoSubGrupo.HoraFin;
+                                }
+
+                            }
+                    }
+                    grupo.Descripcion = gpo.Descripcion.Trim().ToUpper();
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)

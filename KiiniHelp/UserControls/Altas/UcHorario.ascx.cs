@@ -32,9 +32,28 @@ namespace KiiniHelp.UserControls.Altas
             set { hfIdSubRol.Value = value.ToString(); }
         }
 
+        public bool EsAlta
+        {
+            get { return Convert.ToBoolean(hfEsAlta.Value); }
+            set { hfEsAlta.Value = value.ToString(); }
+        }
+
         public RepeaterItemCollection HorariosSubRol
         {
             get { return rptHorarios.Items; }
+        }
+
+        public void SetHorariosSubRol(List<HorarioSubGrupo> lstHorarios, int idSubRol)
+        {
+            try
+            {
+                IdSubRol = idSubRol;
+                MuestraHorarios(lstHorarios);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         private void LimpiarCampos()

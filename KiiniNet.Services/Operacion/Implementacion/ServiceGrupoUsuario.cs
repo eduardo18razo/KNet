@@ -187,5 +187,35 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<HorarioSubGrupo> ObtenerHorariosByIdSubGrupo(int idSubGrupo)
+        {
+            try
+            {
+                using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
+                {
+                    return negocio.ObtenerHorariosByIdSubGrupo(idSubGrupo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<DiaFestivoSubGrupo> ObtenerDiasByIdSubGrupo(int idSubGrupo)
+        {
+            try
+            {
+                using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
+                {
+                    return negocio.ObtenerDiasByIdSubGrupo(idSubGrupo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

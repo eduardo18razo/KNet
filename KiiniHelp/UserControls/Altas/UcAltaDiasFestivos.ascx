@@ -55,6 +55,7 @@
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <div class="row form-control" style="margin-top: 5px; height: 48px">
+                                    <asp:Label runat="server" ID="lblId" Text='<%# Eval("Id") %>' Visible="False" />
                                     <asp:Label runat="server" Text='<%# Eval("IdSubGrupoUsuario") %>' ID="lblSubRol" Visible="False" />
                                     <asp:Label runat="server" Text='<%# Eval("Fecha", "{0:d}") %>' ID="lblFecha" CssClass="col-sm-2" />
                                     <asp:Label runat="server" Text='<%# Eval("Descripcion") %>' ID="lblDescripcion" CssClass="col-sm-7" />

@@ -39,6 +39,7 @@
             </div>
             <div class="panel-body">
                 <asp:HiddenField runat="server" ID="hfIdSubRol" />
+                <asp:HiddenField runat="server" ID="hfEsAlta" />
                 <div class="form-horizontal">
                     <div class="form-group">
                         <asp:Label runat="server" Text="Hora Inicio" CssClass="col-sm-2 control-label" />
@@ -79,7 +80,7 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <div class="row form-control" style="margin-top: 5px; height: 48px">
-
+                                        <asp:Label runat="server" ID="lblId" Text='<%# Eval("Id") %>' Visible="False" />
                                         <asp:Label runat="server" ID="lblIdSubRol" Text='<%# Eval("IdSubGrupoUsuario") %>' Visible="False" />
                                         <asp:Label runat="server" ID="lblDia" Text='<%# Eval("Dia") %>' Visible="False" />
                                         <asp:Label runat="server" Text='<%# (int)Eval("Dia") == 1 ? "Lunes" : (int)Eval("Dia") == 2 ? "MARTES" : (int)Eval("Dia") == 3 ? "MIERCOLES" : (int)Eval("Dia") == 4 ? "JUEVES" : (int)Eval("Dia") == 5 ? "VIERNES" : (int)Eval("Dia") == 6 ? "SABADO" : "DOMINGO"%>' CssClass="col-sm-4" />

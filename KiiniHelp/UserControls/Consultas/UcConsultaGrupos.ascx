@@ -181,9 +181,9 @@
     </asp:UpdatePanel>
     <%--MODAL GRUPO USUARIO--%>
     <div class="modal fade" id="modalAltaGrupoUsuarios" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-        <asp:UpdatePanel ID="upAltaGrupo" runat="server">
+        <asp:UpdatePanel ID="upAltaGrupo" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <div class="modal-dialog modal-md">
+                <div class="modal-dialog" style="height: 780px; width: 650px">
                     <div class="modal-content">
                         <uc:altagrupousuario runat="server" ID="ucAltaGrupoUsuario" />
                     </div>

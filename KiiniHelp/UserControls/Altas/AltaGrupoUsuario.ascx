@@ -91,10 +91,10 @@
 
 
 <%--MODAL HORARO--%>
-<div class="modal fade" id="modalHorarios" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div class="modal fade" id="modalHorarios" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: auto">
     <%--<asp:UpdatePanel ID="upHorarios" runat="server" >
                 <ContentTemplate>--%>
-    <div class="modal-dialog">
+    <div class="modal-dialog" >
         <div class="modal-content">
             <uc1:UcHorario runat="server" ID="ucHorario" />
         </div>
@@ -104,7 +104,7 @@
 </div>
 
 <%--MODAL DIAS DESCANSO--%>
-<div class="modal fade" id="modalDiasDescanso" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div class="modal fade" id="modalDiasDescanso" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: auto">
     <%--<asp:UpdatePanel ID="upDiasDescanso" runat="server" UpdateMode="Conditional">
         <ContentTemplate>--%>
     <div class="modal-dialog">

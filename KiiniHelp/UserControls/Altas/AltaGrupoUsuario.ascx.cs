@@ -103,7 +103,6 @@ namespace KiiniHelp.UserControls.Altas
             set
             {
                 ViewState["Alta"] = value.ToString();
-                rptSubRoles.Visible = value;
             }
         }
 
@@ -116,20 +115,48 @@ namespace KiiniHelp.UserControls.Altas
                 IdTipoUsuario = value.IdTipoUsuario;
                 IdTipoGrupo = value.IdTipoGrupo;
                 txtDescripcionGrupoUsuario.Text = value.Descripcion;
-                foreach (CheckBox chk in from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol"))
-                {
-                    chk.Checked = false;
-                    OnCheckedChanged(chk, null);
-                }
+                //foreach (CheckBox chk in from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol"))
+                //{
+                //    chk.Checked = false;
+                //    OnCheckedChanged(chk, null);
+                //}
                 if (value.SubGrupoUsuario == null) return;
-                foreach (SubGrupoUsuario subGrupo in value.SubGrupoUsuario)
+                foreach (SubGrupoUsuario subGrupo in value.SubGrupoUsuario.OrderBy(o => o.IdSubRol))
                 {
-                    foreach (CheckBox chk in from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol"))
+                    foreach (RepeaterItem item in rptSubRoles.Items)
                     {
-                        chk.Checked = subGrupo.Id == Convert.ToInt32(chk.Attributes["value"]);
-                        if (chk.Checked)
-                            OnCheckedChanged(chk, null);
+                        CheckBox chk = (CheckBox)item.FindControl("chkSubRol");
+                        if (chk != null)
+                        {
+                            Button btn = (Button)item.FindControl("btnHorarios");
+                            btn.CommandName = subGrupo.Id.ToString();
+                            if (subGrupo.Id == Convert.ToInt32(chk.Attributes["value"]))
+                            {
+                                chk.Checked = subGrupo.Id == Convert.ToInt32(chk.Attributes["value"]);
+                                if (chk.Checked)
+                                {
+                                    //ucHorario.SetHorariosSubRol(subGrupo.HorarioSubGrupo);
+                                    //ucAltaDiasFestivos.SetDiasFestivosSubRol(subGrupo.DiaFestivoSubGrupo);
+                                    OnCheckedChanged(chk, null);
+                                    break;
+                                }
+                            }
+                        }
                     }
+                    //foreach (CheckBox chk in from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol"))
+                    //{
+                    //    if (subGrupo.Id == Convert.ToInt32(chk.Attributes["value"]))
+                    //    {
+                    //        chk.Checked = subGrupo.Id == Convert.ToInt32(chk.Attributes["value"]);
+                    //        if (chk.Checked)
+                    //        {
+                    //            ucHorario.SetHorariosSubRol(subGrupo.HorarioSubGrupo);
+                    //            ucAltaDiasFestivos.SetDiasFestivosSubRol(subGrupo.DiaFestivoSubGrupo);
+                    //            OnCheckedChanged(chk, null);
+                    //            break;
+                    //        }
+                    //    }
+                    //}
                 }
             }
         }
@@ -187,15 +214,13 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 Session["HorariosSubRoles"] = Session["HorariosSubRoles"] ?? new List<HorarioSubGrupo>();
+                List<HorarioSubGrupo> tmpEliminar = null;
                 foreach (RepeaterItem item in ucHorario.HorariosSubRol)
                 {
                     Label lblIdSubRol = (Label)item.FindControl("lblIdSubRol");
-                    var tmpEliminar = ((List<HorarioSubGrupo>)Session["HorariosSubRoles"]).Where(w => w.IdSubGrupoUsuario == Convert.ToInt32(lblIdSubRol.Text));
-                    foreach (HorarioSubGrupo dia in tmpEliminar)
-                    {
-                        ((List<HorarioSubGrupo>)Session["HorariosSubRoles"]).Remove(dia);
-                    }
+                    ((List<HorarioSubGrupo>)Session["HorariosSubRoles"]).RemoveAll(w => w.IdSubGrupoUsuario == Convert.ToInt32(lblIdSubRol.Text));
                 }
+
                 foreach (RepeaterItem item in ucHorario.HorariosSubRol)
                 {
                     Label lblIdSubRol = (Label)item.FindControl("lblIdSubRol");
@@ -382,8 +407,14 @@ namespace KiiniHelp.UserControls.Altas
                 {
                     grupoUsuario = GrupoUsuario;
                     grupoUsuario.Descripcion = txtDescripcionGrupoUsuario.Text;
-                    if (grupoUsuario.SubGrupoUsuario != null)
-                        grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
+                    foreach (CheckBox chk in from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol"))
+                    {
+                        if (Session["DiasSubRoles"] != null)
+                            grupoUsuario.SubGrupoUsuario.Single(w => w.Id == Convert.ToInt32(chk.Attributes["value"])).DiaFestivoSubGrupo = ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Where(w => w.IdSubGrupoUsuario == Convert.ToInt32(chk.Attributes["value"])).ToList();
+                        if (Session["HorariosSubRoles"] != null)
+                            grupoUsuario.SubGrupoUsuario.Single(w => w.Id == Convert.ToInt32(chk.Attributes["value"])).HorarioSubGrupo = ((List<HorarioSubGrupo>)Session["HorariosSubRoles"]).Where(w => w.IdSubGrupoUsuario == Convert.ToInt32(chk.Attributes["value"])).ToList();
+
+                    }
                     _servicioGrupoUsuario.ActualizarGrupo(grupoUsuario);
 
                 }
@@ -540,7 +571,14 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                ucHorario.IdSubRol = Convert.ToInt32(((Button)sender).CommandArgument);
+                if (Alta)
+                {
+                    ucHorario.IdSubRol = Convert.ToInt32(((Button)sender).CommandArgument);
+                }
+                else
+                {
+                    ucHorario.SetHorariosSubRol(_servicioGrupoUsuario.ObtenerHorariosByIdSubGrupo(Convert.ToInt32(((Button)sender).CommandArgument)), Convert.ToInt32(((Button)sender).CommandArgument));
+                }
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalHorarios\");", true);
             }
             catch (Exception ex)
@@ -558,7 +596,12 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                ucAltaDiasFestivos.IdSubRol = Convert.ToInt32(((Button)sender).CommandArgument);
+                if (Alta)
+                    ucAltaDiasFestivos.IdSubRol = Convert.ToInt32(((Button)sender).CommandArgument);
+                else
+                {
+                    ucAltaDiasFestivos.SetDiasFestivosSubRol(_servicioGrupoUsuario.ObtenerDiasByIdSubGrupo(Convert.ToInt32(((Button)sender).CommandArgument)), Convert.ToInt32(((Button)sender).CommandArgument));
+                }
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalDiasDescanso\");", true);
             }
             catch (Exception ex)
