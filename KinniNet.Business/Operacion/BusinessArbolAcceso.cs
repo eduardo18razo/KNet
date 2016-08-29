@@ -397,6 +397,70 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public List<ArbolAcceso> ObtenerArbolesAccesoTerminalAll(int? idArea, int? idTipoUsuario, int? idTipoArbol, int? nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7)
+        {
+            List<ArbolAcceso> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<ArbolAcceso> qry = db.ArbolAcceso;
+                if (idArea.HasValue)
+                    qry = qry.Where(w => w.IdArea == idArea);
+                if (idTipoUsuario.HasValue)
+                    qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
+                if (idTipoArbol.HasValue)
+                    qry = qry.Where(w => w.IdTipoArbolAcceso == idTipoArbol);
+
+                if (nivel1.HasValue)
+                    qry = qry.Where(w => w.IdNivel1 == nivel1);
+
+                if (nivel2.HasValue)
+                    qry = qry.Where(w => w.IdNivel2 == nivel2);
+
+                if (nivel3.HasValue)
+                    qry = qry.Where(w => w.IdNivel3 == nivel3);
+
+                if (nivel4.HasValue)
+                    qry = qry.Where(w => w.IdNivel4 == nivel4);
+
+                if (nivel5.HasValue)
+                    qry = qry.Where(w => w.IdNivel5 == nivel5);
+
+                if (nivel6.HasValue)
+                    qry = qry.Where(w => w.IdNivel6 == nivel6);
+
+                if (nivel7.HasValue)
+                    qry = qry.Where(w => w.IdNivel7 == nivel7);
+
+                qry = qry.Where(w => w.EsTerminal);
+                result = qry.ToList();
+
+                foreach (ArbolAcceso arbol in result)
+                {
+                    db.LoadProperty(arbol, "Area");
+                    db.LoadProperty(arbol, "TipoUsuario");
+                    db.LoadProperty(arbol, "TipoArbolAcceso");
+                    db.LoadProperty(arbol, "Nivel1");
+                    db.LoadProperty(arbol, "Nivel2");
+                    db.LoadProperty(arbol, "Nivel3");
+                    db.LoadProperty(arbol, "Nivel4");
+                    db.LoadProperty(arbol, "Nivel5");
+                    db.LoadProperty(arbol, "Nivel6");
+                    db.LoadProperty(arbol, "Nivel7");
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error al Obtener Arboles");
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
         public ArbolAcceso ObtenerArbolAcceso(int idArbol)
         {
             ArbolAcceso result;
@@ -406,6 +470,9 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.ArbolAcceso.SingleOrDefault(w => w.Habilitado && w.Id == idArbol);
                 if (result == null) return null;
+                db.LoadProperty(result, "Area");
+                db.LoadProperty(result, "TipoUsuario");
+                db.LoadProperty(result, "TipoArbolAcceso");
                 db.LoadProperty(result, "Nivel1");
                 db.LoadProperty(result, "Nivel2");
                 db.LoadProperty(result, "Nivel3");

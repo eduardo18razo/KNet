@@ -124,5 +124,37 @@ namespace KinniNet.Core.Sistema
             return result;
         }
 
+        public List<Impacto> ObtenerAll(bool insertarSeleccion)
+        {
+            List<Impacto> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Impacto.OrderBy(o => o.Descripcion).ToList();
+                foreach (Impacto impacto in result)
+                {
+                    db.LoadProperty(impacto, "Prioridad");
+                    db.LoadProperty(impacto, "Urgencia");
+                }
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                        new Impacto
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.Value,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
     }
 }

@@ -8,7 +8,7 @@ using KinniNet.Core.Operacion;
 namespace KiiniNet.Services.Operacion.Implementacion
 {
     public class ServiceGrupoUsuario : IServiceGrupoUsuario 
-    {
+    { 
         public List<GrupoUsuario> ObtenerGruposUsuarioByIdTipoSubGrupo(int idTipoSubgrupo, bool insertarSeleccion)
         {
             try
@@ -210,6 +210,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
                 {
                     return negocio.ObtenerDiasByIdSubGrupo(idSubGrupo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<GrupoUsuario> ObtenerGrupos(bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
+                {
+                    return negocio.ObtenerGrupos(insertarSeleccion);
                 }
             }
             catch (Exception ex)

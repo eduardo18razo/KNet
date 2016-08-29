@@ -168,6 +168,7 @@
                                                 >
                                                 <asp:Label runat="server" ID="lblIdSubGrupo" Text='<%# Eval("SubGrupoUsuario.Id") %>' Visible="False" />
                                                 <asp:Label runat="server" Text='<%# Eval("SubGrupoUsuario.SubRol.Descripcion") %>' Style="width: 50%" />
+                                                <asp:Button runat="server" CssClass="btn btn-primary btn-sm" ID="btnEliminar" OnClick="btnEliminar_OnClick" Text="Quitar"/>
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>

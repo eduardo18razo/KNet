@@ -46,7 +46,12 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 int? idTipoUsuario = null;
                 if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
+                    btnNew.Visible = true;
+                }
+                else
+                    btnNew.Visible = false;
                 rptResultados.DataSource = _servicioUsuarios.ObtenerUsuarios(idTipoUsuario);
                 rptResultados.DataBind();
             }
@@ -60,7 +65,10 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                UcDetalleUsuario1.FromModal = true;
                 UcDetalleUsuario1.OnCancelarModal += UcDetalleUsuario1OnOnCancelarModal;
+                UcAltaUsuario.OnAceptarModal += UcAltaUsuario_OnAceptarModal;
+                UcAltaUsuario.OnCancelarModal += UcAltaUsuario_OnCancelarModal;
                 if (!IsPostBack)
                 {
                     LlenaCombos();
@@ -78,13 +86,23 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        protected void btnUsuario_OnClick(object sender, EventArgs e)
+        void UcAltaUsuario_OnCancelarModal()
         {
             try
             {
-                UcDetalleUsuario1.IdUsuario = Convert.ToInt32(((LinkButton)sender).CommandArgument);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editUser\");", true);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalDetalleUsuario\");", true);
+        void UcAltaUsuario_OnAceptarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editUser\");", true);
             }
             catch (Exception ex)
             {
@@ -103,6 +121,23 @@ namespace KiiniHelp.UserControls.Consultas
                 throw new Exception(ex.Message);
             }
         }
+
+        protected void btnUsuario_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+
+                UcDetalleUsuario1.IdUsuario = Convert.ToInt32(((LinkButton)sender).CommandArgument);
+
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalDetalleUsuario\");", true);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        
 
         protected void btnBaja_OnClick(object sender, EventArgs e)
         {
@@ -142,58 +177,39 @@ namespace KiiniHelp.UserControls.Consultas
 
         protected void btnEditar_OnClick(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    int nivel = 0;
-            //    string descripcion = null;
-            //    Ubicacion org = _servicioUbicacion.ObtenerUbicacionById(Convert.ToInt32(hfId.Value));
-            //    Session["UbicacionSeleccionada"] = org;
-            //    lblTitleCatalogo.Text = ObtenerRuta(org, ref nivel, ref descripcion);
-            //    txtDescripcionCatalogo.Text = descripcion;
-            //    hfCatalogo.Value = nivel.ToString();
-            //    hfAlta.Value = false.ToString();
-            //    ddlTipoUsuarioCatalogo.SelectedValue = org.IdTipoUsuario.ToString();
-            //    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoUbicacion\");", true);
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (_lstError == null)
-            //    {
-            //        _lstError = new List<string>();
-            //    }
-            //    _lstError.Add(ex.Message);
-            //    AlertaUbicacion = _lstError;
-            //}
+            try
+            {
+                UcAltaUsuario.IdUsuario = Convert.ToInt32(hfId.Value);
+                UcAltaUsuario.Alta = false;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editUser\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
         }
 
         protected void btnNew_OnClick(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    Button btn = (Button)sender;
-            //    if (sender == null) return;
-            //    lblTitleCatalogo.Text = ObtenerRuta(btn.CommandArgument, btn.CommandName.ToUpper());
-            //    hfCatalogo.Value = btn.CommandArgument;
-            //    hfAlta.Value = true.ToString();
-            //    ddlTipoUsuarioCatalogo.SelectedValue = IdTipoUsuario.ToString();
-            //    ValidaSeleccion(btn.CommandArgument);
-            //    if (btn.CommandArgument == "0")
-            //    {
-            //        ddlTipoUsuarioCampus.SelectedValue = IdTipoUsuario.ToString();
-            //        ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCampus\");", true);
-            //    }
-            //    else
-            //        ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoUbicacion\");", true);
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (_lstError == null)
-            //    {
-            //        _lstError = new List<string>();
-            //    }
-            //    _lstError.Add(ex.Message);
-            //    AlertaUbicacion = _lstError;
-            //}
+            try
+            {
+                UcAltaUsuario.Alta = true;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editUser\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
         }
 
         protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)

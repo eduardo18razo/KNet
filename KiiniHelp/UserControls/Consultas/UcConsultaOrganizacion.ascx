@@ -3,13 +3,28 @@
     <script>
         function dbClicOrganizacion(e) {
             debugger;
-            __doPostBack('SeleccionarOrganizacion', e.parentElement.id);
-        };
+            //__doPostBack('SeleccionarOrganizacion', e.parentElement.id);
+            var idSeleccion = document.getElementById("<%= this.FindControl("hfIdSeleccion").ClientID %>");
+            idSeleccion.value = e.parentElement.id;
+            var modalName = document.getElementById("<%= this.FindControl("hfModalName").ClientID %>");
+            $(modalName.value).modal('hide');
+            document.getElementById("<%= this.FindControl("btnCerrar").ClientID %>").click();
 
+        };
+        function SeleccionaOrganizacion(id) {
+            debugger;
+            var table = $("#tblHeader");
+            table.find('tr').each(function (i, ev) {
+                if (ev.id === id)
+                    ev.style.background = "gray";
+
+
+            });
+        }
         function ContextMenuOrganizacion() {
             var $contextMenu = $("#contextMenuOrganizacion");
             $("body").on("click", function (e) {
-                //debugger;
+                debugger;
                 $contextMenu.hide();
                 var table = $("#tblHeader");
                 table.find('tr').each(function (i, ev) {
@@ -71,7 +86,9 @@
         };
     </script>
     <asp:UpdatePanel runat="server" style="height: 100%">
-        <ContentTemplate>
+        <ContentTemplate>            
+            <asp:HiddenField runat="server" ID="hfModalName"/>
+            <asp:HiddenField runat="server" ID="hfIdSeleccion"/>
             <div id="contextMenuOrganizacion" class="panel-heading contextMenu">
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfModal" />
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
@@ -207,6 +224,7 @@
                                             </table>
                                     </FooterTemplate>
                                 </asp:Repeater>
+                                <asp:Button runat="server" Text="Cerrar" ID="btnCerrar" OnClick="btnCerrar_OnClick" style="visibility: hidden"/>
                             </div>
                         </div>
                     </div>

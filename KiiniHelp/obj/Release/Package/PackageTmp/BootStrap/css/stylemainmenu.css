@@ -1,47 +1,134 @@
-.u-vmenu ul li {
-	width: 311px;
-	list-style: none;
-    height: 100%
+.MenuVertical {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    margin-top: -2px;
 }
-.u-vmenu ul ul{
-	display: none;
+
+    .MenuVertical ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+    }
+
+        .MenuVertical ul li {
+            padding: 20px;
+            position: relative;
+            background-color: #314f60;
+            border-top: 1px solid #000000;
+            border-top: 1px solid rgba(0,0,0,.3);
+            vertical-align: middle;
+            cursor: default;
+            -webkit-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            -ms-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+
+            .MenuVertical ul li:hover {
+                background-color: #000000;
+                background-color: rgba(0,0,0,0.5);
+            }
+
+    .MenuVertical > ul > li {
+        border-right: 5px solid #314f60;
+    }
+
+    .MenuVertical ul ul {
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        -ms-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+        position: absolute;
+        border-left: 5px solid red;
+        left: 100%;
+        top: -1px;
+        -ms-opacity: 0;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .MenuVertical ul li:hover > ul {
+        -ms-opacity: 1;
+        opacity: 1;
+        visibility: visible;
+        left: 100%;
+        top: -1px;
+        z-index: 1;
+    }
+
+    .MenuVertical ul li a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+.MenuHorizontal * {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
-.u-vmenu > ul > li,
-.u-vmenu > ul > li > ul > li ,
-.u-vmenu > ul > li > ul > li > ul > li ,
-.u-vmenu > ul > li > ul > li > ul > li > ul > li,
-.u-vmenu > ul > li > ul > li > ul > li > ul > li > ul > li ,
-.u-vmenu > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li,
-.u-vmenu > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li > ul > li {
-	background: url(../../images/vmenu/zakladka.png) left top no-repeat;
-	background-size: 100% auto;
+
+.MenuHorizontal {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    text-align: center;
 }
-.u-vmenu ul li a, .u-vmenu ul li div {
-	height: 30px;
-	line-height: 30px;
-	display: block;
-	font-size: 14px;
-	color: #82846f;
-	text-decoration: none;
-	outline: none;
+
+.MenuHorizontal ul {
+    height: 60px;
+    background: #000000;
+    background: rgba(0,0,0,.3);
+    display: flex;
+    list-style: none;
+    border-right: 1px solid rgba(0, 0, 0, 5);
 }
-.u-vmenu > ul > li > a, .u-vmenu > ul > li > div {
-	height: 42px;
-	line-height: 42px;
-	padding-left: 35px;
+
+.MenuHorizontal ul li {
+    width: 210px;
+    padding: 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   px 0;
+    border-right: 1px solid #000000;
+    border-right: 1px solid rgba(0,0,0,5);
 }
-.u-vmenu > ul > li > ul > li > a, .u-vmenu > ul > li > ul > li > div {
-	padding-left: 70px;
+
+
+.MenuHorizontal ul ul{
+    display: none;
+    width: 228px;
 }
-.u-vmenu > ul > li > ul > li > ul > li > a, .u-vmenu > ul > li > ul > li > ul > li > a {
-	padding-left: 100px;
+
+.MenuHorizontal a{
+    display: block;
+    height: 60px;
+    color: #ffffff;    
+    text-decoration: none;
+    background: transparent;
 }
-.u-vmenu > ul > li > ul > li > ul > li > ul > li > a, .u-vmenu > ul > li > ul > li > ul > li > ul > li > div {
-	padding-left: 135px;
+
+.MenuHorizontal a:hover {
+    background: #000000;
+    background: rgba(0,0,0,0.3);
 }
-.u-vmenu ul li div[data-option='on']{
-	background: url(../../images/vmenu/on.png) right center no-repeat;
+
+.MenuHorizontal a:hover li{
+    background: #000000;
+    background: rgba(0,0,0,0.3);
 }
-.u-vmenu ul li div[data-option='off'] {
-	background: url(../../images/vmenu/off.png) right center no-repeat;
+
+.MenuHorizontal ul li:hover ul{
+    display: block;
+    position: absolute;
+}
+
+.MenuHorizontal ul li:hover ul{
+    display: block;
+    position: absolute;
 }

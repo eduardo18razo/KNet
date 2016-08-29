@@ -11,11 +11,11 @@
     <link href="BootStrap/css/DropDown.css" rel="stylesheet" />
     <link href="BootStrap/css/divs.css" rel="stylesheet" />
     <link href="BootStrap/css/FileInput.css" rel="stylesheet" />
-    <link href="BootStrap/css/stylemainmenu.css" rel="stylesheet" />
     <link href="BootStrap/css/Headers.css" rel="stylesheet" />
-    <link href="BootStrap/css/accordion-menu.css" rel="stylesheet" />
+    <link href="BootStrap/css/stylemainmenu.css" rel="stylesheet" />
     <script type="text/javascript">
         function MostrarPopup(modalName) {
+            debugger;
             $(modalName).modal({ backdrop: 'static', keyboard: false });
             $(modalName).modal('show');
             return true;
@@ -27,10 +27,10 @@
         function OpenWindow(url) {
             window.open(url, "test", 'type=fullWindow, fullscreen, height=700,width=760');
         };
-        function UpScroll(modalName) {
-            $('#' + modalName).animate({ scrollTop: 0 }, 'slow');
-            return false;
-        };
+        //function UpScroll(modalName) {
+        //    $('#' + modalName).animate({ scrollTop: 0 }, 'slow');
+        //    return false;
+        //};
 
         function sum() {
             debugger;
@@ -103,114 +103,35 @@
 
 
     </script>
-    <style type="text/css">
-        html, body {
-            height: 100%;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        * {
-            padding: 0;
-            margin: 0;
-        }
-
-        #inferior {
-            position: fixed;
-            color: #FFF;
-            background: transparent;
-            /*position: absolute;*/ /*El div será ubicado con relación a la pantalla*/
-            left: 0px; /*A la derecha deje un espacio de 0px*/
-            right: 0px; /*A la izquierda deje un espacio de 0px*/
-            bottom: 0px; /*Abajo deje un espacio de 0px*/
-            height: 50px; /*alto del div*/
-            z-index: -1;
-            height: 150px;
-            padding-right: 0px;
-        }
-
-        .contextMenu {
-            position: absolute;
-            display: none;
-            background: gray;
-        }
-
-        #full, #form1 {
-            height: 100%;
-        }
-
-
-        .menu {
-            background: transparent;
-            width: 100%;
-            height: 100%;
-            margin-top: -2px;
-        }
-
-            .menu ul {
-                list-style: none;
-                margin: 0;
-                padding: 0;
-                white-space: nowrap;
-            }
-
-                .menu ul li {
-                    padding: 20px;
-                    position: relative;
-                    background-color: #314f60;
-                    border-top: 1px solid rgba(0,0,0,.3);
-                    vertical-align: middle;
-                    cursor: default;
-                    -webkit-transition: all 0.5s;
-                    -o-transition: all 0.5s;
-                    transition: all 0.5s;
-                }
-
-                    .menu ul li:hover {
-                        background-color: #000000;
-                        background-color: rgba(0,0,0,0.5);
-                        ;
-                    }
-
-        .menu > ul > li {
-                border-right: 5px solid #314f60;
-            }
-
-            .menu ul ul {
-                transition: all 0.3s;
-                position: absolute;
-                border-left: 5px solid red;
-                left: 100%;
-                top: -1px;
-                opacity: 0;
-                visibility: hidden;
-            }
-
-            .menu ul li:hover > ul {
-                opacity: 1;
-                visibility: visible;
-                left: 100%;
-                top: -1px;
-            }
-
-            .menu ul li a {
-                color: #fff;
-                text-decoration: none;
-            }
-    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body style="background: url('../Images/backgroud.jpg');">
     <form id="form1" runat="server" enctype="multipart/form-data">
-
+        <header id="panelAlert" runat="server" visible="False">
+            <div class="alert alert-danger">
+                <div>
+                    <div style="float: left">
+                        <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
+                    </div>
+                    <div style="float: left">
+                        <h3>Error</h3>
+                    </div>
+                    <div class="clearfix clear-fix" />
+                </div>
+                <hr />
+                <asp:Repeater runat="server" ID="rptHeaderError">
+                    <ItemTemplate>
+                        <%# Container.DataItem %>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
+        </header>
         <script type="text/javascript" src="<%= ResolveUrl("~/BootStrap/js/validation.js") %>"></script>
         <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
             <Scripts>
-                <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
+                <asp:ScriptReference Path="~/BootStrap/js/jquery-1.10.2.min.js" />
                 <asp:ScriptReference Path="~/BootStrap/js/bootstrap.min.js" />
-                <asp:ScriptReference Path="~/BootStrap/js/vmenuModule.js" />
-                <asp:ScriptReference Path="~/BootStrap/js/accordion-menu.js" />
                 <asp:ScriptReference Path="~/BootStrap/js/super-panel.js" />
             </Scripts>
         </asp:ScriptManager>
@@ -226,22 +147,35 @@
                 <span data-panel="panel1" class="panel-button"></span>
                 <div class="logo" id="logo">
                     <div id="headerNavInfoDiv">
-                        <div>
-                            <asp:Label runat="server" ID="lblUsuario" Style="font-size: x-small" />
+                        <div style="float: left; width: 250px">
+                            <div>
+                                <asp:Label runat="server" ID="lblUsuario" Style="font-size: x-small" />
+                            </div>
+                            <div>
+                                <asp:Label runat="server" ID="lblTipoUsr" Style="font-size: x-small" />
+                            </div>
                         </div>
-                        <div>
-                            <asp:Label runat="server" ID="lblTipoUsr" Style="font-size: x-small" />
+                        <div style="float: left; width: 300px">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-xs-2">
+                                        <asp:Label runat="server" Style="font-size: x-small" Text="Servicio" />
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <asp:DropDownList runat="server" ID="ddlAreas" AutoPostBack="True" OnSelectedIndexChanged="ddlAreas_OnSelectedIndexChanged" CssClass="DropSelect" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <span id="top-nav">
-                    <asp:Button runat="server" CssClass="btn btn-sm btn-success" ID="btnArea" Text="Cambiar area" OnClick="btnArea_OnClick" />
                     <asp:Button runat="server" CssClass="btn btn-sm btn-success" ID="btnsOut" Text="Cerrar Sesion" OnClick="btnsOut_OnClick" Style="margin-left: 10px; margin-right: 10px" />
                 </span>
             </div>
             <div id="panel1">
-                <div class="menu">
+                <div class="MenuVertical">
                     <ul style="color: transparent">
                         <li>
                             <asp:Repeater runat="server" ID="rptMenu" OnItemDataBound="rptMenu_OnItemDataBound">
@@ -330,29 +264,7 @@
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
-            <script>
-                $("#menu-toggle").click(function (e) {
-                    e.preventDefault();
-                    $("#wrapper").toggleClass("toggled");
-                });
-            </script>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $(".u-vmenu").vmenuModule({
-                        Speed: 200,
-                        autostart: false,
-                        autohide: true
-                    });
-                });
-                $(document).ready(function () {
-                    $(window).keydown(function (event) {
-                        if (event.keyCode === 13) {
-                            event.preventDefault();
-                            return false;
-                        }
-                    });
-                });
-            </script>
+
         </div>
     </form>
     <div id="inferior">

@@ -139,5 +139,12 @@
             Reportes = 7,
             Mantenimiento = 8
         }
+
+        public enum EnumTipoEncuesta
+        {
+            Logica = 4,
+            Calificacion = 5,
+            OpcionMultiple = 6
+        }
     }
 }

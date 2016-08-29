@@ -102,6 +102,12 @@
   <wsdl:message name="IServiceArbolAcceso_ActualizardArbol_OutputMessage">
     <wsdl:part name="parameters" element="tns:ActualizardArbolResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceArbolAcceso_ObtenerArbolesAccesoTerminalAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerArbolesAccesoTerminalAll" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArbolAcceso_ObtenerArbolesAccesoTerminalAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerArbolesAccesoTerminalAllResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceArbolAcceso">
     <wsdl:operation name="ObtenerNivel1">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel1" message="tns:IServiceArbolAcceso_ObtenerNivel1_InputMessage" />
@@ -158,6 +164,10 @@
     <wsdl:operation name="ActualizardArbol">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ActualizardArbol" message="tns:IServiceArbolAcceso_ActualizardArbol_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ActualizardArbolResponse" message="tns:IServiceArbolAcceso_ActualizardArbol_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerArbolesAccesoTerminalAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalAll" message="tns:IServiceArbolAcceso_ObtenerArbolesAccesoTerminalAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalAllResponse" message="tns:IServiceArbolAcceso_ObtenerArbolesAccesoTerminalAll_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceArbolAcceso">
@@ -281,6 +291,15 @@
     </wsdl:operation>
     <wsdl:operation name="ActualizardArbol">
       <soap:operation soapAction="http://tempuri.org/IServiceArbolAcceso/ActualizardArbol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerArbolesAccesoTerminalAll">
+      <soap:operation soapAction="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalAll" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

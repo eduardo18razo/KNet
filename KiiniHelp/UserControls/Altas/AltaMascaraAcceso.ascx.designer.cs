@@ -157,6 +157,24 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.WebControls.CheckBox chkRequerido;
         
         /// <summary>
+        /// Control divMascara.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMascara;
+        
+        /// <summary>
+        /// Control txtMascara.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMascara;
+        
+        /// <summary>
         /// Control divLongitudes.
         /// </summary>
         /// <remarks>

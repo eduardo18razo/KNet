@@ -25,6 +25,7 @@
   <Metadata>
     <MetadataFile FileName="ServiceEncuesta.xsd" MetadataType="Schema" ID="bc55e416-78bd-45bc-a709-0960b36034ba" SourceId="1" SourceUrl="http://localhost:15277/ServiceEncuesta.svc?xsd=xsd12" />
     <MetadataFile FileName="ServiceEncuesta5.xsd" MetadataType="Schema" ID="25e0c2cc-c225-4658-9a43-b409e344d355" SourceId="1" SourceUrl="http://localhost:15277/ServiceEncuesta.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceEncuesta14.xsd" MetadataType="Schema" ID="cbf91f93-cdcc-4ff8-89e9-e78bce364ece" SourceId="1" SourceUrl="http://localhost:15277/ServiceEncuesta.svc?xsd=xsd14" />
     <MetadataFile FileName="ServiceEncuesta.wsdl" MetadataType="Wsdl" ID="bd1b84e9-a82a-4899-8b25-fa68025dd087" SourceId="1" SourceUrl="http://localhost:15277/ServiceEncuesta.svc?wsdl" />
     <MetadataFile FileName="ServiceEncuesta2.xsd" MetadataType="Schema" ID="3309c554-5d94-4f1e-9f51-05b56c28c779" SourceId="1" SourceUrl="http://localhost:15277/ServiceEncuesta.svc?xsd=xsd4" />
     <MetadataFile FileName="ServiceEncuesta.disco" MetadataType="Disco" ID="4321f63f-eef4-4e1a-bd50-ca66598663b0" SourceId="1" SourceUrl="http://localhost:15277/ServiceEncuesta.svc?disco" />

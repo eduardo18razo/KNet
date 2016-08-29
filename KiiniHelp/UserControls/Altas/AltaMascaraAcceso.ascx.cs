@@ -156,6 +156,7 @@ namespace KiiniHelp.UserControls.Altas
                 divMoneda.Visible = tipoCampo.SimboloMoneda;
                 divValorMaximo.Visible = tipoCampo.ValorMaximo;
                 divCatalgo.Visible = tipoCampo.Catalogo;
+                divMascara.Visible = tipoCampo.Mask;
                 if (tipoCampo.Catalogo)
                 {
                     Metodos.LlenaComboCatalogo(ddlCatalogosCampo, _servicioSistemaCatalogos.ObtenerCatalogosMascaraCaptura(true));
@@ -209,6 +210,9 @@ namespace KiiniHelp.UserControls.Altas
                 if (divValorMaximo.Visible)
                     if (txtValorMaximo.Text.Trim() == string.Empty)
                         throw new Exception("Debe especificar un valor maximo");
+                if (divMascara.Visible)
+                    if (txtMascara.Text.Trim() == string.Empty)
+                        throw new Exception("Debe especificar una mascara");
 
                 Mascara tmpMascara = ((Mascara)Session["MascaraAlta"]);
                 if (tmpMascara.CampoMascara == null)
@@ -221,10 +225,11 @@ namespace KiiniHelp.UserControls.Altas
                     IdTipoCampoMascara = tipoCampo.Id,
                     Descripcion = txtDescripcionCampo.Text.Trim().ToUpper(),
                     Requerido = chkRequerido.Checked,
-                    LongitudMinima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMinima.Text.Trim()) : (int?)null,
-                    LongitudMaxima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMaxima.Text.Trim()) : (int?)null,
+                    LongitudMinima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMinima.Text.Trim()) : tipoCampo.Mask ? 1 : (int?)null,
+                    LongitudMaxima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMaxima.Text.Trim()) : tipoCampo.Mask ? txtMascara.Text.Trim().Length : (int?)null,
                     SimboloMoneda = tipoCampo.SimboloMoneda ? txtSimboloMoneda.Text.Trim().ToUpper() : null,
                     ValorMaximo = tipoCampo.ValorMaximo ? Convert.ToInt32(txtValorMaximo.Text.Trim()) : (int?)null,
+                    MascaraDetalle = tipoCampo.Mask ? txtMascara.Text.Trim() : null,
                     TipoCampoMascara = tipoCampo
                 });
 

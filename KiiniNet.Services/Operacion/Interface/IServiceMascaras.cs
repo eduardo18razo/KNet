@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Mascaras;
+using KiiniNet.Entities.Helper;
 using KinniNet.Core.Operacion;
 
 namespace KiiniNet.Services.Operacion.Interface
@@ -14,6 +15,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         Mascara ObtenerMascaraCaptura(int idMascara);
+        [OperationContract]
+        Mascara ObtenerMascaraCapturaByIdTicket(int idTicket);
 
         [OperationContract]
         List<Mascara> ObtenerMascarasAcceso(bool insertarSeleccion);
@@ -25,5 +28,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void HabilitarMascara(int idMascara, bool habilitado);
+
+        [OperationContract]
+        List<HelperMascaraData> ObtenerDatosMascara(int idMascara, int idTicket);
     }
 }

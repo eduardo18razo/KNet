@@ -1,39 +1,54 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmMiInformacion.aspx.cs" Inherits="KiiniHelp.Users.General.FrmMiInformacion" %>
 
+<%@ Register Src="~/UserControls/Detalles/UcDetalleUsuario.ascx" TagPrefix="uc1" TagName="UcDetalleUsuario" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaTicketUsuario.ascx" TagPrefix="uc1" TagName="UcConsultaTicketUsuario" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaEncuestaPendiente.ascx" TagPrefix="uc1" TagName="UcConsultaEncuestaPendiente" %>
+
+
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script>
+        $('#myTabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        })
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div>
 
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#datosPersonales" aria-controls="home" role="tab" data-toggle="tab">Mis Datos Personales</a></li>
-            <li role="presentation"><a href="#tickets" aria-controls="profile" role="tab" data-toggle="tab">Mis Tickets</a></li>
+    <div id="exTab2" class="container">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#1" data-toggle="tab">Mis tickets</a>
+            </li>
+            <li>
+                <a href="#2" data-toggle="tab">Perfil</a>
+            </li>
+            <li>
+                <a href="#3" data-toggle="tab">Encuestas Pendientes</a>
+            </li>
+
         </ul>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="datosPersonales">Se muestran los datos personales</div>
-            <div role="tabpanel" class="tab-pane" id="tickets">Se muestran los tickets</div>
+        <div class="tab-content ">
+            <div class="tab-pane active" id="1">
+                <h6>
+                    <uc1:UcConsultaTicketUsuario runat="server" ID="UcConsultaTicketUsuario" />
+                </h6>
+            </div>
+            <div class="tab-pane" id="2">
+                <h6>
+                    <uc1:UcDetalleUsuario runat="server" ID="UcDetalleUsuario" />
+                </h6>
+            </div>
+            
+            <div class="tab-pane" id="3">
+                <h6>
+                    <uc1:UcConsultaEncuestaPendiente runat="server" ID="UcConsultaEncuestaPendiente" />
+                </h6>
+            </div>
+
         </div>
-        <%--<video src="20160525_163911.mp4" preload="preload" controls></video>
-        <object height="320px" width="240px" type="video/x-shockwave-flash">
-            <param name="src" value="" />
-        </object>--%>
-        <video width="640" height="360" controls preload="none">
-            <!-- MP4 must be first for iPad! -->
-            <source src="20160525_163911.mp4" type="video/mp4" /><!-- WebKit video    -->
-            <source src="__VIDEO__.webm" type="video/webm" /><!-- Chrome / Newest versions of Firefox and Opera -->
-            <source src="__VIDEO__.OGV" type="video/ogg" /><!-- Firefox / Opera -->
-            <!-- fallback to Flash: -->
-            <object width="640" height="384" type="application/x-shockwave-flash" data="__FLASH__.SWF">
-                <!-- Firefox uses the `data` attribute above, IE/Safari uses the param below -->
-                <param name="movie" value="__FLASH__.SWF" />
-                <param name="flashvars" value="image=__POSTER__.JPG&amp;file=__VIDEO__.MP4" />
-                <!-- fallback image. note the title field below, put the title of the video there -->
-                <img src="__VIDEO__.JPG" width="640" height="360" alt="__TITLE__"
-                    title="No video playback capabilities, please download the video below" />
-            </object>
-        </video>
     </div>
 </asp:Content>

@@ -131,6 +131,10 @@ namespace KiiniHelp.UserControls.Temporal
                             nombreControl = "chk" + campo.NombreCampo;
                             campoTexto = false;
                             break;
+                        case "MASCARA":
+                            nombreControl = "txt" + campo.NombreCampo;
+                            campoTexto = true;
+                            break;
                     }
 
                     if (campoTexto && nombreControl != null)
@@ -149,6 +153,14 @@ namespace KiiniHelp.UserControls.Temporal
                                     };
                                     lstCamposCapturados.Add(campoCapturado);
                                     break;
+                                    lstCamposCapturados.Add(campoCapturado);
+                                    break;
+                                case "DECIMAL":
+                                    campoCapturado = new HelperCampoMascaraCaptura
+                                    {
+                                        NombreCampo = campo.NombreCampo,
+                                        Valor = txt.Text.Trim().Replace('_', '0')
+                                    };
                                     lstCamposCapturados.Add(campoCapturado);
                                     break;
                                 default:
@@ -258,19 +270,9 @@ namespace KiiniHelp.UserControls.Temporal
                             };
                             txtDecimal.Attributes["placeholder"] = campo.Descripcion;
                             txtDecimal.Attributes["max"] = campo.ValorMaximo.ToString();
-                            MaskedEditExtender meeDecimal = new MaskedEditExtender
-                            {
-                                ID = "mee" + campo.NombreCampo,
-                                TargetControlID = txtDecimal.ID,
-                                InputDirection = MaskedEditInputDirection.LeftToRight,
-                                Mask = "999999.99",
-                                MaskType = MaskedEditType.Date,
-                                AcceptAMPM = false,
-                                AcceptNegative = MaskedEditShowSymbol.None,
-                                ClearTextOnInvalid = true,
-                                CultureDecimalPlaceholder = "000000.00"
-                            };
-                            createDiv.Controls.Add(meeDecimal);
+                            txtDecimal.Attributes["type"] = "number";
+                            txtDecimal.Attributes["step"] = "0.01";
+                            txtDecimal.Attributes["for"] = "DECIMAL";
                             createDiv.Controls.Add(txtDecimal);
                             _lstControles.Add(txtDecimal);
                             break;
@@ -285,6 +287,7 @@ namespace KiiniHelp.UserControls.Temporal
                             };
                             txtEntero.Attributes["placeholder"] = campo.Descripcion;
                             txtEntero.Attributes["type"] = "number";
+                            txtEntero.Attributes["step"] = "1";
                             txtEntero.Attributes["min"] = "1";
                             txtEntero.Attributes["max"] = campo.ValorMaximo.ToString();
                             createDiv.Controls.Add(txtEntero);
@@ -300,17 +303,9 @@ namespace KiiniHelp.UserControls.Temporal
                             };
                             txtFecha.Attributes["placeholder"] = campo.Descripcion;
                             txtFecha.Attributes["for"] = "FECHA";
-                            MaskedEditExtender meeFecha = new MaskedEditExtender
-                            {
-                                ID = "mee" + campo.NombreCampo,
-                                TargetControlID = txtFecha.ID,
-                                InputDirection = MaskedEditInputDirection.LeftToRight,
-                                Mask = "99/99/9999",
-                                MaskType = MaskedEditType.Date,
-                                AcceptAMPM = false
-                            };
+                            txtFecha.Attributes["type"] = "date";
+                            txtFecha.Attributes["step"] = "1";
                             createDiv.Controls.Add(txtFecha);
-                            createDiv.Controls.Add(meeFecha);
                             _lstControles.Add(txtFecha);
                             break;
                         case "HORA":
@@ -322,16 +317,10 @@ namespace KiiniHelp.UserControls.Temporal
                                 CssClass = "form-control"
                             };
                             txtHora.Attributes["placeholder"] = campo.Descripcion;
-                            MaskedEditExtender meeHora = new MaskedEditExtender
-                            {
-                                ID = "mee" + campo.NombreCampo,
-                                TargetControlID = txtHora.ID,
-                                InputDirection = MaskedEditInputDirection.RightToLeft,
-                                Mask = "99:99:99",
-                                MaskType = MaskedEditType.Time,
-                                AcceptAMPM = false
-                            };
-                            createDiv.Controls.Add(meeHora);
+                            txtHora.Attributes["min"] = "00:00";
+                            txtHora.Attributes["max"] = "23:59:59";
+                            txtHora.Attributes["step"] = "30";
+                            txtHora.Attributes["type"] = "time";
                             createDiv.Controls.Add(txtHora);
                             _lstControles.Add(txtHora);
                             break;
@@ -344,6 +333,8 @@ namespace KiiniHelp.UserControls.Temporal
                                 CssClass = "form-control"
                             };
                             txtMoneda.Attributes["placeholder"] = campo.Descripcion;
+                            txtMoneda.Attributes["type"] = "number";
+                            txtMoneda.Attributes["step"] = "0.01";
                             _lstControles.Add(txtMoneda);
                             createDiv.Controls.Add(txtMoneda);
                             break;
@@ -351,6 +342,32 @@ namespace KiiniHelp.UserControls.Temporal
                             CheckBox chk = new CheckBox { ID = "chk" + campo.NombreCampo, Text = campo.Descripcion, ViewStateMode = ViewStateMode.Inherit };
                             _lstControles.Add(chk);
                             createDiv.Controls.Add(chk);
+                            break;
+                        case "MASCARA":
+                            lbl.Attributes["for"] = "txt" + campo.NombreCampo;
+                            createDiv.Controls.Add(lbl);
+                            TextBox txtMascara = new TextBox
+                            {
+                                ID = "txt" + campo.Descripcion.Replace(" ", string.Empty),
+                                Text = campo.Descripcion,
+                                CssClass = "form-control"
+                            };
+                            txtMascara.Attributes["placeholder"] = campo.Descripcion;
+                            txtMascara.Attributes["max"] = campo.ValorMaximo.ToString();
+                            txtMascara.Attributes["for"] = "MASCARA";
+                            MaskedEditExtender meeMascara = new MaskedEditExtender
+                            {
+                                ID = "mee" + campo.NombreCampo,
+                                TargetControlID = txtMascara.ID,
+                                InputDirection = MaskedEditInputDirection.LeftToRight,
+                                Mask = campo.MascaraDetalle,
+                                MaskType = MaskedEditType.Date,
+                                AcceptAMPM = false,
+                                AcceptNegative = MaskedEditShowSymbol.None,
+                            };
+                            createDiv.Controls.Add(meeMascara);
+                            createDiv.Controls.Add(txtMascara);
+                            _lstControles.Add(txtMascara);
                             break;
                     }
 
@@ -408,7 +425,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 //TODO: AGREGAR VALOR MINIMO A ESQUEMA
                                 //if (decimal.Parse(txtDecimal.Text.Trim()) < campo.LongitudMinima)
                                 //    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (decimal.Parse(txtDecimal.Text.Trim()) > campo.ValorMaximo)
+                                if (decimal.Parse(txtDecimal.Text.Trim().Replace('_','0')) > campo.ValorMaximo)
                                     throw new Exception(string.Format("Campo {0} debe se menor o igual a {1}", campo.Descripcion, campo.ValorMaximo));
 
                             }
@@ -479,8 +496,8 @@ namespace KiiniHelp.UserControls.Temporal
                                 //TODO: AGREGAR VALOR MINIMO A ESQUEMA
                                 //if (decimal.Parse(txtDecimal.Text.Trim()) < campo.LongitudMinima)
                                 //    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (decimal.Parse(txtMoneda.Text.Trim()) > campo.LongitudMaxima)
-                                    throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+                                //if (decimal.Parse(txtMoneda.Text.Trim()) > campo.LongitudMaxima)
+                                //    throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
 
                             }
                             break;
@@ -492,6 +509,21 @@ namespace KiiniHelp.UserControls.Temporal
                                 if (campo.Requerido)
                                     if (ddl.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                                         throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
+                            }
+                            break;
+                        case "MASCARA":
+                            nombreControl = "txt" + campo.NombreCampo;
+                            TextBox txtMascara = (TextBox)divControles.FindControl(nombreControl);
+                            if (txtMascara != null)
+                            {
+                                if (campo.Requerido)
+                                    if (txtMascara.Text.Trim() == String.Empty)
+                                        throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
+                                if (txtMascara.Text.Trim().Length < campo.LongitudMinima)
+                                    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
+                                if (txtMascara.Text.Trim().Length > campo.LongitudMaxima)
+                                    throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+
                             }
                             break;
                     }

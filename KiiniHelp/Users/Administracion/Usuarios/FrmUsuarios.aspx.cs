@@ -240,7 +240,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                 UcConsultaUbicaciones.OnSeleccionUbicacionModal += UcUbicacion_OnAceptarModal;
                 UcConsultaUbicaciones.OnCancelarModal += UcUbicacion_OnCancelarModal;
 
-                
+                AsociarGrupoUsuario.AsignacionAutomatica = false;
                 if (!IsPostBack)
                 {
                     LlenaCombos();
@@ -311,7 +311,6 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                 {
                     AsociarGrupoUsuario.HabilitaGrupos(Convert.ToInt32(item.Value), item.Selected);
                 }
-                AsociarGrupoUsuario.AsignacionAutomatica = false;
                 lst.Insert(BusinessVariables.ComboBoxCatalogo.Index, new TipoGrupo { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion });
                 Session["UsuarioGrupo"] = new List<UsuarioGrupo>();
                 btnModalGrupos.Visible = true;

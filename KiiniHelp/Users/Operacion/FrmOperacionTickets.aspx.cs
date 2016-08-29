@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using KiiniHelp.ServiceEncuesta;
 using KiiniHelp.ServiceSistemaEstatus;
 using KiiniHelp.ServiceTicket;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.Users.Operacion
 {
     public partial class FrmOperacionTickets : Page
     {
         readonly ServiceTicketClient _servicioTickets = new ServiceTicketClient();
-        readonly ServiceEstatusClient _servicioEstatus = new ServiceEstatusClient();
         private List<string> _lstError = new List<string>();
         private int _pageSize = 20;
         private List<string> AlertaGeneral
@@ -244,6 +245,7 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
+                UcDetalleUsuario.FromModal = true;
                 UcDetalleUsuario.IdUsuario = Convert.ToInt32(((LinkButton)sender).CommandArgument);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalDetalleUsuario\");", true);
             }
@@ -296,8 +298,17 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
+                
                 ObtenerTicketsPage(int.Parse(ViewState["PageIndex"].ToString()), (Dictionary<string, string>)ViewState["Filtros"], true, ViewState["Sortorder"].ToString() == "ASC", ViewState["Column"].ToString());
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEstatusCambio\");", true);
+                if (UcCambiarEstatusTicket.CerroTicket)
+                {
+                    string url = ResolveUrl("~/FrmEncuesta.aspx?IdTicket=3");
+                    //string s = "window.open('" + url + "', 'popup_window', 'width=600,height=600,left=300,top=100,resizable=yes');";
+                    //ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptEncuesta", "OpenWindow(\"" + url + "\");", true);
+                }
+                
             }
             catch (Exception ex)
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using KiiniNet.Entities.Cat.Usuario;
+using KiiniNet.Entities.Helper;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
 
@@ -15,6 +16,36 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessEncuesta negocio = new BusinessEncuesta())
                 {
                     return negocio.ObtenerEncuestas(insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Encuesta ObtenerEncuestaById(int idEncuesta)
+        {
+            try
+            {
+                using (BusinessEncuesta negocio = new BusinessEncuesta())
+                {
+                    return negocio.ObtenerEncuestaById(idEncuesta);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Encuesta ObtenerEncuestaByIdTicket(int idTicket)
+        {
+            try
+            {
+                using (BusinessEncuesta negocio = new BusinessEncuesta())
+                {
+                    return negocio.ObtenerEncuestaByIdTicket(idTicket);
                 }
             }
             catch (Exception ex)
@@ -60,6 +91,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessEncuesta negocio = new BusinessEncuesta())
                 {
                     negocio.HabilitarEncuesta(idencuesta, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<HelperEncuesta> ObtenerEncuestasPendientesUsuario(int idUsuario)
+        {
+            try
+            {
+                using (BusinessEncuesta negocio = new BusinessEncuesta())
+                {
+                    return negocio.ObtenerEncuestasPendientesUsuario(idUsuario);
                 }
             }
             catch (Exception ex)

@@ -13,6 +13,15 @@ namespace KiiniHelp.UserControls.Operacion {
     public partial class UcCambiarEstatusTicket {
         
         /// <summary>
+        /// Control hfTicketCerrado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfTicketCerrado;
+        
+        /// <summary>
         /// Control panelAlertaGeneral.
         /// </summary>
         /// <remarks>

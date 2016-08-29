@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcDetalleTicket.ascx.cs" Inherits="KiiniHelp.UserControls.Detalles.UcDetalleTicket" %>
+<%@ Register Src="~/UserControls/Detalles/UcDetalleMascaraCaptura.ascx" TagPrefix="uc1" TagName="UcDetalleMascaraCaptura" %>
+
 <asp:UpdatePanel runat="server">
     <ContentTemplate>
         <div class="panel panel-primary">
@@ -33,6 +35,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="panel panel-primary">
+                        <uc1:UcDetalleMascaraCaptura runat="server" ID="ucDetalleMascaraCaptura" />
+                </div>
+                <br/>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h5>Movimientos Estatus</h5>

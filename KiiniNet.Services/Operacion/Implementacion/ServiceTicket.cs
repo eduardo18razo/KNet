@@ -23,6 +23,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public List<HelperTickets> ObtenerTicketsUsuario(int idUsuario, int pageIndex, int pageSize)
+        {
+            try
+            {
+                using (BusinessTicket negocio = new BusinessTicket())
+                {
+                    return negocio.ObtenerTicketsUsuario(idUsuario, pageIndex, pageSize);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize)
         {
             try

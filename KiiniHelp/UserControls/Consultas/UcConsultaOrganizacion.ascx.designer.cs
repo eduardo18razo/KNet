@@ -13,6 +13,24 @@ namespace KiiniHelp.UserControls.Consultas {
     public partial class UcConsultaOrganizacion {
         
         /// <summary>
+        /// Control hfModalName.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfModalName;
+        
+        /// <summary>
+        /// Control hfIdSeleccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdSeleccion;
+        
+        /// <summary>
         /// Control hfModal.
         /// </summary>
         /// <remarks>
@@ -173,6 +191,15 @@ namespace KiiniHelp.UserControls.Consultas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptResultados;
+        
+        /// <summary>
+        /// Control btnCerrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCerrar;
         
         /// <summary>
         /// Control upCatlogos.

@@ -1,8 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmTest.aspx.cs" Inherits="KiiniHelp.Test.FrmTest" %>
-
-<%@ Register Src="~/UserControls/Altas/UcAltaArbolAcceso.ascx" TagPrefix="uc1" TagName="UcAltaArbolAcceso" %>
-
-
+<%@ Register Src="~/UserControls/Filtros/UcFiltroEstatus.ascx" TagPrefix="uc1" TagName="UcFiltroEstatus" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaTicketGrafica.ascx" TagPrefix="uc1" TagName="UcConsultaTicketGrafica" %>
 
 <!DOCTYPE html>
 
@@ -77,13 +75,7 @@
                 <asp:ScriptReference Path="~/BootStrap/js/locales/bootstrap-datepicker.es.min.js" />
             </Scripts>
         </asp:ScriptManager>
-        <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-                <uc1:UcAltaArbolAcceso runat="server" ID="UcAltaArbolAcceso" />
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        
-        <%--<uc1:UcAltaDiasFestivos runat="server" ID="UcAltaDiasFestivos" />--%>
+        <uc1:UcConsultaTicketGrafica runat="server" id="UcConsultaTicketGrafica" />
     </form>
 </body>
 </html>

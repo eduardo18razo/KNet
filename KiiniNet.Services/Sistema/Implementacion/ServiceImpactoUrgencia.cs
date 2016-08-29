@@ -67,5 +67,20 @@ namespace KiiniNet.Services.Sistema.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<Impacto> ObtenerAll(bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessImpactoUrgencia negocio = new BusinessImpactoUrgencia())
+                {
+                    return negocio.ObtenerAll(insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

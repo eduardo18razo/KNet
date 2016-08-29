@@ -17,6 +17,11 @@ namespace KiiniHelp.UserControls.Detalles
 
         private List<string> _lstError = new List<string>();
 
+        public bool FromModal
+        {
+            get { return btnCerrarModal.Visible; }
+            set { btnCerrarModal.Visible = value; }
+        }
         public int IdUsuario
         {
             get { return Convert.ToInt32(ViewState["IdUsuario"].ToString()); }

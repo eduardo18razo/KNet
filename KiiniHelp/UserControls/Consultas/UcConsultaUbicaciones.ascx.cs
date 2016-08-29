@@ -30,6 +30,11 @@ namespace KiiniHelp.UserControls.Consultas
             set { hfModal.Value = value.ToString(); }
         }
 
+        public string ModalName
+        {
+            set { hfModalName.Value = value; }
+        }
+
         public int IdTipoUsuario
         {
             get { return Convert.ToInt32(ddlTipoUsuario.SelectedValue); }
@@ -62,9 +67,19 @@ namespace KiiniHelp.UserControls.Consultas
         {
             get
             {
-                if (ViewState["UbicacionSeleccionada"] == null || ViewState["UbicacionSeleccionada"].ToString().Trim() == string.Empty)
-                    throw new Exception("Debe Seleccionar una ubicación");
-                return (int)ViewState["UbicacionSeleccionada"];
+                if (hfIdSeleccion.Value == null || hfIdSeleccion.Value.Trim() == string.Empty)
+                    throw new Exception("Debe Seleccionar una organización");
+                return Convert.ToInt32(hfIdSeleccion.Value);
+            }
+            set
+            {
+                LlenaUbicaciones();
+                foreach (RepeaterItem item in rptResultados.Items)
+                {
+                    if ((((DataBoundLiteralControl)item.Controls[0])).Text.Split('\n')[1].Contains("id='" + value + "'"))
+                        ScriptManager.RegisterStartupScript(Page, typeof(Page), "Scripts", "SeleccionaOrganizacion(\"" + value + "\");", true);
+                }
+                hfIdSeleccion.Value = value.ToString();
             }
         }
 
@@ -691,6 +706,24 @@ namespace KiiniHelp.UserControls.Consultas
                 }
                 _lstError.Add(ex.Message);
                 AlertaCampus = _lstError;
+            }
+        }
+
+        protected void btnCerrar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (OnSeleccionUbicacionModal != null)
+                    OnSeleccionUbicacionModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaUbicacion = _lstError;
             }
         }
 

@@ -16,6 +16,7 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceEncuesta.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceEncuesta.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceEncuesta.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceEncuesta.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceEncuesta_ObtenerEncuestas_InputMessage">
@@ -23,6 +24,18 @@
   </wsdl:message>
   <wsdl:message name="IServiceEncuesta_ObtenerEncuestas_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerEncuestasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceEncuesta_ObtenerEncuestaById_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEncuestaById" />
+  </wsdl:message>
+  <wsdl:message name="IServiceEncuesta_ObtenerEncuestaById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEncuestaByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceEncuesta_ObtenerEncuestaByIdTicket_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEncuestaByIdTicket" />
+  </wsdl:message>
+  <wsdl:message name="IServiceEncuesta_ObtenerEncuestaByIdTicket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEncuestaByIdTicketResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceEncuesta_GuardarEncuesta_InputMessage">
     <wsdl:part name="parameters" element="tns:GuardarEncuesta" />
@@ -42,10 +55,24 @@
   <wsdl:message name="IServiceEncuesta_HabilitarEncuesta_OutputMessage">
     <wsdl:part name="parameters" element="tns:HabilitarEncuestaResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceEncuesta_ObtenerEncuestasPendientesUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEncuestasPendientesUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServiceEncuesta_ObtenerEncuestasPendientesUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEncuestasPendientesUsuarioResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceEncuesta">
     <wsdl:operation name="ObtenerEncuestas">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestas" message="tns:IServiceEncuesta_ObtenerEncuestas_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasResponse" message="tns:IServiceEncuesta_ObtenerEncuestas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEncuestaById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaById" message="tns:IServiceEncuesta_ObtenerEncuestaById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdResponse" message="tns:IServiceEncuesta_ObtenerEncuestaById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEncuestaByIdTicket">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdTicket" message="tns:IServiceEncuesta_ObtenerEncuestaByIdTicket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdTicketResponse" message="tns:IServiceEncuesta_ObtenerEncuestaByIdTicket_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GuardarEncuesta">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/GuardarEncuesta" message="tns:IServiceEncuesta_GuardarEncuesta_InputMessage" />
@@ -59,11 +86,33 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/HabilitarEncuesta" message="tns:IServiceEncuesta_HabilitarEncuesta_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/HabilitarEncuestaResponse" message="tns:IServiceEncuesta_HabilitarEncuesta_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ObtenerEncuestasPendientesUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasPendientesUsuario" message="tns:IServiceEncuesta_ObtenerEncuestasPendientesUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasPendientesUsuarioResponse" message="tns:IServiceEncuesta_ObtenerEncuestasPendientesUsuario_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceEncuesta">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ObtenerEncuestas">
       <soap:operation soapAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEncuestaById">
+      <soap:operation soapAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEncuestaByIdTicket">
+      <soap:operation soapAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdTicket" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -91,6 +140,15 @@
     </wsdl:operation>
     <wsdl:operation name="HabilitarEncuesta">
       <soap:operation soapAction="http://tempuri.org/IServiceEncuesta/HabilitarEncuesta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEncuestasPendientesUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasPendientesUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

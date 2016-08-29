@@ -27,18 +27,18 @@
       <xs:element minOccurs="0" name="IdEncuesta" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="IdEstatusAsignacion" type="xs:int" />
       <xs:element minOccurs="0" name="IdEstatusTicket" type="xs:int" />
+      <xs:element minOccurs="0" name="IdImpacto" type="xs:int" />
       <xs:element minOccurs="0" name="IdMascara" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="IdOrganizacion" type="xs:int" />
-      <xs:element minOccurs="0" name="IdPrioridad" type="xs:int" />
       <xs:element minOccurs="0" name="IdRespuestaEncuesta" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="IdSlaEstimadoTicket" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="IdTipoArbolAcceso" type="xs:int" />
       <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="IdUbicacion" type="xs:int" />
       <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
-      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" minOccurs="0" name="Mascara" nillable="true" type="q5:Mascara" />
-      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Organizacion" nillable="true" type="q6:Organizacion" />
-      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="Prioridad" nillable="true" type="q7:Prioridad" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="Impacto" nillable="true" type="q5:Impacto" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" minOccurs="0" name="Mascara" nillable="true" type="q6:Mascara" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Organizacion" nillable="true" type="q7:Organizacion" />
       <xs:element minOccurs="0" name="Random" type="xs:boolean" />
       <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="RespuestaEncuesta" nillable="true" type="q8:ArrayOfRespuestaEncuesta" />
       <xs:element minOccurs="0" name="SlaEstimadoTicket" nillable="true" type="tns:SlaEstimadoTicket" />

@@ -10,22 +10,22 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/KiiniNet.Entities.dll">
-      <publishTime>07/22/2016 12:20:46</publishTime>
+      <publishTime>08/17/2016 10:57:03</publishTime>
     </File>
     <File Include="bin/KiiniNet.Services.dll">
-      <publishTime>07/22/2016 12:20:52</publishTime>
+      <publishTime>08/17/2016 10:57:07</publishTime>
     </File>
     <File Include="bin/KiiniNet.Services.Web.dll">
-      <publishTime>07/22/2016 12:20:53</publishTime>
+      <publishTime>08/17/2016 10:57:08</publishTime>
     </File>
     <File Include="bin/KinniNet.Business.Utils.dll">
-      <publishTime>07/22/2016 12:20:46</publishTime>
+      <publishTime>08/17/2016 10:57:03</publishTime>
     </File>
     <File Include="bin/KinniNet.Core.dll">
-      <publishTime>07/22/2016 12:20:52</publishTime>
+      <publishTime>08/17/2016 10:57:07</publishTime>
     </File>
     <File Include="bin/KinniNet.Data.dll">
-      <publishTime>07/22/2016 12:20:51</publishTime>
+      <publishTime>08/17/2016 10:57:06</publishTime>
     </File>
     <File Include="ServiceArbolAcceso.svc">
       <publishTime>07/22/2016 10:45:56</publishTime>
@@ -60,6 +60,9 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="ServiceParametros.svc">
       <publishTime>07/22/2016 10:45:56</publishTime>
     </File>
+    <File Include="ServicePuesto.svc">
+      <publishTime>08/11/2016 12:52:20</publishTime>
+    </File>
     <File Include="ServiceSecurity.svc">
       <publishTime>07/22/2016 10:45:56</publishTime>
     </File>
@@ -86,6 +89,9 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     </File>
     <File Include="Sistema/ServiceEstatus.svc">
       <publishTime>07/22/2016 10:45:56</publishTime>
+    </File>
+    <File Include="Sistema/ServiceImpactoUrgencia.svc">
+      <publishTime>07/28/2016 13:12:10</publishTime>
     </File>
     <File Include="Sistema/ServiceNotificacion.svc">
       <publishTime>07/22/2016 10:45:56</publishTime>
@@ -121,7 +127,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/22/2016 10:45:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/22/2016 12:20:53</publishTime>
+      <publishTime>08/17/2016 10:57:09</publishTime>
     </File>
   </ItemGroup>
 </Project>

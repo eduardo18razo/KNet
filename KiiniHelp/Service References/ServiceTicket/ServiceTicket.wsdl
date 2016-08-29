@@ -25,6 +25,12 @@
   <wsdl:message name="IServiceTicket_CrearTicket_OutputMessage">
     <wsdl:part name="parameters" element="tns:CrearTicketResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceTicket_ObtenerTicketsUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerTicketsUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServiceTicket_ObtenerTicketsUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerTicketsUsuarioResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceTicket_ObtenerTickets_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerTickets" />
   </wsdl:message>
@@ -66,6 +72,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/CrearTicket" message="tns:IServiceTicket_CrearTicket_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/CrearTicketResponse" message="tns:IServiceTicket_CrearTicket_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ObtenerTicketsUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerTicketsUsuario" message="tns:IServiceTicket_ObtenerTicketsUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerTicketsUsuarioResponse" message="tns:IServiceTicket_ObtenerTicketsUsuario_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ObtenerTickets">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerTickets" message="tns:IServiceTicket_ObtenerTickets_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerTicketsResponse" message="tns:IServiceTicket_ObtenerTickets_OutputMessage" />
@@ -95,6 +105,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="CrearTicket">
       <soap:operation soapAction="http://tempuri.org/IServiceTicket/CrearTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTicketsUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServiceTicket/ObtenerTicketsUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

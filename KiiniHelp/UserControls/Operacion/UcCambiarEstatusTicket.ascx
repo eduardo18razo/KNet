@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcCambiarEstatusTicket.ascx.cs" Inherits="KiiniHelp.UserControls.Operacion.UcCambiarEstatusTicket" %>
 <asp:UpdatePanel runat="server">
     <ContentTemplate>
+        <asp:HiddenField runat="server" ID="hfTicketCerrado"/>
         <header id="panelAlertaGeneral" runat="server" visible="false">
             Cambiar Estatus...
             <div class="alert alert-danger">

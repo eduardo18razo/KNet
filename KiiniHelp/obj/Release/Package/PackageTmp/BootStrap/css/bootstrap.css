@@ -15,6 +15,17 @@ body {
     margin: 0;
 }
 
+html, body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
 article,
 aside,
 details,
@@ -4302,7 +4313,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
         background-color: #636567;
         float: left;
         margin-bottom: -1px;
-        color:#FFF
+        color: #FFF;
     }
 
         .nav-tabs > li > a {
@@ -4310,12 +4321,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
             line-height: 1.42857143;
             border: 1px solid transparent;
             border-radius: 4px 4px 0 0;
-            color:#FFF
+            color: #FFF;
         }
 
             .nav-tabs > li > a:hover {
                 border-color: #eee #eee #ddd;
-
             }
 
         .nav-tabs > li.active > a,

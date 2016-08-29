@@ -19,5 +19,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<Usuario> ObtenerUsuariosByGrupo(int idGrupo, int idNivel);
+
+        [OperationContract]
+        void ActualizarUsuario(int idUsuario, Usuario usuario);
     }
 }

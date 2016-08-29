@@ -37,11 +37,11 @@ namespace KiiniHelp
         {
             try
             {
-                List<Area> lstAreas = _servicioArea.ObtenerAreasUsuario(((Usuario)Session["UserData"]).Id, true);
-                ddlAreas.DataSource = lstAreas;
-                ddlAreas.DataTextField = "Descripcion";
-                ddlAreas.DataValueField = "Id";
-                ddlAreas.DataBind();
+                List<Area> lstAreas = _servicioArea.ObtenerAreasUsuario(((Usuario)Session["UserData"]).Id, false);
+                if (Session["AreaSeleccionada"] != null)
+                    lblAreaSeleccionada.Text = lstAreas.Single(s => s.Id == int.Parse(Session["AreaSeleccionada"].ToString())).Descripcion;
+                rptAreas.DataSource = lstAreas;
+                rptAreas.DataBind();
             }
             catch (Exception ex)
             {
@@ -58,8 +58,7 @@ namespace KiiniHelp
         {
             try
             {
-                if (Session["AreaSeleccionada"] != null)
-                    ddlAreas.SelectedValue = Session["AreaSeleccionada"].ToString();
+                lnkBtnCerrar.Visible = !ContentPlaceHolder1.Page.ToString().ToUpper().Contains("DASHBOARD");
                 if (!IsPostBack && Session["UserData"] != null)
                 {
                     Usuario usuario = ((Usuario)Session["UserData"]);
@@ -71,7 +70,6 @@ namespace KiiniHelp
                         areaSeleccionada = int.Parse(Session["AreaSeleccionada"].ToString());
                     rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, areaSeleccionada, areaSeleccionada != 0);
                     rptMenu.DataBind();
-
                 }
             }
             catch (Exception ex)
@@ -262,20 +260,18 @@ namespace KiiniHelp
             }
         }
 
-        protected void ddlAreas_OnSelectedIndexChanged(object sender, EventArgs e)
+        protected void lnkBtnArea_OnClick(object sender, EventArgs e)
         {
             try
             {
-                if (ddlAreas.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
-                {
-                    Usuario usuario = ((Usuario)Session["UserData"]);
-                    Session["AreaSeleccionada"] = ddlAreas.SelectedValue;
-                    int areaSeleccionada = 0;
-                    if (Session["AreaSeleccionada"] != null)
-                        areaSeleccionada = int.Parse(Session["AreaSeleccionada"].ToString());
-                    rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, areaSeleccionada, areaSeleccionada != 0);
-                    rptMenu.DataBind();
-                }
+                Usuario usuario = ((Usuario)Session["UserData"]);
+                Session["AreaSeleccionada"] = ((LinkButton)sender).CommandArgument;
+                lblAreaSeleccionada.Text = ((LinkButton)sender).Text;
+                int areaSeleccionada = 0;
+                if (Session["AreaSeleccionada"] != null)
+                    areaSeleccionada = int.Parse(Session["AreaSeleccionada"].ToString());
+                rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, areaSeleccionada, areaSeleccionada != 0);
+                rptMenu.DataBind();
             }
             catch (Exception ex)
             {
@@ -286,6 +282,11 @@ namespace KiiniHelp
                 _lstError.Add(ex.Message);
                 AlertaGeneral = _lstError;
             }
+        }
+
+        protected void lnkBtnCerrar_OnClick(object sender, EventArgs e)
+        {
+            Response.Redirect(ResolveUrl("~/Users/DashBoard.aspx"));
         }
     }
 }

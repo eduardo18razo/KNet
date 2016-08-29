@@ -38,5 +38,8 @@ namespace KiiniNet.Services.Operacion.Interface
         void HabilitarArbol(int idArbol, bool habilitado);
         [OperationContract]
         void ActualizardArbol(int idArbolAcceso, ArbolAcceso arbolAcceso, string descripcion);
+
+        [OperationContract]
+        List<ArbolAcceso> ObtenerArbolesAccesoTerminalAll(int? idArea, int? idTipoUsuario, int? idTipoArbol, int? nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7);
     }
 }

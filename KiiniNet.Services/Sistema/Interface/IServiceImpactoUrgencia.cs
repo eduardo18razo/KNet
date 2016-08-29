@@ -16,5 +16,8 @@ namespace KiiniNet.Services.Sistema.Interface
 
         [OperationContract]
         Impacto ObtenerImpactoByPrioridadUrgencia(int idPrioridad, int idUrgencia);
+
+        [OperationContract]
+        List<Impacto> ObtenerAll(bool insertarSeleccion);
     }
 }

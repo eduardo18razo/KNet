@@ -17,6 +17,7 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceMascaras.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceMascaras.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceMascaras.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/KinniNet.Core.Operacion" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceMascaras.svc?xsd=xsd15" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceMascaras_CrearMascara_InputMessage">
@@ -30,6 +31,12 @@
   </wsdl:message>
   <wsdl:message name="IServiceMascaras_ObtenerMascaraCaptura_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerMascaraCapturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceMascaras_ObtenerMascaraCapturaByIdTicket_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerMascaraCapturaByIdTicket" />
+  </wsdl:message>
+  <wsdl:message name="IServiceMascaras_ObtenerMascaraCapturaByIdTicket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerMascaraCapturaByIdTicketResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceMascaras_ObtenerMascarasAcceso_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerMascarasAcceso" />
@@ -55,6 +62,12 @@
   <wsdl:message name="IServiceMascaras_HabilitarMascara_OutputMessage">
     <wsdl:part name="parameters" element="tns:HabilitarMascaraResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceMascaras_ObtenerDatosMascara_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerDatosMascara" />
+  </wsdl:message>
+  <wsdl:message name="IServiceMascaras_ObtenerDatosMascara_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerDatosMascaraResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceMascaras">
     <wsdl:operation name="CrearMascara">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceMascaras/CrearMascara" message="tns:IServiceMascaras_CrearMascara_InputMessage" />
@@ -63,6 +76,10 @@
     <wsdl:operation name="ObtenerMascaraCaptura">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceMascaras/ObtenerMascaraCaptura" message="tns:IServiceMascaras_ObtenerMascaraCaptura_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceMascaras/ObtenerMascaraCapturaResponse" message="tns:IServiceMascaras_ObtenerMascaraCaptura_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMascaraCapturaByIdTicket">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceMascaras/ObtenerMascaraCapturaByIdTicket" message="tns:IServiceMascaras_ObtenerMascaraCapturaByIdTicket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceMascaras/ObtenerMascaraCapturaByIdTicketResponse" message="tns:IServiceMascaras_ObtenerMascaraCapturaByIdTicket_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ObtenerMascarasAcceso">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceMascaras/ObtenerMascarasAcceso" message="tns:IServiceMascaras_ObtenerMascarasAcceso_InputMessage" />
@@ -80,6 +97,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceMascaras/HabilitarMascara" message="tns:IServiceMascaras_HabilitarMascara_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceMascaras/HabilitarMascaraResponse" message="tns:IServiceMascaras_HabilitarMascara_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ObtenerDatosMascara">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceMascaras/ObtenerDatosMascara" message="tns:IServiceMascaras_ObtenerDatosMascara_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceMascaras/ObtenerDatosMascaraResponse" message="tns:IServiceMascaras_ObtenerDatosMascara_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceMascaras">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -94,6 +115,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerMascaraCaptura">
       <soap:operation soapAction="http://tempuri.org/IServiceMascaras/ObtenerMascaraCaptura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMascaraCapturaByIdTicket">
+      <soap:operation soapAction="http://tempuri.org/IServiceMascaras/ObtenerMascaraCapturaByIdTicket" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -130,6 +160,15 @@
     </wsdl:operation>
     <wsdl:operation name="HabilitarMascara">
       <soap:operation soapAction="http://tempuri.org/IServiceMascaras/HabilitarMascara" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDatosMascara">
+      <soap:operation soapAction="http://tempuri.org/IServiceMascaras/ObtenerDatosMascara" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

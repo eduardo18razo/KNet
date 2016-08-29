@@ -42,6 +42,7 @@
     <Property Name="LongitudMaxima" Type="int" />
     <Property Name="SimboloMoneda" Type="nvarchar" MaxLength="10" />
     <Property Name="ValorMaximo" Type="int" />
+    <Property Name="MascaraDetalle" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Campus">
     <Key>
@@ -722,13 +723,13 @@
     <Property Name="IdMascara" Type="int" />
     <Property Name="IdEncuesta" Type="int" />
     <Property Name="IdSlaEstimadoTicket" Type="int" />
-    <Property Name="IdRespuestaEncuesta" Type="int" />
     <Property Name="IdEstatusTicket" Type="int" Nullable="false" />
     <Property Name="IdEstatusAsignacion" Type="int" Nullable="false" />
     <Property Name="FechaHoraAlta" Type="datetime" Nullable="false" />
     <Property Name="FechaHoraFinProceso" Type="datetime" />
     <Property Name="Random" Type="bit" />
     <Property Name="ClaveRegistro" Type="nvarchar" MaxLength="40" />
+    <Property Name="EncuestaRespondida" Type="bit" />
   </EntityType>
   <EntityType Name="TicketAsignacion">
     <Key>
@@ -799,6 +800,7 @@
     <Property Name="ValorMaximo" Type="bit" Nullable="false" />
     <Property Name="SimboloMoneda" Type="bit" Nullable="false" />
     <Property Name="Catalogo" Type="bit" Nullable="false" />
+    <Property Name="Mask" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TipoDocumento">
@@ -913,7 +915,7 @@
     <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="IdPuesto" Type="int" />
-    <Property Name="VIP" Type="bit" />
+    <Property Name="Vip" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioGrupo">

@@ -60,8 +60,14 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>07/22/2016 10:45:58</publishTime>
     </File>
+    <File Include="bin/AspNet.ScriptManager.jQuery.dll">
+      <publishTime>08/01/2016 16:28:53</publishTime>
+    </File>
     <File Include="bin/CuteEditor.dll">
       <publishTime>03/09/2016 10:46:06</publishTime>
+    </File>
+    <File Include="bin/DayPilot.dll">
+      <publishTime>06/29/2013 09:00:50</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.AspNet.dll">
       <publishTime>07/22/2016 10:45:57</publishTime>
@@ -94,13 +100,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>01/29/2011 05:51:50</publishTime>
     </File>
     <File Include="bin/KiiniHelp.dll">
-      <publishTime>07/22/2016 12:21:26</publishTime>
+      <publishTime>08/17/2016 15:46:39</publishTime>
     </File>
     <File Include="bin/KiiniNet.Entities.dll">
-      <publishTime>07/22/2016 12:20:46</publishTime>
+      <publishTime>08/17/2016 10:57:03</publishTime>
     </File>
     <File Include="bin/KinniNet.Business.Utils.dll">
-      <publishTime>07/22/2016 12:20:46</publishTime>
+      <publishTime>08/17/2016 10:57:03</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Web.Optimization.WebForms.dll">
       <publishTime>07/22/2016 10:45:58</publishTime>
@@ -139,7 +145,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/22/2016 10:45:53</publishTime>
     </File>
     <File Include="BootStrap/css/bootstrap.css">
-      <publishTime>07/22/2016 10:45:53</publishTime>
+      <publishTime>07/26/2016 08:43:13</publishTime>
     </File>
     <File Include="BootStrap/css/bootstrap.css.map">
       <publishTime>07/22/2016 10:45:53</publishTime>
@@ -150,11 +156,59 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="BootStrap/css/Calendar.css">
       <publishTime>07/22/2016 10:45:53</publishTime>
     </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker.css">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker.css.map">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker.min.css">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker.min.css.map">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker.standalone.css">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker.standalone.css.map">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker.standalone.min.css">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker.standalone.min.css.map">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker3.css">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker3.css.map">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker3.min.css">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker3.min.css.map">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker3.standalone.css">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker3.standalone.css.map">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker3.standalone.min.css">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
+    <File Include="BootStrap/css/Calendar/bootstrap-datepicker3.standalone.min.css.map">
+      <publishTime>08/01/2016 17:26:08</publishTime>
+    </File>
     <File Include="BootStrap/css/CheckBoxStyle.css">
       <publishTime>07/22/2016 10:45:53</publishTime>
     </File>
     <File Include="BootStrap/css/divs.css">
-      <publishTime>07/22/2016 10:45:53</publishTime>
+      <publishTime>07/26/2016 08:44:07</publishTime>
     </File>
     <File Include="BootStrap/css/DropDown.css">
       <publishTime>07/22/2016 10:45:53</publishTime>
@@ -172,7 +226,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/22/2016 10:45:53</publishTime>
     </File>
     <File Include="BootStrap/css/stylemainmenu.css">
-      <publishTime>07/22/2016 10:45:53</publishTime>
+      <publishTime>08/16/2016 12:35:03</publishTime>
     </File>
     <File Include="BootStrap/css/super-panel.css">
       <publishTime>07/22/2016 10:45:53</publishTime>
@@ -191,6 +245,15 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     </File>
     <File Include="BootStrap/js/accordion-menu.js">
       <publishTime>07/22/2016 10:45:53</publishTime>
+    </File>
+    <File Include="BootStrap/js/bootstrap-datepicker.es.min.js">
+      <publishTime>08/01/2016 17:27:21</publishTime>
+    </File>
+    <File Include="BootStrap/js/bootstrap-datepicker.js">
+      <publishTime>08/01/2016 17:25:35</publishTime>
+    </File>
+    <File Include="BootStrap/js/bootstrap-datepicker.min.js">
+      <publishTime>08/01/2016 17:25:35</publishTime>
     </File>
     <File Include="BootStrap/js/bootstrap.js">
       <publishTime>07/22/2016 10:45:53</publishTime>
@@ -213,6 +276,9 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="BootStrap/js/jquery-2.1.1.min.js">
       <publishTime>07/22/2016 10:45:53</publishTime>
     </File>
+    <File Include="BootStrap/js/locales/bootstrap-datepicker.es.min.js">
+      <publishTime>08/02/2016 09:23:49</publishTime>
+    </File>
     <File Include="BootStrap/js/sidebar_menu.js">
       <publishTime>07/22/2016 10:45:53</publishTime>
     </File>
@@ -220,13 +286,16 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/22/2016 11:17:54</publishTime>
     </File>
     <File Include="BootStrap/js/validation.js">
-      <publishTime>07/22/2016 10:45:53</publishTime>
+      <publishTime>07/29/2016 13:40:53</publishTime>
     </File>
     <File Include="BootStrap/js/vmenuModule.js">
       <publishTime>07/22/2016 10:45:53</publishTime>
     </File>
     <File Include="BootStrap/Web.config">
       <publishTime>07/22/2016 10:45:53</publishTime>
+    </File>
+    <File Include="Consultas/FrmConsulta.aspx">
+      <publishTime>08/08/2016 14:35:36</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>07/22/2016 10:45:53</publishTime>
@@ -5053,7 +5122,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/04/2011 03:38:38</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>07/22/2016 10:45:53</publishTime>
+      <publishTime>08/17/2016 12:40:47</publishTime>
     </File>
     <File Include="General/Default.aspx">
       <publishTime>07/22/2016 10:45:53</publishTime>
@@ -5185,7 +5254,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>08/01/2016 16:34:51</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Arbol.Nodos.Nivel1.datasource">
       <publishTime>07/22/2016 10:45:54</publishTime>
@@ -5277,8 +5346,17 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.EstatusTicket.datasource">
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
+    <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.Impacto.datasource">
+      <publishTime>07/28/2016 15:39:53</publishTime>
+    </File>
+    <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.ImpactoUrgencia.datasource">
+      <publishTime>07/28/2016 13:14:14</publishTime>
+    </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.Menu.datasource">
       <publishTime>07/22/2016 10:45:54</publishTime>
+    </File>
+    <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.Prioridad.datasource">
+      <publishTime>07/28/2016 13:14:10</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.Rol.datasource">
       <publishTime>07/22/2016 10:45:54</publishTime>
@@ -5313,14 +5391,29 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.TipoUsuario.datasource">
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
+    <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Sistema.Urgencia.datasource">
+      <publishTime>07/28/2016 13:14:12</publishTime>
+    </File>
+    <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Usuario.DiaFestivoSubGrupo.datasource">
+      <publishTime>08/16/2016 19:24:24</publishTime>
+    </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Usuario.Encuesta.datasource">
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Usuario.GrupoUsuario.datasource">
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
+    <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Usuario.HorarioSubGrupo.datasource">
+      <publishTime>08/16/2016 17:20:27</publishTime>
+    </File>
+    <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Usuario.Puesto.datasource">
+      <publishTime>08/11/2016 12:53:17</publishTime>
+    </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Usuario.SLA.datasource">
       <publishTime>07/22/2016 10:45:54</publishTime>
+    </File>
+    <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Usuario.Sla1.datasource">
+      <publishTime>08/15/2016 12:16:10</publishTime>
     </File>
     <File Include="Properties/DataSources/KiiniNet.Entities.Cat.Usuario.SubGrupoUsuario.datasource">
       <publishTime>07/22/2016 10:45:54</publishTime>
@@ -5472,6 +5565,15 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="Scripts/jquery-1.8.2.min.js">
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
+    <File Include="Scripts/jquery-1.9.1.js">
+      <publishTime>08/01/2016 16:29:13</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.9.1.min.js">
+      <publishTime>08/01/2016 16:29:12</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.9.1.min.map">
+      <publishTime>08/01/2016 16:29:11</publishTime>
+    </File>
     <File Include="Scripts/jquery-ui-1.8.24.js">
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
@@ -5553,6 +5655,9 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="Site.Mobile.Master">
       <publishTime>03/30/2016 16:15:22</publishTime>
     </File>
+    <File Include="Test/FrmTest.aspx">
+      <publishTime>08/15/2016 11:28:29</publishTime>
+    </File>
     <File Include="Test/FrmTestUserControls.aspx">
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
@@ -5575,22 +5680,28 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaGrupoUsuario.ascx">
-      <publishTime>07/22/2016 10:45:54</publishTime>
+      <publishTime>08/16/2016 15:33:11</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaInformacionConsulta.ascx">
-      <publishTime>07/22/2016 10:45:54</publishTime>
+      <publishTime>08/11/2016 16:19:54</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaMascaraAcceso.ascx">
-      <publishTime>07/22/2016 10:45:54</publishTime>
+      <publishTime>08/09/2016 10:00:34</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaOrganizacion.ascx">
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaSla.ascx">
-      <publishTime>07/22/2016 10:45:54</publishTime>
+      <publishTime>08/15/2016 12:30:34</publishTime>
     </File>
     <File Include="UserControls/Altas/AltaTiempoEstimado.ascx">
-      <publishTime>07/22/2016 10:45:54</publishTime>
+      <publishTime>08/15/2016 16:53:59</publishTime>
+    </File>
+    <File Include="UserControls/Altas/UcAltaArbolAcceso.ascx">
+      <publishTime>08/16/2016 09:20:46</publishTime>
+    </File>
+    <File Include="UserControls/Altas/UcAltaDiasFestivos.ascx">
+      <publishTime>08/16/2016 19:23:36</publishTime>
     </File>
     <File Include="UserControls/Altas/UcAltaGrupos.ascx">
       <publishTime>04/28/2016 19:44:56</publishTime>
@@ -5601,32 +5712,41 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="UserControls/Altas/UcAltaMascaraAcceso.ascx">
       <publishTime>05/10/2016 11:58:13</publishTime>
     </File>
+    <File Include="UserControls/Altas/UcAltaPuesto.ascx">
+      <publishTime>08/11/2016 14:52:59</publishTime>
+    </File>
     <File Include="UserControls/Altas/UcAltaUbicacion.ascx">
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
     <File Include="UserControls/Altas/UcEncuesta.ascx">
       <publishTime>05/06/2016 13:36:02</publishTime>
     </File>
+    <File Include="UserControls/Altas/UcHorario.ascx">
+      <publishTime>08/16/2016 19:23:37</publishTime>
+    </File>
     <File Include="UserControls/Altas/UcSla.ascx">
       <publishTime>05/06/2016 13:42:10</publishTime>
     </File>
     <File Include="UserControls/Consultas/UcConsultaArboles.ascx">
-      <publishTime>07/22/2016 10:45:54</publishTime>
+      <publishTime>08/16/2016 10:04:11</publishTime>
     </File>
     <File Include="UserControls/Consultas/UcConsultaEncuesta.ascx">
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
     <File Include="UserControls/Consultas/UcConsultaGrupos.ascx">
-      <publishTime>07/22/2016 10:45:54</publishTime>
+      <publishTime>08/16/2016 16:40:50</publishTime>
     </File>
     <File Include="UserControls/Consultas/UcConsultaInformacionConsulta.ascx">
-      <publishTime>07/22/2016 10:45:54</publishTime>
+      <publishTime>08/11/2016 15:10:49</publishTime>
     </File>
     <File Include="UserControls/Consultas/UcConsultaMascaras.ascx">
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
     <File Include="UserControls/Consultas/UcConsultaOrganizacion.ascx">
-      <publishTime>07/22/2016 10:45:54</publishTime>
+      <publishTime>08/16/2016 09:57:42</publishTime>
+    </File>
+    <File Include="UserControls/Consultas/UcConsultaTicketUsuario.ascx">
+      <publishTime>08/17/2016 15:34:56</publishTime>
     </File>
     <File Include="UserControls/Consultas/UcConsultaUbicaciones.ascx">
       <publishTime>07/22/2016 10:45:54</publishTime>
@@ -5662,28 +5782,91 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
     <File Include="UserControls/Operacion/UcCambiarEstatusTicket.ascx">
-      <publishTime>07/22/2016 10:45:54</publishTime>
+      <publishTime>08/10/2016 17:13:11</publishTime>
     </File>
     <File Include="UserControls/Seleccion/AsociarGrupoUsuario.ascx">
-      <publishTime>07/22/2016 10:45:54</publishTime>
+      <publishTime>08/09/2016 19:50:14</publishTime>
+    </File>
+    <File Include="UserControls/Seleccion/UcImpactoUrgencia.ascx">
+      <publishTime>08/15/2016 10:47:28</publishTime>
     </File>
     <File Include="UserControls/Temporal/UcCatalogoNiveles.ascx">
       <publishTime>07/22/2016 10:45:54</publishTime>
     </File>
     <File Include="UserControls/Temporal/UcMascaraCaptura.ascx">
-      <publishTime>07/22/2016 10:45:54</publishTime>
+      <publishTime>08/05/2016 17:48:42</publishTime>
     </File>
     <File Include="UserControls/Temporal/UcOrganizacion.ascx">
       <publishTime>05/30/2016 08:49:38</publishTime>
     </File>
-    <File Include="Usuarios.Master">
+    <File Include="UserControls/UcLogIn.ascx">
+      <publishTime>07/27/2016 14:48:42</publishTime>
+    </File>
+    <File Include="Users/Administracion/ArbolesAcceso/FrmAltaArbolAcceso.aspx">
+      <publishTime>08/16/2016 08:59:39</publishTime>
+    </File>
+    <File Include="Users/Administracion/ArbolesAcceso/FrmConsultaArbolAcceso.aspx">
+      <publishTime>07/27/2016 12:11:03</publishTime>
+    </File>
+    <File Include="Users/Administracion/Encuestas/FrmConsultaEncuestas.aspx">
+      <publishTime>07/27/2016 12:11:02</publishTime>
+    </File>
+    <File Include="Users/Administracion/Grupos/FrmConsultaGrupos.aspx">
+      <publishTime>07/27/2016 12:11:02</publishTime>
+    </File>
+    <File Include="Users/Administracion/InformaciondeConsulta/FrmConsultaInformacion.aspx">
+      <publishTime>07/27/2016 12:11:02</publishTime>
+    </File>
+    <File Include="Users/Administracion/Mascaras/FrmConsultaMascaraAcceso.aspx">
+      <publishTime>07/27/2016 12:11:03</publishTime>
+    </File>
+    <File Include="Users/Administracion/Organizaciones/FrmConsultaOrganizaciones.aspx">
+      <publishTime>07/27/2016 12:11:03</publishTime>
+    </File>
+    <File Include="Users/Administracion/Ubicaciones/FrmConsultaUbicaciones.aspx">
+      <publishTime>07/27/2016 12:11:03</publishTime>
+    </File>
+    <File Include="Users/Administracion/Usuarios/FrmConsultaUsuarios.aspx">
+      <publishTime>07/27/2016 12:11:03</publishTime>
+    </File>
+    <File Include="Users/Administracion/Usuarios/FrmUsuarios.aspx">
+      <publishTime>08/11/2016 15:00:25</publishTime>
+    </File>
+    <File Include="Users/Administracion/Web.config">
+      <publishTime>08/09/2016 09:10:21</publishTime>
+    </File>
+    <File Include="Users/DashBoard.aspx">
+      <publishTime>07/27/2016 12:03:28</publishTime>
+    </File>
+    <File Include="Users/General/FrmMiInformacion.aspx">
+      <publishTime>08/17/2016 15:33:28</publishTime>
+    </File>
+    <File Include="Users/General/FrmMostrarDocumento.aspx">
+      <publishTime>07/27/2016 12:44:57</publishTime>
+    </File>
+    <File Include="Users/General/FrmNodoConsultas.aspx">
+      <publishTime>07/27/2016 12:44:57</publishTime>
+    </File>
+    <File Include="Users/General/Web.config">
       <publishTime>07/22/2016 10:45:54</publishTime>
+    </File>
+    <File Include="Users/Operacion/FrmOperacionTickets.aspx">
+      <publishTime>08/17/2016 15:24:19</publishTime>
+    </File>
+    <File Include="Users/Ticket/FrmTicket.aspx">
+      <publishTime>08/03/2016 10:38:15</publishTime>
+    </File>
+    <File Include="Users/Ticket/Web.config">
+      <publishTime>07/22/2016 10:45:54</publishTime>
+    </File>
+    <File Include="Usuarios.Master">
+      <publishTime>08/09/2016 19:33:55</publishTime>
     </File>
     <File Include="Usuarios/FrmUsuarios.aspx">
       <publishTime>05/17/2016 11:17:35</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/22/2016 12:21:27</publishTime>
+      <publishTime>08/17/2016 10:59:25</publishTime>
     </File>
   </ItemGroup>
 </Project>

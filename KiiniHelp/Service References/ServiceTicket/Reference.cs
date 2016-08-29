@@ -18,6 +18,9 @@ namespace KiiniHelp.ServiceTicket {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/CrearTicket", ReplyAction="http://tempuri.org/IServiceTicket/CrearTicketResponse")]
         void CrearTicket(int idUsuario, int idArbol, System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperCampoMascaraCaptura> lstCaptura, bool campoRandom);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/ObtenerTicketsUsuario", ReplyAction="http://tempuri.org/IServiceTicket/ObtenerTicketsUsuarioResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperTickets> ObtenerTicketsUsuario(int idUsuario, int pageIndex, int pageSize);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/ObtenerTickets", ReplyAction="http://tempuri.org/IServiceTicket/ObtenerTicketsResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize);
         
@@ -66,6 +69,10 @@ namespace KiiniHelp.ServiceTicket {
         
         public void CrearTicket(int idUsuario, int idArbol, System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperCampoMascaraCaptura> lstCaptura, bool campoRandom) {
             base.Channel.CrearTicket(idUsuario, idArbol, lstCaptura, campoRandom);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperTickets> ObtenerTicketsUsuario(int idUsuario, int pageIndex, int pageSize) {
+            return base.Channel.ObtenerTicketsUsuario(idUsuario, pageIndex, pageSize);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize) {

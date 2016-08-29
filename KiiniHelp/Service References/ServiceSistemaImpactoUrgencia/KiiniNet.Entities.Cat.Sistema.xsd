@@ -371,7 +371,7 @@
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Prioridad" nillable="true" type="tns:ArrayOfImpacto" />
+      <xs:element minOccurs="0" name="Impacto" nillable="true" type="tns:ArrayOfImpacto" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />

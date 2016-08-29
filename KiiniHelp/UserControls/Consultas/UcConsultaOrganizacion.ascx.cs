@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
@@ -31,6 +32,11 @@ namespace KiiniHelp.UserControls.Consultas
             set { ddlTipoUsuario.SelectedValue = value.ToString(); }
         }
 
+        public string ModalName
+        {
+            set { hfModalName.Value = value; }
+        }
+
         public List<string> AlertaOrganizacion
         {
             set
@@ -57,9 +63,19 @@ namespace KiiniHelp.UserControls.Consultas
         {
             get
             {
-                if (ViewState["OrganizacionSeleccionada"] == null || ViewState["OrganizacionSeleccionada"].ToString().Trim() == string.Empty)
+                if (hfIdSeleccion.Value == null || hfIdSeleccion.Value.Trim() == string.Empty)
                     throw new Exception("Debe Seleccionar una organización");
-                return (int) ViewState["OrganizacionSeleccionada"];
+                return Convert.ToInt32(hfIdSeleccion.Value);
+            }
+            set
+            {
+                LlenaOrganizaciones();
+                foreach (RepeaterItem item in rptResultados.Items)
+                {
+                    if ((((DataBoundLiteralControl)item.Controls[0])).Text.Split('\n')[1].Contains("id='" + value + "'"))
+                        ScriptManager.RegisterStartupScript(Page, typeof(Page), "Scripts", "SeleccionaOrganizacion(\"" + value + "\");", true);
+                }
+                hfIdSeleccion.Value = value.ToString();
             }
         }
 
@@ -171,8 +187,8 @@ namespace KiiniHelp.UserControls.Consultas
                 LlenaCombos();
                 LlenaOrganizaciones();
             }
-            if (Request["__EVENTTARGET"] == "SeleccionarOrganizacion")
-                Seleccionar(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+            //if (Request["__EVENTTARGET"] == "SeleccionarOrganizacion")
+            //    Seleccionar(Convert.ToInt32(Request["__EVENTARGUMENT"]));
         }
 
         protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -742,7 +758,7 @@ namespace KiiniHelp.UserControls.Consultas
 
         private void Seleccionar(int id)
         {
-            ViewState["OrganizacionSeleccionada"] = id;
+            hfIdSeleccion.Value = id.ToString();
             if (OnSeleccionOrganizacionModal != null)
                 OnSeleccionOrganizacionModal();
         }
@@ -751,5 +767,28 @@ namespace KiiniHelp.UserControls.Consultas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+
+        protected void btnCerrar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnCerrar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (OnSeleccionOrganizacionModal != null)
+                    OnSeleccionOrganizacionModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
     }
 }

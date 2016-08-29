@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.SqlClient;
 using System.Linq;
 using KiiniNet.Entities.Cat.Mascaras;
+using KiiniNet.Entities.Helper;
+using KiiniNet.Entities.Operacion.Tickets;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
 
@@ -348,6 +351,36 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public Mascara ObtenerMascaraCapturaByIdTicket(int idTicket)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            Mascara result = null;
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                Ticket ticket = db.Ticket.Single(s => s.Id == idTicket);
+                if (ticket != null)
+                {
+                    db.LoadProperty(ticket, "Mascara");
+                    result = ticket.Mascara;
+                    if (result != null)
+                    {
+                        db.LoadProperty(result, "CampoMascara");
+                        foreach (CampoMascara campoMascara in result.CampoMascara)
+                        {
+                            db.LoadProperty(campoMascara, "TipoCampoMascara");
+                            db.LoadProperty(campoMascara, "Catalogos");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return result;
+        }
+
         public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla)
         {
             List<CatalogoGenerico> result;
@@ -409,10 +442,73 @@ namespace KinniNet.Core.Operacion
             }
         }
 
+        public List<HelperMascaraData> ObtenerDatosMascara(int idMascara, int idTicket)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            List<HelperMascaraData> result = null;
+            try
+            {
+                Mascara mascara = db.Mascara.SingleOrDefault(s => s.Id == idMascara);
+                if (mascara != null)
+                {
+                    db.LoadProperty(mascara, "CampoMascara");
+                    string campos = mascara.CampoMascara.Aggregate(string.Empty, (current, campoMascara) => current + (campoMascara.NombreCampo + ", "));
+                    if (mascara.Random)
+                        campos += BusinessVariables.ParametrosMascaraCaptura.NombreCampoRandom;
+                    else
+                        campos = campos.Trim().TrimEnd(',');
+
+                    DataSet retVal = new DataSet();
+                    EntityConnection entityConn = (EntityConnection)db.Connection;
+                    SqlConnection sqlConn = (SqlConnection)entityConn.StoreConnection;
+                    SqlCommand cmdReport = new SqlCommand(string.Format("select {0} from {1} where IdTicket = {2}", campos, mascara.NombreTabla, idTicket), sqlConn);
+                    SqlDataAdapter daReport = new SqlDataAdapter(cmdReport);
+                    using (cmdReport)
+                    {
+                        cmdReport.CommandType = CommandType.Text;
+                        daReport.Fill(retVal);
+                    }
+
+                    if (retVal.Tables.Count > 0)
+                    {
+                        if (retVal.Tables[0].Rows.Count > 0)
+                        {
+                            result = new List<HelperMascaraData>();
+                            foreach (DataRow row in retVal.Tables[0].Rows)
+                            {
+                                foreach (DataColumn column in retVal.Tables[0].Columns)
+                                {
+                                    HelperMascaraData data = new HelperMascaraData();
+                                    data.Campo = column.ColumnName;
+                                    data.Value = row[column.ColumnName].ToString();
+                                    result.Add(data);
+                                }
+                                break;
+                            }
+                        }
+                            
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+
+            return result;
+        }
+
         public class CatalogoGenerico
         {
             public int Id { get; set; }
             public string Descripcion { get; set; }
         }
+
+
     }
 }

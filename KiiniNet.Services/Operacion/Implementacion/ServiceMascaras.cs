@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using KiiniNet.Entities.Cat.Mascaras;
+using KiiniNet.Entities.Helper;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
 
@@ -11,33 +12,76 @@ namespace KiiniNet.Services.Operacion.Implementacion
     {
         public void CrearMascara(Mascara mascara)
         {
-            using (BusinessMascaras negocio = new BusinessMascaras())
+            try
             {
-                negocio.CrearMascara(mascara);
+                using (BusinessMascaras negocio = new BusinessMascaras())
+                {
+                    negocio.CrearMascara(mascara);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
         public Mascara ObtenerMascaraCaptura(int idMascara)
         {
-            using (BusinessMascaras negocio = new BusinessMascaras())
+            try
             {
-                return negocio.ObtenerMascaraCaptura(idMascara);
+                using (BusinessMascaras negocio = new BusinessMascaras())
+                {
+                    return negocio.ObtenerMascaraCaptura(idMascara);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Mascara ObtenerMascaraCapturaByIdTicket(int idTicket)
+        {
+            try
+            {
+                using (BusinessMascaras negocio = new BusinessMascaras())
+                {
+                    return negocio.ObtenerMascaraCapturaByIdTicket(idTicket);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
         public List<Mascara> ObtenerMascarasAcceso(bool insertarSeleccion)
         {
-            using (BusinessMascaras negocio = new BusinessMascaras())
+            try
             {
-                return negocio.ObtenerMascarasAcceso(insertarSeleccion);
+                using (BusinessMascaras negocio = new BusinessMascaras())
+                {
+                    return negocio.ObtenerMascarasAcceso(insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
         public List<BusinessMascaras.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla)
         {
-            using (BusinessMascaras negocio = new BusinessMascaras())
+            try
             {
-                return negocio.ObtenerCatalogoCampoMascara(tabla);
+                using (BusinessMascaras negocio = new BusinessMascaras())
+                {
+                    return negocio.ObtenerCatalogoCampoMascara(tabla);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
@@ -63,6 +107,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessMascaras negocio = new BusinessMascaras())
                 {
                     negocio.HabilitarMascara(idMascara, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<HelperMascaraData> ObtenerDatosMascara(int idMascara, int idTicket)
+        {
+            try
+            {
+                using (BusinessMascaras negocio = new BusinessMascaras())
+                {
+                    return negocio.ObtenerDatosMascara(idMascara, idTicket);
                 }
             }
             catch (Exception ex)

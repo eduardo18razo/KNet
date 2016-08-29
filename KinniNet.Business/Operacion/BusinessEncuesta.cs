@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
+using KiiniNet.Entities.Helper;
+using KiiniNet.Entities.Operacion.Tickets;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
 
@@ -46,21 +49,48 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public Encuesta ObtenerEncuesta(int idencuesta)
+        public Encuesta ObtenerEncuestaById(int idEncuesta)
         {
             Encuesta result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.Encuesta.SingleOrDefault(w => w.Id == idencuesta);
+                result = db.Encuesta.SingleOrDefault(w => w.Id == idEncuesta);
                 if (result != null)
                 {
+                    db.LoadProperty(result, "TipoEncuesta");
                     db.LoadProperty(result, "EncuestaPregunta");
-                    //foreach (EncuestaPregunta pregunta in result.EncuestaPregunta)
-                    //{
-                    //    db.LoadProperty(pregunta, "Pregunta");
-                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public Encuesta ObtenerEncuestaByIdTicket(int idTicket)
+        {
+            Encuesta result = null;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                Ticket tk = db.Ticket.Single(s => s.Id == idTicket);
+                if (tk != null)
+                {
+                    db.LoadProperty(tk, "Encuesta");
+                    result = tk.Encuesta;
+                    if (result != null)
+                    {
+                        db.LoadProperty(result, "TipoEncuesta");
+                        db.LoadProperty(result, "EncuestaPregunta");
+                    }
                 }
             }
             catch (Exception ex)
@@ -111,6 +141,47 @@ namespace KinniNet.Core.Operacion
                 foreach (Encuesta encuesta in result)
                 {
                     db.LoadProperty(encuesta, "TipoEncuesta");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<HelperEncuesta> ObtenerEncuestasPendientesUsuario(int idUsuario)
+        {
+            List<HelperEncuesta> result = null;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                List<Ticket> lstEncuestas = db.Ticket.Where(w => w.EncuestaRespondida == false && w.IdEncuesta != null && w.IdUsuario == idUsuario).ToList();
+                if (lstEncuestas.Count > 0)
+                {
+                    result = new List<HelperEncuesta>();
+                    foreach (Ticket ticket in lstEncuestas)
+                    {
+
+                        db.LoadProperty(ticket, "Encuesta");
+                        if (ticket.IdEncuesta != null)
+                        {
+                            HelperEncuesta hEncuesta = new HelperEncuesta
+                            {
+                                NumeroTicket = ticket.Id,
+                                IdEncuesta = (int) ticket.IdEncuesta,
+                                Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(ticket.IdArbolAcceso),
+                                Descripcion = ticket.Encuesta.Descripcion,
+                                Respondida = ticket.EncuestaRespondida,
+                            };
+                            result.Add(hEncuesta);
+                        }
+                    }
                 }
             }
             catch (Exception ex)

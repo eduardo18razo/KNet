@@ -234,4 +234,27 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerArbolesAccesoTerminalAll">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idArea" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoUsuario" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoArbol" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel1" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel2" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel3" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel4" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel5" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel6" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel7" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerArbolesAccesoTerminalAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ObtenerArbolesAccesoTerminalAllResult" nillable="true" type="q13:ArrayOfArbolAcceso" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

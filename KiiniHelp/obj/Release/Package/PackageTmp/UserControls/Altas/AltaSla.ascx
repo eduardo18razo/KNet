@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AltaSla.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.AltaSla" %>
 <asp:UpdatePanel runat="server">
     <ContentTemplate>
+        <asp:HiddenField runat="server" ID="hfFromModal"/>
+        <asp:HiddenField runat="server" ID="hfIdSla"/>
         <header id="panelAlert" runat="server" visible="False">
             <div class="alert alert-danger">
                 <div>

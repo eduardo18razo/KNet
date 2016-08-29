@@ -661,6 +661,7 @@ namespace KiiniHelp.UserControls.Seleccion
             {
                 AlertaGrupos = new List<string>();
                 ucAltaGrupoUsuario.FromOpcion = AsignacionAutomatica;
+                ucAltaGrupoUsuario.OnAceptarModal += ucAltaGrupoUsuario_OnAceptarModal;
                 ucAltaGrupoUsuario.OnCancelarModal += ucAltaGrupoUsuario_OnCancelarModal;
             }
             catch (Exception ex)
@@ -674,7 +675,7 @@ namespace KiiniHelp.UserControls.Seleccion
             }
         }
 
-        void ucAltaGrupoUsuario_OnCancelarModal()
+        void ucAltaGrupoUsuario_OnAceptarModal()
         {
             try
             {
@@ -748,6 +749,23 @@ namespace KiiniHelp.UserControls.Seleccion
                 }
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaGrupoUsuarios\");", true);
 
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGrupos = _lstError;
+            }
+        }
+
+        void ucAltaGrupoUsuario_OnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaGrupoUsuarios\");", true);
             }
             catch (Exception ex)
             {
@@ -847,6 +865,43 @@ namespace KiiniHelp.UserControls.Seleccion
                     return;
                 }
                 ObtenerGruposHerencia();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGrupos = _lstError;
+            }
+        }
+
+        protected void btnEliminar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Button button = (sender as Button);
+                //Get the Repeater Item reference
+                if (button != null)
+                {
+                    RepeaterItem item = button.NamingContainer as RepeaterItem;
+                    //Get the repeater item index
+                    if (item != null)
+                    {
+                        int index = item.ItemIndex;
+                        Label lblIdGrupoUsuario = (Label)rptUsuarioGrupo.Items[index].FindControl("lblIdGrupoUsuario");
+                        Label lblIdSubGrupoUsuario = (Label)rptUsuarioGrupo.Items[index].FindControl("lblIdSubGrupo");
+                        List<UsuarioGrupo> lst = (List<UsuarioGrupo>)Session["UsuarioGrupo"];
+                        if (lblIdSubGrupoUsuario.Text != string.Empty)
+                            lst.Remove(lst.Single(s => s.IdGrupoUsuario == int.Parse(lblIdGrupoUsuario.Text) && s.IdSubGrupoUsuario == int.Parse(lblIdSubGrupoUsuario.Text)));
+                        else
+                            lst.Remove(lst.Single(s => s.IdGrupoUsuario == int.Parse(lblIdGrupoUsuario.Text)));
+                        Session["UsuarioGrupo"] = lst;
+                        rptUsuarioGrupo.DataSource = lst;
+                        rptUsuarioGrupo.DataBind();
+                    }
+                }
             }
             catch (Exception ex)
             {

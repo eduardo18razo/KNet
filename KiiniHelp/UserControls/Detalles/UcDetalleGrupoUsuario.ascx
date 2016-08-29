@@ -3,7 +3,7 @@
 <asp:UpdatePanel runat="server">
     <ContentTemplate>
         <div class="panel panel-primary">
-            <div >
+            <div class="panel-body">
                 <asp:Repeater runat="server" ID="rptUserGroups" OnItemDataBound="rptUserGroups_OnItemDataBound">
                     <ItemTemplate>
                         <div class="row">

@@ -134,3 +134,6 @@ C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\obj\Re
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\obj\Release\KiiniHelp.csproj.ResolveComReference.cache
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\obj\Release\KiiniHelp.dll
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\obj\Release\KiiniHelp.pdb
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\AspNet.ScriptManager.jQuery.dll
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DayPilot.dll
+C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DayPilot.xml

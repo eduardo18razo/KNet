@@ -8,6 +8,7 @@
     <Property Name="IdArea" Type="int" Nullable="false" />
     <Property Name="IdTipoUsuario" Type="int" Nullable="false" />
     <Property Name="IdTipoArbolAcceso" Type="int" Nullable="false" />
+    <Property Name="IdImpacto" Type="int" />
     <Property Name="IdNivel1" Type="int" Nullable="false" />
     <Property Name="IdNivel2" Type="int" />
     <Property Name="IdNivel3" Type="int" />
@@ -87,6 +88,15 @@
     <Property Name="IdUsuario" Type="int" />
     <Property Name="Correo" Type="nvarchar" MaxLength="150" />
   </EntityType>
+  <EntityType Name="DiaFestivoSubGrupo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSubGrupoUsuario" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Direccion">
     <Key>
       <PropertyRef Name="Id" />
@@ -147,7 +157,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdGrupoUsuario" Type="int" Nullable="false" />
-    <Property Name="IdSubRol" Type="int" Nullable="false" />
+    <Property Name="IdRol" Type="int" />
+    <Property Name="IdSubRol" Type="int" />
     <Property Name="IdEstatusAsignacionActual" Type="int" Nullable="false" />
     <Property Name="IdEstatusAsignacionAccion" Type="int" />
     <Property Name="ComentarioObligado" Type="bit" />
@@ -161,6 +172,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdRol" Type="int" />
     <Property Name="IdSubRol" Type="int" />
     <Property Name="IdEstatusAsignacionActual" Type="int" />
     <Property Name="IdEstatusAsignacionAccion" Type="int" />
@@ -184,7 +196,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdGrupoUsuario" Type="int" Nullable="false" />
-    <Property Name="IdSubRol" Type="int" Nullable="false" />
+    <Property Name="IdRol" Type="int" />
+    <Property Name="IdSubRol" Type="int" />
     <Property Name="IdEstatusTicket" Type="int" Nullable="false" />
     <Property Name="Orden" Type="int" Nullable="false" />
     <Property Name="TieneSupervisor" Type="bit" />
@@ -196,6 +209,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdRol" Type="int" />
     <Property Name="IdSubRol" Type="int" />
     <Property Name="IdEstatusTicket" Type="int" />
     <Property Name="Orden" Type="int" />
@@ -263,6 +277,26 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="HorarioSubGrupo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSubGrupoUsuario" Type="int" Nullable="false" />
+    <Property Name="Dia" Type="int" Nullable="false" />
+    <Property Name="HoraInicio" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="HoraFin" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Impacto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPrioridad" Type="int" />
+    <Property Name="IdUrgencia" Type="int" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
   <EntityType Name="InformacionConsulta">
     <Key>
       <PropertyRef Name="Id" />
@@ -321,6 +355,7 @@
     <Property Name="NombreTabla" Type="nvarchar" MaxLength="150" />
     <Property Name="ComandoInsertar" Type="nvarchar" MaxLength="250" />
     <Property Name="ComandoActualizar" Type="nvarchar" MaxLength="250" />
+    <Property Name="Random" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="Menu">
@@ -468,6 +503,14 @@
     <Property Name="IdTipoUsuario" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prioridad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="Puesto">
     <Key>
@@ -672,6 +715,7 @@
     <Property Name="IdTipoUsuario" Type="int" Nullable="false" />
     <Property Name="IdTipoArbolAcceso" Type="int" Nullable="false" />
     <Property Name="IdArbolAcceso" Type="int" Nullable="false" />
+    <Property Name="IdImpacto" Type="int" Nullable="false" />
     <Property Name="IdUsuario" Type="int" Nullable="false" />
     <Property Name="IdOrganizacion" Type="int" Nullable="false" />
     <Property Name="IdUbicacion" Type="int" Nullable="false" />
@@ -681,7 +725,10 @@
     <Property Name="IdRespuestaEncuesta" Type="int" />
     <Property Name="IdEstatusTicket" Type="int" Nullable="false" />
     <Property Name="IdEstatusAsignacion" Type="int" Nullable="false" />
-    <Property Name="FechaHora" Type="datetime" Nullable="false" />
+    <Property Name="FechaHoraAlta" Type="datetime" Nullable="false" />
+    <Property Name="FechaHoraFinProceso" Type="datetime" />
+    <Property Name="Random" Type="bit" />
+    <Property Name="ClaveRegistro" Type="nvarchar" MaxLength="40" />
   </EntityType>
   <EntityType Name="TicketAsignacion">
     <Key>
@@ -843,6 +890,14 @@
     <Property Name="IdSiteRack" Type="int" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="Urgencia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
   <EntityType Name="Usuario">
     <Key>
       <PropertyRef Name="Id" />
@@ -858,6 +913,7 @@
     <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="IdPuesto" Type="int" />
+    <Property Name="VIP" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioGrupo">
@@ -983,6 +1039,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ArbolAcceso_Prioridad">
+    <End Role="Impacto" Type="Self.Impacto" Multiplicity="0..1" />
+    <End Role="ArbolAcceso" Type="Self.ArbolAcceso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Impacto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArbolAcceso">
+        <PropertyRef Name="IdImpacto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Campus_TipoUsuario">
     <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
     <End Role="Campus" Type="Self.Campus" Multiplicity="*" />
@@ -1028,6 +1096,18 @@
       </Principal>
       <Dependent Role="CorreoUsuario">
         <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DiasFestivosSubGrupo_SubGrupoUsuario">
+    <End Role="SubGrupoUsuario" Type="Self.SubGrupoUsuario" Multiplicity="1" />
+    <End Role="DiaFestivoSubGrupo" Type="Self.DiaFestivoSubGrupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubGrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DiaFestivoSubGrupo">
+        <PropertyRef Name="IdSubGrupoUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1115,8 +1195,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_EstatusAsignacionSubRolGeneral_SubRol">
-    <End Role="SubRol" Type="Self.SubRol" Multiplicity="1" />
+  <Association Name="FK_EstatusAsignacionSubRolGeneral_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+    <End Role="EstatusAsignacionSubRolGeneral" Type="Self.EstatusAsignacionSubRolGeneral" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusAsignacionSubRolGeneral">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusAsignacionSubRolGeneral_SubRol1">
+    <End Role="SubRol" Type="Self.SubRol" Multiplicity="0..1" />
     <End Role="EstatusAsignacionSubRolGeneral" Type="Self.EstatusAsignacionSubRolGeneral" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SubRol">
@@ -1148,6 +1240,18 @@
       </Principal>
       <Dependent Role="EstatusAsignacionSubRolGeneralDefault">
         <PropertyRef Name="IdEstatusAsignacionAccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusAsignacionSubRolGeneralDefault_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+    <End Role="EstatusAsignacionSubRolGeneralDefault" Type="Self.EstatusAsignacionSubRolGeneralDefault" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusAsignacionSubRolGeneralDefault">
+        <PropertyRef Name="IdRol" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1188,7 +1292,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_EstatusSubRolGeneral_SubRol">
-    <End Role="SubRol" Type="Self.SubRol" Multiplicity="1" />
+    <End Role="SubRol" Type="Self.SubRol" Multiplicity="0..1" />
     <End Role="EstatusTicketSubRolGeneral" Type="Self.EstatusTicketSubRolGeneral" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SubRol">
@@ -1196,6 +1300,18 @@
       </Principal>
       <Dependent Role="EstatusTicketSubRolGeneral">
         <PropertyRef Name="IdSubRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusTicketSubRolGeneral_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+    <End Role="EstatusTicketSubRolGeneral" Type="Self.EstatusTicketSubRolGeneral" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusTicketSubRolGeneral">
+        <PropertyRef Name="IdRol" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1208,6 +1324,18 @@
       </Principal>
       <Dependent Role="EstatusTicketSubRolGeneralDefault">
         <PropertyRef Name="IdEstatusTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EstatusTicketSubRolGeneralDefault_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+    <End Role="EstatusTicketSubRolGeneralDefault" Type="Self.EstatusTicketSubRolGeneralDefault" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EstatusTicketSubRolGeneralDefault">
+        <PropertyRef Name="IdRol" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1376,6 +1504,42 @@
       </Principal>
       <Dependent Role="Holding">
         <PropertyRef Name="IdTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HorarioSubGrupo_SubGrupoUsuario">
+    <End Role="SubGrupoUsuario" Type="Self.SubGrupoUsuario" Multiplicity="1" />
+    <End Role="HorarioSubGrupo" Type="Self.HorarioSubGrupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubGrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HorarioSubGrupo">
+        <PropertyRef Name="IdSubGrupoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Impacto_Prioridad">
+    <End Role="Prioridad" Type="Self.Prioridad" Multiplicity="0..1" />
+    <End Role="Impacto" Type="Self.Impacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prioridad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Impacto">
+        <PropertyRef Name="IdPrioridad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Impacto_Urgencia">
+    <End Role="Urgencia" Type="Self.Urgencia" Multiplicity="0..1" />
+    <End Role="Impacto" Type="Self.Impacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urgencia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Impacto">
+        <PropertyRef Name="IdUrgencia" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2195,6 +2359,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Ticket_Prioridad">
+    <End Role="Impacto" Type="Self.Impacto" Multiplicity="1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Impacto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdImpacto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Ticket_TipoArbolAcceso">
     <End Role="TipoArbolAcceso" Type="Self.TipoArbolAcceso" Multiplicity="1" />
     <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
@@ -2660,6 +2836,7 @@
     <EntitySet Name="Colonia" EntityType="Self.Colonia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Compania" EntityType="Self.Compania" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CorreoUsuario" EntityType="Self.CorreoUsuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DiaFestivoSubGrupo" EntityType="Self.DiaFestivoSubGrupo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Domicilio" EntityType="Self.Domicilio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Encuesta" EntityType="Self.Encuesta" Schema="dbo" store:Type="Tables" />
@@ -2677,6 +2854,8 @@
     <EntitySet Name="HitConsulta" EntityType="Self.HitConsulta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HitGrupoUsuario" EntityType="Self.HitGrupoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Holding" EntityType="Self.Holding" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HorarioSubGrupo" EntityType="Self.HorarioSubGrupo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Impacto" EntityType="Self.Impacto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InformacionConsulta" EntityType="Self.InformacionConsulta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InformacionConsultaDatos" EntityType="Self.InformacionConsultaDatos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventarioArbolAcceso" EntityType="Self.InventarioArbolAcceso" Schema="dbo" store:Type="Tables" />
@@ -2698,6 +2877,7 @@
     <EntitySet Name="ParametrosSla" EntityType="Self.ParametrosSla" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametrosTelefonos" EntityType="Self.ParametrosTelefonos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Piso" EntityType="Self.Piso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prioridad" EntityType="Self.Prioridad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Puesto" EntityType="Self.Puesto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RespuestaEncuesta" EntityType="Self.RespuestaEncuesta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RespuestaTipoEncuesta" EntityType="Self.RespuestaTipoEncuesta" Schema="dbo" store:Type="Tables" />
@@ -2733,6 +2913,7 @@
     <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Torre" EntityType="Self.Torre" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Urgencia" EntityType="Self.Urgencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuarioGrupo" EntityType="Self.UsuarioGrupo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
@@ -2769,6 +2950,10 @@
       <End Role="Nivel7" EntitySet="Nivel7" />
       <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
     </AssociationSet>
+    <AssociationSet Name="FK_ArbolAcceso_Prioridad" Association="Self.FK_ArbolAcceso_Prioridad">
+      <End Role="Impacto" EntitySet="Impacto" />
+      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+    </AssociationSet>
     <AssociationSet Name="FK_Campus_TipoUsuario" Association="Self.FK_Campus_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Campus" EntitySet="Campus" />
@@ -2784,6 +2969,10 @@
     <AssociationSet Name="FK_CorreoUsuario_Usuario" Association="Self.FK_CorreoUsuario_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="CorreoUsuario" EntitySet="CorreoUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DiasFestivosSubGrupo_SubGrupoUsuario" Association="Self.FK_DiasFestivosSubGrupo_SubGrupoUsuario">
+      <End Role="SubGrupoUsuario" EntitySet="SubGrupoUsuario" />
+      <End Role="DiaFestivoSubGrupo" EntitySet="DiaFestivoSubGrupo" />
     </AssociationSet>
     <AssociationSet Name="FK_Direccion_TipoUsuario" Association="Self.FK_Direccion_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
@@ -2813,7 +3002,11 @@
       <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
       <End Role="EstatusAsignacionSubRolGeneral" EntitySet="EstatusAsignacionSubRolGeneral" />
     </AssociationSet>
-    <AssociationSet Name="FK_EstatusAsignacionSubRolGeneral_SubRol" Association="Self.FK_EstatusAsignacionSubRolGeneral_SubRol">
+    <AssociationSet Name="FK_EstatusAsignacionSubRolGeneral_Rol" Association="Self.FK_EstatusAsignacionSubRolGeneral_Rol">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="EstatusAsignacionSubRolGeneral" EntitySet="EstatusAsignacionSubRolGeneral" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusAsignacionSubRolGeneral_SubRol1" Association="Self.FK_EstatusAsignacionSubRolGeneral_SubRol1">
       <End Role="SubRol" EntitySet="SubRol" />
       <End Role="EstatusAsignacionSubRolGeneral" EntitySet="EstatusAsignacionSubRolGeneral" />
     </AssociationSet>
@@ -2823,6 +3016,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion1" Association="Self.FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion1">
       <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
+      <End Role="EstatusAsignacionSubRolGeneralDefault" EntitySet="EstatusAsignacionSubRolGeneralDefault" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusAsignacionSubRolGeneralDefault_Rol" Association="Self.FK_EstatusAsignacionSubRolGeneralDefault_Rol">
+      <End Role="Rol" EntitySet="Rol" />
       <End Role="EstatusAsignacionSubRolGeneralDefault" EntitySet="EstatusAsignacionSubRolGeneralDefault" />
     </AssociationSet>
     <AssociationSet Name="FK_EstatusAsignacionSubRolGeneralDefault_SubRol" Association="Self.FK_EstatusAsignacionSubRolGeneralDefault_SubRol">
@@ -2841,8 +3038,16 @@
       <End Role="SubRol" EntitySet="SubRol" />
       <End Role="EstatusTicketSubRolGeneral" EntitySet="EstatusTicketSubRolGeneral" />
     </AssociationSet>
+    <AssociationSet Name="FK_EstatusTicketSubRolGeneral_Rol" Association="Self.FK_EstatusTicketSubRolGeneral_Rol">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="EstatusTicketSubRolGeneral" EntitySet="EstatusTicketSubRolGeneral" />
+    </AssociationSet>
     <AssociationSet Name="FK_EstatusTicketSubRolGeneralDefault_EstatusTicket" Association="Self.FK_EstatusTicketSubRolGeneralDefault_EstatusTicket">
       <End Role="EstatusTicket" EntitySet="EstatusTicket" />
+      <End Role="EstatusTicketSubRolGeneralDefault" EntitySet="EstatusTicketSubRolGeneralDefault" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EstatusTicketSubRolGeneralDefault_Rol" Association="Self.FK_EstatusTicketSubRolGeneralDefault_Rol">
+      <End Role="Rol" EntitySet="Rol" />
       <End Role="EstatusTicketSubRolGeneralDefault" EntitySet="EstatusTicketSubRolGeneralDefault" />
     </AssociationSet>
     <AssociationSet Name="FK_EstatusTicketSubRolGeneralDefault_SubRol" Association="Self.FK_EstatusTicketSubRolGeneralDefault_SubRol">
@@ -2900,6 +3105,18 @@
     <AssociationSet Name="FK_Holding_TipoUsuario" Association="Self.FK_Holding_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Holding" EntitySet="Holding" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HorarioSubGrupo_SubGrupoUsuario" Association="Self.FK_HorarioSubGrupo_SubGrupoUsuario">
+      <End Role="SubGrupoUsuario" EntitySet="SubGrupoUsuario" />
+      <End Role="HorarioSubGrupo" EntitySet="HorarioSubGrupo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Impacto_Prioridad" Association="Self.FK_Impacto_Prioridad">
+      <End Role="Prioridad" EntitySet="Prioridad" />
+      <End Role="Impacto" EntitySet="Impacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Impacto_Urgencia" Association="Self.FK_Impacto_Urgencia">
+      <End Role="Urgencia" EntitySet="Urgencia" />
+      <End Role="Impacto" EntitySet="Impacto" />
     </AssociationSet>
     <AssociationSet Name="FK_InformacionConsulta_TipoDocumento" Association="Self.FK_InformacionConsulta_TipoDocumento">
       <End Role="TipoDocumento" EntitySet="TipoDocumento" />
@@ -3171,6 +3388,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Ticket_Organizacion" Association="Self.FK_Ticket_Organizacion">
       <End Role="Organizacion" EntitySet="Organizacion" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Prioridad" Association="Self.FK_Ticket_Prioridad">
+      <End Role="Impacto" EntitySet="Impacto" />
       <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>
     <AssociationSet Name="FK_Ticket_TipoArbolAcceso" Association="Self.FK_Ticket_TipoArbolAcceso">

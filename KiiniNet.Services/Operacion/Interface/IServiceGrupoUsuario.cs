@@ -49,5 +49,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<DiaFestivoSubGrupo> ObtenerDiasByIdSubGrupo(int idSubGrupo);
+
+        [OperationContract]
+        List<GrupoUsuario> ObtenerGrupos(bool insertarSeleccion);
     }
 }

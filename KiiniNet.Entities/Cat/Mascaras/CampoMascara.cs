@@ -28,7 +28,8 @@ namespace KiiniNet.Entities.Cat.Mascaras
         public string SimboloMoneda { get; set; }
         [DataMember]
         public int? ValorMaximo { get; set; }
-
+        [DataMember]
+        public string MascaraDetalle { get; set; }
         [DataMember]
         public virtual Mascara Mascara { get; set; }
         [DataMember]

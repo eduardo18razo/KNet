@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Usuario;
+using KiiniNet.Entities.Helper;
 
 namespace KiiniNet.Services.Operacion.Interface
 {
@@ -9,6 +10,10 @@ namespace KiiniNet.Services.Operacion.Interface
     {
         [OperationContract]
         List<Encuesta> ObtenerEncuestas(bool insertarSeleccion);
+        [OperationContract]
+        Encuesta ObtenerEncuestaById(int idEncuesta);
+        [OperationContract]
+        Encuesta ObtenerEncuestaByIdTicket(int idTicket);
 
         [OperationContract]
         void GuardarEncuesta(Encuesta encuesta);
@@ -18,5 +23,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void HabilitarEncuesta(int idencuesta, bool habilitado);
+
+        [OperationContract]
+        List<HelperEncuesta> ObtenerEncuestasPendientesUsuario(int idUsuario);
     }
 }

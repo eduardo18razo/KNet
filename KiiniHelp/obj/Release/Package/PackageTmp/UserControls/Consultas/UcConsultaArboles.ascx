@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaArboles.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaArboles" %>
+<%@ Register Src="~/UserControls/Altas/UcAltaArbolAcceso.ascx" TagPrefix="uc1" TagName="UcAltaArbolAcceso" %>
+
 <div style="height: 100%;">
     <script>
         function dbClic(e) {
@@ -8,7 +10,7 @@
         };
 
         function ContextMenu() {
-            var $contextMenu = $("#contextMenu");
+            var $contextMenu = $("#contextMenuArbol");
             $("body").on("click", function (e) {
                 $contextMenu.hide();
                 var table = $("#tblHeader");
@@ -55,7 +57,8 @@
     </script>
     <asp:UpdatePanel runat="server" style="height: 100%">
         <ContentTemplate>
-            <div id="contextMenu" class="panel-heading">
+            <div id="contextMenuArbol" class="panel-heading contextMenu">
+                <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfModal" />
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-primary" Text="Baja" ID="btnBaja" OnClick="btnBaja_OnClick" />
@@ -216,3 +219,11 @@
     </asp:UpdatePanel>
 </div>
 
+<%--MODAL CATALOGOS--%>
+<div class="modal fade" id="editOpcion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <asp:UpdatePanel ID="upOcion" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <uc1:UcAltaArbolAcceso runat="server" ID="UcAltaArbolAcceso" />
+        </ContentTemplate>
+    </asp:UpdatePanel>
+</div>

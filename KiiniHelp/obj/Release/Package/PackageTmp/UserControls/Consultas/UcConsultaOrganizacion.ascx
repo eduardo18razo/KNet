@@ -40,7 +40,7 @@
                 });
 
                 var baja = false;
-                var alta = false;
+                var alta;
                 var parent = e.target.parentElement;
                 var nodos = parent.parentElement.childNodes;
                 for (var fondo = 0; fondo < nodos.length; fondo++) {

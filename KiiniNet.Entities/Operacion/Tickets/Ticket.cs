@@ -35,8 +35,6 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public int? IdSlaEstimadoTicket { get; set; }
         [DataMember]
-        public int? IdRespuestaEncuesta { get; set; }
-        [DataMember]
         public int IdEstatusTicket { get; set; }
         [DataMember]
         public int IdEstatusAsignacion { get; set; }
@@ -48,6 +46,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         public bool Random { get; set; }
         [DataMember]
         public string ClaveRegistro { get; set; }
+        [DataMember]
+        public bool EncuestaRespondida { get; set; }
 
 
         [DataMember]
@@ -71,12 +71,11 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public virtual SlaEstimadoTicket SlaEstimadoTicket { get; set; }
         [DataMember]
-        public virtual List<RespuestaEncuesta> RespuestaEncuesta { get; set; }
-        [DataMember]
         public virtual EstatusTicket EstatusTicket { get; set; }
         [DataMember]
         public virtual EstatusAsignacion EstatusAsignacion { get; set; }
-
+        [DataMember]
+        public virtual List<RespuestaEncuesta> RespuestaEncuesta { get; set; }
         [DataMember]
         public virtual List<TicketGrupoUsuario> TicketGrupoUsuario { get; set; }
         [DataMember]

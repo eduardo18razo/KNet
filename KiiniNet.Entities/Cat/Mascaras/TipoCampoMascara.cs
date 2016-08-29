@@ -28,6 +28,8 @@ namespace KiiniNet.Entities.Cat.Mascaras
         [DataMember]
         public bool Catalogo { get; set; }
         [DataMember]
+        public bool Mask { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
         [DataMember]
         public virtual List<CampoMascara> CampoMascara { get; set; }

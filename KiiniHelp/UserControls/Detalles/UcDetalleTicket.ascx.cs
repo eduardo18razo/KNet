@@ -17,6 +17,7 @@ namespace KiiniHelp.UserControls.Detalles
             {
                 ViewState["ticketDetalle"] = value; 
                 ObtenerDetalle();
+                ucDetalleMascaraCaptura.IdTicket = value;
             }
         }
 

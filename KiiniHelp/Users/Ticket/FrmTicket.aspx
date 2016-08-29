@@ -36,7 +36,7 @@
                     <asp:HiddenField runat="server" ID="hfIdSla" />
                     <asp:Label runat="server" ID="lblTicketDescripcion"></asp:Label>
                 </div>
-
+                
                 <div class="panel-body">
                     <uc1:UcInformacionConsulta runat="server" ID="UcInformacionConsulta" />
                     <uc1:UcMascaraCaptura runat="server" ID="UcMascaraCaptura" />

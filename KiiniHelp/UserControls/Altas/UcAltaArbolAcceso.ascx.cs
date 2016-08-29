@@ -152,8 +152,9 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 StringBuilder sb = new StringBuilder();
-                if (ddlEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
-                    sb.AppendLine("<li>Debe especificar una encuesta.</li>");
+                //todo: eliminar
+                //if (ddlEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                //    sb.AppendLine("<li>Debe especificar una encuesta.</li>");
                 if (sb.ToString() != string.Empty)
                 {
                     sb.Append("</ul>");

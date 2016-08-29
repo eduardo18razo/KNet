@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using KiiniNet.Entities.Cat.Sistema;
-using KinniNet.Core.Demonio;
-using KinniNet.Data.Help;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace KiiniNet.UnitTest
@@ -17,7 +13,10 @@ namespace KiiniNet.UnitTest
         {
             try
             {
-                DataBaseModelContext db = new DataBaseModelContext();
+                //new BusinessMascaras().GetDataMascara(1,1);
+                //DataBaseModelContext db = new DataBaseModelContext();
+                //var y = db.Ticket.Where(w=>w.EncuestaRespondida == false && w.IdEncuesta != null).ToList();
+                //y = y.ToList();
                 //SubRol
                 //try
                 //{
@@ -49,7 +48,7 @@ namespace KiiniNet.UnitTest
                 //}
                 //Debug.WriteLine(nuevacadena);
                 //}
-                
+
                 //while (true)
                 //{
                 //    int year = int.Parse(DateTime.Now.ToString("yy"));
@@ -62,7 +61,7 @@ namespace KiiniNet.UnitTest
                 //    int rnd = new Random().Next(100, 999);
                 //    Thread.Sleep(2);
                 //    string rndValue = rnd.ToString() + year + seg + dia + mes + hora + min + rnd + mil + int.Parse(DateTime.Now.ToString("fff"));
-                    
+
                 //    Debug.WriteLine(rndValue);
                 //}
 

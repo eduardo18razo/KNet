@@ -3,7 +3,7 @@
 #headerNav {
     font-size: 0; 
     display: block; 
-    background: #314f60; 
+    background: #000F89; 
     line-height: 60px; 
     height: 60px; 
     text-align: right; 
@@ -41,7 +41,7 @@
 
 #headerNav a.active, #headerNav a:hover {
     color: #fff;
-    background-color:#314f60;
+    background-color:#000F89;
 }
 
 #vertical-nav a {
@@ -76,7 +76,9 @@
     box-shadow:4px 0 18px #000000;
     box-shadow:4px 0 18px rgba(0,0,0,0.2);
     visibility:hidden;
-    background: #486779;
+    background-color: #000F89;
+    background-color: rgba(0, 16, 138, 0.5);
+
 }
 
 /*---- transparent layer ---- Available when the option transparentLayer is true in pane-panel.js */

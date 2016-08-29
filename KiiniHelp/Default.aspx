@@ -1,8 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="KiiniHelp.Default" %>
-
 <%@ Register Src="~/UserControls/UcLogIn.ascx" TagPrefix="uc1" TagName="UcLogIn" %>
-
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -30,7 +27,7 @@
         };
     </script>
 </head>
-<body style="background: url('images/backgroud.jpg'); background-size: 100% auto;">
+<body style="background: white;">
     <div id="full">
         <form id="form1" runat="server">
 
@@ -77,7 +74,7 @@
                         <div id="headerNavInfoDiv">
                         </div>
                     </div>
-                    <div style="float: left; margin-left: 50px">
+                    <div style="float: left; margin-left: -19px">
                         <div class="MenuHorizontal">
                             <ul>
                                 <li><a>Servicio a clientes</a>

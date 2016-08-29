@@ -27,6 +27,9 @@ namespace KiiniHelp.ServiceSistemaImpactoUrgencia {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceImpactoUrgencia/ObtenerImpactoByPrioridadUrgencia", ReplyAction="http://tempuri.org/IServiceImpactoUrgencia/ObtenerImpactoByPrioridadUrgenciaRespo" +
             "nse")]
         KiiniNet.Entities.Cat.Sistema.Impacto ObtenerImpactoByPrioridadUrgencia(int idPrioridad, int idUrgencia);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceImpactoUrgencia/ObtenerAll", ReplyAction="http://tempuri.org/IServiceImpactoUrgencia/ObtenerAllResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Impacto> ObtenerAll(bool insertarSeleccion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -70,6 +73,10 @@ namespace KiiniHelp.ServiceSistemaImpactoUrgencia {
         
         public KiiniNet.Entities.Cat.Sistema.Impacto ObtenerImpactoByPrioridadUrgencia(int idPrioridad, int idUrgencia) {
             return base.Channel.ObtenerImpactoByPrioridadUrgencia(idPrioridad, idUrgencia);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Impacto> ObtenerAll(bool insertarSeleccion) {
+            return base.Channel.ObtenerAll(insertarSeleccion);
         }
     }
 }
