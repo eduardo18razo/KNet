@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Helper;
+using KiiniNet.Entities.Operacion;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
 
@@ -106,6 +107,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessEncuesta negocio = new BusinessEncuesta())
                 {
                     return negocio.ObtenerEncuestasPendientesUsuario(idUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void Contestaencuesta(List<RespuestaEncuesta> encuestaRespondida)
+        {
+            try
+            {
+                using (BusinessEncuesta negocio = new BusinessEncuesta())
+                {
+                    negocio.Contestaencuesta(encuestaRespondida);
                 }
             }
             catch (Exception ex)

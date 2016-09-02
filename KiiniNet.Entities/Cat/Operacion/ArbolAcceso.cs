@@ -19,7 +19,7 @@ namespace KiiniNet.Entities.Cat.Operacion
         [DataMember]
         public int IdTipoArbolAcceso { get; set; }
         [DataMember]
-        public int IdImpacto { get; set; }
+        public int? IdImpacto { get; set; }
 
         [DataMember]
         public int? IdNivel1 { get; set; }

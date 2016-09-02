@@ -66,6 +66,15 @@ namespace KiiniHelp.UserControls.Filtros
                 throw new Exception(e.Message);
             }
         }
+
+        public List<int> EstatusSeleccionados
+        {
+            get
+            {
+                return (from RepeaterItem item in rptEstatusSeleccionado.Items select int.Parse(((Label) item.FindControl("lblId")).Text)).ToList();
+            }
+            set { }
+        }
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -74,6 +83,7 @@ namespace KiiniHelp.UserControls.Filtros
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
+                    Session["EstatusSeleccionado"] = null;
                     LlenaEstatus();
                 }
             }

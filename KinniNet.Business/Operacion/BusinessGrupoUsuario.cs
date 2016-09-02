@@ -53,6 +53,37 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public List<GrupoUsuario> ObtenerGruposByIdUsuario(int idUsuario, bool insertarSeleccion)
+        {
+            List<GrupoUsuario> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.UsuarioGrupo.Where(w => w.IdUsuario == idUsuario).Select(s => s.GrupoUsuario).Distinct().OrderBy(o => o.Descripcion).ToList();
+                foreach (GrupoUsuario gpo in result)
+                {
+                    db.LoadProperty(gpo, "TipoUsuario");
+                }
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                        new GrupoUsuario
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.Value,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
         public List<GrupoUsuario> ObtenerGruposUsuarioTipoUsuario(int idTipoGrupo, int idTipoUsuario, bool insertarSeleccion)
         {
             List<GrupoUsuario> result;

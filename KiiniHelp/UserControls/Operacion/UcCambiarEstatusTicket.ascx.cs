@@ -99,7 +99,7 @@ namespace KiiniHelp.UserControls.Operacion
                 if (ddlEstatus.SelectedValue != BusinessVariables.ComboBoxCatalogo.Value.ToString())
                 {
                     CerroTicket = Convert.ToInt32(ddlEstatus.SelectedValue) == (int) BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado;
-                    //_servicioTicketClient.CambiarEstatus(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuario, txtComentarios.Text.Trim());
+                    _servicioTicketClient.CambiarEstatus(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuario, txtComentarios.Text.Trim());
                 }
                 
                 if (OnAceptarModal != null)

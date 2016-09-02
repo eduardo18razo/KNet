@@ -74,7 +74,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
 
                 if (!IsPostBack)
                 {
-                    List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true);
+                    List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuario(true);
                     Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
                 }
 

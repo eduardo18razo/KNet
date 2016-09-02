@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using KiiniHelp.ServiceSistemaImpactoUrgencia;
+using KiiniHelp.ServiceImpactourgencia;
 using KiiniNet.Entities.Cat.Sistema;
 
 namespace KiiniHelp.UserControls.Filtros
@@ -26,7 +26,14 @@ namespace KiiniHelp.UserControls.Filtros
                 rptError.DataBind();
             }
         }
-
+        public List<int> ImpactosSeleccionados
+        {
+            get
+            {
+                return (from RepeaterItem item in rptImpactoSeleccionado.Items select int.Parse(((Label)item.FindControl("lblId")).Text)).ToList();
+            }
+            set { }
+        }
         private void LlenaImpacto()
         {
             try
@@ -73,6 +80,7 @@ namespace KiiniHelp.UserControls.Filtros
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
+                    Session["ImpactoSeleccionado"] = null;
                     LlenaImpacto();
                 }
             }

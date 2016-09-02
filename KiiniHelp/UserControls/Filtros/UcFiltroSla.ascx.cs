@@ -28,7 +28,7 @@ namespace KiiniHelp.UserControls.Filtros
         {
             try
             {
-                Dictionary<int, string> lst = new Dictionary<int, string> { { 0, "DENTRO" }, { 1, "FUERA" } };
+                Dictionary<int, string> lst = new Dictionary<int, string> { { 1, "DENTRO" }, { 0, "FUERA" } };
                 rptSla.DataSource = lst.ToList();
                 rptSla.DataBind();
             }
@@ -64,6 +64,15 @@ namespace KiiniHelp.UserControls.Filtros
             }
         }
 
+        public bool SlaSeleccionado
+        {
+            get
+            {
+
+                return (int.Parse(((Label)rptSlaSeleccionado.Items[0].FindControl("lblId")).Text) == 1);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -71,6 +80,7 @@ namespace KiiniHelp.UserControls.Filtros
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
+                    Session["SlaSeleccionado"] = null;
                     LlenaSla();
                 }
             }

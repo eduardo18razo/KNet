@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmTest.aspx.cs" Inherits="KiiniHelp.Test.FrmTest" %>
-<%@ Register Src="~/UserControls/Filtros/UcFiltroEstatus.ascx" TagPrefix="uc1" TagName="UcFiltroEstatus" %>
-<%@ Register Src="~/UserControls/Consultas/UcConsultaTicketGrafica.ascx" TagPrefix="uc1" TagName="UcConsultaTicketGrafica" %>
+
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
 <!DOCTYPE html>
 
@@ -75,7 +75,56 @@
                 <asp:ScriptReference Path="~/BootStrap/js/locales/bootstrap-datepicker.es.min.js" />
             </Scripts>
         </asp:ScriptManager>
-        <uc1:UcConsultaTicketGrafica runat="server" id="UcConsultaTicketGrafica" />
+        
+        <%--<asp:Chart ID="Chart1" runat="server" Width="412px" Height="296px" BorderlineDashStyle="Solid" Palette="BrightPastel" BackSecondaryColor="White" BackGradientStyle="TopBottom" BorderWidth="2" BackColor="WhiteSmoke" BorderColor="26, 59, 105">
+            <Legends>
+                <asp:Legend Enabled="False" IsTextAutoFit="False" Name="Default" BackColor="Transparent" Font="Trebuchet MS, 8.25pt, style=Bold">
+                </asp:Legend>
+            </Legends>
+            <BorderSkin SkinStyle="Emboss"></BorderSkin>
+            <Series>
+                <asp:Series Name="Default" BorderColor="180, 26, 59, 105">
+                </asp:Series>
+            </Series>
+            <ChartAreas>
+                <asp:ChartArea Name="ChartArea1" BorderColor="64, 64, 64, 64" BackSecondaryColor="White" BackColor="Gainsboro" ShadowColor="Transparent" BackGradientStyle="TopBottom">
+                    <AxisY2 IsLabelAutoFit="False" Interval="25">
+                        <LabelStyle Font="Trebuchet MS, 8.25pt, style=Bold" />
+                    </AxisY2>
+                    <AxisY LineColor="64, 64, 64, 64">
+                        <LabelStyle Font="Trebuchet MS, 8.25pt, style=Bold" />
+                        <MajorGrid LineColor="64, 64, 64, 64" />
+                    </AxisY>
+                    <AxisX LineColor="64, 64, 64, 64">
+                        <LabelStyle Font="Trebuchet MS, 8.25pt, style=Bold" />
+                        <MajorGrid LineColor="64, 64, 64, 64" />
+                    </AxisX>
+                </asp:ChartArea>
+            </ChartAreas>
+        </asp:Chart>--%>
+
+        <asp:Chart ID="Chart1" runat="server" Height="531px" Width="920px">
+            <Series>
+                <asp:Series Name="Default" BorderColor="180, 26, 59, 105">
+                </asp:Series>
+            </Series>
+            <ChartAreas>
+                <asp:ChartArea Name="ChartArea1" BorderColor="64, 64, 64, 64" BackSecondaryColor="White" BackColor="Gainsboro" ShadowColor="Transparent" BackGradientStyle="TopBottom">
+                    <AxisY2 IsLabelAutoFit="False" Interval="25">
+                        <LabelStyle Font="Trebuchet MS, 8.25pt, style=Bold" />
+                    </AxisY2>
+                    <AxisY LineColor="64, 64, 64, 64">
+                        <LabelStyle Font="Trebuchet MS, 8.25pt, style=Bold" />
+                        <MajorGrid LineColor="64, 64, 64, 64" />
+                    </AxisY>
+                    <AxisX LineColor="64, 64, 64, 64">
+                        <LabelStyle Font="Trebuchet MS, 8.25pt, style=Bold" />
+                        <MajorGrid LineColor="64, 64, 64, 64" />
+                    </AxisX>
+                </asp:ChartArea>
+            </ChartAreas>
+        </asp:Chart>
+
     </form>
 </body>
 </html>

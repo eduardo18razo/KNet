@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcFiltroTipificacion.ascx.cs" Inherits="KiiniHelp.UserControls.Filtros.UcFiltroTipificacion" %>
 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
     <ContentTemplate>
+        <asp:HiddenField runat="server" ID="hfTipoArbol"/>
         <header class="modal-header" id="panelAlerta" runat="server" visible="false">
             <div class="alert alert-danger">
                 <div>

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using KiiniNet.Entities.Cat.Operacion;
+using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniNet.Entities.Operacion
@@ -14,6 +13,8 @@ namespace KiiniNet.Entities.Operacion
         [DataMember]
         public int Id { get; set; }
         [DataMember]
+        public int IdTipoArbolAcceso { get; set; }
+        [DataMember]
         public int IdArbolAcceso { get; set; }
         [DataMember]
         public int IdUsuario { get; set; }
@@ -21,6 +22,10 @@ namespace KiiniNet.Entities.Operacion
         public int IdUbicacion { get; set; }
         [DataMember]
         public int IdOrganizacion { get; set; }
+        [DataMember]
+        public DateTime? FechaHoraAlta { get; set; }
+        [DataMember]
+        public virtual TipoArbolAcceso TipoArbolAcceso { get; set; }
         [DataMember]
         public virtual List<HitGrupoUsuario> HitGrupoUsuario { get; set; }
         [DataMember]

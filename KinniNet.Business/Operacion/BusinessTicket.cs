@@ -94,7 +94,7 @@ namespace KinniNet.Core.Operacion
                     IdTipoUsuario = usuario.IdTipoUsuario,
                     IdTipoArbolAcceso = arbol.IdTipoArbolAcceso,
                     IdArbolAcceso = arbol.Id,
-                    IdImpacto = arbol.IdImpacto,
+                    IdImpacto = (int) arbol.IdImpacto,
                     IdUsuario = usuario.Id,
                     IdOrganizacion = usuario.IdOrganizacion,
                     IdUbicacion = usuario.IdUbicacion,

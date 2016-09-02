@@ -61,7 +61,7 @@ namespace KinniNet.Core.Operacion
 
                         break;
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
-                        
+
                         break;
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                         if (!informacion.InformacionConsultaDatos.First().Descripcion.StartsWith("http://"))
@@ -226,12 +226,15 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                HitConsulta hit = new HitConsulta();
-                hit.IdArbolAcceso = idArbol;
-                hit.IdUsuario = idUsuario;
-                hit.IdUbicacion = new BusinessUbicacion().ObtenerUbicacionUsuario(new BusinessUsuarios().ObtenerUsuario(idUsuario).IdUbicacion).Id;
-                hit.IdOrganizacion = new BusinessOrganizacion().ObtenerOrganizacionUsuario(new BusinessUsuarios().ObtenerUsuario(idUsuario).IdOrganizacion).Id;
-                hit.HitGrupoUsuario = new List<HitGrupoUsuario>();
+                HitConsulta hit = new HitConsulta
+                {
+                    IdTipoArbolAcceso = new BusinessArbolAcceso().ObtenerArbolAcceso(idArbol).IdTipoArbolAcceso,
+                    IdArbolAcceso = idArbol,
+                    IdUsuario = idUsuario,
+                    IdUbicacion = new BusinessUbicacion().ObtenerUbicacionUsuario(new BusinessUsuarios().ObtenerUsuario(idUsuario).IdUbicacion).Id,
+                    IdOrganizacion = new BusinessOrganizacion().ObtenerOrganizacionUsuario(new BusinessUsuarios().ObtenerUsuario(idUsuario).IdOrganizacion).Id,
+                    HitGrupoUsuario = new List<HitGrupoUsuario>()
+                };
                 foreach (GrupoUsuarioInventarioArbol guia in new BusinessArbolAcceso().ObtenerGruposUsuarioArbol(idArbol))
                 {
                     hit.HitGrupoUsuario.Add(new HitGrupoUsuario

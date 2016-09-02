@@ -4,6 +4,7 @@ using System.Linq;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Helper;
+using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Tickets;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
@@ -202,6 +203,27 @@ namespace KinniNet.Core.Operacion
             {
                 Encuesta encuesta = db.Encuesta.SingleOrDefault(w => w.Id == idencuesta);
                 if (encuesta != null) encuesta.Habilitado = habilitado;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public void Contestaencuesta(List<RespuestaEncuesta> encuestaRespondida )
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                foreach (RespuestaEncuesta respuesta in encuestaRespondida)
+                {
+                    db.RespuestaEncuesta.AddObject(respuesta);
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)

@@ -285,16 +285,29 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="RolTipoUsuario" nillable="true" type="tns:RolTipoUsuario" />
-  <xs:complexType name="Impacto">
+  <xs:complexType name="TipoArbolAcceso">
     <xs:sequence>
       <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ArbolAcceso" nillable="true" type="q63:ArrayOfArbolAcceso" />
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="HitConsulta" nillable="true" type="q64:ArrayOfHitConsulta" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="Ticket" nillable="true" type="q65:ArrayOfTicket" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="TipoArbolAcceso" nillable="true" type="tns:TipoArbolAcceso" />
+  <xs:complexType name="Impacto">
+    <xs:sequence>
+      <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ArbolAcceso" nillable="true" type="q66:ArrayOfArbolAcceso" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IdPrioridad" type="xs:int" />
       <xs:element minOccurs="0" name="IdUrgencia" type="xs:int" />
       <xs:element minOccurs="0" name="Prioridad" nillable="true" type="tns:Prioridad" />
-      <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="Ticket" nillable="true" type="q64:ArrayOfTicket" />
+      <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="Ticket" nillable="true" type="q67:ArrayOfTicket" />
       <xs:element minOccurs="0" name="Urgencia" nillable="true" type="tns:Urgencia" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
@@ -329,22 +342,10 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Urgencia" nillable="true" type="tns:Urgencia" />
-  <xs:complexType name="TipoArbolAcceso">
-    <xs:sequence>
-      <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ArbolAcceso" nillable="true" type="q65:ArrayOfArbolAcceso" />
-      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="Ticket" nillable="true" type="q66:ArrayOfTicket" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="TipoArbolAcceso" nillable="true" type="tns:TipoArbolAcceso" />
   <xs:complexType name="TipoEncuesta">
     <xs:sequence>
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
-      <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="Encuesta" nillable="true" type="q67:ArrayOfEncuesta" />
+      <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="Encuesta" nillable="true" type="q68:ArrayOfEncuesta" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="RespuestaTipoEncuesta" nillable="true" type="tns:ArrayOfRespuestaTipoEncuesta" />

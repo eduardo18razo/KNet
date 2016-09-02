@@ -35,6 +35,9 @@ namespace KiiniHelp.ServiceEncuesta {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasPendientesUsuario", ReplyAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasPendientesUsuarioResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperEncuesta> ObtenerEncuestasPendientesUsuario(int idUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/Contestaencuesta", ReplyAction="http://tempuri.org/IServiceEncuesta/ContestaencuestaResponse")]
+        void Contestaencuesta(System.Collections.Generic.List<KiiniNet.Entities.Operacion.RespuestaEncuesta> encuestaRespondida);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -90,6 +93,10 @@ namespace KiiniHelp.ServiceEncuesta {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperEncuesta> ObtenerEncuestasPendientesUsuario(int idUsuario) {
             return base.Channel.ObtenerEncuestasPendientesUsuario(idUsuario);
+        }
+        
+        public void Contestaencuesta(System.Collections.Generic.List<KiiniNet.Entities.Operacion.RespuestaEncuesta> encuestaRespondida) {
+            base.Channel.Contestaencuesta(encuestaRespondida);
         }
     }
 }

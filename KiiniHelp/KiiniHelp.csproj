@@ -59,6 +59,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -153,14 +154,153 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.DiaFestivoSubGrupo.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperEncuesta.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperMascaraData.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperHits.datasource" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Service References\ServiceConsultas\ServiceConsultas.wsdl" />
+    <None Include="Service References\ServiceConsultas\ServiceConsultas.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas14.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas15.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas9.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceEncuesta\ServiceEncuesta14.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia.wsdl" />
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia9.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras15.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion.wsdl" />
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion14.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServicePuesto\ServicePuesto.wsdl" />
@@ -206,49 +346,31 @@
     <None Include="Service References\ServicePuesto\ServicePuesto9.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\configuration91.svcinfo" />
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\configuration.svcinfo" />
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Arbol.Nodos.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Arbol.Organizacion.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Arbol.Ubicaciones.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Mascaras.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Operacion.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Usuario.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Operacion.Tickets.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Operacion.Usuarios.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Operacion.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Parametros.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <None Include="Service References\ServicePuesto\ServicePuesto.disco" />
     <None Include="Service References\ServicePuesto\configuration91.svcinfo" />
     <None Include="Service References\ServicePuesto\configuration.svcinfo" />
     <None Include="Service References\ServicePuesto\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceConsultas\ServiceConsultas.disco" />
+    <None Include="Service References\ServiceConsultas\configuration91.svcinfo" />
+    <None Include="Service References\ServiceConsultas\configuration.svcinfo" />
+    <None Include="Service References\ServiceConsultas\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia.disco" />
+    <None Include="Service References\ServiceImpactourgencia\configuration91.svcinfo" />
+    <None Include="Service References\ServiceImpactourgencia\configuration.svcinfo" />
+    <None Include="Service References\ServiceImpactourgencia\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceNotificacion\ServiceNotificacion.disco" />
+    <None Include="Service References\ServiceNotificacion\configuration91.svcinfo" />
+    <None Include="Service References\ServiceNotificacion\configuration.svcinfo" />
+    <None Include="Service References\ServiceNotificacion\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -259,7 +381,7 @@
     <Content Include="UserControls\Altas\UcAltaUsuario.ascx" />
     <Content Include="UserControls\Altas\UcHorario.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaEncuestaPendiente.ascx" />
-    <Content Include="UserControls\Consultas\UcConsultaTicketGrafica.ascx" />
+    <Content Include="UserControls\Filtros\UcFiltrosConsulta.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaTicketUsuario.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleMascaraCaptura.ascx" />
     <Content Include="UserControls\Filtros\UcFiltroEstatus.ascx" />
@@ -268,6 +390,7 @@
     <Content Include="UserControls\Filtros\UcFiltroOrganizacion.ascx" />
     <Content Include="UserControls\Filtros\UcFiltroPrioridad.ascx" />
     <Content Include="UserControls\Filtros\UcFiltroServicioIncidente.ascx" />
+    <Content Include="UserControls\Filtros\UcFiltrosGrafico.ascx" />
     <Content Include="UserControls\Filtros\UcFiltroSla.ascx" />
     <Content Include="UserControls\Filtros\UcFiltroTipificacion.ascx" />
     <Content Include="UserControls\Filtros\UcFiltroUbicacion.ascx" />
@@ -276,6 +399,9 @@
     <Content Include="UserControls\UcLogIn.ascx" />
     <Content Include="Users\Administracion\ArbolesAcceso\FrmAltaArbolAcceso.aspx" />
     <Content Include="Users\Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx" />
+    <Content Include="Consultas\FrmConsultaTickets.aspx" />
+    <Content Include="Consultas\FrmConsultaEncuesta.aspx" />
+    <Content Include="Consultas\FrmConsultaHits.aspx" />
     <Content Include="Users\Administracion\Encuestas\FrmConsultaEncuestas.aspx" />
     <Content Include="Users\Administracion\Grupos\FrmConsultaGrupos.aspx" />
     <Content Include="Users\Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx" />
@@ -909,26 +1035,6 @@
     <None Include="Service References\ServiceSistemaEstatus\ServiceEstatus9.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\KiiniNet.Entities.Cat.Sistema.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\service.wsdl" />
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaImpactoUrgencia\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaNotificacion\KiiniNet.Entities.Cat.Sistema.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaNotificacion\service.wsdl" />
-    <None Include="Service References\ServiceSistemaNotificacion\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaNotificacion\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\ServiceSistemaRol\ServiceRoles.wsdl" />
     <None Include="Service References\ServiceSistemaRol\ServiceRoles.xsd">
       <SubType>Designer</SubType>
@@ -1415,6 +1521,9 @@
     <None Include="Service References\ServiceTicket\ServiceTicket4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceUbicacion\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Cat.Arbol.Nodos1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1455,7 +1564,7 @@
     <None Include="Service References\ServiceUbicacion\service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceUbicacion\service21.xsd">
+    <None Include="Service References\ServiceUbicacion\service3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceUbicacion\ServiceUbicacion.wsdl" />
@@ -1614,12 +1723,6 @@
     <None Include="Service References\ServiceSistemaEstatus\configuration91.svcinfo" />
     <None Include="Service References\ServiceSistemaEstatus\configuration.svcinfo" />
     <None Include="Service References\ServiceSistemaEstatus\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\ServiceSistemaNotificacion\configuration91.svcinfo" />
-    <None Include="Service References\ServiceSistemaNotificacion\configuration.svcinfo" />
-    <None Include="Service References\ServiceSistemaNotificacion\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -1924,12 +2027,22 @@
     <Compile Include="Consultas\FrmConsulta.aspx.designer.cs">
       <DependentUpon>FrmConsulta.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Service References\ServicePuesto\Reference.cs">
+    <Compile Include="Service References\ServiceConsultas\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\ServiceSistemaImpactoUrgencia\Reference.cs">
+    <Compile Include="Service References\ServiceImpactourgencia\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceNotificacion\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServicePuesto\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -1983,12 +2096,12 @@
     <Compile Include="UserControls\Consultas\UcConsultaEncuestaPendiente.ascx.designer.cs">
       <DependentUpon>UcConsultaEncuestaPendiente.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Consultas\UcConsultaTicketGrafica.ascx.cs">
-      <DependentUpon>UcConsultaTicketGrafica.ascx</DependentUpon>
+    <Compile Include="UserControls\Filtros\UcFiltrosConsulta.ascx.cs">
+      <DependentUpon>UcFiltrosConsulta.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Consultas\UcConsultaTicketGrafica.ascx.designer.cs">
-      <DependentUpon>UcConsultaTicketGrafica.ascx</DependentUpon>
+    <Compile Include="UserControls\Filtros\UcFiltrosConsulta.ascx.designer.cs">
+      <DependentUpon>UcFiltrosConsulta.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaTicketUsuario.ascx.cs">
       <DependentUpon>UcConsultaTicketUsuario.ascx</DependentUpon>
@@ -2046,6 +2159,13 @@
     <Compile Include="UserControls\Filtros\UcFiltroServicioIncidente.ascx.designer.cs">
       <DependentUpon>UcFiltroServicioIncidente.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Filtros\UcFiltrosGrafico.ascx.cs">
+      <DependentUpon>UcFiltrosGrafico.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\UcFiltrosGrafico.ascx.designer.cs">
+      <DependentUpon>UcFiltrosGrafico.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Filtros\UcFiltroSla.ascx.cs">
       <DependentUpon>UcFiltroSla.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2101,6 +2221,27 @@
     </Compile>
     <Compile Include="Users\Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx.designer.cs">
       <DependentUpon>FrmConsultaArbolAcceso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\FrmConsultaTickets.aspx.cs">
+      <DependentUpon>FrmConsultaTickets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\FrmConsultaTickets.aspx.designer.cs">
+      <DependentUpon>FrmConsultaTickets.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\FrmConsultaEncuesta.aspx.cs">
+      <DependentUpon>FrmConsultaEncuesta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\FrmConsultaEncuesta.aspx.designer.cs">
+      <DependentUpon>FrmConsultaEncuesta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\FrmConsultaHits.aspx.cs">
+      <DependentUpon>FrmConsultaHits.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\FrmConsultaHits.aspx.designer.cs">
+      <DependentUpon>FrmConsultaHits.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Administracion\Encuestas\FrmConsultaEncuestas.aspx.cs">
       <DependentUpon>FrmConsultaEncuestas.aspx</DependentUpon>
@@ -2263,11 +2404,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceSistemaEstatus\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\ServiceSistemaNotificacion\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -2577,6 +2713,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Repositorio\" />
+    <Folder Include="Users\Administracion\Consultas\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KiiniNet.Entities\KiiniNet.Entities.csproj">
@@ -2594,10 +2731,13 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ServiceArbolAcceso\" />
     <WCFMetadataStorage Include="Service References\ServiceArea\" />
+    <WCFMetadataStorage Include="Service References\ServiceConsultas\" />
     <WCFMetadataStorage Include="Service References\ServiceEncuesta\" />
     <WCFMetadataStorage Include="Service References\ServiceGrupoUsuario\" />
+    <WCFMetadataStorage Include="Service References\ServiceImpactourgencia\" />
     <WCFMetadataStorage Include="Service References\ServiceInformacionConsulta\" />
     <WCFMetadataStorage Include="Service References\ServiceMascaraAcceso\" />
+    <WCFMetadataStorage Include="Service References\ServiceNotificacion\" />
     <WCFMetadataStorage Include="Service References\ServiceOrganizacion\" />
     <WCFMetadataStorage Include="Service References\ServiceParametrosSistema\" />
     <WCFMetadataStorage Include="Service References\ServicePuesto\" />
@@ -2605,8 +2745,6 @@
     <WCFMetadataStorage Include="Service References\ServiceSistemaCatalogos\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaDomicilio\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaEstatus\" />
-    <WCFMetadataStorage Include="Service References\ServiceSistemaImpactoUrgencia\" />
-    <WCFMetadataStorage Include="Service References\ServiceSistemaNotificacion\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaRol\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaSubRol\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaTipoArbolAcceso\" />

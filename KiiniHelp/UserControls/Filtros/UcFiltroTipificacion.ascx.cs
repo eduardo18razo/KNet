@@ -27,11 +27,28 @@ namespace KiiniHelp.UserControls.Filtros
             }
         }
 
+        public int TipoArbol
+        {
+            get { return Convert.ToInt32(hfTipoArbol.Value); }
+            set
+            {
+                hfTipoArbol.Value = value.ToString();
+                LlenaArbol();
+            }
+        }
+        public List<int> TipificacionesSeleccionadas
+        {
+            get
+            {
+                return (from RepeaterItem item in rptArbolSeleccionado.Items select int.Parse(((Label)item.FindControl("lblId")).Text)).ToList();
+            }
+            set { }
+        }
         private void LlenaArbol()
         {
             try
             {
-                rptArbol.DataSource = _servicioArbolAcceso.ObtenerArbolesAccesoTerminalAll(null, null, null, null, null, null, null, null, null, null);
+                rptArbol.DataSource = _servicioArbolAcceso.ObtenerArbolesAccesoTerminalAll(null, null, TipoArbol, null, null, null, null, null, null, null);
                 rptArbol.DataBind();
             }
             catch (Exception e)
@@ -73,7 +90,8 @@ namespace KiiniHelp.UserControls.Filtros
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
-                    LlenaArbol();
+                    Session["ArbolSeleccionado"] = null;
+                    //LlenaArbol();
                 }
             }
             catch (Exception ex)

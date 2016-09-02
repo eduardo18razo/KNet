@@ -37,25 +37,25 @@
                             <HeaderTemplate>
                                 <div class="container-fluid">
                                     <asp:Label runat="server" Visible="False" ID="lblId" Text='<%# Eval("Id")%>' />
-                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Holding" />
-                                    <asp:Label CssClass="col-pe-2" runat="server" Text="Compañia" />
-                                    <asp:Label CssClass="col-pe-2" runat="server" Text="Dirección" />
-                                    <asp:Label CssClass="col-pe-2" runat="server" Text="Sub Dirección" />
-                                    <asp:Label CssClass="col-pe-2" runat="server" Text="Gerencia" />
-                                    <asp:Label CssClass="col-pe-2" runat="server" Text="Sub Gerencia" />
-                                    <asp:Label CssClass="col-pe-2" runat="server" Text="Jefatura" />
+                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Holding" />
+                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Compañia" />
+                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Dirección" />
+                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Sub Dirección" />
+                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Gerencia" />
+                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Sub Gerencia" />
+                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Jefatura" />
                                 </div>
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <div class="container-fluid" style="margin-top: 2px">
                                     <asp:Label runat="server" Visible="False" ID="lblId" Text='<%# Eval("Id")%>' />
-                                    <asp:Label CssClass="col-pe-1" runat="server" ID="lblHolding" Text='<%# Eval("Holding.Descripcion")%>' />
-                                    <asp:Label CssClass="col-pe-2" runat="server" ID="lblCompania" Text='<%# Eval("Compania.Descripcion")%>' />
-                                    <asp:Label CssClass="col-pe-2" runat="server" ID="lblDireccion" Text='<%# Eval("Direccion.Descripcion")%>' />
-                                    <asp:Label CssClass="col-pe-2" runat="server" ID="lblSubDireccion" Text='<%# Eval("SubDireccion.Descripcion")%>' />
-                                    <asp:Label CssClass="col-pe-2" runat="server" ID="lblGerencia" Text='<%# Eval("Gerencia.Descripcion")%>' />
-                                    <asp:Label CssClass="col-pe-2" runat="server" ID="lblSubGerencia" Text='<%# Eval("SubGerencia.Descripcion")%>' />
-                                    <asp:Label CssClass="col-pe-2" runat="server" ID="lblJefatura" Text='<%# Eval("Jefatura.Descripcion")%>' />
+                                    <asp:Label CssClass="col-sm-1" runat="server" ID="lblHolding" Text='<%# Eval("Holding.Descripcion")%>' />
+                                    <asp:Label CssClass="col-sm-1" runat="server" ID="lblCompania" Text='<%# Eval("Compania.Descripcion")%>' />
+                                    <asp:Label CssClass="col-sm-1" runat="server" ID="lblDireccion" Text='<%# Eval("Direccion.Descripcion")%>' />
+                                    <asp:Label CssClass="col-sm-1" runat="server" ID="lblSubDireccion" Text='<%# Eval("SubDireccion.Descripcion")%>' />
+                                    <asp:Label CssClass="col-sm-1" runat="server" ID="lblGerencia" Text='<%# Eval("Gerencia.Descripcion")%>' />
+                                    <asp:Label CssClass="col-sm-1" runat="server" ID="lblSubGerencia" Text='<%# Eval("SubGerencia.Descripcion")%>' />
+                                    <asp:Label CssClass="col-sm-1" runat="server" ID="lblJefatura" Text='<%# Eval("Jefatura.Descripcion")%>' />
                                     <asp:Button runat="server" Text="Seleccionar" CssClass="btn btn-primary btn-sm" ID="btnSeleccionar" OnClick="btnSeleccionar_OnClick" />
                                 </div>
                             </ItemTemplate>

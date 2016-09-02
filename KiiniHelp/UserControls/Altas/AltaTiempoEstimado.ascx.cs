@@ -2,14 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
-using KiiniHelp.ServiceGrupoUsuario;
-using KiiniHelp.ServiceSistemaNotificacion;
-using KiiniHelp.ServiceSla;
-using KiiniHelp.ServiceSubGrupoUsuario;
+using KiiniHelp.ServiceNotificacion;
 using KiiniNet.Entities.Cat.Sistema;
-using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 

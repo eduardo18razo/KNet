@@ -13,13 +13,22 @@ namespace KiiniHelp.UserControls.Temporal {
     public partial class UcEncuestaCaptura {
         
         /// <summary>
-        /// Control upMascara.
+        /// Control upEncuesta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upMascara;
+        protected global::System.Web.UI.UpdatePanel upEncuesta;
+        
+        /// <summary>
+        /// Control upEncuestas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upEncuestas;
         
         /// <summary>
         /// Control hfIdEncuesta.
@@ -65,14 +74,5 @@ namespace KiiniHelp.UserControls.Temporal {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAceptar;
-        
-        /// <summary>
-        /// Control btnCancelar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
     }
 }

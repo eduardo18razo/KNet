@@ -19,5 +19,7 @@ namespace KiiniNet.Entities.Cat.Sistema
         public virtual List<ArbolAcceso> ArbolAcceso { get; set; }
         [DataMember]
         public virtual List<Ticket> Ticket { get; set; }
+        [DataMember]
+        public virtual List<HitConsulta> HitConsulta { get; set; }
     }
 }

@@ -546,7 +546,40 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
+        public List<Organizacion> ObtenerOrganizacionesGrupos(List<int> grupos )
+        {
+            List<Organizacion> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<Organizacion> qry = from o in db.Organizacion
+                    join gu in db.GrupoUsuario on o.IdTipoUsuario equals gu.IdTipoUsuario
+                where grupos.Contains(gu.Id)
+                select o;
 
+                result = qry.Distinct().ToList();
+                foreach (Organizacion organizacion in result)
+                {
+                    db.LoadProperty(organizacion, "Holding");
+                    db.LoadProperty(organizacion, "Compania");
+                    db.LoadProperty(organizacion, "Direccion");
+                    db.LoadProperty(organizacion, "SubDireccion");
+                    db.LoadProperty(organizacion, "Gerencia");
+                    db.LoadProperty(organizacion, "SubGerencia");
+                    db.LoadProperty(organizacion, "Jefatura");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
         public string ObtenerDescripcionOrganizacionUsuario(int idUsuario, bool ultimoNivel)
         {
             string result = null;

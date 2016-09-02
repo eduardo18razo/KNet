@@ -16,6 +16,7 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceOrganizacion.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceOrganizacion.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceOrganizacion.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceOrganizacion.svc?xsd=xsd14" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceOrganizacion_ObtenerHoldings_InputMessage">
@@ -144,6 +145,12 @@
   <wsdl:message name="IServiceOrganizacion_ActualizarOrganizacion_OutputMessage">
     <wsdl:part name="parameters" element="tns:ActualizarOrganizacionResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceOrganizacion_ObtenerOrganizacionesGrupos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerOrganizacionesGrupos" />
+  </wsdl:message>
+  <wsdl:message name="IServiceOrganizacion_ObtenerOrganizacionesGrupos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerOrganizacionesGruposResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceOrganizacion">
     <wsdl:operation name="ObtenerHoldings">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceOrganizacion/ObtenerHoldings" message="tns:IServiceOrganizacion_ObtenerHoldings_InputMessage" />
@@ -228,6 +235,10 @@
     <wsdl:operation name="ActualizarOrganizacion">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceOrganizacion/ActualizarOrganizacion" message="tns:IServiceOrganizacion_ActualizarOrganizacion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceOrganizacion/ActualizarOrganizacionResponse" message="tns:IServiceOrganizacion_ActualizarOrganizacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrganizacionesGrupos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionesGrupos" message="tns:IServiceOrganizacion_ObtenerOrganizacionesGrupos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionesGruposResponse" message="tns:IServiceOrganizacion_ObtenerOrganizacionesGrupos_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceOrganizacion">
@@ -414,6 +425,15 @@
     </wsdl:operation>
     <wsdl:operation name="ActualizarOrganizacion">
       <soap:operation soapAction="http://tempuri.org/IServiceOrganizacion/ActualizarOrganizacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerOrganizacionesGrupos">
+      <soap:operation soapAction="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionesGrupos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

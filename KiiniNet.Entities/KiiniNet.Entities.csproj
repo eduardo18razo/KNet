@@ -93,6 +93,7 @@
     <Compile Include="Helper\HelperCampoMascaraCaptura.cs" />
     <Compile Include="Helper\HelperDetalleTicket.cs" />
     <Compile Include="Helper\HelperEncuesta.cs" />
+    <Compile Include="Helper\HelperHits.cs" />
     <Compile Include="Helper\HelperMascaraData.cs" />
     <Compile Include="Helper\HelperSubGurpoUsuario.cs" />
     <Compile Include="Helper\HelperTickets.cs" />

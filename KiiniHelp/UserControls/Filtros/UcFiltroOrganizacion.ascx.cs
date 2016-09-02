@@ -27,12 +27,28 @@ namespace KiiniHelp.UserControls.Filtros
             }
         }
 
-        private void LlenaOrganizaciones()
+        public List<int> Grupos
+        {
+            set
+            {
+                LlenaOrganizaciones(value);
+            }
+        }
+        public List<int> OrganizacionesSeleccionadas
+        {
+            get
+            {
+                return (from RepeaterItem item in rptOrganizacionSeleccionada.Items select int.Parse(((Label)item.FindControl("lblId")).Text)).ToList();
+            }
+            set { }
+        }
+
+        private void LlenaOrganizaciones(List<int> grupos)
         {
             try
             {
 
-                rptOrganizaciones.DataSource = _servicioOrganizacion.ObtenerOrganizaciones(null, null, null, null, null, null, null, null);
+                rptOrganizaciones.DataSource = _servicioOrganizacion.ObtenerOrganizacionesGrupos(grupos);
                 rptOrganizaciones.DataBind();
             }
             catch (Exception e)
@@ -72,7 +88,8 @@ namespace KiiniHelp.UserControls.Filtros
             Alerta = new List<string>();
             if (!IsPostBack)
             {
-                LlenaOrganizaciones();
+                Session["OrganizacionesSeleccionadas"] = null;
+                //LlenaOrganizaciones();
             }
         }
 

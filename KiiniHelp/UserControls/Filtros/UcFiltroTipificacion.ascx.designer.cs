@@ -13,6 +13,15 @@ namespace KiiniHelp.UserControls.Filtros {
     public partial class UcFiltroTipificacion {
         
         /// <summary>
+        /// Control hfTipoArbol.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfTipoArbol;
+        
+        /// <summary>
         /// Control panelAlerta.
         /// </summary>
         /// <remarks>

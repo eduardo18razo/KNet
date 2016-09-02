@@ -48,5 +48,8 @@ namespace KiiniNet.Services.Operacion.Interface
         Ubicacion ObtenerUbicacionById(int idUbicacion);
         [OperationContract]
         void HabilitarUbicacion(int idUbicacion, bool habilitado);
+
+        [OperationContract]
+        List<Ubicacion> ObtenerUbicacionesGrupos(List<int> grupos);
     }
 }

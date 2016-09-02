@@ -357,6 +357,41 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public List<Ubicacion> ObtenerUbicacionesGrupos(List<int> grupos)
+        {
+            List<Ubicacion> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<Ubicacion> qry = from u in db.Ubicacion
+                                               join gu in db.GrupoUsuario on u.IdTipoUsuario equals gu.IdTipoUsuario
+                                               where grupos.Contains(gu.Id)
+                                               select u;
+
+                result = qry.Distinct().ToList();
+                foreach (Ubicacion ubicacion in result)
+                {
+                    db.LoadProperty(ubicacion, "Pais");
+                    db.LoadProperty(ubicacion, "Campus");
+                    db.LoadProperty(ubicacion, "Torre");
+                    db.LoadProperty(ubicacion, "Piso");
+                    db.LoadProperty(ubicacion, "Zona");
+                    db.LoadProperty(ubicacion, "SubZona");
+                    db.LoadProperty(ubicacion, "SiteRack");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
         public string ObtenerDescripcionUbicacionUsuario(int idUsuario, bool ultimoNivel)
         {
             string result = null;

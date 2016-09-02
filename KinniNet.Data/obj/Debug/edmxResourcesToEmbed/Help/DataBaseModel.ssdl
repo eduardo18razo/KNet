@@ -254,10 +254,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoArbolAcceso" Type="int" />
     <Property Name="IdArbolAcceso" Type="int" Nullable="false" />
     <Property Name="IdUsuario" Type="int" Nullable="false" />
     <Property Name="IdUbicacion" Type="int" Nullable="false" />
     <Property Name="IdOrganizacion" Type="int" Nullable="false" />
+    <Property Name="FechaHoraAlta" Type="datetime" />
   </EntityType>
   <EntityType Name="HitGrupoUsuario">
     <Key>
@@ -727,6 +729,8 @@
     <Property Name="IdEstatusAsignacion" Type="int" Nullable="false" />
     <Property Name="FechaHoraAlta" Type="datetime" Nullable="false" />
     <Property Name="FechaHoraFinProceso" Type="datetime" />
+    <Property Name="FechaTermino" Type="datetime" />
+    <Property Name="DentroSla" Type="bit" />
     <Property Name="Random" Type="bit" />
     <Property Name="ClaveRegistro" Type="nvarchar" MaxLength="40" />
     <Property Name="EncuestaRespondida" Type="bit" />
@@ -1458,6 +1462,18 @@
       </Principal>
       <Dependent Role="HitConsulta">
         <PropertyRef Name="IdOrganizacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HitConsulta_TipoArbolAcceso">
+    <End Role="TipoArbolAcceso" Type="Self.TipoArbolAcceso" Multiplicity="0..1" />
+    <End Role="HitConsulta" Type="Self.HitConsulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoArbolAcceso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HitConsulta">
+        <PropertyRef Name="IdTipoArbolAcceso" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3090,6 +3106,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_HitConsulta_Organizacion" Association="Self.FK_HitConsulta_Organizacion">
       <End Role="Organizacion" EntitySet="Organizacion" />
+      <End Role="HitConsulta" EntitySet="HitConsulta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HitConsulta_TipoArbolAcceso" Association="Self.FK_HitConsulta_TipoArbolAcceso">
+      <End Role="TipoArbolAcceso" EntitySet="TipoArbolAcceso" />
       <End Role="HitConsulta" EntitySet="HitConsulta" />
     </AssociationSet>
     <AssociationSet Name="FK_HitConsulta_Ubicacion" Association="Self.FK_HitConsulta_Ubicacion">

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -10,6 +11,7 @@ using KiiniHelp.Users.Operacion;
 using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Helper;
+using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Temporal
@@ -41,7 +43,7 @@ namespace KiiniHelp.UserControls.Temporal
             {
                 lblDescripcionMascara.Text = encuesta.Descripcion;
                 PintaControles(encuesta.EncuestaPregunta, encuesta.IdTipoEncuesta);
-                Session["MascaraActiva"] = encuesta;
+                Session["EncuestaActiva"] = encuesta;
             }
         }
 
@@ -74,110 +76,142 @@ namespace KiiniHelp.UserControls.Temporal
             set { hfIdEncuesta.Value = value.ToString(); }
         }
 
-        public List<HelperCampoMascaraCaptura> ObtenerCapturaMascara()
+        public void ValidaMascaraCaptura()
         {
-            List<HelperCampoMascaraCaptura> lstCamposCapturados;
             try
             {
-                ValidaMascaraCaptura();
-                Mascara mascara = (Mascara)Session["MascaraActiva"];
-                string nombreControl = null;
-                lstCamposCapturados = new List<HelperCampoMascaraCaptura>();
-                foreach (CampoMascara campo in mascara.CampoMascara)
+                Encuesta encuesta = (Encuesta)Session["EncuestaActiva"];
+                switch (encuesta.IdTipoEncuesta)
                 {
-                    bool campoTexto = true;
-                    switch (campo.TipoCampoMascara.Descripcion)
-                    {
-                        case "ALFANUMERICO":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "DECIMAL":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "ENTERO":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "FECHA":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "HORA":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "MONEDA":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "CATALOGO":
-                            nombreControl = "ddl" + campo.NombreCampo;
-                            campoTexto = false;
-                            break;
-                        case "SI/NO":
-                            nombreControl = "chk" + campo.NombreCampo;
-                            campoTexto = false;
-                            break;
-                    }
-
-                    if (campoTexto && nombreControl != null)
-                    {
-                        TextBox txt = (TextBox)divControles.FindControl(nombreControl);
-                        if (txt != null)
+                    case (int)BusinessVariables.EnumTipoEncuesta.Logica:
+                        break;
+                    case (int)BusinessVariables.EnumTipoEncuesta.Calificacion:
+                        foreach (EncuestaPregunta pregunta in encuesta.EncuestaPregunta)
                         {
-                            HelperCampoMascaraCaptura campoCapturado;
-                            switch (txt.Attributes["for"])
+                            HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Pregunta);
+                            if (divControl != null)
                             {
-                                case "FECHA":
-                                    campoCapturado = new HelperCampoMascaraCaptura
+                                HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Pregunta);
+                                if (divGrupo != null)
+                                {
+                                    if (!divGrupo.Controls.Cast<Control>().Any(control => ((RadioButton)control).Checked))
                                     {
-                                        NombreCampo = campo.NombreCampo,
-                                        Valor = Convert.ToDateTime(txt.Text.Trim().ToUpper()).ToString("yyyy-MM-dd"),
-                                    };
-                                    lstCamposCapturados.Add(campoCapturado);
-                                    break;
-                                    lstCamposCapturados.Add(campoCapturado);
-                                    break;
-                                default:
-                                    campoCapturado = new HelperCampoMascaraCaptura
-                                    {
-                                        NombreCampo = campo.NombreCampo,
-                                        Valor = txt.Text.Trim().ToUpper()
-                                    };
-                                    lstCamposCapturados.Add(campoCapturado);
-                                    break;
+                                        throw new Exception("Debe contestar todas las pregunats");
+                                    }
+                                }
                             }
-
                         }
-                    }
-                    else if (!campoTexto)
-                    {
-                        switch (campo.TipoCampoMascara.Descripcion)
-                        {
-                            case "CATALOGO":
-                                DropDownList ddl = (DropDownList)divControles.FindControl(nombreControl);
-                                if (ddl != null)
-                                {
-                                    HelperCampoMascaraCaptura campoCapturado = new HelperCampoMascaraCaptura
-                                    {
-                                        NombreCampo = campo.NombreCampo,
-                                        Valor = ddl.SelectedValue
-                                    };
-                                    lstCamposCapturados.Add(campoCapturado);
-                                }
-                                break;
-                            case "SI/NO":
-                                CheckBox chk = (CheckBox)divControles.FindControl(nombreControl);
-                                if (chk != null)
-                                {
-                                    HelperCampoMascaraCaptura campoCapturado = new HelperCampoMascaraCaptura
-                                    {
-                                        NombreCampo = campo.NombreCampo,
-                                        Valor = chk.Checked.ToString()
-                                    };
-                                    lstCamposCapturados.Add(campoCapturado);
-                                }
-                                break;
-                        }
-                    }
-
+                        break;
+                    case (int)BusinessVariables.EnumTipoEncuesta.OpcionMultiple:
+                        break;
                 }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<RespuestaEncuesta> ObtenerCapturaMascara()
+        {
+            List<RespuestaEncuesta> lstCamposCapturados;
+            try
+            {
+                Encuesta encuesta = (Encuesta)Session["EncuestaActiva"];
+                lstCamposCapturados = new List<RespuestaEncuesta>();
+                switch (encuesta.IdTipoEncuesta)
+                {
+                    case (int)BusinessVariables.EnumTipoEncuesta.Logica:
+                        foreach (EncuestaPregunta pregunta in encuesta.EncuestaPregunta)
+                        {
+                            HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Pregunta);
+                            if (divControl != null)
+                            {
+                                HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Pregunta);
+                                if (divGrupo != null)
+                                {
+                                    for (int i = 0; i < 2; i++)
+                                    {
+                                        RadioButton rbtn = (RadioButton)divGrupo.FindControl("rbtn" + pregunta.Id + i);
+                                        if (rbtn.Checked)
+                                        {
+                                            lstCamposCapturados.Add(new RespuestaEncuesta
+                                            {
+                                                IdEncuesta = encuesta.Id,
+                                                IdTicket = IdTicket,
+                                                IdPregunta = pregunta.Id,
+                                                Ponderacion = i == 0 ? 0 : pregunta.Ponderacion
+
+                                            });
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case (int)BusinessVariables.EnumTipoEncuesta.Calificacion:
+                        foreach (EncuestaPregunta pregunta in encuesta.EncuestaPregunta)
+                        {
+                            HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Pregunta);
+                            if (divControl != null)
+                            {
+                                HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Pregunta);
+                                if (divGrupo != null)
+                                {
+                                    for (int i = 0; i < 10; i++)
+                                    {
+                                        RadioButton rbtn = (RadioButton)divGrupo.FindControl("rbtn" + pregunta.Id + i);
+                                        if (rbtn.Checked)
+                                        {
+                                            lstCamposCapturados.Add(new RespuestaEncuesta
+                                            {
+                                                IdEncuesta = encuesta.Id,
+                                                IdTicket = IdTicket,
+                                                IdPregunta = pregunta.Id,
+                                                Ponderacion = ((i + 1) * 10),
+
+                                            });
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case (int)BusinessVariables.EnumTipoEncuesta.OpcionMultiple:
+                        foreach (EncuestaPregunta pregunta in encuesta.EncuestaPregunta)
+                        {
+                            HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Pregunta);
+                            if (divControl != null)
+                            {
+                                HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Pregunta);
+                                if (divGrupo != null)
+                                {
+                                    for (int i = 1; i < 6; i++)
+                                    {
+                                        RadioButton rbtn = (RadioButton)divGrupo.FindControl("rbtn" + pregunta.Id + i);
+
+                                        if (rbtn.Checked)
+                                        {
+                                            lstCamposCapturados.Add(new RespuestaEncuesta
+                                            {
+                                                IdEncuesta = encuesta.Id,
+                                                IdTicket = IdTicket,
+                                                IdPregunta = pregunta.Id,
+                                                Ponderacion = (pregunta.Ponderacion / 5) * i
+
+                                            });
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                }
+
             }
             catch (Exception ex)
             {
@@ -193,6 +227,31 @@ namespace KiiniHelp.UserControls.Temporal
                 switch (tipoEncuesta)
                 {
                     case (int)BusinessVariables.EnumTipoEncuesta.Logica:
+                        foreach (EncuestaPregunta pregunta in lstControles)
+                        {
+                            HtmlGenericControl createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + pregunta.Pregunta };
+                            createDiv.Attributes["class"] = "form-group";
+                            Label lbl = new Label { Text = pregunta.Pregunta, CssClass = "control-label" };
+                            createDiv.Controls.Add(lbl);
+                            divControles.Controls.Add(createDiv);
+                            createDiv = new HtmlGenericControl("DIV") { ID = "createDivs" + pregunta.Pregunta };
+                            createDiv.Attributes["class"] = "form-group";
+
+                            RadioButton rbNo = new RadioButton();
+                            rbNo.ID = "rbtn" + pregunta.Id + "0";
+                            rbNo.Text = "No";
+                            rbNo.GroupName = "EncuestaLogica" + pregunta.Id;
+                            rbNo.Style.Add("padding", "10px");
+                            createDiv.Controls.Add(rbNo);
+                            RadioButton rbSi = new RadioButton();
+                            rbSi.ID = "rbtn" + pregunta.Id + "1";
+                            rbSi.Text = "SI";
+                            rbSi.GroupName = "EncuestaLogica" + pregunta.Id;
+                            rbSi.Style.Add("padding", "10px");
+                            createDiv.Controls.Add(rbSi);
+
+                            divControles.Controls.Add(createDiv);
+                        }
                         break;
                     case (int)BusinessVariables.EnumTipoEncuesta.Calificacion:
                         foreach (EncuestaPregunta pregunta in lstControles)
@@ -202,12 +261,13 @@ namespace KiiniHelp.UserControls.Temporal
                             Label lbl = new Label { Text = pregunta.Pregunta, CssClass = "control-label" };
                             createDiv.Controls.Add(lbl);
                             divControles.Controls.Add(createDiv);
-                            createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + pregunta.Pregunta };
+                            createDiv = new HtmlGenericControl("DIV") { ID = "createDivs" + pregunta.Pregunta };
                             createDiv.Attributes["class"] = "form-group";
                             for (int i = 0; i < 10; i++)
                             {
 
                                 RadioButton rb = new RadioButton();
+                                rb.ID = "rbtn" + pregunta.Id + i;
                                 rb.Text = i.ToString();
                                 rb.GroupName = "EncuestaCalificacion" + pregunta.Id;
                                 rb.Style.Add("padding", "10px");
@@ -217,10 +277,55 @@ namespace KiiniHelp.UserControls.Temporal
                         }
                         break;
                     case (int)BusinessVariables.EnumTipoEncuesta.OpcionMultiple:
+                        foreach (EncuestaPregunta pregunta in lstControles)
+                        {
+                            HtmlGenericControl createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + pregunta.Pregunta };
+                            createDiv.Attributes["class"] = "form-group";
+                            Label lbl = new Label { Text = pregunta.Pregunta, CssClass = "control-label" };
+                            createDiv.Controls.Add(lbl);
+                            divControles.Controls.Add(createDiv);
+                            createDiv = new HtmlGenericControl("DIV") { ID = "createDivs" + pregunta.Pregunta };
+                            createDiv.Attributes["class"] = "form-group";
+
+                            RadioButton rbtnMala = new RadioButton();
+                            rbtnMala.ID = "rbtn" + pregunta.Id + "1";
+                            rbtnMala.Text = "MALA";
+                            rbtnMala.GroupName = "EncuestaMultiple" + pregunta.Id;
+                            rbtnMala.Style.Add("padding", "10px");
+                            createDiv.Controls.Add(rbtnMala);
+
+                            RadioButton rbtnRegular = new RadioButton();
+                            rbtnRegular.ID = "rbtn" + pregunta.Id + "2";
+                            rbtnRegular.Text = "REGULAR";
+                            rbtnRegular.GroupName = "EncuestaMultiple" + pregunta.Id;
+                            rbtnRegular.Style.Add("padding", "10px");
+                            createDiv.Controls.Add(rbtnRegular);
+
+                            RadioButton rbtnBuena = new RadioButton();
+                            rbtnBuena.ID = "rbtn" + pregunta.Id + "3";
+                            rbtnBuena.Text = "BUENA";
+                            rbtnBuena.GroupName = "EncuestaLogica" + pregunta.Id;
+                            rbtnBuena.Style.Add("padding", "10px");
+                            createDiv.Controls.Add(rbtnBuena);
+                            RadioButton rbtnMuyBuena = new RadioButton();
+                            rbtnMuyBuena.ID = "rbtn" + pregunta.Id + "4";
+                            rbtnMuyBuena.Text = "MUY BUENA";
+                            rbtnMuyBuena.GroupName = "EncuestaLogica" + pregunta.Id;
+                            rbtnMuyBuena.Style.Add("padding", "10px");
+                            createDiv.Controls.Add(rbtnMuyBuena);
+
+                            RadioButton rbtnExelente = new RadioButton();
+                            rbtnExelente.ID = "rbtn" + pregunta.Id + "5";
+                            rbtnExelente.Text = "EXCELENTE";
+                            rbtnExelente.GroupName = "EncuestaLogica" + pregunta.Id;
+                            rbtnExelente.Style.Add("padding", "10px");
+                            createDiv.Controls.Add(rbtnExelente);
+                            divControles.Controls.Add(createDiv);
+                        }
                         break;
                 }
 
-                upMascara.Update();
+                upEncuestas.Update();
             }
             catch (Exception ex)
             {
@@ -236,141 +341,13 @@ namespace KiiniHelp.UserControls.Temporal
             }
         }
 
-        public void ValidaMascaraCaptura()
-        {
-            try
-            {
-                Mascara mascara = (Mascara)Session["MascaraActiva"];
-                foreach (CampoMascara campo in mascara.CampoMascara)
-                {
-                    string nombreControl;
-                    switch (campo.TipoCampoMascara.Descripcion)
-                    {
-                        case "ALFANUMERICO":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            TextBox txtAlfanumerico = (TextBox)divControles.FindControl(nombreControl);
-                            if (txtAlfanumerico != null)
-                            {
-                                if (campo.Requerido)
-                                    if (txtAlfanumerico.Text.Trim() == String.Empty)
-                                        throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
-                                if (txtAlfanumerico.Text.Trim().Length < campo.LongitudMinima)
-                                    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (txtAlfanumerico.Text.Trim().Length > campo.LongitudMaxima)
-                                    throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
-
-                            }
-                            break;
-                        case "DECIMAL":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            TextBox txtDecimal = (TextBox)divControles.FindControl(nombreControl);
-                            if (txtDecimal != null)
-                            {
-                                if (campo.Requerido)
-                                    if (txtDecimal.Text.Trim() == String.Empty)
-                                        throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
-                                //TODO: AGREGAR VALOR MINIMO A ESQUEMA
-                                //if (decimal.Parse(txtDecimal.Text.Trim()) < campo.LongitudMinima)
-                                //    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (decimal.Parse(txtDecimal.Text.Trim()) > campo.ValorMaximo)
-                                    throw new Exception(string.Format("Campo {0} debe se menor o igual a {1}", campo.Descripcion, campo.ValorMaximo));
-
-                            }
-                            break;
-                        case "ENTERO":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            TextBox txtEntero = (TextBox)divControles.FindControl(nombreControl);
-                            if (txtEntero != null)
-                            {
-                                if (campo.Requerido)
-                                    if (txtEntero.Text.Trim() == String.Empty)
-                                        throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
-                                //TODO: AGREGAR VALOR MINIMO A ESQUEMA
-                                //if (txtEntero.Text.Trim().Length < campo.LongitudMinima)
-                                //    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (int.Parse(txtEntero.Text.Trim()) > campo.ValorMaximo)
-                                    throw new Exception(string.Format("Campo {0} debe se menor o igual a {1}", campo.Descripcion, campo.ValorMaximo));
-
-                            }
-                            break;
-                        case "FECHA":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            TextBox txtFecha = (TextBox)divControles.FindControl(nombreControl);
-                            if (txtFecha != null)
-                            {
-                                try
-                                {
-                                    var d = DateTime.Parse(txtFecha.Text.Trim());
-                                }
-                                catch
-                                {
-                                    throw new Exception(string.Format("Campo {0} contiene una fecha no valida", campo.Descripcion));
-                                }
-                                if (campo.Requerido)
-                                    if (txtFecha.Text.Trim() == String.Empty)
-                                        throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
-                            }
-                            break;
-                        case "HORA":
-                            nombreControl = "txt" + campo.NombreCampo;
-
-                            DateTime outTime;
-                            //return ;
-                            TextBox txtHora = (TextBox)divControles.FindControl(nombreControl);
-                            if (txtHora != null)
-                            {
-                                try
-                                {
-                                    DateTime.TryParseExact(txtHora.Text.Trim(), "HHmmss", CultureInfo.InvariantCulture, DateTimeStyles.None, out outTime);
-                                }
-                                catch
-                                {
-                                    throw new Exception(string.Format("Campo {0} contiene una hora no valida", campo.Descripcion));
-                                }
-                                if (campo.Requerido)
-                                    if (txtHora.Text.Trim() == String.Empty)
-                                        throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
-                            }
-                            break;
-                        case "MONEDA":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            TextBox txtMoneda = (TextBox)divControles.FindControl(nombreControl);
-                            if (txtMoneda != null)
-                            {
-                                if (campo.Requerido)
-                                    if (txtMoneda.Text.Trim() == String.Empty)
-                                        throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
-                                //TODO: AGREGAR VALOR MINIMO A ESQUEMA
-                                //if (decimal.Parse(txtDecimal.Text.Trim()) < campo.LongitudMinima)
-                                //    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (decimal.Parse(txtMoneda.Text.Trim()) > campo.LongitudMaxima)
-                                    throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
-
-                            }
-                            break;
-                        case "CATALOGO":
-                            nombreControl = "ddl" + campo.NombreCampo;
-                            DropDownList ddl = (DropDownList)divControles.FindControl(nombreControl);
-                            if (ddl != null)
-                            {
-                                if (campo.Requerido)
-                                    if (ddl.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
-                                        throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
-                            }
-                            break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
         protected void btnAceptar_OnClick(object sender, EventArgs e)
         {
             try
             {
+                ValidaMascaraCaptura();
+                ObtenerCapturaMascara();
+                _servicioEncuesta.Contestaencuesta(ObtenerCapturaMascara());
                 if (OnAceptarModal != null)
                     OnAceptarModal();
             }
@@ -389,7 +366,7 @@ namespace KiiniHelp.UserControls.Temporal
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }

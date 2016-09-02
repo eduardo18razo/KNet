@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Helper;
+using KiiniNet.Entities.Operacion;
 
 namespace KiiniNet.Services.Operacion.Interface
 {
@@ -26,5 +27,11 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<HelperEncuesta> ObtenerEncuestasPendientesUsuario(int idUsuario);
+
+        [OperationContract]
+
+        void Contestaencuesta(List<RespuestaEncuesta> encuestaRespondida);
+
+
     }
 }

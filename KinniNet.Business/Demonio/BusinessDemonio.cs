@@ -28,35 +28,6 @@ namespace KinniNet.Core.Demonio
             _proxy = proxy;
         }
 
-        public void ActualizarProcesoTicket()
-        {
-            DataBaseModelContext db = new DataBaseModelContext();
-            try
-            {
-                List<Ticket> lstTickets = db.SlaEstimadoTicket.Where(w => w.FechaFinProceso == null).SelectMany(s => s.Ticket).ToList();
-                foreach (Ticket ticket in lstTickets)
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        private void ActualizaHoraFinProcesoTicket(Ticket ticket)
-        {
-            try
-            {
-
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
         public void EnvioNotificacion()
         {
 
@@ -79,7 +50,7 @@ namespace KinniNet.Core.Demonio
                     fechaInicio = fechaFin.AddDays(-double.Parse(informeArbol.TiempoNotificacion.ToString()));
                     List<Ticket> selectTickets = db.TiempoInformeArbol.Join(db.Ticket, tia => tia.IdArbol,
                         t => t.IdArbolAcceso, (tia, t) => new { tia, t })
-                        .Where(@t1 =>@t1.t.IdEstatusTicket <(int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto
+                        .Where(@t1 => @t1.t.IdEstatusTicket < (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto
                                 && @t1.t.FechaHoraFinProceso >= fechaInicio && @t1.t.FechaHoraFinProceso <= fechaFin)
                         .Select(@t1 => @t1.t).Distinct().ToList();
                     foreach (Ticket ticket in selectTickets)
@@ -123,7 +94,7 @@ namespace KinniNet.Core.Demonio
                 EnviaNotificacion(informeMantenimiento, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento);
                 EnviaNotificacion(informeDesarrollo, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo);
                 EnviaNotificacion(informeConsulta, (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta);
-                
+
             }
             catch (Exception e)
             {
@@ -194,6 +165,28 @@ namespace KinniNet.Core.Demonio
             catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
+            }
+        }
+
+        public void ActualizaSla()
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                var y = db.Ticket.Where(w => w.DentroSla && w.FechaTermino == null);
+                foreach (Ticket ticket in y)
+                {
+                    ticket.DentroSla = DateTime.Now <= ticket.FechaHoraFinProceso;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                db.Dispose();
             }
         }
     }

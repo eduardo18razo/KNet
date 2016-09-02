@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcFiltroServicioIncidente.ascx.cs" Inherits="KiiniHelp.UserControls.Filtros.UcFiltroServicioIncidente" %>
-<asp:UpdatePanel runat="server" UpdateMode="Conditional">
+<asp:UpdatePanel runat="server">
     <ContentTemplate>
         <header class="modal-header" id="panelAlerta" runat="server" visible="false">
             <div class="alert alert-danger">
@@ -25,6 +25,9 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 Tipo de Servicio
+                <asp:HiddenField runat="server" ID="hfticket" />
+        <asp:HiddenField runat="server" ID="hfConsulta" />
+        <asp:HiddenField runat="server" ID="hfEncuesta" />
             </div>
             <div class="panel-body">
                 <%--ORIGEN--%>

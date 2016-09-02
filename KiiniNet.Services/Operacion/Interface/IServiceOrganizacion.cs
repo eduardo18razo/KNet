@@ -70,5 +70,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void ActualizarOrganizacion(Organizacion org);
+
+        [OperationContract]
+        List<Organizacion> ObtenerOrganizacionesGrupos(List<int> grupos);
     }
 }

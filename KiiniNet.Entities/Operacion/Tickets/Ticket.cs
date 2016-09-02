@@ -43,6 +43,10 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public DateTime FechaHoraFinProceso { get; set; }
         [DataMember]
+        public DateTime? FechaTermino { get; set; }
+        [DataMember]
+        public bool DentroSla { get; set; }
+        [DataMember]
         public bool Random { get; set; }
         [DataMember]
         public string ClaveRegistro { get; set; }

@@ -5,6 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceSistemaTipoArbolAcceso;
 using KiiniNet.Entities.Cat.Sistema;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Filtros
 {
@@ -26,8 +27,41 @@ namespace KiiniHelp.UserControls.Filtros
                 rptError.DataBind();
             }
         }
+        public List<int> TipoArbolSeleccionados
+        {
+            get
+            {
+                return (from RepeaterItem item in rptTipoArbolSeleccionado.Items select int.Parse(((Label)item.FindControl("lblId")).Text)).ToList();
+            }
+            set { }
+        }
+        private void LlenaTipoArbolTicket()
+        {
+            try
+            {
+                rptTipoArbol.DataSource = _servicioGrupoUsuario.ObtenerTiposArbolAcceso(false).Where(w => w.Id != (int)BusinessVariables.EnumTipoArbol.Consultas);
+                rptTipoArbol.DataBind();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
-        private void LlenaTipoArbol()
+        private void LlenaTipoArbolConsulta()
+        {
+            try
+            {
+                rptTipoArbol.DataSource = _servicioGrupoUsuario.ObtenerTiposArbolAcceso(false).Where(w => w.Id == (int)BusinessVariables.EnumTipoArbol.Consultas);
+                rptTipoArbol.DataBind();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        private void LlenaTipoArbolEncuesta()
         {
             try
             {
@@ -39,7 +73,39 @@ namespace KiiniHelp.UserControls.Filtros
                 throw new Exception(e.Message);
             }
         }
-        
+
+        public bool EsTicket
+        {
+            get { return Convert.ToBoolean(hfticket.Value); }
+            set
+            {
+                if (value)
+                    LlenaTipoArbolTicket();
+                hfticket.Value = value.ToString();
+            }
+        }
+
+        public bool EsConsulta
+        {
+            get { return Convert.ToBoolean(hfticket.Value); }
+            set
+            {
+                if (value)
+                    LlenaTipoArbolConsulta();
+                hfticket.Value = value.ToString();
+            }
+        }
+
+        public bool EsEncuesta
+        {
+            get { return Convert.ToBoolean(hfticket.Value); }
+            set
+            {
+                if (value)
+                    LlenaTipoArbolEncuesta();
+                hfticket.Value = value.ToString();
+            }
+        }
         private void LlenaTipoArbolSeleccionado()
         {
             try
@@ -52,7 +118,7 @@ namespace KiiniHelp.UserControls.Filtros
                 throw new Exception(e.Message);
             }
         }
-        
+
         private void Limpiar()
         {
             try
@@ -65,7 +131,7 @@ namespace KiiniHelp.UserControls.Filtros
                 throw new Exception(e.Message);
             }
         }
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -73,7 +139,7 @@ namespace KiiniHelp.UserControls.Filtros
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
-                    LlenaTipoArbol();
+                    Session["TipoArbolSeleccionado"] = null;
                 }
             }
             catch (Exception ex)

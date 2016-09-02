@@ -61,6 +61,9 @@ namespace KiiniHelp.ServiceGrupoUsuario {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupos", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGrupos(bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposByIdUsuario", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposByIdUsuarioResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposByIdUsuario(int idUsuario, bool insertarSeleccion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -148,6 +151,10 @@ namespace KiiniHelp.ServiceGrupoUsuario {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGrupos(bool insertarSeleccion) {
             return base.Channel.ObtenerGrupos(insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposByIdUsuario(int idUsuario, bool insertarSeleccion) {
+            return base.Channel.ObtenerGruposByIdUsuario(idUsuario, insertarSeleccion);
         }
     }
 }

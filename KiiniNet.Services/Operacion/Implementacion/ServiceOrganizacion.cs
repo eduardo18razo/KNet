@@ -323,5 +323,20 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<Organizacion> ObtenerOrganizacionesGrupos(List<int> grupos)
+        {
+            try
+            {
+                using (BusinessOrganizacion negocio = new BusinessOrganizacion())
+                {
+                    return negocio.ObtenerOrganizacionesGrupos(grupos);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

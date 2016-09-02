@@ -22,6 +22,11 @@
                 </asp:Repeater>
             </div>
         </header>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Grupos
+            </div>
+            <div class="panel-body">
         <%--ORIGEN--%>
         <div class="panel panel-primary">
             <div class="panel-heading text-center text-primary">
@@ -37,10 +42,10 @@
                     </HeaderTemplate>
                     <ItemTemplate>
                         <div class="container-fluid" style="margin-top: 2px">
-                            <asp:Label CssClass="col-sm-1" runat="server" Visible="False" ID="lblIdGrupo" Text='<%# Eval("Id") %>' />
-                            <asp:Label CssClass="col-sm-1" runat="server" Visible="False" ID="lblIdTipoUsuario" Text='<%# Eval("IdTipoUsuario") %>' />
-                            <asp:Label CssClass="col-sm-1" runat="server" ID="lblTipoUsuario" Text='<%# Eval("TipoUsuario.Descripcion").ToString().Substring(0,3) %>' />
-                            <asp:Label CssClass="col-sm-4" runat="server" ID="lblDescripcion" Text='<%# Eval("Descripcion") %>' />
+                            <asp:Label runat="server" Visible="False" ID="lblId" Text='<%# Eval("Id") %>' />
+                            <asp:Label runat="server" Visible="False" ID="lblIdTipoUsuario" Text='<%# Eval("IdTipoUsuario") %>' />
+                            <asp:Label CssClass="col-sm-3" runat="server" ID="lblTipoUsuario" Text='<%# Eval("TipoUsuario.Descripcion").ToString().Substring(0,3) %>' />
+                            <asp:Label CssClass="col-sm-6" runat="server" ID="lblDescripcion" Text='<%# Eval("Descripcion") %>' />
                             <asp:Button runat="server" Text="Seleccionar" CssClass="btn btn-primary btn-sm" ID="btnSeleccionar" OnClick="btnSeleccionar_OnClick" />
                         </div>
                     </ItemTemplate>
@@ -63,14 +68,21 @@
                     </HeaderTemplate>
                     <ItemTemplate>
                         <div class="container-fluid" style="margin-top: 2px">
-                            <asp:Label CssClass="col-sm-1" runat="server" Visible="False" ID="lblIdGrupo" Text='<%# Eval("Id") %>' />
-                            <asp:Label CssClass="col-sm-1" runat="server" Visible="False" ID="lblIdTipoUsuario" Text='<%# Eval("IdTipoUsuario") %>' />
-                            <asp:Label CssClass="col-sm-1" runat="server" ID="lblTipoUsuario" Text='<%# Eval("TipoUsuario.Descripcion").ToString().Substring(0,3) %>' />
-                            <asp:Label CssClass="col-sm-4" runat="server" ID="lblDescripcion" Text='<%# Eval("Descripcion") %>' />
+                            <asp:Label runat="server" Visible="False" ID="lblId" Text='<%# Eval("Id") %>' />
+                            <asp:Label runat="server" Visible="False" ID="lblIdTipoUsuario" Text='<%# Eval("IdTipoUsuario") %>' />
+                            <asp:Label CssClass="col-sm-3" runat="server" ID="lblTipoUsuario" Text='<%# Eval("TipoUsuario.Descripcion").ToString().Substring(0,3) %>' />
+                            <asp:Label CssClass="col-sm-6" runat="server" ID="lblDescripcion" Text='<%# Eval("Descripcion") %>' />
                             <asp:Button runat="server" Text="Quitar" CssClass="btn btn-danger btn-sm" ID="btnQuitar" OnClick="btnQuitar_OnClick" />
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>
+            </div>
+        </div>
+        </div>
+            <div class="panel-footer text-center">
+                <asp:Button runat="server" CssClass="btn btn-success" Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_OnClick"/>
+                <asp:Button runat="server" CssClass="btn btn-primary" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick"/>
+                <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_OnClick"/>
             </div>
         </div>
     </ContentTemplate>

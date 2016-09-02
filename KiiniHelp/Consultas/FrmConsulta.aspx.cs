@@ -14,9 +14,34 @@ namespace KiiniHelp.Consultas
     {
         private readonly ServiceTicketClient _servicioticket = new ServiceTicketClient();
 
+        private List<string> _lstError = new List<string>();
+
+        private List<string> AlertaGeneral
+        {
+            set
+            {
+                pnlAlertaGeneral.Visible = value.Any();
+                if (!pnlAlertaGeneral.Visible) return;
+                rptErrorGeneral.DataSource = value;
+                rptErrorGeneral.DataBind();
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                AlertaGeneral = new List<string>();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
         }
 
         protected void btnConsultar_OnClick(object sender, EventArgs e)
@@ -35,7 +60,12 @@ namespace KiiniHelp.Consultas
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
             }
         }
     }

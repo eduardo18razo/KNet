@@ -173,7 +173,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
-
+         
         public void ActualizarUbicacion(Ubicacion ub)
         {
             try
@@ -211,6 +211,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessUbicacion negocio = new BusinessUbicacion())
                 {
                     negocio.HabilitarUbicacion(idUbicacion, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Ubicacion> ObtenerUbicacionesGrupos(List<int> grupos)
+        {
+            try
+            {
+                using (BusinessUbicacion negocio = new BusinessUbicacion())
+                {
+                    return negocio.ObtenerUbicacionesGrupos(grupos);
                 }
             }
             catch (Exception ex)

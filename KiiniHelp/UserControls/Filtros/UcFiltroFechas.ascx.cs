@@ -25,6 +25,19 @@ namespace KiiniHelp.UserControls.Filtros
             }
         }
 
+        public Dictionary<string, DateTime> RangoFechas
+        {
+            get
+            {
+                Dictionary<string, DateTime> result = new Dictionary<string, DateTime>
+                {
+                    {"inicio", Convert.ToDateTime(txtFechaInicio.Text)},
+                    {"fin", Convert.ToDateTime(txtFechaFin.Text)}
+                };
+                return result;
+            }
+        }
+
         private void ValidaFechas()
         {
             try

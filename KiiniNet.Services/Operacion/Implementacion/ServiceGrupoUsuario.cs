@@ -7,8 +7,8 @@ using KinniNet.Core.Operacion;
 
 namespace KiiniNet.Services.Operacion.Implementacion
 {
-    public class ServiceGrupoUsuario : IServiceGrupoUsuario 
-    { 
+    public class ServiceGrupoUsuario : IServiceGrupoUsuario
+    {
         public List<GrupoUsuario> ObtenerGruposUsuarioByIdTipoSubGrupo(int idTipoSubgrupo, bool insertarSeleccion)
         {
             try
@@ -82,7 +82,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
-        
+
         public GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario)
         {
             try
@@ -119,7 +119,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             {
                 using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
                 {
-                    return negocio.ObtenerGruposUsuarioNivel(idtipoArbol,  nivel1,  nivel2,  nivel3,  nivel4,  nivel5,  nivel6,  nivel7);
+                    return negocio.ObtenerGruposUsuarioNivel(idtipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
                 }
             }
             catch (Exception ex)
@@ -225,6 +225,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
                 {
                     return negocio.ObtenerGrupos(insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<GrupoUsuario> ObtenerGruposByIdUsuario(int idUsuario, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
+                {
+                    return negocio.ObtenerGruposByIdUsuario(idUsuario, insertarSeleccion);
                 }
             }
             catch (Exception ex)

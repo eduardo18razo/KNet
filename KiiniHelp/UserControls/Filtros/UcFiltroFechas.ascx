@@ -29,14 +29,14 @@
             <div class="panel-body">
                 <div class="form-horizontal">
                     <div class="form-group">
-                        <asp:Label CssClass="col-sm-1" runat="server" Text="Fecha Inicio" />
-                        <div class="col-sm-2">
+                        <asp:Label CssClass="col-sm-3" runat="server" Text="Fecha Inicio" />
+                        <div class="col-sm-6">
                             <asp:TextBox runat="server" CssClass="form-control" type="date" step="1" ID="txtFechaInicio"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label CssClass="col-sm-1" runat="server" Text="Fecha Fin" />
-                        <div class="col-sm-2">
+                        <asp:Label CssClass="col-sm-3" runat="server" Text="Fecha Fin" />
+                        <div class="col-sm-6">
                             <asp:TextBox runat="server" CssClass="form-control" type="date" step="1" ID="txtFechaFin"/>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using KiiniHelp.Funciones;
-using KiiniHelp.ServiceSistemaImpactoUrgencia;
+using KiiniHelp.ServiceImpactourgencia;
 using KiiniNet.Entities.Cat.Sistema;
 using KinniNet.Business.Utils;
 
@@ -86,13 +86,16 @@ namespace KiiniHelp.UserControls.Seleccion
             return result;
         }
 
-        public void SetImpactoUrgencia(int idImpacto)
+        public void SetImpactoUrgencia(int? idImpacto)
         {
             try
             {
-                Impacto impacto = _servicioImpactoUrgencia.ObtenerImpactoById(idImpacto);
-                ddlPrioridad.SelectedValue = impacto.IdPrioridad.ToString();
-                ddlUrgencia.SelectedValue = impacto.IdUrgencia.ToString();
+                if (idImpacto != null)
+                {
+                    Impacto impacto = _servicioImpactoUrgencia.ObtenerImpactoById((int) idImpacto);
+                    ddlPrioridad.SelectedValue = impacto.IdPrioridad.ToString();
+                    ddlUrgencia.SelectedValue = impacto.IdUrgencia.ToString();
+                }
                 ddlUrgencia_OnSelectedIndexChanged(ddlUrgencia, null);
             }
             catch (Exception ex)

@@ -11,12 +11,14 @@
     <xs:sequence>
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ArbolAcceso" nillable="true" type="q1:ArbolAcceso" />
       <xs:element minOccurs="0" name="ClaveRegistro" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DentroSla" type="xs:boolean" />
       <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="Encuesta" nillable="true" type="q2:Encuesta" />
       <xs:element minOccurs="0" name="EncuestaRespondida" type="xs:boolean" />
       <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacion" nillable="true" type="q3:EstatusAsignacion" />
       <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusTicket" nillable="true" type="q4:EstatusTicket" />
       <xs:element minOccurs="0" name="FechaHoraAlta" type="xs:dateTime" />
       <xs:element minOccurs="0" name="FechaHoraFinProceso" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaTermino" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IdArbolAcceso" type="xs:int" />
       <xs:element minOccurs="0" name="IdEncuesta" nillable="true" type="xs:int" />
