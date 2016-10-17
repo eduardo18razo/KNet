@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
+using KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio;
 using KinniNet.Core.Demonio;
+using KinniNet.Core.Operacion;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace KiiniNet.UnitTest
@@ -15,6 +17,7 @@ namespace KiiniNet.UnitTest
         {
             try
             {
+                var g = new BusinessConsultas().GraficarConsultaHitsGeografico(4, null, null, null, null, null, null, null, null, "", 0);
                 //TODO:FECHAS PARA CONSULTA DE GRAFICOS SEMANAL
                 DateTime jan1 = new DateTime(DateTime.Now.Year, 1, 1);
                 int daysOffset = DayOfWeek.Sunday - jan1.DayOfWeek;
@@ -23,7 +26,6 @@ namespace KiiniNet.UnitTest
                 DateTime firstSaturday = jan1.AddDays(daysToAdd);
                 var cal = CultureInfo.CurrentCulture.Calendar;
                 int firstWeek = cal.GetWeekOfYear(firstSunday, CalendarWeekRule.FirstDay, DayOfWeek.Saturday);
-
                 var weekNum = 2;
                 if (firstWeek <= 1)
                 {

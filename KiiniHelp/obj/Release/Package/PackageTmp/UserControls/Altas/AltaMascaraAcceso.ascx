@@ -160,10 +160,14 @@
                                 <div class="panel panel-body">
                                     <div class="form-group">
                                         <asp:Label runat="server" Text="Descripcion" />
-                                        <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control input" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
                                     </div>
                                     <div class="form-group">
                                         <asp:CheckBox runat="server" ID="chkRequerido" AutoPostBack="False" Text="Campo obligatorio" />
+                                    </div>
+                                    <div class="form-group" runat="server" id="divMascara" visible="False">
+                                        <asp:Label runat="server" Text="Mascara" />
+                                        <asp:TextBox runat="server" ID="txtMascara" CssClass="form-control" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
                                     </div>
                                     <div class="form-group" runat="server" id="divLongitudes" visible="False">
                                         <asp:Label runat="server" Text="Longitud minima" />

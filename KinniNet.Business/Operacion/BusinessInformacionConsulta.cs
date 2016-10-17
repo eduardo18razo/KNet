@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Usuario;
@@ -233,7 +234,8 @@ namespace KinniNet.Core.Operacion
                     IdUsuario = idUsuario,
                     IdUbicacion = new BusinessUbicacion().ObtenerUbicacionUsuario(new BusinessUsuarios().ObtenerUsuario(idUsuario).IdUbicacion).Id,
                     IdOrganizacion = new BusinessOrganizacion().ObtenerOrganizacionUsuario(new BusinessUsuarios().ObtenerUsuario(idUsuario).IdOrganizacion).Id,
-                    HitGrupoUsuario = new List<HitGrupoUsuario>()
+                    HitGrupoUsuario = new List<HitGrupoUsuario>(),
+                    FechaHoraAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture)
                 };
                 foreach (GrupoUsuarioInventarioArbol guia in new BusinessArbolAcceso().ObtenerGruposUsuarioArbol(idArbol))
                 {

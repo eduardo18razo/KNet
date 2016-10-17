@@ -311,7 +311,7 @@ namespace KiiniHelp.UserControls.Consultas
                                 item.Selected = int.Parse(item.Value) == value;
                             }
                         break;
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento:
+                    case (int)BusinessVariables.EnumRoles.ResponsableDeInformaciónPublicada:
                         foreach (ListItem item in chklbxSubRoles.Items)
                         {
                             item.Selected = int.Parse(item.Value) == value;

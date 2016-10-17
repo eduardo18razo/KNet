@@ -3,6 +3,7 @@
   <xs:import schemaLocation="http://localhost:15277/Sistema/ServiceTipoCampoMascara.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:import schemaLocation="http://localhost:15277/Sistema/ServiceTipoCampoMascara.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
   <xs:import schemaLocation="http://localhost:15277/Sistema/ServiceTipoCampoMascara.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
+  <xs:import schemaLocation="http://localhost:15277/Sistema/ServiceTipoCampoMascara.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
   <xs:complexType name="ArrayOfTipoCampoMascara">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="TipoCampoMascara" nillable="true" type="tns:TipoCampoMascara" />
@@ -20,6 +21,7 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="LongitudMaxima" type="xs:boolean" />
       <xs:element minOccurs="0" name="LongitudMinima" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Mask" type="xs:boolean" />
       <xs:element minOccurs="0" name="SimboloMoneda" type="xs:boolean" />
       <xs:element minOccurs="0" name="TipoDatoSql" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ValorMaximo" type="xs:boolean" />
@@ -45,6 +47,8 @@
       <xs:element minOccurs="0" name="LongitudMaxima" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="LongitudMinima" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Mascara" nillable="true" type="tns:Mascara" />
+      <xs:element minOccurs="0" name="MascaraDetalle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreCampo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Requerido" type="xs:boolean" />
       <xs:element minOccurs="0" name="SimboloMoneda" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TipoCampoMascara" nillable="true" type="tns:TipoCampoMascara" />
@@ -65,6 +69,8 @@
       <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="InventarioArbolAcceso" nillable="true" type="q2:ArrayOfInventarioArbolAcceso" />
       <xs:element minOccurs="0" name="NoCampos" type="xs:int" />
       <xs:element minOccurs="0" name="NombreTabla" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Random" type="xs:boolean" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="Ticket" nillable="true" type="q3:ArrayOfTicket" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />

@@ -59,6 +59,8 @@ namespace KinniNet.Data.Help
                 _impacto = CreateObjectSet<Impacto>();
                 _prioridad = CreateObjectSet<Prioridad>();
                 _urgencia = CreateObjectSet<Urgencia>();
+                _nivelUbicacion = CreateObjectSet<NivelUbicacion>();
+                _nivelOrganizacion = CreateObjectSet<NivelOrganizacion>();
 
                 //Parametros
                 _subRolEscalacionPermitida = CreateObjectSet<SubRolEscalacionPermitida>();
@@ -730,6 +732,21 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<NivelUbicacion> NivelUbicacion
+        {
+            get
+            {
+                return _nivelUbicacion;
+            }
+        }
+        public ObjectSet<NivelOrganizacion> NivelOrganizacion
+        {
+            get
+            {
+                return _nivelOrganizacion;
+            }
+        }
+
 
 
         private readonly ObjectSet<TipoUsuario> _tipoUsuario;
@@ -758,6 +775,9 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<Impacto> _impacto;
         private readonly ObjectSet<Prioridad> _prioridad;
         private readonly ObjectSet<Urgencia> _urgencia;
+
+        private readonly ObjectSet<NivelUbicacion> _nivelUbicacion;
+        private readonly ObjectSet<NivelOrganizacion> _nivelOrganizacion;
 
         #endregion Systema
 

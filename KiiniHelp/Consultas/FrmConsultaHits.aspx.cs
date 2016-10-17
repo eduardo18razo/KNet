@@ -27,12 +27,7 @@ namespace KiiniHelp.Consultas
         {
             try
             {
-                if (!IsPostBack)
-                {
-                    UcFiltrosConsulta.EsTicket = false;
-                    UcFiltrosConsulta.EsConsulta = true;
-                    UcFiltrosConsulta.EsEncuesta = false;
-                }
+                
             }
             catch (Exception ex)
             {
@@ -49,8 +44,8 @@ namespace KiiniHelp.Consultas
         {
             try
             {
-                gvResult.DataSource = _servicioConsultas.ConsultarHits(((Usuario)Session["UserData"]).Id, UcFiltrosConsulta.FiltroGrupos, UcFiltrosConsulta.FiltroOrganizaciones,
-                    UcFiltrosConsulta.FiltroUbicaciones, UcFiltrosConsulta.FiltroTipificaciones, UcFiltrosConsulta.FiltroFechas, 0, 1000);
+                gvResult.DataSource = _servicioConsultas.ConsultarHits(((Usuario)Session["UserData"]).Id, UcFiltrosConsulta.FiltroGrupos, UcFiltrosConsulta.FiltroTipoUsuario, UcFiltrosConsulta.FiltroOrganizaciones,
+                    UcFiltrosConsulta.FiltroUbicaciones, UcFiltrosConsulta.FiltroTipificaciones, UcFiltrosConsulta.FiltroVip, UcFiltrosConsulta.FiltroFechas, 0, 100000);
                 gvResult.DataBind();
             }
             catch (Exception ex)

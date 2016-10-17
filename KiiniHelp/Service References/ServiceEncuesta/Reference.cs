@@ -36,8 +36,14 @@ namespace KiiniHelp.ServiceEncuesta {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasPendientesUsuario", ReplyAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasPendientesUsuarioResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperEncuesta> ObtenerEncuestasPendientesUsuario(int idUsuario);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/Contestaencuesta", ReplyAction="http://tempuri.org/IServiceEncuesta/ContestaencuestaResponse")]
-        void Contestaencuesta(System.Collections.Generic.List<KiiniNet.Entities.Operacion.RespuestaEncuesta> encuestaRespondida);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/ContestaEncuesta", ReplyAction="http://tempuri.org/IServiceEncuesta/ContestaEncuestaResponse")]
+        void ContestaEncuesta(System.Collections.Generic.List<KiiniNet.Entities.Operacion.RespuestaEncuesta> encuestaRespondida);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasContestadas", ReplyAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasContestadasResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Encuesta> ObtenerEncuestasContestadas(bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByGrupos", ReplyAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByGruposResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Encuesta> ObtenerEncuestaByGrupos(System.Collections.Generic.List<int> grupos, bool insertarSeleccion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -95,8 +101,16 @@ namespace KiiniHelp.ServiceEncuesta {
             return base.Channel.ObtenerEncuestasPendientesUsuario(idUsuario);
         }
         
-        public void Contestaencuesta(System.Collections.Generic.List<KiiniNet.Entities.Operacion.RespuestaEncuesta> encuestaRespondida) {
-            base.Channel.Contestaencuesta(encuestaRespondida);
+        public void ContestaEncuesta(System.Collections.Generic.List<KiiniNet.Entities.Operacion.RespuestaEncuesta> encuestaRespondida) {
+            base.Channel.ContestaEncuesta(encuestaRespondida);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Encuesta> ObtenerEncuestasContestadas(bool insertarSeleccion) {
+            return base.Channel.ObtenerEncuestasContestadas(insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Encuesta> ObtenerEncuestaByGrupos(System.Collections.Generic.List<int> grupos, bool insertarSeleccion) {
+            return base.Channel.ObtenerEncuestaByGrupos(grupos, insertarSeleccion);
         }
     }
 }

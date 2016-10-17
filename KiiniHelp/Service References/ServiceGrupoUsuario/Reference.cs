@@ -64,6 +64,11 @@ namespace KiiniHelp.ServiceGrupoUsuario {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposByIdUsuario", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposByIdUsuarioResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposByIdUsuario(int idUsuario, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioResponsablesByGruposT" +
+            "ipoServicio", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioResponsablesByGruposT" +
+            "ipoServicioResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioResponsablesByGruposTipoServicio(int idUsuario, System.Collections.Generic.List<int> grupos, System.Collections.Generic.List<int> tipoServicio);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -155,6 +160,10 @@ namespace KiiniHelp.ServiceGrupoUsuario {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposByIdUsuario(int idUsuario, bool insertarSeleccion) {
             return base.Channel.ObtenerGruposByIdUsuario(idUsuario, insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioResponsablesByGruposTipoServicio(int idUsuario, System.Collections.Generic.List<int> grupos, System.Collections.Generic.List<int> tipoServicio) {
+            return base.Channel.ObtenerGruposUsuarioResponsablesByGruposTipoServicio(idUsuario, grupos, tipoServicio);
         }
     }
 }

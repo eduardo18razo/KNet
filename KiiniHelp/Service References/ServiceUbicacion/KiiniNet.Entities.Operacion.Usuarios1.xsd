@@ -47,12 +47,13 @@
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
       <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="Puesto" nillable="true" type="q6:Puesto" />
       <xs:element minOccurs="0" name="TelefonoUsuario" nillable="true" type="tns:ArrayOfTelefonoUsuario" />
-      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="Ticket" nillable="true" type="q7:ArrayOfTicket" />
-      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="TicketAsignado" nillable="true" type="q8:ArrayOfTicketAsignacion" />
-      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="TicketAsigno" nillable="true" type="q9:ArrayOfTicketAsignacion" />
-      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="TicketEstatus" nillable="true" type="q10:ArrayOfTicketEstatus" />
-      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q11:TipoUsuario" />
-      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Ubicacion" nillable="true" type="q12:Ubicacion" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="TicketAsignado" nillable="true" type="q7:ArrayOfTicketAsignacion" />
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="TicketAsigno" nillable="true" type="q8:ArrayOfTicketAsignacion" />
+      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="TicketEstatus" nillable="true" type="q9:ArrayOfTicketEstatus" />
+      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="TicketsLevantados" nillable="true" type="q10:ArrayOfTicket" />
+      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="TicketsResueltos" nillable="true" type="q11:ArrayOfTicket" />
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q12:TipoUsuario" />
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="Ubicacion" nillable="true" type="q13:Ubicacion" />
       <xs:element minOccurs="0" name="UsuarioGrupo" nillable="true" type="tns:ArrayOfUsuarioGrupo" />
       <xs:element minOccurs="0" name="UsuarioRol" nillable="true" type="tns:ArrayOfUsuarioRol" />
       <xs:element minOccurs="0" name="Vip" type="xs:boolean" />
@@ -97,7 +98,7 @@
       <xs:element minOccurs="0" name="IdTipoTelefono" type="xs:int" />
       <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="Numero" nillable="true" type="xs:string" />
-      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoTelefono" nillable="true" type="q13:TipoTelefono" />
+      <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoTelefono" nillable="true" type="q14:TipoTelefono" />
       <xs:element minOccurs="0" name="Usuario" nillable="true" type="tns:Usuario" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
@@ -115,7 +116,7 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IdRolTipoUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
-      <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="RolTipoUsuario" nillable="true" type="q14:RolTipoUsuario" />
+      <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="RolTipoUsuario" nillable="true" type="q15:RolTipoUsuario" />
       <xs:element minOccurs="0" name="Usuario" nillable="true" type="tns:Usuario" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />

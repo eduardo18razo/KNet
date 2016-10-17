@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +38,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
@@ -57,12 +59,13 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DataVisualization" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -136,6 +139,11 @@
     <Content Include="BootStrap\js\bootstrap-datepicker.min.js" />
     <Content Include="BootStrap\js\locales\bootstrap-datepicker.es.min.js" />
     <Content Include="Consultas\FrmConsulta.aspx" />
+    <Content Include="Graficos\FrmGeoChart.aspx" />
+    <Content Include="Graficos\FrmGraficaEncuestaNombre.aspx" />
+    <Content Include="Graficos\FrmGraficaEncuestas.aspx" />
+    <Content Include="Graficos\FrmGraficaHits.aspx" />
+    <Content Include="Graficos\FrmGraficaTickets.aspx" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.ImpactoUrgencia.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Prioridad.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Urgencia.datasource" />
@@ -155,29 +163,13 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperEncuesta.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperMascaraData.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperHits.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperReportesTicket.datasource" />
+    <Content Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Service References\ServiceConsultas\ServiceConsultas.wsdl" />
-    <None Include="Service References\ServiceConsultas\ServiceConsultas.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceConsultas\ServiceConsultas1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceConsultas\ServiceConsultas10.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceConsultas\ServiceConsultas11.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceConsultas\ServiceConsultas12.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceConsultas\ServiceConsultas13.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\ServiceConsultas\ServiceConsultas14.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -190,25 +182,19 @@
     <None Include="Service References\ServiceConsultas\ServiceConsultas3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceConsultas\ServiceConsultas4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\ServiceConsultas\ServiceConsultas5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceConsultas\ServiceConsultas6.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceConsultas\ServiceConsultas7.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceConsultas\ServiceConsultas8.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceConsultas\ServiceConsultas9.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\ServiceEncuesta\ServiceEncuesta14.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceEncuesta\ServiceEncuesta15.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceGrupoUsuario\ServiceGrupoUsuario14.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia.wsdl" />
@@ -254,6 +240,9 @@
     <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia9.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Service References\ServiceMascaraAcceso\KiiniHelp.ServiceMascaraAcceso.BusinessMascarasCatalogoGenerico.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras15.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -301,6 +290,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceOrganizacion\ServiceOrganizacion14.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceParametrosSistema\ServiceParametros13.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServicePuesto\ServicePuesto.wsdl" />
@@ -381,26 +373,44 @@
     <Content Include="UserControls\Altas\UcAltaUsuario.ascx" />
     <Content Include="UserControls\Altas\UcHorario.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaEncuestaPendiente.ascx" />
-    <Content Include="UserControls\Filtros\UcFiltrosConsulta.ascx" />
+    <Content Include="UserControls\Detalles\UcDetalleGeograficoTickets.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroAtendedores.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroEncuesta.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroFechasConsultas.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroGrupoEncuesta.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroResponsablesEncuesta.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroServicioIncidenteEncuesta.ascx" />
+    <Content Include="UserControls\Detalles\UcDetalleGeograficoHit.ascx" />
+    <Content Include="UserControls\Filtros\Consultas\UcFiltrosConsulta.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaTicketUsuario.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleMascaraCaptura.ascx" />
-    <Content Include="UserControls\Filtros\UcFiltroEstatus.ascx" />
-    <Content Include="UserControls\Filtros\UcFiltroFechas.ascx" />
-    <Content Include="UserControls\Filtros\UcFiltroGrupo.ascx" />
-    <Content Include="UserControls\Filtros\UcFiltroOrganizacion.ascx" />
-    <Content Include="UserControls\Filtros\UcFiltroPrioridad.ascx" />
-    <Content Include="UserControls\Filtros\UcFiltroServicioIncidente.ascx" />
-    <Content Include="UserControls\Filtros\UcFiltrosGrafico.ascx" />
-    <Content Include="UserControls\Filtros\UcFiltroSla.ascx" />
-    <Content Include="UserControls\Filtros\UcFiltroTipificacion.ascx" />
-    <Content Include="UserControls\Filtros\UcFiltroUbicacion.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroEstatus.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroFechasGrafico.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroGrupo.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroOrganizacion.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroPrioridad.ascx" />
+    <Content Include="UserControls\Filtros\Consultas\UcFiltrosEncuestas.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroServicioIncidente.ascx" />
+    <Content Include="UserControls\Filtros\Graficos\UcFiltrosGraficasEncuestas.ascx" />
+    <Content Include="UserControls\Filtros\Graficos\UcFiltrosGraficasHits.ascx" />
+    <Content Include="UserControls\Filtros\Graficos\UcFiltrosGraficasTicket.ascx" />
+    <Content Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoEncuestas.ascx" />
+    <Content Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoHits.ascx" />
+    <Content Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoTicket.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroSla.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroStack.ascx" />
+    <Content Include="UserControls\Filtros\Consultas\UcFiltrosTicket.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroTipificacion.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroTipoUsuario.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroUbicacion.ascx" />
+    <Content Include="UserControls\Filtros\Componentes\UcFiltroVip.ascx" />
     <Content Include="UserControls\Seleccion\UcImpactoUrgencia.ascx" />
     <Content Include="UserControls\Temporal\UcEncuestaCaptura.ascx" />
     <Content Include="UserControls\UcLogIn.ascx" />
     <Content Include="Users\Administracion\ArbolesAcceso\FrmAltaArbolAcceso.aspx" />
     <Content Include="Users\Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx" />
     <Content Include="Consultas\FrmConsultaTickets.aspx" />
-    <Content Include="Consultas\FrmConsultaEncuesta.aspx" />
+    <Content Include="Consultas\FrmConsultaEncuestasUnitarias.aspx" />
     <Content Include="Consultas\FrmConsultaHits.aspx" />
     <Content Include="Users\Administracion\Encuestas\FrmConsultaEncuestas.aspx" />
     <Content Include="Users\Administracion\Grupos\FrmConsultaGrupos.aspx" />
@@ -767,9 +777,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Service References\ServiceMascaraAcceso\KiiniHelp.ServiceMascaraAcceso.BusinessMascarasCatalogoGenerico.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta14.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -928,6 +935,9 @@
     <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos13.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos2.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -966,6 +976,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema13.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaDomicilio\ServiceDomicilioSistema2.xsd">
@@ -1051,6 +1064,9 @@
     <None Include="Service References\ServiceSistemaRol\ServiceRoles12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceSistemaRol\ServiceRoles13.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSistemaRol\ServiceRoles2.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1134,6 +1150,12 @@
     <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso14.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSistemaTipoArbolAcceso\ServiceTipoArbolAcceso2.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1172,6 +1194,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara13.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaTipoCampoMascara\ServiceTipoCampoMascara2.xsd">
@@ -1214,6 +1239,9 @@
     <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento13.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSistemaTipoDocumento\ServiceTipoDocumento2.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1252,6 +1280,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta13.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaTipoEncuesta\ServiceTipoEncuesta2.xsd">
@@ -1294,6 +1325,9 @@
     <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo13.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSistemaTipoGrupo\ServiceTipoGrupo2.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1334,6 +1368,9 @@
     <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta13.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSistemaTipoInformacionConsulta\ServiceTipoInformacionConsulta2.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1372,6 +1409,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario13.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario2.xsd">
@@ -1987,6 +2027,9 @@
     <None Include="Service References\ServiceUsuario\ServiceUsuarios13.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios14.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceUsuario\ServiceUsuarios2.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2026,6 +2069,41 @@
     </Compile>
     <Compile Include="Consultas\FrmConsulta.aspx.designer.cs">
       <DependentUpon>FrmConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Graficos\FrmGeoChart.aspx.cs">
+      <DependentUpon>FrmGeoChart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Graficos\FrmGeoChart.aspx.designer.cs">
+      <DependentUpon>FrmGeoChart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Graficos\FrmGraficaEncuestaNombre.aspx.cs">
+      <DependentUpon>FrmGraficaEncuestaNombre.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Graficos\FrmGraficaEncuestaNombre.aspx.designer.cs">
+      <DependentUpon>FrmGraficaEncuestaNombre.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Graficos\FrmGraficaEncuestas.aspx.cs">
+      <DependentUpon>FrmGraficaEncuestas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Graficos\FrmGraficaEncuestas.aspx.designer.cs">
+      <DependentUpon>FrmGraficaEncuestas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Graficos\FrmGraficaHits.aspx.cs">
+      <DependentUpon>FrmGraficaHits.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Graficos\FrmGraficaHits.aspx.designer.cs">
+      <DependentUpon>FrmGraficaHits.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Graficos\FrmGraficaTickets.aspx.cs">
+      <DependentUpon>FrmGraficaTickets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Graficos\FrmGraficaTickets.aspx.designer.cs">
+      <DependentUpon>FrmGraficaTickets.aspx</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceConsultas\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -2096,11 +2174,67 @@
     <Compile Include="UserControls\Consultas\UcConsultaEncuestaPendiente.ascx.designer.cs">
       <DependentUpon>UcConsultaEncuestaPendiente.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltrosConsulta.ascx.cs">
+    <Compile Include="UserControls\Detalles\UcDetalleGeograficoTickets.ascx.cs">
+      <DependentUpon>UcDetalleGeograficoTickets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Detalles\UcDetalleGeograficoTickets.ascx.designer.cs">
+      <DependentUpon>UcDetalleGeograficoTickets.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroAtendedores.ascx.cs">
+      <DependentUpon>UcFiltroAtendedores.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroAtendedores.ascx.designer.cs">
+      <DependentUpon>UcFiltroAtendedores.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroEncuesta.ascx.cs">
+      <DependentUpon>UcFiltroEncuesta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroEncuesta.ascx.designer.cs">
+      <DependentUpon>UcFiltroEncuesta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroFechasConsultas.ascx.cs">
+      <DependentUpon>UcFiltroFechasConsultas.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroFechasConsultas.ascx.designer.cs">
+      <DependentUpon>UcFiltroFechasConsultas.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroGrupoEncuesta.ascx.cs">
+      <DependentUpon>UcFiltroGrupoEncuesta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroGrupoEncuesta.ascx.designer.cs">
+      <DependentUpon>UcFiltroGrupoEncuesta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroResponsablesEncuesta.ascx.cs">
+      <DependentUpon>UcFiltroResponsablesEncuesta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroResponsablesEncuesta.ascx.designer.cs">
+      <DependentUpon>UcFiltroResponsablesEncuesta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroServicioIncidenteEncuesta.ascx.cs">
+      <DependentUpon>UcFiltroServicioIncidenteEncuesta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroServicioIncidenteEncuesta.ascx.designer.cs">
+      <DependentUpon>UcFiltroServicioIncidenteEncuesta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Detalles\UcDetalleGeograficoHit.ascx.cs">
+      <DependentUpon>UcDetalleGeograficoHit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Detalles\UcDetalleGeograficoHit.ascx.designer.cs">
+      <DependentUpon>UcDetalleGeograficoHit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Consultas\UcFiltrosConsulta.ascx.cs">
       <DependentUpon>UcFiltrosConsulta.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltrosConsulta.ascx.designer.cs">
+    <Compile Include="UserControls\Filtros\Consultas\UcFiltrosConsulta.ascx.designer.cs">
       <DependentUpon>UcFiltrosConsulta.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaTicketUsuario.ascx.cs">
@@ -2117,75 +2251,145 @@
     <Compile Include="UserControls\Detalles\UcDetalleMascaraCaptura.ascx.designer.cs">
       <DependentUpon>UcDetalleMascaraCaptura.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroEstatus.ascx.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroEstatus.ascx.cs">
       <DependentUpon>UcFiltroEstatus.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroEstatus.ascx.designer.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroEstatus.ascx.designer.cs">
       <DependentUpon>UcFiltroEstatus.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroFechas.ascx.cs">
-      <DependentUpon>UcFiltroFechas.ascx</DependentUpon>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroFechasGrafico.ascx.cs">
+      <DependentUpon>UcFiltroFechasGrafico.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroFechas.ascx.designer.cs">
-      <DependentUpon>UcFiltroFechas.ascx</DependentUpon>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroFechasGrafico.ascx.designer.cs">
+      <DependentUpon>UcFiltroFechasGrafico.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroGrupo.ascx.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroGrupo.ascx.cs">
       <DependentUpon>UcFiltroGrupo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroGrupo.ascx.designer.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroGrupo.ascx.designer.cs">
       <DependentUpon>UcFiltroGrupo.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroOrganizacion.ascx.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroOrganizacion.ascx.cs">
       <DependentUpon>UcFiltroOrganizacion.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroOrganizacion.ascx.designer.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroOrganizacion.ascx.designer.cs">
       <DependentUpon>UcFiltroOrganizacion.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroPrioridad.ascx.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroPrioridad.ascx.cs">
       <DependentUpon>UcFiltroPrioridad.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroPrioridad.ascx.designer.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroPrioridad.ascx.designer.cs">
       <DependentUpon>UcFiltroPrioridad.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroServicioIncidente.ascx.cs">
+    <Compile Include="UserControls\Filtros\Consultas\UcFiltrosEncuestas.ascx.cs">
+      <DependentUpon>UcFiltrosEncuestas.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Consultas\UcFiltrosEncuestas.ascx.designer.cs">
+      <DependentUpon>UcFiltrosEncuestas.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroServicioIncidente.ascx.cs">
       <DependentUpon>UcFiltroServicioIncidente.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroServicioIncidente.ascx.designer.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroServicioIncidente.ascx.designer.cs">
       <DependentUpon>UcFiltroServicioIncidente.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltrosGrafico.ascx.cs">
-      <DependentUpon>UcFiltrosGrafico.ascx</DependentUpon>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosGraficasEncuestas.ascx.cs">
+      <DependentUpon>UcFiltrosGraficasEncuestas.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltrosGrafico.ascx.designer.cs">
-      <DependentUpon>UcFiltrosGrafico.ascx</DependentUpon>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosGraficasEncuestas.ascx.designer.cs">
+      <DependentUpon>UcFiltrosGraficasEncuestas.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroSla.ascx.cs">
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosGraficasHits.ascx.cs">
+      <DependentUpon>UcFiltrosGraficasHits.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosGraficasHits.ascx.designer.cs">
+      <DependentUpon>UcFiltrosGraficasHits.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosGraficasTicket.ascx.cs">
+      <DependentUpon>UcFiltrosGraficasTicket.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosGraficasTicket.ascx.designer.cs">
+      <DependentUpon>UcFiltrosGraficasTicket.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoEncuestas.ascx.cs">
+      <DependentUpon>UcFiltrosParametrosGraficoEncuestas.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoEncuestas.ascx.designer.cs">
+      <DependentUpon>UcFiltrosParametrosGraficoEncuestas.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoHits.ascx.cs">
+      <DependentUpon>UcFiltrosParametrosGraficoHits.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoHits.ascx.designer.cs">
+      <DependentUpon>UcFiltrosParametrosGraficoHits.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoTicket.ascx.cs">
+      <DependentUpon>UcFiltrosParametrosGraficoTicket.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoTicket.ascx.designer.cs">
+      <DependentUpon>UcFiltrosParametrosGraficoTicket.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroSla.ascx.cs">
       <DependentUpon>UcFiltroSla.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroSla.ascx.designer.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroSla.ascx.designer.cs">
       <DependentUpon>UcFiltroSla.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroTipificacion.ascx.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroStack.ascx.cs">
+      <DependentUpon>UcFiltroStack.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroStack.ascx.designer.cs">
+      <DependentUpon>UcFiltroStack.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Consultas\UcFiltrosTicket.ascx.cs">
+      <DependentUpon>UcFiltrosTicket.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Consultas\UcFiltrosTicket.ascx.designer.cs">
+      <DependentUpon>UcFiltrosTicket.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroTipificacion.ascx.cs">
       <DependentUpon>UcFiltroTipificacion.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroTipificacion.ascx.designer.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroTipificacion.ascx.designer.cs">
       <DependentUpon>UcFiltroTipificacion.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroUbicacion.ascx.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroTipoUsuario.ascx.cs">
+      <DependentUpon>UcFiltroTipoUsuario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroTipoUsuario.ascx.designer.cs">
+      <DependentUpon>UcFiltroTipoUsuario.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroUbicacion.ascx.cs">
       <DependentUpon>UcFiltroUbicacion.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Filtros\UcFiltroUbicacion.ascx.designer.cs">
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroUbicacion.ascx.designer.cs">
       <DependentUpon>UcFiltroUbicacion.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroVip.ascx.cs">
+      <DependentUpon>UcFiltroVip.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Componentes\UcFiltroVip.ascx.designer.cs">
+      <DependentUpon>UcFiltroVip.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Seleccion\UcImpactoUrgencia.ascx.cs">
       <DependentUpon>UcImpactoUrgencia.ascx</DependentUpon>
@@ -2229,12 +2433,12 @@
     <Compile Include="Consultas\FrmConsultaTickets.aspx.designer.cs">
       <DependentUpon>FrmConsultaTickets.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Consultas\FrmConsultaEncuesta.aspx.cs">
-      <DependentUpon>FrmConsultaEncuesta.aspx</DependentUpon>
+    <Compile Include="Consultas\FrmConsultaEncuestasUnitarias.aspx.cs">
+      <DependentUpon>FrmConsultaEncuestasUnitarias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Consultas\FrmConsultaEncuesta.aspx.designer.cs">
-      <DependentUpon>FrmConsultaEncuesta.aspx</DependentUpon>
+    <Compile Include="Consultas\FrmConsultaEncuestasUnitarias.aspx.designer.cs">
+      <DependentUpon>FrmConsultaEncuestasUnitarias.aspx</DependentUpon>
     </Compile>
     <Compile Include="Consultas\FrmConsultaHits.aspx.cs">
       <DependentUpon>FrmConsultaHits.aspx</DependentUpon>

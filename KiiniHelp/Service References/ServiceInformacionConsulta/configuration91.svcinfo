@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="fwTozKNSPmOIUswt8uaWzgIH3LU=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="gQdJhYhpLT4+T721Z+F4dIjLCkE=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="EndPointAdministracion5">
+    <bindingConfiguration bindingType="basicHttpBinding" name="EndPointAdministracion7">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EndPointAdministracion5</serializedValue>
+          <serializedValue>EndPointAdministracion7</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="EndPointAdministracion5" contract="ServiceInformacionConsulta.IServiceInformacionConsulta" bindingType="basicHttpBinding" address="http://localhost:15277/ServiceInformacionConsulta.svc" bindingConfiguration="EndPointAdministracion5">
+    <endpoint name="EndPointAdministracion5" contract="ServiceInformacionConsulta.IServiceInformacionConsulta" bindingType="basicHttpBinding" address="http://localhost:15277/ServiceInformacionConsulta.svc" bindingConfiguration="EndPointAdministracion7">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:15277/ServiceInformacionConsulta.svc</serializedValue>
@@ -124,7 +124,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EndPointAdministracion5</serializedValue>
+          <serializedValue>EndPointAdministracion7</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServiceInformacionConsulta.IServiceInformacionConsulta</serializedValue>

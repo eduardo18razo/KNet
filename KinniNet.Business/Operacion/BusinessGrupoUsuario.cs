@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
@@ -625,6 +626,55 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
+
+        public List<GrupoUsuario> ObtenerGruposUsuarioResponsablesByGruposTipoServicio(int idUsuario, List<int> grupos, List<int> tipoServicio)
+        {
+            List<GrupoUsuario> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                bool supervisor = db.SubGrupoUsuario.Join(db.UsuarioGrupo, sgu => sgu.Id, ug => ug.IdSubGrupoUsuario, (sgu, ug) => new { sgu, ug })
+                        .Any(@t => @t.sgu.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor && @t.ug.IdUsuario == idUsuario);
+                var qry = from t in db.Ticket
+                          join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
+                          join gu in db.GrupoUsuario on tgu.IdGrupoUsuario equals gu.Id
+                          join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
+                          where gu.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || gu.IdTipoUsuario == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada
+                          select new { t, gu, ug };
+
+                if (!supervisor)
+                    qry = from q in qry
+                        where q.ug.IdUsuario == idUsuario 
+                        select q;
+
+                if (grupos.Any())
+                    qry = from q in qry
+                          where grupos.Contains(q.gu.Id)
+                          select q;
+                if (tipoServicio.Any())
+                    qry = from q in qry
+                          where tipoServicio.Contains(q.t.IdTipoArbolAcceso)
+                          select q;
+
+                result = qry.Select(s => s.gu).Distinct().ToList();
+                foreach (GrupoUsuario grupo in result)
+                {
+                    db.LoadProperty(grupo, "TipoUsuario");
+                    db.LoadProperty(grupo, "TipoGrupo");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
 
         public void ActualizarGrupo(GrupoUsuario gpo)
         {

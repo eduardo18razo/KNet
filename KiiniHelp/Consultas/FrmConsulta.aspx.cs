@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using KiiniHelp.ServiceTicket;
 using KiiniNet.Entities.Helper;
 
 namespace KiiniHelp.Consultas
 {
-    public partial class FrmConsulta : System.Web.UI.Page
+    public partial class FrmConsulta : Page
     {
         private readonly ServiceTicketClient _servicioticket = new ServiceTicketClient();
 

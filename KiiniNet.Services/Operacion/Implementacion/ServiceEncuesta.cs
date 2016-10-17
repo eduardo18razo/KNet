@@ -115,13 +115,43 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public void Contestaencuesta(List<RespuestaEncuesta> encuestaRespondida)
+        public void ContestaEncuesta(List<RespuestaEncuesta> encuestaRespondida)
         {
             try
             {
                 using (BusinessEncuesta negocio = new BusinessEncuesta())
                 {
-                    negocio.Contestaencuesta(encuestaRespondida);
+                    negocio.ContestaEncuesta(encuestaRespondida);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Encuesta> ObtenerEncuestasContestadas(bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessEncuesta negocio = new BusinessEncuesta())
+                {
+                    return negocio.ObtenerEncuestasContestadas(insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Encuesta> ObtenerEncuestaByGrupos(List<int> grupos, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessEncuesta negocio = new BusinessEncuesta())
+                {
+                    return negocio.ObtenerEncuestaByGrupos(grupos, insertarSeleccion);
                 }
             }
             catch (Exception ex)

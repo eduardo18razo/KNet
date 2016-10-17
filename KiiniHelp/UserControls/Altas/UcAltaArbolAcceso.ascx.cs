@@ -738,7 +738,7 @@ namespace KiiniHelp.UserControls.Altas
 
                                     //    });
                                     //    break;
-                                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento:
+                                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
                                         arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
                                         {
                                             IdTipoGrupo = gpo.IdTipoGrupo,
@@ -951,7 +951,7 @@ namespace KiiniHelp.UserControls.Altas
                 btnModalInforme.Visible = chkNivelTerminal.Checked && Convert.ToInt32(hfIdTipoArbol.Value) != (int)BusinessVariables.EnumTipoArbol.Consultas;
                 btnModalEncuesta.Visible = chkNivelTerminal.Checked && Convert.ToInt32(hfIdTipoArbol.Value) != (int)BusinessVariables.EnumTipoArbol.Consultas;
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Acceso, false);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento, false);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeInformaciónPublicada, false);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeOperación, false);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, false);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, false);
@@ -969,7 +969,7 @@ namespace KiiniHelp.UserControls.Altas
 
                 //Grupos
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Acceso, true);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeInformaciónPublicada, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeOperación, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, true);

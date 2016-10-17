@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
@@ -7,15 +8,14 @@ using KinniNet.Core.Operacion;
 namespace KiiniNet.Services.Operacion.Implementacion
 {
     public class ServiceConsultas : IServiceConsultas
-    { 
-        public List<HelperTickets> ConsultarTickets(int idUsuario, List<int> grupos, List<int> organizaciones, List<int> ubicaciones, List<int> tipoArbol,
-            List<int> tipificacion, List<int> prioridad, List<int> estatus, bool sla, Dictionary<string, DateTime> fechas, int pageIndex, int pageSize)
+    {
+        public List<HelperReportesTicket> ConsultarTickets(int idUsuario, List<int> grupos, List<int> tiposUsuario, List<int> organizaciones, List<int> ubicaciones, List<int> tipoArbol, List<int> tipificacion, List<int> prioridad, List<int> estatus, List<bool?> sla, List<bool?> vip, Dictionary<string, DateTime> fechas, int pageIndex, int pageSize)
         {
             try
             {
                 using (BusinessConsultas negocio = new BusinessConsultas())
                 {
-                    return negocio.ConsultarTickets(idUsuario, grupos, organizaciones, ubicaciones, tipoArbol, tipificacion, prioridad, estatus, sla, fechas, pageIndex, pageSize);
+                    return negocio.ConsultarTickets(idUsuario, grupos, tiposUsuario, organizaciones, ubicaciones, tipoArbol, tipificacion, prioridad, estatus, sla, vip, fechas, pageIndex, pageSize);
                 }
             }
             catch (Exception ex)
@@ -24,14 +24,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<HelperHits> ConsultarHits(int idUsuario, List<int> grupos, List<int> organizaciones, List<int> ubicaciones, List<int> tipificacion,
-            Dictionary<string, DateTime> fechas, int pageIndex, int pageSize)
+        public List<HelperHits> ConsultarHits(int idUsuario, List<int> grupos, List<int> tiposUsuario, List<int> organizaciones, List<int> ubicaciones, List<int> tipificacion, List<bool?> vip, Dictionary<string, DateTime> fechas, int pageIndex, int pageSize)
         {
             try
             {
                 using (BusinessConsultas negocio = new BusinessConsultas())
                 {
-                    return negocio.ConsultarHits(idUsuario, grupos, organizaciones, ubicaciones, tipificacion, fechas, pageIndex, pageSize);
+                    return negocio.ConsultarHits(idUsuario, grupos, tiposUsuario, organizaciones, ubicaciones, tipificacion, vip, fechas, pageIndex, pageSize);
                 }
             }
             catch (Exception ex)
@@ -40,14 +39,152 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<HelperTickets> ConsultarEncuestas(int idUsuario, List<int> grupos, List<int> organizaciones, List<int> ubicaciones, List<int> tipoArbol,
-            List<int> tipificacion, List<int> prioridad, List<int> estatus, bool sla, Dictionary<string, DateTime> fechas, int pageIndex, int pageSize)
+        public List<HelperReportesTicket> ConsultarEncuestas(int idUsuario, List<int> grupos, List<int> tipoArbol, List<int> responsables, List<int?> encuestas, List<int> atendedores, Dictionary<string, DateTime> fechas, List<int> tiposUsuario, List<int> prioridad, List<bool?> sla, List<int> ubicaciones, List<int> organizaciones, List<bool?> vip, int pageIndex, int pageSize)
         {
             try
             {
                 using (BusinessConsultas negocio = new BusinessConsultas())
                 {
-                    return negocio.ConsultarEncuestas(idUsuario, grupos, organizaciones, ubicaciones, tipoArbol, tipificacion, prioridad, estatus, sla, fechas, pageIndex, pageSize);
+                    return negocio.ConsultarEncuestas(idUsuario, grupos, tipoArbol, responsables, encuestas, atendedores, fechas, tiposUsuario, prioridad, sla, ubicaciones, organizaciones, vip, pageIndex, pageSize);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<HelperReportesTicket> ConsultaEncuestaPregunta(int idUsuario, int idEncuesta, Dictionary<string, DateTime> fechas, int tipoFecha, int tipoEncuesta, int idPregunta)
+        {
+            try
+            {
+                using (BusinessConsultas negocio = new BusinessConsultas())
+                {
+                    return negocio.ConsultaEncuestaPregunta( idUsuario,  idEncuesta, fechas, tipoFecha,  tipoEncuesta, idPregunta);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public DataTable GraficarConsultaTicket(int idUsuario, List<int> grupos, List<int> tiposUsuario, List<int> organizaciones, List<int> ubicaciones, List<int> tipoArbol, List<int> tipificacion, List<int> prioridad, List<int> estatus, List<bool?> sla, List<bool?> vip, Dictionary<string, DateTime> fechas, List<int> filtroStackColumn, string stack, int tipoFecha)
+        {
+            try
+            {
+                using (BusinessConsultas negocio = new BusinessConsultas())
+                {
+                    return negocio.GraficarConsultaTicket(idUsuario, grupos, tiposUsuario, organizaciones, ubicaciones, tipoArbol, tipificacion, prioridad, estatus, sla, vip, fechas, filtroStackColumn, stack, tipoFecha);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string GraficarConsultaTicketGeografico(int idUsuario, List<int> grupos, List<int> tiposUsuario, List<int> organizaciones,List<int> ubicaciones, List<int> tipoArbol, List<int> tipificacion, List<int> prioridad, List<int> estatus, List<bool?> sla, List<bool?> vip,Dictionary<string, DateTime> fechas, List<int> filtroStackColumn, string stack, int tipoFecha)
+        {
+            try
+            {
+                using (BusinessConsultas negocio = new BusinessConsultas())
+                {
+                    return negocio.GraficarConsultaTicketGeografico(idUsuario, grupos, tiposUsuario, organizaciones, ubicaciones, tipoArbol, tipificacion, prioridad, estatus, sla, vip, fechas, filtroStackColumn, stack, tipoFecha);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public DataTable GraficarConsultaHits(int idUsuario, List<int> grupos, List<int> tiposUsuario, List<int> organizaciones, List<int> ubicaciones, List<int> tipificacion, List<bool?> vip, Dictionary<string, DateTime> fechas, List<int> filtroStackColumn, string stack, int tipoFecha)
+        {
+            try
+            {
+                using (BusinessConsultas negocio = new BusinessConsultas())
+                {
+                    return negocio.GraficarConsultaHits(idUsuario, grupos, tiposUsuario, organizaciones, ubicaciones, tipificacion, vip, fechas, filtroStackColumn, stack, tipoFecha);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string GraficarConsultaHitsGeografico(int idUsuario, List<int> grupos, List<int> tiposUsuario, List<int> organizaciones, List<int> ubicaciones, List<int> tipificacion, List<bool?> vip, Dictionary<string, DateTime> fechas, List<int> filtroStackColumn, string stack, int tipoFecha)
+        {
+            try
+            {
+                using (BusinessConsultas negocio = new BusinessConsultas())
+                {
+                    return negocio.GraficarConsultaHitsGeografico(idUsuario, grupos, tiposUsuario, organizaciones, ubicaciones, tipificacion, vip, fechas, filtroStackColumn, stack, tipoFecha);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public DataTable GraficarConsultaEncuesta(int idUsuario, List<int> grupos, List<int> tipoArbol, List<int> responsables, List<int?> encuestas, List<int> atendedores, Dictionary<string, DateTime> fechas, List<int> tiposUsuario, List<int> prioridad, List<bool?> sla, List<int> ubicaciones, List<int> organizaciones, List<bool?> vip, int tipoFecha)
+        {
+            try
+            {
+                using (BusinessConsultas negocio = new BusinessConsultas())
+                {
+                    return negocio.GraficarConsultaEncuesta(idUsuario, grupos, tipoArbol, responsables, encuestas,
+                        atendedores, fechas, tiposUsuario, prioridad, sla, ubicaciones,
+                        organizaciones, vip, tipoFecha);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string GraficarConsultaEncuestaGeografica(int idUsuario, List<int> grupos, List<int> tipoArbol, List<int> responsables, List<int?> encuestas,List<int> atendedores, Dictionary<string, DateTime> fechas, List<int> tiposUsuario, List<int> prioridad, List<bool?> sla, List<int> ubicaciones,List<int> organizaciones, List<bool?> vip, int tipoFecha)
+        {
+            try
+            {
+                using (BusinessConsultas negocio = new BusinessConsultas())
+                {
+                    return negocio.GraficarConsultaEncuestaGeografica(idUsuario, grupos, tipoArbol, responsables, encuestas,
+                        atendedores, fechas, tiposUsuario, prioridad, sla, ubicaciones,
+                        organizaciones, vip, tipoFecha);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<DataTable> GraficarConsultaEncuestaPregunta(int idUsuario, int idEncuesta, Dictionary<string, DateTime> fechas, int tipoFecha, int tipoEncuesta)
+        {
+            try
+            {
+                using (BusinessConsultas negocio = new BusinessConsultas())
+                {
+                    return negocio.GraficarConsultaEncuestaPregunta(idUsuario, idEncuesta, fechas, tipoFecha, tipoEncuesta);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string GraficarConsultaEncuestaPreguntaGeografica(int idUsuario, List<int?> encuestas, Dictionary<string, DateTime> fechas, int tipoFecha)
+        {
+            try
+            {
+                using (BusinessConsultas negocio = new BusinessConsultas())
+                {
+                    return negocio.GraficarConsultaEncuestaPreguntaGeografica(idUsuario, encuestas, fechas, tipoFecha);
                 }
             }
             catch (Exception ex)

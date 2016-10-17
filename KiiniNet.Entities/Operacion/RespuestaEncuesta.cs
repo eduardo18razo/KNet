@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Tickets;
 
@@ -19,6 +15,8 @@ namespace KiiniNet.Entities.Operacion
         public int IdEncuesta { get; set; }
         [DataMember]
         public int IdPregunta { get; set; }
+        [DataMember]
+        public int ValorRespuesta { get; set; }
         [DataMember]
         public decimal Ponderacion { get; set; }
         [DataMember]

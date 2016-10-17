@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="form-group" runat="server" id="divGrupoRespMtto" visible="False">
                                         <div class="col-sm-offset-1">
-                                            <asp:Label runat="server" Text="Responsable de Mantenimiento" class="col-sm-3 control-label"></asp:Label>
+                                            <asp:Label runat="server" Text="Responsable de Información Publicada" class="col-sm-3 control-label"></asp:Label>
                                             <asp:DropDownList runat="server" Width="250px" ID="ddlGrupoResponsableMantenimiento" CssClass="DropSelect" AutoPostBack="True" />
                                             <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="5" />
                                             <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="5" />
@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="form-group" runat="server" id="divGrupoRespOperacion" visible="False">
                                         <div class="col-sm-offset-1">
-                                            <asp:Label runat="server" Text="Dueño del producto" class="col-sm-3 control-label"></asp:Label>
+                                            <asp:Label runat="server" Text="Responsable de Operación" class="col-sm-3 control-label"></asp:Label>
                                             <asp:DropDownList runat="server" Width="250px" ID="ddlGrupoResponsableOperacion" CssClass="DropSelect" AutoPostBack="True" />
                                             <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="6" />
                                             <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="6" />
@@ -95,6 +95,14 @@
                                             <asp:DropDownList runat="server" Width="250px" ID="ddlGrupoResponsableDesarrollo" CssClass="DropSelect" AutoPostBack="True" />
                                             <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="7" />
                                             <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="7" data-toggle="modal" data-target="#modalAltaGrupoUsuario" data-backdrop="static" data-keyboard="false" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group" runat="server" id="divDuenoServicio" visible="False">
+                                        <div class="col-sm-offset-1">
+                                            <asp:Label runat="server" Text="Dueño del Servicio" class="col-sm-3 control-label"></asp:Label>
+                                            <asp:DropDownList runat="server" Width="250px" ID="ddlDuenoServicio" CssClass="DropSelect" AutoPostBack="True" />
+                                            <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="13" />
+                                            <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="13" data-toggle="modal" data-target="#modalAltaGrupoUsuario" data-backdrop="static" data-keyboard="false" />
                                         </div>
                                     </div>
 
@@ -168,6 +176,7 @@
                                                 >
                                                 <asp:Label runat="server" ID="lblIdSubGrupo" Text='<%# Eval("SubGrupoUsuario.Id") %>' Visible="False" />
                                                 <asp:Label runat="server" Text='<%# Eval("SubGrupoUsuario.SubRol.Descripcion") %>' Style="width: 50%" />
+                                                <asp:Button runat="server" CssClass="btn btn-primary btn-sm" ID="btnEliminar" OnClick="btnEliminar_OnClick" Text="Quitar"/>
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>

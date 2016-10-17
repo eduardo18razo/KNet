@@ -39,6 +39,7 @@
       <xs:element minOccurs="0" name="LongitudMaxima" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="LongitudMinima" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Mascara" nillable="true" type="tns:Mascara" />
+      <xs:element minOccurs="0" name="MascaraDetalle" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NombreCampo" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Requerido" type="xs:boolean" />
       <xs:element minOccurs="0" name="SimboloMoneda" nillable="true" type="xs:string" />
@@ -60,6 +61,7 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="LongitudMaxima" type="xs:boolean" />
       <xs:element minOccurs="0" name="LongitudMinima" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Mask" type="xs:boolean" />
       <xs:element minOccurs="0" name="SimboloMoneda" type="xs:boolean" />
       <xs:element minOccurs="0" name="TipoDatoSql" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ValorMaximo" type="xs:boolean" />

@@ -225,25 +225,46 @@ namespace KinniNet.Core.Operacion
                 //TODO: Cambiar habilitado por el embebido
                 organizacion.Habilitado = true;
                 if (organizacion.Holding != null)
+                {
                     organizacion.Holding.Descripcion = organizacion.Holding.Descripcion.ToUpper();
+                    organizacion.IdNivelOrganizacion = 1;
+                }
 
                 if (organizacion.Compania != null)
+                {
                     organizacion.Compania.Descripcion = organizacion.Compania.Descripcion.ToUpper();
+                    organizacion.IdNivelOrganizacion = 2;
+                }
 
                 if (organizacion.Direccion != null)
+                {
                     organizacion.Direccion.Descripcion = organizacion.Direccion.Descripcion.ToUpper();
+                    organizacion.IdNivelOrganizacion = 3;
+                }
 
                 if (organizacion.SubDireccion != null)
+                {
                     organizacion.SubDireccion.Descripcion = organizacion.SubDireccion.Descripcion.ToUpper();
+                    organizacion.IdNivelOrganizacion = 4;
+                }
 
                 if (organizacion.Gerencia != null)
+                {
                     organizacion.Gerencia.Descripcion = organizacion.Gerencia.Descripcion.ToUpper();
+                    organizacion.IdNivelOrganizacion = 5;
+                }
 
                 if (organizacion.SubGerencia != null)
+                {
                     organizacion.SubGerencia.Descripcion = organizacion.SubGerencia.Descripcion.ToUpper();
+                    organizacion.IdNivelOrganizacion = 6;
+                }
 
                 if (organizacion.Jefatura != null)
+                {
                     organizacion.Jefatura.Descripcion = organizacion.Jefatura.Descripcion.ToUpper();
+                    organizacion.IdNivelOrganizacion = 7;
+                }
 
                 if (organizacion.Id == 0)
                     db.Organizacion.AddObject(organizacion);
@@ -546,7 +567,7 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-        public List<Organizacion> ObtenerOrganizacionesGrupos(List<int> grupos )
+        public List<Organizacion> ObtenerOrganizacionesGrupos(List<int> grupos)
         {
             List<Organizacion> result;
             DataBaseModelContext db = new DataBaseModelContext();
@@ -554,9 +575,9 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 IQueryable<Organizacion> qry = from o in db.Organizacion
-                    join gu in db.GrupoUsuario on o.IdTipoUsuario equals gu.IdTipoUsuario
-                where grupos.Contains(gu.Id)
-                select o;
+                                               join gu in db.GrupoUsuario on o.IdTipoUsuario equals gu.IdTipoUsuario
+                                               where grupos.Contains(gu.Id)
+                                               select o;
 
                 result = qry.Distinct().ToList();
                 foreach (Organizacion organizacion in result)
@@ -628,6 +649,102 @@ namespace KinniNet.Core.Operacion
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public string ObtenerDescripcionOrganizacionById(int idOrganizacion, bool ultimoNivel)
+        {
+            string result = null;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
+                Organizacion organizacion = db.Organizacion.SingleOrDefault(w => w.Id == idOrganizacion && w.Habilitado);
+                if (organizacion != null)
+                {
+                    if (ultimoNivel)
+                    {
+                        if (organizacion.Holding != null)
+                            result = organizacion.Holding.Descripcion;
+                        if (organizacion.Compania != null)
+                            result = organizacion.Compania.Descripcion;
+                        if (organizacion.Direccion != null)
+                            result = organizacion.Direccion.Descripcion;
+                        if (organizacion.SubDireccion != null)
+                            result = organizacion.SubDireccion.Descripcion;
+                        if (organizacion.Gerencia != null)
+                            result = organizacion.Gerencia.Descripcion;
+                        if (organizacion.SubGerencia != null)
+                            result = organizacion.SubGerencia.Descripcion;
+                        if (organizacion.Jefatura != null)
+                            result = organizacion.Jefatura.Descripcion;
+                    }
+                    else
+                    {
+                        if (organizacion.Holding != null)
+                            result += organizacion.Holding.Descripcion;
+                        if (organizacion.Compania != null)
+                            result += ">" + organizacion.Compania.Descripcion;
+                        if (organizacion.Direccion != null)
+                            result += ">" + organizacion.Direccion.Descripcion;
+                        if (organizacion.SubDireccion != null)
+                            result += ">" + organizacion.SubDireccion.Descripcion;
+                        if (organizacion.Gerencia != null)
+                            result += ">" + organizacion.Gerencia.Descripcion;
+                        if (organizacion.SubGerencia != null)
+                            result += ">" + organizacion.SubGerencia.Descripcion;
+                        if (organizacion.Jefatura != null)
+                            result += ">" + organizacion.Jefatura.Descripcion;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<int> ObtenerOrganizacionesByIdOrganizacion(int idUbicacion)
+        {
+            List<int> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                Organizacion tmpOrganizacion = db.Organizacion.SingleOrDefault(s => s.Id == idUbicacion);
+                IQueryable<Organizacion> qry = db.Organizacion.Where(w => w.Id != idUbicacion);
+                if (tmpOrganizacion != null)
+                {
+                    if (tmpOrganizacion.IdJefatura.HasValue)
+                        qry = qry.Where(w => w.IdJefatura == tmpOrganizacion.IdJefatura);
+                    else if (tmpOrganizacion.IdSubGerencia.HasValue)
+                        qry = qry.Where(w => w.IdSubGerencia == tmpOrganizacion.IdSubGerencia);
+                    else if (tmpOrganizacion.IdGerencia.HasValue)
+                        qry = qry.Where(w => w.IdGerencia == tmpOrganizacion.IdGerencia);
+                    else if (tmpOrganizacion.IdSubDireccion.HasValue)
+                        qry = qry.Where(w => w.IdSubDireccion == tmpOrganizacion.IdSubDireccion);
+                    else if (tmpOrganizacion.IdDireccion.HasValue)
+                        qry = qry.Where(w => w.IdDireccion == tmpOrganizacion.IdDireccion);
+                    else if (tmpOrganizacion.IdCompania.HasValue)
+                        qry = qry.Where(w => w.IdCompania == tmpOrganizacion.IdCompania);
+                    else
+                        qry = qry.Where(w => w.IdHolding == tmpOrganizacion.IdHolding);
+                }
+                result = qry.Select(s => s.Id).ToList();
             }
             catch (Exception ex)
             {

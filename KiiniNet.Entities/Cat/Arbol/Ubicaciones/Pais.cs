@@ -15,6 +15,8 @@ namespace KiiniNet.Entities.Cat.Arbol.Ubicaciones
         [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
+        public string RegionCode { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
 
         [DataMember]

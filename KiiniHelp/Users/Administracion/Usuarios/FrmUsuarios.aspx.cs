@@ -67,17 +67,16 @@ namespace KiiniHelp.Users.Administracion.Usuarios
         #endregion Alerts
 
         #region Metodos
-        private void LlenaCombos()
+        private void LlenaCombos(bool usuariosResidentes)
         {
             try
             {
 
                 if (!IsPostBack)
                 {
-                    List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuario(true);
+                    List<TipoUsuario> lstTipoUsuario = usuariosResidentes ? _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true) : _servicioSistemaTipoUsuario.ObtenerTiposUsuario(true);
                     Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
                 }
-
             }
             catch (Exception ex)
             {
@@ -243,7 +242,10 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                 AsociarGrupoUsuario.AsignacionAutomatica = false;
                 if (!IsPostBack)
                 {
-                    LlenaCombos();
+                    if (Request.QueryString["all"] != null && Request.QueryString["all"] != string.Empty)
+                        LlenaCombos(false);
+                    else
+                        LlenaCombos(true);
                     Session["UsuarioTemporal"] = null;
                     Session["UsuarioGrupo"] = null;
                 }
@@ -345,7 +347,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                     Session["UsuarioTemporal"] = new Usuario();
                     LimpiarPantalla();
                     divDatos.Visible = true;
-                    
+
                     Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestos(true));
 
                     upGeneral.Update();
@@ -386,7 +388,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                     ApellidoMaterno = txtAm.Text.Trim(),
                     Nombre = txtNombre.Text.Trim(),
                     DirectorioActivo = chkDirectoriActivo.Checked,
-                    IdPuesto = ddlPuesto.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index ? (int?) null : Convert.ToInt32(ddlPuesto.SelectedValue),
+                    IdPuesto = ddlPuesto.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index ? (int?)null : Convert.ToInt32(ddlPuesto.SelectedValue),
                     Vip = chkVip.Checked,
                     //TODO: Cambiar propiedad a una dinamica
                     Habilitado = true
@@ -573,7 +575,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                 _lstError.Add(ex.Message);
                 //UcUbicacion.AlertaUbicacion = _lstError;
             }
-            
+
         }
         void UcUbicacion_OnCancelarModal()
         {

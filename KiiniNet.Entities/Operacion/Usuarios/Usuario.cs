@@ -54,7 +54,9 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         [DataMember]
         public virtual List<HitConsulta> HitConsulta { get; set; }
         [DataMember]
-        public virtual List<Ticket> Ticket { get; set; }
+        public virtual List<Ticket> TicketsLevantados { get; set; }
+        [DataMember]
+        public virtual List<Ticket> TicketsResueltos { get; set; }
         [DataMember]
         public virtual List<TicketEstatus> TicketEstatus { get; set; }
         [DataMember]

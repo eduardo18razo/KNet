@@ -235,6 +235,7 @@ namespace KinniNet.Core.Operacion
                 ubicacion.Habilitado = true;
                 if (ubicacion.Campus != null)
                 {
+                    ubicacion.IdNivelUbicacion = 2;
                     ubicacion.Campus.Descripcion = ubicacion.Campus.Descripcion.ToUpper();
                     foreach (Domicilio domicilio in ubicacion.Campus.Domicilio)
                     {
@@ -244,19 +245,34 @@ namespace KinniNet.Core.Operacion
                     }
                 }
                 if (ubicacion.Torre != null)
+                {
+                    ubicacion.IdNivelUbicacion = 3;
                     ubicacion.Torre.Descripcion = ubicacion.Torre.Descripcion.ToUpper();
+                }
 
                 if (ubicacion.Piso != null)
+                {
+                    ubicacion.IdNivelUbicacion = 4; 
                     ubicacion.Piso.Descripcion = ubicacion.Piso.Descripcion.ToUpper();
+                }
 
                 if (ubicacion.Zona != null)
+                {
+                    ubicacion.IdNivelUbicacion = 5;
                     ubicacion.Zona.Descripcion = ubicacion.Zona.Descripcion.ToUpper();
+                }
 
                 if (ubicacion.SubZona != null)
+                {
+                    ubicacion.IdNivelUbicacion = 6; 
                     ubicacion.SubZona.Descripcion = ubicacion.SubZona.Descripcion.ToUpper();
+                }
 
                 if (ubicacion.SiteRack != null)
+                {
+                    ubicacion.IdNivelUbicacion = 7; 
                     ubicacion.SiteRack.Descripcion = ubicacion.SiteRack.Descripcion.ToUpper();
+                }
 
                 if (ubicacion.Id == 0)
                     db.Ubicacion.AddObject(ubicacion);
@@ -301,7 +317,82 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
+        
+        public List<Ubicacion> ObtenerUbicacionByRegionCode(string regionCode)
+        
+        {
+            List<Ubicacion> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                var qry = from u in db.Ubicacion
+                    join d in db.Domicilio on u.IdCampus equals d.IdCampus
+                    join col in db.Colonia on d.IdColonia equals col.Id
+                    join m in db.Municipio on col.IdMunicipio equals m.Id
+                    join e in db.Estado on m.IdEstado equals e.Id
+                    where e.RegionCode == regionCode 
+                    select u;
+                result = qry.Distinct().ToList();
+                foreach (Ubicacion ubicacion in result)
+                {
+                    db.LoadProperty(ubicacion, "Pais");
+                    db.LoadProperty(ubicacion, "Campus");
+                    db.LoadProperty(ubicacion, "Torre");
+                    db.LoadProperty(ubicacion, "Piso");
+                    db.LoadProperty(ubicacion, "Zona");
+                    db.LoadProperty(ubicacion, "SubZona");
+                    db.LoadProperty(ubicacion, "SiteRack");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+            public List<int> ObtenerUbicacionesByIdUbicacion(int idUbicacion)
+        {
+            List<int> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                Ubicacion tmpUbicacion = db.Ubicacion.SingleOrDefault(s => s.Id == idUbicacion);
+                IQueryable<Ubicacion> qry = db.Ubicacion.Where(w => w.Id != idUbicacion);
+                if (tmpUbicacion != null)
+                {
+                    if (tmpUbicacion.IdSiteRack.HasValue)
+                        qry = qry.Where(w => w.IdSiteRack == tmpUbicacion.IdSiteRack);
+                    else if (tmpUbicacion.IdSubZona.HasValue)
+                        qry = qry.Where(w => w.IdSubZona == tmpUbicacion.IdSubZona);
+                    else if (tmpUbicacion.IdZona.HasValue)
+                        qry = qry.Where(w => w.IdZona == tmpUbicacion.IdZona);
+                    else if (tmpUbicacion.IdPiso.HasValue)
+                        qry = qry.Where(w => w.IdPiso == tmpUbicacion.IdPiso);
+                    else if (tmpUbicacion.IdTorre.HasValue)
+                        qry = qry.Where(w => w.IdTorre == tmpUbicacion.IdTorre);
+                    else if (tmpUbicacion.IdCampus.HasValue)
+                        qry = qry.Where(w => w.IdCampus == tmpUbicacion.IdCampus);
+                    else
+                        qry = qry.Where(w => w.IdPais == tmpUbicacion.IdPais);
+                }
+                result = qry.Select(s => s.Id).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
         public List<Ubicacion> ObtenerUbicaciones(int? idTipoUsuario, int? idPais, int? idCampus, int? idTorre, int? idPiso, int? idZona, int? idSubZona, int? idSiteRack)
         {
             List<Ubicacion> result;
@@ -365,9 +456,9 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 IQueryable<Ubicacion> qry = from u in db.Ubicacion
-                                               join gu in db.GrupoUsuario on u.IdTipoUsuario equals gu.IdTipoUsuario
-                                               where grupos.Contains(gu.Id)
-                                               select u;
+                                            join gu in db.GrupoUsuario on u.IdTipoUsuario equals gu.IdTipoUsuario
+                                            where grupos.Contains(gu.Id)
+                                            select u;
 
                 result = qry.Distinct().ToList();
                 foreach (Ubicacion ubicacion in result)
@@ -438,6 +529,63 @@ namespace KinniNet.Core.Operacion
                             if (usuario.Ubicacion.SiteRack != null)
                                 result += ">" + usuario.Ubicacion.SiteRack.Descripcion;
                         }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public string ObtenerDescripcionUbicacionById(int idUbicacion, bool ultimoNivel)
+        {
+            string result = null;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
+                Ubicacion ubicacion = db.Ubicacion.SingleOrDefault(w => w.Id == idUbicacion && w.Habilitado);
+                if (ubicacion != null)
+                {
+                    if (ultimoNivel)
+                    {
+                        if (ubicacion.Pais != null)
+                            result = ubicacion.Pais.Descripcion;
+                        if (ubicacion.Campus != null)
+                            result = ubicacion.Campus.Descripcion;
+                        if (ubicacion.Torre != null)
+                            result = ubicacion.Torre.Descripcion;
+                        if (ubicacion.Piso != null)
+                            result = ubicacion.Piso.Descripcion;
+                        if (ubicacion.Zona != null)
+                            result = ubicacion.Zona.Descripcion;
+                        if (ubicacion.SubZona != null)
+                            result = ubicacion.SubZona.Descripcion;
+                        if (ubicacion.SiteRack != null)
+                            result = ubicacion.SiteRack.Descripcion;
+                    }
+                    else
+                    {
+                        if (ubicacion.Pais != null)
+                            result += ubicacion.Pais.Descripcion;
+                        if (ubicacion.Campus != null)
+                            result += ">" + ubicacion.Campus.Descripcion;
+                        if (ubicacion.Torre != null)
+                            result += ">" + ubicacion.Torre.Descripcion;
+                        if (ubicacion.Piso != null)
+                            result += ">" + ubicacion.Piso.Descripcion;
+                        if (ubicacion.Zona != null)
+                            result += ">" + ubicacion.Zona.Descripcion;
+                        if (ubicacion.SubZona != null)
+                            result += ">" + ubicacion.SubZona.Descripcion;
+                        if (ubicacion.SiteRack != null)
+                            result += ">" + ubicacion.SiteRack.Descripcion;
                     }
                 }
             }

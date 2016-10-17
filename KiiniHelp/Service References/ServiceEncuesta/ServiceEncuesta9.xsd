@@ -47,7 +47,7 @@
   <xs:complexType name="HitConsulta">
     <xs:sequence>
       <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ArbolAcceso" nillable="true" type="q5:ArbolAcceso" />
-      <xs:element minOccurs="0" name="FechaHoraAlta" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FechaHoraAlta" type="xs:dateTime" />
       <xs:element minOccurs="0" name="HitGrupoUsuario" nillable="true" type="tns:ArrayOfHitGrupoUsuario" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IdArbolAcceso" type="xs:int" />

@@ -247,5 +247,20 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<GrupoUsuario> ObtenerGruposUsuarioResponsablesByGruposTipoServicio(int idUsuario, List<int> grupos, List<int> tipoServicio)
+        {
+            try
+            {
+                using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
+                {
+                    return negocio.ObtenerGruposUsuarioResponsablesByGruposTipoServicio(idUsuario, grupos, tipoServicio);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

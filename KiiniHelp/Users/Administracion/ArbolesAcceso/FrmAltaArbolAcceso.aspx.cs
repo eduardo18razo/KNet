@@ -1231,67 +1231,68 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                                     IdSubGrupoUsuario = lblIdSubGrupoUsuario.Text.Trim() == string.Empty ? (int?)null : Convert.ToInt32(lblIdSubGrupoUsuario.Text)
                                 });
                                 var gpo = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(Convert.ToInt32(lblIdGrupoUsuario.Text));
-                                switch (gpo.IdTipoGrupo)
-                                {
-                                    //TODO: AGREGAR GRUPO DE DUEÑO
-                                    //case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento:
-                                    //    arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
-                                    //    {
-                                    //        IdTipoGrupo = gpo.IdTipoGrupo,
-                                    //        IdGrupoUsuario = gpo.Id,
-                                    //        Dias = AltaTiempoEstimado.TiempoDueño.Dias,
-                                    //        Horas = AltaTiempoEstimado.TiempoDueño.Horas,
-                                    //        Minutos = AltaTiempoEstimado.TiempoDueño.Minutos,
-                                    //        Segundos = AltaTiempoEstimado.TiempoDueño.Segundos,
-                                    //        TiempoNotificacion = AltaTiempoEstimado.TiempoDueño.TiempoNotificacion,
-                                    //        IdTipoNotificacion = AltaTiempoEstimado.TiempoDueño.IdTipoNotificacion
-
-                                    //    });
-                                    //    break;
-                                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento:
-                                        arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
+                                if (btnModalInforme.Visible)
+                                    switch (gpo.IdTipoGrupo)
                                     {
-                                        IdTipoGrupo = gpo.IdTipoGrupo,
-                                        IdGrupoUsuario = gpo.Id,
-                                        Dias = ucAltaTiempoEstimado.TiempoDueño.Dias,
-                                        Horas = ucAltaTiempoEstimado.TiempoDueño.Horas,
-                                        Minutos = ucAltaTiempoEstimado.TiempoDueño.Minutos,
-                                        Segundos = ucAltaTiempoEstimado.TiempoDueño.Segundos,
-                                        TiempoNotificacion = ucAltaTiempoEstimado.TiempoDueño.TiempoNotificacion,
-                                        IdTipoNotificacion = ucAltaTiempoEstimado.TiempoDueño.IdTipoNotificacion
+                                        //TODO: AGREGAR GRUPO DE DUEÑO
+                                        case (int)BusinessVariables.EnumTiposGrupos.DueñoDelServicio:
+                                            arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
+                                            {
+                                                IdTipoGrupo = gpo.IdTipoGrupo,
+                                                IdGrupoUsuario = gpo.Id,
+                                                Dias = ucAltaTiempoEstimado.TiempoDueño.Dias,
+                                                Horas = ucAltaTiempoEstimado.TiempoDueño.Horas,
+                                                Minutos = ucAltaTiempoEstimado.TiempoDueño.Minutos,
+                                                Segundos = ucAltaTiempoEstimado.TiempoDueño.Segundos,
+                                                TiempoNotificacion = ucAltaTiempoEstimado.TiempoDueño.TiempoNotificacion,
+                                                IdTipoNotificacion = ucAltaTiempoEstimado.TiempoDueño.IdTipoNotificacion
 
-                                    });
-                                        break;
-                                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
-                                        arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
-                                    {
-                                        IdTipoGrupo = gpo.IdTipoGrupo,
-                                        IdGrupoUsuario = gpo.Id,
-                                        Dias = ucAltaTiempoEstimado.TiempoDesarrollo.Dias,
-                                        Horas = ucAltaTiempoEstimado.TiempoDesarrollo.Horas,
-                                        Minutos = ucAltaTiempoEstimado.TiempoDesarrollo.Minutos,
-                                        Segundos = ucAltaTiempoEstimado.TiempoDesarrollo.Segundos,
-                                        TiempoNotificacion = ucAltaTiempoEstimado.TiempoDesarrollo.TiempoNotificacion,
-                                        IdTipoNotificacion = ucAltaTiempoEstimado.TiempoDesarrollo.IdTipoNotificacion
+                                            });
+                                            break;
+                                        case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
+                                            arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
+                                        {
+                                            IdTipoGrupo = gpo.IdTipoGrupo,
+                                            IdGrupoUsuario = gpo.Id,
+                                            Dias = ucAltaTiempoEstimado.TiempoDueño.Dias,
+                                            Horas = ucAltaTiempoEstimado.TiempoDueño.Horas,
+                                            Minutos = ucAltaTiempoEstimado.TiempoDueño.Minutos,
+                                            Segundos = ucAltaTiempoEstimado.TiempoDueño.Segundos,
+                                            TiempoNotificacion = ucAltaTiempoEstimado.TiempoDueño.TiempoNotificacion,
+                                            IdTipoNotificacion = ucAltaTiempoEstimado.TiempoDueño.IdTipoNotificacion
 
-                                    });
-                                        break;
-                                    case (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta:
-                                        arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
-                                    {
-                                        IdTipoGrupo = gpo.IdTipoGrupo,
-                                        IdGrupoUsuario = gpo.Id,
-                                        Dias = ucAltaTiempoEstimado.TiempoConsulta.Dias,
-                                        Horas = ucAltaTiempoEstimado.TiempoConsulta.Horas,
-                                        Minutos = ucAltaTiempoEstimado.TiempoConsulta.Minutos,
-                                        Segundos = ucAltaTiempoEstimado.TiempoConsulta.Segundos,
-                                        TiempoNotificacion = ucAltaTiempoEstimado.TiempoConsulta.TiempoNotificacion,
-                                        IdTipoNotificacion = ucAltaTiempoEstimado.TiempoConsulta.IdTipoNotificacion
+                                        });
+                                            break;
+                                        case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
+                                            arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
+                                        {
+                                            IdTipoGrupo = gpo.IdTipoGrupo,
+                                            IdGrupoUsuario = gpo.Id,
+                                            Dias = ucAltaTiempoEstimado.TiempoDesarrollo.Dias,
+                                            Horas = ucAltaTiempoEstimado.TiempoDesarrollo.Horas,
+                                            Minutos = ucAltaTiempoEstimado.TiempoDesarrollo.Minutos,
+                                            Segundos = ucAltaTiempoEstimado.TiempoDesarrollo.Segundos,
+                                            TiempoNotificacion = ucAltaTiempoEstimado.TiempoDesarrollo.TiempoNotificacion,
+                                            IdTipoNotificacion = ucAltaTiempoEstimado.TiempoDesarrollo.IdTipoNotificacion
 
-                                    });
-                                        break;
+                                        });
+                                            break;
+                                        case (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta:
+                                            arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
+                                        {
+                                            IdTipoGrupo = gpo.IdTipoGrupo,
+                                            IdGrupoUsuario = gpo.Id,
+                                            Dias = ucAltaTiempoEstimado.TiempoConsulta.Dias,
+                                            Horas = ucAltaTiempoEstimado.TiempoConsulta.Horas,
+                                            Minutos = ucAltaTiempoEstimado.TiempoConsulta.Minutos,
+                                            Segundos = ucAltaTiempoEstimado.TiempoConsulta.Segundos,
+                                            TiempoNotificacion = ucAltaTiempoEstimado.TiempoConsulta.TiempoNotificacion,
+                                            IdTipoNotificacion = ucAltaTiempoEstimado.TiempoConsulta.IdTipoNotificacion
 
-                                }
+                                        });
+                                            break;
+
+                                    }
                             }
                         }
                         arbol.InventarioArbolAcceso.First().Descripcion = txtDescripcionNivel.Text.Trim();
@@ -1479,6 +1480,9 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 if (ddlTipoArbol.SelectedValue == ((int)BusinessVariables.EnumTipoArbol.Consultas).ToString())
                 {
                     AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Acceso, true);
+                    AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.DueñoDelServicio, true);
+                    AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeInformaciónPublicada, true);
+                    AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.EspecialDeConsulta, true);
                     //Información de Consulta
                     List<InformacionConsulta> infoCons = _servicioSistemaTipoInformacionConsulta.ObtenerTipoInformacionConsulta(false).Select(tipoInf => new InformacionConsulta { TipoInfConsulta = tipoInf }).ToList();
                     rptInformacion.DataSource = infoCons;
@@ -1489,7 +1493,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
 
                 //Grupos
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Acceso, true);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeMantenimiento, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeInformaciónPublicada, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeOperación, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, true);
@@ -1818,7 +1822,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
         }
         #endregion Abre modales Maestros
 
-        
+
     }
 }
 

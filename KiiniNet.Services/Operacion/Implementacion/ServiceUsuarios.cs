@@ -11,33 +11,61 @@ namespace KiiniNet.Services.Operacion.Implementacion
     {
         public void GuardarUsuario(Usuario usuario)
         {
-            using (BusinessUsuarios negocio = new BusinessUsuarios())
+            try
             {
-                negocio.GuardarUsuario(usuario);
+                using (BusinessUsuarios negocio = new BusinessUsuarios())
+                {
+                    negocio.GuardarUsuario(usuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
         public List<Usuario> ObtenerUsuarios(int? idTipoUsuario)
         {
-            using (BusinessUsuarios negocio = new BusinessUsuarios())
+            try
             {
-                return negocio.ObtenerUsuarios(idTipoUsuario);
+                using (BusinessUsuarios negocio = new BusinessUsuarios())
+                {
+                    return negocio.ObtenerUsuarios(idTipoUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
         public Usuario ObtenerDetalleUsuario(int idUsuario)
         {
-            using (BusinessUsuarios negocio = new BusinessUsuarios())
+            try
             {
-               return negocio.ObtenerDetalleUsuario(idUsuario);
+                using (BusinessUsuarios negocio = new BusinessUsuarios())
+                {
+                    return negocio.ObtenerDetalleUsuario(idUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
         public List<Usuario> ObtenerUsuariosByGrupo(int idGrupo, int idNivel)
         {
-            using (BusinessUsuarios negocio = new BusinessUsuarios())
+            try
             {
-                return negocio.ObtenerUsuariosByGrupo(idGrupo, idNivel);
+                using (BusinessUsuarios negocio = new BusinessUsuarios())
+                {
+                    return negocio.ObtenerUsuariosByGrupo(idGrupo, idNivel);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
@@ -48,6 +76,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessUsuarios negocio = new BusinessUsuarios())
                 {
                     negocio.ActualizarUsuario(idUsuario, usuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Usuario> ObtenerAtendedoresEncuesta(int idUsuario, List<int?> encuestas)
+        {
+            try
+            {
+                using (BusinessUsuarios negocio = new BusinessUsuarios())
+                {
+                    return negocio.ObtenerAtendedoresEncuesta(idUsuario, encuestas);
                 }
             }
             catch (Exception ex)

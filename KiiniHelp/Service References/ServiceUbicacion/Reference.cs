@@ -59,6 +59,12 @@ namespace KiiniHelp.ServiceUbicacion {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionesGrupos", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionesGruposResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Ubicacion> ObtenerUbicacionesGrupos(System.Collections.Generic.List<int> grupos);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionesByIdUbicacion", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionesByIdUbicacionResponse")]
+        System.Collections.Generic.List<int> ObtenerUbicacionesByIdUbicacion(int idUbicacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionByRegionCode", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionByRegionCodeResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Ubicacion> ObtenerUbicacionByRegionCode(string regionCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -146,6 +152,14 @@ namespace KiiniHelp.ServiceUbicacion {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Ubicacion> ObtenerUbicacionesGrupos(System.Collections.Generic.List<int> grupos) {
             return base.Channel.ObtenerUbicacionesGrupos(grupos);
+        }
+        
+        public System.Collections.Generic.List<int> ObtenerUbicacionesByIdUbicacion(int idUbicacion) {
+            return base.Channel.ObtenerUbicacionesByIdUbicacion(idUbicacion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Ubicacion> ObtenerUbicacionByRegionCode(string regionCode) {
+            return base.Channel.ObtenerUbicacionByRegionCode(regionCode);
         }
     }
 }

@@ -22,5 +22,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void ActualizarUsuario(int idUsuario, Usuario usuario);
+
+        [OperationContract]
+        List<Usuario> ObtenerAtendedoresEncuesta(int idUsuario, List<int?> encuestas);
     }
 }

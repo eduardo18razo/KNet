@@ -1,8 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmConsultaHits.aspx.cs" Inherits="KiiniHelp.Consultas.FrmConsultaHits" %>
-
-<%@ Register Src="~/UserControls/Filtros/UcFiltrosConsulta.ascx" TagPrefix="uc1" TagName="UcFiltrosConsulta" %>
-
-
+<%@ Register Src="~/UserControls/Filtros/Consultas/UcFiltrosConsulta.ascx" TagPrefix="uc1" TagName="UcFiltrosConsulta" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -35,12 +32,11 @@
                 </div>
                 <div class="panel-footer text-center">
                     <asp:Button runat="server" CssClass="btn btn-success" ID="btnConsultar" Text="Consultar" OnClick="btnConsultar_OnClick" />
-                    <asp:Button runat="server" CssClass="btn btn-success" ID="btnGraficar" Text="Graficar" />
                 </div>
             </div>
             <div class="panel panel-primary">
                 <div class="panel-body">
-                    <asp:GridView runat="server" ID="gvResult"></asp:GridView>
+                    <asp:GridView runat="server" ID="gvResult" CssClass="table table-bordered table-hover table-responsive" ></asp:GridView>
                 </div>
             </div>
         </ContentTemplate>

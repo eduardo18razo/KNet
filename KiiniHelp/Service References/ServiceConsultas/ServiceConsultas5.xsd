@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:15277/ServiceConsultas.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import schemaLocation="http://localhost:15277/ServiceConsultas.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceConsultas.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceConsultas.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceConsultas.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
   <xs:element name="ConsultarTickets">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
         <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q1:ArrayOfint" />
-        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="organizaciones" nillable="true" type="q2:ArrayOfint" />
-        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ubicaciones" nillable="true" type="q3:ArrayOfint" />
-        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipoArbol" nillable="true" type="q4:ArrayOfint" />
-        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipificacion" nillable="true" type="q5:ArrayOfint" />
-        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="prioridad" nillable="true" type="q6:ArrayOfint" />
-        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="estatus" nillable="true" type="q7:ArrayOfint" />
-        <xs:element minOccurs="0" name="sla" type="xs:boolean" />
-        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q8:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tiposUsuario" nillable="true" type="q2:ArrayOfint" />
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="organizaciones" nillable="true" type="q3:ArrayOfint" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ubicaciones" nillable="true" type="q4:ArrayOfint" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipoArbol" nillable="true" type="q5:ArrayOfint" />
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipificacion" nillable="true" type="q6:ArrayOfint" />
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="prioridad" nillable="true" type="q7:ArrayOfint" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="estatus" nillable="true" type="q8:ArrayOfint" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="sla" nillable="true" type="q9:ArrayOfNullableOfboolean" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="vip" nillable="true" type="q10:ArrayOfNullableOfboolean" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q11:ArrayOfKeyValueOfstringdateTime" />
         <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
         <xs:element minOccurs="0" name="pageSize" type="xs:int" />
       </xs:sequence>
@@ -23,7 +27,7 @@
   <xs:element name="ConsultarTicketsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ConsultarTicketsResult" nillable="true" type="q9:ArrayOfHelperTickets" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ConsultarTicketsResult" nillable="true" type="q12:ArrayOfHelperReportesTicket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -31,11 +35,13 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q10:ArrayOfint" />
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="organizaciones" nillable="true" type="q11:ArrayOfint" />
-        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ubicaciones" nillable="true" type="q12:ArrayOfint" />
-        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipificacion" nillable="true" type="q13:ArrayOfint" />
-        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q14:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q13:ArrayOfint" />
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tiposUsuario" nillable="true" type="q14:ArrayOfint" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="organizaciones" nillable="true" type="q15:ArrayOfint" />
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ubicaciones" nillable="true" type="q16:ArrayOfint" />
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipificacion" nillable="true" type="q17:ArrayOfint" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="vip" nillable="true" type="q18:ArrayOfNullableOfboolean" />
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q19:ArrayOfKeyValueOfstringdateTime" />
         <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
         <xs:element minOccurs="0" name="pageSize" type="xs:int" />
       </xs:sequence>
@@ -44,7 +50,7 @@
   <xs:element name="ConsultarHitsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ConsultarHitsResult" nillable="true" type="q15:ArrayOfHelperHits" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ConsultarHitsResult" nillable="true" type="q20:ArrayOfHelperHits" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -52,15 +58,18 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
-        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q16:ArrayOfint" />
-        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="organizaciones" nillable="true" type="q17:ArrayOfint" />
-        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ubicaciones" nillable="true" type="q18:ArrayOfint" />
-        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipoArbol" nillable="true" type="q19:ArrayOfint" />
-        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipificacion" nillable="true" type="q20:ArrayOfint" />
-        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="prioridad" nillable="true" type="q21:ArrayOfint" />
-        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="estatus" nillable="true" type="q22:ArrayOfint" />
-        <xs:element minOccurs="0" name="sla" type="xs:boolean" />
-        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q23:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q21:ArrayOfint" />
+        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipoArbol" nillable="true" type="q22:ArrayOfint" />
+        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="responsables" nillable="true" type="q23:ArrayOfint" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="encuestas" nillable="true" type="q24:ArrayOfNullableOfint" />
+        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="atendedores" nillable="true" type="q25:ArrayOfint" />
+        <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q26:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tiposUsuario" nillable="true" type="q27:ArrayOfint" />
+        <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="prioridad" nillable="true" type="q28:ArrayOfint" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="sla" nillable="true" type="q29:ArrayOfNullableOfboolean" />
+        <xs:element xmlns:q30="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ubicaciones" nillable="true" type="q30:ArrayOfint" />
+        <xs:element xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="organizaciones" nillable="true" type="q31:ArrayOfint" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="vip" nillable="true" type="q32:ArrayOfNullableOfboolean" />
         <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
         <xs:element minOccurs="0" name="pageSize" type="xs:int" />
       </xs:sequence>
@@ -69,7 +78,255 @@
   <xs:element name="ConsultarEncuestasResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ConsultarEncuestasResult" nillable="true" type="q24:ArrayOfHelperTickets" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ConsultarEncuestasResult" nillable="true" type="q33:ArrayOfHelperReportesTicket" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultaEncuestaPregunta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idEncuesta" type="xs:int" />
+        <xs:element xmlns:q34="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q34:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element minOccurs="0" name="tipoFecha" type="xs:int" />
+        <xs:element minOccurs="0" name="tipoEncuesta" type="xs:int" />
+        <xs:element minOccurs="0" name="idPregunta" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultaEncuestaPreguntaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ConsultaEncuestaPreguntaResult" nillable="true" type="q35:ArrayOfHelperReportesTicket" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaTicket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element xmlns:q36="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q36:ArrayOfint" />
+        <xs:element xmlns:q37="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tiposUsuario" nillable="true" type="q37:ArrayOfint" />
+        <xs:element xmlns:q38="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="organizaciones" nillable="true" type="q38:ArrayOfint" />
+        <xs:element xmlns:q39="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ubicaciones" nillable="true" type="q39:ArrayOfint" />
+        <xs:element xmlns:q40="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipoArbol" nillable="true" type="q40:ArrayOfint" />
+        <xs:element xmlns:q41="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipificacion" nillable="true" type="q41:ArrayOfint" />
+        <xs:element xmlns:q42="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="prioridad" nillable="true" type="q42:ArrayOfint" />
+        <xs:element xmlns:q43="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="estatus" nillable="true" type="q43:ArrayOfint" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="sla" nillable="true" type="q44:ArrayOfNullableOfboolean" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="vip" nillable="true" type="q45:ArrayOfNullableOfboolean" />
+        <xs:element xmlns:q46="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q46:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element xmlns:q47="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filtroStackColumn" nillable="true" type="q47:ArrayOfint" />
+        <xs:element minOccurs="0" name="stack" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tipoFecha" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaTicketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GraficarConsultaTicketResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaTicketGeografico">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element xmlns:q48="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q48:ArrayOfint" />
+        <xs:element xmlns:q49="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tiposUsuario" nillable="true" type="q49:ArrayOfint" />
+        <xs:element xmlns:q50="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="organizaciones" nillable="true" type="q50:ArrayOfint" />
+        <xs:element xmlns:q51="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ubicaciones" nillable="true" type="q51:ArrayOfint" />
+        <xs:element xmlns:q52="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipoArbol" nillable="true" type="q52:ArrayOfint" />
+        <xs:element xmlns:q53="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipificacion" nillable="true" type="q53:ArrayOfint" />
+        <xs:element xmlns:q54="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="prioridad" nillable="true" type="q54:ArrayOfint" />
+        <xs:element xmlns:q55="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="estatus" nillable="true" type="q55:ArrayOfint" />
+        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="sla" nillable="true" type="q56:ArrayOfNullableOfboolean" />
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="vip" nillable="true" type="q57:ArrayOfNullableOfboolean" />
+        <xs:element xmlns:q58="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q58:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element xmlns:q59="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filtroStackColumn" nillable="true" type="q59:ArrayOfint" />
+        <xs:element minOccurs="0" name="stack" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tipoFecha" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaTicketGeograficoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GraficarConsultaTicketGeograficoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaHits">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element xmlns:q60="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q60:ArrayOfint" />
+        <xs:element xmlns:q61="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tiposUsuario" nillable="true" type="q61:ArrayOfint" />
+        <xs:element xmlns:q62="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="organizaciones" nillable="true" type="q62:ArrayOfint" />
+        <xs:element xmlns:q63="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ubicaciones" nillable="true" type="q63:ArrayOfint" />
+        <xs:element xmlns:q64="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipificacion" nillable="true" type="q64:ArrayOfint" />
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="vip" nillable="true" type="q65:ArrayOfNullableOfboolean" />
+        <xs:element xmlns:q66="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q66:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element xmlns:q67="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filtroStackColumn" nillable="true" type="q67:ArrayOfint" />
+        <xs:element minOccurs="0" name="stack" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tipoFecha" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaHitsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GraficarConsultaHitsResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaHitsGeografico">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element xmlns:q68="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q68:ArrayOfint" />
+        <xs:element xmlns:q69="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tiposUsuario" nillable="true" type="q69:ArrayOfint" />
+        <xs:element xmlns:q70="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="organizaciones" nillable="true" type="q70:ArrayOfint" />
+        <xs:element xmlns:q71="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ubicaciones" nillable="true" type="q71:ArrayOfint" />
+        <xs:element xmlns:q72="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipificacion" nillable="true" type="q72:ArrayOfint" />
+        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="vip" nillable="true" type="q73:ArrayOfNullableOfboolean" />
+        <xs:element xmlns:q74="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q74:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element xmlns:q75="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="filtroStackColumn" nillable="true" type="q75:ArrayOfint" />
+        <xs:element minOccurs="0" name="stack" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tipoFecha" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaHitsGeograficoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GraficarConsultaHitsGeograficoResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaEncuesta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element xmlns:q76="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q76:ArrayOfint" />
+        <xs:element xmlns:q77="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipoArbol" nillable="true" type="q77:ArrayOfint" />
+        <xs:element xmlns:q78="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="responsables" nillable="true" type="q78:ArrayOfint" />
+        <xs:element xmlns:q79="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="encuestas" nillable="true" type="q79:ArrayOfNullableOfint" />
+        <xs:element xmlns:q80="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="atendedores" nillable="true" type="q80:ArrayOfint" />
+        <xs:element xmlns:q81="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q81:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element xmlns:q82="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tiposUsuario" nillable="true" type="q82:ArrayOfint" />
+        <xs:element xmlns:q83="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="prioridad" nillable="true" type="q83:ArrayOfint" />
+        <xs:element xmlns:q84="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="sla" nillable="true" type="q84:ArrayOfNullableOfboolean" />
+        <xs:element xmlns:q85="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ubicaciones" nillable="true" type="q85:ArrayOfint" />
+        <xs:element xmlns:q86="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="organizaciones" nillable="true" type="q86:ArrayOfint" />
+        <xs:element xmlns:q87="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="vip" nillable="true" type="q87:ArrayOfNullableOfboolean" />
+        <xs:element minOccurs="0" name="tipoFecha" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaEncuestaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GraficarConsultaEncuestaResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+              <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaEncuestaGeografica">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element xmlns:q88="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q88:ArrayOfint" />
+        <xs:element xmlns:q89="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipoArbol" nillable="true" type="q89:ArrayOfint" />
+        <xs:element xmlns:q90="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="responsables" nillable="true" type="q90:ArrayOfint" />
+        <xs:element xmlns:q91="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="encuestas" nillable="true" type="q91:ArrayOfNullableOfint" />
+        <xs:element xmlns:q92="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="atendedores" nillable="true" type="q92:ArrayOfint" />
+        <xs:element xmlns:q93="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q93:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element xmlns:q94="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tiposUsuario" nillable="true" type="q94:ArrayOfint" />
+        <xs:element xmlns:q95="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="prioridad" nillable="true" type="q95:ArrayOfint" />
+        <xs:element xmlns:q96="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="sla" nillable="true" type="q96:ArrayOfNullableOfboolean" />
+        <xs:element xmlns:q97="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ubicaciones" nillable="true" type="q97:ArrayOfint" />
+        <xs:element xmlns:q98="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="organizaciones" nillable="true" type="q98:ArrayOfint" />
+        <xs:element xmlns:q99="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="vip" nillable="true" type="q99:ArrayOfNullableOfboolean" />
+        <xs:element minOccurs="0" name="tipoFecha" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaEncuestaGeograficaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GraficarConsultaEncuestaGeograficaResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaEncuestaPregunta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idEncuesta" type="xs:int" />
+        <xs:element xmlns:q100="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q100:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element minOccurs="0" name="tipoFecha" type="xs:int" />
+        <xs:element minOccurs="0" name="tipoEncuesta" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaEncuestaPreguntaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q101="http://schemas.datacontract.org/2004/07/System.Data" minOccurs="0" name="GraficarConsultaEncuestaPreguntaResult" nillable="true" type="q101:ArrayOfDataTable" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaEncuestaPreguntaGeografica">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element xmlns:q102="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="encuestas" nillable="true" type="q102:ArrayOfNullableOfint" />
+        <xs:element xmlns:q103="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="fechas" nillable="true" type="q103:ArrayOfKeyValueOfstringdateTime" />
+        <xs:element minOccurs="0" name="tipoFecha" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GraficarConsultaEncuestaPreguntaGeograficaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GraficarConsultaEncuestaPreguntaGeograficaResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

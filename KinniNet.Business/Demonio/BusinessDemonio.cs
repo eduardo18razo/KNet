@@ -55,7 +55,7 @@ namespace KinniNet.Core.Demonio
                         .Select(@t1 => @t1.t).Distinct().ToList();
                     foreach (Ticket ticket in selectTickets)
                     {
-                        db.LoadProperty(ticket, "Usuario");
+                        db.LoadProperty(ticket, "UsuarioLevanto");
                         db.LoadProperty(ticket, "TicketGrupoUsuario");
 
                         foreach (TicketGrupoUsuario tgu in ticket.TicketGrupoUsuario)
@@ -74,7 +74,7 @@ namespace KinniNet.Core.Demonio
                         case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención:
                             informeDueño.AddRange(selectTickets.ToList().Distinct());
                             break;
-                        case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento:
+                        case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
                             informeMantenimiento.AddRange(selectTickets.ToList().Distinct());
                             break;
                         case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
@@ -91,7 +91,7 @@ namespace KinniNet.Core.Demonio
                 informeConsulta = informeConsulta.Distinct().ToList();
 
                 EnviaNotificacion(informeDueño, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención);
-                EnviaNotificacion(informeMantenimiento, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento);
+                EnviaNotificacion(informeMantenimiento, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada);
                 EnviaNotificacion(informeDesarrollo, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo);
                 EnviaNotificacion(informeConsulta, (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta);
 
@@ -125,7 +125,7 @@ namespace KinniNet.Core.Demonio
                                               "<br>tiempo envio {4}",
                                               tgu.GrupoUsuario.Descripcion,
                                               correoUsuario.Usuario.NombreCompleto,
-                                              ticket.Usuario.NombreCompleto,
+                                              ticket.UsuarioLevanto.NombreCompleto,
                                               ticket.FechaHoraAlta,
                                               ticket.FechaHoraFinProceso));
                         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion;
@@ -63,6 +62,44 @@ namespace KinniNet.Core.Operacion
                     db.LoadProperty(result, "TipoEncuesta");
                     db.LoadProperty(result, "EncuestaPregunta");
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<Encuesta> ObtenerEncuestaByGrupos(List<int> grupos, bool insertarSeleccion)
+        {
+            List<Encuesta> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                var qry = from t in db.Ticket
+                          join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
+                          join e in db.Encuesta on t.IdEncuesta equals e.Id
+                          where t.EncuestaRespondida
+                          && grupos.Contains(tgu.IdGrupoUsuario)
+                          select new { t, e };
+                result = qry.Select(s => s.e).Distinct().ToList();
+                foreach (Encuesta encuesta in result)
+                {
+                    db.LoadProperty(encuesta, "TipoEncuesta");
+                    db.LoadProperty(encuesta, "EncuestaPregunta");
+                }
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                        new Encuesta
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.Value,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                        });
             }
             catch (Exception ex)
             {
@@ -175,7 +212,7 @@ namespace KinniNet.Core.Operacion
                             HelperEncuesta hEncuesta = new HelperEncuesta
                             {
                                 NumeroTicket = ticket.Id,
-                                IdEncuesta = (int) ticket.IdEncuesta,
+                                IdEncuesta = (int)ticket.IdEncuesta,
                                 Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(ticket.IdArbolAcceso),
                                 Descripcion = ticket.Encuesta.Descripcion,
                                 Respondida = ticket.EncuestaRespondida,
@@ -215,13 +252,14 @@ namespace KinniNet.Core.Operacion
             }
         }
 
-        public void Contestaencuesta(List<RespuestaEncuesta> encuestaRespondida )
+        public void ContestaEncuesta(List<RespuestaEncuesta> encuestaRespondida)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 foreach (RespuestaEncuesta respuesta in encuestaRespondida)
                 {
+                    respuesta.Ponderacion = (respuesta.Ponderacion * db.EncuestaPregunta.Single(s => s.Id == respuesta.IdPregunta).Ponderacion) / 100;
                     db.RespuestaEncuesta.AddObject(respuesta);
                 }
                 db.SaveChanges();
@@ -235,5 +273,37 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
         }
+
+        public List<Encuesta> ObtenerEncuestasContestadas(bool insertarSeleccion)
+        {
+            List<Encuesta> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                var qry = from t in db.Ticket
+                          join e in db.Encuesta on t.IdEncuesta equals e.Id
+                          where t.EncuestaRespondida
+                          select new { t, e };
+                result = qry.Select(s => s.e).Distinct().ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                        new Encuesta
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.Value,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
     }
 }
+

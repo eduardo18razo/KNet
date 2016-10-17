@@ -1663,7 +1663,7 @@ th {
 }
 
 .table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
-    background-color: gray;
+    background-color: rgba(63, 65, 67, 0.2);
 }
 
 table col[class*=col-] {
@@ -4357,8 +4357,8 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
     }
 
 .navbar-inverse {
-    background-color: #636567;
-    border-color: #636567;
+    background-color: #3F4143;
+    border-color: #3F4143;
 }
 
     .navbar-inverse .navbar-brand {
@@ -4395,7 +4395,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 
     .navbar-inverse .navbar-toggle {
         border-color: #fff;
-        background-color: #636567;
+        background-color: #3F4143;
     }
 
         .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
@@ -4407,8 +4407,8 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
         }
 
     .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-        border-color: #636567;
-        background-color: #636567;
+        border-color: #3F4143;
+        background-color: #3F4143;
     }
 
     .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
@@ -5357,13 +5357,13 @@ a.list-group-item-danger {
     }
 
 .panel-primary {
-    border-color: #636567;
+    border-color: #3F4143;
 }
 
     .panel-primary > .panel-heading {
         color: #fff;
-        background-color: #636567;
-        border-color: #636567;
+        background-color: #3F4143;
+        border-color: #3F4143;
     }
 
         .panel-primary > .panel-heading + .panel-collapse .panel-body {

@@ -51,5 +51,11 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<Ubicacion> ObtenerUbicacionesGrupos(List<int> grupos);
+
+        [OperationContract]
+        List<int> ObtenerUbicacionesByIdUbicacion(int idUbicacion);
+
+        [OperationContract]
+        List<Ubicacion> ObtenerUbicacionByRegionCode(string regionCode);
     }
 }

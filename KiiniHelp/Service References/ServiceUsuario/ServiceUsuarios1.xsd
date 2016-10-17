@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/System" />
   <xs:element name="GuardarUsuario">
     <xs:complexType>
       <xs:sequence>
@@ -67,6 +68,21 @@
   <xs:element name="ActualizarUsuarioResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerAtendedoresEncuesta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="encuestas" nillable="true" type="q6:ArrayOfNullableOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerAtendedoresEncuestaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="ObtenerAtendedoresEncuestaResult" nillable="true" type="q7:ArrayOfUsuario" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

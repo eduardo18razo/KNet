@@ -34,6 +34,7 @@
     <MetadataFile FileName="ServiceCatalogos6.xsd" MetadataType="Schema" ID="3f9e9d4b-d6ee-43f9-87f9-9cedb873903c" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd2" />
     <MetadataFile FileName="ServiceCatalogos7.xsd" MetadataType="Schema" ID="b827081f-090a-4617-9ee5-da770690b9e3" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd11" />
     <MetadataFile FileName="ServiceCatalogos8.xsd" MetadataType="Schema" ID="50453006-1222-4b97-adec-5bafc8dcc5d1" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceCatalogos13.xsd" MetadataType="Schema" ID="1d2215fd-8cb7-4096-9559-e1a63a62a62a" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd13" />
     <MetadataFile FileName="ServiceCatalogos9.xsd" MetadataType="Schema" ID="a264a821-d001-416d-a33c-75945c330f67" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd12" />
     <MetadataFile FileName="ServiceCatalogos10.xsd" MetadataType="Schema" ID="9d6aa551-bc2a-4b44-bc2f-8f588d2dd250" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd6" />
     <MetadataFile FileName="ServiceCatalogos11.xsd" MetadataType="Schema" ID="f4246501-9786-4aa8-beb8-f18e073de2b9" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd4" />

@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using KiiniHelp.ServiceConsultas;
+using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniHelp.Consultas
 {
     public partial class FrmConsultaTickets : Page
     {
-        private readonly  ServiceConsultasClient _servicioConsultas = new ServiceConsultasClient();
+        private readonly ServiceConsultasClient _servicioConsultas = new ServiceConsultasClient();
         private List<string> _lstError = new List<string>();
 
         private List<string> AlertaGeneral
@@ -27,12 +29,7 @@ namespace KiiniHelp.Consultas
         {
             try
             {
-                if (!IsPostBack)
-                {
-                    ucFiltrosConsulta.EsTicket = true;
-                    ucFiltrosConsulta.EsConsulta = false;
-                    ucFiltrosConsulta.EsEncuesta = false;
-                }
+                AlertaGeneral = new List<string>();
             }
             catch (Exception ex)
             {
@@ -49,10 +46,39 @@ namespace KiiniHelp.Consultas
         {
             try
             {
-                gvResult.DataSource = _servicioConsultas.ConsultarTickets(((Usuario)Session["UserData"]).Id, ucFiltrosConsulta.FiltroGrupos, ucFiltrosConsulta.FiltroOrganizaciones,
-                    ucFiltrosConsulta.FiltroUbicaciones, ucFiltrosConsulta.FiltroTipoArbol, ucFiltrosConsulta.FiltroTipificaciones,
-                    ucFiltrosConsulta.FiltroPrioridad, ucFiltrosConsulta.FiltroEstatus, ucFiltrosConsulta.FiltroSla, ucFiltrosConsulta.FiltroFechas, 0, 1000);
+                if (!ucFiltrosTicket.FiltroGrupos.Any())
+                    throw new Exception("Debe seleccionar al menos un grupo");
+                List<HelperReportesTicket> lstConsulta = _servicioConsultas.ConsultarTickets(((Usuario)Session["UserData"]).Id, ucFiltrosTicket.FiltroGrupos, ucFiltrosTicket.FiltroTipoUsuario, ucFiltrosTicket.FiltroOrganizaciones,
+                    ucFiltrosTicket.FiltroUbicaciones, ucFiltrosTicket.FiltroTipoArbol, ucFiltrosTicket.FiltroTipificaciones,
+                    ucFiltrosTicket.FiltroPrioridad, ucFiltrosTicket.FiltroEstatus, ucFiltrosTicket.FiltroSla, ucFiltrosTicket.FiltroVip, ucFiltrosTicket.FiltroFechas, 0, 1000);
+                gvResult.DataSource = lstConsulta;
                 gvResult.DataBind();
+
+                
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void gvResult_OnRowCreated(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                e.Row.Cells[0].Visible = false;
+                e.Row.Cells[7].Visible = false;
+                e.Row.Cells[9].Visible = false;
+                e.Row.Cells[10].Visible = false;
+                e.Row.Cells[12].Visible = false;
+                e.Row.Cells[13].Visible = false;
+                e.Row.Cells[15].Visible = false;
+                e.Row.Cells[20].Visible = false;
             }
             catch (Exception ex)
             {

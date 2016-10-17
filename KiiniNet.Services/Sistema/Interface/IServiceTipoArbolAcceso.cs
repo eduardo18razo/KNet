@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Sistema;
 
@@ -10,5 +9,8 @@ namespace KiiniNet.Services.Sistema.Interface
     {
         [OperationContract]
         List<TipoArbolAcceso> ObtenerTiposArbolAcceso(bool insertarSeleccion);
+
+        [OperationContract]
+        List<TipoArbolAcceso> ObtenerTiposArbolAccesoByGrupos(List<int> grupos, bool insertarSeleccion);
     }
 }

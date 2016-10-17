@@ -31,13 +31,13 @@ namespace KiiniHelp.Consultas {
         protected global::System.Web.UI.WebControls.Repeater rptErrorGeneral;
         
         /// <summary>
-        /// Control ucFiltrosConsulta.
+        /// Control ucFiltrosTicket.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Filtros.UcFiltrosConsulta ucFiltrosConsulta;
+        protected global::KiiniHelp.UserControls.Filtros.Consultas.UcFiltrosTicket ucFiltrosTicket;
         
         /// <summary>
         /// Control btnConsultar.
@@ -47,15 +47,6 @@ namespace KiiniHelp.Consultas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnConsultar;
-        
-        /// <summary>
-        /// Control btnGraficar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGraficar;
         
         /// <summary>
         /// Control gvResult.

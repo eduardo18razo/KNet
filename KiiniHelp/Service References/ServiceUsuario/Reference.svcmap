@@ -37,6 +37,7 @@
     <MetadataFile FileName="ServiceUsuarios10.xsd" MetadataType="Schema" ID="0f961a89-be37-4cb3-86f9-872a75d1b508" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd10" />
     <MetadataFile FileName="ServiceUsuarios.xsd" MetadataType="Schema" ID="af64cffb-9648-4194-ac4c-23cb10ba7686" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd6" />
     <MetadataFile FileName="ServiceUsuarios13.xsd" MetadataType="Schema" ID="43396356-21d5-4c26-bebc-94300b4be0ee" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd13" />
+    <MetadataFile FileName="ServiceUsuarios14.xsd" MetadataType="Schema" ID="29dad147-076d-49dd-ab53-a965351de302" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd14" />
     <MetadataFile FileName="ServiceUsuarios.wsdl" MetadataType="Wsdl" ID="8791a15c-16a5-4894-8723-e321d42965d1" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?wsdl" />
     <MetadataFile FileName="ServiceUsuarios12.xsd" MetadataType="Schema" ID="5db0a1e1-9767-4c58-b6b2-c1a7264e195b" SourceId="1" SourceUrl="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd4" />
   </Metadata>

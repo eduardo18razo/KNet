@@ -61,6 +61,8 @@
     <Compile Include="Cat\Sistema\EstatusTicket.cs" />
     <Compile Include="Cat\Sistema\Impacto.cs" />
     <Compile Include="Cat\Sistema\Menu.cs" />
+    <Compile Include="Cat\Sistema\NivelOrganizacion.cs" />
+    <Compile Include="Cat\Sistema\NivelUbicacion.cs" />
     <Compile Include="Cat\Sistema\Prioridad.cs" />
     <Compile Include="Cat\Sistema\RespuestaTipoEncuesta.cs" />
     <Compile Include="Cat\Sistema\RolMenu.cs" />
@@ -91,10 +93,13 @@
     <Compile Include="Cat\Usuario\Sla.cs" />
     <Compile Include="Cat\Usuario\SubGrupoUsuario.cs" />
     <Compile Include="Helper\HelperCampoMascaraCaptura.cs" />
+    <Compile Include="Helper\HelperDatosGrafica.cs" />
     <Compile Include="Helper\HelperDetalleTicket.cs" />
     <Compile Include="Helper\HelperEncuesta.cs" />
+    <Compile Include="Helper\HelperFiltroGrafico.cs" />
     <Compile Include="Helper\HelperHits.cs" />
     <Compile Include="Helper\HelperMascaraData.cs" />
+    <Compile Include="Helper\HelperReportesTicket.cs" />
     <Compile Include="Helper\HelperSubGurpoUsuario.cs" />
     <Compile Include="Helper\HelperTickets.cs" />
     <Compile Include="Operacion\Area.cs" />

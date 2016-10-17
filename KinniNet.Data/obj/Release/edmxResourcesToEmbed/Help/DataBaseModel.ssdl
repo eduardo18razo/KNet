@@ -42,6 +42,7 @@
     <Property Name="LongitudMaxima" Type="int" />
     <Property Name="SimboloMoneda" Type="nvarchar" MaxLength="10" />
     <Property Name="ValorMaximo" Type="int" />
+    <Property Name="MascaraDetalle" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Campus">
     <Key>
@@ -253,10 +254,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoArbolAcceso" Type="int" Nullable="false" />
     <Property Name="IdArbolAcceso" Type="int" Nullable="false" />
     <Property Name="IdUsuario" Type="int" Nullable="false" />
     <Property Name="IdUbicacion" Type="int" Nullable="false" />
     <Property Name="IdOrganizacion" Type="int" Nullable="false" />
+    <Property Name="FechaHoraAlta" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="HitGrupoUsuario">
     <Key>
@@ -439,6 +442,22 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
+  <EntityType Name="NivelOrganizacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
+  <EntityType Name="NivelUbicacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
   <EntityType Name="Organizacion">
     <Key>
       <PropertyRef Name="Id" />
@@ -452,6 +471,7 @@
     <Property Name="IdGerencia" Type="int" />
     <Property Name="IdSubGerencia" Type="int" />
     <Property Name="IdJefatura" Type="int" />
+    <Property Name="IdNivelOrganizacion" Type="int" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="Pais">
@@ -722,13 +742,16 @@
     <Property Name="IdMascara" Type="int" />
     <Property Name="IdEncuesta" Type="int" />
     <Property Name="IdSlaEstimadoTicket" Type="int" />
-    <Property Name="IdRespuestaEncuesta" Type="int" />
     <Property Name="IdEstatusTicket" Type="int" Nullable="false" />
     <Property Name="IdEstatusAsignacion" Type="int" Nullable="false" />
     <Property Name="FechaHoraAlta" Type="datetime" Nullable="false" />
     <Property Name="FechaHoraFinProceso" Type="datetime" />
+    <Property Name="FechaTermino" Type="datetime" />
+    <Property Name="IdUsuarioResolvio" Type="int" />
+    <Property Name="DentroSla" Type="bit" />
     <Property Name="Random" Type="bit" />
     <Property Name="ClaveRegistro" Type="nvarchar" MaxLength="40" />
+    <Property Name="EncuestaRespondida" Type="bit" />
   </EntityType>
   <EntityType Name="TicketAsignacion">
     <Key>
@@ -799,6 +822,7 @@
     <Property Name="ValorMaximo" Type="bit" Nullable="false" />
     <Property Name="SimboloMoneda" Type="bit" Nullable="false" />
     <Property Name="Catalogo" Type="bit" Nullable="false" />
+    <Property Name="Mask" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TipoDocumento">
@@ -888,6 +912,7 @@
     <Property Name="IdZona" Type="int" />
     <Property Name="IdSubZona" Type="int" />
     <Property Name="IdSiteRack" Type="int" />
+    <Property Name="IdNivelUbicacion" Type="int" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Urgencia">
@@ -913,7 +938,7 @@
     <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="IdPuesto" Type="int" />
-    <Property Name="VIP" Type="bit" />
+    <Property Name="Vip" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioGrupo">
@@ -1459,6 +1484,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_HitConsulta_TipoArbolAcceso">
+    <End Role="TipoArbolAcceso" Type="Self.TipoArbolAcceso" Multiplicity="1" />
+    <End Role="HitConsulta" Type="Self.HitConsulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoArbolAcceso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HitConsulta">
+        <PropertyRef Name="IdTipoArbolAcceso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_HitConsulta_Ubicacion">
     <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="1" />
     <End Role="HitConsulta" Type="Self.HitConsulta" Multiplicity="*" />
@@ -1792,6 +1829,18 @@
       </Principal>
       <Dependent Role="Organizacion">
         <PropertyRef Name="IdJefatura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Organizacion_NivelOrganizacion">
+    <End Role="NivelOrganizacion" Type="Self.NivelOrganizacion" Multiplicity="0..1" />
+    <End Role="Organizacion" Type="Self.Organizacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NivelOrganizacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Organizacion">
+        <PropertyRef Name="IdNivelOrganizacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2419,6 +2468,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Ticket_Usuario1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdUsuarioResolvio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TicketAsignacion_EstatusAsignacion">
     <End Role="EstatusAsignacion" Type="Self.EstatusAsignacion" Multiplicity="1" />
     <End Role="TicketAsignacion" Type="Self.TicketAsignacion" Multiplicity="*" />
@@ -2608,6 +2669,18 @@
       </Principal>
       <Dependent Role="Ubicacion">
         <PropertyRef Name="IdCampus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ubicacion_NivelUbicacion">
+    <End Role="NivelUbicacion" Type="Self.NivelUbicacion" Multiplicity="0..1" />
+    <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NivelUbicacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ubicacion">
+        <PropertyRef Name="IdNivelUbicacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2871,6 +2944,8 @@
     <EntitySet Name="Nivel5" EntityType="Self.Nivel5" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Nivel6" EntityType="Self.Nivel6" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Nivel7" EntityType="Self.Nivel7" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NivelOrganizacion" EntityType="Self.NivelOrganizacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NivelUbicacion" EntityType="Self.NivelUbicacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Organizacion" EntityType="Self.Organizacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametrosAplicaciones" EntityType="Self.ParametrosAplicaciones" Schema="dbo" store:Type="Tables" />
@@ -3090,6 +3165,10 @@
       <End Role="Organizacion" EntitySet="Organizacion" />
       <End Role="HitConsulta" EntitySet="HitConsulta" />
     </AssociationSet>
+    <AssociationSet Name="FK_HitConsulta_TipoArbolAcceso" Association="Self.FK_HitConsulta_TipoArbolAcceso">
+      <End Role="TipoArbolAcceso" EntitySet="TipoArbolAcceso" />
+      <End Role="HitConsulta" EntitySet="HitConsulta" />
+    </AssociationSet>
     <AssociationSet Name="FK_HitConsulta_Ubicacion" Association="Self.FK_HitConsulta_Ubicacion">
       <End Role="Ubicacion" EntitySet="Ubicacion" />
       <End Role="HitConsulta" EntitySet="HitConsulta" />
@@ -3200,6 +3279,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Organizacion_Jefatura" Association="Self.FK_Organizacion_Jefatura">
       <End Role="Jefatura" EntitySet="Jefatura" />
+      <End Role="Organizacion" EntitySet="Organizacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Organizacion_NivelOrganizacion" Association="Self.FK_Organizacion_NivelOrganizacion">
+      <End Role="NivelOrganizacion" EntitySet="NivelOrganizacion" />
       <End Role="Organizacion" EntitySet="Organizacion" />
     </AssociationSet>
     <AssociationSet Name="FK_Organizacion_SubDireccion" Association="Self.FK_Organizacion_SubDireccion">
@@ -3410,6 +3493,10 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Usuario1" Association="Self.FK_Ticket_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
     <AssociationSet Name="FK_TicketAsignacion_EstatusAsignacion" Association="Self.FK_TicketAsignacion_EstatusAsignacion">
       <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
       <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
@@ -3472,6 +3559,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Ubicacion_Campus" Association="Self.FK_Ubicacion_Campus">
       <End Role="Campus" EntitySet="Campus" />
+      <End Role="Ubicacion" EntitySet="Ubicacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ubicacion_NivelUbicacion" Association="Self.FK_Ubicacion_NivelUbicacion">
+      <End Role="NivelUbicacion" EntitySet="NivelUbicacion" />
       <End Role="Ubicacion" EntitySet="Ubicacion" />
     </AssociationSet>
     <AssociationSet Name="FK_Ubicacion_Pais" Association="Self.FK_Ubicacion_Pais">

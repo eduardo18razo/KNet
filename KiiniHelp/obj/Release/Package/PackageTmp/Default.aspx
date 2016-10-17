@@ -1,8 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="KiiniHelp.Default" %>
 
 <%@ Register Src="~/UserControls/UcLogIn.ascx" TagPrefix="uc1" TagName="UcLogIn" %>
-
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -30,7 +28,7 @@
         };
     </script>
 </head>
-<body style="background: url('images/backgroud.jpg'); background-size: 100% auto;">
+<body style="background: white;">
     <div id="full">
         <form id="form1" runat="server">
 
@@ -81,55 +79,73 @@
                         <div class="MenuHorizontal">
                             <ul>
                                 <li><a>Servicio a clientes</a>
-                                    <ul>
-                                        <asp:Repeater runat="server" ID="rptClientes">
-                                            <ItemTemplate>
-                                                <li>
-                                                    <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
-                                                    <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' ID="lbtnCteArea" OnClick="lbtnCteArea_OnClick" />
-                                                </li>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </ul>
+                                    <asp:Repeater runat="server" ID="rptClientes">
+                                        <HeaderTemplate>
+                                            <ul>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <li>
+                                                <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
+                                                <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' ID="lbtnCteArea" OnClick="lbtnCteArea_OnClick" />
+                                            </li>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                            </ul>
+                                        </FooterTemplate>
+                                    </asp:Repeater>
+
                                 </li>
 
                                 <li><a>Servicio a Empleados</a>
-                                    <ul>
-                                        <asp:Repeater runat="server" ID="rptEmpleados">
-                                            <ItemTemplate>
-                                                <li>
-                                                    <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
-                                                    <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' ID="lbtnEmpleadoArea" OnClick="lbtnEmpleadoArea_OnClick" />
-                                                </li>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </ul>
+                                    <asp:Repeater runat="server" ID="rptEmpleados">
+                                        <HeaderTemplate>
+                                            <ul>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <li>
+                                                <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
+                                                <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' ID="lbtnEmpleadoArea" OnClick="lbtnEmpleadoArea_OnClick" />
+                                            </li>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                            </ul>
+                                        </FooterTemplate>
+                                    </asp:Repeater>
                                 </li>
                                 <li><a>Servicio a Proveedores</a>
-                                    <ul>
-                                        <asp:Repeater runat="server" ID="rptProveedores">
-                                            <ItemTemplate>
-                                                <li>
-                                                    <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
-                                                    <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' ID="lbtnProveedorArea" OnClick="lbtnProveedorArea_OnClick" />
-                                                </li>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </ul>
+                                    <asp:Repeater runat="server" ID="rptProveedores">
+                                        <HeaderTemplate>
+                                            </ul>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <li>
+                                                <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
+                                                <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' ID="lbtnProveedorArea" OnClick="lbtnProveedorArea_OnClick" />
+                                            </li>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                            </ul>
+                                        </FooterTemplate>
+                                    </asp:Repeater>
                                 </li>
                                 <li><a>Nuestra Institución</a>
-                                    <ul>
-                                        <asp:Repeater runat="server" ID="Repeater3">
-                                            <ItemTemplate>
-                                                <li>
-                                                    <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
-                                                    <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' />
-                                                </li>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </ul>
+                                    <asp:Repeater runat="server" ID="Repeater3">
+                                        <HeaderTemplate>
+                                            <ul>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <li>
+                                                <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
+                                                <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' />
+                                            </li>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                            </ul>
+                                        </FooterTemplate>
+                                    </asp:Repeater>
                                 </li>
-                                <li><asp:LinkButton runat="server" ID="lnkConsultaticket" OnClick="lnkConsultaticket_OnClick" Text="Consultar ticket"></asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton runat="server" ID="lnkConsultaticket" OnClick="lnkConsultaticket_OnClick" Text="Consultar ticket"></asp:LinkButton></li>
                             </ul>
                         </div>
                     </div>
@@ -226,17 +242,17 @@
                     </ul>
                 </div>
             </div>
-            
+
             <%--LOGIN--%>
             <div class="modal fade" id="modalSingIn" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <%--<asp:UpdatePanel ID="upModalSingIn" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>--%>
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <uc1:UcLogIn runat="server" ID="UcLogIn" />
-                            </div>
-                        </div>
-                    <%--</ContentTemplate>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <uc1:UcLogIn runat="server" ID="UcLogIn" />
+                    </div>
+                </div>
+                <%--</ContentTemplate>
                 </asp:UpdatePanel>--%>
             </div>
         </form>

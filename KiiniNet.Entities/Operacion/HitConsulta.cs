@@ -23,7 +23,7 @@ namespace KiiniNet.Entities.Operacion
         [DataMember]
         public int IdOrganizacion { get; set; }
         [DataMember]
-        public DateTime? FechaHoraAlta { get; set; }
+        public DateTime FechaHoraAlta { get; set; }
         [DataMember]
         public virtual TipoArbolAcceso TipoArbolAcceso { get; set; }
         [DataMember]

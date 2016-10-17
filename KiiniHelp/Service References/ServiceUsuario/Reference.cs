@@ -29,6 +29,9 @@ namespace KiiniHelp.ServiceUsuario {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ActualizarUsuario", ReplyAction="http://tempuri.org/IServiceUsuarios/ActualizarUsuarioResponse")]
         void ActualizarUsuario(int idUsuario, KiiniNet.Entities.Operacion.Usuarios.Usuario usuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ObtenerAtendedoresEncuesta", ReplyAction="http://tempuri.org/IServiceUsuarios/ObtenerAtendedoresEncuestaResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> ObtenerAtendedoresEncuesta(int idUsuario, System.Collections.Generic.List<System.Nullable<int>> encuestas);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -76,6 +79,10 @@ namespace KiiniHelp.ServiceUsuario {
         
         public void ActualizarUsuario(int idUsuario, KiiniNet.Entities.Operacion.Usuarios.Usuario usuario) {
             base.Channel.ActualizarUsuario(idUsuario, usuario);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> ObtenerAtendedoresEncuesta(int idUsuario, System.Collections.Generic.List<System.Nullable<int>> encuestas) {
+            return base.Channel.ObtenerAtendedoresEncuesta(idUsuario, encuestas);
         }
     }
 }

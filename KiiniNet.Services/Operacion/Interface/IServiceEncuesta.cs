@@ -30,8 +30,13 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
 
-        void Contestaencuesta(List<RespuestaEncuesta> encuestaRespondida);
+        void ContestaEncuesta(List<RespuestaEncuesta> encuestaRespondida);
 
+        [OperationContract]
+        List<Encuesta> ObtenerEncuestasContestadas(bool insertarSeleccion);
+
+        [OperationContract]
+        List<Encuesta> ObtenerEncuestaByGrupos(List<int> grupos, bool insertarSeleccion);
 
     }
 }

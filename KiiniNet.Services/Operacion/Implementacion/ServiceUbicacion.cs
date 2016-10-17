@@ -233,5 +233,35 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<int> ObtenerUbicacionesByIdUbicacion(int idUbicacion)
+        {
+            try
+            {
+                using (BusinessUbicacion negocio = new BusinessUbicacion())
+                {
+                    return negocio.ObtenerUbicacionesByIdUbicacion(idUbicacion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Ubicacion> ObtenerUbicacionByRegionCode(string regionCode)
+        {
+            try
+            {
+                using (BusinessUbicacion negocio = new BusinessUbicacion())
+                {
+                    return negocio.ObtenerUbicacionByRegionCode(regionCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

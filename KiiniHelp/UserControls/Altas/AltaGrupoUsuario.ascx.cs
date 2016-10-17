@@ -57,7 +57,7 @@ namespace KiiniHelp.UserControls.Altas
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención:
                         lblTitle.Text = "Alta Grupo de Usaurio de tipo Responsable de atención";
                         break;
-                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento:
+                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
                         lblTitle.Text = "Alta Grupo de Usuario de tipo Responsable de Mantenimiento";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeOperación:
@@ -66,9 +66,15 @@ namespace KiiniHelp.UserControls.Altas
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
                         lblTitle.Text = "Alta Grupo de Usuario de tipo Responsable de Desarrollo";
                         break;
+                    case (int)BusinessVariables.EnumTiposGrupos.DueñoDelServicio:
+                        lblTitle.Text = "Alta Grupo de Usuario de tipo Dueño de Servicio";
+                        break;
                 }
                 List<SubRol> lstRoles = _servicioSistemaSubRol.ObtenerSubRolesByTipoGrupo(value, false);
                 divSubRoles.Visible = lstRoles.Count > 0;
+
+                if ((int) BusinessVariables.EnumTiposGrupos.DueñoDelServicio == value)
+                    divSubRoles.Visible = true;
                 rptSubRoles.DataSource = lstRoles;
                 rptSubRoles.DataBind();
             }
@@ -115,11 +121,6 @@ namespace KiiniHelp.UserControls.Altas
                 IdTipoUsuario = value.IdTipoUsuario;
                 IdTipoGrupo = value.IdTipoGrupo;
                 txtDescripcionGrupoUsuario.Text = value.Descripcion;
-                //foreach (CheckBox chk in from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol"))
-                //{
-                //    chk.Checked = false;
-                //    OnCheckedChanged(chk, null);
-                //}
                 if (value.SubGrupoUsuario == null) return;
                 foreach (SubGrupoUsuario subGrupo in value.SubGrupoUsuario.OrderBy(o => o.IdSubRol))
                 {
@@ -135,28 +136,12 @@ namespace KiiniHelp.UserControls.Altas
                                 chk.Checked = subGrupo.Id == Convert.ToInt32(chk.Attributes["value"]);
                                 if (chk.Checked)
                                 {
-                                    //ucHorario.SetHorariosSubRol(subGrupo.HorarioSubGrupo);
-                                    //ucAltaDiasFestivos.SetDiasFestivosSubRol(subGrupo.DiaFestivoSubGrupo);
                                     OnCheckedChanged(chk, null);
                                     break;
                                 }
                             }
                         }
                     }
-                    //foreach (CheckBox chk in from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol"))
-                    //{
-                    //    if (subGrupo.Id == Convert.ToInt32(chk.Attributes["value"]))
-                    //    {
-                    //        chk.Checked = subGrupo.Id == Convert.ToInt32(chk.Attributes["value"]);
-                    //        if (chk.Checked)
-                    //        {
-                    //            ucHorario.SetHorariosSubRol(subGrupo.HorarioSubGrupo);
-                    //            ucAltaDiasFestivos.SetDiasFestivosSubRol(subGrupo.DiaFestivoSubGrupo);
-                    //            OnCheckedChanged(chk, null);
-                    //            break;
-                    //        }
-                    //    }
-                    //}
                 }
             }
         }
@@ -323,56 +308,6 @@ namespace KiiniHelp.UserControls.Altas
                 Alerta = _lstError;
             }
         }
-
-        //protected void chklbxSubRoles_OnSelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        int valueSelected = 0;
-        //        string result = Request.Form["__EVENTTARGET"];
-        //        string[] checkedBox = result.Split('$');
-        //        int index = int.Parse(checkedBox[checkedBox.Length - 1]);
-        //        if (chklbxSubRoles.Items[index].Selected)
-        //        {
-        //            valueSelected = Convert.ToInt32(chklbxSubRoles.Items[index].Value);
-        //        }
-        //        switch (valueSelected)
-        //        {
-        //            case (int)BusinessVariables.EnumSubRoles.TercerNivel:
-        //                if (chklbxSubRoles.Items.Cast<ListItem>().Any(item => (int.Parse(item.Value) == (int)BusinessVariables.EnumSubRoles.SegundoNivel) && !item.Selected))
-        //                {
-        //                    foreach (ListItem item in chklbxSubRoles.Items.Cast<ListItem>().Where(item => int.Parse(item.Value) == (int)BusinessVariables.EnumSubRoles.TercerNivel))
-        //                    {
-        //                        item.Selected = false;
-        //                        break;
-        //                    }
-        //                    throw new Exception("Require Segundo nivel.");
-        //                }
-        //                break;
-        //            case (int)BusinessVariables.EnumSubRoles.CuartoNivel:
-        //                if (chklbxSubRoles.Items.Cast<ListItem>().Any(item => (int.Parse(item.Value) == (int)BusinessVariables.EnumSubRoles.TercerNivel) && !item.Selected))
-        //                {
-        //                    foreach (ListItem item in chklbxSubRoles.Items.Cast<ListItem>().Where(item => int.Parse(item.Value) == (int)BusinessVariables.EnumSubRoles.CuartoNivel))
-        //                    {
-        //                        item.Selected = false;
-        //                        break;
-        //                    }
-        //                    throw new Exception("Require Tercer nivel.");
-        //                }
-        //                break;
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        if (_lstError == null)
-        //        {
-        //            _lstError = new List<string>();
-        //        }
-        //        _lstError.Add(ex.Message);
-        //        Alerta = _lstError;
-        //    }
-        //}
 
         protected void btnGuardar_OnClick(object sender, EventArgs e)
         {
@@ -547,8 +482,8 @@ namespace KiiniHelp.UserControls.Altas
                             ((Button)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("btnDiasDescanso")).CssClass = "col-sm-3 btn btn-primary";
                         }
                         break;
-                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento:
-                        if (sbRol.Id == (int)BusinessVariables.EnumSubRoles.Dueño)
+                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
+                        if (sbRol.Id == (int)BusinessVariables.EnumSubRoles.Autorizador)
                         {
                             ((CheckBox)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("chkSubRol")).Checked = true;
                             ((CheckBox)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("chkSubRol")).Enabled = false;

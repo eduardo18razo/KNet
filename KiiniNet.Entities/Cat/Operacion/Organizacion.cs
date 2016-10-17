@@ -30,6 +30,8 @@ namespace KiiniNet.Entities.Cat.Operacion
         [DataMember]
         public int? IdJefatura { get; set; }
         [DataMember]
+        public int IdNivelOrganizacion { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
         
         [DataMember]
@@ -54,6 +56,8 @@ namespace KiiniNet.Entities.Cat.Operacion
         public virtual List<HitConsulta> HitConsulta { get; set; }
         [DataMember]
         public virtual List<Ticket> Ticket { get; set; }
+        [DataMember]
+        public virtual NivelOrganizacion NivelOrganizacion { get; set; }
 
     }
 }

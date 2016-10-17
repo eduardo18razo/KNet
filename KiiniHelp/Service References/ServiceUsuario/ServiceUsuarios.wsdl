@@ -16,6 +16,7 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceUsuarios_GuardarUsuario_InputMessage">
@@ -48,6 +49,12 @@
   <wsdl:message name="IServiceUsuarios_ActualizarUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ActualizarUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ObtenerAtendedoresEncuesta_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAtendedoresEncuesta" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ObtenerAtendedoresEncuesta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAtendedoresEncuestaResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceUsuarios">
     <wsdl:operation name="GuardarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/GuardarUsuario" message="tns:IServiceUsuarios_GuardarUsuario_InputMessage" />
@@ -68,6 +75,10 @@
     <wsdl:operation name="ActualizarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ActualizarUsuario" message="tns:IServiceUsuarios_ActualizarUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ActualizarUsuarioResponse" message="tns:IServiceUsuarios_ActualizarUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAtendedoresEncuesta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerAtendedoresEncuesta" message="tns:IServiceUsuarios_ObtenerAtendedoresEncuesta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerAtendedoresEncuestaResponse" message="tns:IServiceUsuarios_ObtenerAtendedoresEncuesta_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceUsuarios">
@@ -110,6 +121,15 @@
     </wsdl:operation>
     <wsdl:operation name="ActualizarUsuario">
       <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ActualizarUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAtendedoresEncuesta">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ObtenerAtendedoresEncuesta" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

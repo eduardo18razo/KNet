@@ -80,6 +80,10 @@ namespace KiiniHelp.ServiceOrganizacion {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionesGrupos", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionesGruposResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Organizacion> ObtenerOrganizacionesGrupos(System.Collections.Generic.List<int> grupos);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionesByIdOrganizacion", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionesByIdOrganizacionResp" +
+            "onse")]
+        System.Collections.Generic.List<int> ObtenerOrganizacionesByIdOrganizacion(int idUbicacion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -195,6 +199,10 @@ namespace KiiniHelp.ServiceOrganizacion {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Organizacion> ObtenerOrganizacionesGrupos(System.Collections.Generic.List<int> grupos) {
             return base.Channel.ObtenerOrganizacionesGrupos(grupos);
+        }
+        
+        public System.Collections.Generic.List<int> ObtenerOrganizacionesByIdOrganizacion(int idUbicacion) {
+            return base.Channel.ObtenerOrganizacionesByIdOrganizacion(idUbicacion);
         }
     }
 }

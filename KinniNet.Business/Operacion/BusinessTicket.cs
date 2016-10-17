@@ -237,7 +237,8 @@ namespace KinniNet.Core.Operacion
                             IdUsuarioMovimiento = idUsuario,
                             Comentarios = comentario.Trim().ToUpper()
                     }};
-                    if (idEstatus == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto)
+                    if (idEstatus == (int) BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto)
+                        ticket.IdUsuarioResolvio = idUsuario;
                         ticket.TicketAsignacion = new List<TicketAsignacion>
                         {
                             new TicketAsignacion
@@ -250,6 +251,21 @@ namespace KinniNet.Core.Operacion
                             }
                         };
                     if (idEstatus == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReAbierto)
+                    {
+                        ticket.IdEstatusAsignacion = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar;
+                        ticket.TicketAsignacion = new List<TicketAsignacion>
+                        {
+                            new TicketAsignacion
+                            {
+                                IdEstatusAsignacion = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar,
+                                IdUsuarioAsigno = idUsuario,
+                                IdUsuarioAsignado = null,
+                                FechaAsignacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
+                                Comentarios = comentario.Trim().ToUpper()
+                            }
+                        };
+                    }
+                    if (idEstatus == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado)
                     {
                         ticket.IdEstatusAsignacion = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar;
                         ticket.TicketAsignacion = new List<TicketAsignacion>
@@ -358,7 +374,7 @@ namespace KinniNet.Core.Operacion
                     result = new List<HelperTickets>();
                     foreach (Ticket ticket in lstTickets.Skip(pageIndex * pageSize).Take(pageSize))
                     {
-                        db.LoadProperty(ticket, "Usuario");
+                        db.LoadProperty(ticket, "UsuarioLevanto");
                         db.LoadProperty(ticket, "EstatusTicket");
                         db.LoadProperty(ticket, "EstatusAsignacion");
                         db.LoadProperty(ticket, "TicketEstatus");
@@ -394,7 +410,7 @@ namespace KinniNet.Core.Operacion
                         hticket.IdGrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Distinct().First().GrupoUsuario.Id;
                         hticket.FechaHora = ticket.FechaHoraAlta;
                         hticket.NumeroTicket = ticket.Id;
-                        hticket.NombreUsuario = ticket.Usuario.NombreCompleto;
+                        hticket.NombreUsuario = ticket.UsuarioLevanto.NombreCompleto;
                         hticket.Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(ticket.IdArbolAcceso);
                         hticket.GrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Distinct().First().GrupoUsuario.Descripcion;
                         hticket.EstatusTicket = ticket.EstatusTicket;
@@ -504,7 +520,7 @@ namespace KinniNet.Core.Operacion
                     result = new List<HelperTickets>();
                     foreach (Ticket ticket in lstTickets.Skip(pageIndex * pageSize).Take(pageSize))
                     {
-                        db.LoadProperty(ticket, "Usuario");
+                        db.LoadProperty(ticket, "UsuarioLevanto");
                         db.LoadProperty(ticket, "EstatusTicket");
                         db.LoadProperty(ticket, "EstatusAsignacion");
                         db.LoadProperty(ticket, "TicketEstatus");
@@ -540,7 +556,7 @@ namespace KinniNet.Core.Operacion
                         hticket.IdGrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Distinct().First().GrupoUsuario.Id;
                         hticket.FechaHora = ticket.FechaHoraAlta;
                         hticket.NumeroTicket = ticket.Id;
-                        hticket.NombreUsuario = ticket.Usuario.NombreCompleto;
+                        hticket.NombreUsuario = ticket.UsuarioLevanto.NombreCompleto;
                         hticket.Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(ticket.IdArbolAcceso);
                         hticket.GrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Distinct().First().GrupoUsuario.Descripcion;
                         hticket.EstatusTicket = ticket.EstatusTicket;

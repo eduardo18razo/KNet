@@ -55,5 +55,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<GrupoUsuario> ObtenerGruposByIdUsuario(int idUsuario, bool insertarSeleccion);
+
+        [OperationContract]
+        List<GrupoUsuario> ObtenerGruposUsuarioResponsablesByGruposTipoServicio(int idUsuario, List<int> grupos, List<int> tipoServicio);
     }
 }

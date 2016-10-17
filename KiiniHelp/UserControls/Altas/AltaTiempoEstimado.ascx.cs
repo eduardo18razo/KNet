@@ -58,12 +58,12 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento).ToList())
+                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada).ToList())
                 {
                     //if(tiempo.GrupoUsuario.id)
                     //TiempoDueño = tiempo;
                 }
-                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento).ToList())
+                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada).ToList())
                 {
                     TiempoMantenimiento = tiempo;
                 }
@@ -109,7 +109,7 @@ namespace KiiniHelp.UserControls.Altas
                     Horas = Convert.ToDecimal(txtDuenoHoras.Text),
                     Minutos = Convert.ToDecimal(txtDuenoMinutos.Text),
                     Segundos = Convert.ToDecimal(txtDuenoSegundos.Text),
-                    IdTipoNotificacion = Convert.ToInt32(ddlDuenoVia.SelectedValue)
+                    IdTipoNotificacion = Convert.ToInt32(ddlDuenoVia.SelectedValue) == 0 ? 1 : Convert.ToInt32(ddlDuenoVia.SelectedValue)
                 };
                 result.TiempoNotificacion += (((Convert.ToDecimal(txtDuenoSegundos.Text) / 60) / 60) / 8) +
                 (Convert.ToDecimal(txtDuenoMinutos.Text) / 60) / 8 +

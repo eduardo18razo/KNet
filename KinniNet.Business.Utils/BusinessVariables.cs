@@ -83,14 +83,15 @@
             Acceso = 2,
             EspecialDeConsulta = 3,
             ResponsableDeAtención = 4,
-            ResponsableDeMantenimiento = 5,
+            ResponsableDeInformaciónPublicada = 5,
             ResponsableDeOperación = 6,
             ResponsableDeDesarrollo = 7,
             Responsablemantenimientoubicacionempleado = 8,
             Responsablemantenimientoorganizacionempleado = 9,
             Responsablemantenimientousuarioempleado = 10,
             Responsablemantenimientousuariocliente = 11,
-            Responsablemantenimientousuarioproveedor = 12
+            Responsablemantenimientousuarioproveedor = 12,
+            DueñoDelServicio = 13
         }
 
         public enum EnumRoles
@@ -99,19 +100,20 @@
             Acceso = 2,
             EspecialDeConsulta = 3,
             ResponsableDeAtención = 4,
-            ResponsableDeMantenimiento = 5,
+            ResponsableDeInformaciónPublicada = 5,
             ResponsableDeOperación = 6,
             ResponsableDeDesarrollo = 7,
             Responsablemantenimientoubicacionempleado = 8,
             Responsablemantenimientoorganizacionempleado = 9,
             Responsablemantenimientousuarioempleado = 10,
             Responsablemantenimientousuariocliente = 11,
-            Responsablemantenimientousuarioproveedor = 12
+            Responsablemantenimientousuarioproveedor = 12,
+            DueñoDelServicio = 13
         }
 
         public enum EnumSubRoles
         {
-            Dueño = 1,
+            Autorizador = 1,
             Solicitante = 2,
             Supervisor = 3,
             PrimererNivel = 4,
@@ -142,9 +144,9 @@
 
         public enum EnumTipoEncuesta
         {
-            Logica = 4,
-            Calificacion = 5,
-            OpcionMultiple = 6
+            Logica = 1,
+            Calificacion = 2,
+            OpcionMultiple = 3
         }
     }
 }

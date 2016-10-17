@@ -22,5 +22,20 @@ namespace KiiniNet.Services.Sistema.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<TipoArbolAcceso> ObtenerTiposArbolAccesoByGrupos(List<int> grupos, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessTipoArbolAcceso negocio = new BusinessTipoArbolAcceso())
+                {
+                    return negocio.ObtenerTiposArbolAccesoByGrupos(grupos, insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -2,6 +2,8 @@
 
 <%@ Register Src="~/UserControls/Detalles/UcDetalleUsuario.ascx" TagPrefix="uc1" TagName="UcDetalleUsuario" %>
 <%@ Register Src="~/UserControls/Consultas/UcConsultaTicketUsuario.ascx" TagPrefix="uc1" TagName="UcConsultaTicketUsuario" %>
+<%@ Register Src="~/UserControls/Consultas/UcConsultaEncuestaPendiente.ascx" TagPrefix="uc1" TagName="UcConsultaEncuestaPendiente" %>
+
 
 
 
@@ -18,22 +20,35 @@
     <div id="exTab2" class="container">
         <ul class="nav nav-tabs">
             <li class="active">
-                <a href="#1" data-toggle="tab">Información</a>
+                <a href="#1" data-toggle="tab">Mis tickets</a>
             </li>
-            <li><a href="#2" data-toggle="tab">Mis tickets</a>
+            <li>
+                <a href="#2" data-toggle="tab">Perfil</a>
             </li>
+            <li>
+                <a href="#3" data-toggle="tab">Encuestas Pendientes</a>
+            </li>
+
         </ul>
 
         <div class="tab-content ">
             <div class="tab-pane active" id="1">
                 <h6>
+                    <uc1:UcConsultaTicketUsuario runat="server" ID="UcConsultaTicketUsuario" />
+                </h6>
+            </div>
+            <div class="tab-pane" id="2">
+                <h6>
                     <uc1:UcDetalleUsuario runat="server" ID="UcDetalleUsuario" />
                 </h6>
             </div>
-        <div class="tab-pane" id="2">
-            <h6>
-                <uc1:UcConsultaTicketUsuario runat="server" ID="UcConsultaTicketUsuario" />
-            </h6>
+            
+            <div class="tab-pane" id="3">
+                <h6>
+                    <uc1:UcConsultaEncuestaPendiente runat="server" ID="UcConsultaEncuestaPendiente" />
+                </h6>
+            </div>
+
         </div>
     </div>
 </asp:Content>

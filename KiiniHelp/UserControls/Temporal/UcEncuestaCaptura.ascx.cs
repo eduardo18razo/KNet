@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceEncuesta;
-using KiiniHelp.Test;
-using KiiniHelp.Users.Operacion;
-using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Cat.Usuario;
-using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 
@@ -141,6 +136,7 @@ namespace KiiniHelp.UserControls.Temporal
                                                 IdEncuesta = encuesta.Id,
                                                 IdTicket = IdTicket,
                                                 IdPregunta = pregunta.Id,
+                                                ValorRespuesta = i == 0 ? 0 : 1,
                                                 Ponderacion = i == 0 ? 0 : pregunta.Ponderacion
 
                                             });
@@ -170,6 +166,7 @@ namespace KiiniHelp.UserControls.Temporal
                                                 IdEncuesta = encuesta.Id,
                                                 IdTicket = IdTicket,
                                                 IdPregunta = pregunta.Id,
+                                                ValorRespuesta = i,
                                                 Ponderacion = ((i + 1) * 10),
 
                                             });
@@ -200,6 +197,7 @@ namespace KiiniHelp.UserControls.Temporal
                                                 IdEncuesta = encuesta.Id,
                                                 IdTicket = IdTicket,
                                                 IdPregunta = pregunta.Id,
+                                                ValorRespuesta = i,
                                                 Ponderacion = (pregunta.Ponderacion / 5) * i
 
                                             });
@@ -289,27 +287,28 @@ namespace KiiniHelp.UserControls.Temporal
 
                             RadioButton rbtnMala = new RadioButton();
                             rbtnMala.ID = "rbtn" + pregunta.Id + "1";
-                            rbtnMala.Text = "MALA";
+                            rbtnMala.Text = "PESIMO";
                             rbtnMala.GroupName = "EncuestaMultiple" + pregunta.Id;
                             rbtnMala.Style.Add("padding", "10px");
                             createDiv.Controls.Add(rbtnMala);
 
                             RadioButton rbtnRegular = new RadioButton();
                             rbtnRegular.ID = "rbtn" + pregunta.Id + "2";
-                            rbtnRegular.Text = "REGULAR";
+                            rbtnRegular.Text = "MALO";
                             rbtnRegular.GroupName = "EncuestaMultiple" + pregunta.Id;
                             rbtnRegular.Style.Add("padding", "10px");
                             createDiv.Controls.Add(rbtnRegular);
 
                             RadioButton rbtnBuena = new RadioButton();
                             rbtnBuena.ID = "rbtn" + pregunta.Id + "3";
-                            rbtnBuena.Text = "BUENA";
+                            rbtnBuena.Text = "REGULAR";
                             rbtnBuena.GroupName = "EncuestaLogica" + pregunta.Id;
                             rbtnBuena.Style.Add("padding", "10px");
                             createDiv.Controls.Add(rbtnBuena);
+
                             RadioButton rbtnMuyBuena = new RadioButton();
                             rbtnMuyBuena.ID = "rbtn" + pregunta.Id + "4";
-                            rbtnMuyBuena.Text = "MUY BUENA";
+                            rbtnMuyBuena.Text = "BUENO";
                             rbtnMuyBuena.GroupName = "EncuestaLogica" + pregunta.Id;
                             rbtnMuyBuena.Style.Add("padding", "10px");
                             createDiv.Controls.Add(rbtnMuyBuena);
@@ -347,7 +346,7 @@ namespace KiiniHelp.UserControls.Temporal
             {
                 ValidaMascaraCaptura();
                 ObtenerCapturaMascara();
-                _servicioEncuesta.Contestaencuesta(ObtenerCapturaMascara());
+                _servicioEncuesta.ContestaEncuesta(ObtenerCapturaMascara());
                 if (OnAceptarModal != null)
                     OnAceptarModal();
             }

@@ -45,6 +45,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public DateTime? FechaTermino { get; set; }
         [DataMember]
+        public int? IdUsuarioResolvio { get; set; }
+        [DataMember]
         public bool DentroSla { get; set; }
         [DataMember]
         public bool Random { get; set; }
@@ -63,7 +65,9 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public virtual Impacto Impacto { get; set; }
         [DataMember]
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario UsuarioLevanto { get; set; }
+        [DataMember]
+        public virtual Usuario UsuarioResolvio { get; set; }
         [DataMember]
         public virtual Organizacion Organizacion { get; set; }
         [DataMember]

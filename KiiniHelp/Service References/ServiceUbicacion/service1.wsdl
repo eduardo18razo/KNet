@@ -109,6 +109,18 @@
   <wsdl:message name="IServiceUbicacion_ObtenerUbicacionesGrupos_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerUbicacionesGruposResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceUbicacion_ObtenerUbicacionesByIdUbicacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUbicacionesByIdUbicacion" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUbicacion_ObtenerUbicacionesByIdUbicacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUbicacionesByIdUbicacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUbicacion_ObtenerUbicacionByRegionCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUbicacionByRegionCode" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUbicacion_ObtenerUbicacionByRegionCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUbicacionByRegionCodeResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceUbicacion">
     <wsdl:operation name="ObtenerPais">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerPais" message="tns:IServiceUbicacion_ObtenerPais_InputMessage" />
@@ -169,6 +181,14 @@
     <wsdl:operation name="ObtenerUbicacionesGrupos">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionesGrupos" message="tns:IServiceUbicacion_ObtenerUbicacionesGrupos_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionesGruposResponse" message="tns:IServiceUbicacion_ObtenerUbicacionesGrupos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUbicacionesByIdUbicacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionesByIdUbicacion" message="tns:IServiceUbicacion_ObtenerUbicacionesByIdUbicacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionesByIdUbicacionResponse" message="tns:IServiceUbicacion_ObtenerUbicacionesByIdUbicacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUbicacionByRegionCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionByRegionCode" message="tns:IServiceUbicacion_ObtenerUbicacionByRegionCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionByRegionCodeResponse" message="tns:IServiceUbicacion_ObtenerUbicacionByRegionCode_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceUbicacion">
@@ -301,6 +321,24 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerUbicacionesGrupos">
       <soap:operation soapAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionesGrupos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUbicacionesByIdUbicacion">
+      <soap:operation soapAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionesByIdUbicacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUbicacionByRegionCode">
+      <soap:operation soapAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionByRegionCode" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -646,7 +646,7 @@ namespace KinniNet.Core.Operacion
                             {
                                 switch (informeArbol.IdTipoGrupo)
                                 {
-                                    case (int) BusinessVariables.EnumTiposGrupos.ResponsableDeMantenimiento:
+                                    case (int) BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
                                         TiempoInformeArbol tInformeMto = db.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
                                         tInformeMto = arbol.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
                                         if (tInformeMto != null)

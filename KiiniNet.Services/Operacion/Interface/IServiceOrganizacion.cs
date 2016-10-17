@@ -73,5 +73,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<Organizacion> ObtenerOrganizacionesGrupos(List<int> grupos);
+
+        [OperationContract]
+        List<int> ObtenerOrganizacionesByIdOrganizacion(int idUbicacion);
     }
 }

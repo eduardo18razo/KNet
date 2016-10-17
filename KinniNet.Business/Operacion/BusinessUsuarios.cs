@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using KiiniNet.Entities.Operacion.Usuarios;
+using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
 
 namespace KinniNet.Core.Operacion
@@ -142,7 +143,7 @@ namespace KinniNet.Core.Operacion
                     {
                         if (ugpoDb.IdSubGrupoUsuario == null)
                         {
-                            if (!usuario.UsuarioGrupo.Any(a =>a.IdUsuario == idUsuario && a.IdRol == ugpoDb.IdRol && a.IdGrupoUsuario == ugpoDb.IdGrupoUsuario))
+                            if (!usuario.UsuarioGrupo.Any(a => a.IdUsuario == idUsuario && a.IdRol == ugpoDb.IdRol && a.IdGrupoUsuario == ugpoDb.IdGrupoUsuario))
                                 gruposEliminar.Add(ugpoDb.Id);
                         }
                         else
@@ -310,6 +311,52 @@ namespace KinniNet.Core.Operacion
         public void Dispose()
         {
 
+        }
+
+        public List<Usuario> ObtenerAtendedoresEncuesta(int idUsuario, List<int?> encuestas)
+        {
+            List<Usuario> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                bool supervisor = db.SubGrupoUsuario.Join(db.UsuarioGrupo, sgu => sgu.Id, ug => ug.IdSubGrupoUsuario, (sgu, ug) => new { sgu, ug })
+                        .Any(@t => @t.sgu.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor && @t.ug.IdUsuario == idUsuario);
+                var qry = from t in db.Ticket
+                          join e in db.Encuesta on t.IdEncuesta equals e.Id
+                          join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
+                          join gu in db.GrupoUsuario on tgu.IdGrupoUsuario equals gu.Id
+                          join u in db.Usuario on t.IdUsuarioResolvio equals u.Id
+                          where gu.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención
+                          select new { t, e, tgu, u };
+                if (!supervisor)
+                    qry = from q in qry
+                        where q.t.IdUsuarioResolvio == idUsuario
+                        select q;
+                if (encuestas.Any())
+                    qry = from q in qry
+                          where encuestas.Contains(q.e.Id)
+                          select q;
+                result = qry.Select(s => s.u).Distinct().ToList();
+                foreach (Usuario usuario in result)
+                {
+                    db.LoadProperty(usuario, "TipoUsuario");
+                    usuario.OrganizacionFinal = new BusinessOrganizacion().ObtenerDescripcionOrganizacionUsuario(usuario.Id, true);
+                    usuario.OrganizacionCompleta = new BusinessOrganizacion().ObtenerDescripcionOrganizacionUsuario(usuario.Id, false);
+                    usuario.UbicacionFinal = new BusinessUbicacion().ObtenerDescripcionUbicacionUsuario(usuario.Id, true);
+                    usuario.UbicacionCompleta = new BusinessUbicacion().ObtenerDescripcionUbicacionUsuario(usuario.Id, false);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
         }
     }
 }

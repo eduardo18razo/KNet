@@ -17,6 +17,7 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceEncuesta.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceEncuesta.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceEncuesta.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceEncuesta.svc?xsd=xsd15" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceEncuesta_ObtenerEncuestas_InputMessage">
@@ -61,11 +62,23 @@
   <wsdl:message name="IServiceEncuesta_ObtenerEncuestasPendientesUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerEncuestasPendientesUsuarioResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceEncuesta_Contestaencuesta_InputMessage">
-    <wsdl:part name="parameters" element="tns:Contestaencuesta" />
+  <wsdl:message name="IServiceEncuesta_ContestaEncuesta_InputMessage">
+    <wsdl:part name="parameters" element="tns:ContestaEncuesta" />
   </wsdl:message>
-  <wsdl:message name="IServiceEncuesta_Contestaencuesta_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ContestaencuestaResponse" />
+  <wsdl:message name="IServiceEncuesta_ContestaEncuesta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ContestaEncuestaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceEncuesta_ObtenerEncuestasContestadas_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEncuestasContestadas" />
+  </wsdl:message>
+  <wsdl:message name="IServiceEncuesta_ObtenerEncuestasContestadas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEncuestasContestadasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceEncuesta_ObtenerEncuestaByGrupos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEncuestaByGrupos" />
+  </wsdl:message>
+  <wsdl:message name="IServiceEncuesta_ObtenerEncuestaByGrupos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEncuestaByGruposResponse" />
   </wsdl:message>
   <wsdl:portType name="IServiceEncuesta">
     <wsdl:operation name="ObtenerEncuestas">
@@ -96,9 +109,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasPendientesUsuario" message="tns:IServiceEncuesta_ObtenerEncuestasPendientesUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasPendientesUsuarioResponse" message="tns:IServiceEncuesta_ObtenerEncuestasPendientesUsuario_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="Contestaencuesta">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/Contestaencuesta" message="tns:IServiceEncuesta_Contestaencuesta_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/ContestaencuestaResponse" message="tns:IServiceEncuesta_Contestaencuesta_OutputMessage" />
+    <wsdl:operation name="ContestaEncuesta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/ContestaEncuesta" message="tns:IServiceEncuesta_ContestaEncuesta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/ContestaEncuestaResponse" message="tns:IServiceEncuesta_ContestaEncuesta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEncuestasContestadas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasContestadas" message="tns:IServiceEncuesta_ObtenerEncuestasContestadas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasContestadasResponse" message="tns:IServiceEncuesta_ObtenerEncuestasContestadas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEncuestaByGrupos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByGrupos" message="tns:IServiceEncuesta_ObtenerEncuestaByGrupos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByGruposResponse" message="tns:IServiceEncuesta_ObtenerEncuestaByGrupos_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceEncuesta">
@@ -166,8 +187,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="Contestaencuesta">
-      <soap:operation soapAction="http://tempuri.org/IServiceEncuesta/Contestaencuesta" style="document" />
+    <wsdl:operation name="ContestaEncuesta">
+      <soap:operation soapAction="http://tempuri.org/IServiceEncuesta/ContestaEncuesta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEncuestasContestadas">
+      <soap:operation soapAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestasContestadas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEncuestaByGrupos">
+      <soap:operation soapAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByGrupos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

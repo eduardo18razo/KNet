@@ -193,6 +193,24 @@ namespace KiiniHelp.UserControls.Seleccion {
         protected global::System.Web.UI.WebControls.DropDownList ddlGrupoResponsableDesarrollo;
         
         /// <summary>
+        /// Control divDuenoServicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDuenoServicio;
+        
+        /// <summary>
+        /// Control ddlDuenoServicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDuenoServicio;
+        
+        /// <summary>
         /// Control divUbicacionEmpleado.
         /// </summary>
         /// <remarks>

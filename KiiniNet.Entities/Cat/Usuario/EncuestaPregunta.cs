@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion;
 
 namespace KiiniNet.Entities.Cat.Usuario

@@ -35,6 +35,7 @@
     <MetadataFile FileName="ServiceTipoDocumento8.xsd" MetadataType="Schema" ID="67de5c94-68da-4b18-a7e1-73934538e6d4" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceTipoDocumento.svc?xsd=xsd12" />
     <MetadataFile FileName="ServiceTipoDocumento9.xsd" MetadataType="Schema" ID="f2866f22-4a1d-421b-8fdc-c0239d41e74a" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceTipoDocumento.svc?xsd=xsd11" />
     <MetadataFile FileName="ServiceTipoDocumento10.xsd" MetadataType="Schema" ID="09904137-d65c-44ee-aceb-b16c6ffba8a6" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceTipoDocumento.svc?xsd=xsd10" />
+    <MetadataFile FileName="ServiceTipoDocumento13.xsd" MetadataType="Schema" ID="6163ead1-4e65-4c50-8bfd-0b5d09568b11" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceTipoDocumento.svc?xsd=xsd13" />
     <MetadataFile FileName="ServiceTipoDocumento11.xsd" MetadataType="Schema" ID="1c803482-d8ec-4719-9ab4-106bf078e51d" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceTipoDocumento.svc?xsd=xsd9" />
     <MetadataFile FileName="ServiceTipoDocumento.disco" MetadataType="Disco" ID="d4a12930-dbe3-4277-92c8-7a9a4e3e4d60" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceTipoDocumento.svc?disco" />
     <MetadataFile FileName="ServiceTipoDocumento12.xsd" MetadataType="Schema" ID="25996d7f-f6bd-4d3c-93eb-a0519cf8ec0c" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceTipoDocumento.svc?xsd=xsd4" />

@@ -3,7 +3,7 @@ using System.Web.UI;
 
 namespace KiiniHelp
 {
-    public partial class FrmEncuesta : System.Web.UI.Page
+    public partial class FrmEncuesta : Page
     {
         public int? IdTicket
         {
@@ -27,28 +27,6 @@ namespace KiiniHelp
                     Session["IdTicketTicket"] = value;
             }
         }
-        //public int? IdEncuesta
-        //{
-        //    get
-        //    {
-        //        int result = 0;
-        //        if (hfIdEncuesta.Value != string.Empty)
-        //            result = Convert.ToInt32(hfIdEncuesta.Value);
-        //        else
-        //            result = (int)Session["hfIdEncuestaTicket"];
-        //        return result;
-        //    }
-        //    set
-        //    {
-        //        if (hfIdEncuesta != null)
-        //        {
-        //            hfIdEncuesta.Value = value.ToString();
-        //            Session.Remove("hfIdEncuestaTicket");
-        //        }
-        //        else
-        //            Session["hfIdEncuestaTicket"] = value;
-        //    }
-        //}
         protected void Page_Load(object sender, EventArgs e)
         {
             UcEncuestaCaptura.OnCancelarModal += UcEncuestaCaptura_OnCancelarModal;
@@ -63,11 +41,6 @@ namespace KiiniHelp
         protected void Page_PreInit(object sender, EventArgs e)
         {
             IdTicket = Convert.ToInt32(Request.QueryString["IdTicket"]);
-            //IdEncuesta = Convert.ToInt32(Request.QueryString["IdEncuesta"]);
-            //ArbolAcceso arbol = _servicioArbolAcceso.ObtenerArbolAcceso(idArbol);
-            //Session["ArbolAcceso"] = arbol;
-            //IdMascara = arbol.InventarioArbolAcceso.First().IdMascara ?? 0;
-            //IdEncuesta = arbol.InventarioArbolAcceso.First().IdEncuesta ?? 0;
 
         }
 

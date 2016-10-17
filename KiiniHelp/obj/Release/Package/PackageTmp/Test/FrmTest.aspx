@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmTest.aspx.cs" Inherits="KiiniHelp.Test.FrmTest" %>
 
-<%@ Register Src="~/UserControls/Altas/UcAltaArbolAcceso.ascx" TagPrefix="uc1" TagName="UcAltaArbolAcceso" %>
-
+<%@ Register Src="~/UserControls/Filtros/Componentes/UcFiltroFechasGrafico.ascx" TagPrefix="uc1" TagName="UcFiltroFechasGrafico" %>
 
 
 <!DOCTYPE html>
@@ -77,13 +76,63 @@
                 <asp:ScriptReference Path="~/BootStrap/js/locales/bootstrap-datepicker.es.min.js" />
             </Scripts>
         </asp:ScriptManager>
-        <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-                <uc1:UcAltaArbolAcceso runat="server" ID="UcAltaArbolAcceso" />
-            </ContentTemplate>
-        </asp:UpdatePanel>
+        <asp:TextBox runat="server" type="month" ID="TextBox1"></asp:TextBox>
+        <uc1:UcFiltroFechasGrafico runat="server" ID="UcFiltroFechasGrafico" />
+        <asp:TextBox runat="server" type="week" ID="txtWeek"></asp:TextBox>
+        <asp:Label runat="server" ID="lblFormatWeek"></asp:Label>
+        <br/>
+        <asp:TextBox runat="server" type="month" ID="txtMonth"></asp:TextBox>
+        <asp:Label runat="server" ID="lblFormatMonth"></asp:Label>
+        <asp:Button runat="server" OnClick="OnClick" Text="ver"/>
+        <asp:Chart ID="ChartStack" runat="server" Width="800px" Height="600px" Visible="True">
+            <Titles>
+                <asp:Title ShadowOffset="3" Name="Items" />
+            </Titles>
+            <Legends>
+                <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default" LegendStyle="Row" Title="Titulo" />
+            </Legends>
+            <ChartAreas>
+                <asp:ChartArea Name="ChartArea1" BorderWidth="0" />
+            </ChartAreas>
+        </asp:Chart>
         
-        <%--<uc1:UcAltaDiasFestivos runat="server" ID="UcAltaDiasFestivos" />--%>
+        <asp:Chart ID="chartColumn" runat="server" Width="800px" Height="600px">
+            <Titles>
+                <asp:Title ShadowOffset="3" Name="Items" />
+            </Titles>
+            <Legends>
+                <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default" LegendStyle="Row" Title="Titulo" />
+            </Legends>
+            <ChartAreas>
+                <asp:ChartArea Name="ChartArea1" BorderWidth="0"/>
+            </ChartAreas>
+        </asp:Chart>
+
+
+        <asp:Chart ID="Chart1" runat="server" Height="531px" Width="920px">
+            <Titles>
+                <asp:Title ShadowOffset="3" Name="Items" />
+            </Titles>
+            <Legends>
+                <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default" LegendStyle="Row" Title="Titulo" />
+            </Legends>
+            <ChartAreas>
+                <asp:ChartArea Name="ChartArea1" BorderColor="64, 64, 64, 64" BackSecondaryColor="White" BackColor="Gainsboro" ShadowColor="Transparent" BackGradientStyle="TopBottom">
+                    <AxisY2 IsLabelAutoFit="False" Interval="25">
+                        <LabelStyle Font="Trebuchet MS, 8.25pt, style=Bold" />
+                    </AxisY2>
+                    <AxisY LineColor="64, 64, 64, 64">
+                        <LabelStyle Font="Trebuchet MS, 8.25pt, style=Bold" />
+                        <MajorGrid LineColor="64, 64, 64, 64" />
+                    </AxisY>
+                    <AxisX LineColor="64, 64, 64, 64">
+                        <LabelStyle Font="Trebuchet MS, 8.25pt, style=Bold" />
+                        <MajorGrid LineColor="64, 64, 64, 64" />
+                    </AxisX>
+                </asp:ChartArea>
+            </ChartAreas>
+        </asp:Chart>
+
     </form>
 </body>
 </html>

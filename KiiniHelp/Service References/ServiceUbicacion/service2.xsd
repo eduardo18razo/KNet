@@ -234,4 +234,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerUbicacionesByIdUbicacion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUbicacion" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerUbicacionesByIdUbicacionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerUbicacionesByIdUbicacionResult" nillable="true" type="q16:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerUbicacionByRegionCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="regionCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerUbicacionByRegionCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ObtenerUbicacionByRegionCodeResult" nillable="true" type="q17:ArrayOfUbicacion" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
