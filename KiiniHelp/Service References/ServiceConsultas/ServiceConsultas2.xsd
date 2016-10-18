@@ -27,6 +27,7 @@
       <xs:element name="_x003C_Impacto_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Organizacion_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Prioridad_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Respuesta_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_ServicioIncidente_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Sla_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_Tipificacion_x003E_k__BackingField" nillable="true" type="xs:string" />

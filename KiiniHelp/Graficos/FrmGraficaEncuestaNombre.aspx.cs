@@ -162,12 +162,21 @@ namespace KiiniHelp.Graficos
                 string fecha = selectedData[0];
                 string total = selectedData[1];
                 int idPregunta = int.Parse(selectedData[2]);
-                int idRespuesta = int.Parse(selectedData[2]);
+                int idRespuesta;
                 Encuesta encuesta = _servicioEncuestas.ObtenerEncuestaById(Convert.ToInt32(ddlEncuesta.SelectedValue));
-
+                switch (encuesta.IdTipoEncuesta)
+                {
+                    case(int)BusinessVariables.EnumTipoEncuesta.Logica:
+                        idRespuesta = selectedData[2] == "NO" ? 0 : 1;
+                        break;
+                    default:
+                        idRespuesta = int.Parse(selectedData[3]);
+                        break;
+                }
+                
                 List<HelperReportesTicket> lstConsulta = _servicioConsultas.ConsultaEncuestaPregunta(((Usuario)Session["UserData"]).Id, encuesta.Id,
                             ucFiltroFechasGrafico.RangoFechas, ucFiltroFechasGrafico.TipoPeriodo,
-                            encuesta.IdTipoEncuesta, idPregunta);
+                            encuesta.IdTipoEncuesta, idPregunta, idRespuesta);
                 if (fecha != "Total")
                 {
                         lstConsulta = lstConsulta.Where(w=>w.FechaHora == fecha).ToList();

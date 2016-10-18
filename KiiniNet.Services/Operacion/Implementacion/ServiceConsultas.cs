@@ -54,13 +54,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<HelperReportesTicket> ConsultaEncuestaPregunta(int idUsuario, int idEncuesta, Dictionary<string, DateTime> fechas, int tipoFecha, int tipoEncuesta, int idPregunta)
+        public List<HelperReportesTicket> ConsultaEncuestaPregunta(int idUsuario, int idEncuesta, Dictionary<string, DateTime> fechas, int tipoFecha, int tipoEncuesta, int idPregunta, int respuesta)
         {
             try
             {
                 using (BusinessConsultas negocio = new BusinessConsultas())
                 {
-                    return negocio.ConsultaEncuestaPregunta( idUsuario,  idEncuesta, fechas, tipoFecha,  tipoEncuesta, idPregunta);
+                    return negocio.ConsultaEncuestaPregunta( idUsuario,  idEncuesta, fechas, tipoFecha,  tipoEncuesta, idPregunta, respuesta);
                 }
             }
             catch (Exception ex)

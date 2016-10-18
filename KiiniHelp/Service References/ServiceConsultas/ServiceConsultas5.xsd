@@ -91,6 +91,7 @@
         <xs:element minOccurs="0" name="tipoFecha" type="xs:int" />
         <xs:element minOccurs="0" name="tipoEncuesta" type="xs:int" />
         <xs:element minOccurs="0" name="idPregunta" type="xs:int" />
+        <xs:element minOccurs="0" name="respuesta" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

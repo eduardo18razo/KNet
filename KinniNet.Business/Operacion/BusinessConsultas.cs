@@ -510,7 +510,7 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public List<HelperReportesTicket> ConsultaEncuestaPregunta(int idUsuario, int idEncuesta, Dictionary<string, DateTime> fechas, int tipoFecha, int tipoEncuesta, int idPregunta)
+        public List<HelperReportesTicket> ConsultaEncuestaPregunta(int idUsuario, int idEncuesta, Dictionary<string, DateTime> fechas, int tipoFecha, int tipoEncuesta, int idPregunta, int respuesta)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             List<HelperReportesTicket> result = null;
@@ -537,7 +537,10 @@ namespace KinniNet.Core.Operacion
                           join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
                           join ug in db.UsuarioGrupo on new { tgu.IdGrupoUsuario, tgu.IdSubGrupoUsuario } equals new { ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
                           where t.EncuestaRespondida && t.IdEncuesta == idEncuesta
+                          && re.IdPregunta == idPregunta  && re.ValorRespuesta == respuesta
                           select new { t, tgu, ug, e, re, ep };
+
+                
 
                 if (fechas != null)
                     if (fechas.Count == 2)
