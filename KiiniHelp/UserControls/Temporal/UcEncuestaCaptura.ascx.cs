@@ -83,10 +83,10 @@ namespace KiiniHelp.UserControls.Temporal
                     case (int)BusinessVariables.EnumTipoEncuesta.Calificacion:
                         foreach (EncuestaPregunta pregunta in encuesta.EncuestaPregunta)
                         {
-                            HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Pregunta);
+                            HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Id);
                             if (divControl != null)
                             {
-                                HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Pregunta);
+                                HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Id);
                                 if (divGrupo != null)
                                 {
                                     if (!divGrupo.Controls.Cast<Control>().Any(control => ((RadioButton)control).Checked))
@@ -120,10 +120,10 @@ namespace KiiniHelp.UserControls.Temporal
                     case (int)BusinessVariables.EnumTipoEncuesta.Logica:
                         foreach (EncuestaPregunta pregunta in encuesta.EncuestaPregunta)
                         {
-                            HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Pregunta);
+                            HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Id);
                             if (divControl != null)
                             {
-                                HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Pregunta);
+                                HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Id);
                                 if (divGrupo != null)
                                 {
                                     for (int i = 0; i < 2; i++)
@@ -150,10 +150,10 @@ namespace KiiniHelp.UserControls.Temporal
                     case (int)BusinessVariables.EnumTipoEncuesta.Calificacion:
                         foreach (EncuestaPregunta pregunta in encuesta.EncuestaPregunta)
                         {
-                            HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Pregunta);
+                            HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Id);
                             if (divControl != null)
                             {
-                                HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Pregunta);
+                                HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Id);
                                 if (divGrupo != null)
                                 {
                                     for (int i = 0; i < 10; i++)
@@ -180,10 +180,10 @@ namespace KiiniHelp.UserControls.Temporal
                     case (int)BusinessVariables.EnumTipoEncuesta.OpcionMultiple:
                         foreach (EncuestaPregunta pregunta in encuesta.EncuestaPregunta)
                         {
-                            HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Pregunta);
+                            HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Id);
                             if (divControl != null)
                             {
-                                HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Pregunta);
+                                HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Id);
                                 if (divGrupo != null)
                                 {
                                     for (int i = 1; i < 6; i++)
@@ -227,12 +227,12 @@ namespace KiiniHelp.UserControls.Temporal
                     case (int)BusinessVariables.EnumTipoEncuesta.Logica:
                         foreach (EncuestaPregunta pregunta in lstControles)
                         {
-                            HtmlGenericControl createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + pregunta.Pregunta };
+                            HtmlGenericControl createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + pregunta.Id };
                             createDiv.Attributes["class"] = "form-group";
                             Label lbl = new Label { Text = pregunta.Pregunta, CssClass = "control-label" };
                             createDiv.Controls.Add(lbl);
                             divControles.Controls.Add(createDiv);
-                            createDiv = new HtmlGenericControl("DIV") { ID = "createDivs" + pregunta.Pregunta };
+                            createDiv = new HtmlGenericControl("DIV") { ID = "createDivs" + pregunta.Id };
                             createDiv.Attributes["class"] = "form-group";
 
                             RadioButton rbNo = new RadioButton();
@@ -254,12 +254,12 @@ namespace KiiniHelp.UserControls.Temporal
                     case (int)BusinessVariables.EnumTipoEncuesta.Calificacion:
                         foreach (EncuestaPregunta pregunta in lstControles)
                         {
-                            HtmlGenericControl createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + pregunta.Pregunta };
+                            HtmlGenericControl createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + pregunta.Id };
                             createDiv.Attributes["class"] = "form-group";
                             Label lbl = new Label { Text = pregunta.Pregunta, CssClass = "control-label" };
                             createDiv.Controls.Add(lbl);
                             divControles.Controls.Add(createDiv);
-                            createDiv = new HtmlGenericControl("DIV") { ID = "createDivs" + pregunta.Pregunta };
+                            createDiv = new HtmlGenericControl("DIV") { ID = "createDivs" + pregunta.Id };
                             createDiv.Attributes["class"] = "form-group";
                             for (int i = 0; i < 10; i++)
                             {
@@ -277,12 +277,12 @@ namespace KiiniHelp.UserControls.Temporal
                     case (int)BusinessVariables.EnumTipoEncuesta.OpcionMultiple:
                         foreach (EncuestaPregunta pregunta in lstControles)
                         {
-                            HtmlGenericControl createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + pregunta.Pregunta };
+                            HtmlGenericControl createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + pregunta.Id };
                             createDiv.Attributes["class"] = "form-group";
                             Label lbl = new Label { Text = pregunta.Pregunta, CssClass = "control-label" };
                             createDiv.Controls.Add(lbl);
                             divControles.Controls.Add(createDiv);
-                            createDiv = new HtmlGenericControl("DIV") { ID = "createDivs" + pregunta.Pregunta };
+                            createDiv = new HtmlGenericControl("DIV") { ID = "createDivs" + pregunta.Id };
                             createDiv.Attributes["class"] = "form-group";
 
                             RadioButton rbtnMala = new RadioButton();

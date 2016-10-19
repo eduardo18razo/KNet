@@ -29,13 +29,18 @@ namespace KiiniHelp
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            UcEncuestaCaptura.OnAceptarModal += UcEncuestaCaptura_OnAceptarModal;
             UcEncuestaCaptura.OnCancelarModal += UcEncuestaCaptura_OnCancelarModal;
+        }
+
+        void UcEncuestaCaptura_OnAceptarModal()
+        {
+            Response.Redirect(ResolveUrl("FrmCloseWindow.aspx"));
         }
 
         void UcEncuestaCaptura_OnCancelarModal()
         {
             this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Close", "window.close()", true);
-
         }
 
         protected void Page_PreInit(object sender, EventArgs e)

@@ -143,6 +143,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar(max)" />
+    <Property Name="RegionCode" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="EstatusAsignacion">
     <Key>
@@ -481,6 +482,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdTipoUsuario" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RegionCode" Type="nvarchar" MaxLength="100" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ParametrosAplicaciones">
@@ -548,6 +550,7 @@
     <Property Name="IdTicket" Type="int" Nullable="false" />
     <Property Name="IdEncuesta" Type="int" />
     <Property Name="IdPregunta" Type="int" />
+    <Property Name="ValorRespuesta" Type="int" />
     <Property Name="Ponderacion" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="RespuestaTipoEncuesta">

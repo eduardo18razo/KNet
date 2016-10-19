@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmConsultaEncuestasUnitarias.aspx.cs" Inherits="KiiniHelp.Consultas.FrmConsultaEncuestasUnitarias" %>
+
 <%@ Register Src="~/UserControls/Filtros/Consultas/UcFiltrosEncuestas.ascx" TagPrefix="uc1" TagName="UcFiltrosEncuestas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -37,7 +38,9 @@
             </div>
             <div class="panel panel-primary">
                 <div class="panel-body">
-                    <asp:GridView runat="server" ID="gvResult" CssClass="table table-bordered table-hover table-responsive" OnRowCreated="gvResult_OnRowCreated"></asp:GridView>
+                    <div style="overflow-x: auto">
+                        <asp:GridView runat="server" ID="gvResult" CssClass="table table-bordered table-hover table-responsive" OnRowCreated="gvResult_OnRowCreated"></asp:GridView>
+                    </div>
                 </div>
             </div>
         </ContentTemplate>

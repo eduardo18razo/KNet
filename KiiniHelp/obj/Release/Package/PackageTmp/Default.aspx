@@ -71,20 +71,20 @@
             <div id="headerNav">
                 <span data-panel="panel1" class="panel-button"></span>
                 <div class="logo" id="logo">
-                    <div style="float: left">
+                    <div style="float: left; :hover {background: #265B7F}">
                         <div id="headerNavInfoDiv">
                         </div>
                     </div>
                     <div style="float: left; margin-left: -19px">
                         <div class="MenuHorizontal">
-                            <ul>
-                                <li><a>Servicio a clientes</a>
+                            <ul style="border: none; background: transparent">
+                                <li style="border: none"><a>Servicio a clientes</a>
                                     <asp:Repeater runat="server" ID="rptClientes">
                                         <HeaderTemplate>
-                                            <ul>
+                                            <ul style="border: none">
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <li>
+                                            <li style="border: none;border-bottom: 1px solid #000000">
                                                 <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
                                                 <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' ID="lbtnCteArea" OnClick="lbtnCteArea_OnClick" />
                                             </li>
@@ -96,7 +96,7 @@
 
                                 </li>
 
-                                <li><a>Servicio a Empleados</a>
+                                <li style="border: none"><a>Servicio a Empleados</a>
                                     <asp:Repeater runat="server" ID="rptEmpleados">
                                         <HeaderTemplate>
                                             <ul>
@@ -112,7 +112,7 @@
                                         </FooterTemplate>
                                     </asp:Repeater>
                                 </li>
-                                <li><a>Servicio a Proveedores</a>
+                                <li style="border: none"><a>Servicio a Proveedores</a>
                                     <asp:Repeater runat="server" ID="rptProveedores">
                                         <HeaderTemplate>
                                             </ul>
@@ -128,7 +128,7 @@
                                         </FooterTemplate>
                                     </asp:Repeater>
                                 </li>
-                                <li><a>Nuestra Institución</a>
+                                <li style="border: none"><a>Nuestra Institución</a>
                                     <asp:Repeater runat="server" ID="Repeater3">
                                         <HeaderTemplate>
                                             <ul>
@@ -144,7 +144,7 @@
                                         </FooterTemplate>
                                     </asp:Repeater>
                                 </li>
-                                <li>
+                                <li style="border: none">
                                     <asp:LinkButton runat="server" ID="lnkConsultaticket" OnClick="lnkConsultaticket_OnClick" Text="Consultar ticket"></asp:LinkButton></li>
                             </ul>
                         </div>

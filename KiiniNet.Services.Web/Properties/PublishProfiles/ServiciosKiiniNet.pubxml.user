@@ -10,22 +10,22 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/KiiniNet.Entities.dll">
-      <publishTime>10/03/2016 11:09:56</publishTime>
+      <publishTime>10/19/2016 10:55:44</publishTime>
     </File>
     <File Include="bin/KiiniNet.Services.dll">
-      <publishTime>10/03/2016 11:10:08</publishTime>
+      <publishTime>10/19/2016 10:55:48</publishTime>
     </File>
     <File Include="bin/KiiniNet.Services.Web.dll">
-      <publishTime>10/03/2016 11:10:09</publishTime>
+      <publishTime>10/19/2016 10:55:49</publishTime>
     </File>
     <File Include="bin/KinniNet.Business.Utils.dll">
-      <publishTime>10/03/2016 11:09:57</publishTime>
+      <publishTime>10/19/2016 10:55:44</publishTime>
     </File>
     <File Include="bin/KinniNet.Core.dll">
-      <publishTime>10/03/2016 11:10:06</publishTime>
+      <publishTime>10/19/2016 10:55:47</publishTime>
     </File>
     <File Include="bin/KinniNet.Data.dll">
-      <publishTime>10/03/2016 11:10:04</publishTime>
+      <publishTime>10/19/2016 10:55:46</publishTime>
     </File>
     <File Include="ServiceArbolAcceso.svc">
       <publishTime>07/22/2016 10:45:56</publishTime>
@@ -130,7 +130,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/22/2016 10:45:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/03/2016 11:10:11</publishTime>
+      <publishTime>10/19/2016 10:55:50</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -31,6 +31,7 @@
                         </asp:Repeater>
                     </div>
                 </header>
+                <asp:HiddenField runat="server" ID="hfTicketActivo"/>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3>Operacion de tickets</h3>

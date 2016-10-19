@@ -1,11 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmGraficaEncuestas.aspx.cs" Inherits="KiiniHelp.Graficos.FrmGraficaEncuestas" %>
-
 <%@ Register Src="~/UserControls/Filtros/Graficos/UcFiltrosGraficasEncuestas.ascx" TagPrefix="uc1" TagName="UcFiltrosGraficasEncuestas" %>
 <%@ Register Src="~/UserControls/Filtros/Graficos/UcFiltrosParametrosGraficoEncuestas.ascx" TagPrefix="uc1" TagName="UcFiltrosParametrosGraficoEncuestas" %>
 
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:UpdatePanel runat="server" UpdateMode="Conditional">
@@ -33,11 +32,13 @@
             </header>
             <div class="panel panel-primary">
                 <div class="panel-body">
-                    
+                    <uc1:UcFiltrosGraficasEncuestas runat="server" ID="ucFiltrosGraficasEncuestas" />
                     <div class="center-content-div">
                         <asp:UpdatePanel runat="server" UpdateMode="Conditional" Visible="True" ID="upGrafica">
                             <ContentTemplate>
-                                <uc1:UcFiltrosGraficasEncuestas runat="server" ID="ucFiltrosGraficasEncuestas" />
+                                <asp:HiddenField runat="server" ID="hfGraficado" Value="false"/>
+                                <iframe name="geocharts" runat="server" ID="frameGeoCharts" width="800px" height="600px" Visible="False" style="width: 850px; height: 650px; border: none">
+                                </iframe>
                                 <asp:Chart ID="cGrafico" runat="server" Width="800px" Height="600px" Visible="False">
                                     <Titles>
                                         <asp:Title ShadowOffset="3" Name="Items" />

@@ -14,6 +14,7 @@
     <link href="BootStrap/css/Headers.css" rel="stylesheet" />
     <link href="BootStrap/css/stylemainmenu.css" rel="stylesheet" />
     <script type="text/javascript">
+        var win;
         function MostrarPopup(modalName) {
             debugger;
             $(modalName).modal({ backdrop: 'static', keyboard: false });
@@ -35,30 +36,30 @@
                 var control;
                 $(this).children("td").each(function (indexColumn) {
                     switch (indexColumn) {
-                        case 2:
-                            control = $(this).find("input[id*=txtDias]");
-                            if (control != null) {
-                                totaldias = totaldias + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
-                            }
-                            break;
-                        case 3:
-                            control = $(this).find("input[id*=txtHoras]");
-                            if (control != null) {
-                                totalhoras = totalhoras + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
-                            }
-                            break;
-                        case 4:
-                            control = $(this).find("input[id*=txtMinutos]");
-                            if (control != null) {
-                                totalminutos = totalminutos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
-                            }
-                            break;
-                        case 5:
-                            control = $(this).find("input[id*=txtSegundos]");
-                            if (control != null) {
-                                totalsegundos = totalsegundos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
-                            }
-                            break;
+                    case 2:
+                        control = $(this).find("input[id*=txtDias]");
+                        if (control != null) {
+                            totaldias = totaldias + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                        }
+                        break;
+                    case 3:
+                        control = $(this).find("input[id*=txtHoras]");
+                        if (control != null) {
+                            totalhoras = totalhoras + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                        }
+                        break;
+                    case 4:
+                        control = $(this).find("input[id*=txtMinutos]");
+                        if (control != null) {
+                            totalminutos = totalminutos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                        }
+                        break;
+                    case 5:
+                        control = $(this).find("input[id*=txtSegundos]");
+                        if (control != null) {
+                            totalsegundos = totalsegundos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                        }
+                        break;
                     }
 
                 });
@@ -68,36 +69,38 @@
                 var control;
                 $(this).children("td").each(function (indexColumn) {
                     switch (indexColumn) {
-                        case 2:
-                            control = $(this).find("input[id*=txtTotalDias]");
-                            if (control != null) {
-                                control.val(totaldias);
-                            }
-                            break;
-                        case 3:
-                            control = $(this).find("input[id*=txtTotalHoras]");
-                            if (control != null) {
-                                control.val(totalhoras);
-                            }
-                            break;
-                        case 4:
-                            control = $(this).find("input[id*=txtTotalMinutos]");
-                            if (control != null) {
-                                control.val(totalminutos);
-                            }
-                            break;
-                        case 5:
-                            control = $(this).find("input[id*=txtTotalSegundos]");
-                            if (control != null) {
-                                control.val(totalsegundos);
-                            }
-                            break;
+                    case 2:
+                        control = $(this).find("input[id*=txtTotalDias]");
+                        if (control != null) {
+                            control.val(totaldias);
+                        }
+                        break;
+                    case 3:
+                        control = $(this).find("input[id*=txtTotalHoras]");
+                        if (control != null) {
+                            control.val(totalhoras);
+                        }
+                        break;
+                    case 4:
+                        control = $(this).find("input[id*=txtTotalMinutos]");
+                        if (control != null) {
+                            control.val(totalminutos);
+                        }
+                        break;
+                    case 5:
+                        control = $(this).find("input[id*=txtTotalSegundos]");
+                        if (control != null) {
+                            control.val(totalsegundos);
+                        }
+                        break;
                     }
                 });
             });
         }
 
-
+        function closeit() {
+            win.close();
+        }
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>

@@ -303,12 +303,14 @@ namespace KiiniHelp.Users.Operacion
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEstatusCambio\");", true);
                 if (UcCambiarEstatusTicket.CerroTicket)
                 {
-                    string url = ResolveUrl("~/FrmEncuesta.aspx?IdTicket=3");
+                    string url = ResolveUrl("~/FrmEncuesta.aspx?IdTicket=" + hfTicketActivo.Value);
                     //string s = "window.open('" + url + "', 'popup_window', 'width=600,height=600,left=300,top=100,resizable=yes');";
                     //ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptEncuesta", "OpenWindow(\"" + url + "\");", true);
                 }
-                
+                hfTicketActivo.Value = string.Empty;
+                ;
+
             }
             catch (Exception ex)
             {
@@ -378,6 +380,7 @@ namespace KiiniHelp.Users.Operacion
             {
                 UcCambiarEstatusTicket.EsPropietario = true;
                 UcCambiarEstatusTicket.IdTicket = Convert.ToInt32(((LinkButton)sender).CommandArgument);
+                hfTicketActivo.Value = ((LinkButton) sender).CommandArgument;
                 UcCambiarEstatusTicket.IdUsuario = ((Usuario)Session["UserData"]).Id;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalEstatusCambio\");", true);
             }

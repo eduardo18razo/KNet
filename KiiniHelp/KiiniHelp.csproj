@@ -139,6 +139,7 @@
     <Content Include="BootStrap\js\bootstrap-datepicker.min.js" />
     <Content Include="BootStrap\js\locales\bootstrap-datepicker.es.min.js" />
     <Content Include="Consultas\FrmConsulta.aspx" />
+    <Content Include="FrmCloseWindow.aspx" />
     <Content Include="Graficos\FrmGeoChart.aspx" />
     <Content Include="Graficos\FrmGraficaEncuestaNombre.aspx" />
     <Content Include="Graficos\FrmGraficaEncuestas.aspx" />
@@ -2069,6 +2070,13 @@
     </Compile>
     <Compile Include="Consultas\FrmConsulta.aspx.designer.cs">
       <DependentUpon>FrmConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCloseWindow.aspx.cs">
+      <DependentUpon>FrmCloseWindow.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmCloseWindow.aspx.designer.cs">
+      <DependentUpon>FrmCloseWindow.aspx</DependentUpon>
     </Compile>
     <Compile Include="Graficos\FrmGeoChart.aspx.cs">
       <DependentUpon>FrmGeoChart.aspx</DependentUpon>

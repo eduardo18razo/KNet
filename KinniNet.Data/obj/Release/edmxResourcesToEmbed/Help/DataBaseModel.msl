@@ -94,14 +94,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Estado">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.Estado">
-        <MappingFragment StoreEntitySet="Estado">
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Gerencia">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.Gerencia">
         <MappingFragment StoreEntitySet="Gerencia">
@@ -262,6 +254,7 @@
     <EntitySetMapping Name="Pais">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.Pais">
         <MappingFragment StoreEntitySet="Pais">
+          <ScalarProperty Name="RegionCode" ColumnName="RegionCode" />
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
@@ -574,17 +567,6 @@
           <ScalarProperty Name="IdGrupoUsuario" ColumnName="IdGrupoUsuario" />
           <ScalarProperty Name="IdRol" ColumnName="IdRol" />
           <ScalarProperty Name="IdHit" ColumnName="IdHit" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RespuestaEncuesta">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.RespuestaEncuesta">
-        <MappingFragment StoreEntitySet="RespuestaEncuesta">
-          <ScalarProperty Name="Ponderacion" ColumnName="Ponderacion" />
-          <ScalarProperty Name="IdPregunta" ColumnName="IdPregunta" />
-          <ScalarProperty Name="IdEncuesta" ColumnName="IdEncuesta" />
-          <ScalarProperty Name="IdTicket" ColumnName="IdTicket" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1057,6 +1039,27 @@
           <ScalarProperty Name="IdArbolAcceso" ColumnName="IdArbolAcceso" />
           <ScalarProperty Name="IdTipoArbolAcceso" ColumnName="IdTipoArbolAcceso" />
           <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estado">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.Estado">
+        <MappingFragment StoreEntitySet="Estado">
+          <ScalarProperty Name="RegionCode" ColumnName="RegionCode" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RespuestaEncuesta">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.RespuestaEncuesta">
+        <MappingFragment StoreEntitySet="RespuestaEncuesta">
+          <ScalarProperty Name="Ponderacion" ColumnName="Ponderacion" />
+          <ScalarProperty Name="ValorRespuesta" ColumnName="ValorRespuesta" />
+          <ScalarProperty Name="IdPregunta" ColumnName="IdPregunta" />
+          <ScalarProperty Name="IdEncuesta" ColumnName="IdEncuesta" />
+          <ScalarProperty Name="IdTicket" ColumnName="IdTicket" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

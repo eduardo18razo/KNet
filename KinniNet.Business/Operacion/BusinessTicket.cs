@@ -68,6 +68,8 @@ namespace KinniNet.Core.Operacion
                     }
                     contador++;
                 }
+                if(tiempoProceso == 0)
+                    diasAsignados.Add(DateTime.Now);
                 result = DateTime.ParseExact(diasAsignados.Max().ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
             }
             catch (Exception e)
@@ -267,6 +269,7 @@ namespace KinniNet.Core.Operacion
                     }
                     if (idEstatus == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado)
                     {
+                        ticket.FechaTermino = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                         ticket.IdEstatusAsignacion = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar;
                         ticket.TicketAsignacion = new List<TicketAsignacion>
                         {

@@ -76,7 +76,8 @@
                 <asp:ScriptReference Path="~/BootStrap/js/locales/bootstrap-datepicker.es.min.js" />
             </Scripts>
         </asp:ScriptManager>
-        <asp:TextBox runat="server" type="month" ID="TextBox1"></asp:TextBox>
+        
+        <%--<asp:TextBox runat="server" type="month" ID="TextBox1"></asp:TextBox>
         <uc1:UcFiltroFechasGrafico runat="server" ID="UcFiltroFechasGrafico" />
         <asp:TextBox runat="server" type="week" ID="txtWeek"></asp:TextBox>
         <asp:Label runat="server" ID="lblFormatWeek"></asp:Label>
@@ -131,8 +132,9 @@
                     </AxisX>
                 </asp:ChartArea>
             </ChartAreas>
-        </asp:Chart>
-
+        </asp:Chart>--%>
+        
     </form>
+
 </body>
 </html>

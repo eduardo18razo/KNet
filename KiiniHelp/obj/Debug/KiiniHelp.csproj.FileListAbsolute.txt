@@ -138,7 +138,6 @@ C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\Ki
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\KiiniHelp.pdb
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\Antlr3.Runtime.dll
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\AspNet.ScriptManager.jQuery.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DayPilot.dll
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.AspNet.dll
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.Core.dll
 C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.dll
