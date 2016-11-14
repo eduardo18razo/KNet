@@ -30,13 +30,13 @@
                     <div class="form-group">
                         <asp:Label runat="server" Text="Fecha" CssClass="col-sm-2" />
                         <div class="col-sm-4">
-                            <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" onfocus="SetCalendar(this)" />
+                            <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" type="date" step="1"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <asp:Label runat="server" Text="Descripción" CssClass="col-sm-2" />
                         <div class="col-sm-4">
-                            <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" />
+                            <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control"/>
                         </div>
                     </div>
                     <div class="form-group">

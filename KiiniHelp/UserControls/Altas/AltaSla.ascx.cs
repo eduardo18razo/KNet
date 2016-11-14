@@ -59,7 +59,6 @@ namespace KiiniHelp.UserControls.Altas
             {
                 Sla sla = new Sla
                 {
-                    Descripcion = txtDescripcion.Text.Trim().ToUpper(),
                     SlaDetalle = new List<SlaDetalle>(),
                     Detallado = chkEstimado.Checked,
                     Habilitado = true
@@ -106,7 +105,6 @@ namespace KiiniHelp.UserControls.Altas
             }
             set
             {
-                txtDescripcion.Text = value.Descripcion;
                 chkEstimado.Checked = value.Detallado;
                 chkEstimado_OnCheckedChanged(chkEstimado, null);
                 if (value.Detallado)
@@ -166,8 +164,6 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                if (txtDescripcion.Text.Trim() == string.Empty)
-                    throw new Exception("Debe especificar una descripción");
                 if (chkEstimado.Checked)
                     foreach (RepeaterItem item in rptSubRoles.Items)
                     {
@@ -200,10 +196,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                txtDescripcion.Text = String.Empty;
-                //txtTiempo.Text = String.Empty;
                 chkEstimado.Checked = false;
-
             }
             catch (Exception ex)
             {

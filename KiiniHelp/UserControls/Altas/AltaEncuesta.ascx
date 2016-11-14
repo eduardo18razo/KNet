@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Descripcion</label>
-                        <asp:TextBox runat="server" ID="txtDescripcionEncuesta" placeholder="DESCRIPCION" CssClass="form-control" />
+                        <asp:TextBox runat="server" ID="txtDescripcionEncuesta" placeholder="DESCRIPCION" CssClass="form-control obligatorio" />
                     </div>
 
                     <div class="form-group" style="display: none">
@@ -55,11 +55,11 @@
                                 <div class="form-inline">
 
                                     <asp:Label ID="Label4" runat="server" Text="Pregunta" class="col-sm-2 control-label izquierda"></asp:Label>
-                                    <asp:TextBox ID="txtPregunta" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="txtPregunta" runat="server" CssClass="form-control obligatorio"></asp:TextBox>
                                 </div>
                                 <div class="form-inline margen-arriba">
                                     <asp:Label ID="Label5" runat="server" Text="Ponderacion" class="col-sm-2 control-label izquierda"></asp:Label>
-                                    <asp:TextBox ID="txtPonderacion" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="txtPonderacion" runat="server" CssClass="form-control obligatorio"></asp:TextBox>
                                 </div>
                             </div>
                             <asp:Button ID="btnAddPregunta" runat="server" CssClass="btn btn-success" Text="Agregar" OnClick="btnAddPregunta_OnClick" />

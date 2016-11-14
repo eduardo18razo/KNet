@@ -97,7 +97,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Consulta Mascaras de Acceso</h3>
+                    <h3>Consulta Formularios de Cliente</h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">

@@ -29,7 +29,13 @@ namespace KiiniHelp.UserControls.Altas
         public int IdSubRol
         {
             get { return Convert.ToInt32(hfIdSubRol.Value); }
-            set { hfIdSubRol.Value = value.ToString(); }
+            set
+            {
+                if (Session[value.ToString()] == null)
+                    Session.Add(value.ToString(), new List<HorarioSubGrupo>());
+                hfIdSubRol.Value = value.ToString();
+                MuestraHorarios((List<HorarioSubGrupo>)Session[value.ToString()]);
+            }
         }
 
         public bool EsAlta
@@ -86,7 +92,13 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                Session["TiemposSubGrupo"] = lst;
+                if (Session[IdSubRol.ToString()] == null)
+                {
+                    rptHorarios.DataSource = null;
+                    rptHorarios.DataBind();
+                    return;
+                }
+                Session[IdSubRol.ToString()] = lst;
                 rptHorarios.DataSource = lst;
                 rptHorarios.DataBind();
             }
@@ -102,7 +114,6 @@ namespace KiiniHelp.UserControls.Altas
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
-                    Session["TiemposSubGrupo"] = null;
                     chklbxDias.Items.Add(new ListItem("LUNES", "1"));
                     chklbxDias.Items.Add(new ListItem("MARTES", "2"));
                     chklbxDias.Items.Add(new ListItem("MIERCOLES", "3"));
@@ -131,7 +142,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                List<HorarioSubGrupo> lst = (List<HorarioSubGrupo>)Session["TiemposSubGrupo"] ?? new List<HorarioSubGrupo>();
+                List<HorarioSubGrupo> lst = (List<HorarioSubGrupo>)Session[IdSubRol.ToString()] ?? new List<HorarioSubGrupo>();
                 if (txtHoraInicio.Text.Trim() == string.Empty)
                     throw new Exception("Ingrese hora inicio");
                 if (txtHoraFin.Text.Trim() == string.Empty)
@@ -172,7 +183,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                List<HorarioSubGrupo> lst = (List<HorarioSubGrupo>)Session["TiemposSubGrupo"];
+                List<HorarioSubGrupo> lst = (List<HorarioSubGrupo>)Session[IdSubRol.ToString()];
                 lst.Remove(lst.Single(s => s.HoraInicio == ((Button)sender).CommandName && s.Dia == int.Parse(((Button)sender).CommandArgument)));
                 MuestraHorarios(lst);
             }

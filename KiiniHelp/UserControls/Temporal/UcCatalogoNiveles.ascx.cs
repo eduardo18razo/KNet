@@ -219,7 +219,7 @@ namespace KiiniHelp.UserControls.Temporal
                 DropDownList ddlDocumento = (DropDownList)e.Item.FindControl("ddlDocumento");
                 DropDownList ddlUrl = (DropDownList)e.Item.FindControl("ddlUrl");
                 if (ddlPropietario == null && ddlDocumento == null && ddlUrl == null) return;
-                Metodos.LlenaComboCatalogo(ddlPropietario, _servicionInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.Texto, true));
+                Metodos.LlenaComboCatalogo(ddlPropietario, _servicionInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido, true));
                 Metodos.LlenaComboCatalogo(ddlDocumento, _servicionInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.Documento, true));
                 Metodos.LlenaComboCatalogo(ddlUrl, _servicionInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml, true));
             }

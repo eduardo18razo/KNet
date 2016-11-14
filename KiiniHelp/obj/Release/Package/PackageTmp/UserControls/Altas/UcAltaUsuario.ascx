@@ -60,7 +60,7 @@
         </asp:UpdatePanel>
 
         <%--DATOS GENERALES--%>
-        <div class="modal fade" id="modalDatosGenerales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="modalDatosGenerales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="overflow: hidden">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <asp:UpdatePanel ID="upDatosGenerales" runat="server">
@@ -99,13 +99,21 @@
                                             </div>
                                             <div class="form-group col-sm-12">
                                                 <div class="col-sm-4" style="padding-left: 0">
-                                                    <asp:TextBox ID="txtAp" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100" />
+                                                    <asp:TextBox ID="txtAp" runat="server" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)" AutoPostBack="true" MaxLength="100" OnTextChanged="txtAp_OnTextChanged" />
                                                 </div>
                                                 <div class="col-sm-4" style="padding-left: 0">
-                                                    <asp:TextBox ID="txtAm" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100" />
+                                                    <asp:TextBox ID="txtAm" runat="server" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)" MaxLength="100" />
                                                 </div>
                                                 <div class="col-sm-4" style="padding-left: 0">
-                                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100" />
+                                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)" AutoPostBack="true" MaxLength="100" OnTextChanged="txtAp_OnTextChanged" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <asp:Label runat="server" Text="usuario" class="col-sm-4 control-label izquierda" />
+                                            </div>
+                                            <div class="form-group col-sm-12">
+                                                <div class="col-sm-4" style="padding-left: 0">
+                                                    <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control texto-normal obligatorio" onkeypress="return ValidaCampo(this,14)" OnTextChanged="txtAp_OnTextChanged" MaxLength="100" Style="texttransform: none" />
                                                 </div>
                                             </div>
                                             <div class="form-group col-sm-12">
@@ -204,7 +212,7 @@
         </div>
 
         <%--ORGANIZACION--%>
-        <div class="modal fade" id="modalOrganizacion" data-backdrop-limit="1" tabindex="-1" role="dialog" aria-labelledby="upload-avatar-title" aria-hidden="true">
+        <div class="modal fade" id="modalOrganizacion" data-backdrop-limit="1" tabindex="-1" role="dialog" aria-labelledby="upload-avatar-title" aria-hidden="true" style="overflow: hidden">
             <div class="modal-dialog modal-lg" style="width: 100%">
                 <div class="modal-content">
                     <asp:UpdatePanel ID="upOrganizacion" runat="server" UpdateMode="Conditional">
@@ -218,7 +226,7 @@
         </div>
 
         <%--UBICACIONES--%>
-        <div class="modal fade" id="modalUbicacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal fade" id="modalUbicacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: hidden">
             <div class="modal-dialog modal-lg" style="width: 100%">
                 <div class="modal-content">
                     <asp:UpdatePanel ID="upUbicacion" runat="server" UpdateMode="Conditional">
@@ -232,7 +240,7 @@
         </div>
 
         <%--ROLES--%>
-        <div class="modal fade" id="modalRoles" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal fade" id="modalRoles" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: hidden">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <asp:UpdatePanel ID="upRoles" runat="server" UpdateMode="Conditional">
@@ -266,7 +274,7 @@
                                     <asp:CheckBoxList runat="server" ID="chklbxRoles" OnSelectedIndexChanged="chkKbxRoles_OnSelectedIndexChanged" AutoPostBack="True" />
                                 </div>
                                 <div class="panel-footer" style="text-align: center">
-                                    <asp:Button ID="btnAceptarRoles" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnCerrarRoles_OnClick" />
+                                    <asp:Button ID="btnAceptarRoles" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnAceptarRoles_OnClick" />
                                     <asp:Button ID="btnCerrarRoles" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCerrarRoles_OnClick" />
                                 </div>
                             </div>
@@ -277,7 +285,7 @@
         </div>
 
         <%--GRUPOS--%>
-        <div class="modal fade" id="modalGrupos" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal fade" id="modalGrupos" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: hidden">
             <asp:UpdatePanel ID="upGrupos" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="modal-dialog modal-lg">

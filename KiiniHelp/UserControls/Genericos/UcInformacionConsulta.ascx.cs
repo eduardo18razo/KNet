@@ -78,7 +78,7 @@ namespace KiiniHelp.UserControls.Genericos
                     InformacionConsulta ic = _servicioInformacionConsulta.ObtenerInformacionConsultaById(Convert.ToInt32(btn.CommandArgument));
                     switch (ic.IdTipoInfConsulta)
                     {
-                        case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                        case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                             lblContenido.Text = string.Empty;
                             foreach (InformacionConsultaDatos contenindo in ic.InformacionConsultaDatos.OrderBy(o => o.Orden))
                             {

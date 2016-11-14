@@ -69,10 +69,12 @@
     <Compile Include="Cat\Sistema\RolTipoGrupo.cs" />
     <Compile Include="Cat\Sistema\RolTipoUsuario.cs" />
     <Compile Include="Cat\Sistema\TipoArbolAcceso.cs" />
+    <Compile Include="Cat\Sistema\TipoCorreo.cs" />
     <Compile Include="Cat\Sistema\TipoDocumento.cs" />
     <Compile Include="Cat\Sistema\TipoEncuesta.cs" />
     <Compile Include="Cat\Sistema\TipoGrupo.cs" />
     <Compile Include="Cat\Sistema\TipoInfConsulta.cs" />
+    <Compile Include="Cat\Sistema\TipoLink.cs" />
     <Compile Include="Cat\Sistema\TipoNotificacion.cs" />
     <Compile Include="Cat\Sistema\Urgencia.cs" />
     <Compile Include="Cat\Usuario\DiaFestivoSubGrupo.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Cat\Usuario\Puesto.cs" />
     <Compile Include="Cat\Usuario\Sla.cs" />
     <Compile Include="Cat\Usuario\SubGrupoUsuario.cs" />
+    <Compile Include="Helper\CatalogoGenerico.cs" />
     <Compile Include="Helper\HelperCampoMascaraCaptura.cs" />
     <Compile Include="Helper\HelperDatosGrafica.cs" />
     <Compile Include="Helper\HelperDetalleTicket.cs" />
@@ -110,6 +113,7 @@
     <Compile Include="Operacion\InventarioInfConsulta.cs" />
     <Compile Include="Operacion\RespuestaEncuesta.cs" />
     <Compile Include="Operacion\SLADetalle.cs" />
+    <Compile Include="Operacion\SmsService.cs" />
     <Compile Include="Operacion\Tickets\SlaEstimadoTicket.cs" />
     <Compile Include="Operacion\Tickets\SlaEstimadoTicketDetalle.cs" />
     <Compile Include="Operacion\Tickets\Ticket.cs" />
@@ -117,6 +121,7 @@
     <Compile Include="Operacion\Tickets\TicketAsignacion.cs" />
     <Compile Include="Operacion\Tickets\TicketEstatus.cs" />
     <Compile Include="Operacion\TiempoInformeArbol.cs" />
+    <Compile Include="Operacion\Usuarios\PreguntaReto.cs" />
     <Compile Include="Operacion\Usuarios\TelefonoUsuario.cs" />
     <Compile Include="Cat\Sistema\TipoTelefono.cs" />
     <Compile Include="Cat\Arbol\Ubicaciones\Domicilio\Colonia.cs" />
@@ -133,11 +138,13 @@
     <Compile Include="Operacion\Usuarios\UsuarioGrupo.cs" />
     <Compile Include="Operacion\Usuarios\CorreoUsuario.cs" />
     <Compile Include="Cat\Operacion\Organizacion.cs" />
+    <Compile Include="Operacion\Usuarios\UsuarioLinkPassword.cs" />
     <Compile Include="Parametros\Aplicaciones.cs" />
     <Compile Include="Parametros\EstatusAsignacionSubRolGeneral.cs" />
     <Compile Include="Parametros\EstatusAsignacionSubRolGeneralDefault.cs" />
     <Compile Include="Parametros\EstatusTicketSubRolGeneral.cs" />
     <Compile Include="Parametros\EstatusTicketSubRolGeneralDefault.cs" />
+    <Compile Include="Parametros\ParametroCorreo.cs" />
     <Compile Include="Parametros\ParametrosAplicacion.cs" />
     <Compile Include="Parametros\ParametrosSla.cs" />
     <Compile Include="Parametros\ParametrosTelefonos.cs" />

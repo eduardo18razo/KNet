@@ -47,7 +47,7 @@
                                             <asp:Label CssClass="col-xs-1" runat="server" Text="Ticket" Width="8%" />
                                             <asp:Label CssClass="col-xs-2" runat="server" Text="Descripcion" Width="14%" />
                                             <asp:Label CssClass="col-xs-2" runat="server" Text="Grupo Asignado" Style="width: 10.6%" />
-                                            <asp:Label CssClass="col-xs-1" runat="server" Text="Atendedor" Width="10.6%" />
+                                            <asp:Label CssClass="col-xs-1" runat="server" Text="Agente" Width="10.6%" />
                                             <asp:Label CssClass="col-xs-1" runat="server" Text="Nivel" Width="6%" />
                                             <asp:Label CssClass="col-xs-1" runat="server" Text="Estatus Ticket" />
                                             <asp:Label CssClass="col-xs-1" runat="server" Text="Estatus Asignacion" Width="12%" />

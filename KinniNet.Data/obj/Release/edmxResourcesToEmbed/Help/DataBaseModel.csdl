@@ -36,7 +36,6 @@
     <EntitySet Name="SubDireccion" EntityType="KiiniNet_v2Model.SubDireccion" />
     <EntitySet Name="SubGerencia" EntityType="KiiniNet_v2Model.SubGerencia" />
     <EntitySet Name="SubZona" EntityType="KiiniNet_v2Model.SubZona" />
-    <EntitySet Name="TelefonoUsuario" EntityType="KiiniNet_v2Model.TelefonoUsuario" />
     <EntitySet Name="TipoArbolAcceso" EntityType="KiiniNet_v2Model.TipoArbolAcceso" />
     <EntitySet Name="TipoDocumento" EntityType="KiiniNet_v2Model.TipoDocumento" />
     <EntitySet Name="TipoEncuesta" EntityType="KiiniNet_v2Model.TipoEncuesta" />
@@ -288,10 +287,6 @@
       <End Role="Organizacion" EntitySet="Organizacion" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
-    <AssociationSet Name="FK_TelefonoUsuario_Usuario" Association="KiiniNet_v2Model.FK_TelefonoUsuario_Usuario">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="TelefonoUsuario" EntitySet="TelefonoUsuario" />
-    </AssociationSet>
     <AssociationSet Name="FK_Usuario_TipoUsuario" Association="KiiniNet_v2Model.FK_Usuario_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Usuario" EntitySet="Usuario" />
@@ -337,15 +332,6 @@
       <End Role="InventarioInfConsulta" EntitySet="InventarioInfConsulta" />
     </AssociationSet>
     <EntitySet Name="Area" EntityType="KiiniNet_v2Model.Area" />
-    <EntitySet Name="TipoTelefono" EntityType="KiiniNet_v2Model.TipoTelefono" />
-    <AssociationSet Name="FK_tblParamTelefonos_tblCatTipoTelefono" Association="KiiniNet_v2Model.FK_tblParamTelefonos_tblCatTipoTelefono">
-      <End Role="TipoTelefono" EntitySet="TipoTelefono" />
-      <End Role="ParametrosTelefonos" EntitySet="ParametrosTelefonos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TelefonoUsuario_TipoTelefono" Association="KiiniNet_v2Model.FK_TelefonoUsuario_TipoTelefono">
-      <End Role="TipoTelefono" EntitySet="TipoTelefono" />
-      <End Role="TelefonoUsuario" EntitySet="TelefonoUsuario" />
-    </AssociationSet>
     <EntitySet Name="EstatusTicket" EntityType="KiiniNet_v2Model.EstatusTicket" />
     <EntitySet Name="GrupoUsuario" EntityType="KiiniNet_v2Model.GrupoUsuario" />
     <AssociationSet Name="FK_GrupoUsuario_TipoGrupo1" Association="KiiniNet_v2Model.FK_GrupoUsuario_TipoGrupo1">
@@ -402,18 +388,9 @@
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
     <EntitySet Name="ParametrosSla" EntityType="KiiniNet_v2Model.ParametrosSla" />
-    <EntitySet Name="Sla" EntityType="KiiniNet_v2Model.Sla" />
     <EntitySet Name="SlaDetalle" EntityType="KiiniNet_v2Model.SlaDetalle" />
     <EntitySet Name="SlaEstimadoTicket" EntityType="KiiniNet_v2Model.SlaEstimadoTicket" />
     <EntitySet Name="SlaEstimadoTicketDetalle" EntityType="KiiniNet_v2Model.SlaEstimadoTicketDetalle" />
-    <AssociationSet Name="FK_InventarioArbolAcceso_SLA" Association="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA">
-      <End Role="Sla" EntitySet="Sla" />
-      <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SlaDetalle_SLA" Association="KiiniNet_v2Model.FK_SlaDetalle_SLA">
-      <End Role="Sla" EntitySet="Sla" />
-      <End Role="SlaDetalle" EntitySet="SlaDetalle" />
-    </AssociationSet>
     <AssociationSet Name="FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket" Association="KiiniNet_v2Model.FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket">
       <End Role="SlaEstimadoTicket" EntitySet="SlaEstimadoTicket" />
       <End Role="SlaEstimadoTicketDetalle" EntitySet="SlaEstimadoTicketDetalle" />
@@ -736,6 +713,59 @@
     <AssociationSet Name="FK_tblRespuestaEncuesta_tblTicket" Association="KiiniNet_v2Model.FK_tblRespuestaEncuesta_tblTicket">
       <End Role="Ticket" EntitySet="Ticket" />
       <End Role="RespuestaEncuesta" EntitySet="RespuestaEncuesta" />
+    </AssociationSet>
+    <EntitySet Name="TipoTelefono" EntityType="KiiniNet_v2Model.TipoTelefono" />
+    <AssociationSet Name="FK_tblParamTelefonos_tblCatTipoTelefono" Association="KiiniNet_v2Model.FK_tblParamTelefonos_tblCatTipoTelefono">
+      <End Role="TipoTelefono" EntitySet="TipoTelefono" />
+      <End Role="ParametrosTelefonos" EntitySet="ParametrosTelefonos" />
+    </AssociationSet>
+    <EntitySet Name="TipoLink" EntityType="KiiniNet_v2Model.TipoLink" />
+    <EntitySet Name="TelefonoUsuario" EntityType="KiiniNet_v2Model.TelefonoUsuario" />
+    <AssociationSet Name="FK_TelefonoUsuario_TipoTelefono" Association="KiiniNet_v2Model.FK_TelefonoUsuario_TipoTelefono">
+      <End Role="TipoTelefono" EntitySet="TipoTelefono" />
+      <End Role="TelefonoUsuario" EntitySet="TelefonoUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TelefonoUsuario_Usuario" Association="KiiniNet_v2Model.FK_TelefonoUsuario_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="TelefonoUsuario" EntitySet="TelefonoUsuario" />
+    </AssociationSet>
+    <EntitySet Name="SmsService" EntityType="KiiniNet_v2Model.SmsService" />
+    <AssociationSet Name="FK_Sms_Service_TipoLink" Association="KiiniNet_v2Model.FK_Sms_Service_TipoLink">
+      <End Role="TipoLink" EntitySet="TipoLink" />
+      <End Role="SmsService" EntitySet="SmsService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sms_Service_Usuario" Association="KiiniNet_v2Model.FK_Sms_Service_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="SmsService" EntitySet="SmsService" />
+    </AssociationSet>
+    <EntitySet Name="PreguntaReto" EntityType="KiiniNet_v2Model.PreguntaReto" />
+    <AssociationSet Name="FK_PreguntaReto_Usuario" Association="KiiniNet_v2Model.FK_PreguntaReto_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="PreguntaReto" EntitySet="PreguntaReto" />
+    </AssociationSet>
+    <EntitySet Name="ParametroCorreo" EntityType="KiiniNet_v2Model.ParametroCorreo" />
+    <EntitySet Name="TipoCorreo" EntityType="KiiniNet_v2Model.TipoCorreo" />
+    <EntitySet Name="UsuarioLinkPassword" EntityType="KiiniNet_v2Model.UsuarioLinkPassword" />
+    <AssociationSet Name="FK_ParametroCorreo_TipoCorreo" Association="KiiniNet_v2Model.FK_ParametroCorreo_TipoCorreo">
+      <End Role="TipoCorreo" EntitySet="TipoCorreo" />
+      <End Role="ParametroCorreo" EntitySet="ParametroCorreo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioLinkPassword_TipoLink" Association="KiiniNet_v2Model.FK_UsuarioLinkPassword_TipoLink">
+      <End Role="TipoLink" EntitySet="TipoLink" />
+      <End Role="UsuarioLinkPassword" EntitySet="UsuarioLinkPassword" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioLinkPassword_Usuario" Association="KiiniNet_v2Model.FK_UsuarioLinkPassword_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="UsuarioLinkPassword" EntitySet="UsuarioLinkPassword" />
+    </AssociationSet>
+    <EntitySet Name="Sla" EntityType="KiiniNet_v2Model.Sla" />
+    <AssociationSet Name="FK_InventarioArbolAcceso_SLA" Association="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA">
+      <End Role="Sla" EntitySet="Sla" />
+      <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SlaDetalle_SLA" Association="KiiniNet_v2Model.FK_SlaDetalle_SLA">
+      <End Role="Sla" EntitySet="Sla" />
+      <End Role="SlaDetalle" EntitySet="SlaDetalle" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Campus">
@@ -1142,18 +1172,6 @@
     <Property Name="Habilitado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_SubZona_TipoUsuario" FromRole="SubZona" ToRole="TipoUsuario" />
     <NavigationProperty Name="Ubicacion" Relationship="KiiniNet_v2Model.FK_Ubicacion_SubZona" FromRole="SubZona" ToRole="Ubicacion" />
-  </EntityType>
-  <EntityType Name="TelefonoUsuario">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdTipoTelefono" Type="Int32" />
-    <Property Name="IdUsuario" Type="Int32" Nullable="false" />
-    <Property Name="Numero" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="Extension" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_TelefonoUsuario_Usuario" FromRole="TelefonoUsuario" ToRole="Usuario" />
-    <NavigationProperty Name="TipoTelefono" Relationship="KiiniNet_v2Model.FK_TelefonoUsuario_TipoTelefono" FromRole="TelefonoUsuario" ToRole="TipoTelefono" />
   </EntityType>
   <EntityType Name="TipoArbolAcceso">
     <Key>
@@ -2071,11 +2089,10 @@
     <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DirectorioActivo" Type="Boolean" Nullable="false" />
     <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Habilitado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="CorreoUsuario" Relationship="KiiniNet_v2Model.FK_CorreoUsuario_Usuario" FromRole="Usuario" ToRole="CorreoUsuario" />
     <NavigationProperty Name="Organizacion" Relationship="KiiniNet_v2Model.FK_Usuario_Organizacion" FromRole="Usuario" ToRole="Organizacion" />
-    <NavigationProperty Name="TelefonoUsuario" Relationship="KiiniNet_v2Model.FK_TelefonoUsuario_Usuario" FromRole="Usuario" ToRole="TelefonoUsuario" />
     <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
     <NavigationProperty Name="Ubicacion" Relationship="KiiniNet_v2Model.FK_Usuario_Ubicacion" FromRole="Usuario" ToRole="Ubicacion" />
     <NavigationProperty Name="UsuarioGrupo" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_Usuario" FromRole="Usuario" ToRole="UsuarioGrupo" />
@@ -2088,6 +2105,10 @@
     <NavigationProperty Name="HitConsulta" Relationship="KiiniNet_v2Model.FK_HitConsulta_Usuario" FromRole="Usuario" ToRole="HitConsulta" />
     <NavigationProperty Name="TicketsLevantados" Relationship="KiiniNet_v2Model.FK_Ticket_Usuario" FromRole="Usuario" ToRole="Ticket" />
     <NavigationProperty Name="TicketsResueltos" Relationship="KiiniNet_v2Model.FK_Ticket_Usuario1" FromRole="Usuario" ToRole="Ticket" />
+    <NavigationProperty Name="TelefonoUsuario" Relationship="KiiniNet_v2Model.FK_TelefonoUsuario_Usuario" FromRole="Usuario" ToRole="TelefonoUsuario" />
+    <NavigationProperty Name="SmsService" Relationship="KiiniNet_v2Model.FK_Sms_Service_Usuario" FromRole="Usuario" ToRole="SmsService" />
+    <NavigationProperty Name="PreguntaReto" Relationship="KiiniNet_v2Model.FK_PreguntaReto_Usuario" FromRole="Usuario" ToRole="PreguntaReto" />
+    <NavigationProperty Name="UsuarioLinkPassword" Relationship="KiiniNet_v2Model.FK_UsuarioLinkPassword_Usuario" FromRole="Usuario" ToRole="UsuarioLinkPassword" />
   </EntityType>
   <Association Name="FK_CorreoUsuario_Usuario">
     <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -2110,18 +2131,6 @@
       </Principal>
       <Dependent Role="Usuario">
         <PropertyRef Name="IdOrganizacion" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TelefonoUsuario_Usuario">
-    <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="1" />
-    <End Type="KiiniNet_v2Model.TelefonoUsuario" Role="TelefonoUsuario" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TelefonoUsuario">
-        <PropertyRef Name="IdUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2256,9 +2265,9 @@
     <NavigationProperty Name="Encuesta" Relationship="KiiniNet_v2Model.FK_InventarioArbolAcceso_Encuesta" FromRole="InventarioArbolAcceso" ToRole="Encuesta" />
     <NavigationProperty Name="GrupoUsuarioInventarioArbol" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_InventarioArbolAcceso" FromRole="InventarioArbolAcceso" ToRole="GrupoUsuarioInventarioArbol" />
     <NavigationProperty Name="InventarioInfConsulta" Relationship="KiiniNet_v2Model.FK_InventarioInfConsulta_InventarioArbolAcceso" FromRole="InventarioArbolAcceso" ToRole="InventarioInfConsulta" />
-    <NavigationProperty Name="Sla" Relationship="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA" FromRole="InventarioArbolAcceso" ToRole="Sla" />
     <NavigationProperty Name="Mascara" Relationship="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblMascara" FromRole="InventarioArbolAcceso" ToRole="Mascara" />
     <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblArbolAcceso" FromRole="InventarioArbolAcceso" ToRole="ArbolAcceso" />
+    <NavigationProperty Name="Sla" Relationship="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA" FromRole="InventarioArbolAcceso" ToRole="Sla" />
   </EntityType>
   <Association Name="FK_InventarioArbolAcceso_Encuesta">
     <End Type="KiiniNet_v2Model.Encuesta" Role="Encuesta" Multiplicity="0..1" />
@@ -2305,41 +2314,6 @@
     <Property Name="Habilitado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="Area" ToRole="ArbolAcceso" />
   </EntityType>
-  <EntityType Name="TipoTelefono">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Extension" Type="Boolean" />
-    <Property Name="Habilitado" Type="Boolean" />
-    <NavigationProperty Name="ParametrosTelefonos" Relationship="KiiniNet_v2Model.FK_tblParamTelefonos_tblCatTipoTelefono" FromRole="TipoTelefono" ToRole="ParametrosTelefonos" />
-    <NavigationProperty Name="TelefonoUsuario" Relationship="KiiniNet_v2Model.FK_TelefonoUsuario_TipoTelefono" FromRole="TipoTelefono" ToRole="TelefonoUsuario" />
-  </EntityType>
-  <Association Name="FK_tblParamTelefonos_tblCatTipoTelefono">
-    <End Type="KiiniNet_v2Model.TipoTelefono" Role="TipoTelefono" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.ParametrosTelefonos" Role="ParametrosTelefonos" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoTelefono">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ParametrosTelefonos">
-        <PropertyRef Name="IdTipoTelefono" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TelefonoUsuario_TipoTelefono">
-    <End Type="KiiniNet_v2Model.TipoTelefono" Role="TipoTelefono" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.TelefonoUsuario" Role="TelefonoUsuario" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoTelefono">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TelefonoUsuario">
-        <PropertyRef Name="IdTipoTelefono" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="EstatusTicket">
     <Key>
       <PropertyRef Name="Id" />
@@ -2596,22 +2570,6 @@
     <Property Name="MaximoMinutos" Type="Int32" Nullable="false" />
     <Property Name="MaximoSegundos" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="Sla">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Dias" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Horas" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Minutos" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Segundos" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="TiempoHoraProceso" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Detallado" Type="Boolean" />
-    <Property Name="Habilitado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="InventarioArbolAcceso" Relationship="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA" FromRole="Sla" ToRole="InventarioArbolAcceso" />
-    <NavigationProperty Name="SlaDetalle" Relationship="KiiniNet_v2Model.FK_SlaDetalle_SLA" FromRole="Sla" ToRole="SlaDetalle" />
-  </EntityType>
   <EntityType Name="SlaDetalle">
     <Key>
       <PropertyRef Name="Id" />
@@ -2663,30 +2621,6 @@
     <Property Name="HoraFin" Type="DateTime" Precision="3" />
     <NavigationProperty Name="SlaEstimadoTicket" Relationship="KiiniNet_v2Model.FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket" FromRole="SlaEstimadoTicketDetalle" ToRole="SlaEstimadoTicket" />
   </EntityType>
-  <Association Name="FK_InventarioArbolAcceso_SLA">
-    <End Type="KiiniNet_v2Model.Sla" Role="Sla" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.InventarioArbolAcceso" Role="InventarioArbolAcceso" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Sla">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="InventarioArbolAcceso">
-        <PropertyRef Name="IdSla" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SlaDetalle_SLA">
-    <End Type="KiiniNet_v2Model.Sla" Role="Sla" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.SlaDetalle" Role="SlaDetalle" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Sla">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SlaDetalle">
-        <PropertyRef Name="IdSla" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket">
     <End Type="KiiniNet_v2Model.SlaEstimadoTicket" Role="SlaEstimadoTicket" Multiplicity="0..1" />
     <End Type="KiiniNet_v2Model.SlaEstimadoTicketDetalle" Role="SlaEstimadoTicketDetalle" Multiplicity="*" />
@@ -3960,6 +3894,247 @@
       </Principal>
       <Dependent Role="RespuestaEncuesta">
         <PropertyRef Name="IdTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TipoTelefono">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Extension" Type="Boolean" />
+    <Property Name="Confirmacion" Type="Boolean" Nullable="false" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="ParametrosTelefonos" Relationship="KiiniNet_v2Model.FK_tblParamTelefonos_tblCatTipoTelefono" FromRole="TipoTelefono" ToRole="ParametrosTelefonos" />
+    <NavigationProperty Name="TelefonoUsuario" Relationship="KiiniNet_v2Model.FK_TelefonoUsuario_TipoTelefono" FromRole="TipoTelefono" ToRole="TelefonoUsuario" />
+  </EntityType>
+  <Association Name="FK_tblParamTelefonos_tblCatTipoTelefono">
+    <End Type="KiiniNet_v2Model.TipoTelefono" Role="TipoTelefono" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.ParametrosTelefonos" Role="ParametrosTelefonos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoTelefono">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ParametrosTelefonos">
+        <PropertyRef Name="IdTipoTelefono" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TipoLink">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="SmsService" Relationship="KiiniNet_v2Model.FK_Sms_Service_TipoLink" FromRole="TipoLink" ToRole="SmsService" />
+    <NavigationProperty Name="UsuarioLinkPassword" Relationship="KiiniNet_v2Model.FK_UsuarioLinkPassword_TipoLink" FromRole="TipoLink" ToRole="UsuarioLinkPassword" />
+  </EntityType>
+  <EntityType Name="TelefonoUsuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoTelefono" Type="Int32" />
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+    <Property Name="Numero" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Extension" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Obligatorio" Type="Boolean" />
+    <Property Name="Confirmado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="TipoTelefono" Relationship="KiiniNet_v2Model.FK_TelefonoUsuario_TipoTelefono" FromRole="TelefonoUsuario" ToRole="TipoTelefono" />
+    <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_TelefonoUsuario_Usuario" FromRole="TelefonoUsuario" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="FK_TelefonoUsuario_TipoTelefono">
+    <End Type="KiiniNet_v2Model.TipoTelefono" Role="TipoTelefono" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.TelefonoUsuario" Role="TelefonoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoTelefono">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TelefonoUsuario">
+        <PropertyRef Name="IdTipoTelefono" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TelefonoUsuario_Usuario">
+    <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.TelefonoUsuario" Role="TelefonoUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TelefonoUsuario">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SmsService">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="IdTipoLink" Type="Int32" />
+    <Property Name="Numero" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="Mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Enviado" Type="Boolean" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="TipoLink" Relationship="KiiniNet_v2Model.FK_Sms_Service_TipoLink" FromRole="SmsService" ToRole="TipoLink" />
+    <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_Sms_Service_Usuario" FromRole="SmsService" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="FK_Sms_Service_TipoLink">
+    <End Type="KiiniNet_v2Model.TipoLink" Role="TipoLink" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.SmsService" Role="SmsService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoLink">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SmsService">
+        <PropertyRef Name="IdTipoLink" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sms_Service_Usuario">
+    <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.SmsService" Role="SmsService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SmsService">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PreguntaReto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="Pregunta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Respuesta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_PreguntaReto_Usuario" FromRole="PreguntaReto" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="FK_PreguntaReto_Usuario">
+    <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.PreguntaReto" Role="PreguntaReto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PreguntaReto">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ParametroCorreo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoCorreo" Type="Int32" />
+    <Property Name="Contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Predefinido" Type="Boolean" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="TipoCorreo" Relationship="KiiniNet_v2Model.FK_ParametroCorreo_TipoCorreo" FromRole="ParametroCorreo" ToRole="TipoCorreo" />
+  </EntityType>
+  <EntityType Name="TipoCorreo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="ParametroCorreo" Relationship="KiiniNet_v2Model.FK_ParametroCorreo_TipoCorreo" FromRole="TipoCorreo" ToRole="ParametroCorreo" />
+  </EntityType>
+  <EntityType Name="UsuarioLinkPassword">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoLink" Type="Int32" Nullable="false" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Link" Type="Guid" />
+    <Property Name="Codigo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Activo" Type="Boolean" />
+    <NavigationProperty Name="TipoLink" Relationship="KiiniNet_v2Model.FK_UsuarioLinkPassword_TipoLink" FromRole="UsuarioLinkPassword" ToRole="TipoLink" />
+    <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_UsuarioLinkPassword_Usuario" FromRole="UsuarioLinkPassword" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="FK_ParametroCorreo_TipoCorreo">
+    <End Type="KiiniNet_v2Model.TipoCorreo" Role="TipoCorreo" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.ParametroCorreo" Role="ParametroCorreo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoCorreo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ParametroCorreo">
+        <PropertyRef Name="IdTipoCorreo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioLinkPassword_TipoLink">
+    <End Type="KiiniNet_v2Model.TipoLink" Role="TipoLink" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.UsuarioLinkPassword" Role="UsuarioLinkPassword" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoLink">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsuarioLinkPassword">
+        <PropertyRef Name="IdTipoLink" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioLinkPassword_Usuario">
+    <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.UsuarioLinkPassword" Role="UsuarioLinkPassword" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsuarioLinkPassword">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Sla">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dias" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Horas" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Minutos" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Segundos" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TiempoHoraProceso" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Detallado" Type="Boolean" />
+    <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="InventarioArbolAcceso" Relationship="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA" FromRole="Sla" ToRole="InventarioArbolAcceso" />
+    <NavigationProperty Name="SlaDetalle" Relationship="KiiniNet_v2Model.FK_SlaDetalle_SLA" FromRole="Sla" ToRole="SlaDetalle" />
+  </EntityType>
+  <Association Name="FK_InventarioArbolAcceso_SLA">
+    <End Type="KiiniNet_v2Model.Sla" Role="Sla" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.InventarioArbolAcceso" Role="InventarioArbolAcceso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sla">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventarioArbolAcceso">
+        <PropertyRef Name="IdSla" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SlaDetalle_SLA">
+    <End Type="KiiniNet_v2Model.Sla" Role="Sla" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.SlaDetalle" Role="SlaDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sla">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SlaDetalle">
+        <PropertyRef Name="IdSla" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -7,14 +7,31 @@ using KiiniNet.Entities.Cat.Usuario;
 
 namespace KiiniHelp.UserControls.Altas
 {
-    public partial class UcAltaPuesto : UserControl , IControllerModal
+    public partial class UcAltaPuesto : UserControl, IControllerModal
     {
         private readonly ServicePuestoClient _servicioPuesto = new ServicePuestoClient();
         private List<string> _lstError = new List<string>();
-        
+
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+
+        public bool EsAlta
+        {
+            get { return Convert.ToBoolean(hfEsAlta.Value); }
+            set { hfEsAlta.Value = value.ToString(); }
+        }
+
+        public int IdPuesto
+        {
+            get { return Convert.ToInt32(hfIdPuesto.Value); }
+            set
+            {
+                Puesto puesto = _servicioPuesto.ObtenerPuestos(false).Single(s => s.Id == value);
+                txtDescripcionPuesto.Text = puesto.Descripcion;
+                hfIdPuesto.Value = value.ToString();
+            }
+        }
 
         private List<string> Alerta
         {
@@ -62,11 +79,11 @@ namespace KiiniHelp.UserControls.Altas
             {
                 if (txtDescripcionPuesto.Text.Trim() == string.Empty)
                     throw new Exception("Debe especificar una descripción");
-                Puesto sla = new Puesto();
-                sla.Descripcion = txtDescripcionPuesto.Text.Trim();
-                //TODO: Cambiar propiedad por valor de control
-                sla.Habilitado = true;
-                _servicioPuesto.Guardar(sla);
+                Puesto puesto = new Puesto { Descripcion = txtDescripcionPuesto.Text.Trim(), Habilitado = true };
+                if (EsAlta)
+                    _servicioPuesto.Guardar(puesto);
+                else
+                    _servicioPuesto.Actualizar(int.Parse(hfIdPuesto.Value), puesto);
                 LimpiarCampos();
                 if (OnAceptarModal != null)
                     OnAceptarModal();
@@ -120,6 +137,6 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        
+
     }
 }

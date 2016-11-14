@@ -70,7 +70,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<BusinessMascaras.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla)
+        public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla)
         {
             try
             {

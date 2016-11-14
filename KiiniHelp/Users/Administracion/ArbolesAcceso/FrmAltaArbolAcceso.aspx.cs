@@ -133,7 +133,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                         Label lbl = (Label)item.FindControl("lblIdTipoInformacion");
                         switch (int.Parse(lbl.Text))
                         {
-                            case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                            case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                                 ddl = (DropDownList)item.FindControl("ddlPropietario");
                                 break;
                             case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
@@ -167,7 +167,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
             {
                 StringBuilder sb = new StringBuilder();
                 if (ddlMascaraAcceso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
-                    sb.AppendLine("<li>Debe especificar una mascara de captura.</li>");
+                    sb.AppendLine("<li>Debe especificar un Formulario de Cliente.</li>");
 
                 if (sb.ToString() != string.Empty)
                 {
@@ -1305,7 +1305,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                                 DropDownList ddl = null;
                                 switch (Convert.ToInt32(lblId.Text))
                                 {
-                                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                                    case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                                         ddl = (DropDownList)item.FindControl("ddlPropietario");
                                         break;
                                     case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
@@ -1526,7 +1526,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 DropDownList ddlDocumento = (DropDownList)e.Item.FindControl("ddlDocumento");
                 DropDownList ddlUrl = (DropDownList)e.Item.FindControl("ddlUrl");
                 if (ddlPropietario == null && ddlDocumento == null && ddlUrl == null) return;
-                Metodos.LlenaComboCatalogo(ddlPropietario, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.Texto, true));
+                Metodos.LlenaComboCatalogo(ddlPropietario, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido, true));
                 Metodos.LlenaComboCatalogo(ddlDocumento, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.Documento, true));
                 Metodos.LlenaComboCatalogo(ddlUrl, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml, true));
             }
@@ -1552,7 +1552,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 BusinessVariables.EnumTiposInformacionConsulta seleccion = Metodos.Enumeradores.GetStringEnum<BusinessVariables.EnumTiposInformacionConsulta>(chk.Text);
                 switch (seleccion)
                 {
-                    case BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                    case BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                         ddl = (DropDownList)rptInformacion.Items[0].FindControl("ddlPropietario");
                         btn = (Button)rptInformacion.Items[0].FindControl("btnAgregarPropietario");
                         break;

@@ -46,7 +46,7 @@
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroServicioIncidente" Text="Tipo Servicio" OnClick="btnFiltroServicioIncidente_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroResponsables" Text="Responsables" OnClick="btnFiltroResponsables_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroEncuestas" Text="Encuestas" OnClick="btnFiltroEncuestas_OnClick"/>
-                        <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroAtendedores" Text="Atendedores" OnClick="btnFiltroAtendedores_OnClick"/>
+                        <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroAtendedores" Text="Agentes" OnClick="btnFiltroAtendedores_OnClick"/>
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroFechas" Text="Fechas" OnClick="btnFiltroFechas_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroTipoUsuario" Text="Tipo Usuario" OnClick="btnFiltroTipoUsuario_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroPrioridad" Text="Prioridad" OnClick="btnFiltroPrioridad_OnClick" />

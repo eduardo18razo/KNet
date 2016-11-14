@@ -24,6 +24,13 @@
 
         }
 
+        public static class ParametrosCatalogo
+        {
+            public static string PrefijoTabla = "Cat";
+            public static string PrefijoComandoInsertar = "InsertCatalogoSistema";
+            public static string PrefijoComandoActualizar = "UpdateCatalogoSistema";
+        }
+
         public static class EnumeradoresKiiniNet
         {
             public enum EnumEstatusTicket
@@ -62,7 +69,11 @@
             Proveedor = 5,
             ProveedorInvitado = 6,
         }
-
+        public enum EnumTipoObjeto
+        {
+            Tabla = 1,
+            Store = 2
+        }
         public enum EnumTiposDocumento
         {
             Word = 1,
@@ -71,7 +82,7 @@
         }
         public enum EnumTiposInformacionConsulta
         {
-            Texto = 1,
+            EditorDeContenido = 1,
             Documento = 2,
             PaginaHtml = 3,
             Servicio = 4
@@ -147,6 +158,25 @@
             Logica = 1,
             Calificacion = 2,
             OpcionMultiple = 3
+        }
+
+        public enum EnumTipoCorreo
+        {
+            AltaUsuario = 1,
+            RecuperarCuenta = 2
+        }
+
+        public enum EnumTipoLink
+        {
+            Confirmacion = 1,
+            Reset = 2
+        }
+
+        public enum EnumTipoTelefono
+        {
+            Casa = 1,
+            Celular = 2,
+            Oficina = 3
         }
     }
 }

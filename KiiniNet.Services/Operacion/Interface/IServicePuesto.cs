@@ -15,5 +15,14 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void Guardar(Puesto puesto);
+
+        [OperationContract]
+        void Actualizar(int idPuesto, Puesto puesto);
+
+        [OperationContract]
+        List<Puesto> ObtenerPuestoConsulta(int? idPuesto);
+
+        [OperationContract]
+        void Habilitar(int idPuesto, bool habilitado);
     }
 }

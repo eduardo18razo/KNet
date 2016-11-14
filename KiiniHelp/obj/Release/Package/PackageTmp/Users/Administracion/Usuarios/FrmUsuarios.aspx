@@ -69,7 +69,7 @@
             <div class="modal fade" id="modalDatosGenerales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
-                        <asp:UpdatePanel ID="upDatosGenerales" runat="server">
+                        <asp:UpdatePanel ID="upDatosGenerales" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <div class="modal-header" id="panelAlertaModalDg" runat="server" visible="False">
                                     <div class="alert alert-danger">
@@ -105,13 +105,21 @@
                                                 </div>
                                                 <div class="form-group col-sm-12">
                                                     <div class="col-sm-4" style="padding-left: 0">
-                                                        <asp:TextBox ID="txtAp" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100" />
+                                                        <asp:TextBox ID="txtAp" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" AutoPostBack="true"  MaxLength="100" OnTextChanged="txtAp_OnTextChanged" />
                                                     </div>
                                                     <div class="col-sm-4" style="padding-left: 0">
                                                         <asp:TextBox ID="txtAm" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100" />
                                                     </div>
                                                     <div class="col-sm-4" style="padding-left: 0">
-                                                        <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" MaxLength="100" />
+                                                        <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" onkeypress="return ValidaCampo(this,1)" AutoPostBack="true" MaxLength="100"  OnTextChanged="txtAp_OnTextChanged" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-sm-12">
+                                                    <asp:Label runat="server" Text="usuario" class="col-sm-4 control-label izquierda" />
+                                                </div>
+                                                <div class="form-group col-sm-12">
+                                                    <div class="col-sm-4" style="padding-left: 0">
+                                                        <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control texto-normal" onkeypress="return ValidaCampo(this,14)" MaxLength="100" style="textTransform: none" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-sm-12">
@@ -125,7 +133,6 @@
                                                         <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Agregar" ID="btnAddPuesto" OnClick="btnAddPuesto_OnClick" />
                                                     </div>
                                                 </div>
-
                                                 <div class="form-group col-sm-12 margen-arriba">
                                                     <div class="col-sm-3" style="padding-left: 0">
                                                         <asp:CheckBox runat="server" Text="VIP" ID="chkVip" />
@@ -204,9 +211,6 @@
                                     </div>
                                 </div>
                             </ContentTemplate>
-                            <Triggers>
-                                <asp:AsyncPostBackTrigger ControlID="btnCerrarDatosGenerales" EventName="Click" />
-                            </Triggers>
                         </asp:UpdatePanel>
                     </div>
                 </div>

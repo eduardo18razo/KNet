@@ -30,6 +30,24 @@
   <wsdl:message name="IServicePuesto_Guardar_OutputMessage">
     <wsdl:part name="parameters" element="tns:GuardarResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicePuesto_Actualizar_InputMessage">
+    <wsdl:part name="parameters" element="tns:Actualizar" />
+  </wsdl:message>
+  <wsdl:message name="IServicePuesto_Actualizar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicePuesto_ObtenerPuestoConsulta_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerPuestoConsulta" />
+  </wsdl:message>
+  <wsdl:message name="IServicePuesto_ObtenerPuestoConsulta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerPuestoConsultaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicePuesto_Habilitar_InputMessage">
+    <wsdl:part name="parameters" element="tns:Habilitar" />
+  </wsdl:message>
+  <wsdl:message name="IServicePuesto_Habilitar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServicePuesto">
     <wsdl:operation name="ObtenerPuestos">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicePuesto/ObtenerPuestos" message="tns:IServicePuesto_ObtenerPuestos_InputMessage" />
@@ -38,6 +56,18 @@
     <wsdl:operation name="Guardar">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicePuesto/Guardar" message="tns:IServicePuesto_Guardar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicePuesto/GuardarResponse" message="tns:IServicePuesto_Guardar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePuesto/Actualizar" message="tns:IServicePuesto_Actualizar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePuesto/ActualizarResponse" message="tns:IServicePuesto_Actualizar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPuestoConsulta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePuesto/ObtenerPuestoConsulta" message="tns:IServicePuesto_ObtenerPuestoConsulta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePuesto/ObtenerPuestoConsultaResponse" message="tns:IServicePuesto_ObtenerPuestoConsulta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Habilitar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePuesto/Habilitar" message="tns:IServicePuesto_Habilitar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePuesto/HabilitarResponse" message="tns:IServicePuesto_Habilitar_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServicePuesto">
@@ -53,6 +83,33 @@
     </wsdl:operation>
     <wsdl:operation name="Guardar">
       <soap:operation soapAction="http://tempuri.org/IServicePuesto/Guardar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Actualizar">
+      <soap:operation soapAction="http://tempuri.org/IServicePuesto/Actualizar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPuestoConsulta">
+      <soap:operation soapAction="http://tempuri.org/IServicePuesto/ObtenerPuestoConsulta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Habilitar">
+      <soap:operation soapAction="http://tempuri.org/IServicePuesto/Habilitar" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

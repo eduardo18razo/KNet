@@ -416,96 +416,30 @@ namespace KinniNet.Core.Operacion
 
         private List<EstatusTicketSubRolGeneral> GeneraEstatusGrupoDefault(GrupoUsuario grupo)
         {
-            List<EstatusTicketSubRolGeneral> result = null;
+
+            List<EstatusTicketSubRolGeneral> result = new List<EstatusTicketSubRolGeneral>();
+            DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                result = new List<EstatusTicketSubRolGeneral>();
-                foreach (SubGrupoUsuario subGpo in grupo.SubGrupoUsuario)
-                {
-                    switch (subGpo.IdSubRol)
-                    {
-                        case (int)BusinessVariables.EnumSubRoles.Supervisor:
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto, Orden = 1, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cancelado, Orden = 2, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReTipificado, Orden = 3, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReAbierto, Orden = 4, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 5, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado, Orden = 6, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            //No propietario
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto, Orden = 1, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cancelado, Orden = 2, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReTipificado, Orden = 3, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReAbierto, Orden = 4, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 5, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado, Orden = 6, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            break;
-                        case (int)BusinessVariables.EnumSubRoles.PrimererNivel:
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto, Orden = 1, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cancelado, Orden = 2, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReTipificado, Orden = 3, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReAbierto, Orden = 4, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 5, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado, Orden = 6, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            //No propietario
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto, Orden = 1, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cancelado, Orden = 2, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReTipificado, Orden = 3, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReAbierto, Orden = 4, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 5, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado, Orden = 6, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            break;
-                        case (int)BusinessVariables.EnumSubRoles.SegundoNivel:
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto, Orden = 1, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cancelado, Orden = 2, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReTipificado, Orden = 3, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReAbierto, Orden = 4, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 5, Propietario = true, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado, Orden = 6, Propietario = true, Habilitado = false });
-                            //No propietario
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto, Orden = 1, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cancelado, Orden = 2, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReTipificado, Orden = 3, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReAbierto, Orden = 4, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 5, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado, Orden = 6, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            break;
-                        case (int)BusinessVariables.EnumSubRoles.TercerNivel:
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto, Orden = 1, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cancelado, Orden = 2, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReTipificado, Orden = 3, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReAbierto, Orden = 4, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 5, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado, Orden = 6, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            //No propietario
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto, Orden = 1, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cancelado, Orden = 2, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReTipificado, Orden = 3, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReAbierto, Orden = 4, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 5, Propietario = false, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado, Orden = 6, Propietario = false, Habilitado = false });
-                            break;
-                        case (int)BusinessVariables.EnumSubRoles.CuartoNivel:
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto, Orden = 1, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cancelado, Orden = 2, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReTipificado, Orden = 3, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReAbierto, Orden = 4, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 5, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado, Orden = 6, TieneSupervisor = grupo.TieneSupervisor, Propietario = true, Habilitado = false });
-                            //No propietario
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto, Orden = 1, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cancelado, Orden = 2, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReTipificado, Orden = 3, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.ReAbierto, Orden = 4, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto, Orden = 5, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = true });
-                            result.Add(new EstatusTicketSubRolGeneral { IdSubRol = subGpo.IdSubRol, IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado, Orden = 6, TieneSupervisor = grupo.TieneSupervisor, Propietario = false, Habilitado = false });
-                            break;
-                    }
-                }
+                result.AddRange(from subgpo in grupo.SubGrupoUsuario
+                                where subgpo != null
+                                from statusDefault in db.EstatusTicketSubRolGeneralDefault.Where(w => w.IdSubRol == subgpo.IdSubRol && w.TieneSupervisor == grupo.TieneSupervisor)
+                                select new EstatusTicketSubRolGeneral
+                                {
+                                    IdRol = statusDefault.IdRol,
+                                    IdSubRol = statusDefault.IdSubRol,
+                                    IdEstatusTicket = statusDefault.IdEstatusTicket,
+                                    Orden = statusDefault.Orden,
+                                    TieneSupervisor = statusDefault.TieneSupervisor,
+                                    Propietario = statusDefault.Propietario,
+                                    Habilitado = statusDefault.Habilitado
+                                });
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
+            finally { db.Dispose(); }
             return result;
         }
 
@@ -517,9 +451,10 @@ namespace KinniNet.Core.Operacion
             {
                 result.AddRange(from subgpo in grupo.SubGrupoUsuario
                                 where subgpo != null
-                                from statusDefault in db.EstatusAsignacionSubRolGeneralDefault.Where(w => w.IdSubRol == subgpo.IdSubRol)
+                                from statusDefault in db.EstatusAsignacionSubRolGeneralDefault.Where(w => w.IdSubRol == subgpo.IdSubRol && w.TieneSupervisor == grupo.TieneSupervisor)
                                 select new EstatusAsignacionSubRolGeneral
                                 {
+                                    IdRol = statusDefault.IdRol,
                                     IdSubRol = statusDefault.IdSubRol,
                                     IdEstatusAsignacionActual = statusDefault.IdEstatusAsignacionActual,
                                     IdEstatusAsignacionAccion = statusDefault.IdEstatusAsignacionAccion,

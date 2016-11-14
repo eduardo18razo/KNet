@@ -16,6 +16,10 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public string Numero { get; set; }
         [DataMember]
         public string Extension { get; set; }
+        [DataMember]
+        public bool Obligatorio { get; set; }
+        [DataMember]
+        public bool Confirmado { get; set; }
         
         [DataMember]
         public virtual Usuario Usuario { get; set; }

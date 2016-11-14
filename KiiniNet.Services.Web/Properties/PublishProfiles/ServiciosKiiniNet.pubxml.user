@@ -10,127 +10,127 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/KiiniNet.Entities.dll">
-      <publishTime>10/19/2016 10:55:44</publishTime>
+      <publishTime>11/11/2016 18:29:33</publishTime>
     </File>
     <File Include="bin/KiiniNet.Services.dll">
-      <publishTime>10/19/2016 10:55:48</publishTime>
+      <publishTime>11/11/2016 18:29:36</publishTime>
     </File>
     <File Include="bin/KiiniNet.Services.Web.dll">
-      <publishTime>10/19/2016 10:55:49</publishTime>
+      <publishTime>11/11/2016 18:29:36</publishTime>
     </File>
     <File Include="bin/KinniNet.Business.Utils.dll">
-      <publishTime>10/19/2016 10:55:44</publishTime>
+      <publishTime>11/11/2016 18:29:32</publishTime>
     </File>
     <File Include="bin/KinniNet.Core.dll">
-      <publishTime>10/19/2016 10:55:47</publishTime>
+      <publishTime>11/11/2016 18:29:35</publishTime>
     </File>
     <File Include="bin/KinniNet.Data.dll">
-      <publishTime>10/19/2016 10:55:46</publishTime>
+      <publishTime>11/11/2016 18:29:34</publishTime>
     </File>
     <File Include="ServiceArbolAcceso.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:56</publishTime>
     </File>
     <File Include="ServiceArea.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:56</publishTime>
     </File>
     <File Include="ServiceCatalogos.svc">
       <publishTime>12/04/2016 01:12:09</publishTime>
     </File>
     <File Include="ServiceCatalogosSistema.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:56</publishTime>
     </File>
     <File Include="ServiceCatalogosUsuario.svc">
       <publishTime>04/18/2016 12:04:46</publishTime>
     </File>
     <File Include="ServiceConsultas.svc">
-      <publishTime>08/30/2016 11:00:13</publishTime>
+      <publishTime>10/19/2016 19:08:56</publishTime>
     </File>
     <File Include="ServiceEncuesta.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:56</publishTime>
     </File>
     <File Include="ServiceGrupoUsuario.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:56</publishTime>
     </File>
     <File Include="ServiceInformacionConsulta.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:56</publishTime>
     </File>
     <File Include="ServiceMascaras.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:56</publishTime>
     </File>
     <File Include="ServiceOrganizacion.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="ServiceParametros.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="ServicePuesto.svc">
-      <publishTime>08/11/2016 12:52:20</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="ServiceSecurity.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="ServiceSla.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="ServiceSubGrupoUsuario.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="ServiceTicket.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="ServiceUbicacion.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="ServiceUsuarios.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceCatalogos.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceDomicilioSistema.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceEstatus.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceImpactoUrgencia.svc">
-      <publishTime>07/28/2016 13:12:10</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceNotificacion.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceRoles.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceSubRol.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceTipoArbolAcceso.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceTipoCampoMascara.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceTipoDocumento.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceTipoEncuesta.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceTipoGrupo.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceTipoInformacionConsulta.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceTipoTelefono.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Sistema/ServiceTipoUsuario.svc">
-      <publishTime>07/22/2016 10:45:56</publishTime>
+      <publishTime>10/19/2016 19:08:57</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/19/2016 10:55:50</publishTime>
+      <publishTime>11/11/2016 18:29:37</publishTime>
     </File>
   </ItemGroup>
 </Project>

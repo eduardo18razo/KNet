@@ -29,7 +29,12 @@ namespace KiiniHelp.UserControls.Consultas
         public int IdTipoUsuario
         {
             get { return Convert.ToInt32(ddlTipoUsuario.SelectedValue); }
-            set { ddlTipoUsuario.SelectedValue = value.ToString(); }
+            set
+            {
+                ddlTipoUsuario.SelectedValue = value.ToString();
+                ddlTipoUsuario_OnSelectedIndexChanged(null, null);
+                ddlTipoUsuario.Enabled = false;
+            }
         }
 
         public string ModalName
@@ -202,10 +207,8 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlGerencia);
                 Metodos.LimpiarCombo(ddlSubGerencia);
                 Metodos.LimpiarCombo(ddlJefatura);
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index && int.Parse(ddlTipoUsuario.SelectedValue) != (int)BusinessVariables.EnumTiposUsuario.Empleado)
                 {
-                    LlenaComboOrganizacion(IdTipoUsuario);
-                    LlenaOrganizaciones();
                     btnNew.Visible = true;
                     btnNew.CommandName = "Holding";
                     btnNew.Text = "Agregar Holding";
@@ -215,6 +218,9 @@ namespace KiiniHelp.UserControls.Consultas
                 {
                     btnNew.Visible = false;
                 }
+                if (ddlTipoUsuario.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index) return;
+                LlenaComboOrganizacion(IdTipoUsuario);
+                LlenaOrganizaciones();
             }
             catch (Exception ex)
             {
@@ -241,9 +247,28 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlJefatura);
                 FiltraCombo((DropDownList)sender, ddlCompañia, _servicioOrganizacion.ObtenerCompañias(idTipoUsuario, id, true));
                 LlenaOrganizaciones();
-                btnNew.CommandName = "Compañia";
-                btnNew.Text = "Agregar Compañia";
-                btnNew.CommandArgument = "9";
+                if (ddlHolding.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Compañia";
+                    btnNew.Text = "Agregar Compañia";
+                    btnNew.CommandArgument = "9";
+                }
+                else
+                {
+                    if (int.Parse(ddlTipoUsuario.SelectedValue) == (int)BusinessVariables.EnumTiposUsuario.Empleado)
+                    {
+                        btnNew.Visible = false;
+                    }
+                    else
+                    {
+                        btnNew.Visible = true;
+                        btnNew.CommandName = "Holding";
+                        btnNew.Text = "Agregar Holding";
+                        btnNew.CommandArgument = "99";
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -269,9 +294,21 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlJefatura);
                 FiltraCombo((DropDownList)sender, ddlDireccion, _servicioOrganizacion.ObtenerDirecciones(idTipoUsuario, id, true));
                 LlenaOrganizaciones();
-                btnNew.CommandName = "Dirección";
-                btnNew.Text = "Agregar Dirección";
-                btnNew.CommandArgument = "10";
+                if (ddlCompañia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Dirección";
+                    btnNew.Text = "Agregar Dirección";
+                    btnNew.CommandArgument = "10";
+                }
+                else
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Compañia";
+                    btnNew.Text = "Agregar Compañia";
+                    btnNew.CommandArgument = "9";
+                }
+
             }
             catch (Exception ex)
             {
@@ -296,9 +333,21 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlJefatura);
                 FiltraCombo((DropDownList)sender, ddlSubDireccion, _servicioOrganizacion.ObtenerSubDirecciones(idTipoUsuario, id, true));
                 LlenaOrganizaciones();
-                btnNew.CommandName = "Sub Dirección";
-                btnNew.Text = "Agregar Sub Dirección";
-                btnNew.CommandArgument = "11";
+                if (ddlDireccion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Sub Dirección";
+                    btnNew.Text = "Agregar Sub Dirección";
+                    btnNew.CommandArgument = "11";
+                }
+                else
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Dirección";
+                    btnNew.Text = "Agregar Dirección";
+                    btnNew.CommandArgument = "10";
+                }
+
             }
             catch (Exception ex)
             {
@@ -322,9 +371,21 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlJefatura);
                 FiltraCombo((DropDownList)sender, ddlGerencia, _servicioOrganizacion.ObtenerGerencias(idTipoUsuario, id, true));
                 LlenaOrganizaciones();
-                btnNew.CommandName = "Gerencia";
-                btnNew.Text = "Agregar Gerencia";
-                btnNew.CommandArgument = "12";
+                if (ddlSubDireccion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Gerencia";
+                    btnNew.Text = "Agregar Gerencia";
+                    btnNew.CommandArgument = "12";
+                }
+                else
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Sub Dirección";
+                    btnNew.Text = "Agregar Sub Dirección";
+                    btnNew.CommandArgument = "11";
+                }
+
             }
             catch (Exception ex)
             {
@@ -347,9 +408,21 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlJefatura);
                 FiltraCombo((DropDownList)sender, ddlSubGerencia, _servicioOrganizacion.ObtenerSubGerencias(idTipoUsuario, id, true));
                 LlenaOrganizaciones();
-                btnNew.CommandName = "Sub Gerencia";
-                btnNew.Text = "Agregar Sub Gerencia";
-                btnNew.CommandArgument = "13";
+                if (ddlGerencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Sub Gerencia";
+                    btnNew.Text = "Agregar Sub Gerencia";
+                    btnNew.CommandArgument = "13";
+                }
+                else
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Gerencia";
+                    btnNew.Text = "Agregar Gerencia";
+                    btnNew.CommandArgument = "12";
+                }
+
             }
             catch (Exception ex)
             {
@@ -371,9 +444,21 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlJefatura);
                 FiltraCombo((DropDownList)sender, ddlJefatura, _servicioOrganizacion.ObtenerJefaturas(idTipoUsuario, id, true));
                 LlenaOrganizaciones();
-                btnNew.CommandName = "Jefatura";
-                btnNew.Text = "Agregar Jefatura";
-                btnNew.CommandArgument = "14";
+                if (ddlSubGerencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Jefatura";
+                    btnNew.Text = "Agregar Jefatura";
+                    btnNew.CommandArgument = "14";
+                }
+                else
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Sub Gerencia";
+                    btnNew.Text = "Agregar Sub Gerencia";
+                    btnNew.CommandArgument = "13";
+                }
+
             }
             catch (Exception ex)
             {

@@ -112,6 +112,15 @@ namespace KiiniHelp {
         protected global::System.Web.UI.WebControls.Repeater rptMenu;
         
         /// <summary>
+        /// Control upModalSingIn.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upModalSingIn;
+        
+        /// <summary>
         /// Control UcLogIn.
         /// </summary>
         /// <remarks>

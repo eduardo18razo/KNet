@@ -8,6 +8,7 @@ using KiiniHelp.ServiceTicket;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.Users.Ticket
 {
@@ -141,7 +142,7 @@ namespace KiiniHelp.Users.Ticket
                 AlertaGeneral = new List<string>();
                 if (!IsPostBack)
                 {
-                    ArbolAcceso arbol = ((ArbolAcceso) Session["ArbolAcceso"]);
+                    ArbolAcceso arbol = ((ArbolAcceso)Session["ArbolAcceso"]);
                     UcInformacionConsulta.IdArbol = arbol.Id;
                     lblTicketDescripcion.Text = "TICKET";
                     if (arbol.Nivel1 != null)
@@ -181,9 +182,39 @@ namespace KiiniHelp.Users.Ticket
         {
             try
             {
-                
+
                 List<HelperCampoMascaraCaptura> capturaMascara = UcMascaraCaptura.ObtenerCapturaMascara();
-                _servicioTicket.CrearTicket(((Usuario)Session["UserData"]).Id, Convert.ToInt32(Request.QueryString["IdArbol"]), capturaMascara, UcMascaraCaptura.CampoRandom);
+                KiiniNet.Entities.Operacion.Tickets.Ticket result = _servicioTicket.CrearTicket(((Usuario)Session["UserData"]).Id, Convert.ToInt32(Request.QueryString["IdArbol"]), capturaMascara, UcMascaraCaptura.CampoRandom);
+                lblNoTicket.Text = result.Id.ToString();
+                lblDescRandom.Visible = UcMascaraCaptura.CampoRandom;
+                lblRandom.Visible = UcMascaraCaptura.CampoRandom;
+                if (UcMascaraCaptura.CampoRandom)
+                    lblRandom.Text = result.ClaveRegistro;
+                upConfirmacion.Update();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalExito\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void btnCerrar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalExito\");", true);
+                Usuario userData = (Usuario)Session["UserData"];
+                if (userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado)
+                    Response.Redirect("~/Default.aspx");
+                else
+                    Response.Redirect("~/Users/DashBoard.aspx");
             }
             catch (Exception ex)
             {

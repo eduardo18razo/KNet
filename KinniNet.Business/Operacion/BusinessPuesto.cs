@@ -52,12 +52,75 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                db.ContextOptions.ProxyCreationEnabled = _proxy;
-                //TODO: Cambiar habilitado por el embebido
                 puesto.Habilitado = true;
                 puesto.Descripcion = puesto.Descripcion.Trim().ToUpper();
                 if (puesto.Id == 0)
                     db.Puesto.AddObject(puesto);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public void Actualizar(int idPuesto, Puesto puesto)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
+                Puesto pto = db.Puesto.SingleOrDefault(s => s.Id == idPuesto);
+                if (pto == null) return;
+                pto.Descripcion = puesto.Descripcion.Trim().ToUpper();
+
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public List<Puesto> ObtenerPuestoConsulta(int? idPuesto)
+        {
+            List<Puesto> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<Puesto> qry = db.Puesto;
+                if (idPuesto != null)
+                    qry = qry.Where(w => w.Id == idPuesto);
+                result = qry.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception((ex.InnerException).Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public void Habilitar(int idPuesto, bool habilitado)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Puesto inf = db.Puesto.SingleOrDefault(w => w.Id == idPuesto);
+                if (inf != null) inf.Habilitado = habilitado;
                 db.SaveChanges();
             }
             catch (Exception ex)

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using KiiniNet.Entities.Cat.Operacion;
@@ -311,13 +310,7 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public List<HelperReportesTicket> ConsultarEncuestas(int idUsuario, List<int> grupos, List<int> tipoArbol, List<int> responsables, List<int?> encuestas, List<int> atendedores,
-             Dictionary<string, DateTime> fechas,
-            List<int> tiposUsuario,
-             List<int> prioridad,
-            List<bool?> sla,
-            List<int> ubicaciones,
-            List<int> organizaciones, List<bool?> vip, int pageIndex, int pageSize)
+        public List<HelperReportesTicket> ConsultarEncuestas(int idUsuario, List<int> grupos, List<int> tipoArbol, List<int> responsables, List<int?> encuestas, List<int> atendedores, Dictionary<string, DateTime> fechas, List<int> tiposUsuario, List<int> prioridad, List<bool?> sla, List<int> ubicaciones, List<int> organizaciones, List<bool?> vip, int pageIndex, int pageSize)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             List<HelperReportesTicket> result = null;
@@ -498,6 +491,189 @@ namespace KinniNet.Core.Operacion
                         hticket.Estatus = ticket.EstatusTicket.Descripcion;
                         hticket.DentroSla = ticket.DentroSla;
                         hticket.Sla = ticket.DentroSla ? "DENTRO" : "FUERA";
+                        hticket.FechaHora = ticket.FechaHoraAlta.ToString("dd/MM/yyyy");
+                        result.Add(hticket);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { db.Dispose(); }
+            return result;
+        }
+
+        public List<HelperReportesTicket> ConsultarEficienciaTickets(int idUsuario, List<int> grupos, List<int> responsables, List<int> tipoArbol, List<int> tipificacion, List<int> nivelAtencion, List<int> atendedores, Dictionary<string, DateTime> fechas, List<int> tiposUsuario, List<int> prioridad, List<int> ubicaciones, List<int> organizaciones, List<bool?> vip, int pageIndex, int pageSize)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            List<HelperReportesTicket> result = null;
+            DateTime fechaInicio = new DateTime();
+            try
+            {
+                new BusinessDemonio().ActualizaSla();
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                DateTime fechaFin = new DateTime();
+                if (fechas != null)
+                {
+                    fechaInicio = fechas.Single(s => s.Key == "inicio").Value;
+                    fechaFin = fechas.Single(s => s.Key == "fin").Value.AddDays(1);
+                }
+
+                var qry = from t in db.Ticket
+                          join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
+                          join or in db.Organizacion on t.IdOrganizacion equals or.Id
+                          join ub in db.Ubicacion on t.IdUbicacion equals ub.Id
+                          select t;
+
+                if (grupos.Any())
+                    qry = grupos.Aggregate(qry, (current, grupo) => (from q in current where q.TicketGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo) select q));
+
+                if (responsables.Any())
+                    qry = responsables.Aggregate(qry, (current, grupo) => (from q in current where q.TicketGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo) select q));
+
+                if (tipoArbol.Any())
+                    qry = from q in qry
+                          where tipoArbol.Contains(q.IdTipoArbolAcceso)
+                          select q;
+
+                if (tipificacion.Any())
+                    qry = from q in qry
+                          where tipificacion.Contains(q.IdArbolAcceso)
+                          select q;
+
+                //TODO: Filtrar nivel de atencion
+
+                if (atendedores.Any())
+                    qry = atendedores.Aggregate(qry, (current, grupo) => (from q in current where q.TicketGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo) select q));
+
+                if (fechas != null)
+                    if (fechas.Count == 2)
+                        qry = from q in qry
+                              where q.FechaHoraAlta >= fechaInicio
+                                    && q.FechaHoraAlta <= fechaFin
+                              select q;
+
+                if (tiposUsuario.Any())
+                    qry = from q in qry
+                          where tiposUsuario.Contains(q.IdTipoUsuario)
+                          select q;
+
+                if (prioridad.Any())
+                    qry = from q in qry
+                          where prioridad.Contains(q.IdImpacto)
+                          select q;
+
+                if (ubicaciones.Any())
+                    qry = from q in qry
+                          where ubicaciones.Contains(q.IdUbicacion)
+                          select q;
+
+                if (organizaciones.Any())
+                    qry = from q in qry
+                          where organizaciones.Contains(q.IdOrganizacion)
+                          select q;
+
+                if (vip.Any())
+                    qry = from q in qry
+                          where vip.Contains(q.UsuarioLevanto.Vip)
+                          select q;
+
+                List<Ticket> lstTickets = qry.Distinct().ToList();
+
+                int totalRegistros = lstTickets.Count;
+                if (totalRegistros > 0)
+                {
+                    result = new List<HelperReportesTicket>();
+                    foreach (Ticket ticket in lstTickets.Skip(pageIndex * pageSize).Take(pageSize))
+                    {
+                        db.LoadProperty(ticket, "UsuarioLevanto");
+                        db.LoadProperty(ticket, "TipoUsuario");
+                        db.LoadProperty(ticket, "EstatusTicket");
+                        db.LoadProperty(ticket, "EstatusAsignacion");
+                        db.LoadProperty(ticket, "TicketEstatus");
+                        db.LoadProperty(ticket, "TicketAsignacion");
+                        db.LoadProperty(ticket, "Impacto");
+                        db.LoadProperty(ticket, "Organizacion");
+                        db.LoadProperty(ticket, "Ubicacion");
+                        foreach (TicketAsignacion asignacion in ticket.TicketAsignacion)
+                        {
+
+                            db.LoadProperty(asignacion, "UsuarioAsignado");
+                            if (asignacion.UsuarioAsignado != null)
+                            {
+                                db.LoadProperty(asignacion.UsuarioAsignado, "UsuarioGrupo");
+                                foreach (UsuarioGrupo grupo in asignacion.UsuarioAsignado.UsuarioGrupo)
+                                {
+                                    db.LoadProperty(grupo, "SubGrupoUsuario");
+                                    if (grupo.SubGrupoUsuario != null)
+                                        db.LoadProperty(grupo.SubGrupoUsuario, "SubRol");
+                                }
+                            }
+                        }
+                        db.LoadProperty(ticket, "ArbolAcceso");
+                        db.LoadProperty(ticket, "TipoArbolAcceso");
+                        db.LoadProperty(ticket, "Impacto");
+                        db.LoadProperty(ticket.Impacto, "Prioridad");
+                        db.LoadProperty(ticket.Impacto, "Urgencia");
+                        db.LoadProperty(ticket.ArbolAcceso, "InventarioArbolAcceso");
+                        db.LoadProperty(ticket.ArbolAcceso.InventarioArbolAcceso.First(), "GrupoUsuarioInventarioArbol");
+                        foreach (GrupoUsuarioInventarioArbol grupoinv in ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol)
+                        {
+                            db.LoadProperty(grupoinv, "GrupoUsuario");
+                        }
+                        db.LoadProperty(ticket, "TicketGrupoUsuario");
+                        foreach (TicketGrupoUsuario tgu in ticket.TicketGrupoUsuario)
+                        {
+                            db.LoadProperty(tgu, "GrupoUsuario");
+                        }
+
+                        HelperReportesTicket hticket = new HelperReportesTicket
+                        {
+                            IdTicket = ticket.Id,
+                            TipoUsuario = ticket.TipoUsuario.Descripcion
+                        };
+
+                        if (ticket.TicketGrupoUsuario.Any(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta))
+                            if (grupos.Contains(ticket.TicketGrupoUsuario.First(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta).IdGrupoUsuario))
+                                hticket.GrupoEspecialConsulta = ticket.TicketGrupoUsuario.First(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta).GrupoUsuario.Descripcion;
+
+                        if (ticket.TicketGrupoUsuario.Any(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención))
+                            if (grupos.Contains(ticket.TicketGrupoUsuario.First(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).IdGrupoUsuario))
+                                hticket.GrupoAtendedor = ticket.TicketGrupoUsuario.First(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).GrupoUsuario.Descripcion;
+
+                        if (ticket.TicketGrupoUsuario.Any(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada))
+                            if (grupos.Contains(ticket.TicketGrupoUsuario.First(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada).IdGrupoUsuario))
+                                hticket.GrupoMantenimiento = ticket.TicketGrupoUsuario.First(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada).GrupoUsuario.Descripcion;
+
+                        if (ticket.TicketGrupoUsuario.Any(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeOperación))
+                            if (grupos.Contains(ticket.TicketGrupoUsuario.First(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeOperación).IdGrupoUsuario))
+                                hticket.GrupoOperacion = ticket.TicketGrupoUsuario.First(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeOperación).GrupoUsuario.Descripcion;
+
+                        if (ticket.TicketGrupoUsuario.Any(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo))
+                            if (grupos.Contains(ticket.TicketGrupoUsuario.First(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo).IdGrupoUsuario))
+                                hticket.GrupoDesarrollo = ticket.TicketGrupoUsuario.First(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo).GrupoUsuario.Descripcion;
+
+                        hticket.IdOrganizacion = ticket.IdOrganizacion;
+                        hticket.Organizacion = new BusinessOrganizacion().ObtenerDescripcionOrganizacionById(ticket.IdOrganizacion, false);
+                        hticket.IdNivelOrganizacion = ticket.Organizacion.IdNivelOrganizacion;
+
+                        hticket.IdUbicacion = ticket.IdUbicacion;
+                        hticket.Ubicacion = new BusinessUbicacion().ObtenerDescripcionUbicacionById(ticket.IdUbicacion, false);
+                        hticket.IdNivelUbicacion = ticket.Ubicacion.IdNivelUbicacion;
+
+                        hticket.IdTipificacion = ticket.IdArbolAcceso;
+                        hticket.Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(ticket.IdArbolAcceso);
+                        hticket.IdServicioIncidente = ticket.IdTipoArbolAcceso;
+                        hticket.ServicioIncidente = ticket.TipoArbolAcceso.Descripcion;
+                        hticket.Prioridad = ticket.Impacto.Prioridad.Descripcion;
+                        hticket.Urgencia = ticket.Impacto.Urgencia.Descripcion;
+                        hticket.Impacto = ticket.Impacto.Descripcion;
+                        hticket.IdEstatus = ticket.IdEstatusTicket;
+                        hticket.Estatus = ticket.EstatusTicket.Descripcion;
+                        hticket.DentroSla = ticket.DentroSla;
+                        hticket.Sla = ticket.DentroSla ? "DENTRO" : "FUERA";
+                        hticket.FechaHora = ticket.FechaHoraAlta.ToString("dd/MM/yyyy");
                         result.Add(hticket);
                     }
                 }
@@ -515,7 +691,6 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             List<HelperReportesTicket> result = null;
             DateTime fechaInicio = new DateTime();
-            int conteo = 1;
             try
             {
                 new BusinessDemonio().ActualizaSla();
@@ -537,10 +712,10 @@ namespace KinniNet.Core.Operacion
                           join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
                           join ug in db.UsuarioGrupo on new { tgu.IdGrupoUsuario, tgu.IdSubGrupoUsuario } equals new { ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
                           where t.EncuestaRespondida && t.IdEncuesta == idEncuesta
-                          && re.IdPregunta == idPregunta  && re.ValorRespuesta == respuesta
+                          && re.IdPregunta == idPregunta && re.ValorRespuesta == respuesta
                           select new { t, tgu, ug, e, re, ep };
 
-                
+
 
                 if (fechas != null)
                     if (fechas.Count == 2)
@@ -1373,7 +1548,7 @@ namespace KinniNet.Core.Operacion
                           where vip.Contains(q.h.Usuario.Vip)
                           select q;
 
-                if (fechas != null && fechas != null)
+                if (fechas != null)
                 {
                     if (fechas.Count == 2)
                     {
@@ -1507,6 +1682,7 @@ namespace KinniNet.Core.Operacion
                 if (lstTickets.Any())
                 {
                     result = new DataTable("dt");
+                    result.Columns.Add(new DataColumn("Id"));
                     result.Columns.Add(new DataColumn("Descripcion"));
                     result.Columns.Add(new DataColumn("Total"));
 
@@ -1547,7 +1723,7 @@ namespace KinniNet.Core.Operacion
                     foreach (int? idEncuesta in lstTickets.Select(s => s.t.IdEncuesta).Distinct())
                     {
                         if (idEncuesta == null) continue;
-                        result.Rows.Add(new BusinessEncuesta().ObtenerEncuestaById((int)idEncuesta).Descripcion);
+                        result.Rows.Add(idEncuesta, new BusinessEncuesta().ObtenerEncuestaById((int)idEncuesta).Descripcion);
                         var enumeracion = lstTickets.Where(w => w.t.IdEncuesta == idEncuesta).SelectMany(s => s.e.RespuestaEncuesta).Distinct().ToList().GroupBy(ge => new { ge.IdTicket, ge.IdEncuesta, ge.Ponderacion })
                                 .Distinct().Select(ssum =>
                                         new
@@ -1560,8 +1736,8 @@ namespace KinniNet.Core.Operacion
                         var sumEncuesta = enumeracion.Select(s => new { s.IdTicket, TotalEncuesta = enumeracion.Where(w => w.IdTicket == s.IdTicket).Sum(sm => sm.SumaEncuesta) }).Distinct();
                         var total = sumEncuesta.Average(av => av.TotalEncuesta);
 
-                        result.Rows[row][1] = total;
-                        for (int i = 2; i < result.Columns.Count; i++)
+                        result.Rows[row][2] = total;
+                        for (int i = 3; i < result.Columns.Count; i++)
                         {
                             switch (tipoFecha)
                             {
@@ -2208,6 +2384,543 @@ namespace KinniNet.Core.Operacion
             finally { db.Dispose(); }
             return result;
         }
+
+        public DataTable GraficarConsultaEficienciaTicket(int idUsuario, List<int> grupos, List<int> responsables, List<int> tipoArbol, List<int> tipificacion, List<int> nivelAtencion, List<int> atendedores, Dictionary<string, DateTime> fechas, List<int> tiposUsuario, List<int> prioridad, List<int> ubicaciones, List<int> organizaciones, List<bool?> vip, string stack, int tipoFecha)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            DataTable result = null;
+            DateTime fechaInicio = new DateTime();
+            int conteo = 1;
+            try
+            {
+                new BusinessDemonio().ActualizaSla();
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                bool supervisor = db.SubGrupoUsuario.Join(db.UsuarioGrupo, sgu => sgu.Id, ug => ug.IdSubGrupoUsuario,
+                    (sgu, ug) => new { sgu, ug })
+                    .Any(
+                        @t =>
+                            @t.sgu.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor &&
+                            @t.ug.IdUsuario == idUsuario);
+                DateTime fechaFin = new DateTime();
+                if (fechas != null)
+                {
+                    fechaInicio = fechas.Single(s => s.Key == "inicio").Value;
+                    fechaFin = fechas.Single(s => s.Key == "fin").Value.AddDays(1);
+                }
+
+                var qry = from t in db.Ticket
+                          join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
+                          join or in db.Organizacion on t.IdOrganizacion equals or.Id
+                          join ub in db.Ubicacion on t.IdUbicacion equals ub.Id
+                          select t;
+
+                if (grupos.Any())
+                    qry = grupos.Aggregate(qry,
+                        (current, grupo) =>
+                            (from q in current
+                             where q.TicketGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo)
+                             select q));
+
+                if (responsables.Any())
+                    qry = responsables.Aggregate(qry,
+                        (current, grupo) =>
+                            (from q in current
+                             where q.TicketGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo)
+                             select q));
+
+                if (tipoArbol.Any())
+                    qry = from q in qry
+                          where tipoArbol.Contains(q.IdTipoArbolAcceso)
+                          select q;
+
+                if (tipificacion.Any())
+                    qry = from q in qry
+                          where tipificacion.Contains(q.IdArbolAcceso)
+                          select q;
+
+                //TODO: Filtrar nivel de atencion
+
+                if (atendedores.Any())
+                    qry = atendedores.Aggregate(qry,
+                        (current, grupo) =>
+                            (from q in current
+                             where q.TicketGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo)
+                             select q));
+
+                if (fechas != null)
+                    if (fechas.Count == 2)
+                        qry = from q in qry
+                              where q.FechaHoraAlta >= fechaInicio
+                                    && q.FechaHoraAlta <= fechaFin
+                              select q;
+
+                if (tiposUsuario.Any())
+                    qry = from q in qry
+                          where tiposUsuario.Contains(q.IdTipoUsuario)
+                          select q;
+
+                if (prioridad.Any())
+                    qry = from q in qry
+                          where prioridad.Contains(q.IdImpacto)
+                          select q;
+
+                if (ubicaciones.Any())
+                    qry = from q in qry
+                          where ubicaciones.Contains(q.IdUbicacion)
+                          select q;
+
+                if (organizaciones.Any())
+                    qry = from q in qry
+                          where organizaciones.Contains(q.IdOrganizacion)
+                          select q;
+
+                if (vip.Any())
+                    qry = from q in qry
+                          where vip.Contains(q.UsuarioLevanto.Vip)
+                          select q;
+
+                var lstTickets = qry.Distinct().ToList();
+
+                if (lstTickets.Any())
+                {
+                    result = new DataTable("dt");
+                    result.Columns.Add(new DataColumn("Id"));
+                    result.Columns.Add(new DataColumn("Descripcion"));
+                    result.Columns.Add(new DataColumn("Total"));
+
+                    List<string> lstFechas = lstTickets.OrderBy(o => o.FechaHoraAlta).Distinct().Select(s => s.FechaHoraAlta.ToString("dd/MM/yyyy")).Distinct().ToList();
+                    switch (tipoFecha)
+                    {
+                        case 1:
+                            foreach (string fecha in lstFechas)
+                            {
+                                result.Columns.Add(fecha);
+                            }
+                            break;
+                        case 2:
+                            foreach (string fecha in lstFechas)
+                            {
+                                if (!result.Columns.Contains("SEMANA " + CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Parse(fecha), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday) + " AÑO " + DateTime.Parse(fecha).Year.ToString()))
+                                    result.Columns.Add("SEMANA " + CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Parse(fecha), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday) + " AÑO " + DateTime.Parse(fecha).Year.ToString());
+                                conteo++;
+                            }
+                            break;
+                        case 3:
+                            foreach (string fecha in lstFechas)
+                            {
+                                if (!result.Columns.Contains(DateTime.Parse(fecha).Month.ToString()))
+                                    result.Columns.Add(DateTime.Parse(fecha).Month.ToString());
+                            }
+                            break;
+                        case 4:
+                            foreach (string fecha in lstFechas)
+                            {
+                                if (!result.Columns.Contains(DateTime.Parse(fecha).Year.ToString()))
+                                    result.Columns.Add(DateTime.Parse(fecha).Year.ToString());
+                            }
+                            break;
+                    }
+                    int row = 0;
+                    switch (stack)
+                    {
+                        case "Ubicaciones":
+
+                            foreach (int idUbicacion in lstTickets.Select(s => s.IdUbicacion).Distinct())
+                            {
+                                result.Rows.Add(idUbicacion, new BusinessUbicacion().ObtenerDescripcionUbicacionById(idUbicacion, false));
+                                var total = 0;
+                                switch (tipoFecha)
+                                {
+                                    case 1:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= DateTime.Parse(result.Columns[3].ColumnName) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= DateTime.Parse(result.Columns[result.Columns.Count - 1].ColumnName) && c.IdUbicacion == idUbicacion);
+                                        break;
+                                    case 2:
+                                        total = lstTickets.Count(c =>
+                                            DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[3].ColumnName.Split(' ')[3]), int.Parse(result.Columns[3].ColumnName.Split(' ')[1])) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[result.Columns.Count].ColumnName.Split(' ')[3]), int.Parse(result.Columns[result.Columns.Count].ColumnName.Split(' ')[1])) && c.IdUbicacion == idUbicacion);
+                                        break;
+                                    case 3:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("MM")) >= DateTime.Parse(result.Columns[3].ColumnName.PadLeft(2, '0')) && DateTime.Parse(c.FechaHoraAlta.ToString("MM")) <= DateTime.Parse(result.Columns[result.Columns.Count - 1].ColumnName.PadLeft(2, '0')) && c.IdUbicacion == idUbicacion);
+                                        break;
+                                    case 4:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("yyyy")) >= new DateTime(int.Parse(result.Columns[3].ColumnName.PadLeft(4, '0'))) && DateTime.Parse(c.FechaHoraAlta.ToString("yyyy")) <= new DateTime(int.Parse(result.Columns[result.Columns.Count - 1].ColumnName.PadLeft(4, '0'))) && c.IdUbicacion == idUbicacion);
+
+                                        break;
+                                }
+                                result.Rows[row][2] = total;
+                                for (int i = 3; i < result.Columns.Count; i++)
+                                {
+                                    switch (tipoFecha)
+                                    {
+                                        case 1:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("dd/MM/yyyy") == result.Columns[i].ColumnName && c.IdUbicacion == idUbicacion);
+                                            break;
+                                        case 2:
+                                            result.Rows[row][i] = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1])) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1])) && c.IdUbicacion == idUbicacion);
+                                            break;
+                                        case 3:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("MM") == result.Columns[i].ColumnName.PadLeft(2, '0') && c.IdUbicacion == idUbicacion);
+                                            break;
+                                        case 4:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("yyyy") == result.Columns[i].ColumnName.PadLeft(4, '0') && c.IdUbicacion == idUbicacion);
+                                            break;
+                                    }
+                                }
+                                row++;
+                            }
+                            break;
+                        case "Organizaciones":
+                            foreach (int idOrganizacion in lstTickets.Select(s => s.IdOrganizacion).Distinct())
+                            {
+                                result.Rows.Add(idOrganizacion, new BusinessOrganizacion().ObtenerDescripcionOrganizacionById(idOrganizacion, false));
+                                var total = 0;
+                                switch (tipoFecha)
+                                {
+                                    case 1:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= DateTime.Parse(result.Columns[3].ColumnName) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= DateTime.Parse(result.Columns[result.Columns.Count - 1].ColumnName) && c.IdOrganizacion == idOrganizacion);
+                                        break;
+                                    case 2:
+                                        total = lstTickets.Count(c =>
+                                            DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[3].ColumnName.Split(' ')[3]), int.Parse(result.Columns[3].ColumnName.Split(' ')[1])) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[result.Columns.Count].ColumnName.Split(' ')[3]), int.Parse(result.Columns[result.Columns.Count].ColumnName.Split(' ')[1])) && c.IdOrganizacion == idOrganizacion);
+                                        break;
+                                    case 3:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("MM")) >= DateTime.Parse(result.Columns[3].ColumnName.PadLeft(2, '0')) && DateTime.Parse(c.FechaHoraAlta.ToString("MM")) <= DateTime.Parse(result.Columns[result.Columns.Count - 1].ColumnName.PadLeft(2, '0')) && c.IdOrganizacion == idOrganizacion);
+                                        break;
+                                    case 4:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("yyyy")) >= new DateTime(int.Parse(result.Columns[3].ColumnName.PadLeft(4, '0'))) && DateTime.Parse(c.FechaHoraAlta.ToString("yyyy")) <= new DateTime(int.Parse(result.Columns[result.Columns.Count - 1].ColumnName.PadLeft(4, '0'))) && c.IdOrganizacion == idOrganizacion);
+
+                                        break;
+                                }
+                                result.Rows[row][2] = total;
+                                for (int i = 3; i < result.Columns.Count; i++)
+                                {
+                                    switch (tipoFecha)
+                                    {
+                                        case 1:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("dd/MM/yyyy") == result.Columns[i].ColumnName && c.IdOrganizacion == idOrganizacion);
+                                            break;
+                                        case 2:
+                                            result.Rows[row][i] = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1])) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1])) && c.IdOrganizacion == idOrganizacion);
+                                            break;
+                                        case 3:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("MM") == result.Columns[i].ColumnName.PadLeft(2, '0') && c.IdOrganizacion == idOrganizacion);
+                                            break;
+                                        case 4:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("yyyy") == result.Columns[i].ColumnName.PadLeft(4, '0') && c.IdOrganizacion == idOrganizacion);
+                                            break;
+                                    }
+                                }
+                                row++;
+                            }
+                            break;
+                        case "Tipo Ticket":
+                            foreach (int idTipoArbolAcceso in lstTickets.Select(s => s.IdTipoArbolAcceso).Distinct())
+                            {
+                                result.Rows.Add(idTipoArbolAcceso, new BusinessTipoArbolAcceso().ObtenerTiposArbolAcceso(false).Single(s => s.Id == idTipoArbolAcceso).Descripcion);
+                                var total = 0;
+                                switch (tipoFecha)
+                                {
+                                    case 1:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= DateTime.Parse(result.Columns[3].ColumnName) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= DateTime.Parse(result.Columns[result.Columns.Count - 1].ColumnName) && c.IdTipoArbolAcceso == idTipoArbolAcceso);
+                                        break;
+                                    case 2:
+                                        total = lstTickets.Count(c =>
+                                            DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[3].ColumnName.Split(' ')[3]), int.Parse(result.Columns[3].ColumnName.Split(' ')[1])) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[result.Columns.Count].ColumnName.Split(' ')[3]), int.Parse(result.Columns[result.Columns.Count].ColumnName.Split(' ')[1])) && c.IdTipoArbolAcceso == idTipoArbolAcceso);
+                                        break;
+                                    case 3:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("MM")) >= DateTime.Parse(result.Columns[3].ColumnName.PadLeft(2, '0')) && DateTime.Parse(c.FechaHoraAlta.ToString("MM")) <= DateTime.Parse(result.Columns[result.Columns.Count - 1].ColumnName.PadLeft(2, '0')) && c.IdTipoArbolAcceso == idTipoArbolAcceso);
+                                        break;
+                                    case 4:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("yyyy")) >= new DateTime(int.Parse(result.Columns[3].ColumnName.PadLeft(4, '0'))) && DateTime.Parse(c.FechaHoraAlta.ToString("yyyy")) <= new DateTime(int.Parse(result.Columns[result.Columns.Count - 1].ColumnName.PadLeft(4, '0'))) && c.IdTipoArbolAcceso == idTipoArbolAcceso);
+
+                                        break;
+                                }
+                                result.Rows[row][2] = total;
+                                for (int i = 3; i < result.Columns.Count; i++)
+                                {
+                                    switch (tipoFecha)
+                                    {
+                                        case 1:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("dd/MM/yyyy") == result.Columns[i].ColumnName && c.IdTipoArbolAcceso == idTipoArbolAcceso);
+                                            break;
+                                        case 2:
+
+                                            result.Rows[row][i] = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1])) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1])) && c.IdTipoArbolAcceso == idTipoArbolAcceso);
+                                            break;
+                                        case 3:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("MM") == result.Columns[i].ColumnName.PadLeft(2, '0') && c.IdTipoArbolAcceso == idTipoArbolAcceso);
+                                            break;
+                                        case 4:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("yyyy") == result.Columns[i].ColumnName.PadLeft(4, '0') && c.IdTipoArbolAcceso == idTipoArbolAcceso);
+                                            break;
+                                    }
+                                }
+                                row++;
+                            }
+                            break;
+                        case "Tipificaciones":
+                            foreach (int idArbol in lstTickets.Select(s => s.IdArbolAcceso).Distinct())
+                            {
+                                result.Rows.Add(idArbol, new BusinessArbolAcceso().ObtenerTipificacion(idArbol));
+                                var total = 0;
+                                switch (tipoFecha)
+                                {
+                                    case 1:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= DateTime.Parse(result.Columns[3].ColumnName) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= DateTime.Parse(result.Columns[result.Columns.Count - 1].ColumnName) && c.IdArbolAcceso == idArbol);
+                                        break;
+                                    case 2:
+                                        total = lstTickets.Count(c =>
+                                            DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[3].ColumnName.Split(' ')[3]), int.Parse(result.Columns[3].ColumnName.Split(' ')[1])) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[result.Columns.Count].ColumnName.Split(' ')[3]), int.Parse(result.Columns[result.Columns.Count].ColumnName.Split(' ')[1])) && c.IdArbolAcceso == idArbol);
+                                        break;
+                                    case 3:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("MM")) >= DateTime.Parse(result.Columns[3].ColumnName.PadLeft(2, '0')) && DateTime.Parse(c.FechaHoraAlta.ToString("MM")) <= DateTime.Parse(result.Columns[result.Columns.Count - 1].ColumnName.PadLeft(2, '0')) && c.IdArbolAcceso == idArbol);
+                                        break;
+                                    case 4:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("yyyy")) >= new DateTime(int.Parse(result.Columns[3].ColumnName.PadLeft(4, '0'))) && DateTime.Parse(c.FechaHoraAlta.ToString("yyyy")) <= new DateTime(int.Parse(result.Columns[result.Columns.Count - 1].ColumnName.PadLeft(4, '0'))) && c.IdArbolAcceso == idArbol);
+
+                                        break;
+                                }
+                                result.Rows[row][2] = total;
+                                for (int i = 3; i < result.Columns.Count; i++)
+                                {
+                                    switch (tipoFecha)
+                                    {
+                                        case 1:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("dd/MM/yyyy") == result.Columns[i].ColumnName && c.IdArbolAcceso == idArbol);
+                                            break;
+                                        case 2:
+                                            result.Rows[row][i] = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1])) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1])) && c.IdArbolAcceso == idArbol);
+                                            break;
+                                        case 3:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("MM") == result.Columns[i].ColumnName.PadLeft(2, '0') && c.IdArbolAcceso == idArbol);
+                                            break;
+                                        case 4:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("yyyy") == result.Columns[i].ColumnName.PadLeft(4, '0') && c.IdArbolAcceso == idArbol);
+                                            break;
+                                    }
+                                }
+                                row++;
+                            }
+                            break;
+                        case "Estatus Ticket":
+                            foreach (int idEstatusticket in lstTickets.Select(s => s.IdEstatusTicket).Distinct())
+                            {
+                                result.Rows.Add(idEstatusticket, new BusinessEstatus().ObtenerEstatusTicket(false).Single(s => s.Id == idEstatusticket).Descripcion);
+                                var total = 0;
+                                switch (tipoFecha)
+                                {
+                                    case 1:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= DateTime.Parse(result.Columns[3].ColumnName) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= DateTime.Parse(result.Columns[result.Columns.Count - 1].ColumnName) && c.IdEstatusTicket == idEstatusticket);
+                                        break;
+                                    case 2:
+                                        total = lstTickets.Count(c =>
+                                            DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[3].ColumnName.Split(' ')[3]), int.Parse(result.Columns[3].ColumnName.Split(' ')[1])) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[result.Columns.Count].ColumnName.Split(' ')[3]), int.Parse(result.Columns[result.Columns.Count].ColumnName.Split(' ')[1])) && c.IdEstatusTicket == idEstatusticket);
+                                        break;
+                                    case 3:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("MM")) >= DateTime.Parse(result.Columns[3].ColumnName.PadLeft(2, '0')) && DateTime.Parse(c.FechaHoraAlta.ToString("MM")) <= DateTime.Parse(result.Columns[result.Columns.Count - 1].ColumnName.PadLeft(2, '0')) && c.IdEstatusTicket == idEstatusticket);
+                                        break;
+                                    case 4:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("yyyy")) >= new DateTime(int.Parse(result.Columns[3].ColumnName.PadLeft(4, '0'))) && DateTime.Parse(c.FechaHoraAlta.ToString("yyyy")) <= new DateTime(int.Parse(result.Columns[result.Columns.Count - 1].ColumnName.PadLeft(4, '0'))) && c.IdEstatusTicket == idEstatusticket);
+
+                                        break;
+                                }
+                                result.Rows[row][2] = total;
+                                for (int i = 3; i < result.Columns.Count; i++)
+                                {
+                                    switch (tipoFecha)
+                                    {
+                                        case 1:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("dd/MM/yyyy") == result.Columns[i].ColumnName && c.IdEstatusTicket == idEstatusticket);
+                                            break;
+                                        case 2:
+
+                                            result.Rows[row][i] = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1])) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1])) && c.IdEstatusTicket == idEstatusticket);
+                                            break;
+                                        case 3:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("MM") == result.Columns[i].ColumnName.PadLeft(2, '0') && c.IdEstatusTicket == idEstatusticket);
+                                            break;
+                                        case 4:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("yyyy") == result.Columns[i].ColumnName.PadLeft(4, '0') && c.IdEstatusTicket == idEstatusticket);
+                                            break;
+                                    }
+                                }
+                                row++;
+                            }
+                            break;
+                        case "SLA":
+                            foreach (bool dentroSla in lstTickets.Select(s => s.DentroSla).Distinct())
+                            {
+                                result.Rows.Add(dentroSla ? 1 : 0, dentroSla ? "Dentro" : "Fuera");
+                                var total = 0;
+                                switch (tipoFecha)
+                                {
+                                    case 1:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= DateTime.Parse(result.Columns[3].ColumnName) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= DateTime.Parse(result.Columns[result.Columns.Count - 1].ColumnName) && c.DentroSla == dentroSla);
+                                        break;
+                                    case 2:
+                                        total = lstTickets.Count(c =>
+                                            DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[3].ColumnName.Split(' ')[3]), int.Parse(result.Columns[3].ColumnName.Split(' ')[1])) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[result.Columns.Count].ColumnName.Split(' ')[3]), int.Parse(result.Columns[result.Columns.Count].ColumnName.Split(' ')[1])) && c.DentroSla == dentroSla);
+                                        break;
+                                    case 3:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("MM")) >= DateTime.Parse(result.Columns[3].ColumnName.PadLeft(2, '0')) && DateTime.Parse(c.FechaHoraAlta.ToString("MM")) <= DateTime.Parse(result.Columns[result.Columns.Count - 1].ColumnName.PadLeft(2, '0')) && c.DentroSla == dentroSla);
+                                        break;
+                                    case 4:
+                                        total = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("yyyy")) >= new DateTime(int.Parse(result.Columns[3].ColumnName.PadLeft(4, '0'))) && DateTime.Parse(c.FechaHoraAlta.ToString("yyyy")) <= new DateTime(int.Parse(result.Columns[result.Columns.Count - 1].ColumnName.PadLeft(4, '0'))) && c.DentroSla == dentroSla);
+
+                                        break;
+                                }
+                                result.Rows[row][2] = total;
+                                for (int i = 3; i < result.Columns.Count; i++)
+                                {
+                                    switch (tipoFecha)
+                                    {
+                                        case 1:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("dd/MM/yyyy") == result.Columns[i].ColumnName && c.DentroSla == dentroSla);
+                                            break;
+                                        case 2:
+
+                                            result.Rows[row][i] = lstTickets.Count(c => DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1])) && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1])) && c.DentroSla == dentroSla);
+                                            break;
+                                        case 3:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("MM") == result.Columns[i].ColumnName.PadLeft(2, '0') && c.DentroSla == dentroSla);
+                                            break;
+                                        case 4:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("yyyy") == result.Columns[i].ColumnName.PadLeft(4, '0') && c.DentroSla == dentroSla);
+                                            break;
+                                    }
+                                }
+                                row++;
+                            }
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public string GraficarConsultaEEficienciaTicketsGeografica(int idUsuario, List<int> grupos, List<int> responsables, List<int> tipoArbol, List<int> tipificacion, List<int> nivelAtencion, List<int> atendedores, Dictionary<string, DateTime> fechas, List<int> tiposUsuario, List<int> prioridad, List<int> ubicaciones, List<int> organizaciones, List<bool?> vip, int tipoFecha)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            string result = null;
+            DateTime fechaInicio = new DateTime();
+            try
+            {
+                new BusinessDemonio().ActualizaSla();
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                bool supervisor = db.SubGrupoUsuario.Join(db.UsuarioGrupo, sgu => sgu.Id, ug => ug.IdSubGrupoUsuario, (sgu, ug) => new { sgu, ug })
+                        .Any(@t => @t.sgu.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor && @t.ug.IdUsuario == idUsuario);
+                DateTime fechaFin = new DateTime();
+                if (fechas != null)
+                {
+                    fechaInicio = fechas.Single(s => s.Key == "inicio").Value;
+                    fechaFin = fechas.Single(s => s.Key == "fin").Value.AddDays(1);
+                }
+
+                var qry = from t in db.Ticket
+                          join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
+                          join or in db.Organizacion on t.IdOrganizacion equals or.Id
+                          join ub in db.Ubicacion on t.IdUbicacion equals ub.Id
+                          join ug in db.UsuarioGrupo on new { tgu.IdGrupoUsuario, tgu.IdSubGrupoUsuario } equals new { ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
+                          join d in db.Domicilio on ub.IdCampus equals d.IdCampus
+                          join col in db.Colonia on d.IdColonia equals col.Id
+                          join m in db.Municipio on col.IdMunicipio equals m.Id
+                          join es in db.Estado on m.IdEstado equals es.Id
+                          select new { t, es, ug };
+
+
+                if (grupos.Any())
+                    qry = grupos.Aggregate(qry, (current, grupo) => (from q in current where q.t.TicketGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo) select q));
+
+                if (responsables.Any())
+                    qry = responsables.Aggregate(qry, (current, grupo) => (from q in current where q.t.TicketGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo) select q));
+
+                if (tipoArbol.Any())
+                    qry = from q in qry
+                          where tipoArbol.Contains(q.t.IdTipoArbolAcceso)
+                          select q;
+
+                if (tipificacion.Any())
+                    qry = from q in qry
+                          where tipificacion.Contains(q.t.IdArbolAcceso)
+                          select q;
+
+                //TODO: Filtrar nivel de atencion
+
+                if (atendedores.Any())
+                    qry = atendedores.Aggregate(qry, (current, grupo) => (from q in current where q.t.TicketGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo) select q));
+
+                if (fechas != null)
+                    if (fechas.Count == 2)
+                        qry = from q in qry
+                              where q.t.FechaHoraAlta >= fechaInicio
+                                    && q.t.FechaHoraAlta <= fechaFin
+                              select q;
+
+                if (tiposUsuario.Any())
+                    qry = from q in qry
+                          where tiposUsuario.Contains(q.t.IdTipoUsuario)
+                          select q;
+
+                if (prioridad.Any())
+                    qry = from q in qry
+                          where prioridad.Contains(q.t.IdImpacto)
+                          select q;
+
+                if (ubicaciones.Any())
+                    qry = from q in qry
+                          where ubicaciones.Contains(q.t.IdUbicacion)
+                          select q;
+
+                if (organizaciones.Any())
+                    qry = from q in qry
+                          where organizaciones.Contains(q.t.IdOrganizacion)
+                          select q;
+
+                if (vip.Any())
+                    qry = from q in qry
+                          where vip.Contains(q.t.UsuarioLevanto.Vip)
+                          select q;
+
+                if (!supervisor)
+                    qry = from q in qry
+                          where q.ug.IdUsuario == idUsuario
+                          select q;
+
+                var lstTickets = (from q in qry.Distinct()
+                                  group new { q.es.RegionCode } by new { q.es.RegionCode }
+                                      into g
+                                      select new { g.Key.RegionCode, Hits = g.Count() }).ToList();
+
+                if (lstTickets.Any())
+                {
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("Region");
+                    dt.Columns.Add("Hits");
+                    foreach (var data in lstTickets)
+                    {
+                        dt.Rows.Add(data.RegionCode, data.Hits);
+                    }
+                    result = dt.Columns.Cast<DataColumn>().Aggregate("[\n[", (current, column) => current + string.Format("'{0}', ", column.ColumnName));
+                    result = result.Trim().TrimEnd(',') + "], \n";
+                    result = dt.Rows.Cast<DataRow>().Aggregate(result, (current, row) => current + string.Format("['{0}', {1}]\n", row[0], row[1]));
+                    result += "]";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { db.Dispose(); }
+            return result;
+        }
+
         #endregion Graficas
     }
 }

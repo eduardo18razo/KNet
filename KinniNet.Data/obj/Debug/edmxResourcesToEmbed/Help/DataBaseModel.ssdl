@@ -485,6 +485,16 @@
     <Property Name="RegionCode" Type="nvarchar" MaxLength="100" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="ParametroCorreo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoCorreo" Type="int" />
+    <Property Name="Contenido" Type="ntext" />
+    <Property Name="Predefinido" Type="bit" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
   <EntityType Name="ParametrosAplicaciones">
     <Key>
       <PropertyRef Name="Id" />
@@ -525,6 +535,15 @@
     <Property Name="IdTipoUsuario" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PreguntaReto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="Pregunta" Type="nvarchar(max)" />
+    <Property Name="Respuesta" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Prioridad">
     <Key>
@@ -609,7 +628,6 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Dias" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Horas" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Minutos" Type="decimal" Precision="18" Scale="2" />
@@ -664,6 +682,18 @@
     <Property Name="TiempoProceso" Type="decimal" Precision="18" Scale="2" />
     <Property Name="HoraInicio" Type="datetime" />
     <Property Name="HoraFin" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SmsService">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="IdTipoLink" Type="int" />
+    <Property Name="Numero" Type="nvarchar" MaxLength="16" />
+    <Property Name="Mensaje" Type="nvarchar(max)" />
+    <Property Name="Enviado" Type="bit" />
+    <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="SubDireccion">
     <Key>
@@ -729,6 +759,8 @@
     <Property Name="IdUsuario" Type="int" Nullable="false" />
     <Property Name="Numero" Type="nvarchar" MaxLength="15" Nullable="false" />
     <Property Name="Extension" Type="nvarchar" MaxLength="20" />
+    <Property Name="Obligatorio" Type="bit" />
+    <Property Name="Confirmado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Ticket">
     <Key>
@@ -828,6 +860,14 @@
     <Property Name="Mask" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="TipoCorreo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
   <EntityType Name="TipoDocumento">
     <Key>
       <PropertyRef Name="Id" />
@@ -865,6 +905,14 @@
     <Property Name="EsServicio" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
+  <EntityType Name="TipoLink">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
   <EntityType Name="TipoNotificacion">
     <Key>
       <PropertyRef Name="Id" />
@@ -880,6 +928,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Extension" Type="bit" />
+    <Property Name="Confirmacion" Type="bit" Nullable="false" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="TipoUsuario">
@@ -939,7 +988,7 @@
     <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="DirectorioActivo" Type="bit" Nullable="false" />
     <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" />
-    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar(max)" />
     <Property Name="IdPuesto" Type="int" />
     <Property Name="Vip" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
@@ -953,6 +1002,18 @@
     <Property Name="IdRol" Type="int" />
     <Property Name="IdGrupoUsuario" Type="int" />
     <Property Name="IdSubGrupoUsuario" Type="int" />
+  </EntityType>
+  <EntityType Name="UsuarioLinkPassword">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoLink" Type="int" Nullable="false" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Link" Type="uniqueidentifier" />
+    <Property Name="Codigo" Type="nvarchar(max)" />
+    <Property Name="Activo" Type="bit" />
   </EntityType>
   <EntityType Name="UsuarioRol">
     <Key>
@@ -1883,6 +1944,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ParametroCorreo_TipoCorreo">
+    <End Role="TipoCorreo" Type="Self.TipoCorreo" Multiplicity="0..1" />
+    <End Role="ParametroCorreo" Type="Self.ParametroCorreo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoCorreo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ParametroCorreo">
+        <PropertyRef Name="IdTipoCorreo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Piso_TipoUsuario">
     <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
     <End Role="Piso" Type="Self.Piso" Multiplicity="*" />
@@ -1892,6 +1965,18 @@
       </Principal>
       <Dependent Role="Piso">
         <PropertyRef Name="IdTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PreguntaReto_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="PreguntaReto" Type="Self.PreguntaReto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PreguntaReto">
+        <PropertyRef Name="IdUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2012,6 +2097,30 @@
       </Principal>
       <Dependent Role="SlaEstimadoTicketDetalle">
         <PropertyRef Name="IdSlaEstimadoTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sms_Service_TipoLink">
+    <End Role="TipoLink" Type="Self.TipoLink" Multiplicity="0..1" />
+    <End Role="SmsService" Type="Self.SmsService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoLink">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SmsService">
+        <PropertyRef Name="IdTipoLink" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sms_Service_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="SmsService" Type="Self.SmsService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SmsService">
+        <PropertyRef Name="IdUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2867,6 +2976,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UsuarioLinkPassword_TipoLink">
+    <End Role="TipoLink" Type="Self.TipoLink" Multiplicity="1" />
+    <End Role="UsuarioLinkPassword" Type="Self.UsuarioLinkPassword" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoLink">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsuarioLinkPassword">
+        <PropertyRef Name="IdTipoLink" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuarioLinkPassword_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="UsuarioLinkPassword" Type="Self.UsuarioLinkPassword" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsuarioLinkPassword">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_UsuarioRol_RolTipoUsuario">
     <End Role="RolTipoUsuario" Type="Self.RolTipoUsuario" Multiplicity="0..1" />
     <End Role="UsuarioRol" Type="Self.UsuarioRol" Multiplicity="*" />
@@ -2951,10 +3084,12 @@
     <EntitySet Name="NivelUbicacion" EntityType="Self.NivelUbicacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Organizacion" EntityType="Self.Organizacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ParametroCorreo" EntityType="Self.ParametroCorreo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametrosAplicaciones" EntityType="Self.ParametrosAplicaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametrosSla" EntityType="Self.ParametrosSla" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametrosTelefonos" EntityType="Self.ParametrosTelefonos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Piso" EntityType="Self.Piso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PreguntaReto" EntityType="Self.PreguntaReto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Prioridad" EntityType="Self.Prioridad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Puesto" EntityType="Self.Puesto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RespuestaEncuesta" EntityType="Self.RespuestaEncuesta" Schema="dbo" store:Type="Tables" />
@@ -2968,6 +3103,7 @@
     <EntitySet Name="SlaDetalle" EntityType="Self.SlaDetalle" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SlaEstimadoTicket" EntityType="Self.SlaEstimadoTicket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SlaEstimadoTicketDetalle" EntityType="Self.SlaEstimadoTicketDetalle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SmsService" EntityType="Self.SmsService" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubDireccion" EntityType="Self.SubDireccion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubGerencia" EntityType="Self.SubGerencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubGrupoUsuario" EntityType="Self.SubGrupoUsuario" Schema="dbo" store:Type="Tables" />
@@ -2982,10 +3118,12 @@
     <EntitySet Name="TiempoInformeArbol" EntityType="Self.TiempoInformeArbol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoArbolAcceso" EntityType="Self.TipoArbolAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoCampoMascara" EntityType="Self.TipoCampoMascara" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoCorreo" EntityType="Self.TipoCorreo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoEncuesta" EntityType="Self.TipoEncuesta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoGrupo" EntityType="Self.TipoGrupo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoInfConsulta" EntityType="Self.TipoInfConsulta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoLink" EntityType="Self.TipoLink" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoNotificacion" EntityType="Self.TipoNotificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoTelefono" EntityType="Self.TipoTelefono" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
@@ -2994,6 +3132,7 @@
     <EntitySet Name="Urgencia" EntityType="Self.Urgencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuarioGrupo" EntityType="Self.UsuarioGrupo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsuarioLinkPassword" EntityType="Self.UsuarioLinkPassword" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Zona" EntityType="Self.Zona" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_ArbolAcceso_Area" Association="Self.FK_ArbolAcceso_Area">
@@ -3300,9 +3439,17 @@
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Pais" EntitySet="Pais" />
     </AssociationSet>
+    <AssociationSet Name="FK_ParametroCorreo_TipoCorreo" Association="Self.FK_ParametroCorreo_TipoCorreo">
+      <End Role="TipoCorreo" EntitySet="TipoCorreo" />
+      <End Role="ParametroCorreo" EntitySet="ParametroCorreo" />
+    </AssociationSet>
     <AssociationSet Name="FK_Piso_TipoUsuario" Association="Self.FK_Piso_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Piso" EntitySet="Piso" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PreguntaReto_Usuario" Association="Self.FK_PreguntaReto_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="PreguntaReto" EntitySet="PreguntaReto" />
     </AssociationSet>
     <AssociationSet Name="FK_RespuestaTipoEncuesta_TipoEncuesta" Association="Self.FK_RespuestaTipoEncuesta_TipoEncuesta">
       <End Role="TipoEncuesta" EntitySet="TipoEncuesta" />
@@ -3343,6 +3490,14 @@
     <AssociationSet Name="FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket" Association="Self.FK_SlaEstimadoTicketDetalle_SlaEstimadoTicket">
       <End Role="SlaEstimadoTicket" EntitySet="SlaEstimadoTicket" />
       <End Role="SlaEstimadoTicketDetalle" EntitySet="SlaEstimadoTicketDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sms_Service_TipoLink" Association="Self.FK_Sms_Service_TipoLink">
+      <End Role="TipoLink" EntitySet="TipoLink" />
+      <End Role="SmsService" EntitySet="SmsService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sms_Service_Usuario" Association="Self.FK_Sms_Service_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="SmsService" EntitySet="SmsService" />
     </AssociationSet>
     <AssociationSet Name="FK_SubDireccion_TipoUsuario" Association="Self.FK_SubDireccion_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
@@ -3627,6 +3782,14 @@
     <AssociationSet Name="FK_UsuarioGrupo_Usuario" Association="Self.FK_UsuarioGrupo_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="UsuarioGrupo" EntitySet="UsuarioGrupo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioLinkPassword_TipoLink" Association="Self.FK_UsuarioLinkPassword_TipoLink">
+      <End Role="TipoLink" EntitySet="TipoLink" />
+      <End Role="UsuarioLinkPassword" EntitySet="UsuarioLinkPassword" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuarioLinkPassword_Usuario" Association="Self.FK_UsuarioLinkPassword_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="UsuarioLinkPassword" EntitySet="UsuarioLinkPassword" />
     </AssociationSet>
     <AssociationSet Name="FK_UsuarioRol_RolTipoUsuario" Association="Self.FK_UsuarioRol_RolTipoUsuario">
       <End Role="RolTipoUsuario" EntitySet="RolTipoUsuario" />

@@ -55,6 +55,7 @@ namespace KiiniHelp
         {
             try
             {
+                UcLogIn.OnAceptarModal += UcLogInOnOnCancelarModal;
                 UcLogIn.OnCancelarModal += UcLogInOnOnCancelarModal;
                 if (!IsPostBack)
                 {

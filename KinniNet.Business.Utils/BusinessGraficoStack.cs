@@ -215,23 +215,23 @@ namespace KinniNet.Business.Utils
                 {
                     foreach (DataRow dataRow in dt.Rows)
                     {
-                        grafico.Series.Add(dataRow[0].ToString());
+                        grafico.Series.Add(dataRow[1].ToString());
                     }
-                    string[] x = new string[dt.Columns.Count - 1];
-                    decimal[] y = new decimal[dt.Columns.Count - 1];
+                    string[] x = new string[dt.Columns.Count - 2];
+                    decimal[] y = new decimal[dt.Columns.Count - 2];
 
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        for (int j = 1; j < dt.Columns.Count; j++)
+                        for (int j = 2; j < dt.Columns.Count; j++)
                         {
-                            x[j - 1] = dt.Columns[j].ColumnName.ToString();
-                            y[j - 1] = Convert.ToDecimal(dt.Rows[i][j]);
+                            x[j - 2] = dt.Columns[j].ColumnName.ToString();
+                            y[j - 2] = Convert.ToDecimal(dt.Rows[i][j]);
 
                         }
-                        grafico.Series[dt.Rows[i][0].ToString()].Label = "#VALY{#.##}"; //"#PERCENT{P0}";
-                        grafico.Series[dt.Rows[i][0].ToString()].ToolTip = "#SERIESNAME";
-                        grafico.Series[dt.Rows[i][0].ToString()].Points.DataBindXY(x, y);
-                        grafico.Series[dt.Rows[i][0].ToString()].ChartType = SeriesChartType.Column;
+                        grafico.Series[dt.Rows[i][1].ToString()].Label = "#VALY{#.##}"; //"#PERCENT{P0}";
+                        grafico.Series[dt.Rows[i][1].ToString()].ToolTip = "#SERIESNAME";
+                        grafico.Series[dt.Rows[i][1].ToString()].Points.DataBindXY(x, y);
+                        grafico.Series[dt.Rows[i][1].ToString()].ChartType = SeriesChartType.Column;
                     }
 
                     foreach (Series serie in grafico.Series)
@@ -239,7 +239,7 @@ namespace KinniNet.Business.Utils
                         serie.Font = new Font("Tahoma", 8, System.Drawing.FontStyle.Bold);
                         foreach (DataPoint dp in serie.Points)
                         {
-                            dp.PostBackValue = "#VALX,#VALY";
+                            dp.PostBackValue = "#VALX,#VALY," + dt.Select("Descripcion = '" + serie.Name + "'").First()[0] + "," + dt.Select("Descripcion = '" + serie.Name + "'").First()[1];
                             dp.LabelPostBackValue = "label";
                             dp.LegendPostBackValue = "legendVALX";
                         }

@@ -41,7 +41,7 @@
                                     <div class="panel-body">
                                         <div style="float: left">
                                             <asp:RadioButton runat="server" GroupName="gpoTipoGrafico" AutoPostBack="True" ID="rbtnGeografico" Text="Geografico"  /><br />
-                                            <asp:RadioButton runat="server" GroupName="gpoTipoGrafico" AutoPostBack="True" ID="rbtnTendenciaLinear" Text="Linear" /><br />
+                                            <asp:RadioButton runat="server" GroupName="gpoTipoGrafico" AutoPostBack="True" ID="rbtnTendenciaLinear" Text="Stack" /><br />
                                             <asp:RadioButton runat="server" GroupName="gpoTipoGrafico" AutoPostBack="True" ID="rbtnTendenciaBarraCompetitiva" Text="Barra Comparativa" />
                                         </div>
                                     </div>

@@ -36,7 +36,7 @@
                     <asp:HiddenField runat="server" ID="hfIdSla" />
                     <asp:Label runat="server" ID="lblTicketDescripcion"></asp:Label>
                 </div>
-                
+
                 <div class="panel-body">
                     <uc1:UcInformacionConsulta runat="server" ID="UcInformacionConsulta" />
                     <uc1:UcMascaraCaptura runat="server" ID="UcMascaraCaptura" />
@@ -49,4 +49,33 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
+
+    <div class="modal fade" id="modalExito" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <asp:UpdatePanel ID="upConfirmacion" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h1>Generación de Ticket</h1>
+                            </div>
+                            <div class="panel.panel-body">
+                                <div class="form-group">
+                                    <asp:Label runat="server" Text="Se ha generado correctamente el ticket No.:" />
+                                    <asp:TextBox runat="server" ID="lblNoTicket" CssClass="form-control" ReadOnly="True" />
+                                </div>
+                                <div class="form-group">
+                                    <asp:Label runat="server" Text="Con clave:" ID="lblDescRandom" />
+                                    <asp:TextBox runat="server" ID="lblRandom" CssClass="form-control" ReadOnly="True" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <asp:Button runat="server" CssClass="btn btn-danger" ID="btnCerrar" Text="Cerrar" OnClick="btnCerrar_OnClick" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
 </asp:Content>

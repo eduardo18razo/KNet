@@ -25,13 +25,12 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.Sla.Where(w => w.Habilitado).OrderBy(o => o.Descripcion).ToList();
+                result = db.Sla.Where(w => w.Habilitado).ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
                         new Sla
                         {
                             Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
                         });
             }
             catch (Exception ex)
@@ -74,7 +73,6 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el embebido
                 sla.Habilitado = true;
-                sla.Descripcion = sla.Descripcion.ToUpper();
                 if (sla.Id == 0)
                     db.Sla.AddObject(sla);
                 db.SaveChanges();

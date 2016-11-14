@@ -73,7 +73,10 @@ function ValidaCampo(objeto, tipo) {
             cadStr = '0123456789ADMON';
             break;
         case 13:  //e-mail
-            cadStr = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@-_.'; ;
+            cadStr = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@-_.';;
+            break;
+        case 14:  //USUARIO
+            cadStr = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-_.';;
             break;
     }
 

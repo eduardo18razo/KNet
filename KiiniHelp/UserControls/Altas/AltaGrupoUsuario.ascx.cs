@@ -199,7 +199,6 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 Session["HorariosSubRoles"] = Session["HorariosSubRoles"] ?? new List<HorarioSubGrupo>();
-                List<HorarioSubGrupo> tmpEliminar = null;
                 foreach (RepeaterItem item in ucHorario.HorariosSubRol)
                 {
                     Label lblIdSubRol = (Label)item.FindControl("lblIdSubRol");
@@ -351,11 +350,7 @@ namespace KiiniHelp.UserControls.Altas
 
                     }
                     _servicioGrupoUsuario.ActualizarGrupo(grupoUsuario);
-
                 }
-
-
-
                 LimpiarCampos();
                 IdTipoGrupo = Convert.ToInt32(hfIdGrupo.Value);
                 if (OnAceptarModal != null)
@@ -487,6 +482,8 @@ namespace KiiniHelp.UserControls.Altas
                         {
                             ((CheckBox)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("chkSubRol")).Checked = true;
                             ((CheckBox)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("chkSubRol")).Enabled = false;
+                            ((Button)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("btnHorarios")).CssClass = "col-sm-3 btn btn-primary";
+                            ((Button)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("btnDiasDescanso")).CssClass = "col-sm-3 btn btn-primary";
                         }
                         break;
                 }

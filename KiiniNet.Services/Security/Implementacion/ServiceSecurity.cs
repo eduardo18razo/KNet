@@ -54,6 +54,21 @@ namespace KiiniNet.Services.Security.Implementacion
             }
         }
 
+        public void ChangePassword(int idUsuario, string contrasenaActual, string contrasenaNueva)
+        {
+            try
+            {
+                using (BusinessSecurity.Autenticacion negocio = new BusinessSecurity.Autenticacion())
+                {
+                    negocio.ChangePassword(idUsuario, contrasenaActual, contrasenaNueva);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles)
         {
             try
@@ -76,6 +91,21 @@ namespace KiiniNet.Services.Security.Implementacion
                 using (BusinessSecurity.Menus negocio = new BusinessSecurity.Menus())
                 {
                     return negocio.ObtenerMenuPublico(idTipoUsuario, idArea, arboles);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void RecuperarCuenta(int idUsuario, int idTipoNotificacion, string link, int idCorreo, string codigo, string contrasena, string tipoRecuperacion)
+        {
+            try
+            {
+                using (BusinessSecurity.Autenticacion negocio = new BusinessSecurity.Autenticacion())
+                {
+                    negocio.RecuperarCuenta(idUsuario, idTipoNotificacion, link, idCorreo, codigo, contrasena, tipoRecuperacion);
                 }
             }
             catch (Exception ex)

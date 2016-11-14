@@ -24,6 +24,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public List<HelperReportesTicket> ConsultarEficienciaTickets(int idUsuario, List<int> grupos, List<int> responsables, List<int> tipoArbol, List<int> tipificacion, List<int> nivelAtencion, List<int> atendedores, Dictionary<string, DateTime> fechas, List<int> tiposUsuario, List<int> prioridad, List<int> ubicaciones, List<int> organizaciones, List<bool?> vip, int pageIndex, int pageSize)
+        {
+            try
+            {
+                using (BusinessConsultas negocio = new BusinessConsultas())
+                {
+                    return negocio.ConsultarEficienciaTickets(idUsuario, grupos, responsables, tipoArbol, tipificacion, nivelAtencion, atendedores, fechas, tiposUsuario, prioridad, ubicaciones, organizaciones, vip, pageIndex, pageSize);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<HelperHits> ConsultarHits(int idUsuario, List<int> grupos, List<int> tiposUsuario, List<int> organizaciones, List<int> ubicaciones, List<int> tipificacion, List<bool?> vip, Dictionary<string, DateTime> fechas, int pageIndex, int pageSize)
         {
             try
@@ -60,7 +75,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             {
                 using (BusinessConsultas negocio = new BusinessConsultas())
                 {
-                    return negocio.ConsultaEncuestaPregunta( idUsuario,  idEncuesta, fechas, tipoFecha,  tipoEncuesta, idPregunta, respuesta);
+                    return negocio.ConsultaEncuestaPregunta(idUsuario, idEncuesta, fechas, tipoFecha, tipoEncuesta, idPregunta, respuesta);
                 }
             }
             catch (Exception ex)
@@ -84,7 +99,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public string GraficarConsultaTicketGeografico(int idUsuario, List<int> grupos, List<int> tiposUsuario, List<int> organizaciones,List<int> ubicaciones, List<int> tipoArbol, List<int> tipificacion, List<int> prioridad, List<int> estatus, List<bool?> sla, List<bool?> vip,Dictionary<string, DateTime> fechas, List<int> filtroStackColumn, string stack, int tipoFecha)
+        public string GraficarConsultaTicketGeografico(int idUsuario, List<int> grupos, List<int> tiposUsuario, List<int> organizaciones, List<int> ubicaciones, List<int> tipoArbol, List<int> tipificacion, List<int> prioridad, List<int> estatus, List<bool?> sla, List<bool?> vip, Dictionary<string, DateTime> fechas, List<int> filtroStackColumn, string stack, int tipoFecha)
         {
             try
             {
@@ -146,7 +161,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public string GraficarConsultaEncuestaGeografica(int idUsuario, List<int> grupos, List<int> tipoArbol, List<int> responsables, List<int?> encuestas,List<int> atendedores, Dictionary<string, DateTime> fechas, List<int> tiposUsuario, List<int> prioridad, List<bool?> sla, List<int> ubicaciones,List<int> organizaciones, List<bool?> vip, int tipoFecha)
+        public string GraficarConsultaEncuestaGeografica(int idUsuario, List<int> grupos, List<int> tipoArbol, List<int> responsables, List<int?> encuestas, List<int> atendedores, Dictionary<string, DateTime> fechas, List<int> tiposUsuario, List<int> prioridad, List<bool?> sla, List<int> ubicaciones, List<int> organizaciones, List<bool?> vip, int tipoFecha)
         {
             try
             {
@@ -185,6 +200,36 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessConsultas negocio = new BusinessConsultas())
                 {
                     return negocio.GraficarConsultaEncuestaPreguntaGeografica(idUsuario, encuestas, fechas, tipoFecha);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public DataTable GraficarConsultaEficienciaTicket(int idUsuario, List<int> grupos, List<int> responsables, List<int> tipoArbol, List<int> tipificacion, List<int> nivelAtencion, List<int> atendedores, Dictionary<string, DateTime> fechas, List<int> tiposUsuario, List<int> prioridad, List<int> ubicaciones, List<int> organizaciones, List<bool?> vip, string stack, int tipoFecha)
+        {
+            try
+            {
+                using (BusinessConsultas negocio = new BusinessConsultas())
+                {
+                    return negocio.GraficarConsultaEficienciaTicket(idUsuario, grupos,  responsables,  tipoArbol,  tipificacion,  nivelAtencion,  atendedores,  fechas,  tiposUsuario,  prioridad,  ubicaciones,  organizaciones,  vip, stack, tipoFecha);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public string GraficarConsultaEEficienciaTicketsGeografica(int idUsuario, List<int> grupos, List<int> responsables, List<int> tipoArbol, List<int> tipificacion, List<int> nivelAtencion, List<int> atendedores, Dictionary<string, DateTime> fechas, List<int> tiposUsuario, List<int> prioridad, List<int> ubicaciones, List<int> organizaciones, List<bool?> vip, int tipoFecha)
+        {
+            try
+            {
+                using (BusinessConsultas negocio = new BusinessConsultas())
+                {
+                    return negocio.GraficarConsultaEEficienciaTicketsGeografica(idUsuario, grupos,  responsables,  tipoArbol,  tipificacion,  nivelAtencion,  atendedores,  fechas,  tiposUsuario,  prioridad,  ubicaciones,  organizaciones,  vip, tipoFecha);
                 }
             }
             catch (Exception ex)

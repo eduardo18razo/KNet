@@ -46,6 +46,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ChangePassword">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="contrasenaActual" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="contrasenaNueva" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangePasswordResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ObtenerMenuUsuario">
     <xs:complexType>
       <xs:sequence>
@@ -76,6 +90,24 @@
       <xs:sequence>
         <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerMenuPublicoResult" nillable="true" type="q4:ArrayOfMenu" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarCuenta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoNotificacion" type="xs:int" />
+        <xs:element minOccurs="0" name="link" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idCorreo" type="xs:int" />
+        <xs:element minOccurs="0" name="codigo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="contrasena" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tipoRecuperacion" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecuperarCuentaResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

@@ -4,7 +4,6 @@ using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniNet.Services.Operacion.Interface
 {
-    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de interfaz "IServiceUsuarios" en el código y en el archivo de configuración a la vez.
     [ServiceContract]
     public interface IServiceUsuarios
     {
@@ -25,5 +24,35 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<Usuario> ObtenerAtendedoresEncuesta(int idUsuario, List<int?> encuestas);
+
+        [OperationContract]
+        bool ValidaUserName(string nombreUsuario);
+
+        [OperationContract]
+        bool ValidaConfirmacion(int idUsuario, string guid);
+
+        [OperationContract]
+        string ValidaCodigoVerificacionSms(int idUsuario, int idTipoNotificacion, int idTelefono, string codigo);
+
+        [OperationContract]
+        void EnviaCodigoVerificacionSms(int idUsuario, int idTipoNotificacion, int idTelefono);
+
+        [OperationContract]
+        void ActualizarTelefono(int idUsuario, int idTelefono, string numero);
+
+        [OperationContract]
+        void ConfirmaCuenta(int idUsuario, string password, Dictionary<int, string> confirmaciones, List<PreguntaReto> pregunta, string link);
+
+        [OperationContract]
+        Usuario BuscarUsuario(string usuario);
+
+        [OperationContract]
+        string EnviaCodigoVerificacionCorreo(int idUsuario, int idTipoNotificacion, int idCorreo);
+
+        [OperationContract]
+        void ValidaCodigoVerificacionCorreo(int idUsuario, int idTipoNotificacion, string link, int idCorreo, string codigo);
+
+        [OperationContract]
+        void ValidaRespuestasReto(int idUsuario, Dictionary<int, string> preguntasReto);
     }
 }

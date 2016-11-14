@@ -220,10 +220,10 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="form-horizontal">
-                                        <%--MASCARA DE CAPTURA--%>
+                                        <%--Formulario de Cliente--%>
                                         <div class="form-group">
                                             <div class="form-inline" style="width: 100%">
-                                                <label class="col-sm-3 control-label" style="width: 180px">Mascara de acceso</label>
+                                                <label class="col-sm-3 control-label" style="width: 180px">Formulario de Cliente</label>
                                                 <div class="col-sm-4">
                                                     <asp:DropDownList runat="server" ID="ddlMascaraAcceso" class="form-control" Style="width: 100%" />
                                                 </div>

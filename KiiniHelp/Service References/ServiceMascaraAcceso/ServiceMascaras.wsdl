@@ -16,8 +16,7 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceMascaras.svc?xsd=xsd11" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceMascaras.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceMascaras.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceMascaras.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/KinniNet.Core.Operacion" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceMascaras.svc?xsd=xsd15" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceMascaras.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceMascaras_CrearMascara_InputMessage">

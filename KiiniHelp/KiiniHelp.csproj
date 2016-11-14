@@ -134,17 +134,36 @@
     <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.min.css" />
     <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.standalone.css" />
     <Content Include="BootStrap\css\Calendar\bootstrap-datepicker3.standalone.min.css" />
+    <Content Include="BootStrap\css\Defaults.css" />
+    <Content Include="BootStrap\css\sumoselect.css" />
     <Content Include="BootStrap\js\bootstrap-datepicker.es.min.js" />
     <Content Include="BootStrap\js\bootstrap-datepicker.js" />
     <Content Include="BootStrap\js\bootstrap-datepicker.min.js" />
     <Content Include="BootStrap\js\locales\bootstrap-datepicker.es.min.js" />
-    <Content Include="Consultas\FrmConsulta.aspx" />
+    <Content Include="BootStrap\js\locales\jquery.sumoselect.min.js" />
+    <Content Include="ConfirmacionCuenta.aspx" />
+    <Content Include="FrmRecuperar.aspx" />
+    <Content Include="Identificar.aspx" />
+    <Content Include="UserControls\Altas\UcAltaCatalogo.ascx" />
+    <Content Include="UserControls\Consultas\UcConcultaCatalogos.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaCatalogo.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaPuestos.ascx" />
+    <Content Include="UserControls\Filtros\Graficos\UcFiltrosEficienciaTickets.ascx" />
+    <Content Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoEficienciaTickets.ascx" />
+    <Content Include="UserControls\Operacion\UcCambiarContrasena.ascx" />
+    <Content Include="UserControls\Operacion\UcRegistroCatalogo.ascx" />
+    <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogo.aspx" />
+    <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogos.aspx" />
+    <Content Include="Users\Administracion\Puestos\FrmConsultaPuestos.aspx" />
+    <Content Include="Users\Administracion\Usuarios\FrmCambiarContrasena.aspx" />
+    <Content Include="Users\Consultas\FrmConsulta.aspx" />
     <Content Include="FrmCloseWindow.aspx" />
-    <Content Include="Graficos\FrmGeoChart.aspx" />
-    <Content Include="Graficos\FrmGraficaEncuestaNombre.aspx" />
-    <Content Include="Graficos\FrmGraficaEncuestas.aspx" />
-    <Content Include="Graficos\FrmGraficaHits.aspx" />
-    <Content Include="Graficos\FrmGraficaTickets.aspx" />
+    <Content Include="Users\Graficos\FrmGeoChart.aspx" />
+    <Content Include="Users\Graficos\FrmGraficaEficienciaTickets.aspx" />
+    <Content Include="Users\Graficos\FrmGraficaEncuestaNombre.aspx" />
+    <Content Include="Users\Graficos\FrmGraficaEncuestas.aspx" />
+    <Content Include="Users\Graficos\FrmGraficaHits.aspx" />
+    <Content Include="Users\Graficos\FrmGraficaTickets.aspx" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.ImpactoUrgencia.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Prioridad.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Urgencia.datasource" />
@@ -166,6 +185,8 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperHits.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperReportesTicket.datasource" />
     <Content Include="Properties\DataSources\System.Data.DataTable.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Operacion.Tickets.Ticket.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.CatalogoGenerico.datasource" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -239,12 +260,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia9.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Service References\ServiceMascaraAcceso\KiiniHelp.ServiceMascaraAcceso.BusinessMascarasCatalogoGenerico.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Service References\ServiceMascaraAcceso\ServiceMascaras15.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceNotificacion\ServiceNotificacion.wsdl" />
@@ -410,9 +425,9 @@
     <Content Include="UserControls\UcLogIn.ascx" />
     <Content Include="Users\Administracion\ArbolesAcceso\FrmAltaArbolAcceso.aspx" />
     <Content Include="Users\Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx" />
-    <Content Include="Consultas\FrmConsultaTickets.aspx" />
-    <Content Include="Consultas\FrmConsultaEncuestasUnitarias.aspx" />
-    <Content Include="Consultas\FrmConsultaHits.aspx" />
+    <Content Include="Users\Consultas\FrmConsultaTickets.aspx" />
+    <Content Include="Users\Consultas\FrmConsultaEncuestasUnitarias.aspx" />
+    <Content Include="Users\Consultas\FrmConsultaHits.aspx" />
     <Content Include="Users\Administracion\Encuestas\FrmConsultaEncuestas.aspx" />
     <Content Include="Users\Administracion\Grupos\FrmConsultaGrupos.aspx" />
     <Content Include="Users\Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx" />
@@ -937,6 +952,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos14.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos2.xsd">
@@ -2031,6 +2049,9 @@
     <None Include="Service References\ServiceUsuario\ServiceUsuarios14.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceUsuario\ServiceUsuarios15.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceUsuario\ServiceUsuarios2.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2064,11 +2085,117 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consultas\FrmConsulta.aspx.cs">
+    <Compile Include="ConfirmacionCuenta.aspx.cs">
+      <DependentUpon>ConfirmacionCuenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConfirmacionCuenta.aspx.designer.cs">
+      <DependentUpon>ConfirmacionCuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRecuperar.aspx.cs">
+      <DependentUpon>FrmRecuperar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FrmRecuperar.aspx.designer.cs">
+      <DependentUpon>FrmRecuperar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Funciones\QueryString.cs" />
+    <Compile Include="Identificar.aspx.cs">
+      <DependentUpon>Identificar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Identificar.aspx.designer.cs">
+      <DependentUpon>Identificar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaCatalogo.ascx.cs">
+      <DependentUpon>UcAltaCatalogo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaCatalogo.ascx.designer.cs">
+      <DependentUpon>UcAltaCatalogo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConcultaCatalogos.ascx.cs">
+      <DependentUpon>UcConcultaCatalogos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConcultaCatalogos.ascx.designer.cs">
+      <DependentUpon>UcConcultaCatalogos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaCatalogo.ascx.cs">
+      <DependentUpon>UcConsultaCatalogo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaCatalogo.ascx.designer.cs">
+      <DependentUpon>UcConsultaCatalogo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaPuestos.ascx.cs">
+      <DependentUpon>UcConsultaPuestos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaPuestos.ascx.designer.cs">
+      <DependentUpon>UcConsultaPuestos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosEficienciaTickets.ascx.cs">
+      <DependentUpon>UcFiltrosEficienciaTickets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosEficienciaTickets.ascx.designer.cs">
+      <DependentUpon>UcFiltrosEficienciaTickets.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoEficienciaTickets.ascx.cs">
+      <DependentUpon>UcFiltrosParametrosGraficoEficienciaTickets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoEficienciaTickets.ascx.designer.cs">
+      <DependentUpon>UcFiltrosParametrosGraficoEficienciaTickets.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Operacion\UcCambiarContrasena.ascx.cs">
+      <DependentUpon>UcCambiarContrasena.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Operacion\UcCambiarContrasena.ascx.designer.cs">
+      <DependentUpon>UcCambiarContrasena.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Operacion\UcRegistroCatalogo.ascx.cs">
+      <DependentUpon>UcRegistroCatalogo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Operacion\UcRegistroCatalogo.ascx.designer.cs">
+      <DependentUpon>UcRegistroCatalogo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\Catalogos\FrmConsultaCatalogo.aspx.cs">
+      <DependentUpon>FrmConsultaCatalogo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Catalogos\FrmConsultaCatalogo.aspx.designer.cs">
+      <DependentUpon>FrmConsultaCatalogo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\Catalogos\FrmConsultaCatalogos.aspx.cs">
+      <DependentUpon>FrmConsultaCatalogos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Catalogos\FrmConsultaCatalogos.aspx.designer.cs">
+      <DependentUpon>FrmConsultaCatalogos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\Puestos\FrmConsultaPuestos.aspx.cs">
+      <DependentUpon>FrmConsultaPuestos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Puestos\FrmConsultaPuestos.aspx.designer.cs">
+      <DependentUpon>FrmConsultaPuestos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\Usuarios\FrmCambiarContrasena.aspx.cs">
+      <DependentUpon>FrmCambiarContrasena.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Usuarios\FrmCambiarContrasena.aspx.designer.cs">
+      <DependentUpon>FrmCambiarContrasena.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Consultas\FrmConsulta.aspx.cs">
       <DependentUpon>FrmConsulta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Consultas\FrmConsulta.aspx.designer.cs">
+    <Compile Include="Users\Consultas\FrmConsulta.aspx.designer.cs">
       <DependentUpon>FrmConsulta.aspx</DependentUpon>
     </Compile>
     <Compile Include="FrmCloseWindow.aspx.cs">
@@ -2078,39 +2205,46 @@
     <Compile Include="FrmCloseWindow.aspx.designer.cs">
       <DependentUpon>FrmCloseWindow.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Graficos\FrmGeoChart.aspx.cs">
+    <Compile Include="Users\Graficos\FrmGeoChart.aspx.cs">
       <DependentUpon>FrmGeoChart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Graficos\FrmGeoChart.aspx.designer.cs">
+    <Compile Include="Users\Graficos\FrmGeoChart.aspx.designer.cs">
       <DependentUpon>FrmGeoChart.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Graficos\FrmGraficaEncuestaNombre.aspx.cs">
+    <Compile Include="Users\Graficos\FrmGraficaEficienciaTickets.aspx.cs">
+      <DependentUpon>FrmGraficaEficienciaTickets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Graficos\FrmGraficaEficienciaTickets.aspx.designer.cs">
+      <DependentUpon>FrmGraficaEficienciaTickets.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Graficos\FrmGraficaEncuestaNombre.aspx.cs">
       <DependentUpon>FrmGraficaEncuestaNombre.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Graficos\FrmGraficaEncuestaNombre.aspx.designer.cs">
+    <Compile Include="Users\Graficos\FrmGraficaEncuestaNombre.aspx.designer.cs">
       <DependentUpon>FrmGraficaEncuestaNombre.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Graficos\FrmGraficaEncuestas.aspx.cs">
+    <Compile Include="Users\Graficos\FrmGraficaEncuestas.aspx.cs">
       <DependentUpon>FrmGraficaEncuestas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Graficos\FrmGraficaEncuestas.aspx.designer.cs">
+    <Compile Include="Users\Graficos\FrmGraficaEncuestas.aspx.designer.cs">
       <DependentUpon>FrmGraficaEncuestas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Graficos\FrmGraficaHits.aspx.cs">
+    <Compile Include="Users\Graficos\FrmGraficaHits.aspx.cs">
       <DependentUpon>FrmGraficaHits.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Graficos\FrmGraficaHits.aspx.designer.cs">
+    <Compile Include="Users\Graficos\FrmGraficaHits.aspx.designer.cs">
       <DependentUpon>FrmGraficaHits.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Graficos\FrmGraficaTickets.aspx.cs">
+    <Compile Include="Users\Graficos\FrmGraficaTickets.aspx.cs">
       <DependentUpon>FrmGraficaTickets.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Graficos\FrmGraficaTickets.aspx.designer.cs">
+    <Compile Include="Users\Graficos\FrmGraficaTickets.aspx.designer.cs">
       <DependentUpon>FrmGraficaTickets.aspx</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceConsultas\Reference.cs">
@@ -2434,25 +2568,25 @@
     <Compile Include="Users\Administracion\ArbolesAcceso\FrmConsultaArbolAcceso.aspx.designer.cs">
       <DependentUpon>FrmConsultaArbolAcceso.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Consultas\FrmConsultaTickets.aspx.cs">
+    <Compile Include="Users\Consultas\FrmConsultaTickets.aspx.cs">
       <DependentUpon>FrmConsultaTickets.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Consultas\FrmConsultaTickets.aspx.designer.cs">
+    <Compile Include="Users\Consultas\FrmConsultaTickets.aspx.designer.cs">
       <DependentUpon>FrmConsultaTickets.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Consultas\FrmConsultaEncuestasUnitarias.aspx.cs">
+    <Compile Include="Users\Consultas\FrmConsultaEncuestasUnitarias.aspx.cs">
       <DependentUpon>FrmConsultaEncuestasUnitarias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Consultas\FrmConsultaEncuestasUnitarias.aspx.designer.cs">
+    <Compile Include="Users\Consultas\FrmConsultaEncuestasUnitarias.aspx.designer.cs">
       <DependentUpon>FrmConsultaEncuestasUnitarias.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Consultas\FrmConsultaHits.aspx.cs">
+    <Compile Include="Users\Consultas\FrmConsultaHits.aspx.cs">
       <DependentUpon>FrmConsultaHits.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Consultas\FrmConsultaHits.aspx.designer.cs">
+    <Compile Include="Users\Consultas\FrmConsultaHits.aspx.designer.cs">
       <DependentUpon>FrmConsultaHits.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Administracion\Encuestas\FrmConsultaEncuestas.aspx.cs">

@@ -11,8 +11,6 @@ namespace KiiniNet.Entities.Cat.Usuario
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public string Descripcion { get; set; }
-        [DataMember]
         public decimal? Dias { get; set; }
         [DataMember]
         public decimal? Horas { get; set; }

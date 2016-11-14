@@ -39,5 +39,50 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public void Actualizar(int idPuesto, Puesto puesto)
+        {
+            try
+            {
+                using (BusinessPuesto negocio = new BusinessPuesto())
+                {
+                    negocio.Actualizar(idPuesto, puesto);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Puesto> ObtenerPuestoConsulta(int? idPuesto)
+        {
+            try
+            {
+                using (BusinessPuesto negocio = new BusinessPuesto())
+                {
+                    return negocio.ObtenerPuestoConsulta(idPuesto);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void Habilitar(int idPuesto, bool habilitado)
+        {
+            try
+            {
+                using (BusinessPuesto negocio = new BusinessPuesto())
+                {
+                    negocio.Habilitar(idPuesto, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

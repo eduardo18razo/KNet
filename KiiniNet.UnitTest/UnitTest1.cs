@@ -4,6 +4,7 @@ using KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio;
 using KinniNet.Core.Demonio;
 using KinniNet.Core.Operacion;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BusinessCatalogos = KinniNet.Core.Sistema.BusinessCatalogos;
 
 namespace KiiniNet.UnitTest
 {
@@ -17,23 +18,24 @@ namespace KiiniNet.UnitTest
         {
             try
             {
-                var g = new BusinessConsultas().GraficarConsultaHitsGeografico(4, null, null, null, null, null, null, null, null, "", 0);
-                //TODO:FECHAS PARA CONSULTA DE GRAFICOS SEMANAL
-                DateTime jan1 = new DateTime(DateTime.Now.Year, 1, 1);
-                int daysOffset = DayOfWeek.Sunday - jan1.DayOfWeek;
-                int daysToAdd = DayOfWeek.Saturday - jan1.DayOfWeek;
-                DateTime firstSunday = jan1.AddDays(daysOffset);
-                DateTime firstSaturday = jan1.AddDays(daysToAdd);
-                var cal = CultureInfo.CurrentCulture.Calendar;
-                int firstWeek = cal.GetWeekOfYear(firstSunday, CalendarWeekRule.FirstDay, DayOfWeek.Saturday);
-                var weekNum = 2;
-                if (firstWeek <= 1)
-                {
-                    weekNum -= 1;
-                }
-                var result = firstSunday.AddDays(weekNum * 7);
-                var z = result.AddDays(-3);
-                new BusinessDemonio().ActualizaSla();
+                new BusinessCatalogos().CrearCatalogo("catalogo de prueba", true);
+                //var g = new BusinessConsultas().GraficarConsultaHitsGeografico(4, null, null, null, null, null, null, null, null, "", 0);
+                ////TODO:FECHAS PARA CONSULTA DE GRAFICOS SEMANAL
+                //DateTime jan1 = new DateTime(DateTime.Now.Year, 1, 1);
+                //int daysOffset = DayOfWeek.Sunday - jan1.DayOfWeek;
+                //int daysToAdd = DayOfWeek.Saturday - jan1.DayOfWeek;
+                //DateTime firstSunday = jan1.AddDays(daysOffset);
+                //DateTime firstSaturday = jan1.AddDays(daysToAdd);
+                //var cal = CultureInfo.CurrentCulture.Calendar;
+                //int firstWeek = cal.GetWeekOfYear(firstSunday, CalendarWeekRule.FirstDay, DayOfWeek.Saturday);
+                //var weekNum = 2;
+                //if (firstWeek <= 1)
+                //{
+                //    weekNum -= 1;
+                //}
+                //var result = firstSunday.AddDays(weekNum * 7);
+                //var z = result.AddDays(-3);
+                //new BusinessDemonio().ActualizaSla();
                 //new BusinessMascaras().GetDataMascara(1,1);
                 //DataBaseModelContext db = new DataBaseModelContext();
                 //var y = db.Ticket.Where(w=>w.EncuestaRespondida == false && w.IdEncuesta != null).ToList();

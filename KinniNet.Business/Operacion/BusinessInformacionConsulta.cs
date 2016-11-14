@@ -58,7 +58,7 @@ namespace KinniNet.Core.Operacion
                 informacion.Descripcion = informacion.Descripcion.Trim().ToUpper();
                 switch (informacion.IdTipoInfConsulta)
                 {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
 
                         break;
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
@@ -102,7 +102,7 @@ namespace KinniNet.Core.Operacion
                 info.Habilitado = true;
                 switch (informacion.IdTipoInfConsulta)
                 {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                         for (int i = 0; i < info.InformacionConsultaDatos.Count; i++)
                         {
                             info.InformacionConsultaDatos[i].Descripcion = informacion.InformacionConsultaDatos[i].Descripcion;

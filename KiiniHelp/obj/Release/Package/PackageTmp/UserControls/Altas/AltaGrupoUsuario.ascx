@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Descripcion</label>
                                 <div class="col-sm-6">
-                                    <asp:TextBox runat="server" ID="txtDescripcionGrupoUsuario" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13);" />
+                                    <asp:TextBox runat="server" ID="txtDescripcionGrupoUsuario" placeholder="DESCRIPCION" class="form-control obligatorio" onkeydown="return (event.keyCode!=13);" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -55,11 +55,6 @@
                             <div class="panel-body" runat="server" id="divSubRoles" visible="False">
                                 <asp:HiddenField runat="server" ID="hfOperacion" />
                                 <div>
-                                    <%-- <div class="form-group">
-                                        <div class="form-group">
-                                            <asp:CheckBoxList runat="server" ID="chklbxSubRoles" Checked="True" Visible="True" OnSelectedIndexChanged="chklbxSubRoles_OnSelectedIndexChanged" AutoPostBack="True" />
-                                        </div>
-                                    </div>--%>
                                     <div class="form-group">
                                         <div class="form-group">
                                             <asp:Repeater runat="server" ID="rptSubRoles" OnItemDataBound="rptSubRoles_OnItemDataBound">
@@ -92,26 +87,18 @@
 
 <%--MODAL HORARO--%>
 <div class="modal fade" id="modalHorarios" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: auto">
-    <%--<asp:UpdatePanel ID="upHorarios" runat="server" >
-                <ContentTemplate>--%>
     <div class="modal-dialog" >
         <div class="modal-content">
             <uc1:UcHorario runat="server" ID="ucHorario" />
         </div>
     </div>
-    <%--</ContentTemplate>
-            </asp:UpdatePanel>--%>
 </div>
 
 <%--MODAL DIAS DESCANSO--%>
 <div class="modal fade" id="modalDiasDescanso" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: auto">
-    <%--<asp:UpdatePanel ID="upDiasDescanso" runat="server" UpdateMode="Conditional">
-        <ContentTemplate>--%>
     <div class="modal-dialog">
         <div class="modal-content">
             <uc1:UcAltaDiasFestivos runat="server" ID="ucAltaDiasFestivos" />
         </div>
     </div>
-    <%--    </ContentTemplate>
-    </asp:UpdatePanel>--%>
 </div>

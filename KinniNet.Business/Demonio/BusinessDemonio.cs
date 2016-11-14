@@ -116,7 +116,7 @@ namespace KinniNet.Core.Demonio
                     {
                         foreach (CorreoUsuario correoUsuario in ug.Usuario.CorreoUsuario)
                         {
-                            SendMail(correoUsuario.Correo,
+                            BusinessCorreo.SendMail(correoUsuario.Correo,
                                 string.Format("Ticket {0} Clave Registro {1} {2}", ticket.Id, ticket.Random ? ticket.ClaveRegistro : "N/A", tgu.GrupoUsuario.Descripcion),
                                 string.Format("Grupo {0} " +
                                               "<br>Persona {1} " +
@@ -133,41 +133,7 @@ namespace KinniNet.Core.Demonio
                 }
             }
         }
-
-        private void SendMail(string addressTo, string subject, string content)
-        {
-            try
-            {
-                SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
-
-                MailAddress fromAddress = new MailAddress(section.From, "Eduardo Cerritos");
-                MailAddress toAddress = new MailAddress(addressTo, "Prueba");
-
-                var smtp = new SmtpClient
-                {
-                    Host = section.Network.Host,//"smtp.gmail.com",
-                    Port = section.Network.Port,
-                    EnableSsl = section.Network.EnableSsl,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = section.Network.DefaultCredentials,
-                    Credentials = new NetworkCredential(fromAddress.Address, section.Network.Password)
-                };
-                using (var message = new MailMessage(fromAddress, toAddress)
-                {
-                    Subject = subject,
-                    IsBodyHtml = true,
-                    Body = content
-                })
-                {
-                    smtp.Send(message);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-        }
-
+        
         public void ActualizaSla()
         {
             DataBaseModelContext db = new DataBaseModelContext();

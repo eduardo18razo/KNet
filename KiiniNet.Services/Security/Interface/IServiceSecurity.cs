@@ -18,9 +18,15 @@ namespace KiiniNet.Services.Security.Interface
         Usuario GetUserInvitadoDataAutenticate(int idTipoUsuario);
 
         [OperationContract]
+        void ChangePassword(int idUsuario, string contrasenaActual, string contrasenaNueva);
+
+        [OperationContract]
         List<Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles);
 
         [OperationContract]
         List<Menu> ObtenerMenuPublico(int idTipoUsuario, int idArea, bool arboles);
+
+        [OperationContract]
+        void RecuperarCuenta(int idUsuario, int idTipoNotificacion, string link, int idCorreo, string codigo, string contrasena, string tipoRecuperacion);
     }
 }

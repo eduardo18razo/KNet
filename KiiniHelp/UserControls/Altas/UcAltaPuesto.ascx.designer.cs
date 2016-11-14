@@ -40,6 +40,24 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.WebControls.Repeater rptErrorGeneral;
         
         /// <summary>
+        /// Control hfEsAlta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfEsAlta;
+        
+        /// <summary>
+        /// Control hfIdPuesto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdPuesto;
+        
+        /// <summary>
         /// Control txtDescripcionPuesto.
         /// </summary>
         /// <remarks>
@@ -49,22 +67,22 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.WebControls.TextBox txtDescripcionPuesto;
         
         /// <summary>
-        /// Control btnGuardarArea.
+        /// Control btnGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardarArea;
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
         
         /// <summary>
-        /// Control btnLimpiarArea.
+        /// Control btnLimpiar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLimpiarArea;
+        protected global::System.Web.UI.WebControls.Button btnLimpiar;
         
         /// <summary>
         /// Control btnCancelar.

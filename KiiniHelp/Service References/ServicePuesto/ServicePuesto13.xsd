@@ -27,4 +27,44 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="Actualizar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPuesto" type="xs:int" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="puesto" nillable="true" type="q3:Puesto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualizarResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerPuestoConsulta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPuesto" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerPuestoConsultaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerPuestoConsultaResult" nillable="true" type="q4:ArrayOfPuesto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Habilitar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idPuesto" type="xs:int" />
+        <xs:element minOccurs="0" name="habilitado" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HabilitarResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

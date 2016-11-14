@@ -28,7 +28,6 @@
     <MetadataFile FileName="ServiceMascaras1.xsd" MetadataType="Schema" ID="2fb0a9b6-375d-423b-9a9a-55705f455e18" SourceId="1" SourceUrl="http://localhost:15277/ServiceMascaras.svc?xsd=xsd0" />
     <MetadataFile FileName="ServiceMascaras13.xsd" MetadataType="Schema" ID="07df176c-13d7-47f5-93f7-d19c8011b6e4" SourceId="1" SourceUrl="http://localhost:15277/ServiceMascaras.svc?xsd=xsd13" />
     <MetadataFile FileName="ServiceMascaras2.xsd" MetadataType="Schema" ID="a93c4945-e0f1-40bb-baae-57f1ca18d91e" SourceId="1" SourceUrl="http://localhost:15277/ServiceMascaras.svc?xsd=xsd10" />
-    <MetadataFile FileName="ServiceMascaras15.xsd" MetadataType="Schema" ID="3f939cb6-4a99-4454-a920-6d43700e0190" SourceId="1" SourceUrl="http://localhost:15277/ServiceMascaras.svc?xsd=xsd15" />
     <MetadataFile FileName="ServiceMascaras3.xsd" MetadataType="Schema" ID="f44c02dc-9afa-4286-b8fc-12b9b557aaa4" SourceId="1" SourceUrl="http://localhost:15277/ServiceMascaras.svc?xsd=xsd9" />
     <MetadataFile FileName="ServiceMascaras4.xsd" MetadataType="Schema" ID="339b6b16-f2d5-4001-8c7e-9bba6162d291" SourceId="1" SourceUrl="http://localhost:15277/ServiceMascaras.svc?xsd=xsd7" />
     <MetadataFile FileName="ServiceMascaras5.xsd" MetadataType="Schema" ID="ff7d6c2e-4bc2-4429-aef8-75ff74f86bb3" SourceId="1" SourceUrl="http://localhost:15277/ServiceMascaras.svc?xsd=xsd4" />

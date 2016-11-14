@@ -4,12 +4,16 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceConsultas;
 using KiiniHelp.ServiceEncuesta;
+using KiiniHelp.ServiceSistemaTipoUsuario;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
@@ -18,9 +22,70 @@ namespace KiiniHelp.Test
 {
     public partial class FrmTest : System.Web.UI.Page
     {
+
+        //private void SendMessageAltiria()
+        //{
+        //    HttpWebRequest loHttp =
+        //        (HttpWebRequest)WebRequest.Create("http://www.altiria.net/api/http");
+
+        //    string lcPostData = "cmd=sendsms&domainId=demo&login=edu18&passwd=fhmdemok&dest=525554374934&msg=tercer";
+
+        //    byte[] lbPostBuffer = System.Text.Encoding.GetEncoding("utf-8").GetBytes(lcPostData);
+        //    loHttp.Method = "POST";
+        //    loHttp.ContentType = "application/x-www-form-urlencoded";
+        //    loHttp.ContentLength = lbPostBuffer.Length;
+        //    loHttp.Timeout = 60000;
+        //    String error = "";
+        //    String response = "";
+        //    try
+        //    {
+        //        Stream loPostData = loHttp.GetRequestStream();
+        //        loPostData.Write(lbPostBuffer, 0, lbPostBuffer.Length);
+        //        loPostData.Close();
+        //        HttpWebResponse loWebResponse = (HttpWebResponse)loHttp.GetResponse();
+        //        Encoding enc = System.Text.Encoding.GetEncoding("utf-8");
+        //        StreamReader loResponseStream =
+        //            new StreamReader(loWebResponse.GetResponseStream(), enc);
+        //        response = loResponseStream.ReadToEnd();
+        //        loWebResponse.Close();
+        //        loResponseStream.Close();
+        //    }
+        //    catch (WebException e)
+        //    {
+        //        if (e.Status == WebExceptionStatus.ConnectFailure)
+        //            error = "Error en la conexión";
+        //        else if (e.Status == WebExceptionStatus.Timeout)
+        //            error = "Error TimeOut";
+        //        else
+        //            error = e.Message;
+        //    }
+        //    finally
+        //    {
+        //        if (error != "")
+        //            lblerrorMensaje.Text = error;
+        //        else
+        //            lblerrorMensaje.Text =  response;
+        //    }
+        //}
+        protected void btnGetSelectedValues_Click(object sender, EventArgs e)
+        {
+            string selectedValues = string.Empty;
+            foreach (ListItem li in lstBoxTest.Items)
+            {
+                if (li.Selected == true)
+                {
+                    selectedValues += li.Text + ",";
+                }
+            }
+            Response.Write(selectedValues.ToString());
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            lstBoxTest.DataSource = new ServiceTipoUsuarioClient().ObtenerTiposUsuario(true);
+            lstBoxTest.DataTextField = "Descripcion";
+            lstBoxTest.DataValueField = "Id";
+            lstBoxTest.DataBind();
+            //SendMessageAltiria();
             //if (!IsPostBack)
             //{
             //    DataTable dt = new DataTable("Data");
@@ -122,7 +187,7 @@ namespace KiiniHelp.Test
             //Chart1.Legends[0].Title = "Stack";
         }
 
-        
+
 
         private void MakeParetoChart(Chart chart, string srcSeriesName, string destSeriesName)
         {

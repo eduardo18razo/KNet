@@ -68,7 +68,7 @@ namespace KinniNet.Core.Operacion
                     }
                     contador++;
                 }
-                if(tiempoProceso == 0)
+                if (tiempoProceso == 0)
                     diasAsignados.Add(DateTime.Now);
                 result = DateTime.ParseExact(diasAsignados.Max().ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
             }
@@ -79,24 +79,23 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public void CrearTicket(int idUsuario, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, bool campoRandom)
+        public Ticket CrearTicket(int idUsuario, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, bool campoRandom)
         {
             DataBaseModelContext db = new DataBaseModelContext();
+            Ticket result;
             try
             {
                 Usuario usuario = new BusinessUsuarios().ObtenerUsuario(idUsuario);
                 ArbolAcceso arbol = new BusinessArbolAcceso().ObtenerArbolAcceso(idArbol);
-                Mascara mascara =
-                    new BusinessMascaras().ObtenerMascaraCaptura(arbol.InventarioArbolAcceso.First().IdMascara ?? 0);
-                Encuesta encuesta =
-                    new BusinessEncuesta().ObtenerEncuestaById(arbol.InventarioArbolAcceso.First().IdEncuesta ?? 0);
+                Mascara mascara = new BusinessMascaras().ObtenerMascaraCaptura(arbol.InventarioArbolAcceso.First().IdMascara ?? 0);
+                Encuesta encuesta = new BusinessEncuesta().ObtenerEncuestaById(arbol.InventarioArbolAcceso.First().IdEncuesta ?? 0);
                 Sla sla = new BusinessSla().ObtenerSla(arbol.InventarioArbolAcceso.First().IdSla ?? 0);
                 Ticket ticket = new Ticket
                 {
                     IdTipoUsuario = usuario.IdTipoUsuario,
                     IdTipoArbolAcceso = arbol.IdTipoArbolAcceso,
                     IdArbolAcceso = arbol.Id,
-                    IdImpacto = (int) arbol.IdImpacto,
+                    IdImpacto = (int)arbol.IdImpacto,
                     IdUsuario = usuario.Id,
                     IdOrganizacion = usuario.IdOrganizacion,
                     IdUbicacion = usuario.IdUbicacion,
@@ -120,7 +119,6 @@ namespace KinniNet.Core.Operacion
                         grupo.IdSubGrupoUsuario = grupoArbol.IdSubGrupoUsuario;
                     ticket.TicketGrupoUsuario.Add(grupo);
                 }
-
 
                 //SLA
                 ticket.SlaEstimadoTicket = new SlaEstimadoTicket
@@ -195,12 +193,15 @@ namespace KinniNet.Core.Operacion
                 if (ticket.Random)
                     store = store + ", '" + ticket.ClaveRegistro + "'";
                 db.ExecuteStoreCommand(store);
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = new Ticket { Id = ticket.Id, Random = campoRandom, ClaveRegistro = ticket.ClaveRegistro };
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
             finally { db.Dispose(); }
+            return result;
         }
 
         private string GeneraCampoRandom()
@@ -239,9 +240,9 @@ namespace KinniNet.Core.Operacion
                             IdUsuarioMovimiento = idUsuario,
                             Comentarios = comentario.Trim().ToUpper()
                     }};
-                    if (idEstatus == (int) BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto)
+                    if (idEstatus == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto)
                         ticket.IdUsuarioResolvio = idUsuario;
-                        ticket.TicketAsignacion = new List<TicketAsignacion>
+                    ticket.TicketAsignacion = new List<TicketAsignacion>
                         {
                             new TicketAsignacion
                             {
@@ -369,7 +370,7 @@ namespace KinniNet.Core.Operacion
                 bool supervisor = db.SubGrupoUsuario.Join(db.UsuarioGrupo, sgu => sgu.Id, ug => ug.IdSubGrupoUsuario, (sgu, ug) => new { sgu, ug })
                         .Any(@t => @t.sgu.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor && @t.ug.IdUsuario == idUsuario);
 
-                
+
                 int totalRegistros = lstTickets.Count;
                 //TODO: Actualizar propiedades faltantes de asignacion
                 if (totalRegistros > 0)
@@ -468,7 +469,7 @@ namespace KinniNet.Core.Operacion
                         foreach (int? estatusPermitido in lstEstatusPermitidos)
                         {
                             if (estatusPermitido == null)
-                                
+
                                 lstTickets.AddRange(db.Ticket.Join(db.TicketAsignacion.OrderByDescending(o => o.Id).Take(1), t => t.Id, ta => ta.IdTicket, (t, ta) => new { t, ta })
                                         .Join(db.TicketGrupoUsuario, @t1 => @t1.t.Id, tgu => tgu.IdTicket, (@t1, tgu) => new { @t1, tgu })
                                         .Where(@t1 => @t1.tgu.IdGrupoUsuario == grupo && @t1.@t1.ta.IdUsuarioAsignado == null && @t1.t1.t.IdEstatusAsignacion == estatusPermitido)

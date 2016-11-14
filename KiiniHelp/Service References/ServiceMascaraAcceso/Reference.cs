@@ -9,70 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace KiiniHelp.ServiceMascaraAcceso {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BusinessMascaras.CatalogoGenerico", Namespace="http://schemas.datacontract.org/2004/07/KinniNet.Core.Operacion")]
-    [System.SerializableAttribute()]
-    public partial class BusinessMascarasCatalogoGenerico : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DescripcionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Descripcion {
-            get {
-                return this.DescripcionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DescripcionField, value) != true)) {
-                    this.DescripcionField = value;
-                    this.RaisePropertyChanged("Descripcion");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceMascaraAcceso.IServiceMascaras")]
@@ -91,7 +28,7 @@ namespace KiiniHelp.ServiceMascaraAcceso {
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Mascaras.Mascara> ObtenerMascarasAcceso(bool insertarSeleccion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMascaras/ObtenerCatalogoCampoMascara", ReplyAction="http://tempuri.org/IServiceMascaras/ObtenerCatalogoCampoMascaraResponse")]
-        System.Collections.Generic.List<KiiniHelp.ServiceMascaraAcceso.BusinessMascarasCatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla);
+        System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMascaras/Consulta", ReplyAction="http://tempuri.org/IServiceMascaras/ConsultaResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Mascaras.Mascara> Consulta(string descripcion);
@@ -146,7 +83,7 @@ namespace KiiniHelp.ServiceMascaraAcceso {
             return base.Channel.ObtenerMascarasAcceso(insertarSeleccion);
         }
         
-        public System.Collections.Generic.List<KiiniHelp.ServiceMascaraAcceso.BusinessMascarasCatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla) {
+        public System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla) {
             return base.Channel.ObtenerCatalogoCampoMascara(tabla);
         }
         

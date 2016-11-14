@@ -61,10 +61,13 @@ namespace KinniNet.Data.Help
                 _urgencia = CreateObjectSet<Urgencia>();
                 _nivelUbicacion = CreateObjectSet<NivelUbicacion>();
                 _nivelOrganizacion = CreateObjectSet<NivelOrganizacion>();
+                _tipoCorreo = CreateObjectSet<TipoCorreo>();
+                _tipoLink = CreateObjectSet<TipoLink>();
 
                 //Parametros
                 _subRolEscalacionPermitida = CreateObjectSet<SubRolEscalacionPermitida>();
                 _parametrosSla = CreateObjectSet<ParametrosSla>();
+                _parametroCorreo = CreateObjectSet<ParametroCorreo>();
 
                 //Ubicacion
                 _pais = CreateObjectSet<Pais>();
@@ -107,6 +110,7 @@ namespace KinniNet.Data.Help
                 _telefonoUsuario = CreateObjectSet<TelefonoUsuario>();
                 _usuarioRol = CreateObjectSet<UsuarioRol>();
                 _usuarioGrupo = CreateObjectSet<UsuarioGrupo>();
+                _usuarioLinkPassword = CreateObjectSet<UsuarioLinkPassword>();
                 _tipoCampoMascara = CreateObjectSet<TipoCampoMascara>();
                 _arbolAcceso = CreateObjectSet<ArbolAcceso>();
                 _informacionConsulta = CreateObjectSet<InformacionConsulta>();
@@ -134,6 +138,8 @@ namespace KinniNet.Data.Help
                 _horarioSubGrupo = CreateObjectSet<HorarioSubGrupo>();
                 _diaFestivoSubGrupo = CreateObjectSet<DiaFestivoSubGrupo>();
                 _tiempoInformeArbol = CreateObjectSet<TiempoInformeArbol>();
+                _smsService = CreateObjectSet<SmsService>();
+                _preguntaReto = CreateObjectSet<PreguntaReto>();
 
 
                 _puesto = CreateObjectSet<Puesto>();
@@ -174,8 +180,6 @@ namespace KinniNet.Data.Help
                 return cadena;
             }
         }
-
-
 
         public ObjectSet<ParametrosTelefonos> ParametrosTelefonos
         {
@@ -249,6 +253,14 @@ namespace KinniNet.Data.Help
             get
             {
                 return _usuarioGrupo;
+            }
+        }
+
+        public ObjectSet<UsuarioLinkPassword> UsuarioLinkPassword
+        {
+            get
+            {
+                return _usuarioLinkPassword;
             }
         }
 
@@ -475,6 +487,22 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<SmsService> SmsService
+        {
+            get
+            {
+                return _smsService;
+            }
+        }
+
+        public ObjectSet<PreguntaReto> PreguntaReto
+        {
+            get
+            {
+                return _preguntaReto;
+            }
+        }
+
 
 
         private readonly ObjectSet<Usuario> _usuario;
@@ -485,6 +513,7 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<TelefonoUsuario> _telefonoUsuario;
         private readonly ObjectSet<UsuarioRol> _usuarioRol;
         private readonly ObjectSet<UsuarioGrupo> _usuarioGrupo;
+        private readonly ObjectSet<UsuarioLinkPassword> _usuarioLinkPassword;
         private readonly ObjectSet<TipoCampoMascara> _tipoCampoMascara;
         private readonly ObjectSet<Catalogos> _catalogos;
         private readonly ObjectSet<ArbolAcceso> _arbolAcceso;
@@ -514,6 +543,8 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<HorarioSubGrupo> _horarioSubGrupo;
         private readonly ObjectSet<DiaFestivoSubGrupo> _diaFestivoSubGrupo;
         private readonly ObjectSet<TiempoInformeArbol> _tiempoInformeArbol;
+        private readonly ObjectSet<SmsService> _smsService;
+        private readonly ObjectSet<PreguntaReto> _preguntaReto;
 
         #region Mascara
         public ObjectSet<Mascara> Mascara
@@ -747,7 +778,21 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<TipoCorreo> TipoCorreo
+        {
+            get
+            {
+                return _tipoCorreo;
+            }
+        }
 
+        public ObjectSet<TipoLink> TipoLink
+        {
+            get
+            {
+                return _tipoLink;
+            }
+        }
 
         private readonly ObjectSet<TipoUsuario> _tipoUsuario;
         private readonly ObjectSet<Pais> _pais;
@@ -778,6 +823,8 @@ namespace KinniNet.Data.Help
 
         private readonly ObjectSet<NivelUbicacion> _nivelUbicacion;
         private readonly ObjectSet<NivelOrganizacion> _nivelOrganizacion;
+        private readonly ObjectSet<TipoCorreo> _tipoCorreo;
+        private readonly ObjectSet<TipoLink> _tipoLink;
 
         #endregion Systema
 
@@ -796,8 +843,17 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<ParametroCorreo> ParametroCorreo
+        {
+            get
+            {
+                return _parametroCorreo;
+            }
+        }
+
         private readonly ObjectSet<SubRolEscalacionPermitida> _subRolEscalacionPermitida;
         private readonly ObjectSet<ParametrosSla> _parametrosSla;
+        private readonly ObjectSet<ParametroCorreo> _parametroCorreo;
 
         #region Usuario
 

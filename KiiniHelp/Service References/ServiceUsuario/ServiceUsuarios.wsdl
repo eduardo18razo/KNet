@@ -17,6 +17,7 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceUsuarios.svc?xsd=xsd15" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceUsuarios_GuardarUsuario_InputMessage">
@@ -55,6 +56,66 @@
   <wsdl:message name="IServiceUsuarios_ObtenerAtendedoresEncuesta_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerAtendedoresEncuestaResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ValidaUserName_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidaUserName" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ValidaUserName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidaUserNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ValidaConfirmacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidaConfirmacion" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ValidaConfirmacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidaConfirmacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ValidaCodigoVerificacionSms_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidaCodigoVerificacionSms" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ValidaCodigoVerificacionSms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidaCodigoVerificacionSmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_EnviaCodigoVerificacionSms_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnviaCodigoVerificacionSms" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_EnviaCodigoVerificacionSms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnviaCodigoVerificacionSmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ActualizarTelefono_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarTelefono" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ActualizarTelefono_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarTelefonoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ConfirmaCuenta_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConfirmaCuenta" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ConfirmaCuenta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConfirmaCuentaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_BuscarUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_BuscarUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_EnviaCodigoVerificacionCorreo_InputMessage">
+    <wsdl:part name="parameters" element="tns:EnviaCodigoVerificacionCorreo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_EnviaCodigoVerificacionCorreo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EnviaCodigoVerificacionCorreoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ValidaCodigoVerificacionCorreo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidaCodigoVerificacionCorreo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ValidaCodigoVerificacionCorreo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidaCodigoVerificacionCorreoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ValidaRespuestasReto_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidaRespuestasReto" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ValidaRespuestasReto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidaRespuestasRetoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceUsuarios">
     <wsdl:operation name="GuardarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/GuardarUsuario" message="tns:IServiceUsuarios_GuardarUsuario_InputMessage" />
@@ -79,6 +140,46 @@
     <wsdl:operation name="ObtenerAtendedoresEncuesta">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerAtendedoresEncuesta" message="tns:IServiceUsuarios_ObtenerAtendedoresEncuesta_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerAtendedoresEncuestaResponse" message="tns:IServiceUsuarios_ObtenerAtendedoresEncuesta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidaUserName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ValidaUserName" message="tns:IServiceUsuarios_ValidaUserName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ValidaUserNameResponse" message="tns:IServiceUsuarios_ValidaUserName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidaConfirmacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ValidaConfirmacion" message="tns:IServiceUsuarios_ValidaConfirmacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ValidaConfirmacionResponse" message="tns:IServiceUsuarios_ValidaConfirmacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidaCodigoVerificacionSms">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ValidaCodigoVerificacionSms" message="tns:IServiceUsuarios_ValidaCodigoVerificacionSms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ValidaCodigoVerificacionSmsResponse" message="tns:IServiceUsuarios_ValidaCodigoVerificacionSms_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviaCodigoVerificacionSms">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionSms" message="tns:IServiceUsuarios_EnviaCodigoVerificacionSms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionSmsResponse" message="tns:IServiceUsuarios_EnviaCodigoVerificacionSms_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarTelefono">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ActualizarTelefono" message="tns:IServiceUsuarios_ActualizarTelefono_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ActualizarTelefonoResponse" message="tns:IServiceUsuarios_ActualizarTelefono_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmaCuenta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ConfirmaCuenta" message="tns:IServiceUsuarios_ConfirmaCuenta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ConfirmaCuentaResponse" message="tns:IServiceUsuarios_ConfirmaCuenta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/BuscarUsuario" message="tns:IServiceUsuarios_BuscarUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/BuscarUsuarioResponse" message="tns:IServiceUsuarios_BuscarUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviaCodigoVerificacionCorreo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionCorreo" message="tns:IServiceUsuarios_EnviaCodigoVerificacionCorreo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionCorreoResponse" message="tns:IServiceUsuarios_EnviaCodigoVerificacionCorreo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidaCodigoVerificacionCorreo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ValidaCodigoVerificacionCorreo" message="tns:IServiceUsuarios_ValidaCodigoVerificacionCorreo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ValidaCodigoVerificacionCorreoResponse" message="tns:IServiceUsuarios_ValidaCodigoVerificacionCorreo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidaRespuestasReto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ValidaRespuestasReto" message="tns:IServiceUsuarios_ValidaRespuestasReto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ValidaRespuestasRetoResponse" message="tns:IServiceUsuarios_ValidaRespuestasReto_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceUsuarios">
@@ -130,6 +231,96 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerAtendedoresEncuesta">
       <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ObtenerAtendedoresEncuesta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidaUserName">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ValidaUserName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidaConfirmacion">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ValidaConfirmacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidaCodigoVerificacionSms">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ValidaCodigoVerificacionSms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviaCodigoVerificacionSms">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionSms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarTelefono">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ActualizarTelefono" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmaCuenta">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ConfirmaCuenta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/BuscarUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviaCodigoVerificacionCorreo">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionCorreo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidaCodigoVerificacionCorreo">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ValidaCodigoVerificacionCorreo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidaRespuestasReto">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ValidaRespuestasReto" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

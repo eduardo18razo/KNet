@@ -212,7 +212,7 @@ namespace KiiniHelp.UserControls.Altas
                         throw new Exception("Debe especificar un valor maximo");
                 if (divMascara.Visible)
                     if (txtMascara.Text.Trim() == string.Empty)
-                        throw new Exception("Debe especificar una mascara");
+                        throw new Exception("Debe especificar un Formulario de Cliente");
 
                 Mascara tmpMascara = ((Mascara)Session["MascaraAlta"]);
                 if (tmpMascara.CampoMascara == null)

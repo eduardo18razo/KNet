@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Demonio\BusinessDemonioSms.cs" />
     <Compile Include="Operacion\BusinessConsultas.cs" />
     <Compile Include="Demonio\BusinessDemonio.cs" />
     <Compile Include="Operacion\BusinessArea.cs" />

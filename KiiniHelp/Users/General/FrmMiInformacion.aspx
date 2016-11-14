@@ -28,7 +28,7 @@
             <li>
                 <a href="#3" data-toggle="tab">Encuestas Pendientes</a>
             </li>
-
+            
         </ul>
 
         <div class="tab-content ">

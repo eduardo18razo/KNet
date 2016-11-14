@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.EntityClient;
-using System.Data.Objects;
 using System.Data.SqlClient;
 using System.Linq;
 using KiiniNet.Entities.Cat.Mascaras;
@@ -21,7 +20,7 @@ namespace KinniNet.Core.Operacion
             _proxy = proxy;
         }
 
-        private bool CrearEstrcturaMascaraBaseDatos(Mascara mascara)
+        private bool CrearEstructuraMascaraBaseDatos(Mascara mascara)
         {
             try
             {
@@ -142,7 +141,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                EliminarObjetoBaseDeDatos(mascara.NombreTabla, Objeto.Tabla);
+                EliminarObjetoBaseDeDatos(mascara.NombreTabla, BusinessVariables.EnumTipoObjeto.Tabla);
                 throw new Exception((ex.InnerException).Message);
             }
             finally
@@ -197,8 +196,8 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                EliminarObjetoBaseDeDatos(mascara.NombreTabla, Objeto.Tabla);
-                EliminarObjetoBaseDeDatos(mascara.ComandoInsertar, Objeto.Store);
+                EliminarObjetoBaseDeDatos(mascara.NombreTabla, BusinessVariables.EnumTipoObjeto.Tabla);
+                EliminarObjetoBaseDeDatos(mascara.ComandoInsertar, BusinessVariables.EnumTipoObjeto.Store);
                 throw new Exception((ex.InnerException).Message);
             }
             finally
@@ -208,7 +207,7 @@ namespace KinniNet.Core.Operacion
             return true;
         }
 
-        private void EliminarObjetoBaseDeDatos(string nombreObjeto, Objeto objeto)
+        private void EliminarObjetoBaseDeDatos(string nombreObjeto, BusinessVariables.EnumTipoObjeto objeto)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
@@ -216,10 +215,10 @@ namespace KinniNet.Core.Operacion
                 string query = "DROP ";
                 switch (objeto)
                 {
-                    case Objeto.Tabla:
+                    case BusinessVariables.EnumTipoObjeto.Tabla:
                         query += "TABLE " + nombreObjeto;
                         break;
-                    case Objeto.Store:
+                    case BusinessVariables.EnumTipoObjeto.Store:
                         query += "PROCEDURE " + nombreObjeto;
                         break;
                 }
@@ -255,7 +254,7 @@ namespace KinniNet.Core.Operacion
                 mascara.Habilitado = true;
 
                 ExisteMascara(mascara);
-                CrearEstrcturaMascaraBaseDatos(mascara);
+                CrearEstructuraMascaraBaseDatos(mascara);
                 db.Mascara.AddObject(mascara);
                 db.SaveChanges();
             }
@@ -296,12 +295,6 @@ namespace KinniNet.Core.Operacion
 
         public void Dispose()
         {
-        }
-
-        private enum Objeto
-        {
-            Tabla = 1,
-            Store = 2
         }
 
         public List<Mascara> ObtenerMascarasAcceso(bool insertarSeleccion)
@@ -503,12 +496,6 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public class CatalogoGenerico
-        {
-            public int Id { get; set; }
-            public string Descripcion { get; set; }
-        }
-
-
+        
     }
 }

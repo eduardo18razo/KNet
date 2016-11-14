@@ -102,6 +102,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                LlenaUsuarios();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editUser\");", true);
             }
             catch (Exception ex)
@@ -199,6 +200,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 UcAltaUsuario.Alta = true;
+                UcAltaUsuario.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editUser\");", true);
             }
             catch (Exception ex)

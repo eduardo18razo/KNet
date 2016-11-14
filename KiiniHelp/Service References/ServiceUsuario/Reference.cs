@@ -32,6 +32,36 @@ namespace KiiniHelp.ServiceUsuario {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ObtenerAtendedoresEncuesta", ReplyAction="http://tempuri.org/IServiceUsuarios/ObtenerAtendedoresEncuestaResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> ObtenerAtendedoresEncuesta(int idUsuario, System.Collections.Generic.List<System.Nullable<int>> encuestas);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ValidaUserName", ReplyAction="http://tempuri.org/IServiceUsuarios/ValidaUserNameResponse")]
+        bool ValidaUserName(string nombreUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ValidaConfirmacion", ReplyAction="http://tempuri.org/IServiceUsuarios/ValidaConfirmacionResponse")]
+        bool ValidaConfirmacion(int idUsuario, string guid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ValidaCodigoVerificacionSms", ReplyAction="http://tempuri.org/IServiceUsuarios/ValidaCodigoVerificacionSmsResponse")]
+        string ValidaCodigoVerificacionSms(int idUsuario, int idTipoNotificacion, int idTelefono, string codigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionSms", ReplyAction="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionSmsResponse")]
+        void EnviaCodigoVerificacionSms(int idUsuario, int idTipoNotificacion, int idTelefono);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ActualizarTelefono", ReplyAction="http://tempuri.org/IServiceUsuarios/ActualizarTelefonoResponse")]
+        void ActualizarTelefono(int idUsuario, int idTelefono, string numero);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ConfirmaCuenta", ReplyAction="http://tempuri.org/IServiceUsuarios/ConfirmaCuentaResponse")]
+        void ConfirmaCuenta(int idUsuario, string password, System.Collections.Generic.Dictionary<int, string> confirmaciones, System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.PreguntaReto> pregunta, string link);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/BuscarUsuario", ReplyAction="http://tempuri.org/IServiceUsuarios/BuscarUsuarioResponse")]
+        KiiniNet.Entities.Operacion.Usuarios.Usuario BuscarUsuario(string usuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionCorreo", ReplyAction="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionCorreoResponse")]
+        string EnviaCodigoVerificacionCorreo(int idUsuario, int idTipoNotificacion, int idCorreo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ValidaCodigoVerificacionCorreo", ReplyAction="http://tempuri.org/IServiceUsuarios/ValidaCodigoVerificacionCorreoResponse")]
+        void ValidaCodigoVerificacionCorreo(int idUsuario, int idTipoNotificacion, string link, int idCorreo, string codigo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ValidaRespuestasReto", ReplyAction="http://tempuri.org/IServiceUsuarios/ValidaRespuestasRetoResponse")]
+        void ValidaRespuestasReto(int idUsuario, System.Collections.Generic.Dictionary<int, string> preguntasReto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -83,6 +113,46 @@ namespace KiiniHelp.ServiceUsuario {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> ObtenerAtendedoresEncuesta(int idUsuario, System.Collections.Generic.List<System.Nullable<int>> encuestas) {
             return base.Channel.ObtenerAtendedoresEncuesta(idUsuario, encuestas);
+        }
+        
+        public bool ValidaUserName(string nombreUsuario) {
+            return base.Channel.ValidaUserName(nombreUsuario);
+        }
+        
+        public bool ValidaConfirmacion(int idUsuario, string guid) {
+            return base.Channel.ValidaConfirmacion(idUsuario, guid);
+        }
+        
+        public string ValidaCodigoVerificacionSms(int idUsuario, int idTipoNotificacion, int idTelefono, string codigo) {
+            return base.Channel.ValidaCodigoVerificacionSms(idUsuario, idTipoNotificacion, idTelefono, codigo);
+        }
+        
+        public void EnviaCodigoVerificacionSms(int idUsuario, int idTipoNotificacion, int idTelefono) {
+            base.Channel.EnviaCodigoVerificacionSms(idUsuario, idTipoNotificacion, idTelefono);
+        }
+        
+        public void ActualizarTelefono(int idUsuario, int idTelefono, string numero) {
+            base.Channel.ActualizarTelefono(idUsuario, idTelefono, numero);
+        }
+        
+        public void ConfirmaCuenta(int idUsuario, string password, System.Collections.Generic.Dictionary<int, string> confirmaciones, System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.PreguntaReto> pregunta, string link) {
+            base.Channel.ConfirmaCuenta(idUsuario, password, confirmaciones, pregunta, link);
+        }
+        
+        public KiiniNet.Entities.Operacion.Usuarios.Usuario BuscarUsuario(string usuario) {
+            return base.Channel.BuscarUsuario(usuario);
+        }
+        
+        public string EnviaCodigoVerificacionCorreo(int idUsuario, int idTipoNotificacion, int idCorreo) {
+            return base.Channel.EnviaCodigoVerificacionCorreo(idUsuario, idTipoNotificacion, idCorreo);
+        }
+        
+        public void ValidaCodigoVerificacionCorreo(int idUsuario, int idTipoNotificacion, string link, int idCorreo, string codigo) {
+            base.Channel.ValidaCodigoVerificacionCorreo(idUsuario, idTipoNotificacion, link, idCorreo, codigo);
+        }
+        
+        public void ValidaRespuestasReto(int idUsuario, System.Collections.Generic.Dictionary<int, string> preguntasReto) {
+            base.Channel.ValidaRespuestasReto(idUsuario, preguntasReto);
         }
     }
 }

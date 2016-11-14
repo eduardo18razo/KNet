@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniNet.Entities.Cat.Usuario;
@@ -32,6 +31,10 @@ namespace KiiniHelp.UserControls.Altas
             get { return Convert.ToInt32(hfIdSubRol.Value); }
             set
             {
+                if (Session["DiasFestivos" + value] == null)
+                    Session.Add("DiasFestivos" + value, new List<DiaFestivoSubGrupo>());
+                hfIdSubRol.Value = value.ToString();
+                MuestraDias((List<DiaFestivoSubGrupo>)Session["DiasFestivos" + value]);
                 hfIdSubRol.Value = value.ToString();
             }
         }
@@ -84,7 +87,14 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                Session["DiasFestivosSubRol"] = lst;
+                Session["DiasFestivos" + IdSubRol] = lst;
+                if (Session["DiasFestivos" + IdSubRol] == null)
+                {
+                    rptDias.DataSource = null;
+                    rptDias.DataBind();
+                    return;
+                }
+                Session["DiasFestivos" + IdSubRol] = lst;
                 rptDias.DataSource = lst;
                 rptDias.DataBind();
             }
@@ -104,9 +114,8 @@ namespace KiiniHelp.UserControls.Altas
                     txtDate.Focus();
                     txtDescripcion.Focus();
                     txtDate.Focus();
-                    Session["DiasFestivosSubRol"] = null;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -123,15 +132,13 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                List<DiaFestivoSubGrupo> lst = (List<DiaFestivoSubGrupo>)Session["DiasFestivosSubRol"] ?? new List<DiaFestivoSubGrupo>();
+                List<DiaFestivoSubGrupo> lst = (List<DiaFestivoSubGrupo>)Session["DiasFestivos" + IdSubRol] ?? new List<DiaFestivoSubGrupo>();
                 if (txtDate.Text.Trim() == string.Empty)
                     throw new Exception("Ingrese una fecha");
                 if (txtDescripcion.Text.Trim() == string.Empty)
                     throw new Exception("Ingrese una descripción");
                 if (lst.Any(a => a.Fecha == Convert.ToDateTime(txtDate.Text)))
                     throw new Exception("Ya se ha ingresado esta fecha");
-                var dates = Convert.ToDateTime(txtDate.Text);
-                DateTime date = Convert.ToDateTime(txtDate.Text);
                 lst.Add(new DiaFestivoSubGrupo
                 {
                     IdSubGrupoUsuario = IdSubRol,
@@ -156,7 +163,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                List<DiaFestivoSubGrupo> lst = (List<DiaFestivoSubGrupo>)Session["DiasFestivosSubRol"];
+                List<DiaFestivoSubGrupo> lst = (List<DiaFestivoSubGrupo>)Session["DiasFestivos" + IdSubRol];
                 lst.Remove(lst.Single(s => s.Fecha == Convert.ToDateTime(((Button)sender).CommandArgument)));
                 MuestraDias(lst);
             }

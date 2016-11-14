@@ -117,6 +117,8 @@ namespace KiiniHelp.UserControls
                 List<int> roles = user.UsuarioRol.Select(s => s.RolTipoUsuario.IdRol).ToList();
                 if (roles.Any(a => a == (int) BusinessVariables.EnumRoles.Administrador)) ;
                 LimpiarPantalla();
+                if (OnCancelarModal != null)
+                    OnCancelarModal();
                 Response.Redirect("~/Users/DashBoard.aspx");
             }
             catch (Exception ex)
@@ -134,7 +136,7 @@ namespace KiiniHelp.UserControls
         {
             try
             {
-
+                Response.Redirect("~/Identificar.aspx");
             }
             catch (Exception ex)
             {

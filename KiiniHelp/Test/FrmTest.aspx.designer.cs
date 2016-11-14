@@ -22,12 +22,21 @@ namespace KiiniHelp.Test {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Control scripMain.
+        /// Control lstBoxTest.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager scripMain;
+        protected global::System.Web.UI.WebControls.ListBox lstBoxTest;
+        
+        /// <summary>
+        /// Control btnGetSelectedValues.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGetSelectedValues;
     }
 }

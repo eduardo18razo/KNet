@@ -91,7 +91,7 @@
                     <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" />
                 </div>
                 <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" />
+                    <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" Visible="False" />
                 </div>
             </div>
             <div class="modal-header" id="panelAlertaUbicacion" runat="server" visible="false">
@@ -157,7 +157,7 @@
                                                 <asp:DropDownList runat="server" Width="14%" ID="ddlPiso" CssClass="DropSelect" OnSelectedIndexChanged="ddlPiso_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
                                                 <asp:DropDownList runat="server" Width="14%" ID="ddlZona" CssClass="DropSelect" OnSelectedIndexChanged="ddlZona_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
                                                 <asp:DropDownList runat="server" Width="14%" ID="ddlSubZona" CssClass="DropSelect" OnSelectedIndexChanged="ddlSubZona_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" ID="ddlSiteRack" CssClass="DropSelect" AppendDataBoundItems="True" />
+                                                <asp:DropDownList runat="server" Width="14%" ID="ddlSiteRack" CssClass="DropSelect" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlSiteRack_OnSelectedIndexChanged" AutoPostBack="True" />
                                             </div>
                                             <div class="form-group">
                                                 <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Campus" Width="14%" OnClick="btnNew_OnClick" Visible="False" />

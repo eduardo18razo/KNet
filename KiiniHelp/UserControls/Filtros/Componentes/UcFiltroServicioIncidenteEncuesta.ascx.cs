@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceSistemaTipoArbolAcceso;
 using KiiniNet.Entities.Cat.Sistema;
-using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Filtros.Componentes
 {

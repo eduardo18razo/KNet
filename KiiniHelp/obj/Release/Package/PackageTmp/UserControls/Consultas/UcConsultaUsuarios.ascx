@@ -181,7 +181,7 @@
 <div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <asp:UpdatePanel ID="upUser" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <div class="modal-dialog modal-lg" style="width: 950px; height: 630px; overflow: auto" >
+            <div class="modal-dialog modal-lg" style="width: 1250px; height: 940px; overflow: hidden" >
                 <div class="modal-content">
                     <uc1:UcAltaUsuario runat="server" ID="UcAltaUsuario" />
                 </div>

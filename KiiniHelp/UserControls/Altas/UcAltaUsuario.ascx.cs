@@ -61,6 +61,19 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
+        public int IdTipoUsuario
+        {
+            get { return Convert.ToInt32(ddlTipoUsuario.SelectedValue); }
+            set
+            {
+                ddlTipoUsuario.SelectedValue = value.ToString();
+                ddlTipoUsuario_OnSelectedIndexChanged(null, null);
+                ddlTipoUsuario.Enabled = false;
+                UcConsultaOrganizacion.IdTipoUsuario = value;
+                UcConsultaUbicaciones.IdTipoUsuario = value;
+            }
+        }
+
         #region Alerts
         private List<string> AlertaGeneral
         {
@@ -162,6 +175,8 @@ namespace KiiniHelp.UserControls.Altas
                 sb.AppendLine("<li>Apellido Materno es un campo obligatorio.</li>");
             if (txtNombre.Text.Trim() == string.Empty)
                 sb.AppendLine("<li>Nombre es un campo obligatorio.</li>");
+            if (txtNombre.Text.Trim() == string.Empty)
+                sb.AppendLine("<li>Nombre de Usuario es un campo obligatorio.</li>");
 
             List<ParametrosTelefonos> lstParamTelefonos = _servicioParametros.TelefonosObligatorios(Convert.ToInt32(ddlTipoUsuario.SelectedValue));
             List<TelefonoUsuario> telefonoUsuario = new List<TelefonoUsuario>();
@@ -178,6 +193,10 @@ namespace KiiniHelp.UserControls.Altas
 
             foreach (TelefonoUsuario telefono in telefonoUsuario)
             {
+                if (telefono.Numero.Trim() != string.Empty && telefono.Numero.Length < 10)
+                {
+                    sb.Append(string.Format("<li>El telefono {0} debe ser de 10 digitos.</li>", telefono.Numero));
+                }
                 ParametrosTelefonos parametroTipoTelefono = lstParamTelefonos.Single(s => s.IdTipoTelefono == telefono.IdTipoTelefono);
                 if (telefonoUsuario.Count(c => c.IdTipoTelefono == telefono.IdTipoTelefono && c.Numero.Trim() != string.Empty) < parametroTipoTelefono.Obligatorios)
                 {
@@ -194,7 +213,7 @@ namespace KiiniHelp.UserControls.Altas
                 {
                     if (Regex.Replace(txtMail.Text.Trim(), sFormato, String.Empty).Length != 0)
                     {
-                        throw new Exception("Formato de correo invalido");
+                        sb.AppendLine(string.Format("Correo {0} con formato invalido", txtMail.Text.Trim()));
                     }
                 }
             }
@@ -463,22 +482,60 @@ namespace KiiniHelp.UserControls.Altas
                     DirectorioActivo = chkDirectoriActivo.Checked,
                     IdPuesto = ddlPuesto.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index ? (int?)null : Convert.ToInt32(ddlPuesto.SelectedValue),
                     Vip = chkVip.Checked,
-                    //TODO: Cambiar propiedad a una dinamica
+                    NombreUsuario = txtUserName.Text.Trim(),
+                    Password = ResolveUrl("~/ConfirmacionCuenta.aspx"),
                     Habilitado = true
                 };
+                List<ParametrosTelefonos> lstParamTelefonos = _servicioParametros.TelefonosObligatorios(Convert.ToInt32(ddlTipoUsuario.SelectedValue));
+                int telefonosObligatoriosCasa = lstParamTelefonos.Count(w => w.IdTipoTelefono == (int)BusinessVariables.EnumTipoTelefono.Casa);
+                int telefonosObligatoriosCelular = lstParamTelefonos.Count(w => w.IdTipoTelefono == (int)BusinessVariables.EnumTipoTelefono.Celular);
+                int telefonosObligatoriosOficina = lstParamTelefonos.Count(w => w.IdTipoTelefono == (int)BusinessVariables.EnumTipoTelefono.Oficina);
+                int contadorCasa = 0;
+                int contadorCelular = 0;
+                int contadorOficina = 0;
                 usuario.TelefonoUsuario = new List<TelefonoUsuario>();
                 foreach (RepeaterItem item in rptTelefonos.Items)
                 {
                     Label tipoTelefono = (Label)item.FindControl("lblTipotelefono");
                     TextBox numero = (TextBox)item.FindControl("txtNumero");
                     TextBox extension = (TextBox)item.FindControl("txtExtension");
+                    bool obligatorio = false;
                     if (tipoTelefono != null && numero != null && extension != null)
+                    {
+                        switch (Convert.ToInt32(tipoTelefono.Text.Trim()))
+                        {
+                            case (int)BusinessVariables.EnumTipoTelefono.Casa:
+                                if (contadorCasa < telefonosObligatoriosCasa)
+                                {
+                                    obligatorio = true;
+                                    contadorCasa++;
+                                }
+                                break;
+                            case (int)BusinessVariables.EnumTipoTelefono.Celular:
+                                if (contadorCelular < telefonosObligatoriosCelular)
+                                {
+                                    obligatorio = true;
+                                    contadorCelular++;
+                                }
+                                break;
+                            case (int)BusinessVariables.EnumTipoTelefono.Oficina:
+                                if (contadorOficina < telefonosObligatoriosOficina)
+                                {
+                                    obligatorio = true;
+                                    contadorOficina++;
+                                }
+                                break;
+                        }
+                        
                         usuario.TelefonoUsuario.Add(new TelefonoUsuario
                         {
                             IdTipoTelefono = Convert.ToInt32(tipoTelefono.Text.Trim()),
                             Numero = numero.Text.Trim(),
-                            Extension = extension.Text.Trim()
+                            Extension = extension.Text.Trim(),
+                            Obligatorio = obligatorio,
+                            Confirmado = false
                         });
+                    }
                 }
                 usuario.CorreoUsuario = new List<CorreoUsuario>();
                 foreach (TextBox correo in rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox)item.FindControl("txtCorreo")).Where(correo => correo != null & correo.Text.Trim() != string.Empty))
@@ -566,7 +623,50 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                UcAltaPuesto.EsAlta = true;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAreas\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void txtAp_OnTextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtNombre.Text.Trim().Length <= 0)
+                    return;
+                string username = (txtNombre.Text.Substring(0, 1).ToLower() + txtAp.Text.Trim().ToLower()).Replace(" ", string.Empty);
+                int limite = 2;
+                if (_servicioUsuarios.ValidaUserName(username))
+                {
+                    for (int i = 1; i < limite; i++)
+                    {
+                        string tmpUsername = username + i;
+                        if (!_servicioUsuarios.ValidaUserName(tmpUsername))
+                        {
+                            username = tmpUsername;
+                            break;
+                        }
+                        limite++;
+                    }
+                }
+                txtUserName.Text = username;
+                if (txtAp.ID == ((TextBox)sender).ID)
+                {
+                    txtAm.Focus();
+                }
+                else if (txtNombre.ID == ((TextBox)sender).ID) 
+                {
+                    
+                }
             }
             catch (Exception ex)
             {
@@ -625,8 +725,7 @@ namespace KiiniHelp.UserControls.Altas
                 AlertaDatosGenerales = _lstError;
             }
         }
-
-        protected void btnCerrarRoles_OnClick(object sender, EventArgs e)
+        protected void btnAceptarRoles_OnClick(object sender, EventArgs e)
         {
             try
             {
@@ -649,13 +748,35 @@ namespace KiiniHelp.UserControls.Altas
                 AlertaRoles = _lstError;
             }
         }
+        protected void btnCerrarRoles_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Alta)
+                {
+                    btnModalRoles.CssClass = "btn btn-primary";
+                    btnModalGrupos.Enabled = false;
+                    btnModalGrupos.CssClass = "btn btn-primary";
+                }
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalRoles\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaRoles = _lstError;
+            }
+        }
 
         protected void btnCerrarGrupos_OnClick(object sender, EventArgs e)
         {
             try
             {
-                if (!AsociarGrupoUsuario.ValidaCapturaGrupos()) return;
-                btnModalGrupos.CssClass = "btn btn-success";
+                //if (!AsociarGrupoUsuario.ValidaCapturaGrupos()) return;
+                btnModalGrupos.CssClass = "btn btn-primary";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalGrupos\");", true);
             }
             catch (Exception ex)
@@ -798,5 +919,7 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+
+        
     }
 }

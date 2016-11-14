@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
   <xs:element name="CrearTicket">
     <xs:complexType>
       <xs:sequence>
@@ -13,7 +14,9 @@
   </xs:element>
   <xs:element name="CrearTicketResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="CrearTicketResult" nillable="true" type="q2:Ticket" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ObtenerTicketsUsuario">
@@ -28,7 +31,7 @@
   <xs:element name="ObtenerTicketsUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerTicketsUsuarioResult" nillable="true" type="q2:ArrayOfHelperTickets" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerTicketsUsuarioResult" nillable="true" type="q3:ArrayOfHelperTickets" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -44,7 +47,7 @@
   <xs:element name="ObtenerTicketsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerTicketsResult" nillable="true" type="q3:ArrayOfHelperTickets" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerTicketsResult" nillable="true" type="q4:ArrayOfHelperTickets" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -102,7 +105,7 @@
   <xs:element name="ObtenerDetalleTicketResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerDetalleTicketResult" nillable="true" type="q4:HelperDetalleTicket" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerDetalleTicketResult" nillable="true" type="q5:HelperDetalleTicket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -117,7 +120,7 @@
   <xs:element name="ObtenerDetalleTicketNoRegistradoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerDetalleTicketNoRegistradoResult" nillable="true" type="q5:HelperDetalleTicket" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerDetalleTicketNoRegistradoResult" nillable="true" type="q6:HelperDetalleTicket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

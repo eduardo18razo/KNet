@@ -38,7 +38,8 @@ namespace KinniNet.Core.Security
                 try
                 {
                     db.ContextOptions.ProxyCreationEnabled = _proxy;
-                    result = db.Usuario.Any(w => w.NombreUsuario == user && w.Password == password);
+                    string hashedPdw = SecurityUtils.CreateShaHash(password);
+                    result = db.Usuario.Any(w => w.NombreUsuario == user && w.Password == hashedPdw);
                 }
                 catch (Exception ex)
                 {
@@ -58,9 +59,10 @@ namespace KinniNet.Core.Security
                 try
                 {
                     db.ContextOptions.ProxyCreationEnabled = _proxy;
-                    if (db.Usuario.Count(w => w.NombreUsuario == user && w.Password == password) > 1)
+                    string hashedPdw = SecurityUtils.CreateShaHash(password);
+                    if (db.Usuario.Count(w => w.NombreUsuario == user && w.Password == hashedPdw) > 1)
                         throw new Exception("Error al obtener informacion consulte a su Administrador");
-                    result = db.Usuario.SingleOrDefault(w => w.NombreUsuario == user && w.Password == password);
+                    result = db.Usuario.SingleOrDefault(w => w.NombreUsuario == user && w.Password == hashedPdw);
                     if (result != null)
                     {
                         db.LoadProperty(result, "Organizacion");
@@ -127,6 +129,66 @@ namespace KinniNet.Core.Security
                     db.Dispose();
                 }
                 return result;
+            }
+
+            public void ChangePassword(int idUsuario, string contrasenaActual, string contrasenaNueva)
+            {
+                DataBaseModelContext db = new DataBaseModelContext();
+                try
+                {
+                    string hashedPdw = SecurityUtils.CreateShaHash(contrasenaActual);
+                    Usuario user = db.Usuario.SingleOrDefault(w => w.Id == idUsuario);
+                    if (user != null)
+                    {
+                        if (user.Password != hashedPdw)
+                            throw new Exception("Contraseña actual incorrecta");
+                        user.Password = SecurityUtils.CreateShaHash(contrasenaNueva);
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    db.Dispose();
+                }
+            }
+
+            public void RecuperarCuenta(int idUsuario, int idTipoNotificacion, string link, int idCorreo, string codigo, string contrasena, string tipoRecuperacion)
+            {
+                DataBaseModelContext db = new DataBaseModelContext();
+                try
+                {
+                    switch (int.Parse(tipoRecuperacion))
+                    {
+                        case 0:
+                            new BusinessUsuarios().ValidaCodigoVerificacionCorreo(idUsuario, idTipoNotificacion, link, idCorreo, codigo);
+                            new BusinessUsuarios().TerminaCodigoVerificacionCorreo(idUsuario, idTipoNotificacion, link, idCorreo, codigo);
+                            break;
+                        case 1:
+                            new BusinessUsuarios().ValidaCodigoVerificacionSms(idUsuario, idTipoNotificacion, idCorreo, codigo);
+                            new BusinessUsuarios().TerminaCodigoVerificacionSms(idUsuario, idTipoNotificacion, idCorreo, codigo);
+                            break;
+                    }
+                    
+                    string hashedPdw = SecurityUtils.CreateShaHash(contrasena);
+                    Usuario user = db.Usuario.SingleOrDefault(w => w.Id == idUsuario);
+                    if (user != null)
+                    {
+                        user.Password = hashedPdw;
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    db.Dispose();
+                }
             }
         }
 
@@ -196,7 +258,7 @@ namespace KinniNet.Core.Security
                                     result.Add(menu.Menu2.Menu2.Menu2);
                                 }
                                 else
-                                result.Add(menu.Menu2.Menu2);
+                                    result.Add(menu.Menu2.Menu2);
 
                             }
                             else

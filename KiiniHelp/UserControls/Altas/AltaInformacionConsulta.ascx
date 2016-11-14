@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <asp:Label runat="server" Text="Descripcion" CssClass="col-sm-2 control-label" />
                         <div class="col-sm-10">
-                            <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control obligatorio" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -48,7 +48,7 @@
                 <div runat="server" id="divPropietrario" visible="False">
                     <div class="form-horizontal">
                         <div class="form-group">
-                            <asp:Label runat="server" Text="Contenido" CssClass="col-sm-2 control-label" />
+                            <asp:Label runat="server" Text="Contenido" CssClass="col-sm-2 control-label obligatorio" />
                             <div class="col-sm-10">
                                 <ctrlExterno:HtmlEditor runat="Server" ID="txtEditor" Toolbars="Select#Format,Select#Font,Select#Size:ForeColor,BackColor;Bold,Italic,Underline|Left,Center,Right,Justify|OrderedList,BulletedList|
                                     Outdent,Indent|Rule|Subscript,Superscript:Link,Image" Width="700px" />
@@ -61,7 +61,7 @@
                         <div class="form-group">
                             <asp:Label runat="server" Text="Tipo de Documento" CssClass="col-sm-2 control-label" />
                             <div class="col-sm-10">
-                                <asp:DropDownList runat="server" ID="ddlTipoDocumento" CssClass="DropSelect" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoDocumento_OnSelectedIndexChanged" />
+                                <asp:DropDownList runat="server" ID="ddlTipoDocumento" CssClass="DropSelect obligatorio" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoDocumento_OnSelectedIndexChanged" />
                             </div>
                         </div>
                         <div class="form-group" runat="server" id="divUploadDocumento" visible="False">
@@ -77,7 +77,7 @@
                         <div class="form-group">
                             <asp:Label runat="server" Text="Url Pagina Web" CssClass="col-sm-2 control-label" />
                             <div class="col-sm-10">
-                                <asp:TextBox runat="server" ID="txtDescripcionUrl" CssClass="form-control" />
+                                <asp:TextBox runat="server" ID="txtDescripcionUrl" CssClass="form-control obligatorio" />
                             </div>
                         </div>
                     </div>

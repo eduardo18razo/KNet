@@ -38,7 +38,12 @@ namespace KiiniHelp.UserControls.Consultas
         public int IdTipoUsuario
         {
             get { return Convert.ToInt32(ddlTipoUsuario.SelectedValue); }
-            set { ddlTipoUsuario.SelectedValue = value.ToString(); }
+            set
+            {
+                ddlTipoUsuario.SelectedValue = value.ToString();
+                ddlTipoUsuario_OnSelectedIndexChanged(null, null);
+                ddlTipoUsuario.Enabled = false;
+            }
         }
 
         public List<string> AlertaUbicacion
@@ -303,9 +308,21 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlTorre, _servicioUbicacion.ObtenerTorres(IdTipoUsuario, id, true));
                 LlenaUbicaciones();
-                btnNew.CommandName = "Torre";
-                btnNew.Text = "Agregar Torre";
-                btnNew.CommandArgument = "3";
+                if (ddlCampus.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Torre";
+                    btnNew.Text = "Agregar Torre";
+                    btnNew.CommandArgument = "3";
+                }
+                else
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Campus";
+                    btnNew.Text = "Agregar Campus";
+                    btnNew.CommandArgument = "0";
+                }
+
             }
             catch (Exception ex)
             {
@@ -330,9 +347,20 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlPiso, _servicioUbicacion.ObtenerPisos(idTipoUsuario, id, true));
                 LlenaUbicaciones();
-                btnNew.CommandName = "Piso";
-                btnNew.Text = "Agregar Piso";
-                btnNew.CommandArgument = "4";
+                if (ddlTorre.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Piso";
+                    btnNew.Text = "Agregar Piso";
+                    btnNew.CommandArgument = "4";
+                }
+                else
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Torre";
+                    btnNew.Text = "Agregar Torre";
+                    btnNew.CommandArgument = "3";
+                }
             }
             catch (Exception ex)
             {
@@ -356,9 +384,20 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlZona, _servicioUbicacion.ObtenerZonas(idTipoUsuario, id, true));
                 LlenaUbicaciones();
-                btnNew.CommandName = "Zona";
-                btnNew.Text = "Agregar Zona";
-                btnNew.CommandArgument = "5";
+                if (ddlPiso.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Zona";
+                    btnNew.Text = "Agregar Zona";
+                    btnNew.CommandArgument = "5";
+                }
+                else
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Piso";
+                    btnNew.Text = "Agregar Piso";
+                    btnNew.CommandArgument = "4";
+                }
             }
             catch (Exception ex)
             {
@@ -381,9 +420,20 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlSubZona, _servicioUbicacion.ObtenerSubZonas(idTipoUsuario, id, true));
                 LlenaUbicaciones();
-                btnNew.CommandName = "SubZona";
-                btnNew.Text = "Agregar Campus";
-                btnNew.CommandArgument = "6";
+                if (ddlZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "SubZona";
+                    btnNew.Text = "Agregar Sub Zona";
+                    btnNew.CommandArgument = "6";
+                }
+                else
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Zona";
+                    btnNew.Text = "Agregar Zona";
+                    btnNew.CommandArgument = "5";
+                }
             }
             catch (Exception ex)
             {
@@ -405,9 +455,38 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlSiteRack, _servicioUbicacion.ObtenerSiteRacks(idTipoUsuario, id, true));
                 LlenaUbicaciones();
-                btnNew.CommandName = "Site Rack";
-                btnNew.Text = "Agregar Site Rack";
-                btnNew.CommandArgument = "7";
+                if (ddlSubZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Site Rack";
+                    btnNew.Text = "Agregar Site Rack";
+                    btnNew.CommandArgument = "7";
+                }
+                else
+                {
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "SubZona";
+                    btnNew.Text = "Agregar Sub Zona";
+                    btnNew.CommandArgument = "6";
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaUbicacion = _lstError;
+            }
+        }
+
+        protected void ddlSiteRack_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LlenaUbicaciones();
             }
             catch (Exception ex)
             {
@@ -550,11 +629,15 @@ namespace KiiniHelp.UserControls.Consultas
                 ValidaSeleccion(btn.CommandArgument);
                 if (btn.CommandArgument == "0")
                 {
+                    txtDescripcionCampus.Focus();
                     ddlTipoUsuarioCampus.SelectedValue = IdTipoUsuario.ToString();
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCampus\");", true);
                 }
                 else
-                    ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script", "MostrarPopup(\"#editCatalogoUbicacion\");", true);
+                {
+                    txtDescripcionCatalogo.Focus();
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoUbicacion\");", true);
+                }
             }
             catch (Exception ex)
             {

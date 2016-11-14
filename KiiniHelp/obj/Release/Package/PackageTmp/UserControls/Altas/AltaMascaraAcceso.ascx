@@ -26,7 +26,7 @@
                 </header>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Alta de Mascara de Captura
+                        Alta Formulario de Cliente
                     </div>
                     <div class="panel-body">
 
@@ -36,7 +36,7 @@
                                     <div class="form-group">
                                         <div class="form-inline verical-center">
                                             <asp:Label runat="server" Text="Nombre" CssClass="col-sm-2 izquierda control-label" />
-                                            <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" onkeypress="return ValidaCampo(this,1)"/>
+                                            <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="form-group">
                                         <asp:Label runat="server" Text="Tipo de campo" CssClass="col-sm-2 control-label izquierda"></asp:Label>
-                                        <asp:DropDownList runat="server" ID="ddlTipoCampo" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoCampo_OnSelectedIndexChanged" CssClass="DropSelect" />
+                                        <asp:DropDownList runat="server" ID="ddlTipoCampo" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoCampo_OnSelectedIndexChanged" CssClass="DropSelect obligatorio" />
                                     </div>
                                 </div>
                             </div>
@@ -160,32 +160,32 @@
                                 <div class="panel panel-body">
                                     <div class="form-group">
                                         <asp:Label runat="server" Text="Descripcion" />
-                                        <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
                                     </div>
                                     <div class="form-group">
                                         <asp:CheckBox runat="server" ID="chkRequerido" AutoPostBack="False" Text="Campo obligatorio" />
                                     </div>
                                     <div class="form-group" runat="server" id="divMascara" visible="False">
-                                        <asp:Label runat="server" Text="Mascara" />
-                                        <asp:TextBox runat="server" ID="txtMascara" CssClass="form-control" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
+                                        <asp:Label runat="server" Text="Formulario de Cliente" />
+                                        <asp:TextBox runat="server" ID="txtMascara" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
                                     </div>
                                     <div class="form-group" runat="server" id="divLongitudes" visible="False">
                                         <asp:Label runat="server" Text="Longitud minima" />
-                                        <asp:TextBox runat="server" ID="txtLongitudMinima" type="number" min="1" CssClass="form-control" />
+                                        <asp:TextBox runat="server" ID="txtLongitudMinima" type="number" min="1" CssClass="form-control obligatorio" />
                                         <asp:Label runat="server" Text="Longitud Maxima" />
-                                        <asp:TextBox runat="server" ID="txtLongitudMaxima" type="number" min="1" CssClass="form-control" />
+                                        <asp:TextBox runat="server" ID="txtLongitudMaxima" type="number" min="1" CssClass="form-control obligatorio" />
                                     </div>
                                     <div class="form-group" runat="server" id="divValorMaximo" visible="False">
                                         <asp:Label runat="server" Text="Valor Maximo" />
-                                        <asp:TextBox runat="server" ID="txtValorMaximo" type="number" min="1" CssClass="form-control" />
+                                        <asp:TextBox runat="server" ID="txtValorMaximo" type="number" min="1" CssClass="form-control obligatorio" />
                                     </div>
                                     <div class="form-group" runat="server" id="divMoneda" visible="False">
                                         <asp:Label runat="server" Text="Simbolo de moneda" />
-                                        <asp:TextBox runat="server" ID="txtSimboloMoneda" Text="MXN" CssClass="form-control" />
+                                        <asp:TextBox runat="server" ID="txtSimboloMoneda" Text="MXN" CssClass="form-control obligatorio" />
                                     </div>
                                     <div class="form-group" runat="server" id="divCatalgo" visible="False">
                                         <asp:Label runat="server" Text="Catalgo" />
-                                        <asp:DropDownList runat="server" ID="ddlCatalogosCampo" AutoPostBack="True" CssClass="DropSelect" />
+                                        <asp:DropDownList runat="server" ID="ddlCatalogosCampo" AutoPostBack="True" CssClass="DropSelect obligatorio" />
                                     </div>
                                 </div>
                             </div>

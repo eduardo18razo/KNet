@@ -37,12 +37,6 @@
                     </div>
 
                     <div class="form-group">
-                        <asp:Label runat="server" Text="Descripcion" CssClass="col-sm-2 control-label" />
-                        <div class="col-sm-10">
-                            <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <div class="col-sm-10">
                             <asp:CheckBox runat="server" Text="Detallado" ID="chkEstimado" AutoPostBack="True" OnCheckedChanged="chkEstimado_OnCheckedChanged"/>
                         </div>

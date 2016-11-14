@@ -616,8 +616,6 @@ namespace KinniNet.Core.Operacion
 
                     if (arbol.IdTipoUsuario != (int) BusinessVariables.EnumTipoArbol.Consultas)
                     {
-                        arbol.InventarioArbolAcceso.First().Sla.Descripcion =
-                            arbolAccesoActualizar.InventarioArbolAcceso.First().Sla.Descripcion;
                         arbol.InventarioArbolAcceso.First().Sla.Dias =
                             arbolAccesoActualizar.InventarioArbolAcceso.First().Sla.Dias;
                         arbol.InventarioArbolAcceso.First().Sla.Horas =

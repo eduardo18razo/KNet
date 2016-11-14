@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using KiiniNet.Entities.Helper;
+using KiiniNet.Entities.Operacion.Tickets;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
 
@@ -8,13 +9,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
 {
     public class ServiceTicket : IServiceTicket
     {
-        public void CrearTicket(int idUsuario, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, bool campoRandom)
+        public Ticket CrearTicket(int idUsuario, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, bool campoRandom)
         {
             try
             {
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
-                    negocio.CrearTicket(idUsuario, idArbol, lstCaptura, campoRandom);
+                    return negocio.CrearTicket(idUsuario, idArbol, lstCaptura, campoRandom);
                 }
             }
             catch (Exception ex)

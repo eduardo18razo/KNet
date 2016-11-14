@@ -145,11 +145,15 @@ namespace KiiniHelp.Users.Administracion.Usuarios
 
             foreach (TelefonoUsuario telefono in telefonoUsuario)
             {
+                if (telefono.Numero.Length < 10)
+                {
+                    sb.Append(string.Format("<li>El telefono {0} debe ser de 10 digitos.</li>", telefono.Numero));
+                }
                 ParametrosTelefonos parametroTipoTelefono = lstParamTelefonos.Single(s => s.IdTipoTelefono == telefono.IdTipoTelefono);
+
                 if (telefonoUsuario.Count(c => c.IdTipoTelefono == telefono.IdTipoTelefono && c.Numero.Trim() != string.Empty) < parametroTipoTelefono.Obligatorios)
                 {
-                    sb.AppendLine(String.Format("<li>Debe capturar al menos {0} telefono(s) de {1}.</li>",
-                        parametroTipoTelefono.Obligatorios, parametroTipoTelefono.TipoTelefono.Descripcion));
+                    sb.AppendLine(String.Format("<li>Debe capturar al menos {0} telefono(s) de {1}.</li>",parametroTipoTelefono.Obligatorios, parametroTipoTelefono.TipoTelefono.Descripcion));
                     break;
                 }
             }
@@ -161,7 +165,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                 {
                     if (Regex.Replace(txtMail.Text.Trim(), sFormato, String.Empty).Length != 0)
                     {
-                        throw new Exception("Formato de correo invalido");
+                        sb.AppendLine(string.Format("Correo {0} con formato invalido", txtMail.Text.Trim()));
                     }
                 }
             }
@@ -248,6 +252,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                         LlenaCombos(true);
                     Session["UsuarioTemporal"] = null;
                     Session["UsuarioGrupo"] = null;
+
                 }
             }
             catch (Exception ex)
@@ -260,6 +265,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                 AlertaGeneral = _lstError;
             }
         }
+
 
         private void UcAltaPuestoOnOnCancelarModal()
         {
@@ -377,8 +383,6 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                 if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                     throw new Exception("Seleccione un tipo de usuario.<br>");
                 ValidaCapturaDatosGenerales();
-                //ucOrganizacion.ValidaCapturaOrganizacion();
-                //UcUbicacion.ValidaCapturaUbicacion();
                 ValidaCapturaRoles();
                 ValidaCapturaGrupos();
                 Usuario usuario = new Usuario
@@ -390,22 +394,29 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                     DirectorioActivo = chkDirectoriActivo.Checked,
                     IdPuesto = ddlPuesto.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index ? (int?)null : Convert.ToInt32(ddlPuesto.SelectedValue),
                     Vip = chkVip.Checked,
-                    //TODO: Cambiar propiedad a una dinamica
+                    NombreUsuario = txtUserName.Text.Trim(),
+                    Password = ResolveUrl("~/ConfirmacionCuenta.aspx"),
                     Habilitado = true
                 };
                 usuario.TelefonoUsuario = new List<TelefonoUsuario>();
+                int contadorCelularesObligatorios = 0;
+                int celularesObligatorios = _servicioParametros.TelefonosObligatorios(usuario.IdTipoUsuario).Count(w => w.IdTipoTelefono == (int)BusinessVariables.EnumTipoTelefono.Celular);
                 foreach (RepeaterItem item in rptTelefonos.Items)
                 {
                     Label tipoTelefono = (Label)item.FindControl("lblTipotelefono");
                     TextBox numero = (TextBox)item.FindControl("txtNumero");
                     TextBox extension = (TextBox)item.FindControl("txtExtension");
-                    if (tipoTelefono != null && numero != null && extension != null)
-                        usuario.TelefonoUsuario.Add(new TelefonoUsuario
-                        {
-                            IdTipoTelefono = Convert.ToInt32(tipoTelefono.Text.Trim()),
-                            Numero = numero.Text.Trim(),
-                            Extension = extension.Text.Trim()
-                        });
+                    if (tipoTelefono == null || numero == null || extension == null) continue;
+                    usuario.TelefonoUsuario.Add(new TelefonoUsuario
+                    {
+                        IdTipoTelefono = Convert.ToInt32(tipoTelefono.Text.Trim()),
+                        Numero = numero.Text.Trim(),
+                        Extension = extension.Text.Trim(),
+                        Obligatorio = celularesObligatorios > 0 && Convert.ToInt32(tipoTelefono.Text.Trim()) == (int)BusinessVariables.EnumTipoTelefono.Celular ? contadorCelularesObligatorios < celularesObligatorios : false,
+                        Confirmado = false
+                    });
+                    if (Convert.ToInt32(tipoTelefono.Text.Trim()) == (int)BusinessVariables.EnumTipoTelefono.Celular)
+                        contadorCelularesObligatorios++;
                 }
                 usuario.CorreoUsuario = new List<CorreoUsuario>();
                 foreach (TextBox correo in rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox)item.FindControl("txtCorreo")).Where(correo => correo != null & correo.Text.Trim() != string.Empty))
@@ -645,6 +656,40 @@ namespace KiiniHelp.Users.Administracion.Usuarios
             try
             {
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAreas\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void txtAp_OnTextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtNombre.Text.Trim().Length <= 0)
+                    return;
+                string username = (txtNombre.Text.Substring(0, 1).ToLower() + txtAp.Text.Trim().ToLower()).Replace(" ", string.Empty);
+                int limite = 2;
+                if (_servicioUsuarios.ValidaUserName(username))
+                {
+                    for (int i = 1; i < limite; i++)
+                    {
+                        string tmpUsername = username + i;
+                        if (!_servicioUsuarios.ValidaUserName(tmpUsername))
+                        {
+                            username = tmpUsername;
+                            break;
+                        }
+                        limite++;
+                    }
+                }
+                txtUserName.Text = username;
             }
             catch (Exception ex)
             {

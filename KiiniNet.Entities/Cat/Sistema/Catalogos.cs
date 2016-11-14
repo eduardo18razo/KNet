@@ -14,6 +14,10 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public string Tabla { get; set; }
         [DataMember]
+        public string ComandoInsertar { get; set; }
+        [DataMember]
+        public string ComandoActualizar { get; set; }
+        [DataMember]
         public bool EsMascaraCaptura { get; set; }
         [DataMember]
         public bool Habilitado { get; set; }

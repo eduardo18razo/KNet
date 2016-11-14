@@ -252,7 +252,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 Text = campo.Descripcion,
                                 CssClass = "DropSelect"
                             };
-                            foreach (BusinessMascarasCatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla))
+                            foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla))
                             {
                                 ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
                             }

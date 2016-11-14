@@ -24,11 +24,17 @@ namespace KiiniHelp.ServiceSeguridad {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/GetUserInvitadoDataAutenticate", ReplyAction="http://tempuri.org/IServiceSecurity/GetUserInvitadoDataAutenticateResponse")]
         KiiniNet.Entities.Operacion.Usuarios.Usuario GetUserInvitadoDataAutenticate(int idTipoUsuario);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/ChangePassword", ReplyAction="http://tempuri.org/IServiceSecurity/ChangePasswordResponse")]
+        void ChangePassword(int idUsuario, string contrasenaActual, string contrasenaNueva);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuario", ReplyAction="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuarioResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/ObtenerMenuPublico", ReplyAction="http://tempuri.org/IServiceSecurity/ObtenerMenuPublicoResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuPublico(int idTipoUsuario, int idArea, bool arboles);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/RecuperarCuenta", ReplyAction="http://tempuri.org/IServiceSecurity/RecuperarCuentaResponse")]
+        void RecuperarCuenta(int idUsuario, int idTipoNotificacion, string link, int idCorreo, string codigo, string contrasena, string tipoRecuperacion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -70,12 +76,20 @@ namespace KiiniHelp.ServiceSeguridad {
             return base.Channel.GetUserInvitadoDataAutenticate(idTipoUsuario);
         }
         
+        public void ChangePassword(int idUsuario, string contrasenaActual, string contrasenaNueva) {
+            base.Channel.ChangePassword(idUsuario, contrasenaActual, contrasenaNueva);
+        }
+        
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles) {
             return base.Channel.ObtenerMenuUsuario(idUsuario, idArea, arboles);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuPublico(int idTipoUsuario, int idArea, bool arboles) {
             return base.Channel.ObtenerMenuPublico(idTipoUsuario, idArea, arboles);
+        }
+        
+        public void RecuperarCuenta(int idUsuario, int idTipoNotificacion, string link, int idCorreo, string codigo, string contrasena, string tipoRecuperacion) {
+            base.Channel.RecuperarCuenta(idUsuario, idTipoNotificacion, link, idCorreo, codigo, contrasena, tipoRecuperacion);
         }
     }
 }

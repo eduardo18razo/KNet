@@ -27,6 +27,11 @@
             return true;
         };
     </script>
+    <style>
+        body {
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body style="background: white;">
     <div id="full">
@@ -71,7 +76,7 @@
             <div id="headerNav">
                 <span data-panel="panel1" class="panel-button"></span>
                 <div class="logo" id="logo">
-                    <div style="float: left; :hover {background: #265B7F}">
+                    <div style="float: left; : hover {background: #265B7F}">
                         <div id="headerNavInfoDiv">
                         </div>
                     </div>
@@ -84,7 +89,7 @@
                                             <ul style="border: none">
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <li style="border: none;border-bottom: 1px solid #000000">
+                                            <li style="border: none; border-bottom: 1px solid #000000">
                                                 <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
                                                 <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' ID="lbtnCteArea" OnClick="lbtnCteArea_OnClick" />
                                             </li>
@@ -151,7 +156,7 @@
                     </div>
 
                 </div>
-                <span id="top-nav">
+                <span id="top-nav" style="position: absolute; margin: 12px 0 0 12px; top: 0; right: 5%">
                     <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalSingIn" data-backdrop="static" data-keyboard="false" style="margin-left: 10px; margin-right: 10px">Iniciar Sesión</a>
                 </span>
             </div>
@@ -245,15 +250,15 @@
 
             <%--LOGIN--%>
             <div class="modal fade" id="modalSingIn" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <%--<asp:UpdatePanel ID="upModalSingIn" runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>--%>
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <uc1:UcLogIn runat="server" ID="UcLogIn" />
-                    </div>
-                </div>
-                <%--</ContentTemplate>
-                </asp:UpdatePanel>--%>
+                <asp:UpdatePanel ID="upModalSingIn" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <uc1:UcLogIn runat="server" ID="UcLogIn" />
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </form>
     </div>

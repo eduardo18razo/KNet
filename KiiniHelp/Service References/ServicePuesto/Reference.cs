@@ -20,6 +20,15 @@ namespace KiiniHelp.ServicePuesto {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePuesto/Guardar", ReplyAction="http://tempuri.org/IServicePuesto/GuardarResponse")]
         void Guardar(KiiniNet.Entities.Cat.Usuario.Puesto puesto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePuesto/Actualizar", ReplyAction="http://tempuri.org/IServicePuesto/ActualizarResponse")]
+        void Actualizar(int idPuesto, KiiniNet.Entities.Cat.Usuario.Puesto puesto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePuesto/ObtenerPuestoConsulta", ReplyAction="http://tempuri.org/IServicePuesto/ObtenerPuestoConsultaResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Puesto> ObtenerPuestoConsulta(System.Nullable<int> idPuesto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePuesto/Habilitar", ReplyAction="http://tempuri.org/IServicePuesto/HabilitarResponse")]
+        void Habilitar(int idPuesto, bool habilitado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +64,18 @@ namespace KiiniHelp.ServicePuesto {
         
         public void Guardar(KiiniNet.Entities.Cat.Usuario.Puesto puesto) {
             base.Channel.Guardar(puesto);
+        }
+        
+        public void Actualizar(int idPuesto, KiiniNet.Entities.Cat.Usuario.Puesto puesto) {
+            base.Channel.Actualizar(idPuesto, puesto);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Puesto> ObtenerPuestoConsulta(System.Nullable<int> idPuesto) {
+            return base.Channel.ObtenerPuestoConsulta(idPuesto);
+        }
+        
+        public void Habilitar(int idPuesto, bool habilitado) {
+            base.Channel.Habilitar(idPuesto, habilitado);
         }
     }
 }

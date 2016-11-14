@@ -198,7 +198,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Descripcion</label>
-                                    <asp:TextBox runat="server" ID="txtDescripcionCampus" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13);" />
+                                    <asp:TextBox runat="server" ID="txtDescripcionCampus" placeholder="DESCRIPCION" class="form-control OBLIGATORIO" onkeydown="return (event.keyCode!=13);" />
                                 </div>
                                 <div class="form-group">
                                     <asp:CheckBox runat="server" ID="CheckBox1" Checked="True" Visible="False" />
@@ -222,7 +222,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Numero Interior</label>
-                                    <asp:TextBox runat="server" ID="txtNoInt" placeholder="NUMERO " class="form-control" onkeydown="return (event.keyCode!=13);" />
+                                    <asp:TextBox runat="server" ID="txtNoInt" placeholder="NUMERO INTERIOR" class="form-control" onkeydown="return (event.keyCode!=13);" />
                                 </div>
                             </div>
                         </div>

@@ -98,7 +98,7 @@ namespace KiiniHelp.UserControls.Altas
                         Label lbl = (Label)item.FindControl("lblIdTipoInformacion");
                         switch (int.Parse(lbl.Text))
                         {
-                            case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                            case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                                 ddl = (DropDownList)item.FindControl("ddlPropietario");
                                 break;
                             case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
@@ -132,7 +132,7 @@ namespace KiiniHelp.UserControls.Altas
             {
                 StringBuilder sb = new StringBuilder();
                 if (ddlMascaraAcceso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
-                    sb.AppendLine("<li>Debe especificar una mascara de captura.</li>");
+                    sb.AppendLine("<li>Debe especificar Formulario de Cliente.</li>");
 
                 if (sb.ToString() != string.Empty)
                 {
@@ -223,7 +223,7 @@ namespace KiiniHelp.UserControls.Altas
                         BusinessVariables.EnumTiposInformacionConsulta seleccion = Metodos.Enumeradores.GetValueEnumFromString<BusinessVariables.EnumTiposInformacionConsulta>(invInfo.InformacionConsulta.TipoInfConsulta.Descripcion);
                         switch (seleccion)
                         {
-                            case BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                            case BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                                 chk = (CheckBox)rptInformacion.Items[0].FindControl("chkInfoConsulta");
                                 ddl = (DropDownList)rptInformacion.Items[0].FindControl("ddlPropietario");
                                 btn = (Button)rptInformacion.Items[0].FindControl("btnAgregarPropietario");
@@ -794,7 +794,7 @@ namespace KiiniHelp.UserControls.Altas
                                 DropDownList ddl = null;
                                 switch (Convert.ToInt32(lblId.Text))
                                 {
-                                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                                    case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                                         ddl = (DropDownList)item.FindControl("ddlPropietario");
                                         break;
                                     case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
@@ -882,7 +882,7 @@ namespace KiiniHelp.UserControls.Altas
                 BusinessVariables.EnumTiposInformacionConsulta seleccion = Metodos.Enumeradores.GetStringEnum<BusinessVariables.EnumTiposInformacionConsulta>(chk.Text);
                 switch (seleccion)
                 {
-                    case BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                    case BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                         ddl = (DropDownList)rptInformacion.Items[0].FindControl("ddlPropietario");
                         btn = (Button)rptInformacion.Items[0].FindControl("btnAgregarPropietario");
                         break;
@@ -925,7 +925,7 @@ namespace KiiniHelp.UserControls.Altas
                 DropDownList ddlDocumento = (DropDownList)e.Item.FindControl("ddlDocumento");
                 DropDownList ddlUrl = (DropDownList)e.Item.FindControl("ddlUrl");
                 if (ddlPropietario == null && ddlDocumento == null && ddlUrl == null) return;
-                Metodos.LlenaComboCatalogo(ddlPropietario, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.Texto, true));
+                Metodos.LlenaComboCatalogo(ddlPropietario, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido, true));
                 Metodos.LlenaComboCatalogo(ddlDocumento, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.Documento, true));
                 Metodos.LlenaComboCatalogo(ddlUrl, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml, true));
             }

@@ -65,7 +65,12 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public virtual List<TicketAsignacion> TicketAsignado { get; set; }
         [DataMember]
         public virtual Puesto Puesto { get; set; }
-
+        [DataMember]
+        public virtual List<UsuarioLinkPassword> UsuarioLinkPassword { get; set; }
+        [DataMember]
+        public virtual List<SmsService> SmsService { get; set; }
+        [DataMember]
+        public virtual List<PreguntaReto> PreguntaReto { get; set; }
 
         public string NombreCompleto { get { return ApellidoPaterno + " " + ApellidoMaterno + " " + Nombre; } }
 
@@ -76,5 +81,7 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public string UbicacionCompleta { get; set; }
 
         public string UbicacionFinal { get; set; }
+
+        
     }
 }

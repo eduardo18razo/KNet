@@ -69,7 +69,7 @@ namespace KiiniHelp.UserControls.Altas
                     throw new Exception("Debe especificar una descripción");
                 switch (tipoInformacion)
                 {
-                    case BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                    case BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                         if (txtEditor.Text.Trim() == string.Empty)
                             throw new Exception("Debe especificar un contenido");
                         break;
@@ -124,7 +124,7 @@ namespace KiiniHelp.UserControls.Altas
                 ddlTipoInformacion_OnSelectedIndexChanged(ddlTipoInformacion, null);
                 switch (info.IdTipoInfConsulta)
                 {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                         txtEditor.Text = info.InformacionConsultaDatos.First().Descripcion;
                         break;
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
@@ -167,7 +167,7 @@ namespace KiiniHelp.UserControls.Altas
             {
                 switch (Convert.ToInt32(ddlTipoInformacion.SelectedValue))
                 {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                         divPropietrario.Visible = true;
                         divUploadDocumento.Visible = false;
                         divDocumento.Visible = false;
@@ -365,8 +365,8 @@ namespace KiiniHelp.UserControls.Altas
                 };
                 switch (Convert.ToInt32(ddlTipoInformacion.SelectedValue))
                 {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Texto:
-                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.Texto);
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
+                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido);
                         informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos
                         {
                             Descripcion = txtEditor.Text,
