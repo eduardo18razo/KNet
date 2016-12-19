@@ -98,11 +98,18 @@
                                 <asp:TextBox runat="server" ID="txtContrasena" type="password" CssClass="form-control obligatorio" Style="text-transform: none"></asp:TextBox>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <asp:Label runat="server" class="col-sm-2 control-label">Confirmar Contraseña</asp:Label>
+                            <div class="col-sm-10">
+                                <asp:TextBox runat="server" ID="txtConfirmar" type="password" CssClass="form-control obligatorio" Style="text-transform: none"></asp:TextBox>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="panel-footer">
                 <asp:Button runat="server" ID="btncontinuar" Text="Continuar" OnClick="btncontinuar_OnClick" CssClass="btn btn-success" />
+                <asp:Button runat="server" ID="btnCancelar" Text="Cancelar" OnClick="btnCancelar_OnClick" CssClass="btn btn-danger" />
             </div>
         </div>
     </form>

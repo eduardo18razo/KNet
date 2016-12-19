@@ -4,16 +4,20 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Web;
 using System.Web.UI;
 using AjaxControlToolkit;
 using KiiniHelp.Funciones;
 using KiiniHelp.ServiceInformacionConsulta;
+using KiiniHelp.ServiceParametrosSistema;
 using KiiniHelp.ServiceSistemaTipoDocumento;
 using KiiniHelp.ServiceSistemaTipoInformacionConsulta;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
 using Microsoft.Office.Interop.Word;
+using System = Microsoft.Office.Interop.Word.System;
 
 namespace KiiniHelp.UserControls.Altas
 {
@@ -25,9 +29,16 @@ namespace KiiniHelp.UserControls.Altas
 
         private readonly ServiceTipoInfConsultaClient _servicioCatalogosSistema = new ServiceTipoInfConsultaClient();
         private readonly ServiceTipoDocumentoClient _servicioSistemaTipoDocumento = new ServiceTipoDocumentoClient();
+        private readonly ServiceParametrosClient _servicioParametros = new ServiceParametrosClient();
 
         private readonly ServiceInformacionConsultaClient _servicioInformacionConsulta =
             new ServiceInformacionConsultaClient();
+
+        public override void Dispose()
+        {
+            base.Dispose();
+
+        }
 
         private List<string> _lstError = new List<string>();
 
@@ -49,6 +60,14 @@ namespace KiiniHelp.UserControls.Altas
                 Metodos.LlenaComboCatalogo(ddlTipoInformacion,
                     _servicioCatalogosSistema.ObtenerTipoInformacionConsulta(true));
                 Metodos.LlenaComboCatalogo(ddlTipoDocumento, _servicioSistemaTipoDocumento.ObtenerTipoDocumentos(true));
+                ParametrosGenerales generales = _servicioParametros.ObtenerParametrosGenerales();
+                List<int> uploads = new List<int>();
+                for (int i = 1; i <= int.Parse(generales.NumeroArchivo); i++)
+                {
+                    uploads.Add(i);
+                }
+                rptDonloads.DataSource = uploads;
+                rptDonloads.DataBind();
             }
             catch (Exception ex)
             {
@@ -99,6 +118,8 @@ namespace KiiniHelp.UserControls.Altas
                 txtDescripcion.Text = String.Empty;
                 txtEditor.Text = string.Empty;
                 txtDescripcionUrl.Text = string.Empty;
+                Session["FileSize"] = 0;
+                Session["FileList"] = new List<string>();
             }
             catch (Exception ex)
             {
@@ -148,6 +169,8 @@ namespace KiiniHelp.UserControls.Altas
                 if (!IsPostBack)
                 {
                     LlenaCombos();
+                    Session["FileSize"] = 0;
+                    Session["FileList"] = new List<string>();
                 }
             }
             catch (Exception ex)
@@ -207,10 +230,13 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                TipoDocumento tipoDocto =
-                    _servicioSistemaTipoDocumento.ObtenerTiposDocumentoId(int.Parse(ddlTipoDocumento.SelectedValue));
+                List<string> archivos = (List<string>)Session["FileList"];
+
+                TipoDocumento tipoDocto = _servicioSistemaTipoDocumento.ObtenerTiposDocumentoId(int.Parse(ddlTipoDocumento.SelectedValue));
                 bool fileOk = false;
-                var path = Server.MapPath(ConfigurationManager.AppSettings["PathInformacionConsultaOriginal"]);
+                var path = BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta;
+                if (!Directory.Exists(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta))
+                    Directory.CreateDirectory(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta);
                 if (afuArchivo.HasFile)
                 {
                     string extension = Path.GetExtension(afuArchivo.FileName);
@@ -231,18 +257,20 @@ namespace KiiniHelp.UserControls.Altas
                     {
                         hfFileName.Value = afuArchivo.FileName;
                         afuArchivo.PostedFile.SaveAs(path + afuArchivo.FileName);
-                        switch (int.Parse(ddlTipoDocumento.SelectedValue))
-                        {
-                            case (int)BusinessVariables.EnumTiposDocumento.Word:
-                                ConvertirWord(afuArchivo.FileName);
-                                break;
-                            case (int)BusinessVariables.EnumTiposDocumento.PowerPoint:
-                                //ConvertirExcel(afuArchivo.FileName);
-                                break;
-                            case (int)BusinessVariables.EnumTiposDocumento.Excel:
-                                ConvertirExcel(afuArchivo.FileName);
-                                break;
-                        }
+                        //switch (int.Parse(ddlTipoDocumento.SelectedValue))
+                        //{
+                        //    case (int)BusinessVariables.EnumTiposDocumento.Word:
+                        //        ConvertirWord(afuArchivo.FileName);
+                        //        break;
+                        //    case (int)BusinessVariables.EnumTiposDocumento.PowerPoint:
+                        //        //ConvertirExcel(afuArchivo.FileName);
+                        //        break;
+                        //    case (int)BusinessVariables.EnumTiposDocumento.Excel:
+                        //        ConvertirExcel(afuArchivo.FileName);
+                        //        break;
+                        //}
+                        archivos.Add(afuArchivo.FileName);
+                        Session["FileList"] = archivos;
 
                     }
                     catch (Exception ex)
@@ -280,78 +308,6 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        private void ConvertirWord(string nombrearchivo)
-        {
-            try
-            {
-                string rutaHtml = ConfigurationManager.AppSettings["PathInformacionConsultaHtml"];
-                string rutaArchivosCarga = ConfigurationManager.AppSettings["PathInformacionConsultaOriginal"];
-                object missingType = Type.Missing;
-                object readOnly = true;
-                object isVisible = false;
-                object documentFormat = 8;
-                string randomName = DateTime.Now.Ticks.ToString();
-                object htmlFilePath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) +
-                                      ".htm";
-                string directoryPath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) +
-                                       "_archivos";
-                object fileName = Server.MapPath(rutaArchivosCarga) + nombrearchivo;
-
-                ApplicationClass applicationclass = new ApplicationClass();
-                applicationclass.Documents.Open(ref fileName, ref readOnly, ref missingType, ref missingType,
-                    ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType,
-                    ref isVisible, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType);
-                applicationclass.Visible = false;
-                Document document = applicationclass.ActiveDocument;
-                document.SaveAs(ref htmlFilePath, ref documentFormat, ref missingType, ref missingType, ref missingType,
-                    ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType,
-                    ref missingType, ref missingType, ref missingType, ref missingType, ref missingType);
-                document.Close(ref missingType, ref missingType, ref missingType);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-        private void ConvertirExcel(string nombrearchivo)
-        {
-            try
-            {
-                string rutaHtml = ConfigurationManager.AppSettings["PathInformacionConsultaHtml"];
-                string rutaArchivosCarga = ConfigurationManager.AppSettings["PathInformacionConsultaOriginal"];
-                object missingType = Type.Missing;
-                //object readOnly = true;
-                //object isVisible = false;
-                object documentFormat = 8;
-                string randomName = DateTime.Now.Ticks.ToString();
-                object htmlFilePath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) +
-                                      ".htm";
-                string directoryPath = Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) +
-                                       "_archivos";
-                string fileName = Server.MapPath(rutaArchivosCarga) + nombrearchivo;
-
-                Microsoft.Office.Interop.Excel.ApplicationClass xls =
-                    new Microsoft.Office.Interop.Excel.ApplicationClass();
-                xls.Workbooks.Open(fileName,
-                    Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                    Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                    Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                    Type.Missing, Type.Missing);
-                xls.Visible = false;
-                Microsoft.Office.Interop.Excel.Workbook wb = xls.ActiveWorkbook;
-                wb.SaveAs(htmlFilePath, Microsoft.Office.Interop.Excel.XlFileFormat.xlHtml, Type.Missing, Type.Missing,
-                    false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
-                    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-                wb.Close();
-            }
-            catch (Exception e)
-            {
-
-                throw new Exception(e.Message);
-            }
-        }
-
         protected void btnGuardar_OnClick(object sender, EventArgs e)
         {
             try
@@ -363,6 +319,7 @@ namespace KiiniHelp.UserControls.Altas
                     IdTipoInfConsulta = Convert.ToInt32(ddlTipoInformacion.SelectedValue),
                     InformacionConsultaDatos = new List<InformacionConsultaDatos>()
                 };
+                List<string> lstArchivos = (List<string>) Session["FileList"];
                 switch (Convert.ToInt32(ddlTipoInformacion.SelectedValue))
                 {
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
@@ -381,6 +338,7 @@ namespace KiiniHelp.UserControls.Altas
                             Descripcion = afuArchivo.FileName,
                             Orden = 1
                         });
+                        lstArchivos.Remove(afuArchivo.FileName);
                         break;
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                         ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml);
@@ -394,7 +352,7 @@ namespace KiiniHelp.UserControls.Altas
                         throw new Exception("Seleccione un tipo de información");
                 }
                 if (EsAlta)
-                    _servicioInformacionConsulta.GuardarInformacionConsulta(informacion);
+                    _servicioInformacionConsulta.GuardarInformacionConsulta(informacion, lstArchivos);
                 else
                     _servicioInformacionConsulta.ActualizarInformacionConsulta(IdInformacionConsulta, informacion);
                 LimpiarCampos();
@@ -438,6 +396,34 @@ namespace KiiniHelp.UserControls.Altas
                 LimpiarCampos();
                 if (OnCancelarModal != null)
                     OnCancelarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void afDosnload_OnUploadedComplete(object sender, AsyncFileUploadEventArgs e)
+        {
+            try
+            {
+                List<string> archivos = (List<string>)Session["FileList"];
+                AsyncFileUpload uploadControl = (AsyncFileUpload)sender;
+                ParametrosGenerales generales = _servicioParametros.ObtenerParametrosGenerales();
+                Int64 sumaArchivos = Int64.Parse(Session["FileSize"].ToString());
+                sumaArchivos += int.Parse(e.FileSize);
+                if (!Directory.Exists(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta))
+                    Directory.CreateDirectory(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta);
+                if ((sumaArchivos / 1024) > int.Parse(generales.TamanoDeArchivo))
+                    throw new Exception(string.Format("El tamaño maximo de carga es de {0}MB", generales.TamanoDeArchivo));
+                uploadControl.SaveAs(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta + e.FileName);
+                archivos.Add(e.FileName);
+                Session["FileList"] = archivos;
             }
             catch (Exception ex)
             {

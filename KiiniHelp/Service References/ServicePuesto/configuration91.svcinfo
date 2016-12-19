@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="hL+Zh3KdIT1u4BhO6dA6PFr8KNk=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="hiq1WjjKmqy6ix+sv0zl/nNgkV0=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="EndPointSeguridad">
       <properties>
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="EndPointSeguridad4" contract="ServicePuesto.IServicePuesto" bindingType="basicHttpBinding" address="http://localhost:15277/ServicePuesto.svc" bindingConfiguration="EndPointSeguridad">
+    <endpoint name="EndPointSeguridad" contract="ServicePuesto.IServicePuesto" bindingType="basicHttpBinding" address="http://localhost:15277/ServicePuesto.svc" bindingConfiguration="EndPointSeguridad">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:15277/ServicePuesto.svc</serializedValue>
@@ -187,7 +187,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EndPointSeguridad4</serializedValue>
+          <serializedValue>EndPointSeguridad</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

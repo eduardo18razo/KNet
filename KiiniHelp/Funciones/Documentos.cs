@@ -1,6 +1,8 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Threading;
+using KinniNet.Business.Utils;
 using Page = System.Web.UI.Page;
 
 namespace KiiniHelp.Funciones
@@ -9,28 +11,28 @@ namespace KiiniHelp.Funciones
     {
         public static void MostrarDocumento(string nombrearchivo, Page page, string directorio)
         {
-            string rutaHtml = ConfigurationManager.AppSettings["PathInformacionConsultaHtml"];
-
-            string htmlFilePath = page.Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) + ".htm";
-            string directoryPath = page.Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) + "_archivos";
-            string directorioTemporal = directorio + Path.GetFileNameWithoutExtension(nombrearchivo) + "_archivos"; ;
-            CopyFilesRecursively(new DirectoryInfo(directoryPath), new DirectoryInfo(directorio));
-            byte[] bytes;
-            using (FileStream fs = new FileStream(htmlFilePath, FileMode.Open, FileAccess.Read))
+            try
             {
-                BinaryReader reader = new BinaryReader(fs);
-                bytes = reader.ReadBytes((int)fs.Length);
-                fs.Close();
+                string rutaHtml = BusinessVariables.Directorios.RepositorioInformacionConsultaHtml;
+
+                string htmlFilePath = BusinessVariables.Directorios.RepositorioInformacionConsultaHtml + Path.GetFileNameWithoutExtension(nombrearchivo) + ".htm";
+                //string directoryPath = page.Server.MapPath(rutaHtml) + Path.GetFileNameWithoutExtension(nombrearchivo) + "_archivos";
+                //string directorioTemporal = directorio + Path.GetFileNameWithoutExtension(nombrearchivo) + "_archivos";
+                //CopyFilesRecursively(new DirectoryInfo(directoryPath), new DirectoryInfo(directorio));
+                byte[] bytes;
+                using (FileStream fs = new FileStream(htmlFilePath, FileMode.Open, FileAccess.Read))
+                {
+                    BinaryReader reader = new BinaryReader(fs);
+                    bytes = reader.ReadBytes((int)fs.Length);
+                    fs.Close();
+                }
+                page.Response.BinaryWrite(bytes);
+                page.Response.Flush();
             }
-            page.Response.BinaryWrite(bytes);
-            page.Response.Flush();
-            Thread.Sleep(2000);
-            //foreach (string file in Directory.GetFiles(directorioTemporal))
-            //{
-            //    File.Delete(file);
-            //}
-            //Directory.Delete(directorioTemporal);
-            //page.Response.End();
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public static void EliminarTemporales()
@@ -40,11 +42,18 @@ namespace KiiniHelp.Funciones
 
         private static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
         {
-            if (Directory.Exists(Path.Combine(target.FullName, source.Name))) return;
-            target.CreateSubdirectory(source.Name);
-            foreach (FileInfo file in source.GetFiles())
+            try
             {
-                file.CopyTo(Path.Combine(Path.Combine(target.FullName, source.Name), file.Name));
+                if (Directory.Exists(Path.Combine(target.FullName, source.Name))) return;
+                target.CreateSubdirectory(source.Name);
+                foreach (FileInfo file in source.GetFiles())
+                {
+                    file.CopyTo(Path.Combine(Path.Combine(target.FullName, source.Name), file.Name));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

@@ -42,13 +42,13 @@
                     <div class="form-group col-sm-12">
                         <asp:Label CssClass="col-sm-3" runat="server" Text="Fecha Inicio" style="width: 110px"/>
                         <div class="col-sm-9" style="width: 190px">
-                            <asp:TextBox runat="server" CssClass="form-control" type="date" step="1" ID="txtFechaInicio"/>
+                            <asp:TextBox runat="server" CssClass="form-control" type="date" step="1" ID="txtFechaInicio" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>/>
                         </div>
                     </div>
                     <div class="form-group col-sm-12">
                         <asp:Label CssClass="col-sm-3" runat="server" Text="Fecha Fin" style="width: 110px" />
                         <div class="col-sm-9" style="width: 190px">
-                            <asp:TextBox runat="server" CssClass="form-control" type="date" step="1" ID="txtFechaFin"/>
+                            <asp:TextBox runat="server" CssClass="form-control" type="date" step="1" ID="txtFechaFin" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>/>
                         </div>
                     </div>
                 </div>

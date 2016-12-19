@@ -18,6 +18,11 @@ namespace KiiniHelp.ServiceSistemaTipoArbolAcceso {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAcceso", ReplyAction="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoArbolAcceso> ObtenerTiposArbolAcceso(bool insertarSeleccion);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoByGruposTercero" +
+            "", ReplyAction="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoByGruposTercero" +
+            "Response")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoArbolAcceso> ObtenerTiposArbolAccesoByGruposTercero(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, bool insertarSeleccion);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoByGrupos", ReplyAction="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoByGruposRespons" +
             "e")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoArbolAcceso> ObtenerTiposArbolAccesoByGrupos(System.Collections.Generic.List<int> grupos, bool insertarSeleccion);
@@ -52,6 +57,10 @@ namespace KiiniHelp.ServiceSistemaTipoArbolAcceso {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoArbolAcceso> ObtenerTiposArbolAcceso(bool insertarSeleccion) {
             return base.Channel.ObtenerTiposArbolAcceso(insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoArbolAcceso> ObtenerTiposArbolAccesoByGruposTercero(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, bool insertarSeleccion) {
+            return base.Channel.ObtenerTiposArbolAccesoByGruposTercero(idUsuarioSolicita, idUsuarioLevanta, idArea, insertarSeleccion);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoArbolAcceso> ObtenerTiposArbolAccesoByGrupos(System.Collections.Generic.List<int> grupos, bool insertarSeleccion) {

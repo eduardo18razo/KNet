@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
@@ -17,7 +16,6 @@ using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
-using Microsoft.Office.Interop.Word;
 using Page = System.Web.UI.Page;
 
 namespace KiiniHelp.UserControls.Altas
@@ -141,6 +139,7 @@ namespace KiiniHelp.UserControls.Altas
                 txtAp.Text = string.Empty;
                 txtAm.Text = string.Empty;
                 txtNombre.Text = string.Empty;
+                txtUserName.Text = string.Empty;
                 Metodos.LimpiarCombo(ddlPuesto);
                 chkVip.Checked = false;
                 chkDirectoriActivo.Checked = false;
@@ -149,8 +148,12 @@ namespace KiiniHelp.UserControls.Altas
                 btnModalUbicacion.CssClass = "btn btn-primary disabled";
                 btnModalRoles.CssClass = "btn btn-primary disabled";
                 btnModalGrupos.CssClass = "btn btn-primary disabled";
-
-
+                foreach (ListItem item in chklbxRoles.Items)
+                {
+                    item.Selected = false;
+                }
+                upRoles.Update();
+                AsociarGrupoUsuario.Limpiar();
             }
             catch (Exception ex)
             {
@@ -285,7 +288,7 @@ namespace KiiniHelp.UserControls.Altas
                     txtAp.Text = user.ApellidoPaterno;
                     txtAm.Text = user.ApellidoMaterno;
                     txtNombre.Text = user.Nombre;
-                    Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestos(true));
+                    Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true));
                     ddlPuesto.SelectedValue = user.IdPuesto.ToString();
                     chkVip.Checked = user.Vip;
                     chkDirectoriActivo.Checked = user.DirectorioActivo;
@@ -358,8 +361,8 @@ namespace KiiniHelp.UserControls.Altas
                 AlertaDatosGenerales = new List<string>();
                 AlertaRoles = new List<string>();
 
-                UcAltaPuesto.OnAceptarModal += UcAltaPuestoOnOnAceptarModal;
-                UcAltaPuesto.OnCancelarModal += UcAltaPuestoOnOnCancelarModal;
+                ucAltaPuesto.OnAceptarModal += UcAltaPuestoOnOnAceptarModal;
+                ucAltaPuesto.OnCancelarModal += UcAltaPuestoOnOnCancelarModal;
 
                 UcConsultaOrganizacion.Modal = true;
                 UcConsultaOrganizacion.OnSeleccionOrganizacionModal += ucOrganizacion_OnAceptarModal;
@@ -442,7 +445,7 @@ namespace KiiniHelp.UserControls.Altas
                     LimpiarPantalla();
                     divDatos.Visible = true;
 
-                    Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestos(true));
+                    Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true));
                 }
                 else
                 {
@@ -469,8 +472,6 @@ namespace KiiniHelp.UserControls.Altas
                 if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                     throw new Exception("Seleccione un tipo de usuario.<br>");
                 ValidaCapturaDatosGenerales();
-                //ucOrganizacion.ValidaCapturaOrganizacion();
-                //UcUbicacion.ValidaCapturaUbicacion();
                 ValidaCapturaRoles();
                 ValidaCapturaGrupos();
                 Usuario usuario = new Usuario
@@ -526,7 +527,7 @@ namespace KiiniHelp.UserControls.Altas
                                 }
                                 break;
                         }
-                        
+
                         usuario.TelefonoUsuario.Add(new TelefonoUsuario
                         {
                             IdTipoTelefono = Convert.ToInt32(tipoTelefono.Text.Trim()),
@@ -623,7 +624,8 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                UcAltaPuesto.EsAlta = true;
+                ucAltaPuesto.EsAlta = true;
+                ucAltaPuesto.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAreas\");", true);
             }
             catch (Exception ex)
@@ -643,7 +645,7 @@ namespace KiiniHelp.UserControls.Altas
             {
                 if (txtNombre.Text.Trim().Length <= 0)
                     return;
-                string username = (txtNombre.Text.Substring(0, 1).ToLower() + txtAp.Text.Trim().ToLower()).Replace(" ", string.Empty);
+                string username = txtUserName.Text.Trim() == string.Empty ? (txtNombre.Text.Substring(0, 1).ToLower() + txtAp.Text.Trim().ToLower()).Replace(" ", string.Empty) : txtUserName.Text.Trim();
                 int limite = 2;
                 if (_servicioUsuarios.ValidaUserName(username))
                 {
@@ -663,9 +665,9 @@ namespace KiiniHelp.UserControls.Altas
                 {
                     txtAm.Focus();
                 }
-                else if (txtNombre.ID == ((TextBox)sender).ID) 
+                else if (txtNombre.ID == ((TextBox)sender).ID)
                 {
-                    
+
                 }
             }
             catch (Exception ex)
@@ -771,6 +773,25 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
+        protected void btnAceptarGrupos_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!AsociarGrupoUsuario.ValidaCapturaGrupos()) return;
+                btnModalGrupos.CssClass = "btn btn-success";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalGrupos\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+
+            }
+        }
+
         protected void btnCerrarGrupos_OnClick(object sender, EventArgs e)
         {
             try
@@ -792,7 +813,7 @@ namespace KiiniHelp.UserControls.Altas
         #endregion botones cerrar Cancelar
 
         #region Delegados
-        
+
 
         private void UcAltaPuestoOnOnCancelarModal()
         {
@@ -816,7 +837,7 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAreas\");", true);
-                Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestos(true));
+                Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true));
             }
             catch (Exception ex)
             {
@@ -919,7 +940,5 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
-
-        
     }
 }

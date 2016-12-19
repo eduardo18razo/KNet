@@ -9,13 +9,14 @@ namespace KiiniNet.Services.Operacion.Implementacion
 {
     public class ServiceTicket : IServiceTicket
     {
-        public Ticket CrearTicket(int idUsuario, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, bool campoRandom)
+        public Ticket CrearTicket(int idUsuario,int idUsuarioSolicito, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero)
         {
             try
             {
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
-                    return negocio.CrearTicket(idUsuario, idArbol, lstCaptura, campoRandom);
+                    
+                    return negocio.CrearTicket(idUsuario, idUsuarioSolicito, idArbol, lstCaptura, idCanal, campoRandom, esTercero);
                 }
             }
             catch (Exception ex)

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 using KiiniNet.Entities.Cat.Sistema;
 
 namespace KiiniNet.Entities.Operacion
@@ -30,7 +27,9 @@ namespace KiiniNet.Entities.Operacion
         [DataMember]
         public virtual List<InformacionConsultaDatos> InformacionConsultaDatos { get; set; }
         [DataMember]
-        public virtual List<InventarioInfConsulta> InventarioInfConsulta { get; set; } 
+        public virtual List<InventarioInfConsulta> InventarioInfConsulta { get; set; }
+        [DataMember]
+        public virtual List<InformacionConsultaDocumento> InformacionConsultaDocumento { get; set; }
         
     }
 }

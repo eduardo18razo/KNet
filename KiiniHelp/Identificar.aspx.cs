@@ -52,10 +52,57 @@ namespace KiiniHelp
         {
             try
             {
-                Usuario userData = _servicioUsuarios.BuscarUsuario(txtUserName.Text.Trim());
-                if (userData != null)
-                    Response.Redirect("~/FrmRecuperar.aspx?ldata=" + QueryString.Encrypt(userData.Id.ToString()));
+                try
+                {
+                    List<Usuario> usuarios = _servicioUsuarios.BuscarUsuarios(txtUserName.Text.Trim());
+                    rbtnLstUsuarios.DataSource = usuarios;
+                    rbtnLstUsuarios.DataTextField = "NombreCompleto";
+                    rbtnLstUsuarios.DataValueField = "Id";
+                    rbtnLstUsuarios.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    if (_lstError == null)
+                    {
+                        _lstError = new List<string>();
+                    }
+                    _lstError.Add(ex.Message);
+                    AlertaGeneral = _lstError;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
 
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect(ResolveUrl("~/Default.aspx"));
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void rbtnLstUsuarios_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("~/FrmRecuperar.aspx?ldata=" + QueryString.Encrypt(rbtnLstUsuarios.SelectedValue));
             }
             catch (Exception ex)
             {

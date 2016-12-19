@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using KiiniNet.Entities.Cat.Sistema;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
 
 namespace KinniNet.Core.Sistema
 {
-    public class BusinessTipoGrupo: IDisposable
+    public class BusinessTipoGrupo : IDisposable
     {
         private bool _proxy;
         public BusinessTipoGrupo(bool proxy = false)
@@ -36,7 +37,7 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -67,7 +68,39 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<TipoGrupo> ObtenerTiposGruposByTipoUsuario(int idTipoUsuario, bool insertarSeleccion)
+        {
+            List<TipoGrupo> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = (from tg in db.TipoGrupo
+                          join rtg in db.RolTipoGrupo on tg.Id equals rtg.IdTipoGrupo
+                          join rtu in db.RolTipoUsuario on rtg.IdRol equals rtu.IdRol
+                          where rtu.IdTipoUsuario == idTipoUsuario
+                          select tg).Distinct().OrderBy(o => o.Descripcion).ToList();
+
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                        new TipoGrupo
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.Value,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             finally
             {

@@ -37,5 +37,20 @@ namespace KiiniNet.Services.Sistema.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<TipoGrupo> ObtenerTiposGruposByTipoUsuario(int idTipoUsuario, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessTipoGrupo negocio = new BusinessTipoGrupo())
+                {
+                    return negocio.ObtenerTiposGruposByTipoUsuario(idTipoUsuario, insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

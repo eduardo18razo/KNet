@@ -185,15 +185,25 @@ namespace KiiniHelp.UserControls.Consultas
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            AlertaOrganizacion = new List<string>();
-            AlertaCatalogos = new List<string>();
-            if (!IsPostBack)
+            try
             {
-                LlenaCombos();
-                LlenaOrganizaciones();
+                AlertaOrganizacion = new List<string>();
+                AlertaCatalogos = new List<string>();
+                if (!IsPostBack)
+                {
+                    LlenaCombos();
+                    LlenaOrganizaciones();
+                }
             }
-            //if (Request["__EVENTTARGET"] == "SeleccionarOrganizacion")
-            //    Seleccionar(Convert.ToInt32(Request["__EVENTARGUMENT"]));
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
         }
 
         protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -749,24 +759,35 @@ namespace KiiniHelp.UserControls.Consultas
                             break;
                         case 2:
                             organizacion.Compania.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
+                            ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
                             break;
                         case 3:
                             organizacion.Direccion.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
+                            ddlCompañia_OnSelectedIndexChanged(ddlCompañia, null);
                             break;
                         case 4:
                             organizacion.SubDireccion.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
+                            ddlDirecion_OnSelectedIndexChanged(ddlGerencia, null);
                             break;
                         case 5:
                             organizacion.Gerencia.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
+                            ddlSubDireccion_OnSelectedIndexChanged(ddlSubDireccion, null);
                             break;
                         case 6:
                             organizacion.SubGerencia.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
+                            ddlGerencia_OnSelectedIndexChanged(ddlGerencia, null);
                             break;
                         case 7:
                             organizacion.Jefatura.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
+                            ddlSubGerencia_OnSelectedIndexChanged(ddlSubGerencia, null);
                             break;
                     }
-                    _servicioOrganizacion.ActualizarOrganizacion(organizacion);
                 }
                 LimpiaCatalogo();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoOrganizacion\");", true);

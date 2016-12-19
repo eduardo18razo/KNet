@@ -32,7 +32,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -53,8 +53,7 @@ namespace KinniNet.Core.Operacion
                 usuario.ApellidoPaterno = usuario.ApellidoPaterno.ToUpper();
                 usuario.ApellidoMaterno = usuario.ApellidoMaterno.ToUpper();
                 usuario.Nombre = usuario.Nombre.ToUpper();
-                usuario.Password = ConfigurationManager.AppSettings["siteUrl"] + tmpurl + "?confirmacionalta=" +
-                                   usuario.Id + "_" + g;
+                usuario.Password = BusinessQueryString.Encrypt(ConfigurationManager.AppSettings["siteUrl"] + tmpurl + "?confirmacionalta=" + usuario.Id + "_" + g);
                 usuario.UsuarioLinkPassword = new List<UsuarioLinkPassword>
                 {
                     new UsuarioLinkPassword
@@ -70,8 +69,7 @@ namespace KinniNet.Core.Operacion
                     db.Usuario.AddObject(usuario);
                     db.SaveChanges();
                 }
-                usuario.Password = ConfigurationManager.AppSettings["siteUrl"] + tmpurl + "?confirmacionalta=" +
-                                   usuario.Id + "_" + g;
+                usuario.Password = ConfigurationManager.AppSettings["siteUrl"] + tmpurl + "?confirmacionalta=" + usuario.Id + "_" + g;
                 if (correo != null)
                 {
                     String body = NamedFormat.Format(correo.Contenido, usuario);
@@ -83,7 +81,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -252,7 +250,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -270,7 +268,7 @@ namespace KinniNet.Core.Operacion
                 IQueryable<Usuario> qry = db.Usuario;
                 if (idTipoUsuario != null)
                     qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
-                result = qry.ToList();
+                result = qry.OrderBy(o => o.ApellidoPaterno).ThenBy(tb => tb.ApellidoMaterno).ThenBy(tb => tb.Nombre).ToList();
                 foreach (Usuario usuario in result)
                 {
                     db.LoadProperty(usuario, "TipoUsuario");
@@ -286,7 +284,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -317,7 +315,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -335,6 +333,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Usuario.SingleOrDefault(s => s.Id == idUsuario);
                 db.LoadProperty(result, "CorreoUsuario");
+                db.LoadProperty(result, "Puesto");
                 db.LoadProperty(result, "TelefonoUsuario");
                 db.LoadProperty(result, "PreguntaReto");
                 db.LoadProperty(result, "UsuarioRol");
@@ -368,7 +367,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -426,7 +425,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -446,7 +445,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -464,14 +463,11 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 Guid guidParam = Guid.Parse(guid);
                 result =
-                    db.UsuarioLinkPassword.Any(
-                        s =>
-                            s.IdUsuario == idUsuario && s.Link == guidParam &&
-                            s.IdTipoLink == (int)BusinessVariables.EnumTipoLink.Confirmacion && s.Activo);
+                    db.UsuarioLinkPassword.Any(s => s.IdUsuario == idUsuario && s.Link == guidParam && s.IdTipoLink == (int)BusinessVariables.EnumTipoLink.Confirmacion && s.Activo);
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -547,7 +543,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
         }
 
@@ -570,7 +566,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -589,14 +585,10 @@ namespace KinniNet.Core.Operacion
                 if (user != null)
                 {
                     Guid linkLlave = Guid.Parse(link);
-                    user.UsuarioLinkPassword.Single(
-                        s =>
-                            s.IdTipoLink == (int)BusinessVariables.EnumTipoLink.Confirmacion &&
-                            s.IdUsuario == idUsuario && s.Link == linkLlave).Activo = false;
+                    user.UsuarioLinkPassword.Single(s => s.IdTipoLink == (int)BusinessVariables.EnumTipoLink.Confirmacion && s.IdUsuario == idUsuario && s.Link == linkLlave).Activo = false;
                     user.PreguntaReto = new List<PreguntaReto>();
                     foreach (PreguntaReto reto in pregunta)
                     {
-                        reto.Respuesta = SecurityUtils.CreateShaHash(reto.Respuesta);
                         db.PreguntaReto.AddObject(new PreguntaReto
                         {
                             IdUsuario = user.Id,
@@ -604,7 +596,17 @@ namespace KinniNet.Core.Operacion
                             Respuesta = SecurityUtils.CreateShaHash(reto.Respuesta)
                         });
                     }
+                    if (db.ParametrosGenerales.First().StrongPassword)
+                        user.UsuarioPassword = new List<UsuarioPassword>
+                    {
+                        new UsuarioPassword
+                        {
+                            Fecha = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"),"yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
+                            Password = SecurityUtils.CreateShaHash(password)
+                        }
+                    };
                     user.Password = SecurityUtils.CreateShaHash(password);
+                    user.Activo = true;
                     db.SaveChanges();
                     foreach (KeyValuePair<int, string> confirmacion in confirmaciones)
                     {
@@ -616,7 +618,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -661,7 +663,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -746,7 +748,29 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        public List<Usuario> BuscarUsuarios(string usuario)
+        {
+            List<Usuario> result = null;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Usuario.Join(db.CorreoUsuario, u => u.Id, cu => cu.IdUsuario, (u, cu) => new { u, cu })
+                    .Join(db.TelefonoUsuario, @t => @t.u.Id, tu => tu.IdUsuario, (@t, tu) => new { @t, tu })
+                    .Where(@t => @t.@t.cu.Correo == usuario || @t.tu.Numero == usuario || @t.@t.u.NombreUsuario == usuario)
+                    .Select(@t => @t.@t.u).Distinct().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             finally
             {

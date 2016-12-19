@@ -18,6 +18,9 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/CrearCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/CrearCatalogoResponse")]
         void CrearCatalogo(string nombreCatalogo, bool esMascara);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ObtenerCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/ObtenerCatalogoResponse")]
+        KiiniNet.Entities.Cat.Sistema.Catalogos ObtenerCatalogo(int idCatalogo);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ObtenerCatalogos", ReplyAction="http://tempuri.org/IServiceCatalogos/ObtenerCatalogosResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Catalogos> ObtenerCatalogos(bool insertarSeleccion);
         
@@ -35,6 +38,12 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosCatalogoResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosCatalogo(int idCatalogo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/CrearCatalogoExcel", ReplyAction="http://tempuri.org/IServiceCatalogos/CrearCatalogoExcelResponse")]
+        void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ActualizarCatalogoExcel", ReplyAction="http://tempuri.org/IServiceCatalogos/ActualizarCatalogoExcelResponse")]
+        void ActualizarCatalogoExcel(int idCatalogo, bool esMascara, string archivo, string hoja);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -68,6 +77,10 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
             base.Channel.CrearCatalogo(nombreCatalogo, esMascara);
         }
         
+        public KiiniNet.Entities.Cat.Sistema.Catalogos ObtenerCatalogo(int idCatalogo) {
+            return base.Channel.ObtenerCatalogo(idCatalogo);
+        }
+        
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Catalogos> ObtenerCatalogos(bool insertarSeleccion) {
             return base.Channel.ObtenerCatalogos(insertarSeleccion);
         }
@@ -90,6 +103,14 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosCatalogo(int idCatalogo) {
             return base.Channel.ObtenerRegistrosCatalogo(idCatalogo);
+        }
+        
+        public void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja) {
+            base.Channel.CrearCatalogoExcel(nombreCatalogo, esMascara, archivo, hoja);
+        }
+        
+        public void ActualizarCatalogoExcel(int idCatalogo, bool esMascara, string archivo, string hoja) {
+            base.Channel.ActualizarCatalogoExcel(idCatalogo, esMascara, archivo, hoja);
         }
     }
 }

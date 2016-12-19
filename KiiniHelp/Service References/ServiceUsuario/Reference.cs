@@ -54,6 +54,9 @@ namespace KiiniHelp.ServiceUsuario {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/BuscarUsuario", ReplyAction="http://tempuri.org/IServiceUsuarios/BuscarUsuarioResponse")]
         KiiniNet.Entities.Operacion.Usuarios.Usuario BuscarUsuario(string usuario);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/BuscarUsuarios", ReplyAction="http://tempuri.org/IServiceUsuarios/BuscarUsuariosResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> BuscarUsuarios(string usuario);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionCorreo", ReplyAction="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionCorreoResponse")]
         string EnviaCodigoVerificacionCorreo(int idUsuario, int idTipoNotificacion, int idCorreo);
         
@@ -141,6 +144,10 @@ namespace KiiniHelp.ServiceUsuario {
         
         public KiiniNet.Entities.Operacion.Usuarios.Usuario BuscarUsuario(string usuario) {
             return base.Channel.BuscarUsuario(usuario);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.Usuario> BuscarUsuarios(string usuario) {
+            return base.Channel.BuscarUsuarios(usuario);
         }
         
         public string EnviaCodigoVerificacionCorreo(int idUsuario, int idTipoNotificacion, int idCorreo) {

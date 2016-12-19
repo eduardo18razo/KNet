@@ -10,6 +10,9 @@ namespace KiiniNet.Services.Sistema.Interface
     {
         [OperationContract]
         void CrearCatalogo(string nombreCatalogo, bool esMascara);
+
+        [OperationContract]
+        Catalogos ObtenerCatalogo(int idCatalogo);
         [OperationContract]
         List<Catalogos> ObtenerCatalogos(bool insertarSeleccion);
         [OperationContract]
@@ -25,5 +28,11 @@ namespace KiiniNet.Services.Sistema.Interface
 
         [OperationContract]
         List<CatalogoGenerico> ObtenerRegistrosCatalogo(int idCatalogo);
+
+        [OperationContract]
+        void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja);
+
+        [OperationContract]
+        void ActualizarCatalogoExcel(int idCatalogo, bool esMascara, string archivo, string hoja);
     }
 }

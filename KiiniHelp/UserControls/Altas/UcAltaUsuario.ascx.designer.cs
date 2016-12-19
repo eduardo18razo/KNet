@@ -418,6 +418,15 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::KiiniHelp.UserControls.Seleccion.AsociarGrupoUsuario AsociarGrupoUsuario;
         
         /// <summary>
+        /// Control btnAceptarGrupos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAceptarGrupos;
+        
+        /// <summary>
         /// Control btnCerrarGrupos.
         /// </summary>
         /// <remarks>
@@ -436,12 +445,12 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.UpdatePanel upModalAltaAreas;
         
         /// <summary>
-        /// Control UcAltaPuesto.
+        /// Control ucAltaPuesto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.UcAltaPuesto UcAltaPuesto;
+        protected global::KiiniHelp.UserControls.Altas.UcAltaPuesto ucAltaPuesto;
     }
 }

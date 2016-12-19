@@ -16,13 +16,15 @@ namespace KiiniNet.Entities.Parametros
         [DataMember]
         public int? IdSubRol { get; set; }
         [DataMember]
-        public int IdEstatusTicket { get; set; }
+        public int? IdEstatusTicket { get; set; }
         [DataMember]
-        public int Orden { get; set; }
+        public int? Orden { get; set; }
         [DataMember]
-        public bool TieneSupervisor { get; set; }
+        public bool? TieneSupervisor { get; set; }
         [DataMember]
-        public bool Propietario { get; set; }
+        public bool? Propietario { get; set; }
+        [DataMember]
+        public bool? LevantaTicket { get; set; }
         [DataMember]
         public bool Habilitado { get; set; }
 

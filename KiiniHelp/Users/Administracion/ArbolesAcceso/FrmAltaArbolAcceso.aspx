@@ -507,7 +507,9 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-
+            
+            
+            <%-- ALTAS --%>
             <div class="modal fade" id="modalAltaInfCons" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <asp:UpdatePanel ID="upModalAltaInfCons" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>

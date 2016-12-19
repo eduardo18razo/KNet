@@ -36,6 +36,12 @@
   <wsdl:message name="IServiceParametros_ObtenerCorreosParametrosIdTipoUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerCorreosParametrosIdTipoUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceParametros_ObtenerParametrosGenerales_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerParametrosGenerales" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParametros_ObtenerParametrosGenerales_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerParametrosGeneralesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceParametros">
     <wsdl:operation name="TelefonosObligatorios">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceParametros/TelefonosObligatorios" message="tns:IServiceParametros_TelefonosObligatorios_InputMessage" />
@@ -48,6 +54,10 @@
     <wsdl:operation name="ObtenerCorreosParametrosIdTipoUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceParametros/ObtenerCorreosParametrosIdTipoUsuario" message="tns:IServiceParametros_ObtenerCorreosParametrosIdTipoUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceParametros/ObtenerCorreosParametrosIdTipoUsuarioResponse" message="tns:IServiceParametros_ObtenerCorreosParametrosIdTipoUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerParametrosGenerales">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceParametros/ObtenerParametrosGenerales" message="tns:IServiceParametros_ObtenerParametrosGenerales_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceParametros/ObtenerParametrosGeneralesResponse" message="tns:IServiceParametros_ObtenerParametrosGenerales_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceParametros" type="tns:IServiceParametros">
@@ -72,6 +82,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerCorreosParametrosIdTipoUsuario">
       <soap:operation soapAction="http://tempuri.org/IServiceParametros/ObtenerCorreosParametrosIdTipoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerParametrosGenerales">
+      <soap:operation soapAction="http://tempuri.org/IServiceParametros/ObtenerParametrosGenerales" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

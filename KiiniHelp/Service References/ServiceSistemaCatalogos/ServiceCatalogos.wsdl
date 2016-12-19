@@ -25,6 +25,12 @@
   <wsdl:message name="IServiceCatalogos_CrearCatalogo_OutputMessage">
     <wsdl:part name="parameters" element="tns:CrearCatalogoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceCatalogos_ObtenerCatalogo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerCatalogo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCatalogos_ObtenerCatalogo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerCatalogoResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceCatalogos_ObtenerCatalogos_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerCatalogos" />
   </wsdl:message>
@@ -61,10 +67,26 @@
   <wsdl:message name="IServiceCatalogos_ObtenerRegistrosCatalogo_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerRegistrosCatalogoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceCatalogos_CrearCatalogoExcel_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearCatalogoExcel" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCatalogos_CrearCatalogoExcel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CrearCatalogoExcelResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCatalogos_ActualizarCatalogoExcel_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarCatalogoExcel" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCatalogos_ActualizarCatalogoExcel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarCatalogoExcelResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceCatalogos">
     <wsdl:operation name="CrearCatalogo">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/CrearCatalogo" message="tns:IServiceCatalogos_CrearCatalogo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/CrearCatalogoResponse" message="tns:IServiceCatalogos_CrearCatalogo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCatalogo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/ObtenerCatalogo" message="tns:IServiceCatalogos_ObtenerCatalogo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/ObtenerCatalogoResponse" message="tns:IServiceCatalogos_ObtenerCatalogo_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ObtenerCatalogos">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/ObtenerCatalogos" message="tns:IServiceCatalogos_ObtenerCatalogos_InputMessage" />
@@ -90,11 +112,28 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosCatalogo" message="tns:IServiceCatalogos_ObtenerRegistrosCatalogo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosCatalogoResponse" message="tns:IServiceCatalogos_ObtenerRegistrosCatalogo_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="CrearCatalogoExcel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/CrearCatalogoExcel" message="tns:IServiceCatalogos_CrearCatalogoExcel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/CrearCatalogoExcelResponse" message="tns:IServiceCatalogos_CrearCatalogoExcel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarCatalogoExcel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/ActualizarCatalogoExcel" message="tns:IServiceCatalogos_ActualizarCatalogoExcel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/ActualizarCatalogoExcelResponse" message="tns:IServiceCatalogos_ActualizarCatalogoExcel_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceCatalogos">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="CrearCatalogo">
       <soap:operation soapAction="http://tempuri.org/IServiceCatalogos/CrearCatalogo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCatalogo">
+      <soap:operation soapAction="http://tempuri.org/IServiceCatalogos/ObtenerCatalogo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -149,6 +188,24 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerRegistrosCatalogo">
       <soap:operation soapAction="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosCatalogo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearCatalogoExcel">
+      <soap:operation soapAction="http://tempuri.org/IServiceCatalogos/CrearCatalogoExcel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarCatalogoExcel">
+      <soap:operation soapAction="http://tempuri.org/IServiceCatalogos/ActualizarCatalogoExcel" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

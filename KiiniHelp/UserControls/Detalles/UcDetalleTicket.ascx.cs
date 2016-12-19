@@ -45,8 +45,6 @@ namespace KiiniHelp.UserControls.Detalles
         {
             if (!IsPostBack)
             {
-
-
             }
         }
     }

@@ -37,14 +37,22 @@ namespace KiiniHelp.Funciones
                 return (T)Enum.Parse(typeof(T), Strings.CastToEnum(cadena.ToLower()));
             }
         }
-
-        
-
         public static void LimpiarCombo(DropDownList ddl)
         {
             try
             {
                 ddl.Items.Clear();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static void LimpiarRadioList(RadioButtonList rbtnlst)
+        {
+            try
+            {
+                rbtnlst.Items.Clear();
             }
             catch (Exception ex)
             {

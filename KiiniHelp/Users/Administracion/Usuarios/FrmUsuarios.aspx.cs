@@ -153,7 +153,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
 
                 if (telefonoUsuario.Count(c => c.IdTipoTelefono == telefono.IdTipoTelefono && c.Numero.Trim() != string.Empty) < parametroTipoTelefono.Obligatorios)
                 {
-                    sb.AppendLine(String.Format("<li>Debe capturar al menos {0} telefono(s) de {1}.</li>",parametroTipoTelefono.Obligatorios, parametroTipoTelefono.TipoTelefono.Descripcion));
+                    sb.AppendLine(String.Format("<li>Debe capturar al menos {0} telefono(s) de {1}.</li>", parametroTipoTelefono.Obligatorios, parametroTipoTelefono.TipoTelefono.Descripcion));
                     break;
                 }
             }
@@ -289,7 +289,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
             try
             {
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAreas\");", true);
-                Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestos(true));
+                Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(int.Parse(ddlTipoUsuario.SelectedValue), true));
             }
             catch (Exception ex)
             {
@@ -354,7 +354,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                     LimpiarPantalla();
                     divDatos.Visible = true;
 
-                    Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestos(true));
+                    Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(idTipoUsuario, true));
 
                     upGeneral.Update();
                 }

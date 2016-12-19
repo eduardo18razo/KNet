@@ -26,6 +26,21 @@ namespace KiiniNet.Services.Sistema.Implementacion
             }
         }
 
+        public Catalogos ObtenerCatalogo(int idCatalogo)
+        {
+            try
+            {
+                using (BusinessCatalogos negocio = new BusinessCatalogos())
+                {
+                    return negocio.ObtenerCatalogo(idCatalogo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<Catalogos> ObtenerCatalogos(bool insertarSeleccion)
         {
             try
@@ -108,6 +123,36 @@ namespace KiiniNet.Services.Sistema.Implementacion
                 using (BusinessCatalogos negocio = new BusinessCatalogos())
                 {
                     return negocio.ObtenerRegistrosCatalogo(idCatalogo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja)
+        {
+            try
+            {
+                using (BusinessCatalogos negocio = new BusinessCatalogos())
+                {
+                    negocio.CrearCatalogoExcel(nombreCatalogo, esMascara, archivo, hoja);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ActualizarCatalogoExcel(int idCatalogo, bool esMascara, string archivo, string hoja)
+        {
+            try
+            {
+                using (BusinessCatalogos negocio = new BusinessCatalogos())
+                {
+                    negocio.ActualizarCatalogoExcel(idCatalogo, esMascara, archivo, hoja);
                 }
             }
             catch (Exception ex)

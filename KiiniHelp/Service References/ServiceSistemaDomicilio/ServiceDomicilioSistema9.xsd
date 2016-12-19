@@ -151,7 +151,6 @@
   <xs:element name="ArrayOfGrupoUsuario" nillable="true" type="tns:ArrayOfGrupoUsuario" />
   <xs:complexType name="Sla">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Detallado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Dias" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />

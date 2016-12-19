@@ -59,5 +59,7 @@ namespace KiiniNet.Entities.Cat.Usuario
         public virtual List<TicketGrupoUsuario> TicketGrupoUsuario { get; set; }
         [DataMember]
         public virtual List<TiempoInformeArbol> TiempoInformeArbol { get; set; }
+        [DataMember]
+        public virtual List<Horario> Horario { get; set; }
     }
 }

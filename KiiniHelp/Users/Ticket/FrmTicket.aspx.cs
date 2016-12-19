@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using KiiniHelp.ServiceArbolAcceso;
-using KiiniHelp.ServiceMascaraAcceso;
 using KiiniHelp.ServiceTicket;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Helper;
@@ -15,7 +14,6 @@ namespace KiiniHelp.Users.Ticket
     public partial class FrmTicket : Page
     {
         readonly ServiceArbolAccesoClient _servicioArbolAcceso = new ServiceArbolAccesoClient();
-        readonly ServiceMascarasClient _servicioMascaras = new ServiceMascarasClient();
         readonly ServiceTicketClient _servicioTicket = new ServiceTicketClient();
         private List<string> _lstError = new List<string>();
 
@@ -33,7 +31,7 @@ namespace KiiniHelp.Users.Ticket
         {
             get
             {
-                int result = 0;
+                int result;
                 if (hfIdConsulta.Value != string.Empty)
                     result = Convert.ToInt32(hfIdConsulta.Value);
                 else
@@ -55,7 +53,7 @@ namespace KiiniHelp.Users.Ticket
         {
             get
             {
-                int result = 0;
+                int result;
                 if (hfIdMascara.Value != string.Empty)
                     result = Convert.ToInt32(hfIdMascara.Value);
                 else
@@ -78,7 +76,7 @@ namespace KiiniHelp.Users.Ticket
         {
             get
             {
-                int result = 0;
+                int result;
                 if (hfIdSla.Value != string.Empty)
                     result = Convert.ToInt32(hfIdSla.Value);
                 else
@@ -101,7 +99,7 @@ namespace KiiniHelp.Users.Ticket
         {
             get
             {
-                int result = 0;
+                int result;
                 if (hfIdEncuesta.Value != string.Empty)
                 {
                     result = Convert.ToInt32(hfIdEncuesta.Value);
@@ -120,13 +118,84 @@ namespace KiiniHelp.Users.Ticket
             }
         }
 
+        public int IdCanal
+        {
+            get
+            {
+                int result;
+                if (hfIdCanal.Value != string.Empty)
+                    result = Convert.ToInt32(hfIdCanal.Value);
+                else
+                    result = (int)Session["hfIdCanal"];
+                return result;
+            }
+            set
+            {
+                if (hfIdCanal != null)
+                {
+                    hfIdCanal.Value = value.ToString();
+                    Session.Remove("hfIdCanal");
+                }
+                else
+                    Session["hfIdCanal"] = value;
+            }
+        }
+
+        public int IdUsuarioSolicita
+        {
+            get
+            {
+                int result;
+                if (hfIdUsuarioSolicita.Value != string.Empty)
+                    result = Convert.ToInt32(hfIdUsuarioSolicita.Value);
+                else
+                    result = (int)Session["hfIdUsuarioSolicita"];
+                return result;
+            }
+            set
+            {
+                if (hfIdUsuarioSolicita != null)
+                {
+                    hfIdUsuarioSolicita.Value = value.ToString();
+                    Session.Remove("hfIdUsuarioSolicita");
+                }
+                else
+                    Session["hfIdUsuarioSolicita"] = value;
+            }
+        }
+
+        public bool EsTercero
+        {
+            get { return IdUsuarioSolicita != ((Usuario)Session["UserData"]).Id; }
+        }
+
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            int idArbol = Convert.ToInt32(Request.QueryString["IdArbol"]);
-            ArbolAcceso arbol = _servicioArbolAcceso.ObtenerArbolAcceso(idArbol);
-            Session["ArbolAcceso"] = arbol;
-            IdMascara = arbol.InventarioArbolAcceso.First().IdMascara ?? 0;
-            IdEncuesta = arbol.InventarioArbolAcceso.First().IdEncuesta ?? 0;
+            try
+            {
+                if (Request.QueryString["IdArbol"] != null && Request.QueryString["UsuarioSolicita"] != null && Request.QueryString["Canal"] != null)
+                {
+                    ArbolAcceso arbol = _servicioArbolAcceso.ObtenerArbolAcceso(Convert.ToInt32(Request.QueryString["IdArbol"]));
+                    Session["ArbolAcceso"] = arbol;
+                    IdMascara = arbol.InventarioArbolAcceso.First().IdMascara ?? 0;
+                    IdEncuesta = arbol.InventarioArbolAcceso.First().IdEncuesta ?? 0;
+                    IdUsuarioSolicita = int.Parse(Request.QueryString["UsuarioSolicita"]);
+                    IdCanal = int.Parse(Request.QueryString["Canal"]);
+                }
+                else if (Request.QueryString["IdArbol"] != null && Request.QueryString["Canal"] != null)
+                {
+                    ArbolAcceso arbol = _servicioArbolAcceso.ObtenerArbolAcceso(Convert.ToInt32(Request.QueryString["IdArbol"]));
+                    Session["ArbolAcceso"] = arbol;
+                    IdMascara = arbol.InventarioArbolAcceso.First().IdMascara ?? 0;
+                    IdEncuesta = arbol.InventarioArbolAcceso.First().IdEncuesta ?? 0;
+                    IdUsuarioSolicita = ((Usuario)Session["UserData"]).Id;
+                    IdCanal = (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Web;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
         }
 
@@ -184,7 +253,8 @@ namespace KiiniHelp.Users.Ticket
             {
 
                 List<HelperCampoMascaraCaptura> capturaMascara = UcMascaraCaptura.ObtenerCapturaMascara();
-                KiiniNet.Entities.Operacion.Tickets.Ticket result = _servicioTicket.CrearTicket(((Usuario)Session["UserData"]).Id, Convert.ToInt32(Request.QueryString["IdArbol"]), capturaMascara, UcMascaraCaptura.CampoRandom);
+                KiiniNet.Entities.Operacion.Tickets.Ticket result = _servicioTicket.CrearTicket(((Usuario)Session["UserData"]).Id, IdUsuarioSolicita, Convert.ToInt32(Request.QueryString["IdArbol"]), capturaMascara, IdCanal, UcMascaraCaptura.CampoRandom, EsTercero);
+                UcMascaraCaptura.ConfirmaArchivos();
                 lblNoTicket.Text = result.Id.ToString();
                 lblDescRandom.Visible = UcMascaraCaptura.CampoRandom;
                 lblRandom.Visible = UcMascaraCaptura.CampoRandom;
@@ -210,6 +280,31 @@ namespace KiiniHelp.Users.Ticket
             {
 
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalExito\");", true);
+                if(EsTercero)
+                    Response.Redirect("~/FrmCloseWindow.aspx");
+                Usuario userData = (Usuario)Session["UserData"];
+                if (userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado)
+                    Response.Redirect("~/Default.aspx");
+                else
+                    Response.Redirect("~/Users/DashBoard.aspx");
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (EsTercero)
+                    Response.Redirect("~/FrmCloseWindow.aspx");
                 Usuario userData = (Usuario)Session["UserData"];
                 if (userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado)
                     Response.Redirect("~/Default.aspx");

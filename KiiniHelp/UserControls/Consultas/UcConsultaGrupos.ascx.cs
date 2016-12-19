@@ -48,8 +48,7 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true);
                 Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
-                Metodos.LlenaComboCatalogo(ddlTipoGrupo, _servicioTipoGrupo.ObtenerTiposGrupo(true));
-
+                //Metodos.LlenaComboCatalogo(ddlTipoGrupo, _servicioTipoGrupo.ObtenerTiposGrupo(true));
             }
             catch (Exception e)
             {
@@ -107,15 +106,27 @@ namespace KiiniHelp.UserControls.Consultas
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            AlertaGrupos = new List<string>();
-            if (!IsPostBack)
+            try
             {
-                LlenaCombos();
-                LlenaGrupos();
+                AlertaGrupos = new List<string>();
+                if (!IsPostBack)
+                {
+                    LlenaCombos();
+                    LlenaGrupos();
+                }
+                ucAltaGrupoUsuario.FromOpcion = false;
+                ucAltaGrupoUsuario.OnAceptarModal += UcAltaGrupoUsuarioOnOnAceptarModal;
+                ucAltaGrupoUsuario.OnCancelarModal += UcAltaGrupoUsuarioOnOnCancelarModal;
             }
-            ucAltaGrupoUsuario.FromOpcion = false;
-            ucAltaGrupoUsuario.OnAceptarModal += UcAltaGrupoUsuarioOnOnAceptarModal;
-            ucAltaGrupoUsuario.OnCancelarModal += UcAltaGrupoUsuarioOnOnCancelarModal;
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGrupos = _lstError;
+            }
         }
 
         private void UcAltaGrupoUsuarioOnOnCancelarModal()
@@ -157,8 +168,15 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                LlenaGrupos();
-                //Metodos.LimpiarCombo(ddlTipoGrupo);
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    Metodos.LimpiarCombo(ddlTipoGrupo);
+                    FiltraCombo(ddlTipoUsuario, ddlTipoGrupo, _servicioTipoGrupo.ObtenerTiposGruposByTipoUsuario(int.Parse(ddlTipoUsuario.SelectedValue), true));
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Grupo Empleados";
+                    btnNew.Text = "Agregar Grupo";
+                    btnNew.CommandArgument = "1";
+                }
                 if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index && ddlTipoGrupo.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
                 {
                     btnNew.Visible = true;
@@ -170,6 +188,7 @@ namespace KiiniHelp.UserControls.Consultas
                 {
                     btnNew.Visible = false;
                 }
+                LlenaGrupos();
             }
             catch (Exception ex)
             {
@@ -186,7 +205,6 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                LlenaGrupos();
                 if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index && ddlTipoGrupo.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
                 {
                     btnNew.Visible = true;
@@ -198,6 +216,7 @@ namespace KiiniHelp.UserControls.Consultas
                 {
                     btnNew.Visible = false;
                 }
+                LlenaGrupos();
             }
             catch (Exception ex)
             {

@@ -41,7 +41,7 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -72,7 +72,7 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -99,7 +99,7 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -132,7 +132,7 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {

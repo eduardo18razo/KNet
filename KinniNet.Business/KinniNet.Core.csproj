@@ -31,10 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetOpenAuth.Core">
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId">
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +55,7 @@
     <Compile Include="Operacion\BusinessArea.cs" />
     <Compile Include="Operacion\BusinessPuesto.cs" />
     <Compile Include="Operacion\BusinessTicket.cs" />
+    <Compile Include="Sistema\BusinessCanal.cs" />
     <Compile Include="Sistema\BusinessCatalogos.cs" />
     <Compile Include="Operacion\BusinessArbolAcceso.cs" />
     <Compile Include="Operacion\BusinessEncuesta.cs" />
@@ -64,6 +72,7 @@
     <Compile Include="Security\BusinessSecurity.cs" />
     <Compile Include="Sistema\BusinessDomicilioSistema.cs" />
     <Compile Include="Sistema\BusinessEstatus.cs" />
+    <Compile Include="Operacion\BusinessDiasHorario.cs" />
     <Compile Include="Sistema\BusinessImpactoUrgencia.cs" />
     <Compile Include="Sistema\BusinessNotificacion.cs" />
     <Compile Include="Sistema\BusinessRoles.cs" />
@@ -77,7 +86,9 @@
     <Compile Include="Sistema\BusinessTipoTelefono.cs" />
     <Compile Include="Sistema\BusinessTipoUsuario.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KiiniNet.Entities\KiiniNet.Entities.csproj">
       <Project>{C003D316-9B3C-44EF-B6B4-48C98936B0A7}</Project>

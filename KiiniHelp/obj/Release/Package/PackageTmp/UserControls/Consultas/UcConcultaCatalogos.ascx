@@ -134,18 +134,16 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader">
                                             <thead>
                                                 <tr align="center">
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Descripcion</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Habilitado</asp:Label></td>
+                                                    <td><asp:Label runat="server">Descripcion</asp:Label></td>
+                                                    <td><asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuCatalogos()" ><%# Eval("Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuCatalogos()"  id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuCatalogos()" ><%# Eval("Descripcion")%></td>
+                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuCatalogos()"  id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>

@@ -469,7 +469,7 @@ namespace KiiniHelp.UserControls.Consultas
                     btnNew.Text = "Agregar Sub Zona";
                     btnNew.CommandArgument = "6";
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -926,24 +926,36 @@ namespace KiiniHelp.UserControls.Consultas
                             break;
                         case 9:
                             ubicacion.Campus.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioUbicacion.ActualizarUbicacion(ubicacion);
+                            ddlpais_OnSelectedIndexChanged(ddlpais, null);
                             break;
                         case 10:
                             ubicacion.Torre.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioUbicacion.ActualizarUbicacion(ubicacion);
+                            ddlCampus_OnSelectedIndexChanged(ddlCampus, null);
                             break;
                         case 11:
                             ubicacion.Piso.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioUbicacion.ActualizarUbicacion(ubicacion);
+                            ddlTorre_OnSelectedIndexChanged(ddlTorre, null);
                             break;
                         case 12:
                             ubicacion.Zona.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioUbicacion.ActualizarUbicacion(ubicacion);
+                            ddlPiso_OnSelectedIndexChanged(ddlPiso, null);
                             break;
                         case 13:
                             ubicacion.SubZona.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioUbicacion.ActualizarUbicacion(ubicacion);
+                            ddlZona_OnSelectedIndexChanged(ddlZona, null);
                             break;
                         case 14:
                             ubicacion.SiteRack.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioUbicacion.ActualizarUbicacion(ubicacion);
+                            ddlSubZona_OnSelectedIndexChanged(ddlSubZona, null);
+
                             break;
                     }
-                    _servicioUbicacion.ActualizarUbicacion(ubicacion);
                 }
                 LimpiaCatalogo();
                 LlenaUbicaciones();
@@ -990,6 +1002,9 @@ namespace KiiniHelp.UserControls.Consultas
                 txtCalle.Text = string.Empty;
                 txtNoExt.Text = string.Empty;
                 txtNoInt.Text = string.Empty;
+                lblMunicipio.Text = string.Empty;
+                lblEstado.Text = string.Empty;
+                Metodos.LimpiarCombo(ddlColonia);
             }
             catch (Exception ex)
             {
@@ -1046,6 +1061,34 @@ namespace KiiniHelp.UserControls.Consultas
         }
 
         #endregion Campus
+
+        protected void ddlColonia_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ddlColonia.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    lblMunicipio.Text = string.Empty;
+                    lblEstado.Text = string.Empty;
+                    return;
+                }
+                Colonia col = _servicioSistemaDomicilio.ObtenerDetalleColonia(int.Parse(ddlColonia.SelectedValue));
+                if (col != null)
+                {
+                    lblMunicipio.Text = col.Municipio.Descripcion;
+                    lblEstado.Text = col.Municipio.Estado.Descripcion;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaCampus = _lstError;
+            }
+        }
 
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;

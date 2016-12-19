@@ -157,13 +157,13 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.WebControls.Button btnCancelar;
         
         /// <summary>
-        /// Control ucHorario.
+        /// Control ucAltaHorario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.UcHorario ucHorario;
+        protected global::KiiniHelp.UserControls.Altas.UcAltaHorario ucAltaHorario;
         
         /// <summary>
         /// Control ucAltaDiasFestivos.

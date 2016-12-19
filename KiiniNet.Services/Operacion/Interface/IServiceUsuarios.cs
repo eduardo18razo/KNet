@@ -47,6 +47,9 @@ namespace KiiniNet.Services.Operacion.Interface
         Usuario BuscarUsuario(string usuario);
 
         [OperationContract]
+        List<Usuario> BuscarUsuarios(string usuario);
+
+        [OperationContract]
         string EnviaCodigoVerificacionCorreo(int idUsuario, int idTipoNotificacion, int idCorreo);
 
         [OperationContract]

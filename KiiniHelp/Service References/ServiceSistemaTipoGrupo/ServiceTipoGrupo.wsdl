@@ -30,6 +30,12 @@
   <wsdl:message name="IServiceTipoGrupo_ObtenerTiposGruposByRol_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerTiposGruposByRolResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceTipoGrupo_ObtenerTiposGruposByTipoUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerTiposGruposByTipoUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServiceTipoGrupo_ObtenerTiposGruposByTipoUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerTiposGruposByTipoUsuarioResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceTipoGrupo">
     <wsdl:operation name="ObtenerTiposGrupo">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGrupo" message="tns:IServiceTipoGrupo_ObtenerTiposGrupo_InputMessage" />
@@ -38,6 +44,10 @@
     <wsdl:operation name="ObtenerTiposGruposByRol">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByRol" message="tns:IServiceTipoGrupo_ObtenerTiposGruposByRol_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByRolResponse" message="tns:IServiceTipoGrupo_ObtenerTiposGruposByRol_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTiposGruposByTipoUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByTipoUsuario" message="tns:IServiceTipoGrupo_ObtenerTiposGruposByTipoUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByTipoUsuarioResponse" message="tns:IServiceTipoGrupo_ObtenerTiposGruposByTipoUsuario_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceTipoGrupo">
@@ -53,6 +63,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerTiposGruposByRol">
       <soap:operation soapAction="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByRol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTiposGruposByTipoUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByTipoUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

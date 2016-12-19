@@ -64,6 +64,7 @@
       <xs:element minOccurs="0" name="Mask" type="xs:boolean" />
       <xs:element minOccurs="0" name="SimboloMoneda" type="xs:boolean" />
       <xs:element minOccurs="0" name="TipoDatoSql" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UploadFile" type="xs:boolean" />
       <xs:element minOccurs="0" name="ValorMaximo" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />

@@ -38,6 +38,12 @@
   <wsdl:message name="IServiceEncuesta_ObtenerEncuestaByIdTicket_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerEncuestaByIdTicketResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceEncuesta_ObtenerEncuestaByIdConsulta_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEncuestaByIdConsulta" />
+  </wsdl:message>
+  <wsdl:message name="IServiceEncuesta_ObtenerEncuestaByIdConsulta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEncuestaByIdConsultaResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceEncuesta_GuardarEncuesta_InputMessage">
     <wsdl:part name="parameters" element="tns:GuardarEncuesta" />
   </wsdl:message>
@@ -93,6 +99,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdTicket" message="tns:IServiceEncuesta_ObtenerEncuestaByIdTicket_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdTicketResponse" message="tns:IServiceEncuesta_ObtenerEncuestaByIdTicket_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ObtenerEncuestaByIdConsulta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdConsulta" message="tns:IServiceEncuesta_ObtenerEncuestaByIdConsulta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdConsultaResponse" message="tns:IServiceEncuesta_ObtenerEncuestaByIdConsulta_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GuardarEncuesta">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceEncuesta/GuardarEncuesta" message="tns:IServiceEncuesta_GuardarEncuesta_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceEncuesta/GuardarEncuestaResponse" message="tns:IServiceEncuesta_GuardarEncuesta_OutputMessage" />
@@ -144,6 +154,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerEncuestaByIdTicket">
       <soap:operation soapAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEncuestaByIdConsulta">
+      <soap:operation soapAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdConsulta" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

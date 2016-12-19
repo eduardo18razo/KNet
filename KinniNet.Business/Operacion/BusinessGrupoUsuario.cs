@@ -45,7 +45,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -76,7 +76,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -105,7 +105,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -136,7 +136,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -198,7 +198,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -231,7 +231,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -258,7 +258,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -285,7 +285,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -312,7 +312,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -346,7 +346,74 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public void GuardarGrupoUsuario(GrupoUsuario grupoUsuario, Dictionary<int, int> horarios, Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+
+                grupoUsuario.Descripcion = grupoUsuario.Descripcion.Trim().ToUpper();
+                if (db.GrupoUsuario.Any(a => a.Descripcion == grupoUsuario.Descripcion && a.IdTipoGrupo == grupoUsuario.IdTipoGrupo))
+                {
+                    throw new Exception("Ya existe un Grupo con esta descripcion");
+                }
+                grupoUsuario.SubGrupoUsuario = new List<SubGrupoUsuario>();
+                foreach (KeyValuePair<int, int> horario in horarios)
+                {
+
+                    List<HorarioSubGrupo> lstHorarioGpo = new List<HorarioSubGrupo>();
+                    List<HorarioDetalle> detalle = db.HorarioDetalle.Where(w => w.IdHorario == horario.Value).ToList();
+                    foreach (HorarioDetalle horarioDetalle in detalle)
+                    {
+                        HorarioSubGrupo horarioGpo = new HorarioSubGrupo
+                        {
+                            IdHorario = horario.Value,
+                            IdSubGrupoUsuario = horario.Key,
+                            Dia = horarioDetalle.Dia,
+                            HoraInicio = horarioDetalle.HoraInicio,
+                            HoraFin = horarioDetalle.HoraFin
+                        };
+                        lstHorarioGpo.Add(horarioGpo);
+                    }
+
+                    SubGrupoUsuario subGrupo = new SubGrupoUsuario();
+                    subGrupo.IdSubRol = horario.Key;
+                    subGrupo.Habilitado = true;
+                    subGrupo.HorarioSubGrupo = subGrupo.HorarioSubGrupo ?? new List<HorarioSubGrupo>();
+                    subGrupo.DiaFestivoSubGrupo = subGrupo.DiaFestivoSubGrupo ?? new List<DiaFestivoSubGrupo>();
+                    subGrupo.HorarioSubGrupo.AddRange(lstHorarioGpo);
+                    List<DiaFestivoSubGrupo> lstDiasDescanso = diasDescanso.SingleOrDefault(w => w.Key == horario.Key).Value;
+                    foreach (DiaFestivoSubGrupo dia in lstDiasDescanso)
+                    {
+                        dia.IdSubGrupoUsuario = horario.Key;
+                    }
+                    subGrupo.DiaFestivoSubGrupo.AddRange(lstDiasDescanso);
+
+                    grupoUsuario.SubGrupoUsuario.Add(subGrupo);
+                }
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                //TODO: Cambiar habilitado por el que viene embebido
+                grupoUsuario.Habilitado = true;
+                grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
+                if (grupoUsuario.Id == 0)
+                {
+                    grupoUsuario.EstatusTicketSubRolGeneral = GeneraEstatusGrupoDefault(grupoUsuario);
+                    grupoUsuario.EstatusAsignacionSubRolGeneral = GeneraEstatusAsignacionGrupoDefault(grupoUsuario);
+                    db.GrupoUsuario.AddObject(grupoUsuario);
+                }
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -367,11 +434,16 @@ namespace KinniNet.Core.Operacion
                     db.LoadProperty(result, "TipoUsuario");
                     db.LoadProperty(result, "TipoGrupo");
                     db.LoadProperty(result, "SubGrupoUsuario");
+                    foreach (SubGrupoUsuario sb in result.SubGrupoUsuario)
+                    {
+                        db.LoadProperty(sb, "HorarioSubGrupo");
+                        db.LoadProperty(sb, "DiaFestivoSubGrupo");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -398,6 +470,7 @@ namespace KinniNet.Core.Operacion
                 foreach (UsuarioGrupo grupo in result)
                 {
                     db.LoadProperty(grupo, "GrupoUsuario");
+                    db.LoadProperty(grupo.GrupoUsuario, "TipoGrupo");
                     db.LoadProperty(grupo, "SubGrupoUsuario");
                     if (grupo.SubGrupoUsuario != null)
                         db.LoadProperty(grupo.SubGrupoUsuario, "SubRol");
@@ -405,7 +478,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -432,6 +505,7 @@ namespace KinniNet.Core.Operacion
                                     Orden = statusDefault.Orden,
                                     TieneSupervisor = statusDefault.TieneSupervisor,
                                     Propietario = statusDefault.Propietario,
+                                    LevantaTicket = statusDefault.LevantaTicket,
                                     Habilitado = statusDefault.Habilitado
                                 });
             }
@@ -477,13 +551,18 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
+                if (db.GrupoUsuario.Single(s => s.Id == idGrupo).IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Administrador)
+                    if (db.GrupoUsuario.Count(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Administrador && w.Habilitado && w.Id != idGrupo && w.UsuarioGrupo.Count(ug => ug.IdGrupoUsuario == w.Id) > 0) <= 0)
+                    {
+                        throw new Exception("Debe tener otro usuario activo para este tipo de grupo.");
+                    }
                 GrupoUsuario grpo = db.GrupoUsuario.SingleOrDefault(w => w.Id == idGrupo);
                 if (grpo != null) grpo.Habilitado = habilitado;
                 db.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -553,7 +632,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -580,8 +659,8 @@ namespace KinniNet.Core.Operacion
 
                 if (!supervisor)
                     qry = from q in qry
-                        where q.ug.IdUsuario == idUsuario 
-                        select q;
+                          where q.ug.IdUsuario == idUsuario
+                          select q;
 
                 if (grupos.Any())
                     qry = from q in qry
@@ -601,7 +680,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -611,27 +690,95 @@ namespace KinniNet.Core.Operacion
         }
 
 
-        public void ActualizarGrupo(GrupoUsuario gpo)
+        public void ActualizarGrupo(GrupoUsuario gpo, Dictionary<int, int> horarios, Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.LazyLoadingEnabled = true;
                 GrupoUsuario grupo = db.GrupoUsuario.SingleOrDefault(w => w.Id == gpo.Id);
+                List<SubGrupoUsuario> sb = new List<SubGrupoUsuario>();
                 if (grupo != null)
                 {
-                    List<SubGrupoUsuario> sbGpoRemove = (grupo.SubGrupoUsuario.Select(sbGpo => new { sbGpo, sbDelete = gpo.SubGrupoUsuario.SingleOrDefault(s => s.IdGrupoUsuario == sbGpo.IdGrupoUsuario && s.IdSubRol == sbGpo.IdSubRol) }).Where(@t => @t.sbDelete == null).Select(@t => @t.sbGpo)).ToList();
+                    foreach (KeyValuePair<int, int> horario in horarios)
+                    {
+
+                        List<HorarioSubGrupo> lstHorarioGpo = new List<HorarioSubGrupo>();
+                        List<HorarioDetalle> detalle = db.HorarioDetalle.Where(w => w.IdHorario == horario.Value).ToList();
+                        foreach (HorarioDetalle horarioDetalle in detalle)
+                        {
+                            HorarioSubGrupo horarioGpo = new HorarioSubGrupo
+                            {
+                                IdHorario = horario.Value,
+                                IdSubGrupoUsuario = horario.Key,
+                                Dia = horarioDetalle.Dia,
+                                HoraInicio = horarioDetalle.HoraInicio,
+                                HoraFin = horarioDetalle.HoraFin
+                            };
+                            lstHorarioGpo.Add(horarioGpo);
+                        }
+
+                        SubGrupoUsuario subGrupo = new SubGrupoUsuario();
+                        subGrupo.Id = grupo.SubGrupoUsuario.First(f => f.IdSubRol == horario.Key).Id;
+                        subGrupo.IdGrupoUsuario = grupo.Id;
+                        subGrupo.IdSubRol = horario.Key;
+                        subGrupo.Habilitado = true;
+                        subGrupo.HorarioSubGrupo = subGrupo.HorarioSubGrupo ?? new List<HorarioSubGrupo>();
+                        subGrupo.DiaFestivoSubGrupo = subGrupo.DiaFestivoSubGrupo ?? new List<DiaFestivoSubGrupo>();
+                        subGrupo.HorarioSubGrupo.AddRange(lstHorarioGpo);
+                        List<DiaFestivoSubGrupo> lstDiasDescanso = diasDescanso.SingleOrDefault(w => w.Key == horario.Key).Value;
+                        foreach (DiaFestivoSubGrupo dia in lstDiasDescanso)
+                        {
+                            dia.IdSubGrupoUsuario = horario.Key;
+                        }
+                        subGrupo.DiaFestivoSubGrupo.AddRange(lstDiasDescanso);
+
+                        sb.Add(subGrupo);
+                    }
+
+                    List<SubGrupoUsuario> sbGpoRemove = (grupo.SubGrupoUsuario.Select(sbGpo => new { sbGpo, sbDelete = sb.SingleOrDefault(s => s.IdGrupoUsuario == sbGpo.IdGrupoUsuario && s.IdSubRol == sbGpo.IdSubRol) }).Where(@t => @t.sbDelete == null).Select(@t => @t.sbGpo)).ToList();
                     foreach (SubGrupoUsuario subGrupoUsuario in sbGpoRemove)
                     {
                         db.SubGrupoUsuario.DeleteObject(subGrupoUsuario);
                     }
 
-                    foreach (SubGrupoUsuario sbGpoAdd in gpo.SubGrupoUsuario)
+                    foreach (SubGrupoUsuario sbGpoAdd in sb)
                     {
                         if (!grupo.SubGrupoUsuario.Any(a => a.IdGrupoUsuario == sbGpoAdd.IdGrupoUsuario && a.IdSubRol == sbGpoAdd.IdSubRol))
                             grupo.SubGrupoUsuario.Add(sbGpoAdd);
                     }
-                    foreach (SubGrupoUsuario sbGpoDias in gpo.SubGrupoUsuario)
+                    List<DiaFestivoSubGrupo> diasEliminar = new List<DiaFestivoSubGrupo>();
+                    foreach (SubGrupoUsuario sgu in sb)
+                    {
+                        diasEliminar.AddRange(db.DiaFestivoSubGrupo.Where(w => w.IdSubGrupoUsuario == sgu.Id));
+                    }
+                    //foreach (SubGrupoUsuario sgu in sb)
+                    //{
+                    //    SubGrupoUsuario sgu1 = sgu;
+                    //    foreach (DiaFestivoSubGrupo diaNuevo in db.DiaFestivoSubGrupo.Where(w => w.IdSubGrupoUsuario == sgu1.Id))
+                    //    {
+                    //            diasEliminar.Add(diaNuevo);
+                    //    }
+                    //}
+                    
+
+                    List<HorarioSubGrupo> horariosEliminar = new List<HorarioSubGrupo>();
+                    foreach (SubGrupoUsuario sgu in sb)
+                    {
+                        horariosEliminar.AddRange(db.HorarioSubGrupo.Where(w => w.IdSubGrupoUsuario == sgu.Id));
+                    }
+
+                    foreach (DiaFestivoSubGrupo diaEliminar in diasEliminar)
+                    {
+                        db.DiaFestivoSubGrupo.DeleteObject(diaEliminar);
+                    }
+
+                    foreach (HorarioSubGrupo horarioEliminar in horariosEliminar)
+                    {
+                        db.HorarioSubGrupo.DeleteObject(horarioEliminar);
+                    }
+
+                    foreach (SubGrupoUsuario sbGpoDias in sb)
                     {
                         if (sbGpoDias.DiaFestivoSubGrupo != null)
                             foreach (DiaFestivoSubGrupo diaFestivoSubGrupo in sbGpoDias.DiaFestivoSubGrupo)
@@ -641,35 +788,29 @@ namespace KinniNet.Core.Operacion
                             }
                     }
 
-                    foreach (SubGrupoUsuario sbGpoDias in gpo.SubGrupoUsuario)
+                    foreach (SubGrupoUsuario sbGpoHorario in sb)
                     {
-                        if (sbGpoDias.HorarioSubGrupo != null)
-                            foreach (HorarioSubGrupo horarioFestivoSubGrupo in sbGpoDias.HorarioSubGrupo)
+                        if (sbGpoHorario.HorarioSubGrupo != null)
+                            foreach (HorarioSubGrupo horarioFestivoSubGrupo in sbGpoHorario.HorarioSubGrupo)
                             {
-                                if (
-                                    !grupo.SubGrupoUsuario.Single(
-                                        w =>
-                                            w.IdGrupoUsuario == sbGpoDias.IdGrupoUsuario && w.IdSubRol == sbGpoDias.IdSubRol)
-                                        .HorarioSubGrupo.Any(a => a.Dia == horarioFestivoSubGrupo.Dia))
-                                    grupo.SubGrupoUsuario.Single(
-                                        w =>
-                                            w.IdGrupoUsuario == sbGpoDias.IdGrupoUsuario && w.IdSubRol == sbGpoDias.IdSubRol)
-                                        .HorarioSubGrupo.Add(horarioFestivoSubGrupo);
+                                if (!grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoHorario.IdGrupoUsuario && w.IdSubRol == sbGpoHorario.IdSubRol).HorarioSubGrupo.Any(a => a.Dia == horarioFestivoSubGrupo.Dia && a.HoraInicio == horarioFestivoSubGrupo.HoraInicio && a.HoraFin == horarioFestivoSubGrupo.HoraFin))
+                                    grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoHorario.IdGrupoUsuario && w.IdSubRol == sbGpoHorario.IdSubRol).HorarioSubGrupo.Add(horarioFestivoSubGrupo);
                                 else
                                 {
-                                    grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoDias.IdGrupoUsuario && w.IdSubRol == sbGpoDias.IdSubRol).HorarioSubGrupo.Single(a => a.Dia == horarioFestivoSubGrupo.Dia).HoraInicio = horarioFestivoSubGrupo.HoraInicio;
-                                    grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoDias.IdGrupoUsuario && w.IdSubRol == sbGpoDias.IdSubRol).HorarioSubGrupo.Single(a => a.Dia == horarioFestivoSubGrupo.Dia).HoraFin = horarioFestivoSubGrupo.HoraFin;
+                                    grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoHorario.IdGrupoUsuario && w.IdSubRol == sbGpoHorario.IdSubRol).HorarioSubGrupo.Single(a => a.Dia == horarioFestivoSubGrupo.Dia).HoraInicio = horarioFestivoSubGrupo.HoraInicio;
+                                    grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoHorario.IdGrupoUsuario && w.IdSubRol == sbGpoHorario.IdSubRol).HorarioSubGrupo.Single(a => a.Dia == horarioFestivoSubGrupo.Dia).HoraFin = horarioFestivoSubGrupo.HoraFin;
                                 }
 
                             }
                     }
+                    grupo.TieneSupervisor = grupo.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
                     grupo.Descripcion = gpo.Descripcion.Trim().ToUpper();
                 }
                 db.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {

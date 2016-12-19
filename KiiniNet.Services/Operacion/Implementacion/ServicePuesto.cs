@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
@@ -10,13 +8,28 @@ namespace KiiniNet.Services.Operacion.Implementacion
 {
     public class ServicePuesto : IServicePuesto
     {
-        public List<Puesto> ObtenerPuestos(bool insertarSeleccion)
+        public List<Puesto> ObtenerPuestosByTipoUsuario(int idTipoUsuario, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessPuesto negocio = new BusinessPuesto())
                 {
-                    return negocio.ObtenerPuestos(insertarSeleccion);
+                    return negocio.ObtenerPuestosByTipoUsuario(idTipoUsuario, insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Puesto ObtenerPuestoById(int idPuesto)
+        {
+            try
+            {
+                using (BusinessPuesto negocio = new BusinessPuesto())
+                {
+                    return negocio.ObtenerPuestoById(idPuesto);
                 }
             }
             catch (Exception ex)
@@ -55,13 +68,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<Puesto> ObtenerPuestoConsulta(int? idPuesto)
+        public List<Puesto> ObtenerPuestoConsulta(int? idTipoUsuario)
         {
             try
             {
                 using (BusinessPuesto negocio = new BusinessPuesto())
                 {
-                    return negocio.ObtenerPuestoConsulta(idPuesto);
+                    return negocio.ObtenerPuestoConsulta(idTipoUsuario);
                 }
             }
             catch (Exception ex)

@@ -18,7 +18,7 @@ namespace KiiniNet.Services.Operacion.Interface
         InformacionConsulta ObtenerInformacionConsultaById(int idInformacion);
 
         [OperationContract]
-        void GuardarInformacionConsulta(InformacionConsulta informacion);
+        void GuardarInformacionConsulta(InformacionConsulta informacion, List<string> documentosDescarga);
 
         [OperationContract]
         void ActualizarInformacionConsulta(int idInformacionConsulta, InformacionConsulta informacion);
@@ -31,5 +31,6 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void HabilitarInformacion(int idInformacion, bool habilitado);
+
     }
 }

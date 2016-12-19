@@ -22,7 +22,7 @@ namespace KiiniHelp.UserControls.Altas
             set { hfEsAlta.Value = value.ToString(); }
         }
 
-        public int IdPuesto
+        public int IdCatalogo
         {
             get { return Convert.ToInt32(hfIdCatalogo.Value); }
             set

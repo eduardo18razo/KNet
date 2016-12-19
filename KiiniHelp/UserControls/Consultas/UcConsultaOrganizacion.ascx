@@ -86,9 +86,9 @@
         };
     </script>
     <asp:UpdatePanel runat="server" style="height: 100%">
-        <ContentTemplate>            
-            <asp:HiddenField runat="server" ID="hfModalName"/>
-            <asp:HiddenField runat="server" ID="hfIdSeleccion"/>
+        <ContentTemplate>
+            <asp:HiddenField runat="server" ID="hfModalName" />
+            <asp:HiddenField runat="server" ID="hfIdSeleccion" />
             <div id="contextMenuOrganizacion" class="panel-heading contextMenu">
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfModal" />
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
@@ -154,13 +154,13 @@
                                     <div class="form-horizontal">
                                         <div class="form-horizontal">
                                             <div class="form-group">
-                                                <asp:Label Width="14%" for="ddlHolding" class="col-xs-1 control-label" runat="server">Holding</asp:Label>
-                                                <asp:Label Width="14%" for="ddlCompañia" class="col-xs-1 control-label" runat="server">Compañia</asp:Label>
-                                                <asp:Label Width="14%" for="ddlDirecion" class="col-xs-1 control-label" runat="server">Direccion</asp:Label>
-                                                <asp:Label Width="14%" for="ddlSubDireccion" class="col-xs-1 control-label" runat="server">Sub Direccion</asp:Label>
-                                                <asp:Label Width="14%" for="ddlGerencia" class="col-xs-1 control-label" runat="server">Gerencia</asp:Label>
-                                                <asp:Label Width="14%" for="ddlSubGerencia" class="col-xs-1 control-label" runat="server">Sub Gerencia</asp:Label>
-                                                <asp:Label Width="14%" for="ddlJefatura" class="col-xs-1 control-label" runat="server">Jefatura</asp:Label>
+                                                <asp:Label Width="14%" class="col-xs-1 control-label" for="ddlHolding" runat="server">Holding</asp:Label>
+                                                <asp:Label Width="14%" class="col-xs-1 control-label" for="ddlCompañia" runat="server">Compañia</asp:Label>
+                                                <asp:Label Width="14%" class="col-xs-1 control-label" for="ddlDirecion" runat="server">Direccion</asp:Label>
+                                                <asp:Label Width="14%" class="col-xs-1 control-label" for="ddlSubDireccion" runat="server">Sub Direccion</asp:Label>
+                                                <asp:Label Width="14%" class="col-xs-1 control-label" for="ddlGerencia" runat="server">Gerencia</asp:Label>
+                                                <asp:Label Width="14%" class="col-xs-1 control-label" for="ddlSubGerencia" runat="server">Sub Gerencia</asp:Label>
+                                                <asp:Label Width="14%" class="col-xs-1 control-label" for="ddlJefatura" runat="server">Jefatura</asp:Label>
                                             </div>
                                             <div class="form-group">
                                                 <asp:DropDownList runat="server" ID="ddlHolding" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlHolding_OnSelectedIndexChanged" />
@@ -188,35 +188,35 @@
                                             <thead>
                                                 <tr align="center">
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Holding</asp:Label></td>
+                                                        <asp:Label runat="server">Holding</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Compañia</asp:Label></td>
+                                                        <asp:Label runat="server">Compañia</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Direccion</asp:Label></td>
+                                                        <asp:Label runat="server">Direccion</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Sub Direccion</asp:Label></td>
+                                                        <asp:Label runat="server">Sub Direccion</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Gerencia</asp:Label></td>
+                                                        <asp:Label runat="server">Gerencia</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Sub Gerencia</asp:Label></td>
+                                                        <asp:Label runat="server">Sub Gerencia</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Jefatura</asp:Label></td>
+                                                        <asp:Label runat="server">Jefatura</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Habilitado</asp:Label></td>
+                                                        <asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Holding.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Compania.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Direccion.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("SubDireccion.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Gerencia.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("SubGerencia.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Jefatura.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Holding.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Compania.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Direccion.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("SubDireccion.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Gerencia.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("SubGerencia.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)"><%# Eval("Jefatura.Descripcion")%></td>
+                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="ContextMenuOrganizacion()" ondblclick="dbClicOrganizacion(this)" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>
@@ -224,7 +224,7 @@
                                             </table>
                                     </FooterTemplate>
                                 </asp:Repeater>
-                                <asp:Button runat="server" Text="Cerrar" ID="btnCerrar" OnClick="btnCerrar_OnClick" style="visibility: hidden"/>
+                                <asp:Button runat="server" Text="Cerrar" ID="btnCerrar" OnClick="btnCerrar_OnClick" Style="visibility: hidden" />
                             </div>
                         </div>
                     </div>

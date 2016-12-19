@@ -35,7 +35,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -59,7 +59,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -84,7 +84,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {

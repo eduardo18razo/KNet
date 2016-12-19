@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web.UI;
 using KiiniHelp.Funciones;
 using KiiniHelp.ServicePuesto;
+using KiiniHelp.ServiceSistemaTipoUsuario;
+using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KinniNet.Business.Utils;
 
@@ -12,6 +14,7 @@ namespace KiiniHelp.UserControls.Consultas
     public partial class UcConsultaPuestos : UserControl
     {
         private readonly ServicePuestoClient _servicioPuestos = new ServicePuestoClient();
+        private readonly ServiceTipoUsuarioClient _servicioTipoUsuario = new ServiceTipoUsuarioClient();
 
         private List<string> _lstError = new List<string>();
 
@@ -34,8 +37,8 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                List<Puesto> lstPuestosConsultas = _servicioPuestos.ObtenerPuestos(true);
-                Metodos.LlenaComboCatalogo(ddlpuestos, lstPuestosConsultas);
+                List<TipoUsuario> lstTipoUsuario = _servicioTipoUsuario.ObtenerTiposUsuarioResidentes(true);
+                Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
 
             }
             catch (Exception e)
@@ -49,11 +52,11 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                int? idPuesto = null;
-                if (ddlpuestos.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
-                    idPuesto = int.Parse(ddlpuestos.SelectedValue);
+                int? idTipoUsuario = null;
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                    idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
 
-                rptResultados.DataSource = _servicioPuestos.ObtenerPuestoConsulta(idPuesto);
+                rptResultados.DataSource = _servicioPuestos.ObtenerPuestoConsulta(idTipoUsuario);
                 rptResultados.DataBind();
             }
             catch (Exception e)
@@ -64,14 +67,26 @@ namespace KiiniHelp.UserControls.Consultas
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Alerta = new List<string>();
-            if (!IsPostBack)
+            try
             {
-                LlenaCombos();
-                LlenaPuestosConsulta();
+                Alerta = new List<string>();
+                if (!IsPostBack)
+                {
+                    LlenaCombos();
+                    LlenaPuestosConsulta();
+                }
+                ucAltaPuesto.OnAceptarModal += AltaPuestoOnAceptarModal;
+                ucAltaPuesto.OnCancelarModal += AltaPuestoOnCancelarModal;
             }
-            ucAltaPuesto.OnAceptarModal +=  AltaPuestoOnAceptarModal;
-            ucAltaPuesto.OnCancelarModal += AltaPuestoOnCancelarModal;
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
         }
 
         private void AltaPuestoOnCancelarModal()
@@ -109,12 +124,12 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        protected void ddlpuestos_OnSelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 LlenaPuestosConsulta();
-                if (ddlpuestos.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
                 {
                     btnNew.Visible = true;
                     btnNew.Text = "Agregar Puesto";
@@ -176,6 +191,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 ucAltaPuesto.EsAlta = false;
+                ucAltaPuesto.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
                 ucAltaPuesto.IdPuesto = Convert.ToInt32(hfId.Value);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaPuesto\");", true);
             }
@@ -194,6 +210,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 ucAltaPuesto.EsAlta = true;
+                ucAltaPuesto.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaPuesto\");", true);
             }
             catch (Exception ex)

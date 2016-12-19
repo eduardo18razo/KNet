@@ -44,8 +44,8 @@
                     <div class="form-group">
                         <asp:Label runat="server" Text="Hora Inicio" CssClass="col-sm-2 control-label" />
                         <div class="col-sm-4">
-                            <asp:TextBox ID="txtHoraInicio" runat="server" CssClass="form-control"/>
-                            <ajaxToolkit:MaskedEditExtender ID="timeStarExtender" runat="server" AcceptAMPM="False"
+                            <asp:TextBox ID="txtHoraInicio" runat="server" CssClass="form-control" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
+                            <ajaxToolkit:MaskedEditExtender ID="timeStarExtender" runat="server" AcceptAMPM="False" 
                                 Enabled="True" Mask="99:99" MaskType="Time" TargetControlID="txtHoraInicio"></ajaxToolkit:MaskedEditExtender>
 
                         </div>
@@ -53,7 +53,7 @@
                     <div class="form-group">
                         <asp:Label runat="server" Text="Hora Fin" CssClass="col-sm-2 control-label" />
                         <div class="col-sm-4">
-                            <asp:TextBox ID="txtHoraFin" runat="server" CssClass="form-control"/>
+                            <asp:TextBox ID="txtHoraFin" runat="server" CssClass="form-control" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
                             <ajaxToolkit:MaskedEditExtender ID="timeEndExtender" runat="server" AcceptAMPM="False"
                                 Enabled="True" Mask="99:99" MaskType="Time" TargetControlID="txtHoraFin"></ajaxToolkit:MaskedEditExtender>
 
@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="panel-footer" style="text-align: center">
-                <asp:Button runat="server" CssClass="btn btn-success" Text="Guardar" ID="btnAceptar" OnClick="btnAceptar_OnClick" />
+                <asp:Button runat="server" CssClass="btn btn-success" Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_OnClick" />
                 <asp:Button runat="server" CssClass="btn btn-danger" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick" />
                 <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_OnClick" />
             </div>

@@ -73,6 +73,8 @@ namespace KiiniNet.Entities.Cat.Operacion
 
         [DataMember]
         public virtual List<TiempoInformeArbol> TiempoInformeArbol { get; set; }
+        [DataMember]
+        public virtual List<RespuestaEncuesta> RespuestaEncuesta { get; set; }
 
 
     }

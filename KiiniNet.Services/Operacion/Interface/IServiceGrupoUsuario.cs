@@ -21,20 +21,20 @@ namespace KiiniNet.Services.Operacion.Interface
         List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, bool insertarSeleccion);
 
         [OperationContract]
-        void GuardarGrupoUsuario(GrupoUsuario grupoUsuario);
+        void GuardarGrupoUsuario(GrupoUsuario grupoUsuario, Dictionary<int, int> horarios, Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso);
 
         [OperationContract]
         GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario);
-        
+
         [OperationContract]
         List<GrupoUsuario> ObtenerGruposUsuarioSistema(int idTipoUsuario);
-        
+
         [OperationContract]
         List<GrupoUsuario> ObtenerGruposUsuarioNivel(int idtipoArbol, int? nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7);
 
         [OperationContract]
         List<UsuarioGrupo> ObtenerGruposDeUsuario(int idUsuario);
-        
+
         [OperationContract]
         void HabilitarGrupo(int idGrupo, bool habilitado);
 
@@ -42,7 +42,7 @@ namespace KiiniNet.Services.Operacion.Interface
         List<GrupoUsuario> ObtenerGruposUsuarioAll(int? idTipoUsuario, int? idTipoGrupo);
 
         [OperationContract]
-        void ActualizarGrupo(GrupoUsuario gpo);
+        void ActualizarGrupo(GrupoUsuario gpo, Dictionary<int, int> horarios, Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso);
 
         [OperationContract]
         List<HorarioSubGrupo> ObtenerHorariosByIdSubGrupo(int idSubGrupo);

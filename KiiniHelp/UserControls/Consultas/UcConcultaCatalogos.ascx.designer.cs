@@ -22,6 +22,15 @@ namespace KiiniHelp.UserControls.Consultas {
         protected global::System.Web.UI.WebControls.HiddenField hfId;
         
         /// <summary>
+        /// Control hfEsArchivo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfEsArchivo;
+        
+        /// <summary>
         /// Control btnBaja.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace KiiniHelp.UserControls.Consultas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAlta;
+        
+        /// <summary>
+        /// Control btnEditar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEditar;
         
         /// <summary>
         /// Control panelAlertaGeneral.
@@ -85,6 +103,15 @@ namespace KiiniHelp.UserControls.Consultas {
         protected global::System.Web.UI.WebControls.Button btnNew;
         
         /// <summary>
+        /// Control btnCargarCatalogo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCargarCatalogo;
+        
+        /// <summary>
         /// Control rptResultados.
         /// </summary>
         /// <remarks>
@@ -110,5 +137,23 @@ namespace KiiniHelp.UserControls.Consultas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::KiiniHelp.UserControls.Altas.UcAltaCatalogo ucAltaCatalogo;
+        
+        /// <summary>
+        /// Control upCargaCatalogo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upCargaCatalogo;
+        
+        /// <summary>
+        /// Control ucCargaCatalgo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Altas.UcCargaCatalgo ucCargaCatalgo;
     }
 }

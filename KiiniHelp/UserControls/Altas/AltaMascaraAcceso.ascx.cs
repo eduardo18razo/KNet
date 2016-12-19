@@ -162,6 +162,11 @@ namespace KiiniHelp.UserControls.Altas
                     Metodos.LlenaComboCatalogo(ddlCatalogosCampo, _servicioSistemaCatalogos.ObtenerCatalogosMascaraCaptura(true));
                     divCatalgo.Visible = tipoCampo.Catalogo;
                 }
+                if (tipoCampo.UploadFile)
+                {
+                    txtLongitudMaxima.Text = "255";
+                    txtLongitudMaxima.Visible = false;
+                }
 
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAgregarCampoMascara\");", true);
             }
@@ -225,7 +230,7 @@ namespace KiiniHelp.UserControls.Altas
                     IdTipoCampoMascara = tipoCampo.Id,
                     Descripcion = txtDescripcionCampo.Text.Trim().ToUpper(),
                     Requerido = chkRequerido.Checked,
-                    LongitudMinima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMinima.Text.Trim()) : tipoCampo.Mask ? 1 : (int?)null,
+                    LongitudMinima = tipoCampo.LongitudMinima ? Convert.ToInt32(txtLongitudMinima.Text.Trim()) : tipoCampo.Mask ? 1 : (int?)null,
                     LongitudMaxima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMaxima.Text.Trim()) : tipoCampo.Mask ? txtMascara.Text.Trim().Length : (int?)null,
                     SimboloMoneda = tipoCampo.SimboloMoneda ? txtSimboloMoneda.Text.Trim().ToUpper() : null,
                     ValorMaximo = tipoCampo.ValorMaximo ? Convert.ToInt32(txtValorMaximo.Text.Trim()) : (int?)null,

@@ -30,7 +30,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             return true;
         }
@@ -76,7 +76,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -142,7 +142,7 @@ namespace KinniNet.Core.Operacion
             catch (Exception ex)
             {
                 EliminarObjetoBaseDeDatos(mascara.NombreTabla, BusinessVariables.EnumTipoObjeto.Tabla);
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -198,7 +198,7 @@ namespace KinniNet.Core.Operacion
             {
                 EliminarObjetoBaseDeDatos(mascara.NombreTabla, BusinessVariables.EnumTipoObjeto.Tabla);
                 EliminarObjetoBaseDeDatos(mascara.ComandoInsertar, BusinessVariables.EnumTipoObjeto.Store);
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -226,7 +226,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -310,7 +310,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -407,7 +407,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -427,7 +427,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -486,7 +486,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {

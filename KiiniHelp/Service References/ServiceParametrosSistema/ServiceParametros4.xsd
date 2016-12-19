@@ -13,6 +13,7 @@
   <xs:import schemaLocation="http://localhost:15277/ServiceParametros.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
   <xs:complexType name="TipoTelefono">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Confirmacion" type="xs:boolean" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Extension" type="xs:boolean" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
@@ -330,6 +331,8 @@
   <xs:complexType name="Catalogos">
     <xs:sequence>
       <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" minOccurs="0" name="CampoMascara" nillable="true" type="q66:ArrayOfCampoMascara" />
+      <xs:element minOccurs="0" name="ComandoActualizar" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ComandoInsertar" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EsMascaraCaptura" type="xs:boolean" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
@@ -394,4 +397,16 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Urgencia" nillable="true" type="tns:Urgencia" />
+  <xs:complexType name="TipoLink">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="SmsService" nillable="true" type="q71:ArrayOfSmsService" />
+      <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="UsuarioLinkPassword" nillable="true" type="q72:ArrayOfUsuarioLinkPassword" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="TipoLink" nillable="true" type="tns:TipoLink" />
 </xs:schema>

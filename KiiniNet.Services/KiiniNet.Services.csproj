@@ -48,12 +48,15 @@
   <ItemGroup>
     <Compile Include="Operacion\Implementacion\ServiceArea.cs" />
     <Compile Include="Operacion\Implementacion\ServiceConsultas.cs" />
+    <Compile Include="Operacion\Implementacion\ServiceDiasHorario.cs" />
     <Compile Include="Operacion\Implementacion\ServicePuesto.cs" />
     <Compile Include="Operacion\Implementacion\ServiceTicket.cs" />
     <Compile Include="Operacion\Interface\IServiceArea.cs" />
     <Compile Include="Operacion\Interface\IServiceConsultas.cs" />
+    <Compile Include="Operacion\Interface\IServiceDiasHorario.cs" />
     <Compile Include="Operacion\Interface\IServicePuesto.cs" />
     <Compile Include="Operacion\Interface\IServiceTicket.cs" />
+    <Compile Include="Sistema\Implementacion\ServiceCanal.cs" />
     <Compile Include="Sistema\Implementacion\ServiceImpactoUrgencia.cs" />
     <Compile Include="Sistema\Implementacion\ServiceNotificacion.cs" />
     <Compile Include="Sistema\Implementacion\ServiceCatalogos.cs" />
@@ -69,6 +72,7 @@
     <Compile Include="Sistema\Implementacion\ServiceTipoInfConsulta.cs" />
     <Compile Include="Sistema\Implementacion\ServiceTipoTelefono.cs" />
     <Compile Include="Sistema\Implementacion\ServiceTipoUsuario.cs" />
+    <Compile Include="Sistema\Interface\IServiceCanal.cs" />
     <Compile Include="Sistema\Interface\IServiceCatalogos.cs" />
     <Compile Include="Sistema\Interface\IServiceDomicilioSistema.cs" />
     <Compile Include="Sistema\Interface\IServiceEstatus.cs" />

@@ -7,7 +7,15 @@ namespace KiiniHelp.Users.Administracion.Grupos
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
 
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
     }
 }

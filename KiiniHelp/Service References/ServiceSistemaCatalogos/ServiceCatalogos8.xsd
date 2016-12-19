@@ -15,6 +15,20 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerCatalogo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idCatalogo" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerCatalogoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerCatalogoResult" nillable="true" type="q1:Catalogos" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ObtenerCatalogos">
     <xs:complexType>
       <xs:sequence>
@@ -25,7 +39,7 @@
   <xs:element name="ObtenerCatalogosResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerCatalogosResult" nillable="true" type="q1:ArrayOfCatalogos" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerCatalogosResult" nillable="true" type="q2:ArrayOfCatalogos" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -39,7 +53,7 @@
   <xs:element name="ObtenerCatalogoConsultaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerCatalogoConsultaResult" nillable="true" type="q2:ArrayOfCatalogos" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerCatalogoConsultaResult" nillable="true" type="q3:ArrayOfCatalogos" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -53,7 +67,7 @@
   <xs:element name="ObtenerCatalogosMascaraCapturaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerCatalogosMascaraCapturaResult" nillable="true" type="q3:ArrayOfCatalogos" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerCatalogosMascaraCapturaResult" nillable="true" type="q4:ArrayOfCatalogos" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -93,8 +107,38 @@
   <xs:element name="ObtenerRegistrosCatalogoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerRegistrosCatalogoResult" nillable="true" type="q4:ArrayOfCatalogoGenerico" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerRegistrosCatalogoResult" nillable="true" type="q5:ArrayOfCatalogoGenerico" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CrearCatalogoExcel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nombreCatalogo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="esMascara" type="xs:boolean" />
+        <xs:element minOccurs="0" name="archivo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="hoja" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CrearCatalogoExcelResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualizarCatalogoExcel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idCatalogo" type="xs:int" />
+        <xs:element minOccurs="0" name="esMascara" type="xs:boolean" />
+        <xs:element minOccurs="0" name="archivo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="hoja" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualizarCatalogoExcelResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

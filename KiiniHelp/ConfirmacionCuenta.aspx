@@ -90,11 +90,11 @@
                                 <div class="form-inline">
 
                                     <asp:Label ID="Label4" runat="server" Text="Pregunta" class="col-sm-2 control-label izquierda"></asp:Label>
-                                    <asp:TextBox ID="txtPregunta" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="txtPregunta" runat="server" CssClass="form-control" style="text-transform: none"></asp:TextBox>
                                 </div>
                                 <div class="form-inline margen-arriba">
                                     <asp:Label ID="Label5" runat="server" Text="Respuesta" class="col-sm-2 control-label izquierda"></asp:Label>
-                                    <asp:TextBox ID="txtRespuesta" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="txtRespuesta" runat="server" CssClass="form-control" style="text-transform: none"></asp:TextBox>
                                     <asp:Button ID="btnAddPregunta" runat="server" CssClass="btn btn-sm btn-success" Text="Agregar" OnClick="btnAddPregunta_OnClick" />
                                 </div>
                             </div>
@@ -121,9 +121,6 @@
                                 </ItemTemplate>
                             </asp:Repeater>
                         </div>
-                        <%--<div class="form-horizontal">--%>
-
-                        <%--</div>--%>
                     </div>
                     <div class="panel-footer center-content-div">
                         <asp:Button ID="btnAceptar" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="btnAceptar_OnClick" />

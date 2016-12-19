@@ -22,5 +22,20 @@ namespace KiiniNet.Services.Sistema.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public Colonia ObtenerDetalleColonia(int idColonia)
+        {
+            try
+            {
+                using (BusinessDomicilioSistema negocio = new BusinessDomicilioSistema())
+                {
+                    return negocio.ObtenerDetalleColonia(idColonia);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

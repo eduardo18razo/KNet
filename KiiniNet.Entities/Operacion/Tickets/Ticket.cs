@@ -23,7 +23,9 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public int IdImpacto { get; set; }
         [DataMember]
-        public int IdUsuario { get; set; }
+        public int IdUsuarioLevanto { get; set; }
+        [DataMember]
+        public int IdUsuarioSolicito { get; set; }
         [DataMember]
         public int IdOrganizacion { get; set; }
         [DataMember]
@@ -36,6 +38,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         public int? IdSlaEstimadoTicket { get; set; }
         [DataMember]
         public int IdEstatusTicket { get; set; }
+        [DataMember]
+        public int IdCanal { get; set; }
         [DataMember]
         public int IdEstatusAsignacion { get; set; }
         [DataMember]
@@ -54,7 +58,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         public string ClaveRegistro { get; set; }
         [DataMember]
         public bool EncuestaRespondida { get; set; }
-
+        [DataMember]
+        public bool EsTercero { get; set; }
 
         [DataMember]
         public virtual TipoUsuario TipoUsuario { get; set; }
@@ -69,6 +74,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public virtual Usuario UsuarioResolvio { get; set; }
         [DataMember]
+        public virtual Usuario UsuarioSolicito { get; set; }
+        [DataMember]
         public virtual Organizacion Organizacion { get; set; }
         [DataMember]
         public virtual Ubicacion Ubicacion { get; set; }
@@ -80,6 +87,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         public virtual SlaEstimadoTicket SlaEstimadoTicket { get; set; }
         [DataMember]
         public virtual EstatusTicket EstatusTicket { get; set; }
+        [DataMember]
+        public virtual Canal Canal { get; set; }
         [DataMember]
         public virtual EstatusAsignacion EstatusAsignacion { get; set; }
         [DataMember]

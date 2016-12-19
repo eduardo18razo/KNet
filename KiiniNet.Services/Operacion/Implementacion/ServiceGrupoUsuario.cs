@@ -68,13 +68,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
-        public void GuardarGrupoUsuario(GrupoUsuario grupoUsuario)
+        public void GuardarGrupoUsuario(GrupoUsuario grupoUsuario, Dictionary<int, int> horarios, Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso)
         {
             try
             {
                 using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
                 {
-                    negocio.GuardarGrupoUsuario(grupoUsuario);
+                    negocio.GuardarGrupoUsuario(grupoUsuario, horarios, diasDescanso);
                 }
             }
             catch (Exception ex)
@@ -173,13 +173,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public void ActualizarGrupo(GrupoUsuario gpo)
+        public void ActualizarGrupo(GrupoUsuario gpo, Dictionary<int, int> horarios, Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso)
         {
             try
             {
                 using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
                 {
-                    negocio.ActualizarGrupo(gpo);
+                    negocio.ActualizarGrupo(gpo, horarios, diasDescanso);
                 }
             }
             catch (Exception ex)
@@ -262,5 +262,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+
     }
 }

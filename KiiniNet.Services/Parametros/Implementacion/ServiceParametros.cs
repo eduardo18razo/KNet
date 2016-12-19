@@ -53,5 +53,20 @@ namespace KiiniNet.Services.Parametros.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public ParametrosGenerales ObtenerParametrosGenerales()
+        {
+            try
+            {
+                using (BusinessParametros negocio = new BusinessParametros())
+                {
+                    return negocio.ObtenerParametrosGenerales();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

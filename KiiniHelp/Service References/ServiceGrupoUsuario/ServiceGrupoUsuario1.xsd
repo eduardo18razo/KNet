@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
-  <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
   <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd14" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceGrupoUsuario.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
   <xs:element name="ObtenerGruposUsuarioTipoUsuario">
     <xs:complexType>
       <xs:sequence>
@@ -69,6 +69,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="grupoUsuario" nillable="true" type="q5:GrupoUsuario" />
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="horarios" nillable="true" type="q6:ArrayOfKeyValueOfintint" />
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="diasDescanso" nillable="true" type="q7:ArrayOfKeyValueOfintArrayOfDiaFestivoSubGrupoi6T7NGCD" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -87,7 +89,7 @@
   <xs:element name="ObtenerGrupoUsuarioByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGrupoUsuarioByIdResult" nillable="true" type="q6:GrupoUsuario" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGrupoUsuarioByIdResult" nillable="true" type="q8:GrupoUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -101,7 +103,7 @@
   <xs:element name="ObtenerGruposUsuarioSistemaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposUsuarioSistemaResult" nillable="true" type="q7:ArrayOfGrupoUsuario" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposUsuarioSistemaResult" nillable="true" type="q9:ArrayOfGrupoUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -122,7 +124,7 @@
   <xs:element name="ObtenerGruposUsuarioNivelResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposUsuarioNivelResult" nillable="true" type="q8:ArrayOfGrupoUsuario" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposUsuarioNivelResult" nillable="true" type="q10:ArrayOfGrupoUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -136,7 +138,7 @@
   <xs:element name="ObtenerGruposDeUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="ObtenerGruposDeUsuarioResult" nillable="true" type="q9:ArrayOfUsuarioGrupo" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="ObtenerGruposDeUsuarioResult" nillable="true" type="q11:ArrayOfUsuarioGrupo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -164,14 +166,16 @@
   <xs:element name="ObtenerGruposUsuarioAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposUsuarioAllResult" nillable="true" type="q10:ArrayOfGrupoUsuario" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposUsuarioAllResult" nillable="true" type="q12:ArrayOfGrupoUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ActualizarGrupo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="gpo" nillable="true" type="q11:GrupoUsuario" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="gpo" nillable="true" type="q13:GrupoUsuario" />
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="horarios" nillable="true" type="q14:ArrayOfKeyValueOfintint" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="diasDescanso" nillable="true" type="q15:ArrayOfKeyValueOfintArrayOfDiaFestivoSubGrupoi6T7NGCD" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -190,7 +194,7 @@
   <xs:element name="ObtenerHorariosByIdSubGrupoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerHorariosByIdSubGrupoResult" nillable="true" type="q12:ArrayOfHorarioSubGrupo" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerHorariosByIdSubGrupoResult" nillable="true" type="q16:ArrayOfHorarioSubGrupo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -204,7 +208,7 @@
   <xs:element name="ObtenerDiasByIdSubGrupoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiasByIdSubGrupoResult" nillable="true" type="q13:ArrayOfDiaFestivoSubGrupo" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiasByIdSubGrupoResult" nillable="true" type="q17:ArrayOfDiaFestivoSubGrupo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -218,7 +222,7 @@
   <xs:element name="ObtenerGruposResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposResult" nillable="true" type="q14:ArrayOfGrupoUsuario" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposResult" nillable="true" type="q18:ArrayOfGrupoUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -233,7 +237,7 @@
   <xs:element name="ObtenerGruposByIdUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposByIdUsuarioResult" nillable="true" type="q15:ArrayOfGrupoUsuario" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposByIdUsuarioResult" nillable="true" type="q19:ArrayOfGrupoUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -241,15 +245,15 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
-        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q16:ArrayOfint" />
-        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipoServicio" nillable="true" type="q17:ArrayOfint" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q20:ArrayOfint" />
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="tipoServicio" nillable="true" type="q21:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ObtenerGruposUsuarioResponsablesByGruposTipoServicioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposUsuarioResponsablesByGruposTipoServicioResult" nillable="true" type="q18:ArrayOfGrupoUsuario" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerGruposUsuarioResponsablesByGruposTipoServicioResult" nillable="true" type="q22:ArrayOfGrupoUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

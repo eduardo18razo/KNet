@@ -43,7 +43,41 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<Area> ObtenerAreasUsuarioTercero(int idUsuario, int idUsuarioTercero, bool insertarSeleccion)
+        {
+            List<Area> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = (from a in db.Area
+                          join aa in db.ArbolAcceso on a.Id equals aa.IdArea
+                          join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                          join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                          join gu in db.GrupoUsuario on guia.IdGrupoUsuario equals gu.Id
+                          join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
+                          where ug.IdUsuario == idUsuario && ug.IdUsuario == idUsuarioTercero
+                          select a).Distinct().ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                        new Area
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.Value,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -76,7 +110,7 @@ namespace KinniNet.Core.Operacion
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception((ex.InnerException).Message);
+                    throw new Exception(ex.Message);
                 }
                 finally
                 {
@@ -94,7 +128,6 @@ namespace KinniNet.Core.Operacion
                 DataBaseModelContext db = new DataBaseModelContext();
                 try
                 {
-                    int[] idsPublicos = { (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado, (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado, (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado };
                     db.ContextOptions.ProxyCreationEnabled = _proxy;
                     result = (from a in db.Area
                               join aa in db.ArbolAcceso on a.Id equals aa.IdArea
@@ -112,7 +145,7 @@ namespace KinniNet.Core.Operacion
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception((ex.InnerException).Message);
+                    throw new Exception(ex.Message);
                 }
                 finally
                 {
@@ -140,7 +173,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -164,7 +197,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
+using KiiniHelp.Funciones;
 using KiiniHelp.ServicePuesto;
+using KiiniHelp.ServiceSistemaTipoUsuario;
+using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 
 namespace KiiniHelp.UserControls.Altas
@@ -10,6 +13,7 @@ namespace KiiniHelp.UserControls.Altas
     public partial class UcAltaPuesto : UserControl, IControllerModal
     {
         private readonly ServicePuestoClient _servicioPuesto = new ServicePuestoClient();
+        private readonly ServiceTipoUsuarioClient _servicioTipoUsuario = new ServiceTipoUsuarioClient();
         private List<string> _lstError = new List<string>();
 
         public event DelegateAceptarModal OnAceptarModal;
@@ -21,13 +25,21 @@ namespace KiiniHelp.UserControls.Altas
             get { return Convert.ToBoolean(hfEsAlta.Value); }
             set { hfEsAlta.Value = value.ToString(); }
         }
-
+        public int IdTipoUsuario
+        {
+            get { return Convert.ToInt32(ddlTipoUsuario.SelectedValue); }
+            set
+            {
+                ddlTipoUsuario.SelectedValue = value.ToString();
+                ddlTipoUsuario.Enabled = false;
+            }
+        }
         public int IdPuesto
         {
             get { return Convert.ToInt32(hfIdPuesto.Value); }
             set
             {
-                Puesto puesto = _servicioPuesto.ObtenerPuestos(false).Single(s => s.Id == value);
+                Puesto puesto = _servicioPuesto.ObtenerPuestoById(value);
                 txtDescripcionPuesto.Text = puesto.Descripcion;
                 hfIdPuesto.Value = value.ToString();
             }
@@ -41,6 +53,20 @@ namespace KiiniHelp.UserControls.Altas
                 if (!panelAlerta.Visible) return;
                 rptErrorGeneral.DataSource = value;
                 rptErrorGeneral.DataBind();
+            }
+        }
+
+        private void LlenaCombos()
+        {
+            try
+            {
+                List<TipoUsuario> lstTipoUsuario = _servicioTipoUsuario.ObtenerTiposUsuarioResidentes(true);
+                Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 
@@ -61,6 +87,10 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 Alerta = new List<string>();
+                if (!IsPostBack)
+                {
+                    LlenaCombos();
+                }
             }
             catch (Exception ex)
             {
@@ -79,7 +109,7 @@ namespace KiiniHelp.UserControls.Altas
             {
                 if (txtDescripcionPuesto.Text.Trim() == string.Empty)
                     throw new Exception("Debe especificar una descripción");
-                Puesto puesto = new Puesto { Descripcion = txtDescripcionPuesto.Text.Trim(), Habilitado = true };
+                Puesto puesto = new Puesto { IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue), Descripcion = txtDescripcionPuesto.Text.Trim(), Habilitado = true };
                 if (EsAlta)
                     _servicioPuesto.Guardar(puesto);
                 else

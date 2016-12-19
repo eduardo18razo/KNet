@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
@@ -27,7 +28,28 @@ namespace KiiniHelp
                 rptErrorGeneral.DataBind();
             }
         }
-
+        private void ValidaCampos()
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                if (txtContrasena.Text.Trim() == string.Empty)
+                    sb.AppendLine("<li>Contraseña nueva es campo obligatorio</li>");
+                if (txtContrasena.Text.Trim() != txtConfirmar.Text.Trim())
+                    sb.AppendLine("<li>Las contraseñas no coinciden</li>");
+                if (sb.ToString() != string.Empty)
+                {
+                    sb.Append("</ul>");
+                    sb.Insert(0, "<ul>");
+                    sb.Insert(0, "<h3>Reestablecer Contraseña</h3>");
+                    throw new Exception(sb.ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         private void ChangeOption()
         {
             try
@@ -169,13 +191,15 @@ namespace KiiniHelp
                     {
                         if (divChangePwd.Visible)
                         {
+                            ValidaCampos();
+                            _servicioSeguridad.ValidaPassword(txtContrasena.Text.Trim(                                                               ));
                             switch (btncontinuar.CommandArgument)
                             {
                                 case "0":
-                                    _servicioSeguridad.RecuperarCuenta(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, hfValueNotivicacion.Value, int.Parse(rbtnList.SelectedValue), txtCodigo.Text, txtContrasena.Text, "0");
+                                    _servicioSeguridad.RecuperarCuenta(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, hfValueNotivicacion.Value, int.Parse(rbtnList.SelectedValue), txtCodigo.Text, txtContrasena.Text.Trim(), "0");
                                     break;
                                 case "1":
-                                    _servicioSeguridad.RecuperarCuenta(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, hfValueNotivicacion.Value, int.Parse(rbtnList.SelectedValue), txtCodigo.Text, txtContrasena.Text, "1");
+                                    _servicioSeguridad.RecuperarCuenta(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, hfValueNotivicacion.Value, int.Parse(rbtnList.SelectedValue), txtCodigo.Text, txtContrasena.Text.Trim(), "1");
                                     break;
                                 case "2":
                                     _servicioSeguridad.RecuperarCuenta(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, hfValueNotivicacion.Value, -1, txtCodigo.Text, txtContrasena.Text, "2");
@@ -266,6 +290,23 @@ namespace KiiniHelp
                     _servicioUsuario.EnviaCodigoVerificacionSms(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, int.Parse(rbtnList.SelectedValue));
                 }
 
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect(ResolveUrl("~/Default.aspx"));
             }
             catch (Exception ex)
             {

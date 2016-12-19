@@ -1,7 +1,19 @@
-﻿namespace KinniNet.Business.Utils
+﻿using System.Configuration;
+
+namespace KinniNet.Business.Utils
 {
     public static class BusinessVariables
     {
+        public static class Directorios
+        {
+            public static string RepositorioTemporalInformacionConsulta = ConfigurationManager.AppSettings["Repositorio"] + ConfigurationManager.AppSettings["RepositorioInfomracionConsultas"] + ConfigurationManager.AppSettings["CarpetaTemporal"];
+            public static string RepositorioInformacionConsulta = ConfigurationManager.AppSettings["Repositorio"] + ConfigurationManager.AppSettings["RepositorioInfomracionConsultas"];
+            public static string RepositorioInformacionConsultaHtml = ConfigurationManager.AppSettings["PathInformacionConsultaHtml"];
+            public static string RepositorioTemporalMascara = ConfigurationManager.AppSettings["Repositorio"] + ConfigurationManager.AppSettings["RepositorioMascara"] + ConfigurationManager.AppSettings["CarpetaTemporal"];
+            public static string RepositorioMascara = ConfigurationManager.AppSettings["Repositorio"] + ConfigurationManager.AppSettings["RepositorioMascara"];
+            public static string RepositorioTemporal = ConfigurationManager.AppSettings["Repositorio"] + ConfigurationManager.AppSettings["CarpetaTemporal"];
+            public static string RepositorioRepositorio = ConfigurationManager.AppSettings["Repositorio"];
+        }
 
         public static class ComboBoxCatalogo
         {
@@ -26,7 +38,7 @@
 
         public static class ParametrosCatalogo
         {
-            public static string PrefijoTabla = "Cat";
+            public static string PrefijoTabla = "USER_";
             public static string PrefijoComandoInsertar = "InsertCatalogoSistema";
             public static string PrefijoComandoActualizar = "UpdateCatalogoSistema";
         }
@@ -50,6 +62,14 @@
                 ReAsignado = 3,
                 Escalado = 4,
                 Autoasignado = 5
+            }
+
+            public enum EnumCanal
+            {
+                Web = 1,
+                Telefono = 2,
+                Correo = 3,
+                Chat = 4
             }
         }
 
@@ -78,7 +98,9 @@
         {
             Word = 1,
             PowerPoint = 2,
-            Excel = 3
+            Excel = 3, 
+            Pdf = 4,
+            Imagen = 5
         }
         public enum EnumTiposInformacionConsulta
         {

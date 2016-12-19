@@ -113,5 +113,35 @@ namespace KiiniNet.Services.Security.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public void ValidaPassword(string pwd)
+        {
+            try
+            {
+                using (BusinessSecurity.Autenticacion negocio = new BusinessSecurity.Autenticacion())
+                {
+                    negocio.ValidaPassword(pwd);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public bool CaducaPassword(int idUsuario)
+        {
+            try
+            {
+                using (BusinessSecurity.Autenticacion negocio = new BusinessSecurity.Autenticacion())
+                {
+                    return negocio.CaducaPassword(idUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

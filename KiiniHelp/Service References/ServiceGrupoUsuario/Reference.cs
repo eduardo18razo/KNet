@@ -30,7 +30,7 @@ namespace KiiniHelp.ServiceGrupoUsuario {
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, bool insertarSeleccion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/GuardarGrupoUsuario", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/GuardarGrupoUsuarioResponse")]
-        void GuardarGrupoUsuario(KiiniNet.Entities.Cat.Usuario.GrupoUsuario grupoUsuario);
+        void GuardarGrupoUsuario(KiiniNet.Entities.Cat.Usuario.GrupoUsuario grupoUsuario, System.Collections.Generic.Dictionary<int, int> horarios, System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFestivoSubGrupo>> diasDescanso);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupoUsuarioById", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGrupoUsuarioByIdResponse")]
         KiiniNet.Entities.Cat.Usuario.GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario);
@@ -51,7 +51,7 @@ namespace KiiniHelp.ServiceGrupoUsuario {
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.GrupoUsuario> ObtenerGruposUsuarioAll(System.Nullable<int> idTipoUsuario, System.Nullable<int> idTipoGrupo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ActualizarGrupo", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ActualizarGrupoResponse")]
-        void ActualizarGrupo(KiiniNet.Entities.Cat.Usuario.GrupoUsuario gpo);
+        void ActualizarGrupo(KiiniNet.Entities.Cat.Usuario.GrupoUsuario gpo, System.Collections.Generic.Dictionary<int, int> horarios, System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFestivoSubGrupo>> diasDescanso);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerHorariosByIdSubGrupo", ReplyAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerHorariosByIdSubGrupoResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.HorarioSubGrupo> ObtenerHorariosByIdSubGrupo(int idSubGrupo);
@@ -114,8 +114,8 @@ namespace KiiniHelp.ServiceGrupoUsuario {
             return base.Channel.ObtenerGruposUsuarioByIdRol(idRol, insertarSeleccion);
         }
         
-        public void GuardarGrupoUsuario(KiiniNet.Entities.Cat.Usuario.GrupoUsuario grupoUsuario) {
-            base.Channel.GuardarGrupoUsuario(grupoUsuario);
+        public void GuardarGrupoUsuario(KiiniNet.Entities.Cat.Usuario.GrupoUsuario grupoUsuario, System.Collections.Generic.Dictionary<int, int> horarios, System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFestivoSubGrupo>> diasDescanso) {
+            base.Channel.GuardarGrupoUsuario(grupoUsuario, horarios, diasDescanso);
         }
         
         public KiiniNet.Entities.Cat.Usuario.GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario) {
@@ -142,8 +142,8 @@ namespace KiiniHelp.ServiceGrupoUsuario {
             return base.Channel.ObtenerGruposUsuarioAll(idTipoUsuario, idTipoGrupo);
         }
         
-        public void ActualizarGrupo(KiiniNet.Entities.Cat.Usuario.GrupoUsuario gpo) {
-            base.Channel.ActualizarGrupo(gpo);
+        public void ActualizarGrupo(KiiniNet.Entities.Cat.Usuario.GrupoUsuario gpo, System.Collections.Generic.Dictionary<int, int> horarios, System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFestivoSubGrupo>> diasDescanso) {
+            base.Channel.ActualizarGrupo(gpo, horarios, diasDescanso);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.HorarioSubGrupo> ObtenerHorariosByIdSubGrupo(int idSubGrupo) {

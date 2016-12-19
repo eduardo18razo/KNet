@@ -33,7 +33,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -54,7 +54,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -75,7 +75,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -96,7 +96,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -117,7 +117,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -138,7 +138,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -159,7 +159,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -228,42 +228,56 @@ namespace KinniNet.Core.Operacion
                 {
                     organizacion.Holding.Descripcion = organizacion.Holding.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 1;
+                    if (db.Holding.Any(a => a.Descripcion == organizacion.Holding.Descripcion && a.IdTipoUsuario == organizacion.Holding.IdTipoUsuario))
+                        throw new Exception("Este Holding ya se encuetra registrado");
                 }
 
                 if (organizacion.Compania != null)
                 {
                     organizacion.Compania.Descripcion = organizacion.Compania.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 2;
+                    if (db.Compañia.Any(a => a.Descripcion == organizacion.Compania.Descripcion && a.IdTipoUsuario == organizacion.Compania.IdTipoUsuario))
+                        throw new Exception("Esta Compañia ya se encuetra registrada");
                 }
 
                 if (organizacion.Direccion != null)
                 {
                     organizacion.Direccion.Descripcion = organizacion.Direccion.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 3;
+                    if (db.Direccion.Any(a => a.Descripcion == organizacion.Direccion.Descripcion && a.IdTipoUsuario == organizacion.Direccion.IdTipoUsuario))
+                        throw new Exception("Esta Direccion ya se encuetra registrada");
                 }
 
                 if (organizacion.SubDireccion != null)
                 {
                     organizacion.SubDireccion.Descripcion = organizacion.SubDireccion.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 4;
+                    if (db.SubDireccion.Any(a => a.Descripcion == organizacion.SubDireccion.Descripcion && a.IdTipoUsuario == organizacion.SubDireccion.IdTipoUsuario))
+                        throw new Exception("Esta SubDireccion ya se encuetra registrada");
                 }
 
                 if (organizacion.Gerencia != null)
                 {
                     organizacion.Gerencia.Descripcion = organizacion.Gerencia.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 5;
+                    if (db.Gerencia.Any(a => a.Descripcion == organizacion.Gerencia.Descripcion && a.IdTipoUsuario == organizacion.Gerencia.IdTipoUsuario))
+                        throw new Exception("Esta Gerencia ya se encuetra registrada");
                 }
 
                 if (organizacion.SubGerencia != null)
                 {
                     organizacion.SubGerencia.Descripcion = organizacion.SubGerencia.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 6;
+                    if (db.SubGerencia.Any(a => a.Descripcion == organizacion.SubGerencia.Descripcion && a.IdTipoUsuario == organizacion.SubGerencia.IdTipoUsuario))
+                        throw new Exception("Esta SubGerencia ya se encuetra registrada");
                 }
 
                 if (organizacion.Jefatura != null)
                 {
                     organizacion.Jefatura.Descripcion = organizacion.Jefatura.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 7;
+                    if (db.Jefatura.Any(a => a.Descripcion == organizacion.Jefatura.Descripcion && a.IdTipoUsuario == organizacion.Jefatura.IdTipoUsuario))
+                        throw new Exception("Esta Jefatura ya se encuetra registrada");
                 }
 
                 if (organizacion.Id == 0)
@@ -272,7 +286,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -301,7 +315,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -330,7 +344,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -359,7 +373,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -388,7 +402,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -417,7 +431,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -446,7 +460,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -475,7 +489,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -504,7 +518,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -545,6 +559,10 @@ namespace KinniNet.Core.Operacion
                 if (idJefatura.HasValue)
                     qry = qry.Where(w => w.IdJefatura == idJefatura);
 
+                qry = from q in qry
+                      orderby q.Holding != null, q.Holding.Descripcion, q.Compania != null, q.Compania.Descripcion, q.Direccion != null, q.Direccion.Descripcion, q.SubDireccion != null, q.SubDireccion.Descripcion,
+                      q.Gerencia != null, q.Gerencia.Descripcion, q.SubGerencia != null, q.SubGerencia.Descripcion, q.Jefatura != null, q.Compania.Descripcion ascending
+                      select q;
                 result = qry.ToList();
                 foreach (Organizacion organizacion in result)
                 {
@@ -556,10 +574,11 @@ namespace KinniNet.Core.Operacion
                     db.LoadProperty(organizacion, "SubGerencia");
                     db.LoadProperty(organizacion, "Jefatura");
                 }
+
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -593,7 +612,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -652,7 +671,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -709,7 +728,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -748,7 +767,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -768,7 +787,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -796,7 +815,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -843,7 +862,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {

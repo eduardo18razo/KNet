@@ -148,6 +148,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                     }
 
                 }
+
                 if (sb.ToString() != string.Empty)
                 {
                     sb.Append("</ul>");
@@ -622,6 +623,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 AltaAreas.OnCancelarModal += AltaAreas_OnCancelarModal;
                 AltaAreas.OnAceptarModal += AltaAreas_OnAceptarModal;
 
+                UcAltaInformacionConsulta.EsAlta = true;
                 UcAltaInformacionConsulta.OnAceptarModal += UcAltaInformacionConsulta_OnAceptarModal;
                 UcAltaInformacionConsulta.OnCancelarModal += UcAltaInformacionConsulta_OnCancelarModal;
 
@@ -1182,7 +1184,6 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
         {
             try
             {
-
                 if (Metodos.ValidaCapturaCatalogo(txtDescripcionNivel.Text))
                 {
                     AsociarGrupoUsuario.ValidaCapturaGrupos();
@@ -1199,13 +1200,16 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                     };
                     if (chkNivelTerminal.Checked)
                     {
-                        arbol.IdImpacto = UcImpactoUrgencia.ObtenerImpactoUrgencia().Id;
-                        if (int.Parse(ddlTipoArbol.SelectedValue) == (int)BusinessVariables.EnumTipoArbol.Consultas)
+                        if (int.Parse(ddlTipoArbol.SelectedValue) == (int) BusinessVariables.EnumTipoArbol.Consultas)
+                        {
                             ValidaCapturaConsulta();
+                            ValidaCapturaEncuesta();
+                        }
                         if (int.Parse(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas)
                         {
                             ValidaCapturaTicket();
                             ValidaCapturaEncuesta();
+                            arbol.IdImpacto = UcImpactoUrgencia.ObtenerImpactoUrgencia().Id;
                         }
                         ValidaCapturaGrupos();
                         arbol.InventarioArbolAcceso = new List<InventarioArbolAcceso> { new InventarioArbolAcceso() };
@@ -1474,8 +1478,9 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 btnModalConsultas.Visible = Convert.ToInt32(ddlTipoArbol.SelectedValue) == (int)BusinessVariables.EnumTipoArbol.Consultas;
                 btnModalTicket.Visible = chkNivelTerminal.Checked && Convert.ToInt32(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas;
                 btnModalSla.Visible = chkNivelTerminal.Checked && Convert.ToInt32(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas;
+                btnModalImpactoUrgencia.Visible = chkNivelTerminal.Checked && Convert.ToInt32(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas;
                 btnModalInforme.Visible = chkNivelTerminal.Checked && Convert.ToInt32(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas;
-                btnModalEncuesta.Visible = chkNivelTerminal.Checked && Convert.ToInt32(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas;
+                //btnModalEncuesta.Visible = chkNivelTerminal.Checked && Convert.ToInt32(ddlTipoArbol.SelectedValue) != (int)BusinessVariables.EnumTipoArbol.Consultas;
 
                 if (ddlTipoArbol.SelectedValue == ((int)BusinessVariables.EnumTipoArbol.Consultas).ToString())
                 {

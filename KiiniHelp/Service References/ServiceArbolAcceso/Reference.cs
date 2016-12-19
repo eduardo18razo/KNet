@@ -15,6 +15,30 @@ namespace KiiniHelp.ServiceArbolAcceso {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceArbolAcceso.IServiceArbolAcceso")]
     public interface IServiceArbolAcceso {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel1ByGrupos", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel1ByGruposResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel1> ObtenerNivel1ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel2ByGrupos", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel2ByGruposResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel2> ObtenerNivel2ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel1, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel3ByGrupos", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel3ByGruposResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel3> ObtenerNivel3ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel2, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel4ByGrupos", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel4ByGruposResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel4> ObtenerNivel4ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel3, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel5ByGrupos", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel5ByGruposResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel5> ObtenerNivel5ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel4, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel6ByGrupos", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel6ByGruposResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel6> ObtenerNivel6ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel5, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel7ByGrupos", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel7ByGruposResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel7> ObtenerNivel7ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel6, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/EsNodoTerminalByGrupos", ReplyAction="http://tempuri.org/IServiceArbolAcceso/EsNodoTerminalByGruposResponse")]
+        bool EsNodoTerminalByGrupos(int idArea, int idTipoUsuario, int idTipoArbol, int nivel1, System.Nullable<int> nivel2, System.Nullable<int> nivel3, System.Nullable<int> nivel4, System.Nullable<int> nivel5, System.Nullable<int> nivel6, System.Nullable<int> nivel7);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel1", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel1Response")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel1> ObtenerNivel1(int idTipoArbol, int idTipoUsuario, bool insertarSeleccion);
         
@@ -87,6 +111,38 @@ namespace KiiniHelp.ServiceArbolAcceso {
         
         public ServiceArbolAccesoClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel1> ObtenerNivel1ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, bool insertarSeleccion) {
+            return base.Channel.ObtenerNivel1ByGrupos(idUsuarioSolicita, idUsuarioLevanta, idArea, idTipoArbolAcceso, insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel2> ObtenerNivel2ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel1, bool insertarSeleccion) {
+            return base.Channel.ObtenerNivel2ByGrupos(idUsuarioSolicita, idUsuarioLevanta, idArea, idTipoArbolAcceso, idNivel1, insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel3> ObtenerNivel3ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel2, bool insertarSeleccion) {
+            return base.Channel.ObtenerNivel3ByGrupos(idUsuarioSolicita, idUsuarioLevanta, idArea, idTipoArbolAcceso, idNivel2, insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel4> ObtenerNivel4ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel3, bool insertarSeleccion) {
+            return base.Channel.ObtenerNivel4ByGrupos(idUsuarioSolicita, idUsuarioLevanta, idArea, idTipoArbolAcceso, idNivel3, insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel5> ObtenerNivel5ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel4, bool insertarSeleccion) {
+            return base.Channel.ObtenerNivel5ByGrupos(idUsuarioSolicita, idUsuarioLevanta, idArea, idTipoArbolAcceso, idNivel4, insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel6> ObtenerNivel6ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel5, bool insertarSeleccion) {
+            return base.Channel.ObtenerNivel6ByGrupos(idUsuarioSolicita, idUsuarioLevanta, idArea, idTipoArbolAcceso, idNivel5, insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel7> ObtenerNivel7ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel6, bool insertarSeleccion) {
+            return base.Channel.ObtenerNivel7ByGrupos(idUsuarioSolicita, idUsuarioLevanta, idArea, idTipoArbolAcceso, idNivel6, insertarSeleccion);
+        }
+        
+        public bool EsNodoTerminalByGrupos(int idArea, int idTipoUsuario, int idTipoArbol, int nivel1, System.Nullable<int> nivel2, System.Nullable<int> nivel3, System.Nullable<int> nivel4, System.Nullable<int> nivel5, System.Nullable<int> nivel6, System.Nullable<int> nivel7) {
+            return base.Channel.EsNodoTerminalByGrupos(idArea, idTipoUsuario, idTipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel1> ObtenerNivel1(int idTipoArbol, int idTipoUsuario, bool insertarSeleccion) {

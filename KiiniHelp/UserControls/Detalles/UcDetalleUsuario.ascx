@@ -39,6 +39,23 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <asp:Label runat="server" CssClass="col-sm-2 control-label" Text="Usuario:"></asp:Label>
+                        <div class="col-sm-10 ">
+                            <asp:Label runat="server" CssClass="form-control" ID="lblUsuario"></asp:Label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" CssClass="col-sm-2 control-label" Text="Puesto:"></asp:Label>
+                        <div class="col-sm-10 ">
+                            <asp:Label runat="server" CssClass="form-control" ID="lblPuesto"></asp:Label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 ">
+                            <asp:CheckBox runat="server" ID="chkVip" Text="Vip" />
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <asp:Label runat="server" CssClass="col-sm-3 control-label" Text="Datos Adicionales"></asp:Label>
                     </div>
                     <%--TELEFONOS--%>
@@ -141,7 +158,7 @@
                             <div class="panel panel-primary">
                                 <div class="panel-heading" role="tab" id="headingGrupos">
                                     <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseGrupos" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer">
-                                        <div class="col-xs-6 col-sm-3">Grupos</div>
+                                        <div class="col-xs-6 col-sm-3">Roles y Grupos</div>
                                     </div>
                                 </div>
                                 <div id="collapseGrupos" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingGrupos">

@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcInformacionConsulta.ascx.cs" Inherits="KiiniHelp.UserControls.Genericos.UcInformacionConsulta" %>
+<%@ Import Namespace="KinniNet.Business.Utils" %>
+<%@ Register TagPrefix="ajax" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
     <ContentTemplate>
         <header class="modal-header" id="pnlAlertaGeneral" runat="server" visible="false">
@@ -32,7 +34,7 @@
                     <asp:Repeater runat="server" ID="rptInformacionConsulta">
                         <ItemTemplate>
                             <div style="float: left; width: 25%;">
-                                <asp:Button runat="server" Text='<%# Eval("TipoInfConsulta.Descripcion") %>' CommandArgument='<%# Eval("Id") %>' ID="btnInformacion" OnClick="btnInformacion_OnClick" CommandName="0" CssClass="btn btn-primary btn-lg"/>
+                                <asp:Button runat="server" Text='<%# Eval("TipoInfConsulta.Descripcion") %>' CommandArgument='<%# Eval("Id") %>' ID="btnInformacion" OnClick="btnInformacion_OnClick" CommandName="0" CssClass="btn btn-primary btn-lg" />
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
@@ -68,16 +70,29 @@
                         </div>
                     </div>
                     <div class="panel panel-primary">
-                        <asp:HiddenField runat="server" ID="hfIdArbol"/>
-                        <div runat="server" ID="divPropuetario" Visible="False">
-                            <asp:Label runat="server" ID="lblContenido" ></asp:Label>
+                        <asp:HiddenField runat="server" ID="hfIdArbol" />
+                        <asp:HiddenField runat="server" ID="hfIdInformacion" />
+                        <div runat="server" id="divPropuetario" visible="False">
+                            <asp:Label runat="server" ID="lblContenido"></asp:Label>
                         </div>
-                        <div runat="server" ID="divInfoDocto" Visible="False">
-                            <iframe runat="server" ID="ifDoctos" scrolling="yes" frameborder="0" style="border:none; overflow:hidden; width:100%; height:700px;" allowTransparency="true"></iframe>
+                        <div runat="server" id="divInfoDocto" visible="False">
+                            <iframe runat="server" id="ifDoctos" scrolling="yes" frameborder="0" style="border: none; overflow: hidden; width: 100%; height: 700px;" allowtransparency="true"></iframe>
+                        </div>
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <asp:Repeater runat="server" ID="rptDownloads">
+                                    <ItemTemplate>
+                                        <asp:Label runat="server" Text="" CssClass="col-sm-2 control-label" />
+                                        <div class="col-sm-10">
+                                            <asp:HyperLink runat="server" Text='<%# Eval("Archivo") %>' NavigateUrl='<%# ResolveUrl(string.Format("~/Downloads/FrmDownloads.aspx?file={0}", BusinessVariables.Directorios.RepositorioInformacionConsulta + "~" + Eval("Archivo"))) %>'></asp:HyperLink>
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer" style="text-align: center">
-                        <asp:Button ID="btnCerrarModalInfo" runat="server" CssClass="btn btn-lg btn-danger" Text="Cerrar" OnClick="btnCerrarModalInfo_OnClick" data-dismiss="modal" />
+                        <asp:Button ID="btnCerrarModalInfo" runat="server" CssClass="btn btn-lg btn-danger" Text="Cerrar" OnClick="btnCerrarModalInfo_OnClick" />
                     </div>
 
                 </div>

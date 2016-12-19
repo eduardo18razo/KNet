@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
@@ -36,7 +37,17 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public bool Vip { get; set; }
         [DataMember]
         public bool Habilitado { get; set; }
-        
+        [DataMember]
+        public bool Activo { get; set; }
+        [DataMember]
+        public int Tries { get; set; }
+        [DataMember]
+        public DateTime? FechaBloqueo { get; set; }
+        [DataMember]
+        public DateTime? FechaUpdate { get; set; }
+        [DataMember]
+        public bool LevantaTickets { get; set; }
+
         [DataMember]
         public virtual TipoUsuario TipoUsuario { get; set; }
         [DataMember]
@@ -58,6 +69,8 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         [DataMember]
         public virtual List<Ticket> TicketsResueltos { get; set; }
         [DataMember]
+        public virtual List<Ticket> TicketsSolicitados { get; set; }
+        [DataMember]
         public virtual List<TicketEstatus> TicketEstatus { get; set; }
         [DataMember]
         public virtual List<TicketAsignacion> TicketAsigno { get; set; }
@@ -71,6 +84,8 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public virtual List<SmsService> SmsService { get; set; }
         [DataMember]
         public virtual List<PreguntaReto> PreguntaReto { get; set; }
+        [DataMember]
+        public virtual List<UsuarioPassword> UsuarioPassword { get; set; }
 
         public string NombreCompleto { get { return ApellidoPaterno + " " + ApellidoMaterno + " " + Nombre; } }
 
@@ -82,6 +97,6 @@ namespace KiiniNet.Entities.Operacion.Usuarios
 
         public string UbicacionFinal { get; set; }
 
-        
+
     }
 }

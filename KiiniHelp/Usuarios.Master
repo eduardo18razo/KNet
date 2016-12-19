@@ -110,6 +110,9 @@
         function closeit() {
             win.close();
         }
+        //function UploadComplete(sender, args) {
+        //    __doPostBack('Refresh', '');
+        //}
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>

@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AltaGrupoUsuario.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.AltaGrupoUsuario" %>
 <%@ Register Src="~/UserControls/Altas/UcAltaDiasFestivos.ascx" TagPrefix="uc1" TagName="UcAltaDiasFestivos" %>
-<%@ Register Src="~/UserControls/Altas/UcHorario.ascx" TagPrefix="uc1" TagName="UcHorario" %>
+<%@ Register Src="~/UserControls/Altas/UcAltaHorario.ascx" TagPrefix="uc1" TagName="UcAltaHorario" %>
 
 
 <asp:UpdatePanel ID="upGrupoUsuario" runat="server">
@@ -60,9 +60,13 @@
                                             <asp:Repeater runat="server" ID="rptSubRoles" OnItemDataBound="rptSubRoles_OnItemDataBound">
                                                 <ItemTemplate>
                                                     <div class="row" style="margin-top: 5px">
+                                                        <asp:Label runat="server" ID="lblId" Text='<%# Eval("Id") %>' Visible="False" />
                                                         <asp:CheckBox CssClass="col-sm-3" runat="server" ID="chkSubRol" value='<%# Eval("Id") %>' Text='<%# Eval("Descripcion") %>' AutoPostBack="True" OnCheckedChanged="OnCheckedChanged" />
-                                                        <asp:Button runat="server" CssClass="col-sm-3 btn btn-primary disabled" Style="margin-left: 5px" CommandArgument='<%# Eval("Id") %>' ID="btnHorarios" Text="Horarios" OnClick="btnHorarios_OnClick" />
-                                                        <asp:Button runat="server" CssClass="col-sm-3 btn btn-primary disabled" Style="margin-left: 5px" CommandArgument='<%# Eval("Id") %>' ID="btnDiasDescanso" Text="Días Festivos" OnClick="btnDiasDescanso_OnClick" />
+                                                        <div class="col-sm-3">
+                                                            <asp:DropDownList runat="server" ID="ddlHorario" CssClass="DropSelect" />
+                                                        </div>
+                                                        <asp:Button runat="server" CssClass="col-sm-2 btn btn-sm btn-primary disabled" Style="margin-left: 5px" CommandArgument='<%# Eval("Id") %>' ID="btnHorarios" Text="Agregar" OnClick="btnHorarios_OnClick" />
+                                                        <asp:Button runat="server" CssClass="col-sm-2 btn btn-sm btn-primary disabled" Style="margin-left: 5px" CommandArgument='<%# Eval("Id") %>' ID="btnDiasDescanso" Text="Días Festivos" OnClick="btnDiasDescanso_OnClick" />
                                                     </div>
                                                 </ItemTemplate>
                                             </asp:Repeater>
@@ -87,9 +91,9 @@
 
 <%--MODAL HORARO--%>
 <div class="modal fade" id="modalHorarios" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: auto">
-    <div class="modal-dialog" >
+    <div class="modal-dialog">
         <div class="modal-content">
-            <uc1:UcHorario runat="server" ID="ucHorario" />
+            <uc1:UcAltaHorario runat="server" id="ucAltaHorario" />
         </div>
     </div>
 </div>

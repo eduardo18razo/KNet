@@ -16,6 +16,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerAreasUsuarioTercero">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idUsuarioTercero" type="xs:int" />
+        <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerAreasUsuarioTerceroResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerAreasUsuarioTerceroResult" nillable="true" type="q2:ArrayOfArea" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ObtenerAreasUsuarioPublico">
     <xs:complexType>
       <xs:sequence>
@@ -26,7 +42,7 @@
   <xs:element name="ObtenerAreasUsuarioPublicoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerAreasUsuarioPublicoResult" nillable="true" type="q2:ArrayOfArea" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerAreasUsuarioPublicoResult" nillable="true" type="q3:ArrayOfArea" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -41,7 +57,7 @@
   <xs:element name="ObtenerAreasTipoUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerAreasTipoUsuarioResult" nillable="true" type="q3:ArrayOfArea" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerAreasTipoUsuarioResult" nillable="true" type="q4:ArrayOfArea" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -55,14 +71,14 @@
   <xs:element name="ObtenerAreasResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerAreasResult" nillable="true" type="q4:ArrayOfArea" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerAreasResult" nillable="true" type="q5:ArrayOfArea" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Guardar">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="area" nillable="true" type="q5:Area" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="area" nillable="true" type="q6:Area" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

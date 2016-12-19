@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KinniNet.Business.Utils" />
   <xs:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceInformacionConsulta.svc?xsd=xsd15" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="ObtenerInformacionConsulta">
     <xs:complexType>
       <xs:sequence>
@@ -49,6 +50,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="informacion" nillable="true" type="q5:InformacionConsulta" />
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="documentosDescarga" nillable="true" type="q6:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -61,7 +63,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idInformacionConsulta" type="xs:int" />
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="informacion" nillable="true" type="q6:InformacionConsulta" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="informacion" nillable="true" type="q7:InformacionConsulta" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -94,7 +96,7 @@
   <xs:element name="ObtenerConsultaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerConsultaResult" nillable="true" type="q7:ArrayOfInformacionConsulta" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="ObtenerConsultaResult" nillable="true" type="q8:ArrayOfInformacionConsulta" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

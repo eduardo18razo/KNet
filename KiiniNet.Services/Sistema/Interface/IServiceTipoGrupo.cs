@@ -13,5 +13,8 @@ namespace KiiniNet.Services.Sistema.Interface
 
          [OperationContract]
          List<TipoGrupo> ObtenerTiposGruposByRol(int idrol, bool insertarSeleccion);
+
+        [OperationContract]
+        List<TipoGrupo> ObtenerTiposGruposByTipoUsuario(int idTipoUsuario, bool insertarSeleccion);
     }
 }

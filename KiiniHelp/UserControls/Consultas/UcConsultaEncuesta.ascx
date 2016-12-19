@@ -128,24 +128,20 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader" style="table-layout: fixed">
                                             <thead>
                                                 <tr align="center">
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tipo de Encuesta</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nombre</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tiene Ponderacion</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Habilitado</asp:Label></td>
+                                                    <td><asp:Label runat="server">Tipo de Encuesta</asp:Label></td>
+                                                    <td><asp:Label runat="server">Nombre</asp:Label></td>
+                                                    <td><asp:Label runat="server">Tiene Ponderacion</asp:Label></td>
+                                                    <td><asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuEncuesta()"><%# Eval("TipoEncuesta.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuEncuesta()"><%# Eval("Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuEncuesta()"><%# (bool) Eval("EsPonderacion") ? "SI" : "NO"%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuEncuesta()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuEncuesta()"><%# Eval("TipoEncuesta.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuEncuesta()"><%# Eval("Descripcion")%></td>
+                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuEncuesta()"><%# (bool) Eval("EsPonderacion") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuEncuesta()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>

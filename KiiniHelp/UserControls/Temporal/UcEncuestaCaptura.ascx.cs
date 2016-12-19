@@ -32,8 +32,20 @@ namespace KiiniHelp.UserControls.Temporal
             base.OnInit(e);
             _lstControles = new List<Control>();
             int? idEncuesta = ((FrmEncuesta)Page).IdTicket;
+            int? idTipoServicio = ((FrmEncuesta)Page).IdTipoServicio;
             if (idEncuesta != null) IdTicket = (int)idEncuesta;
-            Encuesta encuesta = _servicioEncuesta.ObtenerEncuestaByIdTicket(IdTicket);
+            if (idTipoServicio != null) IdTipoServicio = (int)idTipoServicio;
+            Encuesta encuesta;
+            switch (IdTipoServicio)
+            {
+                case (int)BusinessVariables.EnumTipoArbol.Consultas:
+                    encuesta = _servicioEncuesta.ObtenerEncuestaByIdConsulta(IdTicket);
+                    break;
+                default:
+                    encuesta = _servicioEncuesta.ObtenerEncuestaByIdTicket(IdTicket);
+                    break;
+            }
+
             if (encuesta != null)
             {
                 lblDescripcionMascara.Text = encuesta.Descripcion;
@@ -69,6 +81,11 @@ namespace KiiniHelp.UserControls.Temporal
         {
             get { return Convert.ToInt32(hfIdEncuesta.Value); }
             set { hfIdEncuesta.Value = value.ToString(); }
+        }
+        public int IdTipoServicio
+        {
+            get { return Convert.ToInt32(hfIdTipoServicio.Value); }
+            set { hfIdTipoServicio.Value = value.ToString(); }
         }
 
         public void ValidaMascaraCaptura()
@@ -134,11 +151,11 @@ namespace KiiniHelp.UserControls.Temporal
                                             lstCamposCapturados.Add(new RespuestaEncuesta
                                             {
                                                 IdEncuesta = encuesta.Id,
-                                                IdTicket = IdTicket,
+                                                IdTicket = IdTipoServicio != (int)BusinessVariables.EnumTipoArbol.Consultas ? IdTicket : (int?)null,
+                                                IdArbol = IdTipoServicio == (int)BusinessVariables.EnumTipoArbol.Consultas ? IdTicket : (int?)null,
                                                 IdPregunta = pregunta.Id,
                                                 ValorRespuesta = i == 0 ? 0 : 1,
                                                 Ponderacion = i == 0 ? 0 : pregunta.Ponderacion
-
                                             });
                                             break;
                                         }
@@ -164,7 +181,8 @@ namespace KiiniHelp.UserControls.Temporal
                                             lstCamposCapturados.Add(new RespuestaEncuesta
                                             {
                                                 IdEncuesta = encuesta.Id,
-                                                IdTicket = IdTicket,
+                                                IdTicket = IdTipoServicio != (int)BusinessVariables.EnumTipoArbol.Consultas ? IdTicket : (int?)null,
+                                                IdArbol = IdTipoServicio == (int)BusinessVariables.EnumTipoArbol.Consultas ? IdTicket : (int?)null,
                                                 IdPregunta = pregunta.Id,
                                                 ValorRespuesta = i,
                                                 Ponderacion = ((i + 1) * 10),
@@ -195,7 +213,8 @@ namespace KiiniHelp.UserControls.Temporal
                                             lstCamposCapturados.Add(new RespuestaEncuesta
                                             {
                                                 IdEncuesta = encuesta.Id,
-                                                IdTicket = IdTicket,
+                                                IdTicket = IdTipoServicio != (int)BusinessVariables.EnumTipoArbol.Consultas ? IdTicket : (int?)null,
+                                                IdArbol = IdTipoServicio == (int)BusinessVariables.EnumTipoArbol.Consultas ? IdTicket : (int?)null,
                                                 IdPregunta = pregunta.Id,
                                                 ValorRespuesta = i,
                                                 Ponderacion = (pregunta.Ponderacion / 5) * i
@@ -345,7 +364,6 @@ namespace KiiniHelp.UserControls.Temporal
             try
             {
                 ValidaMascaraCaptura();
-                ObtenerCapturaMascara();
                 _servicioEncuesta.ContestaEncuesta(ObtenerCapturaMascara());
                 if (OnAceptarModal != null)
                     OnAceptarModal();

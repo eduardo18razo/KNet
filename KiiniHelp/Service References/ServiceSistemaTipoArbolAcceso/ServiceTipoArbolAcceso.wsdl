@@ -25,6 +25,12 @@
   <wsdl:message name="IServiceTipoArbolAcceso_ObtenerTiposArbolAcceso_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerTiposArbolAccesoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceTipoArbolAcceso_ObtenerTiposArbolAccesoByGruposTercero_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerTiposArbolAccesoByGruposTercero" />
+  </wsdl:message>
+  <wsdl:message name="IServiceTipoArbolAcceso_ObtenerTiposArbolAccesoByGruposTercero_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerTiposArbolAccesoByGruposTerceroResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceTipoArbolAcceso_ObtenerTiposArbolAccesoByGrupos_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerTiposArbolAccesoByGrupos" />
   </wsdl:message>
@@ -36,6 +42,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAcceso" message="tns:IServiceTipoArbolAcceso_ObtenerTiposArbolAcceso_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoResponse" message="tns:IServiceTipoArbolAcceso_ObtenerTiposArbolAcceso_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ObtenerTiposArbolAccesoByGruposTercero">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoByGruposTercero" message="tns:IServiceTipoArbolAcceso_ObtenerTiposArbolAccesoByGruposTercero_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoByGruposTerceroResponse" message="tns:IServiceTipoArbolAcceso_ObtenerTiposArbolAccesoByGruposTercero_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ObtenerTiposArbolAccesoByGrupos">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoByGrupos" message="tns:IServiceTipoArbolAcceso_ObtenerTiposArbolAccesoByGrupos_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoByGruposResponse" message="tns:IServiceTipoArbolAcceso_ObtenerTiposArbolAccesoByGrupos_OutputMessage" />
@@ -45,6 +55,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ObtenerTiposArbolAcceso">
       <soap:operation soapAction="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAcceso" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerTiposArbolAccesoByGruposTercero">
+      <soap:operation soapAction="http://tempuri.org/IServiceTipoArbolAcceso/ObtenerTiposArbolAccesoByGruposTercero" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

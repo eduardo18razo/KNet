@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmTicket.aspx.cs" Inherits="KiiniHelp.Users.Ticket.FrmTicket" %>
-
 <%@ Register Src="~/UserControls/Temporal/UcMascaraCaptura.ascx" TagPrefix="uc1" TagName="UcMascaraCaptura" %>
 <%@ Register Src="~/UserControls/Genericos/UcInformacionConsulta.ascx" TagPrefix="uc1" TagName="UcInformacionConsulta" %>
 
@@ -34,6 +33,8 @@
                     <asp:HiddenField runat="server" ID="hfIdConsulta" />
                     <asp:HiddenField runat="server" ID="hfIdEncuesta" />
                     <asp:HiddenField runat="server" ID="hfIdSla" />
+                    <asp:HiddenField runat="server" ID="hfIdCanal" />
+                    <asp:HiddenField runat="server" ID="hfIdUsuarioSolicita" />
                     <asp:Label runat="server" ID="lblTicketDescripcion"></asp:Label>
                 </div>
 
@@ -44,7 +45,7 @@
                 </div>
                 <div class="panel-footer">
                     <asp:Button runat="server" ID="btnGuardar" OnClick="btnGuardar_OnClick" Text="Guardar" CssClass="btn btn-lg btn-success" />
-                    <asp:Button runat="server" ID="btnCancelar" Text="Cancelar" CssClass="btn btn-lg btn-danger" />
+                    <asp:Button runat="server" ID="btnCancelar" Text="Cancelar" CssClass="btn btn-lg btn-danger" OnClick="btnCancelar_OnClick"/>
                 </div>
             </div>
         </ContentTemplate>

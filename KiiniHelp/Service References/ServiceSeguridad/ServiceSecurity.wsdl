@@ -60,6 +60,18 @@
   <wsdl:message name="IServiceSecurity_RecuperarCuenta_OutputMessage">
     <wsdl:part name="parameters" element="tns:RecuperarCuentaResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceSecurity_ValidaPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidaPassword" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSecurity_ValidaPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidaPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSecurity_CaducaPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:CaducaPassword" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSecurity_CaducaPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CaducaPasswordResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceSecurity">
     <wsdl:operation name="Autenticate">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSecurity/Autenticate" message="tns:IServiceSecurity_Autenticate_InputMessage" />
@@ -88,6 +100,14 @@
     <wsdl:operation name="RecuperarCuenta">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSecurity/RecuperarCuenta" message="tns:IServiceSecurity_RecuperarCuenta_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceSecurity/RecuperarCuentaResponse" message="tns:IServiceSecurity_RecuperarCuenta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidaPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSecurity/ValidaPassword" message="tns:IServiceSecurity_ValidaPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSecurity/ValidaPasswordResponse" message="tns:IServiceSecurity_ValidaPassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CaducaPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSecurity/CaducaPassword" message="tns:IServiceSecurity_CaducaPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSecurity/CaducaPasswordResponse" message="tns:IServiceSecurity_CaducaPassword_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceSecurity" type="tns:IServiceSecurity">
@@ -148,6 +168,24 @@
     </wsdl:operation>
     <wsdl:operation name="RecuperarCuenta">
       <soap:operation soapAction="http://tempuri.org/IServiceSecurity/RecuperarCuenta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidaPassword">
+      <soap:operation soapAction="http://tempuri.org/IServiceSecurity/ValidaPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CaducaPassword">
+      <soap:operation soapAction="http://tempuri.org/IServiceSecurity/CaducaPassword" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

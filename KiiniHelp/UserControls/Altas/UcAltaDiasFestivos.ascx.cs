@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using KiiniHelp.ServiceDiasHorario;
+using KiiniHelp.ServiceGrupoUsuario;
 using KiiniNet.Entities.Cat.Usuario;
 
 namespace KiiniHelp.UserControls.Altas
 {
     public partial class UcAltaDiasFestivos : UserControl, IControllerModal
     {
+        private readonly ServiceDiasHorarioClient _servicioDias = new ServiceDiasHorarioClient();
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
@@ -37,6 +40,12 @@ namespace KiiniHelp.UserControls.Altas
                 MuestraDias((List<DiaFestivoSubGrupo>)Session["DiasFestivos" + value]);
                 hfIdSubRol.Value = value.ToString();
             }
+        }
+
+        public bool EsAlta
+        {
+            get { return Convert.ToBoolean(hfEsAlta.Value); }
+            set { hfEsAlta.Value = value.ToString(); }
         }
 
         public RepeaterItemCollection DiasDescansoSubRol

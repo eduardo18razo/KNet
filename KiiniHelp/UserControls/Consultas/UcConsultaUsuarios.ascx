@@ -5,6 +5,7 @@
 <div style="height: 100%;">
     <script>
         function ContextMenu() {
+            debugger;
             var $contextMenu = $("#contextMenuUsuario");
             $("body").on("click", function (e) {
                 $contextMenu.hide();
@@ -19,9 +20,10 @@
                     left: e.pageX,
                     top: e.pageY
                 });
+                debugger;
                 var baja = false;
                 var alta;
-                var parent = e.target.parentElement;
+                var parent = e.target.nodeName === "A" ? e.target.parentElement.parentElement : e.target.parentElement;
                 var nodos = parent.parentElement.childNodes;
                 for (var fondo = 0; fondo < nodos.length; fondo++) {
                     if (nodos[fondo].nodeType === 1)
@@ -40,7 +42,7 @@
                 document.getElementById("<%= FindControl("btnBaja").ClientID %>").style.display = baja ? 'block' : 'none';
                 document.getElementById("<%= FindControl("btnAlta").ClientID %>").style.display = alta ? 'block' : 'none';
                 var elementId = document.getElementById("<%= FindControl("hfId").ClientID %>");
-                elementId.value = e.target.parentElement.id;
+                elementId.value = e.target.nodeName === "A" ? e.target.parentElement.parentElement.id : e.target.parentElement.id;
                 return false;
             });
 
@@ -130,24 +132,24 @@
                                             <thead>
                                                 <tr align="center">
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nombre Completo</asp:Label></td>
+                                                        <asp:Label runat="server">Nombre Completo</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tipo Usuario</asp:Label></td>
+                                                        <asp:Label runat="server">Tipo Usuario</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Directorio Activo</asp:Label></td>
+                                                        <asp:Label runat="server">Directorio Activo</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Activo</asp:Label></td>
+                                                        <asp:Label runat="server">Activo</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td oncontextmenu="ContextMenu()" style="padding: 0;">
+                                            <td oncontextmenu="ContextMenu()" style="padding: 0; text-align: left; font-size: 10px;" >
                                                 <asp:LinkButton Style="padding: 0;" runat="server" Text='<%#Eval("NombreCompleto") %>' ID="LinkButton1" OnClick="btnUsuario_OnClick" CommandArgument='<%#Eval("Id") %>' /></td>
-                                            <td oncontextmenu="ContextMenu()" style="padding: 0;"><%# Eval("TipoUsuario.Descripcion")%></td>
-                                            <td oncontextmenu="ContextMenu()" style="padding: 0;"><%# (bool) Eval("DirectorioActivo") ? "Opcion" : "Menu"%></td>
-                                            <td oncontextmenu="ContextMenu()" style="padding: 0;" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td oncontextmenu="ContextMenu()" style="padding: 0; text-align: left; font-size: 10px;" ><%# Eval("TipoUsuario.Descripcion")%></td>
+                                            <td oncontextmenu="ContextMenu()" style="padding: 0; font-size: 10px;"><%# (bool) Eval("DirectorioActivo") ? "SI" : "NO"%></td>
+                                            <td oncontextmenu="ContextMenu()" style="padding: 0; font-size: 10px;" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>

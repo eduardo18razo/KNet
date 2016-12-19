@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <title>Recuperar Cuenta</title>
     <link href="BootStrap/css/bootstrap.css" rel="stylesheet" />
     <link href="BootStrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="BootStrap/css/CheckBoxStyle.css" rel="stylesheet" />
@@ -53,15 +53,19 @@
                     <div class="panel-body">
                         <div class="form-horizontal">
                             <div class="form-group">
-                                <asp:Label runat="server" Text="Correo electrónico, teléfono, nombre de usuario" CssClass="col-sm-4"/>
+                                <asp:Label runat="server" Text="Correo electrónico, teléfono, nombre de usuario" CssClass="col-sm-4" />
                                 <div class="col-sm-5">
-                                    <asp:TextBox runat="server" ID="txtUserName" CssClass="form-control" Style="text-transform: none"/>
+                                    <asp:TextBox runat="server" ID="txtUserName" CssClass="form-control" Style="text-transform: none" />
                                 </div>
+                                <asp:Button runat="server" ID="btnBuscar" Text="Buscar" CssClass="btn btn-success" OnClick="btnBuscar_OnClick" />
+                            </div>
+                            <div class="form-horizontal">
+                                <asp:RadioButtonList runat="server" ID="rbtnLstUsuarios" OnSelectedIndexChanged="rbtnLstUsuarios_OnSelectedIndexChanged" AutoPostBack="True" />
                             </div>
                         </div>
                     </div>
                     <div class="panel-footer">
-                        <asp:Button runat="server" ID="btnBuscar" Text="Buscar" CssClass="btn btn success" OnClick="btnBuscar_OnClick" />
+                        <asp:Button runat="server" ID="btnCancelar" Text="Cancelar" CssClass="btn btn-danger" OnClick="btnCancelar_OnClick" />
                     </div>
                 </div>
             </ContentTemplate>

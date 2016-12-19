@@ -72,6 +72,43 @@ namespace KiiniHelp.UserControls.Consultas
             }
             ucAltaCatalogo.OnAceptarModal += AltaCatalogoOnAceptarModal;
             ucAltaCatalogo.OnCancelarModal += AltaCatalogoOnCancelarModal;
+            ucCargaCatalgo.OnAceptarModal += ucCargaCatalgo_OnAceptarModal;
+            ucCargaCatalgo.OnCancelarModal += UcCargaCatalgoOnOnCancelarModal;
+        }
+
+        void ucCargaCatalgo_OnAceptarModal()
+        {
+            try
+            {
+                LlenaCatalogoConsulta();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalCargaCatalogo\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        private void UcCargaCatalgoOnOnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalCargaCatalogo\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
         }
 
         private void AltaCatalogoOnCancelarModal()
@@ -114,6 +151,34 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 LlenaCatalogoConsulta();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+        protected void btnEditar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                bool esArchivo = bool.Parse(hfEsArchivo.Value);
+                if (esArchivo)
+                {
+                    ucCargaCatalgo.EsAlta = false;
+                    ucCargaCatalgo.IdCatalogo = int.Parse(hfId.Value);
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalCargaCatalogo\");", true);
+                }
+                //else
+                //{
+                //    ucAltaCatalogo.EsAlta = false;
+                //    ucAltaCatalogo.IdCatalogo = int.Parse(hfId.Value);
+                //    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaCatalogo\");", true);
+                //}
             }
             catch (Exception ex)
             {
@@ -179,5 +244,25 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = _lstError;
             }
         }
+
+        protected void btnCargarCatalogo_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ucCargaCatalgo.EsAlta = true;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalCargaCatalogo\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        
     }
 }

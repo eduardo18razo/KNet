@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
 using KiiniNet.Entities.Cat.Usuario;
 
 namespace KiiniNet.Services.Operacion.Interface
@@ -11,7 +8,10 @@ namespace KiiniNet.Services.Operacion.Interface
     public interface IServicePuesto
     {
         [OperationContract]
-        List<Puesto> ObtenerPuestos(bool insertarSeleccion);
+        List<Puesto> ObtenerPuestosByTipoUsuario(int idTipoUsuario, bool insertarSeleccion);
+
+        [OperationContract]
+        Puesto ObtenerPuestoById(int idPuesto);
 
         [OperationContract]
         void Guardar(Puesto puesto);
@@ -20,7 +20,7 @@ namespace KiiniNet.Services.Operacion.Interface
         void Actualizar(int idPuesto, Puesto puesto);
 
         [OperationContract]
-        List<Puesto> ObtenerPuestoConsulta(int? idPuesto);
+        List<Puesto> ObtenerPuestoConsulta(int? idTipoUsuario);
 
         [OperationContract]
         void Habilitar(int idPuesto, bool habilitado);

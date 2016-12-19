@@ -35,6 +35,12 @@ namespace KiiniHelp.ServiceSeguridad {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/RecuperarCuenta", ReplyAction="http://tempuri.org/IServiceSecurity/RecuperarCuentaResponse")]
         void RecuperarCuenta(int idUsuario, int idTipoNotificacion, string link, int idCorreo, string codigo, string contrasena, string tipoRecuperacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/ValidaPassword", ReplyAction="http://tempuri.org/IServiceSecurity/ValidaPasswordResponse")]
+        void ValidaPassword(string pwd);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/CaducaPassword", ReplyAction="http://tempuri.org/IServiceSecurity/CaducaPasswordResponse")]
+        bool CaducaPassword(int idUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -90,6 +96,14 @@ namespace KiiniHelp.ServiceSeguridad {
         
         public void RecuperarCuenta(int idUsuario, int idTipoNotificacion, string link, int idCorreo, string codigo, string contrasena, string tipoRecuperacion) {
             base.Channel.RecuperarCuenta(idUsuario, idTipoNotificacion, link, idCorreo, codigo, contrasena, tipoRecuperacion);
+        }
+        
+        public void ValidaPassword(string pwd) {
+            base.Channel.ValidaPassword(pwd);
+        }
+        
+        public bool CaducaPassword(int idUsuario) {
+            return base.Channel.CaducaPassword(idUsuario);
         }
     }
 }

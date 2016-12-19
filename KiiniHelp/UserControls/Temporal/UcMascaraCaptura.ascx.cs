@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -133,7 +134,10 @@ namespace KiiniHelp.UserControls.Temporal
                             break;
                         case "MASCARA":
                             nombreControl = "txt" + campo.NombreCampo;
-                            campoTexto = true;
+                            break;
+                        case "CARGA DE ARCHIVO":
+                            nombreControl = "fu" + campo.NombreCampo;
+                            campoTexto = false;
                             break;
                     }
 
@@ -153,8 +157,6 @@ namespace KiiniHelp.UserControls.Temporal
                                     };
                                     lstCamposCapturados.Add(campoCapturado);
                                     break;
-                                    lstCamposCapturados.Add(campoCapturado);
-                                    break;
                                 case "DECIMAL":
                                     campoCapturado = new HelperCampoMascaraCaptura
                                     {
@@ -163,6 +165,7 @@ namespace KiiniHelp.UserControls.Temporal
                                     };
                                     lstCamposCapturados.Add(campoCapturado);
                                     break;
+
                                 default:
                                     campoCapturado = new HelperCampoMascaraCaptura
                                     {
@@ -203,9 +206,22 @@ namespace KiiniHelp.UserControls.Temporal
                                     lstCamposCapturados.Add(campoCapturado);
                                 }
                                 break;
+                            case "CARGA DE ARCHIVO":
+                                AsyncFileUpload upload = (AsyncFileUpload)divControles.FindControl(nombreControl);
+                                if (upload != null)
+                                {
+                                    HelperCampoMascaraCaptura campoCapturado = new HelperCampoMascaraCaptura
+                                    {
+                                        NombreCampo = campo.NombreCampo,
+                                        Valor = Session[nombreControl] == null ? string.Empty : Session[nombreControl].ToString(),
+                                    };
+                                    lstCamposCapturados.Add(campoCapturado);
+                                }
+
+                                break;
                         }
                     }
-                    
+
                 }
             }
             catch (Exception ex)
@@ -369,11 +385,45 @@ namespace KiiniHelp.UserControls.Temporal
                             createDiv.Controls.Add(txtMascara);
                             _lstControles.Add(txtMascara);
                             break;
+                        case "CARGA DE ARCHIVO":
+                            lbl.Attributes["for"] = "fu" + campo.NombreCampo;
+                            createDiv.Controls.Add(lbl);
+                            AsyncFileUpload asyncFileUpload = new AsyncFileUpload
+                            {
+                                ID = "fu" + campo.NombreCampo,
+                                PersistFile = true,
+                                UploaderStyle = AsyncFileUploaderStyle.Traditional,
+
+                            };
+                            asyncFileUpload.UploadedComplete += asyncFileUpload_UploadedComplete;
+                            createDiv.Controls.Add(asyncFileUpload);
+                            _lstControles.Add(asyncFileUpload);
+                            break;
                     }
 
                     divControles.Controls.Add(createDiv);
                 }
                 upMascara.Update();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        void asyncFileUpload_UploadedComplete(object sender, AsyncFileUploadEventArgs e)
+        {
+            try
+            {
+                List<string> lstArchivo = Session["Files"] == null ? new List<string>() : (List<string>)Session["Files"];
+                if (lstArchivo.Contains(e.FileName)) return;
+                AsyncFileUpload uploadControl = (AsyncFileUpload)sender;
+                if (!Directory.Exists(BusinessVariables.Directorios.RepositorioTemporalMascara))
+                    Directory.CreateDirectory(BusinessVariables.Directorios.RepositorioTemporalMascara);
+                uploadControl.SaveAs(BusinessVariables.Directorios.RepositorioTemporalMascara + e.FileName);
+                Session[uploadControl.ID] = e.FileName;
+                lstArchivo.Add(e.FileName);
+                Session["Files"] = lstArchivo;
             }
             catch (Exception ex)
             {
@@ -425,7 +475,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 //TODO: AGREGAR VALOR MINIMO A ESQUEMA
                                 //if (decimal.Parse(txtDecimal.Text.Trim()) < campo.LongitudMinima)
                                 //    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (decimal.Parse(txtDecimal.Text.Trim().Replace('_','0')) > campo.ValorMaximo)
+                                if (decimal.Parse(txtDecimal.Text.Trim().Replace('_', '0')) > campo.ValorMaximo)
                                     throw new Exception(string.Format("Campo {0} debe se menor o igual a {1}", campo.Descripcion, campo.ValorMaximo));
 
                             }
@@ -528,6 +578,19 @@ namespace KiiniHelp.UserControls.Temporal
                             break;
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ConfirmaArchivos()
+        {
+            try
+            {
+                if (Session["Files"] != null)
+                    BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalMascara, BusinessVariables.Directorios.RepositorioMascara, (List<string>)Session["Files"]);
             }
             catch (Exception ex)
             {

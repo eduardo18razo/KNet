@@ -63,11 +63,14 @@ namespace KinniNet.Data.Help
                 _nivelOrganizacion = CreateObjectSet<NivelOrganizacion>();
                 _tipoCorreo = CreateObjectSet<TipoCorreo>();
                 _tipoLink = CreateObjectSet<TipoLink>();
+                _canal = CreateObjectSet<Canal>();
 
                 //Parametros
                 _subRolEscalacionPermitida = CreateObjectSet<SubRolEscalacionPermitida>();
                 _parametrosSla = CreateObjectSet<ParametrosSla>();
                 _parametroCorreo = CreateObjectSet<ParametroCorreo>();
+                _parametrosGenerales = CreateObjectSet<ParametrosGenerales>();
+                _parametroPassword = CreateObjectSet<ParametroPassword>();
 
                 //Ubicacion
                 _pais = CreateObjectSet<Pais>();
@@ -111,9 +114,12 @@ namespace KinniNet.Data.Help
                 _usuarioRol = CreateObjectSet<UsuarioRol>();
                 _usuarioGrupo = CreateObjectSet<UsuarioGrupo>();
                 _usuarioLinkPassword = CreateObjectSet<UsuarioLinkPassword>();
+                _usuarioPassword = CreateObjectSet<UsuarioPassword>();
                 _tipoCampoMascara = CreateObjectSet<TipoCampoMascara>();
                 _arbolAcceso = CreateObjectSet<ArbolAcceso>();
                 _informacionConsulta = CreateObjectSet<InformacionConsulta>();
+                _informacionConsultaDocumento = CreateObjectSet<InformacionConsultaDocumento>();
+
                 _informacionConsultaDatos = CreateObjectSet<InformacionConsultaDatos>();
                 _sla = CreateObjectSet<Sla>();
                 _slaDetalle = CreateObjectSet<SlaDetalle>();
@@ -140,6 +146,8 @@ namespace KinniNet.Data.Help
                 _tiempoInformeArbol = CreateObjectSet<TiempoInformeArbol>();
                 _smsService = CreateObjectSet<SmsService>();
                 _preguntaReto = CreateObjectSet<PreguntaReto>();
+                _horario = CreateObjectSet<Horario>();
+                _horarioDetalle = CreateObjectSet<HorarioDetalle>();
 
 
                 _puesto = CreateObjectSet<Puesto>();
@@ -264,6 +272,14 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<UsuarioPassword> UsuarioPassword
+        {
+            get
+            {
+                return _usuarioPassword;
+            }
+        }
+
         public ObjectSet<TipoCampoMascara> TipoCampoMascara
         {
             get
@@ -293,6 +309,13 @@ namespace KinniNet.Data.Help
             get
             {
                 return _informacionConsulta;
+            }
+        }
+        public ObjectSet<InformacionConsultaDocumento> InformacionConsultaDocumento
+        {
+            get
+            {
+                return _informacionConsultaDocumento;
             }
         }
 
@@ -514,10 +537,12 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<UsuarioRol> _usuarioRol;
         private readonly ObjectSet<UsuarioGrupo> _usuarioGrupo;
         private readonly ObjectSet<UsuarioLinkPassword> _usuarioLinkPassword;
+        private readonly ObjectSet<UsuarioPassword> _usuarioPassword;
         private readonly ObjectSet<TipoCampoMascara> _tipoCampoMascara;
         private readonly ObjectSet<Catalogos> _catalogos;
         private readonly ObjectSet<ArbolAcceso> _arbolAcceso;
         private readonly ObjectSet<InformacionConsulta> _informacionConsulta;
+        private readonly ObjectSet<InformacionConsultaDocumento> _informacionConsultaDocumento;
         private readonly ObjectSet<InformacionConsultaDatos> _informacionConsultaDatos;
         private readonly ObjectSet<Sla> _sla;
         private readonly ObjectSet<SlaDetalle> _slaDetalle;
@@ -794,6 +819,30 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<Canal> Canal
+        {
+            get
+            {
+                return _canal;
+            }
+        }
+
+        public ObjectSet<Horario> Horario
+        {
+            get
+            {
+                return _horario;
+            }
+        }
+        public ObjectSet<HorarioDetalle> HorarioDetalle
+        {
+            get
+            {
+                return _horarioDetalle;
+            }
+        }
+
+
         private readonly ObjectSet<TipoUsuario> _tipoUsuario;
         private readonly ObjectSet<Pais> _pais;
         private readonly ObjectSet<Colonia> _colonia;
@@ -825,6 +874,9 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<NivelOrganizacion> _nivelOrganizacion;
         private readonly ObjectSet<TipoCorreo> _tipoCorreo;
         private readonly ObjectSet<TipoLink> _tipoLink;
+        private readonly ObjectSet<Canal> _canal;
+        private readonly ObjectSet<Horario> _horario;
+        private readonly ObjectSet<HorarioDetalle> _horarioDetalle;
 
         #endregion Systema
 
@@ -842,7 +894,6 @@ namespace KinniNet.Data.Help
                 return _parametrosSla;
             }
         }
-
         public ObjectSet<ParametroCorreo> ParametroCorreo
         {
             get
@@ -850,10 +901,26 @@ namespace KinniNet.Data.Help
                 return _parametroCorreo;
             }
         }
+        public ObjectSet<ParametrosGenerales> ParametrosGenerales
+        {
+            get
+            {
+                return _parametrosGenerales;
+            }
+        }
+        public ObjectSet<ParametroPassword> ParametroPassword
+        {
+            get
+            {
+                return _parametroPassword;
+            }
+        }
 
         private readonly ObjectSet<SubRolEscalacionPermitida> _subRolEscalacionPermitida;
         private readonly ObjectSet<ParametrosSla> _parametrosSla;
         private readonly ObjectSet<ParametroCorreo> _parametroCorreo;
+        private readonly ObjectSet<ParametrosGenerales> _parametrosGenerales;
+        private readonly ObjectSet<ParametroPassword> _parametroPassword;
 
         #region Usuario
 

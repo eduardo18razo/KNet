@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -58,6 +59,14 @@ namespace KiiniHelp
         {
             try
             {
+                HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                if (myCookie == null)
+                {
+                    Response.Redirect(ResolveUrl("~/Default.aspx"));
+                }
+                if (Session["UserData"] != null && HttpContext.Current.Request.Url.Segments[HttpContext.Current.Request.Url.Segments.Count() - 1] != "FrmCambiarContrasena.aspx")
+                    if (_servicioSeguridad.CaducaPassword(((Usuario)Session["UserData"]).Id))
+                        Response.Redirect(ResolveUrl("~/Users/Administracion/Usuarios/FrmCambiarContrasena.aspx"));
                 lnkBtnCerrar.Visible = !ContentPlaceHolder1.Page.ToString().ToUpper().Contains("DASHBOARD");
                 if (!IsPostBack && Session["UserData"] != null)
                 {

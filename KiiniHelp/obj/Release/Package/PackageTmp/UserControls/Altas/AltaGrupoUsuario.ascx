@@ -60,6 +60,7 @@
                                             <asp:Repeater runat="server" ID="rptSubRoles" OnItemDataBound="rptSubRoles_OnItemDataBound">
                                                 <ItemTemplate>
                                                     <div class="row" style="margin-top: 5px">
+                                                        <asp:Label runat="server" ID="lblId" Text='<%# Eval("Id") %>' Visible="False"/>
                                                         <asp:CheckBox CssClass="col-sm-3" runat="server" ID="chkSubRol" value='<%# Eval("Id") %>' Text='<%# Eval("Descripcion") %>' AutoPostBack="True" OnCheckedChanged="OnCheckedChanged" />
                                                         <asp:Button runat="server" CssClass="col-sm-3 btn btn-primary disabled" Style="margin-left: 5px" CommandArgument='<%# Eval("Id") %>' ID="btnHorarios" Text="Horarios" OnClick="btnHorarios_OnClick" />
                                                         <asp:Button runat="server" CssClass="col-sm-3 btn btn-primary disabled" Style="margin-left: 5px" CommandArgument='<%# Eval("Id") %>' ID="btnDiasDescanso" Text="Días Festivos" OnClick="btnDiasDescanso_OnClick" />

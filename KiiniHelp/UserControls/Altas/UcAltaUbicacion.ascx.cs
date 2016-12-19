@@ -715,6 +715,9 @@ namespace KiiniHelp.UserControls.Altas
                 txtCalle.Text = string.Empty;
                 txtNoExt.Text = string.Empty;
                 txtNoInt.Text = string.Empty;
+                lblMunicipio.Text = string.Empty;
+                lblEstado.Text = string.Empty;
+                Metodos.LimpiarCombo(ddlColonia);
             }
             catch (Exception ex)
             {
@@ -805,6 +808,32 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        
+        protected void ddlColonia_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ddlColonia.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                {
+                    lblMunicipio.Text = string.Empty;
+                    lblEstado.Text = string.Empty;
+                    return;
+                }
+                Colonia col = _servicioSistemaDomicilio.ObtenerDetalleColonia(int.Parse(ddlColonia.SelectedValue));
+                if (col != null)
+                {
+                    lblMunicipio.Text = col.Municipio.Descripcion;
+                    lblEstado.Text = col.Municipio.Estado.Descripcion;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaCampus = _lstError;
+            }
+        }
     }
 }

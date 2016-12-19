@@ -23,3 +23,5 @@ C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business.Utils\bin\Relea
 C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business.Utils\obj\Release\KinniNet.Business.Utils.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business.Utils\obj\Release\KinniNet.Business.Utils.dll
 C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business.Utils\obj\Release\KinniNet.Business.Utils.pdb
+C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business.Utils\bin\Release\AjaxControlToolkit.dll
+C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business.Utils\obj\Release\KinniNet.Business.Utils.csproj.ResolveComReference.cache

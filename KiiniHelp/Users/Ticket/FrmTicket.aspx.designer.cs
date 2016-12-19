@@ -67,6 +67,24 @@ namespace KiiniHelp.Users.Ticket {
         protected global::System.Web.UI.WebControls.HiddenField hfIdSla;
         
         /// <summary>
+        /// Control hfIdCanal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdCanal;
+        
+        /// <summary>
+        /// Control hfIdUsuarioSolicita.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdUsuarioSolicita;
+        
+        /// <summary>
         /// Control lblTicketDescripcion.
         /// </summary>
         /// <remarks>

@@ -23,6 +23,21 @@ namespace KiiniNet.Services.Sistema.Implementacion
             }
         }
 
+        public List<TipoArbolAcceso> ObtenerTiposArbolAccesoByGruposTercero(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessTipoArbolAcceso negocio = new BusinessTipoArbolAcceso())
+                {
+                    return negocio.ObtenerTiposArbolAccesoByGruposTercero(idUsuarioSolicita, idUsuarioLevanta, idArea, insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<TipoArbolAcceso> ObtenerTiposArbolAccesoByGrupos(List<int> grupos, bool insertarSeleccion)
         {
             try

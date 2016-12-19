@@ -9,5 +9,8 @@ namespace KiiniNet.Services.Sistema.Interface
     {
         [OperationContract]
         List<Colonia> ObtenerColoniasCp(int cp, bool insertarSeleccion);
+
+        [OperationContract]
+        Colonia ObtenerDetalleColonia(int idColonia);
     }
 }

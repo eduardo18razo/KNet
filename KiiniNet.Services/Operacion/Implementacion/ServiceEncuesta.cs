@@ -55,6 +55,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public Encuesta ObtenerEncuestaByIdConsulta(int idConsulta)
+        {
+            try
+            {
+                using (BusinessEncuesta negocio = new BusinessEncuesta())
+                {
+                    return negocio.ObtenerEncuestaByIdConsulta(idConsulta);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void GuardarEncuesta(Encuesta encuesta)
         {
             try

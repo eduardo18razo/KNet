@@ -6,8 +6,9 @@
    
 </head>
 <body style="width: 750px; height: 750px; text-align: center" >
-    <form id="form1" runat="server" style="text-align: center" >
-        <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true"></asp:ScriptManager>
+    <form id="form1" runat="server" style="width: auto;text-align: left" >
+        <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true"/>
+        <asp:Image runat="server" Visible="False" ID="imgDinamic"/>
     </form>
 </body>
 </html>

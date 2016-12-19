@@ -25,6 +25,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public List<Area> ObtenerAreasUsuarioTercero(int idUsuario, int idUsuarioTercero, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessArea negocio = new BusinessArea())
+                {
+                    return negocio.ObtenerAreasUsuarioTercero(idUsuario, idUsuarioTercero, insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<Area> ObtenerAreasUsuarioPublico(bool insertarSeleccion)
         {
             try

@@ -76,13 +76,13 @@ namespace KiiniHelp.UserControls.Consultas {
         protected global::System.Web.UI.WebControls.Label lbotest;
         
         /// <summary>
-        /// Control ddlpuestos.
+        /// Control ddlTipoUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlpuestos;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoUsuario;
         
         /// <summary>
         /// Control btnNew.

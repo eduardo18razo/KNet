@@ -11,6 +11,9 @@ namespace KiiniNet.Services.Operacion.Interface
         List<Area> ObtenerAreasUsuario(int idUsuario, bool insertarSeleccion);
 
         [OperationContract]
+        List<Area> ObtenerAreasUsuarioTercero(int idUsuario, int idUsuarioTercero, bool insertarSeleccion);
+
+        [OperationContract]
         List<Area> ObtenerAreasUsuarioPublico(bool insertarSeleccion);
         
         [OperationContract]

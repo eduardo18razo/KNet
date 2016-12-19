@@ -31,7 +31,32 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public Colonia ObtenerDetalleColonia(int idColonia)
+        {
+            Colonia result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Colonia.SingleOrDefault(w => w.Id == idColonia);
+                if (result != null)
+                {
+                    db.LoadProperty(result, "Municipio");
+                    db.LoadProperty(result.Municipio, "Estado");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             finally
             {

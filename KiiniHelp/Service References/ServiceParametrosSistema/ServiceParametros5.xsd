@@ -46,4 +46,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerParametrosGenerales">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerParametrosGeneralesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="ObtenerParametrosGeneralesResult" nillable="true" type="q4:ParametrosGenerales" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -78,7 +78,6 @@
                                         <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusTicket.Descripcion") %>' />
                                         <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusAsignacion.Descripcion") %>' Width="12%" />
                                         <div class="col-xs-1"  visible='<%# (bool) Eval("CambiaEstatus")%>'>
-                                            
                                             <asp:LinkButton runat="server" CssClass='<%# (bool) Eval("CambiaEstatus") ? "btn btn-sm btn-primary" : "btn btn-sm btn-primary disabled"%>' Text="Modificar" ID="btnCambiarEstatus" CommandArgument='<%#Eval("IdTicket") %>' OnClick="btnCambiarEstatus_OnClick" />
                                         </div>
                                         <div class="col-xs-1" runat="server" visible='<%# (bool) Eval("Asigna")%>'>

@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ServiceConsultas.svc" />
+    <Content Include="ServiceDiasHorario.svc" />
     <Content Include="ServicePuesto.svc" />
     <Content Include="ServiceArea.svc" />
     <Content Include="ServiceTicket.svc" />
@@ -78,6 +79,7 @@
     <Content Include="ServiceSecurity.svc" />
     <Content Include="ServiceUsuarios.svc" />
     <Content Include="Sistema\ServiceCatalogos.svc" />
+    <Content Include="Sistema\ServiceCanal.svc" />
     <Content Include="Sistema\ServiceEstatus.svc" />
     <Content Include="Sistema\ServiceRoles.svc" />
     <Content Include="Sistema\ServiceSubRol.svc" />

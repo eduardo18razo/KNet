@@ -51,7 +51,13 @@
     <Reference Include="DayPilot">
       <HintPath>..\..\..\..\Downloads\TutorialShiftScheduling.VS2010.20130629\TutorialShiftScheduling\TutorialCS\Bin\DayPilot.dll</HintPath>
     </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\Downloads\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MSCaptcha">
+      <HintPath>..\..\..\..\Downloads\Captcha_Refresh_Button\Bin\MSCaptcha.dll</HintPath>
+    </Reference>
     <Reference Include="SigmaToolBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Downloads\RichTextBox_7_November_2012\Control_dll\SigmaToolBox.dll</HintPath>
@@ -142,18 +148,85 @@
     <Content Include="BootStrap\js\locales\bootstrap-datepicker.es.min.js" />
     <Content Include="BootStrap\js\locales\jquery.sumoselect.min.js" />
     <Content Include="ConfirmacionCuenta.aspx" />
+    <Content Include="Downloads\FrmDownloads.aspx" />
     <Content Include="FrmRecuperar.aspx" />
     <Content Include="Identificar.aspx" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Canal.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.DiaFestivoDefault.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.HorarioDefault.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.Horario.datasource" />
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario.wsdl" />
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal.disco" />
+    <None Include="Service References\ServiceSistemaCanal\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaCanal\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaCanal\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario.disco" />
+    <None Include="Service References\ServiceDiasHorario\configuration91.svcinfo" />
+    <None Include="Service References\ServiceDiasHorario\configuration.svcinfo" />
+    <None Include="Service References\ServiceDiasHorario\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="UserControls\Altas\UcAltaCatalogo.ascx" />
+    <Content Include="UserControls\Altas\UcCargaCatalgo.ascx" />
     <Content Include="UserControls\Consultas\UcConcultaCatalogos.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaCatalogo.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaHorario.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaPuestos.ascx" />
+    <Content Include="UserControls\Detalles\UcMensajeValidacion.ascx" />
     <Content Include="UserControls\Filtros\Graficos\UcFiltrosEficienciaTickets.ascx" />
     <Content Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoEficienciaTickets.ascx" />
+    <Content Include="UserControls\Filtros\UcFiltroCatalogos.ascx" />
     <Content Include="UserControls\Operacion\UcCambiarContrasena.ascx" />
     <Content Include="UserControls\Operacion\UcRegistroCatalogo.ascx" />
     <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogo.aspx" />
     <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogos.aspx" />
+    <Content Include="Users\Administracion\Horarios\FrmConsultaHorarios.aspx" />
     <Content Include="Users\Administracion\Puestos\FrmConsultaPuestos.aspx" />
     <Content Include="Users\Administracion\Usuarios\FrmCambiarContrasena.aspx" />
     <Content Include="Users\Consultas\FrmConsulta.aspx" />
@@ -187,6 +260,7 @@
     <Content Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Operacion.Tickets.Ticket.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.CatalogoGenerico.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.ParametrosGenerales.datasource" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -260,6 +334,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta15.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceNotificacion\ServiceNotificacion.wsdl" />
@@ -387,7 +464,7 @@
     <Content Include="UserControls\Altas\UcAltaDiasFestivos.ascx" />
     <Content Include="UserControls\Altas\UcAltaPuesto.ascx" />
     <Content Include="UserControls\Altas\UcAltaUsuario.ascx" />
-    <Content Include="UserControls\Altas\UcHorario.ascx" />
+    <Content Include="UserControls\Altas\UcAltaHorario.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaEncuestaPendiente.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleGeograficoTickets.ascx" />
     <Content Include="UserControls\Filtros\Componentes\UcFiltroAtendedores.ascx" />
@@ -549,6 +626,7 @@
     <Content Include="Images\vmenu\zakladka.png" />
     <Content Include="Users\DashBoard.aspx" />
     <Content Include="FrmEncuesta.aspx" />
+    <Content Include="Users\Operacion\FrmLevantaTicketAgente.aspx" />
     <Content Include="Users\Operacion\FrmOperacionTickets.aspx" />
     <Content Include="packages.config" />
     <Content Include="BootStrap\css\bootstrap-theme.css.map" />
@@ -933,6 +1011,49 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSeguridad\ServiceSecurity9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal.wsdl" />
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaCanal\ServiceCanal9.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos.wsdl" />
@@ -2092,6 +2213,13 @@
     <Compile Include="ConfirmacionCuenta.aspx.designer.cs">
       <DependentUpon>ConfirmacionCuenta.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Downloads\FrmDownloads.aspx.cs">
+      <DependentUpon>FrmDownloads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Downloads\FrmDownloads.aspx.designer.cs">
+      <DependentUpon>FrmDownloads.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FrmRecuperar.aspx.cs">
       <DependentUpon>FrmRecuperar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2107,12 +2235,30 @@
     <Compile Include="Identificar.aspx.designer.cs">
       <DependentUpon>Identificar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Modulos\QueryStringModule.cs" />
+    <Compile Include="Service References\ServiceDiasHorario\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaCanal\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Altas\UcAltaCatalogo.ascx.cs">
       <DependentUpon>UcAltaCatalogo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\Altas\UcAltaCatalogo.ascx.designer.cs">
       <DependentUpon>UcAltaCatalogo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcCargaCatalgo.ascx.cs">
+      <DependentUpon>UcCargaCatalgo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcCargaCatalgo.ascx.designer.cs">
+      <DependentUpon>UcCargaCatalgo.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConcultaCatalogos.ascx.cs">
       <DependentUpon>UcConcultaCatalogos.ascx</DependentUpon>
@@ -2128,12 +2274,26 @@
     <Compile Include="UserControls\Consultas\UcConsultaCatalogo.ascx.designer.cs">
       <DependentUpon>UcConsultaCatalogo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaHorario.ascx.cs">
+      <DependentUpon>UcConsultaHorario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaHorario.ascx.designer.cs">
+      <DependentUpon>UcConsultaHorario.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaPuestos.ascx.cs">
       <DependentUpon>UcConsultaPuestos.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaPuestos.ascx.designer.cs">
       <DependentUpon>UcConsultaPuestos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Detalles\UcMensajeValidacion.ascx.cs">
+      <DependentUpon>UcMensajeValidacion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Detalles\UcMensajeValidacion.ascx.designer.cs">
+      <DependentUpon>UcMensajeValidacion.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Filtros\Graficos\UcFiltrosEficienciaTickets.ascx.cs">
       <DependentUpon>UcFiltrosEficienciaTickets.ascx</DependentUpon>
@@ -2148,6 +2308,13 @@
     </Compile>
     <Compile Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoEficienciaTickets.ascx.designer.cs">
       <DependentUpon>UcFiltrosParametrosGraficoEficienciaTickets.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Filtros\UcFiltroCatalogos.ascx.cs">
+      <DependentUpon>UcFiltroCatalogos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Filtros\UcFiltroCatalogos.ascx.designer.cs">
+      <DependentUpon>UcFiltroCatalogos.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Operacion\UcCambiarContrasena.ascx.cs">
       <DependentUpon>UcCambiarContrasena.ascx</DependentUpon>
@@ -2176,6 +2343,13 @@
     </Compile>
     <Compile Include="Users\Administracion\Catalogos\FrmConsultaCatalogos.aspx.designer.cs">
       <DependentUpon>FrmConsultaCatalogos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\Horarios\FrmConsultaHorarios.aspx.cs">
+      <DependentUpon>FrmConsultaHorarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Horarios\FrmConsultaHorarios.aspx.designer.cs">
+      <DependentUpon>FrmConsultaHorarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Administracion\Puestos\FrmConsultaPuestos.aspx.cs">
       <DependentUpon>FrmConsultaPuestos.aspx</DependentUpon>
@@ -2302,12 +2476,12 @@
     <Compile Include="UserControls\Altas\UcAltaUsuario.ascx.designer.cs">
       <DependentUpon>UcAltaUsuario.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Altas\UcHorario.ascx.cs">
-      <DependentUpon>UcHorario.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\UcAltaHorario.ascx.cs">
+      <DependentUpon>UcAltaHorario.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Altas\UcHorario.ascx.designer.cs">
-      <DependentUpon>UcHorario.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\UcAltaHorario.ascx.designer.cs">
+      <DependentUpon>UcAltaHorario.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaEncuestaPendiente.ascx.cs">
       <DependentUpon>UcConsultaEncuestaPendiente.ascx</DependentUpon>
@@ -2686,6 +2860,13 @@
     <Compile Include="FrmEncuesta.aspx.designer.cs">
       <DependentUpon>FrmEncuesta.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Users\Operacion\FrmLevantaTicketAgente.aspx.cs">
+      <DependentUpon>FrmLevantaTicketAgente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Operacion\FrmLevantaTicketAgente.aspx.designer.cs">
+      <DependentUpon>FrmLevantaTicketAgente.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Users\Operacion\FrmOperacionTickets.aspx.cs">
       <DependentUpon>FrmOperacionTickets.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3058,7 +3239,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Repositorio\" />
     <Folder Include="Users\Administracion\Consultas\" />
   </ItemGroup>
   <ItemGroup>
@@ -3078,6 +3258,7 @@
     <WCFMetadataStorage Include="Service References\ServiceArbolAcceso\" />
     <WCFMetadataStorage Include="Service References\ServiceArea\" />
     <WCFMetadataStorage Include="Service References\ServiceConsultas\" />
+    <WCFMetadataStorage Include="Service References\ServiceDiasHorario\" />
     <WCFMetadataStorage Include="Service References\ServiceEncuesta\" />
     <WCFMetadataStorage Include="Service References\ServiceGrupoUsuario\" />
     <WCFMetadataStorage Include="Service References\ServiceImpactourgencia\" />
@@ -3088,6 +3269,7 @@
     <WCFMetadataStorage Include="Service References\ServiceParametrosSistema\" />
     <WCFMetadataStorage Include="Service References\ServicePuesto\" />
     <WCFMetadataStorage Include="Service References\ServiceSeguridad\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaCanal\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaCatalogos\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaDomicilio\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaEstatus\" />

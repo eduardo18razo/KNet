@@ -27,10 +27,41 @@ namespace KiiniHelp
                     Session["IdTicketTicket"] = value;
             }
         }
+
+        public int? IdTipoServicio
+        {
+            get
+            {
+                int result = 0;
+                if (hfIdTipoServicio.Value != string.Empty)
+                    result = Convert.ToInt32(hfIdTipoServicio.Value);
+                else
+                    result = (int)Session["IdTipoServicio"];
+                return result;
+            }
+            set
+            {
+                if (hfIdTipoServicio != null)
+                {
+                    hfIdTipoServicio.Value = value.ToString();
+                    Session.Remove("IdTipoServicio");
+                }
+                else
+                    Session["IdTipoServicio"] = value;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            UcEncuestaCaptura.OnAceptarModal += UcEncuestaCaptura_OnAceptarModal;
-            UcEncuestaCaptura.OnCancelarModal += UcEncuestaCaptura_OnCancelarModal;
+            try
+            {
+                ucEncuestaCaptura.OnAceptarModal += UcEncuestaCaptura_OnAceptarModal;
+                ucEncuestaCaptura.OnCancelarModal += UcEncuestaCaptura_OnCancelarModal;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         void UcEncuestaCaptura_OnAceptarModal()
@@ -45,7 +76,15 @@ namespace KiiniHelp
 
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            IdTicket = Convert.ToInt32(Request.QueryString["IdTicket"]);
+            try
+            {
+                IdTipoServicio = Convert.ToInt32(Request.QueryString["IdTipoServicio"]);
+                IdTicket = Convert.ToInt32(Request.QueryString["IdTicket"]);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
         }
 

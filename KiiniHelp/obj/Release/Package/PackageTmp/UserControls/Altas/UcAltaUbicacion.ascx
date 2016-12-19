@@ -209,7 +209,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Colonia</label>
-                                    <asp:DropDownList runat="server" ID="ddlColonia" CssClass="DropSelect" />
+                                    <asp:DropDownList runat="server" ID="ddlColonia" CssClass="DropSelect" OnSelectedIndexChanged="ddlColonia_OnSelectedIndexChanged" AutoPostBack="True"/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Municipio</label>
+                                    <asp:Label runat="server" class="col-sm-3 control-label" ID="lblMunicipio"/>
+                                    <label class="col-sm-2 control-label">Estado</label>
+                                    <asp:Label runat="server" class="col-sm-3 control-label" ID="lblEstado"/>
                                 </div>
                                 <div class="form-group">
 

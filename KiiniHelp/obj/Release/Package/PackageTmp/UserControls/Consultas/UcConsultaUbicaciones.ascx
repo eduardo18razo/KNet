@@ -2,7 +2,7 @@
 <div style="height: 100%;">
     <script>
         function dbClicUbicacion(e) {
-            debugger;
+            //debugger;
             //__doPostBack('SeleccionarOrganizacion', e.parentElement.id);
             var idSeleccion = document.getElementById("<%= this.FindControl("hfIdSeleccion").ClientID %>");
             idSeleccion.value = e.parentElement.id;
@@ -75,8 +75,8 @@
     </script>
     <asp:UpdatePanel runat="server" style="height: 100%" ID="upGeneral">
         <ContentTemplate>
-            <asp:HiddenField runat="server" ID="hfModalName"/>
-            <asp:HiddenField runat="server" ID="hfIdSeleccion"/>
+            <asp:HiddenField runat="server" ID="hfModalName" />
+            <asp:HiddenField runat="server" ID="hfIdSeleccion" />
             <div id="contextMenuUbicaciones" class="panel-heading contextMenu">
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfModal" />
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
@@ -178,35 +178,35 @@
                                             <thead>
                                                 <tr align="center">
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Pais</asp:Label></td>
+                                                        <asp:Label runat="server">Pais</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Campus</asp:Label></td>
+                                                        <asp:Label runat="server">Campus</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Torre</asp:Label></td>
+                                                        <asp:Label runat="server">Torre</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Piso</asp:Label></td>
+                                                        <asp:Label runat="server">Piso</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Zona</asp:Label></td>
+                                                        <asp:Label runat="server">Zona</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Sub Zona</asp:Label></td>
+                                                        <asp:Label runat="server">Sub Zona</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Site Rack</asp:Label></td>
+                                                        <asp:Label runat="server">Site Rack</asp:Label></td>
                                                     <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Habilitado</asp:Label></td>
+                                                        <asp:Label>Habilitado</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Pais.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Campus.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Torre.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Piso.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Zona.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SubZona.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SiteRack.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Pais.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Campus.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Torre.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Piso.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Zona.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SubZona.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SiteRack.Descripcion")%></td>
+                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>
@@ -214,7 +214,7 @@
                                             </table>
                                     </FooterTemplate>
                                 </asp:Repeater>
-                                 <asp:Button runat="server" Text="Cerrar" ID="btnCerrar" OnClick="btnCerrar_OnClick"  style="visibility: hidden"/>
+                                <asp:Button runat="server" Text="Cerrar" ID="btnCerrar" OnClick="btnCerrar_OnClick" Style="visibility: hidden" />
                             </div>
                         </div>
                     </div>
@@ -287,7 +287,7 @@
             </Triggers>
         </asp:UpdatePanel>
     </div>
-    
+
     <%--MODAL CAMPUS--%>
     <div class="modal fade" id="editCampus" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <div class="modal-dialog">
@@ -338,10 +338,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Colonia</label>
-                                        <asp:DropDownList runat="server" ID="ddlColonia" CssClass="DropSelect" />
+                                        <asp:DropDownList runat="server" ID="ddlColonia" CssClass="DropSelect" OnSelectedIndexChanged="ddlColonia_OnSelectedIndexChanged" AutoPostBack="True" />
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Municipio</label>
+                                            <asp:Label runat="server" class="col-sm-4 control-label" ID="lblMunicipio" />
+                                            <label class="col-sm-2 control-label">Estado</label>
+                                            <asp:Label runat="server" class="col-sm-4 control-label" ID="lblEstado" />
+                                        </div>
                                     </div>
                                     <div class="form-group">
-
                                         <label class="col-sm-3 control-label">Calle</label>
                                         <asp:TextBox runat="server" ID="txtCalle" placeholder="CALLE" class="form-control" onkeydown="return (event.keyCode!=13);" />
                                     </div>
@@ -351,7 +358,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label">Numero Interior</label>
-                                        <asp:TextBox runat="server" ID="txtNoInt" placeholder="NUMERO " class="form-control" onkeydown="return (event.keyCode!=13);" />
+                                        <asp:TextBox runat="server" ID="txtNoInt" placeholder="NUMERO INTERIOR" class="form-control" onkeydown="return (event.keyCode!=13);" />
                                     </div>
                                 </div>
                             </div>

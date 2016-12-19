@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using KiiniNet.Entities.Cat.Arbol.Nodos;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
 
@@ -21,6 +23,329 @@ namespace KinniNet.Core.Operacion
         {
             _proxy = proxy;
         }
+        #region ticket tercero
+        public List<Nivel1> ObtenerNivel1ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, bool insertarSeleccion)
+        {
+            List<Nivel1> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
+                Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdGrupoUsuario).ToList();
+                List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
+                lstsubGpos.RemoveAll(r => !r.HasValue);
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                List<int> qrySolicita = (from aa in db.ArbolAcceso
+                                         join n1 in db.Nivel1 on aa.IdNivel1 equals n1.Id
+                                         join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                         join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                         where lstGposSolicita.Contains(guia.IdGrupoUsuario)
+                                               && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                         select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> qryLevanta = (from aa in db.ArbolAcceso
+                                        join n1 in db.Nivel1 on aa.IdNivel1 equals n1.Id
+                                        join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                        join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                        where lstGposLevanta.Contains(guia.IdGrupoUsuario) && lstsubGpos.Contains(guia.IdSubGrupoUsuario)
+                                              && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                        select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> arbolesPermitidos = qrySolicita.Where(qryLevanta.Contains).ToList();
+                result = db.ArbolAcceso.Where(w => arbolesPermitidos.Contains(w.Id)).SelectMany(nivel => db.Nivel1.Where(w => w.Id == nivel.IdNivel1)).Distinct().OrderBy(o => o.Descripcion).ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Nivel1 { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        public List<Nivel2> ObtenerNivel2ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel1, bool insertarSeleccion)
+        {
+            List<Nivel2> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
+                Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdGrupoUsuario).ToList();
+                List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
+                lstsubGpos.RemoveAll(r => !r.HasValue);
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                List<int> qrySolicita = (from aa in db.ArbolAcceso
+                                         join n2 in db.Nivel2 on aa.IdNivel2 equals n2.Id
+                                         join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                         join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                         where lstGposSolicita.Contains(guia.IdGrupoUsuario)
+                                               && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                         select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> qryLevanta = (from aa in db.ArbolAcceso
+                                        join n2 in db.Nivel2 on aa.IdNivel2 equals n2.Id
+                                        join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                        join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                        where lstGposLevanta.Contains(guia.IdGrupoUsuario) && lstsubGpos.Contains(guia.IdSubGrupoUsuario)
+                                              && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                        select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> arbolesPermitidos = qrySolicita.Where(qryLevanta.Contains).ToList();
+                result = db.ArbolAcceso.Where(w => arbolesPermitidos.Contains(w.Id) && w.IdNivel1 == idNivel1).SelectMany(nivel => db.Nivel2.Where(w => w.Id == nivel.IdNivel2)).Distinct().OrderBy(o => o.Descripcion).ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Nivel2 { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        public List<Nivel3> ObtenerNivel3ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel2, bool insertarSeleccion)
+        {
+            List<Nivel3> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
+                Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdGrupoUsuario).ToList();
+                List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
+                lstsubGpos.RemoveAll(r => !r.HasValue);
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                List<int> qrySolicita = (from aa in db.ArbolAcceso
+                                         join n3 in db.Nivel3 on aa.IdNivel3 equals n3.Id
+                                         join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                         join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                         where lstGposSolicita.Contains(guia.IdGrupoUsuario)
+                                               && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                         select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> qryLevanta = (from aa in db.ArbolAcceso
+                                        join n3 in db.Nivel3 on aa.IdNivel3 equals n3.Id
+                                        join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                        join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                        where lstGposLevanta.Contains(guia.IdGrupoUsuario) && lstsubGpos.Contains(guia.IdSubGrupoUsuario)
+                                              && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                        select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> arbolesPermitidos = qrySolicita.Where(qryLevanta.Contains).ToList();
+                result = db.ArbolAcceso.Where(w => arbolesPermitidos.Contains(w.Id) && w.IdNivel2 == idNivel2).SelectMany(nivel => db.Nivel3.Where(w => w.Id == nivel.IdNivel3)).Distinct().OrderBy(o => o.Descripcion).ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Nivel3 { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        public List<Nivel4> ObtenerNivel4ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel3, bool insertarSeleccion)
+        {
+            List<Nivel4> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
+                Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdGrupoUsuario).ToList();
+                List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
+                lstsubGpos.RemoveAll(r => !r.HasValue);
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                List<int> qrySolicita = (from aa in db.ArbolAcceso
+                                         join n4 in db.Nivel4 on aa.IdNivel4 equals n4.Id
+                                         join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                         join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                         where lstGposSolicita.Contains(guia.IdGrupoUsuario)
+                                               && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                         select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> qryLevanta = (from aa in db.ArbolAcceso
+                                        join n4 in db.Nivel4 on aa.IdNivel4 equals n4.Id
+                                        join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                        join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                        where lstGposLevanta.Contains(guia.IdGrupoUsuario) && lstsubGpos.Contains(guia.IdSubGrupoUsuario)
+                                              && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                        select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> arbolesPermitidos = qrySolicita.Where(qryLevanta.Contains).ToList();
+                result = db.ArbolAcceso.Where(w => arbolesPermitidos.Contains(w.Id) && w.IdNivel3 == idNivel3).SelectMany(nivel => db.Nivel4.Where(w => w.Id == nivel.IdNivel4)).Distinct().OrderBy(o => o.Descripcion).ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Nivel4 { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        public List<Nivel5> ObtenerNivel5ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel4, bool insertarSeleccion)
+        {
+            List<Nivel5> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
+                Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdGrupoUsuario).ToList();
+                List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
+                lstsubGpos.RemoveAll(r => !r.HasValue);
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                List<int> qrySolicita = (from aa in db.ArbolAcceso
+                                         join n5 in db.Nivel5 on aa.IdNivel5 equals n5.Id
+                                         join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                         join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                         where lstGposSolicita.Contains(guia.IdGrupoUsuario)
+                                               && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                         select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> qryLevanta = (from aa in db.ArbolAcceso
+                                        join n5 in db.Nivel5 on aa.IdNivel5 equals n5.Id
+                                        join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                        join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                        where lstGposLevanta.Contains(guia.IdGrupoUsuario) && lstsubGpos.Contains(guia.IdSubGrupoUsuario)
+                                              && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                        select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> arbolesPermitidos = qrySolicita.Where(qryLevanta.Contains).ToList();
+                result = db.ArbolAcceso.Where(w => arbolesPermitidos.Contains(w.Id) && w.IdNivel4 == idNivel4).SelectMany(nivel => db.Nivel5.Where(w => w.Id == nivel.IdNivel5)).Distinct().OrderBy(o => o.Descripcion).ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Nivel5 { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        public List<Nivel6> ObtenerNivel6ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel5, bool insertarSeleccion)
+        {
+            List<Nivel6> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
+                Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdGrupoUsuario).ToList();
+                List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
+                lstsubGpos.RemoveAll(r => !r.HasValue);
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                List<int> qrySolicita = (from aa in db.ArbolAcceso
+                                         join n6 in db.Nivel6 on aa.IdNivel6 equals n6.Id
+                                         join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                         join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                         where lstGposSolicita.Contains(guia.IdGrupoUsuario)
+                                               && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                         select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> qryLevanta = (from aa in db.ArbolAcceso
+                                        join n6 in db.Nivel6 on aa.IdNivel6 equals n6.Id
+                                        join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                        join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                        where lstGposLevanta.Contains(guia.IdGrupoUsuario) && lstsubGpos.Contains(guia.IdSubGrupoUsuario)
+                                              && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                        select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> arbolesPermitidos = qrySolicita.Where(qryLevanta.Contains).ToList();
+                result = db.ArbolAcceso.Where(w => arbolesPermitidos.Contains(w.Id) && w.IdNivel5 == idNivel5).SelectMany(nivel => db.Nivel6.Where(w => w.Id == nivel.IdNivel6)).Distinct().OrderBy(o => o.Descripcion).ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Nivel6 { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        public List<Nivel7> ObtenerNivel7ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, int idNivel6, bool insertarSeleccion)
+        {
+            List<Nivel7> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
+                Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdGrupoUsuario).ToList();
+                List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
+                lstsubGpos.RemoveAll(r => !r.HasValue);
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                List<int> qrySolicita = (from aa in db.ArbolAcceso
+                                         join n7 in db.Nivel7 on aa.IdNivel7 equals n7.Id
+                                         join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                         join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                         where lstGposSolicita.Contains(guia.IdGrupoUsuario)
+                                               && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                         select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> qryLevanta = (from aa in db.ArbolAcceso
+                                        join n7 in db.Nivel7 on aa.IdNivel7 equals n7.Id
+                                        join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                        join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                        where lstGposLevanta.Contains(guia.IdGrupoUsuario) && lstsubGpos.Contains(guia.IdSubGrupoUsuario)
+                                              && aa.IdArea == idArea && aa.IdTipoArbolAcceso == idTipoArbolAcceso
+                                        select new { aa.Id }).Select(s => s.Id).Distinct().ToList();
+                List<int> arbolesPermitidos = qrySolicita.Where(qryLevanta.Contains).ToList();
+                result = db.ArbolAcceso.Where(w => arbolesPermitidos.Contains(w.Id) && w.IdNivel6 == idNivel6).SelectMany(nivel => db.Nivel7.Where(w => w.Id == nivel.IdNivel7)).Distinct().OrderBy(o => o.Descripcion).ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Nivel7 { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        public bool EsNodoTerminalByGrupos(int idArea, int idTipoUsuario, int idTipoArbol, int nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7)
+        {
+            bool result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                var qry = db.ArbolAcceso.Where(w => w.IdTipoUsuario == idTipoUsuario && w.IdTipoArbolAcceso == idTipoArbol && w.IdNivel1 == nivel1);
+                qry = nivel2.HasValue ? qry.Where(w => w.IdNivel2 == nivel2) : qry.Where(w => w.IdNivel2 == null);
+                qry = nivel3.HasValue ? qry.Where(w => w.IdNivel3 == nivel3) : qry.Where(w => w.IdNivel3 == null);
+                qry = nivel4.HasValue ? qry.Where(w => w.IdNivel4 == nivel4) : qry.Where(w => w.IdNivel4 == null);
+                qry = nivel5.HasValue ? qry.Where(w => w.IdNivel5 == nivel5) : qry.Where(w => w.IdNivel5 == null);
+                qry = nivel6.HasValue ? qry.Where(w => w.IdNivel6 == nivel6) : qry.Where(w => w.IdNivel6 == null);
+                qry = nivel7.HasValue ? qry.Where(w => w.IdNivel7 == nivel7) : qry.Where(w => w.IdNivel7 == null);
+                result = qry.Any(a => a.EsTerminal);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error al Obtener Datos");
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        #endregion ticket tercero
+
+        #region Flujo normal
         public List<Nivel1> ObtenerNivel1(int idTipoArbol, int idTipoUsuario, bool insertarSeleccion)
         {
             List<Nivel1> result;
@@ -34,7 +359,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -55,7 +380,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -76,7 +401,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -97,7 +422,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -118,7 +443,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -139,7 +464,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -160,7 +485,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -251,7 +576,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -287,7 +612,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -325,7 +650,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -500,7 +825,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -524,7 +849,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -559,7 +884,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -579,7 +904,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -614,7 +939,7 @@ namespace KinniNet.Core.Operacion
                         arbol.InventarioArbolAcceso.First().InventarioInfConsulta.Single(w => w.InformacionConsulta.IdTipoInfConsulta == info.IdTipoInfConsulta).IdInfConsulta = infConsulta.IdInfConsulta;
                     }
 
-                    if (arbol.IdTipoUsuario != (int) BusinessVariables.EnumTipoArbol.Consultas)
+                    if (arbol.IdTipoUsuario != (int)BusinessVariables.EnumTipoArbol.Consultas)
                     {
                         arbol.InventarioArbolAcceso.First().Sla.Dias =
                             arbolAccesoActualizar.InventarioArbolAcceso.First().Sla.Dias;
@@ -644,7 +969,7 @@ namespace KinniNet.Core.Operacion
                             {
                                 switch (informeArbol.IdTipoGrupo)
                                 {
-                                    case (int) BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
+                                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
                                         TiempoInformeArbol tInformeMto = db.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
                                         tInformeMto = arbol.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
                                         if (tInformeMto != null)
@@ -656,7 +981,7 @@ namespace KinniNet.Core.Operacion
                                             arbol.TiempoInformeArbol.Single(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo).IdTipoNotificacion = informeArbol.IdTipoNotificacion;
                                         }
                                         break;
-                                    case (int) BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
+                                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
                                         TiempoInformeArbol tInformeDev = db.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
                                         tInformeDev = arbol.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
                                         if (tInformeDev != null)
@@ -669,7 +994,7 @@ namespace KinniNet.Core.Operacion
                                         }
                                         break;
 
-                                    case (int) BusinessVariables.EnumTiposGrupos.EspecialDeConsulta:
+                                    case (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta:
                                         TiempoInformeArbol tInformeCons = db.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
                                         tInformeCons = arbol.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
                                         if (tInformeCons != null)
@@ -709,12 +1034,13 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
                 db.Dispose();
             }
         }
+        #endregion Flujo normal
     }
 }

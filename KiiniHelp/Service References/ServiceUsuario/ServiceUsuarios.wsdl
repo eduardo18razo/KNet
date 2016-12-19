@@ -98,6 +98,12 @@
   <wsdl:message name="IServiceUsuarios_BuscarUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:BuscarUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_BuscarUsuarios_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarUsuarios" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_BuscarUsuarios_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarUsuariosResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceUsuarios_EnviaCodigoVerificacionCorreo_InputMessage">
     <wsdl:part name="parameters" element="tns:EnviaCodigoVerificacionCorreo" />
   </wsdl:message>
@@ -168,6 +174,10 @@
     <wsdl:operation name="BuscarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/BuscarUsuario" message="tns:IServiceUsuarios_BuscarUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/BuscarUsuarioResponse" message="tns:IServiceUsuarios_BuscarUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarUsuarios">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/BuscarUsuarios" message="tns:IServiceUsuarios_BuscarUsuarios_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/BuscarUsuariosResponse" message="tns:IServiceUsuarios_BuscarUsuarios_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="EnviaCodigoVerificacionCorreo">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/EnviaCodigoVerificacionCorreo" message="tns:IServiceUsuarios_EnviaCodigoVerificacionCorreo_InputMessage" />
@@ -294,6 +304,15 @@
     </wsdl:operation>
     <wsdl:operation name="BuscarUsuario">
       <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/BuscarUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarUsuarios">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/BuscarUsuarios" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcDetalleTicket.ascx.cs" Inherits="KiiniHelp.UserControls.Detalles.UcDetalleTicket" %>
 <%@ Register Src="~/UserControls/Detalles/UcDetalleMascaraCaptura.ascx" TagPrefix="uc1" TagName="UcDetalleMascaraCaptura" %>
 
-<asp:UpdatePanel runat="server">
+<asp:UpdatePanel runat="server" UpdateMode="Conditional">
     <ContentTemplate>
         <div class="panel panel-primary">
             <div class="panel-heading">

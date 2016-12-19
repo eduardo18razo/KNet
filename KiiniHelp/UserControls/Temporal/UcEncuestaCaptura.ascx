@@ -6,6 +6,7 @@
 
         <asp:HiddenField runat="server" ID="hfIdEncuesta" />
         <asp:HiddenField runat="server" ID="hfIdTicket" />
+        <asp:HiddenField runat="server" ID="hfIdTipoServicio" />
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <asp:Label runat="server" ID="lblDescripcionMascara"></asp:Label>

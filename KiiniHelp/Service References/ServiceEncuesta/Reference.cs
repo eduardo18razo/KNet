@@ -24,6 +24,9 @@ namespace KiiniHelp.ServiceEncuesta {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdTicket", ReplyAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdTicketResponse")]
         KiiniNet.Entities.Cat.Usuario.Encuesta ObtenerEncuestaByIdTicket(int idTicket);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdConsulta", ReplyAction="http://tempuri.org/IServiceEncuesta/ObtenerEncuestaByIdConsultaResponse")]
+        KiiniNet.Entities.Cat.Usuario.Encuesta ObtenerEncuestaByIdConsulta(int idConsulta);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/GuardarEncuesta", ReplyAction="http://tempuri.org/IServiceEncuesta/GuardarEncuestaResponse")]
         void GuardarEncuesta(KiiniNet.Entities.Cat.Usuario.Encuesta encuesta);
         
@@ -83,6 +86,10 @@ namespace KiiniHelp.ServiceEncuesta {
         
         public KiiniNet.Entities.Cat.Usuario.Encuesta ObtenerEncuestaByIdTicket(int idTicket) {
             return base.Channel.ObtenerEncuestaByIdTicket(idTicket);
+        }
+        
+        public KiiniNet.Entities.Cat.Usuario.Encuesta ObtenerEncuestaByIdConsulta(int idConsulta) {
+            return base.Channel.ObtenerEncuestaByIdConsulta(idConsulta);
         }
         
         public void GuardarEncuesta(KiiniNet.Entities.Cat.Usuario.Encuesta encuesta) {

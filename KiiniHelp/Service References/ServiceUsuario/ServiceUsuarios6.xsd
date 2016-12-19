@@ -117,6 +117,7 @@
       <xs:element minOccurs="0" name="IdTipoDocumento" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="IdTipoInfConsulta" type="xs:int" />
       <xs:element minOccurs="0" name="InformacionConsultaDatos" nillable="true" type="tns:ArrayOfInformacionConsultaDatos" />
+      <xs:element minOccurs="0" name="InformacionConsultaDocumento" nillable="true" type="tns:ArrayOfInformacionConsultaDocumento" />
       <xs:element minOccurs="0" name="InventarioInfConsulta" nillable="true" type="tns:ArrayOfInventarioInfConsulta" />
       <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoDocumento" nillable="true" type="q15:TipoDocumento" />
       <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoInfConsulta" nillable="true" type="q16:TipoInfConsulta" />
@@ -144,6 +145,24 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="InformacionConsultaDatos" nillable="true" type="tns:InformacionConsultaDatos" />
+  <xs:complexType name="ArrayOfInformacionConsultaDocumento">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InformacionConsultaDocumento" nillable="true" type="tns:InformacionConsultaDocumento" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInformacionConsultaDocumento" nillable="true" type="tns:ArrayOfInformacionConsultaDocumento" />
+  <xs:complexType name="InformacionConsultaDocumento">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Archivo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdInformacionConsulta" type="xs:int" />
+      <xs:element minOccurs="0" name="InformacionConsulta" nillable="true" type="tns:InformacionConsulta" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="InformacionConsultaDocumento" nillable="true" type="tns:InformacionConsultaDocumento" />
   <xs:complexType name="ArrayOfInformacionConsulta">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="InformacionConsulta" nillable="true" type="tns:InformacionConsulta" />

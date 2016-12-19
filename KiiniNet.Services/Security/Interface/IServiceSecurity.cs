@@ -28,5 +28,11 @@ namespace KiiniNet.Services.Security.Interface
 
         [OperationContract]
         void RecuperarCuenta(int idUsuario, int idTipoNotificacion, string link, int idCorreo, string codigo, string contrasena, string tipoRecuperacion);
+
+        [OperationContract]
+        void ValidaPassword(string pwd);
+
+        [OperationContract]
+        bool CaducaPassword(int idUsuario);
     }
 }

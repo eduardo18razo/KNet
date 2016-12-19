@@ -54,13 +54,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public void GuardarInformacionConsulta(InformacionConsulta informacion)
+        public void GuardarInformacionConsulta(InformacionConsulta informacion, List<string> documentosDescarga)
         {
             try
             {
                 using (BusinessInformacionConsulta negocio = new BusinessInformacionConsulta())
                 {
-                    negocio.GuardarInformacionConsulta(informacion);
+                    negocio.GuardarInformacionConsulta(informacion, documentosDescarga);
                 }
             }
             catch (Exception ex)

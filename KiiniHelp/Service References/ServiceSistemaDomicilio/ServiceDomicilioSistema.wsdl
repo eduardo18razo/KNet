@@ -24,16 +24,35 @@
   <wsdl:message name="IServiceDomicilioSistema_ObtenerColoniasCp_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerColoniasCpResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceDomicilioSistema_ObtenerDetalleColonia_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerDetalleColonia" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDomicilioSistema_ObtenerDetalleColonia_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerDetalleColoniaResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceDomicilioSistema">
     <wsdl:operation name="ObtenerColoniasCp">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDomicilioSistema/ObtenerColoniasCp" message="tns:IServiceDomicilioSistema_ObtenerColoniasCp_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDomicilioSistema/ObtenerColoniasCpResponse" message="tns:IServiceDomicilioSistema_ObtenerColoniasCp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDetalleColonia">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDomicilioSistema/ObtenerDetalleColonia" message="tns:IServiceDomicilioSistema_ObtenerDetalleColonia_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDomicilioSistema/ObtenerDetalleColoniaResponse" message="tns:IServiceDomicilioSistema_ObtenerDetalleColonia_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceDomicilioSistema">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ObtenerColoniasCp">
       <soap:operation soapAction="http://tempuri.org/IServiceDomicilioSistema/ObtenerColoniasCp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDetalleColonia">
+      <soap:operation soapAction="http://tempuri.org/IServiceDomicilioSistema/ObtenerDetalleColonia" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

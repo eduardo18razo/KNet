@@ -161,48 +161,36 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader" style="table-layout: fixed">
                                             <thead>
                                                 <tr align="center">
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Producto</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tipo Usuario</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tipo Servicio</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 1</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 2</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 3</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 4</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 5</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 6</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nivel 7</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tipo Opcion</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Habilitado</asp:Label></td>
+                                                    <td><asp:Label runat="server">Producto</asp:Label></td>
+                                                    <td><asp:Label runat="server">Tipo Usuario</asp:Label></td>
+                                                    <td><asp:Label runat="server">Tipo Servicio</asp:Label></td>
+                                                    <td><asp:Label runat="server">Nivel 1</asp:Label></td>
+                                                    <td><asp:Label runat="server">Nivel 2</asp:Label></td>
+                                                    <td><asp:Label runat="server">Nivel 3</asp:Label></td>
+                                                    <td><asp:Label runat="server">Nivel 4</asp:Label></td>
+                                                    <td><asp:Label runat="server">Nivel 5</asp:Label></td>
+                                                    <td><asp:Label runat="server">Nivel 6</asp:Label></td>
+                                                    <td><asp:Label runat="server">Nivel 7</asp:Label></td>
+                                                    <td><asp:Label runat="server">Tipo Opcion</asp:Label></td>
+                                                    <td><asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Area.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("TipoUsuario.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("TipoArbolAcceso.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel1.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel2.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel3.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel4.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel5.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel6.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel7.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# (bool) Eval("EsTerminal") ? "Opcion" : "Menu"%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenu()" ondblclick="dbClic()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Area.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("TipoUsuario.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("TipoArbolAcceso.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel1.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel2.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel3.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel4.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel5.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel6.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel7.Descripcion")%></td>
+                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# (bool) Eval("EsTerminal") ? "Opcion" : "Menu"%></td>
+                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>

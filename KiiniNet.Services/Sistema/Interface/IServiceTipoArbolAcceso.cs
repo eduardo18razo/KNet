@@ -11,6 +11,9 @@ namespace KiiniNet.Services.Sistema.Interface
         List<TipoArbolAcceso> ObtenerTiposArbolAcceso(bool insertarSeleccion);
 
         [OperationContract]
+        List<TipoArbolAcceso> ObtenerTiposArbolAccesoByGruposTercero(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, bool insertarSeleccion);
+
+        [OperationContract]
         List<TipoArbolAcceso> ObtenerTiposArbolAccesoByGrupos(List<int> grupos, bool insertarSeleccion);
     }
 }

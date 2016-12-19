@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceArbolAcceso;
@@ -76,8 +77,10 @@ namespace KiiniHelp.UserControls.Genericos
                 if (btn != null)
                 {
                     InformacionConsulta ic = _servicioInformacionConsulta.ObtenerInformacionConsultaById(Convert.ToInt32(btn.CommandArgument));
+                    hfIdInformacion.Value = ic.Id.ToString();
                     switch (ic.IdTipoInfConsulta)
                     {
+                            
                         case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                             lblContenido.Text = string.Empty;
                             foreach (InformacionConsultaDatos contenindo in ic.InformacionConsultaDatos.OrderBy(o => o.Orden))
@@ -115,7 +118,8 @@ namespace KiiniHelp.UserControls.Genericos
                             ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "OpenWindow(\"" + url + "\");", true);
                             break;
                     }
-
+                    rptDownloads.DataSource = ic.InformacionConsultaDocumento;
+                    rptDownloads.DataBind();
 
                 }
             }
@@ -135,6 +139,11 @@ namespace KiiniHelp.UserControls.Genericos
             try
             {
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalMuestraInformacion\");", true);
+                string url = ResolveUrl("~/FrmEncuesta.aspx?IdTipoServicio=" + (int)BusinessVariables.EnumTipoArbol.Consultas + "&IdTicket=" + IdArbol);
+                //string s = "window.open('" + url + "', 'popup_window', 'width=600,height=600,left=300,top=100,resizable=yes');";
+                //ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptEncuesta", "OpenWindow(\"" + url + "\");", true);
+                
             }
             catch (Exception ex)
             {

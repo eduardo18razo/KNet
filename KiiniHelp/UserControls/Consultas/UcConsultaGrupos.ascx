@@ -3,10 +3,10 @@
 <div style="height: 100%;">
     <script>
         function dbClic(e) {
-            debugger;
-            $('#tblHeader').find('tr').dblclick(function (e) {
-                alert(e.target.parentElement.id);
-            });
+            //debugger;
+            //$('#tblHeader').find('tr').dblclick(function (e) {
+            //    alert(e.target.parentElement.id);
+            //});
         };
 
         function contextMenuGrupo() {
@@ -144,27 +144,22 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader">
                                             <thead>
                                                 <tr align="center">
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Tipo Usuario</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Rol</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Grupo</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Supervisor</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Habilitado</asp:Label></td>
+                                                    <td><asp:Label runat="server">Tipo Usuario</asp:Label></td>
+                                                    <td><asp:Label runat="server">Rol</asp:Label></td>
+                                                    <td><asp:Label runat="server">Grupo</asp:Label></td>
+                                                    <td><asp:Label runat="server">Supervisor</asp:Label></td>
+                                                    <td><asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()" contextmenu="contextMenu"><%# Eval("TipoUsuario.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()"><%# Eval("TipoGrupo.Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()"><%# Eval("Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()"><%# (bool) Eval("TieneSupervisor") ? "SI" : "NO" %></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()" contextmenu="contextMenu"><%# Eval("TipoUsuario.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()"><%# Eval("TipoGrupo.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()"><%# Eval("Descripcion")%></td>
+                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()"><%# (bool) Eval("TieneSupervisor") ? "SI" : "NO" %></td>
+                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuGrupo()" ondblclick="dbClic()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>

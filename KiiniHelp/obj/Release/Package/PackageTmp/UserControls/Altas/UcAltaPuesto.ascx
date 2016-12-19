@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <asp:Label runat="server" Text="Descripcion" CssClass="col-sm-2 control-label" />
                         <div class="col-sm-10">
-                            <asp:TextBox runat="server" ID="txtDescripcionPuesto" CssClass="form-control" onkeydown="return (event.keyCode!=13);" />
+                            <asp:TextBox runat="server" ID="txtDescripcionPuesto" CssClass="form-control obligatorio" onkeydown="return (event.keyCode!=13);" />
                         </div>
                     </div>
                 </div>

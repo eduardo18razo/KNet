@@ -53,3 +53,10 @@ C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\bin\Release\Kin
 C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\obj\Release\KinniNet.Core.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\obj\Release\KinniNet.Core.dll
 C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\obj\Release\KinniNet.Core.pdb
+C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\bin\Release\DotNetOpenAuth.Core.dll
+C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\bin\Release\DotNetOpenAuth.OpenId.dll
+C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\bin\Release\System.Net.Http.dll
+C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\bin\Release\DotNetOpenAuth.Core.xml
+C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\bin\Release\DotNetOpenAuth.OpenId.xml
+C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\bin\Release\System.Net.Http.xml
+C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\bin\Release\es\System.Net.Http.resources.dll

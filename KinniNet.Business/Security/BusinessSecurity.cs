@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using KiiniNet.Entities.Cat.Arbol.Nodos;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion.Usuarios;
+using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
 using KinniNet.Core.Operacion;
 using KinniNet.Data.Help;
@@ -32,18 +35,45 @@ namespace KinniNet.Core.Security
 
             public bool Autenticate(string user, string password)
             {
-
+                DesbloqueaUsuarios();
                 bool result;
                 DataBaseModelContext db = new DataBaseModelContext();
                 try
                 {
-                    db.ContextOptions.ProxyCreationEnabled = _proxy;
                     string hashedPdw = SecurityUtils.CreateShaHash(password);
-                    result = db.Usuario.Any(w => w.NombreUsuario == user && w.Password == hashedPdw);
+                    result = db.Usuario.Any(w => w.NombreUsuario == user && w.Password == hashedPdw && w.FechaBloqueo == null && w.Habilitado && w.Activo);
+                    if (db.ParametrosGenerales.First().StrongPassword)
+                        if (db.ParametroPassword.First().Fail)
+                        {
+                            Usuario usuario = db.Usuario.Single(s => s.NombreUsuario == user);
+                            if (!result && usuario != null)
+                            {
+                                if (usuario.FechaBloqueo == null)
+                                {
+                                    if (db.ParametroPassword.First().Fail)
+                                    {
+                                        usuario.Tries++;
+                                        if (usuario.Tries >= db.ParametroPassword.First().Tries)
+                                            usuario.FechaBloqueo = DateTime.ParseExact(DateTime.Now.AddMinutes(db.ParametroPassword.First().TimeoutFail).ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                                    }
+                                }
+                                else
+                                    throw new Exception(string.Format("Usuario bloqueado espere {0} minutos", db.ParametroPassword.First().TimeoutFail));
+                            }
+                            else if (usuario != null)
+                            {
+                                usuario.Tries = 0;
+                                usuario.FechaBloqueo = null;
+                            }
+                            db.SaveChanges();
+                        }
+                    if (db.Usuario.Any(s => s.NombreUsuario == user))
+                    if (db.Usuario.Single(s => s.NombreUsuario == user).FechaBloqueo != null)
+                        throw new Exception(string.Format("Usuario bloqueado espere {0} minutos", db.ParametroPassword.First().TimeoutFail));
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception((ex.InnerException).Message);
+                    throw new Exception(ex.Message);
                 }
                 finally
                 {
@@ -60,7 +90,7 @@ namespace KinniNet.Core.Security
                 {
                     db.ContextOptions.ProxyCreationEnabled = _proxy;
                     string hashedPdw = SecurityUtils.CreateShaHash(password);
-                    if (db.Usuario.Count(w => w.NombreUsuario == user && w.Password == hashedPdw) > 1)
+                    if (db.Usuario.Count(w => w.NombreUsuario == user && w.Password == hashedPdw && w.Habilitado && w.Activo) > 1)
                         throw new Exception("Error al obtener informacion consulte a su Administrador");
                     result = db.Usuario.SingleOrDefault(w => w.NombreUsuario == user && w.Password == hashedPdw);
                     if (result != null)
@@ -78,7 +108,23 @@ namespace KinniNet.Core.Security
                         {
                             db.LoadProperty(grupo, "SubGrupoUsuario");
                         }
+                        var qry = from u in db.Usuario
+                                  join ug in db.UsuarioGrupo on u.Id equals ug.IdUsuario
+                                  join gu in db.GrupoUsuario on ug.IdGrupoUsuario equals gu.Id
+                                  join etsrb in db.EstatusTicketSubRolGeneral on
+                                      new { rol = ug.IdRol, gpo = ug.IdGrupoUsuario, sbRol = ug.IdSubGrupoUsuario, super = gu.TieneSupervisor } equals
+                                      new { rol = etsrb.IdRol, gpo = etsrb.IdGrupoUsuario, sbRol = etsrb.IdSubRol, super = (bool)etsrb.TieneSupervisor }
+                                  where u.Id == result.Id && etsrb.LevantaTicket == false
+                                  select etsrb;
+                        var levantaTicket = (from u in db.Usuario
+                                             join ug in db.UsuarioGrupo on u.Id equals ug.IdUsuario
+                                             join gu in db.GrupoUsuario on ug.IdGrupoUsuario equals gu.Id
+                                             join etsrb in db.EstatusTicketSubRolGeneral on new { rol = ug.IdRol, gpo = ug.IdGrupoUsuario, sbRol = ug.IdSubGrupoUsuario, super = gu.TieneSupervisor } equals new { rol = etsrb.IdRol, gpo = etsrb.IdGrupoUsuario, sbRol = etsrb.IdSubRol, super = (bool)etsrb.TieneSupervisor }
+                                             where u.Id == result.Id && etsrb.LevantaTicket == true
+                                             select etsrb).FirstOrDefault();
 
+                        if (levantaTicket != null)
+                            result.LevantaTickets = levantaTicket.LevantaTicket ?? false;
                     }
                 }
                 catch (Exception ex)
@@ -99,9 +145,9 @@ namespace KinniNet.Core.Security
                 try
                 {
                     db.ContextOptions.ProxyCreationEnabled = _proxy;
-                    if (db.Usuario.Count(w => w.IdTipoUsuario == idTipoUsuario) > 1)
+                    if (db.Usuario.Count(w => w.IdTipoUsuario == idTipoUsuario && w.Habilitado && w.Activo) > 1)
                         throw new Exception("Error al obtener informacion consulte a su Administrador");
-                    result = db.Usuario.SingleOrDefault(w => w.IdTipoUsuario == idTipoUsuario);
+                    result = db.Usuario.SingleOrDefault(w => w.IdTipoUsuario == idTipoUsuario && w.Habilitado && w.Activo);
                     if (result != null)
                     {
                         db.LoadProperty(result, "Organizacion");
@@ -136,14 +182,32 @@ namespace KinniNet.Core.Security
                 DataBaseModelContext db = new DataBaseModelContext();
                 try
                 {
-                    string hashedPdw = SecurityUtils.CreateShaHash(contrasenaActual);
-                    Usuario user = db.Usuario.SingleOrDefault(w => w.Id == idUsuario);
+                    string hashedActualPdw = SecurityUtils.CreateShaHash(contrasenaActual);
+                    string hashedNewPdw = SecurityUtils.CreateShaHash(contrasenaNueva);
+                    Usuario user = db.Usuario.SingleOrDefault(w => w.Id == idUsuario && w.Habilitado);
                     if (user != null)
                     {
-                        if (user.Password != hashedPdw)
+                        ParametrosGenerales parametrosG = db.ParametrosGenerales.First();
+                        if (parametrosG.StrongPassword)
+                        {
+                            if (db.ParametroPassword.First().CaducaPassword)
+                                user.FechaUpdate = DateTime.ParseExact(DateTime.Now.AddDays(db.ParametroPassword.First().TiempoCaducidad).ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                            if (db.UsuarioPassword.Any(a => a.IdUsuario == idUsuario && a.Password == hashedNewPdw))
+                                throw new Exception("Contraseña antigua intente con una diferente");
+                        }
+                        if (user.Password != hashedActualPdw)
                             throw new Exception("Contraseña actual incorrecta");
-                        user.Password = SecurityUtils.CreateShaHash(contrasenaNueva);
+                        user.Password = hashedNewPdw;
+                        user.UsuarioPassword = new List<UsuarioPassword>
+                        {
+                            new UsuarioPassword
+                            {
+                                Fecha = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
+                                Password = hashedNewPdw
+                            }
+                        };
                         db.SaveChanges();
+                        LimpiaPasswordsAntiguos(idUsuario);
                     }
                 }
                 catch (Exception ex)
@@ -172,13 +236,71 @@ namespace KinniNet.Core.Security
                             new BusinessUsuarios().TerminaCodigoVerificacionSms(idUsuario, idTipoNotificacion, idCorreo, codigo);
                             break;
                     }
-                    
+
                     string hashedPdw = SecurityUtils.CreateShaHash(contrasena);
-                    Usuario user = db.Usuario.SingleOrDefault(w => w.Id == idUsuario);
+                    Usuario user = db.Usuario.SingleOrDefault(w => w.Id == idUsuario && w.Habilitado);
                     if (user != null)
                     {
+                        ParametrosGenerales parametrosG = db.ParametrosGenerales.First();
+                        if (parametrosG.StrongPassword)
+                        {
+                            if (db.ParametroPassword.First().CaducaPassword)
+                                user.FechaUpdate = DateTime.ParseExact(DateTime.Now.AddDays(db.ParametroPassword.First().TiempoCaducidad).ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                            if (db.UsuarioPassword.Any(a => a.IdUsuario == idUsuario && a.Password == hashedPdw))
+                                throw new Exception("Contraseña antigua intente con una diferente");
+                        }
                         user.Password = hashedPdw;
+                        user.UsuarioPassword = new List<UsuarioPassword>
+                        {
+                            new UsuarioPassword
+                            {
+                                Fecha = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
+                                Password = SecurityUtils.CreateShaHash(contrasena)
+                            }
+                        };
                         db.SaveChanges();
+                    }
+                    LimpiaPasswordsAntiguos(idUsuario);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    db.Dispose();
+                }
+            }
+
+            public void ValidaPassword(string pwd)
+            {
+                DataBaseModelContext db = new DataBaseModelContext();
+                try
+                {
+                    if (db.ParametrosGenerales.First().StrongPassword)
+                    {
+                        ParametroPassword parametros = db.ParametroPassword.FirstOrDefault();
+                        if (parametros != null)
+                        {
+                            if (!(pwd.Length >= parametros.Min && pwd.Length <= parametros.Max))
+                                throw new Exception(string.Format("El password debe contener entre {0} y {1} caracteres", parametros.Min, parametros.Max));
+                            if (parametros.Letras)
+                                if (!(Regex.Matches(pwd, @"[a-zA-Z]").Count > 0))
+                                    throw new Exception(string.Format("El password debe contener caracteres alfanumericos"));
+
+                            if (parametros.Numeros)
+                                if (!(Regex.Matches(pwd, @"[0-9]").Count > 0))
+                                    throw new Exception(string.Format("El password debe contener caracteres numericos"));
+
+                            if (parametros.Especiales)
+                                if (!(Regex.Matches(pwd, "[^a-z0-9]", RegexOptions.IgnoreCase).Count > 0))
+                                    throw new Exception(string.Format("El password debe contener caracteres especiales"));
+
+                            if (parametros.Mayusculas > 0)
+                                if (!(Regex.Matches(pwd, "[A-Z]").Count >= parametros.Mayusculas))
+                                    throw new Exception(string.Format("El password debe contener {0} mayusculas", parametros.Mayusculas));
+
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -189,6 +311,81 @@ namespace KinniNet.Core.Security
                 {
                     db.Dispose();
                 }
+            }
+
+            public void LimpiaPasswordsAntiguos(int idUsuario)
+            {
+                DataBaseModelContext db = new DataBaseModelContext();
+                try
+                {
+                    List<UsuarioPassword> lst = db.UsuarioPassword.Where(w => w.IdUsuario == idUsuario).ToList();
+                    int diferencia = 0;
+                    diferencia = lst.Count - db.ParametroPassword.First().AlmacenAnterior;
+                    lst = lst.OrderBy(o => o.Fecha).ToList();
+                    foreach (UsuarioPassword usuarioPassword in lst)
+                    {
+                        if (diferencia > 0)
+                        {
+                            db.UsuarioPassword.DeleteObject(usuarioPassword);
+                            diferencia--;
+                        }
+                        else
+                            break;
+                    }
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    db.Dispose();
+                }
+            }
+
+            public void DesbloqueaUsuarios()
+            {
+                DataBaseModelContext db = new DataBaseModelContext();
+                try
+                {
+                    DateTime? fecha = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                    List<Usuario> usuariosBloqueados = db.Usuario.Where(w => w.FechaBloqueo != null && w.FechaBloqueo <= fecha).ToList();
+                    foreach (Usuario usuario in usuariosBloqueados)
+                    {
+                        usuario.FechaBloqueo = null;
+                        usuario.Tries = 0;
+                    }
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    db.Dispose();
+                }
+            }
+
+            public bool CaducaPassword(int idUsuario)
+            {
+                bool result;
+                DataBaseModelContext db = new DataBaseModelContext();
+                try
+                {
+                    DateTime? fecha = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                    result = db.Usuario.Any(a => a.FechaUpdate <= fecha && a.Id == idUsuario);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    db.Dispose();
+                }
+                return result;
             }
         }
 
@@ -283,11 +480,11 @@ namespace KinniNet.Core.Security
                                     break;
                                 case (int)BusinessVariables.EnumMenu.Servicio:
                                     lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.Servicio, idArea).Distinct().ToList();
-                                    GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?IdArbol=");
+                                    GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Web + "&IdArbol=");
                                     break;
                                 case (int)BusinessVariables.EnumMenu.Incidentes:
                                     lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.Incidentes, idArea).Distinct().ToList();
-                                    GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?IdArbol=");
+                                    GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Web + "&IdArbol=");
                                     break;
                             }
                         }
@@ -311,7 +508,7 @@ namespace KinniNet.Core.Security
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception((ex.InnerException).Message);
+                    throw new Exception(ex.Message);
                 }
                 finally
                 {
@@ -535,7 +732,7 @@ namespace KinniNet.Core.Security
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception((ex.InnerException).Message);
+                    throw new Exception(ex.Message);
                 }
                 finally
                 {

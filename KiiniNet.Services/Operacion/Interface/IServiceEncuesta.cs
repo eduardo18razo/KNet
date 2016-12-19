@@ -15,6 +15,8 @@ namespace KiiniNet.Services.Operacion.Interface
         Encuesta ObtenerEncuestaById(int idEncuesta);
         [OperationContract]
         Encuesta ObtenerEncuestaByIdTicket(int idTicket);
+        [OperationContract]
+        Encuesta ObtenerEncuestaByIdConsulta(int idConsulta);
 
         [OperationContract]
         void GuardarEncuesta(Encuesta encuesta);

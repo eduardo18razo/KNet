@@ -60,7 +60,7 @@
         </asp:UpdatePanel>
 
         <%--DATOS GENERALES--%>
-        <div class="modal fade" id="modalDatosGenerales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="overflow: hidden">
+        <div class="modal fade" id="modalDatosGenerales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="overflow: auto">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <asp:UpdatePanel ID="upDatosGenerales" runat="server">
@@ -99,13 +99,13 @@
                                             </div>
                                             <div class="form-group col-sm-12">
                                                 <div class="col-sm-4" style="padding-left: 0">
-                                                    <asp:TextBox ID="txtAp" runat="server" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)" AutoPostBack="true" MaxLength="100" OnTextChanged="txtAp_OnTextChanged" />
+                                                    <asp:TextBox ID="txtAp" runat="server" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)" AutoPostBack="true" MaxLength="32" OnTextChanged="txtAp_OnTextChanged" />
                                                 </div>
                                                 <div class="col-sm-4" style="padding-left: 0">
-                                                    <asp:TextBox ID="txtAm" runat="server" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)" MaxLength="100" />
+                                                    <asp:TextBox ID="txtAm" runat="server" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)" MaxLength="32" />
                                                 </div>
                                                 <div class="col-sm-4" style="padding-left: 0">
-                                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)" AutoPostBack="true" MaxLength="100" OnTextChanged="txtAp_OnTextChanged" />
+                                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)" AutoPostBack="true" MaxLength="32" OnTextChanged="txtAp_OnTextChanged" />
                                                 </div>
                                             </div>
                                             <div class="form-group col-sm-12">
@@ -113,7 +113,7 @@
                                             </div>
                                             <div class="form-group col-sm-12">
                                                 <div class="col-sm-4" style="padding-left: 0">
-                                                    <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control texto-normal obligatorio" onkeypress="return ValidaCampo(this,14)" OnTextChanged="txtAp_OnTextChanged" MaxLength="100" Style="texttransform: none" />
+                                                    <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control texto-normal obligatorio" onkeypress="return ValidaCampo(this,14)" OnTextChanged="txtAp_OnTextChanged" MaxLength="12" Style="texttransform: none" />
                                                 </div>
                                             </div>
                                             <div class="form-group col-sm-12">
@@ -169,7 +169,7 @@
                                                                     <asp:TextBox runat="server" ID="txtNumero" Text='<%# Eval("Numero") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="10" />
                                                                 </div>
                                                                 <div class="col-xs-4 col-md-3" runat="server" visible='<%# Eval("TipoTelefono.Extension") %>'>
-                                                                    <asp:TextBox runat="server" ID="txtExtension" Text='<%# Eval("Extension") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="40" />
+                                                                    <asp:TextBox runat="server" ID="txtExtension" Text='<%# Eval("Extension") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,15)" MaxLength="40" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -285,13 +285,14 @@
         </div>
 
         <%--GRUPOS--%>
-        <div class="modal fade" id="modalGrupos" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: hidden">
+        <div class="modal fade" id="modalGrupos" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: auto">
             <asp:UpdatePanel ID="upGrupos" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <uc:AsociarGrupoUsuario runat="server" ID="AsociarGrupoUsuario" />
-                            <div class="modal-footer">
+                            <div class="panel-footer" style="text-align: center">
+                                <asp:Button runat="server" CssClass="btn btn-success" ID="btnAceptarGrupos" Text="Aceptar" OnClick="btnAceptarGrupos_OnClick" />
                                 <asp:Button runat="server" CssClass="btn btn-danger" ID="btnCerrarGrupos" Text="Cerrar" OnClick="btnCerrarGrupos_OnClick" />
                             </div>
                         </div>

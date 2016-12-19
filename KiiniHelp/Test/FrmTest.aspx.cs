@@ -1,28 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
-using KiiniHelp.ServiceConsultas;
-using KiiniHelp.ServiceEncuesta;
-using KiiniHelp.ServiceSistemaTipoUsuario;
-using KiiniNet.Entities.Cat.Usuario;
-using KiiniNet.Entities.Operacion.Usuarios;
-using KinniNet.Business.Utils;
+using Font = System.Drawing.Font;
 
 namespace KiiniHelp.Test
 {
     public partial class FrmTest : System.Web.UI.Page
     {
-
+        
         //private void SendMessageAltiria()
         //{
         //    HttpWebRequest loHttp =
@@ -67,24 +54,68 @@ namespace KiiniHelp.Test
         //            lblerrorMensaje.Text =  response;
         //    }
         //}
+        public int IdCatalogo { get { return 10; } }
         protected void btnGetSelectedValues_Click(object sender, EventArgs e)
         {
-            string selectedValues = string.Empty;
-            foreach (ListItem li in lstBoxTest.Items)
-            {
-                if (li.Selected == true)
-                {
-                    selectedValues += li.Text + ",";
-                }
-            }
-            Response.Write(selectedValues.ToString());
+            //string selectedValues = string.Empty;
+            //foreach (ListItem li in lstBoxTest.Items)
+            //{
+            //    if (li.Selected == true)
+            //    {
+            //        selectedValues += li.Text + ",";
+            //    }
+            //}
+            //Response.Write(selectedValues.ToString());
         }
+
+         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+         {
+             TextBox1.Text = GridView1.SelectedRow.Cells[2].Text;
+         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            lstBoxTest.DataSource = new ServiceTipoUsuarioClient().ObtenerTiposUsuario(true);
-            lstBoxTest.DataTextField = "Descripcion";
-            lstBoxTest.DataValueField = "Id";
-            lstBoxTest.DataBind();
+            //ucCargaCatalgo.EsAlta = true;
+            ////////////Set the appropriate ContentType.
+            //////////Response.ContentType = "Application/msword";
+            ////////////Get the physical path to the file.
+            //////////string FilePath = MapPath("CVEduardoCerritos.docx");
+            ////////////Write the file directly to the HTTP content output stream.
+            //////////Response.WriteFile(FilePath);
+            //////////Response.End();
+
+            // PDF
+            //string FilePath = Server.MapPath("CELE860311HDFRCD04.pdf");
+            //WebClient User = new WebClient();
+            //Byte[] FileBuffer = User.DownloadData(FilePath);
+            //if (FileBuffer != null)
+            //{
+            //    Response.ContentType = "application/pdf";
+            //    Response.AddHeader("content-length", FileBuffer.Length.ToString());
+            //    Response.BinaryWrite(FileBuffer);
+            //}
+
+
+            ////Response.ContentType = "application/pdf";
+            ////Response.AddHeader("content-disposition", "attachment;filename=CELE860311HDFRCD04.pdf");
+            ////Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            ////StringWriter sw = new StringWriter();
+            ////HtmlTextWriter hw = new HtmlTextWriter(sw);
+            ////this.Page.RenderControl(hw);
+            ////StringReader sr = new StringReader(sw.ToString());
+            ////Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+            ////HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+            ////PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+            ////pdfDoc.Open();
+            ////htmlparser.Parse(sr);
+            ////pdfDoc.Close();
+            ////Response.Write(pdfDoc);
+            ////Response.End();
+            //ucAltaInformacionConsulta.EsAlta = true;
+            //lstBoxTest.DataSource = new ServiceTipoUsuarioClient().ObtenerTiposUsuario(true);
+            //lstBoxTest.DataTextField = "Descripcion";
+            //lstBoxTest.DataValueField = "Id";
+            //lstBoxTest.DataBind();
             //SendMessageAltiria();
             //if (!IsPostBack)
             //{

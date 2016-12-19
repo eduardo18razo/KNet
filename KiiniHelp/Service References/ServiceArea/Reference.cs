@@ -18,6 +18,9 @@ namespace KiiniHelp.ServiceArea {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuario", ReplyAction="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuario(int idUsuario, bool insertarSeleccion);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioTercero", ReplyAction="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioTerceroResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuarioTercero(int idUsuario, int idUsuarioTercero, bool insertarSeleccion);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioPublico", ReplyAction="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioPublicoResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuarioPublico(bool insertarSeleccion);
         
@@ -60,6 +63,10 @@ namespace KiiniHelp.ServiceArea {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuario(int idUsuario, bool insertarSeleccion) {
             return base.Channel.ObtenerAreasUsuario(idUsuario, insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuarioTercero(int idUsuario, int idUsuarioTercero, bool insertarSeleccion) {
+            return base.Channel.ObtenerAreasUsuarioTercero(idUsuario, idUsuarioTercero, insertarSeleccion);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuarioPublico(bool insertarSeleccion) {

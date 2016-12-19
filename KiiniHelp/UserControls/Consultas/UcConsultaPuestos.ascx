@@ -117,13 +117,13 @@
                                     <div class="form-horizontal">
 
                                         <div class="form-group">
-                                            <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Puestos</asp:Label>
-                                            <asp:DropDownList runat="server" ID="ddlpuestos" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlpuestos_OnSelectedIndexChanged" />
+                                            <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Tipo Usuario</asp:Label>
+                                            <asp:DropDownList runat="server" ID="ddlTipoUsuario" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" />
                                         </div>
                                         <div class="form-group">
                                         </div>
                                         <div class="form-group">
-                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Puesto" Width="14%" OnClick="btnNew_OnClick"/>
+                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Puesto" Width="14%" OnClick="btnNew_OnClick" />
                                         </div>
                                     </div>
                                 </div>
@@ -137,18 +137,18 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader">
                                             <thead>
                                                 <tr align="center">
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Descripcion</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Habilitado</asp:Label></td>
+                                                    <td><asp:Label runat="server">Tipo Usuario</asp:Label></td>
+                                                    <td><asp:Label runat="server">Descripcion</asp:Label></td>
+                                                    <td><asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuPuestos()" ><%# Eval("Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="contextMenuPuestos()"  id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuPuestos()"><%# Eval("TipoUsuario.Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuPuestos()"><%# Eval("Descripcion")%></td>
+                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuPuestos()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>

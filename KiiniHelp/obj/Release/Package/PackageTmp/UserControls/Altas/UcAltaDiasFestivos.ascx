@@ -25,6 +25,7 @@
         </header>
         <div class="panel panel-primary">
             <asp:HiddenField runat="server" ID="hfIdSubRol" />
+
             <div class="panel-body">
                 <div class="form-horizontal">
                     <div class="form-group">

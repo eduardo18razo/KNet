@@ -79,7 +79,7 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public Ticket CrearTicket(int idUsuario, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, bool campoRandom)
+        public Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             Ticket result;
@@ -96,17 +96,20 @@ namespace KinniNet.Core.Operacion
                     IdTipoArbolAcceso = arbol.IdTipoArbolAcceso,
                     IdArbolAcceso = arbol.Id,
                     IdImpacto = (int)arbol.IdImpacto,
-                    IdUsuario = usuario.Id,
+                    IdUsuarioLevanto = usuario.Id,
+                    IdUsuarioSolicito = idUsuarioSolicito,
                     IdOrganizacion = usuario.IdOrganizacion,
                     IdUbicacion = usuario.IdUbicacion,
                     IdMascara = mascara.Id,
                     IdEncuesta = encuesta.Id,
+                    IdCanal = idCanal,
                     //RespuestaEncuesta = new List<RespuestaEncuesta>(),
                     IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto,
                     FechaHoraAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
                     IdEstatusAsignacion = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar,
                     Random = campoRandom,
-                    ClaveRegistro = GeneraCampoRandom()
+                    ClaveRegistro = GeneraCampoRandom(),
+                    EsTercero = usuario.Id != idUsuarioSolicito,
                 };
                 //ENCUESTA
                 //ticket.RespuestaEncuesta.AddRange(encuesta.EncuestaPregunta.Select(pregunta => new RespuestaEncuesta { IdEncuesta = encuesta.Id, IdPregunta = pregunta.Id }));
@@ -248,7 +251,7 @@ namespace KinniNet.Core.Operacion
                             {
                                 IdEstatusAsignacion = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Asignado,
                                 IdUsuarioAsigno = idUsuario,
-                                IdUsuarioAsignado = ticket.IdUsuario,
+                                IdUsuarioAsignado = ticket.IdUsuarioLevanto,
                                 FechaAsignacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
                                 Comentarios = comentario.Trim().ToUpper()
                             }
@@ -365,7 +368,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                List<Ticket> lstTickets = db.Ticket.Where(w => w.IdUsuario == idUsuario).ToList();
+                List<Ticket> lstTickets = db.Ticket.Where(w => w.IdUsuarioLevanto == idUsuario).ToList();
 
                 bool supervisor = db.SubGrupoUsuario.Join(db.UsuarioGrupo, sgu => sgu.Id, ug => ug.IdSubGrupoUsuario, (sgu, ug) => new { sgu, ug })
                         .Any(@t => @t.sgu.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor && @t.ug.IdUsuario == idUsuario);
@@ -410,7 +413,7 @@ namespace KinniNet.Core.Operacion
 
                         HelperTickets hticket = new HelperTickets();
                         hticket.IdTicket = ticket.Id;
-                        hticket.IdUsuario = ticket.IdUsuario;
+                        hticket.IdUsuario = ticket.IdUsuarioLevanto;
                         hticket.IdGrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Distinct().First().GrupoUsuario.Id;
                         hticket.FechaHora = ticket.FechaHoraAlta;
                         hticket.NumeroTicket = ticket.Id;
@@ -461,7 +464,7 @@ namespace KinniNet.Core.Operacion
                     {
                         lstEstatusPermitidos.AddRange((db.EstatusTicketSubRolGeneral.Join(db.GrupoUsuario, easrg => easrg.IdGrupoUsuario, gu => gu.Id, (easrg, gu) => new { easrg, gu })
                                 .Join(db.UsuarioGrupo, @t => @t.gu.Id, ug => ug.IdGrupoUsuario, (@t, ug) => new { @t, ug })
-                                .Where(@t => @t.ug.IdGrupoUsuario == idGrupo && @t.@t.easrg.TieneSupervisor == @t.@t.gu.TieneSupervisor && @t.@t.easrg.Habilitado && @t.ug.IdUsuario == idUsuario && @t.@t.easrg.Propietario)
+                                .Where(@t => @t.ug.IdGrupoUsuario == idGrupo && @t.@t.easrg.TieneSupervisor == @t.@t.gu.TieneSupervisor && @t.@t.easrg.Habilitado && @t.ug.IdUsuario == idUsuario && (bool)@t.@t.easrg.Propietario)
                                 .Select(@t => (int?)@t.@t.easrg.IdEstatusTicket)).Distinct().ToList());
                     }
                     foreach (int grupo in lstGrupos)
@@ -556,7 +559,7 @@ namespace KinniNet.Core.Operacion
 
                         HelperTickets hticket = new HelperTickets();
                         hticket.IdTicket = ticket.Id;
-                        hticket.IdUsuario = ticket.IdUsuario;
+                        hticket.IdUsuario = ticket.IdUsuarioLevanto;
                         hticket.IdGrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Distinct().First().GrupoUsuario.Id;
                         hticket.FechaHora = ticket.FechaHoraAlta;
                         hticket.NumeroTicket = ticket.Id;

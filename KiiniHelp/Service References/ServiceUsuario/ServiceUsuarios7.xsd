@@ -331,6 +331,8 @@
   <xs:complexType name="Catalogos">
     <xs:sequence>
       <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" minOccurs="0" name="CampoMascara" nillable="true" type="q66:ArrayOfCampoMascara" />
+      <xs:element minOccurs="0" name="ComandoActualizar" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ComandoInsertar" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EsMascaraCaptura" type="xs:boolean" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />

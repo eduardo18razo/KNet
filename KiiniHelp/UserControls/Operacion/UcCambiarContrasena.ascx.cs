@@ -72,6 +72,7 @@ namespace KiiniHelp.UserControls.Operacion
             try
             {
                 ValidaCampos();
+                _servicioSeguridad.ValidaPassword(txtContrasenaNueva.Text.Trim());
                 _servicioSeguridad.ChangePassword(((Usuario)Session["UserData"]).Id, txtContrasenaActual.Text.Trim(), txtContrasenaNueva.Text.Trim());
                 if (OnAceptarModal != null)
                     OnAceptarModal();

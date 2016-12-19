@@ -25,6 +25,9 @@ namespace KiiniHelp.ServiceParametrosSistema {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParametros/ObtenerCorreosParametrosIdTipoUsuario", ReplyAction="http://tempuri.org/IServiceParametros/ObtenerCorreosParametrosIdTipoUsuarioRespon" +
             "se")]
         System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.CorreoUsuario> ObtenerCorreosParametrosIdTipoUsuario(int idTipoUsuario, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParametros/ObtenerParametrosGenerales", ReplyAction="http://tempuri.org/IServiceParametros/ObtenerParametrosGeneralesResponse")]
+        KiiniNet.Entities.Parametros.ParametrosGenerales ObtenerParametrosGenerales();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -64,6 +67,10 @@ namespace KiiniHelp.ServiceParametrosSistema {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Usuarios.CorreoUsuario> ObtenerCorreosParametrosIdTipoUsuario(int idTipoUsuario, bool insertarSeleccion) {
             return base.Channel.ObtenerCorreosParametrosIdTipoUsuario(idTipoUsuario, insertarSeleccion);
+        }
+        
+        public KiiniNet.Entities.Parametros.ParametrosGenerales ObtenerParametrosGenerales() {
+            return base.Channel.ObtenerParametrosGenerales();
         }
     }
 }

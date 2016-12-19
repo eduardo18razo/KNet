@@ -149,4 +149,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SubRolEscalacionPermitida" nillable="true" type="tns:SubRolEscalacionPermitida" />
+  <xs:complexType name="ParametrosGenerales">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="NumeroArchivo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TamanoDeArchivo" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ParametrosGenerales" nillable="true" type="tns:ParametrosGenerales" />
 </xs:schema>

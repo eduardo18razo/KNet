@@ -90,7 +90,6 @@
   <xs:element name="ArrayOfEncuesta" nillable="true" type="tns:ArrayOfEncuesta" />
   <xs:complexType name="Sla">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Detallado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Dias" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />

@@ -133,21 +133,18 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader" style="table-layout: fixed">
                                             <thead>
                                                 <tr align="center">
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Nombre</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Numero de Campos</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Habilitado</asp:Label></td>
+                                                    <td><asp:Label runat="server">Nombre</asp:Label></td>
+                                                    <td><asp:Label runat="server">Numero de Campos</asp:Label></td>
+                                                    <td><asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenuMascara()"><%# Eval("Descripcion")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenuMascara()"><%# Eval("NoCampos")%></td>
-                                            <td style="padding: 0;" oncontextmenu="ContextMenuMascara()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenuMascara()"><%# Eval("Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenuMascara()"><%# Eval("NoCampos")%></td>
+                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="ContextMenuMascara()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>

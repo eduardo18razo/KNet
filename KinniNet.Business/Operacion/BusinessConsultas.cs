@@ -707,7 +707,7 @@ namespace KinniNet.Core.Operacion
                           join e in db.Encuesta on t.IdEncuesta equals e.Id
                           join ep in db.EncuestaPregunta on new { idenctick = (int)t.IdEncuesta, ids = e.Id } equals new { idenctick = ep.IdEncuesta, ids = ep.IdEncuesta }
                           join re in db.RespuestaEncuesta on
-                          new { idTickTick = t.Id, idEncTick = (int)t.IdEncuesta, idEncPadre = e.Id, idPreg = ep.Id } equals
+                          new { idTickTick = (int?)t.Id, idEncTick = (int)t.IdEncuesta, idEncPadre = e.Id, idPreg = ep.Id } equals
                           new { idTickTick = re.IdTicket, idEncTick = re.IdEncuesta, idEncPadre = re.IdEncuesta, idPreg = re.IdPregunta }
                           join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
                           join ug in db.UsuarioGrupo on new { tgu.IdGrupoUsuario, tgu.IdSubGrupoUsuario } equals new { ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
@@ -1608,7 +1608,7 @@ namespace KinniNet.Core.Operacion
 
                 var qry = from t in db.Ticket
                           join e in db.Encuesta on t.IdEncuesta equals e.Id
-                          join er in db.RespuestaEncuesta on new { idtick = t.Id, padre = e.Id } equals new { idtick = er.IdTicket, padre = er.IdEncuesta }
+                          join er in db.RespuestaEncuesta on new { idtick = (int?)t.Id, padre = e.Id } equals new { idtick = er.IdTicket, padre = er.IdEncuesta }
                           join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
                           join or in db.Organizacion on t.IdOrganizacion equals or.Id
                           join ub in db.Ubicacion on t.IdUbicacion equals ub.Id
@@ -1793,7 +1793,7 @@ namespace KinniNet.Core.Operacion
 
                 var qry = from t in db.Ticket
                           join e in db.Encuesta on t.IdEncuesta equals e.Id
-                          join re in db.RespuestaEncuesta on new { idTickTick = t.Id, idEncTick = (int)t.IdEncuesta, idEncPadre = e.Id } equals new { idTickTick = re.IdTicket, idEncTick = re.IdEncuesta, idEncPadre = re.IdEncuesta }
+                          join re in db.RespuestaEncuesta on new { idTickTick = (int?)t.Id, idEncTick = (int)t.IdEncuesta, idEncPadre = e.Id } equals new { idTickTick = re.IdTicket, idEncTick = re.IdEncuesta, idEncPadre = re.IdEncuesta }
                           join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
                           join or in db.Organizacion on t.IdOrganizacion equals or.Id
                           join ub in db.Ubicacion on t.IdUbicacion equals ub.Id
@@ -1916,7 +1916,7 @@ namespace KinniNet.Core.Operacion
                           join e in db.Encuesta on t.IdEncuesta equals e.Id
                           join ep in db.EncuestaPregunta on new { idenctick = (int)t.IdEncuesta, ids = e.Id } equals new { idenctick = ep.IdEncuesta, ids = ep.IdEncuesta }
                           join re in db.RespuestaEncuesta on
-                          new { idTickTick = t.Id, idEncTick = (int)t.IdEncuesta, idEncPadre = e.Id, idPreg = ep.Id } equals
+                          new { idTickTick = (int?)t.Id, idEncTick = (int)t.IdEncuesta, idEncPadre = e.Id, idPreg = ep.Id } equals
                           new { idTickTick = re.IdTicket, idEncTick = re.IdEncuesta, idEncPadre = re.IdEncuesta, idPreg = re.IdPregunta }
                           join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
                           join ug in db.UsuarioGrupo on new { tgu.IdGrupoUsuario, tgu.IdSubGrupoUsuario } equals new { ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
@@ -2329,7 +2329,7 @@ namespace KinniNet.Core.Operacion
                 var qry = from t in db.Ticket
                           join e in db.Encuesta on t.IdEncuesta equals e.Id
                           join ep in db.EncuestaPregunta on new { idenctick = (int)t.IdEncuesta, ids = e.Id } equals new { idenctick = ep.IdEncuesta, ids = ep.IdEncuesta }
-                          join re in db.RespuestaEncuesta on new { idTickTick = t.Id, idEncTick = (int)t.IdEncuesta, idEncPadre = e.Id, idPreg = ep.Id } equals new { idTickTick = re.IdTicket, idEncTick = re.IdEncuesta, idEncPadre = re.IdEncuesta, idPreg = re.IdPregunta }
+                          join re in db.RespuestaEncuesta on new { idTickTick = (int?)t.Id, idEncTick = (int)t.IdEncuesta, idEncPadre = e.Id, idPreg = ep.Id } equals new { idTickTick = re.IdTicket, idEncTick = re.IdEncuesta, idEncPadre = re.IdEncuesta, idPreg = re.IdPregunta }
                           join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
                           join ug in db.UsuarioGrupo on new { tgu.IdGrupoUsuario, tgu.IdSubGrupoUsuario } equals new { ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
                           join ub in db.Ubicacion on t.IdUbicacion equals ub.Id

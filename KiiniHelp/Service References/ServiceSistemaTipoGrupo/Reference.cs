@@ -20,6 +20,9 @@ namespace KiiniHelp.ServiceSistemaTipoGrupo {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByRol", ReplyAction="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByRolResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoGrupo> ObtenerTiposGruposByRol(int idrol, bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByTipoUsuario", ReplyAction="http://tempuri.org/IServiceTipoGrupo/ObtenerTiposGruposByTipoUsuarioResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoGrupo> ObtenerTiposGruposByTipoUsuario(int idTipoUsuario, bool insertarSeleccion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +58,10 @@ namespace KiiniHelp.ServiceSistemaTipoGrupo {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoGrupo> ObtenerTiposGruposByRol(int idrol, bool insertarSeleccion) {
             return base.Channel.ObtenerTiposGruposByRol(idrol, insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoGrupo> ObtenerTiposGruposByTipoUsuario(int idTipoUsuario, bool insertarSeleccion) {
+            return base.Channel.ObtenerTiposGruposByTipoUsuario(idTipoUsuario, insertarSeleccion);
         }
     }
 }

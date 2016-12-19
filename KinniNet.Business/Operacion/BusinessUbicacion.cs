@@ -34,7 +34,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -56,7 +56,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -78,7 +78,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -100,7 +100,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -122,7 +122,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -144,7 +144,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -166,7 +166,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -231,7 +231,6 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                //TODO: Cambiar habilitado por el embebido
                 ubicacion.Habilitado = true;
                 if (ubicacion.Campus != null)
                 {
@@ -243,44 +242,56 @@ namespace KinniNet.Core.Operacion
                         domicilio.NoExt = domicilio.NoExt.ToUpper();
                         domicilio.NoInt = domicilio.NoInt.ToUpper();
                     }
+                    if (db.Campus.Any(a => a.Descripcion == ubicacion.Campus.Descripcion && a.IdTipoUsuario == ubicacion.Campus.IdTipoUsuario))
+                        throw new Exception("Esta Campus ya se encuetra registrado");
                 }
                 if (ubicacion.Torre != null)
                 {
                     ubicacion.IdNivelUbicacion = 3;
                     ubicacion.Torre.Descripcion = ubicacion.Torre.Descripcion.ToUpper();
+                    if (db.Torre.Any(a => a.Descripcion == ubicacion.Torre.Descripcion && a.IdTipoUsuario == ubicacion.Torre.IdTipoUsuario))
+                        throw new Exception("Esta Torre ya se encuetra registrada");
                 }
 
                 if (ubicacion.Piso != null)
                 {
                     ubicacion.IdNivelUbicacion = 4; 
                     ubicacion.Piso.Descripcion = ubicacion.Piso.Descripcion.ToUpper();
+                    if (db.Piso.Any(a => a.Descripcion == ubicacion.Piso.Descripcion && a.IdTipoUsuario == ubicacion.Piso.IdTipoUsuario))
+                        throw new Exception("Este Piso ya se encuetra registrado");
                 }
 
                 if (ubicacion.Zona != null)
                 {
                     ubicacion.IdNivelUbicacion = 5;
                     ubicacion.Zona.Descripcion = ubicacion.Zona.Descripcion.ToUpper();
+                    if (db.Zona.Any(a => a.Descripcion == ubicacion.Zona.Descripcion && a.IdTipoUsuario == ubicacion.Zona.IdTipoUsuario))
+                        throw new Exception("Esta Zona ya se encuetra registrada");
                 }
 
                 if (ubicacion.SubZona != null)
                 {
                     ubicacion.IdNivelUbicacion = 6; 
                     ubicacion.SubZona.Descripcion = ubicacion.SubZona.Descripcion.ToUpper();
+                    if (db.SubZona.Any(a => a.Descripcion == ubicacion.SubZona.Descripcion && a.IdTipoUsuario == ubicacion.SubZona.IdTipoUsuario))
+                        throw new Exception("Esta SubZona ya se encuetra registrada");
                 }
 
                 if (ubicacion.SiteRack != null)
                 {
                     ubicacion.IdNivelUbicacion = 7; 
                     ubicacion.SiteRack.Descripcion = ubicacion.SiteRack.Descripcion.ToUpper();
+                    if (db.SiteRack.Any(a => a.Descripcion == ubicacion.SiteRack.Descripcion && a.IdTipoUsuario == ubicacion.SiteRack.IdTipoUsuario))
+                        throw new Exception("Este SiteRack ya se encuetra registrado");
                 }
-
+                
                 if (ubicacion.Id == 0)
                     db.Ubicacion.AddObject(ubicacion);
                 db.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -309,7 +320,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -347,7 +358,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -385,7 +396,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -424,7 +435,10 @@ namespace KinniNet.Core.Operacion
 
                 if (idSiteRack.HasValue)
                     qry = qry.Where(w => w.IdSiteRack == idSiteRack);
-
+                qry = from q in qry
+                      orderby q.Pais != null, q.Pais.Descripcion, q.Campus != null, q.Campus.Descripcion, q.Torre != null, q.Torre.Descripcion, q.Piso != null, q.Piso.Descripcion,
+                      q.Zona != null, q.Zona.Descripcion, q.SubZona != null, q.SubZona.Descripcion, q.SiteRack != null, q.SiteRack.Descripcion ascending
+                      select q;
                 result = qry.ToList();
                 foreach (Ubicacion ubicacion in result)
                 {
@@ -439,7 +453,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -474,7 +488,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -534,7 +548,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -591,7 +605,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -638,7 +652,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -667,7 +681,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -686,7 +700,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {

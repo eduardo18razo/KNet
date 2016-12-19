@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
+using KinniNet.Core.Operacion;
 using KinniNet.Data.Help;
 
 namespace KinniNet.Core.Sistema
@@ -36,7 +39,47 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<TipoArbolAcceso> ObtenerTiposArbolAccesoByGruposTercero(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, bool insertarSeleccion)
+        {
+            List<TipoArbolAcceso> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
+                Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
+                List<int> lstGpos = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
+                lstGpos.AddRange(usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdGrupoUsuario).ToList());
+                List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
+                lstsubGpos.RemoveAll(r => !r.HasValue);
+                var qry = from aa in db.ArbolAcceso 
+                          join taa in db.TipoArbolAcceso on aa.IdTipoArbolAcceso equals taa.Id
+                          join iaa  in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                          join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                          join ug in db.UsuarioGrupo on new {gpo = guia.IdGrupoUsuario, sgpo = guia.IdSubGrupoUsuario } equals new {gpo = ug.IdGrupoUsuario, sgpo = ug.IdSubGrupoUsuario }
+                          where lstGpos.Contains(guia.IdGrupoUsuario) && lstsubGpos.Contains(guia.IdSubGrupoUsuario) && aa.IdArea == idArea
+                          select taa;
+                result = qry.Where(w => w.Habilitado).Distinct().OrderBy(o => o.Descripcion).ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                        new TipoArbolAcceso
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.Value,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -73,7 +116,7 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {

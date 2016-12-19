@@ -30,6 +30,9 @@ namespace KiiniHelp.UserControls.Detalles
                 Usuario userDetail = new ServiceUsuariosClient().ObtenerDetalleUsuario(value);
                 lblUserName.Text = userDetail.NombreCompleto;
                 lblNombre.Text = userDetail.NombreCompleto;
+                lblUsuario.Text = userDetail.NombreUsuario;
+                lblPuesto.Text = userDetail.Puesto == null ? "" : userDetail.Puesto.Descripcion;
+                chkVip.Checked = userDetail.Vip;
                 rptCorreos.DataSource = userDetail.CorreoUsuario;
                 rptCorreos.DataBind();
                 rptTelefonos.DataSource = userDetail.TelefonoUsuario;

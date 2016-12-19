@@ -53,6 +53,14 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="Canal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
   <EntityType Name="Catalogos">
     <Key>
       <PropertyRef Name="Id" />
@@ -200,10 +208,11 @@
     <Property Name="IdGrupoUsuario" Type="int" Nullable="false" />
     <Property Name="IdRol" Type="int" />
     <Property Name="IdSubRol" Type="int" />
-    <Property Name="IdEstatusTicket" Type="int" Nullable="false" />
-    <Property Name="Orden" Type="int" Nullable="false" />
+    <Property Name="IdEstatusTicket" Type="int" />
+    <Property Name="Orden" Type="int" />
     <Property Name="TieneSupervisor" Type="bit" />
-    <Property Name="Propietario" Type="bit" Nullable="false" />
+    <Property Name="Propietario" Type="bit" />
+    <Property Name="LevantaTicket" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="EstatusTicketSubRolGeneralDefault">
@@ -217,6 +226,7 @@
     <Property Name="Orden" Type="int" />
     <Property Name="TieneSupervisor" Type="bit" />
     <Property Name="Propietario" Type="bit" />
+    <Property Name="LevantaTicket" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="Gerencia">
@@ -320,6 +330,15 @@
     <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Orden" Type="int" />
     <Property Name="IdPadre" Type="int" />
+  </EntityType>
+  <EntityType Name="InformacionConsultaDocumento">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdInformacionConsulta" Type="int" />
+    <Property Name="Archivo" Type="nvarchar(max)" />
+    <Property Name="Fecha" Type="datetime" />
   </EntityType>
   <EntityType Name="InventarioArbolAcceso">
     <Key>
@@ -502,6 +521,17 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Activa" Type="bit" />
+  </EntityType>
+  <EntityType Name="ParametrosGenerales">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TamanoDeArchivo" Type="nvarchar" MaxLength="50" />
+    <Property Name="NumeroArchivo" Type="nvarchar" MaxLength="50" />
+    <Property Name="LevantaTickets" Type="bit" />
+    <Property Name="ValidaUsuario" Type="bit" />
+    <Property Name="MensajeValidacion" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="ParametrosSla">
     <Key>
@@ -771,11 +801,13 @@
     <Property Name="IdTipoArbolAcceso" Type="int" Nullable="false" />
     <Property Name="IdArbolAcceso" Type="int" Nullable="false" />
     <Property Name="IdImpacto" Type="int" Nullable="false" />
-    <Property Name="IdUsuario" Type="int" Nullable="false" />
+    <Property Name="IdUsuarioLevanto" Type="int" Nullable="false" />
+    <Property Name="IdUsuarioSolicito" Type="int" />
     <Property Name="IdOrganizacion" Type="int" Nullable="false" />
     <Property Name="IdUbicacion" Type="int" Nullable="false" />
     <Property Name="IdMascara" Type="int" />
     <Property Name="IdEncuesta" Type="int" />
+    <Property Name="IdCanal" Type="int" />
     <Property Name="IdSlaEstimadoTicket" Type="int" />
     <Property Name="IdEstatusTicket" Type="int" Nullable="false" />
     <Property Name="IdEstatusAsignacion" Type="int" Nullable="false" />
@@ -787,6 +819,7 @@
     <Property Name="Random" Type="bit" />
     <Property Name="ClaveRegistro" Type="nvarchar" MaxLength="40" />
     <Property Name="EncuestaRespondida" Type="bit" />
+    <Property Name="EsTercero" Type="bit" />
   </EntityType>
   <EntityType Name="TicketAsignacion">
     <Key>
@@ -858,6 +891,7 @@
     <Property Name="SimboloMoneda" Type="bit" Nullable="false" />
     <Property Name="Catalogo" Type="bit" Nullable="false" />
     <Property Name="Mask" Type="bit" />
+    <Property Name="UploadFile" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TipoCorreo">
@@ -983,15 +1017,16 @@
     <Property Name="IdTipoUsuario" Type="int" Nullable="false" />
     <Property Name="IdUbicacion" Type="int" Nullable="false" />
     <Property Name="IdOrganizacion" Type="int" />
-    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="12" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="12" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="12" Nullable="false" />
     <Property Name="DirectorioActivo" Type="bit" Nullable="false" />
-    <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" />
+    <Property Name="NombreUsuario" Type="nvarchar" MaxLength="12" />
     <Property Name="Password" Type="nvarchar(max)" />
     <Property Name="IdPuesto" Type="int" />
     <Property Name="Vip" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
+    <Property Name="Activo" Type="bit" />
   </EntityType>
   <EntityType Name="UsuarioGrupo">
     <Key>
@@ -1357,7 +1392,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_EstatusSubRolGeneral_EstatusTicket">
-    <End Role="EstatusTicket" Type="Self.EstatusTicket" Multiplicity="1" />
+    <End Role="EstatusTicket" Type="Self.EstatusTicket" Multiplicity="0..1" />
     <End Role="EstatusTicketSubRolGeneral" Type="Self.EstatusTicketSubRolGeneral" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EstatusTicket">
@@ -1664,6 +1699,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="InformacionConsultaDatos">
+        <PropertyRef Name="IdInformacionConsulta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InformacionConsultaDocumento_InformacionConsulta">
+    <End Role="InformacionConsulta" Type="Self.InformacionConsulta" Multiplicity="0..1" />
+    <End Role="InformacionConsultaDocumento" Type="Self.InformacionConsultaDocumento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InformacionConsulta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformacionConsultaDocumento">
         <PropertyRef Name="IdInformacionConsulta" />
       </Dependent>
     </ReferentialConstraint>
@@ -2460,6 +2507,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Ticket_Canal">
+    <End Role="Canal" Type="Self.Canal" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Canal">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdCanal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Ticket_Encuesta">
     <End Role="Encuesta" Type="Self.Encuesta" Multiplicity="0..1" />
     <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
@@ -2576,7 +2635,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Ticket">
-        <PropertyRef Name="IdUsuario" />
+        <PropertyRef Name="IdUsuarioLevanto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2589,6 +2648,18 @@
       </Principal>
       <Dependent Role="Ticket">
         <PropertyRef Name="IdUsuarioResolvio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Usuario2">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdUsuarioSolicito" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3041,6 +3112,7 @@
     <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CampoMascara" EntityType="Self.CampoMascara" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Campus" EntityType="Self.Campus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Canal" EntityType="Self.Canal" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Catalogos" EntityType="Self.Catalogos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Colonia" EntityType="Self.Colonia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Compania" EntityType="Self.Compania" Schema="dbo" store:Type="Tables" />
@@ -3067,6 +3139,7 @@
     <EntitySet Name="Impacto" EntityType="Self.Impacto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InformacionConsulta" EntityType="Self.InformacionConsulta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InformacionConsultaDatos" EntityType="Self.InformacionConsultaDatos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InformacionConsultaDocumento" EntityType="Self.InformacionConsultaDocumento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventarioArbolAcceso" EntityType="Self.InventarioArbolAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventarioInfConsulta" EntityType="Self.InventarioInfConsulta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Jefatura" EntityType="Self.Jefatura" Schema="dbo" store:Type="Tables" />
@@ -3086,6 +3159,7 @@
     <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametroCorreo" EntityType="Self.ParametroCorreo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametrosAplicaciones" EntityType="Self.ParametrosAplicaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ParametrosGenerales" EntityType="Self.ParametrosGenerales" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametrosSla" EntityType="Self.ParametrosSla" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametrosTelefonos" EntityType="Self.ParametrosTelefonos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Piso" EntityType="Self.Piso" Schema="dbo" store:Type="Tables" />
@@ -3346,6 +3420,10 @@
     <AssociationSet Name="FK_InformacionConsultaDatos_InformacionConsulta" Association="Self.FK_InformacionConsultaDatos_InformacionConsulta">
       <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
       <End Role="InformacionConsultaDatos" EntitySet="InformacionConsultaDatos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InformacionConsultaDocumento_InformacionConsulta" Association="Self.FK_InformacionConsultaDocumento_InformacionConsulta">
+      <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
+      <End Role="InformacionConsultaDocumento" EntitySet="InformacionConsultaDocumento" />
     </AssociationSet>
     <AssociationSet Name="FK_InventarioArbolAcceso_Encuesta" Association="Self.FK_InventarioArbolAcceso_Encuesta">
       <End Role="Encuesta" EntitySet="Encuesta" />
@@ -3611,6 +3689,10 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="TelefonoUsuario" EntitySet="TelefonoUsuario" />
     </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Canal" Association="Self.FK_Ticket_Canal">
+      <End Role="Canal" EntitySet="Canal" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
     <AssociationSet Name="FK_Ticket_Encuesta" Association="Self.FK_Ticket_Encuesta">
       <End Role="Encuesta" EntitySet="Encuesta" />
       <End Role="Ticket" EntitySet="Ticket" />
@@ -3652,6 +3734,10 @@
       <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>
     <AssociationSet Name="FK_Ticket_Usuario1" Association="Self.FK_Ticket_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Usuario2" Association="Self.FK_Ticket_Usuario2">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>

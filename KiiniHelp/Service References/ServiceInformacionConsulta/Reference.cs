@@ -29,7 +29,7 @@ namespace KiiniHelp.ServiceInformacionConsulta {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/GuardarInformacionConsulta", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/GuardarInformacionConsultaResponse" +
             "")]
-        void GuardarInformacionConsulta(KiiniNet.Entities.Operacion.InformacionConsulta informacion);
+        void GuardarInformacionConsulta(KiiniNet.Entities.Operacion.InformacionConsulta informacion, System.Collections.Generic.List<string> documentosDescarga);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/ActualizarInformacionConsulta", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/ActualizarInformacionConsultaRespo" +
             "nse")]
@@ -84,8 +84,8 @@ namespace KiiniHelp.ServiceInformacionConsulta {
             return base.Channel.ObtenerInformacionConsultaById(idInformacion);
         }
         
-        public void GuardarInformacionConsulta(KiiniNet.Entities.Operacion.InformacionConsulta informacion) {
-            base.Channel.GuardarInformacionConsulta(informacion);
+        public void GuardarInformacionConsulta(KiiniNet.Entities.Operacion.InformacionConsulta informacion, System.Collections.Generic.List<string> documentosDescarga) {
+            base.Channel.GuardarInformacionConsulta(informacion, documentosDescarga);
         }
         
         public void ActualizarInformacionConsulta(int idInformacionConsulta, KiiniNet.Entities.Operacion.InformacionConsulta informacion) {

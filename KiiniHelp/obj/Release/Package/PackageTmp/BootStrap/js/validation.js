@@ -78,6 +78,9 @@ function ValidaCampo(objeto, tipo) {
         case 14:  //USUARIO
             cadStr = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-_.';;
             break;
+        case 15: //numeros
+            cadStr = "0123456789, ";
+            break;
     }
 
     if (tipo == 4) {

@@ -20,8 +20,12 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public bool EsMascaraCaptura { get; set; }
         [DataMember]
+        public bool Archivo { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
         [DataMember]
         public virtual List<CampoMascara> CampoMascara { get; set; }
+        [DataMember]
+        public virtual List<CampoCatalogo> CampoCatalogo { get; set; } 
     }
 }

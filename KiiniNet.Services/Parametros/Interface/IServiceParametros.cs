@@ -17,5 +17,8 @@ namespace KiiniNet.Services.Parametros.Interface
         [OperationContract]
         List<CorreoUsuario> ObtenerCorreosParametrosIdTipoUsuario(int idTipoUsuario, bool insertarSeleccion);
 
+        [OperationContract]
+        ParametrosGenerales ObtenerParametrosGenerales();
+
     }
 }

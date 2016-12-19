@@ -59,6 +59,7 @@
       <xs:element minOccurs="0" name="IdTicket" type="xs:int" />
       <xs:element minOccurs="0" name="Ponderacion" type="xs:decimal" />
       <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="Ticket" nillable="true" type="q9:Ticket" />
+      <xs:element minOccurs="0" name="ValorRespuesta" type="xs:int" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
@@ -190,4 +191,26 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="HitGrupoUsuario" nillable="true" type="tns:HitGrupoUsuario" />
+  <xs:complexType name="ArrayOfSmsService">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SmsService" nillable="true" type="tns:SmsService" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSmsService" nillable="true" type="tns:ArrayOfSmsService" />
+  <xs:complexType name="SmsService">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Enviado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTipoLink" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="Mensaje" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Numero" nillable="true" type="xs:string" />
+      <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoLink" nillable="true" type="q18:TipoLink" />
+      <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="Usuario" nillable="true" type="q19:Usuario" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="SmsService" nillable="true" type="tns:SmsService" />
 </xs:schema>

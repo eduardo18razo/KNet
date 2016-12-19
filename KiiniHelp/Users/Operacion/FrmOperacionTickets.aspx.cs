@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using KiiniHelp.ServiceEncuesta;
-using KiiniHelp.ServiceSistemaEstatus;
 using KiiniHelp.ServiceTicket;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
@@ -16,7 +14,7 @@ namespace KiiniHelp.Users.Operacion
     {
         readonly ServiceTicketClient _servicioTickets = new ServiceTicketClient();
         private List<string> _lstError = new List<string>();
-        private int _pageSize = 20;
+        private int _pageSize = 1000;
         private List<string> AlertaGeneral
         {
             set
@@ -303,7 +301,7 @@ namespace KiiniHelp.Users.Operacion
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEstatusCambio\");", true);
                 if (UcCambiarEstatusTicket.CerroTicket)
                 {
-                    string url = ResolveUrl("~/FrmEncuesta.aspx?IdTicket=" + hfTicketActivo.Value);
+                    string url = ResolveUrl("~/FrmEncuesta.aspx?IdTipoServicio=" + (int)BusinessVariables.EnumTipoArbol.Servicio + "IdTicket=" + hfTicketActivo.Value);
                     //string s = "window.open('" + url + "', 'popup_window', 'width=600,height=600,left=300,top=100,resizable=yes');";
                     //ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptEncuesta", "OpenWindow(\"" + url + "\");", true);

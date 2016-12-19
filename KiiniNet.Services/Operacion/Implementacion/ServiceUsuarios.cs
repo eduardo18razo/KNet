@@ -203,6 +203,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public List<Usuario> BuscarUsuarios(string usuario)
+        {
+            try
+            {
+                using (BusinessUsuarios negocio = new BusinessUsuarios())
+                {
+                    return negocio.BuscarUsuarios(usuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public string EnviaCodigoVerificacionCorreo(int idUsuario, int idTipoNotificacion, int idCorreo)
         {
             try

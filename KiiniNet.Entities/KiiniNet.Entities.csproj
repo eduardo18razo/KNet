@@ -50,6 +50,8 @@
     <Compile Include="Cat\Arbol\Nodos\Nivel6.cs" />
     <Compile Include="Cat\Arbol\Nodos\Nivel7.cs" />
     <Compile Include="Cat\Arbol\Nodos\Nivel2.cs" />
+    <Compile Include="Cat\Sistema\CampoCatalogo.cs" />
+    <Compile Include="Cat\Sistema\Canal.cs" />
     <Compile Include="Cat\Mascaras\CampoMascara.cs" />
     <Compile Include="Cat\Mascaras\Mascara.cs" />
     <Compile Include="Cat\Mascaras\TipoCampoMascara.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="Cat\Arbol\Organizacion\SubDireccion.cs" />
     <Compile Include="Cat\Sistema\Rol.cs" />
     <Compile Include="Cat\Sistema\SubRol.cs" />
+    <Compile Include="Cat\Usuario\Horario.cs" />
     <Compile Include="Cat\Usuario\HorarioSubGrupo.cs" />
     <Compile Include="Cat\Usuario\Puesto.cs" />
     <Compile Include="Cat\Usuario\Sla.cs" />
@@ -110,6 +113,7 @@
     <Compile Include="Operacion\HitGrupoUsuario.cs" />
     <Compile Include="Operacion\InformacionConsulta.cs" />
     <Compile Include="Operacion\InformacionConsultaDatos.cs" />
+    <Compile Include="Operacion\InformacionConsultaDocumento.cs" />
     <Compile Include="Operacion\InventarioInfConsulta.cs" />
     <Compile Include="Operacion\RespuestaEncuesta.cs" />
     <Compile Include="Operacion\SLADetalle.cs" />
@@ -139,13 +143,17 @@
     <Compile Include="Operacion\Usuarios\CorreoUsuario.cs" />
     <Compile Include="Cat\Operacion\Organizacion.cs" />
     <Compile Include="Operacion\Usuarios\UsuarioLinkPassword.cs" />
+    <Compile Include="Operacion\Usuarios\UsuarioPassword.cs" />
     <Compile Include="Parametros\Aplicaciones.cs" />
     <Compile Include="Parametros\EstatusAsignacionSubRolGeneral.cs" />
     <Compile Include="Parametros\EstatusAsignacionSubRolGeneralDefault.cs" />
     <Compile Include="Parametros\EstatusTicketSubRolGeneral.cs" />
     <Compile Include="Parametros\EstatusTicketSubRolGeneralDefault.cs" />
+    <Compile Include="Cat\Usuario\HorarioDetalle.cs" />
     <Compile Include="Parametros\ParametroCorreo.cs" />
+    <Compile Include="Parametros\ParametroPassword.cs" />
     <Compile Include="Parametros\ParametrosAplicacion.cs" />
+    <Compile Include="Parametros\ParametrosGenerales.cs" />
     <Compile Include="Parametros\ParametrosSla.cs" />
     <Compile Include="Parametros\ParametrosTelefonos.cs" />
     <Compile Include="Parametros\SubRolEscalacionPermitida.cs" />

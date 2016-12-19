@@ -171,3 +171,5 @@ C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\obj\Release\KiiniHelp.c
 C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\obj\Release\KiiniHelp.csproj.ResolveComReference.cache
 C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\obj\Release\KiiniHelp.dll
 C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\obj\Release\KiiniHelp.pdb
+C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\MSCaptcha.dll
+C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\MSCaptcha.xml

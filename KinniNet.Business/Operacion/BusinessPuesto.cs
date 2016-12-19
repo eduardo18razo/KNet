@@ -20,14 +20,15 @@ namespace KinniNet.Core.Operacion
             _proxy = proxy;
         }
 
-        public List<Puesto> ObtenerPuestos(bool insertarSeleccion)
+        public List<Puesto> ObtenerPuestosByTipoUsuario(int idTipoUsuario, bool insertarSeleccion)
         {
             List<Puesto> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.Puesto.Where(w => w.Habilitado).OrderBy(o => o.Descripcion).ToList();
+                result = db.Puesto.Where(w =>w.IdTipoUsuario == idTipoUsuario && w.Habilitado).OrderBy(o => o.Descripcion).ToList();
+
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
                         new Puesto
@@ -38,7 +39,26 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        public Puesto ObtenerPuestoById(int idPuesto)
+        {
+            Puesto result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Puesto.SingleOrDefault(w => w.Id == idPuesto && w.Habilitado);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -54,13 +74,15 @@ namespace KinniNet.Core.Operacion
             {
                 puesto.Habilitado = true;
                 puesto.Descripcion = puesto.Descripcion.Trim().ToUpper();
+                if (db.Puesto.Any(a => a.Descripcion == puesto.Descripcion))
+                    throw new Exception("Este Puesto ya existe.");
                 if (puesto.Id == 0)
                     db.Puesto.AddObject(puesto);
                 db.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -82,7 +104,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -90,7 +112,7 @@ namespace KinniNet.Core.Operacion
             }
         }
 
-        public List<Puesto> ObtenerPuestoConsulta(int? idPuesto)
+        public List<Puesto> ObtenerPuestoConsulta(int? idTipoUsuario)
         {
             List<Puesto> result;
             DataBaseModelContext db = new DataBaseModelContext();
@@ -99,13 +121,17 @@ namespace KinniNet.Core.Operacion
 
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 IQueryable<Puesto> qry = db.Puesto;
-                if (idPuesto != null)
-                    qry = qry.Where(w => w.Id == idPuesto);
+                if (idTipoUsuario != null)
+                    qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
                 result = qry.ToList();
+                foreach (Puesto puesto in result)
+                {
+                    db.LoadProperty(puesto, "TipoUsuario");
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -125,7 +151,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {

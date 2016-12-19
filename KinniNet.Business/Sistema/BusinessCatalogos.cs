@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Metadata.Edm;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Security.Cryptography;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Helper;
 using KinniNet.Business.Utils;
@@ -40,7 +40,7 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -67,7 +67,7 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -109,10 +109,11 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             return true;
         }
+
         private bool CreaTabla(string nombreCatalogo)
         {
             DataBaseModelContext db = new DataBaseModelContext();
@@ -133,13 +134,34 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
                 db.Dispose();
             }
             return true;
+        }
+
+        public Catalogos ObtenerCatalogo(int idCatalogo)
+        {
+            Catalogos result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Catalogos.SingleOrDefault(s => s.Id == idCatalogo);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
         }
 
         public void CrearCatalogo(string nombreCatalogo, bool esMascara)
@@ -149,10 +171,14 @@ namespace KinniNet.Core.Sistema
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 nombreCatalogo = nombreCatalogo.Trim().ToUpper();
-                Catalogos catalogo = new Catalogos { Descripcion = nombreCatalogo };
-                catalogo.Tabla = (BusinessVariables.ParametrosCatalogo.PrefijoTabla + nombreCatalogo).Replace(" ", string.Empty);
-                catalogo.EsMascaraCaptura = esMascara;
-                catalogo.Habilitado = true;
+                Catalogos catalogo = new Catalogos
+                {
+                    Descripcion = nombreCatalogo,
+                    Tabla = (BusinessVariables.ParametrosCatalogo.PrefijoTabla + nombreCatalogo).Replace(" ", string.Empty),
+                    EsMascaraCaptura = esMascara,
+                    Archivo = false,
+                    Habilitado = true
+                };
                 ExisteMascara(catalogo.Tabla);
                 CreaEstructuraBaseDatos(catalogo.Tabla);
                 db.Catalogos.AddObject(catalogo);
@@ -183,7 +209,7 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -203,7 +229,7 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -222,7 +248,7 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -248,6 +274,274 @@ namespace KinniNet.Core.Sistema
                 db.Dispose();
             }
             return result;
+        }
+
+        #region excel
+
+        private void RollBackActualizacion(DataSet dsOriginal, string nombreTabla, SqlConnection sqlCon)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand(string.Format("select * from {0} order by Id", nombreTabla), sqlCon);
+                SqlDataAdapter daRollBack = new SqlDataAdapter(cmd);
+                daRollBack.TableMappings.Add("Table", nombreTabla);
+                DataSet dsRollBack = new DataSet();
+                daRollBack.Fill(dsRollBack);
+                for (int row = 0; row < dsOriginal.Tables[nombreTabla].Rows.Count; row++)
+                {
+                    for (int col = 1; col < dsOriginal.Tables[nombreTabla].Columns.Count; col++)
+                    {
+                        dsRollBack.Tables[nombreTabla].Rows[row][col] = dsOriginal.Tables[nombreTabla].Rows[row][col];
+                    }
+                }
+                new SqlCommandBuilder(daRollBack);
+                daRollBack.Update(dsRollBack.Tables[nombreTabla]);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void ActualizarCatalogoExcel(int idCatalogo, bool esMascara, string archivo, string hoja)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            DataSet dsOriginales = null;
+            SqlConnection sqlConn = null;
+            string nombreTabla = null;
+            try
+            {
+                Catalogos catalogo = db.Catalogos.SingleOrDefault(s => s.Id == idCatalogo);
+                if (catalogo != null)
+                {
+                    nombreTabla = catalogo.Tabla;
+                    sqlConn = new SqlConnection(string.Format("Server={0};Database={1};Trusted_Connection=True", db.Connection.DataSource, (((System.Data.EntityClient.EntityConnection)(db.Connection)).StoreConnection).Database));
+                    sqlConn.Open();
+                    SqlCommand cmdSql = new SqlCommand(string.Format("select * from {0} order by Id", catalogo.Tabla), sqlConn);
+                    SqlDataAdapter daOriginal = new SqlDataAdapter(cmdSql);
+                    daOriginal.TableMappings.Add("Table", catalogo.Tabla);
+                    dsOriginales = new DataSet();
+                    daOriginal.Fill(dsOriginales);
+
+                    DataSet dtExcel = BusinessFile.ExcelManager.LeerHojaExcel(archivo, hoja);
+                    SqlCommand cmdDesabilita = new SqlCommand(string.Format("update {0} set Habilitado = 0", catalogo.Tabla), sqlConn);
+                    cmdDesabilita.ExecuteNonQuery();
+                    cmdSql = new SqlCommand(string.Format("select * from {0}", catalogo.Tabla), sqlConn);
+                    SqlDataAdapter da = new SqlDataAdapter(cmdSql);
+                    da.TableMappings.Add("Table", catalogo.Tabla);
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+
+                    foreach (DataRow row in dtExcel.Tables["tablaPaso"].Rows)
+                    {
+
+                        DataRow[] foundRows = ds.Tables[catalogo.Tabla].Select(dtExcel.Tables["tablaPaso"].Columns[0].ColumnName + " = '" + row[0] + "'");
+                        if (foundRows.Any())
+                        {
+                            foreach (DataRow dataRowDb in foundRows)
+                            {
+                                for (int col = 2; col < ds.Tables[catalogo.Tabla].Columns.Count - 1; col++)
+                                {
+                                    dataRowDb[col] = row[ds.Tables[catalogo.Tabla].Columns[col].ColumnName];
+                                }
+                                dataRowDb["Habilitado"] = true;
+                            }
+                        }
+                        else
+                        {
+                            DataRow dr = ds.Tables[catalogo.Tabla].NewRow();
+                            foreach (DataColumn column in dtExcel.Tables["tablaPaso"].Columns)
+                            {
+                                dr[column.ColumnName] = row[column.ColumnName].ToString();
+                            }
+                            dr["Habilitado"] = true;
+                            ds.Tables[catalogo.Tabla].Rows.Add(dr);
+                        }
+                    }
+                    new SqlCommandBuilder(da);
+                    da.Update(ds.Tables[catalogo.Tabla]);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                if (sqlConn != null && dsOriginales != null && nombreTabla != string.Empty)
+                    RollBackActualizacion(dsOriginales, nombreTabla, sqlConn);
+                throw new Exception(ex.Message);
+            }
+            finally { db.Dispose(); }
+        }
+        public void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                nombreCatalogo = nombreCatalogo.ToUpper();
+                Catalogos catalogo = new Catalogos
+                {
+                    Descripcion = nombreCatalogo,
+                    Tabla = (BusinessVariables.ParametrosCatalogo.PrefijoTabla + nombreCatalogo).Replace(" ", string.Empty),
+                    EsMascaraCaptura = esMascara,
+                    Archivo = true,
+                    Habilitado = true
+                };
+                ExisteMascara(catalogo.Tabla);
+                DataSet dtExcel = BusinessFile.ExcelManager.LeerHojaExcel(archivo, hoja);
+                string sqltable = CreateSqlTableFromDataTable(catalogo.Tabla, dtExcel.Tables["tablaPaso"]);
+                db.ExecuteStoreCommand(sqltable);
+                SqlConnection sqlConn = new SqlConnection(string.Format("Server={0};Database={1};Trusted_Connection=True", db.Connection.DataSource, (((System.Data.EntityClient.EntityConnection)(db.Connection)).StoreConnection).Database));
+                sqlConn.Open();
+                SqlCommand cmd = new SqlCommand(string.Format("select * from {0}", catalogo.Tabla), sqlConn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.TableMappings.Add("Table", catalogo.Tabla);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                List<CampoCatalogo> lstCampos = (from DataColumn column in dtExcel.Tables["tablaPaso"].Columns select new CampoCatalogo { Campo = column.ColumnName, TipoCampo = SqlGetType(column) }).ToList();
+                catalogo.CampoCatalogo = lstCampos;
+                foreach (DataRow row in dtExcel.Tables["tablaPaso"].Rows)
+                {
+                    DataRow dr = ds.Tables[catalogo.Tabla].NewRow();
+                    foreach (DataColumn column in dtExcel.Tables["tablaPaso"].Columns)
+                    {
+                        dr[column.ColumnName] = row[column.ColumnName].ToString();
+                    }
+                    dr["Habilitado"] = true;
+                    ds.Tables[catalogo.Tabla].Rows.Add(dr);
+                }
+                new SqlCommandBuilder(da);
+                da.Update(ds.Tables[catalogo.Tabla]);
+                db.Catalogos.AddObject(catalogo);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                EliminarObjetoBaseDeDatos(nombreCatalogo, BusinessVariables.EnumTipoObjeto.Tabla);
+                throw new Exception(ex.Message);
+            }
+            finally { db.Dispose(); }
+        }
+
+        public static string CreateSqlTableFromDataTable(string tableName, DataTable table)
+        {
+            
+            string sql = "CREATE TABLE [" + tableName + "] (\n";
+            sql += "Id int IDENTITY(1,1) NOT NULL, \n";
+            sql = table.Columns.Cast<DataColumn>().Aggregate(sql, (current, column) => current + ("[" + column.ColumnName + "] " + SqlGetType(column) + ",\n"));
+            sql += "Habilitado BIT \n";
+            sql = sql.TrimEnd(new char[] { ',', '\n' }) + "\n";
+            sql += "CONSTRAINT [PK_" + tableName + "] PRIMARY KEY CLUSTERED (";
+            sql += "[Id] ASC \n" +
+                   ") WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY] \n" +
+                   ") ON [PRIMARY] \n " +
+                   "ALTER TABLE [dbo].[" + tableName + "] ADD  CONSTRAINT [DF_{" + tableName + "}_habilitado]  DEFAULT ((1)) FOR [Habilitado]";
+            return sql;
+        }
+
+        public static string SqlGetType(DataColumn column)
+        {
+            return GetSqlType(column.DataType, column.MaxLength, 10, 2);
+        }
+
+        public static string GetSqlType(object type, int columnSize, int numericPrecision, int numericScale)
+        {
+            switch (type.ToString())
+            {
+                case "System.Byte[]":
+                    return "VARBINARY(MAX)";
+                case "System.Boolean":
+                    return "BIT";
+                case "System.DateTime":
+                    return "DATETIME";
+                case "System.DateTimeOffset":
+                    return "DATETIMEOFFSET";
+                case "System.Decimal":
+                    if (numericPrecision != -1 && numericScale != -1)
+                        return "DECIMAL(" + numericPrecision + "," + numericScale + ")";
+                    else
+                        return "DECIMAL";
+                case "System.Double":
+                    return "FLOAT";
+                case "System.Single":
+                    return "REAL";
+                case "System.Int64":
+                    return "BIGINT";
+                case "System.Int32":
+                    return "INT";
+                case "System.Int16":
+                    return "SMALLINT";
+                case "System.String":
+                    return "NVARCHAR(" + ((columnSize == -1 || columnSize > 8000) ? "MAX" : columnSize.ToString()) + ")";
+                case "System.Byte":
+                    return "TINYINT";
+                case "System.Guid":
+                    return "UNIQUEIDENTIFIER";
+                default:
+                    throw new Exception(type.ToString() + " not implemented.");
+            }
+        }
+
+        private void EliminarObjetoBaseDeDatos(string nombreObjeto, BusinessVariables.EnumTipoObjeto objeto)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                string query = "DROP ";
+                switch (objeto)
+                {
+                    case BusinessVariables.EnumTipoObjeto.Tabla:
+                        query += "TABLE " + nombreObjeto;
+                        break;
+                    case BusinessVariables.EnumTipoObjeto.Store:
+                        query += "PROCEDURE " + nombreObjeto;
+                        break;
+                }
+                db.ExecuteStoreCommand(query);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+        #endregion excel
+
+
+        public List<CamposCatalogo> ObtenerCamposCatalogo(int idCatalogo)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            List<CamposCatalogo> result = new List<CamposCatalogo>();
+            try
+            {
+                Catalogos catalogo = db.Catalogos.SingleOrDefault(w => w.Id == idCatalogo);
+                if (catalogo != null)
+                {
+                    SqlConnection sqlConn = new SqlConnection(string.Format("Server={0};Database={1};Trusted_Connection=True", db.Connection.DataSource, (((System.Data.EntityClient.EntityConnection)(db.Connection)).StoreConnection).Database));
+                    SqlCommand cmdSchema = new SqlCommand(string.Format("select COLUMN_NAME, DATA_TYPE from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME ='{0}'", catalogo.Tabla), sqlConn);
+                    SqlDataAdapter daSchema = new SqlDataAdapter(cmdSchema);
+                    daSchema.TableMappings.Add("Table", catalogo.Tabla);
+                    DataSet dsSchema = new DataSet();
+                    daSchema.Fill(dsSchema);
+                    result = (from DataRow row in dsSchema.Tables[catalogo.Tabla].Rows select new CamposCatalogo { Descripcion = row[0].ToString(), TipoDato = row[1].ToString() }).ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public class CamposCatalogo
+        {
+            public string Descripcion { get; set; }
+            public string TipoDato { get; set; }
         }
     }
 }

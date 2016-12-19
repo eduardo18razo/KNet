@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.UI.WebControls;
+using KiiniHelp.ServiceSeguridad;
 using KiiniHelp.ServiceUsuario;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
@@ -101,7 +102,7 @@ namespace KiiniHelp
                     if (Request.Params["confirmacionalta"] != null)
                     {
                         string[] values = Request.Params["confirmacionalta"].Split('_');
-                        if (!_servicioUsuarios.ValidaConfirmacion(int.Parse(values[0]), values[1]))
+                        if (!_servicioUsuarios.ValidaConfirmacion(int.Parse(values[0]), values[1].ToUpper()))
                         {
                             Response.Redirect(ResolveUrl("~/Default.aspx"));
                         }
@@ -187,6 +188,7 @@ namespace KiiniHelp
             try
             {
                 ValidaCaptura();
+                new ServiceSecurityClient().ValidaPassword(txtContrasena.Text.Trim());
                 string result = string.Empty;
                 Dictionary<int, string> confirmaciones = new Dictionary<int, string>();
                 foreach (RepeaterItem item in rptConfirmacion.Items)
@@ -224,9 +226,7 @@ namespace KiiniHelp
                 if (txtRespuesta.Text.Trim() == string.Empty)
                     throw new Exception("Especifique una respuesta");
 
-                List<PreguntaReto> tmpPreguntas = ((List<PreguntaReto>)Session["PreguntaReto"]);
-                if (tmpPreguntas == null)
-                    tmpPreguntas = new List<PreguntaReto>();
+                List<PreguntaReto> tmpPreguntas = ((List<PreguntaReto>)Session["PreguntaReto"]) ?? new List<PreguntaReto>();
 
                 if (txtIdPregunta.Text.Trim() == string.Empty)
                     tmpPreguntas.Add(new PreguntaReto

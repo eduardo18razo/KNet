@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Usuario;
@@ -13,10 +14,12 @@ namespace KinniNet.Core.Operacion
     public class BusinessInformacionConsulta : IDisposable
     {
         private bool _proxy;
+
         public void Dispose()
         {
 
         }
+
         public BusinessInformacionConsulta(bool proxy = false)
         {
             _proxy = proxy;
@@ -29,7 +32,10 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.InformacionConsulta.Where(w => w.IdTipoInfConsulta == (int)tipoinfoConsulta && w.Habilitado).OrderBy(o => o.Descripcion).ToList();
+                result =
+                    db.InformacionConsulta.Where(w => w.IdTipoInfConsulta == (int) tipoinfoConsulta && w.Habilitado)
+                        .OrderBy(o => o.Descripcion)
+                        .ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
                         new InformacionConsulta
@@ -40,7 +46,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -49,7 +55,7 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public void GuardarInformacionConsulta(InformacionConsulta informacion)
+        public void GuardarInformacionConsulta(InformacionConsulta informacion, List<string> documentosDescarga)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
@@ -58,28 +64,77 @@ namespace KinniNet.Core.Operacion
                 informacion.Descripcion = informacion.Descripcion.Trim().ToUpper();
                 switch (informacion.IdTipoInfConsulta)
                 {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
-
-                        break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
-
-                        break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                    case (int) BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                         if (!informacion.InformacionConsultaDatos.First().Descripcion.StartsWith("http://"))
-                            informacion.InformacionConsultaDatos.First().Descripcion = "http://" + informacion.InformacionConsultaDatos.First().Descripcion;
+                            informacion.InformacionConsultaDatos.First().Descripcion = "http://" +
+                                                                                       informacion
+                                                                                           .InformacionConsultaDatos
+                                                                                           .First().Descripcion;
                         break;
-                    default:
-                        throw new Exception("Seleccione un tipo de información");
+                        //default:
+                        //    throw new Exception("Seleccione un tipo de información");
                 }
-                //TODO: Cambiar habilitado por el embebido
                 informacion.Habilitado = true;
+                informacion.InformacionConsultaDocumento = new List<InformacionConsultaDocumento>();
+                foreach (string s in documentosDescarga)
+                {
+                    informacion.InformacionConsultaDocumento.Add(new InformacionConsultaDocumento
+                    {
+                        Archivo = s,
+                        Fecha =
+                            DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"),
+                                "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
+                    });
+                }
                 if (informacion.Id == 0)
                     db.InformacionConsulta.AddObject(informacion);
                 db.SaveChanges();
+                BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta,
+                    BusinessVariables.Directorios.RepositorioInformacionConsulta, documentosDescarga);
+                if (informacion.IdTipoInfConsulta == (int) BusinessVariables.EnumTiposInformacionConsulta.Documento)
+                {
+                    switch (informacion.IdTipoDocumento)
+                    {
+                        case (int) BusinessVariables.EnumTiposDocumento.Word:
+                            BusinessFile.MoverTemporales(
+                                BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta,
+                                BusinessVariables.Directorios.RepositorioInformacionConsulta,
+                                new List<string> {informacion.InformacionConsultaDatos.First().Descripcion});
+                            BusinessFile.ConvertirWord(informacion.InformacionConsultaDatos.First().Descripcion);
+                            break;
+                        case (int) BusinessVariables.EnumTiposDocumento.Excel:
+                            BusinessFile.MoverTemporales(
+                                BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta,
+                                BusinessVariables.Directorios.RepositorioInformacionConsulta,
+                                new List<string> {informacion.InformacionConsultaDatos.First().Descripcion});
+                            BusinessFile.ConvertirExcel(informacion.InformacionConsultaDatos.First().Descripcion);
+                            break;
+                        case (int) BusinessVariables.EnumTiposDocumento.PowerPoint:
+                            BusinessFile.MoverTemporales(
+                                BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta,
+                                BusinessVariables.Directorios.RepositorioInformacionConsulta,
+                                new List<string> {informacion.InformacionConsultaDatos.First().Descripcion});
+                            BusinessFile.ConvertirPowerPoint(informacion.InformacionConsultaDatos.First().Descripcion);
+                            break;
+                        case (int) BusinessVariables.EnumTiposDocumento.Pdf:
+                            BusinessFile.MoverTemporales(
+                                BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta,
+                                BusinessVariables.Directorios.RepositorioInformacionConsulta,
+                                new List<string> {informacion.InformacionConsultaDatos.First().Descripcion});
+                            break;
+                        case (int) BusinessVariables.EnumTiposDocumento.Imagen:
+                            BusinessFile.MoverTemporales(
+                                BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta,
+                                BusinessVariables.Directorios.RepositorioInformacionConsulta,
+                                new List<string> {informacion.InformacionConsultaDatos.First().Descripcion});
+                            break;
+                    }
+                }
+
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -102,23 +157,27 @@ namespace KinniNet.Core.Operacion
                 info.Habilitado = true;
                 switch (informacion.IdTipoInfConsulta)
                 {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
+                    case (int) BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                         for (int i = 0; i < info.InformacionConsultaDatos.Count; i++)
                         {
-                            info.InformacionConsultaDatos[i].Descripcion = informacion.InformacionConsultaDatos[i].Descripcion;
+                            info.InformacionConsultaDatos[i].Descripcion =
+                                informacion.InformacionConsultaDatos[i].Descripcion;
                         }
                         break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                    case (int) BusinessVariables.EnumTiposInformacionConsulta.Documento:
                         for (int i = 0; i < info.InformacionConsultaDatos.Count; i++)
                         {
-                            info.InformacionConsultaDatos[i].Descripcion = informacion.InformacionConsultaDatos[i].Descripcion;
+                            info.InformacionConsultaDatos[i].Descripcion =
+                                informacion.InformacionConsultaDatos[i].Descripcion;
                         }
                         break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                    case (int) BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
                         for (int i = 0; i < info.InformacionConsultaDatos.Count; i++)
                         {
                             if (!informacion.InformacionConsultaDatos.First().Descripcion.StartsWith("http://"))
-                                info.InformacionConsultaDatos.First().Descripcion = "http://" + informacion.InformacionConsultaDatos.First().Descripcion;
+                                info.InformacionConsultaDatos.First().Descripcion = "http://" +
+                                                                                    informacion.InformacionConsultaDatos
+                                                                                        .First().Descripcion;
                         }
                         break;
                     default:
@@ -129,7 +188,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -145,10 +204,10 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.InventarioArbolAcceso.Join(db.InventarioInfConsulta, iaa => iaa.Id, iic => iic.IdInventario,
-                        (iaa, iic) => new { iaa, iic })
-                        .Join(db.InformacionConsulta, @t => @t.iic.IdInfConsulta, ic => ic.Id, (@t, ic) => new { @t, ic })
-                        .Where(@t => @t.@t.iaa.IdArbolAcceso == idArbol)
-                        .Select(@t => @t.ic).ToList();
+                    (iaa, iic) => new {iaa, iic})
+                    .Join(db.InformacionConsulta, @t => @t.iic.IdInfConsulta, ic => ic.Id, (@t, ic) => new {@t, ic})
+                    .Where(@t => @t.@t.iaa.IdArbolAcceso == idArbol)
+                    .Select(@t => @t.ic).ToList();
                 foreach (InformacionConsulta informacionConsulta in result)
                 {
                     db.LoadProperty(informacionConsulta, "TipoInfConsulta");
@@ -156,7 +215,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -177,11 +236,12 @@ namespace KinniNet.Core.Operacion
                 {
                     db.LoadProperty(result, "TipoInfConsulta");
                     db.LoadProperty(result, "InformacionConsultaDatos");
+                    db.LoadProperty(result, "InformacionConsultaDocumento");
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -212,7 +272,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -232,12 +292,19 @@ namespace KinniNet.Core.Operacion
                     IdTipoArbolAcceso = new BusinessArbolAcceso().ObtenerArbolAcceso(idArbol).IdTipoArbolAcceso,
                     IdArbolAcceso = idArbol,
                     IdUsuario = idUsuario,
-                    IdUbicacion = new BusinessUbicacion().ObtenerUbicacionUsuario(new BusinessUsuarios().ObtenerUsuario(idUsuario).IdUbicacion).Id,
-                    IdOrganizacion = new BusinessOrganizacion().ObtenerOrganizacionUsuario(new BusinessUsuarios().ObtenerUsuario(idUsuario).IdOrganizacion).Id,
+                    IdUbicacion =
+                        new BusinessUbicacion().ObtenerUbicacionUsuario(
+                            new BusinessUsuarios().ObtenerUsuario(idUsuario).IdUbicacion).Id,
+                    IdOrganizacion =
+                        new BusinessOrganizacion().ObtenerOrganizacionUsuario(
+                            new BusinessUsuarios().ObtenerUsuario(idUsuario).IdOrganizacion).Id,
                     HitGrupoUsuario = new List<HitGrupoUsuario>(),
-                    FechaHoraAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture)
+                    FechaHoraAlta =
+                        DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff",
+                            CultureInfo.InvariantCulture)
                 };
-                foreach (GrupoUsuarioInventarioArbol guia in new BusinessArbolAcceso().ObtenerGruposUsuarioArbol(idArbol))
+                foreach (
+                    GrupoUsuarioInventarioArbol guia in new BusinessArbolAcceso().ObtenerGruposUsuarioArbol(idArbol))
                 {
                     hit.HitGrupoUsuario.Add(new HitGrupoUsuario
                     {
@@ -253,7 +320,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -272,7 +339,7 @@ namespace KinniNet.Core.Operacion
             }
             catch (Exception ex)
             {
-                throw new Exception((ex.InnerException).Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
