@@ -8,7 +8,7 @@ using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Helper;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
-
+g
 namespace KinniNet.Core.Sistema
 {
     public class BusinessCatalogos : IDisposable
