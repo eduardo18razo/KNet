@@ -6,6 +6,8 @@ namespace KiiniNet.Entities.Helper
     public class HelperReportesTicket
     {
         public int IdTicket { get; set; }
+        public int IdCanal { get; set; }
+        public string Canal { get; set; }
         public string TipoUsuario { get; set; }
         public string GrupoEspecialConsulta { get; set; }
         public string GrupoAtendedor { get; set; }

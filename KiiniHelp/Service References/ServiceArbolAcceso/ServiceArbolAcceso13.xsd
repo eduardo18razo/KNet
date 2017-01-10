@@ -32,6 +32,7 @@
     <xs:sequence>
       <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="Catalogos" nillable="true" type="q3:Catalogos" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EsArchivo" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IdCatalogo" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="IdMascara" type="xs:int" />

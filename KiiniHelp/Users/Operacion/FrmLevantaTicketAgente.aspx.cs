@@ -1,33 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
 using KiiniHelp.ServiceArbolAcceso;
 using KiiniHelp.ServiceArea;
-using KiiniHelp.ServiceGrupoUsuario;
-using KiiniHelp.ServiceParametrosSistema;
 using KiiniHelp.ServiceSistemaCanal;
 using KiiniHelp.ServiceSistemaTipoArbolAcceso;
 using KiiniHelp.ServiceUsuario;
-using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.Users.Operacion
 {
-    public partial class FrmLevantaTicketAgente : System.Web.UI.Page
+    public partial class FrmLevantaTicketAgente : Page
     {
         private readonly ServiceUsuariosClient _servicioUsuarios = new ServiceUsuariosClient();
         private readonly ServiceArbolAccesoClient _servicioArbolAcceso = new ServiceArbolAccesoClient();
         private readonly ServiceTipoArbolAccesoClient _servicioSistemaTipoArbol = new ServiceTipoArbolAccesoClient();
-        private readonly ServiceGrupoUsuarioClient _servicioGruposUsuario = new ServiceGrupoUsuarioClient();
         private readonly ServiceAreaClient _servicioAreas = new ServiceAreaClient();
         private readonly ServiceCanalClient _servicioCanal = new ServiceCanalClient();
-        private readonly ServiceParametrosClient _servicioParametros = new ServiceParametrosClient();
 
         private List<string> _lstError = new List<string>();
         private List<string> AlertaGeneral
@@ -47,17 +40,60 @@ namespace KiiniHelp.Users.Operacion
             try
             {
                 AlertaGeneral = new List<string>();
-                ParametrosGenerales generales = _servicioParametros.ObtenerParametrosGenerales();
-                if (!((Usuario)Session["UserData"]).LevantaTickets && !generales.LevantaTickets)
+                ParametrosGenerales generales = (ParametrosGenerales)Session["ParametrosGenerales"];
+                if (!IsPostBack)
                 {
-                    Response.Redirect("~/Users/DashBoard.aspx");
+                    if (!generales.LevantaTickets)
+                    {
+                        Response.Redirect("~/Users/DashBoard.aspx");
+                    }
+                    if (generales.LevantaTickets && (!((Usuario)Session["UserData"]).LevantaTickets && !((Usuario)Session["UserData"]).LevantaRecado))
+                    {
+                        Response.Redirect("~/Users/DashBoard.aspx");
+                    }
                 }
-                Session["ParametrosGenerales"] = generales;
+
                 if (generales.ValidaUsuario)
                 {
                     ucMensajeValidacion.Mensaje = generales.MensajeValidacion;
                     ucMensajeValidacion.OnCancelarModal += ucMensajeValidacion_OnCancelarModal;
                 }
+                ucAltaPreticket.OnAceptarModal += UcAltaPreticketOnOnAceptarModal;
+                ucAltaPreticket.OnCancelarModal += UcAltaPreticketOnOnCancelarModal;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        private void UcAltaPreticketOnOnCancelarModal() 
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalPreTicket\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        private void UcAltaPreticketOnOnAceptarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalPreTicket\");", true);
             }
             catch (Exception ex)
             {
@@ -129,7 +165,7 @@ namespace KiiniHelp.Users.Operacion
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
                 divArbol.Visible = true;
-                if (((ParametrosGenerales) Session["ParametrosGenerales"]).ValidaUsuario)
+                if (((ParametrosGenerales)Session["ParametrosGenerales"]).ValidaUsuario)
                 {
                     ucMensajeValidacion.IdUsuarioValidar = int.Parse(rbtnLstUsuarios.SelectedValue);
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalValidaUsuario\");", true);
@@ -212,6 +248,8 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
+                btnLevantar.Visible = false;
+                btnNotificacion.Visible = false;
                 Metodos.LimpiarCombo(ddlNivel2);
                 Metodos.LimpiarCombo(ddlNivel3);
                 Metodos.LimpiarCombo(ddlNivel4);
@@ -220,20 +258,27 @@ namespace KiiniHelp.Users.Operacion
                 Metodos.LimpiarCombo(ddlNivel7);
                 if (ddlNivel1.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                 {
-                    btnLevantar.Visible = false;
                     return;
                 }
                 int idArea = Convert.ToInt32(ddlArea.SelectedValue);
                 int idTipoArbolAcceso = Convert.ToInt32(ddlTipoArbol.SelectedValue);
+                int idTipoUsuario = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).IdTipoUsuario;
                 int idNivelFiltro = Convert.ToInt32(ddlNivel1.SelectedValue);
-                if (!_servicioArbolAcceso.EsNodoTerminalByGrupos(idArea, _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).IdTipoUsuario, idTipoArbolAcceso, idNivelFiltro, null, null, null, null, null, null))
+                if (!_servicioArbolAcceso.EsNodoTerminalByGrupos(idArea, idTipoUsuario, idTipoArbolAcceso, idNivelFiltro,null, null, null, null, null, null))
                 {
-                    Metodos.FiltraCombo(ddlNivel1, ddlNivel2, _servicioArbolAcceso.ObtenerNivel2ByGrupos(int.Parse(rbtnLstUsuarios.SelectedValue), ((Usuario)Session["UserData"]).Id, idArea, idTipoArbolAcceso, idNivelFiltro, true));
-                    btnLevantar.Visible = false;
+                    Metodos.FiltraCombo(ddlNivel1, ddlNivel2,_servicioArbolAcceso.ObtenerNivel2ByGrupos(int.Parse(rbtnLstUsuarios.SelectedValue),((Usuario) Session["UserData"]).Id, idArea, idTipoArbolAcceso, idNivelFiltro, true));
                 }
                 else
                 {
-                    btnLevantar.Visible = true;
+                    btnLevantar.Visible = _servicioArbolAcceso.LevantaTicket(((Usuario) Session["UserData"]).Id, idArea,
+                        idTipoUsuario, idTipoArbolAcceso, idNivelFiltro, null, null, null, null, null, null);
+                    if (!btnLevantar.Visible)
+                    {
+                        btnNotificacion.Visible =
+                            _servicioArbolAcceso.RecadoTicketTicket(((Usuario) Session["UserData"]).Id, idArea,
+                                _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue))
+                                    .IdTipoUsuario, idTipoArbolAcceso, idNivelFiltro, null, null, null, null, null, null);
+                    }
                 }
             }
             catch (Exception ex)
@@ -250,6 +295,9 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
+
+                btnLevantar.Visible = false;
+                btnNotificacion.Visible = false;
                 Metodos.LimpiarCombo(ddlNivel3);
                 Metodos.LimpiarCombo(ddlNivel4);
                 Metodos.LimpiarCombo(ddlNivel5);
@@ -257,7 +305,6 @@ namespace KiiniHelp.Users.Operacion
                 Metodos.LimpiarCombo(ddlNivel7);
                 if (ddlNivel2.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                 {
-                    btnLevantar.Visible = false;
                     return;
                 }
                 int idArea = Convert.ToInt32(ddlArea.SelectedValue);
@@ -265,14 +312,17 @@ namespace KiiniHelp.Users.Operacion
                 int idTipoUsuario = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).IdTipoUsuario;
                 int idNivelFiltro = Convert.ToInt32(ddlNivel2.SelectedValue);
 
-                if (!_servicioArbolAcceso.EsNodoTerminalByGrupos(idTipoUsuario, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), idNivelFiltro, null, null, null, null, null))
+                if (!_servicioArbolAcceso.EsNodoTerminalByGrupos(idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), idNivelFiltro, null, null, null, null, null))
                 {
                     Metodos.FiltraCombo(ddlNivel2, ddlNivel3, _servicioArbolAcceso.ObtenerNivel3ByGrupos(int.Parse(rbtnLstUsuarios.SelectedValue), ((Usuario)Session["UserData"]).Id, idArea, idTipoArbolAcceso, idNivelFiltro, true));
-                    btnLevantar.Visible = false;
                 }
                 else
                 {
-                    btnLevantar.Visible = true;
+                    btnLevantar.Visible = _servicioArbolAcceso.LevantaTicket(((Usuario)Session["UserData"]).Id, idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), idNivelFiltro, null, null, null, null, null);
+                    if (!btnLevantar.Visible)
+                    {
+                        btnNotificacion.Visible = _servicioArbolAcceso.RecadoTicketTicket(((Usuario)Session["UserData"]).Id, idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), idNivelFiltro, null, null, null, null, null);
+                    }
                 }
             }
             catch (Exception ex)
@@ -289,27 +339,31 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
+                btnLevantar.Visible = false;
+                btnNotificacion.Visible = false;
                 Metodos.LimpiarCombo(ddlNivel4);
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
                 if (ddlNivel3.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                 {
-                    btnLevantar.Visible = false;
                     return;
                 }
                 int idArea = Convert.ToInt32(ddlArea.SelectedValue);
                 int idTipoArbolAcceso = Convert.ToInt32(ddlTipoArbol.SelectedValue);
                 int idTipoUsuario = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).IdTipoUsuario;
                 int idNivelFiltro = Convert.ToInt32(ddlNivel3.SelectedValue);
-                if (!_servicioArbolAcceso.EsNodoTerminalByGrupos(idTipoUsuario, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), null, null, null, null))
+                if (!_servicioArbolAcceso.EsNodoTerminalByGrupos(idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), null, null, null, null))
                 {
                     Metodos.FiltraCombo(ddlNivel3, ddlNivel4, _servicioArbolAcceso.ObtenerNivel4ByGrupos(int.Parse(rbtnLstUsuarios.SelectedValue), ((Usuario)Session["UserData"]).Id, idArea, idTipoArbolAcceso, idNivelFiltro, true));
-                    btnLevantar.Visible = false;
                 }
                 else
                 {
-                    btnLevantar.Visible = true;
+                    btnLevantar.Visible = _servicioArbolAcceso.LevantaTicket(((Usuario)Session["UserData"]).Id, idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), null, null, null, null);
+                    if (!btnLevantar.Visible)
+                    {
+                        btnNotificacion.Visible = _servicioArbolAcceso.RecadoTicketTicket(((Usuario)Session["UserData"]).Id, idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), null, null, null, null);
+                    }
                 }
             }
             catch (Exception ex)
@@ -326,26 +380,31 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
+
+                btnLevantar.Visible = false;
+                btnNotificacion.Visible = false;
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
                 if (ddlNivel4.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                 {
-                    btnLevantar.Visible = false;
                     return;
                 }
                 int idArea = Convert.ToInt32(ddlArea.SelectedValue);
                 int idTipoArbolAcceso = Convert.ToInt32(ddlTipoArbol.SelectedValue);
                 int idTipoUsuario = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).IdTipoUsuario;
                 int idNivelFiltro = Convert.ToInt32(ddlNivel4.SelectedValue);
-                if (!_servicioArbolAcceso.EsNodoTerminalByGrupos(idTipoUsuario, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), idNivelFiltro, null, null, null))
+                if (!_servicioArbolAcceso.EsNodoTerminalByGrupos(idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), idNivelFiltro, null, null, null))
                 {
                     Metodos.FiltraCombo(ddlNivel4, ddlNivel5, _servicioArbolAcceso.ObtenerNivel5ByGrupos(int.Parse(rbtnLstUsuarios.SelectedValue), ((Usuario)Session["UserData"]).Id, idArea, idTipoArbolAcceso, idNivelFiltro, true));
-                    btnLevantar.Visible = false;
                 }
                 else
                 {
-                    btnLevantar.Visible = true;
+                    btnLevantar.Visible = _servicioArbolAcceso.LevantaTicket(((Usuario)Session["UserData"]).Id, idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), idNivelFiltro, null, null, null);
+                    if (!btnLevantar.Visible)
+                    {
+                        btnNotificacion.Visible = _servicioArbolAcceso.RecadoTicketTicket(((Usuario)Session["UserData"]).Id, idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), idNivelFiltro, null, null, null);
+                    }
                 }
             }
             catch (Exception ex)
@@ -362,25 +421,29 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
+                btnLevantar.Visible = false;
+                btnNotificacion.Visible = false;
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
                 if (ddlNivel5.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                 {
-                    btnLevantar.Visible = false;
                     return;
                 }
                 int idArea = Convert.ToInt32(ddlArea.SelectedValue);
                 int idTipoArbolAcceso = Convert.ToInt32(ddlTipoArbol.SelectedValue);
                 int idTipoUsuario = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).IdTipoUsuario;
                 int idNivelFiltro = Convert.ToInt32(ddlNivel5.SelectedValue);
-                if (!_servicioArbolAcceso.EsNodoTerminalByGrupos(idTipoUsuario, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), Convert.ToInt32(ddlNivel4.SelectedValue), idNivelFiltro, null, null))
+                if (!_servicioArbolAcceso.EsNodoTerminalByGrupos(idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), Convert.ToInt32(ddlNivel4.SelectedValue), idNivelFiltro, null, null))
                 {
                     Metodos.FiltraCombo(ddlNivel5, ddlNivel6, _servicioArbolAcceso.ObtenerNivel6ByGrupos(int.Parse(rbtnLstUsuarios.SelectedValue), ((Usuario)Session["UserData"]).Id, idArea, idTipoArbolAcceso, idNivelFiltro, true));
-                    btnLevantar.Visible = false;
                 }
                 else
                 {
-                    btnLevantar.Visible = true;
+                    btnLevantar.Visible = _servicioArbolAcceso.LevantaTicket(((Usuario)Session["UserData"]).Id, idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), Convert.ToInt32(ddlNivel4.SelectedValue), idNivelFiltro, null, null);
+                    if (!btnLevantar.Visible)
+                    {
+                        btnNotificacion.Visible = _servicioArbolAcceso.RecadoTicketTicket(((Usuario)Session["UserData"]).Id, idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), Convert.ToInt32(ddlNivel4.SelectedValue), idNivelFiltro, null, null);
+                    }
                 }
             }
             catch (Exception ex)
@@ -397,24 +460,28 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
+                btnLevantar.Visible = false;
+                btnNotificacion.Visible = false;
                 Metodos.LimpiarCombo(ddlNivel7);
                 if (ddlNivel6.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                 {
-                    btnLevantar.Visible = false;
                     return;
                 }
                 int idArea = Convert.ToInt32(ddlArea.SelectedValue);
                 int idTipoArbolAcceso = Convert.ToInt32(ddlTipoArbol.SelectedValue);
                 int idTipoUsuario = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).IdTipoUsuario;
                 int idNivelFiltro = Convert.ToInt32(ddlNivel6.SelectedValue);
-                if (!_servicioArbolAcceso.EsNodoTerminalByGrupos(idTipoUsuario, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), Convert.ToInt32(ddlNivel4.SelectedValue), Convert.ToInt32(ddlNivel5.SelectedValue), idNivelFiltro, null))
+                if (!_servicioArbolAcceso.EsNodoTerminalByGrupos(idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), Convert.ToInt32(ddlNivel4.SelectedValue), Convert.ToInt32(ddlNivel5.SelectedValue), idNivelFiltro, null))
                 {
                     Metodos.FiltraCombo(ddlNivel6, ddlNivel7, _servicioArbolAcceso.ObtenerNivel7ByGrupos(int.Parse(rbtnLstUsuarios.SelectedValue), ((Usuario)Session["UserData"]).Id, idArea, idTipoArbolAcceso, idNivelFiltro, true));
-                    btnLevantar.Visible = false;
                 }
                 else
                 {
-                    btnLevantar.Visible = true;
+                    btnLevantar.Visible = _servicioArbolAcceso.LevantaTicket(((Usuario)Session["UserData"]).Id, idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), Convert.ToInt32(ddlNivel4.SelectedValue), Convert.ToInt32(ddlNivel5.SelectedValue), idNivelFiltro, null);
+                    if (!btnLevantar.Visible)
+                    {
+                        btnNotificacion.Visible = _servicioArbolAcceso.RecadoTicketTicket(((Usuario)Session["UserData"]).Id, idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), Convert.ToInt32(ddlNivel4.SelectedValue), Convert.ToInt32(ddlNivel5.SelectedValue), idNivelFiltro, null);
+                    }
                 }
             }
             catch (Exception ex)
@@ -431,14 +498,23 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
+                btnLevantar.Visible = false;
+                btnNotificacion.Visible = false;
                 if (ddlNivel7.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                 {
-                    btnLevantar.Visible = false;
                     return;
                 }
                 else
                 {
-                    btnLevantar.Visible = true;
+                    int idArea = Convert.ToInt32(ddlArea.SelectedValue);
+                    int idTipoArbolAcceso = Convert.ToInt32(ddlTipoArbol.SelectedValue);
+                    int idTipoUsuario = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).IdTipoUsuario;
+                    int idNivelFiltro = Convert.ToInt32(ddlNivel7.SelectedValue);
+                    btnLevantar.Visible = _servicioArbolAcceso.LevantaTicket(((Usuario)Session["UserData"]).Id, idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), Convert.ToInt32(ddlNivel4.SelectedValue), Convert.ToInt32(ddlNivel5.SelectedValue), Convert.ToInt32(ddlNivel6.SelectedValue), idNivelFiltro);
+                    if (!btnLevantar.Visible)
+                    {
+                        btnNotificacion.Visible = _servicioArbolAcceso.RecadoTicketTicket(((Usuario)Session["UserData"]).Id, idArea, idTipoUsuario, idTipoArbolAcceso, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), Convert.ToInt32(ddlNivel4.SelectedValue), Convert.ToInt32(ddlNivel5.SelectedValue), Convert.ToInt32(ddlNivel6.SelectedValue), idNivelFiltro);
+                    }
                 }
             }
             catch (Exception ex)
@@ -456,8 +532,8 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
-                if(ddlCanal.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
-                    throw  new Exception("Seleccione un medio de comunicación");
+                if (ddlCanal.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                    throw new Exception("Seleccione un medio de comunicación");
                 int? idArea = null;
                 int? idTipoUsuario = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).IdTipoUsuario;
                 int? idTipoArbol = null;
@@ -514,5 +590,65 @@ namespace KiiniHelp.Users.Operacion
         }
 
 
+        protected void btnNotificacion_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ddlCanal.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                    throw new Exception("Seleccione un medio de comunicación");
+                int? idArea = null;
+                int? idTipoUsuario = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).IdTipoUsuario;
+                int? idTipoArbol = null;
+                int? nivel1 = null;
+                int? nivel2 = null;
+                int? nivel3 = null;
+                int? nivel4 = null;
+                int? nivel5 = null;
+                int? nivel6 = null;
+                int? nivel7 = null;
+
+                if (ddlArea.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                    idArea = int.Parse(ddlArea.SelectedValue);
+
+                if (ddlTipoArbol.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                    idTipoArbol = int.Parse(ddlTipoArbol.SelectedValue);
+
+                if (ddlNivel1.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                    nivel1 = int.Parse(ddlNivel1.SelectedValue);
+
+                if (ddlNivel2.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                    nivel2 = int.Parse(ddlNivel2.SelectedValue);
+
+                if (ddlNivel3.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                    nivel3 = int.Parse(ddlNivel3.SelectedValue);
+
+                if (ddlNivel4.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                    nivel4 = int.Parse(ddlNivel4.SelectedValue);
+
+                if (ddlNivel5.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                    nivel5 = int.Parse(ddlNivel5.SelectedValue);
+
+                if (ddlNivel6.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                    nivel6 = int.Parse(ddlNivel6.SelectedValue);
+
+                if (ddlNivel7.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                    nivel7 = int.Parse(ddlNivel7.SelectedValue);
+
+                var y = _servicioArbolAcceso.ObtenerArbolesAccesoTerminalAll(idArea, idTipoUsuario, idTipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
+                ucAltaPreticket.IdArbol = y.First().Id;
+                ucAltaPreticket.IdUsuarioLevanto = ((Usuario)Session["UserData"]).Id;
+                ucAltaPreticket.IdUsuarioSolicito = int.Parse(rbtnLstUsuarios.SelectedValue);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Scriptss", "MostrarPopup(\"#modalPreTicket\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
     }
 }

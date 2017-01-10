@@ -256,6 +256,33 @@ namespace KiiniHelp.UserControls.Filtros.Graficos {
         protected global::System.Web.UI.WebControls.Repeater rptSla;
         
         /// <summary>
+        /// Control rbtnCanal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnCanal;
+        
+        /// <summary>
+        /// Control pnlCanal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlCanal;
+        
+        /// <summary>
+        /// Control rptCanal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptCanal;
+        
+        /// <summary>
         /// Control btnGenerar.
         /// </summary>
         /// <remarks>

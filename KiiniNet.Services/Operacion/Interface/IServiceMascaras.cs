@@ -2,7 +2,6 @@
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Helper;
-using KinniNet.Core.Operacion;
 
 namespace KiiniNet.Services.Operacion.Interface
 {

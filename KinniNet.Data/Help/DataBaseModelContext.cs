@@ -146,6 +146,7 @@ namespace KinniNet.Data.Help
                 _tiempoInformeArbol = CreateObjectSet<TiempoInformeArbol>();
                 _smsService = CreateObjectSet<SmsService>();
                 _preguntaReto = CreateObjectSet<PreguntaReto>();
+                _preTicket = CreateObjectSet<PreTicket>();
                 _horario = CreateObjectSet<Horario>();
                 _horarioDetalle = CreateObjectSet<HorarioDetalle>();
 
@@ -526,6 +527,14 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<PreTicket> PreTicket
+        {
+            get
+            {
+                return _preTicket;
+            }
+        }
+
 
 
         private readonly ObjectSet<Usuario> _usuario;
@@ -570,6 +579,7 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<TiempoInformeArbol> _tiempoInformeArbol;
         private readonly ObjectSet<SmsService> _smsService;
         private readonly ObjectSet<PreguntaReto> _preguntaReto;
+        private readonly ObjectSet<PreTicket> _preTicket;
 
         #region Mascara
         public ObjectSet<Mascara> Mascara

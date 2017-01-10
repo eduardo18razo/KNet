@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
+using System.Text;
 using KiiniNet.Entities.Cat.Sistema;
-using KiiniNet.Entities.Operacion.Usuarios;
-using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
 
@@ -50,18 +48,24 @@ namespace KinniNet.Core.Sistema
             return result;
         }
 
-        public List<EstatusTicket> ObtenerEstatusTicketUsuario(int idUsuario, bool esPropietario, bool insertarSeleccion)
+        public List<EstatusTicket> ObtenerEstatusTicketUsuario(int idUsuario, int idEstatusActual, bool esPropietario, bool insertarSeleccion)
         {
             List<EstatusTicket> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = (db.EstatusTicketSubRolGeneral.Join(db.EstatusTicket, easg => easg.IdEstatusTicket, et => et.Id, (easg, et) => new { easg, et })
-                    .Join(db.UsuarioGrupo, @t => @t.easg.IdGrupoUsuario, ug => ug.IdGrupoUsuario, (@t, ug) => new { @t, ug })
-                    .Where(@t => @t.ug.IdUsuario == idUsuario && @t.@t.easg.Habilitado && @t.@t.easg.Propietario == esPropietario)
-                    .OrderBy(o => o.t.easg.Orden)
-                    .Select(@t => @t.@t.et)).Distinct().ToList();
+                result = (from etsrg in db.EstatusTicketSubRolGeneral
+                        join et in db.EstatusTicket on etsrg.IdEstatusTicketAccion equals et.Id
+                        join ug in db.UsuarioGrupo on etsrg.IdGrupoUsuario equals ug.IdGrupoUsuario
+                        join sgu in db.SubGrupoUsuario on new { subgpo = ug.IdSubGrupoUsuario, sub = etsrg.IdSubRolSolicita } equals new { subgpo = (int?)sgu.Id, sub = (int?)sgu.IdSubRol }
+                        where ug.IdUsuario == idUsuario && etsrg.IdEstatusTicketActual == idEstatusActual && etsrg.Propietario == esPropietario && etsrg.Habilitado
+                        select et).Distinct().ToList();
+                //result = (db.EstatusTicketSubRolGeneral.Join(db.EstatusTicket, easg => easg.IdEstatusTicketActual, et => et.Id, (easg, et) => new { easg, et })
+                //    .Join(db.UsuarioGrupo, @t => @t.easg.IdGrupoUsuario, ug => ug.IdGrupoUsuario, (@t, ug) => new { @t, ug })
+                //    .Where(@t => @t.ug.IdUsuario == idUsuario && @t.@t.easg.Habilitado && @t.@t.easg.Propietario == esPropietario)
+                //    .OrderBy(o => o.t.easg.EstatusTicketAccion.Orden)
+                //    .Select(@t => @t.@t.et)).Distinct().ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
                         new EstatusTicket
@@ -116,12 +120,12 @@ namespace KinniNet.Core.Sistema
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = (from easg in db.EstatusAsignacionSubRolGeneral
-                        join ea in db.EstatusAsignacion on easg.IdEstatusAsignacionActual equals ea.Id
-                        join ea1 in db.EstatusAsignacion on easg.IdEstatusAsignacionAccion equals ea1.Id
-                        join ug in db.UsuarioGrupo on easg.IdGrupoUsuario equals ug.IdGrupoUsuario
-                        where ug.IdUsuario == idUsuario && easg.IdSubRol == idSubRol &&
-                              easg.IdEstatusAsignacionActual == estatusAsignacionActual && easg.Habilitado && easg.Propietario == esPropietario
-                        select ea1).ToList();
+                          join ea in db.EstatusAsignacion on easg.IdEstatusAsignacionActual equals ea.Id
+                          join ea1 in db.EstatusAsignacion on easg.IdEstatusAsignacionAccion equals ea1.Id
+                          join ug in db.UsuarioGrupo on easg.IdGrupoUsuario equals ug.IdGrupoUsuario
+                          where ug.IdUsuario == idUsuario && easg.IdSubRol == idSubRol &&
+                                easg.IdEstatusAsignacionActual == estatusAsignacionActual && easg.Habilitado && easg.Propietario == esPropietario
+                          select ea1).ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
                         new EstatusAsignacion

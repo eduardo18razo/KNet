@@ -125,14 +125,14 @@ namespace KinniNet.Core.Sistema
             return result;
         }
 
-        public List<SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol)
+        public List<SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol, int idEstatusAsignacion)
         {
             List<SubRolEscalacionPermitida> result = null;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.SubRolEscalacionPermitida.Where(w => w.IdSubRol == idSubRol && w.Habilitado).ToList();
+                result = db.SubRolEscalacionPermitida.Where(w => w.IdSubRol == idSubRol && w.IdEstatusAsignacion == idEstatusAsignacion && w.Habilitado).ToList();
             }
             catch (Exception ex)
             {

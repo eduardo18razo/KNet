@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ServiceModel;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Parametros;
 using KiiniNet.Services.Sistema.Interface;
@@ -61,13 +60,13 @@ namespace KiiniNet.Services.Sistema.Implementacion
             return null;
         }
 
-        public List<SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol)
+        public List<SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol, int idEstatusAsignacion)
         {
             try
             {
                 using (BusinessSubRol negocio = new BusinessSubRol())
                 {
-                    return negocio.ObtenerEscalacion(idSubRol);
+                    return negocio.ObtenerEscalacion(idSubRol, idEstatusAsignacion);
                 }
             }
             catch (Exception ex)

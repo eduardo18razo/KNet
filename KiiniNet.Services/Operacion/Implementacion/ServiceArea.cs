@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
@@ -17,6 +15,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessArea negocio = new BusinessArea())
                 {
                     return negocio.ObtenerAreasUsuario(idUsuario, insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Area> ObtenerAreasUsuarioByRol(int idUsuario, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessArea negocio = new BusinessArea())
+                {
+                    return negocio.ObtenerAreasUsuarioByRol(idUsuario, insertarSeleccion);
                 }
             }
             catch (Exception ex)

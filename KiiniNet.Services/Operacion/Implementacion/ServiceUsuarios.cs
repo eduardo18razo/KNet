@@ -83,6 +83,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public void HabilitarUsuario(int idUsuario, bool habilitado)
+        {
+            try
+            {
+                using (BusinessUsuarios negocio = new BusinessUsuarios())
+                {
+                    negocio.HabilitarUsuario(idUsuario, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<Usuario> ObtenerAtendedoresEncuesta(int idUsuario, List<int?> encuestas)
         {
             try

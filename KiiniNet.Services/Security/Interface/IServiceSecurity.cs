@@ -12,6 +12,9 @@ namespace KiiniNet.Services.Security.Interface
         bool Autenticate(string user, string password);
 
         [OperationContract]
+        List<Rol> ObtenerRolesUsuario(int idUsuario);
+
+        [OperationContract]
         Usuario GetUserDataAutenticate(string user, string password);
 
         [OperationContract]
@@ -21,7 +24,7 @@ namespace KiiniNet.Services.Security.Interface
         void ChangePassword(int idUsuario, string contrasenaActual, string contrasenaNueva);
 
         [OperationContract]
-        List<Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles);
+        List<Menu> ObtenerMenuUsuario(int idUsuario, List<int> areas, bool arboles);
 
         [OperationContract]
         List<Menu> ObtenerMenuPublico(int idTipoUsuario, int idArea, bool arboles);

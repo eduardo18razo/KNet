@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
-using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
 
 namespace KinniNet.Core.Demonio

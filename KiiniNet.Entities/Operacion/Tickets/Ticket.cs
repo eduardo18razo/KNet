@@ -31,7 +31,7 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public int IdUbicacion { get; set; }
         [DataMember]
-        public int? IdMascara{get;set;}
+        public int? IdMascara { get; set; }
         [DataMember]
         public int? IdEncuesta { get; set; }
         [DataMember]
@@ -60,6 +60,14 @@ namespace KiiniNet.Entities.Operacion.Tickets
         public bool EncuestaRespondida { get; set; }
         [DataMember]
         public bool EsTercero { get; set; }
+        [DataMember]
+        public bool Espera { get; set; }
+        [DataMember]
+        public string TiempoEspera { get; set; }
+        [DataMember]
+        public DateTime? FechaInicioEspera { get; set; }
+        [DataMember]
+        public DateTime? FechaFinEspera { get; set; }
 
         [DataMember]
         public virtual TipoUsuario TipoUsuario { get; set; }

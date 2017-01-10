@@ -196,6 +196,34 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
             }
         }
 
+        public List<HelperFiltroGrafico> CanalGraficar
+        {
+            get
+            {
+                List<HelperFiltroGrafico> result = new List<HelperFiltroGrafico>();
+                foreach (RepeaterItem item in rptCanal.Items)
+                {
+                    CheckBox chk = (CheckBox)item.FindControl("chkCanal");
+                    if (chk != null)
+                    {
+                        if (chk.Checked)
+                        {
+                            result.Add(new HelperFiltroGrafico
+                            {
+                                Id = Convert.ToInt32(((Label)item.FindControl("lblId")).Text)
+                            });
+                        }
+                    }
+                }
+                return result;
+            }
+            set
+            {
+                rptCanal.DataSource = value;
+                rptCanal.DataBind();
+            }
+        }
+
         public string TipoGrafico
         {
             get
@@ -231,6 +259,8 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
                     result = rbtnEstaus.Text;
                 else if (rbtnSla.Checked)
                     result = rbtnSla.Text;
+                else if (rbtnCanal.Checked)
+                    result = rbtnCanal.Text;
                 return result;
             }
 
@@ -414,6 +444,7 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
                 pnlTipificaciones.Visible = false;
                 pnlEstatusTicket.Visible = false;
                 pnlSla.Visible = false;
+                pnlCanal.Visible = false;
             }
             catch (Exception ex)
             {
@@ -435,6 +466,7 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
                 pnlTipificaciones.Visible = false;
                 pnlEstatusTicket.Visible = false;
                 pnlSla.Visible = false;
+                pnlCanal.Visible = false;
             }
             catch (Exception ex)
             {
@@ -456,6 +488,7 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
                 pnlTipificaciones.Visible = false;
                 pnlEstatusTicket.Visible = false;
                 pnlSla.Visible = false;
+                pnlCanal.Visible = false;
             }
             catch (Exception ex)
             {
@@ -477,6 +510,7 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
                 pnlTipoticket.Visible = false;
                 pnlEstatusTicket.Visible = false;
                 pnlSla.Visible = false;
+                pnlCanal.Visible = false;
             }
             catch (Exception ex)
             {
@@ -498,6 +532,7 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
                 pnlTipoticket.Visible = false;
                 pnlTipificaciones.Visible = false;
                 pnlSla.Visible = false;
+                pnlCanal.Visible = false;
             }
             catch (Exception ex)
             {
@@ -519,6 +554,29 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
                 pnlTipoticket.Visible = false;
                 pnlTipificaciones.Visible = false;
                 pnlEstatusTicket.Visible = false;
+                pnlCanal.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+        protected void rbtnCanal_OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                pnlCanal.Visible = ((RadioButton)sender).Checked;
+                pnlOrganizacion.Visible = false;
+                pnlUbicacion.Visible = false;
+                pnlTipoticket.Visible = false;
+                pnlTipificaciones.Visible = false;
+                pnlEstatusTicket.Visible = false;
+                pnlSla.Visible = false;
             }
             catch (Exception ex)
             {
@@ -613,5 +671,7 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
                 Alerta = _lstError;
             }
         }
+
+        
     }
 }

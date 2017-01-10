@@ -18,6 +18,9 @@ namespace KiiniHelp.ServiceSeguridad {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/Autenticate", ReplyAction="http://tempuri.org/IServiceSecurity/AutenticateResponse")]
         bool Autenticate(string user, string password);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/ObtenerRolesUsuario", ReplyAction="http://tempuri.org/IServiceSecurity/ObtenerRolesUsuarioResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Rol> ObtenerRolesUsuario(int idUsuario);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/GetUserDataAutenticate", ReplyAction="http://tempuri.org/IServiceSecurity/GetUserDataAutenticateResponse")]
         KiiniNet.Entities.Operacion.Usuarios.Usuario GetUserDataAutenticate(string user, string password);
         
@@ -28,7 +31,7 @@ namespace KiiniHelp.ServiceSeguridad {
         void ChangePassword(int idUsuario, string contrasenaActual, string contrasenaNueva);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuario", ReplyAction="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuarioResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles);
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuUsuario(int idUsuario, System.Collections.Generic.List<int> areas, bool arboles);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/ObtenerMenuPublico", ReplyAction="http://tempuri.org/IServiceSecurity/ObtenerMenuPublicoResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuPublico(int idTipoUsuario, int idArea, bool arboles);
@@ -74,6 +77,10 @@ namespace KiiniHelp.ServiceSeguridad {
             return base.Channel.Autenticate(user, password);
         }
         
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Rol> ObtenerRolesUsuario(int idUsuario) {
+            return base.Channel.ObtenerRolesUsuario(idUsuario);
+        }
+        
         public KiiniNet.Entities.Operacion.Usuarios.Usuario GetUserDataAutenticate(string user, string password) {
             return base.Channel.GetUserDataAutenticate(user, password);
         }
@@ -86,8 +93,8 @@ namespace KiiniHelp.ServiceSeguridad {
             base.Channel.ChangePassword(idUsuario, contrasenaActual, contrasenaNueva);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles) {
-            return base.Channel.ObtenerMenuUsuario(idUsuario, idArea, arboles);
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuUsuario(int idUsuario, System.Collections.Generic.List<int> areas, bool arboles) {
+            return base.Channel.ObtenerMenuUsuario(idUsuario, areas, arboles);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuPublico(int idTipoUsuario, int idArea, bool arboles) {

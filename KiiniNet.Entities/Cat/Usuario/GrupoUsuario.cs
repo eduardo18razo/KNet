@@ -25,6 +25,10 @@ namespace KiiniNet.Entities.Cat.Usuario
         [DataMember]
         public bool TieneSupervisor { get; set; }
         [DataMember]
+        public bool LevantaTicket { get; set; }
+        [DataMember]
+        public bool RecadoTicket { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
 
         [DataMember]

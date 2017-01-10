@@ -22,5 +22,35 @@ namespace KiiniNet.Services.Sistema.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<Canal> ObtenerCanalesAll(bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessCanal negocio = new BusinessCanal())
+                {
+                    return negocio.ObtenerCanalesAll(insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Canal ObtenerCanalById(int idCanal)
+        {
+            try
+            {
+                using (BusinessCanal negocio = new BusinessCanal())
+                {
+                    return negocio.ObtenerCanalById(idCanal);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

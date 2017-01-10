@@ -48,7 +48,8 @@ namespace KiiniHelp.Users.Consultas
             {
                 if (!ucFiltrosTicket.FiltroGrupos.Any())
                     throw new Exception("Debe seleccionar al menos un grupo");
-                List<HelperReportesTicket> lstConsulta = _servicioConsultas.ConsultarTickets(((Usuario)Session["UserData"]).Id, ucFiltrosTicket.FiltroGrupos, ucFiltrosTicket.FiltroTipoUsuario, ucFiltrosTicket.FiltroOrganizaciones,
+
+                List<HelperReportesTicket> lstConsulta = _servicioConsultas.ConsultarTickets(((Usuario)Session["UserData"]).Id, ucFiltrosTicket.FiltroGrupos, ucFiltrosTicket.FiltroCanalesApertura, ucFiltrosTicket.FiltroTipoUsuario, ucFiltrosTicket.FiltroOrganizaciones,
                     ucFiltrosTicket.FiltroUbicaciones, ucFiltrosTicket.FiltroTipoArbol, ucFiltrosTicket.FiltroTipificaciones,
                     ucFiltrosTicket.FiltroPrioridad, ucFiltrosTicket.FiltroEstatus, ucFiltrosTicket.FiltroSla, ucFiltrosTicket.FiltroVip, ucFiltrosTicket.FiltroFechas, 0, 1000);
                 gvResult.DataSource = lstConsulta;

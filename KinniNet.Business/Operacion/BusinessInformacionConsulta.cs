@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using KiiniNet.Entities.Cat.Operacion;
-using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
@@ -13,7 +11,7 @@ namespace KinniNet.Core.Operacion
 {
     public class BusinessInformacionConsulta : IDisposable
     {
-        private bool _proxy;
+        private readonly bool _proxy;
 
         public void Dispose()
         {

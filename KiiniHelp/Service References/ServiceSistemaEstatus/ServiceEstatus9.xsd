@@ -11,19 +11,25 @@
   <xs:element name="ArrayOfEstatusTicketSubRolGeneral" nillable="true" type="tns:ArrayOfEstatusTicketSubRolGeneral" />
   <xs:complexType name="EstatusTicketSubRolGeneral">
     <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusTicket" nillable="true" type="q1:EstatusTicket" />
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="GrupoUsuario" nillable="true" type="q2:GrupoUsuario" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusTicketAccion" nillable="true" type="q1:EstatusTicket" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusTicketActual" nillable="true" type="q2:EstatusTicket" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="GrupoUsuario" nillable="true" type="q3:GrupoUsuario" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IdEstatusTicket" type="xs:int" />
+      <xs:element minOccurs="0" name="IdEstatusTicketAccion" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IdEstatusTicketActual" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="IdGrupoUsuario" type="xs:int" />
-      <xs:element minOccurs="0" name="IdRol" type="xs:int" />
-      <xs:element minOccurs="0" name="IdSubRol" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Orden" type="xs:int" />
-      <xs:element minOccurs="0" name="Propietario" type="xs:boolean" />
-      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="Rol" nillable="true" type="q3:Rol" />
-      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubRol" nillable="true" type="q4:SubRol" />
-      <xs:element minOccurs="0" name="TieneSupervisor" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IdRolPertenece" type="xs:int" />
+      <xs:element minOccurs="0" name="IdRolSolicita" type="xs:int" />
+      <xs:element minOccurs="0" name="IdSubRolPertenece" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IdSubRolSolicita" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="LevantaTicket" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Propietario" nillable="true" type="xs:boolean" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="RolPertenece" nillable="true" type="q4:Rol" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="RolSolicita" nillable="true" type="q5:Rol" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubRolPertenece" nillable="true" type="q6:SubRol" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubSolicita" nillable="true" type="q7:SubRol" />
+      <xs:element minOccurs="0" name="TieneSupervisor" nillable="true" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
@@ -38,9 +44,9 @@
   <xs:complexType name="EstatusAsignacionSubRolGeneral">
     <xs:sequence>
       <xs:element minOccurs="0" name="ComentarioObligado" type="xs:boolean" />
-      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacionAccion" nillable="true" type="q5:EstatusAsignacion" />
-      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacionActual" nillable="true" type="q6:EstatusAsignacion" />
-      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="GrupoUsuario" nillable="true" type="q7:GrupoUsuario" />
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacionAccion" nillable="true" type="q8:EstatusAsignacion" />
+      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacionActual" nillable="true" type="q9:EstatusAsignacion" />
+      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="GrupoUsuario" nillable="true" type="q10:GrupoUsuario" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IdEstatusAsignacionAccion" type="xs:int" />
@@ -48,10 +54,9 @@
       <xs:element minOccurs="0" name="IdGrupoUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="IdRol" type="xs:int" />
       <xs:element minOccurs="0" name="IdSubRol" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Orden" type="xs:int" />
       <xs:element minOccurs="0" name="Propietario" type="xs:boolean" />
-      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="Rol" nillable="true" type="q8:Rol" />
-      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubRol" nillable="true" type="q9:SubRol" />
+      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="Rol" nillable="true" type="q11:Rol" />
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubRol" nillable="true" type="q12:SubRol" />
       <xs:element minOccurs="0" name="TieneSupervisor" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
@@ -67,18 +72,17 @@
   <xs:complexType name="EstatusAsignacionSubRolGeneralDefault">
     <xs:sequence>
       <xs:element minOccurs="0" name="ComentarioObligado" type="xs:boolean" />
-      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacionAccion" nillable="true" type="q10:EstatusAsignacion" />
-      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacionActual" nillable="true" type="q11:EstatusAsignacion" />
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacionAccion" nillable="true" type="q13:EstatusAsignacion" />
+      <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacionActual" nillable="true" type="q14:EstatusAsignacion" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IdEstatusAsignacionAccion" type="xs:int" />
       <xs:element minOccurs="0" name="IdEstatusAsignacionActual" type="xs:int" />
       <xs:element minOccurs="0" name="IdRol" type="xs:int" />
       <xs:element minOccurs="0" name="IdSubRol" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Orden" type="xs:int" />
       <xs:element minOccurs="0" name="Propietario" type="xs:boolean" />
-      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="Rol" nillable="true" type="q12:Rol" />
-      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubRol" nillable="true" type="q13:SubRol" />
+      <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="Rol" nillable="true" type="q15:Rol" />
+      <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubRol" nillable="true" type="q16:SubRol" />
       <xs:element minOccurs="0" name="TieneSupervisor" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
@@ -93,18 +97,24 @@
   <xs:element name="ArrayOfEstatusTicketSubRolGeneralDefault" nillable="true" type="tns:ArrayOfEstatusTicketSubRolGeneralDefault" />
   <xs:complexType name="EstatusTicketSubRolGeneralDefault">
     <xs:sequence>
-      <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusTicket" nillable="true" type="q14:EstatusTicket" />
-      <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="GrupoUsuario" nillable="true" type="q15:GrupoUsuario" />
+      <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusTicketAccion" nillable="true" type="q17:EstatusTicket" />
+      <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusTicketActual" nillable="true" type="q18:EstatusTicket" />
+      <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="GrupoUsuario" nillable="true" type="q19:GrupoUsuario" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IdEstatusTicket" type="xs:int" />
-      <xs:element minOccurs="0" name="IdRol" type="xs:int" />
-      <xs:element minOccurs="0" name="IdSubRol" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Orden" type="xs:int" />
-      <xs:element minOccurs="0" name="Propietario" type="xs:boolean" />
-      <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="Rol" nillable="true" type="q16:Rol" />
-      <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubRol" nillable="true" type="q17:SubRol" />
-      <xs:element minOccurs="0" name="TieneSupervisor" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IdEstatusTicketAccion" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IdEstatusTicketActual" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IdRolPertenece" type="xs:int" />
+      <xs:element minOccurs="0" name="IdRolSolicita" type="xs:int" />
+      <xs:element minOccurs="0" name="IdSubRolPertenece" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IdSubRolSolicita" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="LevantaTicket" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Propietario" nillable="true" type="xs:boolean" />
+      <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="RolPertenece" nillable="true" type="q20:Rol" />
+      <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="RolSolicita" nillable="true" type="q21:Rol" />
+      <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubRolPertenece" nillable="true" type="q22:SubRol" />
+      <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubSolicita" nillable="true" type="q23:SubRol" />
+      <xs:element minOccurs="0" name="TieneSupervisor" nillable="true" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
@@ -123,8 +133,8 @@
       <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="NumeroTelefonos" type="xs:int" />
       <xs:element minOccurs="0" name="Obligatorios" type="xs:int" />
-      <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoTelefono" nillable="true" type="q18:TipoTelefono" />
-      <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q19:TipoUsuario" />
+      <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoTelefono" nillable="true" type="q24:TipoTelefono" />
+      <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q25:TipoUsuario" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
@@ -138,14 +148,14 @@
   <xs:element name="ArrayOfSubRolEscalacionPermitida" nillable="true" type="tns:ArrayOfSubRolEscalacionPermitida" />
   <xs:complexType name="SubRolEscalacionPermitida">
     <xs:sequence>
-      <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacion" nillable="true" type="q20:EstatusAsignacion" />
+      <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="EstatusAsignacion" nillable="true" type="q26:EstatusAsignacion" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IdEstatusAsignacion" type="xs:int" />
       <xs:element minOccurs="0" name="IdSubRol" type="xs:int" />
       <xs:element minOccurs="0" name="IdSubRolPermitido" type="xs:int" />
-      <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubRol" nillable="true" type="q21:SubRol" />
-      <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubRolPermitido" nillable="true" type="q22:SubRol" />
+      <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubRol" nillable="true" type="q27:SubRol" />
+      <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="SubRolPermitido" nillable="true" type="q28:SubRol" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SubRolEscalacionPermitida" nillable="true" type="tns:SubRolEscalacionPermitida" />

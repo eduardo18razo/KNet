@@ -15,7 +15,6 @@ namespace KiiniNet.Entities.Helper
         public string EstatusActual { get; set; }
         public string AsignacionActual { get; set; }
         public DateTime FechaCreacion { get; set; }
-
         public List<HelperEstatusDetalle> EstatusDetalle { get; set; }
         public List<HelperAsignacionesDetalle> AsignacionesDetalle { get; set; }
     }
@@ -33,6 +32,7 @@ namespace KiiniNet.Entities.Helper
     {
         public string Descripcion { get; set; }
         public string UsuarioMovimiento { get; set; }
+        public string Comentarios { get; set; }
         public DateTime FechaMovimiento { get; set; }
     }
 }

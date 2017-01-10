@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using KiiniNet.Entities.Cat.Usuario;
-using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
 

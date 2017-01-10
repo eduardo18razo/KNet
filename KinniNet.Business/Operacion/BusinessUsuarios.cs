@@ -258,6 +258,27 @@ namespace KinniNet.Core.Operacion
             }
         }
 
+        public void HabilitarUsuario(int idUsuario, bool habilitado)
+        
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Usuario inf = db.Usuario.SingleOrDefault(w => w.Id == idUsuario);
+                if (inf != null) inf.Habilitado = habilitado;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }   
+        
+
         public List<Usuario> ObtenerUsuarios(int? idTipoUsuario)
         {
             List<Usuario> result;

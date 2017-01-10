@@ -9,5 +9,11 @@ namespace KiiniNet.Services.Sistema.Interface
     {
         [OperationContract]
         List<Canal> ObtenerCanales(bool insertarSeleccion);
+
+        [OperationContract]
+        List<Canal> ObtenerCanalesAll(bool insertarSeleccion);
+
+        [OperationContract]
+        Canal ObtenerCanalById(int idCanal);
     }
 }

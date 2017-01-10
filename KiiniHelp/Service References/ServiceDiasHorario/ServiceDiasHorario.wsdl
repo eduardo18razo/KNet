@@ -60,7 +60,7 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDiasHorario/HabilitarResponse" message="tns:IServiceDiasHorario_Habilitar_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="EndPointSeguridad" type="tns:IServiceDiasHorario">
+  <wsdl:binding name="BasicHttpBinding_IServiceDiasHorario" type="tns:IServiceDiasHorario">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ObtenerHorarioDefault">
       <soap:operation soapAction="http://tempuri.org/IServiceDiasHorario/ObtenerHorarioDefault" style="document" />
@@ -100,7 +100,7 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ServiceDiasHorario">
-    <wsdl:port name="EndPointSeguridad" binding="tns:EndPointSeguridad">
+    <wsdl:port name="BasicHttpBinding_IServiceDiasHorario" binding="tns:BasicHttpBinding_IServiceDiasHorario">
       <soap:address location="http://localhost:15277/ServiceDiasHorario.svc" />
     </wsdl:port>
   </wsdl:service>

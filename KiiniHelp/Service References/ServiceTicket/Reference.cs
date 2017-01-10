@@ -38,6 +38,9 @@ namespace KiiniHelp.ServiceTicket {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketNoRegistrado", ReplyAction="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketNoRegistradoResponse")]
         KiiniNet.Entities.Helper.HelperDetalleTicket ObtenerDetalleTicketNoRegistrado(int idTicket, string cveRegistro);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/GeneraPreticket", ReplyAction="http://tempuri.org/IServiceTicket/GeneraPreticketResponse")]
+        KiiniNet.Entities.Operacion.Tickets.PreTicket GeneraPreticket(int idArbol, int idUsuarioSolicita, int idUsuarioLevanto, string observaciones);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -97,6 +100,10 @@ namespace KiiniHelp.ServiceTicket {
         
         public KiiniNet.Entities.Helper.HelperDetalleTicket ObtenerDetalleTicketNoRegistrado(int idTicket, string cveRegistro) {
             return base.Channel.ObtenerDetalleTicketNoRegistrado(idTicket, cveRegistro);
+        }
+        
+        public KiiniNet.Entities.Operacion.Tickets.PreTicket GeneraPreticket(int idArbol, int idUsuarioSolicita, int idUsuarioLevanto, string observaciones) {
+            return base.Channel.GeneraPreticket(idArbol, idUsuarioSolicita, idUsuarioLevanto, observaciones);
         }
     }
 }

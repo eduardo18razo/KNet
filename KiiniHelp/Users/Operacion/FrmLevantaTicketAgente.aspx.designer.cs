@@ -166,6 +166,24 @@ namespace KiiniHelp.Users.Operacion {
         protected global::System.Web.UI.WebControls.Button btnLevantar;
         
         /// <summary>
+        /// Control btnNotificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNotificacion;
+        
+        /// <summary>
+        /// Control ucAltaPreticket.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Altas.UcAltaPreticket ucAltaPreticket;
+        
+        /// <summary>
         /// Control ucMensajeValidacion.
         /// </summary>
         /// <remarks>

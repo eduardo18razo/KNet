@@ -1503,6 +1503,8 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.EspecialDeConsulta, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.DueñoDelServicio, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ContactCenter, true);
                 AsociarGrupoUsuario.Limpiar();
 
                 //Ticket

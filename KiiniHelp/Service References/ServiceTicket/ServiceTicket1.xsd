@@ -127,4 +127,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GeneraPreticket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="idUsuarioSolicita" type="xs:int" />
+        <xs:element minOccurs="0" name="idUsuarioLevanto" type="xs:int" />
+        <xs:element minOccurs="0" name="observaciones" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GeneraPreticketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="GeneraPreticketResult" nillable="true" type="q7:PreTicket" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

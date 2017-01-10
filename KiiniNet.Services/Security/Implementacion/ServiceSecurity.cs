@@ -24,6 +24,21 @@ namespace KiiniNet.Services.Security.Implementacion
             }
         }
 
+        public List<Rol> ObtenerRolesUsuario(int idUsuario)
+        {
+            try
+            {
+                using (BusinessSecurity.Autenticacion negocio = new BusinessSecurity.Autenticacion())
+                {
+                    return negocio.ObtenerRolesUsuario(idUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public Usuario GetUserDataAutenticate(string user, string password)
         {
             try
@@ -69,13 +84,13 @@ namespace KiiniNet.Services.Security.Implementacion
             }
         }
 
-        public List<Menu> ObtenerMenuUsuario(int idUsuario, int idArea, bool arboles)
+        public List<Menu> ObtenerMenuUsuario(int idUsuario, List<int> areas, bool arboles)
         {
             try
             {
                 using (BusinessSecurity.Menus negocio = new BusinessSecurity.Menus())
                 {
-                    return negocio.ObtenerMenuUsuario(idUsuario, idArea, arboles);
+                    return negocio.ObtenerMenuUsuario(idUsuario, areas, arboles);
                 }
             }
             catch (Exception ex)

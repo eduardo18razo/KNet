@@ -52,7 +52,8 @@ namespace KinniNet.Business.Utils
                 ReTipificado = 3,
                 ReAbierto = 4,
                 Resuelto = 5,
-                Cerrado = 6
+                Cerrado = 6,
+                EnEspera = 7
             }
 
             public enum EnumEstatusAsignacion
@@ -124,7 +125,8 @@ namespace KinniNet.Business.Utils
             Responsablemantenimientousuarioempleado = 10,
             Responsablemantenimientousuariocliente = 11,
             Responsablemantenimientousuarioproveedor = 12,
-            DueñoDelServicio = 13
+            DueñoDelServicio = 13,
+            ContactCenter = 14
         }
 
         public enum EnumRoles
@@ -141,7 +143,8 @@ namespace KinniNet.Business.Utils
             Responsablemantenimientousuarioempleado = 10,
             Responsablemantenimientousuariocliente = 11,
             Responsablemantenimientousuarioproveedor = 12,
-            DueñoDelServicio = 13
+            DueñoDelServicio = 13,
+            ContactCenter = 14
         }
 
         public enum EnumSubRoles

@@ -2,6 +2,54 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
   <xs:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
+  <xs:element name="LevantaTicket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuarioLevanta" type="xs:int" />
+        <xs:element minOccurs="0" name="idArea" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel1" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel2" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel3" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel4" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel5" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel6" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel7" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LevantaTicketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LevantaTicketResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecadoTicketTicket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuarioLevanta" type="xs:int" />
+        <xs:element minOccurs="0" name="idArea" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel1" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel2" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel3" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel4" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel5" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel6" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel7" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecadoTicketTicketResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RecadoTicketTicketResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ObtenerNivel1ByGrupos">
     <xs:complexType>
       <xs:sequence>

@@ -15,6 +15,12 @@ namespace KiiniHelp.ServiceArbolAcceso {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceArbolAcceso.IServiceArbolAcceso")]
     public interface IServiceArbolAcceso {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/LevantaTicket", ReplyAction="http://tempuri.org/IServiceArbolAcceso/LevantaTicketResponse")]
+        bool LevantaTicket(int idUsuarioLevanta, int idArea, int idTipoUsuario, int idTipoArbol, int nivel1, System.Nullable<int> nivel2, System.Nullable<int> nivel3, System.Nullable<int> nivel4, System.Nullable<int> nivel5, System.Nullable<int> nivel6, System.Nullable<int> nivel7);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/RecadoTicketTicket", ReplyAction="http://tempuri.org/IServiceArbolAcceso/RecadoTicketTicketResponse")]
+        bool RecadoTicketTicket(int idUsuarioLevanta, int idArea, int idTipoUsuario, int idTipoArbol, int nivel1, System.Nullable<int> nivel2, System.Nullable<int> nivel3, System.Nullable<int> nivel4, System.Nullable<int> nivel5, System.Nullable<int> nivel6, System.Nullable<int> nivel7);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel1ByGrupos", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerNivel1ByGruposResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel1> ObtenerNivel1ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, bool insertarSeleccion);
         
@@ -111,6 +117,14 @@ namespace KiiniHelp.ServiceArbolAcceso {
         
         public ServiceArbolAccesoClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public bool LevantaTicket(int idUsuarioLevanta, int idArea, int idTipoUsuario, int idTipoArbol, int nivel1, System.Nullable<int> nivel2, System.Nullable<int> nivel3, System.Nullable<int> nivel4, System.Nullable<int> nivel5, System.Nullable<int> nivel6, System.Nullable<int> nivel7) {
+            return base.Channel.LevantaTicket(idUsuarioLevanta, idArea, idTipoUsuario, idTipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
+        }
+        
+        public bool RecadoTicketTicket(int idUsuarioLevanta, int idArea, int idTipoUsuario, int idTipoArbol, int nivel1, System.Nullable<int> nivel2, System.Nullable<int> nivel3, System.Nullable<int> nivel4, System.Nullable<int> nivel5, System.Nullable<int> nivel6, System.Nullable<int> nivel7) {
+            return base.Channel.RecadoTicketTicket(idUsuarioLevanta, idArea, idTipoUsuario, idTipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Arbol.Nodos.Nivel1> ObtenerNivel1ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, bool insertarSeleccion) {

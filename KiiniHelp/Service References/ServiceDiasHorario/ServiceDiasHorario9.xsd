@@ -224,6 +224,8 @@
   <xs:element name="Urgencia" nillable="true" type="tns:Urgencia" />
   <xs:complexType name="Catalogos">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Archivo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CampoCatalogo" nillable="true" type="tns:ArrayOfCampoCatalogo" />
       <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" minOccurs="0" name="CampoMascara" nillable="true" type="q60:ArrayOfCampoMascara" />
       <xs:element minOccurs="0" name="ComandoActualizar" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ComandoInsertar" nillable="true" type="xs:string" />
@@ -237,6 +239,24 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Catalogos" nillable="true" type="tns:Catalogos" />
+  <xs:complexType name="ArrayOfCampoCatalogo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CampoCatalogo" nillable="true" type="tns:CampoCatalogo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCampoCatalogo" nillable="true" type="tns:ArrayOfCampoCatalogo" />
+  <xs:complexType name="CampoCatalogo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Campo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Catalogos" nillable="true" type="tns:Catalogos" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdCatalogo" type="xs:int" />
+      <xs:element minOccurs="0" name="TipoCampo" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="CampoCatalogo" nillable="true" type="tns:CampoCatalogo" />
   <xs:complexType name="TipoLink">
     <xs:sequence>
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />

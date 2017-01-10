@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Linq;
+using KinniNet.Core.Demonio;
+using KinniNet.Core.Sistema;
+using KinniNet.Data.Help;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace KiiniNet.UnitTest
@@ -11,7 +15,7 @@ namespace KiiniNet.UnitTest
         {
             try
             {
-                
+                new BusinessDemonio().ActualizaSla();
             }
             catch (Exception ex)
             {

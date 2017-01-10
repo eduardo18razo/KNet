@@ -52,7 +52,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-2 ">
-                            <asp:CheckBox runat="server" ID="chkVip" Text="Vip" />
+                            <asp:CheckBox runat="server" ID="chkVip" Text="Vip" Enabled="False" />
                         </div>
                     </div>
                     <div class="form-group">

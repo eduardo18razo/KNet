@@ -17,6 +17,7 @@
       <xsd:import schemaLocation="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
       <xsd:import schemaLocation="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
       <xsd:import schemaLocation="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" />
+      <xsd:import schemaLocation="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd15" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceCatalogos_CrearCatalogo_InputMessage">
@@ -61,11 +62,17 @@
   <wsdl:message name="IServiceCatalogos_AgregarRegistro_OutputMessage">
     <wsdl:part name="parameters" element="tns:AgregarRegistroResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceCatalogos_ObtenerRegistrosCatalogo_InputMessage">
-    <wsdl:part name="parameters" element="tns:ObtenerRegistrosCatalogo" />
+  <wsdl:message name="IServiceCatalogos_ObtenerRegistrosSistemaCatalogo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerRegistrosSistemaCatalogo" />
   </wsdl:message>
-  <wsdl:message name="IServiceCatalogos_ObtenerRegistrosCatalogo_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ObtenerRegistrosCatalogoResponse" />
+  <wsdl:message name="IServiceCatalogos_ObtenerRegistrosSistemaCatalogo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerRegistrosSistemaCatalogoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCatalogos_ObtenerRegistrosArchivosCatalogo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerRegistrosArchivosCatalogo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCatalogos_ObtenerRegistrosArchivosCatalogo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerRegistrosArchivosCatalogoResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceCatalogos_CrearCatalogoExcel_InputMessage">
     <wsdl:part name="parameters" element="tns:CrearCatalogoExcel" />
@@ -108,9 +115,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/AgregarRegistro" message="tns:IServiceCatalogos_AgregarRegistro_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/AgregarRegistroResponse" message="tns:IServiceCatalogos_AgregarRegistro_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ObtenerRegistrosCatalogo">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosCatalogo" message="tns:IServiceCatalogos_ObtenerRegistrosCatalogo_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosCatalogoResponse" message="tns:IServiceCatalogos_ObtenerRegistrosCatalogo_OutputMessage" />
+    <wsdl:operation name="ObtenerRegistrosSistemaCatalogo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosSistemaCatalogo" message="tns:IServiceCatalogos_ObtenerRegistrosSistemaCatalogo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosSistemaCatalogoResponse" message="tns:IServiceCatalogos_ObtenerRegistrosSistemaCatalogo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerRegistrosArchivosCatalogo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosArchivosCatalogo" message="tns:IServiceCatalogos_ObtenerRegistrosArchivosCatalogo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosArchivosCatalogoResponse" message="tns:IServiceCatalogos_ObtenerRegistrosArchivosCatalogo_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CrearCatalogoExcel">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/CrearCatalogoExcel" message="tns:IServiceCatalogos_CrearCatalogoExcel_InputMessage" />
@@ -186,8 +197,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ObtenerRegistrosCatalogo">
-      <soap:operation soapAction="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosCatalogo" style="document" />
+    <wsdl:operation name="ObtenerRegistrosSistemaCatalogo">
+      <soap:operation soapAction="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosSistemaCatalogo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerRegistrosArchivosCatalogo">
+      <soap:operation soapAction="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosArchivosCatalogo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

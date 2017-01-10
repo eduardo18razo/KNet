@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
+using System.Data;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Services.Sistema.Interface;
@@ -116,13 +116,28 @@ namespace KiiniNet.Services.Sistema.Implementacion
             }
         }
 
-        public List<CatalogoGenerico> ObtenerRegistrosCatalogo(int idCatalogo)
+        public List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo)
         {
             try
             {
                 using (BusinessCatalogos negocio = new BusinessCatalogos())
                 {
-                    return negocio.ObtenerRegistrosCatalogo(idCatalogo);
+                    return negocio.ObtenerRegistrosSistemaCatalogo(idCatalogo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo)
+        {
+            try
+            {
+                using (BusinessCatalogos negocio = new BusinessCatalogos())
+                {
+                    return negocio.ObtenerRegistrosArchivosCatalogo(idCatalogo);
                 }
             }
             catch (Exception ex)

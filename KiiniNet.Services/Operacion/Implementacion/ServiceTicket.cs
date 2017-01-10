@@ -129,5 +129,20 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public PreTicket GeneraPreticket(int idArbol, int idUsuarioSolicita, int idUsuarioLevanto, string observaciones)
+        {
+            try
+            {
+                using (BusinessTicket negocio = new BusinessTicket())
+                {
+                    return negocio.GeneraPreticket(idArbol, idUsuarioSolicita, idUsuarioLevanto, observaciones);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

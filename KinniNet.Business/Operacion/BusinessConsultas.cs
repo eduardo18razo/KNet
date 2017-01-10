@@ -31,7 +31,7 @@ namespace KinniNet.Core.Operacion
         }
 
         #region Consultas
-        public List<HelperReportesTicket> ConsultarTickets(int idUsuario, List<int> grupos, List<int> tiposUsuario, List<int> organizaciones, List<int> ubicaciones, List<int> tipoArbol, List<int> tipificacion, List<int> prioridad, List<int> estatus, List<bool?> sla, List<bool?> vip, Dictionary<string, DateTime> fechas, int pageIndex, int pageSize)
+        public List<HelperReportesTicket> ConsultarTickets(int idUsuario, List<int> grupos, List<int> canales, List<int> tiposUsuario, List<int> organizaciones, List<int> ubicaciones, List<int> tipoArbol, List<int> tipificacion, List<int> prioridad, List<int> estatus, List<bool?> sla, List<bool?> vip, Dictionary<string, DateTime> fechas, int pageIndex, int pageSize)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             List<HelperReportesTicket> result = null;
@@ -55,6 +55,11 @@ namespace KinniNet.Core.Operacion
 
                 if (grupos.Any())
                     qry = grupos.Aggregate(qry, (current, grupo) => (from q in current where q.TicketGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo) select q));
+
+                if (canales.Any())
+                    qry = from q in qry
+                        where canales.Contains(q.IdCanal) 
+                        select q;
 
                 if (tiposUsuario.Any())
                     qry = from q in qry
@@ -114,6 +119,7 @@ namespace KinniNet.Core.Operacion
                     result = new List<HelperReportesTicket>();
                     foreach (Ticket ticket in lstTickets.Skip(pageIndex * pageSize).Take(pageSize))
                     {
+                        db.LoadProperty(ticket, "Canal");
                         db.LoadProperty(ticket, "UsuarioLevanto");
                         db.LoadProperty(ticket, "TipoUsuario");
                         db.LoadProperty(ticket, "EstatusTicket");
@@ -180,6 +186,9 @@ namespace KinniNet.Core.Operacion
                         if (ticket.TicketGrupoUsuario.Any(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo))
                             if (grupos.Contains(ticket.TicketGrupoUsuario.First(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo).IdGrupoUsuario))
                                 hticket.GrupoDesarrollo = ticket.TicketGrupoUsuario.First(f => f.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo).GrupoUsuario.Descripcion;
+
+                        hticket.IdCanal = ticket.IdCanal;
+                        hticket.Canal = ticket.Canal.Descripcion;
 
                         hticket.IdOrganizacion = ticket.IdOrganizacion;
                         hticket.Organizacion = new BusinessOrganizacion().ObtenerDescripcionOrganizacionById(ticket.IdOrganizacion, false);
@@ -1135,6 +1144,35 @@ namespace KinniNet.Core.Operacion
                                             break;
                                         case 4:
                                             result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("yyyy") == result.Columns[i].ColumnName.PadLeft(4, '0') && c.DentroSla == dentroSla);
+                                            break;
+                                    }
+                                }
+                                row++;
+                            }
+                            break;
+                        case "Canal":
+                            foreach (int idCanal in lstTickets.Select(s => s.IdCanal).Distinct())
+                            {
+                                result.Rows.Add(idCanal, new BusinessCanal().ObtenerCanalById(idCanal).Descripcion);
+                                for (int i = 2; i < result.Columns.Count; i++)
+                                {
+                                    switch (tipoFecha)
+                                    {
+                                        case 1:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("dd/MM/yyyy") == result.Columns[i].ColumnName && c.IdCanal == idCanal);
+                                            break;
+                                        case 2:
+
+                                            result.Rows[row][i] = lstTickets.Count(c =>
+                                                DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) >= BusinessCadenas.Fechas.ObtenerFechaInicioSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1]))
+                                                && DateTime.Parse(c.FechaHoraAlta.ToString("dd/MM/yyyy")) <= BusinessCadenas.Fechas.ObtenerFechaFinSemana(int.Parse(result.Columns[i].ColumnName.Split(' ')[3]), int.Parse(result.Columns[i].ColumnName.Split(' ')[1]))
+                                                && c.IdCanal == idCanal);
+                                            break;
+                                        case 3:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("MM") == result.Columns[i].ColumnName.PadLeft(2, '0') && c.IdCanal == idCanal);
+                                            break;
+                                        case 4:
+                                            result.Rows[row][i] = lstTickets.Count(c => c.FechaHoraAlta.ToString("yyyy") == result.Columns[i].ColumnName.PadLeft(4, '0') && c.IdCanal == idCanal);
                                             break;
                                     }
                                 }

@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Net;
-using System.Net.Configuration;
-using System.Net.Mail;
-using System.Text;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Tickets;
 using KiiniNet.Entities.Operacion.Usuarios;

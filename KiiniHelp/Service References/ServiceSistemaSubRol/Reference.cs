@@ -28,7 +28,7 @@ namespace KiiniHelp.ServiceSistemaSubRol {
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.SubRol> ObtenerTipoSubRol(int idTipoGrupo, bool insertarSeleccion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSubRol/ObtenerEscalacion", ReplyAction="http://tempuri.org/IServiceSubRol/ObtenerEscalacionResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Parametros.SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol);
+        System.Collections.Generic.List<KiiniNet.Entities.Parametros.SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol, int idEstatusAsignacion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -74,8 +74,8 @@ namespace KiiniHelp.ServiceSistemaSubRol {
             return base.Channel.ObtenerTipoSubRol(idTipoGrupo, insertarSeleccion);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol) {
-            return base.Channel.ObtenerEscalacion(idSubRol);
+        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol, int idEstatusAsignacion) {
+            return base.Channel.ObtenerEscalacion(idSubRol, idEstatusAsignacion);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using KiiniNet.Entities.Cat.Usuario;
-using KiiniNet.Entities.Parametros;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
 

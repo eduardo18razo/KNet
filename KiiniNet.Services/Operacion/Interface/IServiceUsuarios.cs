@@ -23,6 +23,9 @@ namespace KiiniNet.Services.Operacion.Interface
         void ActualizarUsuario(int idUsuario, Usuario usuario);
 
         [OperationContract]
+        void HabilitarUsuario(int idUsuario, bool habilitado);
+
+        [OperationContract]
         List<Usuario> ObtenerAtendedoresEncuesta(int idUsuario, List<int?> encuestas);
 
         [OperationContract]

@@ -330,7 +330,7 @@ namespace KiiniHelp
         {
             try
             {
-                Page.ClientScript.RegisterStartupScript(this.GetType(),"OpenWindow","window.open('" +  ResolveUrl("Consultas/FrmConsulta.aspx") + "','_newtab');",true);
+                Page.ClientScript.RegisterStartupScript(this.GetType(),"OpenWindow","window.open('" +  ResolveUrl("Users/Consultas/FrmConsulta.aspx") + "','_newtab');",true);
 
                 //Response.Write(String.Format("window.open('{0}','_blank')",));
                 //Response.Write("<script>window.open('../Consultas/FrmConsultaTicket.aspx','_blank');</script>");

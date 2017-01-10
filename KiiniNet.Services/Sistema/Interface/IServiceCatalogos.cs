@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Helper;
@@ -27,7 +28,9 @@ namespace KiiniNet.Services.Sistema.Interface
         void AgregarRegistro(int idCatalogo, string descripcion);
 
         [OperationContract]
-        List<CatalogoGenerico> ObtenerRegistrosCatalogo(int idCatalogo);
+        List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo);
+        [OperationContract]
+        DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo);
 
         [OperationContract]
         void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja);

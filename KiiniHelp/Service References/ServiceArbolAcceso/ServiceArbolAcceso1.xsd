@@ -51,6 +51,7 @@
       <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="EstatusTicketSubRolGeneralDefault" nillable="true" type="q8:ArrayOfEstatusTicketSubRolGeneralDefault" />
       <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="GrupoUsuarioInventarioArbol" nillable="true" type="q9:ArrayOfGrupoUsuarioInventarioArbol" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Horario" nillable="true" type="tns:ArrayOfHorario" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IdTipoGrupo" type="xs:int" />
       <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
@@ -60,6 +61,8 @@
       <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="InventarioArbolAccesoEspConsulta" nillable="true" type="q13:ArrayOfInventarioArbolAcceso" />
       <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="InventarioArbolAccesoOperador" nillable="true" type="q14:ArrayOfInventarioArbolAcceso" />
       <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="InventarioArbolAccesoSolicitante" nillable="true" type="q15:ArrayOfInventarioArbolAcceso" />
+      <xs:element minOccurs="0" name="LevantaTicket" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RecadoTicket" type="xs:boolean" />
       <xs:element minOccurs="0" name="Sistema" type="xs:boolean" />
       <xs:element minOccurs="0" name="SubGrupoUsuario" nillable="true" type="tns:ArrayOfSubGrupoUsuario" />
       <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="TicketGrupoUsuario" nillable="true" type="q16:ArrayOfTicketGrupoUsuario" />
@@ -126,7 +129,9 @@
       <xs:element minOccurs="0" name="Dia" type="xs:int" />
       <xs:element minOccurs="0" name="HoraFin" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="HoraInicio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Horario" nillable="true" type="tns:Horario" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdHorario" type="xs:int" />
       <xs:element minOccurs="0" name="IdSubGrupoUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="SubGrupoUsuario" nillable="true" type="tns:SubGrupoUsuario" />
     </xs:sequence>
@@ -134,12 +139,47 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="HorarioSubGrupo" nillable="true" type="tns:HorarioSubGrupo" />
+  <xs:complexType name="Horario">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GrupoUsuario" nillable="true" type="tns:GrupoUsuario" />
+      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HorarioDetalle" nillable="true" type="tns:ArrayOfHorarioDetalle" />
+      <xs:element minOccurs="0" name="HorarioSubGrupo" nillable="true" type="tns:ArrayOfHorarioSubGrupo" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdGrupoSolicito" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Horario" nillable="true" type="tns:Horario" />
+  <xs:complexType name="ArrayOfHorarioDetalle">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HorarioDetalle" nillable="true" type="tns:HorarioDetalle" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHorarioDetalle" nillable="true" type="tns:ArrayOfHorarioDetalle" />
+  <xs:complexType name="HorarioDetalle">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Dia" type="xs:int" />
+      <xs:element minOccurs="0" name="HoraFin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HoraInicio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Horario" nillable="true" type="tns:Horario" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdHorario" type="xs:int" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="HorarioDetalle" nillable="true" type="tns:HorarioDetalle" />
   <xs:complexType name="Puesto">
     <xs:sequence>
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="Usuario" nillable="true" type="q25:ArrayOfUsuario" />
+      <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
+      <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="TipoUsuario" nillable="true" type="q25:TipoUsuario" />
+      <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="Usuario" nillable="true" type="q26:ArrayOfUsuario" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Puesto" nillable="true" type="tns:Puesto" />
@@ -149,6 +189,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfGrupoUsuario" nillable="true" type="tns:ArrayOfGrupoUsuario" />
+  <xs:complexType name="ArrayOfHorario">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Horario" nillable="true" type="tns:Horario" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHorario" nillable="true" type="tns:ArrayOfHorario" />
   <xs:complexType name="Sla">
     <xs:sequence>
       <xs:element minOccurs="0" name="Detallado" type="xs:boolean" />
@@ -156,10 +202,10 @@
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="Horas" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="InventarioArbolAcceso" nillable="true" type="q26:ArrayOfInventarioArbolAcceso" />
+      <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="InventarioArbolAcceso" nillable="true" type="q27:ArrayOfInventarioArbolAcceso" />
       <xs:element minOccurs="0" name="Minutos" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="Segundos" nillable="true" type="xs:decimal" />
-      <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="SlaDetalle" nillable="true" type="q27:ArrayOfSlaDetalle" />
+      <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="SlaDetalle" nillable="true" type="q28:ArrayOfSlaDetalle" />
       <xs:element minOccurs="0" name="TiempoHoraProceso" nillable="true" type="xs:decimal" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
@@ -172,4 +218,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfEncuesta" nillable="true" type="tns:ArrayOfEncuesta" />
+  <xs:complexType name="ArrayOfPuesto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Puesto" nillable="true" type="tns:Puesto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPuesto" nillable="true" type="tns:ArrayOfPuesto" />
 </xs:schema>

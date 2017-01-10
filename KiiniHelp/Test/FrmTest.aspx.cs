@@ -3,13 +3,14 @@ using System.Data;
 using System.Drawing;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
+using KiiniHelp.ServiceSistemaCatalogos;
 using Font = System.Drawing.Font;
 
 namespace KiiniHelp.Test
 {
     public partial class FrmTest : System.Web.UI.Page
     {
-        
+        private readonly ServiceCatalogosClient _servicioCatalogos = new ServiceCatalogosClient();
         //private void SendMessageAltiria()
         //{
         //    HttpWebRequest loHttp =
@@ -68,13 +69,21 @@ namespace KiiniHelp.Test
             //Response.Write(selectedValues.ToString());
         }
 
-         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-         {
-             TextBox1.Text = GridView1.SelectedRow.Cells[2].Text;
-         }
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //TextBox1.Text = GridView1.SelectedRow.Cells[2].Text;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //ddlLista.DataSource = _servicioCatalogos.ObtenerRegistrosArchivosCatalogo(10);
+            //ddlLista.DataTextField = "Descripcion";
+            //ddlLista.DataValueField = "Id";
+            //ddlLista.DataBind();
+            //GridView1.DataSource = _servicioCatalogos.ObtenerRegistrosArchivosCatalogo(10);
+            //GridView1.DataBind();
+            //GridView1.Columns[1].Visible = false;
+            //GridView1.Columns[GridView1.Columns.Count -1 ].Visible = false;
             //ucCargaCatalgo.EsAlta = true;
             ////////////Set the appropriate ContentType.
             //////////Response.ContentType = "Application/msword";

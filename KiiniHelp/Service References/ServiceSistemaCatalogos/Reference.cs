@@ -36,8 +36,11 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/AgregarRegistro", ReplyAction="http://tempuri.org/IServiceCatalogos/AgregarRegistroResponse")]
         void AgregarRegistro(int idCatalogo, string descripcion);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosCatalogoResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosCatalogo(int idCatalogo);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosSistemaCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosSistemaCatalogoResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosArchivosCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosArchivosCatalogoResponse")]
+        System.Data.DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/CrearCatalogoExcel", ReplyAction="http://tempuri.org/IServiceCatalogos/CrearCatalogoExcelResponse")]
         void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja);
@@ -101,8 +104,12 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
             base.Channel.AgregarRegistro(idCatalogo, descripcion);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosCatalogo(int idCatalogo) {
-            return base.Channel.ObtenerRegistrosCatalogo(idCatalogo);
+        public System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo) {
+            return base.Channel.ObtenerRegistrosSistemaCatalogo(idCatalogo);
+        }
+        
+        public System.Data.DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo) {
+            return base.Channel.ObtenerRegistrosArchivosCatalogo(idCatalogo);
         }
         
         public void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja) {

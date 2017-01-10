@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
@@ -59,16 +58,23 @@ namespace KinniNet.Core.Sistema
                 Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
                 List<int> lstGpos = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
                 lstGpos.AddRange(usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdGrupoUsuario).ToList());
+                lstGpos.AddRange(usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.LevantaTicket).Select(s => s.IdGrupoUsuario).ToList());
+                lstGpos.AddRange(usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList());
                 List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
                 lstsubGpos.RemoveAll(r => !r.HasValue);
-                var qry = from aa in db.ArbolAcceso 
-                          join taa in db.TipoArbolAcceso on aa.IdTipoArbolAcceso equals taa.Id
-                          join iaa  in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
-                          join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
-                          join ug in db.UsuarioGrupo on new {gpo = guia.IdGrupoUsuario, sgpo = guia.IdSubGrupoUsuario } equals new {gpo = ug.IdGrupoUsuario, sgpo = ug.IdSubGrupoUsuario }
-                          where lstGpos.Contains(guia.IdGrupoUsuario) && lstsubGpos.Contains(guia.IdSubGrupoUsuario) && aa.IdArea == idArea
-                          select taa;
-                result = qry.Where(w => w.Habilitado).Distinct().OrderBy(o => o.Descripcion).ToList();
+                var qry = from aa in db.ArbolAcceso
+                    join taa in db.TipoArbolAcceso on aa.IdTipoArbolAcceso equals taa.Id
+                    join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                    join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                    join ug in db.UsuarioGrupo on new {gpo = guia.IdGrupoUsuario, sgpo = guia.IdSubGrupoUsuario} equals
+                        new {gpo = ug.IdGrupoUsuario, sgpo = ug.IdSubGrupoUsuario}
+                    where lstGpos.Contains(guia.IdGrupoUsuario) && aa.IdArea == idArea
+                    select new {taa, guia};
+                if (lstsubGpos.Any())
+                    qry = from q in qry
+                        where lstsubGpos.Contains(q.guia.IdSubGrupoUsuario)
+                        select q;
+                result = qry.Where(w => w.taa.Habilitado).Select(s => s.taa).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
                         new TipoArbolAcceso

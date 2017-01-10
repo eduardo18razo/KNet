@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Services.Sistema.Interface;
 using KinniNet.Core.Sistema;

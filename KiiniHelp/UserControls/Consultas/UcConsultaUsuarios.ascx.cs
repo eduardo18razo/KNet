@@ -142,38 +142,38 @@ namespace KiiniHelp.UserControls.Consultas
 
         protected void btnBaja_OnClick(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    _servicioUbicacion.HabilitarUbicacion(Convert.ToInt32(hfId.Value), false);
-            //    LlenaUbicaciones();
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (_lstError == null)
-            //    {
-            //        _lstError = new List<string>();
-            //    }
-            //    _lstError.Add(ex.Message);
-            //    AlertaUbicacion = _lstError;
-            //}
+            try
+            {
+                _servicioUsuarios.HabilitarUsuario(Convert.ToInt32(hfId.Value), false);
+                LlenaUsuarios();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
         }
 
         protected void btnAlta_OnClick(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    _servicioUbicacion.HabilitarUbicacion(Convert.ToInt32(hfId.Value), true);
-            //    LlenaUbicaciones();
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (_lstError == null)
-            //    {
-            //        _lstError = new List<string>();
-            //    }
-            //    _lstError.Add(ex.Message);
-            //    AlertaUbicacion = _lstError;
-            //}
+            try
+            {
+                _servicioUsuarios.HabilitarUsuario(Convert.ToInt32(hfId.Value), true);
+                LlenaUsuarios();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
         }
 
         protected void btnEditar_OnClick(object sender, EventArgs e)

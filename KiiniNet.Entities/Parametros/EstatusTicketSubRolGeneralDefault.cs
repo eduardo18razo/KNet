@@ -10,13 +10,17 @@ namespace KiiniNet.Entities.Parametros
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public int IdRol { get; set; }
+        public int IdRolSolicita { get; set; }
         [DataMember]
-        public int? IdSubRol { get; set; }
+        public int? IdSubRolSolicita { get; set; }
         [DataMember]
-        public int? IdEstatusTicket { get; set; }
+        public int IdRolPertenece { get; set; }
         [DataMember]
-        public int? Orden { get; set; }
+        public int? IdSubRolPertenece { get; set; }
+        [DataMember]
+        public int? IdEstatusTicketActual { get; set; }
+        [DataMember]
+        public int? IdEstatusTicketAccion { get; set; }
         [DataMember]
         public bool? TieneSupervisor { get; set; }
         [DataMember]
@@ -25,14 +29,20 @@ namespace KiiniNet.Entities.Parametros
         public bool? LevantaTicket { get; set; }
         [DataMember]
         public bool Habilitado { get; set; }
-
+        
         [DataMember]
-        public EstatusTicket EstatusTicket { get; set; }
+        public EstatusTicket EstatusTicketActual { get; set; }
+        [DataMember]
+        public EstatusTicket EstatusTicketAccion { get; set; }
         [DataMember]
         public GrupoUsuario GrupoUsuario { get; set; }
         [DataMember]
-        public Rol Rol { get; set; }
+        public Rol RolSolicita { get; set; }
         [DataMember]
-        public SubRol SubRol { get; set; }
+        public SubRol SubSolicita { get; set; }
+        [DataMember]
+        public Rol RolPertenece { get; set; }
+        [DataMember]
+        public SubRol SubRolPertenece { get; set; }
     }
 }

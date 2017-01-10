@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Web.UI;
@@ -7,6 +8,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using AjaxControlToolkit;
 using KiiniHelp.ServiceMascaraAcceso;
+using KiiniHelp.ServiceSistemaCatalogos;
 using KiiniHelp.Users.Ticket;
 using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Helper;
@@ -16,7 +18,8 @@ namespace KiiniHelp.UserControls.Temporal
 {
     public partial class UcMascaraCaptura : UserControl
     {
-        readonly ServiceMascarasClient _servicioMascaras = new ServiceMascarasClient();
+        private readonly ServiceCatalogosClient _servicioCatalogos = new ServiceCatalogosClient();
+        private readonly ServiceMascarasClient _servicioMascaras = new ServiceMascarasClient();
         private List<Control> _lstControles;
         protected void Page_PreInit(object sender, EventArgs e)
         {
@@ -264,14 +267,23 @@ namespace KiiniHelp.UserControls.Temporal
                             createDiv.Controls.Add(lbl);
                             DropDownList ddlCatalogo = new DropDownList
                             {
+                                SelectedValue = "0",
                                 ID = "ddl" + campo.NombreCampo,
                                 Text = campo.Descripcion,
                                 CssClass = "DropSelect"
                             };
-                            foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla))
+                            if (campo.EsArchivo)
                             {
-                                ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
+                                foreach (DataRow row in _servicioCatalogos.ObtenerRegistrosArchivosCatalogo(int.Parse(campo.IdCatalogo.ToString())).Rows)
+                                {
+                                    ddlCatalogo.Items.Add(new ListItem(row[1].ToString(), row[0].ToString()));
+                                }
                             }
+                            else
+                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla))
+                                {
+                                    ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
+                                }
                             createDiv.Controls.Add(ddlCatalogo);
                             _lstControles.Add(ddlCatalogo);
                             break;

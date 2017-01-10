@@ -140,8 +140,6 @@ namespace KiiniHelp.UserControls.Genericos
             {
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalMuestraInformacion\");", true);
                 string url = ResolveUrl("~/FrmEncuesta.aspx?IdTipoServicio=" + (int)BusinessVariables.EnumTipoArbol.Consultas + "&IdTicket=" + IdArbol);
-                //string s = "window.open('" + url + "', 'popup_window', 'width=600,height=600,left=300,top=100,resizable=yes');";
-                //ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptEncuesta", "OpenWindow(\"" + url + "\");", true);
                 
             }

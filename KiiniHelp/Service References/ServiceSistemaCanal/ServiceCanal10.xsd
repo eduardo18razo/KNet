@@ -15,4 +15,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerCanalesAll">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerCanalesAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerCanalesAllResult" nillable="true" type="q2:ArrayOfCanal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerCanalById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idCanal" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerCanalByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerCanalByIdResult" nillable="true" type="q3:Canal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

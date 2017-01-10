@@ -1,7 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmTest.aspx.cs" Inherits="KiiniHelp.Test.FrmTest" %>
 
-<%@ Register Src="~/UserControls/Filtros/UcFiltroCatalogos.ascx" TagPrefix="uc1" TagName="UcFiltroCatalogos" %>
-<%@ Register TagPrefix="ajax" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
+<%@ Register Src="~/UserControls/Filtros/Componentes/UcFiltroCanalApertura.ascx" TagPrefix="uc1" TagName="UcFiltroCanalApertura" %>
+
+
+
 
 
 <!DOCTYPE html>
@@ -53,16 +55,18 @@
                 <asp:ScriptReference Path="~/BootStrap/js/super-panel.js" />
             </Scripts>
         </asp:ScriptManager>
+        <uc1:UcFiltroCanalApertura runat="server" id="UcFiltroCanalApertura" />
+        <%--<asp:DropDownList runat="server" ID="ddlLista" CssClass="DropSelect"></asp:DropDownList>
         <ajax:DropDownExtender ID="DropDownExtender2" runat="server"  TargetControlID="TextBox1" DropDownControlID="divDataDropdown"></ajax:DropDownExtender>
-        <asp:TextBox ID="TextBox1" runat="server" AutoCompleteType="None"></asp:TextBox>
-        <div id="divDataDropdown" style="overflow-y: scroll; height: 200px;" runat="server">
+        <asp:TextBox ID="TextBox1" runat="server" AutoCompleteType="None" CssClass="DropSelect"/>
+        <div id="divDataDropdown" style="overflow-y: scroll; height: 200px; background-color: white" runat="server">
             <asp:GridView ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                 <Columns>            
                     <asp:CommandField HeaderText="Select Data" ShowSelectButton="True" />
                 </Columns>
             </asp:GridView>
-        </div>
-        <uc1:UcFiltroCatalogos runat="server" id="UcFiltroCatalogos" />
+        </div>--%>
+        <%--<uc1:UcFiltroCatalogos runat="server" id="UcFiltroCatalogos" />--%>
         <%--<uc1:UcCargaCatalgo runat="server" id="ucCargaCatalgo" />--%>
         <%--<asp:ListBox runat="server" ID="lstBoxTest" SelectionMode="Multiple "/>
         

@@ -100,7 +100,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Consulta Grupos</h3>
+                    <h3>Puestos</h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">

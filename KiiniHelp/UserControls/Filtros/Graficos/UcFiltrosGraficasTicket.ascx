@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcFiltrosGraficasTicket.ascx.cs" Inherits="KiiniHelp.UserControls.Filtros.Graficos.UcFiltrosGraficasTicket" %>
 <%@ Register Src="~/UserControls/Filtros/Componentes/UcFiltroGrupo.ascx" TagPrefix="uc1" TagName="UcFiltroGrupo" %>
+<%@ Register Src="~/UserControls/Filtros/Componentes/UcFiltroCanalApertura.ascx" TagPrefix="uc1" TagName="UcFiltroCanalApertura" %>
 <%@ Register Src="~/UserControls/Filtros/Componentes/UcFiltroOrganizacion.ascx" TagPrefix="uc1" TagName="UcFiltroOrganizacion" %>
 <%@ Register Src="~/UserControls/Filtros/Componentes/UcFiltroUbicacion.ascx" TagPrefix="uc1" TagName="UcFiltroUbicacion" %>
 <%@ Register Src="~/UserControls/Filtros/Componentes/UcFiltroServicioIncidente.ascx" TagPrefix="uc1" TagName="UcFiltroServicioIncidente" %>
@@ -42,6 +43,7 @@
                     </div>
                     <div class="panel-body text-center">
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroGrupo" Text="Grupo" OnClick="btnFiltroGrupo_OnClick" />
+                        <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroCanal" Text="Canal Apertura" OnClick="btnFiltroCanal_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroTipoUsuario" Text="Tipo Usuario" OnClick="btnFiltroTipoUsuario_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroOrganizacion" Text="Organización" OnClick="btnFiltroOrganizacion_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroUbicacion" Text="Ubicación" OnClick="btnFiltroUbicacion_OnClick" />
@@ -67,6 +69,18 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <uc1:UcFiltroGrupo runat="server" ID="ucFiltroGrupo" />
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+</div>
+
+<div class="modal fade" id="modalFiltroCanal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <uc1:UcFiltroCanalApertura runat="server" id="ucFiltroCanalApertura" />
                 </div>
             </div>
         </ContentTemplate>

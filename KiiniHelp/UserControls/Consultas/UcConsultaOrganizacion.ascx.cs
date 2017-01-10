@@ -183,16 +183,29 @@ namespace KiiniHelp.UserControls.Consultas
                 throw new Exception(e.Message);
             }
         }
+
+        private void LimpiarOrganizaciones()
+        {
+            try
+            {
+                rptResultados.DataSource = null;
+                rptResultados.DataBind();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+                
                 AlertaOrganizacion = new List<string>();
                 AlertaCatalogos = new List<string>();
                 if (!IsPostBack)
                 {
                     LlenaCombos();
-                    LlenaOrganizaciones();
                 }
             }
             catch (Exception ex)
@@ -226,6 +239,7 @@ namespace KiiniHelp.UserControls.Consultas
                 }
                 else
                 {
+                    LimpiarOrganizaciones();
                     btnNew.Visible = false;
                 }
                 if (ddlTipoUsuario.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index) return;

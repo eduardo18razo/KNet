@@ -9,13 +9,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
 {
     public class ServiceConsultas : IServiceConsultas
     {
-        public List<HelperReportesTicket> ConsultarTickets(int idUsuario, List<int> grupos, List<int> tiposUsuario, List<int> organizaciones, List<int> ubicaciones, List<int> tipoArbol, List<int> tipificacion, List<int> prioridad, List<int> estatus, List<bool?> sla, List<bool?> vip, Dictionary<string, DateTime> fechas, int pageIndex, int pageSize)
+        public List<HelperReportesTicket> ConsultarTickets(int idUsuario, List<int> grupos, List<int> canales, List<int> tiposUsuario, List<int> organizaciones, List<int> ubicaciones, List<int> tipoArbol, List<int> tipificacion, List<int> prioridad, List<int> estatus, List<bool?> sla, List<bool?> vip, Dictionary<string, DateTime> fechas, int pageIndex, int pageSize)
         {
             try
             {
                 using (BusinessConsultas negocio = new BusinessConsultas())
                 {
-                    return negocio.ConsultarTickets(idUsuario, grupos, tiposUsuario, organizaciones, ubicaciones, tipoArbol, tipificacion, prioridad, estatus, sla, vip, fechas, pageIndex, pageSize);
+                    return negocio.ConsultarTickets(idUsuario, grupos, canales, tiposUsuario, organizaciones, ubicaciones, tipoArbol, tipificacion, prioridad, estatus, sla, vip, fechas, pageIndex, pageSize);
                 }
             }
             catch (Exception ex)

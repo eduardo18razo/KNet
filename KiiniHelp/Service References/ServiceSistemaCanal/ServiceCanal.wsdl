@@ -24,16 +24,54 @@
   <wsdl:message name="IServiceCanal_ObtenerCanales_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerCanalesResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceCanal_ObtenerCanalesAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerCanalesAll" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCanal_ObtenerCanalesAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerCanalesAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCanal_ObtenerCanalById_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerCanalById" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCanal_ObtenerCanalById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerCanalByIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceCanal">
     <wsdl:operation name="ObtenerCanales">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceCanal/ObtenerCanales" message="tns:IServiceCanal_ObtenerCanales_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceCanal/ObtenerCanalesResponse" message="tns:IServiceCanal_ObtenerCanales_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCanalesAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCanal/ObtenerCanalesAll" message="tns:IServiceCanal_ObtenerCanalesAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCanal/ObtenerCanalesAllResponse" message="tns:IServiceCanal_ObtenerCanalesAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCanalById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCanal/ObtenerCanalById" message="tns:IServiceCanal_ObtenerCanalById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCanal/ObtenerCanalByIdResponse" message="tns:IServiceCanal_ObtenerCanalById_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceCanal">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ObtenerCanales">
       <soap:operation soapAction="http://tempuri.org/IServiceCanal/ObtenerCanales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCanalesAll">
+      <soap:operation soapAction="http://tempuri.org/IServiceCanal/ObtenerCanalesAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCanalById">
+      <soap:operation soapAction="http://tempuri.org/IServiceCanal/ObtenerCanalById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

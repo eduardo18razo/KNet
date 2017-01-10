@@ -62,7 +62,7 @@
                                         <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdTicket") %>' Visible="False" />
                                         <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdUsuario") %>' Visible="False" />
                                         <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdUsuarioAsignado") %>' Visible="False" />
-                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusTicket.Id") %>' Visible="False" />
+                                        <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusTicket.Id") %>' Visible="False" ID="lblEstatusActual" />
                                         <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EstatusAsignacion.Id") %>' Visible="False" ID="lblEstatusAsignacionActual" />
                                         <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("IdGrupoAsignado") %>' Visible="False" ID="lblIdGrupoAsignado" />
                                         <asp:Label runat="server" CssClass="col-xs-1" Text='<%#Eval("EsPropietario") %>' Visible="False" ID="lblEsPropietario" />

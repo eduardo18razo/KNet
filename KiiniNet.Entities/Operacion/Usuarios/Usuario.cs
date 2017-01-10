@@ -47,6 +47,8 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public DateTime? FechaUpdate { get; set; }
         [DataMember]
         public bool LevantaTickets { get; set; }
+        [DataMember]
+        public bool LevantaRecado { get; set; }
 
         [DataMember]
         public virtual TipoUsuario TipoUsuario { get; set; }
@@ -86,6 +88,10 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public virtual List<PreguntaReto> PreguntaReto { get; set; }
         [DataMember]
         public virtual List<UsuarioPassword> UsuarioPassword { get; set; }
+        [DataMember]
+        public virtual List<PreTicket> PreTicketSolicitado { get; set; }
+        [DataMember]
+        public virtual List<PreTicket> PreTicketLevantado { get; set; }
 
         public string NombreCompleto { get { return ApellidoPaterno + " " + ApellidoMaterno + " " + Nombre; } }
 

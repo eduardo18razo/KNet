@@ -12,6 +12,11 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
         {
             get { return ucFiltroGrupo.GruposSeleccionados; }
         }
+        public List<int> FiltroCanalesApertura
+        {
+            get { return ucFiltroCanalApertura.CanalesSeleccionados; }
+        }
+
         public List<int> FiltroTipoUsuario
         {
             get { return ucFiltroTipoUsuario.TipoUsuarioSeleccionados; }
@@ -77,6 +82,9 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
                 Alerta = new List<string>();
                 ucFiltroGrupo.OnAceptarModal += ucFiltroGrupo_OnAceptarModal;
                 ucFiltroGrupo.OnCancelarModal += ucFiltroGrupo_OnCancelarModal;
+
+                ucFiltroCanalApertura.OnAceptarModal += UcFiltroCanalAperturaOnOnAceptarModal;
+                ucFiltroCanalApertura.OnCancelarModal += UcFiltroCanalAperturaOnOnCancelarModal;
 
                 ucFiltroTipoUsuario.OnAceptarModal += UcFiltroTipoUsuarioOnOnAceptarModal;
                 ucFiltroTipoUsuario.OnCancelarModal += UcFiltroTipoUsuarioOnOnCancelarModal;
@@ -150,6 +158,41 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
             {
                 btnFiltroGrupo.CssClass = ucFiltroGrupo.GruposSeleccionados.Count > 0 ? "btn btn-success" : "btn btn-primary";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalFiltroGrupo\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        private void UcFiltroCanalAperturaOnOnAceptarModal()
+        {
+            try
+            {
+                btnFiltroCanal.CssClass = ucFiltroCanalApertura.CanalesSeleccionados.Count > 0 ? "btn btn-success" : "btn btn-primary";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalFiltroCanal\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+        private void UcFiltroCanalAperturaOnOnCancelarModal()
+        {
+            try
+            {
+                btnFiltroCanal.CssClass = ucFiltroCanalApertura.CanalesSeleccionados.Count > 0 ? "btn btn-success" : "btn btn-primary";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalFiltroCanal\");", true);
             }
             catch (Exception ex)
             {
@@ -523,6 +566,23 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
             try
             {
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalFiltroGrupo\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnFiltroCanal_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalFiltroCanal\");", true);
             }
             catch (Exception ex)
             {

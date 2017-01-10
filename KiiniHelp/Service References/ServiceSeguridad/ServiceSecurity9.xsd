@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
-  <xs:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceSecurity.svc?xsd=xsd14" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="Autenticate">
     <xs:complexType>
       <xs:sequence>
@@ -17,6 +18,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerRolesUsuario">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerRolesUsuarioResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerRolesUsuarioResult" nillable="true" type="q1:ArrayOfRol" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetUserDataAutenticate">
     <xs:complexType>
       <xs:sequence>
@@ -28,7 +43,7 @@
   <xs:element name="GetUserDataAutenticateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="GetUserDataAutenticateResult" nillable="true" type="q1:Usuario" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="GetUserDataAutenticateResult" nillable="true" type="q2:Usuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -42,7 +57,7 @@
   <xs:element name="GetUserInvitadoDataAutenticateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="GetUserInvitadoDataAutenticateResult" nillable="true" type="q2:Usuario" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="GetUserInvitadoDataAutenticateResult" nillable="true" type="q3:Usuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -64,7 +79,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
-        <xs:element minOccurs="0" name="idArea" type="xs:int" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="areas" nillable="true" type="q4:ArrayOfint" />
         <xs:element minOccurs="0" name="arboles" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
@@ -72,7 +87,7 @@
   <xs:element name="ObtenerMenuUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerMenuUsuarioResult" nillable="true" type="q3:ArrayOfMenu" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerMenuUsuarioResult" nillable="true" type="q5:ArrayOfMenu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -88,7 +103,7 @@
   <xs:element name="ObtenerMenuPublicoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerMenuPublicoResult" nillable="true" type="q4:ArrayOfMenu" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" minOccurs="0" name="ObtenerMenuPublicoResult" nillable="true" type="q6:ArrayOfMenu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

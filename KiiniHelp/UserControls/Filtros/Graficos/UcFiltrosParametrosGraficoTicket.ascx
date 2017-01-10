@@ -173,7 +173,27 @@
                                                 </asp:Repeater>
                                             </div>
                                         </div>
-
+                                        <br />
+                                        <asp:RadioButton runat="server" Text="Canal" AutoPostBack="True" GroupName="Stack" ID="rbtnCanal" OnCheckedChanged="rbtnCanal_OnCheckedChanged" />
+                                        <div class="panel panel-default" runat="server" id="pnlCanal" visible="False">
+                                            <div class="panel-body">
+                                                <asp:Repeater runat="server" ID="rptCanal">
+                                                    
+                                                     <HeaderTemplate>
+                                                        <div class="container-fluid">
+                                                            <asp:Label CssClass="col-sm-4 text-center" runat="server" Text="Canal Apertura" />
+                                                        </div>
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <div class="container-fluid" style="margin-top: 2px">
+                                                            <asp:Label CssClass="col-sm-1" runat="server" Visible="False" ID="lblId" Text='<%# Eval("Id") %>' />
+                                                            <asp:CheckBox runat="server" Text='<%# Eval("Descripcion") %>' ID="chkCanal" AutoPostBack="True" />
+                                                            (<asp:Label runat="server" Text='<%# Eval("Total") %>'></asp:Label>)
+                                                        </div>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

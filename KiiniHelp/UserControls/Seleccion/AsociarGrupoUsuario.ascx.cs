@@ -95,6 +95,13 @@ namespace KiiniHelp.UserControls.Seleccion
             { HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, value); }
         }
 
+        public bool ContacCenter
+        {
+            get { return divdivContactCenter.Visible; }
+            set
+            { HabilitaGrupos((int)BusinessVariables.EnumRoles.ContactCenter, value); }
+        }
+
         public bool UbicacionEmpleado
         {
             get { return divUbicacionEmpleado.Visible; }
@@ -183,6 +190,9 @@ namespace KiiniHelp.UserControls.Seleccion
                 if (Desarrollo)
                     if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo) <= 0)
                         sb.AppendLine("<li>Debe asignar al menos un grupo de Tipo Responsable de Desarrollo.</li>");
+                if (ContacCenter)
+                    if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.ContactCenter) <= 0)
+                        sb.AppendLine("<li>Debe asignar al menos un grupo de Tipo Contact Center.</li>");
 
                 if (sb.ToString() != string.Empty)
                 {
@@ -254,6 +264,10 @@ namespace KiiniHelp.UserControls.Seleccion
                     ddlGrupoResponsableOperacion.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
                 if (Desarrollo)
                     ddlGrupoResponsableDesarrollo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                if (Dueño)
+                    ddlDuenoServicio.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                if (ContacCenter)
+                    ddlContactCenter.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
             }
             catch (Exception e)
             {
@@ -307,6 +321,11 @@ namespace KiiniHelp.UserControls.Seleccion
                         divDuenoServicio.Visible = visible;
                         if (visible)
                             Metodos.LlenaComboCatalogo(ddlDuenoServicio, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.ContactCenter:
+                        divdivContactCenter.Visible = visible;
+                        if (visible)
+                            Metodos.LlenaComboCatalogo(ddlContactCenter, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
                         break;
 
                     case (int)BusinessVariables.EnumRoles.Responsablemantenimientoubicacionempleado:
@@ -423,6 +442,15 @@ namespace KiiniHelp.UserControls.Seleccion
                         if (ddlDuenoServicio.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlDuenoServicio.SelectedItem.Value);
+                        grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
+                        lstSubRoles = _servicioSubGrupoUsuario.ObtenerSubGruposUsuario(idGrupoUsuario, false);
+                        break;
+
+                    case (int)BusinessVariables.EnumRoles.ContactCenter:
+                        idRol = (int)BusinessVariables.EnumRoles.ContactCenter;
+                        if (ddlContactCenter.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                            throw new Exception("Seleccione un grupo valido");
+                        idGrupoUsuario = Convert.ToInt32(ddlContactCenter.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
                         lstSubRoles = _servicioSubGrupoUsuario.ObtenerSubGruposUsuario(idGrupoUsuario, false);
                         break;
@@ -623,6 +651,16 @@ namespace KiiniHelp.UserControls.Seleccion
                         idGrupoUsuario = Convert.ToInt32(ddlGrupoResponsableDesarrollo.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
                         break;
+                    case (int)BusinessVariables.EnumRoles.DueñoDelServicio:
+                        idRol = (int)BusinessVariables.EnumRoles.DueñoDelServicio;
+                        idGrupoUsuario = Convert.ToInt32(ddlDuenoServicio.SelectedItem.Value);
+                        grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
+                        break;
+                    case (int)BusinessVariables.EnumRoles.ContactCenter:
+                        idRol = (int)BusinessVariables.EnumRoles.ContactCenter;
+                        idGrupoUsuario = Convert.ToInt32(ddlContactCenter.SelectedItem.Value);
+                        grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
+                        break;
                 }
                 if (grupoUsuario != null)
                 {
@@ -672,6 +710,12 @@ namespace KiiniHelp.UserControls.Seleccion
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo:
                         ddlGrupoResponsableDesarrollo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                        break;
+                    case (int)BusinessVariables.EnumRoles.DueñoDelServicio:
+                        ddlDuenoServicio.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                        break;
+                    case (int)BusinessVariables.EnumRoles.ContactCenter:
+                        ddlContactCenter.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
                         break;
                 }
 
@@ -753,6 +797,11 @@ namespace KiiniHelp.UserControls.Seleccion
                     case (int)BusinessVariables.EnumRoles.DueñoDelServicio:
                         divDuenoServicio.Visible = true;
                         Metodos.LlenaComboCatalogo(ddlDuenoServicio,
+                            AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
+                        break;
+                    case (int)BusinessVariables.EnumRoles.ContactCenter:
+                        divdivContactCenter.Visible = true;
+                        Metodos.LlenaComboCatalogo(ddlContactCenter,
                             AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
                         break;
 

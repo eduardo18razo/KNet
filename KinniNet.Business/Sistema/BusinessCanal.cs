@@ -46,5 +46,52 @@ namespace KinniNet.Core.Sistema
             }
             return result;
         }
+
+        public List<Canal> ObtenerCanalesAll(bool insertarSeleccion)
+        {
+            List<Canal> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Canal.ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                        new Canal
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.Value,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public Canal ObtenerCanalById(int idCanal)
+        {
+            Canal result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Canal.SingleOrDefault(w => w.Id == idCanal);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
     }
 }

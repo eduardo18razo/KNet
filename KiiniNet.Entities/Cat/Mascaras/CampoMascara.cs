@@ -15,6 +15,8 @@ namespace KiiniNet.Entities.Cat.Mascaras
         [DataMember]
         public int? IdCatalogo { get; set; }
         [DataMember]
+        public bool EsArchivo { get; set; }
+        [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
         public string NombreCampo { get; set; }

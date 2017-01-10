@@ -38,9 +38,13 @@ namespace KiiniNet.Entities.Cat.Sistema
         public virtual List<EstatusAsignacionSubRolGeneralDefault> EstatusAsignacionSubRolGeneralDefault { get; set; }
 
         [DataMember]
-        public virtual List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneral { get; set; }
+        public virtual List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneralSolicita { get; set; }
+        [DataMember]
+        public virtual List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneralPertenece { get; set; }
 
         [DataMember]
-        public virtual List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefault { get; set; } 
+        public virtual List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefaultSolicita { get; set; }
+        [DataMember]
+        public virtual List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefaultPertenece { get; set; } 
     }
 }

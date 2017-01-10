@@ -13,6 +13,8 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
+        public int Orden { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
         [DataMember]
         public List<Ticket> Ticket { get; set; }
@@ -20,9 +22,13 @@ namespace KiiniNet.Entities.Cat.Sistema
         public virtual List<TicketEstatus> TicketEstatus { get; set; }
 
         [DataMember]
-        public List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneral { get; set; }
+        public List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefaultActual { get; set; }
+        [DataMember]
+        public List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefaultAccion { get; set; }
 
         [DataMember]
-        public List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefault { get; set; }
+        public List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneralActual { get; set; }
+        [DataMember]
+        public List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneralAccion { get; set; }
     }
 }

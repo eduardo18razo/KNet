@@ -9,6 +9,36 @@ namespace KiiniNet.Services.Operacion.Implementacion
 {
     public class ServiceArbolAcceso : IServiceArbolAcceso
     {
+        public bool LevantaTicket(int idUsuarioLevanta, int idArea, int idTipoUsuario, int idTipoArbol, int nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7)
+        {
+            try
+            {
+                using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
+                {
+                    return negocio.LevantaTicket(idUsuarioLevanta, idArea, idTipoUsuario, idTipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public bool RecadoTicketTicket(int idUsuarioLevanta, int idArea, int idTipoUsuario, int idTipoArbol, int nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7)
+        {
+            try
+            {
+                using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
+                {
+                    return negocio.RecadoTicketTicket(idUsuarioLevanta, idArea, idTipoUsuario, idTipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<Nivel1> ObtenerNivel1ByGrupos(int idUsuarioSolicita, int idUsuarioLevanta, int idArea, int idTipoArbolAcceso, bool insertarSeleccion)
         {
             try

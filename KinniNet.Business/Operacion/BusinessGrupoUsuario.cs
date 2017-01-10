@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Permissions;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
@@ -12,7 +11,7 @@ namespace KinniNet.Core.Operacion
 {
     public class BusinessGrupoUsuario : IDisposable
     {
-        private bool _proxy;
+        private readonly bool _proxy;
         public void Dispose()
         {
 
@@ -22,7 +21,6 @@ namespace KinniNet.Core.Operacion
         {
             _proxy = proxy;
         }
-
         public List<GrupoUsuario> ObtenerGrupos(bool insertarSeleccion)
         {
             List<GrupoUsuario> result;
@@ -53,7 +51,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<GrupoUsuario> ObtenerGruposByIdUsuario(int idUsuario, bool insertarSeleccion)
         {
             List<GrupoUsuario> result;
@@ -84,7 +81,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<GrupoUsuario> ObtenerGruposUsuarioTipoUsuario(int idTipoGrupo, int idTipoUsuario, bool insertarSeleccion)
         {
             List<GrupoUsuario> result;
@@ -144,7 +140,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<GrupoUsuario> ObtenerGruposUsuarioNivel(int idtipoArbol, int? nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7)
         {
             List<GrupoUsuario> result;
@@ -206,7 +201,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<GrupoUsuario> ObtenerGruposUsuarioSistemaNivelArbol()
         {
             List<GrupoUsuario> result;
@@ -239,7 +233,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<GrupoUsuario> ObtenerGruposUsuarioByIdTipoSubGrupo(int idTipoSubgrupo, bool insertarSeleccion)
         {
             List<GrupoUsuario> result = new List<GrupoUsuario>();
@@ -266,7 +259,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<GrupoUsuario> ObtenerGruposUsuarioByIdRolTipoUsuario(int idRol, int idTipoUsuario, bool insertarSeleccion)
         {
             List<GrupoUsuario> result = new List<GrupoUsuario>();
@@ -293,7 +285,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, bool insertarSeleccion)
         {
             List<GrupoUsuario> result = new List<GrupoUsuario>();
@@ -320,7 +311,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public void GuardarGrupoUsuario(GrupoUsuario grupoUsuario)
         {
             DataBaseModelContext db = new DataBaseModelContext();
@@ -353,7 +343,6 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
         }
-
         public void GuardarGrupoUsuario(GrupoUsuario grupoUsuario, Dictionary<int, int> horarios, Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso)
         {
             DataBaseModelContext db = new DataBaseModelContext();
@@ -420,7 +409,6 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
         }
-
         public GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario)
         {
             GrupoUsuario result;
@@ -451,7 +439,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<UsuarioGrupo> ObtenerGruposDeUsuario(int idUsuario)
         {
             List<UsuarioGrupo> result;
@@ -486,66 +473,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
-        private List<EstatusTicketSubRolGeneral> GeneraEstatusGrupoDefault(GrupoUsuario grupo)
-        {
-
-            List<EstatusTicketSubRolGeneral> result = new List<EstatusTicketSubRolGeneral>();
-            DataBaseModelContext db = new DataBaseModelContext();
-            try
-            {
-                result.AddRange(from subgpo in grupo.SubGrupoUsuario
-                                where subgpo != null
-                                from statusDefault in db.EstatusTicketSubRolGeneralDefault.Where(w => w.IdSubRol == subgpo.IdSubRol && w.TieneSupervisor == grupo.TieneSupervisor)
-                                select new EstatusTicketSubRolGeneral
-                                {
-                                    IdRol = statusDefault.IdRol,
-                                    IdSubRol = statusDefault.IdSubRol,
-                                    IdEstatusTicket = statusDefault.IdEstatusTicket,
-                                    Orden = statusDefault.Orden,
-                                    TieneSupervisor = statusDefault.TieneSupervisor,
-                                    Propietario = statusDefault.Propietario,
-                                    LevantaTicket = statusDefault.LevantaTicket,
-                                    Habilitado = statusDefault.Habilitado
-                                });
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            finally { db.Dispose(); }
-            return result;
-        }
-
-        private List<EstatusAsignacionSubRolGeneral> GeneraEstatusAsignacionGrupoDefault(GrupoUsuario grupo)
-        {
-            List<EstatusAsignacionSubRolGeneral> result = new List<EstatusAsignacionSubRolGeneral>();
-            DataBaseModelContext db = new DataBaseModelContext();
-            try
-            {
-                result.AddRange(from subgpo in grupo.SubGrupoUsuario
-                                where subgpo != null
-                                from statusDefault in db.EstatusAsignacionSubRolGeneralDefault.Where(w => w.IdSubRol == subgpo.IdSubRol && w.TieneSupervisor == grupo.TieneSupervisor)
-                                select new EstatusAsignacionSubRolGeneral
-                                {
-                                    IdRol = statusDefault.IdRol,
-                                    IdSubRol = statusDefault.IdSubRol,
-                                    IdEstatusAsignacionActual = statusDefault.IdEstatusAsignacionActual,
-                                    IdEstatusAsignacionAccion = statusDefault.IdEstatusAsignacionAccion,
-                                    Orden = statusDefault.Orden,
-                                    TieneSupervisor = statusDefault.TieneSupervisor,
-                                    Propietario = statusDefault.Propietario,
-                                    Habilitado = statusDefault.Habilitado
-                                });
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            finally { db.Dispose(); }
-            return result;
-        }
-
         public void HabilitarGrupo(int idGrupo, bool habilitado)
         {
             DataBaseModelContext db = new DataBaseModelContext();
@@ -569,7 +496,6 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
         }
-
         public List<HorarioSubGrupo> ObtenerHorariosByIdSubGrupo(int idSubGrupo)
         {
             List<HorarioSubGrupo> result;
@@ -608,7 +534,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<GrupoUsuario> ObtenerGruposUsuarioAll(int? idTipoUsuario, int? idTipoGrupo)
         {
             List<GrupoUsuario> result;
@@ -640,7 +565,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<GrupoUsuario> ObtenerGruposUsuarioResponsablesByGruposTipoServicio(int idUsuario, List<int> grupos, List<int> tipoServicio)
         {
             List<GrupoUsuario> result;
@@ -688,8 +612,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
-
         public void ActualizarGrupo(GrupoUsuario gpo, Dictionary<int, int> horarios, Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso)
         {
             DataBaseModelContext db = new DataBaseModelContext();
@@ -816,6 +738,66 @@ namespace KinniNet.Core.Operacion
             {
                 db.Dispose();
             }
+        }
+        
+        
+        private List<EstatusTicketSubRolGeneral> GeneraEstatusGrupoDefault(GrupoUsuario grupo)
+        {
+
+            List<EstatusTicketSubRolGeneral> result = new List<EstatusTicketSubRolGeneral>();
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                result.AddRange(from subgpo in grupo.SubGrupoUsuario
+                                where subgpo != null
+                                from statusDefault in db.EstatusTicketSubRolGeneralDefault.Where(w => w.IdSubRolSolicita == subgpo.IdSubRol && w.TieneSupervisor == grupo.TieneSupervisor)
+                                select new EstatusTicketSubRolGeneral
+                                {
+                                    IdRolSolicita = statusDefault.IdRolSolicita,
+                                    IdSubRolSolicita = statusDefault.IdSubRolSolicita,
+                                    IdRolPertenece = statusDefault.IdRolPertenece,
+                                    IdSubRolPertenece = statusDefault.IdSubRolPertenece,
+                                    IdEstatusTicketActual = statusDefault.IdEstatusTicketActual,
+                                    IdEstatusTicketAccion = statusDefault.IdEstatusTicketAccion,
+                                    TieneSupervisor = statusDefault.TieneSupervisor,
+                                    Propietario = statusDefault.Propietario,
+                                    LevantaTicket = statusDefault.LevantaTicket,
+                                    Habilitado = statusDefault.Habilitado
+                                });
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally { db.Dispose(); }
+            return result;
+        }
+        private List<EstatusAsignacionSubRolGeneral> GeneraEstatusAsignacionGrupoDefault(GrupoUsuario grupo)
+        {
+            List<EstatusAsignacionSubRolGeneral> result = new List<EstatusAsignacionSubRolGeneral>();
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                result.AddRange(from subgpo in grupo.SubGrupoUsuario
+                                where subgpo != null
+                                from statusDefault in db.EstatusAsignacionSubRolGeneralDefault.Where(w => w.IdSubRol == subgpo.IdSubRol && w.TieneSupervisor == grupo.TieneSupervisor)
+                                select new EstatusAsignacionSubRolGeneral
+                                {
+                                    IdRol = statusDefault.IdRol,
+                                    IdSubRol = statusDefault.IdSubRol,
+                                    IdEstatusAsignacionActual = statusDefault.IdEstatusAsignacionActual,
+                                    IdEstatusAsignacionAccion = statusDefault.IdEstatusAsignacionAccion,
+                                    TieneSupervisor = statusDefault.TieneSupervisor,
+                                    Propietario = statusDefault.Propietario,
+                                    Habilitado = statusDefault.Habilitado
+                                });
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally { db.Dispose(); }
+            return result;
         }
     }
 }

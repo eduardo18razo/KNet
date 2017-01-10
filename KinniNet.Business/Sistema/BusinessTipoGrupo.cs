@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using KiiniNet.Entities.Cat.Sistema;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
@@ -10,7 +9,7 @@ namespace KinniNet.Core.Sistema
 {
     public class BusinessTipoGrupo : IDisposable
     {
-        private bool _proxy;
+        private readonly bool _proxy;
         public BusinessTipoGrupo(bool proxy = false)
         {
             _proxy = proxy;

@@ -67,6 +67,12 @@
   <wsdl:message name="IServiceTicket_ObtenerDetalleTicketNoRegistrado_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerDetalleTicketNoRegistradoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceTicket_GeneraPreticket_InputMessage">
+    <wsdl:part name="parameters" element="tns:GeneraPreticket" />
+  </wsdl:message>
+  <wsdl:message name="IServiceTicket_GeneraPreticket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GeneraPreticketResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceTicket">
     <wsdl:operation name="CrearTicket">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/CrearTicket" message="tns:IServiceTicket_CrearTicket_InputMessage" />
@@ -99,6 +105,10 @@
     <wsdl:operation name="ObtenerDetalleTicketNoRegistrado">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketNoRegistrado" message="tns:IServiceTicket_ObtenerDetalleTicketNoRegistrado_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketNoRegistradoResponse" message="tns:IServiceTicket_ObtenerDetalleTicketNoRegistrado_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GeneraPreticket">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/GeneraPreticket" message="tns:IServiceTicket_GeneraPreticket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/GeneraPreticketResponse" message="tns:IServiceTicket_GeneraPreticket_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceTicket">
@@ -168,6 +178,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerDetalleTicketNoRegistrado">
       <soap:operation soapAction="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketNoRegistrado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GeneraPreticket">
+      <soap:operation soapAction="http://tempuri.org/IServiceTicket/GeneraPreticket" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

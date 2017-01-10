@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
 using KiiniNet.Entities.Cat.Sistema;
 
 namespace KiiniNet.Services.Sistema.Interface

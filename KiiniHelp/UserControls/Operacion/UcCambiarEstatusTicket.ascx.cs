@@ -33,6 +33,11 @@ namespace KiiniHelp.UserControls.Operacion
             }
         }
 
+        public int IdEstatusActual
+        {
+            get { return int.Parse(hfEstatusActual.Value); }
+            set { hfEstatusActual.Value = value.ToString(); }
+        }
         public bool CerroTicket
         {
             get { return Convert.ToBoolean(hfTicketCerrado.Value); }
@@ -49,7 +54,7 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
-                ddlEstatus.DataSource = _servicioEstatus.ObtenerEstatusTicketUsuario(IdUsuario, EsPropietario, true);
+                ddlEstatus.DataSource = _servicioEstatus.ObtenerEstatusTicketUsuario(IdUsuario, IdEstatusActual, EsPropietario, true);
                 ddlEstatus.DataTextField = "Descripcion";
                 ddlEstatus.DataValueField = "Id";
                 ddlEstatus.DataBind();

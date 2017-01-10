@@ -31,6 +31,9 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         HelperDetalleTicket ObtenerDetalleTicketNoRegistrado(int idTicket, string cveRegistro);
+
+        [OperationContract]
+        PreTicket GeneraPreticket(int idArbol, int idUsuarioSolicita, int idUsuarioLevanto, string observaciones);
     }
 
 }

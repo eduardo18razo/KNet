@@ -19,6 +19,7 @@
       <xs:element minOccurs="0" name="GrupoUsuario" nillable="true" type="tns:GrupoUsuario" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element minOccurs="0" name="HorarioDetalle" nillable="true" type="tns:ArrayOfHorarioDetalle" />
+      <xs:element minOccurs="0" name="HorarioSubGrupo" nillable="true" type="tns:ArrayOfHorarioSubGrupo" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IdGrupoSolicito" type="xs:int" />
     </xs:sequence>
@@ -157,7 +158,9 @@
       <xs:element minOccurs="0" name="Dia" type="xs:int" />
       <xs:element minOccurs="0" name="HoraFin" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="HoraInicio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Horario" nillable="true" type="tns:Horario" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdHorario" type="xs:int" />
       <xs:element minOccurs="0" name="IdSubGrupoUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="SubGrupoUsuario" nillable="true" type="tns:SubGrupoUsuario" />
     </xs:sequence>

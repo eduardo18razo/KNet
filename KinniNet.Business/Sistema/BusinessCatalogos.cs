@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Metadata.Edm;
 using System.Data.SqlClient;
 using System.Linq;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Helper;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
-g
+
 namespace KinniNet.Core.Sistema
 {
     public class BusinessCatalogos : IDisposable
     {
-        private bool _proxy;
+        private readonly bool _proxy;
         public BusinessCatalogos(bool proxy = false)
         {
             _proxy = proxy;
@@ -256,7 +255,7 @@ namespace KinniNet.Core.Sistema
             }
         }
 
-        public List<CatalogoGenerico> ObtenerRegistrosCatalogo(int idCatalogo)
+        public List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo)
         {
             List<CatalogoGenerico> result;
             DataBaseModelContext db = new DataBaseModelContext();
@@ -264,6 +263,60 @@ namespace KinniNet.Core.Sistema
             {
                 Catalogos cat = db.Catalogos.Single(s => s.Id == idCatalogo);
                 result = db.ExecuteStoreQuery<CatalogoGenerico>("ObtenerCatalogoSistema '" + cat.Tabla + "'").ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo)
+        {
+            DataTable result = new DataTable();
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                int lenght = 15;
+
+                Catalogos cat = db.Catalogos.Single(s => s.Id == idCatalogo);
+                List<CamposCatalogo> lstCampos = ObtenerCamposCatalogo(idCatalogo);
+                string sql = string.Format(" SELECT {0} Id, '{1}' as Descripcion \nUNION \nSELECT Id, ", BusinessVariables.ComboBoxCatalogo.Value, BusinessVariables.ComboBoxCatalogo.Descripcion);
+                foreach (CamposCatalogo campo in lstCampos.Where(w=>w.Descripcion != "Id" && w.Descripcion != "Habilitado"))
+                {
+                    switch (campo.TipoDato)
+                    {
+                        case"int":
+                        case "float":
+                            sql += string.Format("REPLACE(STR([{0}], {1}), SPACE(1), '0') + ' | ' +", campo.Descripcion, lenght);
+                            break;
+                        case "nvarchar":
+                            sql += string.Format("SUBSTRING(left([{0}] + SPACE(15) , {1}), 1, {1}) + ' | ' +", campo.Descripcion, lenght);
+                            break;
+                    }
+                }
+
+                sql = sql.TrimEnd('+').TrimEnd('\'').Trim().TrimEnd('|');
+                sql = sql.TrimEnd('|').TrimEnd('\'').Trim().TrimEnd('|');
+                sql = sql.TrimEnd('+').TrimEnd('\'').Trim().TrimEnd('|');
+                sql = sql.TrimEnd('+').TrimEnd('\'').Trim().TrimEnd('|');
+                sql = sql.TrimEnd('+').TrimEnd('\'').Trim().TrimEnd('|');
+                sql += " as Descripcion \nFROM " + cat.Tabla;
+
+                SqlConnection sqlConn = new SqlConnection(string.Format("Server={0};Database={1};Trusted_Connection=True", db.Connection.DataSource, (((System.Data.EntityClient.EntityConnection)(db.Connection)).StoreConnection).Database));
+                SqlCommand cmdSql = new SqlCommand(sql, sqlConn);
+                //cmdSql.Parameters.Add("@TABLENAME", SqlDbType.VarChar).Value = cat.Tabla;
+                SqlDataAdapter da = new SqlDataAdapter(cmdSql);
+                cmdSql.CommandType = CommandType.Text;
+                DataSet ds = new DataSet();
+                da.Fill(ds, cat.Tabla);
+
+                DataTable dt = ds.Tables[cat.Tabla];
+                result = ds.Tables[cat.Tabla];
             }
             catch (Exception ex)
             {
@@ -422,7 +475,7 @@ namespace KinniNet.Core.Sistema
 
         public static string CreateSqlTableFromDataTable(string tableName, DataTable table)
         {
-            
+
             string sql = "CREATE TABLE [" + tableName + "] (\n";
             sql += "Id int IDENTITY(1,1) NOT NULL, \n";
             sql = table.Columns.Cast<DataColumn>().Aggregate(sql, (current, column) => current + ("[" + column.ColumnName + "] " + SqlGetType(column) + ",\n"));
@@ -506,8 +559,6 @@ namespace KinniNet.Core.Sistema
             }
         }
         #endregion excel
-
-
         public List<CamposCatalogo> ObtenerCamposCatalogo(int idCatalogo)
         {
             DataBaseModelContext db = new DataBaseModelContext();

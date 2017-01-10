@@ -40,6 +40,15 @@ namespace KiiniHelp.UserControls.Filtros.Consultas {
         protected global::System.Web.UI.WebControls.Button btnFiltroGrupo;
         
         /// <summary>
+        /// Control btnFiltroCanal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFiltroCanal;
+        
+        /// <summary>
         /// Control btnFiltroTipoUsuario.
         /// </summary>
         /// <remarks>
@@ -146,6 +155,24 @@ namespace KiiniHelp.UserControls.Filtros.Consultas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::KiiniHelp.UserControls.Filtros.Componentes.UcFiltroGrupo ucFiltroGrupo;
+        
+        /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
+        /// Control ucFiltroCanalApertura.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Filtros.Componentes.UcFiltroCanalApertura ucFiltroCanalApertura;
         
         /// <summary>
         /// Control upFiltroTipoUsuario.

@@ -23,7 +23,7 @@
 </header>
 <div class="panel panel-primary">
     <div class="panel-heading text-primary text-center">
-        <h3>Login panel</h3>
+        <h3>Acceder a mi cuenta Kiininet</h3>
     </div>
     <div class="panel-body">
         <div class="form-horizontal" role="form">
@@ -42,7 +42,7 @@
             <div class="form-group">
                 <div class="col-sm-2 control-label"></div>
                 <div class="col-sm-10">
-                    <asp:LinkButton class="btn btn-primary" ID="lnkBtnRecuperar" runat="server" Text="Recuperar contraseña" OnClick="lnkBtnRecuperar_OnClick"></asp:LinkButton>
+                    <asp:LinkButton class="btn btn-primary" ID="lnkBtnRecuperar" runat="server" Text="¿Olvidaste tu contraseña?" OnClick="lnkBtnRecuperar_OnClick"></asp:LinkButton>
                 </div>
             </div>
             <div class="form-group">

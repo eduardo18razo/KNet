@@ -104,12 +104,12 @@ namespace KiiniHelp.UserControls.Operacion
                 divUsuariosSupervisor.Visible = false;
                 List<int> lstSubRoles = ((Usuario)Session["UserData"]).UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Select(s => s.SubGrupoUsuario).Select(subRol => subRol.IdSubRol).ToList();
                 var supervisor = lstSubRoles.Contains((int)BusinessVariables.EnumSubRoles.Supervisor);
-                if (!EsPropietario && !supervisor) return;
+                //if (!EsPropietario && !supervisor) return;
                 List<Usuario> lstUsuarios;
                 List<SubRolEscalacionPermitida> lstAsignacionesPermitidas = new List<SubRolEscalacionPermitida>();
                 foreach (int subRol in lstSubRoles)
                 {
-                    lstAsignacionesPermitidas.AddRange(_servicioSubRol.ObtenerEscalacion(subRol));
+                    lstAsignacionesPermitidas.AddRange(_servicioSubRol.ObtenerEscalacion(subRol, int.Parse(ddlEstatus.SelectedValue)));
                 }
                 if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.Supervisor))
                 {
@@ -330,6 +330,7 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
+                if (ddlEstatus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index) return;
                 if (int.Parse(ddlEstatus.SelectedValue) != (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Autoasignado)
                     LLenaUsuarios();
             }

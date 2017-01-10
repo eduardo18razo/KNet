@@ -2,6 +2,7 @@
 <asp:UpdatePanel runat="server">
     <ContentTemplate>
         <asp:HiddenField runat="server" ID="hfTicketCerrado"/>
+        <asp:HiddenField runat="server" ID="hfEstatusActual"/>
         <header id="panelAlertaGeneral" runat="server" visible="false">
             Cambiar Estatus...
             <div class="alert alert-danger">

@@ -105,6 +105,14 @@
                                             <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="13" data-toggle="modal" data-target="#modalAltaGrupoUsuario" data-backdrop="static" data-keyboard="false" />
                                         </div>
                                     </div>
+                                    <div class="form-group" runat="server" id="divdivContactCenter" visible="False">
+                                        <div class="col-sm-offset-1">
+                                            <asp:Label runat="server" Text="Contact Center" class="col-sm-3 control-label"></asp:Label>
+                                            <asp:DropDownList runat="server" Width="250px" ID="ddlContactCenter" CssClass="DropSelect" AutoPostBack="True" />
+                                            <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="14" />
+                                            <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="14" data-toggle="modal" data-target="#modalAltaGrupoUsuario" data-backdrop="static" data-keyboard="false" />
+                                        </div>
+                                    </div>
 
 
                                     <div class="form-group" runat="server" id="divUbicacionEmpleado" visible="False">

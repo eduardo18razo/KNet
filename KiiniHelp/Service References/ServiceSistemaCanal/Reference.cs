@@ -17,6 +17,12 @@ namespace KiiniHelp.ServiceSistemaCanal {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCanal/ObtenerCanales", ReplyAction="http://tempuri.org/IServiceCanal/ObtenerCanalesResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Canal> ObtenerCanales(bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCanal/ObtenerCanalesAll", ReplyAction="http://tempuri.org/IServiceCanal/ObtenerCanalesAllResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Canal> ObtenerCanalesAll(bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCanal/ObtenerCanalById", ReplyAction="http://tempuri.org/IServiceCanal/ObtenerCanalByIdResponse")]
+        KiiniNet.Entities.Cat.Sistema.Canal ObtenerCanalById(int idCanal);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -48,6 +54,14 @@ namespace KiiniHelp.ServiceSistemaCanal {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Canal> ObtenerCanales(bool insertarSeleccion) {
             return base.Channel.ObtenerCanales(insertarSeleccion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Canal> ObtenerCanalesAll(bool insertarSeleccion) {
+            return base.Channel.ObtenerCanalesAll(insertarSeleccion);
+        }
+        
+        public KiiniNet.Entities.Cat.Sistema.Canal ObtenerCanalById(int idCanal) {
+            return base.Channel.ObtenerCanalById(idCanal);
         }
     }
 }

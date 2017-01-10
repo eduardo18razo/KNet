@@ -47,6 +47,10 @@
                                     <asp:TextBox runat="server" ID="txtDescripcionGrupoUsuario" placeholder="DESCRIPCION" class="form-control obligatorio" onkeydown="return (event.keyCode!=13);" />
                                 </div>
                             </div>
+                            <div class="form-group" runat="server" ID="divParametros" Visible="False">
+                                <asp:RadioButton runat="server" ID="rbtnLevanta" GroupName="gpoContacCenterParamtro" Text="Levanta Tickets" CssClass="col-sm-12"/>
+                                <asp:RadioButton runat="server" ID="rbtnRecado" GroupName="gpoContacCenterParamtro" Text="Levanta Recados" CssClass="col-sm-12"/>
+                            </div>
                             <div class="form-group">
                                 <div class="col-sm-4">
                                     <asp:CheckBox runat="server" ID="chkHabilitado" Checked="True" Visible="False" />
@@ -84,7 +88,6 @@
                 <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancelar_OnClick" />
             </div>
         </div>
-
     </ContentTemplate>
 </asp:UpdatePanel>
 

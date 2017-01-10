@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using KiiniNet.Entities.Cat.Usuario;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
@@ -10,7 +9,7 @@ namespace KinniNet.Core.Operacion
 {
     public class BusinessPuesto : IDisposable
     {
-        private bool _proxy;
+        private readonly bool _proxy;
         public void Dispose()
         {
 

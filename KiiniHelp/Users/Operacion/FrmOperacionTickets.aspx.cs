@@ -378,7 +378,9 @@ namespace KiiniHelp.Users.Operacion
             {
                 UcCambiarEstatusTicket.EsPropietario = true;
                 UcCambiarEstatusTicket.IdTicket = Convert.ToInt32(((LinkButton)sender).CommandArgument);
+                UcCambiarEstatusTicket.IdEstatusActual = int.Parse(((Label) ((LinkButton) sender).NamingContainer.FindControl("lblEstatusActual")).Text);
                 hfTicketActivo.Value = ((LinkButton) sender).CommandArgument;
+
                 UcCambiarEstatusTicket.IdUsuario = ((Usuario)Session["UserData"]).Id;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalEstatusCambio\");", true);
             }

@@ -53,7 +53,7 @@ namespace KiiniHelp.Users.Graficos
         {
             try
             {
-                List<HelperReportesTicket> lstConsulta = _servicioConsultas.ConsultarTickets(((Usuario)Session["UserData"]).Id, ucFiltrosGraficas.FiltroGrupos, ucFiltrosGraficas.FiltroTipoUsuario, ucFiltrosGraficas.FiltroOrganizaciones,
+                List<HelperReportesTicket> lstConsulta = _servicioConsultas.ConsultarTickets(((Usuario)Session["UserData"]).Id, ucFiltrosGraficas.FiltroGrupos, ucFiltrosGraficas.FiltroCanalesApertura, ucFiltrosGraficas.FiltroTipoUsuario, ucFiltrosGraficas.FiltroOrganizaciones,
                     ucFiltrosGraficas.FiltroUbicaciones, ucFiltrosGraficas.FiltroTipoArbol, ucFiltrosGraficas.FiltroTipificaciones,
                     ucFiltrosGraficas.FiltroPrioridad, ucFiltrosGraficas.FiltroEstatus, ucFiltrosGraficas.FiltroSla, ucFiltrosGraficas.FiltroVip, ucFiltrosGraficas.FiltroFechas, 0, 1000);
                 string[] selectedData = imageMapEventArgs.PostBackValue.ToString().Split(',');
@@ -405,16 +405,17 @@ namespace KiiniHelp.Users.Graficos
         {
             try
             {
-                List<HelperReportesTicket> lstConsulta = _servicioConsultas.ConsultarTickets(((Usuario)Session["UserData"]).Id, ucFiltrosGraficas.FiltroGrupos, ucFiltrosGraficas.FiltroTipoUsuario, ucFiltrosGraficas.FiltroOrganizaciones,
+                List<HelperReportesTicket> lstConsulta = _servicioConsultas.ConsultarTickets(((Usuario)Session["UserData"]).Id, ucFiltrosGraficas.FiltroGrupos, ucFiltrosGraficas.FiltroCanalesApertura, ucFiltrosGraficas.FiltroTipoUsuario, ucFiltrosGraficas.FiltroOrganizaciones,
                     ucFiltrosGraficas.FiltroUbicaciones, ucFiltrosGraficas.FiltroTipoArbol, ucFiltrosGraficas.FiltroTipificaciones,
                     ucFiltrosGraficas.FiltroPrioridad, ucFiltrosGraficas.FiltroEstatus, ucFiltrosGraficas.FiltroSla, ucFiltrosGraficas.FiltroVip, ucFiltrosGraficas.FiltroFechas, 0, 1000);
-                if (lstConsulta == null) return;
+                if (lstConsulta == null) throw new Exception("No existen datos a graficar");
                 ucFiltrosGrafico.UbicacionesGraficar = lstConsulta.GroupBy(g => new { g.IdUbicacion, g.Ubicacion }).Select(s => new HelperFiltroGrafico { Id = s.Key.IdUbicacion, Descripcion = s.Key.Ubicacion, Total = s.Count() }).ToList();
                 ucFiltrosGrafico.OrganizacionesGraficar = lstConsulta.GroupBy(g => new { g.IdOrganizacion, g.Organizacion }).Select(s => new HelperFiltroGrafico { Id = s.Key.IdOrganizacion, Descripcion = s.Key.Organizacion, Total = s.Count() }).ToList();
                 ucFiltrosGrafico.TipoTicket = lstConsulta.GroupBy(g => new { g.IdServicioIncidente, g.ServicioIncidente }).Select(s => new HelperFiltroGrafico { Id = s.Key.IdServicioIncidente, Descripcion = s.Key.ServicioIncidente, Total = s.Count() }).ToList();
                 ucFiltrosGrafico.TipificacionesGraficar = lstConsulta.GroupBy(g => new { g.IdTipificacion, g.Tipificacion }).Select(s => new HelperFiltroGrafico { Id = s.Key.IdTipificacion, Descripcion = s.Key.Tipificacion, Total = s.Count() }).ToList();
                 ucFiltrosGrafico.EstatusStack = lstConsulta.GroupBy(g => new { g.IdEstatus, g.Estatus }).Select(s => new HelperFiltroGrafico { Id = s.Key.IdEstatus, Descripcion = s.Key.Estatus, Total = s.Count() }).ToList();
                 ucFiltrosGrafico.SlaGraficar = lstConsulta.GroupBy(g => new { g.DentroSla, g.Sla }).ToDictionary(var => var.Key.DentroSla, var => var.Key.Sla);
+                ucFiltrosGrafico.CanalGraficar = lstConsulta.GroupBy(g => new { g.IdCanal, g.Canal }).Select(s => new HelperFiltroGrafico { Id = s.Key.IdCanal, Descripcion = s.Key.Canal, Total = s.Count() }).ToList();
                 gvResult.DataSource = lstConsulta;
                 gvResult.DataBind();
                 hfGraficaGenerada.Value = false.ToString();
@@ -438,7 +439,7 @@ namespace KiiniHelp.Users.Graficos
                 try
                 {
 
-                    List<HelperReportesTicket> lstConsulta = _servicioConsultas.ConsultarTickets(((Usuario)Session["UserData"]).Id, ucFiltrosGraficas.FiltroGrupos, ucFiltrosGraficas.FiltroTipoUsuario, ucFiltrosGraficas.FiltroOrganizaciones,
+                    List<HelperReportesTicket> lstConsulta = _servicioConsultas.ConsultarTickets(((Usuario)Session["UserData"]).Id, ucFiltrosGraficas.FiltroGrupos, ucFiltrosGraficas.FiltroCanalesApertura, ucFiltrosGraficas.FiltroTipoUsuario, ucFiltrosGraficas.FiltroOrganizaciones,
                     ucFiltrosGraficas.FiltroUbicaciones, ucFiltrosGraficas.FiltroTipoArbol, ucFiltrosGraficas.FiltroTipificaciones,
                     ucFiltrosGraficas.FiltroPrioridad, ucFiltrosGraficas.FiltroEstatus, ucFiltrosGraficas.FiltroSla, ucFiltrosGraficas.FiltroVip, ucFiltrosGraficas.FiltroFechas, 0, 1000);
                     if (lstConsulta == null) return;
