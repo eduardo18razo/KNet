@@ -33,6 +33,8 @@ namespace KinniNet.Data.Help
             {
                 //Sistema
                 _parametrosTelefonos = CreateObjectSet<ParametrosTelefonos>();
+                _aliasOrganizacion = CreateObjectSet<AliasOrganizacion>();
+                _aliasUbicacion = CreateObjectSet<AliasUbicacion>();
                 _tipoUsuario = CreateObjectSet<TipoUsuario>();
                 _rol = CreateObjectSet<Rol>();
                 _rolTipoUsuario = CreateObjectSet<RolTipoUsuario>();
@@ -197,8 +199,25 @@ namespace KinniNet.Data.Help
                 return _parametrosTelefonos;
             }
         }
+        public ObjectSet<AliasOrganizacion> AliasOrganizacion
+        {
+            get
+            {
+                return _aliasOrganizacion;
+            }
+        }
+
+        public ObjectSet<AliasUbicacion> AliasUbicacion
+        {
+            get
+            {
+                return _aliasUbicacion;
+            }
+        }
 
         private readonly ObjectSet<ParametrosTelefonos> _parametrosTelefonos;
+        private readonly ObjectSet<AliasOrganizacion> _aliasOrganizacion;
+        private readonly ObjectSet<AliasUbicacion> _aliasUbicacion;
 
         #region Operativo
         public ObjectSet<Usuario> Usuario

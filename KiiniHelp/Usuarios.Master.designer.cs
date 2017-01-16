@@ -94,6 +94,15 @@ namespace KiiniHelp {
         protected global::System.Web.UI.WebControls.Label lblTipoUsr;
         
         /// <summary>
+        /// Control btnSwitchRol.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSwitchRol;
+        
+        /// <summary>
         /// Control lblAreaSeleccionada.
         /// </summary>
         /// <remarks>

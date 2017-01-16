@@ -26,7 +26,7 @@ namespace KinniNet.Core.Sistema
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.TipoTelefono.Where(w => w.Habilitado).OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new TipoTelefono { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new TipoTelefono { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {

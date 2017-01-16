@@ -29,7 +29,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Holding.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Habilitado).OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Holding { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new Holding { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Organizacion.Where(w => w.IdHolding == idHolding).SelectMany(organizacion => db.Compañia.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == organizacion.IdCompania && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Compania { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new Compania { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -71,7 +71,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Organizacion.Where(w => w.IdCompania == idCompañia).SelectMany(organizacion => db.Direccion.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == organizacion.IdDireccion && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Direccion { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new Direccion { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -92,7 +92,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Organizacion.Where(w => w.IdDireccion == idDireccoin).SelectMany(organizacion => db.SubDireccion.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == organizacion.IdSubDireccion && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new SubDireccion { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new SubDireccion { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -113,7 +113,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Organizacion.Where(w => w.IdSubDireccion == idSubdireccion).SelectMany(organizacion => db.Gerencia.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == organizacion.IdGerencia && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Gerencia { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new Gerencia { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -134,7 +134,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Organizacion.Where(w => w.IdGerencia == idGerencia).SelectMany(organizacion => db.SubGerencia.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == organizacion.IdSubGerencia && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new SubGerencia { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new SubGerencia { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -155,7 +155,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Organizacion.Where(w => w.IdSubGerencia == idSubGerencia).SelectMany(organizacion => db.Jefatura.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == organizacion.IdJefatura && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Jefatura { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new Jefatura { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -215,6 +215,78 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
             return result;
+        }
+        public List<Organizacion> BuscarPorPalabra(int? idTipoUsuario, int? idHolding, int? idCompania, int? idDireccion, int? idSubDireccion, int? idGerencia, int? idSubGerencia, int? idJefatura, string filtro)
+        {
+            {
+                List<Organizacion> result;
+                DataBaseModelContext db = new DataBaseModelContext();
+                try
+                {
+                    db.ContextOptions.ProxyCreationEnabled = _proxy;
+                    IQueryable<Organizacion> qry = db.Organizacion;
+                    if (idTipoUsuario.HasValue)
+                        qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
+
+                    if (idHolding.HasValue)
+                        qry = qry.Where(w => w.IdHolding == idHolding);
+
+                    if (idCompania.HasValue)
+                        qry = qry.Where(w => w.IdCompania == idCompania);
+
+                    if (idDireccion.HasValue)
+                        qry = qry.Where(w => w.IdDireccion == idDireccion);
+
+                    if (idSubDireccion.HasValue)
+                        qry = qry.Where(w => w.IdSubDireccion == idSubDireccion);
+
+                    if (idGerencia.HasValue)
+                        qry = qry.Where(w => w.IdGerencia == idGerencia);
+
+                    if (idSubGerencia.HasValue)
+                        qry = qry.Where(w => w.IdSubGerencia == idSubGerencia);
+
+                    if (idJefatura.HasValue)
+                        qry = qry.Where(w => w.IdJefatura == idJefatura);
+
+                    if (filtro.Trim() != string.Empty)
+                    {
+                        filtro = filtro.ToUpper().Trim();
+                        qry = qry.Where(w => w.Holding.Descripcion.Contains(filtro)
+                            || w.Compania.Descripcion.Contains(filtro)
+                            || w.Direccion.Descripcion.Contains(filtro)
+                            || w.SubDireccion.Descripcion.Contains(filtro)
+                            || w.Gerencia.Descripcion.Contains(filtro) 
+                            || w.SubGerencia.Descripcion.Contains(filtro)
+                            || w.Jefatura.Descripcion.Contains(filtro));
+                    }
+                    qry = from q in qry
+                          orderby q.Holding != null, q.Holding.Descripcion, q.Compania != null, q.Compania.Descripcion, q.Direccion != null, q.Direccion.Descripcion, q.SubDireccion != null, q.SubDireccion.Descripcion,
+                          q.Gerencia != null, q.Gerencia.Descripcion, q.SubGerencia != null, q.SubGerencia.Descripcion, q.Jefatura != null, q.Compania.Descripcion ascending
+                          select q;
+                    result = qry.ToList();
+                    foreach (Organizacion organizacion in result)
+                    {
+                        db.LoadProperty(organizacion, "Holding");
+                        db.LoadProperty(organizacion, "Compania");
+                        db.LoadProperty(organizacion, "Direccion");
+                        db.LoadProperty(organizacion, "SubDireccion");
+                        db.LoadProperty(organizacion, "Gerencia");
+                        db.LoadProperty(organizacion, "SubGerencia");
+                        db.LoadProperty(organizacion, "Jefatura");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    db.Dispose();
+                }
+                return result;
+            }
         }
         public void GuardarOrganizacion(Organizacion organizacion)
         {
@@ -737,15 +809,15 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public List<int> ObtenerOrganizacionesByIdOrganizacion(int idUbicacion)
+        public List<int> ObtenerOrganizacionesByIdOrganizacion(int idOrganizacion)
         {
             List<int> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                Organizacion tmpOrganizacion = db.Organizacion.SingleOrDefault(s => s.Id == idUbicacion);
-                IQueryable<Organizacion> qry = db.Organizacion.Where(w => w.Id != idUbicacion);
+                Organizacion tmpOrganizacion = db.Organizacion.SingleOrDefault(s => s.Id == idOrganizacion);
+                IQueryable<Organizacion> qry = db.Organizacion.Where(w => w.Id != idOrganizacion);
                 if (tmpOrganizacion != null)
                 {
                     if (tmpOrganizacion.IdJefatura.HasValue)

@@ -145,6 +145,8 @@
     <Compile Include="Cat\Operacion\Organizacion.cs" />
     <Compile Include="Operacion\Usuarios\UsuarioLinkPassword.cs" />
     <Compile Include="Operacion\Usuarios\UsuarioPassword.cs" />
+    <Compile Include="Parametros\AliasUbicacion.cs" />
+    <Compile Include="Parametros\AliasOrganizacion.cs" />
     <Compile Include="Parametros\Aplicaciones.cs" />
     <Compile Include="Parametros\EstatusAsignacionSubRolGeneral.cs" />
     <Compile Include="Parametros\EstatusAsignacionSubRolGeneralDefault.cs" />

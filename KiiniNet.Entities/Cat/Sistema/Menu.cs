@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace KiiniNet.Entities.Cat.Sistema
 {
@@ -17,6 +14,9 @@ namespace KiiniNet.Entities.Cat.Sistema
         public string Url { get; set; }
         [DataMember]
         public int? IdPadre { get; set; }
+        [DataMember]
+        public int? Orden { get; set; }
+
         [DataMember]
         public bool Habilitado { get; set; }
         [DataMember]

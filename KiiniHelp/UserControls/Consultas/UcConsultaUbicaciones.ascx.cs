@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
+using KiiniHelp.ServiceParametrosSistema;
 using KiiniHelp.ServiceSistemaDomicilio;
 using KiiniHelp.ServiceSistemaTipoUsuario;
 using KiiniHelp.ServiceUbicacion;
@@ -11,15 +12,18 @@ using KiiniNet.Entities.Cat.Arbol.Ubicaciones;
 using KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Consultas
 {
     public partial class UcConsultaUbicaciones : UserControl, IControllerModal
     {
-        readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
-        readonly ServiceUbicacionClient _servicioUbicacion = new ServiceUbicacionClient();
-        readonly ServiceDomicilioSistemaClient _servicioSistemaDomicilio = new ServiceDomicilioSistemaClient();
+        private readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
+        private readonly ServiceUbicacionClient _servicioUbicacion = new ServiceUbicacionClient();
+        private readonly ServiceDomicilioSistemaClient _servicioSistemaDomicilio = new ServiceDomicilioSistemaClient();
+        private readonly ServiceParametrosClient _servicioParametros = new ServiceParametrosClient();
+
         private List<string> _lstError = new List<string>();
         public delegate void DelegateSeleccionUbicacionModal();
         public event DelegateSeleccionUbicacionModal OnSeleccionUbicacionModal;
@@ -103,6 +107,8 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true);
+                if (lstTipoUsuario.Count >= 2)
+                    lstTipoUsuario.Insert(BusinessVariables.ComboBoxCatalogo.IndexTodos, new TipoUsuario { Id = BusinessVariables.ComboBoxCatalogo.ValueTodos, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionTodos });
                 Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
                 Metodos.LlenaComboCatalogo(ddlTipoUsuarioCatalogo, lstTipoUsuario);
                 Metodos.LlenaComboCatalogo(ddlTipoUsuarioCampus, lstTipoUsuario);
@@ -141,28 +147,28 @@ namespace KiiniHelp.UserControls.Consultas
                 int? idGerencia = null;
                 int? idSubGerencia = null;
                 int? idJefatura = null;
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
 
-                if (ddlpais.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlpais.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idHolding = int.Parse(ddlpais.SelectedValue);
 
-                if (ddlCampus.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlCampus.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idCompania = int.Parse(ddlCampus.SelectedValue);
 
-                if (ddlTorre.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTorre.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idDireccion = int.Parse(ddlTorre.SelectedValue);
 
-                if (ddlPiso.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlPiso.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idSubDireccion = int.Parse(ddlPiso.SelectedValue);
 
-                if (ddlZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idGerencia = int.Parse(ddlZona.SelectedValue);
 
-                if (ddlSubZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlSubZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idSubGerencia = int.Parse(ddlSubZona.SelectedValue);
 
-                if (ddlSiteRack.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlSiteRack.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idJefatura = int.Parse(ddlSiteRack.SelectedValue);
 
                 rptResultados.DataSource = _servicioUbicacion.ObtenerUbicaciones(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
@@ -174,12 +180,54 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
+        private void LimpiarOrganizaciones()
+        {
+            try
+            {
+                rptResultados.DataSource = null;
+                rptResultados.DataBind();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        private void SetAlias()
+        {
+            try
+            {
+                lblNivel1.Text = "Nivel 1";
+                lblNivel2.Text = "Nivel 2";
+                lblNivel3.Text = "Nivel 3";
+                lblNivel4.Text = "Nivel 4";
+                lblNivel5.Text = "Nivel 5";
+                lblNivel6.Text = "Nivel 6";
+                lblNivel7.Text = "Nivel 7";
+                if (ddlTipoUsuario.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexTodos) return;
+                List<AliasUbicacion> alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue));
+                if (alias.Count != 7)
+                {
+                    return;
+                }
+                lblNivel1.Text = alias.Single(s => s.Nivel == 1).Descripcion;
+                lblNivel2.Text = alias.Single(s => s.Nivel == 2).Descripcion;
+                lblNivel3.Text = alias.Single(s => s.Nivel == 3).Descripcion;
+                lblNivel4.Text = alias.Single(s => s.Nivel == 4).Descripcion;
+                lblNivel5.Text = alias.Single(s => s.Nivel == 5).Descripcion;
+                lblNivel6.Text = alias.Single(s => s.Nivel == 6).Descripcion;
+                lblNivel7.Text = alias.Single(s => s.Nivel == 7).Descripcion;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         private void FiltraCombo(DropDownList ddlFiltro, DropDownList ddlLlenar, object source)
         {
             try
             {
                 ddlLlenar.Items.Clear();
-                if (ddlFiltro.SelectedValue != BusinessVariables.ComboBoxCatalogo.Value.ToString())
+                if (ddlFiltro.SelectedValue != BusinessVariables.ComboBoxCatalogo.ValueSeleccione.ToString())
                 {
                     ddlLlenar.Enabled = true;
                     Metodos.LlenaComboCatalogo(ddlLlenar, source);
@@ -209,7 +257,6 @@ namespace KiiniHelp.UserControls.Consultas
                 if (!IsPostBack)
                 {
                     LlenaCombos();
-                    LlenaUbicaciones();
                 }
                 if (Request["__EVENTTARGET"] == "SeleccionarUbicacion")
                     Seleccionar(Convert.ToInt32(Request["__EVENTARGUMENT"]));
@@ -237,11 +284,26 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlZona);
                 Metodos.LimpiarCombo(ddlSubZona);
                 Metodos.LimpiarCombo(ddlSiteRack);
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                txtFiltroDecripcion.Text = string.Empty;
+                SetAlias();
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                {
+                    LimpiarOrganizaciones();
+                    btnNew.Visible = false;
+                    return;
+                }
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexTodos)
+                {
+                    LlenaUbicaciones();
+                    btnNew.Visible = false;
+                }
+                else if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
                 {
                     LlenaComboUbicacion(IdTipoUsuario);
                     LlenaUbicaciones();
                     btnNew.Visible = true;
+                    //if (ddlHolding.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    //    ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
                 }
                 else
                 {
@@ -263,6 +325,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                btnNew.Visible = false;
                 int idTipoUsuario = IdTipoUsuario;
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
                 Metodos.LimpiarCombo(ddlCampus);
@@ -273,16 +336,32 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlCampus, _servicioUbicacion.ObtenerCampus(idTipoUsuario, id, true));
                 LlenaUbicaciones();
-                if (ddlpais.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                AliasUbicacion alias;
+                string nivel;
+                if (ddlpais.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
+                    alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 2);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 2";
                     btnNew.Visible = true;
-                    btnNew.CommandName = "Campus";
-                    btnNew.Text = "Agregar Campus";
-                    btnNew.CommandArgument = "0";
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "2";
                 }
                 else
                 {
-                    btnNew.Visible = false;
+                    if (int.Parse(ddlTipoUsuario.SelectedValue) == (int)BusinessVariables.EnumTiposUsuario.Empleado)
+                    {
+                        btnNew.Visible = false;
+                    }
+                    else
+                    {
+                        alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 1);
+                        nivel = alias != null ? alias.Descripcion : "NIVEL 1";
+                        btnNew.Visible = true;
+                        btnNew.CommandName = nivel;
+                        btnNew.Text = nivel;
+                        btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "1"; 
+                    }
                 }
             }
             catch (Exception ex)
@@ -308,19 +387,25 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlTorre, _servicioUbicacion.ObtenerTorres(IdTipoUsuario, id, true));
                 LlenaUbicaciones();
-                if (ddlCampus.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                AliasUbicacion alias;
+                string nivel;
+                if (ddlCampus.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
+                    alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 3);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 3";
                     btnNew.Visible = true;
-                    btnNew.CommandName = "Torre";
-                    btnNew.Text = "Agregar Torre";
-                    btnNew.CommandArgument = "3";
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "3";
                 }
                 else
                 {
+                    alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 2);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 2";
                     btnNew.Visible = true;
-                    btnNew.CommandName = "Campus";
-                    btnNew.Text = "Agregar Campus";
-                    btnNew.CommandArgument = "0";
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "2";
                 }
 
             }
@@ -347,19 +432,25 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlPiso, _servicioUbicacion.ObtenerPisos(idTipoUsuario, id, true));
                 LlenaUbicaciones();
-                if (ddlTorre.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                AliasUbicacion alias;
+                string nivel;
+                if (ddlTorre.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
+                    alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 4);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 4";
                     btnNew.Visible = true;
-                    btnNew.CommandName = "Piso";
-                    btnNew.Text = "Agregar Piso";
-                    btnNew.CommandArgument = "4";
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "4";
                 }
                 else
                 {
+                    alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 3);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 3";
                     btnNew.Visible = true;
-                    btnNew.CommandName = "Torre";
-                    btnNew.Text = "Agregar Torre";
-                    btnNew.CommandArgument = "3";
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "3";
                 }
             }
             catch (Exception ex)
@@ -384,19 +475,25 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlZona, _servicioUbicacion.ObtenerZonas(idTipoUsuario, id, true));
                 LlenaUbicaciones();
-                if (ddlPiso.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                AliasUbicacion alias;
+                string nivel;
+                if (ddlPiso.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
+                    alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 5);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 5";
                     btnNew.Visible = true;
-                    btnNew.CommandName = "Zona";
-                    btnNew.Text = "Agregar Zona";
-                    btnNew.CommandArgument = "5";
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "5";
                 }
                 else
                 {
+                    alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 4);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 4";
                     btnNew.Visible = true;
-                    btnNew.CommandName = "Piso";
-                    btnNew.Text = "Agregar Piso";
-                    btnNew.CommandArgument = "4";
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "4";
                 }
             }
             catch (Exception ex)
@@ -420,19 +517,25 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlSubZona, _servicioUbicacion.ObtenerSubZonas(idTipoUsuario, id, true));
                 LlenaUbicaciones();
-                if (ddlZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                AliasUbicacion alias;
+                string nivel;
+                if (ddlZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
+                    alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 6);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 6";
                     btnNew.Visible = true;
-                    btnNew.CommandName = "SubZona";
-                    btnNew.Text = "Agregar Sub Zona";
-                    btnNew.CommandArgument = "6";
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "6";
                 }
                 else
                 {
+                    alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 5);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 5";
                     btnNew.Visible = true;
-                    btnNew.CommandName = "Zona";
-                    btnNew.Text = "Agregar Zona";
-                    btnNew.CommandArgument = "5";
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "5";
                 }
             }
             catch (Exception ex)
@@ -455,19 +558,25 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlSiteRack, _servicioUbicacion.ObtenerSiteRacks(idTipoUsuario, id, true));
                 LlenaUbicaciones();
-                if (ddlSubZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                AliasUbicacion alias;
+                string nivel;
+                if (ddlSubZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
+                    alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 7);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 7";
                     btnNew.Visible = true;
-                    btnNew.CommandName = "Site Rack";
-                    btnNew.Text = "Agregar Site Rack";
-                    btnNew.CommandArgument = "7";
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "7";
                 }
                 else
                 {
+                    alias = _servicioParametros.ObtenerAliasUbicacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 6);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 6";
                     btnNew.Visible = true;
-                    btnNew.CommandName = "SubZona";
-                    btnNew.Text = "Agregar Sub Zona";
-                    btnNew.CommandArgument = "6";
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "6";
                 }
 
             }
@@ -486,6 +595,8 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                if (((DropDownList)sender).SelectedValue == "")
+                    return;
                 LlenaUbicaciones();
             }
             catch (Exception ex)
@@ -541,13 +652,52 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 int nivel = 0;
                 string descripcion = null;
-                Ubicacion org = _servicioUbicacion.ObtenerUbicacionById(Convert.ToInt32(hfId.Value));
-                Session["UbicacionSeleccionada"] = org;
-                lblTitleCatalogo.Text = ObtenerRuta(org, ref nivel, ref descripcion);
+                Ubicacion ubicacion = _servicioUbicacion.ObtenerUbicacionById(Convert.ToInt32(hfId.Value));
+                if (ubicacion == null) return;
+                ddlTipoUsuario.SelectedValue = ubicacion.IdTipoUsuario.ToString();
+                ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
+                if (ubicacion.Pais != null)
+                {
+                    ddlpais.SelectedValue = ubicacion.IdPais.ToString();
+                    ddlpais_OnSelectedIndexChanged(ddlpais, null);
+                }
+                if (ubicacion.Campus != null)
+                {
+                    ddlCampus.SelectedValue = ubicacion.IdCampus.ToString();
+                    ddlCampus_OnSelectedIndexChanged(ddlCampus, null);
+                }
+                if (ubicacion.Torre != null)
+                {
+                    ddlTorre.SelectedValue = ubicacion.IdTorre.ToString();
+                    ddlTorre_OnSelectedIndexChanged(ddlTorre, null);
+                }
+                if (ubicacion.Piso != null)
+                {
+                    ddlPiso.SelectedValue = ubicacion.IdPiso.ToString();
+                    ddlPiso_OnSelectedIndexChanged(ddlPiso, null);
+                }
+                if (ubicacion.Zona != null)
+                {
+                    ddlZona.SelectedValue = ubicacion.IdZona.ToString();
+                    ddlZona_OnSelectedIndexChanged(ddlZona, null);
+                }
+                if (ubicacion.SubZona != null)
+                {
+                    ddlSubZona.SelectedValue = ubicacion.IdSubZona.ToString();
+                    ddlSubZona_OnSelectedIndexChanged(ddlSubZona, null);
+                }
+                if (ubicacion.SiteRack != null)
+                {
+                    ddlSiteRack.SelectedValue = ubicacion.IdSiteRack.ToString();
+                    ddlSiteRack_OnSelectedIndexChanged(ddlSiteRack, null);
+                }
+                
+                Session["UbicacionSeleccionada"] = ubicacion;
+                lblTitleCatalogo.Text = ObtenerRuta(ubicacion, ref nivel, ref descripcion);
                 txtDescripcionCatalogo.Text = descripcion;
                 hfCatalogo.Value = nivel.ToString();
                 hfAlta.Value = false.ToString();
-                ddlTipoUsuarioCatalogo.SelectedValue = org.IdTipoUsuario.ToString();
+                ddlTipoUsuarioCatalogo.SelectedValue = ubicacion.IdTipoUsuario.ToString();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoUbicacion\");", true);
             }
             catch (Exception ex)
@@ -568,43 +718,43 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 if (ubicacion.Pais != null)
                 {
-                    nivel = 8;
+                    nivel = 1;
                     result = ubicacion.Pais.Descripcion;
                     descripcion = ubicacion.Pais.Descripcion;
                 }
                 if (ubicacion.Campus != null)
                 {
-                    nivel = 9;
+                    nivel = 2;
                     result += ">" + ubicacion.Campus.Descripcion;
                     descripcion = ubicacion.Campus.Descripcion;
                 }
                 if (ubicacion.Torre != null)
                 {
-                    nivel = 10;
+                    nivel = 3;
                     result += ">" + ubicacion.Torre.Descripcion;
                     descripcion = ubicacion.Torre.Descripcion;
                 }
                 if (ubicacion.Piso != null)
                 {
-                    nivel = 11;
+                    nivel = 4;
                     result += ">" + ubicacion.Piso.Descripcion;
                     descripcion = ubicacion.Piso.Descripcion;
                 }
                 if (ubicacion.Zona != null)
                 {
-                    nivel = 12;
+                    nivel = 5;
                     result += ">" + ubicacion.Zona.Descripcion;
                     descripcion = ubicacion.Zona.Descripcion;
                 }
                 if (ubicacion.SubZona != null)
                 {
-                    nivel = 13;
+                    nivel = 6;
                     result += ">" + ubicacion.SubZona.Descripcion;
                     descripcion = ubicacion.SubZona.Descripcion;
                 }
                 if (ubicacion.SiteRack != null)
                 {
-                    nivel = 14;
+                    nivel = 7;
                     result += ">" + ubicacion.SiteRack.Descripcion;
                     descripcion = ubicacion.SiteRack.Descripcion;
                 }
@@ -657,57 +807,57 @@ namespace KiiniHelp.UserControls.Consultas
                 switch (command)
                 {
                     case "0":
-                        if (ddlpais.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlpais.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
                         break;
                     case "3":
-                        if (ddlpais.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlpais.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlCampus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlCampus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
                         break;
                     case "4":
-                        if (ddlpais.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlpais.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlCampus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlCampus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlTorre.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlTorre.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
                         break;
                     case "5":
-                        if (ddlpais.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlpais.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlCampus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlCampus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlTorre.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlTorre.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlPiso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlPiso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
                         break;
                     case "6":
-                        if (ddlpais.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlpais.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlCampus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlCampus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlTorre.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlTorre.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlPiso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlPiso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlZona.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlZona.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
                         break;
                     case "7":
-                        if (ddlpais.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlpais.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlCampus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlCampus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlTorre.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlTorre.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlPiso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlPiso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlZona.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlZona.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlSubZona.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlSubZona.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
                         break;
                 }
@@ -856,6 +1006,7 @@ namespace KiiniHelp.UserControls.Consultas
                             };
                             _servicioUbicacion.GuardarUbicacion(ubicacion);
                             ddlCampus_OnSelectedIndexChanged(ddlCampus, null);
+                            ddlTorre.SelectedValue = ddlTorre.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                         case 4:
                             ubicacion.IdCampus = Convert.ToInt32(ddlCampus.SelectedValue);
@@ -868,6 +1019,7 @@ namespace KiiniHelp.UserControls.Consultas
                             };
                             _servicioUbicacion.GuardarUbicacion(ubicacion);
                             ddlTorre_OnSelectedIndexChanged(ddlTorre, null);
+                            ddlPiso.SelectedValue = ddlPiso.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                         case 5:
                             ubicacion.IdCampus = Convert.ToInt32(ddlCampus.SelectedValue);
@@ -882,6 +1034,7 @@ namespace KiiniHelp.UserControls.Consultas
 
                             _servicioUbicacion.GuardarUbicacion(ubicacion);
                             ddlPiso_OnSelectedIndexChanged(ddlPiso, null);
+                            ddlZona.SelectedValue = ddlZona.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                         case 6:
                             ubicacion.IdCampus = Convert.ToInt32(ddlCampus.SelectedValue);
@@ -897,6 +1050,7 @@ namespace KiiniHelp.UserControls.Consultas
 
                             _servicioUbicacion.GuardarUbicacion(ubicacion);
                             ddlZona_OnSelectedIndexChanged(ddlZona, null);
+                            ddlSubZona.SelectedValue = ddlSubZona.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                         case 7:
                             ubicacion.IdCampus = Convert.ToInt32(ddlCampus.SelectedValue);
@@ -912,6 +1066,7 @@ namespace KiiniHelp.UserControls.Consultas
                             };
                             _servicioUbicacion.GuardarUbicacion(ubicacion);
                             ddlSubZona_OnSelectedIndexChanged(ddlSubZona, null);
+                            ddlSiteRack.SelectedValue = ddlSiteRack.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                     }
 
@@ -921,39 +1076,44 @@ namespace KiiniHelp.UserControls.Consultas
                     ubicacion = (Ubicacion)Session["UbicacionSeleccionada"];
                     switch (int.Parse(hfCatalogo.Value))
                     {
-                        case 8:
+                        case 1:
                             ubicacion.Pais.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             break;
-                        case 9:
+                        case 2:
                             ubicacion.Campus.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioUbicacion.ActualizarUbicacion(ubicacion);
                             ddlpais_OnSelectedIndexChanged(ddlpais, null);
+                            ddlCampus.SelectedValue = ddlCampus.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
-                        case 10:
+                        case 3:
                             ubicacion.Torre.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioUbicacion.ActualizarUbicacion(ubicacion);
                             ddlCampus_OnSelectedIndexChanged(ddlCampus, null);
+                            ddlTorre.SelectedValue = ddlTorre.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
-                        case 11:
+                        case 4:
                             ubicacion.Piso.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioUbicacion.ActualizarUbicacion(ubicacion);
                             ddlTorre_OnSelectedIndexChanged(ddlTorre, null);
+                            ddlPiso.SelectedValue = ddlPiso.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
-                        case 12:
+                        case 5:
                             ubicacion.Zona.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioUbicacion.ActualizarUbicacion(ubicacion);
                             ddlPiso_OnSelectedIndexChanged(ddlPiso, null);
+                            ddlZona.SelectedValue = ddlZona.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
-                        case 13:
+                        case 6:
                             ubicacion.SubZona.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioUbicacion.ActualizarUbicacion(ubicacion);
                             ddlZona_OnSelectedIndexChanged(ddlZona, null);
+                            ddlSubZona.SelectedValue = ddlSubZona.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
-                        case 14:
+                        case 7:
                             ubicacion.SiteRack.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioUbicacion.ActualizarUbicacion(ubicacion);
                             ddlSubZona_OnSelectedIndexChanged(ddlSubZona, null);
-
+                            ddlSiteRack.SelectedValue = ddlSiteRack.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                     }
                 }
@@ -1066,7 +1226,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                if (ddlColonia.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlColonia.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     lblMunicipio.Text = string.Empty;
                     lblEstado.Text = string.Empty;
@@ -1087,6 +1247,87 @@ namespace KiiniHelp.UserControls.Consultas
                 }
                 _lstError.Add(ex.Message);
                 AlertaCampus = _lstError;
+            }
+        }
+
+        protected void rptResultados_OnItemCreated(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
+                    if (e.Item.ItemType == ListItemType.Header)
+                    {
+                        List<AliasUbicacion> alias = _servicioParametros.ObtenerAliasUbicacion(IdTipoUsuario);
+                        if (alias.Count != 7) return;
+                        ((Label)e.Item.FindControl("lblNivel1")).Text = alias.Single(s => s.Nivel == 1).Descripcion;
+                        ((Label)e.Item.FindControl("lblNivel2")).Text = alias.Single(s => s.Nivel == 2).Descripcion;
+                        ((Label)e.Item.FindControl("lblNivel3")).Text = alias.Single(s => s.Nivel == 3).Descripcion;
+                        ((Label)e.Item.FindControl("lblNivel4")).Text = alias.Single(s => s.Nivel == 4).Descripcion;
+                        ((Label)e.Item.FindControl("lblNivel5")).Text = alias.Single(s => s.Nivel == 5).Descripcion;
+                        ((Label)e.Item.FindControl("lblNivel6")).Text = alias.Single(s => s.Nivel == 6).Descripcion;
+                        ((Label)e.Item.FindControl("lblNivel7")).Text = alias.Single(s => s.Nivel == 7).Descripcion;
+                    }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaUbicacion = _lstError;
+            }
+        }
+
+        protected void btnBuscar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                int? idTipoUsuario = null;
+                int? idHolding = null;
+                int? idCompania = null;
+                int? idDireccion = null;
+                int? idSubDireccion = null;
+                int? idGerencia = null;
+                int? idSubGerencia = null;
+                int? idJefatura = null;
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
+                    idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
+
+                if (ddlpais.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idHolding = int.Parse(ddlpais.SelectedValue);
+
+                if (ddlCampus.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idCompania = int.Parse(ddlCampus.SelectedValue);
+
+                if (ddlTorre.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idDireccion = int.Parse(ddlTorre.SelectedValue);
+
+                if (ddlPiso.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idSubDireccion = int.Parse(ddlPiso.SelectedValue);
+
+                if (ddlZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idGerencia = int.Parse(ddlZona.SelectedValue);
+
+                if (ddlSubZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idSubGerencia = int.Parse(ddlSubZona.SelectedValue);
+
+                if (ddlSiteRack.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idJefatura = int.Parse(ddlSiteRack.SelectedValue);
+
+                rptResultados.DataSource = _servicioUbicacion.BuscarPorPalabra(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura, txtFiltroDecripcion.Text.Trim());
+                rptResultados.DataBind();
+                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "HightSearch(\"tblHeader\", \"" + txtFiltroDecripcion.Text.Trim() + "\");", true);
+
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaUbicacion = _lstError;
             }
         }
 

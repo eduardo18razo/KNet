@@ -30,11 +30,11 @@ namespace KinniNet.Core.Sistema
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Catalogos.OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new Catalogos
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                         });
             }
             catch (Exception ex)
@@ -57,11 +57,11 @@ namespace KinniNet.Core.Sistema
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Catalogos.Where(w => w.EsMascaraCaptura && w.Habilitado).OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new Catalogos
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                         });
             }
             catch (Exception ex)
@@ -285,7 +285,7 @@ namespace KinniNet.Core.Sistema
 
                 Catalogos cat = db.Catalogos.Single(s => s.Id == idCatalogo);
                 List<CamposCatalogo> lstCampos = ObtenerCamposCatalogo(idCatalogo);
-                string sql = string.Format(" SELECT {0} Id, '{1}' as Descripcion \nUNION \nSELECT Id, ", BusinessVariables.ComboBoxCatalogo.Value, BusinessVariables.ComboBoxCatalogo.Descripcion);
+                string sql = string.Format(" SELECT {0} Id, '{1}' as Descripcion \nUNION \nSELECT Id, ", BusinessVariables.ComboBoxCatalogo.ValueSeleccione, BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione);
                 foreach (CamposCatalogo campo in lstCampos.Where(w=>w.Descripcion != "Id" && w.Descripcion != "Habilitado"))
                 {
                     switch (campo.TipoDato)

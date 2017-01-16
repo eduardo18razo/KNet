@@ -52,7 +52,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                if (ddlCatalogos.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlCatalogos.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     List<CatalogoGenerico> lst = _servicioCatalogos.ObtenerRegistrosSistemaCatalogo(int.Parse(ddlCatalogos.SelectedValue)).Where(w=>w.Id != 0).ToList();
                     rptResultados.DataSource = lst;

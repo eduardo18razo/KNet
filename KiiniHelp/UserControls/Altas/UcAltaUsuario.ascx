@@ -30,7 +30,7 @@
                 <asp:HiddenField runat="server" ID="hfAlta" />
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Alta de Usuarios</h4>
+                        <h4>Agregar de Usuarios</h4>
                     </div>
                     <div class="panel-body">
                         <div class="well">
@@ -217,7 +217,6 @@
                 <div class="modal-content">
                     <asp:UpdatePanel ID="upOrganizacion" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <%--<uc:AltaOrganizacion runat="server" ID="ucOrganizacion" FromModal="True" />--%>
                             <uc:UcConsultaOrganizacion runat="server" ID="UcConsultaOrganizacion" />
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -231,7 +230,6 @@
                 <div class="modal-content">
                     <asp:UpdatePanel ID="upUbicacion" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <%--<uc:UcAltaUbicacion runat="server" ID="UcUbicacion" FromModal="True" />--%>
                             <uc:UcConsultaUbicaciones runat="server" ID="UcConsultaUbicaciones" />
                         </ContentTemplate>
                     </asp:UpdatePanel>

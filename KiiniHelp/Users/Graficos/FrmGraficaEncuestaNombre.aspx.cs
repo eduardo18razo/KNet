@@ -100,7 +100,7 @@ namespace KiiniHelp.Users.Graficos
         {
             try
             {
-                if (ddlEncuesta.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlEncuesta.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     throw new Exception("Seleccione una encuesta");
                 Encuesta encuesta = _servicioEncuestas.ObtenerEncuestaById(Convert.ToInt32(ddlEncuesta.SelectedValue));
                 switch (encuesta.IdTipoEncuesta)

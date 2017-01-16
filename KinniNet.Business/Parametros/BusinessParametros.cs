@@ -139,5 +139,45 @@ namespace KinniNet.Core.Parametros
             }
             return result;
         }
+
+        public List<AliasOrganizacion> ObtenerAliasOrganizacion(int idTipoUsuario)
+        {
+            List<AliasOrganizacion> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.AliasOrganizacion.Where(w => w.IdTipoUsuario == idTipoUsuario).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<AliasUbicacion> ObtenerAliasUbicacion(int idTipoUsuario)
+        {
+            List<AliasUbicacion> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.AliasUbicacion.Where(w => w.IdTipoUsuario == idTipoUsuario).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
     }
 }

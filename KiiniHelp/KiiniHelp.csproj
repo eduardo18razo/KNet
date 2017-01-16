@@ -157,6 +157,8 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.Horario.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Operacion.Tickets.PreTicket.datasource" />
     <Content Include="Public.Master" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.AliasOrganizacion.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.AliasUbicacion.datasource" />
     <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario.wsdl" />
     <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario.xsd">
       <SubType>Designer</SubType>

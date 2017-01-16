@@ -43,7 +43,7 @@
 
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Alta de Consultas Servicios e Incidentes
+                            Agregar Opcion
                         </div>
                         <div class="panel-body">
                             <div class="well">

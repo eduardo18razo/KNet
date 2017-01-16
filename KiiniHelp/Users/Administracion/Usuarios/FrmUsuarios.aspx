@@ -7,7 +7,7 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <title>Alta Usuarios</title>
+    <title>Agregar Usuarios</title>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
@@ -35,7 +35,7 @@
                     </header>
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Alta de Usuarios</h4>
+                            <h4>Agregar de Usuarios</h4>
                         </div>
                         <div class="panel-body">
                             <div class="well">

@@ -72,34 +72,34 @@ namespace KiiniHelp.UserControls.Consultas
                 int? idSubGerencia = null;
                 int? idJefatura = null;
 
-                if (ddlArea.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlArea.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idArea = int.Parse(ddlArea.SelectedValue);
 
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
 
-                if (ddlTipoArbol.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoArbol.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idTipoArbol = int.Parse(ddlTipoArbol.SelectedValue);
 
-                if (ddlNivel1.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel1.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idHolding = int.Parse(ddlNivel1.SelectedValue);
 
-                if (ddlNivel2.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel2.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idCompania = int.Parse(ddlNivel2.SelectedValue);
 
-                if (ddlNivel3.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel3.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idDireccion = int.Parse(ddlNivel3.SelectedValue);
 
-                if (ddlNivel4.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel4.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idSubDireccion = int.Parse(ddlNivel4.SelectedValue);
 
-                if (ddlNivel5.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel5.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idGerencia = int.Parse(ddlNivel5.SelectedValue);
 
-                if (ddlNivel6.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel6.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idSubGerencia = int.Parse(ddlNivel6.SelectedValue);
 
-                if (ddlNivel7.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel7.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idJefatura = int.Parse(ddlNivel7.SelectedValue);
 
                 rptResultados.DataSource = _servicioArbolAcceso.ObtenerArbolesAccesoAll(idArea, idTipoUsuario, idTipoArbol, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
@@ -171,7 +171,7 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
-                if (ddlArea.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index) return;
+                if (ddlArea.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione) return;
                 List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuario(true);
                 Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
                 
@@ -199,7 +199,7 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
-                if (ddlTipoUsuario.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     Metodos.LlenaComboCatalogo(ddlTipoArbol, _servicioSistemaTipoArbol.ObtenerTiposArbolAcceso(true));
                 }

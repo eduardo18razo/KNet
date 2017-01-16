@@ -20,5 +20,11 @@ namespace KiiniNet.Services.Parametros.Interface
         [OperationContract]
         ParametrosGenerales ObtenerParametrosGenerales();
 
+        [OperationContract]
+        List<AliasOrganizacion> ObtenerAliasOrganizacion(int idTipoUsuario);
+
+        [OperationContract]
+        List<AliasUbicacion> ObtenerAliasUbicacion(int idTipoUsuario);
+
     }
 }

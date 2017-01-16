@@ -83,7 +83,10 @@ namespace KiiniHelp.ServiceOrganizacion {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionesByIdOrganizacion", ReplyAction="http://tempuri.org/IServiceOrganizacion/ObtenerOrganizacionesByIdOrganizacionResp" +
             "onse")]
-        System.Collections.Generic.List<int> ObtenerOrganizacionesByIdOrganizacion(int idUbicacion);
+        System.Collections.Generic.List<int> ObtenerOrganizacionesByIdOrganizacion(int idOrganizacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceOrganizacion/BuscarPorPalabra", ReplyAction="http://tempuri.org/IServiceOrganizacion/BuscarPorPalabraResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Organizacion> BuscarPorPalabra(System.Nullable<int> idTipoUsuario, System.Nullable<int> idHolding, System.Nullable<int> idCompania, System.Nullable<int> idDireccion, System.Nullable<int> idSubDireccion, System.Nullable<int> idGerencia, System.Nullable<int> idSubGerencia, System.Nullable<int> idJefatura, string filtro);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -201,8 +204,12 @@ namespace KiiniHelp.ServiceOrganizacion {
             return base.Channel.ObtenerOrganizacionesGrupos(grupos);
         }
         
-        public System.Collections.Generic.List<int> ObtenerOrganizacionesByIdOrganizacion(int idUbicacion) {
-            return base.Channel.ObtenerOrganizacionesByIdOrganizacion(idUbicacion);
+        public System.Collections.Generic.List<int> ObtenerOrganizacionesByIdOrganizacion(int idOrganizacion) {
+            return base.Channel.ObtenerOrganizacionesByIdOrganizacion(idOrganizacion);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Organizacion> BuscarPorPalabra(System.Nullable<int> idTipoUsuario, System.Nullable<int> idHolding, System.Nullable<int> idCompania, System.Nullable<int> idDireccion, System.Nullable<int> idSubDireccion, System.Nullable<int> idGerencia, System.Nullable<int> idSubGerencia, System.Nullable<int> idJefatura, string filtro) {
+            return base.Channel.BuscarPorPalabra(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura, filtro);
         }
     }
 }

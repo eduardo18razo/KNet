@@ -436,9 +436,9 @@ namespace KinniNet.Core.Security
                                            join rtu in db.RolTipoUsuario on ur.IdRolTipoUsuario equals rtu.Id
                                            join rm in db.RolMenu on rtu.IdRol equals rm.IdRol
                                            join m in db.Menu on rm.IdMenu equals m.Id
-                                           where ur.IdUsuario == idUsuario
+                                           where ur.IdUsuario == idUsuario && m.Habilitado
                                            select m;
-                    foreach (Menu menu in qry.Where(w => w.IdPadre == null).Distinct())
+                    foreach (Menu menu in qry.Where(w => w.IdPadre == null).OrderBy(o => o.Orden).ThenBy(t => t.Id).Distinct())
                     {
                         result.Add(menu);
                         db.LoadProperty(menu, menuHijo);
@@ -503,7 +503,7 @@ namespace KinniNet.Core.Security
                                         lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.Incidentes, area).Distinct().ToList();
                                         GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Web + "&IdArbol=");
                                         break;
-                                }   
+                                }
                             }
                         }
                     else
@@ -789,7 +789,7 @@ namespace KinniNet.Core.Security
                     IQueryable<Menu> qry = from rtu in db.RolTipoUsuario
                                            join rm in db.RolMenu on rtu.IdRol equals rm.IdRol
                                            join m in db.Menu on rm.IdMenu equals m.Id
-                                           where rtu.IdTipoUsuario == idTipoUsuario
+                                           where rtu.IdTipoUsuario == idTipoUsuario && m.Habilitado
                                            select m;
                     result = qry.OrderBy(o => o.Id).Distinct().ToList();
                     foreach (Menu menu in result)

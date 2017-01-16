@@ -54,7 +54,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.SubGrupoUsuario.Where(w => w.IdGrupoUsuario == idGrupoUsuario).Select(s => new HelperSubGurpoUsuario { Id = s.Id, Descripcion = "CAMBIAR ESTA DESCRIPCION" }).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new HelperSubGurpoUsuario { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new HelperSubGurpoUsuario { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione });
 
             }
             catch (Exception ex)

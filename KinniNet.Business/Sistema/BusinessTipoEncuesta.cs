@@ -26,11 +26,11 @@ namespace KinniNet.Core.Sistema
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.TipoEncuesta.Where(w => w.Habilitado).OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new TipoEncuesta
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                         });
             }
             catch (Exception ex)

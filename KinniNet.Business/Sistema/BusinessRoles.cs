@@ -7,7 +7,7 @@ using KinniNet.Data.Help;
 
 namespace KinniNet.Core.Sistema
 {
-    public class BusinessRoles: IDisposable
+    public class BusinessRoles : IDisposable
     {
         private bool _proxy;
         public BusinessRoles(bool proxy = false)
@@ -30,12 +30,38 @@ namespace KinniNet.Core.Sistema
                         .Select(s => s.Rol).Distinct()
                         .ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new Rol
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                         });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public RolTipoUsuario ObtenerRolTipoUsuario(int idTipoUsuario, int idRol)
+        {
+            RolTipoUsuario result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.RolTipoUsuario.SingleOrDefault(w => w.IdTipoUsuario == idTipoUsuario && w.IdRol == idRol && w.Rol.Habilitado);
+                if (result == null)
+                {
+                    result = new RolTipoUsuario { IdRol = idRol, IdTipoUsuario = idTipoUsuario };
+                    db.RolTipoUsuario.AddObject(result);
+                    db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {

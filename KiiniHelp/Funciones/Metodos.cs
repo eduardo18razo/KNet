@@ -125,7 +125,7 @@ namespace KiiniHelp.Funciones
             try
             {
                 ddlLlenar.Items.Clear();
-                if (ddlFiltro.SelectedValue != BusinessVariables.ComboBoxCatalogo.Value.ToString())
+                if (ddlFiltro.SelectedValue != BusinessVariables.ComboBoxCatalogo.ValueSeleccione.ToString())
                 {
                     ddlLlenar.Enabled = true;
                     LlenaComboCatalogo(ddlLlenar, source);
@@ -148,11 +148,11 @@ namespace KiiniHelp.Funciones
         public static bool ValidaCapturaCatalogoCampus(int idTipoUsuario, string descripcion, int idColonia, string calle, string noExt, string noInt)
         {
             StringBuilder sb = new StringBuilder();
-            if (idTipoUsuario == BusinessVariables.ComboBoxCatalogo.Value)
+            if (idTipoUsuario == BusinessVariables.ComboBoxCatalogo.ValueSeleccione)
                 sb.AppendLine("Tipo de usuario es un campo obligatorio.<br>");
             if (descripcion == string.Empty)
                 sb.AppendLine("Descripción es un campo obligatorio.<br>");
-            if (idColonia == BusinessVariables.ComboBoxCatalogo.Value)
+            if (idColonia == BusinessVariables.ComboBoxCatalogo.ValueSeleccione)
                 sb.AppendLine("Colonia es un campo obligatorio.<br>");
             if (calle == string.Empty)
                 sb.AppendLine("Calle es un campo obligatorio.<br>");

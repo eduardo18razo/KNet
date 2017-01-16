@@ -26,7 +26,7 @@
                 </header>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Alta Formulario de Cliente
+                        Agregar Formulario de Cliente
                     </div>
                     <div class="panel-body">
 

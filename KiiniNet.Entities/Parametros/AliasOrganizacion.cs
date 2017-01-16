@@ -4,23 +4,19 @@ using KiiniNet.Entities.Cat.Sistema;
 namespace KiiniNet.Entities.Parametros
 {
     [DataContract(IsReference = true)]
-    public class ParametrosTelefonos
+    public class AliasOrganizacion
     {
         [DataMember]
         public int Id { get; set; }
         [DataMember]
         public int IdTipoUsuario { get; set; }
         [DataMember]
-        public int IdTipoTelefono { get; set; }
+        public string Descripcion { get; set; }
         [DataMember]
-        public int NumeroTelefonos { get; set; }
+        public int Nivel { get; set; }
         [DataMember]
-        public int Obligatorios { get; set; }
-
+        public bool Habilitado { get; set; }
         [DataMember]
         public virtual TipoUsuario TipoUsuario { get; set; }
-
-        [DataMember]
-        public virtual TipoTelefono TipoTelefono { get; set; }
     }
 }

@@ -36,6 +36,8 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         [DataMember]
         public bool Vip { get; set; }
         [DataMember]
+        public byte[] Foto { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
         [DataMember]
         public bool Activo { get; set; }

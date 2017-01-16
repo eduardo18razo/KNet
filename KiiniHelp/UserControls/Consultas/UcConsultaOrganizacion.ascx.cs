@@ -1,25 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.DynamicData;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
 using KiiniHelp.ServiceOrganizacion;
+using KiiniHelp.ServiceParametrosSistema;
 using KiiniHelp.ServiceSistemaTipoUsuario;
 using KiiniNet.Entities.Cat.Arbol.Organizacion;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
+using Microsoft.Office.Interop.Word;
+using Page = System.Web.UI.Page;
 
 namespace KiiniHelp.UserControls.Consultas
 {
     public partial class UcConsultaOrganizacion : UserControl, IControllerModal
     {
+        public event DelegateSeleccionOrganizacionModal OnSeleccionOrganizacionModal;
+        public event DelegateAceptarModal OnAceptarModal;
+        public event DelegateLimpiarModal OnLimpiarModal;
+        public event DelegateCancelarModal OnCancelarModal;
         public delegate void DelegateSeleccionOrganizacionModal();
+
         readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
         readonly ServiceOrganizacionClient _servicioOrganizacion = new ServiceOrganizacionClient();
+        readonly ServiceParametrosClient _servicioParametros = new ServiceParametrosClient();
         private List<string> _lstError = new List<string>();
+        private int PageSize = 10;
 
         public bool Modal
         {
@@ -36,12 +46,10 @@ namespace KiiniHelp.UserControls.Consultas
                 ddlTipoUsuario.Enabled = false;
             }
         }
-
         public string ModalName
         {
             set { hfModalName.Value = value; }
         }
-
         public List<string> AlertaOrganizacion
         {
             set
@@ -52,7 +60,6 @@ namespace KiiniHelp.UserControls.Consultas
                 rptErrorOrganizacion.DataBind();
             }
         }
-
         private List<string> AlertaCatalogos
         {
             set
@@ -63,7 +70,6 @@ namespace KiiniHelp.UserControls.Consultas
                 rptErrorCatalogo.DataBind();
             }
         }
-
         public int OrganizacionSeleccionada
         {
             get
@@ -83,12 +89,50 @@ namespace KiiniHelp.UserControls.Consultas
                 hfIdSeleccion.Value = value.ToString();
             }
         }
+        private void PopulatePager(int recordCount, int currentPage)
+        {
+            double dblPageCount = (double)((decimal)recordCount / Convert.ToDecimal(PageSize));
+            int pageCount = (int)Math.Ceiling(dblPageCount);
+            List<ListItem> pages = new List<ListItem>();
+            if (pageCount > 0)
+            {
+                for (int i = 1; i <= pageCount; i++)
+                {
+                    pages.Add(new ListItem(i.ToString(), i.ToString(), i != currentPage));
+                }
+            }
+            rptPager.DataSource = pages;
+            rptPager.DataBind();
+        }
+        protected void Page_Changed(object sender, EventArgs e)
+        {
+            int pageIndex = int.Parse((sender as LinkButton).CommandArgument);
+            this.LlenaOrganizaciones();
+        }
 
+        private void LimpiaCatalogo()
+        {
+            try
+            {
+                txtDescripcionCatalogo.Text = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
         private void LlenaCombos()
         {
             try
             {
                 List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true);
+                if (lstTipoUsuario.Count >= 2)
+                    lstTipoUsuario.Insert(BusinessVariables.ComboBoxCatalogo.IndexTodos, new TipoUsuario { Id = BusinessVariables.ComboBoxCatalogo.ValueTodos, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionTodos });
                 Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
                 Metodos.LlenaComboCatalogo(ddlTipoUsuarioCatalogo, lstTipoUsuario);
 
@@ -98,7 +142,6 @@ namespace KiiniHelp.UserControls.Consultas
                 throw new Exception(e.Message);
             }
         }
-
         private void LlenaComboOrganizacion(int idTipoUsuario)
         {
             try
@@ -113,13 +156,12 @@ namespace KiiniHelp.UserControls.Consultas
                 throw new Exception(ex.Message);
             }
         }
-
         private void FiltraCombo(DropDownList ddlFiltro, DropDownList ddlLlenar, object source)
         {
             try
             {
                 ddlLlenar.Items.Clear();
-                if (ddlFiltro.SelectedValue != BusinessVariables.ComboBoxCatalogo.Value.ToString())
+                if (ddlFiltro.SelectedValue != BusinessVariables.ComboBoxCatalogo.ValueSeleccione.ToString())
                 {
                     ddlLlenar.Enabled = true;
                     Metodos.LlenaComboCatalogo(ddlLlenar, source);
@@ -138,7 +180,6 @@ namespace KiiniHelp.UserControls.Consultas
                 throw new Exception(e.Message);
             }
         }
-
         private void LlenaOrganizaciones()
         {
             try
@@ -151,31 +192,31 @@ namespace KiiniHelp.UserControls.Consultas
                 int? idGerencia = null;
                 int? idSubGerencia = null;
                 int? idJefatura = null;
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
 
-                if (ddlHolding.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlHolding.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idHolding = int.Parse(ddlHolding.SelectedValue);
 
-                if (ddlCompañia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlCompañia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idCompania = int.Parse(ddlCompañia.SelectedValue);
 
-                if (ddlDireccion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlDireccion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idDireccion = int.Parse(ddlDireccion.SelectedValue);
 
-                if (ddlSubDireccion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlSubDireccion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idSubDireccion = int.Parse(ddlSubDireccion.SelectedValue);
 
-                if (ddlGerencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlGerencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idGerencia = int.Parse(ddlGerencia.SelectedValue);
 
-                if (ddlSubGerencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlSubGerencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idSubGerencia = int.Parse(ddlSubGerencia.SelectedValue);
 
-                if (ddlJefatura.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlJefatura.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idJefatura = int.Parse(ddlJefatura.SelectedValue);
 
-                rptResultados.DataSource = new ServiceOrganizacionClient().ObtenerOrganizaciones(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
+                rptResultados.DataSource = _servicioOrganizacion.ObtenerOrganizaciones(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
                 rptResultados.DataBind();
             }
             catch (Exception e)
@@ -183,7 +224,6 @@ namespace KiiniHelp.UserControls.Consultas
                 throw new Exception(e.Message);
             }
         }
-
         private void LimpiarOrganizaciones()
         {
             try
@@ -196,384 +236,33 @@ namespace KiiniHelp.UserControls.Consultas
                 throw new Exception(e.Message);
             }
         }
-        protected void Page_Load(object sender, EventArgs e)
+        public string ObtenerRuta(int command, string modulo)
         {
-            try
+            string result = "<h3>ALTA " + modulo + "</h3><span style=\"font-size: x-small;\">";
+            switch (command)
             {
-                
-                AlertaOrganizacion = new List<string>();
-                AlertaCatalogos = new List<string>();
-                if (!IsPostBack)
-                {
-                    LlenaCombos();
-                }
+                //case 1:
+                //    result += ddlHolding.SelectedItem.Text;
+                //    break;
+                case 2:
+                    result += ddlHolding.SelectedItem.Text;//+ ">" + ddlCompañia.SelectedItem.Text;
+                    break;
+                case 3:
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text;//+ ">" + ddlDireccion.SelectedItem.Text;
+                    break;
+                case 4:
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text;//+ ">" + ddlSubDireccion.SelectedItem.Text;
+                    break;
+                case 5:
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text;// + ">" + ddlGerencia.SelectedItem.Text;
+                    break;
+                case 6:
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text + ">" + ddlGerencia.SelectedItem.Text;// + ">" + ddlSubGerencia.SelectedItem.Text;
+                    break;
             }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
+            result += "</span>";
+            return result;
         }
-
-        protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Metodos.LimpiarCombo(ddlHolding);
-                Metodos.LimpiarCombo(ddlCompañia);
-                Metodos.LimpiarCombo(ddlDireccion);
-                Metodos.LimpiarCombo(ddlSubDireccion);
-                Metodos.LimpiarCombo(ddlGerencia);
-                Metodos.LimpiarCombo(ddlSubGerencia);
-                Metodos.LimpiarCombo(ddlJefatura);
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index && int.Parse(ddlTipoUsuario.SelectedValue) != (int)BusinessVariables.EnumTiposUsuario.Empleado)
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Holding";
-                    btnNew.Text = "Agregar Holding";
-                    btnNew.CommandArgument = "99";
-                }
-                else
-                {
-                    LimpiarOrganizaciones();
-                    btnNew.Visible = false;
-                }
-                if (ddlTipoUsuario.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index) return;
-                LlenaComboOrganizacion(IdTipoUsuario);
-                LlenaOrganizaciones();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
-        protected void ddlHolding_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                int idTipoUsuario = IdTipoUsuario;
-                int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
-                Metodos.LimpiarCombo(ddlCompañia);
-                Metodos.LimpiarCombo(ddlDireccion);
-                Metodos.LimpiarCombo(ddlSubDireccion);
-                Metodos.LimpiarCombo(ddlGerencia);
-                Metodos.LimpiarCombo(ddlSubGerencia);
-                Metodos.LimpiarCombo(ddlJefatura);
-                FiltraCombo((DropDownList)sender, ddlCompañia, _servicioOrganizacion.ObtenerCompañias(idTipoUsuario, id, true));
-                LlenaOrganizaciones();
-                if (ddlHolding.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Compañia";
-                    btnNew.Text = "Agregar Compañia";
-                    btnNew.CommandArgument = "9";
-                }
-                else
-                {
-                    if (int.Parse(ddlTipoUsuario.SelectedValue) == (int)BusinessVariables.EnumTiposUsuario.Empleado)
-                    {
-                        btnNew.Visible = false;
-                    }
-                    else
-                    {
-                        btnNew.Visible = true;
-                        btnNew.CommandName = "Holding";
-                        btnNew.Text = "Agregar Holding";
-                        btnNew.CommandArgument = "99";
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
-        protected void ddlCompañia_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                int idTipoUsuario = IdTipoUsuario;
-                int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
-                Metodos.LimpiarCombo(ddlDireccion);
-                Metodos.LimpiarCombo(ddlSubDireccion);
-                Metodos.LimpiarCombo(ddlGerencia);
-                Metodos.LimpiarCombo(ddlSubGerencia);
-                Metodos.LimpiarCombo(ddlJefatura);
-                FiltraCombo((DropDownList)sender, ddlDireccion, _servicioOrganizacion.ObtenerDirecciones(idTipoUsuario, id, true));
-                LlenaOrganizaciones();
-                if (ddlCompañia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Dirección";
-                    btnNew.Text = "Agregar Dirección";
-                    btnNew.CommandArgument = "10";
-                }
-                else
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Compañia";
-                    btnNew.Text = "Agregar Compañia";
-                    btnNew.CommandArgument = "9";
-                }
-
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
-        protected void ddlDirecion_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                int idTipoUsuario = IdTipoUsuario;
-                int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
-                Metodos.LimpiarCombo(ddlSubDireccion);
-                Metodos.LimpiarCombo(ddlGerencia);
-                Metodos.LimpiarCombo(ddlSubGerencia);
-                Metodos.LimpiarCombo(ddlJefatura);
-                FiltraCombo((DropDownList)sender, ddlSubDireccion, _servicioOrganizacion.ObtenerSubDirecciones(idTipoUsuario, id, true));
-                LlenaOrganizaciones();
-                if (ddlDireccion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Sub Dirección";
-                    btnNew.Text = "Agregar Sub Dirección";
-                    btnNew.CommandArgument = "11";
-                }
-                else
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Dirección";
-                    btnNew.Text = "Agregar Dirección";
-                    btnNew.CommandArgument = "10";
-                }
-
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
-        protected void ddlSubDireccion_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                int idTipoUsuario = IdTipoUsuario;
-                int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
-                Metodos.LimpiarCombo(ddlGerencia);
-                Metodos.LimpiarCombo(ddlSubGerencia);
-                Metodos.LimpiarCombo(ddlJefatura);
-                FiltraCombo((DropDownList)sender, ddlGerencia, _servicioOrganizacion.ObtenerGerencias(idTipoUsuario, id, true));
-                LlenaOrganizaciones();
-                if (ddlSubDireccion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Gerencia";
-                    btnNew.Text = "Agregar Gerencia";
-                    btnNew.CommandArgument = "12";
-                }
-                else
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Sub Dirección";
-                    btnNew.Text = "Agregar Sub Dirección";
-                    btnNew.CommandArgument = "11";
-                }
-
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
-        protected void ddlGerencia_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                int idTipoUsuario = IdTipoUsuario;
-                int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
-                Metodos.LimpiarCombo(ddlSubGerencia);
-                Metodos.LimpiarCombo(ddlJefatura);
-                FiltraCombo((DropDownList)sender, ddlSubGerencia, _servicioOrganizacion.ObtenerSubGerencias(idTipoUsuario, id, true));
-                LlenaOrganizaciones();
-                if (ddlGerencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Sub Gerencia";
-                    btnNew.Text = "Agregar Sub Gerencia";
-                    btnNew.CommandArgument = "13";
-                }
-                else
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Gerencia";
-                    btnNew.Text = "Agregar Gerencia";
-                    btnNew.CommandArgument = "12";
-                }
-
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
-        protected void ddlSubGerencia_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                int idTipoUsuario = IdTipoUsuario;
-                int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
-                Metodos.LimpiarCombo(ddlJefatura);
-                FiltraCombo((DropDownList)sender, ddlJefatura, _servicioOrganizacion.ObtenerJefaturas(idTipoUsuario, id, true));
-                LlenaOrganizaciones();
-                if (ddlSubGerencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Jefatura";
-                    btnNew.Text = "Agregar Jefatura";
-                    btnNew.CommandArgument = "14";
-                }
-                else
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Sub Gerencia";
-                    btnNew.Text = "Agregar Sub Gerencia";
-                    btnNew.CommandArgument = "13";
-                }
-
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
-        protected void ddlJefatura_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LlenaOrganizaciones();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
-        protected void btnBaja_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioOrganizacion.HabilitarOrganizacion(Convert.ToInt32(hfId.Value), false);
-                LlenaOrganizaciones();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
-        protected void btnAlta_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioOrganizacion.HabilitarOrganizacion(Convert.ToInt32(hfId.Value), true);
-                LlenaOrganizaciones();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
-        protected void btnEditar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                int nivel = 0;
-                string descripcion = null;
-                Organizacion org = _servicioOrganizacion.ObtenerOrganizacionById(Convert.ToInt32(hfId.Value));
-                Session["OrganizacionSeleccionada"] = org;
-                lblTitleCatalogo.Text = ObtenerRuta(org, ref nivel, ref descripcion);
-                txtDescripcionCatalogo.Text = descripcion;
-                hfCatalogo.Value = nivel.ToString();
-                hfAlta.Value = false.ToString();
-                ddlTipoUsuarioCatalogo.SelectedValue = org.IdTipoUsuario.ToString();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoOrganizacion\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
         private string ObtenerRuta(Organizacion organizacion, ref int nivel, ref string descripcion)
         {
             string result = null;
@@ -628,13 +317,48 @@ namespace KiiniHelp.UserControls.Consultas
             }
             return result;
         }
-
-        #region CatalogoAlta
-        private void LimpiaCatalogo()
+        private void SetAlias()
         {
             try
             {
-                txtDescripcionCatalogo.Text = string.Empty;
+                lblNivel1.Text = "Nivel 1";
+                lblNivel2.Text = "Nivel 2";
+                lblNivel3.Text = "Nivel 3";
+                lblNivel4.Text = "Nivel 4";
+                lblNivel5.Text = "Nivel 5";
+                lblNivel6.Text = "Nivel 6";
+                lblNivel7.Text = "Nivel 7";
+                if (ddlTipoUsuario.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexTodos) return;
+                List<AliasOrganizacion> alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue));
+                if (alias.Count != 7)
+                {
+                    return;
+                }
+                lblNivel1.Text = alias.Single(s => s.Nivel == 1).Descripcion;
+                lblNivel2.Text = alias.Single(s => s.Nivel == 2).Descripcion;
+                lblNivel3.Text = alias.Single(s => s.Nivel == 3).Descripcion;
+                lblNivel4.Text = alias.Single(s => s.Nivel == 4).Descripcion;
+                lblNivel5.Text = alias.Single(s => s.Nivel == 5).Descripcion;
+                lblNivel6.Text = alias.Single(s => s.Nivel == 6).Descripcion;
+                lblNivel7.Text = alias.Single(s => s.Nivel == 7).Descripcion;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+
+                AlertaOrganizacion = new List<string>();
+                AlertaCatalogos = new List<string>();
+                if (!IsPostBack)
+                {
+                    LlenaCombos();
+                }
             }
             catch (Exception ex)
             {
@@ -646,7 +370,419 @@ namespace KiiniHelp.UserControls.Consultas
                 AlertaOrganizacion = _lstError;
             }
         }
+        protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Metodos.LimpiarCombo(ddlHolding);
+                Metodos.LimpiarCombo(ddlCompañia);
+                Metodos.LimpiarCombo(ddlDireccion);
+                Metodos.LimpiarCombo(ddlSubDireccion);
+                Metodos.LimpiarCombo(ddlGerencia);
+                Metodos.LimpiarCombo(ddlSubGerencia);
+                Metodos.LimpiarCombo(ddlJefatura);
+                txtFiltroDecripcion.Text = string.Empty;
+                SetAlias();
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                {
+                    LimpiarOrganizaciones();
+                    btnNew.Visible = false;
+                    return;
+                }
 
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexTodos)
+                {
+                    btnNew.Visible = false;
+                }
+                else if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos && int.Parse(ddlTipoUsuario.SelectedValue) != (int)BusinessVariables.EnumTiposUsuario.Empleado)
+                {
+                    LlenaComboOrganizacion(IdTipoUsuario);
+                    btnNew.Visible = true;
+                    btnNew.CommandName = "Holding";
+                    btnNew.Text = "Agregar Holding";
+                    btnNew.CommandArgument = "1";
+                    if (ddlHolding.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione) 
+                        ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
+                }
+                else
+                {
+                    btnNew.Visible = false;
+                    LlenaComboOrganizacion(IdTipoUsuario);
+                }
+
+                LlenaOrganizaciones();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+        protected void ddlHolding_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((DropDownList) sender).SelectedValue == "")
+                    return;
+                int idTipoUsuario = IdTipoUsuario;
+                int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlCompañia);
+                Metodos.LimpiarCombo(ddlDireccion);
+                Metodos.LimpiarCombo(ddlSubDireccion);
+                Metodos.LimpiarCombo(ddlGerencia);
+                Metodos.LimpiarCombo(ddlSubGerencia);
+                Metodos.LimpiarCombo(ddlJefatura);
+                FiltraCombo((DropDownList)sender, ddlCompañia, _servicioOrganizacion.ObtenerCompañias(idTipoUsuario, id, true));
+                LlenaOrganizaciones();
+                AliasOrganizacion alias;
+                string nivel;
+                if (ddlHolding.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                {
+                    alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 2);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 2";
+                    btnNew.Visible = true;
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = "2";
+                }
+                else
+                {
+                    if (int.Parse(ddlTipoUsuario.SelectedValue) == (int)BusinessVariables.EnumTiposUsuario.Empleado)
+                    {
+                        btnNew.Visible = false;
+                    }
+                    else
+                    {
+                        alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 1);
+                        nivel = alias != null ? alias.Descripcion : "NIVEL 1";
+                        btnNew.Visible = true;
+                        btnNew.CommandName = nivel;
+                        btnNew.Text = nivel;
+                        btnNew.CommandArgument = "1";
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+        protected void ddlCompañia_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((DropDownList)sender).SelectedValue == "")
+                    return;
+                int idTipoUsuario = IdTipoUsuario;
+                int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlDireccion);
+                Metodos.LimpiarCombo(ddlSubDireccion);
+                Metodos.LimpiarCombo(ddlGerencia);
+                Metodos.LimpiarCombo(ddlSubGerencia);
+                Metodos.LimpiarCombo(ddlJefatura);
+                FiltraCombo((DropDownList)sender, ddlDireccion, _servicioOrganizacion.ObtenerDirecciones(idTipoUsuario, id, true));
+                LlenaOrganizaciones();
+                AliasOrganizacion alias;
+                string nivel;
+                if (ddlCompañia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                {
+                    alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 3);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 3";
+                    btnNew.Visible = true;
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = "3";
+                }
+                else
+                {
+                    alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 2);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 2";
+                    btnNew.Visible = true;
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = "2";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+        protected void ddlDirecion_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((DropDownList)sender).SelectedValue == "")
+                    return;
+                int idTipoUsuario = IdTipoUsuario;
+                int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlSubDireccion);
+                Metodos.LimpiarCombo(ddlGerencia);
+                Metodos.LimpiarCombo(ddlSubGerencia);
+                Metodos.LimpiarCombo(ddlJefatura);
+                FiltraCombo((DropDownList)sender, ddlSubDireccion, _servicioOrganizacion.ObtenerSubDirecciones(idTipoUsuario, id, true));
+                LlenaOrganizaciones();
+                AliasOrganizacion alias;
+                string nivel;
+                if (ddlDireccion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                {
+                    alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 4);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 4";
+                    btnNew.Visible = true;
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = "4";
+                }
+                else
+                {
+                    alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 3);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 3";
+                    btnNew.Visible = true;
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = "3";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+        protected void ddlSubDireccion_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((DropDownList)sender).SelectedValue == "")
+                    return;
+                int idTipoUsuario = IdTipoUsuario;
+                int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlGerencia);
+                Metodos.LimpiarCombo(ddlSubGerencia);
+                Metodos.LimpiarCombo(ddlJefatura);
+                FiltraCombo((DropDownList)sender, ddlGerencia, _servicioOrganizacion.ObtenerGerencias(idTipoUsuario, id, true));
+                LlenaOrganizaciones();
+                AliasOrganizacion alias;
+                string nivel;
+                if (ddlSubDireccion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                {
+                    alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 5);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 5";
+                    btnNew.Visible = true;
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = "5";
+                }
+                else
+                {
+                    alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 4);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 4";
+                    btnNew.Visible = true;
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = "4";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+        protected void ddlGerencia_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((DropDownList)sender).SelectedValue == "")
+                    return;
+                int idTipoUsuario = IdTipoUsuario;
+                int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlSubGerencia);
+                Metodos.LimpiarCombo(ddlJefatura);
+                FiltraCombo((DropDownList)sender, ddlSubGerencia, _servicioOrganizacion.ObtenerSubGerencias(idTipoUsuario, id, true));
+                LlenaOrganizaciones();
+                AliasOrganizacion alias;
+                string nivel;
+                if (ddlGerencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                {
+                    alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 6);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 6";
+                    btnNew.Visible = true;
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = "6";
+                }
+                else
+                {
+                    alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 5);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 5";
+                    btnNew.Visible = true;
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = "5";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+        protected void ddlSubGerencia_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((DropDownList)sender).SelectedValue == "")
+                    return;
+                int idTipoUsuario = IdTipoUsuario;
+                int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
+                Metodos.LimpiarCombo(ddlJefatura);
+                FiltraCombo((DropDownList)sender, ddlJefatura, _servicioOrganizacion.ObtenerJefaturas(idTipoUsuario, id, true));
+                LlenaOrganizaciones();
+                AliasOrganizacion alias;
+                string nivel;
+                if (ddlSubGerencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                {
+                    alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 7);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 7";
+                    btnNew.Visible = true;
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = "7";
+                }
+                else
+                {
+                    alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 6);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 6";
+                    btnNew.Visible = true;
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = "6";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+        protected void ddlJefatura_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (((DropDownList)sender).SelectedValue == "")
+                    return;
+                LlenaOrganizaciones();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+        protected void btnEditar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                int nivel = 0;
+                string descripcion = null;
+                Organizacion org = _servicioOrganizacion.ObtenerOrganizacionById(int.Parse(((Button)sender).CommandArgument));
+                if (org == null) return;
+                ddlTipoUsuario.SelectedValue = org.IdTipoUsuario.ToString();
+                ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
+                if (org.Holding != null)
+                {
+                    ddlHolding.SelectedValue = org.IdHolding.ToString();
+                    ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
+                }
+                if (org.Compania != null)
+                {
+                    ddlCompañia.SelectedValue = org.IdCompania.ToString();
+                    ddlCompañia_OnSelectedIndexChanged(ddlCompañia, null);
+                }
+                if (org.Direccion != null)
+                {
+                    ddlDireccion.SelectedValue = org.IdDireccion.ToString();
+                    ddlDirecion_OnSelectedIndexChanged(ddlDireccion, null);
+                }
+                if (org.SubDireccion != null)
+                {
+                    ddlSubDireccion.SelectedValue = org.IdSubDireccion.ToString();
+                    ddlSubDireccion_OnSelectedIndexChanged(ddlSubDireccion, null);
+                }
+                if (org.Gerencia != null)
+                {
+                    ddlGerencia.SelectedValue = org.IdGerencia.ToString();
+                    ddlGerencia_OnSelectedIndexChanged(ddlGerencia, null);
+                }
+                if (org.SubGerencia != null)
+                {
+                    ddlSubGerencia.SelectedValue = org.IdSubGerencia.ToString();
+                    ddlSubGerencia_OnSelectedIndexChanged(ddlSubGerencia, null);
+                }
+                if(org.Jefatura != null)
+                {
+                    ddlJefatura.SelectedValue = org.IdJefatura.ToString();
+                    ddlJefatura_OnSelectedIndexChanged(ddlJefatura, null);
+                }
+                Session["OrganizacionSeleccionada"] = org;
+                lblTitleCatalogo.Text = ObtenerRuta(org, ref nivel, ref descripcion);
+                txtDescripcionCatalogo.Text = descripcion;
+                hfCatalogo.Value = nivel.ToString();
+                hfAlta.Value = false.ToString();
+                ddlTipoUsuarioCatalogo.SelectedValue = org.IdTipoUsuario.ToString();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoOrganizacion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
         protected void btnGuardarCatalogo_OnClick(object sender, EventArgs e)
         {
             try
@@ -662,7 +798,7 @@ namespace KiiniHelp.UserControls.Consultas
                     };
                     switch (int.Parse(hfCatalogo.Value))
                     {
-                        case 99:
+                        case 1:
                             organizacion.Holding = new Holding
                             {
                                 IdTipoUsuario = Convert.ToInt32(ddlTipoUsuarioCatalogo.SelectedValue),
@@ -672,9 +808,9 @@ namespace KiiniHelp.UserControls.Consultas
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
                             LlenaComboOrganizacion(Convert.ToInt32(ddlTipoUsuarioCatalogo.SelectedValue));
                             ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
-                            //upOrganizacion.Update();
+                            ddlHolding.SelectedValue = ddlHolding.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
-                        case 9:
+                        case 2:
                             organizacion.IdHolding = Convert.ToInt32(ddlHolding.SelectedValue);
                             organizacion.Compania = new Compania
                             {
@@ -684,9 +820,10 @@ namespace KiiniHelp.UserControls.Consultas
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
                             ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
-                            //upOrganizacion.Update();
+                            ddlCompañia.SelectedValue = ddlCompañia.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlCompañia_OnSelectedIndexChanged(ddlCompañia, null);
                             break;
-                        case 10:
+                        case 3:
                             organizacion.IdHolding = Convert.ToInt32(ddlHolding.SelectedValue);
                             organizacion.IdCompania = Convert.ToInt32(ddlCompañia.SelectedValue);
                             organizacion.Direccion = new Direccion
@@ -697,9 +834,10 @@ namespace KiiniHelp.UserControls.Consultas
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
                             ddlCompañia_OnSelectedIndexChanged(ddlCompañia, null);
-                            //upOrganizacion.Update();
+                            ddlDireccion.SelectedValue = ddlDireccion.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlDirecion_OnSelectedIndexChanged(ddlDireccion, null);
                             break;
-                        case 11:
+                        case 4:
                             organizacion.IdHolding = Convert.ToInt32(ddlHolding.SelectedValue);
                             organizacion.IdCompania = Convert.ToInt32(ddlCompañia.SelectedValue);
                             organizacion.IdDireccion = Convert.ToInt32(ddlDireccion.SelectedValue);
@@ -711,9 +849,10 @@ namespace KiiniHelp.UserControls.Consultas
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
                             ddlDirecion_OnSelectedIndexChanged(ddlDireccion, null);
-                            //upOrganizacion.Update();
+                            ddlSubDireccion.SelectedValue = ddlSubDireccion.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlSubDireccion_OnSelectedIndexChanged(ddlSubDireccion, null);
                             break;
-                        case 12:
+                        case 5:
                             organizacion.IdHolding = Convert.ToInt32(ddlHolding.SelectedValue);
                             organizacion.IdCompania = Convert.ToInt32(ddlCompañia.SelectedValue);
                             organizacion.IdDireccion = Convert.ToInt32(ddlDireccion.SelectedValue);
@@ -726,9 +865,10 @@ namespace KiiniHelp.UserControls.Consultas
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
                             ddlSubDireccion_OnSelectedIndexChanged(ddlSubDireccion, null);
-                            //upOrganizacion.Update();
+                            ddlGerencia.SelectedValue = ddlGerencia.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlGerencia_OnSelectedIndexChanged(ddlGerencia, null);
                             break;
-                        case 13:
+                        case 6:
                             organizacion.IdHolding = Convert.ToInt32(ddlHolding.SelectedValue);
                             organizacion.IdCompania = Convert.ToInt32(ddlCompañia.SelectedValue);
                             organizacion.IdDireccion = Convert.ToInt32(ddlDireccion.SelectedValue);
@@ -742,9 +882,10 @@ namespace KiiniHelp.UserControls.Consultas
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
                             ddlGerencia_OnSelectedIndexChanged(ddlGerencia, null);
-                            //upOrganizacion.Update();
+                            ddlSubGerencia.SelectedValue = ddlSubGerencia.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlSubGerencia_OnSelectedIndexChanged(ddlSubGerencia, null);
                             break;
-                        case 14:
+                        case 7:
                             organizacion.IdHolding = Convert.ToInt32(ddlHolding.SelectedValue);
                             organizacion.IdCompania = Convert.ToInt32(ddlCompañia.SelectedValue);
                             organizacion.IdDireccion = Convert.ToInt32(ddlDireccion.SelectedValue);
@@ -759,7 +900,8 @@ namespace KiiniHelp.UserControls.Consultas
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
                             ddlSubGerencia_OnSelectedIndexChanged(ddlSubGerencia, null);
-                            //upOrganizacion.Update();
+                            ddlJefatura.SelectedValue = ddlJefatura.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlJefatura_OnSelectedIndexChanged(ddlJefatura, null);
                             break;
                     }
                 }
@@ -770,36 +912,45 @@ namespace KiiniHelp.UserControls.Consultas
                     {
                         case 1:
                             organizacion.Holding.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
+                            ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
+                            ddlHolding.SelectedValue = ddlHolding.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                         case 2:
                             organizacion.Compania.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioOrganizacion.ActualizarOrganizacion(organizacion);
                             ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
+                            ddlCompañia.SelectedValue = ddlCompañia.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                         case 3:
                             organizacion.Direccion.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioOrganizacion.ActualizarOrganizacion(organizacion);
                             ddlCompañia_OnSelectedIndexChanged(ddlCompañia, null);
+                            ddlDireccion.SelectedValue = ddlDireccion.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                         case 4:
                             organizacion.SubDireccion.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioOrganizacion.ActualizarOrganizacion(organizacion);
-                            ddlDirecion_OnSelectedIndexChanged(ddlGerencia, null);
+                            ddlDirecion_OnSelectedIndexChanged(ddlDireccion, null);
+                            ddlSubDireccion.SelectedValue = ddlSubDireccion.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                         case 5:
                             organizacion.Gerencia.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioOrganizacion.ActualizarOrganizacion(organizacion);
                             ddlSubDireccion_OnSelectedIndexChanged(ddlSubDireccion, null);
+                            ddlGerencia.SelectedValue = ddlGerencia.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                         case 6:
                             organizacion.SubGerencia.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioOrganizacion.ActualizarOrganizacion(organizacion);
                             ddlGerencia_OnSelectedIndexChanged(ddlGerencia, null);
+                            ddlSubGerencia.SelectedValue = ddlSubGerencia.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                         case 7:
                             organizacion.Jefatura.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioOrganizacion.ActualizarOrganizacion(organizacion);
                             ddlSubGerencia_OnSelectedIndexChanged(ddlSubGerencia, null);
+                            ddlJefatura.SelectedValue = ddlJefatura.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
                             break;
                     }
                 }
@@ -817,21 +968,18 @@ namespace KiiniHelp.UserControls.Consultas
                 AlertaCatalogos = _lstError;
             }
         }
-
         protected void btnCancelarCatalogo_OnClick(object sender, EventArgs e)
         {
             LimpiaCatalogo();
             ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoOrganizacion\");", true);
         }
-        #endregion
-
         protected void btnNew_OnClick(object sender, EventArgs e)
         {
             try
             {
                 Button btn = (Button)sender;
                 if (sender == null) return;
-                lblTitleCatalogo.Text = ObtenerRuta(btn.CommandArgument, btn.CommandName.ToUpper());
+                lblTitleCatalogo.Text = ObtenerRuta(int.Parse(btn.CommandArgument), btn.CommandName);
                 hfCatalogo.Value = btn.CommandArgument;
                 hfAlta.Value = true.ToString();
                 ddlTipoUsuarioCatalogo.SelectedValue = IdTipoUsuario.ToString();
@@ -847,58 +995,113 @@ namespace KiiniHelp.UserControls.Consultas
                 AlertaOrganizacion = _lstError;
             }
         }
-
-        public string ObtenerRuta(string command, string modulo)
-        {
-            string result = "<h3>ALTA NUEVA " + modulo + "</h3><span style=\"font-size: x-small;\">";
-            switch (command)
-            {
-                case "9":
-                    result += ddlHolding.SelectedItem.Text;
-                    break;
-                case "10":
-                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text;
-                    break;
-                case "11":
-                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text;
-                    break;
-                case "12":
-                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text;
-                    break;
-                case "13":
-                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text + ">" + ddlGerencia.SelectedItem.Text;
-                    break;
-                case "14":
-                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text + ">" + ddlGerencia.SelectedItem.Text + ">" + ddlSubGerencia.SelectedItem.Text;
-                    break;
-            }
-            result += "</span>";
-            return result;
-        }
-
-        private void Seleccionar(int id)
-        {
-            hfIdSeleccion.Value = id.ToString();
-            if (OnSeleccionOrganizacionModal != null)
-                OnSeleccionOrganizacionModal();
-        }
-
-        public event DelegateSeleccionOrganizacionModal OnSeleccionOrganizacionModal;
-        public event DelegateAceptarModal OnAceptarModal;
-        public event DelegateLimpiarModal OnLimpiarModal;
-        public event DelegateCancelarModal OnCancelarModal;
-
         protected void btnCerrar_Click(object sender, EventArgs e)
         {
 
         }
-
         protected void btnCerrar_OnClick(object sender, EventArgs e)
         {
             try
             {
                 if (OnSeleccionOrganizacionModal != null)
                     OnSeleccionOrganizacionModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+        protected void rptResultados_OnItemCreated(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
+                    if (e.Item.ItemType == ListItemType.Header)
+                    {
+                        List<AliasOrganizacion> alias = _servicioParametros.ObtenerAliasOrganizacion(IdTipoUsuario);
+                        if (alias.Count != 7) return;
+                        ((Label)e.Item.FindControl("lblHolding")).Text = alias.Single(s => s.Nivel == 1).Descripcion;
+                        ((Label)e.Item.FindControl("lblCompania")).Text = alias.Single(s => s.Nivel == 2).Descripcion;
+                        ((Label)e.Item.FindControl("lblDireccion")).Text = alias.Single(s => s.Nivel == 3).Descripcion;
+                        ((Label)e.Item.FindControl("lblSubDireccion")).Text = alias.Single(s => s.Nivel == 4).Descripcion;
+                        ((Label)e.Item.FindControl("lblGerencia")).Text = alias.Single(s => s.Nivel == 5).Descripcion;
+                        ((Label)e.Item.FindControl("lblSubGerencia")).Text = alias.Single(s => s.Nivel == 6).Descripcion;
+                        ((Label)e.Item.FindControl("lblJefatura")).Text = alias.Single(s => s.Nivel == 7).Descripcion;
+                    }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+        protected void btnBajaAlta_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                bool alta = bool.Parse(((Button)sender).CommandArgument);
+                _servicioOrganizacion.HabilitarOrganizacion(int.Parse(((Button)sender).CommandName), !alta);
+                LlenaOrganizaciones();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+        protected void btnBuscar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                int? idTipoUsuario = null;
+                int? idHolding = null;
+                int? idCompania = null;
+                int? idDireccion = null;
+                int? idSubDireccion = null;
+                int? idGerencia = null;
+                int? idSubGerencia = null;
+                int? idJefatura = null;
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
+                    idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
+
+                if (ddlHolding.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idHolding = int.Parse(ddlHolding.SelectedValue);
+
+                if (ddlCompañia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idCompania = int.Parse(ddlCompañia.SelectedValue);
+
+                if (ddlDireccion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idDireccion = int.Parse(ddlDireccion.SelectedValue);
+
+                if (ddlSubDireccion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idSubDireccion = int.Parse(ddlSubDireccion.SelectedValue);
+
+                if (ddlGerencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idGerencia = int.Parse(ddlGerencia.SelectedValue);
+
+                if (ddlSubGerencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idSubGerencia = int.Parse(ddlSubGerencia.SelectedValue);
+
+                if (ddlJefatura.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    idJefatura = int.Parse(ddlJefatura.SelectedValue);
+
+                rptResultados.DataSource = _servicioOrganizacion.BuscarPorPalabra(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura, txtFiltroDecripcion.Text.Trim());
+                rptResultados.DataBind();
+                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "HightSearch(\"tblHeader\", \"" + txtFiltroDecripcion.Text.Trim() + "\");", true);
+
             }
             catch (Exception ex)
             {

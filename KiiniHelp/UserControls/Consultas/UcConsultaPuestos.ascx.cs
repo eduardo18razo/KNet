@@ -18,10 +18,6 @@ namespace KiiniHelp.UserControls.Consultas
 
         private List<string> _lstError = new List<string>();
 
-        public event DelegateAceptarModal OnAceptarModal;
-        public event DelegateLimpiarModal OnLimpiarModal;
-        public event DelegateCancelarModal OnCancelarModal;
-        
         public List<string> Alerta
         {
             set
@@ -38,6 +34,8 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 List<TipoUsuario> lstTipoUsuario = _servicioTipoUsuario.ObtenerTiposUsuarioResidentes(true);
+                if (lstTipoUsuario.Count >= 2)
+                    lstTipoUsuario.Insert(BusinessVariables.ComboBoxCatalogo.IndexTodos, new TipoUsuario { Id = BusinessVariables.ComboBoxCatalogo.ValueTodos, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionTodos });
                 Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
 
             }
@@ -48,15 +46,29 @@ namespace KiiniHelp.UserControls.Consultas
         }
 
 
-        private void LlenaPuestosConsulta()
+        private void LlenaPuestosConsulta(string filtro = "")
         {
             try
             {
                 int? idTipoUsuario = null;
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
-
-                rptResultados.DataSource = _servicioPuestos.ObtenerPuestoConsulta(idTipoUsuario);
+                List<Puesto> ptos = _servicioPuestos.ObtenerPuestoConsulta(idTipoUsuario);
+                if (filtro != string.Empty)
+                    ptos = ptos.Where(w => w.Descripcion.Contains(filtro)).ToList();
+                rptResultados.DataSource = ptos;
+                rptResultados.DataBind();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        private void LimpiarPuestos()
+        {
+            try
+            {
+                rptResultados.DataSource = null;
                 rptResultados.DataBind();
             }
             catch (Exception e)
@@ -73,7 +85,6 @@ namespace KiiniHelp.UserControls.Consultas
                 if (!IsPostBack)
                 {
                     LlenaCombos();
-                    LlenaPuestosConsulta();
                 }
                 ucAltaPuesto.OnAceptarModal += AltaPuestoOnAceptarModal;
                 ucAltaPuesto.OnCancelarModal += AltaPuestoOnCancelarModal;
@@ -128,16 +139,15 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                LlenaPuestosConsulta();
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
-                    btnNew.Visible = true;
-                    btnNew.Text = "Agregar Puesto";
-                }
-                else
-                {
+                    LimpiarPuestos();
                     btnNew.Visible = false;
+                    return;
                 }
+                btnNew.Visible = ddlTipoUsuario.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexTodos;
+
+                LlenaPuestosConsulta();
             }
             catch (Exception ex)
             {
@@ -212,6 +222,23 @@ namespace KiiniHelp.UserControls.Consultas
                 ucAltaPuesto.EsAlta = true;
                 ucAltaPuesto.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaPuesto\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnBuscar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LlenaPuestosConsulta(txtFiltro.Text.Trim().ToUpper());
             }
             catch (Exception ex)
             {

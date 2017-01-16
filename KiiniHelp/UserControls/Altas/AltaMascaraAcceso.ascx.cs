@@ -71,7 +71,7 @@ namespace KiiniHelp.UserControls.Altas
                 txtLongitudMaxima.Text = string.Empty;
                 txtValorMaximo.Text = string.Empty;
                 txtSimboloMoneda.Text = string.Empty;
-                ddlCatalogosCampo.SelectedIndex = ddlCatalogosCampo.SelectedIndex >= 1 ? BusinessVariables.ComboBoxCatalogo.Index : -1;
+                ddlCatalogosCampo.SelectedIndex = ddlCatalogosCampo.SelectedIndex >= 1 ? BusinessVariables.ComboBoxCatalogo.IndexSeleccione : -1;
             }
             catch (Exception e)
             {
@@ -89,7 +89,7 @@ namespace KiiniHelp.UserControls.Altas
                 txtValorMaximo.Text = string.Empty;
                 txtSimboloMoneda.Text = string.Empty;
                 if (ddlCatalogosCampo.SelectedIndex > 0)
-                    ddlCatalogosCampo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                    ddlCatalogosCampo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 Session["MascaraAlta"] = new Mascara();
                 rptControles.DataSource = ((Mascara)Session["MascaraAlta"]).CampoMascara;
                 rptControles.DataBind();
@@ -146,7 +146,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                if (ddlTipoCampo.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index) return;
+                if (ddlTipoCampo.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione) return;
                 TipoCampoMascara tipoCampo = _servicioSistemaTipoCampoMascara.TipoCampoMascaraId(Convert.ToInt32(ddlTipoCampo.SelectedValue));
                 if (tipoCampo == null) return;
                 lblTitleAgregarCampo.Text = "Agregar campo " + tipoCampo.Descripcion;
@@ -205,7 +205,7 @@ namespace KiiniHelp.UserControls.Altas
                 }
 
                 if (divCatalgo.Visible)
-                    if (ddlCatalogosCampo.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                    if (ddlCatalogosCampo.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         throw new Exception("Debe especificar un catalogo");
 
                 if (divMoneda.Visible)
@@ -241,7 +241,7 @@ namespace KiiniHelp.UserControls.Altas
                 rptControles.DataSource = tmpMascara.CampoMascara;
                 rptControles.DataBind();
                 Session["MascaraAlta"] = tmpMascara;
-                ddlTipoCampo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                ddlTipoCampo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 LimpiarModalCampo();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAgregarCampoMascara\");", true);
             }

@@ -66,22 +66,22 @@ namespace KiiniHelp.UserControls.Altas
                     IdHolding = Convert.ToInt32(ddlHolding.SelectedValue)
                 };
 
-                if (ddlCompañia.SelectedValue != string.Empty & ddlCompañia.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlCompañia.SelectedValue != string.Empty & ddlCompañia.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     organizacion.IdCompania = Convert.ToInt32(ddlCompañia.SelectedValue);
 
-                if (ddlDireccion.SelectedValue != string.Empty & ddlDireccion.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlDireccion.SelectedValue != string.Empty & ddlDireccion.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     organizacion.IdDireccion = Convert.ToInt32(ddlDireccion.SelectedValue);
 
-                if (ddlSubDireccion.SelectedValue != string.Empty & ddlSubDireccion.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlSubDireccion.SelectedValue != string.Empty & ddlSubDireccion.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     organizacion.IdSubDireccion = Convert.ToInt32(ddlSubDireccion.SelectedValue);
 
-                if (ddlGerencia.SelectedValue != string.Empty & ddlGerencia.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlGerencia.SelectedValue != string.Empty & ddlGerencia.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     organizacion.IdGerencia = Convert.ToInt32(ddlGerencia.SelectedValue);
 
-                if (ddlSubGerencia.SelectedValue != string.Empty & ddlSubGerencia.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlSubGerencia.SelectedValue != string.Empty & ddlSubGerencia.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     organizacion.IdSubGerencia = Convert.ToInt32(ddlSubGerencia.SelectedValue);
 
-                if (ddlJefatura.SelectedValue != string.Empty & ddlJefatura.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlJefatura.SelectedValue != string.Empty & ddlJefatura.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     organizacion.IdJefatura = Convert.ToInt32(ddlJefatura.SelectedValue);
 
             }
@@ -151,7 +151,7 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 ddlLlenar.Items.Clear();
-                if (ddlFiltro.SelectedValue != BusinessVariables.ComboBoxCatalogo.Value.ToString())
+                if (ddlFiltro.SelectedValue != BusinessVariables.ComboBoxCatalogo.ValueSeleccione.ToString())
                 {
                     ddlLlenar.Enabled = true;
                     Metodos.LlenaComboCatalogo(ddlLlenar, source);
@@ -174,9 +174,9 @@ namespace KiiniHelp.UserControls.Altas
         public void ValidaCapturaOrganizacion()
         {
             StringBuilder sb = new StringBuilder();
-            if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+            if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 sb.AppendLine("<li>Debe especificar un Tipo de Usuario.</li>");
-            if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+            if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 sb.AppendLine("<li>Debe especificar al menos un Holding.</li>");
 
             if (sb.ToString() != string.Empty)
@@ -226,7 +226,7 @@ namespace KiiniHelp.UserControls.Altas
                 Metodos.LimpiarCombo(ddlGerencia);
                 Metodos.LimpiarCombo(ddlSubGerencia);
                 Metodos.LimpiarCombo(ddlJefatura);
-                if (ddlTipoUsuario.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     LlenaComboOrganizacion(IdTipoUsuario);
                 }
@@ -403,7 +403,7 @@ namespace KiiniHelp.UserControls.Altas
 
         public string ObtenerRuta(string command, string modulo)
         {
-            string result = "<h3>ALTA NUEVA " + modulo + "</h3><span style=\"font-size: x-small;\">";
+            string result = "<h3>AGREGAR " + modulo + "</h3><span style=\"font-size: x-small;\">";
             switch (command)
             {
                 case "9":
@@ -438,57 +438,57 @@ namespace KiiniHelp.UserControls.Altas
                 switch (command)
                 {
                     case "9":
-                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
                         break;
                     case "10":
-                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
                         break;
                     case "11":
-                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
                         break;
                     case "12":
-                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlSubDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlSubDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
                         break;
                     case "13":
-                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlSubDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlSubDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlGerencia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlGerencia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
                         break;
                     case "14":
-                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlSubDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlSubDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlGerencia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlGerencia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
-                        if (ddlSubGerencia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlSubGerencia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception();
                         break;
                 }

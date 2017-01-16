@@ -30,7 +30,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Pais.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Habilitado).OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Pais { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new Pais { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -52,7 +52,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Ubicacion.Where(w => w.IdPais == idPais).SelectMany(ubicacion => db.Campus.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == ubicacion.IdCampus && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Campus { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new Campus { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -74,7 +74,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Ubicacion.Where(w => w.IdCampus == idCampus).SelectMany(ubicacion => db.Torre.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == ubicacion.IdTorre && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Torre { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new Torre { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -96,7 +96,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Ubicacion.Where(w => w.IdTorre == idTorre).SelectMany(ubicacion => db.Piso.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == ubicacion.IdPiso && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Piso { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new Piso { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -118,7 +118,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Ubicacion.Where(w => w.IdPiso == idPiso).SelectMany(ubicacion => db.Zona.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == ubicacion.IdZona && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new Zona { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new Zona { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -140,7 +140,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Ubicacion.Where(w => w.IdZona == idZona).SelectMany(ubicacion => db.SubZona.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == ubicacion.IdSubZona && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new SubZona { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new SubZona { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -162,7 +162,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Ubicacion.Where(w => w.IdSubZona == idSubZona).SelectMany(ubicacion => db.SiteRack.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == ubicacion.IdSiteRack && w.Habilitado)).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index, new SiteRack { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new SiteRack { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione, Habilitado = BusinessVariables.ComboBoxCatalogo.Habilitado });
             }
             catch (Exception ex)
             {
@@ -255,7 +255,7 @@ namespace KinniNet.Core.Operacion
 
                 if (ubicacion.Piso != null)
                 {
-                    ubicacion.IdNivelUbicacion = 4; 
+                    ubicacion.IdNivelUbicacion = 4;
                     ubicacion.Piso.Descripcion = ubicacion.Piso.Descripcion.ToUpper();
                     if (db.Piso.Any(a => a.Descripcion == ubicacion.Piso.Descripcion && a.IdTipoUsuario == ubicacion.Piso.IdTipoUsuario))
                         throw new Exception("Este Piso ya se encuetra registrado");
@@ -271,7 +271,7 @@ namespace KinniNet.Core.Operacion
 
                 if (ubicacion.SubZona != null)
                 {
-                    ubicacion.IdNivelUbicacion = 6; 
+                    ubicacion.IdNivelUbicacion = 6;
                     ubicacion.SubZona.Descripcion = ubicacion.SubZona.Descripcion.ToUpper();
                     if (db.SubZona.Any(a => a.Descripcion == ubicacion.SubZona.Descripcion && a.IdTipoUsuario == ubicacion.SubZona.IdTipoUsuario))
                         throw new Exception("Esta SubZona ya se encuetra registrada");
@@ -279,12 +279,12 @@ namespace KinniNet.Core.Operacion
 
                 if (ubicacion.SiteRack != null)
                 {
-                    ubicacion.IdNivelUbicacion = 7; 
+                    ubicacion.IdNivelUbicacion = 7;
                     ubicacion.SiteRack.Descripcion = ubicacion.SiteRack.Descripcion.ToUpper();
                     if (db.SiteRack.Any(a => a.Descripcion == ubicacion.SiteRack.Descripcion && a.IdTipoUsuario == ubicacion.SiteRack.IdTipoUsuario))
                         throw new Exception("Este SiteRack ya se encuetra registrado");
                 }
-                
+
                 if (ubicacion.Id == 0)
                     db.Ubicacion.AddObject(ubicacion);
                 db.SaveChanges();
@@ -328,9 +328,8 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-        
+
         public List<Ubicacion> ObtenerUbicacionByRegionCode(string regionCode)
-        
         {
             List<Ubicacion> result;
             DataBaseModelContext db = new DataBaseModelContext();
@@ -338,12 +337,12 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 var qry = from u in db.Ubicacion
-                    join d in db.Domicilio on u.IdCampus equals d.IdCampus
-                    join col in db.Colonia on d.IdColonia equals col.Id
-                    join m in db.Municipio on col.IdMunicipio equals m.Id
-                    join e in db.Estado on m.IdEstado equals e.Id
-                    where e.RegionCode == regionCode 
-                    select u;
+                          join d in db.Domicilio on u.IdCampus equals d.IdCampus
+                          join col in db.Colonia on d.IdColonia equals col.Id
+                          join m in db.Municipio on col.IdMunicipio equals m.Id
+                          join e in db.Estado on m.IdEstado equals e.Id
+                          where e.RegionCode == regionCode
+                          select u;
                 result = qry.Distinct().ToList();
                 foreach (Ubicacion ubicacion in result)
                 {
@@ -366,7 +365,7 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-            public List<int> ObtenerUbicacionesByIdUbicacion(int idUbicacion)
+        public List<int> ObtenerUbicacionesByIdUbicacion(int idUbicacion)
         {
             List<int> result;
             DataBaseModelContext db = new DataBaseModelContext();
@@ -460,6 +459,80 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
             return result;
+        }
+        public List<Ubicacion> BuscarPorPalabra(int? idTipoUsuario, int? idPais, int? idCampus, int? idTorre, int? idPiso, int? idZona, int? idSubZona, int? idSiteRack, string filtro)
+        {
+            {
+                List<Ubicacion> result;
+                DataBaseModelContext db = new DataBaseModelContext();
+                try
+                {
+                    db.ContextOptions.ProxyCreationEnabled = _proxy;
+                    IQueryable<Ubicacion> qry = db.Ubicacion;
+                    if (idTipoUsuario.HasValue)
+                        qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
+
+                    if (idPais.HasValue)
+                        qry = qry.Where(w => w.IdPais == idPais);
+
+                    if (idCampus.HasValue)
+                        qry = qry.Where(w => w.IdCampus == idCampus);
+
+                    if (idTorre.HasValue)
+                        qry = qry.Where(w => w.IdTorre == idTorre);
+
+                    if (idPiso.HasValue)
+                        qry = qry.Where(w => w.IdPiso == idPiso);
+
+                    if (idZona.HasValue)
+                        qry = qry.Where(w => w.IdZona == idZona);
+
+                    if (idSubZona.HasValue)
+                        qry = qry.Where(w => w.IdSubZona == idSubZona);
+
+                    if (idSiteRack.HasValue)
+                        qry = qry.Where(w => w.IdSiteRack == idSiteRack);
+
+                    if (filtro.Trim() != string.Empty)
+                    {
+                        filtro = filtro.ToUpper().Trim();
+                        qry = qry.Where(w => w.Pais.Descripcion.Contains(filtro)
+                            || w.Campus.Descripcion.Contains(filtro)
+                            || w.Torre.Descripcion.Contains(filtro)
+                            || w.Piso.Descripcion.Contains(filtro)
+                            || w.Zona.Descripcion.Contains(filtro)
+                            || w.SubZona.Descripcion.Contains(filtro)
+                            || w.SiteRack.Descripcion.Contains(filtro));
+                    }
+                    qry = from q in qry
+                        orderby q.Pais != null, q.Pais.Descripcion, q.Campus != null, q.Campus.Descripcion,
+                            q.Torre != null, q.Torre.Descripcion, q.Piso != null, q.Piso.Descripcion,
+                            q.Zona != null, q.Zona.Descripcion, q.SubZona != null, q.SubZona.Descripcion,
+                            q.SiteRack != null, q.SiteRack.Descripcion ascending
+                        select q;
+                    result = qry.ToList();
+                    foreach (Ubicacion ubicacion in result)
+                    {
+                        db.LoadProperty(ubicacion, "Pais");
+                        db.LoadProperty(ubicacion, "Campus");
+                        db.LoadProperty(ubicacion, "Torre");
+                        db.LoadProperty(ubicacion, "Piso");
+                        db.LoadProperty(ubicacion, "Zona");
+                        db.LoadProperty(ubicacion, "SubZona");
+                        db.LoadProperty(ubicacion, "SiteRack");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    db.Dispose();
+                }
+                return result;
+            }
         }
 
         public List<Ubicacion> ObtenerUbicacionesGrupos(List<int> grupos)

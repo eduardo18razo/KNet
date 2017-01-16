@@ -112,9 +112,9 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                ddlTipoInformacion.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                ddlTipoInformacion.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 ddlTipoInformacion_OnSelectedIndexChanged(ddlTipoInformacion, null);
-                ddlTipoDocumento.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                ddlTipoDocumento.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 txtDescripcion.Text = String.Empty;
                 txtEditor.Text = string.Empty;
                 txtDescripcionUrl.Text = string.Empty;

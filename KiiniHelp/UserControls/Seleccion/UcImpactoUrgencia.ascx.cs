@@ -61,7 +61,7 @@ namespace KiiniHelp.UserControls.Seleccion
             Impacto result = null;
             try
             {
-                if (ddlPrioridad.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index && ddlUrgencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlPrioridad.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione && ddlUrgencia.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     result = _servicioImpactoUrgencia.ObtenerImpactoByPrioridadUrgencia(Convert.ToInt32(ddlPrioridad.SelectedValue), Convert.ToInt32(ddlUrgencia.SelectedValue));
                 divImpacto.Visible = result != null;
                 if (result != null)

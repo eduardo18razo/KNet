@@ -34,11 +34,11 @@ namespace KinniNet.Core.Operacion
                     where ug.IdUsuario == idUsuario && guia.IdRol == (int)BusinessVariables.EnumRoles.Acceso
                     select a).Distinct().ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new Area
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                         });
             }
             catch (Exception ex)
@@ -68,11 +68,11 @@ namespace KinniNet.Core.Operacion
                           where ug.IdUsuario == idUsuario && guia.IdRol == (int)BusinessVariables.EnumRoles.Acceso
                           select a).Distinct().ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new Area
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                         });
             }
             catch (Exception ex)
@@ -103,11 +103,11 @@ namespace KinniNet.Core.Operacion
                           where ug.IdUsuario == idUsuario && ug.IdUsuario == idUsuarioTercero
                           select a).Distinct().ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new Area
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                         });
             }
             catch (Exception ex)
@@ -136,11 +136,11 @@ namespace KinniNet.Core.Operacion
                               where BusinessVariables.IdsPublicos.Contains(aa.IdTipoUsuario)
                               select a).Distinct().ToList();
                     if (insertarSeleccion)
-                        result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                        result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                             new Area
                             {
-                                Id = BusinessVariables.ComboBoxCatalogo.Value,
-                                Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                                Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                                Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                             });
                 }
                 catch (Exception ex)
@@ -169,11 +169,11 @@ namespace KinniNet.Core.Operacion
                               where aa.IdTipoUsuario == idTipoUsuario 
                               select a).Distinct().ToList();
                     if (insertarSeleccion)
-                        result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                        result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                             new Area
                             {
-                                Id = BusinessVariables.ComboBoxCatalogo.Value,
-                                Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                                Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                                Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                             });
                     if (result.Count <= 0)
                         result = null;
@@ -199,11 +199,11 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Area.Where(w => w.Habilitado).OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new Area
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                         });
             }
             catch (Exception ex)

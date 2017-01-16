@@ -194,7 +194,7 @@ namespace KiiniHelp.Users.Operacion
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
-                if (ddlArea.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlArea.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
 
                     btnLevantar.Visible = false;
@@ -225,7 +225,7 @@ namespace KiiniHelp.Users.Operacion
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
-                if (ddlTipoArbol.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoArbol.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     btnLevantar.Visible = false;
                     return;
@@ -256,7 +256,7 @@ namespace KiiniHelp.Users.Operacion
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
-                if (ddlNivel1.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel1.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     return;
                 }
@@ -303,7 +303,7 @@ namespace KiiniHelp.Users.Operacion
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
-                if (ddlNivel2.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel2.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     return;
                 }
@@ -345,7 +345,7 @@ namespace KiiniHelp.Users.Operacion
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
-                if (ddlNivel3.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel3.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     return;
                 }
@@ -386,7 +386,7 @@ namespace KiiniHelp.Users.Operacion
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
-                if (ddlNivel4.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel4.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     return;
                 }
@@ -425,7 +425,7 @@ namespace KiiniHelp.Users.Operacion
                 btnNotificacion.Visible = false;
                 Metodos.LimpiarCombo(ddlNivel6);
                 Metodos.LimpiarCombo(ddlNivel7);
-                if (ddlNivel5.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel5.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     return;
                 }
@@ -463,7 +463,7 @@ namespace KiiniHelp.Users.Operacion
                 btnLevantar.Visible = false;
                 btnNotificacion.Visible = false;
                 Metodos.LimpiarCombo(ddlNivel7);
-                if (ddlNivel6.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel6.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     return;
                 }
@@ -500,7 +500,7 @@ namespace KiiniHelp.Users.Operacion
             {
                 btnLevantar.Visible = false;
                 btnNotificacion.Visible = false;
-                if (ddlNivel7.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel7.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     return;
                 }
@@ -532,7 +532,7 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
-                if (ddlCanal.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlCanal.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     throw new Exception("Seleccione un medio de comunicación");
                 int? idArea = null;
                 int? idTipoUsuario = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).IdTipoUsuario;
@@ -545,31 +545,31 @@ namespace KiiniHelp.Users.Operacion
                 int? nivel6 = null;
                 int? nivel7 = null;
 
-                if (ddlArea.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlArea.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idArea = int.Parse(ddlArea.SelectedValue);
 
-                if (ddlTipoArbol.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoArbol.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idTipoArbol = int.Parse(ddlTipoArbol.SelectedValue);
 
-                if (ddlNivel1.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel1.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel1 = int.Parse(ddlNivel1.SelectedValue);
 
-                if (ddlNivel2.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel2.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel2 = int.Parse(ddlNivel2.SelectedValue);
 
-                if (ddlNivel3.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel3.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel3 = int.Parse(ddlNivel3.SelectedValue);
 
-                if (ddlNivel4.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel4.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel4 = int.Parse(ddlNivel4.SelectedValue);
 
-                if (ddlNivel5.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel5.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel5 = int.Parse(ddlNivel5.SelectedValue);
 
-                if (ddlNivel6.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel6.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel6 = int.Parse(ddlNivel6.SelectedValue);
 
-                if (ddlNivel7.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel7.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel7 = int.Parse(ddlNivel7.SelectedValue);
 
                 var y = _servicioArbolAcceso.ObtenerArbolesAccesoTerminalAll(idArea, idTipoUsuario, idTipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
@@ -594,7 +594,7 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
-                if (ddlCanal.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlCanal.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     throw new Exception("Seleccione un medio de comunicación");
                 int? idArea = null;
                 int? idTipoUsuario = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).IdTipoUsuario;
@@ -607,31 +607,31 @@ namespace KiiniHelp.Users.Operacion
                 int? nivel6 = null;
                 int? nivel7 = null;
 
-                if (ddlArea.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlArea.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idArea = int.Parse(ddlArea.SelectedValue);
 
-                if (ddlTipoArbol.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoArbol.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idTipoArbol = int.Parse(ddlTipoArbol.SelectedValue);
 
-                if (ddlNivel1.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel1.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel1 = int.Parse(ddlNivel1.SelectedValue);
 
-                if (ddlNivel2.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel2.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel2 = int.Parse(ddlNivel2.SelectedValue);
 
-                if (ddlNivel3.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel3.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel3 = int.Parse(ddlNivel3.SelectedValue);
 
-                if (ddlNivel4.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel4.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel4 = int.Parse(ddlNivel4.SelectedValue);
 
-                if (ddlNivel5.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel5.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel5 = int.Parse(ddlNivel5.SelectedValue);
 
-                if (ddlNivel6.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel6.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel6 = int.Parse(ddlNivel6.SelectedValue);
 
-                if (ddlNivel7.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlNivel7.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     nivel7 = int.Parse(ddlNivel7.SelectedValue);
 
                 var y = _servicioArbolAcceso.ObtenerArbolesAccesoTerminalAll(idArea, idTipoUsuario, idTipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);

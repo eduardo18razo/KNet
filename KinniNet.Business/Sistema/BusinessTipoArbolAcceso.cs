@@ -29,11 +29,11 @@ namespace KinniNet.Core.Sistema
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.TipoArbolAcceso.Where(w => w.Habilitado).OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new TipoArbolAcceso
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                         });
             }
             catch (Exception ex)
@@ -76,11 +76,11 @@ namespace KinniNet.Core.Sistema
                         select q;
                 result = qry.Where(w => w.taa.Habilitado).Select(s => s.taa).Distinct().OrderBy(o => o.Descripcion).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new TipoArbolAcceso
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                         });
             }
             catch (Exception ex)
@@ -113,11 +113,11 @@ namespace KinniNet.Core.Sistema
                           select q;
                 result = qry.Select(s => s.taa).Distinct().ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new TipoArbolAcceso
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                         });
             }
             catch (Exception ex)

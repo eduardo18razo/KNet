@@ -302,16 +302,7 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="UsuarioRol" EntitySet="UsuarioRol" />
     </AssociationSet>
-    <EntitySet Name="Menu" EntityType="KiiniNet_v2Model.Menu" />
     <EntitySet Name="RolMenu" EntityType="KiiniNet_v2Model.RolMenu" />
-    <AssociationSet Name="FK_Menu_Menu" Association="KiiniNet_v2Model.FK_Menu_Menu">
-      <End Role="Menu" EntitySet="Menu" />
-      <End Role="Menu1" EntitySet="Menu" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RolMenu_Menu" Association="KiiniNet_v2Model.FK_RolMenu_Menu">
-      <End Role="Menu" EntitySet="Menu" />
-      <End Role="RolMenu" EntitySet="RolMenu" />
-    </AssociationSet>
     <AssociationSet Name="FK_RolMenu_Rol" Association="KiiniNet_v2Model.FK_RolMenu_Rol">
       <End Role="Rol" EntitySet="Rol" />
       <End Role="RolMenu" EntitySet="RolMenu" />
@@ -847,6 +838,25 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="TicketEstatus" EntitySet="TicketEstatus" />
     </AssociationSet>
+    <EntitySet Name="Menu" EntityType="KiiniNet_v2Model.Menu" />
+    <AssociationSet Name="FK_Menu_Menu" Association="KiiniNet_v2Model.FK_Menu_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="Menu1" EntitySet="Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolMenu_Menu" Association="KiiniNet_v2Model.FK_RolMenu_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="RolMenu" EntitySet="RolMenu" />
+    </AssociationSet>
+    <EntitySet Name="AliasOrganizacion" EntityType="KiiniNet_v2Model.AliasOrganizacion" />
+    <AssociationSet Name="FK_AliasOrganizacion_TipoUsuario" Association="KiiniNet_v2Model.FK_AliasOrganizacion_TipoUsuario">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+      <End Role="AliasOrganizacion" EntitySet="AliasOrganizacion" />
+    </AssociationSet>
+    <EntitySet Name="AliasUbicacion" EntityType="KiiniNet_v2Model.AliasUbicacion" />
+    <AssociationSet Name="FK_AliasUbicacion_TipoUsuario" Association="KiiniNet_v2Model.FK_AliasUbicacion_TipoUsuario">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+      <End Role="AliasUbicacion" EntitySet="AliasUbicacion" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Campus">
     <Key>
@@ -1338,6 +1348,8 @@
     <NavigationProperty Name="Puesto" Relationship="KiiniNet_v2Model.FK_Puesto_TipoUsuario" FromRole="TipoUsuario" ToRole="Puesto" />
     <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_GrupoUsuario_TipoUsuario" FromRole="TipoUsuario" ToRole="GrupoUsuario" />
     <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_Ticket_TipoUsuario" FromRole="TipoUsuario" ToRole="Ticket" />
+    <NavigationProperty Name="AliasOrganizacion" Relationship="KiiniNet_v2Model.FK_AliasOrganizacion_TipoUsuario" FromRole="TipoUsuario" ToRole="AliasOrganizacion" />
+    <NavigationProperty Name="AliasUbicacion" Relationship="KiiniNet_v2Model.FK_AliasUbicacion_TipoUsuario" FromRole="TipoUsuario" ToRole="AliasUbicacion" />
   </EntityType>
   <EntityType Name="Torre">
     <Key>
@@ -2190,6 +2202,7 @@
     <NavigationProperty Name="TicketsResueltos" Relationship="KiiniNet_v2Model.FK_Ticket_Usuario1" FromRole="Usuario" ToRole="Ticket" />
     <NavigationProperty Name="TicketsSolicitados" Relationship="KiiniNet_v2Model.FK_Ticket_Usuario2" FromRole="Usuario" ToRole="Ticket" />
     <NavigationProperty Name="TicketEstatus" Relationship="KiiniNet_v2Model.FK_TicketEstatus_Usuario" FromRole="Usuario" ToRole="TicketEstatus" />
+    <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <Association Name="FK_CorreoUsuario_Usuario">
     <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -2263,19 +2276,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Menu">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="IdPadre" Type="Int32" />
-    <Property Name="Habilitado" Type="Boolean" />
-    <NavigationProperty Name="Menu1" Relationship="KiiniNet_v2Model.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
-    <NavigationProperty Name="Menu2" Relationship="KiiniNet_v2Model.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
-    <NavigationProperty Name="RolMenu" Relationship="KiiniNet_v2Model.FK_RolMenu_Menu" FromRole="Menu" ToRole="RolMenu" />
-  </EntityType>
   <EntityType Name="RolMenu">
     <Key>
       <PropertyRef Name="Id" />
@@ -2283,33 +2283,9 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="IdRol" Type="Int32" Nullable="false" />
     <Property Name="IdMenu" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Menu" Relationship="KiiniNet_v2Model.FK_RolMenu_Menu" FromRole="RolMenu" ToRole="Menu" />
     <NavigationProperty Name="Rol" Relationship="KiiniNet_v2Model.FK_RolMenu_Rol" FromRole="RolMenu" ToRole="Rol" />
+    <NavigationProperty Name="Menu" Relationship="KiiniNet_v2Model.FK_RolMenu_Menu" FromRole="RolMenu" ToRole="Menu" />
   </EntityType>
-  <Association Name="FK_Menu_Menu">
-    <End Type="KiiniNet_v2Model.Menu" Role="Menu" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.Menu" Role="Menu1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Menu">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Menu1">
-        <PropertyRef Name="IdPadre" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_RolMenu_Menu">
-    <End Type="KiiniNet_v2Model.Menu" Role="Menu" Multiplicity="1" />
-    <End Type="KiiniNet_v2Model.RolMenu" Role="RolMenu" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Menu">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RolMenu">
-        <PropertyRef Name="IdMenu" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_RolMenu_Rol">
     <End Type="KiiniNet_v2Model.Rol" Role="Rol" Multiplicity="1" />
     <End Type="KiiniNet_v2Model.RolMenu" Role="RolMenu" Multiplicity="*" />
@@ -4295,7 +4271,7 @@
     <Property Name="EncuestaRespondida" Type="Boolean" />
     <Property Name="EsTercero" Type="Boolean" />
     <Property Name="Espera" Type="Boolean" />
-    <Property Name="TiempoEspera" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TiempoEspera" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="FechaInicioEspera" Type="DateTime" Precision="3" />
     <Property Name="FechaFinEspera" Type="DateTime" Precision="3" />
     <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_tblTicket_tblArbolAcceso" FromRole="Ticket" ToRole="ArbolAcceso" />
@@ -4581,6 +4557,90 @@
       </Principal>
       <Dependent Role="TicketEstatus">
         <PropertyRef Name="IdUsuarioMovimiento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IdPadre" Type="Int32" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="Menu1" Relationship="KiiniNet_v2Model.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
+    <NavigationProperty Name="Menu2" Relationship="KiiniNet_v2Model.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
+    <NavigationProperty Name="RolMenu" Relationship="KiiniNet_v2Model.FK_RolMenu_Menu" FromRole="Menu" ToRole="RolMenu" />
+  </EntityType>
+  <Association Name="FK_Menu_Menu">
+    <End Type="KiiniNet_v2Model.Menu" Role="Menu" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.Menu" Role="Menu1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Menu1">
+        <PropertyRef Name="IdPadre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolMenu_Menu">
+    <End Type="KiiniNet_v2Model.Menu" Role="Menu" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.RolMenu" Role="RolMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RolMenu">
+        <PropertyRef Name="IdMenu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AliasOrganizacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoUsuario" Type="Int32" />
+    <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Nivel" Type="Int32" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_AliasOrganizacion_TipoUsuario" FromRole="AliasOrganizacion" ToRole="TipoUsuario" />
+  </EntityType>
+  <Association Name="FK_AliasOrganizacion_TipoUsuario">
+    <End Type="KiiniNet_v2Model.TipoUsuario" Role="TipoUsuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.AliasOrganizacion" Role="AliasOrganizacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AliasOrganizacion">
+        <PropertyRef Name="IdTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AliasUbicacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoUsuario" Type="Int32" />
+    <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Nivel" Type="Int32" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_AliasUbicacion_TipoUsuario" FromRole="AliasUbicacion" ToRole="TipoUsuario" />
+  </EntityType>
+  <Association Name="FK_AliasUbicacion_TipoUsuario">
+    <End Type="KiiniNet_v2Model.TipoUsuario" Role="TipoUsuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.AliasUbicacion" Role="AliasUbicacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AliasUbicacion">
+        <PropertyRef Name="IdTipoUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

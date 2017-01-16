@@ -251,23 +251,23 @@ namespace KiiniHelp.UserControls.Seleccion
                 rptUsuarioGrupo.DataSource = lst;
                 rptUsuarioGrupo.DataBind();
                 if (Administrador)
-                    ddlGrupoAdministrador.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                    ddlGrupoAdministrador.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 if (Acceso)
-                    ddlGrupoAcceso.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                    ddlGrupoAcceso.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 if (EspecialConsulta)
-                    ddlGrupoEspecialConsulta.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                    ddlGrupoEspecialConsulta.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 if (Atencion)
-                    ddlGrupoResponsableAtencion.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                    ddlGrupoResponsableAtencion.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 if (Mtto)
-                    ddlGrupoResponsableMantenimiento.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                    ddlGrupoResponsableMantenimiento.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 if (Operacion)
-                    ddlGrupoResponsableOperacion.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                    ddlGrupoResponsableOperacion.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 if (Desarrollo)
-                    ddlGrupoResponsableDesarrollo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                    ddlGrupoResponsableDesarrollo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 if (Dueño)
-                    ddlDuenoServicio.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                    ddlDuenoServicio.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 if (ContacCenter)
-                    ddlContactCenter.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                    ddlContactCenter.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
             }
             catch (Exception e)
             {
@@ -382,7 +382,7 @@ namespace KiiniHelp.UserControls.Seleccion
                 {
                     case (int)BusinessVariables.EnumRoles.Administrador:
                         idRol = (int)BusinessVariables.EnumRoles.Administrador;
-                        if (ddlGrupoAdministrador.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlGrupoAdministrador.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlGrupoAdministrador.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -390,7 +390,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         break;
                     case (int)BusinessVariables.EnumRoles.Acceso:
                         idRol = (int)BusinessVariables.EnumRoles.Acceso;
-                        if (ddlGrupoAcceso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlGrupoAcceso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlGrupoAcceso.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -398,7 +398,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         break;
                     case (int)BusinessVariables.EnumRoles.EspecialDeConsulta:
                         idRol = (int)BusinessVariables.EnumRoles.EspecialDeConsulta;
-                        if (ddlGrupoEspecialConsulta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlGrupoEspecialConsulta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlGrupoEspecialConsulta.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -406,7 +406,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
                         idRol = (int)BusinessVariables.EnumRoles.ResponsableDeAtención;
-                        if (ddlGrupoResponsableAtencion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlGrupoResponsableAtencion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlGrupoResponsableAtencion.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -414,7 +414,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeInformaciónPublicada:
                         idRol = (int)BusinessVariables.EnumRoles.ResponsableDeInformaciónPublicada;
-                        if (ddlGrupoResponsableMantenimiento.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlGrupoResponsableMantenimiento.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlGrupoResponsableMantenimiento.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -422,7 +422,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeOperación:
                         idRol = (int)BusinessVariables.EnumRoles.ResponsableDeOperación;
-                        if (ddlGrupoResponsableOperacion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlGrupoResponsableOperacion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlGrupoResponsableOperacion.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -430,7 +430,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo:
                         idRol = (int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo;
-                        if (ddlGrupoResponsableDesarrollo.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlGrupoResponsableDesarrollo.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlGrupoResponsableDesarrollo.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -439,7 +439,7 @@ namespace KiiniHelp.UserControls.Seleccion
 
                     case (int)BusinessVariables.EnumRoles.DueñoDelServicio:
                         idRol = (int)BusinessVariables.EnumRoles.DueñoDelServicio;
-                        if (ddlDuenoServicio.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlDuenoServicio.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlDuenoServicio.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -448,7 +448,7 @@ namespace KiiniHelp.UserControls.Seleccion
 
                     case (int)BusinessVariables.EnumRoles.ContactCenter:
                         idRol = (int)BusinessVariables.EnumRoles.ContactCenter;
-                        if (ddlContactCenter.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlContactCenter.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlContactCenter.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -458,7 +458,7 @@ namespace KiiniHelp.UserControls.Seleccion
 
                     case (int)BusinessVariables.EnumRoles.Responsablemantenimientoorganizacionempleado:
                         idRol = (int)BusinessVariables.EnumRoles.Responsablemantenimientoorganizacionempleado;
-                        if (ddlOrganizacionEmpleado.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlOrganizacionEmpleado.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlOrganizacionEmpleado.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -466,7 +466,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         break;
                     case (int)BusinessVariables.EnumRoles.Responsablemantenimientoubicacionempleado:
                         idRol = (int)BusinessVariables.EnumRoles.Responsablemantenimientoubicacionempleado;
-                        if (ddlUbicacionEmpleado.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlUbicacionEmpleado.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlUbicacionEmpleado.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -474,7 +474,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         break;
                     case (int)BusinessVariables.EnumRoles.Responsablemantenimientousuariocliente:
                         idRol = (int)BusinessVariables.EnumRoles.ResponsableDeOperación;
-                        if (ddlUsuarioCliente.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlUsuarioCliente.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlUsuarioCliente.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -482,7 +482,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         break;
                     case (int)BusinessVariables.EnumRoles.Responsablemantenimientousuarioempleado:
                         idRol = (int)BusinessVariables.EnumRoles.ResponsableDeOperación;
-                        if (ddlUsuarioEmpleado.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlUsuarioEmpleado.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlUsuarioEmpleado.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -490,7 +490,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         break;
                     case (int)BusinessVariables.EnumRoles.Responsablemantenimientousuarioproveedor:
                         idRol = (int)BusinessVariables.EnumRoles.ResponsableDeOperación;
-                        if (ddlUsuarioProveedor.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlUsuarioProveedor.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlUsuarioProveedor.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
@@ -691,31 +691,31 @@ namespace KiiniHelp.UserControls.Seleccion
                 switch (operacion)
                 {
                     case (int)BusinessVariables.EnumRoles.Administrador:
-                        ddlGrupoAdministrador.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                        ddlGrupoAdministrador.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                         break;
                     case (int)BusinessVariables.EnumRoles.Acceso:
-                        ddlGrupoAcceso.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                        ddlGrupoAcceso.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                         break;
                     case (int)BusinessVariables.EnumRoles.EspecialDeConsulta:
-                        ddlGrupoEspecialConsulta.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                        ddlGrupoEspecialConsulta.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
-                        ddlGrupoResponsableAtencion.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                        ddlGrupoResponsableAtencion.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeInformaciónPublicada:
-                        ddlGrupoResponsableMantenimiento.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                        ddlGrupoResponsableMantenimiento.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeOperación:
-                        ddlGrupoResponsableOperacion.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                        ddlGrupoResponsableOperacion.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo:
-                        ddlGrupoResponsableDesarrollo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                        ddlGrupoResponsableDesarrollo.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                         break;
                     case (int)BusinessVariables.EnumRoles.DueñoDelServicio:
-                        ddlDuenoServicio.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                        ddlDuenoServicio.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                         break;
                     case (int)BusinessVariables.EnumRoles.ContactCenter:
-                        ddlContactCenter.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                        ddlContactCenter.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                         break;
                 }
 

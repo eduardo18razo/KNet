@@ -28,6 +28,12 @@ namespace KiiniHelp.ServiceParametrosSistema {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParametros/ObtenerParametrosGenerales", ReplyAction="http://tempuri.org/IServiceParametros/ObtenerParametrosGeneralesResponse")]
         KiiniNet.Entities.Parametros.ParametrosGenerales ObtenerParametrosGenerales();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParametros/ObtenerAliasOrganizacion", ReplyAction="http://tempuri.org/IServiceParametros/ObtenerAliasOrganizacionResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Parametros.AliasOrganizacion> ObtenerAliasOrganizacion(int idTipoUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParametros/ObtenerAliasUbicacion", ReplyAction="http://tempuri.org/IServiceParametros/ObtenerAliasUbicacionResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Parametros.AliasUbicacion> ObtenerAliasUbicacion(int idTipoUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -71,6 +77,14 @@ namespace KiiniHelp.ServiceParametrosSistema {
         
         public KiiniNet.Entities.Parametros.ParametrosGenerales ObtenerParametrosGenerales() {
             return base.Channel.ObtenerParametrosGenerales();
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.AliasOrganizacion> ObtenerAliasOrganizacion(int idTipoUsuario) {
+            return base.Channel.ObtenerAliasOrganizacion(idTipoUsuario);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.AliasUbicacion> ObtenerAliasUbicacion(int idTipoUsuario) {
+            return base.Channel.ObtenerAliasUbicacion(idTipoUsuario);
         }
     }
 }

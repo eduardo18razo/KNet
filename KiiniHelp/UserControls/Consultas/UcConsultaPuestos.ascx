@@ -115,15 +115,23 @@
                             <div id="collapseFiltros" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFiltros">
                                 <div class="panel-body">
                                     <div class="form-horizontal">
-
                                         <div class="form-group">
-                                            <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Tipo Usuario</asp:Label>
-                                            <asp:DropDownList runat="server" ID="ddlTipoUsuario" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" />
+                                            <asp:Label class="col-xs-1 control-label" runat="server">Tipo Usuario</asp:Label>
+                                            <div class="col-xs-2 ">
+                                                <asp:DropDownList runat="server" ID="ddlTipoUsuario" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <asp:Label class="col-xs-1 control-label" runat="server">Descripción</asp:Label>
+                                            <div class="col-xs-2 ">
+                                                <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" />
+                                            </div>
+                                            <asp:Button runat="server" CssClass="btn btn-primary" ID="btnBuscar" Text="Buscar" OnClick="btnBuscar_OnClick"/>
                                         </div>
                                         <div class="form-group">
                                         </div>
                                         <div class="form-group">
-                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Puesto" Width="14%" OnClick="btnNew_OnClick" />
+                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Visible="False" Text="Agregar Puesto" Width="14%" OnClick="btnNew_OnClick" />
                                         </div>
                                     </div>
                                 </div>
@@ -137,9 +145,12 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader">
                                             <thead>
                                                 <tr align="center">
-                                                    <td><asp:Label runat="server">Tipo Usuario</asp:Label></td>
-                                                    <td><asp:Label runat="server">Descripcion</asp:Label></td>
-                                                    <td><asp:Label runat="server">Habilitado</asp:Label></td>
+                                                    <td>
+                                                        <asp:Label runat="server">Tipo Usuario</asp:Label></td>
+                                                    <td>
+                                                        <asp:Label runat="server">Descripcion</asp:Label></td>
+                                                    <td>
+                                                        <asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>

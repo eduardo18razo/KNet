@@ -41,7 +41,7 @@ namespace KiiniHelp.UserControls.Altas
                 rptPreguntas.DataSource = tmpEncuesta.EncuestaPregunta;
                 rptPreguntas.DataBind();
                 txtDescripcionEncuesta.Text = string.Empty;
-                ddlTipoEncuesta.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                ddlTipoEncuesta.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 chkPonderacion.Checked = false;
             }
             catch (Exception ex)
@@ -92,7 +92,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                if (ddlTipoEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     throw new Exception("Especifique el tipo de encuesta");
                 if (txtPregunta.Text.Trim() == string.Empty)
                     throw new Exception("Especifique una pregunta");
@@ -166,7 +166,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                if (ddlTipoEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     throw new Exception("Seleccione un tipo de encuesta");
                 if (txtDescripcionEncuesta.Text.Trim() == string.Empty)
                     throw new Exception("Especifique una descripción");

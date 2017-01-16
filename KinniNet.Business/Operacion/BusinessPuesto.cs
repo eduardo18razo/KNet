@@ -26,14 +26,14 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.Puesto.Where(w =>w.IdTipoUsuario == idTipoUsuario && w.Habilitado).OrderBy(o => o.Descripcion).ToList();
+                result = db.Puesto.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Habilitado).OrderBy(o => o.Descripcion).ToList();
 
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new Puesto
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
                         });
             }
             catch (Exception ex)
@@ -122,7 +122,7 @@ namespace KinniNet.Core.Operacion
                 IQueryable<Puesto> qry = db.Puesto;
                 if (idTipoUsuario != null)
                     qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
-                result = qry.ToList();
+                result = qry.OrderBy(o => o.Descripcion).ToList();
                 foreach (Puesto puesto in result)
                 {
                     db.LoadProperty(puesto, "TipoUsuario");

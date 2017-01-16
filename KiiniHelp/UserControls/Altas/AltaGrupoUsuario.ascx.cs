@@ -45,35 +45,36 @@ namespace KiiniHelp.UserControls.Altas
             {
                 hfIdGrupo.Value = value.ToString();
                 divParametros.Visible = false;
+                lblTitle.Text = "Agregar Grupo ";
                 switch (value)
                 {
                     case (int)BusinessVariables.EnumTiposGrupos.Administrador:
-                        lblTitle.Text = "Alta Grupo de Usuario de tipo Administrador";
+                        lblTitle.Text += "Administrador";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.Acceso:
-                        lblTitle.Text = "Alta Grupo de Usuario de tipo Acceso";
+                        lblTitle.Text += "Usuario";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta:
-                        lblTitle.Text = "Alta Grupo de Usuario de tipo Especial de consulta";
+                        lblTitle.Text += "Consultas Especiales";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención:
-                        lblTitle.Text = "Alta Grupo de Usaurio de tipo Responsable de atención";
+                        lblTitle.Text += "Responsable de Atención";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
-                        lblTitle.Text = "Alta Grupo de Usuario de tipo Responsable de Mantenimiento";
+                        lblTitle.Text += "Responsable de Contenido";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeOperación:
-                        lblTitle.Text = "Alta Grupo de Usuario de tipo Responsable de Operación";
+                        lblTitle.Text += "Responsable de Operación";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
-                        lblTitle.Text = "Alta Grupo de Usuario de tipo Responsable de Desarrollo";
+                        lblTitle.Text += "Responsable de Desarrollo";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.DueñoDelServicio:
-                        lblTitle.Text = "Alta Grupo de Usuario de tipo Dueño de Servicio";
+                        lblTitle.Text += "Responsable de Servicio";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ContactCenter:
                         divParametros.Visible = true;
-                        lblTitle.Text = "Alta Grupo de Usuario de tipo Contac Center";
+                        lblTitle.Text = "Contac Center";
                         break;
                 }
                 List<SubRol> lstRoles = _servicioSistemaSubRol.ObtenerSubRolesByTipoGrupo(value, false);
@@ -427,7 +428,7 @@ namespace KiiniHelp.UserControls.Altas
                     foreach (CheckBox chk in (from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol")).Where(chk => chk.Checked))
                     {
                         DropDownList ddlHorario = (DropDownList)chk.NamingContainer.FindControl("ddlHorario");
-                        if (ddlHorario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlHorario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Debe capturar horarios");
 
                         horarios.Add(int.Parse(chk.Attributes["value"]), int.Parse(ddlHorario.SelectedValue));
@@ -447,7 +448,7 @@ namespace KiiniHelp.UserControls.Altas
                     foreach (CheckBox chk in (from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol")).Where(chk => chk.Checked))
                     {
                         DropDownList ddlHorario = (DropDownList)chk.NamingContainer.FindControl("ddlHorario");
-                        if (ddlHorario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlHorario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Debe capturar horarios");
 
                         horarios.Add(int.Parse(chk.Attributes["value"]), int.Parse(ddlHorario.SelectedValue));

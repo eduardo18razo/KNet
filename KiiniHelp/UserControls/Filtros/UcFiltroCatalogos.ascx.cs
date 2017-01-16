@@ -564,7 +564,7 @@ namespace KiiniHelp.UserControls.Filtros
                             if (ddl != null)
                             {
                                 if (campo.Requerido)
-                                    if (ddl.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                                    if (ddl.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                                         throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
                             }
                             break;

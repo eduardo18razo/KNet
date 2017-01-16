@@ -50,7 +50,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 int? idPuesto = null;
-                if (ddlCatalogos.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlCatalogos.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idPuesto = int.Parse(ddlCatalogos.SelectedValue);
 
                 rptResultados.DataSource = _servicioCatalogos.ObtenerCatalogoConsulta(idPuesto);

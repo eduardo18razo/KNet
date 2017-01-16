@@ -27,10 +27,10 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Sla.Where(w => w.Habilitado).ToList();
                 if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.Index,
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new Sla
                         {
-                            Id = BusinessVariables.ComboBoxCatalogo.Value,
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
                         });
             }
             catch (Exception ex)

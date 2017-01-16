@@ -52,7 +52,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 int? idTipoInfotmacion = null;
-                if (ddlTipoInformacion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoInformacion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idTipoInfotmacion = int.Parse(ddlTipoInformacion.SelectedValue);
 
                 rptResultados.DataSource = _servicioInformacionConsulta.ObtenerConsulta(idTipoInfotmacion, null);
@@ -116,7 +116,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 LlenaInformacionConsulta();
-                if (ddlTipoInformacion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoInformacion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     btnNew.Visible = true;
                     btnNew.Text = "Agregar Información";

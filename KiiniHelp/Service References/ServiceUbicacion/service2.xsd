@@ -181,10 +181,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="BuscarPorPalabra">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTipoUsuario" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="idPais" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="idCampus" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="idTorre" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="idPiso" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="idZona" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="idSubZona" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="idSiteRack" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="filtro" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarPorPalabraResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="BuscarPorPalabraResult" nillable="true" type="q12:ArrayOfUbicacion" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ActualizarUbicacion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ub" nillable="true" type="q12:Ubicacion" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ub" nillable="true" type="q13:Ubicacion" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -203,7 +225,7 @@
   <xs:element name="ObtenerUbicacionByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ObtenerUbicacionByIdResult" nillable="true" type="q13:Ubicacion" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ObtenerUbicacionByIdResult" nillable="true" type="q14:Ubicacion" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -223,14 +245,14 @@
   <xs:element name="ObtenerUbicacionesGrupos">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q14:ArrayOfint" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q15:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ObtenerUbicacionesGruposResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ObtenerUbicacionesGruposResult" nillable="true" type="q15:ArrayOfUbicacion" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ObtenerUbicacionesGruposResult" nillable="true" type="q16:ArrayOfUbicacion" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -244,7 +266,7 @@
   <xs:element name="ObtenerUbicacionesByIdUbicacionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerUbicacionesByIdUbicacionResult" nillable="true" type="q16:ArrayOfint" />
+        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ObtenerUbicacionesByIdUbicacionResult" nillable="true" type="q17:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -258,7 +280,7 @@
   <xs:element name="ObtenerUbicacionByRegionCodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ObtenerUbicacionByRegionCodeResult" nillable="true" type="q17:ArrayOfUbicacion" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ObtenerUbicacionByRegionCodeResult" nillable="true" type="q18:ArrayOfUbicacion" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

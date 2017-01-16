@@ -75,6 +75,9 @@ namespace KiiniNet.Services.Operacion.Interface
         List<Organizacion> ObtenerOrganizacionesGrupos(List<int> grupos);
 
         [OperationContract]
-        List<int> ObtenerOrganizacionesByIdOrganizacion(int idUbicacion);
+        List<int> ObtenerOrganizacionesByIdOrganizacion(int idOrganizacion);
+
+        [OperationContract]
+        List<Organizacion> BuscarPorPalabra(int? idTipoUsuario, int? idHolding, int? idCompania, int? idDireccion, int? idSubDireccion, int? idGerencia, int? idSubGerencia, int? idJefatura, string filtro);
     }
 }

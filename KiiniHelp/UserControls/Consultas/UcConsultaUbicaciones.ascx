@@ -126,29 +126,31 @@
                             <div class="panel-heading" role="tab" id="headingFiltros">
                                 <h4 class="panel-title">
                                     <div role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiltros" aria-expanded="true" aria-controls="collapseFiltros" style="cursor: pointer">
-                                        Filtros
+                                        Mostrar/Ocultar Filtros
                                     </div>
                                 </h4>
                             </div>
                             <div id="collapseFiltros" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFiltros">
                                 <div class="panel-body">
                                     <div class="form-horizontal">
-
                                         <div class="form-group">
                                             <asp:Label Width="14%" for="ddlTipoUsuario" class="col-xs-1 control-label" runat="server">Tipo de Usuario</asp:Label>
                                             <asp:DropDownList runat="server" ID="ddlTipoUsuario" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" />
+                                            <asp:Label Width="14%" runat="server" Text="Filtrar por" class="col-xs-1 control-label"></asp:Label>
+                                            <asp:TextBox Width="14%" runat="server" ID="txtFiltroDecripcion" CssClass=" col-xs-1 form-control"></asp:TextBox>
+                                            <asp:Button runat="server" Text="Buscar" ID="btnBuscar" CssClass="col-xs-1 btn btn-sm btn-primary" OnClick="btnBuscar_OnClick"></asp:Button>
                                         </div>
                                     </div>
                                     <div class="form-horizontal">
                                         <div class="form-horizontal">
                                             <div class="form-group">
-                                                <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Pais</asp:Label>
-                                                <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Campus</asp:Label>
-                                                <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Torre</asp:Label>
-                                                <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Piso</asp:Label>
-                                                <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Zona</asp:Label>
-                                                <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Sub Zona</asp:Label>
-                                                <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Site Rack</asp:Label>
+                                                <asp:Label Width="14%" ID="lblNivel1" class="col-xs-1 control-label" runat="server">Pais</asp:Label>
+                                                <asp:Label Width="14%" ID="lblNivel2" class="col-xs-1 control-label" runat="server">Campus</asp:Label>
+                                                <asp:Label Width="14%" ID="lblNivel3" class="col-xs-1 control-label" runat="server">Torre</asp:Label>
+                                                <asp:Label Width="14%" ID="lblNivel4" class="col-xs-1 control-label" runat="server">Piso</asp:Label>
+                                                <asp:Label Width="14%" ID="lblNivel5" class="col-xs-1 control-label" runat="server">Zona</asp:Label>
+                                                <asp:Label Width="14%" ID="lblNivel6" class="col-xs-1 control-label" runat="server">Sub Zona</asp:Label>
+                                                <asp:Label Width="14%" ID="lblNivel7" class="col-xs-1 control-label" runat="server">Site Rack</asp:Label>
                                             </div>
                                             <div class="form-group">
                                                 <asp:DropDownList runat="server" Width="14%" ID="ddlpais" CssClass="DropSelect" OnSelectedIndexChanged="ddlpais_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
@@ -169,43 +171,41 @@
                         </div>
 
                         <div class="panel panel-primary">
-                            <%--ScrollBars="Horizontal" Height="100%" Style="text-align: right; min-height: 10%" Width="100%"--%>
                             <div class="panel-body">
-                                <asp:Repeater runat="server" ID="rptResultados">
+                                <asp:Repeater runat="server" ID="rptResultados" OnItemCreated="rptResultados_OnItemCreated">
                                     <HeaderTemplate>
-                                        <%--<panel ID="Panel1" runat="server" ScrollBars="Horizontal" Style="height: 94%">--%>
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader">
                                             <thead>
                                                 <tr align="center">
+                                                    <td><asp:Label runat="server" ID="lblNivel1">Nivel 1</asp:Label></td>
+                                                    <td><asp:Label runat="server" ID="lblNivel2">Nivel 2</asp:Label></td>
+                                                    <td><asp:Label runat="server" ID="lblNivel3">Nivel 3</asp:Label></td>
+                                                    <td><asp:Label runat="server" ID="lblNivel4">Nivel 4</asp:Label></td>
+                                                    <td><asp:Label runat="server" ID="lblNivel5">Nivel 5</asp:Label></td>
+                                                    <td><asp:Label runat="server" ID="lblNivel6">Nivel 6</asp:Label></td>
+                                                    <td><asp:Label runat="server" ID="lblNivel7">Nivel 7</asp:Label></td>
                                                     <td>
-                                                        <asp:Label runat="server">Pais</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label runat="server">Campus</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label runat="server">Torre</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label runat="server">Piso</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label runat="server">Zona</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label runat="server">Sub Zona</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label runat="server">Site Rack</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label>Habilitado</asp:Label></td>
+                                                        <asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Pais.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Campus.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Torre.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Piso.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Zona.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SubZona.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SiteRack.Descripcion")%></td>
+                                            <td style='<%# Eval("Campus") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Pais.Descripcion")%></td>
+                                            <td style='<%# Eval("Torre") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Campus.Descripcion")%></td>
+                                            <td style='<%# Eval("Piso") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Torre.Descripcion")%></td>
+                                            <td style='<%# Eval("Zona") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Piso.Descripcion")%></td>
+                                            <td style='<%# Eval("SubZona") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Zona.Descripcion")%></td>
+                                            <td style='<%# Eval("SiteRack") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SubZona.Descripcion")%></td>
+                                            <td style='<%# Eval("SiteRack") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SiteRack.Descripcion")%></td>
                                             <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>

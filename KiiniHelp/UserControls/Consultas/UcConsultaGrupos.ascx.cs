@@ -63,10 +63,10 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 int? idTipoUsuario = null;
                 int? idTipoGrupo = null;
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
 
-                if (ddlTipoGrupo.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoGrupo.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idTipoGrupo = int.Parse(ddlTipoGrupo.SelectedValue);
 
                 rptResultados.DataSource = _servicioGrupoUsuario.ObtenerGruposUsuarioAll(idTipoUsuario, idTipoGrupo);
@@ -83,7 +83,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 ddlLlenar.Items.Clear();
-                if (ddlFiltro.SelectedValue != BusinessVariables.ComboBoxCatalogo.Value.ToString())
+                if (ddlFiltro.SelectedValue != BusinessVariables.ComboBoxCatalogo.ValueSeleccione.ToString())
                 {
                     ddlLlenar.Enabled = true;
                     Metodos.LlenaComboCatalogo(ddlLlenar, source);
@@ -168,7 +168,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     Metodos.LimpiarCombo(ddlTipoGrupo);
                     FiltraCombo(ddlTipoUsuario, ddlTipoGrupo, _servicioTipoGrupo.ObtenerTiposGruposByTipoUsuario(int.Parse(ddlTipoUsuario.SelectedValue), true));
@@ -177,7 +177,7 @@ namespace KiiniHelp.UserControls.Consultas
                     btnNew.Text = "Agregar Grupo";
                     btnNew.CommandArgument = "1";
                 }
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index && ddlTipoGrupo.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione && ddlTipoGrupo.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     btnNew.Visible = true;
                     btnNew.CommandName = "Grupo Empleados";
@@ -205,7 +205,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index && ddlTipoGrupo.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione && ddlTipoGrupo.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     btnNew.Visible = true;
                     btnNew.CommandName = "Grupo Empleados";

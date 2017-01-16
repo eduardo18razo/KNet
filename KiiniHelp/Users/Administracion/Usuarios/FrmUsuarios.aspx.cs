@@ -319,7 +319,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                 {
                     AsociarGrupoUsuario.HabilitaGrupos(Convert.ToInt32(item.Value), item.Selected);
                 }
-                lst.Insert(BusinessVariables.ComboBoxCatalogo.Index, new TipoGrupo { Id = BusinessVariables.ComboBoxCatalogo.Value, Descripcion = BusinessVariables.ComboBoxCatalogo.Descripcion });
+                lst.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new TipoGrupo { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione });
                 Session["UsuarioGrupo"] = new List<UsuarioGrupo>();
                 btnModalGrupos.Visible = true;
                 upGrupos.Update();
@@ -339,7 +339,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
         {
             try
             {
-                if (ddlTipoUsuario.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                     rptTelefonos.DataSource = _servicioParametros.ObtenerTelefonosParametrosIdTipoUsuario(idTipoUsuario, false);
@@ -380,7 +380,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
         {
             try
             {
-                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     throw new Exception("Seleccione un tipo de usuario.<br>");
                 ValidaCapturaDatosGenerales();
                 ValidaCapturaRoles();
@@ -392,7 +392,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                     ApellidoMaterno = txtAm.Text.Trim(),
                     Nombre = txtNombre.Text.Trim(),
                     DirectorioActivo = chkDirectoriActivo.Checked,
-                    IdPuesto = ddlPuesto.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index ? (int?)null : Convert.ToInt32(ddlPuesto.SelectedValue),
+                    IdPuesto = ddlPuesto.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? (int?)null : Convert.ToInt32(ddlPuesto.SelectedValue),
                     Vip = chkVip.Checked,
                     NombreUsuario = txtUserName.Text.Trim(),
                     Password = ResolveUrl("~/ConfirmacionCuenta.aspx"),
@@ -548,7 +548,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
         {
             try
             {
-                ddlTipoUsuario.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                ddlTipoUsuario.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
             }
             catch (Exception ex)

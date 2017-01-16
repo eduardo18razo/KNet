@@ -1,5 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="KiiniNet_v2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AliasOrganizacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoUsuario" Type="int" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="30" />
+    <Property Name="Nivel" Type="int" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
+  <EntityType Name="AliasUbicacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoUsuario" Type="int" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="30" />
+    <Property Name="Nivel" Type="int" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
   <EntityType Name="ArbolAcceso">
     <Key>
       <PropertyRef Name="Id" />
@@ -417,6 +437,7 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Url" Type="nvarchar" MaxLength="500" />
     <Property Name="IdPadre" Type="int" />
+    <Property Name="Orden" Type="int" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="Municipio">
@@ -883,7 +904,7 @@
     <Property Name="EncuestaRespondida" Type="bit" />
     <Property Name="EsTercero" Type="bit" />
     <Property Name="Espera" Type="bit" />
-    <Property Name="TiempoEspera" Type="nvarchar" MaxLength="50" />
+    <Property Name="TiempoEspera" Type="nvarchar(max)" />
     <Property Name="FechaInicioEspera" Type="datetime" />
     <Property Name="FechaFinEspera" Type="datetime" />
   </EntityType>
@@ -1092,6 +1113,7 @@
     <Property Name="Password" Type="nvarchar(max)" />
     <Property Name="IdPuesto" Type="int" />
     <Property Name="Vip" Type="bit" />
+    <Property Name="Foto" Type="image" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
     <Property Name="Activo" Type="bit" />
     <Property Name="Tries" Type="int" />
@@ -1146,6 +1168,30 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
+  <Association Name="FK_AliasOrganizacion_TipoUsuario">
+    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
+    <End Role="AliasOrganizacion" Type="Self.AliasOrganizacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AliasOrganizacion">
+        <PropertyRef Name="IdTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AliasUbicacion_TipoUsuario">
+    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
+    <End Role="AliasUbicacion" Type="Self.AliasUbicacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AliasUbicacion">
+        <PropertyRef Name="IdTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ArbolAcceso_Area">
     <End Role="Area" Type="Self.Area" Multiplicity="1" />
     <End Role="ArbolAcceso" Type="Self.ArbolAcceso" Multiplicity="*" />
@@ -3367,6 +3413,8 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="KiiniNet_v2ModelStoreContainer">
+    <EntitySet Name="AliasOrganizacion" EntityType="Self.AliasOrganizacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AliasUbicacion" EntityType="Self.AliasUbicacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArbolAcceso" EntityType="Self.ArbolAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CampoMascara" EntityType="Self.CampoMascara" Schema="dbo" store:Type="Tables" />
@@ -3473,6 +3521,14 @@
     <EntitySet Name="UsuarioPassword" EntityType="Self.UsuarioPassword" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Zona" EntityType="Self.Zona" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AliasOrganizacion_TipoUsuario" Association="Self.FK_AliasOrganizacion_TipoUsuario">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+      <End Role="AliasOrganizacion" EntitySet="AliasOrganizacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AliasUbicacion_TipoUsuario" Association="Self.FK_AliasUbicacion_TipoUsuario">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+      <End Role="AliasUbicacion" EntitySet="AliasUbicacion" />
+    </AssociationSet>
     <AssociationSet Name="FK_ArbolAcceso_Area" Association="Self.FK_ArbolAcceso_Area">
       <End Role="Area" EntitySet="Area" />
       <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />

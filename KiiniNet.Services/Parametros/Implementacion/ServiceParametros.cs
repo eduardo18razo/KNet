@@ -68,5 +68,35 @@ namespace KiiniNet.Services.Parametros.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<AliasOrganizacion> ObtenerAliasOrganizacion(int idTipoUsuario)
+        {
+            try
+            {
+                using (BusinessParametros negocio = new BusinessParametros())
+                {
+                    return negocio.ObtenerAliasOrganizacion(idTipoUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<AliasUbicacion> ObtenerAliasUbicacion(int idTipoUsuario)
+        {
+            try
+            {
+                using (BusinessParametros negocio = new BusinessParametros())
+                {
+                    return negocio.ObtenerAliasUbicacion(idTipoUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

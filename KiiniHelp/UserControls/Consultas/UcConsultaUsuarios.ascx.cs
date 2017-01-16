@@ -45,7 +45,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 int? idTipoUsuario = null;
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
                     btnNew.Visible = true;

@@ -91,7 +91,10 @@ namespace KiiniNet.Entities.Cat.Sistema
         public virtual List<GrupoUsuario> GrupoUsuario { get; set; }
         [DataMember]
         public virtual List<Puesto> Puesto { get; set; }
-
+        [DataMember]
+        public virtual List<AliasOrganizacion> AliasOrganizacion { get; set; }
+        [DataMember]
+        public virtual List<AliasUbicacion> AliasUbicacion { get; set; }
 
     }
 }

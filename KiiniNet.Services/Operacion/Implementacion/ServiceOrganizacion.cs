@@ -339,13 +339,28 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<int> ObtenerOrganizacionesByIdOrganizacion(int idUbicacion)
+        public List<int> ObtenerOrganizacionesByIdOrganizacion(int idOrganizacion)
         {
             try
             {
                 using (BusinessOrganizacion negocio = new BusinessOrganizacion())
                 {
-                    return negocio.ObtenerOrganizacionesByIdOrganizacion(idUbicacion);
+                    return negocio.ObtenerOrganizacionesByIdOrganizacion(idOrganizacion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Organizacion> BuscarPorPalabra(int? idTipoUsuario, int? idHolding, int? idCompania, int? idDireccion, int? idSubDireccion, int? idGerencia, int? idSubGerencia, int? idJefatura, string filtro)
+        {
+            try
+            {
+                using (BusinessOrganizacion negocio = new BusinessOrganizacion())
+                {
+                    return negocio.BuscarPorPalabra(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura, filtro);
                 }
             }
             catch (Exception ex)

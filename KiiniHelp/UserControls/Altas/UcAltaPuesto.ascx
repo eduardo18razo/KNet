@@ -24,13 +24,13 @@
         </header>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                Alta Puesto
+                Agregar Puesto
             </div>
             <div class="panel-body">
                 <div class="form-horizontal">
                     <asp:HiddenField runat="server" ID="hfEsAlta" />
                     <asp:HiddenField runat="server" ID="hfIdPuesto" />
-                    <div class="form-group">
+                    <div class="form-group" runat="server" Visible="False">
                         <asp:Label runat="server" Text="Tipo Usuario" CssClass="col-sm-2 control-label" />
                         <div class="col-sm-10">
                             <asp:DropDownList runat="server" ID="ddlTipoUsuario" CssClass="DropSelect" />

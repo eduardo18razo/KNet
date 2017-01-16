@@ -109,6 +109,18 @@
         }
         function closeit() {
             win.close();
+        };
+        function HightSearch(content, serachText)
+        {
+            var src_str = $("#" + content).html();
+            var term = serachText;
+            term = term.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
+            var pattern = new RegExp("(" + term + ")", "gi");
+
+            src_str = src_str.replace(pattern, "<mark>$1</mark>");
+            src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
+
+            $("#test").html(src_str);
         }
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -186,8 +198,8 @@
                             <asp:UpdatePanel runat="server">
                                 <ContentTemplate>
                                     <div class="MenuHorizontalArea">
-                                                <asp:Button runat="server" Style="cursor: pointer" OnClick="OnClick" Text="Rol Activo" />
-                                             
+                                        <asp:Button runat="server" Style="cursor: pointer" ID="btnSwitchRol" OnClick="btnSwitchRol_OnClick" Text="Rol Activo" />
+
                                     </div>
                                     <asp:Label runat="server" ID="lblAreaSeleccionada"></asp:Label>
                                     </div>
@@ -299,15 +311,15 @@
                 <img src="../Images/logoKiininet.jpg" height="150" style="float: right; opacity: .6" />
             </div>
             <script type="text/javascript">
-                $(window).load(function () {
+                $(document).ready(function () {
                     debugger;
                     var elementId = document.getElementById("<%= this.FindControl("hfCargaInicial").ClientID %>");
-                        if (elementId.value === "False") {
-                            $('#modalRol').modal('show');
-                            elementId.value = "true";
-                        }
+                    if (elementId.value === "False") {
+                        $('#modalRol').modal('show');
+                        elementId.value = "true";
+                    }
 
-                    });
+                });
             </script>
 
             <div class="modal fade" id="modalRol" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
@@ -315,24 +327,25 @@
                     <div class="modal-content">
                         <%--<asp:UpdatePanel runat="server">
                             <ContentTemplate>--%>
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
-                                        <h3>Cambio de Rol</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <asp:Repeater runat="server" ID="rptRoles">
-                                            <ItemTemplate>
-                                                <asp:Button runat="server" Text='<%# Eval("Descripcion") %>' CssClass="btn btn-default" CommandArgument='<%# Eval("Id") %>' ID="lnkBtnRol" OnClick="lnkBtnRol_OnClick" Style="width: 75px; height: 75px;" />
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </div>
-                                    <div class="panel-footer"></div>
-                                </div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3>Cambio de Rol</h3>
+                            </div>
+                            <div class="panel-body">
+                                <asp:Repeater runat="server" ID="rptRoles">
+                                    <ItemTemplate>
+                                        <asp:Button runat="server" Text='<%# Eval("Descripcion") %>' CssClass="btn btn-default" CommandArgument='<%# Eval("Id") %>' ID="lnkBtnRol" OnClick="lnkBtnRol_OnClick" Style="height: 75px;" />
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
                         <%--    </ContentTemplate>
                         </asp:UpdatePanel>--%>
                     </div>
                 </div>
             </div>
+        </div>
     </form>
 </body>
 </html>

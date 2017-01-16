@@ -6,12 +6,12 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
@@ -84,6 +84,12 @@
   </wsdl:message>
   <wsdl:message name="IServiceUbicacion_ObtenerUbicaciones_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerUbicacionesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUbicacion_BuscarPorPalabra_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarPorPalabra" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUbicacion_BuscarPorPalabra_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarPorPalabraResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceUbicacion_ActualizarUbicacion_InputMessage">
     <wsdl:part name="parameters" element="tns:ActualizarUbicacion" />
@@ -165,6 +171,10 @@
     <wsdl:operation name="ObtenerUbicaciones">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicaciones" message="tns:IServiceUbicacion_ObtenerUbicaciones_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionesResponse" message="tns:IServiceUbicacion_ObtenerUbicaciones_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuscarPorPalabra">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUbicacion/BuscarPorPalabra" message="tns:IServiceUbicacion_BuscarPorPalabra_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUbicacion/BuscarPorPalabraResponse" message="tns:IServiceUbicacion_BuscarPorPalabra_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ActualizarUbicacion">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUbicacion/ActualizarUbicacion" message="tns:IServiceUbicacion_ActualizarUbicacion_InputMessage" />
@@ -285,6 +295,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerUbicaciones">
       <soap:operation soapAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicaciones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuscarPorPalabra">
+      <soap:operation soapAction="http://tempuri.org/IServiceUbicacion/BuscarPorPalabra" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

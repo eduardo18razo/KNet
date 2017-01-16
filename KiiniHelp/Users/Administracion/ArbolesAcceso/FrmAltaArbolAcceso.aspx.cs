@@ -143,7 +143,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                                 ddl = (DropDownList)item.FindControl("ddlUrl");
                                 break;
                         }
-                        if (ddl != null && ddl.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddl != null && ddl.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             sb.AppendLine("<li>Seleccioine alguna información de consulta.</li>");
                     }
 
@@ -167,7 +167,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
             try
             {
                 StringBuilder sb = new StringBuilder();
-                if (ddlMascaraAcceso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlMascaraAcceso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     sb.AppendLine("<li>Debe especificar un Formulario de Cliente.</li>");
 
                 if (sb.ToString() != string.Empty)
@@ -188,7 +188,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
             try
             {
                 StringBuilder sb = new StringBuilder();
-                if (ddlEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     sb.AppendLine("<li>Debe especificar una encuesta.</li>");
                 if (sb.ToString() != string.Empty)
                 {
@@ -228,11 +228,11 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
         {
             try
             {
-                if (ddlTipoUsuario.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     throw new Exception("Seleccione un tipo de usuario");
                 }
-                if (ddlTipoArbol.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoArbol.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     throw new Exception("Seleccione un tipo de arbol");
                 }
@@ -245,102 +245,102 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                         break;
                     case "2":
                         nivel = 2;
-                        if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 1");
                         }
                         break;
                     case "3":
                         nivel = 3;
-                        if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 1");
                         }
-                        if (ddlNivel2.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel2.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 2");
                         }
                         break;
                     case "4":
                         nivel = 4;
-                        if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 1");
                         }
-                        if (ddlNivel2.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel2.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 2");
                         }
-                        if (ddlNivel3.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel3.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 3");
                         }
                         break;
                     case "5":
                         nivel = 5;
-                        if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 1");
                         }
-                        if (ddlNivel2.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel2.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 2");
                         }
-                        if (ddlNivel3.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel3.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 3");
                         }
-                        if (ddlNivel4.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel4.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 4");
                         }
                         break;
                     case "6":
                         nivel = 6;
-                        if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 1");
                         }
-                        if (ddlNivel2.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel2.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 2");
                         }
-                        if (ddlNivel3.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel3.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 3");
                         }
-                        if (ddlNivel4.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel4.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 4");
                         }
-                        if (ddlNivel5.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel5.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 5");
                         }
                         break;
                     case "7":
                         nivel = 7;
-                        if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel1.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 1");
                         }
-                        if (ddlNivel2.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel2.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 2");
                         }
-                        if (ddlNivel3.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel3.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 3");
                         }
-                        if (ddlNivel4.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel4.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 4");
                         }
-                        if (ddlNivel5.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel5.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 5");
                         }
-                        if (ddlNivel6.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddlNivel6.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         {
                             throw new Exception("Seleccione SubMenu/Opcion 6");
                         }
@@ -759,7 +759,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 btnAddMenu6.Enabled = false;
                 btnAddOpti6.Enabled = false;
                 btnAddOpti7.Enabled = false;
-                if (ddlArea.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index) return;
+                if (ddlArea.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione) return;
                 List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuario(true);
                 Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
                 Metodos.LlenaComboCatalogo(ddlTipoUsuarioNivel, lstTipoUsuario);
@@ -818,7 +818,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 btnAddMenu6.Enabled = false;
                 btnAddOpti6.Enabled = false;
                 btnAddOpti7.Enabled = false;
-                if (ddlTipoUsuario.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoUsuario.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     Metodos.LlenaComboCatalogo(ddlTipoArbol, _servicioSistemaTipoArbol.ObtenerTiposArbolAcceso(true));
                     AsociarGrupoUsuario.IdTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
@@ -849,7 +849,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 int idTipoArbol = Convert.ToInt32(ddlTipoArbol.SelectedValue);
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 Metodos.LlenaComboCatalogo(ddlNivel1, _servicioArbolAcceso.ObtenerNivel1(idTipoArbol, idTipoUsuario, true));
-                if (ddlTipoArbol.SelectedIndex != BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlTipoArbol.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     btnAddMenu1.Enabled = true;
                     btnAddOpti1.Enabled = true;
@@ -1217,7 +1217,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                         {
                             arbol.InventarioArbolAcceso.First().IdMascara = Convert.ToInt32(ddlMascaraAcceso.SelectedValue) == 0 ? (int?)null : Convert.ToInt32(ddlMascaraAcceso.SelectedValue);
                             arbol.InventarioArbolAcceso.First().Sla = UcSla.Sla;
-                            arbol.InventarioArbolAcceso.First().IdEncuesta = Convert.ToInt32(ddlEncuesta.SelectedValue) == BusinessVariables.ComboBoxCatalogo.Value ? (int?)null : Convert.ToInt32(ddlEncuesta.SelectedValue);
+                            arbol.InventarioArbolAcceso.First().IdEncuesta = Convert.ToInt32(ddlEncuesta.SelectedValue) == BusinessVariables.ComboBoxCatalogo.ValueSeleccione ? (int?)null : Convert.ToInt32(ddlEncuesta.SelectedValue);
                         }
                         arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol = new List<GrupoUsuarioInventarioArbol>();
                         arbol.TiempoInformeArbol = new List<TiempoInformeArbol>();
@@ -1579,7 +1579,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
 
                 if (ddl == null) return;
                 if (!chk.Checked)
-                    ddl.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                    ddl.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 ddl.Enabled = chk.Checked;
                 btn.Enabled = chk.Checked;
             }

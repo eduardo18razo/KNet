@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
+using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
 using KinniNet.Core.Demonio;
+using KinniNet.Core.Sistema;
 using KinniNet.Data.Help;
 
 namespace KinniNet.Core.Operacion
@@ -64,6 +66,10 @@ namespace KinniNet.Core.Operacion
                         IdTipoLink = (int) BusinessVariables.EnumTipoLink.Confirmacion
                     }
                 };
+                foreach (UsuarioRol rol in usuario.UsuarioRol)
+                {
+                    rol.IdRolTipoUsuario = new BusinessRoles().ObtenerRolTipoUsuario(rol.RolTipoUsuario.IdTipoUsuario, rol.RolTipoUsuario.IdRol).Id;
+                }
                 if (usuario.Id == 0)
                 {
                     db.Usuario.AddObject(usuario);
@@ -121,19 +127,11 @@ namespace KinniNet.Core.Operacion
                         db.CorreoUsuario.DeleteObject(db.CorreoUsuario.SingleOrDefault(w => w.Id == i));
                     }
                     List<int> telefonoEliminar = (from telefonoUsuario in userData.TelefonoUsuario
-                                                  where
-                                                      !usuario.TelefonoUsuario.Any(
-                                                          a =>
-                                                              a.Numero == telefonoUsuario.Numero &&
-                                                              a.IdTipoTelefono == telefonoUsuario.IdTipoTelefono)
+                                                  where !usuario.TelefonoUsuario.Any(a => a.Numero == telefonoUsuario.Numero && a.IdTipoTelefono == telefonoUsuario.IdTipoTelefono)
                                                   select telefonoUsuario.Id).ToList();
                     foreach (TelefonoUsuario telefonoUsuario in usuario.TelefonoUsuario)
                     {
-                        if (
-                            !db.TelefonoUsuario.Any(
-                                a =>
-                                    a.IdUsuario == idUsuario && a.Numero == telefonoUsuario.Numero &&
-                                    a.IdTipoTelefono == telefonoUsuario.IdTipoTelefono))
+                        if (!db.TelefonoUsuario.Any(a => a.IdUsuario == idUsuario && a.Numero == telefonoUsuario.Numero && a.IdTipoTelefono == telefonoUsuario.IdTipoTelefono))
                             userData.TelefonoUsuario.Add(new TelefonoUsuario
                             {
                                 IdUsuario = idUsuario,
@@ -149,25 +147,21 @@ namespace KinniNet.Core.Operacion
 
                     foreach (UsuarioRol rol in usuario.UsuarioRol)
                     {
-                        rol.IdRolTipoUsuario =
-                            db.RolTipoUsuario.Single(
-                                s =>
-                                    s.IdRol == rol.RolTipoUsuario.IdRol &&
-                                    s.IdTipoUsuario == rol.RolTipoUsuario.IdTipoUsuario).Id;
-                        rol.IdUsuario = idUsuario;
-                        rol.RolTipoUsuario = null;
+                        if (rol.RolTipoUsuario != null)
+                        {
+                            rol.IdRolTipoUsuario = new BusinessRoles().ObtenerRolTipoUsuario(rol.RolTipoUsuario.IdTipoUsuario, rol.RolTipoUsuario.IdRol).Id;
+                            rol.IdUsuario = idUsuario;
+                            rol.RolTipoUsuario = null;
+                        }
                     }
 
                     List<int> rolEliminar = (from usuarioRol in userData.UsuarioRol
-                                             where
-                                                 !usuario.UsuarioRol.Any(
-                                                     a => a.IdUsuario == idUsuario && a.IdRolTipoUsuario == usuarioRol.IdRolTipoUsuario)
+                                             where !usuario.UsuarioRol.Any(a => a.IdUsuario == idUsuario && a.IdRolTipoUsuario == usuarioRol.IdRolTipoUsuario)
                                              select usuarioRol.Id).ToList();
                     foreach (UsuarioRol rol in usuario.UsuarioRol)
                     {
                         if (
-                            !db.UsuarioRol.Any(
-                                a => a.IdUsuario == idUsuario && a.IdRolTipoUsuario == rol.IdRolTipoUsuario))
+                            !db.UsuarioRol.Any(a => a.IdUsuario == idUsuario && a.IdRolTipoUsuario == rol.IdRolTipoUsuario))
                             userData.UsuarioRol.Add(new UsuarioRol
                             {
                                 IdUsuario = idUsuario,
@@ -259,7 +253,6 @@ namespace KinniNet.Core.Operacion
         }
 
         public void HabilitarUsuario(int idUsuario, bool habilitado)
-        
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
@@ -276,8 +269,8 @@ namespace KinniNet.Core.Operacion
             {
                 db.Dispose();
             }
-        }   
-        
+        }
+
 
         public List<Usuario> ObtenerUsuarios(int? idTipoUsuario)
         {

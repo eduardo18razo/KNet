@@ -17,9 +17,12 @@ namespace KinniNet.Business.Utils
 
         public static class ComboBoxCatalogo
         {
-            public static int Index = 0;
-            public static int Value = 0;
-            public static string Descripcion = "==SELECCIONE==";
+            public static int IndexSeleccione = 0;
+            public static int IndexTodos = 1;
+            public static int ValueSeleccione = 0;
+            public static int ValueTodos = -1;
+            public static string DescripcionSeleccione = "==SELECCIONE==";
+            public static string DescripcionTodos = "==TODOS==";
             public static bool Habilitado = false;
         }
 

@@ -177,7 +177,7 @@ namespace KiiniHelp.UserControls.Altas
         private void ValidDatosHorario()
         {
             StringBuilder sb = new StringBuilder();
-            if (ddlGrupoSolicito.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+            if (ddlGrupoSolicito.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 sb.AppendLine("<li>Selecciones un Grupo.</li>");
             if (txtDescripcion.Text.Trim() == string.Empty)
                 sb.AppendLine("<li>Ingrese una descripción.</li>");
@@ -187,7 +187,7 @@ namespace KiiniHelp.UserControls.Altas
             {
                 sb.Append("</ul>");
                 sb.Insert(0, "<ul>");
-                sb.Insert(0, "<h3>Alta Horario</h3>");
+                sb.Insert(0, "<h3>Agregar Horario</h3>");
                 throw new Exception(sb.ToString());
             }
         }

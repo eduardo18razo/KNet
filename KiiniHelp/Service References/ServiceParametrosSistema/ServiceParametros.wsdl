@@ -42,6 +42,18 @@
   <wsdl:message name="IServiceParametros_ObtenerParametrosGenerales_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerParametrosGeneralesResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceParametros_ObtenerAliasOrganizacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAliasOrganizacion" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParametros_ObtenerAliasOrganizacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAliasOrganizacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParametros_ObtenerAliasUbicacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAliasUbicacion" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParametros_ObtenerAliasUbicacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerAliasUbicacionResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceParametros">
     <wsdl:operation name="TelefonosObligatorios">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceParametros/TelefonosObligatorios" message="tns:IServiceParametros_TelefonosObligatorios_InputMessage" />
@@ -58,6 +70,14 @@
     <wsdl:operation name="ObtenerParametrosGenerales">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceParametros/ObtenerParametrosGenerales" message="tns:IServiceParametros_ObtenerParametrosGenerales_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceParametros/ObtenerParametrosGeneralesResponse" message="tns:IServiceParametros_ObtenerParametrosGenerales_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAliasOrganizacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceParametros/ObtenerAliasOrganizacion" message="tns:IServiceParametros_ObtenerAliasOrganizacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceParametros/ObtenerAliasOrganizacionResponse" message="tns:IServiceParametros_ObtenerAliasOrganizacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAliasUbicacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceParametros/ObtenerAliasUbicacion" message="tns:IServiceParametros_ObtenerAliasUbicacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceParametros/ObtenerAliasUbicacionResponse" message="tns:IServiceParametros_ObtenerAliasUbicacion_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceParametros" type="tns:IServiceParametros">
@@ -91,6 +111,24 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerParametrosGenerales">
       <soap:operation soapAction="http://tempuri.org/IServiceParametros/ObtenerParametrosGenerales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAliasOrganizacion">
+      <soap:operation soapAction="http://tempuri.org/IServiceParametros/ObtenerAliasOrganizacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerAliasUbicacion">
+      <soap:operation soapAction="http://tempuri.org/IServiceParametros/ObtenerAliasUbicacion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

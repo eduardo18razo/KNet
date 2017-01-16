@@ -31,12 +31,12 @@ namespace KiiniHelp.Test {
         protected global::System.Web.UI.ScriptManager scripMain;
         
         /// <summary>
-        /// Control UcFiltroCanalApertura.
+        /// Control UcConsultaOrganizacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Filtros.Componentes.UcFiltroCanalApertura UcFiltroCanalApertura;
+        protected global::KiiniHelp.UserControls.Consultas.UcConsultaOrganizacion UcConsultaOrganizacion;
     }
 }

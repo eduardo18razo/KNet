@@ -211,7 +211,7 @@ namespace KiiniHelp.UserControls.Operacion
             try
             {
                 _lstError = new List<string>();
-                ddlEstatus.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                ddlEstatus.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 txtComentarios.Text = string.Empty;
                 rbtnlSupervisor.ClearSelection();
                 rbtnlUsuariosGrupoNivel1.ClearSelection();
@@ -330,7 +330,7 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
-                if (ddlEstatus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index) return;
+                if (ddlEstatus.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione) return;
                 if (int.Parse(ddlEstatus.SelectedValue) != (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Autoasignado)
                     LLenaUsuarios();
             }
@@ -369,13 +369,13 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
-                if (ddlEstatus.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlEstatus.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     throw new Exception("Debe seleccionar un estatus");
                 if (((Usuario)Session["UserData"]).UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Select(s => s.SubGrupoUsuario).Where(subRol => _servicioEstatus.HasComentarioObligatorio(((Usuario) Session["UserData"]).Id, subRol.IdSubRol,IdEstatusAsignacionActual, Convert.ToInt32(ddlEstatus.SelectedValue), EsPropietario)).Any(subRol => txtComentarios.Text.Trim() == string.Empty))
                 {
                     throw new Exception("Debe agregar un comentario");
                 }
-                if (ddlEstatus.SelectedValue != BusinessVariables.ComboBoxCatalogo.Value.ToString())
+                if (ddlEstatus.SelectedValue != BusinessVariables.ComboBoxCatalogo.ValueSeleccione.ToString())
                 {
                     _servicioTicketClient.CambiarAsignacionTicket(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuarioSeleccionado(), ((Usuario)Session["UserData"]).Id, txtComentarios.Text);
                 }

@@ -108,7 +108,7 @@ namespace KiiniHelp.UserControls.Altas
                                 ddl = (DropDownList)item.FindControl("ddlUrl");
                                 break;
                         }
-                        if (ddl != null && ddl.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                        if (ddl != null && ddl.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             sb.AppendLine("<li>Seleccioine alguna información de consulta.</li>");
                     }
 
@@ -131,7 +131,7 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 StringBuilder sb = new StringBuilder();
-                if (ddlMascaraAcceso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlMascaraAcceso.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     sb.AppendLine("<li>Debe especificar Formulario de Cliente.</li>");
 
                 if (sb.ToString() != string.Empty)
@@ -695,7 +695,7 @@ namespace KiiniHelp.UserControls.Altas
                                     : Convert.ToInt32(ddlMascaraAcceso.SelectedValue);
                             arbol.InventarioArbolAcceso.First().Sla = UcSla.Sla;
                             arbol.InventarioArbolAcceso.First().IdEncuesta =
-                                Convert.ToInt32(ddlEncuesta.SelectedValue) == BusinessVariables.ComboBoxCatalogo.Value
+                                Convert.ToInt32(ddlEncuesta.SelectedValue) == BusinessVariables.ComboBoxCatalogo.ValueSeleccione
                                     ? (int?)null
                                     : Convert.ToInt32(ddlEncuesta.SelectedValue);
                         }
@@ -902,7 +902,7 @@ namespace KiiniHelp.UserControls.Altas
 
                 if (ddl == null) return;
                 if (!chk.Checked)
-                    ddl.SelectedIndex = BusinessVariables.ComboBoxCatalogo.Index;
+                    ddl.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 ddl.Enabled = chk.Checked;
                 btn.Enabled = chk.Checked;
             }

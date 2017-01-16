@@ -119,10 +119,7 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_Usuario_Ubicacion" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioGrupo_Usuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioRol_Usuario" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.Menu" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.RolMenu" Width="1.5" PointX="6.375" PointY="29.375" IsExpanded="true" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Menu_Menu" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_Menu" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_Rol" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.HitGrupoUsuario" Width="1.5" PointX="15" PointY="57.875" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.InventarioArbolAcceso" Width="1.5" PointX="10.5" PointY="77.25" IsExpanded="true" />
@@ -300,6 +297,13 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketEstatus_EstatusTicket" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketEstatus_Ticket" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketEstatus_Usuario" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.Menu" Width="1.5" PointX="11.375" PointY="13" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Menu_Menu" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_Menu" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.AliasOrganizacion" Width="1.5" PointX="3" PointY="99.25" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_AliasOrganizacion_TipoUsuario" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.AliasUbicacion" Width="1.5" PointX="3" PointY="102.375" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_AliasUbicacion_TipoUsuario" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

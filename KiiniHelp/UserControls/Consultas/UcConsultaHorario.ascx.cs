@@ -48,7 +48,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 int? idTipoUsuario = null;
-                if (ddlGrupoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlGrupoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idTipoUsuario = int.Parse(ddlGrupoUsuario.SelectedValue);
 
                 rptResultados.DataSource = _servicioHorarios.ObtenerHorarioConsulta(idTipoUsuario);
@@ -124,7 +124,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 LlenaHorariosConsulta();
-                if (ddlGrupoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.Index)
+                if (ddlGrupoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     btnNew.Visible = true;
                     btnNew.Text = "Agregar Horario";

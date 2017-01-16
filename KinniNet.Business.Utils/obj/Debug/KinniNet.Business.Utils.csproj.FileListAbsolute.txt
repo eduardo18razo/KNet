@@ -30,4 +30,3 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Debug\AjaxCon
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.csproj.ResolveComReference.cache
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.pdb
-C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.csprojResolveAssemblyReference.cache
