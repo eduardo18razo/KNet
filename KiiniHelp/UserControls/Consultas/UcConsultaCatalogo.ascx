@@ -99,7 +99,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Consulta Grupos</h3>
+                    <h3>Registros</h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">
@@ -116,7 +116,7 @@
                                     <div class="form-horizontal">
 
                                         <div class="form-group">
-                                            <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Catalogos</asp:Label>
+                                            <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Catálogo</asp:Label>
                                             <asp:DropDownList runat="server" ID="ddlCatalogos" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlCatalogos_OnSelectedIndexChanged" />
                                         </div>
                                         <div class="form-group">
@@ -137,7 +137,7 @@
                                             <thead>
                                                 <tr align="center">
                                                     <td>
-                                                        <asp:Label runat="server">Descripcion</asp:Label></td>
+                                                        <asp:Label runat="server">Descripción</asp:Label></td>
                                                     <%--<td><asp:Label class="col-xs-1 control-label;padding: 0;" runat="server">Habilitado</asp:Label></td>--%>
                                                 </tr>
                                             </thead>

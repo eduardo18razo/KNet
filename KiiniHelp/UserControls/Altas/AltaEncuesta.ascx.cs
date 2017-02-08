@@ -38,6 +38,7 @@ namespace KiiniHelp.UserControls.Altas
             {
                 Session["Encuesta"] = new Encuesta();
                 Encuesta tmpEncuesta = ((Encuesta)Session["Encuesta"]);
+
                 rptPreguntas.DataSource = tmpEncuesta.EncuestaPregunta;
                 rptPreguntas.DataBind();
                 txtDescripcionEncuesta.Text = string.Empty;
@@ -92,30 +93,39 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                if (ddlTipoEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    throw new Exception("Especifique el tipo de encuesta");
                 if (txtPregunta.Text.Trim() == string.Empty)
                     throw new Exception("Especifique una pregunta");
                 if (txtPonderacion.Text.Trim() == string.Empty)
                     throw new Exception("Especifique una ponderacion");
-
+                if(int.Parse(txtPonderacion.Text.Trim()) <= 0)
+                    throw new Exception("La ponderacion debe ser mayor a 0");
                 Encuesta tmpEncuesta = ((Encuesta)Session["Encuesta"]);
+
                 if (tmpEncuesta.EncuestaPregunta == null)
                     tmpEncuesta.EncuestaPregunta = new List<EncuestaPregunta>();
-                
+
+
+
                 if (txtIdPregunta.Text.Trim() == string.Empty)
+                {
+                    if ((tmpEncuesta.EncuestaPregunta.Sum(s => s.Ponderacion) + decimal.Parse(txtPonderacion.Text.Trim())) > 100)
+                        throw new Exception("La ponderacion debe ser menor");
                     tmpEncuesta.EncuestaPregunta.Add(new EncuestaPregunta
                     {
                         Id = tmpEncuesta.EncuestaPregunta.Count + 1,
-                        Pregunta = txtPregunta.Text.Trim(),
+                        Pregunta = txtPregunta.Text.ToUpper().Trim(),
                         Ponderacion = decimal.Parse(txtPonderacion.Text.Trim())
                     });
+                }
                 else
                 {
-                    EncuestaPregunta pregunta = tmpEncuesta.EncuestaPregunta.SingleOrDefault(s => s.Id == Convert.ToInt32(txtIdPregunta.Text.Trim()));
+                    if ((tmpEncuesta.EncuestaPregunta.Where(w => w.Id != int.Parse(txtIdPregunta.Text.Trim())).Sum(s => s.Ponderacion) + decimal.Parse(txtPonderacion.Text.Trim())) > 100)
+                        throw new Exception("La ponderacion debe ser menor");
+                    EncuestaPregunta pregunta = tmpEncuesta.EncuestaPregunta.SingleOrDefault(
+                            s => s.Id == Convert.ToInt32(txtIdPregunta.Text.Trim()));
                     if (pregunta != null)
                     {
-                        pregunta.Pregunta = txtPregunta.Text.Trim();
+                        pregunta.Pregunta = txtPregunta.Text.ToUpper().Trim();
                         pregunta.Ponderacion = decimal.Parse(txtPonderacion.Text.Trim());
                     }
                 }
@@ -124,9 +134,13 @@ namespace KiiniHelp.UserControls.Altas
                 rptPreguntas.DataSource = tmpEncuesta.EncuestaPregunta;
                 rptPreguntas.DataBind();
                 Session["Encuesta"] = tmpEncuesta;
+                Label lbltotal = (Label)rptPreguntas.Controls[rptPreguntas.Controls.Count - 1].Controls[0].FindControl("lblTotal");
+                if (lbltotal != null)
+                    lbltotal.Text = tmpEncuesta.EncuestaPregunta.Sum(s => s.Ponderacion).ToString();
                 txtIdPregunta.Text = string.Empty;
                 txtPregunta.Text = string.Empty;
                 txtPonderacion.Text = string.Empty;
+                btnAddPregunta.Text = "Agregar";
             }
             catch (Exception ex)
             {
@@ -139,28 +153,6 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        protected void OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                EncuestaPregunta pregunta = ((Encuesta)Session["Encuesta"]).EncuestaPregunta.SingleOrDefault(s => s.Id == Convert.ToInt32(((LinkButton)sender).CommandArgument));
-                if (pregunta != null)
-                {
-                    txtIdPregunta.Text = pregunta.Id.ToString();
-                    txtPregunta.Text = pregunta.Pregunta;
-                    txtPonderacion.Text = pregunta.Ponderacion.ToString(CultureInfo.InvariantCulture);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
 
         protected void btnGuardarEncuesta_OnClick(object sender, EventArgs e)
         {
@@ -228,6 +220,55 @@ namespace KiiniHelp.UserControls.Altas
                 if (OnCancelarModal != null)
                     OnCancelarModal();
 
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnEliminar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Encuesta tmpEncuesta = ((Encuesta)Session["Encuesta"]);
+                EncuestaPregunta pregunta = tmpEncuesta.EncuestaPregunta.SingleOrDefault(s => s.Id == Convert.ToInt32(((LinkButton)sender).CommandArgument));
+                tmpEncuesta.EncuestaPregunta.Remove(pregunta);
+                rptPreguntas.DataSource = tmpEncuesta.EncuestaPregunta;
+                rptPreguntas.DataBind();
+                Session["Encuesta"] = tmpEncuesta;
+                Label lbltotal = (Label)rptPreguntas.Controls[rptPreguntas.Controls.Count - 1].Controls[0].FindControl("lblTotal");
+                if (lbltotal != null)
+                    lbltotal.Text = tmpEncuesta.EncuestaPregunta.Sum(s => s.Ponderacion).ToString();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnEditar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                EncuestaPregunta pregunta = ((Encuesta)Session["Encuesta"]).EncuestaPregunta.SingleOrDefault(s => s.Id == Convert.ToInt32(((LinkButton)sender).CommandArgument));
+                if (pregunta != null)
+                {
+                    btnAddPregunta.Text = "Cambiar";
+                    txtIdPregunta.Text = pregunta.Id.ToString();
+                    txtPregunta.Text = pregunta.Pregunta;
+                    txtPonderacion.Text = pregunta.Ponderacion.ToString(CultureInfo.InvariantCulture);
+                }
             }
             catch (Exception ex)
             {

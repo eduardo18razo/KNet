@@ -76,7 +76,7 @@ namespace KiiniHelp
             try
             {
                 Usuario userData = _servicioUsuarios.ObtenerDetalleUsuario(idUsuario);
-                rptConfirmacion.DataSource = userData.TelefonoUsuario.Where(w => w.IdTipoTelefono == (int)BusinessVariables.EnumTipoTelefono.Celular && w.Obligatorio && !w.Confirmado);
+                rptConfirmacion.DataSource = userData.TelefonoUsuario.Where(w => w.IdTipoTelefono == (int)BusinessVariables.EnumTipoTelefono.Celular && w.Obligatorio && !w.Confirmado).OrderBy(o => o.Id).Take(1);
                 rptConfirmacion.DataBind();
 
             }
@@ -171,6 +171,9 @@ namespace KiiniHelp
                 Label lblId = (Label)item.FindControl("lblId");
                 Label lblIdUsuario = (Label)item.FindControl("lblIdUsuario");
                 SendNotificacion(int.Parse(lblIdUsuario.Text), int.Parse(lblId.Text));
+                ((Button)sender).Enabled = false;
+                tmpSendNotificacion.Enabled = true;
+
             }
             catch (Exception ex)
             {
@@ -273,6 +276,27 @@ namespace KiiniHelp
                     txtIdPregunta.Text = pregunta.Id.ToString();
                     txtPregunta.Text = pregunta.Pregunta;
                     txtRespuesta.Text = pregunta.Respuesta;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void tmpSendNotificacion_OnTick(object sender, EventArgs e)
+        {
+            try
+            {
+                tmpSendNotificacion.Enabled = false;
+                foreach (RepeaterItem item in rptConfirmacion.Items)
+                {
+                    ((Button)item.FindControl("btnSendNotification")).Enabled = true;
                 }
             }
             catch (Exception ex)

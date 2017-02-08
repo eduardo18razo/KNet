@@ -1,14 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
+using AjaxControlToolkit;
 using KiiniHelp.ServiceSistemaCatalogos;
+using KinniNet.Business.Utils;
 using Font = System.Drawing.Font;
+using System.Text.RegularExpressions;
 
 namespace KiiniHelp.Test
 {
-    public partial class FrmTest : System.Web.UI.Page
+    public partial class FrmTest : Page
     {
         private readonly ServiceCatalogosClient _servicioCatalogos = new ServiceCatalogosClient();
         //private void SendMessageAltiria()
@@ -73,9 +80,78 @@ namespace KiiniHelp.Test
         {
             //TextBox1.Text = GridView1.SelectedRow.Cells[2].Text;
         }
-
+        void asyncFileUpload_UploadedComplete(object sender, AsyncFileUploadEventArgs e)
+        {
+            try
+            {
+                List<string> lstArchivo = Session["Files"] == null ? new List<string>() : (List<string>)Session["Files"];
+                if (lstArchivo.Contains(e.FileName)) return;
+                AsyncFileUpload uploadControl = (AsyncFileUpload)sender;
+                if (!Directory.Exists(BusinessVariables.Directorios.RepositorioTemporalMascara))
+                    Directory.CreateDirectory(BusinessVariables.Directorios.RepositorioTemporalMascara);
+                uploadControl.SaveAs(BusinessVariables.Directorios.RepositorioTemporalMascara + e.FileName);
+                Session[uploadControl.ID] = e.FileName;
+                lstArchivo.Add(e.FileName);
+                Session["Files"] = lstArchivo;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        static string CleanInput(string strIn)
+        {
+            // Replace invalid characters with empty strings.
+            try
+            {
+                return Regex.Replace(strIn, "[^a-zA-Z0-9]+", string.Empty, RegexOptions.Compiled);
+            }
+            // If we timeout when replacing invalid characters, 
+            // we should return Empty.
+            catch (Exception e)
+            {
+                return String.Empty;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
+            //string var = CleanInput("ESTE ES 1 TEXTO CON PAY@SDAS+¨'+´+}{+");
+            //if (!IsPostBack)
+            //{
+            //    FileInfo newFile = new FileInfo(@"C:\Users\Eduardo Cerritos\Documents\2016 10 18 DATOS DE PRUEBA.xlsx");
+
+            //    ExcelPackage pck = new ExcelPackage(newFile);
+            //    string path = @"C:\Users\Eduardo Cerritos\Desktop\Nueva carpeta\result.html";
+            //    Stream stream = File.Create(path);
+            //    pck.SaveAs(stream);
+            //}
+            //Add the Content sheet
+            //var ws = pck.Workbook.Worksheets.Add("Content");
+            //ws.View.ShowGridLines = false;
+
+            //ws.Column(4).OutlineLevel = 1;
+            //ws.Column(4).Collapsed = true;
+            //ws.Column(5).OutlineLevel = 1;
+            //ws.Column(5).Collapsed = true;
+            //ws.OutLineSummaryRight = true;
+
+            ////Headers
+            //ws.Cells["B1"].Value = "Name";
+            //ws.Cells["C1"].Value = "Size";
+            //ws.Cells["D1"].Value = "Created";
+            //ws.Cells["E1"].Value = "Last modified";
+            //ws.Cells["B1:E1"].Style.Font.Bold = true;
+
+            //pck.Save();
+            //AsyncFileUpload asyncFileUpload = new AsyncFileUpload
+            //{
+            //    ID = "fuhhhh",
+            //    PersistFile = true,
+            //    UploaderStyle = AsyncFileUploaderStyle.Traditional,
+
+            //};
+            //asyncFileUpload.UploadedComplete += asyncFileUpload_UploadedComplete;
+            //divctl.Controls.Add(asyncFileUpload);
             //ddlLista.DataSource = _servicioCatalogos.ObtenerRegistrosArchivosCatalogo(10);
             //ddlLista.DataTextField = "Descripcion";
             //ddlLista.DataValueField = "Id";
@@ -167,6 +243,21 @@ namespace KiiniHelp.Test
             //    //Chart1.SaveImage();
             //}
             //ChartStack.Click += ChartStackOnClick;
+        }
+
+        protected void btnModalImpactoUrgencia_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                //btnModalImpactoUrgencia.CssClass = "btn btn-primary";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalImpacto\");", true);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+
         }
 
         private void ChartStackOnClick(object sender, ImageMapEventArgs imageMapEventArgs)
@@ -337,5 +428,21 @@ namespace KiiniHelp.Test
             //var result = firstMonday.AddDays(weekNum * 7 + 0 - 1);
         }
 
+        protected void btnAbrirModal_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ucAltaNivelArbol.IdArea = 1;
+                ucAltaNivelArbol.IdNivel1 = 1;
+                ucAltaNivelArbol.IdTipoArbol = 1;
+                ucAltaNivelArbol.IdTipoUsuario = 1;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editNivel\");", true);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

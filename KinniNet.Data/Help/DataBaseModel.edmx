@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="KiiniNet_v2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="KiiniNet_v2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="AliasOrganizacion">
           <Key>
             <PropertyRef Name="Id" />
@@ -50,6 +50,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Imagen" Type="image" />
           <Property Name="Habilitado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CampoMascara">
@@ -123,6 +124,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="Correo" Type="nvarchar" MaxLength="150" />
+          <Property Name="Obligatorio" Type="bit" />
         </EntityType>
         <EntityType Name="DiaFestivoSubGrupo">
           <Key>
@@ -704,7 +706,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="60" />
           <Property Name="EsUnico" Type="bit" />
           <Property Name="Habilitado" Type="bit" />
         </EntityType>
@@ -1017,7 +1019,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="Habilitado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TipoInfConsulta">
@@ -4278,12 +4280,11 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="KiiniNet_v2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="KiiniNet_v2Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="connection" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Campus" EntityType="KiiniNet_v2Model.Campus" />
           <EntitySet Name="Colonia" EntityType="KiiniNet_v2Model.Colonia" />
           <EntitySet Name="Compania" EntityType="KiiniNet_v2Model.Compania" />
-          <EntitySet Name="CorreoUsuario" EntityType="KiiniNet_v2Model.CorreoUsuario" />
           <EntitySet Name="Direccion" EntityType="KiiniNet_v2Model.Direccion" />
           <EntitySet Name="Domicilio" EntityType="KiiniNet_v2Model.Domicilio" />
           <EntitySet Name="Encuesta" EntityType="KiiniNet_v2Model.Encuesta" />
@@ -4557,10 +4558,6 @@
             <End Role="UsuarioGrupo" EntitySet="UsuarioGrupo" />
           </AssociationSet>
           <EntitySet Name="Usuario" EntityType="KiiniNet_v2Model.Usuario" />
-          <AssociationSet Name="FK_CorreoUsuario_Usuario" Association="KiiniNet_v2Model.FK_CorreoUsuario_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="CorreoUsuario" EntitySet="CorreoUsuario" />
-          </AssociationSet>
           <AssociationSet Name="FK_Usuario_Organizacion" Association="KiiniNet_v2Model.FK_Usuario_Organizacion">
             <End Role="Organizacion" EntitySet="Organizacion" />
             <End Role="Usuario" EntitySet="Usuario" />
@@ -4600,7 +4597,6 @@
             <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
             <End Role="InventarioInfConsulta" EntitySet="InventarioInfConsulta" />
           </AssociationSet>
-          <EntitySet Name="Area" EntityType="KiiniNet_v2Model.Area" />
           <EntitySet Name="TicketGrupoUsuario" EntityType="KiiniNet_v2Model.TicketGrupoUsuario" />
           <AssociationSet Name="FK_TicketGrupoUsuario_SubGrupoUsuario" Association="KiiniNet_v2Model.FK_TicketGrupoUsuario_SubGrupoUsuario">
             <End Role="SubGrupoUsuario" EntitySet="SubGrupoUsuario" />
@@ -4688,10 +4684,6 @@
             <End Role="SubRolEscalacionPermitida" EntitySet="SubRolEscalacionPermitida" />
           </AssociationSet>
           <EntitySet Name="ArbolAcceso" EntityType="KiiniNet_v2Model.ArbolAcceso" />
-          <AssociationSet Name="FK_ArbolAcceso_Area" Association="KiiniNet_v2Model.FK_ArbolAcceso_Area">
-            <End Role="Area" EntitySet="Area" />
-            <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
-          </AssociationSet>
           <AssociationSet Name="FK_ArbolAcceso_Nivel1" Association="KiiniNet_v2Model.FK_ArbolAcceso_Nivel1">
             <End Role="Nivel1" EntitySet="Nivel1" />
             <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
@@ -5137,6 +5129,16 @@
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="AliasUbicacion" EntitySet="AliasUbicacion" />
           </AssociationSet>
+          <EntitySet Name="CorreoUsuario" EntityType="KiiniNet_v2Model.CorreoUsuario" />
+          <AssociationSet Name="FK_CorreoUsuario_Usuario" Association="KiiniNet_v2Model.FK_CorreoUsuario_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="CorreoUsuario" EntitySet="CorreoUsuario" />
+          </AssociationSet>
+          <EntitySet Name="Area" EntityType="KiiniNet_v2Model.Area" />
+          <AssociationSet Name="FK_ArbolAcceso_Area" Association="KiiniNet_v2Model.FK_ArbolAcceso_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Campus">
           <Key>
@@ -5171,15 +5173,6 @@
           <Property Name="Habilitado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_Compania_TipoUsuario" FromRole="Compania" ToRole="TipoUsuario" />
           <NavigationProperty Name="Organizacion" Relationship="KiiniNet_v2Model.FK_Organizacion_Compania" FromRole="Compania" ToRole="Organizacion" />
-        </EntityType>
-        <EntityType Name="CorreoUsuario">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="Correo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_CorreoUsuario_Usuario" FromRole="CorreoUsuario" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Direccion">
           <Key>
@@ -5569,7 +5562,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="Habilitado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="RolTipoGrupo" Relationship="KiiniNet_v2Model.FK_RolTipoGrupo_TipoGrupo" FromRole="TipoGrupo" ToRole="RolTipoGrupo" />
           <NavigationProperty Name="TiempoInformeArbol" Relationship="KiiniNet_v2Model.FK_TiempoInformeArbol_TipoGrupo" FromRole="TipoGrupo" ToRole="TiempoInformeArbol" />
@@ -6376,7 +6369,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="EsUnico" Type="Boolean" />
           <Property Name="Habilitado" Type="Boolean" />
           <NavigationProperty Name="GrupoUsuarioInventarioArbol" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_Rol" FromRole="Rol" ToRole="GrupoUsuarioInventarioArbol" />
@@ -6456,7 +6449,6 @@
           <Property Name="NombreUsuario" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Habilitado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="CorreoUsuario" Relationship="KiiniNet_v2Model.FK_CorreoUsuario_Usuario" FromRole="Usuario" ToRole="CorreoUsuario" />
           <NavigationProperty Name="Organizacion" Relationship="KiiniNet_v2Model.FK_Usuario_Organizacion" FromRole="Usuario" ToRole="Organizacion" />
           <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
           <NavigationProperty Name="Ubicacion" Relationship="KiiniNet_v2Model.FK_Usuario_Ubicacion" FromRole="Usuario" ToRole="Ubicacion" />
@@ -6482,20 +6474,8 @@
           <NavigationProperty Name="TicketsResueltos" Relationship="KiiniNet_v2Model.FK_Ticket_Usuario1" FromRole="Usuario" ToRole="Ticket" />
           <NavigationProperty Name="TicketsSolicitados" Relationship="KiiniNet_v2Model.FK_Ticket_Usuario2" FromRole="Usuario" ToRole="Ticket" />
           <NavigationProperty Name="TicketEstatus" Relationship="KiiniNet_v2Model.FK_TicketEstatus_Usuario" FromRole="Usuario" ToRole="TicketEstatus" />
-          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="CorreoUsuario" Relationship="KiiniNet_v2Model.FK_CorreoUsuario_Usuario" FromRole="Usuario" ToRole="CorreoUsuario" />
           </EntityType>
-        <Association Name="FK_CorreoUsuario_Usuario">
-          <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="KiiniNet_v2Model.CorreoUsuario" Role="CorreoUsuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CorreoUsuario">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Usuario_Organizacion">
           <End Type="KiiniNet_v2Model.Organizacion" Role="Organizacion" Multiplicity="0..1" />
           <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="*" />
@@ -6642,15 +6622,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Area">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Habilitado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="Area" ToRole="ArbolAcceso" />
-        </EntityType>
         <EntityType Name="TicketGrupoUsuario">
           <Key>
             <PropertyRef Name="Id" />
@@ -7099,7 +7070,6 @@
           <Property Name="IdNivel7" Type="Int32" />
           <Property Name="EsTerminal" Type="Boolean" Nullable="false" />
           <Property Name="Habilitado" Type="Boolean" />
-          <NavigationProperty Name="Area" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="ArbolAcceso" ToRole="Area" />
           <NavigationProperty Name="Nivel1" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Nivel1" FromRole="ArbolAcceso" ToRole="Nivel1" />
           <NavigationProperty Name="Nivel2" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Nivel2" FromRole="ArbolAcceso" ToRole="Nivel2" />
           <NavigationProperty Name="Nivel3" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Nivel3" FromRole="ArbolAcceso" ToRole="Nivel3" />
@@ -7116,19 +7086,8 @@
           <NavigationProperty Name="RespuestaEncuesta" Relationship="KiiniNet_v2Model.FK_RespuestaEncuesta_ArbolAcceso" FromRole="ArbolAcceso" ToRole="RespuestaEncuesta" />
           <NavigationProperty Name="PreTicket" Relationship="KiiniNet_v2Model.FK_PreTicket_ArbolAcceso" FromRole="ArbolAcceso" ToRole="PreTicket" />
           <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_tblTicket_tblArbolAcceso" FromRole="ArbolAcceso" ToRole="Ticket" />
+          <NavigationProperty Name="Area" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="ArbolAcceso" ToRole="Area" />
           </EntityType>
-        <Association Name="FK_ArbolAcceso_Area">
-          <End Type="KiiniNet_v2Model.Area" Role="Area" Multiplicity="1" />
-          <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Area">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ArbolAcceso">
-              <PropertyRef Name="IdArea" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ArbolAcceso_Nivel1">
           <End Type="KiiniNet_v2Model.Nivel1" Role="Nivel1" Multiplicity="1" />
           <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="*" />
@@ -8925,11 +8884,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CorreoUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="Correo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Obligatorio" Type="Boolean" />
+          <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_CorreoUsuario_Usuario" FromRole="CorreoUsuario" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_CorreoUsuario_Usuario">
+          <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.CorreoUsuario" Role="CorreoUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CorreoUsuario">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="Area" ToRole="ArbolAcceso" />
+        </EntityType>
+        <Association Name="FK_ArbolAcceso_Area">
+          <End Type="KiiniNet_v2Model.Area" Role="Area" Multiplicity="1" />
+          <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ArbolAcceso">
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="KiiniNet_v2ModelStoreContainer" CdmEntityContainer="connection">
           <EntitySetMapping Name="Campus">
             <EntityTypeMapping TypeName="KiiniNet_v2Model.Campus">
@@ -8957,15 +8960,6 @@
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CorreoUsuario">
-            <EntityTypeMapping TypeName="KiiniNet_v2Model.CorreoUsuario">
-              <MappingFragment StoreEntitySet="CorreoUsuario">
-                <ScalarProperty Name="Correo" ColumnName="Correo" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -9432,7 +9426,6 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="KiiniNet_v2Model.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="Foto" ColumnName="Foto" />
                 <ScalarProperty Name="FechaUpdate" ColumnName="FechaUpdate" />
                 <ScalarProperty Name="FechaBloqueo" ColumnName="FechaBloqueo" />
                 <ScalarProperty Name="Tries" ColumnName="Tries" />
@@ -9481,15 +9474,6 @@
                 <ScalarProperty Name="IdSla" ColumnName="IdSla" />
                 <ScalarProperty Name="IdMascara" ColumnName="IdMascara" />
                 <ScalarProperty Name="IdArbolAcceso" ColumnName="IdArbolAcceso" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Area">
-            <EntityTypeMapping TypeName="KiiniNet_v2Model.Area">
-              <MappingFragment StoreEntitySet="Area">
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -10208,27 +10192,47 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CorreoUsuario">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.CorreoUsuario">
+              <MappingFragment StoreEntitySet="CorreoUsuario">
+                <ScalarProperty Name="Obligatorio" ColumnName="Obligatorio" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Area">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
-    <Connection>
-      <DesignerInfoPropertySet>
-        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
-      </DesignerInfoPropertySet>
-    </Connection>
-    <Options>
-      <DesignerInfoPropertySet>
-        <DesignerProperty Name="ValIdateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
-      </DesignerInfoPropertySet>
-    </Options>
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValIdateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="false" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
-  </Designer>
+    <edmx:Diagrams />
+  </edmx:Designer>
 </edmx:Edmx>

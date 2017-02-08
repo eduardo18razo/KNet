@@ -100,7 +100,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Consulta Grupos</h3>
+                    <h3>Editor de contenido</h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">
@@ -108,7 +108,7 @@
                             <div class="panel-heading" role="tab" id="headingFiltros">
                                 <h4 class="panel-title">
                                     <div role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiltros" aria-expanded="true" aria-controls="collapseFiltros" style="cursor: pointer">
-                                        Filtros
+                                        Ocultar/Mostrar Filtros
                                     </div>
                                 </h4>
                             </div>
@@ -123,7 +123,7 @@
                                         <div class="form-group">
                                         </div>
                                         <div class="form-group">
-                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Informacion" Width="14%" OnClick="btnNew_OnClick"/>
+                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar contenido" Width="14%" OnClick="btnNew_OnClick" Visible="False"/>
                                         </div>
                                     </div>
                                 </div>
@@ -137,8 +137,8 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader">
                                             <thead>
                                                 <tr align="center">
-                                                    <td><asp:Label runat="server">Tipo Informacion</asp:Label></td>
-                                                    <td><asp:Label runat="server">Tipo Documento</asp:Label></td>
+                                                    <td><asp:Label runat="server">Tipo de contenido</asp:Label></td>
+                                                    <td><asp:Label runat="server">Tipo de documento</asp:Label></td>
                                                     <td><asp:Label runat="server">Nombre</asp:Label></td>
                                                     <td><asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>

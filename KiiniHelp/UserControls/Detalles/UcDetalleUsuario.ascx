@@ -35,13 +35,13 @@
                     <div class="form-group">
                         <asp:Label runat="server" CssClass="col-sm-2 control-label" Text="Nombre:"></asp:Label>
                         <div class="col-sm-10 ">
-                            <asp:Label runat="server" CssClass="form-control" ID="lblNombre"></asp:Label>
+                            <asp:Label runat="server" CssClass="form-control" ID="lblNombre" Enabled="False"></asp:Label>
                         </div>
                     </div>
                     <div class="form-group">
                         <asp:Label runat="server" CssClass="col-sm-2 control-label" Text="Usuario:"></asp:Label>
                         <div class="col-sm-10 ">
-                            <asp:Label runat="server" CssClass="form-control" ID="lblUsuario"></asp:Label>
+                            <asp:Label runat="server" CssClass="form-control" ID="lblUsuario" Enabled="False"></asp:Label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -83,10 +83,10 @@
                                                             <asp:Label runat="server"><%# Eval("TipoTelefono.Descripcion") %></asp:Label>
                                                         </div>
                                                         <div class="col-xs-5 col-md-3">
-                                                            <asp:TextBox runat="server" ID="txtNumero" Text='<%# Eval("Numero") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="10" />
+                                                            <asp:Label runat="server" ID="txtNumero" Text='<%# Eval("Numero") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="10" />
                                                         </div>
                                                         <div class="col-xs-4 col-md-3" runat="server" visible='<%# Eval("TipoTelefono.Extension") %>'>
-                                                            <asp:TextBox runat="server" ID="txtExtension" Text='<%# Eval("Extension") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="40" />
+                                                            <asp:Label runat="server" ID="txtExtension" Text='<%# Eval("Extension") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="40" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -170,8 +170,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer">
+                <div class="panel-footer" style="text-align: center">
                     <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarModal" Text="Cerrar" OnClick="btnCerrarModal_OnClick" />
+                    <%--
+                    <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnModificar" Text="Cerrar" OnClick="btnCerrarModal_OnClick" />
+                    <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="Button2" Text="Cerrar" OnClick="btnCerrarModal_OnClick" />--%>
                 </div>
             </div>
     </ContentTemplate>

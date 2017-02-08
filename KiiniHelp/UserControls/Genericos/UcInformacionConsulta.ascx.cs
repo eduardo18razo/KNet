@@ -96,7 +96,7 @@ namespace KiiniHelp.UserControls.Genericos
                             }
                             ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalMuestraInformacion\");", true);
                             break;
-                        case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                        case (int)BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice:
                             string nombreDocto = ic.InformacionConsultaDatos.OrderBy(o => o.Orden).Aggregate(string.Empty, (current, contenindo) => current + contenindo.Descripcion);
                             ifDoctos.Attributes.Add("src", string.Format("../General/FrmMostrarDocumento.aspx?NombreDocumento={0}&TipoDocumento={1}", nombreDocto, ic.IdTipoDocumento));
                             divPropuetario.Visible = false;
@@ -108,7 +108,7 @@ namespace KiiniHelp.UserControls.Genericos
                             }
                             ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalMuestraInformacion\");", true);
                             break;
-                        case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                        case (int)BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
                             string url = ic.InformacionConsultaDatos.OrderBy(o => o.Orden).Aggregate(string.Empty, (current, contenindo) => current + contenindo.Descripcion);
                             if (btn.CommandName == "0")
                             {
@@ -139,7 +139,7 @@ namespace KiiniHelp.UserControls.Genericos
             try
             {
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalMuestraInformacion\");", true);
-                string url = ResolveUrl("~/FrmEncuesta.aspx?IdTipoServicio=" + (int)BusinessVariables.EnumTipoArbol.Consultas + "&IdTicket=" + IdArbol);
+                string url = ResolveUrl("~/FrmEncuesta.aspx?IdTipoServicio=" + (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion + "&IdTicket=" + IdArbol);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptEncuesta", "OpenWindow(\"" + url + "\");", true);
                 
             }

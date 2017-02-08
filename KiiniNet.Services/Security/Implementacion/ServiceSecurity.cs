@@ -84,13 +84,13 @@ namespace KiiniNet.Services.Security.Implementacion
             }
         }
 
-        public List<Menu> ObtenerMenuUsuario(int idUsuario, List<int> areas, bool arboles)
+        public List<Menu> ObtenerMenuUsuario(int idUsuario, int idRol, bool arboles)
         {
             try
             {
                 using (BusinessSecurity.Menus negocio = new BusinessSecurity.Menus())
                 {
-                    return negocio.ObtenerMenuUsuario(idUsuario, areas, arboles);
+                    return negocio.ObtenerMenuUsuario(idUsuario, idRol, arboles);
                 }
             }
             catch (Exception ex)

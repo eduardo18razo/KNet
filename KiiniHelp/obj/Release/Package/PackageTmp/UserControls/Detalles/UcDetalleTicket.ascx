@@ -66,6 +66,7 @@
                             <Columns>
                                 <asp:BoundField DataField="Descripcion" HeaderText="Estatus Ticket" InsertVisible="False" ReadOnly="True" SortExpression="Descripcion" ControlStyle-Width="70px" />
                                 <asp:BoundField DataField="UsuarioMovimiento" HeaderText="Usuario Movimiento" InsertVisible="False" ReadOnly="True" SortExpression="UsuarioMovimiento" ControlStyle-Width="70px" />
+                                <asp:BoundField DataField="Comentarios" HeaderText="Comentario" InsertVisible="False" ReadOnly="True" SortExpression="UsuarioMovimiento" ControlStyle-Width="70px" />
                                 <asp:BoundField DataField="FechaMovimiento" HeaderText="Fecha Movimiento" ReadOnly="True" SortExpression="FechaMovimiento" ControlStyle-Width="300px" />
                             </Columns>
                         </asp:GridView>

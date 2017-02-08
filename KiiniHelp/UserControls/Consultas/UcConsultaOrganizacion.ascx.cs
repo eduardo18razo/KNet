@@ -12,7 +12,6 @@ using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
-using Microsoft.Office.Interop.Word;
 using Page = System.Web.UI.Page;
 
 namespace KiiniHelp.UserControls.Consultas
@@ -34,7 +33,11 @@ namespace KiiniHelp.UserControls.Consultas
         public bool Modal
         {
             get { return Convert.ToBoolean(hfModal.Value); }
-            set { hfModal.Value = value.ToString(); }
+            set
+            {
+                hfModal.Value = value.ToString();
+                lblTitleOrganizacion.Text = value ? "Agregar Organización" : "Organizaciones";
+            }
         }
         public int IdTipoUsuario
         {
@@ -238,7 +241,7 @@ namespace KiiniHelp.UserControls.Consultas
         }
         public string ObtenerRuta(int command, string modulo)
         {
-            string result = "<h3>ALTA " + modulo + "</h3><span style=\"font-size: x-small;\">";
+            string result = "<h3>AGREGAR " + modulo + "</h3><span style=\"font-size: x-small;\">";
             switch (command)
             {
                 //case 1:
@@ -915,36 +918,42 @@ namespace KiiniHelp.UserControls.Consultas
                             _servicioOrganizacion.ActualizarOrganizacion(organizacion);
                             ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
                             ddlHolding.SelectedValue = ddlHolding.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
                             break;
                         case 2:
                             organizacion.Compania.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioOrganizacion.ActualizarOrganizacion(organizacion);
                             ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
                             ddlCompañia.SelectedValue = ddlCompañia.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlCompañia_OnSelectedIndexChanged(ddlCompañia, null);
                             break;
                         case 3:
                             organizacion.Direccion.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioOrganizacion.ActualizarOrganizacion(organizacion);
                             ddlCompañia_OnSelectedIndexChanged(ddlCompañia, null);
                             ddlDireccion.SelectedValue = ddlDireccion.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlDirecion_OnSelectedIndexChanged(ddlDireccion, null);
                             break;
                         case 4:
                             organizacion.SubDireccion.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioOrganizacion.ActualizarOrganizacion(organizacion);
                             ddlDirecion_OnSelectedIndexChanged(ddlDireccion, null);
                             ddlSubDireccion.SelectedValue = ddlSubDireccion.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlSubDireccion_OnSelectedIndexChanged(ddlSubDireccion, null);
                             break;
                         case 5:
                             organizacion.Gerencia.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioOrganizacion.ActualizarOrganizacion(organizacion);
                             ddlSubDireccion_OnSelectedIndexChanged(ddlSubDireccion, null);
                             ddlGerencia.SelectedValue = ddlGerencia.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlGerencia_OnSelectedIndexChanged(ddlGerencia, null);
                             break;
                         case 6:
                             organizacion.SubGerencia.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioOrganizacion.ActualizarOrganizacion(organizacion);
                             ddlGerencia_OnSelectedIndexChanged(ddlGerencia, null);
                             ddlSubGerencia.SelectedValue = ddlSubGerencia.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlSubGerencia_OnSelectedIndexChanged(ddlSubGerencia, null);
                             break;
                         case 7:
                             organizacion.Jefatura.Descripcion = txtDescripcionCatalogo.Text.Trim();

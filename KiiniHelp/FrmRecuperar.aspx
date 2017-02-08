@@ -89,7 +89,7 @@
                                     <asp:Label runat="server" Text='<%# Eval("IdUsuario") %>' ID="lblIdUsuario" Visible="False" />
                                     <asp:Label runat="server" Text='<%# Eval("Pregunta") %>' class="col-xs-6 col-md-3" ID="lblPregunta" />
                                     <div class="col-sm-9">
-                                        <asp:TextBox runat="server" ID="txtRespuesta" CssClass="form-control obligatorio" />
+                                        <asp:TextBox runat="server" ID="txtRespuesta" CssClass="form-control obligatorio" style="text-transform: none" />
                                     </div>
                                 </div>
                             </ItemTemplate>

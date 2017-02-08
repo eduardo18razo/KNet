@@ -44,8 +44,6 @@ namespace KiiniHelp.UserControls.Consultas
                 throw new Exception(e.Message);
             }
         }
-
-
         private void LlenaPuestosConsulta(string filtro = "")
         {
             try
@@ -99,7 +97,6 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = _lstError;
             }
         }
-
         private void AltaPuestoOnCancelarModal()
         {
             try
@@ -116,7 +113,6 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = _lstError;
             }
         }
-
         private void AltaPuestoOnAceptarModal()
         {
             try
@@ -134,7 +130,6 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = _lstError;
             }
         }
-
         protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -159,7 +154,6 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = _lstError;
             }
         }
-
         protected void btnBaja_OnClick(object sender, EventArgs e)
         {
             try
@@ -177,7 +171,6 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = _lstError;
             }
         }
-
         protected void btnAlta_OnClick(object sender, EventArgs e)
         {
             try
@@ -195,14 +188,17 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = _lstError;
             }
         }
-
         protected void btnEditar_OnClick(object sender, EventArgs e)
         {
             try
             {
                 ucAltaPuesto.EsAlta = false;
+                Puesto puesto = _servicioPuestos.ObtenerPuestoById(Convert.ToInt32(hfId.Value));
+                if (puesto == null) return;
+                ddlTipoUsuario.SelectedValue = puesto.IdTipoUsuario.ToString();
+                ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
                 ucAltaPuesto.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
-                ucAltaPuesto.IdPuesto = Convert.ToInt32(hfId.Value);
+                ucAltaPuesto.IdPuesto = puesto.Id;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaPuesto\");", true);
             }
             catch (Exception ex)
@@ -233,7 +229,6 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = _lstError;
             }
         }
-
         protected void btnBuscar_OnClick(object sender, EventArgs e)
         {
             try

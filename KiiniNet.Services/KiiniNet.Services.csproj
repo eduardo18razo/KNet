@@ -36,16 +36,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IService1.cs" />
     <Compile Include="Operacion\Implementacion\ServiceArea.cs" />
     <Compile Include="Operacion\Implementacion\ServiceConsultas.cs" />
     <Compile Include="Operacion\Implementacion\ServiceDiasHorario.cs" />
@@ -56,6 +55,7 @@
     <Compile Include="Operacion\Interface\IServiceDiasHorario.cs" />
     <Compile Include="Operacion\Interface\IServicePuesto.cs" />
     <Compile Include="Operacion\Interface\IServiceTicket.cs" />
+    <Compile Include="Service1.cs" />
     <Compile Include="Sistema\Implementacion\ServiceCanal.cs" />
     <Compile Include="Sistema\Implementacion\ServiceImpactoUrgencia.cs" />
     <Compile Include="Sistema\Implementacion\ServiceNotificacion.cs" />

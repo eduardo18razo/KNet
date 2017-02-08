@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using KiiniHelp.ServiceUsuario;
 using KiiniNet.Entities.Operacion.Usuarios;
 
@@ -20,7 +18,11 @@ namespace KiiniHelp.UserControls.Detalles
         public bool FromModal
         {
             get { return btnCerrarModal.Visible; }
-            set { btnCerrarModal.Visible = value; }
+            set
+            {
+                btnCerrarModal.Visible = value;
+
+            }
         }
         public int IdUsuario
         {

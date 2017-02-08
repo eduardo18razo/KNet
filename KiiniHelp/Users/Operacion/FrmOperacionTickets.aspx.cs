@@ -102,6 +102,8 @@ namespace KiiniHelp.Users.Operacion
                 _lstError = new List<string>();
                 if (!IsPostBack)
                 {
+                    if (int.Parse(Session["RolSeleccionado"].ToString()) != (int)BusinessVariables.EnumRoles.ResponsableDeAtención)
+                        Response.Redirect("~/Users/DashBoard.aspx");
                     ViewState["Column"] = "DateTime";
                     ViewState["Sortorder"] = "ASC";
                     ViewState["PageIndex"] = "0";
@@ -301,7 +303,7 @@ namespace KiiniHelp.Users.Operacion
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEstatusCambio\");", true);
                 if (UcCambiarEstatusTicket.CerroTicket)
                 {
-                    string url = ResolveUrl("~/FrmEncuesta.aspx?IdTipoServicio=" + (int)BusinessVariables.EnumTipoArbol.Servicio + "IdTicket=" + hfTicketActivo.Value);
+                    string url = ResolveUrl("~/FrmEncuesta.aspx?IdTipoServicio=" + (int)BusinessVariables.EnumTipoArbol.SolicitarServicio + "IdTicket=" + hfTicketActivo.Value);
                     //string s = "window.open('" + url + "', 'popup_window', 'width=600,height=600,left=300,top=100,resizable=yes');";
                     //ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptEncuesta", "OpenWindow(\"" + url + "\");", true);

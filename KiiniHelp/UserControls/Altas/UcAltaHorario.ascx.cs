@@ -127,6 +127,7 @@ namespace KiiniHelp.UserControls.Altas
                 if (!IsPostBack)
                 {
                     LlenaCombo();
+                    chklbxDias.Items.Add(new ListItem("TODOS", "99"));
                     chklbxDias.Items.Add(new ListItem("LUNES", "1"));
                     chklbxDias.Items.Add(new ListItem("MARTES", "2"));
                     chklbxDias.Items.Add(new ListItem("MIERCOLES", "3"));
@@ -183,6 +184,7 @@ namespace KiiniHelp.UserControls.Altas
                 sb.AppendLine("<li>Ingrese una descripción.</li>");
             if (rptHorarios.Items.Count <= 0)
                 sb.AppendLine("<li>Ingrese al menos un horario.</li>");
+            
             if (sb.ToString() != string.Empty)
             {
                 sb.Append("</ul>");
@@ -198,16 +200,51 @@ namespace KiiniHelp.UserControls.Altas
             {
                 ValidaCapturaHorario();
                 List<HorarioDetalle> lst = (List<HorarioDetalle>)Session["NuevoHorario"] ?? new List<HorarioDetalle>();
-                foreach (ListItem dia in chklbxDias.Items)
+                foreach (ListItem dia in chklbxDias.Items.Cast<ListItem>().Where(w => w.Value != "99"))
                 {
-                    if (dia.Selected)
-                        if (!lst.Any(s => s.HoraInicio == Convert.ToDateTime(txtHoraInicio.Text.Trim()).ToString("HH:mm:ss") && s.Dia == Convert.ToInt32(dia.Value)))
-                            lst.Add(new HorarioDetalle
+                    if (!dia.Selected) continue;
+                    foreach (RepeaterItem itemHorario in rptHorarios.Items)
+                    {
+                        Label lblDia = (Label) itemHorario.FindControl("lblDia");
+                        if (lblDia != null)
+                        {
+                            if (lblDia.Text == dia.Value)
                             {
-                                Dia = Convert.ToInt32(dia.Value),
-                                HoraInicio = Convert.ToDateTime(txtHoraInicio.Text.Trim()).ToString("HH:mm:ss"),
-                                HoraFin = Convert.ToDateTime(txtHoraFin.Text.Trim()).ToString("HH:mm:ss")
-                            });
+                                Label lblHoraInicio = (Label) itemHorario.FindControl("lblHoraInicio");
+                                Label lblHoraFin = (Label) itemHorario.FindControl("lblHoraFin");
+                                DateTime horaInicioIngresar = DateTime.ParseExact(Convert.ToDateTime(txtHoraInicio.Text.Trim()).ToString("HH:mm:ss"), "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+                                DateTime horaFinIngresar = DateTime.ParseExact(Convert.ToDateTime(txtHoraFin.Text.Trim()).ToString("HH:mm:ss"), "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+                                DateTime horaInicioEncontrada = DateTime.ParseExact(lblHoraInicio.Text, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+                                DateTime horaFinEncontrada = DateTime.ParseExact(lblHoraFin.Text, "HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture);
+                                if (horaInicioIngresar >= horaInicioEncontrada)
+                                {
+                                    if (horaInicioIngresar <= horaFinEncontrada)
+                                    {
+                                        throw new Exception("No se puede ingresar hora traslapada");
+                                    }
+                                }
+
+                                if (horaFinIngresar <= horaFinEncontrada)
+                                {
+                                    if (horaFinIngresar >= horaInicioEncontrada)
+                                    {
+                                        throw new Exception("No se puede ingresar hora traslapada");
+                                    }
+                                }
+                                
+                                    
+                            }
+                        }
+                    }
+
+                    if (!lst.Any(s =>s.HoraInicio == Convert.ToDateTime(txtHoraInicio.Text.Trim()).ToString("HH:mm:ss") &&
+                                     s.Dia == Convert.ToInt32(dia.Value)))
+                        lst.Add(new HorarioDetalle
+                        {
+                            Dia = Convert.ToInt32(dia.Value),
+                            HoraInicio = Convert.ToDateTime(txtHoraInicio.Text.Trim()).ToString("HH:mm:ss"),
+                            HoraFin = Convert.ToDateTime(txtHoraFin.Text.Trim()).ToString("HH:mm:ss")
+                        });
                 }
 
                 MuestraHorarios(lst);
@@ -297,6 +334,39 @@ namespace KiiniHelp.UserControls.Altas
                 LimpiarPantalla();
                 if (OnCancelarModal != null)
                     OnCancelarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void chklbxDias_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chklbxDias.Items.Cast<ListItem>().Any(item => item.Selected && item.Value == "99"))
+                {
+                    foreach (ListItem dia in chklbxDias.Items)
+                    {
+                        dia.Selected = true;
+                    }
+                }
+
+                if (chklbxDias.Items.Cast<ListItem>().Any(item => item.Selected && item.Value == "99") && chklbxDias.Items.Cast<ListItem>().Any(item => !item.Selected))
+                {
+                    ListItem item = chklbxDias.Items.Cast<ListItem>().SingleOrDefault(s => s.Value == "99");
+                    if (item != null)
+                        item.Selected = false;
+                }
+
+
+
             }
             catch (Exception ex)
             {

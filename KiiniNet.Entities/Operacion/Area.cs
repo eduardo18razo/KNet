@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 using KiiniNet.Entities.Cat.Operacion;
 
 namespace KiiniNet.Entities.Operacion
@@ -14,6 +12,10 @@ namespace KiiniNet.Entities.Operacion
         public int Id { get; set; }
         [DataMember]
         public string Descripcion { get; set; }
+        [DataMember]
+        public byte[] Imagen { get; set; }
+        [DataMember]
+        public string Extension { get; set; }
         [DataMember]
         public bool Habilitado { get; set; }
         [DataMember]

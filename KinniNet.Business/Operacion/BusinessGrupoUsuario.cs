@@ -380,11 +380,14 @@ namespace KinniNet.Core.Operacion
                     subGrupo.DiaFestivoSubGrupo = subGrupo.DiaFestivoSubGrupo ?? new List<DiaFestivoSubGrupo>();
                     subGrupo.HorarioSubGrupo.AddRange(lstHorarioGpo);
                     List<DiaFestivoSubGrupo> lstDiasDescanso = diasDescanso.SingleOrDefault(w => w.Key == horario.Key).Value;
-                    foreach (DiaFestivoSubGrupo dia in lstDiasDescanso)
+                    if (lstDiasDescanso != null)
                     {
-                        dia.IdSubGrupoUsuario = horario.Key;
+                        foreach (DiaFestivoSubGrupo dia in lstDiasDescanso)
+                        {
+                            dia.IdSubGrupoUsuario = horario.Key;
+                        }
+                        subGrupo.DiaFestivoSubGrupo.AddRange(lstDiasDescanso);
                     }
-                    subGrupo.DiaFestivoSubGrupo.AddRange(lstDiasDescanso);
 
                     grupoUsuario.SubGrupoUsuario.Add(subGrupo);
                 }
@@ -578,7 +581,7 @@ namespace KinniNet.Core.Operacion
                           join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
                           join gu in db.GrupoUsuario on tgu.IdGrupoUsuario equals gu.Id
                           join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
-                          where gu.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || gu.IdTipoUsuario == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada
+                          where gu.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || gu.IdTipoUsuario == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido
                           select new { t, gu, ug };
 
                 if (!supervisor)
@@ -618,10 +621,21 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.LazyLoadingEnabled = true;
+                gpo.Descripcion = gpo.Descripcion.Trim().ToUpper();
+                    if (db.GrupoUsuario.Any(a => a.Descripcion == gpo.Descripcion && a.IdTipoGrupo == gpo.IdTipoGrupo && a.Id != gpo.Id))
+                    {
+                        throw new Exception("Ya existe un Grupo con esta descripción");
+                    }
                 GrupoUsuario grupo = db.GrupoUsuario.SingleOrDefault(w => w.Id == gpo.Id);
                 List<SubGrupoUsuario> sb = new List<SubGrupoUsuario>();
                 if (grupo != null)
                 {
+                    
+                    if (grupo.IdTipoGrupo == (int) BusinessVariables.EnumTiposGrupos.AgenteUniversal)
+                    {
+                        grupo.LevantaTicket = gpo.LevantaTicket;
+                        grupo.RecadoTicket = gpo.RecadoTicket;
+                    }
                     foreach (KeyValuePair<int, int> horario in horarios)
                     {
 
@@ -641,7 +655,8 @@ namespace KinniNet.Core.Operacion
                         }
 
                         SubGrupoUsuario subGrupo = new SubGrupoUsuario();
-                        subGrupo.Id = grupo.SubGrupoUsuario.First(f => f.IdSubRol == horario.Key).Id;
+                        var h = grupo.SubGrupoUsuario.FirstOrDefault(f => f.IdSubRol == horario.Key);
+                        subGrupo.Id = grupo.SubGrupoUsuario.FirstOrDefault(f => f.IdSubRol == horario.Key) != null ? grupo.SubGrupoUsuario.First(f => f.IdSubRol == horario.Key).Id : 0;
                         subGrupo.IdGrupoUsuario = grupo.Id;
                         subGrupo.IdSubRol = horario.Key;
                         subGrupo.Habilitado = true;
@@ -739,8 +754,8 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
         }
-        
-        
+
+
         private List<EstatusTicketSubRolGeneral> GeneraEstatusGrupoDefault(GrupoUsuario grupo)
         {
 

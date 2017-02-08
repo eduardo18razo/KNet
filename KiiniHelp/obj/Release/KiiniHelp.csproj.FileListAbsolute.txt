@@ -1,175 +1,40 @@
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\KiiniHelp.dll.config
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\KiiniHelp.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\KiiniHelp.pdb
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\AjaxControlToolkit.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\Antlr3.Runtime.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.AspNet.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.Core.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\KiiniNet.Entities.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\KinniNet.Business.Utils.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\Microsoft.Web.Infrastructure.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\System.Web.Optimization.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\System.Web.Providers.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\WebGrease.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\KiiniNet.Entities.pdb
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\KinniNet.Business.Utils.pdb
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.Core.xml
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.xml
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.xml
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.xml
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.AspNet.xml
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\es\System.Web.Optimization.resources.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\es\System.Web.Providers.resources.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\obj\Release\KiiniHelp.csprojResolveAssemblyReference.cache
-D:\KiiniNet\App\KinniNet\KiiniHelp\obj\Release\KiiniHelp.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\obj\Release\KiiniHelp.pdb
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\CuteEditor.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\FreeTextBox.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\bin\Winthusiasm.HtmlEditor.dll
-D:\KiiniNet\App\KinniNet\KiiniHelp\obj\Release\KiiniHelp.dll.licenses
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\KiiniHelp.dll.config
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\KiiniHelp.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\KiiniHelp.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\Antlr3.Runtime.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.AspNet.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.Core.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\KiiniNet.Entities.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\KinniNet.Business.Utils.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\System.Web.Optimization.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\System.Web.Providers.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\WebGrease.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\System.Net.Http.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\KiiniNet.Entities.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\KinniNet.Business.Utils.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.Core.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\DotNetOpenAuth.AspNet.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\System.Net.Http.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\es\System.Web.Optimization.resources.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\es\System.Web.Providers.resources.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\obj\Release\KiiniHelp.csprojResolveAssemblyReference.cache
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\obj\Release\KiiniHelp.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\obj\Release\KiiniHelp.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KinniNet\KiiniHelp\bin\SigmaToolBox.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\KiiniHelp.dll.config
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\KiiniHelp.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\KiiniHelp.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\Antlr3.Runtime.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.AspNet.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.Core.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\KiiniNet.Entities.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\KinniNet.Business.Utils.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\SigmaToolBox.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\System.Web.Optimization.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\System.Web.Providers.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\WebGrease.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\System.Net.Http.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\KiiniNet.Entities.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\KinniNet.Business.Utils.pdb
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.Core.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.AspNet.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\System.Net.Http.xml
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\es\System.Web.Optimization.resources.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\bin\es\System.Web.Providers.resources.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\obj\Release\KiiniHelp.csprojResolveAssemblyReference.cache
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\obj\Release\KiiniHelp.csproj.ResolveComReference.cache
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\obj\Release\KiiniHelp.dll
-C:\Users\Eduardo\Documents\Visual Studio 2013\Projects\KiiniNet\App\KiiniNet\KiiniHelp\obj\Release\KiiniHelp.pdb
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\KiiniHelp.dll.config
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\KiiniHelp.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\KiiniHelp.pdb
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\Antlr3.Runtime.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.AspNet.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.Core.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\KiiniNet.Entities.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\KinniNet.Business.Utils.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\System.Web.Optimization.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\System.Web.Providers.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\WebGrease.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\System.Net.Http.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\KiiniNet.Entities.pdb
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\KinniNet.Business.Utils.pdb
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.Core.xml
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.xml
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.xml
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.xml
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DotNetOpenAuth.AspNet.xml
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\System.Net.Http.xml
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\es\System.Web.Optimization.resources.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\es\System.Web.Providers.resources.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\es\System.Net.Http.resources.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\obj\Release\KiiniHelp.csprojResolveAssemblyReference.cache
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\obj\Release\KiiniHelp.csproj.ResolveComReference.cache
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\obj\Release\KiiniHelp.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\obj\Release\KiiniHelp.pdb
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\AspNet.ScriptManager.jQuery.dll
-C:\Users\Eduardo Cerritos\Documents\Visual Studio 2013\KiiniNet\KiiniHelp\bin\DayPilot.xml
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\KiiniHelp.dll.config
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\KiiniHelp.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\KiiniHelp.pdb
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\Antlr3.Runtime.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\AspNet.ScriptManager.jQuery.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\DotNetOpenAuth.AspNet.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\DotNetOpenAuth.Core.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\DotNetOpenAuth.OAuth.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\DotNetOpenAuth.OpenId.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\KiiniNet.Entities.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\KinniNet.Business.Utils.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\System.Web.Optimization.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\System.Web.Providers.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\WebGrease.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\System.Net.Http.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\KiiniNet.Entities.pdb
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\KinniNet.Business.Utils.pdb
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\DotNetOpenAuth.Core.xml
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\DotNetOpenAuth.OAuth.xml
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.xml
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\DotNetOpenAuth.OpenId.xml
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\DotNetOpenAuth.AspNet.xml
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\System.Net.Http.xml
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\es\System.Web.Optimization.resources.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\es\System.Web.Providers.resources.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\es\System.Net.Http.resources.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\obj\Release\KiiniHelp.csprojResolveAssemblyReference.cache
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\obj\Release\KiiniHelp.csproj.ResolveComReference.cache
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\obj\Release\KiiniHelp.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\obj\Release\KiiniHelp.pdb
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\MSCaptcha.dll
-C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KiiniHelp\bin\MSCaptcha.xml
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KiiniHelp.dll.config
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KiiniHelp.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KiiniHelp.pdb
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\Antlr3.Runtime.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\AspNet.ScriptManager.jQuery.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\DotNetOpenAuth.AspNet.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\DotNetOpenAuth.Core.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\DotNetOpenAuth.OAuth.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\DotNetOpenAuth.OpenId.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\itextsharp.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KiiniNet.Entities.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KinniNet.Business.Utils.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\MSCaptcha.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\System.Web.Optimization.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\System.Web.Providers.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\WebGrease.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\System.Net.Http.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KiiniNet.Entities.pdb
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KinniNet.Business.Utils.pdb
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\MSCaptcha.xml
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\DotNetOpenAuth.Core.xml
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\DotNetOpenAuth.OAuth.xml
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\DotNetOpenAuth.OAuth.Consumer.xml
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\DotNetOpenAuth.OpenId.xml
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\DotNetOpenAuth.AspNet.xml
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\System.Net.Http.xml
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\es\System.Web.Optimization.resources.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\es\System.Web.Providers.resources.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\es\System.Net.Http.resources.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\obj\Release\KiiniHelp.csprojResolveAssemblyReference.cache
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\obj\Release\KiiniHelp.csproj.ResolveComReference.cache
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\obj\Release\KiiniHelp.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\obj\Release\KiiniHelp.pdb
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\EPPlus.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\EPPlus.xml

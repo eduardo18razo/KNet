@@ -69,13 +69,13 @@ namespace KinniNet.Core.Demonio
                         case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención:
                             informeDueño.AddRange(selectTickets.ToList().Distinct());
                             break;
-                        case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
+                        case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido:
                             informeMantenimiento.AddRange(selectTickets.ToList().Distinct());
                             break;
                         case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
                             informeDesarrollo.AddRange(selectTickets.ToList().Distinct());
                             break;
-                        case (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta:
+                        case (int)BusinessVariables.EnumTiposGrupos.ConsultasEspeciales:
                             informeConsulta.AddRange(selectTickets.ToList().Distinct());
                             break;
                     }
@@ -86,9 +86,9 @@ namespace KinniNet.Core.Demonio
                 informeConsulta = informeConsulta.Distinct().ToList();
 
                 EnviaNotificacion(informeDueño, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención);
-                EnviaNotificacion(informeMantenimiento, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada);
+                EnviaNotificacion(informeMantenimiento, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido);
                 EnviaNotificacion(informeDesarrollo, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo);
-                EnviaNotificacion(informeConsulta, (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta);
+                EnviaNotificacion(informeConsulta, (int)BusinessVariables.EnumTiposGrupos.ConsultasEspeciales);
 
             }
             catch (Exception e)

@@ -81,6 +81,8 @@ namespace KinniNet.Core.Operacion
             try
             {
                 horario.Descripcion = horario.Descripcion.ToUpper();
+                if (db.Horario.Any(a=>a.Descripcion == horario.Descripcion))
+                    throw new Exception("Ya existe un horario con esta descripción");
                 db.Horario.AddObject(horario);
                 db.SaveChanges();
             }

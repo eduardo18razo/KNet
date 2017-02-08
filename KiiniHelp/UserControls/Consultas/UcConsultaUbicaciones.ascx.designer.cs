@@ -112,6 +112,15 @@ namespace KiiniHelp.UserControls.Consultas {
         protected global::System.Web.UI.WebControls.Label lbotest;
         
         /// <summary>
+        /// Control lblTitleUbicacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTitleUbicacion;
+        
+        /// <summary>
         /// Control ddlTipoUsuario.
         /// </summary>
         /// <remarks>

@@ -67,7 +67,7 @@ namespace KiiniHelp.UserControls.Filtros.Componentes
         {
             get
             {
-                return (from RepeaterItem item in rptVipSeleccionado.Items select (bool?) Convert.ToBoolean(((Label) item.FindControl("lblId")).Text)).ToList();
+                return (from RepeaterItem item in rptVipSeleccionado.Items select (bool?)(((Label) item.FindControl("lblId")).Text == "1")).ToList();
             }
         }
 

@@ -24,7 +24,7 @@ namespace KiiniNet.Services.Security.Interface
         void ChangePassword(int idUsuario, string contrasenaActual, string contrasenaNueva);
 
         [OperationContract]
-        List<Menu> ObtenerMenuUsuario(int idUsuario, List<int> areas, bool arboles);
+        List<Menu> ObtenerMenuUsuario(int idUsuario, int idRol, bool arboles);
 
         [OperationContract]
         List<Menu> ObtenerMenuPublico(int idTipoUsuario, int idArea, bool arboles);

@@ -42,11 +42,41 @@ namespace KiiniHelp.UserControls.Altas
             return true;
         }
 
-        private void LimpiarCampos()
+        public void LimpiarCampos()
         {
             try
             {
+                txtDuenoDias.Text = string.Empty;
+                txtDuenoHoras.Text = string.Empty;
+                txtDuenoMinutos.Text = string.Empty;
+                txtDuenoSegundos.Text = string.Empty;
+                ddlDuenoVia.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
+                chkDueno.Checked = false;
+                chkDueno_OnCheckedChanged(chkDueno, null);
 
+                txtMttoDias.Text = string.Empty;
+                txtMttoHoras.Text = string.Empty;
+                txtMttoMinutos.Text = string.Empty;
+                txtMttoSegundos.Text = string.Empty;
+                ddlMttoVia.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
+                chkMtto.Checked = false;
+                chkMtto_OnCheckedChanged(chkMtto, null);
+
+                txtDesarrolloDias.Text = string.Empty;
+                txtDesarrolloHoras.Text = string.Empty;
+                txtDesarrolloMinutos.Text = string.Empty;
+                txtDesarrolloSegundos.Text = string.Empty;
+                ddlDesarrolloVia.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
+                chkDesarrollo.Checked = false;
+                chkDesarrollo_OnCheckedChanged(chkDesarrollo, null);
+
+                txtConsultaDias.Text = string.Empty;
+                txtConsultaHoras.Text = string.Empty;
+                txtConsultaMinutos.Text = string.Empty;
+                txtConsultaSegundos.Text = string.Empty;
+                ddlConsultaVia.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
+                chkConsulta.Checked = false;
+                chkConsulta_OnCheckedChanged(chkConsulta, null);
             }
             catch (Exception ex)
             {
@@ -58,12 +88,12 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada).ToList())
+                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido).ToList())
                 {
                     //if(tiempo.GrupoUsuario.id)
                     //TiempoDueño = tiempo;
                 }
-                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada).ToList())
+                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido).ToList())
                 {
                     TiempoMantenimiento = tiempo;
                 }
@@ -71,7 +101,7 @@ namespace KiiniHelp.UserControls.Altas
                 {
                     TiempoDesarrollo = tiempo;
                 }
-                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta).ToList())
+                foreach (TiempoInformeArbol tiempo in tiemposInforme.Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ConsultasEspeciales).ToList())
                 {
                     TiempoConsulta = tiempo;
                 }
@@ -96,6 +126,11 @@ namespace KiiniHelp.UserControls.Altas
             {
                 throw new Exception(e.Message);
             }
+        }
+
+        public bool TieneTiempoDueño
+        {
+            get { return chkDueno.Checked; }
         }
 
         //TODO: CAMBIAR VALORES FIJOS POR VARIABLES DE PARAMETRO
@@ -128,6 +163,10 @@ namespace KiiniHelp.UserControls.Altas
                 chkDueno_OnCheckedChanged(chkDueno, null);
             }
         }
+        public bool TieneTiempoMantenimiento
+        {
+            get { return chkDueno.Checked; }
+        }
         public TiempoInformeArbol TiempoMantenimiento
         {
             get
@@ -156,6 +195,11 @@ namespace KiiniHelp.UserControls.Altas
                 chkMtto.Checked = true;
                 chkMtto_OnCheckedChanged(chkMtto, null);
             }
+        }
+
+        public bool TieneTiempoDesarrollo
+        {
+            get { return chkDueno.Checked; }
         }
         public TiempoInformeArbol TiempoDesarrollo
         {
@@ -186,6 +230,10 @@ namespace KiiniHelp.UserControls.Altas
                 chkDesarrollo.Checked = true;
                 chkDesarrollo_OnCheckedChanged(chkDesarrollo, null);
             }
+        }
+        public bool TieneTiempoConsulta
+        {
+            get { return chkDueno.Checked; }
         }
         public TiempoInformeArbol TiempoConsulta
         {

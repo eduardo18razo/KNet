@@ -124,7 +124,7 @@
                                         <div class="form-group">
                                             <asp:Label class="col-xs-1 control-label" runat="server">Descripción</asp:Label>
                                             <div class="col-xs-2 ">
-                                                <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" />
+                                                <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
                                             </div>
                                             <asp:Button runat="server" CssClass="btn btn-primary" ID="btnBuscar" Text="Buscar" OnClick="btnBuscar_OnClick"/>
                                         </div>
@@ -148,7 +148,7 @@
                                                     <td>
                                                         <asp:Label runat="server">Tipo Usuario</asp:Label></td>
                                                     <td>
-                                                        <asp:Label runat="server">Descripcion</asp:Label></td>
+                                                        <asp:Label runat="server">Descripción</asp:Label></td>
                                                     <td>
                                                         <asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>

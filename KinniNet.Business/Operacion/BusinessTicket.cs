@@ -501,14 +501,14 @@ namespace KinniNet.Core.Operacion
 
                 if (lstGrupos.Count <= 0)
                 {
-                    lstGrupos = db.UsuarioGrupo.Where(ug => ug.IdUsuario == idUsuario && ug.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).Distinct().ToList();
+                    lstGrupos = db.UsuarioGrupo.Where(ug => ug.IdUsuario == idUsuario && ug.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Usuario).Select(s => s.IdGrupoUsuario).Distinct().ToList();
                     foreach (int idGrupo in lstGrupos)
                     {
                         lstEstatusPermitidos.AddRange((from etsrg in db.EstatusTicketSubRolGeneral
                                                        join gu in db.GrupoUsuario on new { gpo = etsrg.IdGrupoUsuario, sup = (bool)etsrg.TieneSupervisor } equals new { gpo = gu.Id, sup = gu.TieneSupervisor }
                                                        join sgu in db.SubGrupoUsuario on new { Gpo = gu.Id, gpoIn = etsrg.IdGrupoUsuario, sbr = (int)etsrg.IdSubRolSolicita } equals new { Gpo = sgu.IdGrupoUsuario, gpoIn = sgu.IdGrupoUsuario, sbr = sgu.IdSubRol }
                                                        join ug in db.UsuarioGrupo on new { idGpo = gu.Id, rol = etsrg.IdRolSolicita, dbgpo = sgu.Id } equals new { idGpo = ug.IdGrupoUsuario, rol = ug.IdRol, dbgpo = (int)ug.IdSubGrupoUsuario }
-                                                       where gu.Id == 8 && ug.IdUsuario == 2 && etsrg.Habilitado
+                                                       where gu.Id == idGrupo && ug.IdUsuario == idUsuario && etsrg.Habilitado
                                                        select etsrg.IdEstatusTicketActual).Distinct().ToList());
                     }
                     foreach (int grupo in lstGrupos)
@@ -546,7 +546,7 @@ namespace KinniNet.Core.Operacion
                                                        join gu in db.GrupoUsuario on new { gpo = etsrg.IdGrupoUsuario, sup = (bool)etsrg.TieneSupervisor } equals new { gpo = gu.Id, sup = gu.TieneSupervisor }
                                                        join sgu in db.SubGrupoUsuario on new { Gpo = gu.Id, gpoIn = etsrg.IdGrupoUsuario, sbr = (int)etsrg.IdSubRolSolicita } equals new { Gpo = sgu.IdGrupoUsuario, gpoIn = sgu.IdGrupoUsuario, sbr = sgu.IdSubRol }
                                                        join ug in db.UsuarioGrupo on new { idGpo = gu.Id, rol = etsrg.IdRolSolicita, dbgpo = sgu.Id } equals new { idGpo = ug.IdGrupoUsuario, rol = ug.IdRol, dbgpo = (int)ug.IdSubGrupoUsuario }
-                                                       where gu.Id == 8 && ug.IdUsuario == 2 && etsrg.Habilitado
+                                                       where gu.Id == idGrupo && ug.IdUsuario == idUsuario && etsrg.Habilitado
                                                        select etsrg.IdEstatusTicketActual).Distinct().ToList());
                     }
                     foreach (int grupo in lstGrupos)

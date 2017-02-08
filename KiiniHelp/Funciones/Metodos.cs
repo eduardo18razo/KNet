@@ -3,7 +3,6 @@ using System.Linq;
 using System.Text;
 using System.Web.UI.WebControls;
 using KinniNet.Business.Utils;
-using Microsoft.Ajax.Utilities;
 
 namespace KiiniHelp.Funciones
 {

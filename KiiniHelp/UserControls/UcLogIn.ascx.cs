@@ -56,7 +56,7 @@ namespace KiiniHelp.UserControls
         private void ValidaCaptura()
         {
             StringBuilder sb = new StringBuilder();
-            
+
             if (txtUsuario.Text.Trim() == string.Empty)
                 sb.AppendLine("<li>Usuario es un campo obligatorio.</li>");
             if (txtpwd.Text.Trim() == string.Empty)
@@ -114,8 +114,9 @@ namespace KiiniHelp.UserControls
                 ValidaCaptura();
                 if (!ValidCaptcha)
                 {
-                    LimpiarPantalla();
-                    return;
+                    txtCaptcha.Text = string.Empty;
+                    StringBuilder sb = new StringBuilder();
+                    throw new Exception(sb.ToString());
                 }
                 if (!_servicioSeguridad.Autenticate(txtUsuario.Text.Trim(), txtpwd.Text.Trim())) throw new Exception("Usuario y/o contraseña no validos");
                 Usuario user = _servicioSeguridad.GetUserDataAutenticate(txtUsuario.Text.Trim(), txtpwd.Text.Trim());
@@ -124,7 +125,7 @@ namespace KiiniHelp.UserControls
                 string encTicket = FormsAuthentication.Encrypt(ticket);
                 Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
                 List<int> roles = user.UsuarioRol.Select(s => s.RolTipoUsuario.IdRol).ToList();
-                if (roles.Any(a => a == (int) BusinessVariables.EnumRoles.Administrador)) ;
+                if (roles.Any(a => a == (int)BusinessVariables.EnumRoles.Administrador)) ;
                 LimpiarPantalla();
                 if (OnCancelarModal != null)
                     OnCancelarModal();

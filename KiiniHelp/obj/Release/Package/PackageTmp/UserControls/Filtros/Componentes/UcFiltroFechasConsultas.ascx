@@ -31,13 +31,13 @@
                     <div class="form-group">
                         <asp:Label CssClass="col-sm-3" runat="server" Text="Fecha Inicio" />
                         <div class="col-sm-6">
-                            <asp:TextBox runat="server" CssClass="form-control" type="date" step="1" ID="txtFechaInicio" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>/>
+                            <asp:TextBox runat="server" CssClass="form-control" type="date" step="1" ID="txtFechaInicio" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <asp:Label CssClass="col-sm-3" runat="server" Text="Fecha Fin" />
                         <div class="col-sm-6">
-                            <asp:TextBox runat="server" CssClass="form-control" type="date" step="1" ID="txtFechaFin" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>/>
+                            <asp:TextBox runat="server" CssClass="form-control" type="date" step="1" ID="txtFechaFin" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
                         </div>
                     </div>
                 </div>

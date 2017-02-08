@@ -248,9 +248,9 @@ namespace KinniNet.Core.Operacion
                     campoMascara.SimboloMoneda = campoMascara.SimboloMoneda == null ? null : campoMascara.SimboloMoneda.Trim().ToUpper();
                     campoMascara.TipoCampoMascara = null;
                 }
-                mascara.NombreTabla = (BusinessVariables.ParametrosMascaraCaptura.PrefijoTabla + mascara.Descripcion).Replace(" ", string.Empty);
-                mascara.ComandoInsertar = (BusinessVariables.ParametrosMascaraCaptura.PrefijoComandoInsertar + mascara.Descripcion).Replace(" ", string.Empty);
-                mascara.ComandoActualizar = (BusinessVariables.ParametrosMascaraCaptura.PrefijoComandoActualizar + mascara.Descripcion).Replace(" ", string.Empty);
+                mascara.NombreTabla = (BusinessVariables.ParametrosMascaraCaptura.PrefijoTabla + mascara.Descripcion).Replace(" ", string.Empty).ToUpper();
+                mascara.ComandoInsertar = (BusinessVariables.ParametrosMascaraCaptura.PrefijoComandoInsertar + mascara.Descripcion).Replace(" ", string.Empty).ToUpper();
+                mascara.ComandoActualizar = (BusinessVariables.ParametrosMascaraCaptura.PrefijoComandoActualizar + mascara.Descripcion).Replace(" ", string.Empty).ToUpper();
                 mascara.Habilitado = true;
 
                 ExisteMascara(mascara);

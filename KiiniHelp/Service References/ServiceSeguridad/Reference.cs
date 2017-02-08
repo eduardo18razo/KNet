@@ -31,7 +31,7 @@ namespace KiiniHelp.ServiceSeguridad {
         void ChangePassword(int idUsuario, string contrasenaActual, string contrasenaNueva);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuario", ReplyAction="http://tempuri.org/IServiceSecurity/ObtenerMenuUsuarioResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuUsuario(int idUsuario, System.Collections.Generic.List<int> areas, bool arboles);
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuUsuario(int idUsuario, int idRol, bool arboles);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSecurity/ObtenerMenuPublico", ReplyAction="http://tempuri.org/IServiceSecurity/ObtenerMenuPublicoResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuPublico(int idTipoUsuario, int idArea, bool arboles);
@@ -93,8 +93,8 @@ namespace KiiniHelp.ServiceSeguridad {
             base.Channel.ChangePassword(idUsuario, contrasenaActual, contrasenaNueva);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuUsuario(int idUsuario, System.Collections.Generic.List<int> areas, bool arboles) {
-            return base.Channel.ObtenerMenuUsuario(idUsuario, areas, arboles);
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuUsuario(int idUsuario, int idRol, bool arboles) {
+            return base.Channel.ObtenerMenuUsuario(idUsuario, idRol, arboles);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.Menu> ObtenerMenuPublico(int idTipoUsuario, int idArea, bool arboles) {

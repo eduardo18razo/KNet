@@ -23,14 +23,14 @@
             </header>
             <div class="panel-heading">
 
-                <h3>Alta de catalogo
+                <h3>Agregar registro
                         <asp:Label runat="server" ID="lblTitle" /></h3>
             </div>
             <div class="panel-body">
                 <asp:HiddenField runat="server" ID="hfEsAlta" />
                 <asp:HiddenField runat="server" ID="hfIdCatalogo" />
                 <div class="form-group">
-                    <asp:Label runat="server" Text="Descripcion" />
+                    <asp:Label runat="server" Text="Descripción" />
                     <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" />
                 </div>
             </div>

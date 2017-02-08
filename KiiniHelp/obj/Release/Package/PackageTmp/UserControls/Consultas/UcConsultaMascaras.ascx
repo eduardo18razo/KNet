@@ -97,7 +97,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Consulta Formularios de Cliente</h3>
+                    <h3>Formularios</h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">
@@ -105,7 +105,7 @@
                             <div class="panel-heading" role="tab" id="headingFiltros">
                                 <h4 class="panel-title">
                                     <div role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiltros" aria-expanded="true" aria-controls="collapseFiltros" style="cursor: pointer">
-                                        Filtros
+                                        Ocultar/Mostrar Filtros
                                     </div>
                                 </h4>
                             </div>
@@ -113,13 +113,13 @@
                                 <div class="panel-body">
                                     <div class="form-horizontal">
                                         <div class="form-group">
-                                            <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Descripcion</asp:Label>
-                                            <asp:TextBox runat="server" ID="txtDescripcion" AutoPostBack="True" OnTextChanged="txtDescripcion_OnTextChanged" CssClass="form-control"></asp:TextBox>
+                                            <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Nombre del Formulario</asp:Label>
+                                            <asp:TextBox Width="14%" runat="server" ID="txtDescripcion" AutoPostBack="True" OnTextChanged="txtDescripcion_OnTextChanged" CssClass="col-xs-3 form-control" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
                                         </div>
                                         <div class="form-group">
-                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Informacion" Width="14%" OnClick="btnNew_OnClick"/>
+                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar nuevo" Width="14%" OnClick="btnNew_OnClick"/>
                                         </div>
                                     </div>
                                 </div>
@@ -163,8 +163,8 @@
     <div class="modal fade" id="modalAltaMascara" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <asp:UpdatePanel ID="upAltaMascara" runat="server">
             <ContentTemplate>
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
+                <div class="modal-dialog modal-lg" style="width: 1100px; height: 600px">
+                    <div class="modal-content" >
                         <uc1:AltaMascaraAcceso runat="server" ID="AltaMascaraAcceso" />
                     </div>
                 </div>

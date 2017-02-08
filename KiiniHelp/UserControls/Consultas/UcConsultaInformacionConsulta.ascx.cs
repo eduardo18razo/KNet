@@ -116,15 +116,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 LlenaInformacionConsulta();
-                if (ddlTipoInformacion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                {
-                    btnNew.Visible = true;
-                    btnNew.Text = "Agregar Información";
-                }
-                else
-                {
-                    btnNew.Visible = false;
-                }
+                btnNew.Visible = ddlTipoInformacion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
             }
             catch (Exception ex)
             {
@@ -195,6 +187,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                AltaInformacionConsulta.IdTipoInformacion = int.Parse(ddlTipoInformacion.SelectedValue);
                 AltaInformacionConsulta.EsAlta = true;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaInformacion\");", true);
             }

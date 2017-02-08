@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmMiInformacion.aspx.cs" Inherits="KiiniHelp.Users.General.FrmMiInformacion" %>
+﻿<%@ Page Title="Mi Actividad" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmMiInformacion.aspx.cs" Inherits="KiiniHelp.Users.General.FrmMiInformacion" %>
 
 <%@ Register Src="~/UserControls/Detalles/UcDetalleUsuario.ascx" TagPrefix="uc1" TagName="UcDetalleUsuario" %>
 <%@ Register Src="~/UserControls/Consultas/UcConsultaTicketUsuario.ascx" TagPrefix="uc1" TagName="UcConsultaTicketUsuario" %>

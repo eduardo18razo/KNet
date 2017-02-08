@@ -7,6 +7,7 @@ using KiiniHelp.Funciones;
 using KiiniHelp.ServiceSistemaTipoUsuario;
 using KiiniHelp.ServiceUsuario;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Consultas
@@ -32,6 +33,8 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true);
+                if (lstTipoUsuario.Count >= 2)
+                    lstTipoUsuario.Insert(BusinessVariables.ComboBoxCatalogo.IndexTodos, new TipoUsuario { Id = BusinessVariables.ComboBoxCatalogo.ValueTodos, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionTodos });
                 Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
             }
             catch (Exception e)
@@ -45,13 +48,24 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 int? idTipoUsuario = null;
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+
+                LimpiarUsuarios();
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                {
+                    btnNew.Visible = false;
+                    return;
+                }
+
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexTodos)
+                {
+                    btnNew.Visible = false;
+                }
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
                 {
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
                     btnNew.Visible = true;
                 }
-                else
-                    btnNew.Visible = false;
+
                 rptResultados.DataSource = _servicioUsuarios.ObtenerUsuarios(idTipoUsuario);
                 rptResultados.DataBind();
             }
@@ -72,7 +86,6 @@ namespace KiiniHelp.UserControls.Consultas
                 if (!IsPostBack)
                 {
                     LlenaCombos();
-                    LlenaUsuarios();
                 }
             }
             catch (Exception ex)
@@ -138,8 +151,6 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        
-
         protected void btnBaja_OnClick(object sender, EventArgs e)
         {
             try
@@ -180,7 +191,9 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                UcAltaUsuario.IdUsuario = Convert.ToInt32(hfId.Value);
+                Usuario user = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(hfId.Value));
+                if(user == null) return;
+                UcAltaUsuario.IdUsuario = user.Id;
                 UcAltaUsuario.Alta = false;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editUser\");", true);
             }
@@ -211,6 +224,19 @@ namespace KiiniHelp.UserControls.Consultas
                 }
                 _lstError.Add(ex.Message);
                 AlertaGeneral = _lstError;
+            }
+        }
+
+        private void LimpiarUsuarios()
+        {
+            try
+            {
+                rptResultados.DataSource = null;
+                rptResultados.DataBind();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
 

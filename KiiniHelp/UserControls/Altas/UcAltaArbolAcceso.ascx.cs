@@ -101,10 +101,10 @@ namespace KiiniHelp.UserControls.Altas
                             case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                                 ddl = (DropDownList)item.FindControl("ddlPropietario");
                                 break;
-                            case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                            case (int)BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice:
                                 ddl = (DropDownList)item.FindControl("ddlDocumento");
                                 break;
-                            case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                            case (int)BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
                                 ddl = (DropDownList)item.FindControl("ddlUrl");
                                 break;
                         }
@@ -228,12 +228,12 @@ namespace KiiniHelp.UserControls.Altas
                                 ddl = (DropDownList)rptInformacion.Items[0].FindControl("ddlPropietario");
                                 btn = (Button)rptInformacion.Items[0].FindControl("btnAgregarPropietario");
                                 break;
-                            case BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                            case BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice:
                                 chk = (CheckBox)rptInformacion.Items[1].FindControl("chkInfoConsulta");
                                 ddl = (DropDownList)rptInformacion.Items[1].FindControl("ddlDocumento");
                                 btn = (Button)rptInformacion.Items[1].FindControl("btnAgregarDocumento");
                                 break;
-                            case BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                            case BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
                                 chk = (CheckBox)rptInformacion.Items[2].FindControl("chkInfoConsulta");
                                 ddl = (DropDownList)rptInformacion.Items[2].FindControl("ddlUrl");
                                 btn = (Button)rptInformacion.Items[2].FindControl("btnAgregarUrl");
@@ -252,7 +252,7 @@ namespace KiiniHelp.UserControls.Altas
                         if (btn != null) btn.Enabled = true;
                     }
 
-                    if (opcion.IdTipoArbolAcceso != (int)BusinessVariables.EnumTipoArbol.Consultas)
+                    if (opcion.IdTipoArbolAcceso != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion)
                     {
                         Metodos.LlenaComboCatalogo(ddlMascaraAcceso, _servicioMascaras.ObtenerMascarasAcceso(true));
                         ddlMascaraAcceso.SelectedValue = opcion.InventarioArbolAcceso.First().IdMascara.ToString();
@@ -678,16 +678,16 @@ namespace KiiniHelp.UserControls.Altas
                     if (chkNivelTerminal.Checked)
                     {
                         arbol.IdImpacto = UcImpactoUrgencia.ObtenerImpactoUrgencia().Id;
-                        if (int.Parse(hfIdTipoArbol.Value) == (int)BusinessVariables.EnumTipoArbol.Consultas)
+                        if (int.Parse(hfIdTipoArbol.Value) == (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion)
                             ValidaCapturaConsulta();
-                        if (int.Parse(hfIdTipoArbol.Value) != (int)BusinessVariables.EnumTipoArbol.Consultas)
+                        if (int.Parse(hfIdTipoArbol.Value) != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion)
                         {
                             ValidaCapturaTicket();
                             ValidaCapturaEncuesta();
                         }
                         ValidaCapturaGrupos();
                         arbol.InventarioArbolAcceso = new List<InventarioArbolAcceso> { new InventarioArbolAcceso() };
-                        if (hfIdTipoArbol.Value != ((int)BusinessVariables.EnumTipoArbol.Consultas).ToString())
+                        if (hfIdTipoArbol.Value != ((int)BusinessVariables.EnumTipoArbol.ConsultarInformacion).ToString())
                         {
                             arbol.InventarioArbolAcceso.First().IdMascara =
                                 Convert.ToInt32(ddlMascaraAcceso.SelectedValue) == 0
@@ -738,7 +738,7 @@ namespace KiiniHelp.UserControls.Altas
 
                                     //    });
                                     //    break;
-                                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
+                                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido:
                                         arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
                                         {
                                             IdTipoGrupo = gpo.IdTipoGrupo,
@@ -766,7 +766,7 @@ namespace KiiniHelp.UserControls.Altas
 
                                         });
                                         break;
-                                    case (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta:
+                                    case (int)BusinessVariables.EnumTiposGrupos.ConsultasEspeciales:
                                         arbol.TiempoInformeArbol.Add(new TiempoInformeArbol
                                         {
                                             IdTipoGrupo = gpo.IdTipoGrupo,
@@ -797,10 +797,10 @@ namespace KiiniHelp.UserControls.Altas
                                     case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                                         ddl = (DropDownList)item.FindControl("ddlPropietario");
                                         break;
-                                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                                    case (int)BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice:
                                         ddl = (DropDownList)item.FindControl("ddlDocumento");
                                         break;
-                                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                                    case (int)BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
                                         ddl = (DropDownList)item.FindControl("ddlUrl");
                                         break;
                                 }
@@ -886,11 +886,11 @@ namespace KiiniHelp.UserControls.Altas
                         ddl = (DropDownList)rptInformacion.Items[0].FindControl("ddlPropietario");
                         btn = (Button)rptInformacion.Items[0].FindControl("btnAgregarPropietario");
                         break;
-                    case BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                    case BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice:
                         ddl = (DropDownList)rptInformacion.Items[1].FindControl("ddlDocumento");
                         btn = (Button)rptInformacion.Items[1].FindControl("btnAgregarDocumento");
                         break;
-                    case BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                    case BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
                         ddl = (DropDownList)rptInformacion.Items[2].FindControl("ddlUrl");
                         btn = (Button)rptInformacion.Items[2].FindControl("btnAgregarUrl");
                         break;
@@ -926,8 +926,8 @@ namespace KiiniHelp.UserControls.Altas
                 DropDownList ddlUrl = (DropDownList)e.Item.FindControl("ddlUrl");
                 if (ddlPropietario == null && ddlDocumento == null && ddlUrl == null) return;
                 Metodos.LlenaComboCatalogo(ddlPropietario, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido, true));
-                Metodos.LlenaComboCatalogo(ddlDocumento, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.Documento, true));
-                Metodos.LlenaComboCatalogo(ddlUrl, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml, true));
+                Metodos.LlenaComboCatalogo(ddlDocumento, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice, true));
+                Metodos.LlenaComboCatalogo(ddlUrl, _servicioInformacionConsulta.ObtenerInformacionConsulta(BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb, true));
             }
             catch (Exception ex)
             {
@@ -945,20 +945,20 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
 
-                btnModalConsultas.Visible = Convert.ToInt32(hfIdTipoArbol.Value) == (int)BusinessVariables.EnumTipoArbol.Consultas;
-                btnModalTicket.Visible = chkNivelTerminal.Checked && Convert.ToInt32(hfIdTipoArbol.Value) != (int)BusinessVariables.EnumTipoArbol.Consultas;
-                btnModalSla.Visible = chkNivelTerminal.Checked && Convert.ToInt32(hfIdTipoArbol.Value) != (int)BusinessVariables.EnumTipoArbol.Consultas;
-                btnModalInforme.Visible = chkNivelTerminal.Checked && Convert.ToInt32(hfIdTipoArbol.Value) != (int)BusinessVariables.EnumTipoArbol.Consultas;
-                btnModalEncuesta.Visible = chkNivelTerminal.Checked && Convert.ToInt32(hfIdTipoArbol.Value) != (int)BusinessVariables.EnumTipoArbol.Consultas;
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Acceso, false);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeInformaciónPublicada, false);
+                btnModalConsultas.Visible = Convert.ToInt32(hfIdTipoArbol.Value) == (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion;
+                btnModalTicket.Visible = chkNivelTerminal.Checked && Convert.ToInt32(hfIdTipoArbol.Value) != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion;
+                btnModalSla.Visible = chkNivelTerminal.Checked && Convert.ToInt32(hfIdTipoArbol.Value) != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion;
+                btnModalInforme.Visible = chkNivelTerminal.Checked && Convert.ToInt32(hfIdTipoArbol.Value) != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion;
+                btnModalEncuesta.Visible = chkNivelTerminal.Checked && Convert.ToInt32(hfIdTipoArbol.Value) != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion;
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Usuario, false);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeContenido, false);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeOperación, false);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, false);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, false);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.EspecialDeConsulta, false);
-                if (hfIdTipoArbol.Value == ((int)BusinessVariables.EnumTipoArbol.Consultas).ToString())
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ConsultasEspeciales, false);
+                if (hfIdTipoArbol.Value == ((int)BusinessVariables.EnumTipoArbol.ConsultarInformacion).ToString())
                 {
-                    AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Acceso, true);
+                    AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Usuario, true);
                     //Información de Consulta
                     List<InformacionConsulta> infoCons = _servicioSistemaTipoInformacionConsulta.ObtenerTipoInformacionConsulta(false).Select(tipoInf => new InformacionConsulta { TipoInfConsulta = tipoInf }).ToList();
                     rptInformacion.DataSource = infoCons;
@@ -968,12 +968,12 @@ namespace KiiniHelp.UserControls.Altas
                 }
 
                 //Grupos
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Acceso, true);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeInformaciónPublicada, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Usuario, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeContenido, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeOperación, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, true);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.EspecialDeConsulta, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ConsultasEspeciales, true);
                 AsociarGrupoUsuario.Limpiar();
 
                 //Ticket
@@ -1063,7 +1063,7 @@ namespace KiiniHelp.UserControls.Altas
             {
                 ValidaCapturaGrupos();
                 btnModalGrupos.CssClass = "btn btn-success";
-                if (Convert.ToInt32(hfIdTipoArbol.Value) == (int)BusinessVariables.EnumTipoArbol.Consultas)
+                if (Convert.ToInt32(hfIdTipoArbol.Value) == (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion)
                     btnModalImpactoUrgencia.CssClass = "btn btn-primary";
                 else
                     btnModalSla.CssClass = "btn btn-primary";

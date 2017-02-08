@@ -144,10 +144,10 @@ namespace KinniNet.Core.Security
                             result.LevantaTickets = levantaTicket.LevantaTicket ?? false;
                         else
                         {
-                            result.LevantaTickets = result.UsuarioGrupo.Any(grupo => grupo.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && grupo.GrupoUsuario.LevantaTicket);
+                            result.LevantaTickets = result.UsuarioGrupo.Any(grupo => grupo.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && grupo.GrupoUsuario.LevantaTicket);
                         }
                         if (!result.LevantaTickets)
-                            result.LevantaRecado = result.UsuarioGrupo.Any(grupo => grupo.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && grupo.GrupoUsuario.RecadoTicket);
+                            result.LevantaRecado = result.UsuarioGrupo.Any(grupo => grupo.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && grupo.GrupoUsuario.RecadoTicket);
                     }
                 }
                 catch (Exception ex)
@@ -423,7 +423,7 @@ namespace KinniNet.Core.Security
 
             }
 
-            public List<Menu> ObtenerMenuUsuario(int idUsuario, List<int> areas, bool arboles)
+            public List<Menu> ObtenerMenuUsuario(int idUsuario, int idRol, bool arboles)
             {
                 List<Menu> result = new List<Menu>();
                 DataBaseModelContext db = new DataBaseModelContext();
@@ -436,7 +436,7 @@ namespace KinniNet.Core.Security
                                            join rtu in db.RolTipoUsuario on ur.IdRolTipoUsuario equals rtu.Id
                                            join rm in db.RolMenu on rtu.IdRol equals rm.IdRol
                                            join m in db.Menu on rm.IdMenu equals m.Id
-                                           where ur.IdUsuario == idUsuario && m.Habilitado
+                                           where ur.IdUsuario == idUsuario && m.Habilitado && rm.IdRol == idRol
                                            select m;
                     foreach (Menu menu in qry.Where(w => w.IdPadre == null).OrderBy(o => o.Orden).ThenBy(t => t.Id).Distinct())
                     {
@@ -482,9 +482,9 @@ namespace KinniNet.Core.Security
                     }
 
                     result = result.Distinct().ToList();
-
+                    List<int> areas = new BusinessArea().ObtenerAreasUsuarioByIdRol(idUsuario, idRol, false).Select(s=>s.Id).Distinct().ToList();
                     if (arboles)
-                        foreach (Menu menu in result)
+                        foreach (Menu menu in result.Where(w => w.Id == (int)BusinessVariables.EnumMenu.Consultas || w.Id == (int)BusinessVariables.EnumMenu.Servicio || w.Id == (int)BusinessVariables.EnumMenu.Incidentes))
                         {
                             List<ArbolAcceso> lstArboles;
                             foreach (int area in areas)
@@ -492,15 +492,15 @@ namespace KinniNet.Core.Security
                                 switch (menu.Id)
                                 {
                                     case (int)BusinessVariables.EnumMenu.Consultas:
-                                        lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.Consultas, area).Distinct().ToList();
+                                        lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion, area).Distinct().ToList();
                                         GeneraSubMenus(menu, lstArboles, db, "~/Users/General/FrmNodoConsultas.aspx?IdArbol=");
                                         break;
                                     case (int)BusinessVariables.EnumMenu.Servicio:
-                                        lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.Servicio, area).Distinct().ToList();
+                                        lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.SolicitarServicio, area).Distinct().ToList();
                                         GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Web + "&IdArbol=");
                                         break;
                                     case (int)BusinessVariables.EnumMenu.Incidentes:
-                                        lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.Incidentes, area).Distinct().ToList();
+                                        lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.ReportarProblemas, area).Distinct().ToList();
                                         GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Web + "&IdArbol=");
                                         break;
                                 }
@@ -667,11 +667,11 @@ namespace KinniNet.Core.Security
 
                         if (arbol.Nivel2 != null)
                         {
-                            if (menu.Menu1[0].Menu1 == null)
-                                menu.Menu1[0].Menu1 = new List<Menu>();
+                            if (menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1 == null)
+                                menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1 = new List<Menu>();
                             Nivel2 n = db.Nivel2.SingleOrDefault(s => s.Id == arbol.Nivel2.Id);
                             if (n == null) continue;
-                            if (!menu.Menu1[0].Menu1.Any(a => a.Id == n.Id))
+                            if (!menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Any(a => a.Id == n.Id))
                             {
                                 Menu menuNivel1 = new Menu
                                 {
@@ -679,17 +679,17 @@ namespace KinniNet.Core.Security
                                     Id = n.Id,
                                     Url = arbol.Nivel3 != null ? string.Empty : url + arbol.Id
                                 };
-                                menu.Menu1[0].Menu1.Add(menuNivel1);
+                                menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Add(menuNivel1);
                             }
                         }
 
                         if (arbol.Nivel3 != null)
                         {
-                            if (menu.Menu1[0].Menu1[0].Menu1 == null)
-                                menu.Menu1[0].Menu1[0].Menu1 = new List<Menu>();
+                            if (menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1 == null)
+                                menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1 = new List<Menu>();
                             Nivel3 n = db.Nivel3.SingleOrDefault(s => s.Id == arbol.Nivel3.Id);
                             if (n == null) continue;
-                            if (!menu.Menu1[0].Menu1[0].Menu1.Any(a => a.Id == n.Id))
+                            if (!menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Any(a => a.Id == n.Id))
                             {
                                 Menu menuNivel1 = new Menu
                                 {
@@ -697,17 +697,17 @@ namespace KinniNet.Core.Security
                                     Id = n.Id,
                                     Url = arbol.Nivel4 != null ? string.Empty : url + arbol.Id
                                 };
-                                menu.Menu1[0].Menu1[0].Menu1.Add(menuNivel1);
+                                menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Add(menuNivel1);
                             }
                         }
 
                         if (arbol.Nivel4 != null)
                         {
-                            if (menu.Menu1[0].Menu1[0].Menu1[0].Menu1 == null)
-                                menu.Menu1[0].Menu1[0].Menu1[0].Menu1 = new List<Menu>();
+                            if (menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1 == null)
+                                menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1 = new List<Menu>();
                             Nivel4 n = db.Nivel4.SingleOrDefault(s => s.Id == arbol.Nivel4.Id);
                             if (n == null) continue;
-                            if (!menu.Menu1[0].Menu1[0].Menu1[0].Menu1.Any(a => a.Id == n.Id))
+                            if (!menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Any(a => a.Id == n.Id))
                             {
                                 Menu menuNivel1 = new Menu
                                 {
@@ -715,17 +715,17 @@ namespace KinniNet.Core.Security
                                     Id = n.Id,
                                     Url = arbol.Nivel5 != null ? string.Empty : url + arbol.Id
                                 };
-                                menu.Menu1[0].Menu1[0].Menu1[0].Menu1.Add(menuNivel1);
+                                menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Add(menuNivel1);
                             }
                         }
 
                         if (arbol.Nivel5 != null)
                         {
-                            if (menu.Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1 == null)
-                                menu.Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1 = new List<Menu>();
+                            if (menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1 == null)
+                                menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1 = new List<Menu>();
                             Nivel5 n = db.Nivel5.SingleOrDefault(s => s.Id == arbol.Nivel5.Id);
                             if (n == null) continue;
-                            if (!menu.Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1.Any(a => a.Id == n.Id))
+                            if (!menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Any(a => a.Id == n.Id))
                             {
                                 Menu menuNivel1 = new Menu
                                 {
@@ -733,17 +733,17 @@ namespace KinniNet.Core.Security
                                     Id = n.Id,
                                     Url = arbol.Nivel6 != null ? string.Empty : url + arbol.Id
                                 };
-                                menu.Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1.Add(menuNivel1);
+                                menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Add(menuNivel1);
                             }
                         }
 
                         if (arbol.Nivel6 != null)
                         {
-                            if (menu.Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1 == null)
-                                menu.Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1 = new List<Menu>();
+                            if (menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Single(s => s.Id == arbol.IdNivel5).Menu1 == null)
+                                menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Single(s => s.Id == arbol.IdNivel5).Menu1 = new List<Menu>();
                             Nivel6 n = db.Nivel6.SingleOrDefault(s => s.Id == arbol.Nivel6.Id);
                             if (n == null) continue;
-                            if (!menu.Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1.Any(a => a.Id == n.Id))
+                            if (!menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Single(s => s.Id == arbol.IdNivel5).Menu1.Any(a => a.Id == n.Id))
                             {
                                 Menu menuNivel1 = new Menu
                                 {
@@ -751,16 +751,16 @@ namespace KinniNet.Core.Security
                                     Id = n.Id,
                                     Url = arbol.Nivel7 != null ? string.Empty : url + arbol.Id
                                 };
-                                menu.Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1.Add(menuNivel1);
+                                menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Single(s => s.Id == arbol.IdNivel5).Menu1.Add(menuNivel1);
                             }
                         }
                         if (arbol.Nivel7 != null)
                         {
-                            if (menu.Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1 == null)
-                                menu.Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1 = new List<Menu>();
+                            if (menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Single(s => s.Id == arbol.IdNivel5).Menu1.Single(s => s.Id == arbol.IdNivel6).Menu1 == null)
+                                menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Single(s => s.Id == arbol.IdNivel5).Menu1.Single(s => s.Id == arbol.IdNivel6).Menu1 = new List<Menu>();
                             Nivel5 n = db.Nivel5.SingleOrDefault(s => s.Id == arbol.Nivel7.Id);
                             if (n == null) continue;
-                            if (!menu.Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1.Any(a => a.Id == n.Id))
+                            if (!menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Single(s => s.Id == arbol.IdNivel5).Menu1.Single(s => s.Id == arbol.IdNivel6).Menu1.Any(a => a.Id == n.Id))
                             {
                                 Menu menuNivel1 = new Menu
                                 {
@@ -768,7 +768,7 @@ namespace KinniNet.Core.Security
                                     Id = n.Id,
                                     Url = url + arbol.Id
                                 };
-                                menu.Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1[0].Menu1.Add(menuNivel1);
+                                menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Single(s => s.Id == arbol.IdNivel5).Menu1.Single(s => s.Id == arbol.IdNivel6).Menu1.Add(menuNivel1);
                             }
                         }
                     }
@@ -823,15 +823,15 @@ namespace KinniNet.Core.Security
                             switch (menu.Id)
                             {
                                 case (int)BusinessVariables.EnumMenu.Consultas:
-                                    lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByTipoUsuarioTipoArbol(idTipoUsuario, (int)BusinessVariables.EnumTipoArbol.Consultas, idArea).Distinct().ToList();
+                                    lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByTipoUsuarioTipoArbol(idTipoUsuario, (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion, idArea).Distinct().ToList();
                                     GeneraSubMenus(menu, lstArboles, db, "~/Users/General/FrmNodoConsultas.aspx?IdArbol=");
                                     break;
                                 case (int)BusinessVariables.EnumMenu.Servicio:
-                                    lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByTipoUsuarioTipoArbol(idTipoUsuario, (int)BusinessVariables.EnumTipoArbol.Servicio, idArea).Distinct().ToList();
+                                    lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByTipoUsuarioTipoArbol(idTipoUsuario, (int)BusinessVariables.EnumTipoArbol.SolicitarServicio, idArea).Distinct().ToList();
                                     GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?IdArbol=");
                                     break;
                                 case (int)BusinessVariables.EnumMenu.Incidentes:
-                                    lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByTipoUsuarioTipoArbol(idTipoUsuario, (int)BusinessVariables.EnumTipoArbol.Incidentes, idArea).Distinct().ToList();
+                                    lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByTipoUsuarioTipoArbol(idTipoUsuario, (int)BusinessVariables.EnumTipoArbol.ReportarProblemas, idArea).Distinct().ToList();
                                     GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?IdArbol=");
                                     break;
                             }

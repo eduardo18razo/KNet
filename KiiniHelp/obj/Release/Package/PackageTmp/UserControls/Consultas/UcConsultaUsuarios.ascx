@@ -93,7 +93,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Consulta Usuarios</h3>
+                    <h3>Usuarios</h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">
@@ -136,8 +136,6 @@
                                                     <td>
                                                         <asp:Label runat="server">Tipo Usuario</asp:Label></td>
                                                     <td>
-                                                        <asp:Label runat="server">Directorio Activo</asp:Label></td>
-                                                    <td>
                                                         <asp:Label runat="server">Activo</asp:Label></td>
                                                 </tr>
                                             </thead>
@@ -148,7 +146,6 @@
                                             <td oncontextmenu="ContextMenu()" style="padding: 0; text-align: left; font-size: 10px;" >
                                                 <asp:LinkButton Style="padding: 0;" runat="server" Text='<%#Eval("NombreCompleto") %>' ID="LinkButton1" OnClick="btnUsuario_OnClick" CommandArgument='<%#Eval("Id") %>' /></td>
                                             <td oncontextmenu="ContextMenu()" style="padding: 0; text-align: left; font-size: 10px;" ><%# Eval("TipoUsuario.Descripcion")%></td>
-                                            <td oncontextmenu="ContextMenu()" style="padding: 0; font-size: 10px;"><%# (bool) Eval("DirectorioActivo") ? "SI" : "NO"%></td>
                                             <td oncontextmenu="ContextMenu()" style="padding: 0; font-size: 10px;" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>

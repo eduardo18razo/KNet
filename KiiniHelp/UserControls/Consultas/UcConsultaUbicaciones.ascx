@@ -118,7 +118,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Consulta Ubicaciones</h3>
+                    <h3><asp:Label runat="server" Text="Ubicaciones" ID="lblTitleUbicacion"/></h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">
@@ -137,7 +137,7 @@
                                             <asp:Label Width="14%" for="ddlTipoUsuario" class="col-xs-1 control-label" runat="server">Tipo de Usuario</asp:Label>
                                             <asp:DropDownList runat="server" ID="ddlTipoUsuario" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" />
                                             <asp:Label Width="14%" runat="server" Text="Filtrar por" class="col-xs-1 control-label"></asp:Label>
-                                            <asp:TextBox Width="14%" runat="server" ID="txtFiltroDecripcion" CssClass=" col-xs-1 form-control"></asp:TextBox>
+                                            <asp:TextBox Width="14%" runat="server" ID="txtFiltroDecripcion" CssClass=" col-xs-1 form-control" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"></asp:TextBox>
                                             <asp:Button runat="server" Text="Buscar" ID="btnBuscar" CssClass="col-xs-1 btn btn-sm btn-primary" OnClick="btnBuscar_OnClick"></asp:Button>
                                         </div>
                                     </div>
@@ -177,6 +177,7 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader">
                                             <thead>
                                                 <tr align="center">
+                                                    <td><asp:Label runat="server" ID="Label1">Tipo Usuario</asp:Label></td>
                                                     <td><asp:Label runat="server" ID="lblNivel1">Nivel 1</asp:Label></td>
                                                     <td><asp:Label runat="server" ID="lblNivel2">Nivel 2</asp:Label></td>
                                                     <td><asp:Label runat="server" ID="lblNivel3">Nivel 3</asp:Label></td>
@@ -192,20 +193,22 @@
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
+                                            <td style='font-weight: normal; padding: 0; text-align: left; font-size: 10px;' 
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("TipoUsuario.Descripcion")%></td>
                                             <td style='<%# Eval("Campus") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Pais.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Pais.Descripcion")%></td>
                                             <td style='<%# Eval("Torre") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Campus.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Campus.Descripcion")%></td>
                                             <td style='<%# Eval("Piso") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Torre.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Torre.Descripcion")%></td>
                                             <td style='<%# Eval("Zona") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Piso.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Piso.Descripcion")%></td>
                                             <td style='<%# Eval("SubZona") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Zona.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Zona.Descripcion")%></td>
                                             <td style='<%# Eval("SiteRack") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SubZona.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("SubZona.Descripcion")%></td>
                                             <td style='<%# Eval("SiteRack") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SiteRack.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("SiteRack.Descripcion")%></td>
                                             <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
@@ -259,7 +262,7 @@
                                 <asp:HiddenField runat="server" ID="hfCatalogo" />
                                 <asp:HiddenField runat="server" ID="hfAlta" />
                                 <div class="form-horizontal">
-                                    <div class="form-group">
+                                    <div class="form-group" runat="server" Visible="False">
                                         <label class="col-sm-2 control-label">Tipo de Usuario</label>
                                         <div class="col-sm-10">
                                             <asp:DropDownList runat="server" ID="ddlTipoUsuarioCatalogo" CssClass="DropSelect" Enabled="False" />
@@ -268,7 +271,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Descripcion</label>
                                         <div class="col-sm-10">
-                                            <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
+                                            <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus"/>
                                         </div>
                                     </div>
                                 </div>
@@ -317,23 +320,23 @@
                         </div>
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                Datos generales
+                                Datos Generales
                             </div>
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <div class="form-group">
+                                    <div class="form-group" runat="server" Visible="False">
                                         <label class="col-sm-3 control-label">Tipo de Usuario</label>
                                         <asp:DropDownList runat="server" ID="ddlTipoUsuarioCampus" CssClass="DropSelect" Enabled="False" />
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Descripcion</label>
-                                        <asp:TextBox runat="server" ID="txtDescripcionCampus" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13);" />
+                                        <label class="col-sm-3 control-label">Nombre</label>
+                                        <asp:TextBox runat="server" ID="txtDescripcionCampus" placeholder="Nombre" class="form-control" onkeydown="return (event.keyCode!=13);" autofocus="autofocus" />
                                     </div>
                                     <div class="form-group">
                                         <asp:CheckBox runat="server" ID="CheckBox1" Checked="True" Visible="False" />
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Codigo Postal</label>
+                                        <label class="col-sm-3 control-label">Código Postal</label>
                                         <asp:TextBox runat="server" ID="txtCp" placeholder="CODIGO POSTAL" AutoPostBack="True" OnTextChanged="txtCp_OnTextChanged" class="form-control" onkeypress="return ValidaCampo(this,2)" onkeydown="return (event.keyCode!=13);" />
                                     </div>
                                     <div class="form-group">
@@ -353,11 +356,11 @@
                                         <asp:TextBox runat="server" ID="txtCalle" placeholder="CALLE" class="form-control" onkeydown="return (event.keyCode!=13);" />
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Numero Exterior</label>
+                                        <label class="col-sm-4 control-label">Número Exterior</label>
                                         <asp:TextBox runat="server" ID="txtNoExt" placeholder="NUMERO EXTERIOR" class="form-control" onkeydown="return (event.keyCode!=13);" />
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Numero Interior</label>
+                                        <label class="col-sm-4 control-label">Número Interior</label>
                                         <asp:TextBox runat="server" ID="txtNoInt" placeholder="NUMERO INTERIOR" class="form-control" onkeydown="return (event.keyCode!=13);" />
                                     </div>
                                 </div>

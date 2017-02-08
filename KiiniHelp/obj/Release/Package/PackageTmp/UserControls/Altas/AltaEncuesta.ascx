@@ -2,7 +2,7 @@
 <asp:UpdatePanel ID="upEncuesta" runat="server">
     <ContentTemplate>
         <header id="panelAlerta" runat="server" visible="false">
-            <div class="alert alert-danger" >
+            <div class="alert alert-danger">
                 <div>
                     <div style="float: left">
                         <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
@@ -24,7 +24,7 @@
         </header>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                Alta de Encuesta
+                Agregar Encuesta
             </div>
             <div class="panel-body">
                 <asp:HiddenField runat="server" ID="dfIdGrupo" />
@@ -35,7 +35,7 @@
                         <asp:DropDownList runat="server" ID="ddlTipoEncuesta" CssClass="DropSelect" OnSelectedIndexChanged="ddlTipoEncuesta_OnSelectedIndexChanged" AutoPostBack="True" />
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Descripcion</label>
+                        <label class="col-sm-3 control-label">Nombre de la encuesta</label>
                         <asp:TextBox runat="server" ID="txtDescripcionEncuesta" placeholder="DESCRIPCION" CssClass="form-control obligatorio" />
                     </div>
 
@@ -60,6 +60,9 @@
                                 <div class="form-inline margen-arriba">
                                     <asp:Label ID="Label5" runat="server" Text="Ponderacion" class="col-sm-2 control-label izquierda"></asp:Label>
                                     <asp:TextBox ID="txtPonderacion" runat="server" CssClass="form-control obligatorio"></asp:TextBox>
+                                </div>
+                                <div class="form-inline margen-arriba">
+                                    *La ponderación de las preguntas debe sumar 100
                                 </div>
                             </div>
                             <asp:Button ID="btnAddPregunta" runat="server" CssClass="btn btn-success" Text="Agregar" OnClick="btnAddPregunta_OnClick" />
@@ -89,6 +92,17 @@
                                         </div>
                                     </div>
                                 </ItemTemplate>
+                                <FooterTemplate>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-md-3">
+                                            <asp:Label runat="server" ID="lblPregunta" Text="Total"></asp:Label>
+                                        </div>
+                                        <div class="col-xs-5 col-md-3">
+                                            <asp:Label runat="server" ID="lblTotal"><%# Eval("Ponderacion") %></asp:Label>
+                                        </div>
+                                    </div>
+
+                                </FooterTemplate>
                             </asp:Repeater>
                         </div>
                     </div>

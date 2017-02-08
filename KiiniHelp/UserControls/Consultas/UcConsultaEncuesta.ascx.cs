@@ -99,23 +99,6 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        protected void txtDescripcion_OnTextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LlenaMascaras();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
         protected void btnBaja_OnClick(object sender, EventArgs e)
         {
             try
@@ -176,6 +159,23 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaEncuesta\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnBuscar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LlenaMascaras();
             }
             catch (Exception ex)
             {

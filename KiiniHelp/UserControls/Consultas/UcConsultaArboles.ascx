@@ -98,7 +98,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Consulta Menu Opciones</h3>
+                    <h3>Opciones de menú</h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">
@@ -106,7 +106,7 @@
                             <div class="panel-heading" role="tab" id="headingFiltros">
                                 <h4 class="panel-title">
                                     <div role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiltros" aria-expanded="true" aria-controls="collapseFiltros" style="cursor: pointer">
-                                        Filtros
+                                        Ocultar/Mostrar Filtros
                                     </div>
                                 </h4>
                             </div>
@@ -115,7 +115,7 @@
                                     <div class="form-horizontal">
                                         <div class="form-horizontal">
                                             <div class="form-group">
-                                                <asp:Label Width="16%" runat="server" class="col-sm-3 control-label">Producto</asp:Label>
+                                                <asp:Label Width="16%" runat="server" class="col-sm-3 control-label">Area de Atención</asp:Label>
                                                 <asp:Label Width="16%" runat="server" class="col-sm-3 control-label">Tipo de Usuario Autorizado</asp:Label>
                                                 <asp:Label Width="16%" runat="server" class="col-sm-3 control-label">Tipo de Servicio</asp:Label>
                                             </div>
@@ -211,7 +211,7 @@
 <div class="modal fade" id="editOpcion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <asp:UpdatePanel ID="upOcion" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <uc1:UcAltaArbolAcceso runat="server" ID="UcAltaArbolAcceso" />
+            <%--<uc1:UcAltaArbolAcceso runat="server" ID="UcAltaArbolAcceso" />--%>
         </ContentTemplate>
     </asp:UpdatePanel>
 </div>

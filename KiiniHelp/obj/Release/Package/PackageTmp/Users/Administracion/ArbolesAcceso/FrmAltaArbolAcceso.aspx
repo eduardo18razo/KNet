@@ -43,7 +43,7 @@
 
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Alta de Consultas Servicios e Incidentes
+                            Agregar Opcion
                         </div>
                         <div class="panel-body">
                             <div class="well">
@@ -201,7 +201,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-3 control-label">Descripcion</label>
+                                                    <label class="col-sm-3 control-label">Descripción</label>
                                                     <div class="col-sm-4">
                                                         <asp:TextBox runat="server" ID="txtDescripcionNivel" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13);" />
                                                     </div>
@@ -507,7 +507,9 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-
+            
+            
+            <%-- ALTAS --%>
             <div class="modal fade" id="modalAltaInfCons" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                 <asp:UpdatePanel ID="upModalAltaInfCons" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>

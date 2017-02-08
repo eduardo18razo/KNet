@@ -31,7 +31,11 @@ namespace KiiniHelp.UserControls.Consultas
         public bool Modal
         {
             get { return Convert.ToBoolean(hfModal.Value); }
-            set { hfModal.Value = value.ToString(); }
+            set
+            {
+                hfModal.Value = value.ToString();
+                lblTitleUbicacion.Text = value ? "Agregar Ubicación" : "Ubicaciones";
+            }
         }
 
         public string ModalName
@@ -170,8 +174,11 @@ namespace KiiniHelp.UserControls.Consultas
 
                 if (ddlSiteRack.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idJefatura = int.Parse(ddlSiteRack.SelectedValue);
+                List<Ubicacion> lstUbicaciones = _servicioUbicacion.ObtenerUbicaciones(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
+                if (Modal)
+                    lstUbicaciones = lstUbicaciones.Where(w => w.Habilitado == !Modal).ToList();
 
-                rptResultados.DataSource = _servicioUbicacion.ObtenerUbicaciones(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
+                rptResultados.DataSource = lstUbicaciones;
                 rptResultados.DataBind();
             }
             catch (Exception e)
@@ -360,7 +367,7 @@ namespace KiiniHelp.UserControls.Consultas
                         btnNew.Visible = true;
                         btnNew.CommandName = nivel;
                         btnNew.Text = nivel;
-                        btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "1"; 
+                        btnNew.CommandArgument = alias != null ? alias.Nivel.ToString() : "1";
                     }
                 }
             }
@@ -691,7 +698,7 @@ namespace KiiniHelp.UserControls.Consultas
                     ddlSiteRack.SelectedValue = ubicacion.IdSiteRack.ToString();
                     ddlSiteRack_OnSelectedIndexChanged(ddlSiteRack, null);
                 }
-                
+
                 Session["UbicacionSeleccionada"] = ubicacion;
                 lblTitleCatalogo.Text = ObtenerRuta(ubicacion, ref nivel, ref descripcion);
                 txtDescripcionCatalogo.Text = descripcion;
@@ -777,7 +784,7 @@ namespace KiiniHelp.UserControls.Consultas
                 hfAlta.Value = true.ToString();
                 ddlTipoUsuarioCatalogo.SelectedValue = IdTipoUsuario.ToString();
                 ValidaSeleccion(btn.CommandArgument);
-                if (btn.CommandArgument == "0")
+                if (btn.CommandArgument == "2")
                 {
                     txtDescripcionCampus.Focus();
                     ddlTipoUsuarioCampus.SelectedValue = IdTipoUsuario.ToString();
@@ -871,7 +878,7 @@ namespace KiiniHelp.UserControls.Consultas
 
         public string ObtenerRuta(string command, string modulo)
         {
-            string result = "<h3>ALTA NUEVA " + modulo + "</h3><span style=\"font-size: x-small;\">";
+            string result = "<h3>AGREGAR " + modulo + "</h3><span style=\"font-size: x-small;\">";
             switch (command)
             {
                 case "9":
@@ -925,8 +932,10 @@ namespace KiiniHelp.UserControls.Consultas
                         }
                     };
                     _servicioUbicacion.GuardarUbicacion(ubicacion);
-                    LimpiaCampus();
                     ddlpais_OnSelectedIndexChanged(ddlpais, null);
+                    ddlCampus.SelectedValue = ddlCampus.Items.FindByText(txtDescripcionCampus.Text.Trim().ToUpper()).Value;
+                    ddlCampus_OnSelectedIndexChanged(ddlCampus, null);
+                    LimpiaCampus();
                     LlenaUbicaciones();
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCampus\");", true);
                 }
@@ -1007,6 +1016,7 @@ namespace KiiniHelp.UserControls.Consultas
                             _servicioUbicacion.GuardarUbicacion(ubicacion);
                             ddlCampus_OnSelectedIndexChanged(ddlCampus, null);
                             ddlTorre.SelectedValue = ddlTorre.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlTorre_OnSelectedIndexChanged(ddlTorre, null);
                             break;
                         case 4:
                             ubicacion.IdCampus = Convert.ToInt32(ddlCampus.SelectedValue);
@@ -1020,6 +1030,7 @@ namespace KiiniHelp.UserControls.Consultas
                             _servicioUbicacion.GuardarUbicacion(ubicacion);
                             ddlTorre_OnSelectedIndexChanged(ddlTorre, null);
                             ddlPiso.SelectedValue = ddlPiso.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlPiso_OnSelectedIndexChanged(ddlPiso, null);
                             break;
                         case 5:
                             ubicacion.IdCampus = Convert.ToInt32(ddlCampus.SelectedValue);
@@ -1035,6 +1046,7 @@ namespace KiiniHelp.UserControls.Consultas
                             _servicioUbicacion.GuardarUbicacion(ubicacion);
                             ddlPiso_OnSelectedIndexChanged(ddlPiso, null);
                             ddlZona.SelectedValue = ddlZona.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlZona_OnSelectedIndexChanged(ddlZona, null);
                             break;
                         case 6:
                             ubicacion.IdCampus = Convert.ToInt32(ddlCampus.SelectedValue);
@@ -1051,6 +1063,7 @@ namespace KiiniHelp.UserControls.Consultas
                             _servicioUbicacion.GuardarUbicacion(ubicacion);
                             ddlZona_OnSelectedIndexChanged(ddlZona, null);
                             ddlSubZona.SelectedValue = ddlSubZona.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlSubZona_OnSelectedIndexChanged(ddlSubZona, null);
                             break;
                         case 7:
                             ubicacion.IdCampus = Convert.ToInt32(ddlCampus.SelectedValue);
@@ -1078,36 +1091,42 @@ namespace KiiniHelp.UserControls.Consultas
                     {
                         case 1:
                             ubicacion.Pais.Descripcion = txtDescripcionCatalogo.Text.Trim();
+                            ddlpais_OnSelectedIndexChanged(ddlpais, null);
                             break;
                         case 2:
                             ubicacion.Campus.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioUbicacion.ActualizarUbicacion(ubicacion);
                             ddlpais_OnSelectedIndexChanged(ddlpais, null);
                             ddlCampus.SelectedValue = ddlCampus.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlCampus_OnSelectedIndexChanged(ddlCampus, null);
                             break;
                         case 3:
                             ubicacion.Torre.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioUbicacion.ActualizarUbicacion(ubicacion);
                             ddlCampus_OnSelectedIndexChanged(ddlCampus, null);
                             ddlTorre.SelectedValue = ddlTorre.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlTorre_OnSelectedIndexChanged(ddlTorre, null);
                             break;
                         case 4:
                             ubicacion.Piso.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioUbicacion.ActualizarUbicacion(ubicacion);
                             ddlTorre_OnSelectedIndexChanged(ddlTorre, null);
                             ddlPiso.SelectedValue = ddlPiso.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlPiso_OnSelectedIndexChanged(ddlPiso, null);
                             break;
                         case 5:
                             ubicacion.Zona.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioUbicacion.ActualizarUbicacion(ubicacion);
                             ddlPiso_OnSelectedIndexChanged(ddlPiso, null);
                             ddlZona.SelectedValue = ddlZona.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlZona_OnSelectedIndexChanged(ddlZona, null);
                             break;
                         case 6:
                             ubicacion.SubZona.Descripcion = txtDescripcionCatalogo.Text.Trim();
                             _servicioUbicacion.ActualizarUbicacion(ubicacion);
                             ddlZona_OnSelectedIndexChanged(ddlZona, null);
                             ddlSubZona.SelectedValue = ddlSubZona.Items.FindByText(txtDescripcionCatalogo.Text.Trim().ToUpper()).Value;
+                            ddlSubZona_OnSelectedIndexChanged(ddlSubZona, null);
                             break;
                         case 7:
                             ubicacion.SiteRack.Descripcion = txtDescripcionCatalogo.Text.Trim();

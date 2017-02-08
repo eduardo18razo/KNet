@@ -105,7 +105,7 @@ namespace KiiniHelp.Users.Graficos
                 Encuesta encuesta = _servicioEncuestas.ObtenerEncuestaById(Convert.ToInt32(ddlEncuesta.SelectedValue));
                 switch (encuesta.IdTipoEncuesta)
                 {
-                    case (int)BusinessVariables.EnumTipoEncuesta.Logica:
+                    case (int)BusinessVariables.EnumTipoEncuesta.SiNo:
                         rptGraficos.DataSource = _servicioConsultas.GraficarConsultaEncuestaPregunta(((Usuario)Session["UserData"]).Id, encuesta.Id, ucFiltroFechasGrafico.RangoFechas, ucFiltroFechasGrafico.TipoPeriodo, encuesta.IdTipoEncuesta);
                         rptGraficos.DataBind();
                         break;
@@ -165,7 +165,7 @@ namespace KiiniHelp.Users.Graficos
                 Encuesta encuesta = _servicioEncuestas.ObtenerEncuestaById(Convert.ToInt32(ddlEncuesta.SelectedValue));
                 switch (encuesta.IdTipoEncuesta)
                 {
-                    case(int)BusinessVariables.EnumTipoEncuesta.Logica:
+                    case(int)BusinessVariables.EnumTipoEncuesta.SiNo:
                         idRespuesta = selectedData[2] == "NO" ? 0 : 1;
                         break;
                     default:

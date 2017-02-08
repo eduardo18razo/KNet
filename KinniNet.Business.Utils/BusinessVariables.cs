@@ -28,9 +28,9 @@ namespace KinniNet.Business.Utils
 
         public static class ParametrosMascaraCaptura
         {
-            public static string PrefijoTabla = "Mascara";
-            public static string PrefijoComandoInsertar = "uspInsert";
-            public static string PrefijoComandoActualizar = "uspUpdate";
+            public static string PrefijoTabla = "MASCARA";
+            public static string PrefijoComandoInsertar = "USPINSERT";
+            public static string PrefijoComandoActualizar = "USPUPDATE";
             public static string NombreCampoRandom = "CLAVEREGISTRO";
             public static string TipoCampoRandom = "NVARCHAR(20)";
             public static string CampoRandom = NombreCampoRandom + " " + TipoCampoRandom;
@@ -102,52 +102,52 @@ namespace KinniNet.Business.Utils
         {
             Word = 1,
             PowerPoint = 2,
-            Excel = 3, 
+            Excel = 3,
             Pdf = 4,
             Imagen = 5
         }
         public enum EnumTiposInformacionConsulta
         {
             EditorDeContenido = 1,
-            Documento = 2,
-            PaginaHtml = 3,
+            DocumentoOffice = 2,
+            DireccionWeb = 3,
             Servicio = 4
         }
 
         public enum EnumTiposGrupos
         {
             Administrador = 1,
-            Acceso = 2,
-            EspecialDeConsulta = 3,
+            Usuario = 2,
+            ConsultasEspeciales = 3,
             ResponsableDeAtención = 4,
-            ResponsableDeInformaciónPublicada = 5,
+            ResponsableDeContenido = 5,
             ResponsableDeOperación = 6,
             ResponsableDeDesarrollo = 7,
-            Responsablemantenimientoubicacionempleado = 8,
-            Responsablemantenimientoorganizacionempleado = 9,
-            Responsablemantenimientousuarioempleado = 10,
-            Responsablemantenimientousuariocliente = 11,
-            Responsablemantenimientousuarioproveedor = 12,
-            DueñoDelServicio = 13,
-            ContactCenter = 14
+            ResponsableMantenimientoEmpleadoUbicacion = 8,
+            ResponsableMantenimientoEmpleadoOrganizacion = 9,
+            ResponsableMantenimientoEmpleadoUsuario = 10,
+            ResponsableMantenimientoCliente = 11,
+            ResponsableMantenimientoProveedor = 12,
+            ResponsableServicio = 13,
+            AgenteUniversal = 14
         }
 
         public enum EnumRoles
         {
             Administrador = 1,
-            Acceso = 2,
-            EspecialDeConsulta = 3,
+            Usuario = 2,
+            ConsultasEspeciales = 3,
             ResponsableDeAtención = 4,
-            ResponsableDeInformaciónPublicada = 5,
+            ResponsableDeContenido = 5,
             ResponsableDeOperación = 6,
             ResponsableDeDesarrollo = 7,
-            Responsablemantenimientoubicacionempleado = 8,
-            Responsablemantenimientoorganizacionempleado = 9,
-            Responsablemantenimientousuarioempleado = 10,
-            Responsablemantenimientousuariocliente = 11,
-            Responsablemantenimientousuarioproveedor = 12,
-            DueñoDelServicio = 13,
-            ContactCenter = 14
+            ResponsableMantenimientoEmpleadoUbicacion = 8,
+            ResponsableMantenimientoEmpleadoOrganizacion = 9,
+            ResponsableMantenimientoEmpleadoUsuario = 10,
+            ResponsableMantenimientoCliente = 11,
+            ResponsableMantenimientoProveedor = 12,
+            ResponsableServicio = 13,
+            AgenteUniversal = 14
         }
 
         public enum EnumSubRoles
@@ -161,17 +161,23 @@ namespace KinniNet.Business.Utils
             CuartoNivel = 7,
         }
 
+        public enum EnumTipoNivel
+        {
+            SubMenu = 1,
+            OpcionTerminal = 2
+        }
+
         public enum EnumTipoArbol
         {
-            Consultas = 1,
-            Servicio = 2,
-            Incidentes = 3,
+            ConsultarInformacion = 1,
+            SolicitarServicio = 2,
+            ReportarProblemas = 3,
             IncidentesMonitoreo = 4
         }
 
         public enum EnumMenu
         {
-            MiInformación = 1,
+            MiActividad = 1,
             Operacion = 2,
             Consultas = 3,
             Servicio = 4,
@@ -183,7 +189,7 @@ namespace KinniNet.Business.Utils
 
         public enum EnumTipoEncuesta
         {
-            Logica = 1,
+            SiNo = 1,
             Calificacion = 2,
             OpcionMultiple = 3
         }

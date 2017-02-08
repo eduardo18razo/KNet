@@ -45,15 +45,15 @@ namespace KiiniHelp.UserControls.Filtros.Componentes
             {
                 List<int> filtroGrupos = new List<int>
                 {
-                    (int) BusinessVariables.EnumTiposGrupos.DueñoDelServicio,
-                    (int) BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada,
+                    (int) BusinessVariables.EnumTiposGrupos.ResponsableServicio,
+                    (int) BusinessVariables.EnumTiposGrupos.ResponsableDeContenido,
                     (int) BusinessVariables.EnumTiposGrupos.ResponsableDeAtención,
                     (int) BusinessVariables.EnumTiposGrupos.ResponsableDeOperación,
                     (int) BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo,
-                    (int) BusinessVariables.EnumTiposGrupos.EspecialDeConsulta
+                    (int) BusinessVariables.EnumTiposGrupos.ConsultasEspeciales
                 };
 
-                rptGpos.DataSource = _servicioGrupoUsuario.ObtenerGruposByIdUsuario(((Usuario)Session["UserData"]).Id, false).Where(w => w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Acceso && filtroGrupos.Contains(w.IdTipoGrupo));
+                rptGpos.DataSource = _servicioGrupoUsuario.ObtenerGruposByIdUsuario(((Usuario)Session["UserData"]).Id, false).Where(w => w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Usuario && filtroGrupos.Contains(w.IdTipoGrupo));
                 rptGpos.DataBind();
             }
             catch (Exception e)

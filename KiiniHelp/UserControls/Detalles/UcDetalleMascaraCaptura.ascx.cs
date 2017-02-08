@@ -116,10 +116,10 @@ namespace KiiniHelp.UserControls.Detalles
                     {
                         case "ALFANUMERICO":
                         case "CATALOGO":
-                        case "DECIMAL":
-                        case "ENTERO":
+                        case "NUMERO DECIMAL":
+                        case "NUMERO ENTERO":
                         case "FECHA":
-                        case "MASCARA":
+                        case "CAMPO CON FORMATO":
                         case "HORA":
 
                             lbl.Attributes["for"] = "txt" + campo.NombreCampo;
@@ -145,7 +145,7 @@ namespace KiiniHelp.UserControls.Detalles
                             txtAlfanumerico.Style.Add("margin-left", "10px");
                             createDiv.Controls.Add(txtAlfanumerico);
                             break;
-                        case "SI/NO":
+                        case "SI o NO":
                             lbl.Attributes["for"] = "txt" + campo.NombreCampo;
                             createDiv.Controls.Add(lbl);
                             txtAlfanumerico = new TextBox
@@ -157,7 +157,7 @@ namespace KiiniHelp.UserControls.Detalles
                             txtAlfanumerico.Style.Add("margin-left", "10px");
                             createDiv.Controls.Add(txtAlfanumerico);
                             break;
-                        case "CARGA DE ARCHIVO":
+                        case "ARCHIVO ADJUNTO":
                             lbl.Attributes["for"] = "txt" + campo.NombreCampo;
                             createDiv.Controls.Add(lbl);
                             string archivo = datosMascara.Single(s => s.Campo == campo.NombreCampo).Value;

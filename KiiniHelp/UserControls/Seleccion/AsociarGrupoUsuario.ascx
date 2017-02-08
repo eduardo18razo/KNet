@@ -46,7 +46,7 @@
                                             <asp:Label runat="server" Text="Administrador" class="col-sm-3 control-label"></asp:Label>
                                             <asp:DropDownList runat="server" Width="250px" ID="ddlGrupoAdministrador" CssClass="DropSelect" AutoPostBack="True" />
                                             <asp:Button runat="server" CssClass="btn btn-success btn-xs" Text="Asignar" OnClick="OnClickAsignarGrupo" CommandArgument="1" />
-                                            <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar" OnClick="OnClickAltaGrupo" CommandArgument="1" />
+                                            <asp:Button runat="server" CssClass="btn btn-primary btn-xs" Text="Agregar nuevo" OnClick="OnClickAltaGrupo" CommandArgument="1" />
                                         </div>
                                     </div>
                                     <div class="form-group" runat="server" id="divGrupoAcceso" visible="False">

@@ -289,7 +289,8 @@ namespace KiiniHelp.UserControls.Altas
                     txtAm.Text = user.ApellidoMaterno;
                     txtNombre.Text = user.Nombre;
                     Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true));
-                    ddlPuesto.SelectedValue = user.IdPuesto.ToString();
+                    if (user.IdPuesto != null)
+                        ddlPuesto.SelectedValue = user.IdPuesto.ToString();
                     chkVip.Checked = user.Vip;
                     chkDirectoriActivo.Checked = user.DirectorioActivo;
                     int contadorCasa, contadorCel, contadorOficina;
@@ -533,7 +534,7 @@ namespace KiiniHelp.UserControls.Altas
                             IdTipoTelefono = Convert.ToInt32(tipoTelefono.Text.Trim()),
                             Numero = numero.Text.Trim(),
                             Extension = extension.Text.Trim(),
-                            Obligatorio = obligatorio,
+                            Obligatorio = numero.CssClass.Contains("obligatorio"),
                             Confirmado = false
                         });
                     }
@@ -541,7 +542,7 @@ namespace KiiniHelp.UserControls.Altas
                 usuario.CorreoUsuario = new List<CorreoUsuario>();
                 foreach (TextBox correo in rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox)item.FindControl("txtCorreo")).Where(correo => correo != null & correo.Text.Trim() != string.Empty))
                 {
-                    usuario.CorreoUsuario.Add(new CorreoUsuario { Correo = correo.Text.Trim() });
+                    usuario.CorreoUsuario.Add(new CorreoUsuario { Correo = correo.Text.Trim(), Obligatorio = correo.CssClass.Contains("obligatorio") });
                 }
 
                 usuario.IdOrganizacion = UcConsultaOrganizacion.OrganizacionSeleccionada;

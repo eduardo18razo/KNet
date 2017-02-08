@@ -64,7 +64,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaMascara\");", true);
+                Response.Redirect("~/Users/Administracion/Mascaras/FrmConsultaMascaraAcceso.aspx");
             }
             catch (Exception ex)
             {
@@ -81,8 +81,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                LlenaMascaras();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaMascara\");", true);
+                Response.Redirect("~/Users/Administracion/Mascaras/FrmConsultaMascaraAcceso.aspx");
             }
             catch (Exception ex)
             {

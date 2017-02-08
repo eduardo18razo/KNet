@@ -51,14 +51,16 @@ namespace KinniNet.Core.Parametros
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
+                int obligatorios = 0;
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = new List<TelefonoUsuario>();
                 foreach (ParametrosTelefonos parametrosTelefonose in db.ParametrosTelefonos.Where(w => w.IdTipoUsuario == idTipoUsuario))
                 {
                     db.LoadProperty(parametrosTelefonose, "TipoTelefono");
+                    obligatorios = parametrosTelefonose.Obligatorios;
                     for (int i = 0; i < parametrosTelefonose.NumeroTelefonos; i++)
                     {
-                        result.Add(new TelefonoUsuario { IdTipoTelefono = parametrosTelefonose.IdTipoTelefono, TipoTelefono = parametrosTelefonose.TipoTelefono });
+                        result.Add(new TelefonoUsuario { IdTipoTelefono = parametrosTelefonose.IdTipoTelefono, TipoTelefono = parametrosTelefonose.TipoTelefono, Obligatorio = i + 1 <= obligatorios });
                     }
                 }
             }
@@ -79,13 +81,15 @@ namespace KinniNet.Core.Parametros
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
+                int obligatorios = 0;
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = new List<CorreoUsuario>();
                 foreach (TipoUsuario tipoUsuario in db.TipoUsuario.Where(w => w.Id == idTipoUsuario))
                 {
+                    obligatorios = tipoUsuario.CorreosObligatorios;
                     for (int i = 0; i < tipoUsuario.NumeroCorreos; i++)
                     {
-                        result.Add(new CorreoUsuario());
+                        result.Add(new CorreoUsuario { Obligatorio = i + 1 <= obligatorios });
                     }
                 }
             }

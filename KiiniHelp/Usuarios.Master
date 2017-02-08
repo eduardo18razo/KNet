@@ -1,8 +1,11 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Usuarios.master.cs" Inherits="KiiniHelp.UsuariosMaster" %>
 
+
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    
     <title></title>
     <link href="BootStrap/css/bootstrap.css" rel="stylesheet" />
     <link href="BootStrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -28,6 +31,9 @@
         var win;
         function MostrarPopup(modalName) {
             debugger;
+            $(modalName).on('shown.bs.modal', function () {
+                $(this).find('[autofocus]').focus();
+            });
             $(modalName).modal({ backdrop: 'static', keyboard: false });
             $(modalName).modal({ show: true });
             return true;
@@ -315,7 +321,8 @@
                     debugger;
                     var elementId = document.getElementById("<%= this.FindControl("hfCargaInicial").ClientID %>");
                     if (elementId.value === "False") {
-                        $('#modalRol').modal('show');
+                        $('#modalRol').modal({ backdrop: 'static', keyboard: false });
+                        $('#modalRol').modal({ show: true });
                         elementId.value = "true";
                     }
 

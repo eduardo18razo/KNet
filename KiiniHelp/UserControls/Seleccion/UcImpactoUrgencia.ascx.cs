@@ -43,12 +43,15 @@ namespace KiiniHelp.UserControls.Seleccion
             }
         }
 
-        private void Limpiar()
+        public void Limpiar()
         {
             try
             {
                 Metodos.LimpiarCombo(ddlPrioridad);
                 Metodos.LimpiarCombo(ddlUrgencia);
+                LlenaCombo();
+                ObtenerImpactoUrgencia();
+
             }
             catch (Exception ex)
             {

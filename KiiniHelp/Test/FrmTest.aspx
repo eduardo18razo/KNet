@@ -1,11 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmTest.aspx.cs" Inherits="KiiniHelp.Test.FrmTest" %>
 
-<%@ Register Src="~/UserControls/Filtros/Componentes/UcFiltroCanalApertura.ascx" TagPrefix="uc1" TagName="UcFiltroCanalApertura" %>
-<%@ Register Src="~/UserControls/Consultas/UcConsultaOrganizacion.ascx" TagPrefix="uc1" TagName="UcConsultaOrganizacion" %>
-
-
-
-
+<%@ Register Src="~/UserControls/Altas/UcAltaNivelArbol.ascx" TagPrefix="uc1" TagName="UcAltaNivelArbol" %>
 
 
 <!DOCTYPE html>
@@ -17,7 +12,7 @@
     <script src="../BootStrap/js/locales/jquery.sumoselect.min.js"></script>
     <script src="../BootStrap/js/bootstrap.min.js"></script>
     <script src="../BootStrap/js/bootstrap.js"></script>
-    
+
     <link href="~/BootStrap/css/sumoselect.css" rel="stylesheet" />
     <link href="~/BootStrap/css/bootstrap.css" rel="stylesheet" />
     <link href="~/BootStrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -84,41 +79,26 @@
                 <asp:ScriptReference Path="~/BootStrap/js/super-panel.js" />
             </Scripts>
         </asp:ScriptManager>
-        <uc1:UcConsultaOrganizacion runat="server" id="UcConsultaOrganizacion" />
+        <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <asp:Button runat="server" ID="btnAbrirModal" OnClick="btnAbrirModal_OnClick" Text="Abrir Modal" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <div class="modal fade" id="editNivel" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                    <asp:UpdatePanel ID="upCampus" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <uc1:UcAltaNivelArbol runat="server" id="ucAltaNivelArbol" />
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </form>
-
-
-
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <%--<asp:DropDownList runat="server" ID="ddlLista" CssClass="DropSelect"></asp:DropDownList>
-        <ajax:DropDownExtender ID="DropDownExtender2" runat="server"  TargetControlID="TextBox1" DropDownControlID="divDataDropdown"></ajax:DropDownExtender>
-        <asp:TextBox ID="TextBox1" runat="server" AutoCompleteType="None" CssClass="DropSelect"/>
-        <div id="divDataDropdown" style="overflow-y: scroll; height: 200px; background-color: white" runat="server">
-            <asp:GridView ID="GridView1" runat="server" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-                <Columns>            
-                    <asp:CommandField HeaderText="Select Data" ShowSelectButton="True" />
-                </Columns>
-            </asp:GridView>
-        </div>--%>
-        <%--<uc1:UcFiltroCatalogos runat="server" id="UcFiltroCatalogos" />--%>
-        <%--<uc1:UcCargaCatalgo runat="server" id="ucCargaCatalgo" />--%>
-        <%--<asp:ListBox runat="server" ID="lstBoxTest" SelectionMode="Multiple "/>
-        
-        <asp:Button Text="Values" Visible="True" ID="btnGetSelectedValues" OnClick="btnGetSelectedValues_Click" runat="server" />
-        <uc1:AltaInformacionConsulta runat="server" id="ucAltaInformacionConsulta" />--%>

@@ -568,10 +568,9 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
         }
-
         public Organizacion ObtenerOrganizacionUsuario(int idOrganizacion)
         {
-            Organizacion result = null;
+            Organizacion result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
@@ -598,7 +597,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<Organizacion> ObtenerOrganizaciones(int? idTipoUsuario, int? idHolding, int? idCompania, int? idDireccion, int? idSubDireccion, int? idGerencia, int? idSubGerencia, int? idJefatura)
         {
             List<Organizacion> result;
@@ -638,6 +636,7 @@ namespace KinniNet.Core.Operacion
                 result = qry.ToList();
                 foreach (Organizacion organizacion in result)
                 {
+                    db.LoadProperty(organizacion, "TipoUsuario");
                     db.LoadProperty(organizacion, "Holding");
                     db.LoadProperty(organizacion, "Compania");
                     db.LoadProperty(organizacion, "Direccion");
@@ -751,7 +750,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public string ObtenerDescripcionOrganizacionById(int idOrganizacion, bool ultimoNivel)
         {
             string result = null;
@@ -808,7 +806,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public List<int> ObtenerOrganizacionesByIdOrganizacion(int idOrganizacion)
         {
             List<int> result;
@@ -847,14 +844,222 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public void HabilitarOrganizacion(int idOrganizacion, bool habilitado)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
+                db.ContextOptions.LazyLoadingEnabled = true;
+                db.ContextOptions.ProxyCreationEnabled = true;
                 Organizacion org = db.Organizacion.SingleOrDefault(w => w.Id == idOrganizacion);
-                if (org != null) org.Habilitado = habilitado;
+                if (org != null)
+                {
+                    if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any())
+                        throw new Exception("La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
+                    org.Habilitado = habilitado;
+
+
+                    var qry = db.Organizacion.Where(w => w.IdTipoUsuario == org.IdTipoUsuario && w.IdHolding == org.IdHolding);
+                    if (!habilitado)
+                    {
+                        qry = qry.Where(w => w.IdNivelOrganizacion > org.IdNivelOrganizacion && w.Habilitado);
+                        foreach (Organizacion source in qry.OrderBy(o => o.Id))
+                        {
+                            if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any())
+                                throw new Exception("La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
+                            switch (org.IdNivelOrganizacion)
+                            {
+                                case 1:
+                                    break;
+                                case 2:
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania)
+                                    {
+                                        source.Compania.Habilitado = false;
+                                        if (source.IdDireccion.HasValue)
+                                            source.Direccion.Habilitado = false;
+                                        if (source.IdSubDireccion.HasValue)
+                                            source.SubDireccion.Habilitado = false;
+                                        if (source.IdGerencia.HasValue)
+                                            source.Gerencia.Habilitado = false;
+                                        if (source.IdSubGerencia.HasValue)
+                                            source.SubGerencia.Habilitado = false;
+                                        if (source.IdJefatura.HasValue)
+                                            source.Jefatura.Habilitado = false;
+                                        source.Habilitado = false;
+                                    }
+                                    break;
+                                case 3:
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion)
+                                    {
+                                        source.Direccion.Habilitado = false;
+                                        if (source.IdSubDireccion.HasValue)
+                                            source.SubDireccion.Habilitado = false;
+                                        if (source.IdGerencia.HasValue)
+                                            source.Gerencia.Habilitado = false;
+                                        if (source.IdSubGerencia.HasValue)
+                                            source.SubGerencia.Habilitado = false;
+                                        if (source.IdJefatura.HasValue)
+                                            source.Jefatura.Habilitado = false;
+                                        source.Habilitado = false;
+                                    }
+                                    break;
+                                case 4:
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion && source.IdSubDireccion == org.IdSubDireccion)
+                                    {
+                                        source.SubDireccion.Habilitado = false;
+                                        if (source.IdGerencia.HasValue)
+                                            source.Gerencia.Habilitado = false;
+                                        if (source.IdSubGerencia.HasValue)
+                                            source.SubGerencia.Habilitado = false;
+                                        if (source.IdJefatura.HasValue)
+                                            source.Jefatura.Habilitado = false;
+                                        source.Habilitado = false;
+                                    }
+                                    break;
+                                case 5:
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion && source.IdSubDireccion == org.IdSubDireccion && source.IdGerencia == org.IdGerencia)
+                                    {
+                                        source.Gerencia.Habilitado = false;
+                                        if (source.IdSubGerencia.HasValue)
+                                            source.SubGerencia.Habilitado = false;
+                                        if (source.IdJefatura.HasValue)
+                                            source.Jefatura.Habilitado = false;
+                                        source.Habilitado = false;
+                                    }
+                                    break;
+                                case 6:
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion && source.IdSubDireccion == org.IdSubDireccion && source.IdGerencia == org.IdGerencia && source.IdSubGerencia == org.IdSubGerencia)
+                                    {
+                                        source.SubGerencia.Habilitado = false;
+                                        if (source.IdJefatura.HasValue)
+                                            source.Jefatura.Habilitado = false;
+                                        source.Habilitado = false;
+                                    }
+                                    break;
+                                case 7:
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion && source.IdSubDireccion == org.IdSubDireccion && source.IdGerencia == org.IdGerencia && source.IdSubGerencia == org.IdSubGerencia && source.IdJefatura == org.IdJefatura)
+                                    {
+                                        source.Jefatura.Habilitado = false;
+                                        source.Habilitado = false;
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        qry = qry.Where(w => w.IdNivelOrganizacion < org.IdNivelOrganizacion && !w.Habilitado);
+                        if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any())
+                            throw new Exception("La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
+                        switch (org.IdNivelOrganizacion)
+                        {
+                            case 1:
+                                break;
+                            case 2:
+                                org.Compania.Habilitado = true;
+                                break;
+                            case 3:
+                                org.Compania.Habilitado = true;
+                                org.Direccion.Habilitado = true;
+                                break;
+                            case 4:
+                                org.Compania.Habilitado = true;
+                                org.Direccion.Habilitado = true;
+                                org.SubDireccion.Habilitado = true;
+                                break;
+                            case 5:
+                                org.Compania.Habilitado = true;
+                                org.Direccion.Habilitado = true;
+                                org.SubDireccion.Habilitado = true;
+                                org.Gerencia.Habilitado = true;
+                                break;
+                            case 6:
+                               org.Compania.Habilitado = true;
+                                org.Direccion.Habilitado = true;
+                                org.SubDireccion.Habilitado = true;
+                                org.Gerencia.Habilitado = true;
+                                org.SubGerencia.Habilitado = true;
+                                break;
+                            case 7:
+                                org.Compania.Habilitado = true;
+                                org.Direccion.Habilitado = true;
+                                org.SubDireccion.Habilitado = true;
+                                org.Gerencia.Habilitado = true;
+                                org.SubGerencia.Habilitado = true;
+                                org.Jefatura.Habilitado = true;
+                                break;
+                        }
+                        if (org.IdCompania.HasValue)
+                            qry = qry.Where(w => w.IdCompania == org.IdCompania);
+                        foreach (Organizacion source in qry.OrderBy(o => o.Id))
+                        {
+                            if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any())
+                                throw new Exception("La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
+                            switch (source.IdNivelOrganizacion)
+                            {
+                                case 1:
+                                    break;
+                                case 2:
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania)
+                                    {
+                                        source.Compania.Habilitado = true;
+                                        source.Habilitado = true;
+                                    }
+                                    break;
+                                case 3:
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion)
+                                    {
+                                        source.Compania.Habilitado = true;
+                                        source.Direccion.Habilitado = true;
+                                        source.Habilitado = true;
+                                    }
+                                    break;
+                                case 4:
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion && source.IdSubDireccion == org.IdSubDireccion)
+                                    {
+                                        source.Compania.Habilitado = true;
+                                        source.Direccion.Habilitado = true;
+                                        source.SubDireccion.Habilitado = true;
+                                        source.Habilitado = true;
+                                    }
+                                    break;
+                                case 5:
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion && source.IdSubDireccion == org.IdSubDireccion && source.IdGerencia == org.IdGerencia)
+                                    {
+                                        source.Compania.Habilitado = true;
+                                        source.Direccion.Habilitado = true;
+                                        source.SubDireccion.Habilitado = true;
+                                        source.Gerencia.Habilitado = true;
+                                        source.Habilitado = true;
+                                    }
+                                    break;
+                                case 6:
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion && source.IdSubDireccion == org.IdSubDireccion && source.IdGerencia == org.IdGerencia && source.IdSubGerencia == org.IdSubGerencia)
+                                    {
+                                        source.Compania.Habilitado = true;
+                                        source.Direccion.Habilitado = true;
+                                        source.SubDireccion.Habilitado = true;
+                                        source.Gerencia.Habilitado = true;
+                                        source.SubGerencia.Habilitado = true;
+                                        source.Habilitado = true;
+                                    }
+                                    break;
+                                case 7:
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion && source.IdSubDireccion == org.IdSubDireccion && source.IdGerencia == org.IdGerencia && source.IdSubGerencia == org.IdSubGerencia && source.IdJefatura == org.IdJefatura)
+                                    {
+                                        source.Compania.Habilitado = true;
+                                        source.Direccion.Habilitado = true;
+                                        source.SubDireccion.Habilitado = true;
+                                        source.Gerencia.Habilitado = true;
+                                        source.SubGerencia.Habilitado = true;
+                                        source.Jefatura.Habilitado = true;
+                                        source.Habilitado = true;
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)
@@ -895,7 +1100,6 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
         public void ActualizarOrganizacion(Organizacion org)
         {
             DataBaseModelContext db = new DataBaseModelContext();

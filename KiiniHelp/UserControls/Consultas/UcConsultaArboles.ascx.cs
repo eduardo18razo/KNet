@@ -113,8 +113,8 @@ namespace KiiniHelp.UserControls.Consultas
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            UcAltaArbolAcceso.OnAceptarModal += UcAltaArbolAccesoOnOnAceptarModal;
-            UcAltaArbolAcceso.OnCancelarModal += UcAltaArbolAccesoOnOnCancelarModal;
+            //UcAltaArbolAcceso.OnAceptarModal += UcAltaArbolAccesoOnOnAceptarModal;
+            //UcAltaArbolAcceso.OnCancelarModal += UcAltaArbolAccesoOnOnCancelarModal;
             if (!IsPostBack)
             {
                 LlenaCombos();
@@ -460,7 +460,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                UcAltaArbolAcceso.IdArbol = Convert.ToInt32(hfId.Value);
+                //UcAltaArbolAcceso.IdArbol = Convert.ToInt32(hfId.Value);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editOpcion\");", true);
                 upOcion.Update();
             }

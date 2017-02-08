@@ -23,7 +23,7 @@
 </header>
 <div class="panel panel-primary">
     <div class="panel-heading text-primary text-center">
-        <h3>Login panel</h3>
+        <h3>Acceder a mi cuenta Kiininet</h3>
     </div>
     <div class="panel-body">
         <div class="form-horizontal" role="form">
@@ -42,12 +42,12 @@
             <div class="form-group">
                 <div class="col-sm-2 control-label"></div>
                 <div class="col-sm-10">
-                    <asp:LinkButton class="btn btn-primary" ID="lnkBtnRecuperar" runat="server" Text="Recuperar contraseña" OnClick="lnkBtnRecuperar_OnClick"></asp:LinkButton>
+                    <asp:LinkButton class="btn btn-primary" ID="lnkBtnRecuperar" runat="server" Text="¿Olvidaste tu contraseña?" OnClick="lnkBtnRecuperar_OnClick"></asp:LinkButton>
                 </div>
             </div>
             <div class="form-group">
                 <asp:CustomValidator ErrorMessage="" OnServerValidate="OnServerValidate" runat="server" />
-                <cc1:CaptchaControl ID="Captcha1" runat="server" CaptchaBackgroundNoise="Low" CaptchaLength="5" CssClass="col-sm-2"
+                <cc1:CaptchaControl ID="Captcha1" runat="server" CaptchaBackgroundNoise="Low" CaptchaLength="6" CssClass="col-sm-2"
                     CaptchaHeight="60" CaptchaWidth="200" CaptchaMinTimeout="5" CaptchaMaxTimeout="240"
                     FontColor="#D20B0C" NoiseColor="#B1B1B1" />
             </div>

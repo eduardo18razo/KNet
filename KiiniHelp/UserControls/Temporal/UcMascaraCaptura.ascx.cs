@@ -112,10 +112,10 @@ namespace KiiniHelp.UserControls.Temporal
                         case "ALFANUMERICO":
                             nombreControl = "txt" + campo.NombreCampo;
                             break;
-                        case "DECIMAL":
+                        case "NUMERO DECIMAL":
                             nombreControl = "txt" + campo.NombreCampo;
                             break;
-                        case "ENTERO":
+                        case "NUMERO ENTERO":
                             nombreControl = "txt" + campo.NombreCampo;
                             break;
                         case "FECHA":
@@ -131,14 +131,14 @@ namespace KiiniHelp.UserControls.Temporal
                             nombreControl = "ddl" + campo.NombreCampo;
                             campoTexto = false;
                             break;
-                        case "SI/NO":
+                        case "SI o NO":
                             nombreControl = "chk" + campo.NombreCampo;
                             campoTexto = false;
                             break;
-                        case "MASCARA":
+                        case "CAMPO CON FORMATO":
                             nombreControl = "txt" + campo.NombreCampo;
                             break;
-                        case "CARGA DE ARCHIVO":
+                        case "ARCHIVO ADJUNTO":
                             nombreControl = "fu" + campo.NombreCampo;
                             campoTexto = false;
                             break;
@@ -160,7 +160,7 @@ namespace KiiniHelp.UserControls.Temporal
                                     };
                                     lstCamposCapturados.Add(campoCapturado);
                                     break;
-                                case "DECIMAL":
+                                case "NUMERO DECIMAL":
                                     campoCapturado = new HelperCampoMascaraCaptura
                                     {
                                         NombreCampo = campo.NombreCampo,
@@ -197,7 +197,7 @@ namespace KiiniHelp.UserControls.Temporal
                                     lstCamposCapturados.Add(campoCapturado);
                                 }
                                 break;
-                            case "SI/NO":
+                            case "SI o NO":
                                 CheckBox chk = (CheckBox)divControles.FindControl(nombreControl);
                                 if (chk != null)
                                 {
@@ -209,7 +209,7 @@ namespace KiiniHelp.UserControls.Temporal
                                     lstCamposCapturados.Add(campoCapturado);
                                 }
                                 break;
-                            case "CARGA DE ARCHIVO":
+                            case "ARCHIVO ADJUNTO":
                                 AsyncFileUpload upload = (AsyncFileUpload)divControles.FindControl(nombreControl);
                                 if (upload != null)
                                 {
@@ -287,7 +287,7 @@ namespace KiiniHelp.UserControls.Temporal
                             createDiv.Controls.Add(ddlCatalogo);
                             _lstControles.Add(ddlCatalogo);
                             break;
-                        case "DECIMAL":
+                        case "NUMERO DECIMAL":
                             lbl.Attributes["for"] = "txt" + campo.NombreCampo;
                             createDiv.Controls.Add(lbl);
                             TextBox txtDecimal = new TextBox
@@ -304,7 +304,7 @@ namespace KiiniHelp.UserControls.Temporal
                             createDiv.Controls.Add(txtDecimal);
                             _lstControles.Add(txtDecimal);
                             break;
-                        case "ENTERO":
+                        case "NUMERO ENTERO":
                             lbl.Attributes["for"] = "txt" + campo.NombreCampo;
                             createDiv.Controls.Add(lbl);
                             TextBox txtEntero = new TextBox
@@ -347,7 +347,7 @@ namespace KiiniHelp.UserControls.Temporal
                             txtHora.Attributes["placeholder"] = campo.Descripcion;
                             txtHora.Attributes["min"] = "00:00";
                             txtHora.Attributes["max"] = "23:59:59";
-                            txtHora.Attributes["step"] = "30";
+                            txtHora.Attributes["step"] = "0";
                             txtHora.Attributes["type"] = "time";
                             createDiv.Controls.Add(txtHora);
                             _lstControles.Add(txtHora);
@@ -366,12 +366,12 @@ namespace KiiniHelp.UserControls.Temporal
                             _lstControles.Add(txtMoneda);
                             createDiv.Controls.Add(txtMoneda);
                             break;
-                        case "SI/NO":
+                        case "SI o NO":
                             CheckBox chk = new CheckBox { ID = "chk" + campo.NombreCampo, Text = campo.Descripcion, ViewStateMode = ViewStateMode.Inherit };
                             _lstControles.Add(chk);
                             createDiv.Controls.Add(chk);
                             break;
-                        case "MASCARA":
+                        case "CAMPO CON FORMATO":
                             lbl.Attributes["for"] = "txt" + campo.NombreCampo;
                             createDiv.Controls.Add(lbl);
                             TextBox txtMascara = new TextBox
@@ -382,7 +382,7 @@ namespace KiiniHelp.UserControls.Temporal
                             };
                             txtMascara.Attributes["placeholder"] = campo.Descripcion;
                             txtMascara.Attributes["max"] = campo.ValorMaximo.ToString();
-                            txtMascara.Attributes["for"] = "MASCARA";
+                            txtMascara.Attributes["for"] = "txt" + campo.Descripcion.Replace(" ", string.Empty);
                             MaskedEditExtender meeMascara = new MaskedEditExtender
                             {
                                 ID = "mee" + campo.NombreCampo,
@@ -397,7 +397,7 @@ namespace KiiniHelp.UserControls.Temporal
                             createDiv.Controls.Add(txtMascara);
                             _lstControles.Add(txtMascara);
                             break;
-                        case "CARGA DE ARCHIVO":
+                        case "ARCHIVO ADJUNTO":
                             lbl.Attributes["for"] = "fu" + campo.NombreCampo;
                             createDiv.Controls.Add(lbl);
                             AsyncFileUpload asyncFileUpload = new AsyncFileUpload
@@ -573,7 +573,7 @@ namespace KiiniHelp.UserControls.Temporal
                                         throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
                             }
                             break;
-                        case "MASCARA":
+                        case "CAMPO CON FORMATO":
                             nombreControl = "txt" + campo.NombreCampo;
                             TextBox txtMascara = (TextBox)divControles.FindControl(nombreControl);
                             if (txtMascara != null)
@@ -602,7 +602,10 @@ namespace KiiniHelp.UserControls.Temporal
             try
             {
                 if (Session["Files"] != null)
-                    BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalMascara, BusinessVariables.Directorios.RepositorioMascara, (List<string>)Session["Files"]);
+                {
+                    BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalMascara, BusinessVariables.Directorios.RepositorioMascara, (List<string>) Session["Files"]);
+                    Session["Files"] = null;
+                }
             }
             catch (Exception ex)
             {

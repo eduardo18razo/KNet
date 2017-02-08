@@ -25,14 +25,15 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = (from a in db.Area
-                    join aa in db.ArbolAcceso on a.Id equals aa.IdArea
-                    join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
-                    join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
-                    join gu in db.GrupoUsuario on guia.IdGrupoUsuario equals gu.Id
-                    join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
-                    where ug.IdUsuario == idUsuario && guia.IdRol == (int)BusinessVariables.EnumRoles.Acceso
-                    select a).Distinct().ToList();
+                List<int> lstAreas = (from a in db.Area
+                          join aa in db.ArbolAcceso on a.Id equals aa.IdArea
+                          join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                          join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                          join gu in db.GrupoUsuario on guia.IdGrupoUsuario equals gu.Id
+                          join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
+                          where ug.IdUsuario == idUsuario && guia.IdRol == (int)BusinessVariables.EnumRoles.Usuario
+                          select a.Id).Distinct().ToList();
+                result = db.Area.Where(w => lstAreas.Contains(w.Id)).ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new Area
@@ -52,6 +53,41 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public List<Area> ObtenerAreasUsuarioByIdRol(int idUsuario, int idRol, bool insertarSeleccion)
+        {
+            List<Area> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                List<int> lstAreas = (from a in db.Area
+                    join aa in db.ArbolAcceso on a.Id equals aa.IdArea
+                    join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                    join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                    join gu in db.GrupoUsuario on guia.IdGrupoUsuario equals gu.Id
+                    join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
+                    join ur in db.UsuarioRol on ug.IdUsuario equals ur.IdUsuario
+                    where ug.IdUsuario == idUsuario && guia.IdRol == idRol
+                    select a.Id).Distinct().ToList();
+                result = db.Area.Where(w => lstAreas.Contains(w.Id)).ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
+                        new Area
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
         public List<Area> ObtenerAreasUsuarioByRol(int idUsuario, bool insertarSeleccion)
         {
             List<Area> result;
@@ -59,14 +95,15 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = (from a in db.Area
+                List<int> lstAreas = (from a in db.Area
                           join aa in db.ArbolAcceso on a.Id equals aa.IdArea
                           join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
                           join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
                           join gu in db.GrupoUsuario on guia.IdGrupoUsuario equals gu.Id
                           join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
-                          where ug.IdUsuario == idUsuario && guia.IdRol == (int)BusinessVariables.EnumRoles.Acceso
-                          select a).Distinct().ToList();
+                          where ug.IdUsuario == idUsuario && guia.IdRol == (int)BusinessVariables.EnumRoles.Usuario
+                          select a.Id).Distinct().ToList();
+                result = db.Area.Where(w => lstAreas.Contains(w.Id)).ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new Area
@@ -85,7 +122,25 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
+        public Area ObtenerAreaById(int idArea)
+        {
+            Area result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Area.SingleOrDefault(w => w.Id == idArea && w.Habilitado);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
 
         public List<Area> ObtenerAreasUsuarioTercero(int idUsuario, int idUsuarioTercero, bool insertarSeleccion)
         {
@@ -94,14 +149,16 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = (from a in db.Area
-                          join aa in db.ArbolAcceso on a.Id equals aa.IdArea
-                          join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
-                          join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
-                          join gu in db.GrupoUsuario on guia.IdGrupoUsuario equals gu.Id
-                          join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
-                          where ug.IdUsuario == idUsuario && ug.IdUsuario == idUsuarioTercero
-                          select a).Distinct().ToList();
+
+                List<int> lstAreas = (from a in db.Area
+                                      join aa in db.ArbolAcceso on a.Id equals aa.IdArea
+                                      join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                      join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                      join gu in db.GrupoUsuario on guia.IdGrupoUsuario equals gu.Id
+                                      join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
+                                      where ug.IdUsuario == idUsuario && ug.IdUsuario == idUsuarioTercero
+                                      select a.Id).Distinct().ToList();
+                result = db.Area.Where(w => lstAreas.Contains(w.Id)).ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new Area
@@ -129,12 +186,13 @@ namespace KinniNet.Core.Operacion
                 DataBaseModelContext db = new DataBaseModelContext();
                 try
                 {
-                    
+
                     db.ContextOptions.ProxyCreationEnabled = _proxy;
-                    result = (from a in db.Area
+                    List<int> lstAreas = (from a in db.Area
                               join aa in db.ArbolAcceso on a.Id equals aa.IdArea
                               where BusinessVariables.IdsPublicos.Contains(aa.IdTipoUsuario)
-                              select a).Distinct().ToList();
+                              select a.Id).Distinct().ToList();
+                    result = db.Area.Where(w => lstAreas.Contains(w.Id)).ToList();
                     if (insertarSeleccion)
                         result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                             new Area
@@ -164,10 +222,12 @@ namespace KinniNet.Core.Operacion
                 try
                 {
                     db.ContextOptions.ProxyCreationEnabled = _proxy;
-                    result = (from a in db.Area
-                              join aa in db.ArbolAcceso on a.Id equals aa.IdArea
-                              where aa.IdTipoUsuario == idTipoUsuario 
-                              select a).Distinct().ToList();
+                    List<int> lstAreas = (from a in db.Area
+                                       join aa in db.ArbolAcceso on a.Id equals aa.IdArea
+                                       where aa.IdTipoUsuario == idTipoUsuario
+                                       select a.Id).Distinct().ToList();
+
+                    result = db.Area.Where(w => lstAreas.Contains(w.Id)).ToList();
                     if (insertarSeleccion)
                         result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                             new Area
@@ -238,6 +298,74 @@ namespace KinniNet.Core.Operacion
             {
                 db.Dispose();
             }
+        }
+
+        public void Actualizar(int idArea, Area area)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                if (db.Area.Any(a => a.Descripcion == area.Descripcion && a.Id != idArea))
+                    throw new Exception("Esta Area ya existe.");
+                db.ContextOptions.LazyLoadingEnabled = true;
+                Area areaUpdate = db.Area.SingleOrDefault(s => s.Id == idArea);
+
+                if (areaUpdate == null) return;
+                areaUpdate.Descripcion = area.Descripcion.Trim().ToUpper();
+                areaUpdate.Imagen = area.Imagen;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public void Habilitar(int idArea, bool habilitado)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Area inf = db.Area.SingleOrDefault(w => w.Id == idArea);
+                if (inf != null) inf.Habilitado = habilitado;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public List<Area> ObtenerAreaConsulta(string descripcion)
+        {
+            List<Area> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<Area> qry = db.Area;
+                if (descripcion != string.Empty)
+                    qry = qry.Where(w => w.Descripcion.Contains(descripcion));
+                result = qry.OrderBy(o => o.Descripcion).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
         }
 
     }

@@ -18,7 +18,7 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<Area> ObtenerAreasUsuarioPublico(bool insertarSeleccion);
-        
+
         [OperationContract]
         List<Area> ObtenerAreasTipoUsuario(int idTipoUsuario, bool insertarSeleccion);
 
@@ -27,5 +27,14 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void Guardar(Area area);
+
+        [OperationContract]
+        Area ObtenerAreaById(int idArea);
+        [OperationContract]
+        void Actualizar(int idArea, Area puesto);
+        [OperationContract]
+        void Habilitar(int idArea, bool habilitado);
+        [OperationContract]
+        List<Area> ObtenerAreaConsulta(string descripcion);
     }
 }

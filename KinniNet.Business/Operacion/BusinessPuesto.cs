@@ -73,7 +73,7 @@ namespace KinniNet.Core.Operacion
             {
                 puesto.Habilitado = true;
                 puesto.Descripcion = puesto.Descripcion.Trim().ToUpper();
-                if (db.Puesto.Any(a => a.Descripcion == puesto.Descripcion))
+                if (db.Puesto.Any(a => a.Descripcion == puesto.Descripcion&& a.IdTipoUsuario == puesto.IdTipoUsuario))
                     throw new Exception("Este Puesto ya existe.");
                 if (puesto.Id == 0)
                     db.Puesto.AddObject(puesto);
@@ -94,8 +94,11 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
+                if (db.Puesto.Any(a => a.Descripcion == puesto.Descripcion && a.IdTipoUsuario == puesto.IdTipoUsuario && a.Id != idPuesto))
+                    throw new Exception("Este Puesto ya existe.");
                 db.ContextOptions.LazyLoadingEnabled = true;
                 Puesto pto = db.Puesto.SingleOrDefault(s => s.Id == idPuesto);
+                
                 if (pto == null) return;
                 pto.Descripcion = puesto.Descripcion.Trim().ToUpper();
 

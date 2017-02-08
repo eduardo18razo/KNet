@@ -53,7 +53,7 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
-
+                AlertaGeneral = new List<string>();
             }
             catch (Exception ex)
             {
@@ -70,7 +70,10 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
+                if(txtDescripcion.Text.Trim() == string.Empty)
+                    throw new Exception("Descripcion es campo obligatorio");
                 _servicioCatalogo.AgregarRegistro(IdCatalogo, txtDescripcion.Text);
+                Limpiar();
                 if (OnAceptarModal != null)
                     OnAceptarModal();
             }

@@ -112,5 +112,65 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public Area ObtenerAreaById(int idArea)
+        {
+            try
+            {
+                using (BusinessArea negocio = new BusinessArea())
+                {
+                    return negocio.ObtenerAreaById(idArea);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void Actualizar(int idArea, Area area)
+        {
+            try
+            {
+                using (BusinessArea negocio = new BusinessArea())
+                {
+                    negocio.Actualizar(idArea, area);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void Habilitar(int idArea, bool habilitado)
+        {
+            try
+            {
+                using (BusinessArea negocio = new BusinessArea())
+                {
+                    negocio.Habilitar(idArea, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Area> ObtenerAreaConsulta(string descripcion)
+        {
+            try
+            {
+                using (BusinessArea negocio = new BusinessArea())
+                {
+                    return negocio.ObtenerAreaConsulta(descripcion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

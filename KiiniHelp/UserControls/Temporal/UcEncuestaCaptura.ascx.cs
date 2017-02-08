@@ -38,7 +38,7 @@ namespace KiiniHelp.UserControls.Temporal
             Encuesta encuesta;
             switch (IdTipoServicio)
             {
-                case (int)BusinessVariables.EnumTipoArbol.Consultas:
+                case (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion:
                     encuesta = _servicioEncuesta.ObtenerEncuestaByIdConsulta(IdTicket);
                     break;
                 default:
@@ -95,7 +95,7 @@ namespace KiiniHelp.UserControls.Temporal
                 Encuesta encuesta = (Encuesta)Session["EncuestaActiva"];
                 switch (encuesta.IdTipoEncuesta)
                 {
-                    case (int)BusinessVariables.EnumTipoEncuesta.Logica:
+                    case (int)BusinessVariables.EnumTipoEncuesta.SiNo:
                         break;
                     case (int)BusinessVariables.EnumTipoEncuesta.Calificacion:
                         foreach (EncuestaPregunta pregunta in encuesta.EncuestaPregunta)
@@ -134,7 +134,7 @@ namespace KiiniHelp.UserControls.Temporal
                 lstCamposCapturados = new List<RespuestaEncuesta>();
                 switch (encuesta.IdTipoEncuesta)
                 {
-                    case (int)BusinessVariables.EnumTipoEncuesta.Logica:
+                    case (int)BusinessVariables.EnumTipoEncuesta.SiNo:
                         foreach (EncuestaPregunta pregunta in encuesta.EncuestaPregunta)
                         {
                             HtmlGenericControl divControl = (HtmlGenericControl)divControles.FindControl("createDiv" + pregunta.Id);
@@ -151,8 +151,8 @@ namespace KiiniHelp.UserControls.Temporal
                                             lstCamposCapturados.Add(new RespuestaEncuesta
                                             {
                                                 IdEncuesta = encuesta.Id,
-                                                IdTicket = IdTipoServicio != (int)BusinessVariables.EnumTipoArbol.Consultas ? IdTicket : (int?)null,
-                                                IdArbol = IdTipoServicio == (int)BusinessVariables.EnumTipoArbol.Consultas ? IdTicket : (int?)null,
+                                                IdTicket = IdTipoServicio != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion ? IdTicket : (int?)null,
+                                                IdArbol = IdTipoServicio == (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion ? IdTicket : (int?)null,
                                                 IdPregunta = pregunta.Id,
                                                 ValorRespuesta = i == 0 ? 0 : 1,
                                                 Ponderacion = i == 0 ? 0 : pregunta.Ponderacion
@@ -173,7 +173,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 HtmlGenericControl divGrupo = (HtmlGenericControl)divControl.FindControl("createDivs" + pregunta.Id);
                                 if (divGrupo != null)
                                 {
-                                    for (int i = 0; i < 10; i++)
+                                    for (int i = 1; i <= 10; i++)
                                     {
                                         RadioButton rbtn = (RadioButton)divGrupo.FindControl("rbtn" + pregunta.Id + i);
                                         if (rbtn.Checked)
@@ -181,8 +181,8 @@ namespace KiiniHelp.UserControls.Temporal
                                             lstCamposCapturados.Add(new RespuestaEncuesta
                                             {
                                                 IdEncuesta = encuesta.Id,
-                                                IdTicket = IdTipoServicio != (int)BusinessVariables.EnumTipoArbol.Consultas ? IdTicket : (int?)null,
-                                                IdArbol = IdTipoServicio == (int)BusinessVariables.EnumTipoArbol.Consultas ? IdTicket : (int?)null,
+                                                IdTicket = IdTipoServicio != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion ? IdTicket : (int?)null,
+                                                IdArbol = IdTipoServicio == (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion ? IdTicket : (int?)null,
                                                 IdPregunta = pregunta.Id,
                                                 ValorRespuesta = i,
                                                 Ponderacion = ((i + 1) * 10),
@@ -213,8 +213,8 @@ namespace KiiniHelp.UserControls.Temporal
                                             lstCamposCapturados.Add(new RespuestaEncuesta
                                             {
                                                 IdEncuesta = encuesta.Id,
-                                                IdTicket = IdTipoServicio != (int)BusinessVariables.EnumTipoArbol.Consultas ? IdTicket : (int?)null,
-                                                IdArbol = IdTipoServicio == (int)BusinessVariables.EnumTipoArbol.Consultas ? IdTicket : (int?)null,
+                                                IdTicket = IdTipoServicio != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion ? IdTicket : (int?)null,
+                                                IdArbol = IdTipoServicio == (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion ? IdTicket : (int?)null,
                                                 IdPregunta = pregunta.Id,
                                                 ValorRespuesta = i,
                                                 Ponderacion = (pregunta.Ponderacion / 5) * i
@@ -243,12 +243,12 @@ namespace KiiniHelp.UserControls.Temporal
             {
                 switch (tipoEncuesta)
                 {
-                    case (int)BusinessVariables.EnumTipoEncuesta.Logica:
+                    case (int)BusinessVariables.EnumTipoEncuesta.SiNo:
                         foreach (EncuestaPregunta pregunta in lstControles)
                         {
                             HtmlGenericControl createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + pregunta.Id };
                             createDiv.Attributes["class"] = "form-group";
-                            Label lbl = new Label { Text = pregunta.Pregunta, CssClass = "control-label" };
+                            Label lbl = new Label { Text = string.Format("{0}", pregunta.Pregunta.ToUpper()), CssClass = "control-label" };
                             createDiv.Controls.Add(lbl);
                             divControles.Controls.Add(createDiv);
                             createDiv = new HtmlGenericControl("DIV") { ID = "createDivs" + pregunta.Id };
@@ -275,12 +275,12 @@ namespace KiiniHelp.UserControls.Temporal
                         {
                             HtmlGenericControl createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + pregunta.Id };
                             createDiv.Attributes["class"] = "form-group";
-                            Label lbl = new Label { Text = pregunta.Pregunta, CssClass = "control-label" };
+                            Label lbl = new Label { Text = string.Format("{0}", pregunta.Pregunta.ToUpper()), CssClass = "control-label" };
                             createDiv.Controls.Add(lbl);
                             divControles.Controls.Add(createDiv);
                             createDiv = new HtmlGenericControl("DIV") { ID = "createDivs" + pregunta.Id };
                             createDiv.Attributes["class"] = "form-group";
-                            for (int i = 0; i < 10; i++)
+                            for (int i = 1; i <= 10; i++)
                             {
 
                                 RadioButton rb = new RadioButton();
@@ -298,7 +298,7 @@ namespace KiiniHelp.UserControls.Temporal
                         {
                             HtmlGenericControl createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + pregunta.Id };
                             createDiv.Attributes["class"] = "form-group";
-                            Label lbl = new Label { Text = pregunta.Pregunta, CssClass = "control-label" };
+                            Label lbl = new Label { Text = string.Format("{0}", pregunta.Pregunta.ToUpper()), CssClass = "control-label" };
                             createDiv.Controls.Add(lbl);
                             divControles.Controls.Add(createDiv);
                             createDiv = new HtmlGenericControl("DIV") { ID = "createDivs" + pregunta.Id };

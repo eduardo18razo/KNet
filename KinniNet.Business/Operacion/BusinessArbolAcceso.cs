@@ -31,7 +31,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
-                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
                 //List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
                 var qry = db.ArbolAcceso.Where(w => w.IdTipoUsuario == idTipoUsuario && w.IdTipoArbolAcceso == idTipoArbol && w.IdNivel1 == nivel1);
                 qry = nivel2.HasValue ? qry.Where(w => w.IdNivel2 == nivel2) : qry.Where(w => w.IdNivel2 == null);
@@ -65,7 +65,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
-                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
                 var qry = db.ArbolAcceso.Where(w => w.IdTipoUsuario == idTipoUsuario && w.IdTipoArbolAcceso == idTipoArbol && w.IdNivel1 == nivel1);
                 qry = nivel2.HasValue ? qry.Where(w => w.IdNivel2 == nivel2) : qry.Where(w => w.IdNivel2 == null);
                 qry = nivel3.HasValue ? qry.Where(w => w.IdNivel3 == nivel3) : qry.Where(w => w.IdNivel3 == null);
@@ -98,9 +98,9 @@ namespace KinniNet.Core.Operacion
             {
                 Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
                 Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
-                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Usuario).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
                 List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
                 lstsubGpos.RemoveAll(r => !r.HasValue);
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
@@ -155,9 +155,9 @@ namespace KinniNet.Core.Operacion
             {
                 Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
                 Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
-                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Usuario).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
                 List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
                 lstsubGpos.RemoveAll(r => !r.HasValue);
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
@@ -211,9 +211,9 @@ namespace KinniNet.Core.Operacion
             {
                 Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
                 Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
-                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Usuario).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
                 List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
                 lstsubGpos.RemoveAll(r => !r.HasValue);
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
@@ -267,9 +267,9 @@ namespace KinniNet.Core.Operacion
             {
                 Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
                 Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
-                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Usuario).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
                 List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
                 lstsubGpos.RemoveAll(r => !r.HasValue);
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
@@ -323,9 +323,9 @@ namespace KinniNet.Core.Operacion
             {
                 Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
                 Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
-                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Usuario).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
                 List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
                 lstsubGpos.RemoveAll(r => !r.HasValue);
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
@@ -379,9 +379,9 @@ namespace KinniNet.Core.Operacion
             {
                 Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
                 Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
-                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Usuario).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
                 List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
                 lstsubGpos.RemoveAll(r => !r.HasValue);
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
@@ -435,9 +435,9 @@ namespace KinniNet.Core.Operacion
             {
                 Usuario usuarioLevanta = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioLevanta);
                 Usuario usuarioSolicita = new BusinessUsuarios().ObtenerDetalleUsuario(idUsuarioSolicita);
-                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Acceso).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
-                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ContactCenter && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposSolicita = usuarioSolicita.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Usuario).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposLevanta = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || (w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.LevantaTicket)).Select(s => s.IdGrupoUsuario).ToList();
+                List<int> lstGposRecado = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal && w.GrupoUsuario.RecadoTicket).Select(s => s.IdGrupoUsuario).ToList();
                 List<int?> lstsubGpos = usuarioLevanta.UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Select(s => s.IdSubGrupoUsuario).ToList();
                 lstsubGpos.RemoveAll(r => !r.HasValue);
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
@@ -727,7 +727,7 @@ namespace KinniNet.Core.Operacion
                     arbol.Nivel7.Descripcion = arbol.Nivel7.Descripcion.ToUpper();
                     arbol.Nivel7.Habilitado = arbol.Nivel7.Habilitado;
                 }
-                if (arbol.EsTerminal && arbol.IdTipoArbolAcceso != (int)BusinessVariables.EnumTipoArbol.Consultas)
+                if (arbol.EsTerminal && arbol.IdTipoArbolAcceso != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion)
                 {
                     arbol.InventarioArbolAcceso.First().Sla.TiempoHoraProceso =
                         arbol.InventarioArbolAcceso.First().Sla.Dias +
@@ -760,7 +760,7 @@ namespace KinniNet.Core.Operacion
                                               join guia in db.GrupoUsuarioInventarioArbol on iac.Id equals guia.IdInventarioArbolAcceso
                                               join ug in db.UsuarioGrupo on new { guia.IdRol, guia.IdGrupoUsuario, guia.IdSubGrupoUsuario } equals new { ug.IdRol, ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
                                               where ug.IdUsuario == idUsuario && ac.IdTipoArbolAcceso == idTipoArbol && ac.IdArea == idArea
-                                              && guia.IdRol == (int)BusinessVariables.EnumRoles.Acceso
+                                              && guia.IdRol == (int)BusinessVariables.EnumRoles.Usuario
                                               select ac;
                 result = qry.ToList();
                 foreach (ArbolAcceso arbol in result)
@@ -798,7 +798,7 @@ namespace KinniNet.Core.Operacion
                                               join guia in db.GrupoUsuarioInventarioArbol on iac.Id equals guia.IdInventarioArbolAcceso
                                               join ug in db.UsuarioGrupo on new { guia.IdRol, guia.IdGrupoUsuario, guia.IdSubGrupoUsuario } equals new { ug.IdRol, ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
                                               where ac.IdTipoUsuario == idTipoUsuario && ac.IdTipoArbolAcceso == idTipoArbol && ac.IdArea == idArea
-                                              && guia.IdRol == (int)BusinessVariables.EnumRoles.Acceso
+                                              && guia.IdRol == (int)BusinessVariables.EnumRoles.Usuario
                                               select ac;
                 result = qry.ToList();
                 foreach (ArbolAcceso arbol in result)
@@ -1104,7 +1104,7 @@ namespace KinniNet.Core.Operacion
                         arbol.InventarioArbolAcceso.First().InventarioInfConsulta.Single(w => w.InformacionConsulta.IdTipoInfConsulta == info.IdTipoInfConsulta).IdInfConsulta = infConsulta.IdInfConsulta;
                     }
 
-                    if (arbol.IdTipoUsuario != (int)BusinessVariables.EnumTipoArbol.Consultas)
+                    if (arbol.IdTipoUsuario != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion)
                     {
                         arbol.InventarioArbolAcceso.First().Sla.Dias =
                             arbolAccesoActualizar.InventarioArbolAcceso.First().Sla.Dias;
@@ -1134,7 +1134,7 @@ namespace KinniNet.Core.Operacion
                             {
                                 switch (informeArbol.IdTipoGrupo)
                                 {
-                                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
+                                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido:
                                         TiempoInformeArbol tInformeMto = db.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
                                         tInformeMto = arbol.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
                                         if (tInformeMto != null)
@@ -1159,7 +1159,7 @@ namespace KinniNet.Core.Operacion
                                         }
                                         break;
 
-                                    case (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta:
+                                    case (int)BusinessVariables.EnumTiposGrupos.ConsultasEspeciales:
                                         TiempoInformeArbol tInformeCons = db.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
                                         tInformeCons = arbol.TiempoInformeArbol.SingleOrDefault(s => s.IdArbol == arbol.Id && s.IdGrupoUsuario == informeArbol.IdGrupoUsuario && s.IdTipoGrupo == informeArbol.IdTipoGrupo);
                                         if (tInformeCons != null)

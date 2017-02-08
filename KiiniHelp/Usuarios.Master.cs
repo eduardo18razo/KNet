@@ -65,11 +65,11 @@ namespace KiiniHelp
         {
             try
             {
-                HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-                if (myCookie == null)
-                {
-                    Response.Redirect(ResolveUrl("~/Default.aspx"));
-                }
+                //HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                //if (myCookie == null)
+                //{
+                //    Response.Redirect(ResolveUrl("~/Default.aspx"));
+                //}
 
                 if (Session["UserData"] != null && HttpContext.Current.Request.Url.Segments[HttpContext.Current.Request.Url.Segments.Count() - 1] != "FrmCambiarContrasena.aspx")
                     if (_servicioSeguridad.CaducaPassword(((Usuario)Session["UserData"]).Id))
@@ -94,7 +94,7 @@ namespace KiiniHelp
                     int rolSeleccionado = 0;
                     if (Session["RolSeleccionado"] != null)
                         rolSeleccionado = int.Parse(Session["RolSeleccionado"].ToString());
-                    rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, _servicioArea.ObtenerAreasUsuario(((Usuario)Session["UserData"]).Id, false).Select(s => s.Id).ToList(), rolSeleccionado != 0);
+                    rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, rolSeleccionado, rolSeleccionado != 0);
                     rptMenu.DataBind();
                 }
 
@@ -305,10 +305,11 @@ namespace KiiniHelp
                     int areaSeleccionada = 0;
                     if (Session["RolSeleccionado"] != null)
                         areaSeleccionada = int.Parse(Session["RolSeleccionado"].ToString());
-                    rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, _servicioArea.ObtenerAreasUsuario(((Usuario)Session["UserData"]).Id, false).Select(s => s.Id).ToList(), areaSeleccionada != 0);
+                    rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, areaSeleccionada, areaSeleccionada != 0);
                     rptMenu.DataBind();
                     Session["CargaInicialModal"] = "True";
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalRol\");", true);
+                    Response.Redirect("~/Users/DashBoard.aspx");
                 }
                 catch (Exception ex)
                 {

@@ -40,6 +40,33 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.WebControls.Repeater rptErrorGeneral;
         
         /// <summary>
+        /// Control hfEsAlta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfEsAlta;
+        
+        /// <summary>
+        /// Control hfIdArea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdArea;
+        
+        /// <summary>
+        /// Control hfFileName.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfFileName;
+        
+        /// <summary>
         /// Control txtDescripcionAreas.
         /// </summary>
         /// <remarks>
@@ -47,6 +74,15 @@ namespace KiiniHelp.UserControls.Altas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescripcionAreas;
+        
+        /// <summary>
+        /// Control afDosnload.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AsyncFileUpload afDosnload;
         
         /// <summary>
         /// Control btnGuardarArea.

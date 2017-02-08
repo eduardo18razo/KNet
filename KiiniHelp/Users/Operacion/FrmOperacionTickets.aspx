@@ -45,7 +45,7 @@
                                         <div class="panel-heading" style="padding-bottom: 9px; margin: 0 0 20px; padding-left: 0">
                                             <asp:LinkButton CssClass="col-xs-1" runat="server" Text="Fecha y Hora" CommandName="DateTime" Width="10.6%" />
                                             <asp:Label CssClass="col-xs-1" runat="server" Text="Ticket" Width="8%" />
-                                            <asp:Label CssClass="col-xs-2" runat="server" Text="Descripcion" Width="14%" />
+                                            <asp:Label CssClass="col-xs-2" runat="server" Text="Descripción" Width="14%" />
                                             <asp:Label CssClass="col-xs-2" runat="server" Text="Grupo Asignado" Style="width: 10.6%" />
                                             <asp:Label CssClass="col-xs-1" runat="server" Text="Agente" Width="10.6%" />
                                             <asp:Label CssClass="col-xs-1" runat="server" Text="Nivel" Width="6%" />

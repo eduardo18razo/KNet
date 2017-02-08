@@ -43,9 +43,9 @@
                 </asp:Repeater>
             </div>
         </header>
-        <asp:HiddenField runat="server" ID="hfEsLink" Value="false"/>
-        <asp:HiddenField runat="server" ID="hfParametrosConfirmados" Value="false"/>
-        <asp:HiddenField runat="server" ID="hfValueNotivicacion" Value="false"/>
+        <asp:HiddenField runat="server" ID="hfEsLink" Value="false" />
+        <asp:HiddenField runat="server" ID="hfParametrosConfirmados" Value="false" />
+        <asp:HiddenField runat="server" ID="hfValueNotivicacion" Value="false" />
         <div class="panel panel-primary" style="width: 750px; margin: 0 auto">
             <div class="panel-heading">
                 <asp:Label runat="server" Text="¿Cómo quieres cambiar tu contraseña?"></asp:Label>
@@ -81,14 +81,20 @@
                     <asp:Label runat="server" Text=""></asp:Label>
                 </div>
                 <div runat="server" id="divPreguntas" visible="False">
-                    <asp:Repeater runat="server" ID="rptPreguntas">
-                        <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("Id") %>' ID="lblId" Visible="False"/>
-                            <asp:Label runat="server" Text='<%# Eval("IdUsuario") %>' ID="lblIdUsuario" Visible="False"/>
-                            <asp:Label runat="server" Text='<%# Eval("Pregunta") %>' ID="lblPregunta" />
-                            <asp:TextBox runat="server" ID="txtRespuesta" />
-                        </ItemTemplate>
-                    </asp:Repeater>
+                    <div class="form-horizontal">
+                        <asp:Repeater runat="server" ID="rptPreguntas">
+                            <ItemTemplate>
+                                <div class="form-group">
+                                    <asp:Label runat="server" Text='<%# Eval("Id") %>' ID="lblId" Visible="False" />
+                                    <asp:Label runat="server" Text='<%# Eval("IdUsuario") %>' ID="lblIdUsuario" Visible="False" />
+                                    <asp:Label runat="server" Text='<%# Eval("Pregunta") %>' class="col-xs-6 col-md-3" ID="lblPregunta" />
+                                    <div class="col-sm-9">
+                                        <asp:TextBox runat="server" ID="txtRespuesta" CssClass="form-control obligatorio" style="text-transform: none" />
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
                 </div>
                 <div runat="server" id="divChangePwd" visible="False">
                     <div class="form-horizontal">

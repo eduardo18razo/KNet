@@ -33,7 +33,7 @@
                         <h4>Agregar de Usuarios</h4>
                     </div>
                     <div class="panel-body">
-                        <div class="well">
+                        <div class="well" runat="server" Visible="False">
                             <div class="form-inline center-content-div">
                                 <div class="form-group" style="width: 42%">
                                     <label class="col-md-4">Tipo Usuario</label>
@@ -166,7 +166,7 @@
                                                                     <asp:Label runat="server"><%# Eval("TipoTelefono.Descripcion") %></asp:Label>
                                                                 </div>
                                                                 <div class="col-xs-5 col-md-3">
-                                                                    <asp:TextBox runat="server" ID="txtNumero" Text='<%# Eval("Numero") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="10" />
+                                                                    <asp:TextBox runat="server" ID="txtNumero" Text='<%# Eval("Numero") %>' CssClass=<%# bool.Parse(Eval("Obligatorio").ToString()) ? "form-control obligatorio"  : "form-control"  %> onkeypress="return ValidaCampo(this,2)" MaxLength="10" />
                                                                 </div>
                                                                 <div class="col-xs-4 col-md-3" runat="server" visible='<%# Eval("TipoTelefono.Extension") %>'>
                                                                     <asp:TextBox runat="server" ID="txtExtension" Text='<%# Eval("Extension") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,15)" MaxLength="40" />
@@ -190,7 +190,7 @@
                                                         <div style="border-radius: 20px; margin-bottom: 5px; height: auto">
                                                             <div class="row">
                                                                 <div class="col-xs-8 col-md-6">
-                                                                    <asp:TextBox runat="server" ID="txtCorreo" Text='<%# Eval("Correo") %>' CssClass="form-control" Style="text-transform: lowercase" onkeypress="return ValidaCampo(this,13)" />
+                                                                    <asp:TextBox runat="server" ID="txtCorreo" Text='<%# Eval("Correo") %>' CssClass=<%# bool.Parse(Eval("Obligatorio").ToString()) ? "form-control obligatorio"  : "form-control"  %> Style="text-transform: lowercase" onkeypress="return ValidaCampo(this,13)" />
                                                                 </div>
                                                             </div>
                                                         </div>

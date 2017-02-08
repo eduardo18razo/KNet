@@ -45,87 +45,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="AspNet.ScriptManager.jQuery">
-      <HintPath>..\packages\AspNet.ScriptManager.jQuery.1.9.1\lib\net40\AspNet.ScriptManager.jQuery.dll</HintPath>
-    </Reference>
-    <Reference Include="DayPilot">
-      <HintPath>..\..\..\..\Downloads\TutorialShiftScheduling.VS2010.20130629\TutorialShiftScheduling\TutorialCS\Bin\DayPilot.dll</HintPath>
-    </Reference>
-    <Reference Include="itextsharp">
-      <HintPath>..\..\..\Downloads\itextsharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="MSCaptcha">
       <HintPath>..\..\..\Downloads\Captcha_Refresh_Button\Bin\MSCaptcha.dll</HintPath>
     </Reference>
-    <Reference Include="SigmaToolBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Downloads\RichTextBox_7_November_2012\Control_dll\SigmaToolBox.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.2\lib\net40\System.Web.Providers.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotNetOpenAuth.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetOpenAuth.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetOpenAuth.OpenId, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.1.4.12333\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
-    </Reference>
-    <Reference Include="DotNetOpenAuth.AspNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.1.4.12333\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.0.0\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
-    </Reference>
     <Reference Include="Winthusiasm.HtmlEditor, Version=1.9.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Winthusiasm.HtmlEditor.dll</HintPath>
@@ -148,6 +79,7 @@
     <Content Include="BootStrap\js\locales\bootstrap-datepicker.es.min.js" />
     <Content Include="BootStrap\js\locales\jquery.sumoselect.min.js" />
     <Content Include="ConfirmacionCuenta.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="Downloads\FrmDownloads.aspx" />
     <Content Include="FrmRecuperar.aspx" />
     <Content Include="Identificar.aspx" />
@@ -202,9 +134,6 @@
     <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario9.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceSeguridad\ServiceSecurity14.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\ServiceSistemaCanal\ServiceCanal.disco" />
     <None Include="Service References\ServiceSistemaCanal\configuration91.svcinfo" />
     <None Include="Service References\ServiceSistemaCanal\configuration.svcinfo" />
@@ -220,10 +149,12 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Publico\Consultas\FrmConsultaTicket.aspx" />
+    <Content Include="UserControls\Altas\UcAltaNivelArbol.ascx" />
     <Content Include="UserControls\Altas\UcAltaCatalogo.ascx" />
     <Content Include="UserControls\Altas\UcAltaPreticket.ascx" />
     <Content Include="UserControls\Altas\UcCargaCatalgo.ascx" />
-    <Content Include="UserControls\Consultas\UcConcultaCatalogos.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaCatalogos.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaAreas.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaCatalogo.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaHorario.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaPuestos.ascx" />
@@ -234,6 +165,8 @@
     <Content Include="UserControls\Filtros\UcFiltroCatalogos.ascx" />
     <Content Include="UserControls\Operacion\UcCambiarContrasena.ascx" />
     <Content Include="UserControls\Operacion\UcRegistroCatalogo.ascx" />
+    <Content Include="Users\Administracion\Area\FrmConsultaAreas.aspx" />
+    <Content Include="Users\Administracion\Area\GetImageDatafromDB.aspx" />
     <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogo.aspx" />
     <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogos.aspx" />
     <Content Include="Users\Administracion\Horarios\FrmConsultaHorarios.aspx" />
@@ -470,7 +403,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Test\FrmTest.aspx" />
-    <Content Include="UserControls\Altas\UcAltaArbolAcceso.ascx" />
     <Content Include="UserControls\Altas\UcAltaDiasFestivos.ascx" />
     <Content Include="UserControls\Altas\UcAltaPuesto.ascx" />
     <Content Include="UserControls\Altas\UcAltaUsuario.ascx" />
@@ -606,7 +538,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Default.aspx" />
     <Content Include="Users\General\FrmMostrarDocumento.aspx" />
     <Content Include="Users\General\FrmNodoConsultas.aspx" />
     <Content Include="Users\General\FrmMiInformacion.aspx" />
@@ -1925,7 +1856,7 @@
     <Content Include="UserControls\Altas\AltaEncuesta.ascx" />
     <Content Include="UserControls\Altas\AltaOrganizacion.ascx" />
     <Content Include="UserControls\Altas\AltaTiempoEstimado.ascx" />
-    <Content Include="UserControls\Altas\AltaSla.ascx" />
+    <Content Include="UserControls\Altas\UcAltaSla.ascx" />
     <Content Include="UserControls\Altas\UcAltaUbicacion.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaArboles.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaEncuesta.ascx" />
@@ -2226,6 +2157,13 @@
     <Compile Include="ConfirmacionCuenta.aspx.designer.cs">
       <DependentUpon>ConfirmacionCuenta.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Downloads\FrmDownloads.aspx.cs">
       <DependentUpon>FrmDownloads.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2273,6 +2211,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Altas\UcAltaNivelArbol.ascx.cs">
+      <DependentUpon>UcAltaNivelArbol.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaNivelArbol.ascx.designer.cs">
+      <DependentUpon>UcAltaNivelArbol.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Altas\UcAltaCatalogo.ascx.cs">
       <DependentUpon>UcAltaCatalogo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2294,12 +2239,19 @@
     <Compile Include="UserControls\Altas\UcCargaCatalgo.ascx.designer.cs">
       <DependentUpon>UcCargaCatalgo.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Consultas\UcConcultaCatalogos.ascx.cs">
-      <DependentUpon>UcConcultaCatalogos.ascx</DependentUpon>
+    <Compile Include="UserControls\Consultas\UcConsultaCatalogos.ascx.cs">
+      <DependentUpon>UcConsultaCatalogos.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Consultas\UcConcultaCatalogos.ascx.designer.cs">
-      <DependentUpon>UcConcultaCatalogos.ascx</DependentUpon>
+    <Compile Include="UserControls\Consultas\UcConsultaCatalogos.ascx.designer.cs">
+      <DependentUpon>UcConsultaCatalogos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaAreas.ascx.cs">
+      <DependentUpon>UcConsultaAreas.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaAreas.ascx.designer.cs">
+      <DependentUpon>UcConsultaAreas.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaCatalogo.ascx.cs">
       <DependentUpon>UcConsultaCatalogo.ascx</DependentUpon>
@@ -2370,6 +2322,20 @@
     </Compile>
     <Compile Include="UserControls\Operacion\UcRegistroCatalogo.ascx.designer.cs">
       <DependentUpon>UcRegistroCatalogo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\Area\FrmConsultaAreas.aspx.cs">
+      <DependentUpon>FrmConsultaAreas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Area\FrmConsultaAreas.aspx.designer.cs">
+      <DependentUpon>FrmConsultaAreas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\Area\GetImageDatafromDB.aspx.cs">
+      <DependentUpon>GetImageDatafromDB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Area\GetImageDatafromDB.aspx.designer.cs">
+      <DependentUpon>GetImageDatafromDB.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Administracion\Catalogos\FrmConsultaCatalogo.aspx.cs">
       <DependentUpon>FrmConsultaCatalogo.aspx</DependentUpon>
@@ -2488,13 +2454,6 @@
     </Compile>
     <Compile Include="Test\FrmTest.aspx.designer.cs">
       <DependentUpon>FrmTest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Altas\UcAltaArbolAcceso.ascx.cs">
-      <DependentUpon>UcAltaArbolAcceso.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControls\Altas\UcAltaArbolAcceso.ascx.designer.cs">
-      <DependentUpon>UcAltaArbolAcceso.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Altas\UcAltaDiasFestivos.ascx.cs">
       <DependentUpon>UcAltaDiasFestivos.ascx</DependentUpon>
@@ -2853,13 +2812,6 @@
     <Compile Include="Users\Administracion\Usuarios\FrmConsultaUsuarios.aspx.designer.cs">
       <DependentUpon>FrmConsultaUsuarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Funciones\Documentos.cs" />
     <Compile Include="Funciones\Metodos.cs" />
     <Compile Include="Users\General\FrmMostrarDocumento.aspx.cs">
@@ -3074,12 +3026,12 @@
     <Compile Include="UserControls\Altas\AltaTiempoEstimado.ascx.designer.cs">
       <DependentUpon>AltaTiempoEstimado.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Altas\AltaSla.ascx.cs">
-      <DependentUpon>AltaSla.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\UcAltaSla.ascx.cs">
+      <DependentUpon>UcAltaSla.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Altas\AltaSla.ascx.designer.cs">
-      <DependentUpon>AltaSla.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\UcAltaSla.ascx.designer.cs">
+      <DependentUpon>UcAltaSla.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Altas\UcAltaUbicacion.ascx.cs">
       <DependentUpon>UcAltaUbicacion.ascx</DependentUpon>
@@ -3280,7 +3232,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Users\Administracion\Consultas\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KiiniNet.Entities\KiiniNet.Entities.csproj">
@@ -3328,53 +3279,6 @@
     <WCFMetadataStorage Include="Service References\ServiceTicket\" />
     <WCFMetadataStorage Include="Service References\ServiceUbicacion\" />
     <WCFMetadataStorage Include="Service References\ServiceUsuario\" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>4</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Excel">
-      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>6</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.PowerPoint">
-      <Guid>{91493440-5A91-11CF-8700-00AA0060263B}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>9</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Word">
-      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>8</VersionMajor>
-      <VersionMinor>4</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="VBIDE">
-      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>3</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

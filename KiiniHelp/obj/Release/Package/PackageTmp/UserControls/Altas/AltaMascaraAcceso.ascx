@@ -26,41 +26,44 @@
                 </header>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        Alta Formulario de Cliente
+                        Agregar Formulario
                     </div>
                     <div class="panel-body">
-
+                        <asp:HiddenField runat="server" ID="hfAltaCampo" Value="true" />
+                        <asp:HiddenField runat="server" ID="hfCampoEditado" Value="0" />
                         <div class="panel">
                             <div class="panel-body">
                                 <div class="form-horizontal">
                                     <div class="form-group">
                                         <div class="form-inline verical-center">
-                                            <asp:Label runat="server" Text="Nombre" CssClass="col-sm-2 izquierda control-label" />
-                                            <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)"/>
+                                            <asp:Label runat="server" Text="Nombre del formulario" CssClass="col-sm-2 izquierda control-label" />
+                                            <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-inline verical-center">
-                                            <asp:CheckBox runat="server" ID="chkClaveRegistro" CssClass="form-control" Text="Clave de Registro"/>
+                                            <asp:CheckBox runat="server" ID="chkClaveRegistro" CssClass="form-control" Text="Clave de Registro" />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <asp:Label runat="server" Text="Tipo de campo" CssClass="col-sm-2 control-label izquierda"></asp:Label>
-                                        <asp:DropDownList runat="server" ID="ddlTipoCampo" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoCampo_OnSelectedIndexChanged" CssClass="DropSelect obligatorio" />
+                                        <asp:Label runat="server" Text="Selecciona el tipo de campo" CssClass="col-sm-2 control-label izquierda"></asp:Label>
+                                        <div class="col-xs-3">
+                                            <asp:DropDownList runat="server" ID="ddlTipoCampo" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoCampo_OnSelectedIndexChanged" CssClass="DropSelect obligatorio" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
                                     <div class="row">
+                                        <div class="col-xs-4 col-md-2 center-content-div" style="width: 200px; padding-left: 0;">
+                                            <asp:Label runat="server" Text="Contenido del campo"></asp:Label>
+                                        </div>
                                         <div class="col-xs-4 col-md-2 center-content-div" style="width: 200px; padding-left: 0">
                                             <asp:Label runat="server" Text="Tipo de campo"></asp:Label>
                                         </div>
                                         <div class="col-xs-4 col-md-2 center-content-div" style="width: 90px; padding-left: 0">
                                             <asp:Label runat="server" Text="Obligatorio"></asp:Label>
-                                        </div>
-                                        <div class="col-xs-4 col-md-2 center-content-div" style="width: 200px; padding-left: 0;">
-                                            <asp:Label runat="server" Text="Descripcion"></asp:Label>
                                         </div>
                                         <div class="col-xs-4 col-md-2 center-content-div" style="width: 120px; padding-left: 0;">
                                             <asp:Label runat="server" Text="Longitud Min"></asp:Label>
@@ -80,36 +83,52 @@
                                 <div class="panel-body">
                                     <asp:Repeater runat="server" ID="rptControles">
                                         <ItemTemplate>
-                                            <div class="row">
+                                            <div class="row" style="border-bottom: 1px solid">
                                                 <div class="form-inline">
-                                                    <div class="col-xs-4 col-md-2 center-content-div" style="width: 200px; padding-left: 0">
-                                                        <%# Eval("TipoCampoMascara.Descripcion") %>
+                                                    <asp:Label runat="server" Text='<%# Eval("TipoCampoMascara.Id") %>' ID="lblIdTipoCampoMascara" Visible="False" />
+                                                    <div class="col-xs-4 col-md-2 " style="width: 200px; height: 17px; padding-left: 0;">
+                                                        <asp:Label runat="server" Text='<%# Eval("Descripcion") %>' ID="lblDescripcion" />
                                                     </div>
 
-                                                    <div class="col-xs-4 col-md-2 center-content-div" style="width: 90px; padding-left: 0">
-                                                        <%# (bool) Eval("Requerido") ? "SI" : "NO" %>
+                                                    <div class="col-xs-4 col-md-2 center-content-div" style="width: 200px; height: 17px; padding-left: 0">
+                                                        <asp:Label runat="server" Text='<%# Eval("TipoCampoMascara.Descripcion") %>' ID="lblTipoCampo" />
                                                     </div>
 
-                                                    <div class="col-xs-4 col-md-2 " style="width: 200px; padding-left: 0;">
-                                                        <%# Eval("Descripcion") %>
+                                                    <div class="col-xs-4 col-md-2 center-content-div" style="width: 90px; height: 17px; padding-left: 0">
+                                                        <asp:Label runat="server" Text='<%# (bool) Eval("Requerido") ? "SI" : "NO" %>' ID="lblRequerido" />
+
                                                     </div>
 
+                                                    <div class="col-xs-4 col-md-2 center-content-div" style="width: 120px; height: 17px; padding-left: 0;">
+                                                        <asp:Label runat="server" Text='<%# Eval("LongitudMinima") %>' ID="lblLongitudMinima" />
+                                                    </div>
+
+                                                    <div class="col-xs-4 col-md-2 center-content-div" style="width: 120px; height: 17px; padding-left: 0;">
+                                                        <asp:Label runat="server" Text='<%# Eval("LongitudMaxima") %>' ID="lblLongitudMaxima" />
+
+                                                    </div>
+
+                                                    <div class="col-xs-4 col-md-2 center-content-div" style="width: 120px; height: 17px; padding-left: 0;">
+                                                        <asp:Label runat="server" Text='<%# Eval("SimboloMoneda") %>' ID="lblSimboloMoneda" />
+
+                                                    </div>
+
+                                                    <div class="col-xs-4 col-md-2 center-content-div" style="width: 120px; height: 17px; padding-left: 0;">
+                                                        <asp:Label runat="server" Text='<%# Eval("ValorMaximo") %>' ID="lblValorMaximo" />
+
+                                                    </div>
                                                     <div class="col-xs-4 col-md-2 center-content-div" style="width: 120px; padding-left: 0;">
-                                                        <%# Eval("LongitudMinima") %>
+                                                        <asp:Button runat="server" Text="Eliminar" ID="btnEliminarCampo" OnClick="btnEliminarCampo_OnClick" CssClass="btn btn-danger" />
                                                     </div>
-
                                                     <div class="col-xs-4 col-md-2 center-content-div" style="width: 120px; padding-left: 0;">
-                                                        <%# Eval("LongitudMaxima") %>
+                                                        <asp:Button runat="server" Text="Editar" ID="btnEditarCampo" OnClick="btnEditarCampo_OnClick" CssClass="btn btn-primary" />
                                                     </div>
-
                                                     <div class="col-xs-4 col-md-2 center-content-div" style="width: 120px; padding-left: 0;">
-                                                        <%# Eval("SimboloMoneda") %>
+                                                        <asp:Button runat="server" Text="^" ID="btnSubir" OnClick="btnSubir_OnClick" CssClass="btn btn-primary" />
                                                     </div>
-
                                                     <div class="col-xs-4 col-md-2 center-content-div" style="width: 120px; padding-left: 0;">
-                                                        <%# Eval("ValorMaximo") %>
+                                                        <asp:Button runat="server" Text="˅" ID="btnBajar" OnClick="btnBajar_OnClick" CssClass="btn btn-primary" />
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </ItemTemplate>
@@ -131,8 +150,8 @@
         <div class="modal fade" id="modalAgregarCampoMascara" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
             <asp:UpdatePanel ID="upAgregarCampo" runat="server">
                 <ContentTemplate>
-                    <div class="modal-dialog modal-lg" >
-                        <div class="modal-content" >
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
                             <div class="modal-header" id="panelAlertaAgregarCampo" runat="server" visible="False">
                                 <div class="alert alert-danger">
                                     <div>
@@ -158,40 +177,42 @@
                                     </h4>
                                 </div>
                                 <div class="panel panel-body">
-                                    <div class="form-group">
-                                        <asp:Label runat="server" Text="Descripcion" />
-                                        <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group">
-                                        <asp:CheckBox runat="server" ID="chkRequerido" AutoPostBack="False" Text="Campo obligatorio" />
-                                    </div>
-                                    <div class="form-group" runat="server" id="divMascara" visible="False">
-                                        <asp:Label runat="server" Text="Formulario de Cliente" />
-                                        <asp:TextBox runat="server" ID="txtMascara" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
-                                    </div>
-                                    <div class="form-group" runat="server" id="divLongitudes" visible="False">
-                                        <asp:Label runat="server" Text="Longitud minima" />
-                                        <asp:TextBox runat="server" ID="txtLongitudMinima" type="number" min="1" CssClass="form-control obligatorio" />
-                                        <asp:Label runat="server" Text="Longitud Maxima" />
-                                        <asp:TextBox runat="server" ID="txtLongitudMaxima" type="number" min="1" CssClass="form-control obligatorio" />
-                                    </div>
-                                    <div class="form-group" runat="server" id="divValorMaximo" visible="False">
-                                        <asp:Label runat="server" Text="Valor Maximo" />
-                                        <asp:TextBox runat="server" ID="txtValorMaximo" type="number" min="1" CssClass="form-control obligatorio" />
-                                    </div>
-                                    <div class="form-group" runat="server" id="divMoneda" visible="False">
-                                        <asp:Label runat="server" Text="Simbolo de moneda" />
-                                        <asp:TextBox runat="server" ID="txtSimboloMoneda" Text="MXN" CssClass="form-control obligatorio" />
-                                    </div>
-                                    <div class="form-group" runat="server" id="divCatalgo" visible="False">
-                                        <asp:Label runat="server" Text="Catalgo" />
-                                        <asp:DropDownList runat="server" ID="ddlCatalogosCampo" AutoPostBack="True" CssClass="DropSelect obligatorio" />
+                                    <div style="border-bottom: 1px">
+                                        <div class="form-group">
+                                            <asp:Label runat="server" Text="Contenido del Campo" />
+                                            <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
+                                        </div>
+                                        <div class="form-group">
+                                            <asp:CheckBox runat="server" ID="chkRequerido" AutoPostBack="False" Text="Campo obligatorio" />
+                                        </div>
+                                        <div class="form-group" runat="server" id="divMascara" visible="False">
+                                            <asp:Label runat="server" Text="Formulario de Cliente" />
+                                            <asp:TextBox runat="server" ID="txtMascara" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
+                                        </div>
+                                        <div class="form-group" runat="server" id="divLongitudes" visible="False">
+                                            <asp:Label runat="server" Text="Longitud mínima" />
+                                            <asp:TextBox runat="server" ID="txtLongitudMinima" type="number" min="1" CssClass="form-control obligatorio" />
+                                            <asp:Label runat="server" Text="Longitud máxima" />
+                                            <asp:TextBox runat="server" ID="txtLongitudMaxima" type="number" min="1" CssClass="form-control obligatorio" />
+                                        </div>
+                                        <div class="form-group" runat="server" id="divValorMaximo" visible="False">
+                                            <asp:Label runat="server" Text="Valor Maximo" />
+                                            <asp:TextBox runat="server" ID="txtValorMaximo" type="number" min="1" CssClass="form-control obligatorio" />
+                                        </div>
+                                        <div class="form-group" runat="server" id="divMoneda" visible="False">
+                                            <asp:Label runat="server" Text="Simbolo de moneda" />
+                                            <asp:TextBox runat="server" ID="txtSimboloMoneda" Text="MXN" CssClass="form-control obligatorio" />
+                                        </div>
+                                        <div class="form-group" runat="server" id="divCatalgo" visible="False">
+                                            <asp:Label runat="server" Text="Catalgo" />
+                                            <asp:DropDownList runat="server" ID="ddlCatalogosCampo" AutoPostBack="True" CssClass="DropSelect obligatorio" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer" style="text-align: center">
                                 <asp:Button ID="btnGuardarCampo" runat="server" CssClass="btn btn-success" Text="Guardar" OnClick="btnGuardarCampo_OnClick" />
-                                <asp:Button runat="server" CssClass="btn btn-danger" Text="Limpiar" ID="btnLimpiarCampo" OnClick="btnLimpiarCampo_OnClick" />
+                                <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnLimpiarCampo" OnClick="btnLimpiarCampo_OnClick" />
                             </div>
                         </div>
                     </div>

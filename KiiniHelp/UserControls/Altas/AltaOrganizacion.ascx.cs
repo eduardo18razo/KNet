@@ -188,6 +188,122 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
+        public string ObtenerRuta(string command, string modulo)
+        {
+            string result = "<h3>AGREGAR " + modulo + "</h3><span style=\"font-size: x-small;\">";
+            switch (command)
+            {
+                case "9":
+                    result += ddlHolding.SelectedItem.Text;
+                    break;
+                case "10":
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text;
+                    break;
+                case "11":
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text;
+                    break;
+                case "12":
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text;
+                    break;
+                case "13":
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text + ">" + ddlGerencia.SelectedItem.Text;
+                    break;
+                case "14":
+                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text + ">" + ddlGerencia.SelectedItem.Text + ">" + ddlSubGerencia.SelectedItem.Text;
+                    break;
+            }
+            result += "</span>";
+            return result;
+        }
+
+        public void ValidaSeleccion(string command)
+        {
+            try
+            {
+                if (IdTipoUsuario <= 0)
+                    throw new Exception("Debe seleccionar un Tipo de usuario");
+                switch (command)
+                {
+                    case "9":
+                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        break;
+                    case "10":
+                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        break;
+                    case "11":
+                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        break;
+                    case "12":
+                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlSubDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        break;
+                    case "13":
+                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlSubDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlGerencia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        break;
+                    case "14":
+                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlSubDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlGerencia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        if (ddlSubGerencia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception();
+                        break;
+                }
+            }
+            catch
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoOrganizacion\");", true);
+                throw new Exception("Debe de seleccionarse un Padre para esta Operación");
+            }
+        }
+
+        private void LimpiaCatalogo()
+        {
+            try
+            {
+                txtDescripcionCatalogo.Text = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaOrganizacion = _lstError;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -401,123 +517,6 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        public string ObtenerRuta(string command, string modulo)
-        {
-            string result = "<h3>AGREGAR " + modulo + "</h3><span style=\"font-size: x-small;\">";
-            switch (command)
-            {
-                case "9":
-                    result += ddlHolding.SelectedItem.Text;
-                    break;
-                case "10":
-                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text;
-                    break;
-                case "11":
-                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text;
-                    break;
-                case "12":
-                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text;
-                    break;
-                case "13":
-                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text + ">" + ddlGerencia.SelectedItem.Text;
-                    break;
-                case "14":
-                    result += ddlHolding.SelectedItem.Text + ">" + ddlCompañia.SelectedItem.Text + ">" + ddlDireccion.SelectedItem.Text + ">" + ddlSubDireccion.SelectedItem.Text + ">" + ddlGerencia.SelectedItem.Text + ">" + ddlSubGerencia.SelectedItem.Text;
-                    break;
-            }
-            result += "</span>";
-            return result;
-        }
-
-        public void ValidaSeleccion(string command)
-        {
-            try
-            {
-                if (IdTipoUsuario <= 0)
-                    throw new Exception("Debe seleccionar un Tipo de usuario");
-                switch (command)
-                {
-                    case "9":
-                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        break;
-                    case "10":
-                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        break;
-                    case "11":
-                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        break;
-                    case "12":
-                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlSubDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        break;
-                    case "13":
-                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlSubDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlGerencia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        break;
-                    case "14":
-                        if (ddlHolding.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlCompañia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlSubDireccion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlGerencia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        if (ddlSubGerencia.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception();
-                        break;
-                }
-            }
-            catch
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoOrganizacion\");", true);
-                throw new Exception("Debe de seleccionarse un Padre para esta Operación");
-            }
-        }
-
-        #region CatalogoAlta
-        private void LimpiaCatalogo()
-        {
-            try
-            {
-                txtDescripcionCatalogo.Text = string.Empty;
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaOrganizacion = _lstError;
-            }
-        }
-
         protected void btnGuardarCatalogo_OnClick(object sender, EventArgs e)
         {
             try
@@ -651,7 +650,6 @@ namespace KiiniHelp.UserControls.Altas
             LimpiaCatalogo();
             ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoOrganizacion\");", true);
         }
-        #endregion
 
         protected void btnAceptarOrganizacion_OnClick(object sender, EventArgs e)
         {

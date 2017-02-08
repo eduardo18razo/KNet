@@ -82,7 +82,7 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
                 ucFiltroFechasGrafico.OnCancelarModal += ucFiltroFechas_OnCancelarModal;
                 if (!IsPostBack)
                 {
-                    ucFiltroTipificacion.TipoArbol = (int)BusinessVariables.EnumTipoArbol.Consultas;
+                    ucFiltroTipificacion.TipoArbol = (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion;
                 }
             }
             catch (Exception ex)

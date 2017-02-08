@@ -71,6 +71,7 @@
                     </div>
                     <div class="panel panel-primary">
                         <asp:HiddenField runat="server" ID="hfIdArbol" />
+                        <asp:HiddenField runat="server" ID="hfIdInformacion" />
                         <div runat="server" id="divPropuetario" visible="False">
                             <asp:Label runat="server" ID="lblContenido"></asp:Label>
                         </div>
@@ -91,7 +92,7 @@
                         </div>
                     </div>
                     <div class="modal-footer" style="text-align: center">
-                        <asp:Button ID="btnCerrarModalInfo" runat="server" CssClass="btn btn-lg btn-danger" Text="Cerrar" OnClick="btnCerrarModalInfo_OnClick" data-dismiss="modal" />
+                        <asp:Button ID="btnCerrarModalInfo" runat="server" CssClass="btn btn-lg btn-danger" Text="Cerrar" OnClick="btnCerrarModalInfo_OnClick" />
                     </div>
 
                 </div>

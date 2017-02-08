@@ -102,6 +102,11 @@ namespace KiiniHelp
         {
             try
             {
+
+                if (!_servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).Activo)
+                {
+                    throw new Exception("Debe primero confirmar su cuenta");
+                }
                 Response.Redirect("~/FrmRecuperar.aspx?ldata=" + QueryString.Encrypt(rbtnLstUsuarios.SelectedValue));
             }
             catch (Exception ex)

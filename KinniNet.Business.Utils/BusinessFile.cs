@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
+using System.Drawing;
 using System.IO;
 using Microsoft.Office.Core;
 using Word = Microsoft.Office.Interop.Word;
@@ -30,6 +31,8 @@ namespace KinniNet.Business.Utils
             {
                 foreach (string archivo in archivos)
                 {
+                    if (File.Exists(folderDestino + archivo))
+                        File.Delete(folderDestino + archivo);
                     File.Move(folderOrigen + archivo, folderDestino + archivo);
                 }
             }
@@ -66,77 +69,218 @@ namespace KinniNet.Business.Utils
                 throw new Exception(ex.Message);
             }
         }
+        public static class Imagenes
+        {
+            public static byte[] ImageToByteArray(string image)
+            {
+                byte[] data = null;
+                image = BusinessVariables.Directorios.RepositorioTemporal + image;
+                FileInfo fInfo = new FileInfo(image);
+                long numBytes = fInfo.Length;
+                FileStream fStream = new FileStream(image, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fStream);
+                data = br.ReadBytes((int)numBytes);
+                return data;
+            }
 
+            public static Image ByteArrayToImage(byte[] byteArrayIn)
+            {
+                MemoryStream ms = new MemoryStream(byteArrayIn);
+                Image returnImage = Image.FromStream(ms);
+                return returnImage;
+            } 
+        }
         public static void ConvertirWord(string nombrearchivo)
         {
-            try
+            string logFile = BusinessVariables.Directorios.RepositorioRepositorio + @"LogArchivosWord.txt";
+            if (!File.Exists(logFile))
             {
-                object missingType = Type.Missing;
-                object readOnly = true;
-                object isVisible = false;
-                object documentFormat = 8;
-                string htmlFilePath = BusinessVariables.Directorios.RepositorioInformacionConsultaHtml + Path.GetFileNameWithoutExtension(nombrearchivo) + ".htm";
-                string directoryPath = BusinessVariables.Directorios.RepositorioInformacionConsultaHtml + Path.GetFileNameWithoutExtension(nombrearchivo) + "_archivos";
-                object fileName = BusinessVariables.Directorios.RepositorioInformacionConsulta + nombrearchivo;
-
-                Word._Application applicationclass = new Word.ApplicationClass();
-                applicationclass.Documents.Open(ref fileName, ref readOnly, ref missingType, ref missingType,
-                    ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType,
-                    ref isVisible, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType);
-                applicationclass.Visible = false;
-                Word.Document document = applicationclass.ActiveDocument;
-                document.SaveAs(htmlFilePath, ref documentFormat, ref missingType, ref missingType, ref missingType,
-                    ref missingType, ref missingType, ref missingType, ref missingType, ref missingType, ref missingType,
-                    ref missingType, ref missingType, ref missingType, ref missingType, ref missingType);
-                document.Close(ref missingType, ref missingType, ref missingType);
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(logFile))
+                {
+                    sw.WriteLine("Inicio Log" + DateTime.Now.ToString());
+                }
             }
-            catch (Exception e)
+            Word._Application winWord = null;
+            using (StreamWriter file = new StreamWriter(logFile))
             {
-                throw new Exception(e.Message);
+                try
+                {
+                    file.WriteLine("Inicia Proceso");
+                    string htmlFilePath = BusinessVariables.Directorios.RepositorioInformacionConsultaHtml + Path.GetFileNameWithoutExtension(nombrearchivo) + ".htm";
+                    string fileName = BusinessVariables.Directorios.RepositorioInformacionConsulta + nombrearchivo;
+                    //nuevo codigo
+                    Object oMissing = System.Reflection.Missing.Value;
+
+                    Object oTemplatePath = "D:\\MyTemplate.dotx";
+                    Word.Application wordApp = new Word.Application();
+                    Word.Document wordDoc = new Word.Document();
+                    file.WriteLine("Inicia Proceso abre documento nuevo codigo");
+                    wordDoc = wordApp.Documents.Add(fileName);
+                    file.WriteLine("Inicia Proceso abrio documento nuevo codigo");
+                    file.WriteLine("Inicia Proceso Guarda html nuevo codigo");
+                    wordDoc.SaveAs(htmlFilePath, Word.WdSaveFormat.wdFormatHTML);
+                    file.WriteLine("Inicia Proceso guardo html nuevo codigo");
+                    //wordApp.Documents.Open("myFile.doc");
+                    wordApp.Application.Quit();
+                    //Finnuevo codigo
+
+
+                    //file.WriteLine("Inicia aplicacion");
+                    //winWord = new Word.ApplicationClass();
+                    //winWord.Visible = true;
+                    //file.WriteLine("Abre Archivo");
+                    //winWord.Documents.Open(fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                    //file.WriteLine("Abrio Archivo");
+                    //file.WriteLine("Activa documento de trabajo");
+                    //Word.Document doc = winWord.ActiveDocument;
+                    //file.WriteLine("Activo documento de trabajo");
+                    //file.WriteLine(htmlFilePath);
+
+                    //doc.SaveAs(htmlFilePath, Word.WdSaveFormat.wdFormatHTML, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                    //file.WriteLine("Guardo nuevo formato");
+                    //doc.Close();
+                    //file.WriteLine("cerro documento");
+                    //winWord.Quit();
+                    //file.WriteLine("Cerro Word");
+                }
+                catch (Exception e)
+                {
+                    if (winWord != null)
+                    {
+                        winWord.Quit();
+                    }
+                    throw new Exception(e.Message);
+                }
+                finally
+                {
+                    GC.Collect();
+                }
             }
         }
-
         public static void ConvertirExcel(string nombrearchivo)
         {
-            try
+            string logFile = BusinessVariables.Directorios.RepositorioRepositorio + @"LogArchivosExcel.txt";
+            if (!File.Exists(logFile))
             {
-                string htmlFilePath = BusinessVariables.Directorios.RepositorioInformacionConsultaHtml + Path.GetFileNameWithoutExtension(nombrearchivo) + ".htm";
-                string directoryPath = BusinessVariables.Directorios.RepositorioInformacionConsultaHtml + Path.GetFileNameWithoutExtension(nombrearchivo) + "_archivos";
-                string fileName = BusinessVariables.Directorios.RepositorioInformacionConsulta + nombrearchivo;
-
-                Excel._Application xls = new Excel.ApplicationClass();
-                xls.Workbooks.Open(fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-                xls.Visible = false;
-                Excel.Workbook wb = xls.ActiveWorkbook;
-                wb.SaveAs(htmlFilePath, Excel.XlFileFormat.xlHtml, Type.Missing, Type.Missing, false, false, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-                wb.Close();
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(logFile))
+                {
+                    sw.WriteLine("Inicio Log" + DateTime.Now.ToString());
+                }
             }
-            catch (Exception e)
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(logFile))
             {
+                try
+                {
+                    file.WriteLine("Inicia Proceso");
+                    string htmlFilePath = BusinessVariables.Directorios.RepositorioInformacionConsultaHtml + Path.GetFileNameWithoutExtension(nombrearchivo) + ".htm";
+                    string directoryPath = BusinessVariables.Directorios.RepositorioInformacionConsultaHtml + Path.GetFileNameWithoutExtension(nombrearchivo) + "_archivos";
+                    string fileName = BusinessVariables.Directorios.RepositorioInformacionConsulta + nombrearchivo;
+                    file.WriteLine("Inicia aplicacion");
+                    Excel._Application xls = new Excel.ApplicationClass();
+                    xls.Visible = false;
+                    file.WriteLine("Abre Archivo");
+                    xls.Workbooks.Open(fileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                    file.WriteLine("Abrio Archivo");
+                    file.WriteLine("Activa hoja de trabajo");
+                    Excel.Workbook wb = xls.ActiveWorkbook;
+                    file.WriteLine("Activo hoja de trabajo");
+                    file.WriteLine(htmlFilePath);
 
-                throw new Exception(e.Message);
+                    wb.SaveAs(htmlFilePath, Excel.XlFileFormat.xlHtml, Type.Missing, Type.Missing, false, false, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                    file.WriteLine("Guardo nuevo formato");
+                    wb.Close();
+                    file.WriteLine("cerro libro de trabajo");
+                    xls.Quit();
+                    file.WriteLine("Cerro excel");
+
+                }
+                catch (Exception e)
+                {
+                    file.WriteLine("error proceso \n" + e.InnerException.Message + " Error gral\n" + e.Message);
+                    throw new Exception(e.Message);
+
+                }
+                finally
+                {
+                    GC.Collect();
+                }
             }
         }
-
         public static void ConvertirPowerPoint(string nombrearchivo)
         {
-            string fileName = BusinessVariables.Directorios.RepositorioInformacionConsulta + nombrearchivo;
-            //Give the name and path of the HTML file to be generated
-            string htmlFilePath = BusinessVariables.Directorios.RepositorioInformacionConsultaHtml + Path.GetFileNameWithoutExtension(nombrearchivo) + ".htm";
-            //Create a PowerPoint Application Object
-            PowerPoint.Application ppApp = new PowerPoint.Application();
+            string logFile = BusinessVariables.Directorios.RepositorioRepositorio + @"LogArchivosWord.txt";
+            if (!File.Exists(logFile))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(logFile))
+                {
+                    sw.WriteLine("Inicio Log" + DateTime.Now.ToString());
+                }
+            }
+            PowerPoint._Application winWord = null;
+            using (StreamWriter file = new StreamWriter(logFile))
+            {
+                try
+                {
 
-            //Create a PowerPoint Presentation object
-            PowerPoint.Presentation prsPres = ppApp.Presentations.Open(fileName, MsoTriState.msoTrue, MsoTriState.msoFalse, MsoTriState.msoFalse);
-            //Call the SaveAs method of Presentaion object and specify the format as HTML
-            prsPres.SaveAs(htmlFilePath, PowerPoint.PpSaveAsFileType.ppSaveAsHTML, MsoTriState.msoTrue);
+                    file.WriteLine("Inicia Proceso");
+                    string htmlFilePath = BusinessVariables.Directorios.RepositorioInformacionConsultaHtml + Path.GetFileNameWithoutExtension(nombrearchivo) + ".htm";
+                    string fileName = BusinessVariables.Directorios.RepositorioInformacionConsulta + nombrearchivo;
 
-            //Close the Presentation object
-            prsPres.Close();
-            //Close the Application object
-            ppApp.Quit();
+                    PowerPoint.Application ppApp = new PowerPoint.Application();
+                    ppApp.Visible = MsoTriState.msoTrue;
+                    PowerPoint.Presentations ppPresens = ppApp.Presentations;
+                    PowerPoint.Presentation objPres = ppPresens.Open(fileName, MsoTriState.msoFalse, MsoTriState.msoTrue, MsoTriState.msoTrue);
+                    file.WriteLine("Abrio Presentacion");
+                    file.WriteLine("Guardara Nueva Presentacion nuevo formato");
+                    file.WriteLine(htmlFilePath);
+                    objPres.SaveAs(htmlFilePath, PowerPoint.PpSaveAsFileType.ppSaveAsHTML, MsoTriState.msoCTrue);
+                    file.WriteLine("Guardo nuevo formato");
+                    PowerPoint.Slides objSlides = objPres.Slides;
+                    //PowerPoint.SlideShowWindows objSSWs; 
+                    //PowerPoint.SlideShowSettings objSSS;
+                    ////Run the Slide show
+                    //objSSS = objPres.SlideShowSettings;
+                    //objSSS.Run();
+                    //objSSWs = ppApp.SlideShowWindows;
+                    //while (objSSWs.Count >= 1)
+                    //    System.Threading.Thread.Sleep(100);
+                    ////Close the presentation without saving changes and quit PowerPoint
+                    //objPres.Close();
+                    ppApp.Quit();
+
+
+
+                    //file.WriteLine("Inicia aplicacion");
+                    //winWord = new PowerPoint.ApplicationClass();
+                    //file.WriteLine("Abre Archivo");
+                    //PowerPoint.Presentation prsPres = winWord.Presentations.Open(fileName, MsoTriState.msoTrue, MsoTriState.msoFalse, MsoTriState.msoFalse);
+                    //file.WriteLine("Abrio Archivo");
+                    //file.WriteLine(htmlFilePath);
+                    //file.WriteLine("GuardaraNuevo Documento nuevo formato");
+                    //prsPres.SaveAs(htmlFilePath, PowerPoint.PpSaveAsFileType.ppSaveAsHTML);
+                    //file.WriteLine("Guardo nuevo formato");
+                    //prsPres.Close();
+                    //file.WriteLine("cerro documento");
+                    //winWord.Quit();
+                    //file.WriteLine("Cerro Word");
+                }
+                catch (Exception e)
+                {
+                    if (winWord != null)
+                    {
+                        winWord.Quit();
+                    }
+                    throw new Exception(e.Message);
+                }
+                finally
+                {
+                    GC.Collect();
+                }
+            }
         }
-
         public static class ExcelManager
         {
             public static DataTable ObtenerHojasExcel(string nombreArchivo)

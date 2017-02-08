@@ -472,8 +472,8 @@ namespace KiiniHelp.UserControls.Altas
             string result = "<h3>AGREGAR " + modulo + "</h3><span style=\"font-size: x-small;\">";
             switch (command)
             {
-                case "0":
-                    result += ddlpais.SelectedItem.Text + ">" + ddlCampus.SelectedItem.Text;
+                case "2":
+                    result += ddlpais.SelectedItem.Text ;
                     break;
                 case "3":
                     result += ddlpais.SelectedItem.Text + ">" + ddlCampus.SelectedItem.Text;

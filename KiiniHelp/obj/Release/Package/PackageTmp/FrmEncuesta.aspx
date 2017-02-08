@@ -35,7 +35,8 @@
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
                     <asp:HiddenField runat="server" ID="hfIdTicket" />
-                            <asp:HiddenField runat="server" ID="hfIdEncuesta" />
+                    <asp:HiddenField runat="server" ID="hfIdTipoServicio" />
+                    <asp:HiddenField runat="server" ID="hfIdEncuesta" />
                     <header>
                         <div class="alert alert-danger" id="panelAlert" runat="server" visible="False">
                             <div>
@@ -57,7 +58,7 @@
                     </header>
                     <div class="panel panel-primary">
                         <div class="panel-body">
-                            <uc1:UcEncuestaCaptura runat="server" ID="UcEncuestaCaptura" />
+                            <uc1:UcEncuestaCaptura runat="server" ID="ucEncuestaCaptura" />
                         </div>
                         <div class="panel-footer">
                             <%--<asp:Button runat="server" ID="btnGuardar" OnClick="btnGuardar_OnClick" Text="Guardar" CssClass="btn btn-lg btn-success" />

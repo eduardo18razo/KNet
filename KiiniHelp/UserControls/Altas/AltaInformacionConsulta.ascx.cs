@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Web;
 using System.Web.UI;
 using AjaxControlToolkit;
 using KiiniHelp.Funciones;
@@ -16,8 +13,6 @@ using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
-using Microsoft.Office.Interop.Word;
-using System = Microsoft.Office.Interop.Word.System;
 
 namespace KiiniHelp.UserControls.Altas
 {
@@ -30,15 +25,7 @@ namespace KiiniHelp.UserControls.Altas
         private readonly ServiceTipoInfConsultaClient _servicioCatalogosSistema = new ServiceTipoInfConsultaClient();
         private readonly ServiceTipoDocumentoClient _servicioSistemaTipoDocumento = new ServiceTipoDocumentoClient();
         private readonly ServiceParametrosClient _servicioParametros = new ServiceParametrosClient();
-
-        private readonly ServiceInformacionConsultaClient _servicioInformacionConsulta =
-            new ServiceInformacionConsultaClient();
-
-        public override void Dispose()
-        {
-            base.Dispose();
-
-        }
+        private readonly ServiceInformacionConsultaClient _servicioInformacionConsulta = new ServiceInformacionConsultaClient();
 
         private List<string> _lstError = new List<string>();
 
@@ -92,11 +79,11 @@ namespace KiiniHelp.UserControls.Altas
                         if (txtEditor.Text.Trim() == string.Empty)
                             throw new Exception("Debe especificar un contenido");
                         break;
-                    case BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                    case BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice:
                         //if (!fuFile.HasFile)
                         //    throw new Exception("Debe especificar un documento");
                         break;
-                    case BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                    case BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
                         if (txtDescripcionUrl.Text.Trim() == string.Empty)
                             throw new Exception("Debe especificar una url de pagina");
                         break;
@@ -132,6 +119,15 @@ namespace KiiniHelp.UserControls.Altas
             get { return Convert.ToBoolean(hfEsAlta.Value); }
             set { hfEsAlta.Value = value.ToString(); }
         }
+        public int IdTipoInformacion
+        {
+            get { return int.Parse(ddlTipoInformacion.SelectedValue); }
+            set
+            {
+                ddlTipoInformacion.SelectedValue = value.ToString();
+                ddlTipoInformacion_OnSelectedIndexChanged(ddlTipoInformacion, null);
+            }
+        }
 
         public int IdInformacionConsulta
         {
@@ -148,10 +144,10 @@ namespace KiiniHelp.UserControls.Altas
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
                         txtEditor.Text = info.InformacionConsultaDatos.First().Descripcion;
                         break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice:
 
                         break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
                         txtDescripcionUrl.Text = info.InformacionConsultaDatos.First().Descripcion;
                         break;
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.Servicio:
@@ -196,12 +192,12 @@ namespace KiiniHelp.UserControls.Altas
                         divDocumento.Visible = false;
                         divUrl.Visible = false;
                         break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice:
                         divPropietrario.Visible = false;
                         divDocumento.Visible = true;
                         divUrl.Visible = false;
                         break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
                         divPropietrario.Visible = false;
                         divDocumento.Visible = false;
                         divUploadDocumento.Visible = false;
@@ -319,7 +315,7 @@ namespace KiiniHelp.UserControls.Altas
                     IdTipoInfConsulta = Convert.ToInt32(ddlTipoInformacion.SelectedValue),
                     InformacionConsultaDatos = new List<InformacionConsultaDatos>()
                 };
-                List<string> lstArchivos = (List<string>) Session["FileList"];
+                List<string> lstArchivos = (List<string>)Session["FileList"];
                 switch (Convert.ToInt32(ddlTipoInformacion.SelectedValue))
                 {
                     case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
@@ -330,8 +326,8 @@ namespace KiiniHelp.UserControls.Altas
                             Orden = 1
                         });
                         break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.Documento:
-                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.Documento);
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice:
+                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice);
                         informacion.IdTipoDocumento = Convert.ToInt32(ddlTipoDocumento.SelectedValue);
                         informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos
                         {
@@ -340,8 +336,8 @@ namespace KiiniHelp.UserControls.Altas
                         });
                         lstArchivos.Remove(afuArchivo.FileName);
                         break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml:
-                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.PaginaHtml);
+                    case (int)BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
+                        ValidaCaptura(BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb);
                         informacion.InformacionConsultaDatos.Add(new InformacionConsultaDatos
                         {
                             Descripcion = txtDescripcionUrl.Text.Trim(),

@@ -18,6 +18,9 @@ namespace KiiniHelp.ServiceArea {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuario", ReplyAction="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuario(int idUsuario, bool insertarSeleccion);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioByRol", ReplyAction="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioByRolResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuarioByRol(int idUsuario, bool insertarSeleccion);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioTercero", ReplyAction="http://tempuri.org/IServiceArea/ObtenerAreasUsuarioTerceroResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuarioTercero(int idUsuario, int idUsuarioTercero, bool insertarSeleccion);
         
@@ -32,6 +35,18 @@ namespace KiiniHelp.ServiceArea {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/Guardar", ReplyAction="http://tempuri.org/IServiceArea/GuardarResponse")]
         void Guardar(KiiniNet.Entities.Operacion.Area area);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/ObtenerAreaById", ReplyAction="http://tempuri.org/IServiceArea/ObtenerAreaByIdResponse")]
+        KiiniNet.Entities.Operacion.Area ObtenerAreaById(int idArea);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/Actualizar", ReplyAction="http://tempuri.org/IServiceArea/ActualizarResponse")]
+        void Actualizar(int idArea, KiiniNet.Entities.Operacion.Area puesto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/Habilitar", ReplyAction="http://tempuri.org/IServiceArea/HabilitarResponse")]
+        void Habilitar(int idArea, bool habilitado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArea/ObtenerAreaConsulta", ReplyAction="http://tempuri.org/IServiceArea/ObtenerAreaConsultaResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreaConsulta(string descripcion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -65,6 +80,10 @@ namespace KiiniHelp.ServiceArea {
             return base.Channel.ObtenerAreasUsuario(idUsuario, insertarSeleccion);
         }
         
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuarioByRol(int idUsuario, bool insertarSeleccion) {
+            return base.Channel.ObtenerAreasUsuarioByRol(idUsuario, insertarSeleccion);
+        }
+        
         public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreasUsuarioTercero(int idUsuario, int idUsuarioTercero, bool insertarSeleccion) {
             return base.Channel.ObtenerAreasUsuarioTercero(idUsuario, idUsuarioTercero, insertarSeleccion);
         }
@@ -83,6 +102,22 @@ namespace KiiniHelp.ServiceArea {
         
         public void Guardar(KiiniNet.Entities.Operacion.Area area) {
             base.Channel.Guardar(area);
+        }
+        
+        public KiiniNet.Entities.Operacion.Area ObtenerAreaById(int idArea) {
+            return base.Channel.ObtenerAreaById(idArea);
+        }
+        
+        public void Actualizar(int idArea, KiiniNet.Entities.Operacion.Area puesto) {
+            base.Channel.Actualizar(idArea, puesto);
+        }
+        
+        public void Habilitar(int idArea, bool habilitado) {
+            base.Channel.Habilitar(idArea, habilitado);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.Area> ObtenerAreaConsulta(string descripcion) {
+            return base.Channel.ObtenerAreaConsulta(descripcion);
         }
     }
 }

@@ -62,7 +62,7 @@
 
                 </div>
                 <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" Visible="False"/>
+                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" Visible="False" />
                 </div>
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" />
@@ -92,7 +92,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Consulta Encuesta</h3>
+                    <h3>Encuesta</h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">
@@ -100,7 +100,7 @@
                             <div class="panel-heading" role="tab" id="headingFiltros">
                                 <h4 class="panel-title">
                                     <div role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiltros" aria-expanded="true" aria-controls="collapseFiltros" style="cursor: pointer">
-                                        Filtros
+                                        Ocultar/Mostrar Filtros
                                     </div>
                                 </h4>
                             </div>
@@ -108,13 +108,14 @@
                                 <div class="panel-body">
                                     <div class="form-horizontal">
                                         <div class="form-group">
-                                            <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Descripcion</asp:Label>
-                                            <asp:TextBox runat="server" ID="txtDescripcion" AutoPostBack="True" OnTextChanged="txtDescripcion_OnTextChanged" CssClass="form-control"></asp:TextBox>
+                                            <asp:Label Width="14%" class="col-xs-1 control-label" runat="server" Text="Nombre de la encuesta" />
+                                            <asp:TextBox Width="14%" runat="server" ID="txtDescripcion" CssClass="col-xs-1 form-control" />
+                                            <asp:Button runat="server" Text="Buscar" ID="btnBuscar" CssClass="col-xs-1 btn btn-sm btn-primary" OnClick="btnBuscar_OnClick" />
                                         </div>
                                         <div class="form-group">
                                         </div>
                                         <div class="form-group">
-                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Informacion" Width="14%" OnClick="btnNew_OnClick"/>
+                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Encuesta" Width="14%" OnClick="btnNew_OnClick" />
                                         </div>
                                     </div>
                                 </div>
@@ -128,18 +129,22 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader" style="table-layout: fixed">
                                             <thead>
                                                 <tr align="center">
-                                                    <td><asp:Label runat="server">Tipo de Encuesta</asp:Label></td>
-                                                    <td><asp:Label runat="server">Nombre</asp:Label></td>
-                                                    <td><asp:Label runat="server">Tiene Ponderacion</asp:Label></td>
-                                                    <td><asp:Label runat="server">Habilitado</asp:Label></td>
+                                                    <td>
+                                                        <asp:Label runat="server">Nombre</asp:Label></td>
+                                                    <td>
+                                                        <asp:Label runat="server">Tipo de Encuesta</asp:Label></td>
+                                                    <td>
+                                                        <asp:Label runat="server">Tiene Ponderacion</asp:Label></td>
+                                                    <td>
+                                                        <asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuEncuesta()"><%# Eval("TipoEncuesta.Descripcion")%></td>
                                             <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuEncuesta()"><%# Eval("Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuEncuesta()"><%# Eval("TipoEncuesta.Descripcion")%></td>
                                             <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuEncuesta()"><%# (bool) Eval("EsPonderacion") ? "SI" : "NO"%></td>
                                             <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuEncuesta()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>

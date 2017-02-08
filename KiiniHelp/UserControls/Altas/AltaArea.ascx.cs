@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
+using AjaxControlToolkit;
 using KiiniHelp.ServiceArea;
 using KiiniNet.Entities.Operacion;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
 {
@@ -26,10 +28,28 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
+        public bool EsAlta
+        {
+            get { return Convert.ToBoolean(hfEsAlta.Value); }
+            set { hfEsAlta.Value = value.ToString(); }
+        }
+
+        public int IdArea
+        {
+            get { return Convert.ToInt32(hfIdArea.Value); }
+            set
+            {
+                Area puesto = _servicioArea.ObtenerAreaById(value);
+                txtDescripcionAreas.Text = puesto.Descripcion;
+                hfIdArea.Value = value.ToString();
+            }
+        }
+
         private void LimpiarCampos()
         {
             try
             {
+                hfFileName.Value = string.Empty;
                 txtDescripcionAreas.Text = String.Empty;
             }
             catch (Exception ex)
@@ -61,11 +81,16 @@ namespace KiiniHelp.UserControls.Altas
             {
                 if (txtDescripcionAreas.Text.Trim() == string.Empty)
                     throw new Exception("Debe especificar una descripción");
-                Area sla = new Area();
-                sla.Descripcion = txtDescripcionAreas.Text.Trim();
+                Area area = new Area();
+                area.Descripcion = txtDescripcionAreas.Text.Trim();
+                if (Session["ImagenArea"].ToString() != string.Empty)
+                    area.Imagen = BusinessFile.Imagenes.ImageToByteArray(Session["ImagenArea"].ToString());
                 //TODO: Cambiar propiedad por valor de control
-                sla.Habilitado = true;
-                _servicioArea.Guardar(sla);
+                area.Habilitado = true;
+                if (EsAlta)
+                    _servicioArea.Guardar(area);
+                else
+                    _servicioArea.Actualizar(int.Parse(hfIdArea.Value), area);
                 LimpiarCampos();
                 if (OnAceptarModal != null)
                     OnAceptarModal();
@@ -107,6 +132,33 @@ namespace KiiniHelp.UserControls.Altas
                 LimpiarCampos();
                 if (OnCancelarModal != null)
                     OnCancelarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void afDosnload_OnUploadedComplete(object sender, AsyncFileUploadEventArgs e)
+        {
+            try
+            {
+                AsyncFileUpload uploadControl = (AsyncFileUpload)sender;
+                //ParametrosGenerales generales = _servicioParametros.ObtenerParametrosGenerales();
+                //Int64 sumaArchivos = Int64.Parse(Session["FileSize"].ToString());
+                //sumaArchivos += int.Parse(e.FileSize);
+                //if (!Directory.Exists(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta))
+                //    Directory.CreateDirectory(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta);
+                //if ((sumaArchivos / 1024) > int.Parse(generales.TamanoDeArchivo))
+                //    throw new Exception(string.Format("El tamaño maximo de carga es de {0}MB", generales.TamanoDeArchivo));
+                uploadControl.SaveAs(BusinessVariables.Directorios.RepositorioTemporal + e.FileName);
+                Session["ImagenArea"] = e.FileName;
+                //hfFileName.Value = e.FileName;
             }
             catch (Exception ex)
             {

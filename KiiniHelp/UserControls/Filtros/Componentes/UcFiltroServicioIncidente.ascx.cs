@@ -39,7 +39,7 @@ namespace KiiniHelp.UserControls.Filtros.Componentes
         {
             try
             {
-                rptTipoArbol.DataSource = _servicioGrupoUsuario.ObtenerTiposArbolAcceso(false).Where(w => w.Id != (int)BusinessVariables.EnumTipoArbol.Consultas);
+                rptTipoArbol.DataSource = _servicioGrupoUsuario.ObtenerTiposArbolAcceso(false).Where(w => w.Id != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion);
                 rptTipoArbol.DataBind();
             }
             catch (Exception e)
@@ -52,7 +52,7 @@ namespace KiiniHelp.UserControls.Filtros.Componentes
         {
             try
             {
-                rptTipoArbol.DataSource = _servicioGrupoUsuario.ObtenerTiposArbolAcceso(false).Where(w => w.Id == (int)BusinessVariables.EnumTipoArbol.Consultas);
+                rptTipoArbol.DataSource = _servicioGrupoUsuario.ObtenerTiposArbolAcceso(false).Where(w => w.Id == (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion);
                 rptTipoArbol.DataBind();
             }
             catch (Exception e)

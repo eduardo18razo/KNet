@@ -69,6 +69,7 @@ namespace KinniNet.Core.Operacion
                 foreach (UsuarioRol rol in usuario.UsuarioRol)
                 {
                     rol.IdRolTipoUsuario = new BusinessRoles().ObtenerRolTipoUsuario(rol.RolTipoUsuario.IdTipoUsuario, rol.RolTipoUsuario.IdRol).Id;
+                    rol.RolTipoUsuario = null;
                 }
                 if (usuario.Id == 0)
                 {

@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConcultaCatalogos.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConcultaCatalogos" %>
 <%@ Register Src="~/UserControls/Altas/UcAltaCatalogo.ascx" TagPrefix="uc1" TagName="UcAltaCatalogo" %>
+<%@ Register Src="~/UserControls/Altas/UcCargaCatalgo.ascx" TagPrefix="uc1" TagName="UcCargaCatalgo" %>
+
 
 <div style="height: 100%;">
     <script>
@@ -31,6 +33,7 @@
                 var alta = false;
                 var parent = e.target.parentElement;
                 var nodos = parent.parentElement.childNodes;
+                var columnArchivo = parent.childNodes[3];
                 for (var fondo = 0; fondo < nodos.length; fondo++) {
                     if (nodos[fondo].nodeType === 1)
                         parent.parentElement.childNodes[fondo].removeAttribute("style");
@@ -45,10 +48,20 @@
                     }
                 }
                 alta = !baja;
+                if (columnArchivo.textContent === "True") {
+                    document.getElementById("divEditar").style.visibility = 'visible';
+                    document.getElementById("divEditar").style.display = 'block';
+                }
+                else {
+                    document.getElementById("divEditar").style.visibility = 'hidden';
+                    document.getElementById("divEditar").style.display = 'none';
+                }
                 document.getElementById("<%= this.FindControl("btnBaja").ClientID %>").style.display = baja ? 'block' : 'none';
                 document.getElementById("<%= this.FindControl("btnAlta").ClientID %>").style.display = alta ? 'block' : 'none';
                 var elementId = document.getElementById("<%= this.FindControl("hfId").ClientID %>");
+                var elementEsArchivo = document.getElementById("<%= this.FindControl("hfEsArchivo").ClientID %>");
                 elementId.value = e.target.parentElement.id;
+                elementEsArchivo.value = columnArchivo.textContent;
                 return false;
             });
 
@@ -62,12 +75,15 @@
         <ContentTemplate>
             <div id="contextMenuCatalogos" class="panel-heading contextMenu">
                 <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
+                <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfEsArchivo" />
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-primary" Text="Baja" ID="btnBaja" OnClick="btnBaja_OnClick" />
                 </div>
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-primary" Text="Alta" ID="btnAlta" OnClick="btnAlta_OnClick" />
-
+                </div>
+                <div class="form-group" id="divEditar">
+                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" />
                 </div>
                 <div class="form-group">
                     <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" />
@@ -97,7 +113,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Consulta Grupos</h3>
+                    <h3>Catálogos </h3>
                 </div>
                 <div class="panel-body">
                     <div class="panel panel-primary">
@@ -112,15 +128,21 @@
                             <div id="collapseFiltros" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFiltros">
                                 <div class="panel-body">
                                     <div class="form-horizontal">
-
                                         <div class="form-group">
-                                            <asp:Label Width="14%" class="col-xs-1 control-label" runat="server">Catalogos</asp:Label>
-                                            <asp:DropDownList runat="server" ID="ddlCatalogos" Width="14%" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlCatalogos_OnSelectedIndexChanged" />
+                                            <asp:Label class="col-xs-1 control-label" runat="server">Catálogo</asp:Label>
+                                            <div class="col-xs-2">
+                                                <asp:DropDownList runat="server" ID="ddlCatalogos" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlCatalogos_OnSelectedIndexChanged" />
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                        </div>
-                                        <div class="form-group">
-                                            <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Catalogo" Width="14%" OnClick="btnNew_OnClick"/>
+                                            <div class="col-xs-1 control-label"></div>
+                                            <div class="col-xs-1">
+                                                <asp:Button runat="server" CssClass="btn btn-primary" ID="btnNew" Text="Agregar Catálogo" OnClick="btnNew_OnClick" />
+                                            </div>
+                                            <div style="width: 45px"></div>
+                                            <div class="col-xs-1">
+                                                <asp:Button runat="server" CssClass="btn btn-primary" ID="btnCargarCatalogo" Text="Cargar Catálogo" OnClick="btnCargarCatalogo_OnClick" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -134,16 +156,19 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader">
                                             <thead>
                                                 <tr align="center">
-                                                    <td><asp:Label runat="server">Descripcion</asp:Label></td>
-                                                    <td><asp:Label runat="server">Habilitado</asp:Label></td>
+                                                    <td>
+                                                        <asp:Label runat="server">Descripción</asp:Label></td>
+                                                    <td>
+                                                        <asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuCatalogos()" ><%# Eval("Descripcion")%></td>
-                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuCatalogos()"  id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuCatalogos()"><%# Eval("Descripcion")%></td>
+                                            <td style="padding: 0; text-align: left; font-size: 10px; display: none" oncontextmenu="contextMenuCatalogos()" id="colArchivo"><%# Eval("Archivo")%></td>
+                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuCatalogos()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>
@@ -165,6 +190,18 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <uc1:UcAltaCatalogo runat="server" id="ucAltaCatalogo" />
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
+    <%--MODAL CARGAR--%>
+    <div class="modal fade" id="modalCargaCatalogo" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <asp:UpdatePanel ID="upCargaCatalogo" runat="server">
+            <ContentTemplate>
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <uc1:UcCargaCatalgo runat="server" id="ucCargaCatalgo" />
                     </div>
                 </div>
             </ContentTemplate>

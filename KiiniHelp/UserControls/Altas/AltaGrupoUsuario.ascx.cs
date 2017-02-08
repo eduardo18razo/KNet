@@ -51,16 +51,16 @@ namespace KiiniHelp.UserControls.Altas
                     case (int)BusinessVariables.EnumTiposGrupos.Administrador:
                         lblTitle.Text += "Administrador";
                         break;
-                    case (int)BusinessVariables.EnumTiposGrupos.Acceso:
+                    case (int)BusinessVariables.EnumTiposGrupos.Usuario:
                         lblTitle.Text += "Usuario";
                         break;
-                    case (int)BusinessVariables.EnumTiposGrupos.EspecialDeConsulta:
+                    case (int)BusinessVariables.EnumTiposGrupos.ConsultasEspeciales:
                         lblTitle.Text += "Consultas Especiales";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención:
                         lblTitle.Text += "Responsable de Atención";
                         break;
-                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
+                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido:
                         lblTitle.Text += "Responsable de Contenido";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeOperación:
@@ -69,10 +69,10 @@ namespace KiiniHelp.UserControls.Altas
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
                         lblTitle.Text += "Responsable de Desarrollo";
                         break;
-                    case (int)BusinessVariables.EnumTiposGrupos.DueñoDelServicio:
+                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableServicio:
                         lblTitle.Text += "Responsable de Servicio";
                         break;
-                    case (int)BusinessVariables.EnumTiposGrupos.ContactCenter:
+                    case (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal:
                         divParametros.Visible = true;
                         lblTitle.Text = "Contac Center";
                         break;
@@ -80,8 +80,8 @@ namespace KiiniHelp.UserControls.Altas
                 List<SubRol> lstRoles = _servicioSistemaSubRol.ObtenerSubRolesByTipoGrupo(value, false);
                 divSubRoles.Visible = lstRoles.Count > 0;
 
-                if ((int)BusinessVariables.EnumTiposGrupos.DueñoDelServicio == value)
-                    divSubRoles.Visible = true;
+                //if ((int)BusinessVariables.EnumTiposGrupos.DueñoDelServicio == value)
+                //    divSubRoles.Visible = true;
                 rptSubRoles.DataSource = lstRoles;
                 rptSubRoles.DataBind();
             }
@@ -130,6 +130,11 @@ namespace KiiniHelp.UserControls.Altas
                     IdTipoUsuario = value.IdTipoUsuario;
                     IdTipoGrupo = value.IdTipoGrupo;
                     txtDescripcionGrupoUsuario.Text = value.Descripcion;
+                    if (value.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal)
+                    {
+                        rbtnLevanta.Checked = value.LevantaTicket;
+                        rbtnRecado.Checked = value.RecadoTicket;
+                    }
                     if (value.SubGrupoUsuario == null) return;
                     foreach (SubGrupoUsuario subGrupo in value.SubGrupoUsuario.OrderBy(o => o.IdSubRol))
                     {
@@ -227,7 +232,7 @@ namespace KiiniHelp.UserControls.Altas
 
             if (txtDescripcionGrupoUsuario.Text.Trim() == string.Empty)
                 sb.AppendLine("Descripcion es un campo obligatorio.<br>");
-            if (IdTipoGrupo == (int) BusinessVariables.EnumTiposGrupos.ContactCenter)
+            if (IdTipoGrupo == (int) BusinessVariables.EnumTiposGrupos.AgenteUniversal)
             {
                 if(!rbtnLevanta.Checked && !rbtnRecado.Checked)
                     sb.AppendLine("Seleccione una opción para este grupo.<br>");
@@ -254,6 +259,7 @@ namespace KiiniHelp.UserControls.Altas
                 Session.Remove("HorariosSubRoles");
                 Session.Remove("DiasSubRoles");
                 Session.Remove("DiasFestivos");
+                IdTipoGrupo = IdTipoGrupo;
 
             }
             catch (Exception ex)
@@ -289,10 +295,9 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                Label lblId = (from RepeaterItem item in rptSubRoles.Items select (Label)item.FindControl("lblId")).FirstOrDefault();
                 foreach (RepeaterItem item in rptSubRoles.Items)
                 {
-                    lblId = (Label)item.FindControl("lblId");
+                    Label lblId = (Label)item.FindControl("lblId");
                     if (lblId == null) continue;
                     if (int.Parse(lblId.Text) != ucAltaHorario.IdSubRol) continue;
                     var parent = lblId.NamingContainer;
@@ -301,6 +306,7 @@ namespace KiiniHelp.UserControls.Altas
                     ddl.DataTextField = "Descripcion";
                     ddl.DataValueField = "Id";
                     ddl.DataBind();
+                    break;
                 }
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalHorarios\");", true);
             }
@@ -413,7 +419,7 @@ namespace KiiniHelp.UserControls.Altas
                         Habilitado = chkHabilitado.Checked,
                         SubGrupoUsuario = new List<SubGrupoUsuario>()
                     };
-                    if (IdTipoGrupo == (int) BusinessVariables.EnumTiposGrupos.ContactCenter)
+                    if (IdTipoGrupo == (int) BusinessVariables.EnumTiposGrupos.AgenteUniversal)
                     {
                         grupoUsuario.LevantaTicket = rbtnLevanta.Checked;
                         grupoUsuario.RecadoTicket = rbtnRecado.Checked;
@@ -456,6 +462,16 @@ namespace KiiniHelp.UserControls.Altas
                         {
                             diasDescanso.Add(int.Parse(chk.Attributes["value"]), ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Where(w => w.IdSubGrupoUsuario == Convert.ToInt32(chk.Attributes["value"])).ToList());
                         }
+                    }
+                    if (IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal)
+                    {
+                        grupoUsuario.LevantaTicket = rbtnLevanta.Checked;
+                        grupoUsuario.RecadoTicket = rbtnRecado.Checked;
+                    }
+                    else
+                    {
+                        grupoUsuario.LevantaTicket = false;
+                        grupoUsuario.RecadoTicket = false;
                     }
                     _servicioGrupoUsuario.ActualizarGrupo(grupoUsuario, horarios, diasDescanso);
                 }
@@ -543,6 +559,7 @@ namespace KiiniHelp.UserControls.Altas
                                 break;
                         }
                         DropDownList ddl = (DropDownList)chk.DataItemContainer.FindControl("ddlHorario");
+                        ddl.Enabled = chk.Checked;
                         ddl.DataSource = _servicioDiaHorario.ObtenerHorarioDefault(true);
                         ddl.DataTextField = "Descripcion";
                         ddl.DataValueField = "Id";
@@ -556,6 +573,7 @@ namespace KiiniHelp.UserControls.Altas
                         }
                         else
                         {
+                            Metodos.LimpiarCombo(ddl);
                             btnHorarios.CssClass = "col-sm-2 btn btn-sm btn-primary disabled";
                             btnDiasDescanso.CssClass = "col-sm-2 btn btn-sm btn-primary disabled";
                         }
@@ -590,7 +608,7 @@ namespace KiiniHelp.UserControls.Altas
                             ((Button)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("btnDiasDescanso")).CssClass = "col-sm-2 btn btn-sm btn-primary";
                         }
                         break;
-                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeInformaciónPublicada:
+                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido:
                         if (sbRol.Id == (int)BusinessVariables.EnumSubRoles.Autorizador)
                         {
                             ((CheckBox)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("chkSubRol")).Checked = true;

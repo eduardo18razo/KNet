@@ -61,7 +61,11 @@ namespace KiiniHelp.Modulos
         void context_BeginRequest(object sender, EventArgs e)
         {
             HttpContext context = HttpContext.Current; //Contexto http actual
-
+            if (context.Request.Url.OriginalString.Contains("AsyncFileUploadID"))
+            {
+                return;
+                //context.Request.Url.OriginalString.IndexOf("AsyncFileUploadID");
+            }
             if (context.Request.Url.OriginalString.Contains("aspx") && context.Request.RawUrl.Contains("?")) //url contiene ".aspx" && "?" ?
             {
                 string query = ExtraerCadena(context.Request.RawUrl);

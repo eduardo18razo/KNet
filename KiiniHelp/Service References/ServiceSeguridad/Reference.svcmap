@@ -39,7 +39,6 @@
     <MetadataFile FileName="ServiceSecurity11.xsd" MetadataType="Schema" ID="11ba2e7b-4c06-4c3d-9fdf-6fe067d3f769" SourceId="1" SourceUrl="http://localhost:15277/ServiceSecurity.svc?xsd=xsd9" />
     <MetadataFile FileName="ServiceSecurity12.xsd" MetadataType="Schema" ID="050f4c24-a545-448d-9bc5-2c93d72e60b5" SourceId="1" SourceUrl="http://localhost:15277/ServiceSecurity.svc?xsd=xsd4" />
     <MetadataFile FileName="ServiceSecurity.disco" MetadataType="Disco" ID="34812832-99c8-46ea-a0ba-3e4e5775fb88" SourceId="1" SourceUrl="http://localhost:15277/ServiceSecurity.svc?disco" />
-    <MetadataFile FileName="ServiceSecurity14.xsd" MetadataType="Schema" ID="ad168e34-983e-4ccf-9933-e0d9503d9b27" SourceId="1" SourceUrl="http://localhost:15277/ServiceSecurity.svc?xsd=xsd14" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

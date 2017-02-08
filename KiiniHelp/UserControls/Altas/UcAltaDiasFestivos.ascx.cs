@@ -148,6 +148,8 @@ namespace KiiniHelp.UserControls.Altas
                     throw new Exception("Ingrese una descripción");
                 if (lst.Any(a => a.Fecha == Convert.ToDateTime(txtDate.Text)))
                     throw new Exception("Ya se ha ingresado esta fecha");
+                if (DateTime.Parse(txtDate.Text) < DateTime.Parse(DateTime.Now.ToShortDateString()))
+                    throw new Exception("La fecha no puede ser anterior al dia actual");
                 lst.Add(new DiaFestivoSubGrupo
                 {
                     IdSubGrupoUsuario = IdSubRol,

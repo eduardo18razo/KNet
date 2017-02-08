@@ -16,8 +16,12 @@
     <link href="BootStrap/css/FileInput.css" rel="stylesheet" />
     <link href="BootStrap/css/Headers.css" rel="stylesheet" />
     <link href="BootStrap/css/stylemainmenu.css" rel="stylesheet" />
+    <link href="BootStrap/css/Defaults.css" rel="stylesheet" />
     <script type="text/javascript">
         function MostrarPopup(modalName) {
+            $(modalName).on('shown.bs.modal', function () {
+                $(this).find('[autofocus]').focus();
+            });
             $(modalName).modal({ backdrop: 'static', keyboard: false });
             $(modalName).modal('show');
             return true;
@@ -39,7 +43,6 @@
 <body>
     <div id="full">
         <form id="form1" runat="server">
-
             <header id="panelAlert" runat="server" visible="False">
                 <div class="alert alert-danger">
                     <div>
@@ -79,7 +82,7 @@
             <div id="headerNav">
                 <span data-panel="panel1" class="panel-button"></span>
                 <div class="logo" id="logo">
-                    <div style="float: left; : hover {background: #265B7F}">
+                    <div style="float: left;">
                         <div id="headerNavInfoDiv">
                         </div>
                     </div>
@@ -160,7 +163,7 @@
 
                 </div>
                 <span id="top-nav" style="position: absolute; margin: 12px 0 0 12px; top: 0; right: 5%">
-                    <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalSingIn" data-backdrop="static" data-keyboard="false" style="margin-left: 10px; margin-right: 10px">Iniciar Sesión</a>
+                    <a class="btn btn-sm btn-success" style="margin-left: 10px; margin-right: 10px" onclick="MostrarPopup('#modalSingIn');">Iniciar Sesión</a>
                 </span>
             </div>
 

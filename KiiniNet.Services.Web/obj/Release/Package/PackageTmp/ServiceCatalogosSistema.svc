@@ -1,2 +1,2 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="KiiniNet.Services.Sistema.ServiceCatalogosSistema"%>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="KiiniNet.Services.Sistema.Implementacion.ServiceCatalogos"%>
 
