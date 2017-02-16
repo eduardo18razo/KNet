@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="KiiniNet_v2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="KiiniNet_v2Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
   <EntityContainer Name="connection" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Campus" EntityType="KiiniNet_v2Model.Campus" />
     <EntitySet Name="Colonia" EntityType="KiiniNet_v2Model.Colonia" />
@@ -316,7 +316,6 @@
       <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
       <End Role="InventarioInfConsulta" EntitySet="InventarioInfConsulta" />
     </AssociationSet>
-    <EntitySet Name="Area" EntityType="KiiniNet_v2Model.Area" />
     <EntitySet Name="TicketGrupoUsuario" EntityType="KiiniNet_v2Model.TicketGrupoUsuario" />
     <AssociationSet Name="FK_TicketGrupoUsuario_SubGrupoUsuario" Association="KiiniNet_v2Model.FK_TicketGrupoUsuario_SubGrupoUsuario">
       <End Role="SubGrupoUsuario" EntitySet="SubGrupoUsuario" />
@@ -404,10 +403,6 @@
       <End Role="SubRolEscalacionPermitida" EntitySet="SubRolEscalacionPermitida" />
     </AssociationSet>
     <EntitySet Name="ArbolAcceso" EntityType="KiiniNet_v2Model.ArbolAcceso" />
-    <AssociationSet Name="FK_ArbolAcceso_Area" Association="KiiniNet_v2Model.FK_ArbolAcceso_Area">
-      <End Role="Area" EntitySet="Area" />
-      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
-    </AssociationSet>
     <AssociationSet Name="FK_ArbolAcceso_Nivel1" Association="KiiniNet_v2Model.FK_ArbolAcceso_Nivel1">
       <End Role="Nivel1" EntitySet="Nivel1" />
       <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
@@ -857,6 +852,11 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="CorreoUsuario" EntitySet="CorreoUsuario" />
     </AssociationSet>
+    <EntitySet Name="Area" EntityType="KiiniNet_v2Model.Area" />
+    <AssociationSet Name="FK_ArbolAcceso_Area" Association="KiiniNet_v2Model.FK_ArbolAcceso_Area">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Campus">
     <Key>
@@ -1280,7 +1280,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
     <Property Name="Habilitado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="RolTipoGrupo" Relationship="KiiniNet_v2Model.FK_RolTipoGrupo_TipoGrupo" FromRole="TipoGrupo" ToRole="RolTipoGrupo" />
     <NavigationProperty Name="TiempoInformeArbol" Relationship="KiiniNet_v2Model.FK_TiempoInformeArbol_TipoGrupo" FromRole="TipoGrupo" ToRole="TiempoInformeArbol" />
@@ -2087,7 +2087,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Descripcion" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
     <Property Name="EsUnico" Type="Boolean" />
     <Property Name="Habilitado" Type="Boolean" />
     <NavigationProperty Name="GrupoUsuarioInventarioArbol" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_Rol" FromRole="Rol" ToRole="GrupoUsuarioInventarioArbol" />
@@ -2340,15 +2340,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Area">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Habilitado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="Area" ToRole="ArbolAcceso" />
-  </EntityType>
   <EntityType Name="TicketGrupoUsuario">
     <Key>
       <PropertyRef Name="Id" />
@@ -2797,7 +2788,6 @@
     <Property Name="IdNivel7" Type="Int32" />
     <Property Name="EsTerminal" Type="Boolean" Nullable="false" />
     <Property Name="Habilitado" Type="Boolean" />
-    <NavigationProperty Name="Area" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="ArbolAcceso" ToRole="Area" />
     <NavigationProperty Name="Nivel1" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Nivel1" FromRole="ArbolAcceso" ToRole="Nivel1" />
     <NavigationProperty Name="Nivel2" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Nivel2" FromRole="ArbolAcceso" ToRole="Nivel2" />
     <NavigationProperty Name="Nivel3" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Nivel3" FromRole="ArbolAcceso" ToRole="Nivel3" />
@@ -2814,19 +2804,8 @@
     <NavigationProperty Name="RespuestaEncuesta" Relationship="KiiniNet_v2Model.FK_RespuestaEncuesta_ArbolAcceso" FromRole="ArbolAcceso" ToRole="RespuestaEncuesta" />
     <NavigationProperty Name="PreTicket" Relationship="KiiniNet_v2Model.FK_PreTicket_ArbolAcceso" FromRole="ArbolAcceso" ToRole="PreTicket" />
     <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_tblTicket_tblArbolAcceso" FromRole="ArbolAcceso" ToRole="Ticket" />
+    <NavigationProperty Name="Area" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="ArbolAcceso" ToRole="Area" />
   </EntityType>
-  <Association Name="FK_ArbolAcceso_Area">
-    <End Type="KiiniNet_v2Model.Area" Role="Area" Multiplicity="1" />
-    <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Area">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ArbolAcceso">
-        <PropertyRef Name="IdArea" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ArbolAcceso_Nivel1">
     <End Type="KiiniNet_v2Model.Nivel1" Role="Nivel1" Multiplicity="1" />
     <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="*" />
@@ -4641,6 +4620,28 @@
       </Principal>
       <Dependent Role="CorreoUsuario">
         <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="Area" ToRole="ArbolAcceso" />
+  </EntityType>
+  <Association Name="FK_ArbolAcceso_Area">
+    <End Type="KiiniNet_v2Model.Area" Role="Area" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArbolAcceso">
+        <PropertyRef Name="IdArea" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

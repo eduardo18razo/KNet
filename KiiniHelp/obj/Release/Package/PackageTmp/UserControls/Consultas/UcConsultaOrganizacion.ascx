@@ -3,7 +3,6 @@
     <script>
         function dbClicOrganizacion(e) {
             debugger;
-            //__doPostBack('SeleccionarOrganizacion', e.parentElement.id);
             var idSeleccion = document.getElementById("<%= this.FindControl("hfIdSeleccion").ClientID %>");
             idSeleccion.value = e.parentElement.id;
             var modalName = document.getElementById("<%= this.FindControl("hfModalName").ClientID %>");
@@ -12,7 +11,6 @@
 
         };
         function SeleccionaOrganizacion(id) {
-            debugger;
             var table = $("#tblHeader");
             table.find('tr').each(function (i, ev) {
                 if (ev.id === id)
@@ -112,6 +110,7 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader">
                                             <thead>
                                                 <tr align="center">
+                                                    <td><asp:Label runat="server" ID="Label1">Tipo Usuario</asp:Label></td>
                                                     <td>
                                                         <asp:Label runat="server" ID="lblHolding">Nivel 1</asp:Label></td>
                                                     <td>
@@ -137,13 +136,14 @@
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
                                             <%--oncontextmenu="ContextMenuOrganizacion()" --%>
-                                            <td style='<%# Eval("Compania") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick="dbClicOrganizacion(this)"><%# Eval("Holding.Descripcion")%></td>
-                                            <td style='<%# Eval("Direccion") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick="dbClicOrganizacion(this)"><%# Eval("Compania.Descripcion")%></td>
-                                            <td style='<%# Eval("SubDireccion") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick="dbClicOrganizacion(this)"><%# Eval("Direccion.Descripcion")%></td>
-                                            <td style='<%# Eval("Gerencia") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick="dbClicOrganizacion(this)"><%# Eval("SubDireccion.Descripcion")%></td>
-                                            <td style='<%# Eval("SubGerencia") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick="dbClicOrganizacion(this)"><%# Eval("Gerencia.Descripcion")%></td>
-                                            <td style='<%# Eval("Jefatura") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick="dbClicOrganizacion(this)"><%# Eval("SubGerencia.Descripcion")%></td>
-                                            <td style='<%# Eval("Jefatura") != null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick="dbClicOrganizacion(this)"><%# Eval("Jefatura.Descripcion")%></td>
+                                            <td style='font-weight: normal; padding: 0; text-align: left; font-size: 10px;' ondblclick='<%# int.Parse(Eval("IdNivelOrganizacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("TipoUsuario.Descripcion")%></td>
+                                            <td style='<%# Eval("Compania") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick='<%# int.Parse(Eval("IdNivelOrganizacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Holding.Descripcion")%></td>
+                                            <td style='<%# Eval("Direccion") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick='<%# int.Parse(Eval("IdNivelOrganizacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Compania.Descripcion")%></td>
+                                            <td style='<%# Eval("SubDireccion") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick='<%# int.Parse(Eval("IdNivelOrganizacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Direccion.Descripcion")%></td>
+                                            <td style='<%# Eval("Gerencia") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick='<%# int.Parse(Eval("IdNivelOrganizacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("SubDireccion.Descripcion")%></td>
+                                            <td style='<%# Eval("SubGerencia") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick='<%# int.Parse(Eval("IdNivelOrganizacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Gerencia.Descripcion")%></td>
+                                            <td style='<%# Eval("Jefatura") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick='<%# int.Parse(Eval("IdNivelOrganizacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("SubGerencia.Descripcion")%></td>
+                                            <td style='<%# Eval("Jefatura") != null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' ondblclick='<%# int.Parse(Eval("IdNivelOrganizacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Jefatura.Descripcion")%></td>
                                             <td style="padding: 0; font-size: 10px;">
                                                 <asp:Button Style="width: 50px;" CssClass='<%# (bool) Eval("Habilitado") ? "btn btn-sm btn-success" : "btn btn-sm btn-danger"%>' runat="server" ID="btnBajaAlta"
                                                     Text='<%# (bool) Eval("Habilitado") ? "SI" : "NO"%>' CommandArgument='<%# (bool) Eval("Habilitado") ? "true" : "false"%>' CommandName='<%# Eval("Id")%>' OnClick="btnBajaAlta_OnClick" />
@@ -219,7 +219,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Descripcion</label>
                                     <div class="col-sm-10">
-                                        <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
+                                        <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus"/>
                                     </div>
                                 </div>
                             </div>

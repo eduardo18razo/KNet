@@ -531,6 +531,7 @@ namespace KinniNet.Core.Operacion
                     result = qry.ToList();
                     foreach (Ubicacion ubicacion in result)
                     {
+                        db.LoadProperty(ubicacion, "TipoUsuario");
                         db.LoadProperty(ubicacion, "Pais");
                         db.LoadProperty(ubicacion, "Campus");
                         db.LoadProperty(ubicacion, "Torre");

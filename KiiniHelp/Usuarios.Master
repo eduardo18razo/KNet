@@ -134,7 +134,6 @@
 </head>
 <body style="background: white">
     <form id="form1" runat="server" enctype="multipart/form-data">
-
         <asp:HiddenField runat="server" ID="hfCargaInicial" Value="False" />
         <header id="panelAlert" runat="server" visible="False">
             <div class="alert alert-danger">

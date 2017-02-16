@@ -1,6 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaArboles.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaArboles" %>
-<%@ Register Src="~/UserControls/Altas/UcAltaArbolAcceso.ascx" TagPrefix="uc1" TagName="UcAltaArbolAcceso" %>
-
 <div style="height: 100%;">
     <script>
         function dbClic(e) {

@@ -224,6 +224,7 @@ namespace KiiniHelp.UserControls.Filtros.Componentes
         {
             try
             {
+                var valida = GruposSeleccionados;
                 if (OnCancelarModal != null)
                     OnCancelarModal();
             }

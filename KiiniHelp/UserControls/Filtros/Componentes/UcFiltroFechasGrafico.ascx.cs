@@ -204,6 +204,7 @@ namespace KiiniHelp.UserControls.Filtros.Componentes
         {
             try
             {
+                var valida = RangoFechas;
                 if (OnCancelarModal != null)
                     OnCancelarModal();
             }

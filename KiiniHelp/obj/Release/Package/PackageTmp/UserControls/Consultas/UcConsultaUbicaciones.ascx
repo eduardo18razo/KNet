@@ -177,6 +177,7 @@
                                         <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader">
                                             <thead>
                                                 <tr align="center">
+                                                    <td><asp:Label runat="server" ID="Label1">Tipo Usuario</asp:Label></td>
                                                     <td><asp:Label runat="server" ID="lblNivel1">Nivel 1</asp:Label></td>
                                                     <td><asp:Label runat="server" ID="lblNivel2">Nivel 2</asp:Label></td>
                                                     <td><asp:Label runat="server" ID="lblNivel3">Nivel 3</asp:Label></td>
@@ -192,20 +193,22 @@
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
+                                            <td style='font-weight: normal; padding: 0; text-align: left; font-size: 10px;' 
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("TipoUsuario.Descripcion")%></td>
                                             <td style='<%# Eval("Campus") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Pais.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("Pais.Descripcion")%></td>
                                             <td style='<%# Eval("Torre") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Campus.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("Campus.Descripcion")%></td>
                                             <td style='<%# Eval("Piso") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Torre.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("Torre.Descripcion")%></td>
                                             <td style='<%# Eval("Zona") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Piso.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("Piso.Descripcion")%></td>
                                             <td style='<%# Eval("SubZona") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("Zona.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("Zona.Descripcion")%></td>
                                             <td style='<%# Eval("SiteRack") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SubZona.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("SubZona.Descripcion")%></td>
                                             <td style='<%# Eval("SiteRack") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)"><%# Eval("SiteRack.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("SiteRack.Descripcion")%></td>
                                             <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
@@ -268,7 +271,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Descripcion</label>
                                         <div class="col-sm-10">
-                                            <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
+                                            <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="DESCRIPCION" class="form-control" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus"/>
                                         </div>
                                     </div>
                                 </div>
@@ -327,7 +330,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Nombre</label>
-                                        <asp:TextBox runat="server" ID="txtDescripcionCampus" placeholder="Nombre" class="form-control" onkeydown="return (event.keyCode!=13);" />
+                                        <asp:TextBox runat="server" ID="txtDescripcionCampus" placeholder="Nombre" class="form-control" onkeydown="return (event.keyCode!=13);" autofocus="autofocus" />
                                     </div>
                                     <div class="form-group">
                                         <asp:CheckBox runat="server" ID="CheckBox1" Checked="True" Visible="False" />

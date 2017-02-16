@@ -218,8 +218,10 @@ namespace KiiniHelp.UserControls.Consultas
 
                 if (ddlJefatura.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idJefatura = int.Parse(ddlJefatura.SelectedValue);
-
-                rptResultados.DataSource = _servicioOrganizacion.ObtenerOrganizaciones(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
+                List<Organizacion> lstOrganizaciones = _servicioOrganizacion.ObtenerOrganizaciones(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
+                if (Modal)
+                    lstOrganizaciones = lstOrganizaciones.Where(w => w.Habilitado == Modal).ToList();
+                rptResultados.DataSource = lstOrganizaciones;
                 rptResultados.DataBind();
             }
             catch (Exception e)
@@ -963,6 +965,7 @@ namespace KiiniHelp.UserControls.Consultas
                             break;
                     }
                 }
+                txtFiltroDecripcion.Text = string.Empty;
                 LimpiaCatalogo();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoOrganizacion\");", true);
                 LlenaOrganizaciones();
@@ -1107,10 +1110,12 @@ namespace KiiniHelp.UserControls.Consultas
                 if (ddlJefatura.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idJefatura = int.Parse(ddlJefatura.SelectedValue);
 
-                rptResultados.DataSource = _servicioOrganizacion.BuscarPorPalabra(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura, txtFiltroDecripcion.Text.Trim());
-                rptResultados.DataBind();
-                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "HightSearch(\"tblHeader\", \"" + txtFiltroDecripcion.Text.Trim() + "\");", true);
+                List<Organizacion> lstOrganizaciones = _servicioOrganizacion.BuscarPorPalabra(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura, txtFiltroDecripcion.Text.Trim());
+                if (Modal)
+                    lstOrganizaciones = lstOrganizaciones.Where(w => w.Habilitado == Modal).ToList();
 
+                rptResultados.DataSource = lstOrganizaciones;
+                rptResultados.DataBind();
             }
             catch (Exception ex)
             {

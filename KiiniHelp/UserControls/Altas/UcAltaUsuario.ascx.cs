@@ -110,13 +110,13 @@ namespace KiiniHelp.UserControls.Altas
         #endregion Alerts
 
         #region Metodos
-        private void LlenaCombos()
+        private void LlenaCombos(bool usuariosResidentes)
         {
             try
             {
                 if (!IsPostBack)
                 {
-                    List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true);
+                    List<TipoUsuario> lstTipoUsuario = usuariosResidentes ? _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true) : _servicioSistemaTipoUsuario.ObtenerTiposUsuario(true);
                     Metodos.LlenaComboCatalogo(ddlTipoUsuario, lstTipoUsuario);
                 }
             }
@@ -282,7 +282,7 @@ namespace KiiniHelp.UserControls.Altas
                 Usuario user = _servicioUsuarios.ObtenerDetalleUsuario(IdUsuario);
                 if (user != null)
                 {
-                    LlenaCombos();
+                    LlenaCombos(false);
                     ddlTipoUsuario.SelectedValue = user.IdTipoUsuario.ToString();
                     ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
                     txtAp.Text = user.ApellidoPaterno;
@@ -378,7 +378,10 @@ namespace KiiniHelp.UserControls.Altas
                 AsociarGrupoUsuario.AsignacionAutomatica = false;
                 if (!IsPostBack)
                 {
-                    LlenaCombos();
+                    if (Request.QueryString["all"] != null && Request.QueryString["all"] != string.Empty)
+                        LlenaCombos(false);
+                    else
+                        LlenaCombos(true);
                     Session["UsuarioTemporal"] = null;
                     Session["UsuarioGrupo"] = null;
                 }

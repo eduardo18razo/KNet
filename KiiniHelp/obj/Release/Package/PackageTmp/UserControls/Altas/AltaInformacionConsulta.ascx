@@ -83,8 +83,10 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="form-horizontal">
-                    <div class="form-group">
+                        <div class="form-group">
+                                                    Archivo adjunto para descarga
                         <asp:Repeater runat="server" ID="rptDonloads">
                             <ItemTemplate>
                                 <asp:Label runat="server" Text="" CssClass="col-sm-2 control-label" />

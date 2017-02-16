@@ -23,7 +23,7 @@ namespace KiiniHelp.ServiceSubGrupoUsuario {
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.SubGrupoUsuario> ObtenerSubGruposUsuarioByIdGrupo(int idGrupoUsuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGrupoUsuario", ReplyAction="http://tempuri.org/IServiceSubGrupoUsuario/ObtenerSubGrupoUsuarioResponse")]
-        KiiniNet.Entities.Cat.Usuario.SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubRol);
+        KiiniNet.Entities.Cat.Usuario.SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubGrupo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -61,8 +61,8 @@ namespace KiiniHelp.ServiceSubGrupoUsuario {
             return base.Channel.ObtenerSubGruposUsuarioByIdGrupo(idGrupoUsuario);
         }
         
-        public KiiniNet.Entities.Cat.Usuario.SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubRol) {
-            return base.Channel.ObtenerSubGrupoUsuario(idGrupoUsuario, idSubRol);
+        public KiiniNet.Entities.Cat.Usuario.SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubGrupo) {
+            return base.Channel.ObtenerSubGrupoUsuario(idGrupoUsuario, idSubGrupo);
         }
     }
 }

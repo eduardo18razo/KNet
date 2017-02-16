@@ -35,7 +35,7 @@
         </header>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                Asignacion de horarios
+                Agregar horario
             </div>
             <div class="panel-body">
                 <asp:HiddenField runat="server" ID="hfIdSubRol" />

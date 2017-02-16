@@ -194,21 +194,21 @@
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
                                             <td style='font-weight: normal; padding: 0; text-align: left; font-size: 10px;' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("TipoUsuario.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("TipoUsuario.Descripcion")%></td>
                                             <td style='<%# Eval("Campus") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Pais.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("Pais.Descripcion")%></td>
                                             <td style='<%# Eval("Torre") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Campus.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("Campus.Descripcion")%></td>
                                             <td style='<%# Eval("Piso") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Torre.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("Torre.Descripcion")%></td>
                                             <td style='<%# Eval("Zona") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Piso.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("Piso.Descripcion")%></td>
                                             <td style='<%# Eval("SubZona") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("Zona.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("Zona.Descripcion")%></td>
                                             <td style='<%# Eval("SiteRack") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("SubZona.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("SubZona.Descripcion")%></td>
                                             <td style='<%# Eval("SiteRack") == null ? "font-weight: bold; padding: 0; text-align: left; font-size: 10px;": "font-weight: normal; padding: 0; text-align: left; font-size: 10px;" %>' 
-                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicOrganizacion(this)" %>'><%# Eval("SiteRack.Descripcion")%></td>
+                                                oncontextmenu="contextMenuUbicaciones()" ondblclick='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) == 1 ? "" : "dbClicUbicacion(this)" %>'><%# Eval("SiteRack.Descripcion")%></td>
                                             <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuUbicaciones()" ondblclick="dbClicUbicacion(this)" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>

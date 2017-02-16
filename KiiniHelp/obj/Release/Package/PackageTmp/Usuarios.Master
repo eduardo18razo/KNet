@@ -31,6 +31,9 @@
         var win;
         function MostrarPopup(modalName) {
             debugger;
+            $(modalName).on('shown.bs.modal', function () {
+                $(this).find('[autofocus]').focus();
+            });
             $(modalName).modal({ backdrop: 'static', keyboard: false });
             $(modalName).modal({ show: true });
             return true;
@@ -318,7 +321,8 @@
                     debugger;
                     var elementId = document.getElementById("<%= this.FindControl("hfCargaInicial").ClientID %>");
                     if (elementId.value === "False") {
-                        $('#modalRol').modal('show');
+                        $('#modalRol').modal({ backdrop: 'static', keyboard: false });
+                        $('#modalRol').modal({ show: true });
                         elementId.value = "true";
                     }
 

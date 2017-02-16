@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AltaSla.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.AltaSla" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcAltaSla.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.UcAltaSla" %>
 <asp:UpdatePanel runat="server">
     <ContentTemplate>
         <asp:HiddenField runat="server" ID="hfFromModal"/>

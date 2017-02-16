@@ -267,6 +267,7 @@ namespace KinniNet.Core.Operacion
                     result = qry.ToList();
                     foreach (Organizacion organizacion in result)
                     {
+                        db.LoadProperty(organizacion, "TipoUsuario");
                         db.LoadProperty(organizacion, "Holding");
                         db.LoadProperty(organizacion, "Compania");
                         db.LoadProperty(organizacion, "Direccion");

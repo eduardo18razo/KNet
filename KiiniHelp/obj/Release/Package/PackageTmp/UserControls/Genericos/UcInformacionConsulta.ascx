@@ -41,6 +41,19 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                debugger;
+                <%--document.getElementById("<%= this.FindControl("btnCerrar").ClientID %>").click();--%>
+                <%--var elementId = document.getElementById("<%= this.FindControl("hfCargaInicial").ClientID %>");
+                    if (elementId.value === "False") {
+                        $('#modalMuestraInformacion').modal({ backdrop: 'static', keyboard: false });
+                        $('#modalMuestraInformacion').modal({ show: true });
+                        elementId.value = "true";
+                    }
+
+                });--%>
+            </script>
     </ContentTemplate>
 </asp:UpdatePanel>
 

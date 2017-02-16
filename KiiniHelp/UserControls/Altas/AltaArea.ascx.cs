@@ -83,8 +83,9 @@ namespace KiiniHelp.UserControls.Altas
                     throw new Exception("Debe especificar una descripción");
                 Area area = new Area();
                 area.Descripcion = txtDescripcionAreas.Text.Trim();
-                if (Session["ImagenArea"].ToString() != string.Empty)
-                    area.Imagen = BusinessFile.Imagenes.ImageToByteArray(Session["ImagenArea"].ToString());
+                if (Session["ImagenArea"] != null)
+                    if (Session["ImagenArea"].ToString() != string.Empty)
+                        area.Imagen = BusinessFile.Imagenes.ImageToByteArray(Session["ImagenArea"].ToString());
                 //TODO: Cambiar propiedad por valor de control
                 area.Habilitado = true;
                 if (EsAlta)

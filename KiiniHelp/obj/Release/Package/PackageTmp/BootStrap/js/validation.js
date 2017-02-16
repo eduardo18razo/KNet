@@ -25,6 +25,7 @@ function ValidaRfc(rfcStr) {
 
 
 function ValidaCampo(objeto, tipo) {
+    debugger;
     var longitudValor = objeto.value.length + 1;
     var subCadena = String.fromCharCode(window.event.keyCode).toUpperCase();
     var tCadena = objeto.value;
@@ -34,10 +35,10 @@ function ValidaCampo(objeto, tipo) {
     //alert("Codigo:" + window.event.keyCode)
 
     var cadena = "";
-    var cadStr = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ/-$%.,() ';
+    var cadStr = '0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ/-$%.,() ';
     switch (tipo) {
         case 1:  //Letras			    
-            cadStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ. ';
+            cadStr = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ. ';
             break;
         case 2: //numeros
             cadStr = "0123456789";
@@ -91,10 +92,10 @@ function ValidaCampo(objeto, tipo) {
             }
         }
     }
-
+    //|| (window.event.keyCode == 209) || (window.event.keyCode == 241)
     if (longitudValor > 0) {
         for (i = 1; i <= cadStr.length; i++) {
-            if ((cadStr.substring(i, i - 1) == subCadena) || (window.event.keyCode == 209) || (window.event.keyCode == 241)) {
+            if ((cadStr.substring(i, i - 1) == subCadena)) {
                 cadena = cadStr.substring(i, i - 1);
 
                 if ((window.event.keyCode == 241) && ((tipo == 2) || (tipo == 4))) {

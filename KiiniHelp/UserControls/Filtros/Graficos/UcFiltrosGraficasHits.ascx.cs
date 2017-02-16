@@ -278,7 +278,7 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
         {
             try
             {
-                btnFiltroVip.CssClass = ucFiltroVip.VipSeleccionado != null ? "btn btn-success" : "btn btn-primary";
+                btnFiltroVip.CssClass = ucFiltroVip.VipSeleccionado.Count > 0 ? "btn btn-success" : "btn btn-primary";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalFiltroVip\");", true);
             }
             catch (Exception ex)
@@ -295,7 +295,7 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
         {
             try
             {
-                btnFiltroVip.CssClass = ucFiltroVip.VipSeleccionado != null ? "btn btn-success" : "btn btn-primary";
+                btnFiltroVip.CssClass = ucFiltroVip.VipSeleccionado.Count > 0 ? "btn btn-success" : "btn btn-primary";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalFiltroVip\");", true);
             }
             catch (Exception ex)

@@ -33,17 +33,16 @@ namespace KiiniHelp.UserControls.Filtros.Componentes
         {
             get
             {
-                if(rptGpoSeleccionado.Items.Count<= 0)
+                if (rptGpoSeleccionado.Items.Count <= 0)
                     throw new Exception("Debe seleccionar un grupo");
                 return (from RepeaterItem item in rptGpoSeleccionado.Items select int.Parse(((Label)item.FindControl("lblId")).Text)).ToList();
             }
-            set { }
         }
         private void LlenaGrupos()
         {
             try
             {
-                rptGpos.DataSource = _servicioGrupoUsuario.ObtenerGruposByIdUsuario(((Usuario)Session["UserData"]).Id, false).Where(w=>w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Usuario);
+                rptGpos.DataSource = _servicioGrupoUsuario.ObtenerGruposByIdUsuario(((Usuario)Session["UserData"]).Id, false).Where(w => w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Usuario);
                 rptGpos.DataBind();
             }
             catch (Exception e)
@@ -214,6 +213,7 @@ namespace KiiniHelp.UserControls.Filtros.Componentes
         {
             try
             {
+                var valida = GruposSeleccionados;
                 if (OnCancelarModal != null)
                     OnCancelarModal();
             }

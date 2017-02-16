@@ -68,14 +68,14 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubRol)
+        public SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubGrupo)
         {
             SubGrupoUsuario result = new SubGrupoUsuario();
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.SubGrupoUsuario.SingleOrDefault(s => s.IdGrupoUsuario == idGrupoUsuario && s.IdSubRol == idSubRol);
+                result = db.SubGrupoUsuario.SingleOrDefault(s => s.IdGrupoUsuario == idGrupoUsuario && s.Id == idSubGrupo);
                 if (result != null)
                 {
                     db.LoadProperty(result, "SubRol");

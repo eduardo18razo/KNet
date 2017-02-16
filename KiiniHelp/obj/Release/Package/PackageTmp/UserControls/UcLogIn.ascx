@@ -30,7 +30,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="txtUsuario">Usuario</label>
                 <div class="col-sm-10">
-                    <asp:TextBox class="form-control obligatorio" ID="txtUsuario" placeholder="UserName" runat="server" Style="text-transform: none"></asp:TextBox>
+                    <asp:TextBox class="form-control obligatorio" ID="txtUsuario" placeholder="UserName" runat="server" Style="text-transform: none" autofocus="autofocus"></asp:TextBox>
                 </div>
             </div>
             <div class="form-group">
@@ -47,7 +47,7 @@
             </div>
             <div class="form-group">
                 <asp:CustomValidator ErrorMessage="" OnServerValidate="OnServerValidate" runat="server" />
-                <cc1:CaptchaControl ID="Captcha1" runat="server" CaptchaBackgroundNoise="Low" CaptchaLength="6" CssClass="col-sm-2"
+                <cc1:CaptchaControl ID="Captcha1" runat="server" CaptchaBackgroundNoise="Low" CaptchaLength="4" CssClass="col-sm-2"
                     CaptchaHeight="60" CaptchaWidth="200" CaptchaMinTimeout="5" CaptchaMaxTimeout="240"
                     FontColor="#D20B0C" NoiseColor="#B1B1B1" />
             </div>

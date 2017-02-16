@@ -29,6 +29,7 @@
         </asp:ScriptManager>
         <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
+                <asp:Timer runat="server" ID="tmpSendNotificacion" OnTick="tmpSendNotificacion_OnTick" Interval="60000" Enabled="False"/>
                 <header class="" id="panelAlertaGeneral" runat="server" visible="False" style="width: 600px; margin: 0 auto">
                     <div class="alert alert-danger">
                         <div>
@@ -80,7 +81,7 @@
                                             <asp:TextBox runat="server" CssClass="form-control" Text='<%# Eval("Numero") %>' ID="txtNumeroEdit" ReadOnly="True" onkeypress="return ValidaCampo(this,2)" MaxLength="10" />
                                         </div>
                                         <asp:Button runat="server" Text="Cambiar Numero" CssClass="btn btn-sm btn-primary" ID="btnChangeNumber" CommandArgument="0" OnClick="btnChangeNumber_OnClick" />
-                                        <asp:Button runat="server" Text="Reenviar Codigo" CssClass="btn btn-sm btn-primary" ID="btnSendNotification" OnClick="btnSendNotification_OnClick" />
+                                        <asp:Button runat="server" Text="Enviar Codigo" CssClass="btn btn-sm btn-primary" ID="btnSendNotification" OnClick="btnSendNotification_OnClick" />
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>

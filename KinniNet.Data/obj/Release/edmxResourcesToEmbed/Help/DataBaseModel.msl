@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="KiiniNet_v2ModelStoreContainer" CdmEntityContainer="connection">
     <EntitySetMapping Name="Campus">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.Campus">
@@ -541,15 +541,6 @@
           <ScalarProperty Name="IdSla" ColumnName="IdSla" />
           <ScalarProperty Name="IdMascara" ColumnName="IdMascara" />
           <ScalarProperty Name="IdArbolAcceso" ColumnName="IdArbolAcceso" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Area">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.Area">
-        <MappingFragment StoreEntitySet="Area">
-          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1273,6 +1264,16 @@
           <ScalarProperty Name="Obligatorio" ColumnName="Obligatorio" />
           <ScalarProperty Name="Correo" ColumnName="Correo" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Area">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.Area">
+        <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

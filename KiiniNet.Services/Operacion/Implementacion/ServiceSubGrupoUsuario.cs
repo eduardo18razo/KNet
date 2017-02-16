@@ -38,13 +38,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
-        public SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubRol)
+        public SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubGrupo)
         {
             try
             {
                 using (BusinessSubGrupoUsuario negocio = new BusinessSubGrupoUsuario())
                 {
-                    return negocio.ObtenerSubGrupoUsuario(idGrupoUsuario, idSubRol);
+                    return negocio.ObtenerSubGrupoUsuario(idGrupoUsuario, idSubGrupo);
                 }
             }
             catch (Exception ex)

@@ -109,7 +109,6 @@ namespace KiiniHelp.UserControls.Seleccion
             { HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableMantenimientoEmpleadoUbicacion, value); }
         }
 
-
         public bool OrganizacionEmpleado
         {
             get { return divOrganizacionEmpleado.Visible; }
@@ -357,7 +356,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         if (visible)
                             Metodos.LlenaComboCatalogo(ddlUsuarioProveedor, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
                         break;
-                    
+
                 }
             }
             catch (Exception e)
@@ -539,7 +538,7 @@ namespace KiiniHelp.UserControls.Seleccion
                 foreach (GrupoUsuarioInventarioArbol gpo in value)
                 {
                     if (gpo.SubGrupoUsuario != null)
-                        AsignarGrupo(gpo.GrupoUsuario, gpo.IdRol, gpo.SubGrupoUsuario.IdSubRol);
+                        AsignarGrupo(gpo.GrupoUsuario, gpo.IdRol, gpo.SubGrupoUsuario.Id);
                     else
                         AsignarGrupo(gpo.GrupoUsuario, gpo.IdRol, null);
                 }
@@ -666,7 +665,7 @@ namespace KiiniHelp.UserControls.Seleccion
                 {
                     foreach (ListItem item in chklbxSubRoles.Items.Cast<ListItem>().Where(item => item.Selected))
                     {
-                        AsignarGrupo(grupoUsuario, idRol, int.Parse(item.Value));
+                        AsignarGrupo(grupoUsuario, idRol, grupoUsuario.SubGrupoUsuario.First(w => w.IdSubRol == int.Parse(item.Value)).Id);
                     }
                 }
 
@@ -981,6 +980,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         Label lblIdGrupoUsuario = (Label)rptUsuarioGrupo.Items[index].FindControl("lblIdGrupoUsuario");
                         Label lblIdSubGrupoUsuario = (Label)rptUsuarioGrupo.Items[index].FindControl("lblIdSubGrupo");
                         List<UsuarioGrupo> lst = (List<UsuarioGrupo>)Session["UsuarioGrupo"];
+
                         if (lblIdSubGrupoUsuario.Text != string.Empty)
                             lst.Remove(lst.Single(s => s.IdGrupoUsuario == int.Parse(lblIdGrupoUsuario.Text) && s.IdSubGrupoUsuario == int.Parse(lblIdSubGrupoUsuario.Text)));
                         else

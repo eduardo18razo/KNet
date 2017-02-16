@@ -15,6 +15,6 @@ namespace KiiniNet.Services.Operacion.Interface
         List<SubGrupoUsuario> ObtenerSubGruposUsuarioByIdGrupo(int idGrupoUsuario);
 
         [OperationContract]
-        SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubRol);
+        SubGrupoUsuario ObtenerSubGrupoUsuario(int idGrupoUsuario, int idSubGrupo);
     }
 }

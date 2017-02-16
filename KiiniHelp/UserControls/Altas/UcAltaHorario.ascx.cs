@@ -39,6 +39,7 @@ namespace KiiniHelp.UserControls.Altas
             {
                 hfEsAlta.Value = value.ToString();
                 Session["NuevoHorario"] = null;
+                LlenaCombo();
             }
         }
 
@@ -126,7 +127,6 @@ namespace KiiniHelp.UserControls.Altas
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
-                    LlenaCombo();
                     chklbxDias.Items.Add(new ListItem("TODOS", "99"));
                     chklbxDias.Items.Add(new ListItem("LUNES", "1"));
                     chklbxDias.Items.Add(new ListItem("MARTES", "2"));
@@ -350,7 +350,14 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                if (chklbxDias.Items.Cast<ListItem>().Any(item => item.Selected && item.Value == "99"))
+                if (chklbxDias.Items.Cast<ListItem>().Any(item => !item.Selected && item.Value == "99"))
+                {
+                    foreach (ListItem dia in chklbxDias.Items)
+                    {
+                        dia.Selected = false;
+                    }
+                }
+                else if (chklbxDias.Items.Cast<ListItem>().Any(item => item.Selected && item.Value == "99"))
                 {
                     foreach (ListItem dia in chklbxDias.Items)
                     {
@@ -358,15 +365,12 @@ namespace KiiniHelp.UserControls.Altas
                     }
                 }
 
-                if (chklbxDias.Items.Cast<ListItem>().Any(item => item.Selected && item.Value == "99") && chklbxDias.Items.Cast<ListItem>().Any(item => !item.Selected))
-                {
-                    ListItem item = chklbxDias.Items.Cast<ListItem>().SingleOrDefault(s => s.Value == "99");
-                    if (item != null)
-                        item.Selected = false;
-                }
-
-
-
+                //if (chklbxDias.Items.Cast<ListItem>().Any(item => item.Selected && item.Value == "99") && chklbxDias.Items.Cast<ListItem>().Any(item => !item.Selected))
+                //{
+                //    ListItem item = chklbxDias.Items.Cast<ListItem>().SingleOrDefault(s => s.Value == "99");
+                //    if (item != null)
+                //        item.Selected = false;
+                //}
             }
             catch (Exception ex)
             {

@@ -144,39 +144,39 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 int? idTipoUsuario = null;
-                int? idHolding = null;
-                int? idCompania = null;
-                int? idDireccion = null;
-                int? idSubDireccion = null;
-                int? idGerencia = null;
-                int? idSubGerencia = null;
-                int? idJefatura = null;
+                int? idPais = null;
+                int? idCampus = null;
+                int? idTorre = null;
+                int? idPiso = null;
+                int? idZona = null;
+                int? idSubZona = null;
+                int? idSiteRack = null;
                 if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
 
                 if (ddlpais.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    idHolding = int.Parse(ddlpais.SelectedValue);
+                    idPais = int.Parse(ddlpais.SelectedValue);
 
                 if (ddlCampus.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    idCompania = int.Parse(ddlCampus.SelectedValue);
+                    idCampus = int.Parse(ddlCampus.SelectedValue);
 
                 if (ddlTorre.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    idDireccion = int.Parse(ddlTorre.SelectedValue);
+                    idTorre = int.Parse(ddlTorre.SelectedValue);
 
                 if (ddlPiso.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    idSubDireccion = int.Parse(ddlPiso.SelectedValue);
+                    idPiso = int.Parse(ddlPiso.SelectedValue);
 
                 if (ddlZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    idGerencia = int.Parse(ddlZona.SelectedValue);
+                    idZona = int.Parse(ddlZona.SelectedValue);
 
                 if (ddlSubZona.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    idSubGerencia = int.Parse(ddlSubZona.SelectedValue);
+                    idSubZona = int.Parse(ddlSubZona.SelectedValue);
 
                 if (ddlSiteRack.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    idJefatura = int.Parse(ddlSiteRack.SelectedValue);
-                List<Ubicacion> lstUbicaciones = _servicioUbicacion.ObtenerUbicaciones(idTipoUsuario, idHolding, idCompania, idDireccion, idSubDireccion, idGerencia, idSubGerencia, idJefatura);
+                    idSiteRack = int.Parse(ddlSiteRack.SelectedValue);
+                List<Ubicacion> lstUbicaciones = _servicioUbicacion.ObtenerUbicaciones(idTipoUsuario, idPais, idCampus, idTorre, idPiso, idZona, idSubZona, idSiteRack);
                 if (Modal)
-                    lstUbicaciones = lstUbicaciones.Where(w => w.Habilitado == !Modal).ToList();
+                    lstUbicaciones = lstUbicaciones.Where(w => w.Habilitado == Modal).ToList();
 
                 rptResultados.DataSource = lstUbicaciones;
                 rptResultados.DataBind();
@@ -1136,6 +1136,7 @@ namespace KiiniHelp.UserControls.Consultas
                             break;
                     }
                 }
+                txtFiltroDecripcion.Text = string.Empty;
                 LimpiaCatalogo();
                 LlenaUbicaciones();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoUbicacion\");", true);

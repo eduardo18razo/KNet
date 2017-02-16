@@ -35,7 +35,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idGrupoUsuario" type="xs:int" />
-        <xs:element minOccurs="0" name="idSubRol" type="xs:int" />
+        <xs:element minOccurs="0" name="idSubGrupo" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
