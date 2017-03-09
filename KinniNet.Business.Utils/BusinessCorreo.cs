@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Net;
 using System.Net.Configuration;
 using System.Net.Mail;
+using MailMessage = System.Net.Mail.MailMessage;
 
 namespace KinniNet.Business.Utils
 {

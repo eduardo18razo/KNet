@@ -77,6 +77,10 @@ namespace KiiniNet.Entities.Cat.Operacion
         public virtual List<RespuestaEncuesta> RespuestaEncuesta { get; set; }
         [DataMember]
         public virtual List<PreTicket> PreTicket { get; set; }
+        [DataMember]
+        public virtual List<NotaOpcionUsuario> NotaOpcionUsuario { get; set; }
+        [DataMember]
+        public virtual List<NotaOpcionGrupo> NotaOpcionGrupo { get; set; }
 
 
     }

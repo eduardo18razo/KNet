@@ -23,6 +23,9 @@ namespace KiiniHelp.ServiceSistemaTipoUsuario {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoUsuario/ObtenerTiposUsuario", ReplyAction="http://tempuri.org/IServiceTipoUsuario/ObtenerTiposUsuarioResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoUsuario> ObtenerTiposUsuario(bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoUsuario/ObtenerTipoUsuarioById", ReplyAction="http://tempuri.org/IServiceTipoUsuario/ObtenerTipoUsuarioByIdResponse")]
+        KiiniNet.Entities.Cat.Sistema.TipoUsuario ObtenerTipoUsuarioById(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -62,6 +65,10 @@ namespace KiiniHelp.ServiceSistemaTipoUsuario {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Sistema.TipoUsuario> ObtenerTiposUsuario(bool insertarSeleccion) {
             return base.Channel.ObtenerTiposUsuario(insertarSeleccion);
+        }
+        
+        public KiiniNet.Entities.Cat.Sistema.TipoUsuario ObtenerTipoUsuarioById(int id) {
+            return base.Channel.ObtenerTipoUsuarioById(id);
         }
     }
 }

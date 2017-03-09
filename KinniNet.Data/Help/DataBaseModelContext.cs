@@ -66,6 +66,7 @@ namespace KinniNet.Data.Help
                 _tipoCorreo = CreateObjectSet<TipoCorreo>();
                 _tipoLink = CreateObjectSet<TipoLink>();
                 _canal = CreateObjectSet<Canal>();
+                _tipoNota = CreateObjectSet<TipoNota>();
 
                 //Parametros
                 _subRolEscalacionPermitida = CreateObjectSet<SubRolEscalacionPermitida>();
@@ -151,6 +152,11 @@ namespace KinniNet.Data.Help
                 _preTicket = CreateObjectSet<PreTicket>();
                 _horario = CreateObjectSet<Horario>();
                 _horarioDetalle = CreateObjectSet<HorarioDetalle>();
+                _notaGeneral = CreateObjectSet<NotaGeneral>();
+                _notaGeneralGrupo = CreateObjectSet<NotaGeneralGrupo>();
+                _notaOpcionUsuario = CreateObjectSet<NotaOpcionUsuario>();
+                _notaOpcionGrupo = CreateObjectSet<NotaOpcionGrupo>();
+
 
 
                 _puesto = CreateObjectSet<Puesto>();
@@ -554,6 +560,35 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<NotaGeneral> NotaGeneral
+        {
+            get
+            {
+                return _notaGeneral;
+            }
+        }
+        public ObjectSet<NotaGeneralGrupo> NotaGeneralGrupo
+        {
+            get
+            {
+                return _notaGeneralGrupo;
+            }
+        }
+        public ObjectSet<NotaOpcionUsuario> NotaOpcionUsuario
+        {
+            get
+            {
+                return _notaOpcionUsuario;
+            }
+        }
+        public ObjectSet<NotaOpcionGrupo> NotaOpcionGrupo
+        {
+            get
+            {
+                return _notaOpcionGrupo;
+            }
+        }
+
 
 
         private readonly ObjectSet<Usuario> _usuario;
@@ -599,6 +634,10 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<SmsService> _smsService;
         private readonly ObjectSet<PreguntaReto> _preguntaReto;
         private readonly ObjectSet<PreTicket> _preTicket;
+        private readonly ObjectSet<NotaGeneral> _notaGeneral;
+        private readonly ObjectSet<NotaGeneralGrupo> _notaGeneralGrupo;
+        private readonly ObjectSet<NotaOpcionUsuario> _notaOpcionUsuario;
+        private readonly ObjectSet<NotaOpcionGrupo> _notaOpcionGrupo;
 
         #region Mascara
         public ObjectSet<Mascara> Mascara
@@ -871,6 +910,14 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<TipoNota> TipoNota
+        {
+            get
+            {
+                return _tipoNota;
+            }
+        }
+
 
         private readonly ObjectSet<TipoUsuario> _tipoUsuario;
         private readonly ObjectSet<Pais> _pais;
@@ -906,6 +953,7 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<Canal> _canal;
         private readonly ObjectSet<Horario> _horario;
         private readonly ObjectSet<HorarioDetalle> _horarioDetalle;
+        private readonly ObjectSet<TipoNota> _tipoNota;
 
         #endregion Systema
 

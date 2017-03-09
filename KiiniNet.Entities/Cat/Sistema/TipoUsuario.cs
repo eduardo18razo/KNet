@@ -21,6 +21,8 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public bool EsResidente { get; set; }
         [DataMember]
+        public bool EsMoral { get; set; }
+        [DataMember]
         public int NumeroCorreos { get; set; }
         [DataMember]
         public int CorreosObligatorios { get; set; }

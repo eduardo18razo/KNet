@@ -393,6 +393,7 @@
     <EntitySetMapping Name="TipoUsuario">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.TipoUsuario">
         <MappingFragment StoreEntitySet="TipoUsuario">
+          <ScalarProperty Name="EsMoral" ColumnName="EsMoral" />
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
           <ScalarProperty Name="CorreosObligatorios" ColumnName="CorreosObligatorios" />
           <ScalarProperty Name="NumeroCorreos" ColumnName="NumeroCorreos" />
@@ -435,15 +436,6 @@
           <ScalarProperty Name="IdSubGrupoUsuario" ColumnName="IdSubGrupoUsuario" />
           <ScalarProperty Name="IdGrupoUsuario" ColumnName="IdGrupoUsuario" />
           <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UsuarioRol">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.UsuarioRol">
-        <MappingFragment StoreEntitySet="UsuarioRol">
-          <ScalarProperty Name="IdRolTipoUsuario" ColumnName="IdRolTipoUsuario" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -812,6 +804,7 @@
     <EntitySetMapping Name="Estado">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.Estado">
         <MappingFragment StoreEntitySet="Estado">
+          <ScalarProperty Name="IdPais" ColumnName="IdPais" />
           <ScalarProperty Name="RegionCode" ColumnName="RegionCode" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1271,9 +1264,83 @@
     <EntitySetMapping Name="Area">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.Area">
         <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="Extension" ColumnName="Extension" />
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
           <ScalarProperty Name="Imagen" ColumnName="Imagen" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsuarioRol">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.UsuarioRol">
+        <MappingFragment StoreEntitySet="UsuarioRol">
+          <ScalarProperty Name="IdRolTipoUsuario" ColumnName="IdRolTipoUsuario" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoNota">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.TipoNota">
+        <MappingFragment StoreEntitySet="TipoNota">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotaGeneral">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.NotaGeneral">
+        <MappingFragment StoreEntitySet="NotaGeneral">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Aprobada" ColumnName="Aprobada" />
+          <ScalarProperty Name="Compartida" ColumnName="Compartida" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotaGeneralGrupo">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.NotaGeneralGrupo">
+        <MappingFragment StoreEntitySet="NotaGeneralGrupo">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IdGrupoUsuario" ColumnName="IdGrupoUsuario" />
+          <ScalarProperty Name="IdNotaGeneral" ColumnName="IdNotaGeneral" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotaOpcionGrupo">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.NotaOpcionGrupo">
+        <MappingFragment StoreEntitySet="NotaOpcionGrupo">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Aprobada" ColumnName="Aprobada" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdArbolAcceso" ColumnName="IdArbolAcceso" />
+          <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotaOpcionUsuario">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.NotaOpcionUsuario">
+        <MappingFragment StoreEntitySet="NotaOpcionUsuario">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdArbolAcceso" ColumnName="IdArbolAcceso" />
+          <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

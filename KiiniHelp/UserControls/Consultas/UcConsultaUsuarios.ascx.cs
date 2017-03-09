@@ -81,8 +81,13 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 UcDetalleUsuario1.FromModal = true;
                 UcDetalleUsuario1.OnCancelarModal += UcDetalleUsuario1OnOnCancelarModal;
-                UcAltaUsuario.OnAceptarModal += UcAltaUsuario_OnAceptarModal;
-                UcAltaUsuario.OnCancelarModal += UcAltaUsuario_OnCancelarModal;
+
+                ucAltaUsuarioMoral.OnAceptarModal += UcAltaUsuarioMoral_OnAceptarModal;
+                ucAltaUsuarioMoral.OnCancelarModal += UcAltaUsuarioMoral_OnCancelarModal;
+
+                //ucAltaUsuarioFisico.OnAceptarModal += UcAltaUsuarioFisico_OnAceptarModal;
+                //ucAltaUsuarioFisico.OnCancelarModal += UcAltaUsuarioFisico_OnCancelarModal;
+
                 if (!IsPostBack)
                 {
                     LlenaCombos();
@@ -99,11 +104,23 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        void UcAltaUsuario_OnCancelarModal()
+        void UcAltaUsuarioMoral_OnAceptarModal()
         {
             try
             {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editUser\");", true);
+                LlenaUsuarios();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalPersonaMoral\");", true);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        void UcAltaUsuarioMoral_OnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalPersonaMoral\");", true);
             }
             catch (Exception ex)
             {
@@ -111,12 +128,24 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        void UcAltaUsuario_OnAceptarModal()
+        void UcAltaUsuarioFisico_OnAceptarModal()
         {
             try
             {
                 LlenaUsuarios();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editUser\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalPersonaFisica\");", true);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        void UcAltaUsuarioFisico_OnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalPersonaFisica\");", true);
             }
             catch (Exception ex)
             {
@@ -192,10 +221,19 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 Usuario user = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(hfId.Value));
-                if(user == null) return;
-                UcAltaUsuario.IdUsuario = user.Id;
-                UcAltaUsuario.Alta = false;
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editUser\");", true);
+                if (user == null) return;
+                //if (user.TipoUsuario.EsMoral)
+                //{
+                ucAltaUsuarioMoral.IdUsuario = user.Id;
+                ucAltaUsuarioMoral.Alta = false;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalPersonaMoral\");", true);
+                //}
+                //else
+                //{
+                //    ucAltaUsuarioFisico.IdUsuario = user.Id;
+                //    ucAltaUsuarioFisico.Alta = false;
+                //    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalPersonaFisica\");", true);
+                //}
             }
             catch (Exception ex)
             {
@@ -212,9 +250,20 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                UcAltaUsuario.Alta = true;
-                UcAltaUsuario.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editUser\");", true);
+                //if (_servicioSistemaTipoUsuario.ObtenerTipoUsuarioById(int.Parse(ddlTipoUsuario.SelectedValue)).EsMoral)
+                //{
+                    ucAltaUsuarioMoral.Alta = true;
+                    ucAltaUsuarioMoral.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalPersonaMoral\");", true);
+                //}
+                //else
+                //{
+                //    ucAltaUsuarioFisico.Alta = true;
+                //    ucAltaUsuarioFisico.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
+                //    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalPersonaFisica\");", true);
+                //}
+
+
             }
             catch (Exception ex)
             {

@@ -6,7 +6,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdTipoUsuario" Type="int" />
-    <Property Name="Descripcion" Type="nvarchar" MaxLength="30" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
     <Property Name="Nivel" Type="int" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
@@ -16,7 +16,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdTipoUsuario" Type="int" />
-    <Property Name="Descripcion" Type="nvarchar" MaxLength="30" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
     <Property Name="Nivel" Type="int" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
@@ -46,6 +46,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Imagen" Type="image" />
+    <Property Name="Extension" Type="nvarchar" MaxLength="5" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="CampoMascara">
@@ -174,6 +175,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPais" Type="int" />
     <Property Name="Descripcion" Type="nvarchar(max)" />
     <Property Name="RegionCode" Type="nvarchar" MaxLength="150" />
   </EntityType>
@@ -529,6 +531,57 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
+  <EntityType Name="NotaGeneral">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoNota" Type="int" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Contenido" Type="nvarchar(max)" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Compartida" Type="bit" />
+    <Property Name="Aprobada" Type="bit" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
+  <EntityType Name="NotaGeneralGrupo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdNotaGeneral" Type="int" Nullable="false" />
+    <Property Name="IdGrupoUsuario" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NotaOpcionGrupo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoNota" Type="int" />
+    <Property Name="IdArbolAcceso" Type="int" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Contenido" Type="nvarchar(max)" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Aprobada" Type="bit" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
+  <EntityType Name="NotaOpcionUsuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoNota" Type="int" />
+    <Property Name="IdArbolAcceso" Type="int" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Contenido" Type="nvarchar(max)" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
   <EntityType Name="Organizacion">
     <Key>
       <PropertyRef Name="Id" />
@@ -634,7 +687,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdTipoUsuario" Type="int" />
-    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="PreguntaReto">
@@ -1037,6 +1090,14 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
+  <EntityType Name="TipoNota">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habilitado" Type="bit" />
+  </EntityType>
   <EntityType Name="TipoNotificacion">
     <Key>
       <PropertyRef Name="Id" />
@@ -1062,6 +1123,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="EsResidente" Type="bit" Nullable="false" />
+    <Property Name="EsMoral" Type="bit" Nullable="false" />
     <Property Name="NumeroCorreos" Type="int" Nullable="false" />
     <Property Name="CorreosObligatorios" Type="int" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
@@ -1407,6 +1469,18 @@
       </Principal>
       <Dependent Role="EncuestaPregunta">
         <PropertyRef Name="IdEncuesta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Estado_Pais">
+    <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+    <End Role="Estado" Type="Self.Estado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Estado">
+        <PropertyRef Name="IdPais" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2115,6 +2189,126 @@
       </Principal>
       <Dependent Role="Nivel7">
         <PropertyRef Name="IdTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotaGeneral_TipoNota">
+    <End Role="TipoNota" Type="Self.TipoNota" Multiplicity="0..1" />
+    <End Role="NotaGeneral" Type="Self.NotaGeneral" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoNota">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotaGeneral">
+        <PropertyRef Name="IdTipoNota" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotaGeneral_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="NotaGeneral" Type="Self.NotaGeneral" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotaGeneral">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotaGeneralGrupo_GrupoUsuario">
+    <End Role="GrupoUsuario" Type="Self.GrupoUsuario" Multiplicity="1" />
+    <End Role="NotaGeneralGrupo" Type="Self.NotaGeneralGrupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotaGeneralGrupo">
+        <PropertyRef Name="IdGrupoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotaGeneralGrupo_NotaGeneral">
+    <End Role="NotaGeneral" Type="Self.NotaGeneral" Multiplicity="1" />
+    <End Role="NotaGeneralGrupo" Type="Self.NotaGeneralGrupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NotaGeneral">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotaGeneralGrupo">
+        <PropertyRef Name="IdNotaGeneral" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotaOpcionGrupo_ArbolAcceso">
+    <End Role="ArbolAcceso" Type="Self.ArbolAcceso" Multiplicity="0..1" />
+    <End Role="NotaOpcionGrupo" Type="Self.NotaOpcionGrupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArbolAcceso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotaOpcionGrupo">
+        <PropertyRef Name="IdArbolAcceso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotaOpcionGrupo_TipoNota">
+    <End Role="TipoNota" Type="Self.TipoNota" Multiplicity="0..1" />
+    <End Role="NotaOpcionGrupo" Type="Self.NotaOpcionGrupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoNota">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotaOpcionGrupo">
+        <PropertyRef Name="IdTipoNota" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotaOpcionGrupo_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="NotaOpcionGrupo" Type="Self.NotaOpcionGrupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotaOpcionGrupo">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotaOpcionUsuario_ArbolAcceso">
+    <End Role="ArbolAcceso" Type="Self.ArbolAcceso" Multiplicity="0..1" />
+    <End Role="NotaOpcionUsuario" Type="Self.NotaOpcionUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArbolAcceso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotaOpcionUsuario">
+        <PropertyRef Name="IdArbolAcceso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotaOpcionUsuario_TipoNota">
+    <End Role="TipoNota" Type="Self.TipoNota" Multiplicity="0..1" />
+    <End Role="NotaOpcionUsuario" Type="Self.NotaOpcionUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoNota">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotaOpcionUsuario">
+        <PropertyRef Name="IdTipoNota" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NotaOpcionUsuario_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="NotaOpcionUsuario" Type="Self.NotaOpcionUsuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NotaOpcionUsuario">
+        <PropertyRef Name="IdUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3466,6 +3660,10 @@
     <EntitySet Name="Nivel7" EntityType="Self.Nivel7" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NivelOrganizacion" EntityType="Self.NivelOrganizacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NivelUbicacion" EntityType="Self.NivelUbicacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotaGeneral" EntityType="Self.NotaGeneral" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotaGeneralGrupo" EntityType="Self.NotaGeneralGrupo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotaOpcionGrupo" EntityType="Self.NotaOpcionGrupo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotaOpcionUsuario" EntityType="Self.NotaOpcionUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Organizacion" EntityType="Self.Organizacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ParametroCorreo" EntityType="Self.ParametroCorreo" Schema="dbo" store:Type="Tables" />
@@ -3511,6 +3709,7 @@
     <EntitySet Name="TipoGrupo" EntityType="Self.TipoGrupo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoInfConsulta" EntityType="Self.TipoInfConsulta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoLink" EntityType="Self.TipoLink" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoNota" EntityType="Self.TipoNota" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoNotificacion" EntityType="Self.TipoNotificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoTelefono" EntityType="Self.TipoTelefono" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
@@ -3602,6 +3801,10 @@
     <AssociationSet Name="FK_EncuestaPregunta_Encuesta" Association="Self.FK_EncuestaPregunta_Encuesta">
       <End Role="Encuesta" EntitySet="Encuesta" />
       <End Role="EncuestaPregunta" EntitySet="EncuestaPregunta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Estado_Pais" Association="Self.FK_Estado_Pais">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Estado" EntitySet="Estado" />
     </AssociationSet>
     <AssociationSet Name="FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion" Association="Self.FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion">
       <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
@@ -3838,6 +4041,46 @@
     <AssociationSet Name="FK_Nivel7_TipoUsuario" Association="Self.FK_Nivel7_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Nivel7" EntitySet="Nivel7" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotaGeneral_TipoNota" Association="Self.FK_NotaGeneral_TipoNota">
+      <End Role="TipoNota" EntitySet="TipoNota" />
+      <End Role="NotaGeneral" EntitySet="NotaGeneral" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotaGeneral_Usuario" Association="Self.FK_NotaGeneral_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="NotaGeneral" EntitySet="NotaGeneral" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotaGeneralGrupo_GrupoUsuario" Association="Self.FK_NotaGeneralGrupo_GrupoUsuario">
+      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+      <End Role="NotaGeneralGrupo" EntitySet="NotaGeneralGrupo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotaGeneralGrupo_NotaGeneral" Association="Self.FK_NotaGeneralGrupo_NotaGeneral">
+      <End Role="NotaGeneral" EntitySet="NotaGeneral" />
+      <End Role="NotaGeneralGrupo" EntitySet="NotaGeneralGrupo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotaOpcionGrupo_ArbolAcceso" Association="Self.FK_NotaOpcionGrupo_ArbolAcceso">
+      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+      <End Role="NotaOpcionGrupo" EntitySet="NotaOpcionGrupo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotaOpcionGrupo_TipoNota" Association="Self.FK_NotaOpcionGrupo_TipoNota">
+      <End Role="TipoNota" EntitySet="TipoNota" />
+      <End Role="NotaOpcionGrupo" EntitySet="NotaOpcionGrupo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotaOpcionGrupo_Usuario" Association="Self.FK_NotaOpcionGrupo_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="NotaOpcionGrupo" EntitySet="NotaOpcionGrupo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotaOpcionUsuario_ArbolAcceso" Association="Self.FK_NotaOpcionUsuario_ArbolAcceso">
+      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+      <End Role="NotaOpcionUsuario" EntitySet="NotaOpcionUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotaOpcionUsuario_TipoNota" Association="Self.FK_NotaOpcionUsuario_TipoNota">
+      <End Role="TipoNota" EntitySet="TipoNota" />
+      <End Role="NotaOpcionUsuario" EntitySet="NotaOpcionUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NotaOpcionUsuario_Usuario" Association="Self.FK_NotaOpcionUsuario_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="NotaOpcionUsuario" EntitySet="NotaOpcionUsuario" />
     </AssociationSet>
     <AssociationSet Name="FK_Organizacion_Compania" Association="Self.FK_Organizacion_Compania">
       <End Role="Compania" EntitySet="Compania" />

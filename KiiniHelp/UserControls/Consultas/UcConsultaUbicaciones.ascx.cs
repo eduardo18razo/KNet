@@ -216,6 +216,7 @@ namespace KiiniHelp.UserControls.Consultas
                 {
                     return;
                 }
+                btnNew.Text = alias.Single(s => s.Nivel == 1).Descripcion;
                 lblNivel1.Text = alias.Single(s => s.Nivel == 1).Descripcion;
                 lblNivel2.Text = alias.Single(s => s.Nivel == 2).Descripcion;
                 lblNivel3.Text = alias.Single(s => s.Nivel == 3).Descripcion;
@@ -307,7 +308,8 @@ namespace KiiniHelp.UserControls.Consultas
                 else if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
                 {
                     LlenaComboUbicacion(IdTipoUsuario);
-                    LlenaUbicaciones();
+                    if (IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.Empleado || IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.Cliente || IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.Proveedor)
+                        LlenaUbicaciones();
                     btnNew.Visible = true;
                     //if (ddlHolding.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     //    ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
@@ -342,7 +344,8 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSubZona);
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlCampus, _servicioUbicacion.ObtenerCampus(idTipoUsuario, id, true));
-                LlenaUbicaciones();
+                if (idTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.Empleado || idTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.Cliente || idTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.Proveedor)
+                    LlenaUbicaciones();
                 AliasUbicacion alias;
                 string nivel;
                 if (ddlpais.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
@@ -393,7 +396,8 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSubZona);
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlTorre, _servicioUbicacion.ObtenerTorres(IdTipoUsuario, id, true));
-                LlenaUbicaciones();
+                if (int.Parse(ddlTipoUsuario.SelectedValue) == (int)BusinessVariables.EnumTiposUsuario.Empleado || int.Parse(ddlTipoUsuario.SelectedValue) == (int)BusinessVariables.EnumTiposUsuario.Cliente || int.Parse(ddlTipoUsuario.SelectedValue) == (int)BusinessVariables.EnumTiposUsuario.Proveedor)
+                    LlenaUbicaciones();
                 AliasUbicacion alias;
                 string nivel;
                 if (ddlCampus.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
@@ -438,7 +442,8 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlSubZona);
                 Metodos.LimpiarCombo(ddlSiteRack);
                 FiltraCombo((DropDownList)sender, ddlPiso, _servicioUbicacion.ObtenerPisos(idTipoUsuario, id, true));
-                LlenaUbicaciones();
+                if (idTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.Empleado || idTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.Cliente || idTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.Proveedor)
+                    LlenaUbicaciones();
                 AliasUbicacion alias;
                 string nivel;
                 if (ddlTorre.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)

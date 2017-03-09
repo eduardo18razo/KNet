@@ -65,11 +65,11 @@ namespace KiiniHelp
         {
             try
             {
-                HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-                if (myCookie == null)
-                {
-                    Response.Redirect(ResolveUrl("~/Default.aspx"));
-                }
+                //HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                //if (myCookie == null)
+                //{
+                //    Response.Redirect(ResolveUrl("~/Default.aspx"));
+                //}
 
                 if (Session["UserData"] != null && HttpContext.Current.Request.Url.Segments[HttpContext.Current.Request.Url.Segments.Count() - 1] != "FrmCambiarContrasena.aspx")
                     if (_servicioSeguridad.CaducaPassword(((Usuario)Session["UserData"]).Id))

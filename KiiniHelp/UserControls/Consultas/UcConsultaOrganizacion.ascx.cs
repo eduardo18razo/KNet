@@ -339,6 +339,7 @@ namespace KiiniHelp.UserControls.Consultas
                 {
                     return;
                 }
+                btnNew.Text = alias.Single(s => s.Nivel == 1).Descripcion;
                 lblNivel1.Text = alias.Single(s => s.Nivel == 1).Descripcion;
                 lblNivel2.Text = alias.Single(s => s.Nivel == 2).Descripcion;
                 lblNivel3.Text = alias.Single(s => s.Nivel == 3).Descripcion;
@@ -352,7 +353,7 @@ namespace KiiniHelp.UserControls.Consultas
                 throw new Exception(e.Message);
             }
         }
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -388,6 +389,8 @@ namespace KiiniHelp.UserControls.Consultas
                 Metodos.LimpiarCombo(ddlJefatura);
                 txtFiltroDecripcion.Text = string.Empty;
                 SetAlias();
+                AliasOrganizacion alias;
+                string nivel;
                 if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     LimpiarOrganizaciones();
@@ -401,12 +404,19 @@ namespace KiiniHelp.UserControls.Consultas
                 }
                 else if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos && int.Parse(ddlTipoUsuario.SelectedValue) != (int)BusinessVariables.EnumTiposUsuario.Empleado)
                 {
+                    alias = _servicioParametros.ObtenerAliasOrganizacion(int.Parse(ddlTipoUsuario.SelectedValue)).SingleOrDefault(w => w.Nivel == 1);
+                    nivel = alias != null ? alias.Descripcion : "NIVEL 1";
+                    btnNew.Visible = true;
+                    btnNew.CommandName = nivel;
+                    btnNew.Text = nivel;
+                    btnNew.CommandArgument = "1";
+
                     LlenaComboOrganizacion(IdTipoUsuario);
                     btnNew.Visible = true;
-                    btnNew.CommandName = "Holding";
-                    btnNew.Text = "Agregar Holding";
-                    btnNew.CommandArgument = "1";
-                    if (ddlHolding.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione) 
+                    //btnNew.CommandName = "Holding";
+                    //btnNew.Text = "Agregar Holding";
+                    //btnNew.CommandArgument = "1";
+                    if (ddlHolding.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                         ddlHolding_OnSelectedIndexChanged(ddlHolding, null);
                 }
                 else
@@ -431,7 +441,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                if (((DropDownList) sender).SelectedValue == "")
+                if (((DropDownList)sender).SelectedValue == "")
                     return;
                 int idTipoUsuario = IdTipoUsuario;
                 int id = Convert.ToInt32(((DropDownList)sender).SelectedValue);
@@ -765,7 +775,7 @@ namespace KiiniHelp.UserControls.Consultas
                     ddlSubGerencia.SelectedValue = org.IdSubGerencia.ToString();
                     ddlSubGerencia_OnSelectedIndexChanged(ddlSubGerencia, null);
                 }
-                if(org.Jefatura != null)
+                if (org.Jefatura != null)
                 {
                     ddlJefatura.SelectedValue = org.IdJefatura.ToString();
                     ddlJefatura_OnSelectedIndexChanged(ddlJefatura, null);

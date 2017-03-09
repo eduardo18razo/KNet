@@ -49,7 +49,6 @@
         <EntityTypeShape EntityType="KiiniNet_v2Model.Torre" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Ubicacion" Width="1.5" PointX="8.25" PointY="52.625" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.UsuarioGrupo" Width="1.5" PointX="15.75" PointY="49.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.UsuarioRol" Width="1.5" PointX="12.75" PointY="48.125" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Zona" Width="1.5" PointX="3" PointY="27.25" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Campus_TipoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Domicilio_Campus" />
@@ -90,7 +89,6 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_RespuestaTipoEncuesta_TipoEncuesta" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolTipoGrupo_TipoGrupo" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolTipoUsuario_TipoUsuario" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioRol_RolTipoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_SiteRack_TipoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ubicacion_SiteRack" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_SubDireccion_TipoUsuario" />
@@ -116,7 +114,6 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_Usuario_TipoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Usuario_Ubicacion" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioGrupo_Usuario" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioRol_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.RolMenu" Width="1.5" PointX="6.375" PointY="29.375" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_Rol" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.HitGrupoUsuario" Width="1.5" PointX="15" PointY="57.875" IsExpanded="true" />
@@ -304,6 +301,25 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_CorreoUsuario_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Area" Width="1.5" PointX="13.375" PointY="12.875" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_ArbolAcceso_Area" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.UsuarioRol" Width="1.5" PointX="55.75" PointY="48" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Estado_Pais" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioRol_RolTipoUsuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioRol_Usuario" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.TipoNota" Width="1.5" PointX="17.375" PointY="7.75" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.NotaGeneral" Width="1.5" PointX="52.75" PointY="29.125" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.NotaGeneralGrupo" Width="1.5" PointX="55" PointY="44.375" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.NotaOpcionGrupo" Width="1.5" PointX="52.75" PointY="33.25" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.NotaOpcionUsuario" Width="1.5" PointX="55.75" PointY="34.25" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionGrupo_ArbolAcceso" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionUsuario_ArbolAcceso" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaGeneralGrupo_GrupoUsuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaGeneral_TipoNota" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaGeneral_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaGeneralGrupo_NotaGeneral" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionGrupo_TipoNota" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionGrupo_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionUsuario_TipoNota" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionUsuario_Usuario" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -266,7 +266,7 @@
                     <ContentTemplate>
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <uc1:uclogin runat="server" id="UcLogIn" />
+                                <uc1:UcLogIn runat="server" id="UcLogIn" />
                             </div>
                         </div>
                     </ContentTemplate>

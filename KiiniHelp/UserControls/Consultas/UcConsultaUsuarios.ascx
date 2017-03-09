@@ -1,6 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaUsuarios.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaUsuarios" %>
 <%@ Register TagPrefix="uc1" TagName="UcDetalleUsuario" Src="~/UserControls/Detalles/UcDetalleUsuario.ascx" %>
-<%@ Register Src="~/UserControls/Altas/UcAltaUsuario.ascx" TagPrefix="uc1" TagName="UcAltaUsuario" %>
+<%@ Register Src="~/UserControls/Altas/Usuarios/UcAltaUsuarioMoral.ascx" TagPrefix="uc1" TagName="UcAltaUsuarioMoral" %>
+
+
+
 
 <div style="height: 100%;">
     <script>
@@ -143,9 +146,9 @@
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td oncontextmenu="ContextMenu()" style="padding: 0; text-align: left; font-size: 10px;" >
+                                            <td oncontextmenu="ContextMenu()" style="padding: 0; text-align: left; font-size: 10px;">
                                                 <asp:LinkButton Style="padding: 0;" runat="server" Text='<%#Eval("NombreCompleto") %>' ID="LinkButton1" OnClick="btnUsuario_OnClick" CommandArgument='<%#Eval("Id") %>' /></td>
-                                            <td oncontextmenu="ContextMenu()" style="padding: 0; text-align: left; font-size: 10px;" ><%# Eval("TipoUsuario.Descripcion")%></td>
+                                            <td oncontextmenu="ContextMenu()" style="padding: 0; text-align: left; font-size: 10px;"><%# Eval("TipoUsuario.Descripcion")%></td>
                                             <td oncontextmenu="ContextMenu()" style="padding: 0; font-size: 10px;" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>
@@ -162,7 +165,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     <%--MODAL DETALLE--%>
-<div class="modal fade" id="modalDetalleUsuario" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal fade" id="modalDetalleUsuario" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <div class="modal-dialog modal-lg">
@@ -176,19 +179,30 @@
 </div>
 
 
-<%--MODAL CATALOGOS--%>
-<div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<%--MODAL Usuarios--%>
+<div class="modal fade" id="modalPersonaMoral" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <asp:UpdatePanel ID="upUser" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <div class="modal-dialog modal-lg" style="width: 1250px; height: 940px; overflow: hidden" >
+            <div class="modal-dialog modal-lg" style="width: 1250px; height: 940px; overflow: hidden">
                 <div class="modal-content">
-                    <uc1:UcAltaUsuario runat="server" ID="UcAltaUsuario" />
+                    <uc1:UcAltaUsuarioMoral runat="server" id="ucAltaUsuarioMoral" />
                 </div>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
 </div>
 
+<%--<div class="modal fade" id="modalPersonaFisica" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div class="modal-dialog modal-lg" style="width: 1250px; height: 940px; overflow: hidden">
+                <div class="modal-content">
+                    <uc1:UcAltaUsuarioFisico runat="server" id="ucAltaUsuarioFisico" />
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+</div>--%>
 
 
 

@@ -133,6 +133,9 @@ namespace KinniNet.Core.Security
                             db.LoadProperty(grupo, "GrupoUsuario");
                             db.LoadProperty(grupo, "SubGrupoUsuario");
                         }
+                        result.Supervisor = db.SubGrupoUsuario.Join(db.UsuarioGrupo, sgu => sgu.Id, ug => ug.IdSubGrupoUsuario, (sgu, ug) => new { sgu, ug })
+                       .Any(@t => @t.sgu.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor && @t.ug.IdUsuario == result.Id);
+
                         var levantaTicket = (from u in db.Usuario
                                              join ug in db.UsuarioGrupo on u.Id equals ug.IdUsuario
                                              join gu in db.GrupoUsuario on ug.IdGrupoUsuario equals gu.Id
@@ -482,7 +485,7 @@ namespace KinniNet.Core.Security
                     }
 
                     result = result.Distinct().ToList();
-                    List<int> areas = new BusinessArea().ObtenerAreasUsuarioByIdRol(idUsuario, idRol, false).Select(s=>s.Id).Distinct().ToList();
+                    List<int> areas = new BusinessArea().ObtenerAreasUsuarioByIdRol(idUsuario, idRol, false).Select(s => s.Id).Distinct().ToList();
                     if (arboles)
                         foreach (Menu menu in result.Where(w => w.Id == (int)BusinessVariables.EnumMenu.Consultas || w.Id == (int)BusinessVariables.EnumMenu.Servicio || w.Id == (int)BusinessVariables.EnumMenu.Incidentes))
                         {

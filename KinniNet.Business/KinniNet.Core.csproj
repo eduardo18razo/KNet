@@ -44,6 +44,7 @@
     <Compile Include="Operacion\BusinessConsultas.cs" />
     <Compile Include="Demonio\BusinessDemonio.cs" />
     <Compile Include="Operacion\BusinessArea.cs" />
+    <Compile Include="Operacion\BusinessNota.cs" />
     <Compile Include="Operacion\BusinessPuesto.cs" />
     <Compile Include="Operacion\BusinessTicket.cs" />
     <Compile Include="Sistema\BusinessCanal.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Sistema\BusinessTipoEncuesta.cs" />
     <Compile Include="Sistema\BusinessTipoGrupo.cs" />
     <Compile Include="Sistema\BusinessTipoInfConsulta.cs" />
+    <Compile Include="Sistema\BusinessTipoNota.cs" />
     <Compile Include="Sistema\BusinessTipoTelefono.cs" />
     <Compile Include="Sistema\BusinessTipoUsuario.cs" />
   </ItemGroup>

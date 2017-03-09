@@ -68,6 +68,9 @@ namespace KiiniHelp.ServiceUbicacion {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionByRegionCode", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionByRegionCodeResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Ubicacion> ObtenerUbicacionByRegionCode(string regionCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionFiscal", ReplyAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionFiscalResponse")]
+        KiiniNet.Entities.Cat.Operacion.Ubicacion ObtenerUbicacionFiscal(int idColonia, string calle, string noExt, string noInt);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -167,6 +170,10 @@ namespace KiiniHelp.ServiceUbicacion {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.Ubicacion> ObtenerUbicacionByRegionCode(string regionCode) {
             return base.Channel.ObtenerUbicacionByRegionCode(regionCode);
+        }
+        
+        public KiiniNet.Entities.Cat.Operacion.Ubicacion ObtenerUbicacionFiscal(int idColonia, string calle, string noExt, string noInt) {
+            return base.Channel.ObtenerUbicacionFiscal(idColonia, calle, noExt, noInt);
         }
     }
 }

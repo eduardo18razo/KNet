@@ -84,6 +84,55 @@
     <Content Include="Downloads\FrmDownloads.aspx" />
     <Content Include="FrmRecuperar.aspx" />
     <Content Include="Identificar.aspx" />
+    <Content Include="on\css\account.css" />
+    <Content Include="on\css\authentication.css" />
+    <Content Include="on\css\bootstrap-datepicker.css" />
+    <Content Include="on\css\bootstrap-markdown.css" />
+    <Content Include="on\css\bootstrap.css" />
+    <Content Include="on\css\dashboard-health.css" />
+    <Content Include="on\css\discussion.css" />
+    <Content Include="on\css\elegant-icons.css" />
+    <Content Include="on\css\font-awesome.css" />
+    <Content Include="on\css\help.css" />
+    <Content Include="on\css\jstree-default.css" />
+    <Content Include="on\css\metisMenu.css" />
+    <Content Include="on\css\mmenu.css" />
+    <Content Include="on\css\pe-7-icons-helper.css" />
+    <Content Include="on\css\pe-7-icons.css" />
+    <Content Include="on\css\styles.css" />
+    <Content Include="on\css\tether-shepherd.css" />
+    <Content Include="on\fonts\ElegantIcons.svg" />
+    <Content Include="on\fonts\flexslider-icon.svg" />
+    <Content Include="on\fonts\fontawesome-webfont.svg" />
+    <Content Include="on\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="on\fonts\Pe-icon-7-stroke.svg" />
+    <Content Include="on\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="on\images\users_icon\cliente.jpg" />
+    <Content Include="on\images\logo-icon.svg" />
+    <Content Include="on\images\profiles\profile-1.png" />
+    <Content Include="on\images\carousels\slide-1.jpg" />
+    <Content Include="on\images\carousels\slide-2.jpg" />
+    <Content Include="on\images\carousels\slide-3.jpg" />
+    <Content Include="on\images\users_icon\usuario_2.jpg" />
+    <Content Include="on\images\users_icon\usuario_3.jpg" />
+    <Content Include="on\js\bootstrap-markdown.js" />
+    <Content Include="on\js\bootstrap.js" />
+    <Content Include="on\js\forms-wizard.js" />
+    <Content Include="on\js\imagesloaded.js" />
+    <Content Include="on\js\jquery-peity.js" />
+    <Content Include="on\js\jquery-steps.js" />
+    <Content Include="on\js\jquery-ui.js" />
+    <Content Include="on\js\jquery.js" />
+    <Content Include="on\js\jquery.mmenu.all.min.js" />
+    <Content Include="on\js\main.js" />
+    <Content Include="on\js\markdown-js.js" />
+    <Content Include="on\js\masonry.js" />
+    <Content Include="on\js\metisMenu.js" />
+    <Content Include="on\js\moment.js" />
+    <Content Include="on\js\pace.js" />
+    <Content Include="on\js\tether-shepherd.js" />
+    <Content Include="on\js\tether.js" />
+    <Content Include="on\js\to-markdown.js" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Canal.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.DiaFestivoDefault.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.HorarioDefault.datasource" />
@@ -92,6 +141,35 @@
     <Content Include="Public.Master" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.AliasOrganizacion.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.AliasUbicacion.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.TipoNota.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperNotasUsuario.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperNotasOpcion.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperArbolAcceso.datasource" />
+    <Content Include="on\fonts\ElegantIcons.eot" />
+    <Content Include="on\fonts\ElegantIcons.ttf" />
+    <Content Include="on\fonts\ElegantIcons.woff" />
+    <Content Include="on\fonts\flexslider-icon.eot" />
+    <Content Include="on\fonts\flexslider-icon.ttf" />
+    <Content Include="on\fonts\flexslider-icon.woff" />
+    <Content Include="on\fonts\fontawesome-webfont.eot" />
+    <Content Include="on\fonts\fontawesome-webfont.ttf" />
+    <Content Include="on\fonts\fontawesome-webfont.woff" />
+    <Content Include="on\fonts\fontawesome-webfont.woff2" />
+    <Content Include="on\fonts\FontAwesome.otf" />
+    <Content Include="on\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="on\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="on\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="on\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="on\fonts\Pe-icon-7-stroke.eot" />
+    <Content Include="on\fonts\Pe-icon-7-stroke.ttf" />
+    <Content Include="on\fonts\Pe-icon-7-stroke.woff" />
+    <Content Include="on\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="on\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="on\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="on\fonts\WeatherIcons-Regular.otf" />
+    <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso14.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario.wsdl" />
     <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario.xsd">
       <SubType>Designer</SubType>
@@ -135,6 +213,52 @@
     <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario9.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceNota\ServiceNota.wsdl" />
+    <None Include="Service References\ServiceNota\ServiceNota.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota14.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota9.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSistemaCanal\ServiceCanal.disco" />
     <None Include="Service References\ServiceSistemaCanal\configuration91.svcinfo" />
     <None Include="Service References\ServiceSistemaCanal\configuration.svcinfo" />
@@ -150,15 +274,38 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Publico\Consultas\FrmConsultaTicket.aspx" />
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota.disco" />
+    <None Include="Service References\ServiceSitemaTipoNota\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSitemaTipoNota\configuration.svcinfo" />
+    <None Include="Service References\ServiceSitemaTipoNota\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceNota\ServiceNota.disco" />
+    <None Include="Service References\ServiceNota\configuration91.svcinfo" />
+    <None Include="Service References\ServiceNota\configuration.svcinfo" />
+    <None Include="Service References\ServiceNota\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Test\FrmTestMenu.aspx" />
+    <Content Include="Test\FrmTestMenuCu.aspx" />
     <Content Include="UserControls\Altas\UcAltaNivelArbol.ascx" />
     <Content Include="UserControls\Altas\UcAltaCatalogo.ascx" />
+    <Content Include="UserControls\Altas\UcAltaNota.ascx" />
+    <Content Include="UserControls\Altas\UcAltaNotaUsuario.ascx" />
+    <Content Include="UserControls\Altas\UcAltaNotaOpcion.ascx" />
     <Content Include="UserControls\Altas\UcAltaPreticket.ascx" />
     <Content Include="UserControls\Altas\UcCargaCatalgo.ascx" />
+    <Content Include="UserControls\Altas\Usuarios\UcAltaUsuarioMoral.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaCatalogos.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaAreas.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaCatalogo.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaHorario.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaNotasOpcion.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaNotasUsuario.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaPuestos.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaUbicacionesFisico.ascx" />
     <Content Include="UserControls\Detalles\UcMensajeValidacion.ascx" />
     <Content Include="UserControls\Filtros\Componentes\UcFiltroCanalApertura.ascx" />
     <Content Include="UserControls\Filtros\Graficos\UcFiltrosEficienciaTickets.ascx" />
@@ -166,11 +313,14 @@
     <Content Include="UserControls\Filtros\UcFiltroCatalogos.ascx" />
     <Content Include="UserControls\Operacion\UcCambiarContrasena.ascx" />
     <Content Include="UserControls\Operacion\UcRegistroCatalogo.ascx" />
+    <Content Include="UserControls\UcLogCopia.ascx" />
     <Content Include="Users\Administracion\Area\FrmConsultaAreas.aspx" />
     <Content Include="Users\Administracion\Area\GetImageDatafromDB.aspx" />
     <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogo.aspx" />
     <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogos.aspx" />
     <Content Include="Users\Administracion\Horarios\FrmConsultaHorarios.aspx" />
+    <Content Include="Users\Administracion\Notas\FrmConsultaNotasOpcion.aspx" />
+    <Content Include="Users\Administracion\Notas\FrmConsultaNotasUsuario.aspx" />
     <Content Include="Users\Administracion\Puestos\FrmConsultaPuestos.aspx" />
     <Content Include="Users\Administracion\Usuarios\FrmCambiarContrasena.aspx" />
     <Content Include="Users\Consultas\FrmConsulta.aspx" />
@@ -406,7 +556,6 @@
     <Content Include="Test\FrmTest.aspx" />
     <Content Include="UserControls\Altas\UcAltaDiasFestivos.ascx" />
     <Content Include="UserControls\Altas\UcAltaPuesto.ascx" />
-    <Content Include="UserControls\Altas\UcAltaUsuario.ascx" />
     <Content Include="UserControls\Altas\UcAltaHorario.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaEncuestaPendiente.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleGeograficoTickets.ascx" />
@@ -1523,6 +1672,49 @@
     <None Include="Service References\ServiceSistemaTipoUsuario\ServiceTipoUsuario9.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota.wsdl" />
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota9.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSla\ServiceSla.disco" />
     <None Include="Service References\ServiceSla\configuration91.svcinfo" />
     <None Include="Service References\ServiceSla\configuration.svcinfo" />
@@ -1646,7 +1838,7 @@
     <None Include="Service References\ServiceTicket\ServiceTicket4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceUbicacion\Arrays.xsd">
+    <None Include="Service References\ServiceUbicacion\Arrays1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Cat.Arbol.Nodos1.xsd">
@@ -2207,10 +2399,34 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ServiceNota\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ServiceSistemaCanal\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSitemaTipoNota\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Test\FrmTestMenu.aspx.cs">
+      <DependentUpon>FrmTestMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\FrmTestMenu.aspx.designer.cs">
+      <DependentUpon>FrmTestMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test\FrmTestMenuCu.aspx.cs">
+      <DependentUpon>FrmTestMenuCu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\FrmTestMenuCu.aspx.designer.cs">
+      <DependentUpon>FrmTestMenuCu.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Altas\UcAltaNivelArbol.ascx.cs">
       <DependentUpon>UcAltaNivelArbol.ascx</DependentUpon>
@@ -2226,6 +2442,27 @@
     <Compile Include="UserControls\Altas\UcAltaCatalogo.ascx.designer.cs">
       <DependentUpon>UcAltaCatalogo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Altas\UcAltaNota.ascx.cs">
+      <DependentUpon>UcAltaNota.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaNota.ascx.designer.cs">
+      <DependentUpon>UcAltaNota.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaNotaUsuario.ascx.cs">
+      <DependentUpon>UcAltaNotaUsuario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaNotaUsuario.ascx.designer.cs">
+      <DependentUpon>UcAltaNotaUsuario.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaNotaOpcion.ascx.cs">
+      <DependentUpon>UcAltaNotaOpcion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaNotaOpcion.ascx.designer.cs">
+      <DependentUpon>UcAltaNotaOpcion.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Altas\UcAltaPreticket.ascx.cs">
       <DependentUpon>UcAltaPreticket.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2239,6 +2476,13 @@
     </Compile>
     <Compile Include="UserControls\Altas\UcCargaCatalgo.ascx.designer.cs">
       <DependentUpon>UcCargaCatalgo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\Usuarios\UcAltaUsuarioMoral.ascx.cs">
+      <DependentUpon>UcAltaUsuarioMoral.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\Usuarios\UcAltaUsuarioMoral.ascx.designer.cs">
+      <DependentUpon>UcAltaUsuarioMoral.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaCatalogos.ascx.cs">
       <DependentUpon>UcConsultaCatalogos.ascx</DependentUpon>
@@ -2268,12 +2512,33 @@
     <Compile Include="UserControls\Consultas\UcConsultaHorario.ascx.designer.cs">
       <DependentUpon>UcConsultaHorario.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaNotasOpcion.ascx.cs">
+      <DependentUpon>UcConsultaNotasOpcion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaNotasOpcion.ascx.designer.cs">
+      <DependentUpon>UcConsultaNotasOpcion.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaNotasUsuario.ascx.cs">
+      <DependentUpon>UcConsultaNotasUsuario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaNotasUsuario.ascx.designer.cs">
+      <DependentUpon>UcConsultaNotasUsuario.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaPuestos.ascx.cs">
       <DependentUpon>UcConsultaPuestos.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaPuestos.ascx.designer.cs">
       <DependentUpon>UcConsultaPuestos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaUbicacionesFisico.ascx.cs">
+      <DependentUpon>UcConsultaUbicacionesFisico.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaUbicacionesFisico.ascx.designer.cs">
+      <DependentUpon>UcConsultaUbicacionesFisico.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Detalles\UcMensajeValidacion.ascx.cs">
       <DependentUpon>UcMensajeValidacion.ascx</DependentUpon>
@@ -2324,6 +2589,13 @@
     <Compile Include="UserControls\Operacion\UcRegistroCatalogo.ascx.designer.cs">
       <DependentUpon>UcRegistroCatalogo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UcLogCopia.ascx.cs">
+      <DependentUpon>UcLogCopia.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcLogCopia.ascx.designer.cs">
+      <DependentUpon>UcLogCopia.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Users\Administracion\Area\FrmConsultaAreas.aspx.cs">
       <DependentUpon>FrmConsultaAreas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2358,6 +2630,20 @@
     </Compile>
     <Compile Include="Users\Administracion\Horarios\FrmConsultaHorarios.aspx.designer.cs">
       <DependentUpon>FrmConsultaHorarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\Notas\FrmConsultaNotasOpcion.aspx.cs">
+      <DependentUpon>FrmConsultaNotasOpcion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Notas\FrmConsultaNotasOpcion.aspx.designer.cs">
+      <DependentUpon>FrmConsultaNotasOpcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\Notas\FrmConsultaNotasUsuario.aspx.cs">
+      <DependentUpon>FrmConsultaNotasUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Notas\FrmConsultaNotasUsuario.aspx.designer.cs">
+      <DependentUpon>FrmConsultaNotasUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Administracion\Puestos\FrmConsultaPuestos.aspx.cs">
       <DependentUpon>FrmConsultaPuestos.aspx</DependentUpon>
@@ -2469,13 +2755,6 @@
     </Compile>
     <Compile Include="UserControls\Altas\UcAltaPuesto.ascx.designer.cs">
       <DependentUpon>UcAltaPuesto.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Altas\UcAltaUsuario.ascx.cs">
-      <DependentUpon>UcAltaUsuario.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControls\Altas\UcAltaUsuario.ascx.designer.cs">
-      <DependentUpon>UcAltaUsuario.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Altas\UcAltaHorario.ascx.cs">
       <DependentUpon>UcAltaHorario.ascx</DependentUpon>
@@ -3257,6 +3536,7 @@
     <WCFMetadataStorage Include="Service References\ServiceImpactourgencia\" />
     <WCFMetadataStorage Include="Service References\ServiceInformacionConsulta\" />
     <WCFMetadataStorage Include="Service References\ServiceMascaraAcceso\" />
+    <WCFMetadataStorage Include="Service References\ServiceNota\" />
     <WCFMetadataStorage Include="Service References\ServiceNotificacion\" />
     <WCFMetadataStorage Include="Service References\ServiceOrganizacion\" />
     <WCFMetadataStorage Include="Service References\ServiceParametrosSistema\" />
@@ -3275,6 +3555,7 @@
     <WCFMetadataStorage Include="Service References\ServiceSistemaTipoGrupo\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaTipoInformacionConsulta\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaTipoUsuario\" />
+    <WCFMetadataStorage Include="Service References\ServiceSitemaTipoNota\" />
     <WCFMetadataStorage Include="Service References\ServiceSla\" />
     <WCFMetadataStorage Include="Service References\ServiceSubGrupoUsuario\" />
     <WCFMetadataStorage Include="Service References\ServiceTicket\" />

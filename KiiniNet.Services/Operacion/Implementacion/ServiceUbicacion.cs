@@ -280,5 +280,20 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public Ubicacion ObtenerUbicacionFiscal(int idColonia, string calle, string noExt, string noInt)
+        {
+            try
+            {
+                using (BusinessUbicacion negocio = new BusinessUbicacion())
+                {
+                    return negocio.ObtenerUbicacionFiscal(idColonia, calle, noExt, noInt);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

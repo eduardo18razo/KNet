@@ -52,5 +52,20 @@ namespace KiiniNet.Services.Sistema.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public TipoUsuario ObtenerTipoUsuarioById(int id)
+        {
+            try
+            {
+                using (BusinessTipoUsuario negocio = new BusinessTipoUsuario())
+                {
+                    return negocio.ObtenerTipoUsuarioById(id);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

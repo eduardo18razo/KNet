@@ -1011,5 +1011,71 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
         }
+
+        public Ubicacion ObtenerUbicacionFiscal(int idColonia, string calle, string noExt, string noInt)
+        {
+            Ubicacion result = null;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
+                db.ContextOptions.ProxyCreationEnabled = true;
+                bool insertaNueva = false;
+                Colonia colonia = db.Colonia.SingleOrDefault(s => s.Id == idColonia);
+                if (colonia != null)
+                {
+                    result = new Ubicacion
+                    {
+                        IdPais = colonia.Municipio.Estado.IdPais,
+                        IdCampus = colonia.Municipio.IdEstado
+                    };
+
+                    Piso piso = db.Piso.SingleOrDefault(w => w.Descripcion == colonia.Descripcion) ?? new Piso { Descripcion = colonia.Descripcion, Habilitado = true };
+                    if (piso.Id == 0)
+                        result.Piso = piso;
+                    else
+                        result.IdPiso = piso.Id;
+
+                    Zona zona = db.Zona.SingleOrDefault(w => w.Descripcion == calle) ?? new Zona { Descripcion = calle, Habilitado = true };
+                    if (zona.Id == 0)
+                        result.Zona = zona;
+                    else
+                        result.IdZona = zona.Id;
+                    SubZona subZona = db.SubZona.SingleOrDefault(w => w.Descripcion == noExt) ?? new SubZona { Descripcion = noExt, Habilitado = true };
+                    if (subZona.Id == 0)
+                        result.SubZona = subZona;
+                    else
+                        result.IdSubZona = subZona.Id;
+                    if (noInt.Trim() != string.Empty)
+                    {
+                        SiteRack siteRack = db.SiteRack.SingleOrDefault(w => w.Descripcion == noInt) ?? new SiteRack { Descripcion = noInt, Habilitado = true };
+                        if (siteRack.Id == 0)
+                            result.SiteRack = siteRack;
+                        else
+                            result.IdSiteRack = siteRack.Id;
+                        result.IdNivelUbicacion = 7;
+                    }
+
+                    result.IdNivelUbicacion = result.IdNivelUbicacion == 0 ? 6 : result.IdNivelUbicacion;
+
+                    if (result.Piso != null || result.Zona != null || result.SubZona != null || result.SiteRack != null)
+                        insertaNueva = true;
+                    if (insertaNueva)
+                    {
+                        db.Ubicacion.AddObject(result);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
     }
 }

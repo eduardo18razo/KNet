@@ -43,6 +43,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ServiceNota.svc" />
     <Content Include="ServiceConsultas.svc" />
     <Content Include="ServiceDiasHorario.svc" />
     <Content Include="ServicePuesto.svc" />
@@ -70,6 +71,7 @@
     <Content Include="Sistema\ServiceTipoCampoMascara.svc" />
     <Content Include="Sistema\ServiceTipoDocumento.svc" />
     <Content Include="Sistema\ServiceTipoEncuesta.svc" />
+    <Content Include="Sistema\ServiceTipoNota.svc" />
     <Content Include="Sistema\ServiceTipoGrupo.svc" />
     <Content Include="Sistema\ServiceTipoInformacionConsulta.svc" />
     <Content Include="Sistema\ServiceTipoTelefono.svc" />

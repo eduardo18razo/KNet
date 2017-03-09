@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using KiiniNet.Entities.Cat.Arbol.Nodos;
 using KiiniNet.Entities.Cat.Operacion;
+using KiiniNet.Entities.Helper;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
 
@@ -288,7 +289,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea)
+        public List<ArbolAcceso> ObtenerArbolesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea)
         {
             try
             {
@@ -370,6 +371,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
                 {
                     return negocio.ObtenerArbolesAccesoTerminalAll(idArea, idTipoUsuario, idTipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<HelperArbolAcceso> ObtenerArbolesAccesoTerminalByIdUsuario(int idUsuario, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
+                {
+                    return negocio.ObtenerArbolesAccesoTerminalByIdUsuario(idUsuario, insertarSeleccion);
                 }
             }
             catch (Exception ex)

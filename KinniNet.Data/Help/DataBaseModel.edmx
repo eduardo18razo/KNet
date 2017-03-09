@@ -11,7 +11,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdTipoUsuario" Type="int" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="30" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="Nivel" Type="int" />
           <Property Name="Habilitado" Type="bit" />
         </EntityType>
@@ -21,7 +21,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdTipoUsuario" Type="int" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="30" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="Nivel" Type="int" />
           <Property Name="Habilitado" Type="bit" />
         </EntityType>
@@ -51,6 +51,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Imagen" Type="image" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="5" />
           <Property Name="Habilitado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CampoMascara">
@@ -179,6 +180,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPais" Type="int" />
           <Property Name="Descripcion" Type="nvarchar(max)" />
           <Property Name="RegionCode" Type="nvarchar" MaxLength="150" />
         </EntityType>
@@ -534,6 +536,57 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
           <Property Name="Habilitado" Type="bit" />
         </EntityType>
+        <EntityType Name="NotaGeneral">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTipoNota" Type="int" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contenido" Type="nvarchar(max)" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Compartida" Type="bit" />
+          <Property Name="Aprobada" Type="bit" />
+          <Property Name="Habilitado" Type="bit" />
+        </EntityType>
+        <EntityType Name="NotaGeneralGrupo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdNotaGeneral" Type="int" Nullable="false" />
+          <Property Name="IdGrupoUsuario" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Habilitado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NotaOpcionGrupo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTipoNota" Type="int" />
+          <Property Name="IdArbolAcceso" Type="int" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contenido" Type="nvarchar(max)" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Aprobada" Type="bit" />
+          <Property Name="Habilitado" Type="bit" />
+        </EntityType>
+        <EntityType Name="NotaOpcionUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTipoNota" Type="int" />
+          <Property Name="IdArbolAcceso" Type="int" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contenido" Type="nvarchar(max)" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Habilitado" Type="bit" />
+        </EntityType>
         <EntityType Name="Organizacion">
           <Key>
             <PropertyRef Name="Id" />
@@ -639,7 +692,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdTipoUsuario" Type="int" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Habilitado" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PreguntaReto">
@@ -1042,6 +1095,14 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
           <Property Name="Habilitado" Type="bit" />
         </EntityType>
+        <EntityType Name="TipoNota">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Habilitado" Type="bit" />
+        </EntityType>
         <EntityType Name="TipoNotificacion">
           <Key>
             <PropertyRef Name="Id" />
@@ -1067,6 +1128,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EsResidente" Type="bit" Nullable="false" />
+          <Property Name="EsMoral" Type="bit" Nullable="false" />
           <Property Name="NumeroCorreos" Type="int" Nullable="false" />
           <Property Name="CorreosObligatorios" Type="int" Nullable="false" />
           <Property Name="Habilitado" Type="bit" Nullable="false" />
@@ -1412,6 +1474,18 @@
             </Principal>
             <Dependent Role="EncuestaPregunta">
               <PropertyRef Name="IdEncuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estado_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+          <End Role="Estado" Type="Self.Estado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estado">
+              <PropertyRef Name="IdPais" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2120,6 +2194,126 @@
             </Principal>
             <Dependent Role="Nivel7">
               <PropertyRef Name="IdTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaGeneral_TipoNota">
+          <End Role="TipoNota" Type="Self.TipoNota" Multiplicity="0..1" />
+          <End Role="NotaGeneral" Type="Self.NotaGeneral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNota">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaGeneral">
+              <PropertyRef Name="IdTipoNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaGeneral_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="NotaGeneral" Type="Self.NotaGeneral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaGeneral">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaGeneralGrupo_GrupoUsuario">
+          <End Role="GrupoUsuario" Type="Self.GrupoUsuario" Multiplicity="1" />
+          <End Role="NotaGeneralGrupo" Type="Self.NotaGeneralGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaGeneralGrupo">
+              <PropertyRef Name="IdGrupoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaGeneralGrupo_NotaGeneral">
+          <End Role="NotaGeneral" Type="Self.NotaGeneral" Multiplicity="1" />
+          <End Role="NotaGeneralGrupo" Type="Self.NotaGeneralGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotaGeneral">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaGeneralGrupo">
+              <PropertyRef Name="IdNotaGeneral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaOpcionGrupo_ArbolAcceso">
+          <End Role="ArbolAcceso" Type="Self.ArbolAcceso" Multiplicity="0..1" />
+          <End Role="NotaOpcionGrupo" Type="Self.NotaOpcionGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArbolAcceso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaOpcionGrupo">
+              <PropertyRef Name="IdArbolAcceso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaOpcionGrupo_TipoNota">
+          <End Role="TipoNota" Type="Self.TipoNota" Multiplicity="0..1" />
+          <End Role="NotaOpcionGrupo" Type="Self.NotaOpcionGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNota">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaOpcionGrupo">
+              <PropertyRef Name="IdTipoNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaOpcionGrupo_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="NotaOpcionGrupo" Type="Self.NotaOpcionGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaOpcionGrupo">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaOpcionUsuario_ArbolAcceso">
+          <End Role="ArbolAcceso" Type="Self.ArbolAcceso" Multiplicity="0..1" />
+          <End Role="NotaOpcionUsuario" Type="Self.NotaOpcionUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArbolAcceso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaOpcionUsuario">
+              <PropertyRef Name="IdArbolAcceso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaOpcionUsuario_TipoNota">
+          <End Role="TipoNota" Type="Self.TipoNota" Multiplicity="0..1" />
+          <End Role="NotaOpcionUsuario" Type="Self.NotaOpcionUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNota">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaOpcionUsuario">
+              <PropertyRef Name="IdTipoNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaOpcionUsuario_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="NotaOpcionUsuario" Type="Self.NotaOpcionUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaOpcionUsuario">
+              <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3471,6 +3665,10 @@
           <EntitySet Name="Nivel7" EntityType="Self.Nivel7" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NivelOrganizacion" EntityType="Self.NivelOrganizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NivelUbicacion" EntityType="Self.NivelUbicacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotaGeneral" EntityType="Self.NotaGeneral" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotaGeneralGrupo" EntityType="Self.NotaGeneralGrupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotaOpcionGrupo" EntityType="Self.NotaOpcionGrupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotaOpcionUsuario" EntityType="Self.NotaOpcionUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organizacion" EntityType="Self.Organizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ParametroCorreo" EntityType="Self.ParametroCorreo" Schema="dbo" store:Type="Tables" />
@@ -3516,6 +3714,7 @@
           <EntitySet Name="TipoGrupo" EntityType="Self.TipoGrupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoInfConsulta" EntityType="Self.TipoInfConsulta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoLink" EntityType="Self.TipoLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoNota" EntityType="Self.TipoNota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoNotificacion" EntityType="Self.TipoNotificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoTelefono" EntityType="Self.TipoTelefono" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
@@ -3607,6 +3806,10 @@
           <AssociationSet Name="FK_EncuestaPregunta_Encuesta" Association="Self.FK_EncuestaPregunta_Encuesta">
             <End Role="Encuesta" EntitySet="Encuesta" />
             <End Role="EncuestaPregunta" EntitySet="EncuestaPregunta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Estado_Pais" Association="Self.FK_Estado_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Estado" EntitySet="Estado" />
           </AssociationSet>
           <AssociationSet Name="FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion" Association="Self.FK_EstatusAsignacionSubRolGeneral_EstatusAsignacion">
             <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
@@ -3843,6 +4046,46 @@
           <AssociationSet Name="FK_Nivel7_TipoUsuario" Association="Self.FK_Nivel7_TipoUsuario">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="Nivel7" EntitySet="Nivel7" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaGeneral_TipoNota" Association="Self.FK_NotaGeneral_TipoNota">
+            <End Role="TipoNota" EntitySet="TipoNota" />
+            <End Role="NotaGeneral" EntitySet="NotaGeneral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaGeneral_Usuario" Association="Self.FK_NotaGeneral_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="NotaGeneral" EntitySet="NotaGeneral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaGeneralGrupo_GrupoUsuario" Association="Self.FK_NotaGeneralGrupo_GrupoUsuario">
+            <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+            <End Role="NotaGeneralGrupo" EntitySet="NotaGeneralGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaGeneralGrupo_NotaGeneral" Association="Self.FK_NotaGeneralGrupo_NotaGeneral">
+            <End Role="NotaGeneral" EntitySet="NotaGeneral" />
+            <End Role="NotaGeneralGrupo" EntitySet="NotaGeneralGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaOpcionGrupo_ArbolAcceso" Association="Self.FK_NotaOpcionGrupo_ArbolAcceso">
+            <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+            <End Role="NotaOpcionGrupo" EntitySet="NotaOpcionGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaOpcionGrupo_TipoNota" Association="Self.FK_NotaOpcionGrupo_TipoNota">
+            <End Role="TipoNota" EntitySet="TipoNota" />
+            <End Role="NotaOpcionGrupo" EntitySet="NotaOpcionGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaOpcionGrupo_Usuario" Association="Self.FK_NotaOpcionGrupo_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="NotaOpcionGrupo" EntitySet="NotaOpcionGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaOpcionUsuario_ArbolAcceso" Association="Self.FK_NotaOpcionUsuario_ArbolAcceso">
+            <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+            <End Role="NotaOpcionUsuario" EntitySet="NotaOpcionUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaOpcionUsuario_TipoNota" Association="Self.FK_NotaOpcionUsuario_TipoNota">
+            <End Role="TipoNota" EntitySet="TipoNota" />
+            <End Role="NotaOpcionUsuario" EntitySet="NotaOpcionUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaOpcionUsuario_Usuario" Association="Self.FK_NotaOpcionUsuario_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="NotaOpcionUsuario" EntitySet="NotaOpcionUsuario" />
           </AssociationSet>
           <AssociationSet Name="FK_Organizacion_Compania" Association="Self.FK_Organizacion_Compania">
             <End Role="Compania" EntitySet="Compania" />
@@ -4324,7 +4567,6 @@
           <EntitySet Name="Torre" EntityType="KiiniNet_v2Model.Torre" />
           <EntitySet Name="Ubicacion" EntityType="KiiniNet_v2Model.Ubicacion" />
           <EntitySet Name="UsuarioGrupo" EntityType="KiiniNet_v2Model.UsuarioGrupo" />
-          <EntitySet Name="UsuarioRol" EntityType="KiiniNet_v2Model.UsuarioRol" />
           <EntitySet Name="Zona" EntityType="KiiniNet_v2Model.Zona" />
           <AssociationSet Name="FK_Campus_TipoUsuario" Association="KiiniNet_v2Model.FK_Campus_TipoUsuario">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
@@ -4482,10 +4724,6 @@
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="RolTipoUsuario" EntitySet="RolTipoUsuario" />
           </AssociationSet>
-          <AssociationSet Name="FK_UsuarioRol_RolTipoUsuario" Association="KiiniNet_v2Model.FK_UsuarioRol_RolTipoUsuario">
-            <End Role="RolTipoUsuario" EntitySet="RolTipoUsuario" />
-            <End Role="UsuarioRol" EntitySet="UsuarioRol" />
-          </AssociationSet>
           <AssociationSet Name="FK_SiteRack_TipoUsuario" Association="KiiniNet_v2Model.FK_SiteRack_TipoUsuario">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="SiteRack" EntitySet="SiteRack" />
@@ -4573,10 +4811,6 @@
           <AssociationSet Name="FK_UsuarioGrupo_Usuario" Association="KiiniNet_v2Model.FK_UsuarioGrupo_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="UsuarioGrupo" EntitySet="UsuarioGrupo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UsuarioRol_Usuario" Association="KiiniNet_v2Model.FK_UsuarioRol_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="UsuarioRol" EntitySet="UsuarioRol" />
           </AssociationSet>
           <EntitySet Name="RolMenu" EntityType="KiiniNet_v2Model.RolMenu" />
           <AssociationSet Name="FK_RolMenu_Rol" Association="KiiniNet_v2Model.FK_RolMenu_Rol">
@@ -5139,6 +5373,64 @@
             <End Role="Area" EntitySet="Area" />
             <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
           </AssociationSet>
+          <EntitySet Name="UsuarioRol" EntityType="KiiniNet_v2Model.UsuarioRol" />
+          <AssociationSet Name="FK_Estado_Pais" Association="KiiniNet_v2Model.FK_Estado_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Estado" EntitySet="Estado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioRol_RolTipoUsuario" Association="KiiniNet_v2Model.FK_UsuarioRol_RolTipoUsuario">
+            <End Role="RolTipoUsuario" EntitySet="RolTipoUsuario" />
+            <End Role="UsuarioRol" EntitySet="UsuarioRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioRol_Usuario" Association="KiiniNet_v2Model.FK_UsuarioRol_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="UsuarioRol" EntitySet="UsuarioRol" />
+          </AssociationSet>
+          <EntitySet Name="TipoNota" EntityType="KiiniNet_v2Model.TipoNota" />
+          <EntitySet Name="NotaGeneral" EntityType="KiiniNet_v2Model.NotaGeneral" />
+          <EntitySet Name="NotaGeneralGrupo" EntityType="KiiniNet_v2Model.NotaGeneralGrupo" />
+          <EntitySet Name="NotaOpcionGrupo" EntityType="KiiniNet_v2Model.NotaOpcionGrupo" />
+          <EntitySet Name="NotaOpcionUsuario" EntityType="KiiniNet_v2Model.NotaOpcionUsuario" />
+          <AssociationSet Name="FK_NotaOpcionGrupo_ArbolAcceso" Association="KiiniNet_v2Model.FK_NotaOpcionGrupo_ArbolAcceso">
+            <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+            <End Role="NotaOpcionGrupo" EntitySet="NotaOpcionGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaOpcionUsuario_ArbolAcceso" Association="KiiniNet_v2Model.FK_NotaOpcionUsuario_ArbolAcceso">
+            <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+            <End Role="NotaOpcionUsuario" EntitySet="NotaOpcionUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaGeneralGrupo_GrupoUsuario" Association="KiiniNet_v2Model.FK_NotaGeneralGrupo_GrupoUsuario">
+            <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+            <End Role="NotaGeneralGrupo" EntitySet="NotaGeneralGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaGeneral_TipoNota" Association="KiiniNet_v2Model.FK_NotaGeneral_TipoNota">
+            <End Role="TipoNota" EntitySet="TipoNota" />
+            <End Role="NotaGeneral" EntitySet="NotaGeneral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaGeneral_Usuario" Association="KiiniNet_v2Model.FK_NotaGeneral_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="NotaGeneral" EntitySet="NotaGeneral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaGeneralGrupo_NotaGeneral" Association="KiiniNet_v2Model.FK_NotaGeneralGrupo_NotaGeneral">
+            <End Role="NotaGeneral" EntitySet="NotaGeneral" />
+            <End Role="NotaGeneralGrupo" EntitySet="NotaGeneralGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaOpcionGrupo_TipoNota" Association="KiiniNet_v2Model.FK_NotaOpcionGrupo_TipoNota">
+            <End Role="TipoNota" EntitySet="TipoNota" />
+            <End Role="NotaOpcionGrupo" EntitySet="NotaOpcionGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaOpcionGrupo_Usuario" Association="KiiniNet_v2Model.FK_NotaOpcionGrupo_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="NotaOpcionGrupo" EntitySet="NotaOpcionGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaOpcionUsuario_TipoNota" Association="KiiniNet_v2Model.FK_NotaOpcionUsuario_TipoNota">
+            <End Role="TipoNota" EntitySet="TipoNota" />
+            <End Role="NotaOpcionUsuario" EntitySet="NotaOpcionUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotaOpcionUsuario_Usuario" Association="KiiniNet_v2Model.FK_NotaOpcionUsuario_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="NotaOpcionUsuario" EntitySet="NotaOpcionUsuario" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Campus">
           <Key>
@@ -5419,6 +5711,7 @@
           <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_Pais_TipoUsuario" FromRole="Pais" ToRole="TipoUsuario" />
           <NavigationProperty Name="Ubicacion" Relationship="KiiniNet_v2Model.FK_Ubicacion_Pais" FromRole="Pais" ToRole="Ubicacion" />
           <Property Name="RegionCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Estado" Relationship="KiiniNet_v2Model.FK_Estado_Pais" FromRole="Pais" ToRole="Estado" />
         </EntityType>
         <EntityType Name="ParametrosAplicaciones">
           <Key>
@@ -5446,7 +5739,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdTipoUsuario" Type="Int32" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Habilitado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_Piso_TipoUsuario" FromRole="Piso" ToRole="TipoUsuario" />
           <NavigationProperty Name="Ubicacion" Relationship="KiiniNet_v2Model.FK_Ubicacion_Piso" FromRole="Piso" ToRole="Ubicacion" />
@@ -5479,8 +5772,8 @@
           <Property Name="IdRol" Type="Int32" Nullable="false" />
           <Property Name="IdTipoUsuario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_RolTipoUsuario_TipoUsuario" FromRole="RolTipoUsuario" ToRole="TipoUsuario" />
-          <NavigationProperty Name="UsuarioRol" Relationship="KiiniNet_v2Model.FK_UsuarioRol_RolTipoUsuario" FromRole="RolTipoUsuario" ToRole="UsuarioRol" />
           <NavigationProperty Name="Rol" Relationship="KiiniNet_v2Model.FK_RolTipoUsuario_Rol" FromRole="RolTipoUsuario" ToRole="Rol" />
+          <NavigationProperty Name="UsuarioRol" Relationship="KiiniNet_v2Model.FK_UsuarioRol_RolTipoUsuario" FromRole="RolTipoUsuario" ToRole="UsuarioRol" />
         </EntityType>
         <EntityType Name="SiteRack">
           <Key>
@@ -5623,6 +5916,7 @@
           <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_Ticket_TipoUsuario" FromRole="TipoUsuario" ToRole="Ticket" />
           <NavigationProperty Name="AliasOrganizacion" Relationship="KiiniNet_v2Model.FK_AliasOrganizacion_TipoUsuario" FromRole="TipoUsuario" ToRole="AliasOrganizacion" />
           <NavigationProperty Name="AliasUbicacion" Relationship="KiiniNet_v2Model.FK_AliasUbicacion_TipoUsuario" FromRole="TipoUsuario" ToRole="AliasUbicacion" />
+          <Property Name="EsMoral" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Torre">
           <Key>
@@ -5676,16 +5970,6 @@
           <NavigationProperty Name="Rol" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_Rol" FromRole="UsuarioGrupo" ToRole="Rol" />
           <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_Usuario" FromRole="UsuarioGrupo" ToRole="Usuario" />
           <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_GrupoUsuario" FromRole="UsuarioGrupo" ToRole="GrupoUsuario" />
-        </EntityType>
-        <EntityType Name="UsuarioRol">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="IdRolTipoUsuario" Type="Int32" />
-          <NavigationProperty Name="RolTipoUsuario" Relationship="KiiniNet_v2Model.FK_UsuarioRol_RolTipoUsuario" FromRole="UsuarioRol" ToRole="RolTipoUsuario" />
-          <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_UsuarioRol_Usuario" FromRole="UsuarioRol" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Zona">
           <Key>
@@ -6166,18 +6450,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UsuarioRol_RolTipoUsuario">
-          <End Type="KiiniNet_v2Model.RolTipoUsuario" Role="RolTipoUsuario" Multiplicity="0..1" />
-          <End Type="KiiniNet_v2Model.UsuarioRol" Role="UsuarioRol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RolTipoUsuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsuarioRol">
-              <PropertyRef Name="IdRolTipoUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SiteRack_TipoUsuario">
           <End Type="KiiniNet_v2Model.TipoUsuario" Role="TipoUsuario" Multiplicity="0..1" />
           <End Type="KiiniNet_v2Model.SiteRack" Role="SiteRack" Multiplicity="*" />
@@ -6453,7 +6725,6 @@
           <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
           <NavigationProperty Name="Ubicacion" Relationship="KiiniNet_v2Model.FK_Usuario_Ubicacion" FromRole="Usuario" ToRole="Ubicacion" />
           <NavigationProperty Name="UsuarioGrupo" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_Usuario" FromRole="Usuario" ToRole="UsuarioGrupo" />
-          <NavigationProperty Name="UsuarioRol" Relationship="KiiniNet_v2Model.FK_UsuarioRol_Usuario" FromRole="Usuario" ToRole="UsuarioRol" />
           <NavigationProperty Name="TicketAsignado" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_UsuarioAsignado" FromRole="Usuario" ToRole="TicketAsignacion" />
           <NavigationProperty Name="TicketAsigno" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_UsuarioAsigno" FromRole="Usuario" ToRole="TicketAsignacion" />
           <Property Name="Vip" Type="Boolean" />
@@ -6475,6 +6746,10 @@
           <NavigationProperty Name="TicketsSolicitados" Relationship="KiiniNet_v2Model.FK_Ticket_Usuario2" FromRole="Usuario" ToRole="Ticket" />
           <NavigationProperty Name="TicketEstatus" Relationship="KiiniNet_v2Model.FK_TicketEstatus_Usuario" FromRole="Usuario" ToRole="TicketEstatus" />
           <NavigationProperty Name="CorreoUsuario" Relationship="KiiniNet_v2Model.FK_CorreoUsuario_Usuario" FromRole="Usuario" ToRole="CorreoUsuario" />
+          <NavigationProperty Name="UsuarioRol" Relationship="KiiniNet_v2Model.FK_UsuarioRol_Usuario" FromRole="Usuario" ToRole="UsuarioRol" />
+          <NavigationProperty Name="NotaGeneral" Relationship="KiiniNet_v2Model.FK_NotaGeneral_Usuario" FromRole="Usuario" ToRole="NotaGeneral" />
+          <NavigationProperty Name="NotaOpcionGrupo" Relationship="KiiniNet_v2Model.FK_NotaOpcionGrupo_Usuario" FromRole="Usuario" ToRole="NotaOpcionGrupo" />
+          <NavigationProperty Name="NotaOpcionUsuario" Relationship="KiiniNet_v2Model.FK_NotaOpcionUsuario_Usuario" FromRole="Usuario" ToRole="NotaOpcionUsuario" />
           </EntityType>
         <Association Name="FK_Usuario_Organizacion">
           <End Type="KiiniNet_v2Model.Organizacion" Role="Organizacion" Multiplicity="0..1" />
@@ -6520,18 +6795,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UsuarioGrupo">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UsuarioRol_Usuario">
-          <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="KiiniNet_v2Model.UsuarioRol" Role="UsuarioRol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UsuarioRol">
               <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
@@ -7087,6 +7350,8 @@
           <NavigationProperty Name="PreTicket" Relationship="KiiniNet_v2Model.FK_PreTicket_ArbolAcceso" FromRole="ArbolAcceso" ToRole="PreTicket" />
           <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_tblTicket_tblArbolAcceso" FromRole="ArbolAcceso" ToRole="Ticket" />
           <NavigationProperty Name="Area" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="ArbolAcceso" ToRole="Area" />
+          <NavigationProperty Name="NotaOpcionGrupo" Relationship="KiiniNet_v2Model.FK_NotaOpcionGrupo_ArbolAcceso" FromRole="ArbolAcceso" ToRole="NotaOpcionGrupo" />
+          <NavigationProperty Name="NotaOpcionUsuario" Relationship="KiiniNet_v2Model.FK_NotaOpcionUsuario_ArbolAcceso" FromRole="ArbolAcceso" ToRole="NotaOpcionUsuario" />
           </EntityType>
         <Association Name="FK_ArbolAcceso_Nivel1">
           <End Type="KiiniNet_v2Model.Nivel1" Role="Nivel1" Multiplicity="1" />
@@ -7428,6 +7693,8 @@
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RegionCode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Municipio" Relationship="KiiniNet_v2Model.FK_Municipio_Estado" FromRole="Estado" ToRole="Municipio" />
+          <Property Name="IdPais" Type="Int32" />
+          <NavigationProperty Name="Pais" Relationship="KiiniNet_v2Model.FK_Estado_Pais" FromRole="Estado" ToRole="Pais" />
         </EntityType>
         <Association Name="FK_Municipio_Estado">
           <End Type="KiiniNet_v2Model.Estado" Role="Estado" Multiplicity="0..1" />
@@ -8037,6 +8304,7 @@
           <NavigationProperty Name="UsuarioGrupo" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_GrupoUsuario" FromRole="GrupoUsuario" ToRole="UsuarioGrupo" />
           <NavigationProperty Name="EstatusTicketSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusSubRolGeneral_GrupoUsuario" FromRole="GrupoUsuario" ToRole="EstatusTicketSubRolGeneral" />
           <NavigationProperty Name="EstatusAsignacionSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_GrupoUsuario" FromRole="GrupoUsuario" ToRole="EstatusAsignacionSubRolGeneral" />
+          <NavigationProperty Name="NotaGeneralGrupo" Relationship="KiiniNet_v2Model.FK_NotaGeneralGrupo_GrupoUsuario" FromRole="GrupoUsuario" ToRole="NotaGeneralGrupo" />
         </EntityType>
         <Association Name="FK_GrupoUsuario_TipoGrupo1">
           <End Type="KiiniNet_v2Model.TipoGrupo" Role="TipoGrupo" Multiplicity="0..1" />
@@ -8844,7 +9112,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdTipoUsuario" Type="Int32" />
-          <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Nivel" Type="Int32" />
           <Property Name="Habilitado" Type="Boolean" />
           <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_AliasOrganizacion_TipoUsuario" FromRole="AliasOrganizacion" ToRole="TipoUsuario" />
@@ -8867,7 +9135,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdTipoUsuario" Type="Int32" />
-          <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Nivel" Type="Int32" />
           <Property Name="Habilitado" Type="Boolean" />
           <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_AliasUbicacion_TipoUsuario" FromRole="AliasUbicacion" ToRole="TipoUsuario" />
@@ -8915,6 +9183,7 @@
           <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Habilitado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="Area" ToRole="ArbolAcceso" />
+          <Property Name="Extension" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_ArbolAcceso_Area">
           <End Type="KiiniNet_v2Model.Area" Role="Area" Multiplicity="1" />
@@ -8925,6 +9194,245 @@
             </Principal>
             <Dependent Role="ArbolAcceso">
               <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UsuarioRol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="IdRolTipoUsuario" Type="Int32" />
+          <NavigationProperty Name="RolTipoUsuario" Relationship="KiiniNet_v2Model.FK_UsuarioRol_RolTipoUsuario" FromRole="UsuarioRol" ToRole="RolTipoUsuario" />
+          <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_UsuarioRol_Usuario" FromRole="UsuarioRol" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Estado_Pais">
+          <End Type="KiiniNet_v2Model.Pais" Role="Pais" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.Estado" Role="Estado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estado">
+              <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioRol_RolTipoUsuario">
+          <End Type="KiiniNet_v2Model.RolTipoUsuario" Role="RolTipoUsuario" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.UsuarioRol" Role="UsuarioRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolTipoUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsuarioRol">
+              <PropertyRef Name="IdRolTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioRol_Usuario">
+          <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.UsuarioRol" Role="UsuarioRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsuarioRol">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TipoNota">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Habilitado" Type="Boolean" />
+          <NavigationProperty Name="NotaGeneral" Relationship="KiiniNet_v2Model.FK_NotaGeneral_TipoNota" FromRole="TipoNota" ToRole="NotaGeneral" />
+          <NavigationProperty Name="NotaOpcionGrupo" Relationship="KiiniNet_v2Model.FK_NotaOpcionGrupo_TipoNota" FromRole="TipoNota" ToRole="NotaOpcionGrupo" />
+          <NavigationProperty Name="NotaOpcionUsuario" Relationship="KiiniNet_v2Model.FK_NotaOpcionUsuario_TipoNota" FromRole="TipoNota" ToRole="NotaOpcionUsuario" />
+        </EntityType>
+        <EntityType Name="NotaGeneral">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoNota" Type="Int32" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Compartida" Type="Boolean" />
+          <Property Name="Aprobada" Type="Boolean" />
+          <Property Name="Habilitado" Type="Boolean" />
+          <NavigationProperty Name="TipoNota" Relationship="KiiniNet_v2Model.FK_NotaGeneral_TipoNota" FromRole="NotaGeneral" ToRole="TipoNota" />
+          <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_NotaGeneral_Usuario" FromRole="NotaGeneral" ToRole="Usuario" />
+          <NavigationProperty Name="NotaGeneralGrupo" Relationship="KiiniNet_v2Model.FK_NotaGeneralGrupo_NotaGeneral" FromRole="NotaGeneral" ToRole="NotaGeneralGrupo" />
+        </EntityType>
+        <EntityType Name="NotaGeneralGrupo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdNotaGeneral" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupoUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_NotaGeneralGrupo_GrupoUsuario" FromRole="NotaGeneralGrupo" ToRole="GrupoUsuario" />
+          <NavigationProperty Name="NotaGeneral" Relationship="KiiniNet_v2Model.FK_NotaGeneralGrupo_NotaGeneral" FromRole="NotaGeneralGrupo" ToRole="NotaGeneral" />
+        </EntityType>
+        <EntityType Name="NotaOpcionGrupo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoNota" Type="Int32" />
+          <Property Name="IdArbolAcceso" Type="Int32" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Aprobada" Type="Boolean" />
+          <Property Name="Habilitado" Type="Boolean" />
+          <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_NotaOpcionGrupo_ArbolAcceso" FromRole="NotaOpcionGrupo" ToRole="ArbolAcceso" />
+          <NavigationProperty Name="TipoNota" Relationship="KiiniNet_v2Model.FK_NotaOpcionGrupo_TipoNota" FromRole="NotaOpcionGrupo" ToRole="TipoNota" />
+          <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_NotaOpcionGrupo_Usuario" FromRole="NotaOpcionGrupo" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="NotaOpcionUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoNota" Type="Int32" />
+          <Property Name="IdArbolAcceso" Type="Int32" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Habilitado" Type="Boolean" />
+          <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_NotaOpcionUsuario_ArbolAcceso" FromRole="NotaOpcionUsuario" ToRole="ArbolAcceso" />
+          <NavigationProperty Name="TipoNota" Relationship="KiiniNet_v2Model.FK_NotaOpcionUsuario_TipoNota" FromRole="NotaOpcionUsuario" ToRole="TipoNota" />
+          <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_NotaOpcionUsuario_Usuario" FromRole="NotaOpcionUsuario" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_NotaOpcionGrupo_ArbolAcceso">
+          <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.NotaOpcionGrupo" Role="NotaOpcionGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArbolAcceso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaOpcionGrupo">
+              <PropertyRef Name="IdArbolAcceso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaOpcionUsuario_ArbolAcceso">
+          <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.NotaOpcionUsuario" Role="NotaOpcionUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArbolAcceso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaOpcionUsuario">
+              <PropertyRef Name="IdArbolAcceso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaGeneralGrupo_GrupoUsuario">
+          <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="1" />
+          <End Type="KiiniNet_v2Model.NotaGeneralGrupo" Role="NotaGeneralGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaGeneralGrupo">
+              <PropertyRef Name="IdGrupoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaGeneral_TipoNota">
+          <End Type="KiiniNet_v2Model.TipoNota" Role="TipoNota" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.NotaGeneral" Role="NotaGeneral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNota">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaGeneral">
+              <PropertyRef Name="IdTipoNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaGeneral_Usuario">
+          <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.NotaGeneral" Role="NotaGeneral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaGeneral">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaGeneralGrupo_NotaGeneral">
+          <End Type="KiiniNet_v2Model.NotaGeneral" Role="NotaGeneral" Multiplicity="1" />
+          <End Type="KiiniNet_v2Model.NotaGeneralGrupo" Role="NotaGeneralGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NotaGeneral">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaGeneralGrupo">
+              <PropertyRef Name="IdNotaGeneral" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaOpcionGrupo_TipoNota">
+          <End Type="KiiniNet_v2Model.TipoNota" Role="TipoNota" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.NotaOpcionGrupo" Role="NotaOpcionGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNota">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaOpcionGrupo">
+              <PropertyRef Name="IdTipoNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaOpcionGrupo_Usuario">
+          <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.NotaOpcionGrupo" Role="NotaOpcionGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaOpcionGrupo">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaOpcionUsuario_TipoNota">
+          <End Type="KiiniNet_v2Model.TipoNota" Role="TipoNota" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.NotaOpcionUsuario" Role="NotaOpcionUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNota">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaOpcionUsuario">
+              <PropertyRef Name="IdTipoNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NotaOpcionUsuario_Usuario">
+          <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.NotaOpcionUsuario" Role="NotaOpcionUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NotaOpcionUsuario">
+              <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9326,6 +9834,7 @@
           <EntitySetMapping Name="TipoUsuario">
             <EntityTypeMapping TypeName="KiiniNet_v2Model.TipoUsuario">
               <MappingFragment StoreEntitySet="TipoUsuario">
+                <ScalarProperty Name="EsMoral" ColumnName="EsMoral" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="CorreosObligatorios" ColumnName="CorreosObligatorios" />
                 <ScalarProperty Name="NumeroCorreos" ColumnName="NumeroCorreos" />
@@ -9368,15 +9877,6 @@
                 <ScalarProperty Name="IdSubGrupoUsuario" ColumnName="IdSubGrupoUsuario" />
                 <ScalarProperty Name="IdGrupoUsuario" ColumnName="IdGrupoUsuario" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UsuarioRol">
-            <EntityTypeMapping TypeName="KiiniNet_v2Model.UsuarioRol">
-              <MappingFragment StoreEntitySet="UsuarioRol">
-                <ScalarProperty Name="IdRolTipoUsuario" ColumnName="IdRolTipoUsuario" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -9745,6 +10245,7 @@
           <EntitySetMapping Name="Estado">
             <EntityTypeMapping TypeName="KiiniNet_v2Model.Estado">
               <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
                 <ScalarProperty Name="RegionCode" ColumnName="RegionCode" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -10205,9 +10706,83 @@
           <EntitySetMapping Name="Area">
             <EntityTypeMapping TypeName="KiiniNet_v2Model.Area">
               <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="Imagen" ColumnName="Imagen" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuarioRol">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.UsuarioRol">
+              <MappingFragment StoreEntitySet="UsuarioRol">
+                <ScalarProperty Name="IdRolTipoUsuario" ColumnName="IdRolTipoUsuario" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoNota">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.TipoNota">
+              <MappingFragment StoreEntitySet="TipoNota">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotaGeneral">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.NotaGeneral">
+              <MappingFragment StoreEntitySet="NotaGeneral">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Aprobada" ColumnName="Aprobada" />
+                <ScalarProperty Name="Compartida" ColumnName="Compartida" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotaGeneralGrupo">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.NotaGeneralGrupo">
+              <MappingFragment StoreEntitySet="NotaGeneralGrupo">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdGrupoUsuario" ColumnName="IdGrupoUsuario" />
+                <ScalarProperty Name="IdNotaGeneral" ColumnName="IdNotaGeneral" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotaOpcionGrupo">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.NotaOpcionGrupo">
+              <MappingFragment StoreEntitySet="NotaOpcionGrupo">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Aprobada" ColumnName="Aprobada" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdArbolAcceso" ColumnName="IdArbolAcceso" />
+                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotaOpcionUsuario">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.NotaOpcionUsuario">
+              <MappingFragment StoreEntitySet="NotaOpcionUsuario">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdArbolAcceso" ColumnName="IdArbolAcceso" />
+                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -60,5 +60,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<Ubicacion> ObtenerUbicacionByRegionCode(string regionCode);
+
+        [OperationContract]
+        Ubicacion ObtenerUbicacionFiscal(int idColonia, string calle, string noExt, string noInt);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using KiiniNet.Entities.Cat.Arbol.Nodos;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Usuario;
+using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
@@ -761,6 +762,109 @@ namespace KinniNet.Core.Operacion
                                               join ug in db.UsuarioGrupo on new { guia.IdRol, guia.IdGrupoUsuario, guia.IdSubGrupoUsuario } equals new { ug.IdRol, ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
                                               where ug.IdUsuario == idUsuario && ac.IdTipoArbolAcceso == idTipoArbol && ac.IdArea == idArea
                                               && guia.IdRol == (int)BusinessVariables.EnumRoles.Usuario
+                                              select ac;
+                result = qry.ToList();
+                foreach (ArbolAcceso arbol in result)
+                {
+                    db.LoadProperty(arbol, "Area");
+                    db.LoadProperty(arbol, "Nivel1");
+                    db.LoadProperty(arbol, "Nivel2");
+                    db.LoadProperty(arbol, "Nivel3");
+                    db.LoadProperty(arbol, "Nivel4");
+                    db.LoadProperty(arbol, "Nivel5");
+                    db.LoadProperty(arbol, "Nivel6");
+                    db.LoadProperty(arbol, "Nivel7");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<ArbolAcceso> ObtenerArbolesAccesoByIdUsuario(int idUsuario)
+        {
+            List<ArbolAcceso> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<ArbolAcceso> qry = from ac in db.ArbolAcceso
+                                              join iac in db.InventarioArbolAcceso on ac.Id equals iac.IdArbolAcceso
+                                              join guia in db.GrupoUsuarioInventarioArbol on iac.Id equals guia.IdInventarioArbolAcceso
+                                              join ug in db.UsuarioGrupo on new { guia.IdRol, guia.IdGrupoUsuario, guia.IdSubGrupoUsuario } equals new { ug.IdRol, ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
+                                              where ug.IdUsuario == idUsuario && guia.IdRol == (int)BusinessVariables.EnumRoles.Usuario
+                                              select ac;
+                result = qry.ToList();
+                foreach (ArbolAcceso arbol in result)
+                {
+                    db.LoadProperty(arbol, "Area");
+                    db.LoadProperty(arbol, "Nivel1");
+                    db.LoadProperty(arbol, "Nivel2");
+                    db.LoadProperty(arbol, "Nivel3");
+                    db.LoadProperty(arbol, "Nivel4");
+                    db.LoadProperty(arbol, "Nivel5");
+                    db.LoadProperty(arbol, "Nivel6");
+                    db.LoadProperty(arbol, "Nivel7");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<HelperArbolAcceso> ObtenerArbolesAccesoTerminalByIdUsuario(int idUsuario, bool insertarSeleccion)
+        {
+            List<HelperArbolAcceso> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<ArbolAcceso> qry = from ac in db.ArbolAcceso
+                                              join iac in db.InventarioArbolAcceso on ac.Id equals iac.IdArbolAcceso
+                                              join guia in db.GrupoUsuarioInventarioArbol on iac.Id equals guia.IdInventarioArbolAcceso
+                                              join ug in db.UsuarioGrupo on new { guia.IdRol, guia.IdGrupoUsuario, guia.IdSubGrupoUsuario } equals new { ug.IdRol, ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
+                                              where ug.IdUsuario == idUsuario && guia.IdRol == (int)BusinessVariables.EnumRoles.Usuario
+                                              select ac;
+
+                result = qry.ToList().Select(arbol => new HelperArbolAcceso { Id = arbol.Id, Descripcion = ObtenerTipificacion(arbol.Id) }).ToList();
+                if (insertarSeleccion)
+                    result.Insert(0, new HelperArbolAcceso { Id = BusinessVariables.ComboBoxCatalogo.IndexSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<ArbolAcceso> ObtenerArbolesAccesoByGrupos(List<int> lstGrupos)
+        {
+            List<ArbolAcceso> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                IQueryable<ArbolAcceso> qry = from ac in db.ArbolAcceso
+                                              join iac in db.InventarioArbolAcceso on ac.Id equals iac.IdArbolAcceso
+                                              join guia in db.GrupoUsuarioInventarioArbol on iac.Id equals guia.IdInventarioArbolAcceso
+                                              join ug in db.UsuarioGrupo on new { guia.IdRol, guia.IdGrupoUsuario, guia.IdSubGrupoUsuario } equals new { ug.IdRol, ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
+                                              where lstGrupos.Contains(guia.IdGrupoUsuario) && guia.IdRol == (int)BusinessVariables.EnumRoles.Usuario
                                               select ac;
                 result = qry.ToList();
                 foreach (ArbolAcceso arbol in result)

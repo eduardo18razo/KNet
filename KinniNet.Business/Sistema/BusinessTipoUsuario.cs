@@ -83,5 +83,25 @@ namespace KinniNet.Core.Sistema
             }
             return result;
         }
+
+        public TipoUsuario ObtenerTipoUsuarioById(int id)
+        {
+            TipoUsuario result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.TipoUsuario.SingleOrDefault(w => w.Id == id && w.Habilitado);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
     }
 }

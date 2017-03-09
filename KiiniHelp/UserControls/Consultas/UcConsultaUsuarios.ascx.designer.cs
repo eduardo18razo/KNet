@@ -121,12 +121,12 @@ namespace KiiniHelp.UserControls.Consultas {
         protected global::System.Web.UI.UpdatePanel upUser;
         
         /// <summary>
-        /// Control UcAltaUsuario.
+        /// Control ucAltaUsuarioMoral.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.UcAltaUsuario UcAltaUsuario;
+        protected global::KiiniHelp.UserControls.Altas.Usuarios.UcAltaUsuarioMoral ucAltaUsuarioMoral;
     }
 }

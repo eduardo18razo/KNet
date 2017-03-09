@@ -14,5 +14,8 @@ namespace KiiniNet.Services.Sistema.Interface
 
         [OperationContract]
         List<TipoUsuario> ObtenerTiposUsuario(bool insertarSeleccion);
+
+        [OperationContract]
+        TipoUsuario ObtenerTipoUsuarioById(int id);
     }
 }

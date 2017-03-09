@@ -284,4 +284,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerUbicacionFiscal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idColonia" type="xs:int" />
+        <xs:element minOccurs="0" name="calle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="noExt" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="noInt" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerUbicacionFiscalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ObtenerUbicacionFiscalResult" nillable="true" type="q19:Ubicacion" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

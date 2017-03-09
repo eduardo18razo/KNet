@@ -72,9 +72,9 @@ namespace KiiniHelp.ServiceArbolAcceso {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/GuardarArbol", ReplyAction="http://tempuri.org/IServiceArbolAcceso/GuardarArbolResponse")]
         void GuardarArbol(KiiniNet.Entities.Cat.Operacion.ArbolAcceso arbol);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArblodesAccesoByGruposUsuario", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerArblodesAccesoByGruposUsuarioRespon" +
-            "se")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoByGruposUsuario", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoByGruposUsuarioRespons" +
+            "e")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.ArbolAcceso> ObtenerArbolesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolAcceso", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolAccesoResponse")]
         KiiniNet.Entities.Cat.Operacion.ArbolAcceso ObtenerArbolAcceso(int idArbol);
@@ -90,6 +90,10 @@ namespace KiiniHelp.ServiceArbolAcceso {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalAll", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalAllResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.ArbolAcceso> ObtenerArbolesAccesoTerminalAll(System.Nullable<int> idArea, System.Nullable<int> idTipoUsuario, System.Nullable<int> idTipoArbol, System.Nullable<int> nivel1, System.Nullable<int> nivel2, System.Nullable<int> nivel3, System.Nullable<int> nivel4, System.Nullable<int> nivel5, System.Nullable<int> nivel6, System.Nullable<int> nivel7);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalByIdUsuario", ReplyAction="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalByIdUsuarioRes" +
+            "ponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperArbolAcceso> ObtenerArbolesAccesoTerminalByIdUsuario(int idUsuario, bool insertarSeleccion);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -195,8 +199,8 @@ namespace KiiniHelp.ServiceArbolAcceso {
             base.Channel.GuardarArbol(arbol);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea) {
-            return base.Channel.ObtenerArblodesAccesoByGruposUsuario(idUsuario, idTipoArbol, idArea);
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.ArbolAcceso> ObtenerArbolesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea) {
+            return base.Channel.ObtenerArbolesAccesoByGruposUsuario(idUsuario, idTipoArbol, idArea);
         }
         
         public KiiniNet.Entities.Cat.Operacion.ArbolAcceso ObtenerArbolAcceso(int idArbol) {
@@ -217,6 +221,10 @@ namespace KiiniHelp.ServiceArbolAcceso {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Operacion.ArbolAcceso> ObtenerArbolesAccesoTerminalAll(System.Nullable<int> idArea, System.Nullable<int> idTipoUsuario, System.Nullable<int> idTipoArbol, System.Nullable<int> nivel1, System.Nullable<int> nivel2, System.Nullable<int> nivel3, System.Nullable<int> nivel4, System.Nullable<int> nivel5, System.Nullable<int> nivel6, System.Nullable<int> nivel7) {
             return base.Channel.ObtenerArbolesAccesoTerminalAll(idArea, idTipoUsuario, idTipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperArbolAcceso> ObtenerArbolesAccesoTerminalByIdUsuario(int idUsuario, bool insertarSeleccion) {
+            return base.Channel.ObtenerArbolesAccesoTerminalByIdUsuario(idUsuario, insertarSeleccion);
         }
     }
 }

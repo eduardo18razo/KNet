@@ -75,6 +75,12 @@ namespace KinniNet.Business.Utils
                 Correo = 3,
                 Chat = 4
             }
+
+            public enum EnumTipoNota
+            {
+                General = 1,
+                Opcion = 2
+            }
         }
 
         public static int[] IdsPublicos =
@@ -92,6 +98,10 @@ namespace KinniNet.Business.Utils
             ClienteInvitado = 4,
             Proveedor = 5,
             ProveedorInvitado = 6,
+            EmpleadoPersonaFisica = 7,
+            ClientaPersonaFisica = 8,
+            ProveedorPersonaFisica = 9,
+            NuestraInstitucion = 10
         }
         public enum EnumTipoObjeto
         {

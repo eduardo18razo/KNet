@@ -127,6 +127,12 @@
   <wsdl:message name="IServiceUbicacion_ObtenerUbicacionByRegionCode_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerUbicacionByRegionCodeResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceUbicacion_ObtenerUbicacionFiscal_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUbicacionFiscal" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUbicacion_ObtenerUbicacionFiscal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUbicacionFiscalResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceUbicacion">
     <wsdl:operation name="ObtenerPais">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerPais" message="tns:IServiceUbicacion_ObtenerPais_InputMessage" />
@@ -199,6 +205,10 @@
     <wsdl:operation name="ObtenerUbicacionByRegionCode">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionByRegionCode" message="tns:IServiceUbicacion_ObtenerUbicacionByRegionCode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionByRegionCodeResponse" message="tns:IServiceUbicacion_ObtenerUbicacionByRegionCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUbicacionFiscal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionFiscal" message="tns:IServiceUbicacion_ObtenerUbicacionFiscal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionFiscalResponse" message="tns:IServiceUbicacion_ObtenerUbicacionFiscal_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceUbicacion">
@@ -358,6 +368,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerUbicacionByRegionCode">
       <soap:operation soapAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionByRegionCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUbicacionFiscal">
+      <soap:operation soapAction="http://tempuri.org/IServiceUbicacion/ObtenerUbicacionFiscal" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

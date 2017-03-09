@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
 
@@ -23,5 +24,6 @@ namespace KiiniNet.Entities.Cat.Arbol.Ubicaciones
         public virtual List<Ubicacion> Ubicacion { get; set; }
         [DataMember]
         public virtual TipoUsuario TipoUsuario { get; set; }
+        public virtual List<Estado> Estado { get; set; }
     }
 }

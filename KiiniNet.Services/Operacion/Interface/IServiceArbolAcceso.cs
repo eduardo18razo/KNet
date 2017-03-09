@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Arbol.Nodos;
 using KiiniNet.Entities.Cat.Operacion;
+using KiiniNet.Entities.Helper;
 
 namespace KiiniNet.Services.Operacion.Interface
 {
@@ -50,7 +51,7 @@ namespace KiiniNet.Services.Operacion.Interface
         [OperationContract]
         void GuardarArbol(ArbolAcceso arbol);
         [OperationContract]
-        List<ArbolAcceso> ObtenerArblodesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea);
+        List<ArbolAcceso> ObtenerArbolesAccesoByGruposUsuario(int idUsuario, int idTipoArbol, int idArea);
         [OperationContract]
         ArbolAcceso ObtenerArbolAcceso(int idArbol);
 
@@ -64,5 +65,8 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         List<ArbolAcceso> ObtenerArbolesAccesoTerminalAll(int? idArea, int? idTipoUsuario, int? idTipoArbol, int? nivel1, int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7);
+
+        [OperationContract]
+        List<HelperArbolAcceso> ObtenerArbolesAccesoTerminalByIdUsuario(int idUsuario, bool insertarSeleccion);
     }
 }

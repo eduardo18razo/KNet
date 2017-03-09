@@ -44,18 +44,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IService1.cs" />
     <Compile Include="Operacion\Implementacion\ServiceArea.cs" />
     <Compile Include="Operacion\Implementacion\ServiceConsultas.cs" />
     <Compile Include="Operacion\Implementacion\ServiceDiasHorario.cs" />
+    <Compile Include="Operacion\Implementacion\ServiceNota.cs" />
     <Compile Include="Operacion\Implementacion\ServicePuesto.cs" />
     <Compile Include="Operacion\Implementacion\ServiceTicket.cs" />
     <Compile Include="Operacion\Interface\IServiceArea.cs" />
     <Compile Include="Operacion\Interface\IServiceConsultas.cs" />
     <Compile Include="Operacion\Interface\IServiceDiasHorario.cs" />
+    <Compile Include="Operacion\Interface\IServiceNota.cs" />
     <Compile Include="Operacion\Interface\IServicePuesto.cs" />
     <Compile Include="Operacion\Interface\IServiceTicket.cs" />
-    <Compile Include="Service1.cs" />
+    <Compile Include="Sistema\Implementacion\ServiceTipoNota.cs" />
+    <Compile Include="Sistema\Interface\IServiceTipoNota.cs" />
     <Compile Include="Sistema\Implementacion\ServiceCanal.cs" />
     <Compile Include="Sistema\Implementacion\ServiceImpactoUrgencia.cs" />
     <Compile Include="Sistema\Implementacion\ServiceNotificacion.cs" />

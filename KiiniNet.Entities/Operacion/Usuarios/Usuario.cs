@@ -94,7 +94,13 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public virtual List<PreTicket> PreTicketSolicitado { get; set; }
         [DataMember]
         public virtual List<PreTicket> PreTicketLevantado { get; set; }
-
+        [DataMember]
+        public virtual List<NotaGeneral> NotaGeneral { get; set; }
+        [DataMember]
+        public virtual List<NotaOpcionUsuario> NotaOpcionUsuario { get; set; }
+        [DataMember]
+        public virtual List<NotaOpcionGrupo> NotaOpcionGrupo { get; set; }
+        public bool Supervisor { get; set; }
         public string NombreCompleto { get { return ApellidoPaterno + " " + ApellidoMaterno + " " + Nombre; } }
 
         public string OrganizacionCompleta { get; set; }

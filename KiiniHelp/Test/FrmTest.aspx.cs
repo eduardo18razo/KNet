@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Net.Mail;
+using System.Net.Security;
+using System.Net.Sockets;
+using System.ServiceModel.Channels;
 using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
@@ -17,6 +21,7 @@ namespace KiiniHelp.Test
 {
     public partial class FrmTest : Page
     {
+
         private readonly ServiceCatalogosClient _servicioCatalogos = new ServiceCatalogosClient();
         //private void SendMessageAltiria()
         //{
@@ -115,6 +120,41 @@ namespace KiiniHelp.Test
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            TcpClient tcpclient = new TcpClient();
+            //tcpclient.Connect("pop3.live.com", 995);
+            tcpclient.Connect("pop.gmail.com", 995);
+            System.Net.Security.SslStream sslstream = new SslStream(tcpclient.GetStream());
+            //sslstream.AuthenticateAsClient("pop3.live.com");
+            sslstream.AuthenticateAsClient("pop.gmail.com");
+            StreamWriter sw = new StreamWriter(sslstream);
+            System.IO.StreamReader reader = new StreamReader(sslstream);
+            sw.WriteLine("USER eduardo30razo@gmail.com"); sw.Flush();
+            sw.WriteLine("PASS Eyleen231012"); sw.Flush();
+            sw.WriteLine("RETR 1");
+            sw.Flush();
+            sw.WriteLine("Quit ");
+            sw.Flush();
+            string str = string.Empty;
+            string strTemp = string.Empty;
+            while ((strTemp = reader.ReadLine()) != null)
+            {
+                if (".".Equals(strTemp))
+                {
+                    break;
+                }
+                if (strTemp.IndexOf("-ERR") != -1)
+                {
+                    break;
+                }
+                str += strTemp;
+            }
+            Response.Write(str);
+            reader.Close();
+            sw.Close();
+            tcpclient.Close(); // close the connection
+
+
+
             //string var = CleanInput("ESTE ES 1 TEXTO CON PAY@SDAS+¨'+´+}{+");
             //if (!IsPostBack)
             //{
@@ -244,6 +284,8 @@ namespace KiiniHelp.Test
             //}
             //ChartStack.Click += ChartStackOnClick;
         }
+
+
 
         protected void btnModalImpactoUrgencia_OnClick(object sender, EventArgs e)
         {
