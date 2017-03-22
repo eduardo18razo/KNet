@@ -37,7 +37,10 @@
     <Property Name="IdNivel6" Type="int" />
     <Property Name="IdNivel7" Type="int" />
     <Property Name="EsTerminal" Type="bit" Nullable="false" />
+    <Property Name="Sistema" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
+    <Property Name="FechaAlta" Type="datetime" />
+    <Property Name="IdUsuarioAlta" Type="int" />
   </EntityType>
   <EntityType Name="Area">
     <Key>
@@ -47,6 +50,11 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Imagen" Type="image" />
     <Property Name="Extension" Type="nvarchar" MaxLength="5" />
+    <Property Name="Sistema" Type="bit" Nullable="false" />
+    <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioAlta" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModifico" Type="int" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="CampoMascara">
@@ -112,6 +120,14 @@
     <Property Name="IdTipoUsuario" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConversacionArchivo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTicketConversacion" Type="int" />
+    <Property Name="Archivo" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="CorreoUsuario">
     <Key>
@@ -431,6 +447,8 @@
     <Property Name="ComandoInsertar" Type="nvarchar" MaxLength="250" />
     <Property Name="ComandoActualizar" Type="nvarchar" MaxLength="250" />
     <Property Name="Random" Type="bit" />
+    <Property Name="FechaAlta" Type="datetime" />
+    <Property Name="IdUsuarioAlta" Type="int" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="Menu">
@@ -975,6 +993,19 @@
     <Property Name="FechaAsignacion" Type="datetime" Nullable="false" />
     <Property Name="Comentarios" Type="nvarchar" MaxLength="150" />
   </EntityType>
+  <EntityType Name="TicketConversacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTicket" Type="int" Nullable="false" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="Mensaje" Type="ntext" Nullable="false" />
+    <Property Name="FechaGeneracion" Type="datetime" />
+    <Property Name="Sistema" Type="bit" />
+    <Property Name="Leido" Type="bit" />
+    <Property Name="FechaLectura" Type="datetime" />
+  </EntityType>
   <EntityType Name="TicketEstatus">
     <Key>
       <PropertyRef Name="Id" />
@@ -1364,6 +1395,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ArbolAcceso_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="ArbolAcceso" Type="Self.ArbolAcceso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArbolAcceso">
+        <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Area_UsuarioAlta">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Area_UsuarioModifico">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Area" Type="Self.Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="IdUsuarioModifico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Campus_TipoUsuario">
     <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
     <End Role="Campus" Type="Self.Campus" Multiplicity="*" />
@@ -1397,6 +1464,18 @@
       </Principal>
       <Dependent Role="Compania">
         <PropertyRef Name="IdTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConversacionArchivo_TicketConversacion">
+    <End Role="TicketConversacion" Type="Self.TicketConversacion" Multiplicity="0..1" />
+    <End Role="ConversacionArchivo" Type="Self.ConversacionArchivo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TicketConversacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConversacionArchivo">
+        <PropertyRef Name="IdTicketConversacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2081,6 +2160,18 @@
       </Principal>
       <Dependent Role="Jefatura">
         <PropertyRef Name="IdTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mascara_UsuarioAlta">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Mascara" Type="Self.Mascara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mascara">
+        <PropertyRef Name="IdUsuarioAlta" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3200,6 +3291,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TicketConversacion_Ticket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="1" />
+    <End Role="TicketConversacion" Type="Self.TicketConversacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketConversacion">
+        <PropertyRef Name="IdTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketConversacion_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="TicketConversacion" Type="Self.TicketConversacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketConversacion">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TicketEstatus_EstatusTicket">
     <End Role="EstatusTicket" Type="Self.EstatusTicket" Multiplicity="1" />
     <End Role="TicketEstatus" Type="Self.TicketEstatus" Multiplicity="*" />
@@ -3619,6 +3734,7 @@
     <EntitySet Name="Catalogos" EntityType="Self.Catalogos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Colonia" EntityType="Self.Colonia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Compania" EntityType="Self.Compania" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ConversacionArchivo" EntityType="Self.ConversacionArchivo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CorreoUsuario" EntityType="Self.CorreoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DiaFestivoSubGrupo" EntityType="Self.DiaFestivoSubGrupo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
@@ -3698,6 +3814,7 @@
     <EntitySet Name="TelefonoUsuario" EntityType="Self.TelefonoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TicketAsignacion" EntityType="Self.TicketAsignacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TicketConversacion" EntityType="Self.TicketConversacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TicketEstatus" EntityType="Self.TicketEstatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TicketGrupoUsuario" EntityType="Self.TicketGrupoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiempoInformeArbol" EntityType="Self.TiempoInformeArbol" Schema="dbo" store:Type="Tables" />
@@ -3766,6 +3883,18 @@
       <End Role="Impacto" EntitySet="Impacto" />
       <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
     </AssociationSet>
+    <AssociationSet Name="FK_ArbolAcceso_Usuario" Association="Self.FK_ArbolAcceso_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Area_UsuarioAlta" Association="Self.FK_Area_UsuarioAlta">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Area_UsuarioModifico" Association="Self.FK_Area_UsuarioModifico">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
     <AssociationSet Name="FK_Campus_TipoUsuario" Association="Self.FK_Campus_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Campus" EntitySet="Campus" />
@@ -3777,6 +3906,10 @@
     <AssociationSet Name="FK_Compania_TipoUsuario" Association="Self.FK_Compania_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Compania" EntitySet="Compania" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConversacionArchivo_TicketConversacion" Association="Self.FK_ConversacionArchivo_TicketConversacion">
+      <End Role="TicketConversacion" EntitySet="TicketConversacion" />
+      <End Role="ConversacionArchivo" EntitySet="ConversacionArchivo" />
     </AssociationSet>
     <AssociationSet Name="FK_CorreoUsuario_Usuario" Association="Self.FK_CorreoUsuario_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
@@ -4005,6 +4138,10 @@
     <AssociationSet Name="FK_Jefatura_TipoUsuario" Association="Self.FK_Jefatura_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Jefatura" EntitySet="Jefatura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mascara_UsuarioAlta" Association="Self.FK_Mascara_UsuarioAlta">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Mascara" EntitySet="Mascara" />
     </AssociationSet>
     <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
       <End Role="Menu" EntitySet="Menu" />
@@ -4377,6 +4514,14 @@
     <AssociationSet Name="FK_TicketAsignacion_UsuarioAsigno" Association="Self.FK_TicketAsignacion_UsuarioAsigno">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketConversacion_Ticket" Association="Self.FK_TicketConversacion_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="TicketConversacion" EntitySet="TicketConversacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketConversacion_Usuario" Association="Self.FK_TicketConversacion_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="TicketConversacion" EntitySet="TicketConversacion" />
     </AssociationSet>
     <AssociationSet Name="FK_TicketEstatus_EstatusTicket" Association="Self.FK_TicketEstatus_EstatusTicket">
       <End Role="EstatusTicket" EntitySet="EstatusTicket" />

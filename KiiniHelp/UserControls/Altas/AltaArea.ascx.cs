@@ -5,6 +5,7 @@ using System.Web.UI;
 using AjaxControlToolkit;
 using KiiniHelp.ServiceArea;
 using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
@@ -89,9 +90,15 @@ namespace KiiniHelp.UserControls.Altas
                 //TODO: Cambiar propiedad por valor de control
                 area.Habilitado = true;
                 if (EsAlta)
+                {
+                    area.IdUsuarioAlta = ((Usuario) Session["UserData"]).Id;
                     _servicioArea.Guardar(area);
+                }
                 else
+                {
+                    area.IdUsuarioModifico = ((Usuario) Session["UserData"]).Id;
                     _servicioArea.Actualizar(int.Parse(hfIdArea.Value), area);
+                }
                 LimpiarCampos();
                 if (OnAceptarModal != null)
                     OnAceptarModal();

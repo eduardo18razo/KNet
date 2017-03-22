@@ -9,7 +9,7 @@ namespace KiiniNet.Services.Operacion.Interface
     public interface IServiceTicket
     {
         [OperationContract]
-        Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero);
+        Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero, bool esMail);
 
         [OperationContract]
         List<HelperTickets> ObtenerTicketsUsuario(int idUsuario, int pageIndex, int pageSize);

@@ -500,11 +500,11 @@ namespace KinniNet.Core.Security
                                         break;
                                     case (int)BusinessVariables.EnumMenu.Servicio:
                                         lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.SolicitarServicio, area).Distinct().ToList();
-                                        GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Web + "&IdArbol=");
+                                        GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Portal + "&IdArbol=");
                                         break;
                                     case (int)BusinessVariables.EnumMenu.Incidentes:
                                         lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.ReportarProblemas, area).Distinct().ToList();
-                                        GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Web + "&IdArbol=");
+                                        GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Portal + "&IdArbol=");
                                         break;
                                 }
                             }

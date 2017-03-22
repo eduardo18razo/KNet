@@ -261,7 +261,7 @@ namespace KinniNet.Core.Operacion
         }
         public List<GrupoUsuario> ObtenerGruposUsuarioByIdRolTipoUsuario(int idRol, int idTipoUsuario, bool insertarSeleccion)
         {
-            List<GrupoUsuario> result = new List<GrupoUsuario>();
+            List<GrupoUsuario> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
@@ -287,7 +287,7 @@ namespace KinniNet.Core.Operacion
         }
         public List<GrupoUsuario> ObtenerGruposUsuarioByIdRol(int idRol, bool insertarSeleccion)
         {
-            List<GrupoUsuario> result = new List<GrupoUsuario>();
+            List<GrupoUsuario> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
@@ -310,107 +310,6 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
             return result;
-        }
-        public void GuardarGrupoUsuario(GrupoUsuario grupoUsuario)
-        {
-            DataBaseModelContext db = new DataBaseModelContext();
-            try
-            {
-
-                grupoUsuario.Descripcion = grupoUsuario.Descripcion.Trim().ToUpper();
-                if (db.GrupoUsuario.Any(a => a.Descripcion == grupoUsuario.Descripcion && a.IdTipoGrupo == grupoUsuario.IdTipoGrupo))
-                {
-                    throw new Exception("Ya existe un Grupo con esta descripcion");
-                }
-                db.ContextOptions.ProxyCreationEnabled = _proxy;
-                //TODO: Cambiar habilitado por el que viene embebido
-                grupoUsuario.Habilitado = true;
-                grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
-                if (grupoUsuario.Id == 0)
-                {
-                    grupoUsuario.EstatusTicketSubRolGeneral = GeneraEstatusGrupoDefault(grupoUsuario);
-                    grupoUsuario.EstatusAsignacionSubRolGeneral = GeneraEstatusAsignacionGrupoDefault(grupoUsuario);
-                    db.GrupoUsuario.AddObject(grupoUsuario);
-                }
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                db.Dispose();
-            }
-        }
-        public void GuardarGrupoUsuario(GrupoUsuario grupoUsuario, Dictionary<int, int> horarios, Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso)
-        {
-            DataBaseModelContext db = new DataBaseModelContext();
-            try
-            {
-
-                grupoUsuario.Descripcion = grupoUsuario.Descripcion.Trim().ToUpper();
-                if (db.GrupoUsuario.Any(a => a.Descripcion == grupoUsuario.Descripcion && a.IdTipoGrupo == grupoUsuario.IdTipoGrupo))
-                {
-                    throw new Exception("Ya existe un Grupo con esta descripcion");
-                }
-                grupoUsuario.SubGrupoUsuario = new List<SubGrupoUsuario>();
-                foreach (KeyValuePair<int, int> horario in horarios)
-                {
-
-                    List<HorarioSubGrupo> lstHorarioGpo = new List<HorarioSubGrupo>();
-                    List<HorarioDetalle> detalle = db.HorarioDetalle.Where(w => w.IdHorario == horario.Value).ToList();
-                    foreach (HorarioDetalle horarioDetalle in detalle)
-                    {
-                        HorarioSubGrupo horarioGpo = new HorarioSubGrupo
-                        {
-                            IdHorario = horario.Value,
-                            IdSubGrupoUsuario = horario.Key,
-                            Dia = horarioDetalle.Dia,
-                            HoraInicio = horarioDetalle.HoraInicio,
-                            HoraFin = horarioDetalle.HoraFin
-                        };
-                        lstHorarioGpo.Add(horarioGpo);
-                    }
-
-                    SubGrupoUsuario subGrupo = new SubGrupoUsuario();
-                    subGrupo.IdSubRol = horario.Key;
-                    subGrupo.Habilitado = true;
-                    subGrupo.HorarioSubGrupo = subGrupo.HorarioSubGrupo ?? new List<HorarioSubGrupo>();
-                    subGrupo.DiaFestivoSubGrupo = subGrupo.DiaFestivoSubGrupo ?? new List<DiaFestivoSubGrupo>();
-                    subGrupo.HorarioSubGrupo.AddRange(lstHorarioGpo);
-                    List<DiaFestivoSubGrupo> lstDiasDescanso = diasDescanso.SingleOrDefault(w => w.Key == horario.Key).Value;
-                    if (lstDiasDescanso != null)
-                    {
-                        foreach (DiaFestivoSubGrupo dia in lstDiasDescanso)
-                        {
-                            dia.IdSubGrupoUsuario = horario.Key;
-                        }
-                        subGrupo.DiaFestivoSubGrupo.AddRange(lstDiasDescanso);
-                    }
-
-                    grupoUsuario.SubGrupoUsuario.Add(subGrupo);
-                }
-                db.ContextOptions.ProxyCreationEnabled = _proxy;
-                //TODO: Cambiar habilitado por el que viene embebido
-                grupoUsuario.Habilitado = true;
-                grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
-                if (grupoUsuario.Id == 0)
-                {
-                    grupoUsuario.EstatusTicketSubRolGeneral = GeneraEstatusGrupoDefault(grupoUsuario);
-                    grupoUsuario.EstatusAsignacionSubRolGeneral = GeneraEstatusAsignacionGrupoDefault(grupoUsuario);
-                    db.GrupoUsuario.AddObject(grupoUsuario);
-                }
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                db.Dispose();
-            }
         }
         public GrupoUsuario ObtenerGrupoUsuarioById(int idGrupoUsuario)
         {
@@ -475,29 +374,6 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
             return result;
-        }
-        public void HabilitarGrupo(int idGrupo, bool habilitado)
-        {
-            DataBaseModelContext db = new DataBaseModelContext();
-            try
-            {
-                if (db.GrupoUsuario.Single(s => s.Id == idGrupo).IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Administrador)
-                    if (db.GrupoUsuario.Count(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Administrador && w.Habilitado && w.Id != idGrupo && w.UsuarioGrupo.Count(ug => ug.IdGrupoUsuario == w.Id) > 0) <= 0)
-                    {
-                        throw new Exception("Debe tener otro usuario activo para este tipo de grupo.");
-                    }
-                GrupoUsuario grpo = db.GrupoUsuario.SingleOrDefault(w => w.Id == idGrupo);
-                if (grpo != null) grpo.Habilitado = habilitado;
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                db.Dispose();
-            }
         }
         public List<HorarioSubGrupo> ObtenerHorariosByIdSubGrupo(int idSubGrupo)
         {
@@ -615,6 +491,108 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
+
+        public void GuardarGrupoUsuario(GrupoUsuario grupoUsuario)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+
+                grupoUsuario.Descripcion = grupoUsuario.Descripcion.Trim().ToUpper();
+                if (db.GrupoUsuario.Any(a => a.Descripcion == grupoUsuario.Descripcion && a.IdTipoGrupo == grupoUsuario.IdTipoGrupo))
+                {
+                    throw new Exception("Ya existe un Grupo con esta descripcion");
+                }
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                //TODO: Cambiar habilitado por el que viene embebido
+                grupoUsuario.Habilitado = true;
+                grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
+                if (grupoUsuario.Id == 0)
+                {
+                    grupoUsuario.EstatusTicketSubRolGeneral = GeneraEstatusGrupoDefault(grupoUsuario);
+                    grupoUsuario.EstatusAsignacionSubRolGeneral = GeneraEstatusAsignacionGrupoDefault(grupoUsuario);
+                    db.GrupoUsuario.AddObject(grupoUsuario);
+                }
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+        public void GuardarGrupoUsuario(GrupoUsuario grupoUsuario, Dictionary<int, int> horarios, Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+
+                grupoUsuario.Descripcion = grupoUsuario.Descripcion.Trim().ToUpper();
+                if (db.GrupoUsuario.Any(a => a.Descripcion == grupoUsuario.Descripcion && a.IdTipoGrupo == grupoUsuario.IdTipoGrupo))
+                {
+                    throw new Exception("Ya existe un Grupo con esta descripcion");
+                }
+                grupoUsuario.SubGrupoUsuario = new List<SubGrupoUsuario>();
+                foreach (KeyValuePair<int, int> horario in horarios)
+                {
+
+                    List<HorarioSubGrupo> lstHorarioGpo = new List<HorarioSubGrupo>();
+                    List<HorarioDetalle> detalle = db.HorarioDetalle.Where(w => w.IdHorario == horario.Value).ToList();
+                    foreach (HorarioDetalle horarioDetalle in detalle)
+                    {
+                        HorarioSubGrupo horarioGpo = new HorarioSubGrupo
+                        {
+                            IdHorario = horario.Value,
+                            IdSubGrupoUsuario = horario.Key,
+                            Dia = horarioDetalle.Dia,
+                            HoraInicio = horarioDetalle.HoraInicio,
+                            HoraFin = horarioDetalle.HoraFin
+                        };
+                        lstHorarioGpo.Add(horarioGpo);
+                    }
+
+                    SubGrupoUsuario subGrupo = new SubGrupoUsuario();
+                    subGrupo.IdSubRol = horario.Key;
+                    subGrupo.Habilitado = true;
+                    subGrupo.HorarioSubGrupo = subGrupo.HorarioSubGrupo ?? new List<HorarioSubGrupo>();
+                    subGrupo.DiaFestivoSubGrupo = subGrupo.DiaFestivoSubGrupo ?? new List<DiaFestivoSubGrupo>();
+                    subGrupo.HorarioSubGrupo.AddRange(lstHorarioGpo);
+                    List<DiaFestivoSubGrupo> lstDiasDescanso = diasDescanso.SingleOrDefault(w => w.Key == horario.Key).Value;
+                    if (lstDiasDescanso != null)
+                    {
+                        foreach (DiaFestivoSubGrupo dia in lstDiasDescanso)
+                        {
+                            dia.IdSubGrupoUsuario = horario.Key;
+                        }
+                        subGrupo.DiaFestivoSubGrupo.AddRange(lstDiasDescanso);
+                    }
+
+                    grupoUsuario.SubGrupoUsuario.Add(subGrupo);
+                }
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                //TODO: Cambiar habilitado por el que viene embebido
+                grupoUsuario.Habilitado = true;
+                grupoUsuario.TieneSupervisor = grupoUsuario.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
+                if (grupoUsuario.Id == 0)
+                {
+                    grupoUsuario.EstatusTicketSubRolGeneral = GeneraEstatusGrupoDefault(grupoUsuario);
+                    grupoUsuario.EstatusAsignacionSubRolGeneral = GeneraEstatusAsignacionGrupoDefault(grupoUsuario);
+                    db.GrupoUsuario.AddObject(grupoUsuario);
+                }
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
         public void ActualizarGrupo(GrupoUsuario gpo, Dictionary<int, int> horarios, Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso)
         {
             DataBaseModelContext db = new DataBaseModelContext();
@@ -622,16 +600,16 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.LazyLoadingEnabled = true;
                 gpo.Descripcion = gpo.Descripcion.Trim().ToUpper();
-                    if (db.GrupoUsuario.Any(a => a.Descripcion == gpo.Descripcion && a.IdTipoGrupo == gpo.IdTipoGrupo && a.Id != gpo.Id))
-                    {
-                        throw new Exception("Ya existe un Grupo con esta descripción");
-                    }
+                if (db.GrupoUsuario.Any(a => a.Descripcion == gpo.Descripcion && a.IdTipoGrupo == gpo.IdTipoGrupo && a.Id != gpo.Id))
+                {
+                    throw new Exception("Ya existe un Grupo con esta descripción");
+                }
                 GrupoUsuario grupo = db.GrupoUsuario.SingleOrDefault(w => w.Id == gpo.Id);
                 List<SubGrupoUsuario> sb = new List<SubGrupoUsuario>();
                 if (grupo != null)
                 {
-                    
-                    if (grupo.IdTipoGrupo == (int) BusinessVariables.EnumTiposGrupos.AgenteUniversal)
+
+                    if (grupo.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal)
                     {
                         grupo.LevantaTicket = gpo.LevantaTicket;
                         grupo.RecadoTicket = gpo.RecadoTicket;
@@ -654,12 +632,13 @@ namespace KinniNet.Core.Operacion
                             lstHorarioGpo.Add(horarioGpo);
                         }
 
-                        SubGrupoUsuario subGrupo = new SubGrupoUsuario();
-                        var h = grupo.SubGrupoUsuario.FirstOrDefault(f => f.IdSubRol == horario.Key);
-                        subGrupo.Id = grupo.SubGrupoUsuario.FirstOrDefault(f => f.IdSubRol == horario.Key) != null ? grupo.SubGrupoUsuario.First(f => f.IdSubRol == horario.Key).Id : 0;
-                        subGrupo.IdGrupoUsuario = grupo.Id;
-                        subGrupo.IdSubRol = horario.Key;
-                        subGrupo.Habilitado = true;
+                        SubGrupoUsuario subGrupo = new SubGrupoUsuario
+                        {
+                            Id = grupo.SubGrupoUsuario.FirstOrDefault(f => f.IdSubRol == horario.Key) != null ? grupo.SubGrupoUsuario.First(f => f.IdSubRol == horario.Key).Id : 0,
+                            IdGrupoUsuario = grupo.Id,
+                            IdSubRol = horario.Key,
+                            Habilitado = true
+                        };
                         subGrupo.HorarioSubGrupo = subGrupo.HorarioSubGrupo ?? new List<HorarioSubGrupo>();
                         subGrupo.DiaFestivoSubGrupo = subGrupo.DiaFestivoSubGrupo ?? new List<DiaFestivoSubGrupo>();
                         subGrupo.HorarioSubGrupo.AddRange(lstHorarioGpo);
@@ -697,7 +676,7 @@ namespace KinniNet.Core.Operacion
                     //            diasEliminar.Add(diaNuevo);
                     //    }
                     //}
-                    
+
 
                     List<HorarioSubGrupo> horariosEliminar = new List<HorarioSubGrupo>();
                     foreach (SubGrupoUsuario sgu in sb)
@@ -742,6 +721,21 @@ namespace KinniNet.Core.Operacion
                     }
                     grupo.TieneSupervisor = grupo.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
                     grupo.Descripcion = gpo.Descripcion.Trim().ToUpper();
+
+                    List<EstatusTicketSubRolGeneral> lstEliminarPoliticaEstatus = db.EstatusTicketSubRolGeneral.Where(w => w.IdGrupoUsuario == grupo.Id).ToList();
+                    List<EstatusAsignacionSubRolGeneral> lstEliminarPoliticaEstatusAsignacion = db.EstatusAsignacionSubRolGeneral.Where(w => w.IdGrupoUsuario == grupo.Id).ToList();
+                    foreach (EstatusTicketSubRolGeneral politicaEstatus in lstEliminarPoliticaEstatus)
+                    {
+                        db.EstatusTicketSubRolGeneral.DeleteObject(politicaEstatus);
+                    }
+                    foreach (EstatusAsignacionSubRolGeneral politicaAsignacion in lstEliminarPoliticaEstatusAsignacion)
+                    {
+                        db.EstatusAsignacionSubRolGeneral.DeleteObject(politicaAsignacion);
+                    }
+
+                    grupo.EstatusTicketSubRolGeneral = GeneraEstatusGrupoDefault(grupo);
+                    grupo.EstatusAsignacionSubRolGeneral = GeneraEstatusAsignacionGrupoDefault(grupo);
+                    db.GrupoUsuario.AddObject(grupo);
                 }
                 db.SaveChanges();
             }
@@ -754,7 +748,29 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
         }
-
+        public void HabilitarGrupo(int idGrupo, bool habilitado)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                if (db.GrupoUsuario.Single(s => s.Id == idGrupo).IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Administrador)
+                    if (db.GrupoUsuario.Count(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Administrador && w.Habilitado && w.Id != idGrupo && w.UsuarioGrupo.Count(ug => ug.IdGrupoUsuario == w.Id) > 0) <= 0)
+                    {
+                        throw new Exception("Debe tener otro usuario activo para este tipo de grupo.");
+                    }
+                GrupoUsuario grpo = db.GrupoUsuario.SingleOrDefault(w => w.Id == idGrupo);
+                if (grpo != null) grpo.Habilitado = habilitado;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
 
         private List<EstatusTicketSubRolGeneral> GeneraEstatusGrupoDefault(GrupoUsuario grupo)
         {

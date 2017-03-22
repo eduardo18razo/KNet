@@ -9,6 +9,7 @@ using KiiniHelp.ServiceMascaraAcceso;
 using KiiniHelp.ServiceSistemaCatalogos;
 using KiiniHelp.ServiceSistemaTipoCampoMascara;
 using KiiniNet.Entities.Cat.Mascaras;
+using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
@@ -291,6 +292,7 @@ namespace KiiniHelp.UserControls.Altas
                     throw new Exception("Debe al menos un campo.");
                 nuevaMascara.Descripcion = txtNombre.Text.Trim();
                 nuevaMascara.Random = chkClaveRegistro.Checked;
+                nuevaMascara.IdUsuarioAlta = ((Usuario) Session["UserData"]).Id;
                 _servicioMascaras.CrearMascara(nuevaMascara);
                 LimpiarMascara();
                 if (OnAceptarModal != null)

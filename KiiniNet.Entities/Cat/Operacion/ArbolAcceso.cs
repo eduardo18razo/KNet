@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Arbol.Nodos;
 using KiiniNet.Entities.Cat.Sistema;
@@ -38,7 +39,13 @@ namespace KiiniNet.Entities.Cat.Operacion
         [DataMember]
         public bool EsTerminal { get; set; }
         [DataMember]
+        public bool Sistema { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
+        [DataMember]
+        public DateTime FechaAlta { get; set; }
+        [DataMember]
+        public int IdUsuarioAlta { get; set; }
 
         [DataMember]
         public virtual TipoUsuario TipoUsuario { get; set; }
@@ -81,7 +88,5 @@ namespace KiiniNet.Entities.Cat.Operacion
         public virtual List<NotaOpcionUsuario> NotaOpcionUsuario { get; set; }
         [DataMember]
         public virtual List<NotaOpcionGrupo> NotaOpcionGrupo { get; set; }
-
-
     }
 }

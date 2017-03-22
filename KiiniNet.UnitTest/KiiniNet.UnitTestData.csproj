@@ -62,6 +62,10 @@
       <Project>{c003d316-9b3c-44ef-b6b4-48c98936b0a7}</Project>
       <Name>KiiniNet.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\KinniNet.Business.Utils\KinniNet.Business.Utils.csproj">
+      <Project>{911050F0-AACF-4706-8EEF-94754856737F}</Project>
+      <Name>KinniNet.Business.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KinniNet.Business\KinniNet.Core.csproj">
       <Project>{7852A613-D901-44E2-9319-197C2CC9C390}</Project>
       <Name>KinniNet.Core</Name>

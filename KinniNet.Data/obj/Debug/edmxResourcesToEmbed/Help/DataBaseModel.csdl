@@ -354,11 +354,6 @@
       <End Role="SubGrupoUsuario" EntitySet="SubGrupoUsuario" />
       <End Role="DiaFestivoSubGrupo" EntitySet="DiaFestivoSubGrupo" />
     </AssociationSet>
-    <EntitySet Name="Mascara" EntityType="KiiniNet_v2Model.Mascara" />
-    <AssociationSet Name="FK_tblInventarioArbolAcceso_tblMascara" Association="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblMascara">
-      <End Role="Mascara" EntitySet="Mascara" />
-      <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
-    </AssociationSet>
     <EntitySet Name="EstatusAsignacionSubRolGeneralDefault" EntityType="KiiniNet_v2Model.EstatusAsignacionSubRolGeneralDefault" />
     <AssociationSet Name="FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion" Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion">
       <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
@@ -607,10 +602,6 @@
       <End Role="TipoCampoMascara" EntitySet="TipoCampoMascara" />
       <End Role="CampoMascara" EntitySet="CampoMascara" />
     </AssociationSet>
-    <AssociationSet Name="FK_tblCampoMascara_tblMascara" Association="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara">
-      <End Role="Mascara" EntitySet="Mascara" />
-      <End Role="CampoMascara" EntitySet="CampoMascara" />
-    </AssociationSet>
     <EntitySet Name="GrupoUsuario" EntityType="KiiniNet_v2Model.GrupoUsuario" />
     <AssociationSet Name="FK_GrupoUsuario_TipoGrupo1" Association="KiiniNet_v2Model.FK_GrupoUsuario_TipoGrupo1">
       <End Role="TipoGrupo" EntitySet="TipoGrupo" />
@@ -758,10 +749,6 @@
       <End Role="Impacto" EntitySet="Impacto" />
       <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>
-    <AssociationSet Name="FK_Ticket_Mascara" Association="KiiniNet_v2Model.FK_Ticket_Mascara">
-      <End Role="Mascara" EntitySet="Mascara" />
-      <End Role="Ticket" EntitySet="Ticket" />
-    </AssociationSet>
     <AssociationSet Name="FK_Ticket_Organizacion" Association="KiiniNet_v2Model.FK_Ticket_Organizacion">
       <End Role="Organizacion" EntitySet="Organizacion" />
       <End Role="Ticket" EntitySet="Ticket" />
@@ -843,11 +830,6 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="CorreoUsuario" EntitySet="CorreoUsuario" />
     </AssociationSet>
-    <EntitySet Name="Area" EntityType="KiiniNet_v2Model.Area" />
-    <AssociationSet Name="FK_ArbolAcceso_Area" Association="KiiniNet_v2Model.FK_ArbolAcceso_Area">
-      <End Role="Area" EntitySet="Area" />
-      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
-    </AssociationSet>
     <EntitySet Name="UsuarioRol" EntityType="KiiniNet_v2Model.UsuarioRol" />
     <AssociationSet Name="FK_Estado_Pais" Association="KiiniNet_v2Model.FK_Estado_Pais">
       <End Role="Pais" EntitySet="Pais" />
@@ -905,6 +887,54 @@
     <AssociationSet Name="FK_NotaOpcionUsuario_Usuario" Association="KiiniNet_v2Model.FK_NotaOpcionUsuario_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="NotaOpcionUsuario" EntitySet="NotaOpcionUsuario" />
+    </AssociationSet>
+    <EntitySet Name="Area" EntityType="KiiniNet_v2Model.Area" />
+    <AssociationSet Name="FK_ArbolAcceso_Area" Association="KiiniNet_v2Model.FK_ArbolAcceso_Area">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Area_UsuarioAlta" Association="KiiniNet_v2Model.FK_Area_UsuarioAlta">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Area_UsuarioModifico" Association="KiiniNet_v2Model.FK_Area_UsuarioModifico">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Area" EntitySet="Area" />
+    </AssociationSet>
+    <EntitySet Name="Mascara" EntityType="KiiniNet_v2Model.Mascara" />
+    <AssociationSet Name="FK_tblCampoMascara_tblMascara" Association="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara">
+      <End Role="Mascara" EntitySet="Mascara" />
+      <End Role="CampoMascara" EntitySet="CampoMascara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblInventarioArbolAcceso_tblMascara" Association="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblMascara">
+      <End Role="Mascara" EntitySet="Mascara" />
+      <End Role="InventarioArbolAcceso" EntitySet="InventarioArbolAcceso" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mascara_UsuarioAlta" Association="KiiniNet_v2Model.FK_Mascara_UsuarioAlta">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Mascara" EntitySet="Mascara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_Mascara" Association="KiiniNet_v2Model.FK_Ticket_Mascara">
+      <End Role="Mascara" EntitySet="Mascara" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <EntitySet Name="ConversacionArchivo" EntityType="KiiniNet_v2Model.ConversacionArchivo" />
+    <AssociationSet Name="FK_ArbolAcceso_Usuario" Association="KiiniNet_v2Model.FK_ArbolAcceso_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+    </AssociationSet>
+    <EntitySet Name="TicketConversacion" EntityType="KiiniNet_v2Model.TicketConversacion" />
+    <AssociationSet Name="FK_ConversacionArchivo_TicketConversacion" Association="KiiniNet_v2Model.FK_ConversacionArchivo_TicketConversacion">
+      <End Role="TicketConversacion" EntitySet="TicketConversacion" />
+      <End Role="ConversacionArchivo" EntitySet="ConversacionArchivo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketConversacion_Ticket" Association="KiiniNet_v2Model.FK_TicketConversacion_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="TicketConversacion" EntitySet="TicketConversacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TicketConversacion_Usuario" Association="KiiniNet_v2Model.FK_TicketConversacion_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="TicketConversacion" EntitySet="TicketConversacion" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Campus">
@@ -2225,6 +2255,7 @@
     <NavigationProperty Name="NotaGeneral" Relationship="KiiniNet_v2Model.FK_NotaGeneral_Usuario" FromRole="Usuario" ToRole="NotaGeneral" />
     <NavigationProperty Name="NotaOpcionGrupo" Relationship="KiiniNet_v2Model.FK_NotaOpcionGrupo_Usuario" FromRole="Usuario" ToRole="NotaOpcionGrupo" />
     <NavigationProperty Name="NotaOpcionUsuario" Relationship="KiiniNet_v2Model.FK_NotaOpcionUsuario_Usuario" FromRole="Usuario" ToRole="NotaOpcionUsuario" />
+    <NavigationProperty Name="TicketConversacion" Relationship="KiiniNet_v2Model.FK_TicketConversacion_Usuario" FromRole="Usuario" ToRole="TicketConversacion" />
   </EntityType>
   <Association Name="FK_Usuario_Organizacion">
     <End Type="KiiniNet_v2Model.Organizacion" Role="Organizacion" Multiplicity="0..1" />
@@ -2320,9 +2351,9 @@
     <NavigationProperty Name="Encuesta" Relationship="KiiniNet_v2Model.FK_InventarioArbolAcceso_Encuesta" FromRole="InventarioArbolAcceso" ToRole="Encuesta" />
     <NavigationProperty Name="GrupoUsuarioInventarioArbol" Relationship="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_InventarioArbolAcceso" FromRole="InventarioArbolAcceso" ToRole="GrupoUsuarioInventarioArbol" />
     <NavigationProperty Name="InventarioInfConsulta" Relationship="KiiniNet_v2Model.FK_InventarioInfConsulta_InventarioArbolAcceso" FromRole="InventarioArbolAcceso" ToRole="InventarioInfConsulta" />
-    <NavigationProperty Name="Mascara" Relationship="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblMascara" FromRole="InventarioArbolAcceso" ToRole="Mascara" />
     <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblArbolAcceso" FromRole="InventarioArbolAcceso" ToRole="ArbolAcceso" />
     <NavigationProperty Name="Sla" Relationship="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA" FromRole="InventarioArbolAcceso" ToRole="Sla" />
+    <NavigationProperty Name="Mascara" Relationship="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblMascara" FromRole="InventarioArbolAcceso" ToRole="Mascara" />
   </EntityType>
   <Association Name="FK_InventarioArbolAcceso_Encuesta">
     <End Type="KiiniNet_v2Model.Encuesta" Role="Encuesta" Multiplicity="0..1" />
@@ -2629,34 +2660,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Mascara">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="NoCampos" Type="Int32" />
-    <Property Name="NombreTabla" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="ComandoInsertar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="ComandoActualizar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="Random" Type="Boolean" />
-    <Property Name="Habilitado" Type="Boolean" />
-    <NavigationProperty Name="InventarioArbolAcceso" Relationship="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblMascara" FromRole="Mascara" ToRole="InventarioArbolAcceso" />
-    <NavigationProperty Name="CampoMascara" Relationship="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara" FromRole="Mascara" ToRole="CampoMascara" />
-    <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_Ticket_Mascara" FromRole="Mascara" ToRole="Ticket" />
-  </EntityType>
-  <Association Name="FK_tblInventarioArbolAcceso_tblMascara">
-    <End Type="KiiniNet_v2Model.Mascara" Role="Mascara" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.InventarioArbolAcceso" Role="InventarioArbolAcceso" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Mascara">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="InventarioArbolAcceso">
-        <PropertyRef Name="IdMascara" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="EstatusAsignacionSubRolGeneralDefault">
     <Key>
       <PropertyRef Name="Id" />
@@ -2824,9 +2827,12 @@
     <NavigationProperty Name="RespuestaEncuesta" Relationship="KiiniNet_v2Model.FK_RespuestaEncuesta_ArbolAcceso" FromRole="ArbolAcceso" ToRole="RespuestaEncuesta" />
     <NavigationProperty Name="PreTicket" Relationship="KiiniNet_v2Model.FK_PreTicket_ArbolAcceso" FromRole="ArbolAcceso" ToRole="PreTicket" />
     <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_tblTicket_tblArbolAcceso" FromRole="ArbolAcceso" ToRole="Ticket" />
-    <NavigationProperty Name="Area" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="ArbolAcceso" ToRole="Area" />
     <NavigationProperty Name="NotaOpcionGrupo" Relationship="KiiniNet_v2Model.FK_NotaOpcionGrupo_ArbolAcceso" FromRole="ArbolAcceso" ToRole="NotaOpcionGrupo" />
     <NavigationProperty Name="NotaOpcionUsuario" Relationship="KiiniNet_v2Model.FK_NotaOpcionUsuario_ArbolAcceso" FromRole="ArbolAcceso" ToRole="NotaOpcionUsuario" />
+    <Property Name="Sistema" Type="Boolean" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioAlta" Type="Int32" />
+    <NavigationProperty Name="Area" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="ArbolAcceso" ToRole="Area" />
   </EntityType>
   <Association Name="FK_ArbolAcceso_Nivel1">
     <End Type="KiiniNet_v2Model.Nivel1" Role="Nivel1" Multiplicity="1" />
@@ -3743,18 +3749,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tblCampoMascara_tblMascara">
-    <End Type="KiiniNet_v2Model.Mascara" Role="Mascara" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.CampoMascara" Role="CampoMascara" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Mascara">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CampoMascara">
-        <PropertyRef Name="IdMascara" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="GrupoUsuario">
     <Key>
       <PropertyRef Name="Id" />
@@ -4262,7 +4256,6 @@
     <NavigationProperty Name="EstatusAsignacion" Relationship="KiiniNet_v2Model.FK_Ticket_EstatusAsignacion" FromRole="Ticket" ToRole="EstatusAsignacion" />
     <NavigationProperty Name="EstatusTicket" Relationship="KiiniNet_v2Model.FK_Ticket_EstatusTicket" FromRole="Ticket" ToRole="EstatusTicket" />
     <NavigationProperty Name="Impacto" Relationship="KiiniNet_v2Model.FK_Ticket_Prioridad" FromRole="Ticket" ToRole="Impacto" />
-    <NavigationProperty Name="Mascara" Relationship="KiiniNet_v2Model.FK_Ticket_Mascara" FromRole="Ticket" ToRole="Mascara" />
     <NavigationProperty Name="Organizacion" Relationship="KiiniNet_v2Model.FK_Ticket_Organizacion" FromRole="Ticket" ToRole="Organizacion" />
     <NavigationProperty Name="RespuestaEncuesta" Relationship="KiiniNet_v2Model.FK_tblRespuestaEncuesta_tblTicket" FromRole="Ticket" ToRole="RespuestaEncuesta" />
     <NavigationProperty Name="SlaEstimadoTicket" Relationship="KiiniNet_v2Model.FK_tblTicket_tblSLAEstimadoTicket" FromRole="Ticket" ToRole="SlaEstimadoTicket" />
@@ -4275,6 +4268,8 @@
     <NavigationProperty Name="TicketAsignacion" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_Ticket" FromRole="Ticket" ToRole="TicketAsignacion" />
     <NavigationProperty Name="TicketGrupoUsuario" Relationship="KiiniNet_v2Model.FK_TicketGrupoUsuario_Ticket" FromRole="Ticket" ToRole="TicketGrupoUsuario" />
     <NavigationProperty Name="TicketEstatus" Relationship="KiiniNet_v2Model.FK_TicketEstatus_Ticket" FromRole="Ticket" ToRole="TicketEstatus" />
+    <NavigationProperty Name="Mascara" Relationship="KiiniNet_v2Model.FK_Ticket_Mascara" FromRole="Ticket" ToRole="Mascara" />
+    <NavigationProperty Name="TicketConversacion" Relationship="KiiniNet_v2Model.FK_TicketConversacion_Ticket" FromRole="Ticket" ToRole="TicketConversacion" />
   </EntityType>
   <Association Name="FK_tblTicket_tblArbolAcceso">
     <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="1" />
@@ -4345,18 +4340,6 @@
       </Principal>
       <Dependent Role="Ticket">
         <PropertyRef Name="IdImpacto" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Ticket_Mascara">
-    <End Type="KiiniNet_v2Model.Mascara" Role="Mascara" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.Ticket" Role="Ticket" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Mascara">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Ticket">
-        <PropertyRef Name="IdMascara" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4648,29 +4631,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Area">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="Habilitado" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="Area" ToRole="ArbolAcceso" />
-    <Property Name="Extension" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <Association Name="FK_ArbolAcceso_Area">
-    <End Type="KiiniNet_v2Model.Area" Role="Area" Multiplicity="1" />
-    <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Area">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ArbolAcceso">
-        <PropertyRef Name="IdArea" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="UsuarioRol">
     <Key>
       <PropertyRef Name="Id" />
@@ -4906,6 +4866,197 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="NotaOpcionUsuario">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Extension" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="Sistema" Type="Boolean" Nullable="false" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="IdUsuarioAlta" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModifico" Type="Int32" />
+    <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ArbolAcceso" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="Area" ToRole="ArbolAcceso" />
+  </EntityType>
+  <Association Name="FK_ArbolAcceso_Area">
+    <End Type="KiiniNet_v2Model.Area" Role="Area" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArbolAcceso">
+        <PropertyRef Name="IdArea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Area_UsuarioAlta">
+    <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.Area" Role="Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Area_UsuarioModifico">
+    <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.Area" Role="Area" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Area">
+        <PropertyRef Name="IdUsuarioModifico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Mascara">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NoCampos" Type="Int32" />
+    <Property Name="NombreTabla" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ComandoInsertar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ComandoActualizar" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Random" Type="Boolean" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioAlta" Type="Int32" />
+    <Property Name="Habilitado" Type="Boolean" />
+    <NavigationProperty Name="CampoMascara" Relationship="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara" FromRole="Mascara" ToRole="CampoMascara" />
+    <NavigationProperty Name="InventarioArbolAcceso" Relationship="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblMascara" FromRole="Mascara" ToRole="InventarioArbolAcceso" />
+    <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_Ticket_Mascara" FromRole="Mascara" ToRole="Ticket" />
+  </EntityType>
+  <Association Name="FK_tblCampoMascara_tblMascara">
+    <End Type="KiiniNet_v2Model.Mascara" Role="Mascara" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.CampoMascara" Role="CampoMascara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mascara">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CampoMascara">
+        <PropertyRef Name="IdMascara" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblInventarioArbolAcceso_tblMascara">
+    <End Type="KiiniNet_v2Model.Mascara" Role="Mascara" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.InventarioArbolAcceso" Role="InventarioArbolAcceso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mascara">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventarioArbolAcceso">
+        <PropertyRef Name="IdMascara" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mascara_UsuarioAlta">
+    <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.Mascara" Role="Mascara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mascara">
+        <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ticket_Mascara">
+    <End Type="KiiniNet_v2Model.Mascara" Role="Mascara" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.Ticket" Role="Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mascara">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdMascara" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ConversacionArchivo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTicketConversacion" Type="Int32" />
+    <Property Name="Archivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TicketConversacion" Relationship="KiiniNet_v2Model.FK_ConversacionArchivo_TicketConversacion" FromRole="ConversacionArchivo" ToRole="TicketConversacion" />
+  </EntityType>
+  <Association Name="FK_ArbolAcceso_Usuario">
+    <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArbolAcceso">
+        <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TicketConversacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTicket" Type="Int32" Nullable="false" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="Mensaje" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FechaGeneracion" Type="DateTime" Precision="3" />
+    <Property Name="Sistema" Type="Boolean" />
+    <Property Name="Leido" Type="Boolean" />
+    <Property Name="FechaLectura" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ConversacionArchivo" Relationship="KiiniNet_v2Model.FK_ConversacionArchivo_TicketConversacion" FromRole="TicketConversacion" ToRole="ConversacionArchivo" />
+    <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_TicketConversacion_Ticket" FromRole="TicketConversacion" ToRole="Ticket" />
+    <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_TicketConversacion_Usuario" FromRole="TicketConversacion" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="FK_ConversacionArchivo_TicketConversacion">
+    <End Type="KiiniNet_v2Model.TicketConversacion" Role="TicketConversacion" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.ConversacionArchivo" Role="ConversacionArchivo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TicketConversacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConversacionArchivo">
+        <PropertyRef Name="IdTicketConversacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketConversacion_Ticket">
+    <End Type="KiiniNet_v2Model.Ticket" Role="Ticket" Multiplicity="1" />
+    <End Type="KiiniNet_v2Model.TicketConversacion" Role="TicketConversacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketConversacion">
+        <PropertyRef Name="IdTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TicketConversacion_Usuario">
+    <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.TicketConversacion" Role="TicketConversacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TicketConversacion">
         <PropertyRef Name="IdUsuario" />
       </Dependent>
     </ReferentialConstraint>

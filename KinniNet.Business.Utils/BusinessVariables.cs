@@ -13,6 +13,7 @@ namespace KinniNet.Business.Utils
             public static string RepositorioMascara = ConfigurationManager.AppSettings["Repositorio"] + ConfigurationManager.AppSettings["RepositorioMascara"];
             public static string RepositorioTemporal = ConfigurationManager.AppSettings["Repositorio"] + ConfigurationManager.AppSettings["CarpetaTemporal"];
             public static string RepositorioRepositorio = ConfigurationManager.AppSettings["Repositorio"];
+            public static string RepositorioCorreo = ConfigurationManager.AppSettings["RepositorioCorreos"];
         }
 
         public static class ComboBoxCatalogo
@@ -70,10 +71,13 @@ namespace KinniNet.Business.Utils
 
             public enum EnumCanal
             {
-                Web = 1,
-                Telefono = 2,
-                Correo = 3,
-                Chat = 4
+                Portal = 1,
+                Correo = 2,
+                Chat = 3,
+                MessengerFacebook = 4,
+                Twiter = 5,
+                Telefono = 6,
+
             }
 
             public enum EnumTipoNota
@@ -81,6 +85,21 @@ namespace KinniNet.Business.Utils
                 General = 1,
                 Opcion = 2
             }
+        }
+
+        public static class Correo
+        {
+            public static string HotmailAccount = ConfigurationManager.AppSettings["HotmailAccount"];
+            public static string HotmailPassword = ConfigurationManager.AppSettings["HotmailPassword"];
+            public static string GmailAccount = ConfigurationManager.AppSettings["GmailAccount"];
+            public static string GmailPassword = ConfigurationManager.AppSettings["GmailPassword"];
+            public static string YahooAccount = ConfigurationManager.AppSettings["YahooAccount"];
+            public static string YahooPassword = ConfigurationManager.AppSettings["YahooPassword"];
+            public static string OtherSmtp = ConfigurationManager.AppSettings["OtherSmtp"];
+            public static int OtherPort = int.Parse(ConfigurationManager.AppSettings["OtherPort"]);
+            public static string OtherAccount = ConfigurationManager.AppSettings["OtherAccount"];
+            public static string OtherPassword = ConfigurationManager.AppSettings["OtherPassword"];
+
         }
 
         public static int[] IdsPublicos =
@@ -207,7 +226,9 @@ namespace KinniNet.Business.Utils
         public enum EnumTipoCorreo
         {
             AltaUsuario = 1,
-            RecuperarCuenta = 2
+            RecuperarCuenta = 2,
+            GenerarTicket = 3,
+            ResponderTicket = 4
         }
 
         public enum EnumTipoLink
@@ -221,6 +242,14 @@ namespace KinniNet.Business.Utils
             Casa = 1,
             Celular = 2,
             Oficina = 3
+        }
+
+        public enum EnumtServerImap
+        {
+            Hotmail = 1,
+            Gmail = 2,
+            Yahoo = 3,
+            Other = 4
         }
     }
 }

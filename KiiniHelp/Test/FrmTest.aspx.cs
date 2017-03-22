@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net.Mail;
 using System.Net.Security;
 using System.Net.Sockets;
+using System.Reflection;
 using System.ServiceModel.Channels;
 using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
 using AjaxControlToolkit;
+using KiiniHelp.ServiceArea;
 using KiiniHelp.ServiceSistemaCatalogos;
+using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 using Font = System.Drawing.Font;
 using System.Text.RegularExpressions;
@@ -23,6 +27,8 @@ namespace KiiniHelp.Test
     {
 
         private readonly ServiceCatalogosClient _servicioCatalogos = new ServiceCatalogosClient();
+        private readonly ServiceAreaClient _servicioArea = new ServiceAreaClient();
+
         //private void SendMessageAltiria()
         //{
         //    HttpWebRequest loHttp =
@@ -118,40 +124,75 @@ namespace KiiniHelp.Test
                 return String.Empty;
             }
         }
+        public List<InfoClass> ObtenerPropiedadesObjeto(object obj)
+        {
+            List<InfoClass> result;
+            try
+            {
+                var propertiesArea = GetProperties(obj);
+                result = (from info in propertiesArea
+                          where info.PropertyType.Name == "String" || info.PropertyType.Name == "Int32" || info.PropertyType.Name == "DateTime"
+                          select new InfoClass
+                          {
+                              Name = info.Name,
+                              Type = info.PropertyType.Name
+                          }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return result;
+        }
+        private IEnumerable<PropertyInfo> GetProperties(object obj)
+        {
+            return obj.GetType().GetProperties().ToList();
+        }
+
+        public class InfoClass
+        {
+            public string Name { get; set; }
+            public string Type { get; set; }
+
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
-            TcpClient tcpclient = new TcpClient();
-            //tcpclient.Connect("pop3.live.com", 995);
-            tcpclient.Connect("pop.gmail.com", 995);
-            System.Net.Security.SslStream sslstream = new SslStream(tcpclient.GetStream());
-            //sslstream.AuthenticateAsClient("pop3.live.com");
-            sslstream.AuthenticateAsClient("pop.gmail.com");
-            StreamWriter sw = new StreamWriter(sslstream);
-            System.IO.StreamReader reader = new StreamReader(sslstream);
-            sw.WriteLine("USER eduardo30razo@gmail.com"); sw.Flush();
-            sw.WriteLine("PASS Eyleen231012"); sw.Flush();
-            sw.WriteLine("RETR 1");
-            sw.Flush();
-            sw.WriteLine("Quit ");
-            sw.Flush();
-            string str = string.Empty;
-            string strTemp = string.Empty;
-            while ((strTemp = reader.ReadLine()) != null)
-            {
-                if (".".Equals(strTemp))
-                {
-                    break;
-                }
-                if (strTemp.IndexOf("-ERR") != -1)
-                {
-                    break;
-                }
-                str += strTemp;
-            }
-            Response.Write(str);
-            reader.Close();
-            sw.Close();
-            tcpclient.Close(); // close the connection
+            Area area = _servicioArea.ObtenerAreaById(1);
+
+            lstParameter.DataSource = ObtenerPropiedadesObjeto(area);
+            lstParameter.DataBind();
+            //TcpClient tcpclient = new TcpClient();
+            ////tcpclient.Connect("pop3.live.com", 995);
+            //tcpclient.Connect("pop.gmail.com", 995);
+            //System.Net.Security.SslStream sslstream = new SslStream(tcpclient.GetStream());
+            ////sslstream.AuthenticateAsClient("pop3.live.com");
+            //sslstream.AuthenticateAsClient("pop.gmail.com");
+            //StreamWriter sw = new StreamWriter(sslstream);
+            //System.IO.StreamReader reader = new StreamReader(sslstream);
+            //sw.WriteLine("USER eduardo30razo@gmail.com"); sw.Flush();
+            //sw.WriteLine("PASS Eyleen231012"); sw.Flush();
+            //sw.WriteLine("RETR 1");
+            //sw.Flush();
+            //sw.WriteLine("Quit ");
+            //sw.Flush();
+            //string str = string.Empty;
+            //string strTemp = string.Empty;
+            //while ((strTemp = reader.ReadLine()) != null)
+            //{
+            //    if (".".Equals(strTemp))
+            //    {
+            //        break;
+            //    }
+            //    if (strTemp.IndexOf("-ERR") != -1)
+            //    {
+            //        break;
+            //    }
+            //    str += strTemp;
+            //}
+            //Response.Write(str);
+            //reader.Close();
+            //sw.Close();
+            //tcpclient.Close(); // close the connection
 
 
 
@@ -474,11 +515,11 @@ namespace KiiniHelp.Test
         {
             try
             {
-                ucAltaNivelArbol.IdArea = 1;
-                ucAltaNivelArbol.IdNivel1 = 1;
-                ucAltaNivelArbol.IdTipoArbol = 1;
-                ucAltaNivelArbol.IdTipoUsuario = 1;
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editNivel\");", true);
+                //ucAltaNivelArbol.IdArea = 1;
+                //ucAltaNivelArbol.IdNivel1 = 1;
+                //ucAltaNivelArbol.IdTipoArbol = 1;
+                //ucAltaNivelArbol.IdTipoUsuario = 1;
+                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editNivel\");", true);
             }
             catch (Exception ex)
             {

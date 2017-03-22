@@ -31,39 +31,21 @@ namespace KiiniHelp.Test {
         protected global::System.Web.UI.ScriptManager scripMain;
         
         /// <summary>
-        /// Control upGeneral.
+        /// Control txtMsg.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upGeneral;
+        protected global::System.Web.UI.WebControls.TextBox txtMsg;
         
         /// <summary>
-        /// Control btnAbrirModal.
+        /// Control lstParameter.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAbrirModal;
-        
-        /// <summary>
-        /// Control upCampus.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upCampus;
-        
-        /// <summary>
-        /// Control ucAltaNivelArbol.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.UcAltaNivelArbol ucAltaNivelArbol;
+        protected global::System.Web.UI.WebControls.ListBox lstParameter;
     }
 }

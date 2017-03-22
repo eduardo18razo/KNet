@@ -79,6 +79,20 @@
     <Content Include="BootStrap\js\bootstrap-datepicker.min.js" />
     <Content Include="BootStrap\js\locales\bootstrap-datepicker.es.min.js" />
     <Content Include="BootStrap\js\locales\jquery.sumoselect.min.js" />
+    <Content Include="BootStrap\MainMenu\css\component.css" />
+    <Content Include="BootStrap\MainMenu\css\demo.css" />
+    <Content Include="BootStrap\MainMenu\css\icons.css" />
+    <Content Include="BootStrap\MainMenu\css\normalize.css" />
+    <Content Include="BootStrap\MainMenu\Fonts\codropsicons\codropsicons.svg" />
+    <Content Include="BootStrap\MainMenu\Fonts\codropsicons\license.txt" />
+    <Content Include="BootStrap\MainMenu\Fonts\linecons\license.txt" />
+    <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.dev.svg" />
+    <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.svg" />
+    <Content Include="BootStrap\MainMenu\Fonts\linecons\lte-ie7.js" />
+    <Content Include="BootStrap\MainMenu\Fonts\linecons\Read Me.txt" />
+    <Content Include="BootStrap\MainMenu\js\classie.js" />
+    <Content Include="BootStrap\MainMenu\js\mlpushmenu.js" />
+    <Content Include="BootStrap\MainMenu\js\modernizr.custom.js" />
     <Content Include="ConfirmacionCuenta.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Downloads\FrmDownloads.aspx" />
@@ -167,6 +181,13 @@
     <Content Include="on\fonts\weathericons-regular-webfont.ttf" />
     <Content Include="on\fonts\weathericons-regular-webfont.woff" />
     <Content Include="on\fonts\WeatherIcons-Regular.otf" />
+    <Content Include="BootStrap\MainMenu\Fonts\codropsicons\.DS_Store" />
+    <Content Include="BootStrap\MainMenu\Fonts\codropsicons\codropsicons.eot" />
+    <Content Include="BootStrap\MainMenu\Fonts\codropsicons\codropsicons.ttf" />
+    <Content Include="BootStrap\MainMenu\Fonts\codropsicons\codropsicons.woff" />
+    <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.eot" />
+    <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.ttf" />
+    <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.woff" />
     <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso14.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -288,6 +309,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Test\FrmTestMain.aspx" />
     <Content Include="Test\FrmTestMenu.aspx" />
     <Content Include="Test\FrmTestMenuCu.aspx" />
     <Content Include="UserControls\Altas\UcAltaNivelArbol.ascx" />
@@ -2413,6 +2435,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Test\FrmTestMain.aspx.cs">
+      <DependentUpon>FrmTestMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test\FrmTestMain.aspx.designer.cs">
+      <DependentUpon>FrmTestMain.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test\FrmTestMenu.aspx.cs">
       <DependentUpon>FrmTestMenu.aspx</DependentUpon>

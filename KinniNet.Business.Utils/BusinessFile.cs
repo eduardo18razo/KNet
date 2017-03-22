@@ -31,6 +31,8 @@ namespace KinniNet.Business.Utils
             {
                 foreach (string archivo in archivos)
                 {
+                    if (!Directory.Exists(folderDestino))
+                        Directory.CreateDirectory(folderDestino);
                     if (File.Exists(folderDestino + archivo))
                         File.Delete(folderDestino + archivo);
                     File.Move(folderOrigen + archivo, folderDestino + archivo);

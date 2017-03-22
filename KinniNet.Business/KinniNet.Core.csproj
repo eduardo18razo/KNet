@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EAGetMail40, Version=4.6.2.2, Culture=neutral, PublicKeyToken=e10a0812eb29cf94, processorArchitecture=MSIL">
+      <HintPath>..\packages\EAGetMail.4.6.2.2\lib\net40\EAGetMail40.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EASendMail40, Version=7.3.1.2, Culture=neutral, PublicKeyToken=88adb80ecd66540b, processorArchitecture=MSIL">
+      <HintPath>..\packages\EASendMail.7.3.1.2\lib\net40\EASendMail40.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -41,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Demonio\BusinessDemonioSms.cs" />
+    <Compile Include="Demonio\BusinessTicketMailService.cs" />
+    <Compile Include="Demonio\Imap4Mail.cs" />
     <Compile Include="Operacion\BusinessConsultas.cs" />
     <Compile Include="Demonio\BusinessDemonio.cs" />
     <Compile Include="Operacion\BusinessArea.cs" />
@@ -96,7 +106,6 @@
       <Name>KinniNet.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

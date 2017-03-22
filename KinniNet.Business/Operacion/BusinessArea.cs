@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
@@ -286,6 +287,7 @@ namespace KinniNet.Core.Operacion
                 //TODO: Cambiar habilitado por el embebido
                 area.Habilitado = true;
                 area.Descripcion = area.Descripcion.Trim().ToUpper();
+                area.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 if (area.Id == 0)
                     db.Area.AddObject(area);
                 db.SaveChanges();
@@ -313,6 +315,8 @@ namespace KinniNet.Core.Operacion
                 if (areaUpdate == null) return;
                 areaUpdate.Descripcion = area.Descripcion.Trim().ToUpper();
                 areaUpdate.Imagen = area.Imagen;
+                areaUpdate.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                areaUpdate.IdUsuarioModifico = area.IdUsuarioModifico;
                 db.SaveChanges();
             }
             catch (Exception ex)

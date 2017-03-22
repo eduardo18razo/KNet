@@ -107,6 +107,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         public virtual List<TicketEstatus> TicketEstatus { get; set; }
         [DataMember]
         public virtual List<TicketAsignacion> TicketAsignacion { get; set; }
+        [DataMember]
+        public virtual List<TicketConversacion> TicketConversacion { get; set; }
 
     }
 }

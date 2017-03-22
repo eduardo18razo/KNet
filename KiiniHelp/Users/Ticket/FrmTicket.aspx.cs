@@ -189,7 +189,7 @@ namespace KiiniHelp.Users.Ticket
                     IdMascara = arbol.InventarioArbolAcceso.First().IdMascara ?? 0;
                     IdEncuesta = arbol.InventarioArbolAcceso.First().IdEncuesta ?? 0;
                     IdUsuarioSolicita = ((Usuario)Session["UserData"]).Id;
-                    IdCanal = (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Web;
+                    IdCanal = (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Portal;
                 }
             }
             catch (Exception ex)
@@ -253,8 +253,8 @@ namespace KiiniHelp.Users.Ticket
             {
 
                 List<HelperCampoMascaraCaptura> capturaMascara = UcMascaraCaptura.ObtenerCapturaMascara();
-                KiiniNet.Entities.Operacion.Tickets.Ticket result = _servicioTicket.CrearTicket(((Usuario)Session["UserData"]).Id, IdUsuarioSolicita, Convert.ToInt32(Request.QueryString["IdArbol"]), capturaMascara, IdCanal, UcMascaraCaptura.CampoRandom, EsTercero);
-                UcMascaraCaptura.ConfirmaArchivos();
+                KiiniNet.Entities.Operacion.Tickets.Ticket result = _servicioTicket.CrearTicket(((Usuario)Session["UserData"]).Id, IdUsuarioSolicita, Convert.ToInt32(Request.QueryString["IdArbol"]), capturaMascara, IdCanal, UcMascaraCaptura.CampoRandom, EsTercero, false);
+                UcMascaraCaptura.ConfirmaArchivos(result.Id);
                 lblNoTicket.Text = result.Id.ToString();
                 lblDescRandom.Visible = UcMascaraCaptura.CampoRandom;
                 lblRandom.Visible = UcMascaraCaptura.CampoRandom;

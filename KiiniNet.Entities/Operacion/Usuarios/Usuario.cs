@@ -11,6 +11,7 @@ namespace KiiniNet.Entities.Operacion.Usuarios
     [DataContract(IsReference = true)]
     public class Usuario
     {
+        #region Mapeo
         [DataMember]
         public int Id { get; set; }
         [DataMember]
@@ -100,6 +101,10 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public virtual List<NotaOpcionUsuario> NotaOpcionUsuario { get; set; }
         [DataMember]
         public virtual List<NotaOpcionGrupo> NotaOpcionGrupo { get; set; }
+        [DataMember]
+        public virtual List<TicketConversacion> TicketConversacion { get; set; }
+        #endregion Mapeo
+
         public bool Supervisor { get; set; }
         public string NombreCompleto { get { return ApellidoPaterno + " " + ApellidoMaterno + " " + Nombre; } }
 

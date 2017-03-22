@@ -150,10 +150,10 @@
                                     <ItemTemplate>
                                         <tr align="center" id='<%# Eval("Id")%>'>
                                             <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuAreas()"><%# Eval("Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuAreas()">
+                                            <%--<td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuAreas()">
                                                 <img style='border:1px solid #000000' alt="Bind Images from Folder Asp.Net Repeater Control" src="GetImageDatafromDB.aspx?id=1" height="200px"/>
                                                 <img alt="" src='images/<%#Eval("Imagen") %>' height="50px" width="50px" />
-                                            </td>
+                                            </td>--%>
                                             <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuAreas()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
                                         </tr>
                                     </ItemTemplate>

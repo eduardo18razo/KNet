@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using KiiniNet.Entities.Cat.Arbol.Nodos;
 using KiiniNet.Entities.Cat.Operacion;
@@ -691,6 +692,7 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el embebido
+                arbol.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 arbol.Habilitado = true;
                 List<GrupoUsuario> lstGrupoUsuario = null;
                 if (arbol.Nivel1 != null)

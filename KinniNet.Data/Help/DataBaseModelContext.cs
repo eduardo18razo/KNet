@@ -156,9 +156,8 @@ namespace KinniNet.Data.Help
                 _notaGeneralGrupo = CreateObjectSet<NotaGeneralGrupo>();
                 _notaOpcionUsuario = CreateObjectSet<NotaOpcionUsuario>();
                 _notaOpcionGrupo = CreateObjectSet<NotaOpcionGrupo>();
-
-
-
+                _ticketConversacion = CreateObjectSet<TicketConversacion>();
+                _conversacionArchivo = CreateObjectSet<ConversacionArchivo>();
                 _puesto = CreateObjectSet<Puesto>();
 
             }
@@ -588,6 +587,20 @@ namespace KinniNet.Data.Help
                 return _notaOpcionGrupo;
             }
         }
+        public ObjectSet<TicketConversacion> TicketConversacion
+        {
+            get
+            {
+                return _ticketConversacion;
+            }
+        }
+        public ObjectSet<ConversacionArchivo> ConversacionArchivo
+        {
+            get
+            {
+                return _conversacionArchivo;
+            }
+        }
 
 
 
@@ -638,6 +651,8 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<NotaGeneralGrupo> _notaGeneralGrupo;
         private readonly ObjectSet<NotaOpcionUsuario> _notaOpcionUsuario;
         private readonly ObjectSet<NotaOpcionGrupo> _notaOpcionGrupo;
+        private readonly ObjectSet<TicketConversacion> _ticketConversacion;
+        private readonly ObjectSet<ConversacionArchivo> _conversacionArchivo;
 
         #region Mascara
         public ObjectSet<Mascara> Mascara

@@ -55,6 +55,32 @@
 
             $("#" + content).html(src_str);
         }
+
+        var d;
+        function drag(objSource) {
+            this.select = objSource;
+        }
+
+        function dragPrototypeDrop(objDest) {
+            if (!this.dragStart) return;
+            this.dest = objDest;
+
+            var o = this.option.cloneNode(true);
+            this.dest.appendChild(o);
+            this.select.removeChild(this.option);
+        }
+
+        function dragPrototypeSetIndex() {
+            var i = this.select.selectedIndex;
+
+            //i returns -1 if no option is "truly" selected
+            window.status = "selectedIndex = " + i;
+            if (i == -1) return;
+
+            this.option = this.select.options[i];
+            this.dragStart = true;
+        } 
+
     </script>
     <style type="text/css">
         body {
@@ -79,7 +105,11 @@
                 <asp:ScriptReference Path="~/BootStrap/js/super-panel.js" />
             </Scripts>
         </asp:ScriptManager>
-        <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
+        <asp:TextBox ID="txtMsg" runat="server" TextMode="MultiLine" Rows="10" Columns="50" onclick="storeCur(this);" onkeyup="storeCur(this);" onselect="storeCur(this);"></asp:TextBox>
+
+        <asp:ListBox ID="lstParameter" runat="server" DataTextField="Name" DataValueField="Type" onmousedown="d = new drag(this)"
+            onmouseup="d.drop(this.form.txtMsg)" onmouseout="if (typeof d != 'undefined') d.setIndex()"></asp:ListBox>
+        <%--<asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <asp:UpdatePanel runat="server">
                     <ContentTemplate>
@@ -98,7 +128,7 @@
                     </asp:UpdatePanel>
                 </div>
             </ContentTemplate>
-        </asp:UpdatePanel>
+        </asp:UpdatePanel>--%>
     </form>
 </body>
 </html>

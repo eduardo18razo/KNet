@@ -122,10 +122,12 @@
     <Compile Include="Operacion\RespuestaEncuesta.cs" />
     <Compile Include="Operacion\SLADetalle.cs" />
     <Compile Include="Operacion\SmsService.cs" />
+    <Compile Include="Operacion\Tickets\ConversacionArchivo.cs" />
     <Compile Include="Operacion\Tickets\PreTicket.cs" />
     <Compile Include="Operacion\Tickets\SlaEstimadoTicket.cs" />
     <Compile Include="Operacion\Tickets\SlaEstimadoTicketDetalle.cs" />
     <Compile Include="Operacion\Tickets\Ticket.cs" />
+    <Compile Include="Operacion\Tickets\TicketConversacion.cs" />
     <Compile Include="Operacion\Tickets\TicketGrupoUsuario.cs" />
     <Compile Include="Operacion\Tickets\TicketAsignacion.cs" />
     <Compile Include="Operacion\Tickets\TicketEstatus.cs" />

@@ -79,7 +79,7 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero)
+        public Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero, bool esMail)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             Ticket result;
@@ -95,7 +95,7 @@ namespace KinniNet.Core.Operacion
                     IdTipoUsuario = usuario.IdTipoUsuario,
                     IdTipoArbolAcceso = arbol.IdTipoArbolAcceso,
                     IdArbolAcceso = arbol.Id,
-                    IdImpacto = (int)arbol.IdImpacto,
+                    IdImpacto = (int) arbol.IdImpacto,
                     IdUsuarioLevanto = usuario.Id,
                     IdUsuarioSolicito = idUsuarioSolicito,
                     IdOrganizacion = usuario.IdOrganizacion,
@@ -103,18 +103,16 @@ namespace KinniNet.Core.Operacion
                     IdMascara = mascara.Id,
                     IdEncuesta = encuesta.Id,
                     IdCanal = idCanal,
-                    //RespuestaEncuesta = new List<RespuestaEncuesta>(),
-                    IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto,
-                    FechaHoraAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
-                    IdEstatusAsignacion = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar,
+                    IdEstatusTicket = (int) BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto,
+                    FechaHoraAlta =
+                        DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff",
+                            CultureInfo.InvariantCulture),
+                    IdEstatusAsignacion = (int) BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar,
                     Random = campoRandom,
                     ClaveRegistro = GeneraCampoRandom(),
                     EsTercero = usuario.Id != idUsuarioSolicito,
+                    TicketGrupoUsuario = new List<TicketGrupoUsuario>(),
                 };
-                //ENCUESTA
-                //ticket.RespuestaEncuesta.AddRange(encuesta.EncuestaPregunta.Select(pregunta => new RespuestaEncuesta { IdEncuesta = encuesta.Id, IdPregunta = pregunta.Id }));
-                //GrupoUsuario USUARIO
-                ticket.TicketGrupoUsuario = new List<TicketGrupoUsuario>();
                 foreach (GrupoUsuarioInventarioArbol grupoArbol in arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol)
                 {
                     TicketGrupoUsuario grupo = new TicketGrupoUsuario { IdGrupoUsuario = grupoArbol.IdGrupoUsuario };
@@ -189,9 +187,22 @@ namespace KinniNet.Core.Operacion
 
                 db.Ticket.AddObject(ticket);
                 db.SaveChanges();
+
                 string store = string.Format("{0} '{1}',", mascara.ComandoInsertar, ticket.Id);
-                store = lstCaptura.Aggregate(store,
-                    (current, captura) => current + string.Format("'{0}',", captura.Valor));
+                bool contieneArchivo = false;
+                foreach (HelperCampoMascaraCaptura helperCampoMascaraCaptura in lstCaptura)
+                {
+                    if (mascara.CampoMascara.Any(s =>s.Id == helperCampoMascaraCaptura.IdCampo &&s.TipoCampoMascara.Descripcion == "ARCHIVO ADJUNTO"))
+                    {
+
+                        store += string.Format("'{0}',", helperCampoMascaraCaptura.Valor.Replace("ticketid", ticket.Id.ToString()));
+                        contieneArchivo = true;
+                    }
+                    else
+                        store += string.Format("'{0}',", helperCampoMascaraCaptura.Valor);
+                }
+                if(!contieneArchivo && esMail)
+                    store += string.Format("'{0}',", string.Empty);
                 store = store.Trim().TrimEnd(',');
                 if (ticket.Random)
                     store = store + ", '" + ticket.ClaveRegistro + "'";
@@ -789,6 +800,44 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
             return result;
+        }
+
+        public void AgregarComentarioConversacionTicket(int idTicket, int idUsuario, string mensaje, bool sistema, List<string> archivos)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                var comment = new TicketConversacion
+                {
+                    IdTicket = idTicket,
+                    IdUsuario = idUsuario,
+                    Mensaje = mensaje,
+                    FechaGeneracion = 
+                        DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff",
+                            CultureInfo.InvariantCulture),
+                    Sistema = sistema,
+                    Leido = false,
+                    FechaLectura = null
+                };
+                if (archivos != null)
+                {
+                    comment.ConversacionArchivo = new List<ConversacionArchivo>();
+                    foreach (ConversacionArchivo archivoComment in archivos.Select(archivo => new ConversacionArchivo { Archivo = archivo.Replace("ticketid", idTicket.ToString()) }))
+                    {
+                        comment.ConversacionArchivo.Add(archivoComment);
+                    }
+                }
+                db.TicketConversacion.AddObject(comment);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
         }
     }
 }

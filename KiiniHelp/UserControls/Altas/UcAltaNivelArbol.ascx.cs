@@ -16,6 +16,7 @@ using KiiniNet.Entities.Cat.Arbol.Nodos;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
@@ -673,7 +674,9 @@ namespace KiiniHelp.UserControls.Altas
                         IdTipoUsuario = IdTipoUsuario,
                         IdTipoArbolAcceso = IdTipoArbol,
                         EsTerminal = chkNivelTerminal.Checked,
-                        Habilitado = chkNivelHabilitado.Checked
+                        Habilitado = chkNivelHabilitado.Checked,
+                        Sistema = false,
+                        IdUsuarioAlta = ((Usuario)Session["UserData"]).Id
                     };
                     if (chkNivelTerminal.Checked)
                     {

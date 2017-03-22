@@ -96,3 +96,5 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.UnitTest\bin\Debug\KinniNet.Busi
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTestData.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTest.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.UnitTest\obj\Debug\KiiniNet.UnitTest.pdb
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.UnitTest\bin\Debug\EAGetMail40.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.UnitTest\bin\Debug\EASendMail40.dll

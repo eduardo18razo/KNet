@@ -16,7 +16,7 @@ namespace KiiniHelp.ServiceTicket {
     public interface IServiceTicket {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/CrearTicket", ReplyAction="http://tempuri.org/IServiceTicket/CrearTicketResponse")]
-        KiiniNet.Entities.Operacion.Tickets.Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero);
+        KiiniNet.Entities.Operacion.Tickets.Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero, bool esMail);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/ObtenerTicketsUsuario", ReplyAction="http://tempuri.org/IServiceTicket/ObtenerTicketsUsuarioResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperTickets> ObtenerTicketsUsuario(int idUsuario, int pageIndex, int pageSize);
@@ -70,8 +70,8 @@ namespace KiiniHelp.ServiceTicket {
                 base(binding, remoteAddress) {
         }
         
-        public KiiniNet.Entities.Operacion.Tickets.Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero) {
-            return base.Channel.CrearTicket(idUsuario, idUsuarioSolicito, idArbol, lstCaptura, idCanal, campoRandom, esTercero);
+        public KiiniNet.Entities.Operacion.Tickets.Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero, bool esMail) {
+            return base.Channel.CrearTicket(idUsuario, idUsuarioSolicito, idArbol, lstCaptura, idCanal, campoRandom, esTercero, esMail);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperTickets> ObtenerTicketsUsuario(int idUsuario, int pageIndex, int pageSize) {

@@ -52,6 +52,12 @@
     <Compile Include="InstallerSettings.Designer.cs">
       <DependentUpon>InstallerSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="ServiceTicketMail.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ServiceTicketMail.Designer.cs">
+      <DependentUpon>ServiceTicketMail.cs</DependentUpon>
+    </Compile>
     <Compile Include="ServiceNotificacion.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -63,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="App1.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KinniNet.Business\KinniNet.Core.csproj">

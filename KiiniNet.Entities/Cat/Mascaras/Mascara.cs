@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
-using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Tickets;
 
 namespace KiiniNet.Entities.Cat.Mascaras
@@ -23,6 +23,10 @@ namespace KiiniNet.Entities.Cat.Mascaras
         public string ComandoActualizar { get; set; }
         [DataMember]
         public bool Random { get; set; }
+        [DataMember]
+        public DateTime FechaAlta { get; set; }
+        [DataMember]
+        public int IdUsuarioAlta { get; set; }
         [DataMember]
         public bool Habilitado { get; set; }
 

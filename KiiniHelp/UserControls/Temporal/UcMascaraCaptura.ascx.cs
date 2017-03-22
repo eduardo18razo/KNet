@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -427,14 +428,19 @@ namespace KiiniHelp.UserControls.Temporal
         {
             try
             {
+
                 List<string> lstArchivo = Session["Files"] == null ? new List<string>() : (List<string>)Session["Files"];
-                if (lstArchivo.Contains(e.FileName)) return;
+                if (lstArchivo.Any(archivosCargados => archivosCargados.Split('_')[0] == e.FileName))
+                    return;
+                string extension = Path.GetExtension(e.FileName);
+                if (extension == null) return;
+                string filename = string.Format("{0}_{1}_{2}{3}{4}", e.FileName.Replace(extension, string.Empty), "ticketid", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), extension);
                 AsyncFileUpload uploadControl = (AsyncFileUpload)sender;
                 if (!Directory.Exists(BusinessVariables.Directorios.RepositorioTemporalMascara))
                     Directory.CreateDirectory(BusinessVariables.Directorios.RepositorioTemporalMascara);
-                uploadControl.SaveAs(BusinessVariables.Directorios.RepositorioTemporalMascara + e.FileName);
-                Session[uploadControl.ID] = e.FileName;
-                lstArchivo.Add(e.FileName);
+                uploadControl.SaveAs(BusinessVariables.Directorios.RepositorioTemporalMascara + filename);
+                Session[uploadControl.ID] = filename;
+                lstArchivo.Add(filename);
                 Session["Files"] = lstArchivo;
             }
             catch (Exception ex)
@@ -597,13 +603,17 @@ namespace KiiniHelp.UserControls.Temporal
             }
         }
 
-        public void ConfirmaArchivos()
+        public void ConfirmaArchivos(int idTicket)
         {
             try
             {
+                for (int i = 0; i < ((List<string>)Session["Files"]).Count; i++)
+                {
+                    ((List<string>)Session["Files"])[i] = ((List<string>)Session["Files"])[i].Replace("ticketid", idTicket.ToString());
+                }
                 if (Session["Files"] != null)
                 {
-                    BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalMascara, BusinessVariables.Directorios.RepositorioMascara, (List<string>) Session["Files"]);
+                    BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalMascara, BusinessVariables.Directorios.RepositorioMascara, (List<string>)Session["Files"]);
                     Session["Files"] = null;
                 }
             }

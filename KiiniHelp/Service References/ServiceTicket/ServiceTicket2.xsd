@@ -81,6 +81,7 @@
   <xs:element name="ArrayOfHelperEstatusDetalle" nillable="true" type="tns:ArrayOfHelperEstatusDetalle" />
   <xs:complexType name="HelperEstatusDetalle">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Comentarios" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FechaMovimiento" type="xs:dateTime" />
       <xs:element minOccurs="0" name="UsuarioMovimiento" nillable="true" type="xs:string" />

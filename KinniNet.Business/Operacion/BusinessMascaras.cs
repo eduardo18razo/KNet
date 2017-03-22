@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.EntityClient;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Helper;
@@ -255,6 +256,7 @@ namespace KinniNet.Core.Operacion
 
                 ExisteMascara(mascara);
                 CrearEstructuraMascaraBaseDatos(mascara);
+                mascara.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 db.Mascara.AddObject(mascara);
                 db.SaveChanges();
             }
@@ -479,7 +481,7 @@ namespace KinniNet.Core.Operacion
                                 break;
                             }
                         }
-                            
+
                     }
 
                 }
@@ -496,6 +498,6 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        
+
     }
 }

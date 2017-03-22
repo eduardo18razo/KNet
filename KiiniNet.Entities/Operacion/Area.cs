@@ -16,6 +16,18 @@ namespace KiiniNet.Entities.Operacion
         public byte[] Imagen { get; set; }
         [DataMember]
         public string Extension { get; set; }
+
+        [DataMember]
+        public bool Sistema { get; set; }
+        [DataMember]
+        public DateTime FechaAlta { get; set; }
+        [DataMember]
+        public int IdUsuarioAlta { get; set; }
+        [DataMember]
+        public DateTime? FechaModificacion { get; set; }
+        [DataMember]
+        public int? IdUsuarioModifico { get; set; }
+
         [DataMember]
         public bool Habilitado { get; set; }
         [DataMember]

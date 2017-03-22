@@ -110,3 +110,5 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\KinniNet.Data.p
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\obj\Debug\KiiniNet.Services.Web.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\obj\Debug\KiiniNet.Services.Web.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\obj\Debug\KiiniNet.Services.Web.pdb
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\EAGetMail40.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\EASendMail40.dll
