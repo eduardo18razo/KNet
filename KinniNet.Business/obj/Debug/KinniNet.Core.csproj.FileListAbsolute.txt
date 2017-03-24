@@ -73,6 +73,8 @@ C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\obj\Debug\Kinni
 C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business\obj\Debug\KinniNet.Core.pdb
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Debug\KinniNet.Core.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Debug\KinniNet.Core.pdb
+C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Debug\EAGetMail40.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Debug\EASendMail40.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Debug\KiiniNet.Entities.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Debug\KinniNet.Business.Utils.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Debug\KinniNet.Data.dll
@@ -82,5 +84,3 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Debug\KinniNet.Data
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\obj\Debug\KinniNet.Core.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\obj\Debug\KinniNet.Core.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\obj\Debug\KinniNet.Core.pdb
-C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Debug\EAGetMail40.dll
-C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Debug\EASendMail40.dll

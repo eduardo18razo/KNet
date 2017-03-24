@@ -64,6 +64,105 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\account.css" />
+    <Content Include="assets\css\authentication.css" />
+    <Content Include="assets\css\bootstrap-datepicker.css" />
+    <Content Include="assets\css\bootstrap-markdown.css" />
+    <Content Include="assets\css\bootstrap-switch.css" />
+    <Content Include="assets\css\bootstrap.css" />
+    <Content Include="assets\css\chosen.css" />
+    <Content Include="assets\css\dashboard-health.css" />
+    <Content Include="assets\css\discussion.css" />
+    <Content Include="assets\css\elegant-icons.css" />
+    <Content Include="assets\css\font-awesome.css" />
+    <Content Include="assets\css\help.css" />
+    <Content Include="assets\css\jasny-bootstrap.css" />
+    <Content Include="assets\css\jquery-steps.css" />
+    <Content Include="assets\css\jquery.mmenu.all.css" />
+    <Content Include="assets\css\jstree-default.css" />
+    <Content Include="assets\css\metisMenu.css" />
+    <Content Include="assets\css\mmenu.css" />
+    <Content Include="assets\css\pe-7-icons-helper.css" />
+    <Content Include="assets\css\pe-7-icons.css" />
+    <Content Include="assets\css\styles.css" />
+    <Content Include="assets\css\switchery.css" />
+    <Content Include="assets\css\tether-shepherd.css" />
+    <Content Include="assets\fonts\ElegantIcons.svg" />
+    <Content Include="assets\fonts\flexslider-icon.svg" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\fonts\Pe-icon-7-stroke.svg" />
+    <Content Include="assets\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="assets\images\32px.png" />
+    <Content Include="assets\images\40px.png" />
+    <Content Include="assets\images\bg.png" />
+    <Content Include="assets\images\carousels\slide-1.jpg" />
+    <Content Include="assets\images\carousels\slide-2.jpg" />
+    <Content Include="assets\images\carousels\slide-3.jpg" />
+    <Content Include="assets\images\carousels\slide-4.jpg" />
+    <Content Include="assets\images\carousels\slide-5.jpg" />
+    <Content Include="assets\images\favicon.ico" />
+    <Content Include="assets\images\grey%402x.png" />
+    <Content Include="assets\images\grey.png" />
+    <Content Include="assets\images\icons.png" />
+    <Content Include="assets\images\icons\new_org.png" />
+    <Content Include="assets\images\icons\new_place.png" />
+    <Content Include="assets\images\icons\new_ticket.png" />
+    <Content Include="assets\images\icons\ok.png" />
+    <Content Include="assets\images\loading.gif" />
+    <Content Include="assets\images\logo-icon.svg" />
+    <Content Include="assets\images\profiles\profile-1.png" />
+    <Content Include="assets\images\profiles\profile-square-1-lg.png" />
+    <Content Include="assets\images\profiles\profile-square-1.png" />
+    <Content Include="assets\images\profiles\profile.png" />
+    <Content Include="assets\images\stock\admin_org.png" />
+    <Content Include="assets\images\throbber.gif" />
+    <Content Include="assets\images\users_icon\usuario_1.jpg" />
+    <Content Include="assets\images\users_icon\usuario_2.jpg" />
+    <Content Include="assets\images\users_icon\usuario_3.jpg" />
+    <Content Include="assets\images\users_icon\usuario_4.jpg" />
+    <Content Include="assets\js\bootstrap-datepicker.js" />
+    <Content Include="assets\js\bootstrap-markdown.js" />
+    <Content Include="assets\js\bootstrap-switch.js" />
+    <Content Include="assets\js\bootstrap.js" />
+    <Content Include="assets\js\charts-morris.js" />
+    <Content Include="assets\js\charts-peity.js" />
+    <Content Include="assets\js\chosen-jquery.js" />
+    <Content Include="assets\js\dashboard-health.js" />
+    <Content Include="assets\js\draggable.js" />
+    <Content Include="assets\js\forms-bootstrap-switch.js" />
+    <Content Include="assets\js\forms-chosen.js" />
+    <Content Include="assets\js\forms-switchery.js" />
+    <Content Include="assets\js\forms-wizard.js" />
+    <Content Include="assets\js\imagesloaded.js" />
+    <Content Include="assets\js\jquery-data-tables-bs3.js" />
+    <Content Include="assets\js\jquery-data-tables.js" />
+    <Content Include="assets\js\jquery-peity.js" />
+    <Content Include="assets\js\jquery-steps.js" />
+    <Content Include="assets\js\jquery-ui.js" />
+    <Content Include="assets\js\jquery.js" />
+    <Content Include="assets\js\jquery.mmenu.all.min.js" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\markdown-js.js" />
+    <Content Include="assets\js\masonry.js" />
+    <Content Include="assets\js\metisMenu.js" />
+    <Content Include="assets\js\moment.js" />
+    <Content Include="assets\js\pace.js" />
+    <Content Include="assets\js\raphael.js" />
+    <Content Include="assets\js\switchery.js" />
+    <Content Include="assets\js\tables.js" />
+    <Content Include="assets\js\tether-shepherd.js" />
+    <Content Include="assets\js\tether.js" />
+    <Content Include="assets\js\to-markdown.js" />
+    <Content Include="assets\tpl\day.html" />
+    <Content Include="assets\tpl\events-list.html" />
+    <Content Include="assets\tpl\modal.html" />
+    <Content Include="assets\tpl\month-day.html" />
+    <Content Include="assets\tpl\month.html" />
+    <Content Include="assets\tpl\week-days.html" />
+    <Content Include="assets\tpl\week.html" />
+    <Content Include="assets\tpl\year-month.html" />
+    <Content Include="assets\tpl\year.html" />
     <Content Include="BootStrap\css\Calendar\bootstrap-datepicker.css" />
     <Content Include="BootStrap\css\Calendar\bootstrap-datepicker.min.css" />
     <Content Include="BootStrap\css\Calendar\bootstrap-datepicker.standalone.css" />
@@ -80,7 +179,7 @@
     <Content Include="BootStrap\js\locales\bootstrap-datepicker.es.min.js" />
     <Content Include="BootStrap\js\locales\jquery.sumoselect.min.js" />
     <Content Include="BootStrap\MainMenu\css\component.css" />
-    <Content Include="BootStrap\MainMenu\css\demo.css" />
+    <Content Include="BootStrap\MainMenu\css\menuStyle.css" />
     <Content Include="BootStrap\MainMenu\css\icons.css" />
     <Content Include="BootStrap\MainMenu\css\normalize.css" />
     <Content Include="BootStrap\MainMenu\Fonts\codropsicons\codropsicons.svg" />
@@ -90,11 +189,11 @@
     <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.svg" />
     <Content Include="BootStrap\MainMenu\Fonts\linecons\lte-ie7.js" />
     <Content Include="BootStrap\MainMenu\Fonts\linecons\Read Me.txt" />
-    <Content Include="BootStrap\MainMenu\js\classie.js" />
-    <Content Include="BootStrap\MainMenu\js\mlpushmenu.js" />
+    <Content Include="BootStrap\MainMenu\js\pmenu.js" />
     <Content Include="BootStrap\MainMenu\js\modernizr.custom.js" />
     <Content Include="ConfirmacionCuenta.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="DefaultAspnet.aspx" />
     <Content Include="Downloads\FrmDownloads.aspx" />
     <Content Include="FrmRecuperar.aspx" />
     <Content Include="Identificar.aspx" />
@@ -188,6 +287,36 @@
     <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.eot" />
     <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.ttf" />
     <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.woff" />
+    <Content Include="assets\.DS_Store" />
+    <Content Include="assets\css\.DS_Store" />
+    <Content Include="assets\data\visitor-data.json" />
+    <Content Include="assets\fonts\ElegantIcons.eot" />
+    <Content Include="assets\fonts\ElegantIcons.ttf" />
+    <Content Include="assets\fonts\ElegantIcons.woff" />
+    <Content Include="assets\fonts\flexslider-icon.eot" />
+    <Content Include="assets\fonts\flexslider-icon.ttf" />
+    <Content Include="assets\fonts\flexslider-icon.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="assets\fonts\Pe-icon-7-stroke.eot" />
+    <Content Include="assets\fonts\Pe-icon-7-stroke.ttf" />
+    <Content Include="assets\fonts\Pe-icon-7-stroke.woff" />
+    <Content Include="assets\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="assets\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="assets\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="assets\fonts\WeatherIcons-Regular.otf" />
+    <Content Include="assets\images\.DS_Store" />
+    <Content Include="assets\images\carousels\.DS_Store" />
+    <Content Include="assets\images\profiles\.DS_Store" />
+    <Content Include="assets\images\stock\.DS_Store" />
+    <Content Include="assets\js\.DS_Store" />
     <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso14.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2378,6 +2507,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DefaultAspnet.aspx.cs">
+      <DependentUpon>DefaultAspnet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DefaultAspnet.aspx.designer.cs">
+      <DependentUpon>DefaultAspnet.aspx</DependentUpon>
     </Compile>
     <Compile Include="Downloads\FrmDownloads.aspx.cs">
       <DependentUpon>FrmDownloads.aspx</DependentUpon>

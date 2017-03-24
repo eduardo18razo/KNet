@@ -496,15 +496,18 @@ namespace KinniNet.Core.Security
                                 {
                                     case (int)BusinessVariables.EnumMenu.Consultas:
                                         lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion, area).Distinct().ToList();
-                                        GeneraSubMenus(menu, lstArboles, db, "~/Users/General/FrmNodoConsultas.aspx?IdArbol=");
+                                        if (lstArboles.Any())
+                                            GeneraSubMenus(menu, lstArboles, db, "~/Users/General/FrmNodoConsultas.aspx?IdArbol=");
                                         break;
                                     case (int)BusinessVariables.EnumMenu.Servicio:
                                         lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.SolicitarServicio, area).Distinct().ToList();
-                                        GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Portal + "&IdArbol=");
+                                        if (lstArboles.Any())
+                                            GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Portal + "&IdArbol=");
                                         break;
                                     case (int)BusinessVariables.EnumMenu.Incidentes:
                                         lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByUsuarioTipoArbol(idUsuario, (int)BusinessVariables.EnumTipoArbol.ReportarProblemas, area).Distinct().ToList();
-                                        GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Portal + "&IdArbol=");
+                                        if (lstArboles.Any())
+                                            GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Portal + "&IdArbol=");
                                         break;
                                 }
                             }
@@ -761,7 +764,7 @@ namespace KinniNet.Core.Security
                         {
                             if (menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Single(s => s.Id == arbol.IdNivel5).Menu1.Single(s => s.Id == arbol.IdNivel6).Menu1 == null)
                                 menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Single(s => s.Id == arbol.IdNivel5).Menu1.Single(s => s.Id == arbol.IdNivel6).Menu1 = new List<Menu>();
-                            Nivel5 n = db.Nivel5.SingleOrDefault(s => s.Id == arbol.Nivel7.Id);
+                            Nivel7 n = db.Nivel7.SingleOrDefault(s => s.Id == arbol.Nivel7.Id);
                             if (n == null) continue;
                             if (!menu.Menu1.Single(s => s.Id == arbol.IdNivel1).Menu1.Single(s => s.Id == arbol.IdNivel2).Menu1.Single(s => s.Id == arbol.IdNivel3).Menu1.Single(s => s.Id == arbol.IdNivel4).Menu1.Single(s => s.Id == arbol.IdNivel5).Menu1.Single(s => s.Id == arbol.IdNivel6).Menu1.Any(a => a.Id == n.Id))
                             {

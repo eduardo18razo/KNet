@@ -1,6 +1,58 @@
 ;( function( window ) {
 	
-	'use strict';
+    'use strict';
+    function classReg(className) {
+        return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
+    }
+
+    var hasClass, addClass, removeClass;
+
+    if ('classList' in document.documentElement) {
+        hasClass = function (elem, c) {
+            return elem.classList.contains(c);
+        };
+        addClass = function (elem, c) {
+            elem.classList.add(c);
+        };
+        removeClass = function (elem, c) {
+            elem.classList.remove(c);
+        };
+    }
+    else {
+        hasClass = function (elem, c) {
+            return classReg(c).test(elem.className);
+        };
+        addClass = function (elem, c) {
+            if (!hasClass(elem, c)) {
+                elem.className = elem.className + ' ' + c;
+            }
+        };
+        removeClass = function (elem, c) {
+            elem.className = elem.className.replace(classReg(c), ' ');
+        };
+    }
+
+    function toggleClass(elem, c) {
+        var fn = hasClass(elem, c) ? removeClass : addClass;
+        fn(elem, c);
+    }
+
+    var classie = {
+        hasClass: hasClass,
+        addClass: addClass,
+        removeClass: removeClass,
+        toggleClass: toggleClass,
+        has: hasClass,
+        add: addClass,
+        remove: removeClass,
+        toggle: toggleClass
+    };
+
+    if (typeof define === 'function' && define.amd) {
+        define(classie);
+    } else {
+        window.classie = classie;
+    }
 
 	function extend( a, b ) {
 		for( var key in b ) { 
@@ -56,19 +108,19 @@
 		defaults : {
 			type : 'overlap', // overlap || cover
 			levelSpacing : 40,
-			backClass : 'mp-back'
+			backClass: 'menuBack'
 		},
 		_init : function() {
 			this.open = false;
 			this.level = 0;
-			this.wrapper = document.getElementById( 'mp-pusher' );
-			this.levels = Array.prototype.slice.call( this.el.querySelectorAll( 'div.mp-level' ) );
+			this.wrapper = document.getElementById('divMainMenu');
+			this.levels = Array.prototype.slice.call(this.el.querySelectorAll('div.menuLevel'));
 			var self = this;
-			this.levels.forEach( function( el, i ) { el.setAttribute( 'data-level', getLevelDepth( el, self.el.id, 'mp-level' ) ); } );
+			this.levels.forEach(function (el, i) { el.setAttribute('data-level', getLevelDepth(el, self.el.id, 'menuLevel')); });
 			this.menuItems = Array.prototype.slice.call( this.el.querySelectorAll( 'li' ) );
 			this.levelBack = Array.prototype.slice.call( this.el.querySelectorAll( '.' + this.options.backClass ) );
 			this.eventtype = mobilecheck() ? 'touchstart' : 'click';
-			classie.add( this.el, 'mp-' + this.options.type );
+			classie.add( this.el, 'menu-' + this.options.type );
 			this._initEvents();
 		},
 		_initEvents : function() {
@@ -96,14 +148,14 @@
 			} );
 
 			this.menuItems.forEach( function( el, i ) {
-				var subLevel = el.querySelector( 'div.mp-level' );
+			    var subLevel = el.querySelector('div.menuLevel');
 				if( subLevel ) {
 					el.querySelector( 'a' ).addEventListener( self.eventtype, function( ev ) {
 						ev.preventDefault();
-						var level = closest( el, 'mp-level' ).getAttribute( 'data-level' );
+						var level = closest(el, 'menuLevel').getAttribute('data-level');
 						if( self.level <= level ) {
 							ev.stopPropagation();
-							classie.add( closest( el, 'mp-level' ), 'mp-level-overlay' );
+							classie.add(closest(el, 'menuLevel'), 'menuLevel-overlay');
 							self._openMenu( subLevel );
 						}
 					} );
@@ -124,10 +176,10 @@
 			this.levelBack.forEach( function( el, i ) {
 				el.addEventListener( self.eventtype, function( ev ) {
 					ev.preventDefault();
-					var level = closest( el, 'mp-level' ).getAttribute( 'data-level' );
+					var level = closest(el, 'menuLevel').getAttribute('data-level');
 					if( self.level <= level ) {
 						ev.stopPropagation();
-						self.level = closest( el, 'mp-level' ).getAttribute( 'data-level' ) - 1;
+						self.level = closest(el, 'menuLevel').getAttribute('data-level') - 1;
 						self.level === 0 ? self._resetMenu() : self._closeMenu();
 					}
 				} );
@@ -145,23 +197,22 @@
 				this._setTransform( '', subLevel );
 				for( var i = 0, len = this.levels.length; i < len; ++i ) {
 					var levelEl = this.levels[i];
-					if( levelEl != subLevel && !classie.has( levelEl, 'mp-level-open' ) ) {
+					if (levelEl != subLevel && !classie.has(levelEl, 'menuLevel-open')) {
 						this._setTransform( 'translate3d(-100%,0,0) translate3d(' + -1*levelFactor + 'px,0,0)', levelEl );
 					}
 				}
 			}
 			if( this.level === 1 ) {
-				classie.add( this.wrapper, 'mp-pushed' );
+				classie.add( this.wrapper, 'menuPushed' );
 				this.open = true;
 			}
-			classie.add(subLevel || this.levels[0], 'mp-level-open');
+			classie.add(subLevel || this.levels[0], 'menuLevel-open');
 		    classie.add(trigger, 'active');
 		},
 		_resetMenu : function() {
 			this._setTransform('translate3d(0,0,0)');
 			this.level = 0;
-			// remove class mp-pushed from main wrapper
-			classie.remove(this.wrapper, 'mp-pushed');
+			classie.remove(this.wrapper, 'menuPushed');
 			classie.remove(trigger, 'active');
 			this._toggleLevels();
 			this.open = false;
@@ -181,15 +232,15 @@
 			for( var i = 0, len = this.levels.length; i < len; ++i ) {
 				var levelEl = this.levels[i];
 				if( levelEl.getAttribute( 'data-level' ) >= this.level + 1 ) {
-					classie.remove( levelEl, 'mp-level-open' );
-					classie.remove( levelEl, 'mp-level-overlay' );
+				    classie.remove(levelEl, 'menuLevel-open');
+				    classie.remove(levelEl, 'menuLevel-overlay');
 				}
 				else if( Number( levelEl.getAttribute( 'data-level' ) ) == this.level ) {
-					classie.remove( levelEl, 'mp-level-overlay' );
+				    classie.remove(levelEl, 'menuLevel-overlay');
 				}
 			}
 		}
 	}
     
 	window.mlPushMenu = mlPushMenu;
-} )( window );
+})(window);

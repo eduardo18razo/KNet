@@ -127,40 +127,6 @@ namespace KiiniHelp.UserControls
             }
         }
 
-        protected void lnkBtnRecuperar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                Response.Redirect("~/Identificar.aspx");
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-            }
-        }
-
-        protected void btnCacelar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                LimpiarPantalla();
-                if (OnCancelarModal != null)
-                    OnCancelarModal();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-            }
-        }
-
         protected void OnServerValidate(object source, ServerValidateEventArgs e)
         {
             try

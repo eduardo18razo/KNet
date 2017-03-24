@@ -37,7 +37,6 @@ html, body, .container, .scroller {
 
 .menu-trigger {
     position:absolute; margin:12px 0 0 12px; top:0; left:0;
-    /*display:inline-block;vertical-align:middle;position:relative;*/
     border-radius: 25px;
     background-color:black;
 
@@ -97,31 +96,14 @@ html, body, .container, .scroller {
     top:0;
 }
 
-/*.menu-trigger {
-	position: relative;
-	padding-left: 60px;
-	font-size: 0.9em;
-}
-
-.menu-trigger:before {
-	position: absolute;
-	top: 2px;
-	left: 0;
-	width: 40px;
-	height: 6px;
-	background: #fff;
-	box-shadow: 0 6px #34495e, 0 12px #fff, 0 18px #34495e, 0 24px #fff;
-	content: '';
-}*/
-
-.mp-pusher {
+.divMainMenu {
 	position: relative;
 	left: 0;
 	height: 100%;
 }
 
-.mp-menu {
-	position: absolute; /* we can't use fixed here :( */
+.pMenu {
+	position: absolute; 
 	top: 0;
 	left: 0;
 	z-index: 1;
@@ -132,7 +114,7 @@ html, body, .container, .scroller {
 	transform: translate3d(-100%, 0, 0);
 }
 
-.mp-level {
+.menuLevel {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -144,10 +126,9 @@ html, body, .container, .scroller {
 	transform: translate3d(-100%, 0, 0);
 }
 
-/* overlays for pusher and for level that gets covered */
-.mp-pusher::after,
-.mp-level::after,
-.mp-level::before {
+.divMainMenu::after,
+.menuLevel::after,
+.menuLevel::before {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -157,8 +138,8 @@ html, body, .container, .scroller {
 	opacity: 0;
 }
 
-.mp-pusher::after,
-.mp-level::after {
+.divMainMenu::after,
+.menuLevel::after {
     background: #000000;
     background: rgba(0,0,0,0.3);
 	-webkit-transition: opacity 0.3s, width 0.1s 0.3s, height 0.1s 0.3s;
@@ -166,12 +147,12 @@ html, body, .container, .scroller {
 	transition: opacity 0.3s, width 0.1s 0.3s, height 0.1s 0.3s;
 }
 
-.mp-level::after {
+.menuLevel::after {
 	z-index: -1;
 }
 
-.mp-pusher.mp-pushed::after,
-.mp-level.mp-level-overlay::after {
+.divMainMenu.menuPushed::after,
+.menuLevel.menuLevel-overlay::after {
 	width: 100%;
 	height: 100%;
 	opacity: 1;
@@ -180,26 +161,26 @@ html, body, .container, .scroller {
 	transition: opacity 0.3s;
 }
 
-.mp-level.mp-level-overlay {
+.menuLevel.menuLevel-overlay {
 	cursor: pointer;
 }
 
-.mp-level.mp-level-overlay.mp-level::before {
+.menuLevel.menuLevel-overlay.menuLevel::before {
 	width: 100%;
 	height: 100%;
 	background: transparent;
 	opacity: 1;
 }
 
-.mp-pusher,
-.mp-level {
+.divMainMenu,
+.menuLevel {
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
 	transition: all 0.5s;
 }
 
 /* overlap */
-.mp-overlap .mp-level.mp-level-open {
+.menu-overlap .menuLevel.menuLevel-open {
     box-shadow: 1px 0 2px #000000;
     box-shadow: 1px 0 2px rgba(0,0,0,0.2);
 	-webkit-transform: translate3d(-40px, 0, 0);
@@ -208,10 +189,10 @@ html, body, .container, .scroller {
 }
 
 /* First level */
-.mp-menu > .mp-level,
-.mp-menu > .mp-level.mp-level-open,
-.mp-menu.mp-overlap > .mp-level,
-.mp-menu.mp-overlap > .mp-level.mp-level-open {
+.pMenu > .menuLevel,
+.pMenu > .menuLevel.menuLevel-open,
+.pMenu.menu-overlap > .menuLevel,
+.pMenu.menu-overlap > .menuLevel.menuLevel-open {
 	box-shadow: none;
 	-webkit-transform: translate3d(0, 0, 0);
 	-moz-transform: translate3d(0, 0, 0);
@@ -219,26 +200,26 @@ html, body, .container, .scroller {
 }
 
 /* cover */
-.mp-cover .mp-level.mp-level-open {
+.menu-cover .menuLevel.menuLevel-open {
 	-webkit-transform: translate3d(0, 0, 0);
 	-moz-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
 }
 
-.mp-cover .mp-level.mp-level-open > ul > li > .mp-level:not(.mp-level-open) {
+.menu-cover .menuLevel.menuLevel-open > ul > li > .menuLevel:not(.menuLevel-open) {
 	-webkit-transform: translate3d(-100%, 0, 0);
 	-moz-transform: translate3d(-100%, 0, 0);
 	transform: translate3d(-100%, 0, 0);
 }
 
 /* content style */
-.mp-menu ul {
+.pMenu ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-.mp-menu h2 {
+.pMenu h2 {
     margin: 0;
 	padding: 1em;
     color: #000000;
@@ -249,7 +230,7 @@ html, body, .container, .scroller {
 	font-size: 2em;
 }
 
-.mp-menu.mp-overlap h2::before {
+.pMenu.menu-overlap h2::before {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -265,14 +246,14 @@ html, body, .container, .scroller {
 	transform: translateX(-100%);
 }
 
-.mp-menu.mp-cover h2 {
+.pMenu.menu-cover h2 {
 	text-transform: uppercase;
 	font-weight: 700;
 	letter-spacing: 1px;
 	font-size: 1em;
 }
 
-.mp-overlap .mp-level.mp-level-overlay > h2::before {
+.menu-overlap .menuLevel.menuLevel-overlay > h2::before {
 	opacity: 1;
 	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
 	-moz-transition: -moz-transform 0.3s, opacity 0.3s;
@@ -282,7 +263,7 @@ html, body, .container, .scroller {
 	transform: translateX(0);
 }
 
-.mp-menu ul li > a {
+.pMenu ul li > a {
     display: block;
 	padding: 0.7em 1em 0.7em 1.8em;
 	outline: none;
@@ -296,7 +277,7 @@ html, body, .container, .scroller {
 	transition: background 0.3s, box-shadow 0.3s;
 }
 
-.mp-menu ul li::before {
+.pMenu ul li::before {
     position: absolute;
 	left: 10px;
 	z-index: -1;
@@ -305,34 +286,34 @@ html, body, .container, .scroller {
 	line-height: 3.5;
 }
 
-.mp-level > ul > li:first-child > a {
+.menuLevel > ul > li:first-child > a {
     box-shadow: inset 0 -1px #000000, inset 0 1px #000000;
     box-shadow: inset 0 -1px rgba(0,0,0,0.2), inset 0 1px rgba(0,0,0,0.2);
 }
 
-.mp-menu ul li a:hover,
-.mp-level > ul > li:first-child > a:hover {
+.pMenu ul li a:hover,
+.menuLevel > ul > li:first-child > a:hover {
     background: #000000;
     background: rgba(0,0,0,0.2);
     box-shadow: inset 0 -1px #000000;
     box-shadow: inset 0 -1px rgba(0,0,0,0);
 }
 
-.mp-menu .mp-level.mp-level-overlay > ul > li > a,
-.mp-level.mp-level-overlay > ul > li:first-child > a {
+.pMenu .menuLevel.menuLevel-overlay > ul > li > a,
+.menuLevel.menuLevel-overlay > ul > li:first-child > a {
     box-shadow: inset 0 -1px #000000;
     box-shadow: inset 0 -1px rgba(0,0,0,0);
 }
 
-.mp-level > ul > li:first-child > a:hover,
-.mp-level.mp-level-overlay > ul > li:first-child > a {
+.menuLevel > ul > li:first-child > a:hover,
+.menuLevel.menuLevel-overlay > ul > li:first-child > a {
     box-shadow: inset 0 -1px #000000, inset 0 1px #000000;
     box-shadow: inset 0 -1px rgba(0,0,0,0), inset 0 1px rgba(0,0,0,0);
 }
 
 /* seems like Chrome 34.0.1847.131 needs the second shadow otherwise the transition breaks */
 
-.mp-back {
+.menuBack {
     background: #000000;
     background: rgba(0,0,0,0.1);
 	outline: none;
@@ -351,7 +332,7 @@ html, body, .container, .scroller {
 	transition: background 0.3s;
 }
 
-.mp-back::after {
+.menuBack::after {
     font-family: 'linecons';
 	position: absolute;
 	content: "\e037";
@@ -361,24 +342,24 @@ html, body, .container, .scroller {
     color: rgba(0,0,0,0.3);
 }
 
-.mp-menu .mp-level.mp-level-overlay > .mp-back,
-.mp-menu .mp-level.mp-level-overlay > .mp-back::after {
+.pMenu .menuLevel.menuLevel-overlay > .menuBack,
+.pMenu .menuLevel.menuLevel-overlay > .menuBack::after {
 	background: transparent;
 	box-shadow: none;
 	color: transparent;
 }
 
-.no-csstransforms3d .mp-pusher,
-.no-js .mp-pusher {
+.no-csstransforms3d .divMainMenu,
+.no-js .divMainMenu {
 	padding-left: 300px;
 }
 
-.no-csstransforms3d .mp-menu .mp-level,
-.no-js .mp-menu .mp-level {
+.no-csstransforms3d .pMenu .menuLevel,
+.no-js .pMenu .menuLevel {
 	display: none;
 }
 
-.no-csstransforms3d .mp-menu > .mp-level,
-.no-js .mp-menu > .mp-level {
+.no-csstransforms3d .pMenu > .menuLevel,
+.no-js .pMenu > .menuLevel {
 	display: block;
 }
