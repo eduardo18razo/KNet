@@ -1,22 +1,27 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Public.master.cs" Inherits="KiiniHelp.Public" %>
 
 <%@ Register Src="~/UserControls/UcLogIn.ascx" TagPrefix="uc1" TagName="UcLogIn" %>
+<%@ Register Src="~/UserControls/UcLogCopia.ascx" TagPrefix="uc1" TagName="UcLogCopia" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>KiiniNet</title>
-    <link href="BootStrap/css/bootstrap.css" rel="stylesheet" />
-    <link href="BootStrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="BootStrap/css/CheckBoxStyle.css" rel="stylesheet" />
-    <link href="BootStrap/css/Calendar.css" rel="stylesheet" />
-    <link href="BootStrap/css/DropDown.css" rel="stylesheet" />
-    <link href="BootStrap/css/divs.css" rel="stylesheet" />
-    <link href="BootStrap/css/FileInput.css" rel="stylesheet" />
-    <link href="BootStrap/css/Headers.css" rel="stylesheet" />
-    <link href="BootStrap/css/stylemainmenu.css" rel="stylesheet" />
-    <link href="BootStrap/css/Defaults.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="assets/images/favicon.ico" />
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/css/metisMenu.css" />
+    <link rel="stylesheet" type="text/css" href="bootstrap/MainMenu/css/icons.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/css/elegant-icons.css" />
+    <link rel="stylesheet" href="assets/css/pe-7-icons.css" />
+    <link rel="stylesheet" href="assets/css/pe-7-icons-helper.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/help.css" />
+    <%----%>
+    <link rel="stylesheet" type="text/css" href="bootstrap/MainMenu/css/menuStyle.css" />
     <script type="text/javascript">
         function MostrarPopup(modalName) {
             $(modalName).on('shown.bs.modal', function () {
@@ -40,33 +45,21 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body class="preload">
     <div id="full">
         <form id="form1" runat="server">
-            <header id="panelAlert" runat="server" visible="False">
-                <div class="alert alert-danger">
-                    <div>
-                        <div style="float: left">
-                            <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
-                        </div>
-                        <div style="float: left">
-                            <h3>Error</h3>
-                        </div>
-                        <div class="clearfix clear-fix" />
-                    </div>
-                    <hr />
-                    <asp:Repeater runat="server" ID="rptHeaderError">
-                        <ItemTemplate>
-                            <%# Container.DataItem %>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-            </header>
             <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
                 <Scripts>
-                    <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
-                    <asp:ScriptReference Path="~/BootStrap/js/bootstrap.min.js" />
-                    <asp:ScriptReference Path="~/BootStrap/js/super-panel.js" />
+                    <asp:ScriptReference Path="~/assets/js/jquery.js" />
+                    <asp:ScriptReference Path="~/assets/js/bootstrap.js" />
+                    <asp:ScriptReference Path="~/BootStrap/MainMenu/js/modernizr.custom.js" />
+                    <asp:ScriptReference Path="~/BootStrap/MainMenu/js/pmenu.js" />
+                    <asp:ScriptReference Path="~/assets/js/metisMenu.js" />
+                    <asp:ScriptReference Path="~/assets/js/imagesloaded.js" />
+                    <asp:ScriptReference Path="~/assets/js/masonry.js" />
+                    <asp:ScriptReference Path="~/assets/js/pace.js" />
+                    <asp:ScriptReference Path="~/assets/js/main.js" />
+
                 </Scripts>
             </asp:ScriptManager>
             <asp:UpdateProgress ID="updateProgress" runat="server">
@@ -76,188 +69,279 @@
                     </div>
                 </ProgressTemplate>
             </asp:UpdateProgress>
-            <div id="inferior">
-                <img src="Images/logoKiininet.jpg" height="150" style="float: right; opacity: .7" />
-            </div>
-            <div id="headerNav">
-                <span data-panel="panel1" class="panel-button"></span>
-                <div class="logo" id="logo">
-                    <div style="float: left;">
-                        <div id="headerNavInfoDiv">
+
+            <!--INICIA HEADER-->
+            <header class="header">
+                <span id="trigger" class="menu-trigger" style="z-index: 9999"></span>
+                <div class="branding float-left">
+                    <h1 class="logo text-center"><a href="index.html">
+                        <img class="logo-icon" src="assets/images/logo-icon.svg" alt="icon" />
+                        <span class="nav-label"><span class="h3"><strong>Bancremex</strong></span></span> </a></h1>
+                </div>
+                <div class="topbar bg_w_header">
+                    <!--INICIA MENU COLAPSABLE-->
+                    <!--TERMINA MENU COLAPSABLE-->
+                    <!--INICIA BUSCADOR-->
+
+                    <div class="search-container">
+                        <div id="main-search" class="main-search">
+                            <i id="main-search-toggle" class="fa fa-search icon"></i>
+                            <div id="main-search-input-wrapper" class="main-search-input-wrapper">
+                                <input type="text" id="main-search-input" class="main-search-input form-control" placeholder="Buscar por palabra clave..." />
+                                <span id="clear-search" aria-hidden="true" class="fs1 icon icon_close_alt2 clear-search"></span>
+                            </div>
                         </div>
+                        <!--TERMINA BUSCADOR-->
                     </div>
-                    <div style="float: left; margin-left: -19px">
-                        <div class="MenuHorizontal">
-                            <ul style="border: none; background: transparent">
-                                <li style="border: none"><a>Servicio a clientes</a>
-                                    <asp:Repeater runat="server" ID="rptClientes">
-                                        <HeaderTemplate>
-                                            <ul style="border: none">
-                                        </HeaderTemplate>
-                                        <ItemTemplate>
-                                            <li style="border: none; border-bottom: 1px solid #000000">
-                                                <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
-                                                <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' ID="lbtnCteArea" OnClick="lbtnCteArea_OnClick" />
-                                            </li>
-                                        </ItemTemplate>
-                                        <FooterTemplate>
-                                            </ul>
-                                        </FooterTemplate>
-                                    </asp:Repeater>
+                    <!--INICIA HERRAMIENTAS-->
+                    <div class="navbar-tools">
+                        <div class="utilities-container">
+                            <div class="utilities">
 
-                                </li>
+                                <!--INICIA TICKET-->
+                                <div class="item item-notifications">
+                                    <div class="dropdown-toggle" id="dropdownMenu-notifications" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Tickets</span> <span class="pe-icon fa fa-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Tickets"></span></div>
+                                    <ul class="dropdown-menu wdropdown-ticket" role="menu" aria-labelledby="dropdownMenu-user">
+                                        <li><span class="arrow"></span><a role="menuitem" data-toggle="modal" data-target="#modal-new-ticket"><span class="pe-icon pe-7s-plus icon"></span>Nuevo ticket</a></li>
+                                        <li><a role="menuitem" href="guest_ticket_con.html"><span class="pe-icon pe-7s-look icon"></span>Consultar ticket</a></li>
+                                    </ul>
+                                </div>
+                                <!--TERMINA TICKET-->
 
-                                <li style="border: none"><a>Servicio a Empleados</a>
-                                    <asp:Repeater runat="server" ID="rptEmpleados">
-                                        <HeaderTemplate>
-                                            <ul>
-                                        </HeaderTemplate>
-                                        <ItemTemplate>
-                                            <li>
-                                                <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
-                                                <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' ID="lbtnEmpleadoArea" OnClick="lbtnEmpleadoArea_OnClick" />
-                                            </li>
-                                        </ItemTemplate>
-                                        <FooterTemplate>
-                                            </ul>
-                                        </FooterTemplate>
-                                    </asp:Repeater>
-                                </li>
-                                <li style="border: none"><a>Servicio a Proveedores</a>
-                                    <asp:Repeater runat="server" ID="rptProveedores">
-                                        <HeaderTemplate>
-                                            </ul>
-                                        </HeaderTemplate>
-                                        <ItemTemplate>
-                                            <li>
-                                                <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
-                                                <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' ID="lbtnProveedorArea" OnClick="lbtnProveedorArea_OnClick" />
-                                            </li>
-                                        </ItemTemplate>
-                                        <FooterTemplate>
-                                            </ul>
-                                        </FooterTemplate>
-                                    </asp:Repeater>
-                                </li>
-                                <li style="border: none"><a>Nuestra Institución</a>
-                                    <asp:Repeater runat="server" ID="Repeater3">
-                                        <HeaderTemplate>
-                                            <ul>
-                                        </HeaderTemplate>
-                                        <ItemTemplate>
-                                            <li>
-                                                <asp:Label runat="server" Visible="False" ID="lblId" Text='<%#Eval("Id") %>' />
-                                                <asp:LinkButton runat="server" Text='<%#Eval("Descripcion") %>' CommandArgument='<%#Eval("Id") %>' />
-                                            </li>
-                                        </ItemTemplate>
-                                        <FooterTemplate>
-                                            </ul>
-                                        </FooterTemplate>
-                                    </asp:Repeater>
-                                </li>
-                                <li style="border: none">
-                                    <asp:LinkButton runat="server" ID="lnkConsultaticket" OnClick="lnkConsultaticket_OnClick" Text="Consultar ticket"></asp:LinkButton></li>
+                                <!--INICIA REGISTRATE-->
+                                <div class="item item-notifications">
+                                    <a href="signup.html"><span class="sr-only">Regístrate</span> <span class="pe-icon fa fa-book icon" data-toggle="tooltip" data-placement="bottom" title="Regístrate"></span></a>
+
+                                </div>
+                                <!--TERMINA REGISTRATE-->
+                                <!--INICIA LOGIN-->
+                                <div class="item item-messages dropdown">
+                                    <div class="dropdown-toggle" id="dropdownMenu-messages" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Ingresa</span> <span class="pe-icon fa fa-sign-in icon" data-toggle="tooltip" data-placement="bottom" title="Ingresa"></span></div>
+                                    <div class="dropdown-menu wdropdown-login" role="menu" aria-labelledby="dropdownMenu-messages">
+                                        <span class="arrow"></span>
+                                        <div class="message-items no-overflow">
+                                            <div class="form-container col-md-12 col-sm-12 col-xs-12">
+                                                <br />
+                                                <uc1:UcLogCopia runat="server" id="UcLogCopia" />
+                                            </div>
+                                            <div class="social-btns col-md-12 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-sm-offset-0">
+                                                <div class="divider"><span>O ingresa con</span></div>
+                                                <ul class="list-unstyled social-login">
+                                                    <li>
+                                                        <button class="social-btn facebook-btn btn" type="button"><i class="fa fa-facebook"></i>Facebook</button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--TERMINA LOGIN-->
+                            </div>
+                        </div>
+                        <!--TERMINA HERRAMIENTAS-->
+
+                        <!--INICIA PERFIL-->
+                        <div class="user-container dropdown">
+                            <div class="dropdown-toggle" id="dropdownMenu-user" data-toggle="dropdown" aria-expanded="true" role="button">
+                                <img src="assets/images/profiles/profile-1.png" alt="" />
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-user">
+                                <li><span class="arrow"></span><a role="menuitem" href="#"><span class="pe-icon pe-7s-user icon"></span>Mi perfil</a></li>
+                                <li><a role="menuitem" href="signup.html"><span class="pe-icon pe-7s-paper-plane icon"></span>Registrarse</a></li>
+                                <li><a role="menuitem" href="login.html"><span class="fa fa-sign-in icon"></span>Ingresar</a></li>
+                                <li><a role="menuitem" href="index.html"><span class="fa fa-sign-out icon"></span>Salir</a></li>
                             </ul>
                         </div>
+                        <!--TERMINA PERFIL-->
                     </div>
-
                 </div>
-                <span id="top-nav" style="position: absolute; margin: 12px 0 0 12px; top: 0; right: 5%">
-                    <a class="btn btn-sm btn-success" style="margin-left: 10px; margin-right: 10px" onclick="MostrarPopup('#modalSingIn');">Iniciar Sesión</a>
-                </span>
-            </div>
+            </header>
+            <!--TERMINA HEADER-->
+            <div id="content-wrapper" class="content-wrapper" style="padding-top: 0">
+                <div class="container-fluid" style="padding-left: 0">
+                    <div class="divMainMenu" id="divMainMenu" style="margin-top: 80px;">
+                        <header id="panelAlert" runat="server" visible="False">
+                            <div class="alert alert-danger">
+                                <div>
+                                    <div style="float: left">
+                                        <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
+                                    </div>
+                                    <div style="float: left">
+                                        <h3>Error</h3>
+                                    </div>
+                                    <div class="clearfix clear-fix"></div>
+                                </div>
+                                <hr />
+                                <asp:Repeater runat="server" ID="rptHeaderError">
+                                    <ItemTemplate>
+                                        <%# Container.DataItem %>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </div>
+                        </header>
 
-            <div id="panel1">
-                <div class="MenuVertical">
-                    <ul style="color: transparent">
-                        <li>
-                            <asp:Repeater runat="server" ID="rptMenu" OnItemDataBound="rptMenu_OnItemDataBound">
-                                <ItemTemplate>
-                                    <li>
-                                        <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
-                                        <ul>
-                                            <asp:Repeater runat="server" ID="rptSubMenu1" OnItemDataBound="rptSubMenu1_OnItemDataBound">
-                                                <ItemTemplate>
-                                                    <li>
-                                                        <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") == null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
+                        <nav id="pMenu" class="pMenu">
+                            <div class="menuLevel">
+                                <h2 class="icon icon-shop">Inicio</h2>
+                                <ul>
+                                    <asp:Repeater runat="server" ID="rptMenu" OnItemDataBound="rptMenu_OnItemDataBound">
+                                        <ItemTemplate>
+                                            <li>
+                                                <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                <li class="icon icon-arrow-left" runat="server" visible='<%# Eval("Menu1") !=null %>'>
+                                                    <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") !=null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                    <div runat="server" visible='<%# Eval("Menu1") !=null %>' class="menuLevel">
+                                                        <h2 class="icon icon-display"><%# Eval("Descripcion") %></h2>
+                                                        <asp:HyperLink runat="server" CssClass="menuBack" href="#">Atras</asp:HyperLink>
                                                         <ul>
-                                                            <asp:Repeater runat="server" ID="rptSubMenu2" OnItemDataBound="rptSubMenu2_OnItemDataBound">
+                                                            <asp:Repeater runat="server" ID="rptSubMenu1" OnItemDataBound="rptSubMenu1_OnItemDataBound">
                                                                 <ItemTemplate>
                                                                     <li>
-                                                                        <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
-                                                                        <ul>
-                                                                            <asp:Repeater runat="server" ID="rptSubMenu3" OnItemDataBound="rptSubMenu3_OnItemDataBound">
-                                                                                <ItemTemplate>
-                                                                                    <li>
-                                                                                        <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
-                                                                                        <ul>
-                                                                                            <asp:Repeater runat="server" ID="rptSubMenu4" OnItemDataBound="rptSubMenu4_OnItemDataBound">
-                                                                                                <ItemTemplate>
-                                                                                                    <li>
-                                                                                                        <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
+                                                                        <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") == null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                        <li class="icon icon-arrow-left" runat="server" visible='<%# Eval("Menu1") !=null %>'>
+                                                                            <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") !=null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                            <div runat="server" visible='<%# Eval("Menu1") !=null %>' class="menuLevel">
+                                                                                <h2 class="icon icon-display"><%# Eval("Descripcion") %></h2>
+                                                                                <asp:HyperLink runat="server" CssClass="menuBack" href="#">Atras</asp:HyperLink>
+                                                                                <ul>
+                                                                                    <asp:Repeater runat="server" ID="rptSubMenu2" OnItemDataBound="rptSubMenu2_OnItemDataBound">
+                                                                                        <ItemTemplate>
+                                                                                            <li>
+                                                                                                <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                                                <li class="icon icon-arrow-left" runat="server" visible='<%# Eval("Menu1") !=null %>'>
+                                                                                                    <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") !=null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                                                    <div runat="server" visible='<%# Eval("Menu1") !=null %>' class="menuLevel">
+                                                                                                        <h2 class="icon icon-display"><%# Eval("Descripcion") %></h2>
+                                                                                                        <asp:HyperLink runat="server" CssClass="menuBack" href="#">Atras</asp:HyperLink>
                                                                                                         <ul>
-                                                                                                            <asp:Repeater runat="server" ID="rptSubMenu5" OnItemDataBound="rptSubMenu5_OnItemDataBound">
+                                                                                                            <asp:Repeater runat="server" ID="rptSubMenu3" OnItemDataBound="rptSubMenu3_OnItemDataBound">
                                                                                                                 <ItemTemplate>
                                                                                                                     <li>
                                                                                                                         <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
-                                                                                                                        <ul>
-                                                                                                                            <asp:Repeater runat="server" ID="rptSubMenu6" OnItemDataBound="rptSubMenu6_OnItemDataBound">
-                                                                                                                                <ItemTemplate>
-                                                                                                                                    <li>
-                                                                                                                                        <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
-                                                                                                                                        <ul>
-                                                                                                                                            <asp:Repeater runat="server" ID="rptSubMenu7">
-                                                                                                                                                <ItemTemplate>
-                                                                                                                                                    <li>
-                                                                                                                                                        <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
-                                                                                                                                                        <div runat="server" visible='<%# Eval("Menu1") !=null %>' style="color: white"><%# Eval("Descripcion") %></div>
-                                                                                                                                                    </li>
-                                                                                                                                                </ItemTemplate>
-                                                                                                                                            </asp:Repeater>
-                                                                                                                                        </ul>
-                                                                                                                                    </li>
-                                                                                                                                </ItemTemplate>
-                                                                                                                            </asp:Repeater>
-                                                                                                                        </ul>
+                                                                                                                        <li class="icon icon-arrow-left" runat="server" visible='<%# Eval("Menu1") !=null %>'>
+                                                                                                                            <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") !=null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                                                                            <div runat="server" visible='<%# Eval("Menu1") !=null %>' class="menuLevel">
+                                                                                                                                <h2 class="icon icon-display"><%# Eval("Descripcion") %></h2>
+                                                                                                                                <asp:HyperLink runat="server" CssClass="menuBack" href="#">Atras</asp:HyperLink>
+                                                                                                                                <ul>
+                                                                                                                                    <asp:Repeater runat="server" ID="rptSubMenu4" OnItemDataBound="rptSubMenu4_OnItemDataBound">
+                                                                                                                                        <ItemTemplate>
+                                                                                                                                            <li>
+                                                                                                                                                <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                                                                                                <li class="icon icon-arrow-left" runat="server" visible='<%# Eval("Menu1") !=null %>'>
+                                                                                                                                                    <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") !=null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                                                                                                    <div runat="server" visible='<%# Eval("Menu1") !=null %>' class="menuLevel">
+                                                                                                                                                        <h2 class="icon icon-display"><%# Eval("Descripcion") %></h2>
+                                                                                                                                                        <asp:HyperLink runat="server" CssClass="menuBack" href="#">Atras</asp:HyperLink>
+                                                                                                                                                        <ul>
+                                                                                                                                                            <asp:Repeater runat="server" ID="rptSubMenu5" OnItemDataBound="rptSubMenu5_OnItemDataBound">
+                                                                                                                                                                <ItemTemplate>
+                                                                                                                                                                    <li>
+                                                                                                                                                                        <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                                                                                                                        <li class="icon icon-arrow-left" runat="server" visible='<%# Eval("Menu1") !=null %>'>
+                                                                                                                                                                            <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") !=null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                                                                                                                            <div runat="server" visible='<%# Eval("Menu1") !=null %>' class="menuLevel">
+                                                                                                                                                                                <h2 class="icon icon-display"><%# Eval("Descripcion") %></h2>
+                                                                                                                                                                                <asp:HyperLink runat="server" CssClass="menuBack" href="#">Atras</asp:HyperLink>
+                                                                                                                                                                                <ul>
+                                                                                                                                                                                    <asp:Repeater runat="server" ID="rptSubMenu6" OnItemDataBound="rptSubMenu6_OnItemDataBound">
+                                                                                                                                                                                        <ItemTemplate>
+                                                                                                                                                                                            <li>
+                                                                                                                                                                                                <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                                                                                                                                                <li class="icon icon-arrow-left" runat="server" visible='<%# Eval("Menu1") !=null %>'>
+                                                                                                                                                                                                    <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") !=null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                                                                                                                                                    <div runat="server" visible='<%# Eval("Menu1") !=null %>' class="menuLevel">
+                                                                                                                                                                                                        <h2 class="icon icon-display"><%# Eval("Descripcion") %></h2>
+                                                                                                                                                                                                        <asp:HyperLink runat="server" CssClass="menuBack" href="#">Atras</asp:HyperLink>
+                                                                                                                                                                                                        <ul>
+                                                                                                                                                                                                            <asp:Repeater runat="server" ID="rptSubMenu7">
+                                                                                                                                                                                                                <ItemTemplate>
+                                                                                                                                                                                                                    <li>
+                                                                                                                                                                                                                        <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") ==null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                                                                                                                                                                        <li class="icon icon-arrow-left" runat="server" visible='<%# Eval("Menu1") !=null %>'>
+                                                                                                                                                                                                                            <asp:HyperLink NavigateUrl='<%# Eval("Url") %>' Visible='<%# Eval("Menu1") !=null %>' runat="server" Text='<%# Eval("Descripcion") %>' />
+                                                                                                                                                                                                                            <div runat="server" visible='<%# Eval("Menu1") !=null %>' class="menuLevel">
+                                                                                                                                                                                                                                <h2 class="icon icon-display"><%# Eval("Descripcion") %></h2>
+                                                                                                                                                                                                                                <asp:HyperLink runat="server" CssClass="menuBack" href="#">Atras</asp:HyperLink>
+                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                                </ItemTemplate>
+                                                                                                                                                                                                            </asp:Repeater>
+                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                </li>
+                                                                                                                                                                                            </li>
+                                                                                                                                                                                        </ItemTemplate>
+                                                                                                                                                                                    </asp:Repeater>
+                                                                                                                                                                                </ul>
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </li>
+                                                                                                                                                                    </li>
+                                                                                                                                                                </ItemTemplate>
+                                                                                                                                                            </asp:Repeater>
+                                                                                                                                                        </ul>
+                                                                                                                                                    </div>
+                                                                                                                                                </li>
+                                                                                                                                            </li>
+                                                                                                                                        </ItemTemplate>
+                                                                                                                                    </asp:Repeater>
+                                                                                                                                </ul>
+                                                                                                                            </div>
+                                                                                                                        </li>
                                                                                                                     </li>
                                                                                                                 </ItemTemplate>
                                                                                                             </asp:Repeater>
                                                                                                         </ul>
-                                                                                                    </li>
-                                                                                                </ItemTemplate>
-                                                                                            </asp:Repeater>
-                                                                                        </ul>
-                                                                                    </li>
-                                                                                </ItemTemplate>
-                                                                            </asp:Repeater>
-                                                                        </ul>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                            </li>
+                                                                                        </ItemTemplate>
+                                                                                    </asp:Repeater>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </li>
                                                                     </li>
                                                                 </ItemTemplate>
                                                             </asp:Repeater>
                                                         </ul>
-                                                    </li>
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-                                        </ul>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </li>
-                    </ul>
+                                                    </div>
+                                                </li>
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </ul>
+                            </div>
+                        </nav>
+
+                        <div class="scroller" style="padding-left: 30px">
+                            <div style="margin-top: 0; height: 100%;">
+                                <asp:LinkButton runat="server" CssClass="close" ID="lnkBtnCerrar" Visible="False">
+                        <span class="glyphicon glyphicon-remove"></span>
+                                </asp:LinkButton>
+                                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                </asp:ContentPlaceHolder>
+                            </div>
+                            <%--<div class="scroller-inner">
+                            <div class="content clearfix">
+                                <div class="block block-40 clearfix">--%>
+                            <%--Content--%>
+
+                            <%--  </div>
+                            </div>
+                        </div>--%>
+                            <!-- /scroller-inner -->
+                        </div>
+
+
+
+                    </div>
                 </div>
             </div>
-            <div style="width: 95%; margin: 0 auto; margin-top: 0; padding-top: 75px; height: 100%;">
-
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
+            <footer id="footer" class="site-footer">
+                <div class="copyright">Kiinisupport &copy; 2017 - <a href="http://www.kiininet.com" target="_blank">Powered by Kiinenet</a> - <a href="terminos.html">Términos y condiciones</a></div>
+            </footer>
 
 
             <%--LOGIN--%>
@@ -272,10 +356,14 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
+            <script>
+                new mlPushMenu(document.getElementById('pMenu'), document.getElementById('trigger'), {
+                    type: 'overlap'
+                });
+            </script>
         </form>
-    </div>
-    <!--Start of Tawk.to Script-->
-    <%--<script type="text/javascript">
+        <!--Start of Tawk.to Script-->
+        <%--<script type="text/javascript">
         var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
         (function () {
             var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
@@ -286,6 +374,7 @@
             s0.parentNode.insertBefore(s1, s0);
         })();
     </script>--%>
-    <!--End of Tawk.to Script-->
+        <!--End of Tawk.to Script-->
+    </div>
 </body>
 </html>

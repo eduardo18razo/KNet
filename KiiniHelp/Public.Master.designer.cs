@@ -31,24 +31,6 @@ namespace KiiniHelp {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Control panelAlert.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlert;
-        
-        /// <summary>
-        /// Control rptHeaderError.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
-        
-        /// <summary>
         /// Control scripMain.
         /// </summary>
         /// <remarks>
@@ -67,49 +49,31 @@ namespace KiiniHelp {
         protected global::System.Web.UI.UpdateProgress updateProgress;
         
         /// <summary>
-        /// Control rptClientes.
+        /// Control UcLogCopia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptClientes;
+        protected global::KiiniHelp.UserControls.UcLogCopia UcLogCopia;
         
         /// <summary>
-        /// Control rptEmpleados.
+        /// Control panelAlert.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptEmpleados;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlert;
         
         /// <summary>
-        /// Control rptProveedores.
+        /// Control rptHeaderError.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptProveedores;
-        
-        /// <summary>
-        /// Control Repeater3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater3;
-        
-        /// <summary>
-        /// Control lnkConsultaticket.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkConsultaticket;
+        protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
         
         /// <summary>
         /// Control rptMenu.
@@ -119,6 +83,15 @@ namespace KiiniHelp {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptMenu;
+        
+        /// <summary>
+        /// Control lnkBtnCerrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkBtnCerrar;
         
         /// <summary>
         /// Control ContentPlaceHolder1.

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="KiiniHelp.Default1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" EnableEventValidation="false" Inherits="KiiniHelp.Default1" %>
 
 <%@ Register Src="~/UserControls/UcLogCopia.ascx" TagPrefix="uc1" TagName="UcLogCopia" %>
 
@@ -46,78 +46,85 @@
         </asp:ScriptManager>
         <!--INICIA HEADER-->
         <header class="header">
-  <div class="branding float-left">
-    <h1 class="logo text-center"> <a href="index.html"> <img class="logo-icon" src="assets/images/logo-icon.svg" alt="icon" /> <span class="nav-label"> <span class="h3"><strong>Bancremex</strong></span></span> </a> </h1>
-  </div>
-  <div class="topbar bg_w_header"> 
-    <!--INICIA MENU COLAPSABLE--> 
-    <!--TERMINA MENU COLAPSABLE--> 
-    <!--INICIA BUSCADOR-->
-    <div class="search-container">
-      <form id="main-search" class="main-search">
-        <i id="main-search-toggle" class="fa fa-search icon"></i>
-        <div id="main-search-input-wrapper" class="main-search-input-wrapper">
-          <input type="text" id="main-search-input" class="main-search-input form-control" placeholder="Buscar por palabra clave...">
-          <span id="clear-search" aria-hidden="true" class="fs1 icon icon_close_alt2 clear-search"></span> </div>
-      </form>
-      <!--TERMINA BUSCADOR--> 
-    </div>
-    <!--INICIA HERRAMIENTAS-->
-    <div class="navbar-tools">
-      <div class="utilities-container">
-        <div class="utilities"> 
-          
-          <!--INICIA TICKET-->
-          <div class="item item-notifications">
-            <div class="dropdown-toggle" id="dropdownMenu-notifications" data-toggle="dropdown" aria-expanded="true" role="button"> <span class="sr-only">Tickets</span> <span class="pe-icon fa fa-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Tickets"></span> </div>
-            <ul class="dropdown-menu wdropdown-ticket" role="menu" aria-labelledby="dropdownMenu-user" >
-              <li><span class="arrow"></span><a role="menuitem" data-toggle="modal" data-target="#modal-new-ticket"><span class="pe-icon pe-7s-plus icon"></span>Nuevo ticket</a></li>
-              <li><a role="menuitem" href="guest_ticket_con.html"><span class="pe-icon pe-7s-look icon"></span>Consultar ticket</a></li>
-            </ul>
-          </div>
-          <!--TERMINA TICKET--> 
-          
-          <!--INICIA REGISTRATE-->
-          <div class="item item-notifications"> <a href="signup.html"><span class="sr-only">Regístrate</span> <span class="pe-icon fa fa-book icon" data-toggle="tooltip" data-placement="bottom" title="Regístrate"></span></a> </div>
-          <!--TERMINA REGISTRATE--> 
-          <!--INICIA LOGIN-->
-          <div class="item item-messages dropdown">
-            <div class="dropdown-toggle" id="dropdownMenu-messages" data-toggle="dropdown" aria-expanded="true" role="button"> <span class="sr-only">Ingresa</span> <span class="pe-icon fa fa-sign-in icon" data-toggle="tooltip" data-placement="bottom" title="Ingresa"></span> </div>
-            <div class="dropdown-menu wdropdown-login" role="menu" aria-labelledby="dropdownMenu-messages"> <span class="arrow"></span>
-              <div class="message-items no-overflow">
-                <div class="form-container col-md-12 col-sm-12 col-xs-12"><br>
-                    <uc1:UcLogCopia runat="server" id="UcLogCopia" />
-                </div>
-                <div class="social-btns col-md-12 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-sm-offset-0">
-                  <div class="divider"><span>O ingresa con</span></div>
-                  <ul class="list-unstyled social-login">
-                    <li>
-                      <button class="social-btn facebook-btn btn" type="button"><i class="fa fa-facebook"></i> Facebook</button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+            <div class="branding float-left">
+                <h1 class="logo text-center"><a href="index.html">
+                    <img class="logo-icon" src="assets/images/logo-icon.svg" alt="icon" />
+                    <span class="nav-label"><span class="h3"><strong>Bancremex</strong></span></span> </a></h1>
             </div>
-          </div>
-          <!--TERMINA LOGIN--> 
-        </div>
-      </div>
-      <!--TERMINA HERRAMIENTAS--> 
-      
-      <!--INICIA PERFIL-->
-      <div class="user-container dropdown">
-        <div class="dropdown-toggle" id="dropdownMenu-user" data-toggle="dropdown" aria-expanded="true" role="button"> <img src="assets/images/profiles/profile-1.png" alt="" /> <i class="fa fa-caret-down"></i> </div>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-user" >
-          <li><span class="arrow"></span><a role="menuitem" href="#"><span class="pe-icon pe-7s-user icon"></span>Mi perfil</a></li>
-          <li><a role="menuitem" href="signup.html"><span class="pe-icon pe-7s-paper-plane icon"></span>Registrarse</a></li>
-          <li><a role="menuitem" href="login.html"><span class="fa fa-sign-in icon"></span>Ingresar</a></li>
-          <li><a role="menuitem" href="index.html"><span class="fa fa-sign-out icon"></span>Salir</a></li>
-        </ul>
-      </div>
-      <!--TERMINA PERFIL--> 
-    </div>
-  </div>
-</header>
+            <div class="topbar bg_w_header">
+                <!--INICIA MENU COLAPSABLE-->
+                <!--TERMINA MENU COLAPSABLE-->
+                <!--INICIA BUSCADOR-->
+                <div class="search-container">
+                    <div id="main-search" class="main-search">
+                        <i id="main-search-toggle" class="fa fa-search icon"></i>
+                        <div id="main-search-input-wrapper" class="main-search-input-wrapper">
+                            <input type="text" id="main-search-input" class="main-search-input form-control" placeholder="Buscar por palabra clave..."/>
+                            <span id="clear-search" aria-hidden="true" class="fs1 icon icon_close_alt2 clear-search"></span>
+                        </div>
+                    </div>
+                    <!--TERMINA BUSCADOR-->
+                </div>
+                <!--INICIA HERRAMIENTAS-->
+                <div class="navbar-tools">
+                    <div class="utilities-container">
+                        <div class="utilities">
+
+                            <!--INICIA TICKET-->
+                            <div class="item item-notifications">
+                                <div class="dropdown-toggle" id="dropdownMenu-notifications" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Tickets</span> <span class="pe-icon fa fa-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Tickets"></span></div>
+                                <ul class="dropdown-menu wdropdown-ticket" role="menu" aria-labelledby="dropdownMenu-user">
+                                    <li><span class="arrow"></span><a role="menuitem" data-toggle="modal" data-target="#modal-new-ticket"><span class="pe-icon pe-7s-plus icon"></span>Nuevo ticket</a></li>
+                                    <li><a role="menuitem" href="guest_ticket_con.html"><span class="pe-icon pe-7s-look icon"></span>Consultar ticket</a></li>
+                                </ul>
+                            </div>
+                            <!--TERMINA TICKET-->
+
+                            <!--INICIA REGISTRATE-->
+                            <div class="item item-notifications"><a href="signup.html"><span class="sr-only">Regístrate</span> <span class="pe-icon fa fa-book icon" data-toggle="tooltip" data-placement="bottom" title="Regístrate"></span></a></div>
+                            <!--TERMINA REGISTRATE-->
+                            <!--INICIA LOGIN-->
+                            <div class="item item-messages dropdown">
+                                <div class="dropdown-toggle" id="dropdownMenu-messages" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Ingresa</span> <span class="pe-icon fa fa-sign-in icon" data-toggle="tooltip" data-placement="bottom" title="Ingresa"></span></div>
+                                <div class="dropdown-menu wdropdown-login" role="menu" aria-labelledby="dropdownMenu-messages">
+                                    <span class="arrow"></span>
+                                    <div class="message-items no-overflow">
+                                        <div class="form-container col-md-12 col-sm-12 col-xs-12">
+                                            <br>
+                                            <uc1:UcLogCopia runat="server" id="UcLogCopia" />
+                                        </div>
+                                        <div class="social-btns col-md-12 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-sm-offset-0">
+                                            <div class="divider"><span>O ingresa con</span></div>
+                                            <ul class="list-unstyled social-login">
+                                                <li>
+                                                    <button class="social-btn facebook-btn btn" type="button"><i class="fa fa-facebook"></i>Facebook</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--TERMINA LOGIN-->
+                        </div>
+                    </div>
+                    <!--TERMINA HERRAMIENTAS-->
+
+                    <!--INICIA PERFIL-->
+                    <div class="user-container dropdown">
+                        <div class="dropdown-toggle" id="dropdownMenu-user" data-toggle="dropdown" aria-expanded="true" role="button">
+                            <img src="assets/images/profiles/profile-1.png" alt="" />
+                            <i class="fa fa-caret-down"></i></div>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-user">
+                            <li><span class="arrow"></span><a role="menuitem" href="#"><span class="pe-icon pe-7s-user icon"></span>Mi perfil</a></li>
+                            <li><a role="menuitem" href="signup.html"><span class="pe-icon pe-7s-paper-plane icon"></span>Registrarse</a></li>
+                            <li><a role="menuitem" href="login.html"><span class="fa fa-sign-in icon"></span>Ingresar</a></li>
+                            <li><a role="menuitem" href="index.html"><span class="fa fa-sign-out icon"></span>Salir</a></li>
+                        </ul>
+                    </div>
+                    <!--TERMINA PERFIL-->
+                </div>
+            </div>
+        </header>
         <!--TERMINA HEADER-->
         <div id="content-wrapper" class="content-wrapper view projects-view ">
             <div class="container-fluid">
@@ -152,12 +159,12 @@
                     </div>
                     <!--TERMINA CARRUSEL-->
                 </div>
-                <br>
+                <br/>
                 <!--INICIA TITULO-->
                 <h2 class="title text-left">Para ofrecerte un mejor servicio indicanos que tipo de usuario eres.</h2>
-                <hr>
+                <hr/>
                 <!--TERMINA TITULO-->
-                <hr>
+                <hr/>
                 <!--INICIA USUARIOS-->
                 <div id="masonry" class="row">
                     <div class="module-wrapper masonry-item col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -178,7 +185,7 @@
                             <div class="module-inner">
                                 <div class="module-content collapse in" id="content-3">
                                     <div class="module-content-inner">
-                                        <asp:LinkButton href="user_select.html" runat="server" ID="lnkBtnCliente" OnClick="lnkBtnCliente_OnClick">
+                                        <asp:LinkButton runat="server" ID="lnkBtnCliente" OnClick="lnkBtnCliente_OnClick">
                                             <img class="img-responsive  margin-left" src="assets/images/users_icon/usuario_1.jpg" alt="Iconos de usuarios" /></asp:LinkButton>
                                         <h4 style="text-align: center">CLIENTE</h4>
                                     </div>
@@ -191,7 +198,7 @@
                             <div class="module-inner">
                                 <div class="module-content collapse in" id="content-4">
                                     <div class="module-content-inner">
-                                        <asp:LinkButton href="user_select.html" runat="server" ID="lnkBtnProveedor" OnClick="lnkBtnProveedor_OnClick">
+                                        <asp:LinkButton runat="server" ID="lnkBtnProveedor" OnClick="lnkBtnProveedor_OnClick">
                                             <img class="img-responsive  margin-left" src="assets/images/users_icon/usuario_3.jpg" alt="Iconos de usuarios" /></asp:LinkButton>
                                         <h4 style="text-align: center">PROVEEDOR</h4>
                                     </div>
@@ -201,7 +208,7 @@
                     </div>
                 </div>
                 <!--TERMINA USUARIOS-->
-                <hr>
+                <hr/>
                 <!--INICIA BUSCADOR-->
                 <div class="row">
                     <div class="module-wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -251,7 +258,7 @@
                             Crear Ticket Nuevo</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <div>
                             <div class="form-group">
                                 <label class="col-sm-12 control-label">¿Cuál es tu solicitud?</label>
                                 <div class="col-sm-8">
@@ -265,9 +272,9 @@
                                     </label>
                                 </div>
                             </div>
-                            <br>
-                            <br>
-                            <hr>
+                            <br/>
+                            <br/>
+                            <hr/>
                             <div class="form-group">
                                 <label class="col-sm-12 control-label">Área de atención</label>
                                 <div class="col-sm-10">
@@ -300,12 +307,12 @@
                                 <label class="sr-only">Description</label>
                                 <textarea class="form-control" rows="2" placeholder="Escribe un comentario..."></textarea>
                             </div>
-                            <hr>
+                            <hr/>
                             <div class="form-group">
                                 <label for="exampleInputFile">Agregar un archivo</label>
                                 <input type="file" id="exampleInputFile" />
                             </div>
-                            <hr>
+                            <hr/>
                             <div class="checkbox remember">
                                 <label>
                                     <input type="checkbox" />
@@ -313,7 +320,7 @@
                                 </label>
                             </div>
                             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" data-dismiss="modal">Crear ticket </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -326,16 +333,16 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h3 class="modal-title" id="myModalLabel">
-                            <img img-responsive margin-left src="assets/images/icons/ok.png" alt="" /><br>
+                            <img img-responsive margin-left src="assets/images/icons/ok.png" alt="" /><br/>
                             Tu ticket se creo con éxito</h3>
                     </div>
                     <div class="modal-body">
-                        <hr>
+                        <hr/>
                         <p class="h4">
-                            <strong>Tu no. de ticket: 01</strong><br>
+                            <strong>Tu no. de ticket: 01</strong><br/>
                         </p>
                         <p class="h4"><strong>Clave de registro: 234D45</strong></p>
-                        <hr>
+                        <hr/>
                         En breve recibirás un correo con los datos de tu ticket para que puedas dar seguimiento.
                     </div>
                     <div class="modal-footer"></div>

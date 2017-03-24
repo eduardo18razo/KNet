@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp
 {
@@ -18,7 +19,7 @@ namespace KiiniHelp
         {
             try
             {
-                Response.Redirect("~/DefaultAspnet.aspx");
+                Response.Redirect("~/DefaultAspnet.aspx?userTipe=" + (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado);
             }
             catch (Exception)
             {
@@ -31,7 +32,7 @@ namespace KiiniHelp
         {
             try
             {
-                Response.Redirect("~/DefaultAspnet.aspx");
+                Response.Redirect("~/DefaultAspnet.aspx?userTipe=" + (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado);
             }
             catch (Exception)
             {
@@ -44,7 +45,7 @@ namespace KiiniHelp
         {
             try
             {
-                Response.Redirect("~/DefaultAspnet.aspx");
+                Response.Redirect("~/DefaultAspnet.aspx?userTipe=" + (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado);
             }
             catch (Exception)
             {
