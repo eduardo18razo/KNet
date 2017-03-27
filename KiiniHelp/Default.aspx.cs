@@ -1,25 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp
 {
-    public partial class Default1 : System.Web.UI.Page
+    public partial class Default1 : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                if(UcLogCopia.Fail)
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "OpenDropLogin();", true);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
         protected void lnkBtnEmpleado_OnClick(object sender, EventArgs e)
         {
             try
             {
-                Response.Redirect("~/DefaultAspnet.aspx?userTipe=" + (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado);
+                Response.Redirect("~/DefaultUserSelect.aspx?userTipe=" + (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado);
             }
             catch (Exception)
             {
@@ -32,7 +38,7 @@ namespace KiiniHelp
         {
             try
             {
-                Response.Redirect("~/DefaultAspnet.aspx?userTipe=" + (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado);
+                Response.Redirect("~/DefaultUserSelect.aspx?userTipe=" + (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado);
             }
             catch (Exception)
             {
@@ -45,7 +51,7 @@ namespace KiiniHelp
         {
             try
             {
-                Response.Redirect("~/DefaultAspnet.aspx?userTipe=" + (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado);
+                Response.Redirect("~/DefaultUserSelect.aspx?userTipe=" + (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado);
             }
             catch (Exception)
             {

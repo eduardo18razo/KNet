@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 	var $window = $(window),
 		$body = $('body'),
-		$searchWrapper = $('#main-search-input-wrapper'),
+		$searchWrapper = $('#main_search_input_wrapper'),
 		$container = $('#masonry');
 
 	function adaptToScreenSize() {
@@ -64,11 +64,11 @@ $(document).ready(function() {
 
 
 	// re-apply masonry layout after content-wrapper transition (i.e. side-panel collapse)
-	$('#content-wrapper').on('transitionend webkitTransitionEnd oTransitionEnd', function(ev) {
-		if(ev.target && !$(ev.target).hasClass('masonry-item')) {
-			$container.masonry();
-		}
-	});
+	//$('#content-wrapper').on('transitionend webkitTransitionEnd oTransitionEnd', function(ev) {
+	//	if(ev.target && !$(ev.target).hasClass('masonry-item')) {
+	//		$container.masonry();
+	//	}
+	//});
 
 	// Hook up event for closing modules
 	$body.on('click', '.close-module', function(ev) {
@@ -119,7 +119,7 @@ $(document).ready(function() {
 		$("#side-panel").animate({
 		  right: "-=320" //same as the panel width
 		  }, 500);
-		  $(this).removeClass('panel-show').addClass('panel-hide')
+		    $(this).removeClass('panel-show').addClass('panel-hide');
 		}
 		else {
 		$("#side-panel").animate({
@@ -145,7 +145,7 @@ $(document).ready(function() {
 
 	$('#main-search-toggle').on('click', function(){
 		$searchWrapper.toggle();
-		$('#main-search-input').trigger('focus');
+		$('#main_search_input').trigger('focus');
 
 	});
 
@@ -154,7 +154,7 @@ $(document).ready(function() {
 	});
 
 
-	$('#main-search-input').on('keydown', function() {
+    $('#main_search_input').on('keydown', function () {
 		var $this = $(this);
 		if ($this.val() !== "Search..." && $this.val().length > 0) {
 			$this.closest('form').find('#clear-search').show()

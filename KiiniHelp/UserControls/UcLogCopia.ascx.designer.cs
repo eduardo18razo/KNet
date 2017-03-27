@@ -13,6 +13,15 @@ namespace KiiniHelp.UserControls {
     public partial class UcLogCopia {
         
         /// <summary>
+        /// Control fhFallo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField fhFallo;
+        
+        /// <summary>
         /// Control txtUsuario.
         /// </summary>
         /// <remarks>

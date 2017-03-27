@@ -1,15 +1,14 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcLogCopia.ascx.cs" Inherits="KiiniHelp.UserControls.UcLogCopia" %>
 <%@ Register Assembly="MSCaptcha" Namespace="MSCaptcha" TagPrefix="cc1" %>
 
-<div class="login-form">
-
-    <div class="form-container col-md-12 col-sm-12 col-xs-12">
-
+<div >
+    <div class=" col-md-12 col-sm-12 col-xs-12">
         <br>
         <p class="lead">Accede a tu cuenta</p>
-        <div role="form" class="login-form">
+        <div class="" >
             <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
+                    <asp:HiddenField runat="server" ID="fhFallo" Value="False"/>
                     <div class="form-group email">
                         <label class="sr-only" for="login-email">Email or username</label>
                         <span class="fa fa-user icon"></span>
@@ -32,11 +31,12 @@
 
                     </div>
                     <asp:Button CssClass="btn btn-block btn-primary" ID="btnLogin" OnClick="btnLogin_Click" runat="server" Text="Entrar"></asp:Button>
+                    <asp:CheckBox runat="server" Text="Recordarme" AutoPostBack="False" onclick="DontCloseMenu()" />
                 </ContentTemplate>
             </asp:UpdatePanel>
-            <form>
-                <asp:CheckBox runat="server" Text="Recordarme" AutoPostBack="False" />
-            </form>
+            <%--<form>--%>
+                
+            <%--</form>--%>
 
 
 

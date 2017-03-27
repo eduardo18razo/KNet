@@ -95,7 +95,7 @@ namespace KinniNet.Core.Operacion
                     IdTipoUsuario = usuario.IdTipoUsuario,
                     IdTipoArbolAcceso = arbol.IdTipoArbolAcceso,
                     IdArbolAcceso = arbol.Id,
-                    IdImpacto = (int) arbol.IdImpacto,
+                    IdImpacto = (int)arbol.IdImpacto,
                     IdUsuarioLevanto = usuario.Id,
                     IdUsuarioSolicito = idUsuarioSolicito,
                     IdOrganizacion = usuario.IdOrganizacion,
@@ -103,11 +103,11 @@ namespace KinniNet.Core.Operacion
                     IdMascara = mascara.Id,
                     IdEncuesta = encuesta.Id,
                     IdCanal = idCanal,
-                    IdEstatusTicket = (int) BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto,
+                    IdEstatusTicket = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Abierto,
                     FechaHoraAlta =
                         DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff",
                             CultureInfo.InvariantCulture),
-                    IdEstatusAsignacion = (int) BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar,
+                    IdEstatusAsignacion = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar,
                     Random = campoRandom,
                     ClaveRegistro = GeneraCampoRandom(),
                     EsTercero = usuario.Id != idUsuarioSolicito,
@@ -192,7 +192,7 @@ namespace KinniNet.Core.Operacion
                 bool contieneArchivo = false;
                 foreach (HelperCampoMascaraCaptura helperCampoMascaraCaptura in lstCaptura)
                 {
-                    if (mascara.CampoMascara.Any(s =>s.Id == helperCampoMascaraCaptura.IdCampo &&s.TipoCampoMascara.Descripcion == "ARCHIVO ADJUNTO"))
+                    if (mascara.CampoMascara.Any(s => s.Id == helperCampoMascaraCaptura.IdCampo && s.TipoCampoMascara.Descripcion == "ARCHIVO ADJUNTO"))
                     {
 
                         store += string.Format("'{0}',", helperCampoMascaraCaptura.Valor.Replace("ticketid", ticket.Id.ToString()));
@@ -201,7 +201,7 @@ namespace KinniNet.Core.Operacion
                     else
                         store += string.Format("'{0}',", helperCampoMascaraCaptura.Valor);
                 }
-                if(!contieneArchivo && esMail)
+                if (!contieneArchivo && esMail)
                     store += string.Format("'{0}',", string.Empty);
                 store = store.Trim().TrimEnd(',');
                 if (ticket.Random)
@@ -670,6 +670,7 @@ namespace KinniNet.Core.Operacion
                     db.LoadProperty(ticket, "EstatusTicket");
                     db.LoadProperty(ticket, "EstatusAsignacion");
                     db.LoadProperty(ticket, "TicketEstatus");
+                    db.LoadProperty(ticket, "TicketConversacion");
                     foreach (TicketEstatus tEstatus in ticket.TicketEstatus)
                     {
                         db.LoadProperty(tEstatus, "EstatusTicket");
@@ -686,12 +687,15 @@ namespace KinniNet.Core.Operacion
                     {
                         IdTicket = ticket.Id,
                         IdEstatusTicket = ticket.IdEstatusTicket,
+                        CveRegistro = ticket.ClaveRegistro,
                         IdEstatusAsignacion = ticket.IdEstatusAsignacion,
                         EstatusActual = ticket.EstatusTicket.Descripcion,
                         AsignacionActual = ticket.EstatusAsignacion.Descripcion,
                         FechaCreacion = ticket.FechaHoraAlta,
                         EstatusDetalle = new List<HelperEstatusDetalle>(),
-                        AsignacionesDetalle = new List<HelperAsignacionesDetalle>()
+                        AsignacionesDetalle = new List<HelperAsignacionesDetalle>(),
+                        ConversacionDetalle = new List<HelperConversacionDetalle>()
+
                     };
                     foreach (HelperEstatusDetalle detalle in ticket.TicketEstatus.Select(movEstatus => new HelperEstatusDetalle { Descripcion = movEstatus.EstatusTicket.Descripcion, UsuarioMovimiento = movEstatus.Usuario.NombreCompleto, FechaMovimiento = movEstatus.FechaMovimiento, Comentarios = movEstatus.Comentarios }))
                     {
@@ -700,6 +704,10 @@ namespace KinniNet.Core.Operacion
                     foreach (HelperAsignacionesDetalle detalle in ticket.TicketAsignacion.Select(movAsignacion => new HelperAsignacionesDetalle { Descripcion = movAsignacion.EstatusAsignacion.Descripcion, UsuarioAsignado = movAsignacion.UsuarioAsignado != null ? movAsignacion.UsuarioAsignado.NombreCompleto : "SIN ASGNACIÓN", UsuarioAsigno = movAsignacion.UsuarioAsigno != null ? movAsignacion.UsuarioAsigno.NombreCompleto : "NO APLICA", FechaMovimiento = movAsignacion.FechaAsignacion }))
                     {
                         result.AsignacionesDetalle.Add(detalle);
+                    }
+                    foreach (HelperConversacionDetalle comentario in ticket.TicketConversacion.Select(conversacion => new HelperConversacionDetalle { Id = conversacion.Id, Nombre = conversacion.Usuario.NombreCompleto, FechaHora = string.Format("{0}, {1} {2}", conversacion.FechaGeneracion.ToString("MMM"), conversacion.FechaGeneracion.ToString("YYYY"), conversacion.FechaGeneracion.ToString("HH:mm tt")), Comentario = conversacion.Mensaje }))
+                    {
+                        result.ConversacionDetalle.Add(comentario);
                     }
                 }
             }
@@ -727,6 +735,11 @@ namespace KinniNet.Core.Operacion
                     db.LoadProperty(ticket, "EstatusTicket");
                     db.LoadProperty(ticket, "EstatusAsignacion");
                     db.LoadProperty(ticket, "TicketEstatus");
+                    db.LoadProperty(ticket, "TicketConversacion");
+                    foreach (TicketConversacion conversacion in ticket.TicketConversacion)
+                    {
+                        db.LoadProperty(conversacion, "ConversacionArchivo");
+                    }
                     foreach (TicketEstatus tEstatus in ticket.TicketEstatus)
                     {
                         db.LoadProperty(tEstatus, "EstatusTicket");
@@ -748,7 +761,8 @@ namespace KinniNet.Core.Operacion
                         AsignacionActual = ticket.EstatusAsignacion.Descripcion,
                         FechaCreacion = ticket.FechaHoraAlta,
                         EstatusDetalle = new List<HelperEstatusDetalle>(),
-                        AsignacionesDetalle = new List<HelperAsignacionesDetalle>()
+                        AsignacionesDetalle = new List<HelperAsignacionesDetalle>(),
+                        ConversacionDetalle = new List<HelperConversacionDetalle>()
                     };
                     foreach (HelperEstatusDetalle detalle in ticket.TicketEstatus.Select(movEstatus => new HelperEstatusDetalle { Descripcion = movEstatus.EstatusTicket.Descripcion, UsuarioMovimiento = movEstatus.Usuario.NombreCompleto, FechaMovimiento = movEstatus.FechaMovimiento, Comentarios = movEstatus.Comentarios }))
                     {
@@ -757,6 +771,28 @@ namespace KinniNet.Core.Operacion
                     foreach (HelperAsignacionesDetalle detalle in ticket.TicketAsignacion.Select(movAsignacion => new HelperAsignacionesDetalle { Descripcion = movAsignacion.EstatusAsignacion.Descripcion, UsuarioAsignado = movAsignacion.UsuarioAsignado != null ? movAsignacion.UsuarioAsignado.NombreCompleto : "SIN ASGNACIÓN", UsuarioAsigno = movAsignacion.UsuarioAsigno != null ? movAsignacion.UsuarioAsigno.NombreCompleto : "NO APLICA", FechaMovimiento = movAsignacion.FechaAsignacion }))
                     {
                         result.AsignacionesDetalle.Add(detalle);
+                    }
+                    foreach (TicketConversacion comentario in ticket.TicketConversacion)
+                    {
+                        HelperConversacionDetalle conversacion = new HelperConversacionDetalle
+                        {
+                            Id = comentario.Id,
+                            Nombre = comentario.Usuario.NombreCompleto,
+                            FechaHora =
+                                string.Format("{0}, {1} {2}", comentario.FechaGeneracion.ToString("MMM"),
+                                    comentario.FechaGeneracion.ToString("YYYY"),
+                                    comentario.FechaGeneracion.ToString("HH:mm tt")),
+                            Comentario = comentario.Mensaje,
+                        };
+                        conversacion.Archivo = comentario.ConversacionArchivo.Any()
+                            ? new List<HelperConversacionArchivo>()
+                            : null;
+                        if (conversacion.Archivo != null)
+                            foreach (ConversacionArchivo archivoActual in comentario.ConversacionArchivo)
+                            {
+                                conversacion.Archivo.Add(new HelperConversacionArchivo { IdConversacion = archivoActual.IdTicketConversacion, Archivo = archivoActual.Archivo });
+                            }
+                        result.ConversacionDetalle.Add(conversacion);
                     }
                 }
             }
@@ -812,7 +848,7 @@ namespace KinniNet.Core.Operacion
                     IdTicket = idTicket,
                     IdUsuario = idUsuario,
                     Mensaje = mensaje,
-                    FechaGeneracion = 
+                    FechaGeneracion =
                         DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff",
                             CultureInfo.InvariantCulture),
                     Sistema = sistema,

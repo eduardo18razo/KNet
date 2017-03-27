@@ -42,6 +42,11 @@ namespace KiiniHelp.UserControls
             }
         }
 
+        public bool Fail
+        {
+            get { return bool.Parse(fhFallo.Value); }
+            set { fhFallo.Value = value.ToString(); }
+        }
         private void ValidaCaptura()
         {
             StringBuilder sb = new StringBuilder();
@@ -119,6 +124,7 @@ namespace KiiniHelp.UserControls
             }
             catch (Exception ex)
             {
+                Fail = true;
                 if (_lstError == null)
                 {
                     _lstError = new List<string>();

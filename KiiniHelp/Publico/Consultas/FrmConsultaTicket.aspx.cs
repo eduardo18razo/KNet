@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using KiiniHelp.ServiceTicket;
 using KiiniNet.Entities.Helper;
 
 namespace KiiniHelp.Publico.Consultas
 {
-    public partial class FrmConsultaTicket : System.Web.UI.Page
+    public partial class FrmConsultaTicket : Page
     {
         private readonly ServiceTicketClient _servicioticket = new ServiceTicketClient();
 
@@ -29,6 +31,8 @@ namespace KiiniHelp.Publico.Consultas
             try
             {
                 AlertaGeneral = new List<string>();
+                targetEditor.Attributes.Add("onfocus", "CargaEditor(\"#targetEditor\");");
+                
             }
             catch (Exception ex)
             {
@@ -46,13 +50,39 @@ namespace KiiniHelp.Publico.Consultas
             try
             {
                 HelperDetalleTicket detalle = _servicioticket.ObtenerDetalleTicketNoRegistrado(int.Parse(txtTicket.Text.Trim()), txtClave.Text.Trim());
-                divResultado.Visible = detalle != null;
                 if (detalle != null)
                 {
+                    divConsulta.Visible = false;
+                    divDetalle.Visible = true;
                     lblticket.Text = detalle.IdTicket.ToString();
+                    lblCveRegistro.Text = detalle.CveRegistro;
+                    lblFechaActualiza.Text = detalle.AsignacionesDetalle.OrderBy(o => o.FechaMovimiento).First().FechaMovimiento.ToShortDateString();
                     lblestatus.Text = detalle.EstatusActual;
-                    lblAsignacion.Text = detalle.AsignacionActual;
                     lblfecha.Text = detalle.FechaCreacion.ToString(CultureInfo.InvariantCulture);
+                    rptComentrios.DataSource = detalle.ConversacionDetalle;
+                    rptComentrios.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void rptComentrios_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                Repeater rptDownloads = ((Repeater)e.Item.FindControl("rptDownloads"));
+                if (rptDownloads != null)
+                {
+                    rptDownloads.DataSource = ((HelperConversacionDetalle)e.Item.DataItem).Archivo;
+                    rptDownloads.DataBind();
                 }
             }
             catch (Exception ex)

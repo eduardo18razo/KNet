@@ -9,14 +9,31 @@ namespace KiiniNet.Entities.Helper
     {
         public int IdTicket { get; set; }
         public int IdEstatusTicket { get; set; }
+        public string CveRegistro { get; set; }
         public int IdEstatusAsignacion { get; set; }
         public string EstatusActual { get; set; }
         public string AsignacionActual { get; set; }
         public DateTime FechaCreacion { get; set; }
         public List<HelperEstatusDetalle> EstatusDetalle { get; set; }
         public List<HelperAsignacionesDetalle> AsignacionesDetalle { get; set; }
+        public List<HelperConversacionDetalle> ConversacionDetalle { get; set; }
     }
 
+    public class HelperConversacionDetalle
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string FechaHora { get; set; }
+
+        public string Comentario { get; set; }
+        public List<HelperConversacionArchivo> Archivo { get; set; }
+    }
+
+    public class HelperConversacionArchivo
+    {
+        public int IdConversacion { get; set; }
+        public string Archivo { get; set; }
+    }
     public class HelperAsignacionesDetalle
     {
         public string Descripcion { get; set; }

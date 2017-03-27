@@ -21,7 +21,7 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public bool Sistema { get; set; }
         [DataMember]
-        public bool Leido { get; set; }
+        public bool? Leido { get; set; }
         [DataMember]
         public DateTime? FechaLectura { get; set; }
         [DataMember]

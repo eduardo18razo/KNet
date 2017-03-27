@@ -178,59 +178,12 @@
     <Content Include="BootStrap\MainMenu\js\modernizr.custom.js" />
     <Content Include="ConfirmacionCuenta.aspx" />
     <Content Include="Default.aspx" />
-    <Content Include="DefaultAspnet.aspx" />
+    <Content Include="DefaultUserSelect.aspx" />
     <Content Include="Downloads\FrmDownloads.aspx" />
+    <Content Include="Downloads\FrmPreviewImage.aspx" />
     <Content Include="FrmRecuperar.aspx" />
     <Content Include="Identificar.aspx" />
-    <Content Include="on\css\account.css" />
-    <Content Include="on\css\authentication.css" />
-    <Content Include="on\css\bootstrap-datepicker.css" />
-    <Content Include="on\css\bootstrap-markdown.css" />
-    <Content Include="on\css\bootstrap.css" />
-    <Content Include="on\css\dashboard-health.css" />
-    <Content Include="on\css\discussion.css" />
-    <Content Include="on\css\elegant-icons.css" />
-    <Content Include="on\css\font-awesome.css" />
-    <Content Include="on\css\help.css" />
-    <Content Include="on\css\jstree-default.css" />
-    <Content Include="on\css\metisMenu.css" />
-    <Content Include="on\css\mmenu.css" />
-    <Content Include="on\css\pe-7-icons-helper.css" />
-    <Content Include="on\css\pe-7-icons.css" />
-    <Content Include="on\css\styles.css" />
-    <Content Include="on\css\tether-shepherd.css" />
-    <Content Include="on\fonts\ElegantIcons.svg" />
-    <Content Include="on\fonts\flexslider-icon.svg" />
-    <Content Include="on\fonts\fontawesome-webfont.svg" />
-    <Content Include="on\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="on\fonts\Pe-icon-7-stroke.svg" />
-    <Content Include="on\fonts\weathericons-regular-webfont.svg" />
-    <Content Include="on\images\users_icon\cliente.jpg" />
-    <Content Include="on\images\logo-icon.svg" />
-    <Content Include="on\images\profiles\profile-1.png" />
-    <Content Include="on\images\carousels\slide-1.jpg" />
-    <Content Include="on\images\carousels\slide-2.jpg" />
-    <Content Include="on\images\carousels\slide-3.jpg" />
-    <Content Include="on\images\users_icon\usuario_2.jpg" />
-    <Content Include="on\images\users_icon\usuario_3.jpg" />
-    <Content Include="on\js\bootstrap-markdown.js" />
-    <Content Include="on\js\bootstrap.js" />
-    <Content Include="on\js\forms-wizard.js" />
-    <Content Include="on\js\imagesloaded.js" />
-    <Content Include="on\js\jquery-peity.js" />
-    <Content Include="on\js\jquery-steps.js" />
-    <Content Include="on\js\jquery-ui.js" />
-    <Content Include="on\js\jquery.js" />
-    <Content Include="on\js\jquery.mmenu.all.min.js" />
-    <Content Include="on\js\main.js" />
-    <Content Include="on\js\markdown-js.js" />
-    <Content Include="on\js\masonry.js" />
-    <Content Include="on\js\metisMenu.js" />
-    <Content Include="on\js\moment.js" />
-    <Content Include="on\js\pace.js" />
-    <Content Include="on\js\tether-shepherd.js" />
-    <Content Include="on\js\tether.js" />
-    <Content Include="on\js\to-markdown.js" />
+    <Content Include="assets\css\font.css" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Sistema.Canal.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.DiaFestivoDefault.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.HorarioDefault.datasource" />
@@ -243,28 +196,6 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperNotasUsuario.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperNotasOpcion.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperArbolAcceso.datasource" />
-    <Content Include="on\fonts\ElegantIcons.eot" />
-    <Content Include="on\fonts\ElegantIcons.ttf" />
-    <Content Include="on\fonts\ElegantIcons.woff" />
-    <Content Include="on\fonts\flexslider-icon.eot" />
-    <Content Include="on\fonts\flexslider-icon.ttf" />
-    <Content Include="on\fonts\flexslider-icon.woff" />
-    <Content Include="on\fonts\fontawesome-webfont.eot" />
-    <Content Include="on\fonts\fontawesome-webfont.ttf" />
-    <Content Include="on\fonts\fontawesome-webfont.woff" />
-    <Content Include="on\fonts\fontawesome-webfont.woff2" />
-    <Content Include="on\fonts\FontAwesome.otf" />
-    <Content Include="on\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="on\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="on\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="on\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="on\fonts\Pe-icon-7-stroke.eot" />
-    <Content Include="on\fonts\Pe-icon-7-stroke.ttf" />
-    <Content Include="on\fonts\Pe-icon-7-stroke.woff" />
-    <Content Include="on\fonts\weathericons-regular-webfont.eot" />
-    <Content Include="on\fonts\weathericons-regular-webfont.ttf" />
-    <Content Include="on\fonts\weathericons-regular-webfont.woff" />
-    <Content Include="on\fonts\WeatherIcons-Regular.otf" />
     <Content Include="BootStrap\MainMenu\Fonts\codropsicons\.DS_Store" />
     <Content Include="BootStrap\MainMenu\Fonts\codropsicons\codropsicons.eot" />
     <Content Include="BootStrap\MainMenu\Fonts\codropsicons\codropsicons.ttf" />
@@ -2370,12 +2301,12 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DefaultAspnet.aspx.cs">
-      <DependentUpon>DefaultAspnet.aspx</DependentUpon>
+    <Compile Include="DefaultUserSelect.aspx.cs">
+      <DependentUpon>DefaultUserSelect.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DefaultAspnet.aspx.designer.cs">
-      <DependentUpon>DefaultAspnet.aspx</DependentUpon>
+    <Compile Include="DefaultUserSelect.aspx.designer.cs">
+      <DependentUpon>DefaultUserSelect.aspx</DependentUpon>
     </Compile>
     <Compile Include="Downloads\FrmDownloads.aspx.cs">
       <DependentUpon>FrmDownloads.aspx</DependentUpon>
@@ -2383,6 +2314,13 @@
     </Compile>
     <Compile Include="Downloads\FrmDownloads.aspx.designer.cs">
       <DependentUpon>FrmDownloads.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Downloads\FrmPreviewImage.aspx.cs">
+      <DependentUpon>FrmPreviewImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Downloads\FrmPreviewImage.aspx.designer.cs">
+      <DependentUpon>FrmPreviewImage.aspx</DependentUpon>
     </Compile>
     <Compile Include="FrmRecuperar.aspx.cs">
       <DependentUpon>FrmRecuperar.aspx</DependentUpon>

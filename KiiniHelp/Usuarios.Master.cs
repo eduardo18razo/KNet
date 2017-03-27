@@ -49,6 +49,9 @@ namespace KiiniHelp
                         lstRoles.Single(s => s.Id == int.Parse(Session["RolSeleccionado"].ToString())).Descripcion;
                 rptRoles.DataSource = lstRoles;
                 rptRoles.DataBind();
+                rptRolesPanel.DataSource = lstRoles;
+                rptRolesPanel.DataBind();
+                lblBadgeRoles.Text = lstRoles.Count.ToString();
             }
             catch (Exception ex)
             {
@@ -300,8 +303,8 @@ namespace KiiniHelp
                 try
                 {
                     Usuario usuario = ((Usuario)Session["UserData"]);
-                    Session["RolSeleccionado"] = ((Button)sender).CommandArgument;
-                    lblAreaSeleccionada.Text = ((Button)sender).Text;
+                    Session["RolSeleccionado"] = ((LinkButton)sender).CommandArgument;
+                    lblAreaSeleccionada.Text = ((LinkButton)sender).Text;
                     int areaSeleccionada = 0;
                     if (Session["RolSeleccionado"] != null)
                         areaSeleccionada = int.Parse(Session["RolSeleccionado"].ToString());

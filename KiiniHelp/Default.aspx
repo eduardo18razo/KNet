@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" EnableEventValidation="false" Inherits="KiiniHelp.Default1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="KiiniHelp.Default1" %>
 
 <%@ Register Src="~/UserControls/UcLogCopia.ascx" TagPrefix="uc1" TagName="UcLogCopia" %>
 
@@ -13,53 +13,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="assets/images/favicon.ico" />
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="assets/css/bootstrap.css" />
-    <link rel="stylesheet" href="assets/css/metisMenu.css" />
+    <link rel='stylesheet' href="assets/css/font.css" />
     <link rel="stylesheet" href="assets/css/font-awesome.css" />
-    <link rel="stylesheet" href="assets/css/elegant-icons.css" />
-    <link rel="stylesheet" href="assets/css/pe-7-icons.css" />
-    <link rel="stylesheet" href="assets/css/pe-7-icons-helper.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" href="assets/css/help.css" />
-    <script>
+    <script src="assets/js/jquery.js"></script>
+
+    <script type="text/javascript">
+
         function DontCloseMenu(event) {
             event.stopPropagation();
-        }
+        };
     </script>
 </head>
 
-<body class="layout-no-leftnav" data-trigger="">
-    <form id="form1" runat="server">
+<body class="layout_no_leftnav" data-trigger="">
+    <form runat="server">
         <!--JS-->
         <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
             <Scripts>
                 <asp:ScriptReference Path="~/assets/js/jquery.js" />
                 <asp:ScriptReference Path="~/assets/js/bootstrap.js" />
-                <asp:ScriptReference Path="~/assets/js/metisMenu.js" />
-                <asp:ScriptReference Path="~/assets/js/imagesloaded.js" />
-                <asp:ScriptReference Path="~/assets/js/masonry.js" />
-                <asp:ScriptReference Path="~/assets/js/pace.js" />
-                <asp:ScriptReference Path="~/assets/js/main.js" />
+                <asp:ScriptReference Path="assets/js/imagesloaded.js" />
+                <asp:ScriptReference Path="assets/js/masonry.js" />
+                <asp:ScriptReference Path="assets/js/main.js" />
             </Scripts>
         </asp:ScriptManager>
         <!--INICIA HEADER-->
         <header class="header">
-            <div class="branding float-left">
-                <h1 class="logo text-center"><a href="index.html">
-                    <img class="logo-icon" src="assets/images/logo-icon.svg" alt="icon" />
-                    <span class="nav-label"><span class="h3"><strong>Bancremex</strong></span></span> </a></h1>
+            <div class="branding ">
+                <h1 class="logo text-center">
+                    <asp:HyperLink NavigateUrl="~/Default.aspx" runat="server"> <asp:Image class="logo-icon" ImageUrl="~/assets/images/logo-icon.svg" alt="icon"  runat="server"/> <span class="nav-label"> <span class="h3"><strong>Bancremex</strong></span></span> </asp:HyperLink>
+                </h1>
             </div>
             <div class="topbar bg_w_header">
                 <!--INICIA MENU COLAPSABLE-->
                 <!--TERMINA MENU COLAPSABLE-->
                 <!--INICIA BUSCADOR-->
                 <div class="search-container">
-                    <div id="main-search" class="main-search">
+                    <div id="main-search">
                         <i id="main-search-toggle" class="fa fa-search icon"></i>
-                        <div id="main-search-input-wrapper" class="main-search-input-wrapper">
-                            <input type="text" id="main-search-input" class="main-search-input form-control" placeholder="Buscar por palabra clave..."/>
+                        <div id="main_search_input_wrapper" class="main_search_input_wrapper">
+                            <asp:TextBox type="text" ID="main_search_input" class="main_search_input form-control" placeholder="Buscar por palabra clave..." runat="server" />
                             <span id="clear-search" aria-hidden="true" class="fs1 icon icon_close_alt2 clear-search"></span>
                         </div>
                     </div>
@@ -69,29 +64,47 @@
                 <div class="navbar-tools">
                     <div class="utilities-container">
                         <div class="utilities">
-
                             <!--INICIA TICKET-->
                             <div class="item item-notifications">
-                                <div class="dropdown-toggle" id="dropdownMenu-notifications" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Tickets</span> <span class="pe-icon fa fa-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Tickets"></span></div>
+                                <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" role="button">
+                                    <span class="sr-only">Tickets</span> <span class="pe-icon fa fa-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Tickets"></span>
+                                </div>
                                 <ul class="dropdown-menu wdropdown-ticket" role="menu" aria-labelledby="dropdownMenu-user">
-                                    <li><span class="arrow"></span><a role="menuitem" data-toggle="modal" data-target="#modal-new-ticket"><span class="pe-icon pe-7s-plus icon"></span>Nuevo ticket</a></li>
-                                    <li><a role="menuitem" href="guest_ticket_con.html"><span class="pe-icon pe-7s-look icon"></span>Consultar ticket</a></li>
+                                    <li><span class="arrow"></span><a role="menuitem" data-toggle="modal" data-target="#modal-new-ticket">
+                                        <span class="pe-icon pe-7s-plus icon"></span>Nuevo ticket
+                                    </a></li>
+                                    <li>
+                                        <asp:HyperLink role="menuitem" NavigateUrl="~/Publico/Consultas/FrmConsultaTicket.aspx" runat="server">
+                                            <span class="pe-icon pe-7s-look icon"></span>Consultar ticket
+                                        </asp:HyperLink>
+                                    </li>
                                 </ul>
                             </div>
                             <!--TERMINA TICKET-->
 
                             <!--INICIA REGISTRATE-->
-                            <div class="item item-notifications"><a href="signup.html"><span class="sr-only">Regístrate</span> <span class="pe-icon fa fa-book icon" data-toggle="tooltip" data-placement="bottom" title="Regístrate"></span></a></div>
+                            <div class="item item-notifications">
+                                <a href="signup.html">
+                                    <span class="sr-only">Regístrate</span>
+                                    <span class="pe-icon fa fa-book icon" data-toggle="tooltip" data-placement="bottom" title="Regístrate"></span>
+                                </a>
+                            </div>
                             <!--TERMINA REGISTRATE-->
                             <!--INICIA LOGIN-->
                             <div class="item item-messages dropdown">
-                                <div class="dropdown-toggle" id="dropdownMenu-messages" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Ingresa</span> <span class="pe-icon fa fa-sign-in icon" data-toggle="tooltip" data-placement="bottom" title="Ingresa"></span></div>
+                                <div class="dropdown-toggle" id="dropdownMenu-messages" data-toggle="dropdown" aria-expanded="true" role="button">
+                                    <span class="sr-only">Ingresa</span> <span class="pe-icon fa fa-sign-in icon" data-toggle="tooltip" data-placement="bottom" title="Ingresa"></span>
+                                </div>
                                 <div class="dropdown-menu wdropdown-login" role="menu" aria-labelledby="dropdownMenu-messages">
                                     <span class="arrow"></span>
-                                    <div class="message-items no-overflow">
-                                        <div class="form-container col-md-12 col-sm-12 col-xs-12">
-                                            <br>
-                                            <uc1:UcLogCopia runat="server" id="UcLogCopia" />
+                                    <div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <br />
+                                            <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                                <ContentTemplate>
+                                                    <uc1:UcLogCopia runat="server" ID="UcLogCopia" />
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
                                         </div>
                                         <div class="social-btns col-md-12 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-sm-offset-0">
                                             <div class="divider"><span>O ingresa con</span></div>
@@ -113,12 +126,14 @@
                     <div class="user-container dropdown">
                         <div class="dropdown-toggle" id="dropdownMenu-user" data-toggle="dropdown" aria-expanded="true" role="button">
                             <img src="assets/images/profiles/profile-1.png" alt="" />
-                            <i class="fa fa-caret-down"></i></div>
+                            <i class="fa fa-caret-down"></i>
+                        </div>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-user">
                             <li><span class="arrow"></span><a role="menuitem" href="#"><span class="pe-icon pe-7s-user icon"></span>Mi perfil</a></li>
                             <li><a role="menuitem" href="signup.html"><span class="pe-icon pe-7s-paper-plane icon"></span>Registrarse</a></li>
                             <li><a role="menuitem" href="login.html"><span class="fa fa-sign-in icon"></span>Ingresar</a></li>
-                            <li><a role="menuitem" href="index.html"><span class="fa fa-sign-out icon"></span>Salir</a></li>
+                            <li>
+                                <asp:HyperLink role="menuitem" NavigateUrl="~/Default.aspx" runat="server"><span class="fa fa-sign-out icon"></span>Salir</asp:HyperLink></li>
                         </ul>
                     </div>
                     <!--TERMINA PERFIL-->
@@ -126,7 +141,7 @@
             </div>
         </header>
         <!--TERMINA HEADER-->
-        <div id="content-wrapper" class="content-wrapper view projects-view ">
+        <div id="content-wrapper" class="content-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <br />
@@ -135,10 +150,12 @@
                     <!--INICIA CARRUSEL-->
                     <div class="module-content collapse in" id="content-1">
                         <div class="module-content-inner no-padding-bottom">
-                            <div class="carousel slide bootstrap-carousel" data-ride="carousel" id="carousel-example-generic">
+                            <div class="carousel slide" data-ride="carousel" id="carouselPresenter">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators">
-                                    <li class="active" data-slide-to="0" data-target="#carousel-example-generic"></li>
+                                    <li data-target="#carouselPresenter" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carouselPresenter" data-slide-to="1"></li>
+                                    <li data-target="#carouselPresenter" data-slide-to="2"></li>
                                 </ol>
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
@@ -153,22 +170,24 @@
                                     </div>
                                 </div>
                                 <!-- Controls -->
-                                <a class="left carousel-control" data-slide="prev" href="#carousel-example-generic"><span class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous</span></a> <a class="right carousel-control" data-slide="next" href="#carousel-example-generic"><span class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next</span></a>
+                                <a class="left carousel-control" data-slide="prev" href="#carouselPresenter">
+                                    <span class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous</span>
+                                </a><a class="right carousel-control" data-slide="next" href="#carouselPresenter"><span class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next</span></a>
                             </div>
                         </div>
                     </div>
                     <!--TERMINA CARRUSEL-->
                 </div>
-                <br/>
+                <br />
                 <!--INICIA TITULO-->
                 <h2 class="title text-left">Para ofrecerte un mejor servicio indicanos que tipo de usuario eres.</h2>
-                <hr/>
+                <hr />
                 <!--TERMINA TITULO-->
-                <hr/>
+                <hr />
                 <!--INICIA USUARIOS-->
                 <div id="masonry" class="row">
-                    <div class="module-wrapper masonry-item col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <section class="module project-module">
+                    <div class=" col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <section class="module ">
                             <div class="module-inner">
                                 <div class="module-content collapse in" id="content-2">
                                     <div class="module-content-inner">
@@ -180,8 +199,8 @@
                             </div>
                         </section>
                     </div>
-                    <div class="module-wrapper masonry-item col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <section class="module project-module">
+                    <div class=" col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <section class="module ">
                             <div class="module-inner">
                                 <div class="module-content collapse in" id="content-3">
                                     <div class="module-content-inner">
@@ -193,8 +212,8 @@
                             </div>
                         </section>
                     </div>
-                    <div class="module-wrapper masonry-item col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <section class="module project-module">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <section class="module">
                             <div class="module-inner">
                                 <div class="module-content collapse in" id="content-4">
                                     <div class="module-content-inner">
@@ -208,18 +227,18 @@
                     </div>
                 </div>
                 <!--TERMINA USUARIOS-->
-                <hr/>
+                <hr>
                 <!--INICIA BUSCADOR-->
                 <div class="row">
-                    <div class="module-wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <section class="module module-headings">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <section class="module">
                             <div class="module-inner">
                                 <div class="module-content">
                                     <div class="module-content-inner">
                                         <div class="help-section">
-                                            <div class="help-search">
+                                            <div>
                                                 <h3 class="text-center title">¿Podemos ayudarte?</h3>
-                                                <div role="form" class="search-box form-inline text-center margin-bottom-lg">
+                                                <div role="form" class="search-box form-inline text-center">
                                                     <label class="sr-only" for="help_search_form">Buscar</label>
                                                     <div class="form-group">
                                                         <asp:TextBox ID="help_search_form" name="search-form" type="text" class="form-control help-search-form" placeholder="Busca con una palabra clave..." runat="server"></asp:TextBox>
@@ -227,12 +246,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="help-category-wrapper margin-bottom-lg">
+                                            <div>
                                                 <div class="row text-center"></div>
                                                 <div class="row text-center"></div>
                                                 <div class="row text-center"></div>
                                             </div>
-                                            <div class="help-lead text-center margin-bottom-lg">
+                                            <div class="help-lead text-center">
                                                 <h4 class="subtitle">¿Aún necesitas ayuda?</h4>
                                                 <a class="btn btn-primary" data-toggle="modal" data-target="#modal-new-ticket"><i class="fa fa-play-circle"></i>Generar un ticket </a>
                                             </div>
@@ -254,7 +273,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="modal-new-ticket-label">
-                            <img img-responsive margin-left src="assets/images/icons/new_ticket.png" alt="" /><br>
+                            <img img-responsive src="assets/images/icons/new_ticket.png" alt="" /><br />
                             Crear Ticket Nuevo</h4>
                     </div>
                     <div class="modal-body">
@@ -263,18 +282,17 @@
                                 <label class="col-sm-12 control-label">¿Cuál es tu solicitud?</label>
                                 <div class="col-sm-8">
                                     <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                        Servicio/Consulta
+                                        <asp:RadioButton name="inlineRadioOptions" value="option1" runat="server" Text="" />
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                        Problema
+                                        <asp:RadioButton name="inlineRadioOptions" value="option2" runat="server" Text="Problema" />
+
                                     </label>
                                 </div>
                             </div>
-                            <br/>
-                            <br/>
-                            <hr/>
+                            <br />
+                            <br />
+                            <hr />
                             <div class="form-group">
                                 <label class="col-sm-12 control-label">Área de atención</label>
                                 <div class="col-sm-10">
@@ -307,12 +325,12 @@
                                 <label class="sr-only">Description</label>
                                 <textarea class="form-control" rows="2" placeholder="Escribe un comentario..."></textarea>
                             </div>
-                            <hr/>
+                            <hr>
                             <div class="form-group">
                                 <label for="exampleInputFile">Agregar un archivo</label>
                                 <input type="file" id="exampleInputFile" />
                             </div>
-                            <hr/>
+                            <hr>
                             <div class="checkbox remember">
                                 <label>
                                     <input type="checkbox" />
@@ -333,16 +351,16 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h3 class="modal-title" id="myModalLabel">
-                            <img img-responsive margin-left src="assets/images/icons/ok.png" alt="" /><br/>
+                            <img img-responsive margin-left src="assets/images/icons/ok.png" alt="" /><br>
                             Tu ticket se creo con éxito</h3>
                     </div>
                     <div class="modal-body">
-                        <hr/>
+                        <hr />
                         <p class="h4">
-                            <strong>Tu no. de ticket: 01</strong><br/>
+                            <strong>Tu no. de ticket: 01</strong><br>
                         </p>
                         <p class="h4"><strong>Clave de registro: 234D45</strong></p>
-                        <hr/>
+                        <hr />
                         En breve recibirás un correo con los datos de tu ticket para que puedas dar seguimiento.
                     </div>
                     <div class="modal-footer"></div>
@@ -356,72 +374,23 @@
             <div class="copyright">Kiinisuppor &copy; 2017 - <a href="http://www.kiininet.com" target="_blank">Powered by Kiinenet</a></div>
         </footer>
         <!--TERMINA FOOTER-->
+        <%--<script type="text/javascript">
+            //$("#frmdefault").submit(function (event) {
+            //    event.preventDefault();
 
-        <!--INICIA SELECCION DE ROLES-->
+            //});
+            $('.dropdown-menu').click(function (e) {
+                e.stopPropagation();
+            });
+            $('.dropdownMenu-messages').click(function (e) {
+                e.stopPropagation();
+            });
+            function OpenDropLogin() {
 
-        <div id="side-panel" class="side-panel">
-            <div class="side-panel-inner">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="title text-center"><i class="fa fa-users"></i>Roles</h4>
-                <div class="items-wrapper">
-                    <div class="item">
-                        <div class="symbol-holder">
-                            <button class="icon-container btn btn-info btn-circle"><i class="icon fa fa-user"></i></button>
-                        </div>
-                        <div class="content-holder">
-                            <div class="subject-line"><strong>ADMINISTRADOR</strong> </div>
-                            <div class="time-stamp">Desde el 15 de agosto</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="symbol-holder">
-                            <button class="icon-container btn btn-info btn-circle"><i class="icon fa fa-user"></i></button>
-                        </div>
-                        <div class="content-holder">
-                            <div class="subject-line"><strong>ADMINISTRADOR</strong> </div>
-                            <div class="time-stamp">Desde el 15 de agosto</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="symbol-holder">
-                            <button class="icon-container btn btn-info btn-circle"><i class="icon fa fa-user"></i></button>
-                        </div>
-                        <div class="content-holder">
-                            <div class="subject-line"><strong>ADMINISTRADOR</strong> </div>
-                            <div class="time-stamp">Desde el 15 de agosto</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="symbol-holder">
-                            <button class="icon-container btn btn-info btn-circle"><i class="icon fa fa-user"></i></button>
-                        </div>
-                        <div class="content-holder">
-                            <div class="subject-line"><strong>ADMINISTRADOR</strong> </div>
-                            <div class="time-stamp">Desde el 15 de agosto</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="symbol-holder">
-                            <button class="icon-container btn btn-info btn-circle"><i class="icon fa fa-user"></i></button>
-                        </div>
-                        <div class="content-holder">
-                            <div class="subject-line"><strong>ADMINISTRADOR</strong> </div>
-                            <div class="time-stamp">Desde el 15 de agosto</div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="symbol-holder">
-                            <button class="icon-container btn btn-info btn-circle"><i class="icon fa fa-user"></i></button>
-                        </div>
-                        <div class="content-holder">
-                            <div class="subject-line"><strong>ADMINISTRADOR</strong> </div>
-                            <div class="time-stamp">Desde el 15 de agosto</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--FIN SELECCION DE ROLES-->
+                $('.wdropdown-login').toggle();
+
+            };
+        </script>--%>
     </form>
 </body>
 </html>

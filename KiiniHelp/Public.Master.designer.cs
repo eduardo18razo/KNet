@@ -22,15 +22,6 @@ namespace KiiniHelp {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
-        /// Control form1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
         /// Control scripMain.
         /// </summary>
         /// <remarks>
@@ -49,13 +40,22 @@ namespace KiiniHelp {
         protected global::System.Web.UI.UpdateProgress updateProgress;
         
         /// <summary>
-        /// Control UcLogCopia.
+        /// Control main_search_input.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.UcLogCopia UcLogCopia;
+        protected global::System.Web.UI.WebControls.TextBox main_search_input;
+        
+        /// <summary>
+        /// Control UcLogIn.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.UcLogCopia UcLogIn;
         
         /// <summary>
         /// Control panelAlert.
@@ -94,30 +94,12 @@ namespace KiiniHelp {
         protected global::System.Web.UI.WebControls.LinkButton lnkBtnCerrar;
         
         /// <summary>
-        /// Control ContentPlaceHolder1.
+        /// Control ContentPlaceHolderPublic.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
-        
-        /// <summary>
-        /// Control upModalSingIn.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upModalSingIn;
-        
-        /// <summary>
-        /// Control UcLogIn.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::KiiniHelp.UserControls.UcLogIn UcLogIn;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderPublic;
     }
 }
