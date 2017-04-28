@@ -19,6 +19,7 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         readonly ServiceTipoCampoMascaraClient _servicioSistemaTipoCampoMascara = new ServiceTipoCampoMascaraClient();
         readonly ServiceCatalogosClient _servicioSistemaCatalogos = new ServiceCatalogosClient();
@@ -232,7 +233,7 @@ namespace KiiniHelp.UserControls.Altas
                     {
                         IdCatalogo = tipoCampo.Catalogo ? Convert.ToInt32(ddlCatalogosCampo.SelectedValue) : (int?)null,
                         IdTipoCampoMascara = tipoCampo.Id,
-                        Descripcion = txtDescripcionCampo.Text.Trim().ToUpper(),
+                        Descripcion = txtDescripcionCampo.Text.Trim(),
                         Requerido = chkRequerido.Checked,
                         LongitudMinima =
                             tipoCampo.LongitudMinima

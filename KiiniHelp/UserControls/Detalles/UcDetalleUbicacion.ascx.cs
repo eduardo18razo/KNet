@@ -15,23 +15,12 @@ namespace KiiniHelp.UserControls.Detalles
         {
             set
             {
-                using (Ubicacion ub = new ServiceUbicacionClient().ObtenerUbicacionUsuario(value))
+                using (Ubicacion ub = new ServiceUbicacionClient().ObtenerUbicacionById(value))
                 {
                     if (ub == null) return;
-                    if (ub.Pais != null)
-                        lblPais.Text = ub.Pais.Descripcion;
-                    if (ub.Campus != null)
-                        lblCampus.Text = ub.Campus.Descripcion;
-                    if (ub.Torre != null)
-                        lblTorre.Text = ub.Torre.Descripcion;
-                    if (ub.Piso != null)
-                        lblPiso.Text = ub.Piso.Descripcion;
-                    if (ub.Zona != null)
-                        lblZona.Text = ub.Zona.Descripcion;
-                    if (ub.SubZona != null)
-                        lblSubZona.Text = ub.SubZona.Descripcion;
-                    if (ub.SiteRack != null)
-                        lblsite.Text = ub.SiteRack.Descripcion;
+                    List<Ubicacion> source = new List<Ubicacion> {ub};
+                    rptUbicacion.DataSource = source;
+                    rptUbicacion.DataBind();
                 }
             }
         }

@@ -23,6 +23,12 @@ namespace KiiniNet.Services.Operacion.Interface
         void ActualizarUsuario(int idUsuario, Usuario usuario);
 
         [OperationContract]
+        void GuardarFoto(int idUsuario, byte[] imagen);
+
+        [OperationContract]
+        byte[] ObtenerFoto(int idUsuario);
+
+        [OperationContract]
         void HabilitarUsuario(int idUsuario, bool habilitado);
 
         [OperationContract]

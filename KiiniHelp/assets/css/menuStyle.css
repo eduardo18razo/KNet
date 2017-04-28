@@ -18,8 +18,7 @@
 
 .pMenu a:hover,.pMenu a:focus {
 	/*color: #fff;*/
-	/*outline: ;*/
-    text-decoration: underline;
+	outline: none;
 }
 
 .clearfix:before,
@@ -46,17 +45,33 @@ html, body, .container, .scroller {
 
 .scroller {
 	/*overflow-y: scroll;*/
+    -webkit-transition:all .3s linear;
+    -moz-transition:all .3s linear;
+    -ms-transition:all .3s linear;
+    -o-transition:all .3s linear;
+    transition:all .3s linear;
 }
 
 .scroller,
 .scroller-inner {
-	position: relative;
+    -webkit-transition:all .3s linear;
+    -moz-transition:all .3s linear;
+    -ms-transition:all .3s linear;
+    -o-transition:all .3s linear;
+    transition:all .3s linear;
+	/*position: fixed;*/
+    width: 100%;
+    overflow-x: hidden;
+    height: 100% !important;
+    margin-top: 80px
+
 }
 
 .container {
 	position: relative;
 	overflow: hidden;
 	background: #34495e;
+    width: 100%;
 }
 /*---- Menu trigger ----*/
 .menu-trigger {
@@ -131,9 +146,9 @@ html, body, .container, .scroller {
 }
 
 .divMainMenu {
-	position: relative;
+	position: fixed;
 	left: 0;
-	height: 100%;
+    height: 87%;
 }
 
 .pMenu {
@@ -154,7 +169,7 @@ html, body, .container, .scroller {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: #FFFFFF;
+	background: #ffffff;
 	-webkit-transform: translate3d(-100%, 0, 0);
 	-moz-transform: translate3d(-100%, 0, 0);
 	transform: translate3d(-100%, 0, 0);
@@ -189,10 +204,10 @@ html, body, .container, .scroller {
 .menuLevel.menuLevel-overlay::after {
 	width: 100%;
 	height: 100%;
-	opacity: 1;
+	/*opacity: 1;
 	-webkit-transition: opacity 0.3s;
 	-moz-transition: opacity 0.3s;
-	transition: opacity 0.3s;
+	transition: opacity 0.3s;*/
 }
 
 .menuLevel.menuLevel-overlay {
@@ -305,7 +320,7 @@ html, body, .container, .scroller {
     box-shadow: inset 0 -1px rgba(0,0,0,0.2);
     text-shadow: 0 0 1px #ffffff;
     text-shadow: 0 0 1px rgba(255,255,255,0.1);
-	font-size: 1.4em;
+	font-size: 12px;
 	-webkit-transition: background 0.3s, box-shadow 0.3s;
 	-moz-transition: background 0.3s, box-shadow 0.3s;
 	transition: background 0.3s, box-shadow 0.3s;

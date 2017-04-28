@@ -1,165 +1,113 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaUsuarios.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaUsuarios" %>
+<%@ Import Namespace="KinniNet.Business.Utils" %>
 <%@ Register TagPrefix="uc1" TagName="UcDetalleUsuario" Src="~/UserControls/Detalles/UcDetalleUsuario.ascx" %>
-<%@ Register Src="~/UserControls/Altas/Usuarios/UcAltaUsuarioMoral.ascx" TagPrefix="uc1" TagName="UcAltaUsuarioMoral" %>
-
-
-
-
 <div style="height: 100%;">
-    <script>
-        function ContextMenu() {
-            debugger;
-            var $contextMenu = $("#contextMenuUsuario");
-            $("body").on("click", function (e) {
-                $contextMenu.hide();
-                var table = $("#tblHeader");
-                table.find('tr').each(function (i, ev) {
-                    $(this).css('background', "transparent");
-                });
-            });
-            $("body").on("contextmenu", "table tr", function (e) {
-                $contextMenu.css({
-                    display: "block",
-                    left: e.pageX,
-                    top: e.pageY
-                });
-                debugger;
-                var baja = false;
-                var alta;
-                var parent = e.target.nodeName === "A" ? e.target.parentElement.parentElement : e.target.parentElement;
-                var nodos = parent.parentElement.childNodes;
-                for (var fondo = 0; fondo < nodos.length; fondo++) {
-                    if (nodos[fondo].nodeType === 1)
-                        parent.parentElement.childNodes[fondo].removeAttribute("style");
-                }
-
-                parent.parentElement.parentElement.style.background = 'transparent';
-                parent.style.background = "gray";
-                var columnas = e.target.parentElement.childNodes;
-                for (var z = 0; z < columnas.length; z++) {
-                    if (columnas[z].id === "colHabilitado") {
-                        baja = (columnas[z].textContent === 'SI');
-                    }
-                }
-                alta = !baja;
-                document.getElementById("<%= FindControl("btnBaja").ClientID %>").style.display = baja ? 'block' : 'none';
-                document.getElementById("<%= FindControl("btnAlta").ClientID %>").style.display = alta ? 'block' : 'none';
-                var elementId = document.getElementById("<%= FindControl("hfId").ClientID %>");
-                elementId.value = e.target.nodeName === "A" ? e.target.parentElement.parentElement.id : e.target.parentElement.id;
-                return false;
-            });
-
-            $contextMenu.on("click", "button", function () {
-                $contextMenu.hide();
-            });
-        };
-    </script>
     <asp:UpdatePanel runat="server" style="height: 100%">
         <ContentTemplate>
-            <div id="contextMenuUsuario" class="panel-heading contextMenu">
-                <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
-                <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Baja" ID="btnBaja" OnClick="btnBaja_OnClick" />
-                </div>
-                <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Alta" ID="btnAlta" OnClick="btnAlta_OnClick" />
+            <br>
+            <h3 class="h6">
+                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx" Text="Home" />
+                / Usaurios </h3>
+            <hr />
 
-                </div>
-                <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" />
-                </div>
-                <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" />
-                </div>
-            </div>
-            <div class="modal-header" id="panelAlertaGeneral" runat="server" visible="false">
-                <div class="alert alert-danger" role="alert">
-                    <div>
-                        <div style="float: left">
-                            <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
-                        </div>
-                        <div style="float: left">
-                            <h3>Error</h3>
-                        </div>
-                        <div class="clearfix clear-fix"></div>
-                    </div>
-                    <hr />
-                    <asp:Repeater runat="server" ID="rptErrorGeneral">
-                        <ItemTemplate>
-                            <ul>
-                                <li><%# Container.DataItem %></li>
-                            </ul>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-            </div>
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Usuarios</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="panel panel-primary">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingFiltros">
-                                <h4 class="panel-title">
-                                    <div role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiltros" aria-expanded="true" aria-controls="collapseFiltros" style="cursor: pointer">
-                                        Filtros
-                                    </div>
-                                </h4>
+            <!--MÓDULO-->
+            <section class="module">
+                <div class="row">
+                    <div class="col-lg-8 col-md-9">
+                        <div class="module-inner">
+                            <div class="module-heading">
+                                <h3 class="module-title"><asp:Label runat="server" ID="lblBranding" /></h3>
                             </div>
-                            <div id="collapseFiltros" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFiltros">
-                                <div class="panel-body">
-                                    <div class="form-horizontal">
-                                        <div class="form-horizontal">
-                                            <div class="form-group">
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">Tipo de Usuario</asp:Label>
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlTipoUsuario" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" AutoPostBack="true" />
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Usuario" Width="14%" OnClick="btnNew_OnClick" Visible="False" />
-                                            </div>
-                                        </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="module-inner">
+                            <asp:LinkButton runat="server" CssClass="btn btn-success fa fa-plus" Text="Crear Nuevo Usuario" OnClick="btnNew_OnClick">Crear Nuevo Usuario</asp:LinkButton>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="module-inner">
+                            CONSULTA PUESTOS:<br />
+                            <div class="search-box form-inline margin-bottom-lg">
+                                <label class="sr-only" for="txtFiltro">Buscar</label>
+                                <div class="form-group">
+                                    <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control help_search_form" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" placeholder="Busca con una palabra clave..." />
+                                    <asp:LinkButton runat="server" class="btn btn-primary btn-single-icon" OnClick="btnBuscar_OnClick"><i class="fa fa-search"></i></asp:LinkButton>
+                                </div>
+                            </div>
+                            <br/>
+                            ... o consulta por Tipo de Usuario<br />
+                            <asp:DropDownList runat="server" ID="ddlTipoUsuario" CssClass="form-control" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" AutoPostBack="true" />
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="module-inner">
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--/MÓDULO-->
+
+            <div id="masonry" class="row">
+                <div class="module-wrapper masonry-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <section class="module module-headings">
+                        <div class="module-inner">
+                            <div class="module-content collapse in" id="content-1">
+                                <div class="module-content-inner no-padding-bottom">
+                                    <div class="table-responsive">
+                                        <asp:Repeater runat="server" ID="rptResultados">
+                                            <HeaderTemplate>
+                                                <table class="table table-striped table-hover display" id="tblResults"> style="table-layout: fixed">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Tipo Usuario</th>
+                                                            <th>Nombre Completo</th>
+                                                            <th>Activo</th>
+                                                            <th>Editar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <tr id='<%# Eval("Id")%>'>
+                                                    <td>
+                                                <button type="button" class='<%# 
+int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Empleado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoPersonaFisica ? "btn btn-default-alt btn-square-usuario empleado" : 
+int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Cliente || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClientaPersonaFisica ? "btn btn-default-alt btn-square-usuario cliente" : 
+int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Proveedor || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorPersonaFisica ? "btn btn-default-alt btn-square-usuario proveedor" : "btn btn-default-alt btn-square-usuario"
+                                                        %>'><%# Eval("TipoUsuario.Descripcion").ToString().Substring(0,1) %></button></td>
+                                                    <td style="padding: 0; text-align: left; font-size: 10px;">
+                                                        <asp:LinkButton Style="padding: 0;" runat="server" Text='<%#Eval("NombreCompleto") %>' ID="LinkButton1" OnClick="btnUsuario_OnClick" CommandArgument='<%#Eval("Id") %>' /></td>
+                                                    <td id="colHabilitado">
+                                                        <ul class="list list-unstyled hidden" id="hiddenEnabled">
+                                                            <li>
+                                                                <asp:CheckBox runat="server" AutoPostBack="true" Checked='<%# (bool) Eval("Habilitado") %>' CssClass="chkIphone" Width="30px" data-id='<%# Eval("Id")%>' Text='<%# (bool) Eval("Habilitado") ? "SI" : "NO"%>' OnCheckedChanged="OnCheckedChanged" />
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                    <td id="colEditar">
+                                                        <ul class="list list-unstyled hidden" id="hiddenEdit">
+                                                            <li>
+                                                                <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Editar" CommandArgument='<%# Eval("Id")%>' OnClick="btnEditar_OnClick" />
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                            <FooterTemplate>
+                                                </tbody>
+                                            </table>
+                                            </FooterTemplate>
+                                        </asp:Repeater>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <asp:Repeater runat="server" ID="rptResultados">
-                                    <HeaderTemplate>
-                                        <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader" style="table-layout: fixed">
-                                            <thead>
-                                                <tr align="center">
-                                                    <td>
-                                                        <asp:Label runat="server">Nombre Completo</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label runat="server">Tipo Usuario</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label runat="server">Activo</asp:Label></td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                    </HeaderTemplate>
-                                    <ItemTemplate>
-                                        <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td oncontextmenu="ContextMenu()" style="padding: 0; text-align: left; font-size: 10px;">
-                                                <asp:LinkButton Style="padding: 0;" runat="server" Text='<%#Eval("NombreCompleto") %>' ID="LinkButton1" OnClick="btnUsuario_OnClick" CommandArgument='<%#Eval("Id") %>' /></td>
-                                            <td oncontextmenu="ContextMenu()" style="padding: 0; text-align: left; font-size: 10px;"><%# Eval("TipoUsuario.Descripcion")%></td>
-                                            <td oncontextmenu="ContextMenu()" style="padding: 0; font-size: 10px;" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
-                                        </tr>
-                                    </ItemTemplate>
-                                    <FooterTemplate>
-                                        </tbody>
-                                            </table>
-                                    </FooterTemplate>
-                                </asp:Repeater>
-                            </div>
-                        </div>
-                    </div>
+                    </section>
                 </div>
             </div>
         </ContentTemplate>
@@ -180,24 +128,12 @@
 
 
 <%--MODAL Usuarios--%>
-<div class="modal fade" id="modalPersonaMoral" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<%--<div class="modal fade" id="modalPersonaMoral" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <asp:UpdatePanel ID="upUser" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="modal-dialog modal-lg" style="width: 1250px; height: 940px; overflow: hidden">
                 <div class="modal-content">
                     <uc1:UcAltaUsuarioMoral runat="server" id="ucAltaUsuarioMoral" />
-                </div>
-            </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-</div>
-
-<%--<div class="modal fade" id="modalPersonaFisica" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-        <ContentTemplate>
-            <div class="modal-dialog modal-lg" style="width: 1250px; height: 940px; overflow: hidden">
-                <div class="modal-content">
-                    <uc1:UcAltaUsuarioFisico runat="server" id="ucAltaUsuarioFisico" />
                 </div>
             </div>
         </ContentTemplate>

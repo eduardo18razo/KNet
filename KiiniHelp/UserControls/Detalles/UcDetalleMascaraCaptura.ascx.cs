@@ -21,6 +21,7 @@ namespace KiiniHelp.UserControls.Detalles
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         private readonly ServiceMascarasClient _servicioMascaras = new ServiceMascarasClient();
         //protected void Page_PreInit(object sender, EventArgs e)

@@ -8,6 +8,7 @@ using KiiniHelp.Funciones;
 using KiiniHelp.ServiceDiasHorario;
 using KiiniHelp.ServiceGrupoUsuario;
 using KiiniHelp.ServiceSistemaSubRol;
+using KiiniHelp.ServiceSistemaTipoGrupo;
 using KiiniHelp.ServiceSistemaTipoUsuario;
 using KiiniHelp.ServiceUsuario;
 using KiiniNet.Entities.Cat.Sistema;
@@ -21,29 +22,48 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
         private readonly ServiceDiasHorarioClient _servicioDiaHorario = new ServiceDiasHorarioClient();
         private readonly ServiceGrupoUsuarioClient _servicioGrupoUsuario = new ServiceGrupoUsuarioClient();
         private readonly ServiceSubRolClient _servicioSistemaSubRol = new ServiceSubRolClient();
         private readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
+        private readonly ServiceTipoGrupoClient _servicioTipoGrupo = new ServiceTipoGrupoClient();
         private List<string> _lstError = new List<string>();
 
         private List<string> Alerta
         {
             set
             {
-                panelAlerta.Visible = value.Any();
-                if (!panelAlerta.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
+            }
+        }
+
+        public bool FromOpcion
+        {
+            get { return Convert.ToBoolean(hfFromOpcion.Value); }
+            set { hfFromOpcion.Value = value.ToString(); }
+        }
+
+        public int IdTipoUsuario
+        {
+            get { return Convert.ToInt32(ddlTipoUsuario.SelectedValue); }
+            set
+            {
+                ddlTipoUsuario.SelectedValue = value.ToString();
             }
         }
 
         public int IdTipoGrupo
         {
-            get { return Convert.ToInt32(hfIdGrupo.Value); }
+            get { return Convert.ToInt32(ddlTipoGrupo.SelectedValue); }
             set
             {
-                hfIdGrupo.Value = value.ToString();
+                ddlTipoGrupo.SelectedValue = value.ToString();
                 divParametros.Visible = false;
                 lblTitle.Text = "Agregar Grupo ";
                 switch (value)
@@ -76,31 +96,15 @@ namespace KiiniHelp.UserControls.Altas
                         divParametros.Visible = true;
                         lblTitle.Text = "Contac Center";
                         break;
+                    default:
+                        return;
+                        break;
                 }
                 List<SubRol> lstRoles = _servicioSistemaSubRol.ObtenerSubRolesByTipoGrupo(value, false);
                 divSubRoles.Visible = lstRoles.Count > 0;
 
-                //if ((int)BusinessVariables.EnumTiposGrupos.DueñoDelServicio == value)
-                //    divSubRoles.Visible = true;
                 rptSubRoles.DataSource = lstRoles;
                 rptSubRoles.DataBind();
-            }
-        }
-
-        public bool FromOpcion
-        {
-            get { return Convert.ToBoolean(hfFromOpcion.Value); }
-            set { hfFromOpcion.Value = value.ToString(); }
-        }
-
-        public int IdTipoUsuario
-        {
-            get { return Convert.ToInt32(ddlTipoUsuarioAltaGrupo.SelectedValue); }
-            set
-            {
-                Metodos.LlenaComboCatalogo(ddlTipoUsuarioAltaGrupo, _servicioSistemaTipoUsuario.ObtenerTiposUsuario(true));
-                ddlTipoUsuarioAltaGrupo.SelectedValue = value.ToString();
-                ddlTipoUsuarioAltaGrupo.Enabled = FromOpcion;
             }
         }
 
@@ -128,7 +132,9 @@ namespace KiiniHelp.UserControls.Altas
                 {
                     Session["GrupoUsuarioEditar"] = value;
                     IdTipoUsuario = value.IdTipoUsuario;
+                    ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
                     IdTipoGrupo = value.IdTipoGrupo;
+                    ddlTipoGrupo_OnSelectedIndexChanged(ddlTipoGrupo, null);
                     txtDescripcionGrupoUsuario.Text = value.Descripcion;
                     if (value.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal)
                     {
@@ -143,11 +149,11 @@ namespace KiiniHelp.UserControls.Altas
                             CheckBox chk = (CheckBox)item.FindControl("chkSubRol");
                             if (chk != null)
                             {
-                                Button btnHorarios = (Button)item.FindControl("btnHorarios");
-                                btnHorarios.CommandName = subGrupo.Id.ToString();
+                                //Button btnHorarios = (Button)item.FindControl("btnHorarios");
+                                //btnHorarios.CommandName = subGrupo.Id.ToString();
 
-                                Button btnDias = (Button)item.FindControl("btnDiasDescanso");
-                                btnDias.CommandName = subGrupo.Id.ToString();
+                                //Button btnDias = (Button)item.FindControl("btnDiasDescanso");
+                                //btnDias.CommandName = subGrupo.Id.ToString();
                                 if (subGrupo.IdSubRol == Convert.ToInt32(chk.Attributes["value"]))
                                 {
                                     chk.Checked = subGrupo.IdSubRol == Convert.ToInt32(chk.Attributes["value"]);
@@ -155,9 +161,10 @@ namespace KiiniHelp.UserControls.Altas
                                     {
                                         OnCheckedChanged(chk, null);
                                         ((DropDownList)item.FindControl("ddlHorario")).SelectedValue = subGrupo.HorarioSubGrupo.First(s => s.IdSubGrupoUsuario == subGrupo.Id).IdHorario.ToString();
-                                        CargaHorario();
-                                        ucAltaDiasFestivos.SetDiasFestivosSubRol(_servicioGrupoUsuario.ObtenerDiasByIdSubGrupo(subGrupo.Id), int.Parse(btnDias.CommandArgument));
-                                        CargaDias();
+                                        ((DropDownList)item.FindControl("ddlDiasFeriados")).SelectedValue = subGrupo.DiaFestivoSubGrupo.First(s => s.IdSubGrupoUsuario == subGrupo.Id).IdDiasFeriados.ToString();
+                                        //CargaHorario();
+                                        //ucAltaDiasFestivos.SetDiasFestivosSubRol(_servicioGrupoUsuario.ObtenerDiasByIdSubGrupo(subGrupo.Id), int.Parse(btnDias.CommandArgument));
+                                        //CargaDias();
                                         break;
                                     }
                                 }
@@ -188,37 +195,37 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                Session["DiasSubRoles"] = Session["DiasSubRoles"] ?? new List<DiaFestivoSubGrupo>();
-                foreach (RepeaterItem item in ucAltaDiasFestivos.DiasDescansoSubRol)
-                {
-                    List<DiaFestivoSubGrupo> tmpEliminar = ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Where(w => w.IdSubGrupoUsuario == ucAltaDiasFestivos.IdSubRol).ToList();
-                    foreach (DiaFestivoSubGrupo dia in tmpEliminar)
-                    {
-                        ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Remove(dia);
-                    }
-                }
+                //Session["DiasSubRoles"] = Session["DiasSubRoles"] ?? new List<DiaFestivoSubGrupo>();
+                //foreach (RepeaterItem item in ucAltaDiasFestivos.DiasDescansoSubRol)
+                //{
+                //    List<DiaFestivoSubGrupo> tmpEliminar = ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Where(w => w.IdSubGrupoUsuario == ucAltaDiasFestivos.IdSubRol).ToList();
+                //    foreach (DiaFestivoSubGrupo dia in tmpEliminar)
+                //    {
+                //        ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Remove(dia);
+                //    }
+                //}
 
-                foreach (RepeaterItem item in ucAltaDiasFestivos.DiasDescansoSubRol)
-                {
-                    Label lblFecha = (Label)item.FindControl("lblFecha");
-                    Label lblDescripcion = (Label)item.FindControl("lblDescripcion");
-                    DiaFestivoSubGrupo dia = new DiaFestivoSubGrupo
-                    {
-                        IdSubGrupoUsuario = ucAltaDiasFestivos.IdSubRol,
-                        Fecha = Convert.ToDateTime(lblFecha.Text),
-                        Descripcion = lblDescripcion.Text.Trim().ToUpper()
-                    };
-                    ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Add(dia);
-                }
-                foreach (RepeaterItem itemSr in rptSubRoles.Items)
-                {
-                    Label lbl = (Label)itemSr.FindControl("lblId");
-                    if (int.Parse(lbl.Text) == ucAltaDiasFestivos.IdSubRol)
-                    {
-                        Button btn = (Button)itemSr.FindControl("btnDiasDescanso");
-                        btn.CssClass = "col-sm-3 btn btn-success";
-                    }
-                }
+                //foreach (RepeaterItem item in ucAltaDiasFestivos.DiasDescansoSubRol)
+                //{
+                //    Label lblFecha = (Label)item.FindControl("lblFecha");
+                //    Label lblDescripcion = (Label)item.FindControl("lblDescripcion");
+                //    DiaFestivoSubGrupo dia = new DiaFestivoSubGrupo
+                //    {
+                //        IdSubGrupoUsuario = ucAltaDiasFestivos.IdSubRol,
+                //        Fecha = Convert.ToDateTime(lblFecha.Text),
+                //        Descripcion = lblDescripcion.Text.Trim().ToUpper()
+                //    };
+                //    ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Add(dia);
+                //}
+                //foreach (RepeaterItem itemSr in rptSubRoles.Items)
+                //{
+                //    Label lbl = (Label)itemSr.FindControl("lblId");
+                //    if (int.Parse(lbl.Text) == ucAltaDiasFestivos.IdSubRol)
+                //    {
+                //        Button btn = (Button)itemSr.FindControl("btnDiasDescanso");
+                //        btn.CssClass = "col-sm-3 btn btn-success";
+                //    }
+                //}
             }
             catch (Exception ex)
             {
@@ -232,9 +239,9 @@ namespace KiiniHelp.UserControls.Altas
 
             if (txtDescripcionGrupoUsuario.Text.Trim() == string.Empty)
                 sb.AppendLine("Descripcion es un campo obligatorio.<br>");
-            if (IdTipoGrupo == (int) BusinessVariables.EnumTiposGrupos.AgenteUniversal)
+            if (IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal)
             {
-                if(!rbtnLevanta.Checked && !rbtnRecado.Checked)
+                if (!rbtnLevanta.Checked && !rbtnRecado.Checked)
                     sb.AppendLine("Seleccione una opción para este grupo.<br>");
             }
 
@@ -246,6 +253,8 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                IdTipoUsuario = BusinessVariables.ComboBoxCatalogo.ValueSeleccione;
+                ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
                 txtDescripcionGrupoUsuario.Text = String.Empty;
                 rptSubRoles.DataSource = null;
                 rptSubRoles.DataBind();
@@ -259,7 +268,7 @@ namespace KiiniHelp.UserControls.Altas
                 Session.Remove("HorariosSubRoles");
                 Session.Remove("DiasSubRoles");
                 Session.Remove("DiasFestivos");
-                IdTipoGrupo = IdTipoGrupo;
+                
 
             }
             catch (Exception ex)
@@ -278,7 +287,11 @@ namespace KiiniHelp.UserControls.Altas
 
                 ucAltaHorario.OnAceptarModal += UcHorarioOnOnAceptarModal;
                 ucAltaHorario.OnCancelarModal += UcHorarioOnOnCancelarModal;
+                if (!IsPostBack)
+                {
+                    Metodos.LlenaComboCatalogo(ddlTipoUsuario, _servicioSistemaTipoUsuario.ObtenerTiposUsuario(true));
 
+                }
             }
             catch (Exception ex)
             {
@@ -297,18 +310,15 @@ namespace KiiniHelp.UserControls.Altas
             {
                 foreach (RepeaterItem item in rptSubRoles.Items)
                 {
-                    Label lblId = (Label)item.FindControl("lblId");
-                    if (lblId == null) continue;
-                    if (int.Parse(lblId.Text) != ucAltaHorario.IdSubRol) continue;
-                    var parent = lblId.NamingContainer;
-                    DropDownList ddl = (DropDownList)parent.FindControl("ddlHorario");
+                    CheckBox chk = (CheckBox)item.FindControl("chkSubRol");
+                    if (!chk.Checked) continue;
+                    DropDownList ddl = (DropDownList)item.FindControl("ddlHorario");
                     ddl.DataSource = _servicioDiaHorario.ObtenerHorarioDefault(true);
                     ddl.DataTextField = "Descripcion";
                     ddl.DataValueField = "Id";
                     ddl.DataBind();
                     break;
                 }
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalHorarios\");", true);
             }
             catch (Exception ex)
             {
@@ -342,38 +352,17 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                Session["DiasSubRoles"] = Session["DiasSubRoles"] ?? new List<DiaFestivoSubGrupo>();
-                foreach (RepeaterItem item in ucAltaDiasFestivos.DiasDescansoSubRol)
+                foreach (RepeaterItem item in rptSubRoles.Items)
                 {
-                    List<DiaFestivoSubGrupo> tmpEliminar = ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Where(w => w.IdSubGrupoUsuario == ucAltaDiasFestivos.IdSubRol).ToList();
-                    foreach (DiaFestivoSubGrupo dia in tmpEliminar)
-                    {
-                        ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Remove(dia);
-                    }
+                    CheckBox chk = (CheckBox)item.FindControl("chkSubRol");
+                    if (!chk.Checked) continue;
+                    DropDownList ddl = (DropDownList)item.FindControl("ddlDiasFeriados");
+                    ddl.DataSource = _servicioDiaHorario.ObtenerDiasFeriadosUser(true);
+                    ddl.DataTextField = "Descripcion";
+                    ddl.DataValueField = "Id";
+                    ddl.DataBind();
+                    break;
                 }
-
-                foreach (RepeaterItem item in ucAltaDiasFestivos.DiasDescansoSubRol)
-                {
-                    Label lblFecha = (Label)item.FindControl("lblFecha");
-                    Label lblDescripcion = (Label)item.FindControl("lblDescripcion");
-                    DiaFestivoSubGrupo dia = new DiaFestivoSubGrupo
-                    {
-                        IdSubGrupoUsuario = ucAltaDiasFestivos.IdSubRol,
-                        Fecha = Convert.ToDateTime(lblFecha.Text),
-                        Descripcion = lblDescripcion.Text.Trim().ToUpper()
-                    };
-                    ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Add(dia);
-                }
-                foreach (RepeaterItem itemSr in rptSubRoles.Items)
-                {
-                    Label lbl = (Label)itemSr.FindControl("lblId");
-                    if (int.Parse(lbl.Text) == ucAltaDiasFestivos.IdSubRol)
-                    {
-                        Button btn = (Button)itemSr.FindControl("btnDiasDescanso");
-                        btn.CssClass = "col-sm-3 btn btn-success";
-                    }
-                }
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalDiasDescanso\");", true);
             }
             catch (Exception ex)
             {
@@ -403,6 +392,40 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
+        protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Metodos.LlenaComboCatalogo(ddlTipoGrupo, _servicioTipoGrupo.ObtenerTiposGruposByTipoUsuario(IdTipoUsuario, true));
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void ddlTipoGrupo_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
         protected void btnGuardar_OnClick(object sender, EventArgs e)
         {
             try
@@ -419,50 +442,6 @@ namespace KiiniHelp.UserControls.Altas
                         Habilitado = chkHabilitado.Checked,
                         SubGrupoUsuario = new List<SubGrupoUsuario>()
                     };
-                    if (IdTipoGrupo == (int) BusinessVariables.EnumTiposGrupos.AgenteUniversal)
-                    {
-                        grupoUsuario.LevantaTicket = rbtnLevanta.Checked;
-                        grupoUsuario.RecadoTicket = rbtnRecado.Checked;
-                    }
-                    else
-                    {
-                        grupoUsuario.LevantaTicket = false;
-                        grupoUsuario.RecadoTicket = false;
-                    }
-                    Dictionary<int, int> horarios = new Dictionary<int, int>();
-                    Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso = new Dictionary<int, List<DiaFestivoSubGrupo>>();
-                    foreach (CheckBox chk in (from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol")).Where(chk => chk.Checked))
-                    {
-                        DropDownList ddlHorario = (DropDownList)chk.NamingContainer.FindControl("ddlHorario");
-                        if (ddlHorario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception("Debe capturar horarios");
-
-                        horarios.Add(int.Parse(chk.Attributes["value"]), int.Parse(ddlHorario.SelectedValue));
-                        if (Session["DiasSubRoles"] != null)
-                        {
-                            diasDescanso.Add(int.Parse(chk.Attributes["value"]), ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Where(w => w.IdSubGrupoUsuario == Convert.ToInt32(chk.Attributes["value"])).ToList());
-                        }
-                    }
-                    _servicioGrupoUsuario.GuardarGrupoUsuario(grupoUsuario, horarios, diasDescanso);
-                }
-                else
-                {
-                    grupoUsuario = GrupoUsuario;
-                    grupoUsuario.Descripcion = txtDescripcionGrupoUsuario.Text;
-                    Dictionary<int, int> horarios = new Dictionary<int, int>();
-                    Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso = new Dictionary<int, List<DiaFestivoSubGrupo>>();
-                    foreach (CheckBox chk in (from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol")).Where(chk => chk.Checked))
-                    {
-                        DropDownList ddlHorario = (DropDownList)chk.NamingContainer.FindControl("ddlHorario");
-                        if (ddlHorario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                            throw new Exception("Debe capturar horarios");
-
-                        horarios.Add(int.Parse(chk.Attributes["value"]), int.Parse(ddlHorario.SelectedValue));
-                        if (Session["DiasSubRoles"] != null)
-                        {
-                            diasDescanso.Add(int.Parse(chk.Attributes["value"]), ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Where(w => w.IdSubGrupoUsuario == Convert.ToInt32(chk.Attributes["value"])).ToList());
-                        }
-                    }
                     if (IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal)
                     {
                         grupoUsuario.LevantaTicket = rbtnLevanta.Checked;
@@ -473,10 +452,69 @@ namespace KiiniHelp.UserControls.Altas
                         grupoUsuario.LevantaTicket = false;
                         grupoUsuario.RecadoTicket = false;
                     }
+                    Dictionary<int, int> horarios = new Dictionary<int, int>();
+                    Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso = new Dictionary<int, List<DiaFestivoSubGrupo>>();
+                    foreach (CheckBox chk in (from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol")).Where(chk => chk.Checked))
+                    {
+                        DropDownList ddlHorario = (DropDownList)chk.NamingContainer.FindControl("ddlHorario");
+                        if (ddlHorario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception("Debe capturar horarios");
+
+                        horarios.Add(int.Parse(chk.Attributes["value"]), int.Parse(ddlHorario.SelectedValue));
+
+                        DropDownList ddlDiasFeriados = (DropDownList)chk.NamingContainer.FindControl("ddlDiasFeriados");
+                        if (ddlDiasFeriados == null || ddlDiasFeriados.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            continue;
+                        DiasFeriados descansoSeleccionado = _servicioDiaHorario.ObtenerDiasFeriadosUserById(int.Parse(ddlDiasFeriados.SelectedValue));
+                        diasDescanso.Add(int.Parse(chk.Attributes["value"]), descansoSeleccionado.DiasFeriadosDetalle.Select(s => new DiaFestivoSubGrupo
+                        {
+                            IdSubGrupoUsuario = Convert.ToInt32(chk.Attributes["value"]),
+                            Fecha = s.Dia,
+                            Descripcion = s.Descripcion,
+                            IdDiasFeriados = s.IdDiasFeriados
+                        }).ToList());
+                    }
+                    _servicioGrupoUsuario.GuardarGrupoUsuario(grupoUsuario, horarios, diasDescanso);
+                }
+                else
+                {
+                    grupoUsuario = GrupoUsuario;
+                    grupoUsuario.Descripcion = txtDescripcionGrupoUsuario.Text;
+                    if (IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal)
+                    {
+                        grupoUsuario.LevantaTicket = rbtnLevanta.Checked;
+                        grupoUsuario.RecadoTicket = rbtnRecado.Checked;
+                    }
+                    else
+                    {
+                        grupoUsuario.LevantaTicket = false;
+                        grupoUsuario.RecadoTicket = false;
+                    }
+                    Dictionary<int, int> horarios = new Dictionary<int, int>();
+                    Dictionary<int, List<DiaFestivoSubGrupo>> diasDescanso = new Dictionary<int, List<DiaFestivoSubGrupo>>();
+                    foreach (CheckBox chk in (from RepeaterItem item in rptSubRoles.Items select (CheckBox)item.FindControl("chkSubRol")).Where(chk => chk.Checked))
+                    {
+                        DropDownList ddlHorario = (DropDownList)chk.NamingContainer.FindControl("ddlHorario");
+                        if (ddlHorario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            throw new Exception("Debe capturar horarios");
+
+                        horarios.Add(int.Parse(chk.Attributes["value"]), int.Parse(ddlHorario.SelectedValue));
+
+                        DropDownList ddlDiasFeriados = (DropDownList)chk.NamingContainer.FindControl("ddlDiasFeriados");
+                        if (ddlDiasFeriados == null || ddlDiasFeriados.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                            continue;
+                        DiasFeriados descansoSeleccionado = _servicioDiaHorario.ObtenerDiasFeriadosUserById(int.Parse(ddlDiasFeriados.SelectedValue));
+                        diasDescanso.Add(int.Parse(chk.Attributes["value"]), descansoSeleccionado.DiasFeriadosDetalle.Select(s => new DiaFestivoSubGrupo
+                        {
+                            IdSubGrupoUsuario = Convert.ToInt32(chk.Attributes["value"]),
+                            Fecha = s.Dia,
+                            Descripcion = s.Descripcion,
+                            IdDiasFeriados = s.IdDiasFeriados
+                        }).ToList());
+                    }
                     _servicioGrupoUsuario.ActualizarGrupo(grupoUsuario, horarios, diasDescanso);
                 }
                 LimpiarCampos();
-                IdTipoGrupo = Convert.ToInt32(hfIdGrupo.Value);
                 if (OnAceptarModal != null)
                     OnAceptarModal();
             }
@@ -558,24 +596,37 @@ namespace KiiniHelp.UserControls.Altas
                                 }
                                 break;
                         }
-                        DropDownList ddl = (DropDownList)chk.DataItemContainer.FindControl("ddlHorario");
-                        ddl.Enabled = chk.Checked;
-                        ddl.DataSource = _servicioDiaHorario.ObtenerHorarioDefault(true);
-                        ddl.DataTextField = "Descripcion";
-                        ddl.DataValueField = "Id";
-                        ddl.DataBind();
+                        DropDownList ddlHorario = (DropDownList)chk.DataItemContainer.FindControl("ddlHorario");
+
+                        ddlHorario.Enabled = chk.Checked;
+                        ddlHorario.DataSource = _servicioDiaHorario.ObtenerHorarioDefault(true);
+                        ddlHorario.DataTextField = "Descripcion";
+                        ddlHorario.DataValueField = "Id";
+                        ddlHorario.DataBind();
+                        DropDownList ddlDiasFeriados = (DropDownList)chk.DataItemContainer.FindControl("ddlDiasFeriados");
+                        ddlDiasFeriados.Enabled = chk.Checked;
+                        ddlDiasFeriados.DataSource = _servicioDiaHorario.ObtenerDiasFeriadosUser(true);
+                        ddlDiasFeriados.DataTextField = "Descripcion";
+                        ddlDiasFeriados.DataValueField = "Id";
+                        ddlDiasFeriados.DataBind();
                         Button btnHorarios = (Button)chk.DataItemContainer.FindControl("btnHorarios");
                         Button btnDiasDescanso = (Button)chk.DataItemContainer.FindControl("btnDiasDescanso");
-                        if (chk.Checked)
+                        if (btnHorarios != null && btnDiasDescanso != null)
                         {
-                            btnHorarios.CssClass = "col-sm-2 btn btn-sm btn-primary";
-                            btnDiasDescanso.CssClass = "col-sm-2 btn btn-sm btn-primary";
-                        }
-                        else
-                        {
-                            Metodos.LimpiarCombo(ddl);
-                            btnHorarios.CssClass = "col-sm-2 btn btn-sm btn-primary disabled";
-                            btnDiasDescanso.CssClass = "col-sm-2 btn btn-sm btn-primary disabled";
+                            if (chk.Checked)
+                            {
+                                chk.CssClass = "btn btn-primary active";
+                                btnHorarios.CssClass = "col-sm-2 btn btn-sm btn-primary";
+                                btnDiasDescanso.CssClass = "col-sm-2 btn btn-sm btn-primary";
+                            }
+                            else
+                            {
+                                Metodos.LimpiarCombo(ddlHorario);
+                                Metodos.LimpiarCombo(ddlDiasFeriados);
+                                chk.CssClass = "btn btn-primary";
+                                btnHorarios.CssClass = "col-sm-2 btn btn-sm btn-primary disabled";
+                                btnDiasDescanso.CssClass = "col-sm-2 btn btn-sm btn-primary disabled";
+                            }
                         }
                     }
                 }
@@ -595,6 +646,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem) return;
                 SubRol sbRol = (SubRol)e.Item.DataItem;
                 switch (IdTipoGrupo)
                 {
@@ -604,8 +656,8 @@ namespace KiiniHelp.UserControls.Altas
                             ((CheckBox)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("chkSubRol")).Checked = true;
                             OnCheckedChanged(((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("chkSubRol"), null);
                             ((CheckBox)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("chkSubRol")).Enabled = false;
-                            ((Button)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("btnHorarios")).CssClass = "col-sm-2 btn btn-sm btn-primary";
-                            ((Button)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("btnDiasDescanso")).CssClass = "col-sm-2 btn btn-sm btn-primary";
+                            //((Button)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("btnHorarios")).CssClass = "col-sm-2 btn btn-sm btn-primary";
+                            //((Button)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("btnDiasDescanso")).CssClass = "col-sm-2 btn btn-sm btn-primary";
                         }
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido:
@@ -614,8 +666,8 @@ namespace KiiniHelp.UserControls.Altas
                             ((CheckBox)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("chkSubRol")).Checked = true;
                             OnCheckedChanged(((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("chkSubRol"), null);
                             ((CheckBox)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("chkSubRol")).Enabled = false;
-                            ((Button)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("btnHorarios")).CssClass = "col-sm-2 btn btn-sm btn-primary";
-                            ((Button)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("btnDiasDescanso")).CssClass = "col-sm-2 btn-sm btn btn-primary";
+                            //((Button)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("btnHorarios")).CssClass = "col-sm-2 btn btn-sm btn-primary";
+                            //((Button)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("btnDiasDescanso")).CssClass = "col-sm-2 btn-sm btn btn-primary";
                         }
                         break;
                 }
@@ -631,58 +683,6 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        protected void btnHorarios_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Alta)
-                {
-                    ucAltaHorario.EsAlta = true;
-                    ucAltaHorario.IdSubRol = Convert.ToInt32(((Button)sender).CommandArgument);
-                }
-                else
-                {
 
-                }
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalHorarios\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnDiasDescanso_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Alta)
-                {
-                    ucAltaDiasFestivos.EsAlta = true;
-                    ucAltaDiasFestivos.IdSubRol = Convert.ToInt32(((Button)sender).CommandArgument);
-                }
-                else
-                {
-                    ucAltaDiasFestivos.EsAlta = false;
-                    ucAltaDiasFestivos.IdSubRol = Convert.ToInt32(((Button)sender).CommandArgument);
-                    ucAltaDiasFestivos.SetDiasFestivosSubRol(((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Where(w => w.IdSubGrupoUsuario == Convert.ToInt32(((Button)sender).CommandArgument)).ToList(), Convert.ToInt32(((Button)sender).CommandArgument));
-                }
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalDiasDescanso\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
     }
 }

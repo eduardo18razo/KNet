@@ -7,8 +7,8 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
-      <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceArbolAcceso.svc?xsd=xsd9" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio" />
@@ -169,6 +169,12 @@
   <wsdl:message name="IServiceArbolAcceso_ObtenerArbolesAccesoTerminalAll_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerArbolesAccesoTerminalAllResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceArbolAcceso_ObtenerArbolesAccesoTerminalAllTipificacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerArbolesAccesoTerminalAllTipificacion" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArbolAcceso_ObtenerArbolesAccesoTerminalAllTipificacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerArbolesAccesoTerminalAllTipificacionResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceArbolAcceso_ObtenerArbolesAccesoTerminalByIdUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerArbolesAccesoTerminalByIdUsuario" />
   </wsdl:message>
@@ -275,6 +281,10 @@
     <wsdl:operation name="ObtenerArbolesAccesoTerminalAll">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalAll" message="tns:IServiceArbolAcceso_ObtenerArbolesAccesoTerminalAll_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalAllResponse" message="tns:IServiceArbolAcceso_ObtenerArbolesAccesoTerminalAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerArbolesAccesoTerminalAllTipificacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalAllTipificacion" message="tns:IServiceArbolAcceso_ObtenerArbolesAccesoTerminalAllTipificacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalAllTipificacionResponse" message="tns:IServiceArbolAcceso_ObtenerArbolesAccesoTerminalAllTipificacion_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ObtenerArbolesAccesoTerminalByIdUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalByIdUsuario" message="tns:IServiceArbolAcceso_ObtenerArbolesAccesoTerminalByIdUsuario_InputMessage" />
@@ -501,6 +511,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerArbolesAccesoTerminalAll">
       <soap:operation soapAction="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerArbolesAccesoTerminalAllTipificacion">
+      <soap:operation soapAction="http://tempuri.org/IServiceArbolAcceso/ObtenerArbolesAccesoTerminalAllTipificacion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

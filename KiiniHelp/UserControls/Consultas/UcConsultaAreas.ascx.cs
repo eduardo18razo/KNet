@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Configuration;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using KiiniHelp.ServiceArea;
-using KiiniHelp.ServiceSistemaTipoUsuario;
 using KiiniNet.Entities.Operacion;
 
 namespace KiiniHelp.UserControls.Consultas
@@ -18,21 +19,25 @@ namespace KiiniHelp.UserControls.Consultas
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
-        private void LlenaAreasConsulta(string filtro = "")
+        private void LlenaAreasConsulta()
         {
             try
             {
+                string filtro = txtFiltro.Text.Trim().ToUpper();
                 List<Area> areas = _servicioAreas.ObtenerAreaConsulta(txtFiltro.Text.Trim());
                 if (filtro != string.Empty)
                     areas = areas.Where(w => w.Descripcion.Contains(filtro)).ToList();
                 rptResultados.DataSource = areas;
                 rptResultados.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
             }
             catch (Exception e)
             {
@@ -44,6 +49,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
                 Alerta = new List<string>();
                 ucAltaArea.OnAceptarModal += AltaAreaOnAceptarModal;
                 ucAltaArea.OnCancelarModal += AltaAreaOnCancelarModal;
@@ -91,46 +97,12 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = _lstError;
             }
         }
-        protected void btnBaja_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioAreas.Habilitar(Convert.ToInt32(hfId.Value), false);
-                LlenaAreasConsulta();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-        protected void btnAlta_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioAreas.Habilitar(Convert.ToInt32(hfId.Value), true);
-                LlenaAreasConsulta();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
         protected void btnEditar_OnClick(object sender, EventArgs e)
         {
             try
             {
                 ucAltaArea.EsAlta = false;
-                Area puesto = _servicioAreas.ObtenerAreaById(Convert.ToInt32(hfId.Value));
+                Area puesto = _servicioAreas.ObtenerAreaById(int.Parse(((Button)sender).CommandArgument));
                 if (puesto == null) return;
                 ucAltaArea.IdArea = puesto.Id;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaArea\");", true);
@@ -166,7 +138,25 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                LlenaAreasConsulta(txtFiltro.Text.Trim().ToUpper());
+                LlenaAreasConsulta();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _servicioAreas.Habilitar(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+                LlenaAreasConsulta();
             }
             catch (Exception ex)
             {

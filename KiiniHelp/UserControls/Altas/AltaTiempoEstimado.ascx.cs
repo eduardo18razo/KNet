@@ -15,6 +15,7 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
         private readonly ServiceNotificacionClient _servicioNotificacion = new ServiceNotificacionClient();
         private List<string> _lstError = new List<string>();
 

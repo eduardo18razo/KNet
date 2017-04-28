@@ -36,8 +36,8 @@
     <MetadataFile FileName="ServiceNotificacion.disco" MetadataType="Disco" ID="dccdec3b-ecfe-4eaa-bcd8-8939b5ab7180" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceNotificacion.svc?disco" />
     <MetadataFile FileName="ServiceNotificacion9.xsd" MetadataType="Schema" ID="133ea874-d7e8-4f7a-a3c5-879ec343ca00" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceNotificacion.svc?xsd=xsd13" />
     <MetadataFile FileName="ServiceNotificacion10.xsd" MetadataType="Schema" ID="e547ba4f-40b7-4566-98ef-6614a8cf54d0" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceNotificacion.svc?xsd=xsd2" />
-    <MetadataFile FileName="ServiceNotificacion11.xsd" MetadataType="Schema" ID="c0e91cb3-d098-4a1c-b233-da919d5546a0" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceNotificacion.svc?xsd=xsd6" />
     <MetadataFile FileName="ServiceNotificacion12.xsd" MetadataType="Schema" ID="24d09c69-24f5-43b1-9278-c04437dcd747" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceNotificacion.svc?xsd=xsd5" />
+    <MetadataFile FileName="ServiceNotificacion11.xsd" MetadataType="Schema" ID="c0e91cb3-d098-4a1c-b233-da919d5546a0" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceNotificacion.svc?xsd=xsd6" />
     <MetadataFile FileName="ServiceNotificacion13.xsd" MetadataType="Schema" ID="133bfaee-caeb-483c-abb6-424e50df4ec7" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceNotificacion.svc?xsd=xsd10" />
   </Metadata>
   <Extensions>

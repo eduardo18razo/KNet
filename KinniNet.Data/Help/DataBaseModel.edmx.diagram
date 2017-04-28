@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="274a177c190245e2b35a53a2cf71a3b9" Name="Diagram1" ZoomLevel="69" ShowGrid="true">
+      <Diagram DiagramId="274a177c190245e2b35a53a2cf71a3b9" Name="Diagram1" ZoomLevel="66" ShowGrid="true">
         <EntityTypeShape EntityType="KiiniNet_v2Model.TipoSubGrupo" Width="1.5" PointX="5.875" PointY="58.25" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TipoSubGrupo_TipoGrupo" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Campus" Width="1.5" PointX="3" PointY="83.125" IsExpanded="true" />
@@ -109,11 +109,6 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolTipoGrupo_Rol" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolTipoUsuario_Rol" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioGrupo_Rol" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.Usuario" Width="3.875" PointX="48.125" PointY="44.875" IsExpanded="true" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Usuario_Organizacion" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Usuario_TipoUsuario" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Usuario_Ubicacion" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioGrupo_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.RolMenu" Width="1.5" PointX="6.375" PointY="29.375" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_Rol" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.HitGrupoUsuario" Width="1.5" PointX="15" PointY="57.875" IsExpanded="true" />
@@ -124,11 +119,8 @@
         <EntityTypeShape EntityType="KiiniNet_v2Model.TicketGrupoUsuario" Width="1.5" PointX="18" PointY="64.625" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketGrupoUsuario_SubGrupoUsuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusAsignacion" Width="3.125" PointX="37" PointY="59.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.TicketAsignacion" Width="2" PointX="23.875" PointY="62.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.TicketAsignacion" Width="2" PointX="12.375" PointY="29.25" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketAsignacion_EstatusAsignacion" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_TicketAsignacion_UsuarioAsignado" ManuallyRouted="false" >
-        </AssociationConnector>
-        <AssociationConnector Association="KiiniNet_v2Model.FK_TicketAsignacion_UsuarioAsigno" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.SubRolEscalacionPermitida" Width="2.625" PointX="23.875" PointY="69.75" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_SubRolEscalacionPermitida_EstatusAsignacion" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.ParametrosSla" Width="1.5" PointX="7.375" PointY="0.75" IsExpanded="true" />
@@ -140,8 +132,6 @@
         <EntityTypeShape EntityType="KiiniNet_v2Model.TiempoInformeArbol" Width="1.5" PointX="9.75" PointY="36.75" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TiempoInformeArbol_TipoGrupo" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TiempoInformeArbol_TipoNotificacion" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.DiaFestivoSubGrupo" Width="1.5" PointX="15" PointY="77.875" IsExpanded="true" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_DiasFestivosSubGrupo_SubGrupoUsuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusAsignacionSubRolGeneralDefault" Width="3.625" PointX="26.875" PointY="59.375" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_EstatusAsignacion1" />
@@ -175,7 +165,6 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_HitConsulta_Organizacion" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_HitConsulta_TipoArbolAcceso" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_HitConsulta_Ubicacion" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_HitConsulta_Usuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_HitGrupoUsuario_HitConsulta" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.NivelOrganizacion" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.NivelUbicacion" Width="1.5" PointX="3.375" PointY="9.875" IsExpanded="true" />
@@ -188,18 +177,14 @@
         <EntityTypeShape EntityType="KiiniNet_v2Model.TipoLink" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.TelefonoUsuario" Width="1.5" PointX="14.625" PointY="28.5" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TelefonoUsuario_TipoTelefono" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_TelefonoUsuario_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.SmsService" Width="1.5" PointX="12.75" PointY="32.5" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Sms_Service_TipoLink" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Sms_Service_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.PreguntaReto" Width="1.5" PointX="12.75" PointY="41.625" IsExpanded="true" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_PreguntaReto_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.ParametroCorreo" Width="1.5" PointX="14.625" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.TipoCorreo" Width="1.5" PointX="12.375" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.UsuarioLinkPassword" Width="1.5" PointX="15.75" PointY="32.625" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_ParametroCorreo_TipoCorreo" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioLinkPassword_TipoLink" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioLinkPassword_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Sla" Width="1.5" PointX="7.375" PointY="40.375" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_InventarioArbolAcceso_SLA" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_SlaDetalle_SLA" />
@@ -209,20 +194,15 @@
         <EntityTypeShape EntityType="KiiniNet_v2Model.Canal" Width="1.5" PointX="22.375" PointY="44.5" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.ParametrosGenerales" Width="1.5" PointX="5.375" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.UsuarioPassword" Width="1.5" PointX="22.5" PointY="53.875" IsExpanded="true" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioPassword_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.ParametroPassword" Width="1.5" PointX="7.375" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.RespuestaEncuesta" Width="1.5" PointX="27.875" PointY="71.125" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_RespuestaEncuesta_ArbolAcceso" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_tblRespuestaEncuesta_tblEncuesta" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_tblRespuestaEncuesta_tblEncuestaPregunta" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.Puesto" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.Puesto" Width="1.5" PointX="8.5" PointY="21" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Puesto_TipoUsuario" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Usuario_Puesto" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.Horario" Width="1.5" PointX="9.75" PointY="86.375" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.HorarioDetalle" Width="1.5" PointX="12" PointY="86.375" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_HorarioDetalle_Horario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.HorarioSubGrupo" Width="1.5" PointX="15" PointY="73.75" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_HorarioSubGrupo_Horario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_HorarioSubGrupo_SubGrupoUsuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Catalogos" Width="1.5" PointX="9.375" PointY="13" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.CampoMascara" Width="1.5" PointX="15.625" PointY="40.875" />
@@ -232,16 +212,13 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_GrupoUsuario_TipoGrupo1" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_GrupoUsuario_TipoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_GrupoUsuario" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Horario_GrupoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_SubGrupoUsuario_GrupoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketGrupoUsuario_GrupoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TiempoInformeArbol_GrupoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioGrupo_GrupoUsuario" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.PreTicket" Width="1.5" PointX="22.5" PointY="56.875" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.PreTicket" Width="2.125" PointX="7.75" PointY="35.625" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_PreTicket_ArbolAcceso" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_PreTicket_UsuarioLevanto" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_PreTicket_UsuarioSolicito" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_PreTicket_UsuarioAtendio" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusTicket" Width="2.875" PointX="29.375" PointY="43.875" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusTicketSubRolGeneral" Width="4" PointX="33" PointY="47.875" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.EstatusTicketSubRolGeneralDefault" Width="3.75" PointX="33" PointY="42" />
@@ -264,7 +241,7 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_GrupoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_Rol" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_SubRol1" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.Ticket" Width="3.625" PointX="42.875" PointY="43.375" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.Ticket" Width="3.625" PointX="17.75" PointY="25.625" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_tblTicket_tblArbolAcceso" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Canal" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Encuesta" />
@@ -277,15 +254,11 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_TipoArbolAcceso" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_TipoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Ubicacion" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Usuario" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Usuario1" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Usuario2" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketAsignacion_Ticket" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketGrupoUsuario_Ticket" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.TicketEstatus" Width="1.5" PointX="52.75" PointY="47" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketEstatus_EstatusTicket" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketEstatus_Ticket" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_TicketEstatus_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Menu" Width="1.5" PointX="11.375" PointY="13" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Menu_Menu" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_Menu" />
@@ -294,11 +267,9 @@
         <EntityTypeShape EntityType="KiiniNet_v2Model.AliasUbicacion" Width="1.5" PointX="3" PointY="102.375" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_AliasUbicacion_TipoUsuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.CorreoUsuario" Width="1.5" PointX="52.75" PointY="51" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_CorreoUsuario_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.UsuarioRol" Width="1.5" PointX="55.75" PointY="48" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Estado_Pais" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioRol_RolTipoUsuario" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioRol_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.TipoNota" Width="1.5" PointX="17.375" PointY="7.75" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.NotaGeneral" Width="1.5" PointX="52.75" PointY="29.125" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.NotaGeneralGrupo" Width="1.5" PointX="55" PointY="44.375" />
@@ -308,27 +279,66 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionUsuario_ArbolAcceso" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_NotaGeneralGrupo_GrupoUsuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_NotaGeneral_TipoNota" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaGeneral_Usuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_NotaGeneralGrupo_NotaGeneral" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionGrupo_TipoNota" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionGrupo_Usuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionUsuario_TipoNota" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionUsuario_Usuario" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.Area" Width="1.5" PointX="52.75" PointY="53.875" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.Area" Width="1.5" PointX="11.875" PointY="35.875" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_ArbolAcceso_Area" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Area_UsuarioAlta" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Area_UsuarioModifico" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Mascara" Width="1.5" PointX="52.75" PointY="41.625" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_tblInventarioArbolAcceso_tblMascara" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_Mascara_UsuarioAlta" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Mascara" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.ConversacionArchivo" Width="1.5" PointX="58" PointY="51.875" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_ArbolAcceso_Usuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.TicketConversacion" Width="1.5" PointX="55.75" PointY="51.125" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_ConversacionArchivo_TicketConversacion" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketConversacion_Ticket" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.Frecuencia" Width="1.5" PointX="10.5" PointY="50.5" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Frecuencia_ArbolAcceso" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Frecuencia_TipoArbolAcceso" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Frecuencia_TipoUsuario" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.DiaFestivoDefault" Width="1.5" PointX="13.375" PointY="12.75" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.BitacoraAcceso" Width="1.5" PointX="52.75" PointY="58.5" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.Usuario" Width="3.5" PointX="8.5" PointY="25" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_ArbolAcceso_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Area_UsuarioAlta" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Area_UsuarioModifico" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_BitacoraAcceso_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_CorreoUsuario_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_HitConsulta_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Mascara_UsuarioAlta" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaGeneral_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionGrupo_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_NotaOpcionUsuario_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Usuario_Organizacion" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_PreguntaReto_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_PreTicket_UsuarioAtendio" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_PreTicket_UsuarioSolicito" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Usuario_Puesto" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Sms_Service_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_TelefonoUsuario_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Usuario1" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Usuario2" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_TicketAsignacion_UsuarioAsignado" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_TicketAsignacion_UsuarioAsigno" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketConversacion_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_TicketEstatus_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Usuario_TipoUsuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Usuario_Ubicacion" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioGrupo_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioLinkPassword_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioPassword_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioRol_Usuario" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.DiaFeriado" Width="1.5" PointX="20.125" PointY="1.5" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.DiasFeriados" Width="1.5" PointX="15.25" PointY="4.25" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.DiasFeriadosDetalle" Width="1.5" PointX="17.5" PointY="4" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_DiasFeriadosDetalle_DiasFeriados" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.Horario" Width="1.5" PointX="9.75" PointY="82.125" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_HorarioDetalle_Horario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_HorarioSubGrupo_Horario" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.DiaFestivoSubGrupo" Width="1.5" PointX="17.5" PointY="37.125" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_DiaFestivoSubGrupo_DiasFeriados" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_DiasFestivosSubGrupo_SubGrupoUsuario" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

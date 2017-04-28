@@ -15,6 +15,7 @@ namespace KiiniHelp.UserControls.Operacion
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         private List<string> _lstError = new List<string>();
 

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using KiiniHelp.Funciones;
 using KiiniHelp.ServiceDiasHorario;
-using KiiniHelp.ServiceGrupoUsuario;
 using KiiniNet.Entities.Cat.Usuario;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
 {
@@ -15,6 +16,7 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         private List<string> _lstError = new List<string>();
 
@@ -22,24 +24,19 @@ namespace KiiniHelp.UserControls.Altas
         {
             set
             {
-                panelAlerta.Visible = value.Any();
-                if (!panelAlerta.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
-        public int IdSubRol
+        private List<DiasFeriadosDetalle> DiasFeriados
         {
-            get { return Convert.ToInt32(hfIdSubRol.Value); }
-            set
-            {
-                if (Session["DiasFestivos" + value] == null)
-                    Session.Add("DiasFestivos" + value, new List<DiaFestivoSubGrupo>());
-                hfIdSubRol.Value = value.ToString();
-                MuestraDias((List<DiaFestivoSubGrupo>)Session["DiasFestivos" + value]);
-                hfIdSubRol.Value = value.ToString();
-            }
+            get { return (List<DiasFeriadosDetalle>)Session["DiasSeleccionados"]; }
+            set { Session["DiasSeleccionados"] = value; }
         }
 
         public bool EsAlta
@@ -48,43 +45,14 @@ namespace KiiniHelp.UserControls.Altas
             set { hfEsAlta.Value = value.ToString(); }
         }
 
-        public RepeaterItemCollection DiasDescansoSubRol
-        {
-            get { return rptDias.Items; }
-        }
-
-        public void SetDiasFestivosSubRol(List<DiaFestivoSubGrupo> lstDiasfestivos, int idSubRol)
-        {
-            try
-            {
-                IdSubRol = idSubRol;
-                MuestraDias(lstDiasfestivos);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-        private void LimpiarCampos()
-        {
-            try
-            {
-                txtDate.Text = string.Empty;
-                txtDescripcion.Text = string.Empty;
-                txtDate.Focus();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
         private void LimpiarPantalla()
         {
             try
             {
-                LimpiarCampos();
-                MuestraDias(new List<DiaFestivoSubGrupo>());
+                txtDescripcionDias.Text = string.Empty;
+                LimpiaCapturaDias();
+                DiasFeriados = new List<DiasFeriadosDetalle>();
+                LlenaDias();
             }
             catch (Exception e)
             {
@@ -92,19 +60,36 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        private void MuestraDias(List<DiaFestivoSubGrupo> lst)
+        private void LimpiaCapturaDias()
         {
             try
             {
-                Session["DiasFestivos" + IdSubRol] = lst;
-                if (Session["DiasFestivos" + IdSubRol] == null)
-                {
-                    rptDias.DataSource = null;
-                    rptDias.DataBind();
-                    return;
-                }
-                Session["DiasFestivos" + IdSubRol] = lst;
-                rptDias.DataSource = lst;
+                txtDescripcionDia.Text = string.Empty;
+                txtDate.Text = string.Empty;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        private void LlenaCombos()
+        {
+            try
+            {
+                Metodos.LlenaComboCatalogo(ddlDiasFeriados, _servicioDias.ObtenerDiasFeriados(true));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        private void LlenaDias()
+        {
+            try
+            {
+                rptDias.DataSource = DiasFeriados.OrderBy(o => o.Dia).ToList();
                 rptDias.DataBind();
             }
             catch (Exception e)
@@ -120,8 +105,9 @@ namespace KiiniHelp.UserControls.Altas
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
+                    LlenaCombos();
                     txtDate.Focus();
-                    txtDescripcion.Focus();
+                    txtDescripcionDias.Focus();
                     txtDate.Focus();
                 }
 
@@ -137,27 +123,60 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        protected void btnAgregar_OnClick(object sender, EventArgs e)
+        protected void btnSeleccionar_OnClick(object sender, EventArgs e)
         {
             try
             {
-                List<DiaFestivoSubGrupo> lst = (List<DiaFestivoSubGrupo>)Session["DiasFestivos" + IdSubRol] ?? new List<DiaFestivoSubGrupo>();
+                int idDiaFeriado = int.Parse(ddlDiasFeriados.SelectedValue);
+                DiaFeriado selectedDay = _servicioDias.ObtenerDiaFeriado(idDiaFeriado);
+                List<DiasFeriadosDetalle> tmpSeleccionados = DiasFeriados ?? new List<DiasFeriadosDetalle>();
+                if (hfEditando.Value != string.Empty)
+                {
+                    tmpSeleccionados.Single(a => a.Dia == selectedDay.Fecha).Descripcion = txtDescripcionDia.Text.ToUpper();
+                    tmpSeleccionados.Single(a => a.Dia == selectedDay.Fecha).Dia = Convert.ToDateTime(txtDate.Text);
+                }
+                else
+                {
+                    if (tmpSeleccionados.Any(a => a.Dia == selectedDay.Fecha))
+                        throw new Exception("Ya se ha ingresado esta fecha");
+                    tmpSeleccionados.Add(new DiasFeriadosDetalle
+                    {
+                        Descripcion = selectedDay.Descripcion,
+                        Dia = selectedDay.Fecha
+                    });
+                }
+
+                DiasFeriados = tmpSeleccionados;
+                ddlDiasFeriados.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
+                LlenaDias();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnAddDiaDescanso_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+
                 if (txtDate.Text.Trim() == string.Empty)
                     throw new Exception("Ingrese una fecha");
-                if (txtDescripcion.Text.Trim() == string.Empty)
+                if (txtDescripcionDia.Text.Trim() == string.Empty)
                     throw new Exception("Ingrese una descripción");
-                if (lst.Any(a => a.Fecha == Convert.ToDateTime(txtDate.Text)))
-                    throw new Exception("Ya se ha ingresado esta fecha");
                 if (DateTime.Parse(txtDate.Text) < DateTime.Parse(DateTime.Now.ToShortDateString()))
                     throw new Exception("La fecha no puede ser anterior al dia actual");
-                lst.Add(new DiaFestivoSubGrupo
-                {
-                    IdSubGrupoUsuario = IdSubRol,
-                    Fecha = Convert.ToDateTime(txtDate.Text),
-                    Descripcion = txtDescripcion.Text.Trim().ToUpper()
-                });
-                MuestraDias(lst);
-                LimpiarCampos();
+
+                DiaFeriado newDay = new DiaFeriado { Descripcion = txtDescripcionDia.Text, Fecha = Convert.ToDateTime(txtDate.Text) };
+                _servicioDias.AgregarDiaFeriado(newDay);
+                LimpiaCapturaDias();
+                LlenaCombos();
             }
             catch (Exception ex)
             {
@@ -169,14 +188,20 @@ namespace KiiniHelp.UserControls.Altas
                 Alerta = _lstError;
             }
         }
-
-        protected void OnClick(object sender, EventArgs e)
+        protected void lnkBtnEditar_OnClick(object sender, EventArgs e)
         {
             try
             {
-                List<DiaFestivoSubGrupo> lst = (List<DiaFestivoSubGrupo>)Session["DiasFestivos" + IdSubRol];
-                lst.Remove(lst.Single(s => s.Fecha == Convert.ToDateTime(((Button)sender).CommandArgument)));
-                MuestraDias(lst);
+                LinkButton btn = (LinkButton)sender;
+                if (btn != null)
+                {
+                    DateTime fecha = Convert.ToDateTime(btn.CommandArgument);
+                    hfEditando.Value = btn.CommandArgument;
+                    List<DiasFeriadosDetalle> tmpSeleccionados = DiasFeriados ?? new List<DiasFeriadosDetalle>();
+                    DiasFeriadosDetalle diaSeleccion = tmpSeleccionados.Single(f => f.Dia == fecha);
+                    txtDescripcionDia.Text = diaSeleccion.Descripcion;
+                    txtDate.Text = diaSeleccion.Dia.ToString("yyyy-MM-dd");
+                }
             }
             catch (Exception ex)
             {
@@ -188,11 +213,44 @@ namespace KiiniHelp.UserControls.Altas
                 Alerta = _lstError;
             }
         }
-
-        protected void btnAceptar_OnClick(object sender, EventArgs e)
+        protected void lbkBtnBorrar_OnClick(object sender, EventArgs e)
         {
             try
             {
+                LinkButton btn = (LinkButton)sender;
+                if (btn != null)
+                {
+                    DateTime fecha = Convert.ToDateTime(btn.CommandArgument);
+                    List<DiasFeriadosDetalle> tmpSeleccionados = DiasFeriados ?? new List<DiasFeriadosDetalle>();
+                    tmpSeleccionados.Remove(tmpSeleccionados.Single(f => f.Dia == fecha));
+                    DiasFeriados = tmpSeleccionados;
+                    LlenaDias();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+        protected void btnGuardar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtDescripcionDias.Text.Trim() == string.Empty)
+                    throw new Exception("Ingrese un nombre");
+                if (DiasFeriados.Count <= 0)
+                    throw new Exception("Ingrese la menos un día");
+                DiasFeriados newDias = new DiasFeriados();
+                newDias.Descripcion = txtDescripcionDias.Text;
+                newDias.DiasFeriadosDetalle = DiasFeriados;
+                _servicioDias.CrearDiasFestivos(newDias);
+                LlenaCombos();
+                LimpiarPantalla();
                 if (OnAceptarModal != null)
                     OnAceptarModal();
             }
@@ -206,7 +264,6 @@ namespace KiiniHelp.UserControls.Altas
                 Alerta = _lstError;
             }
         }
-
         protected void btnLimpiar_OnClick(object sender, EventArgs e)
         {
             try
@@ -225,7 +282,6 @@ namespace KiiniHelp.UserControls.Altas
                 Alerta = _lstError;
             }
         }
-
         protected void btnCancelar_OnClick(object sender, EventArgs e)
         {
             try

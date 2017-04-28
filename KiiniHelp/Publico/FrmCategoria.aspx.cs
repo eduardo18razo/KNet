@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace KiiniHelp
+namespace KiiniHelp.Publico
 {
-    public partial class DefaultAspnet : System.Web.UI.Page
+    public partial class FrmCategoria : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

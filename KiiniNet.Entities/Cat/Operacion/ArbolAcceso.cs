@@ -88,5 +88,11 @@ namespace KiiniNet.Entities.Cat.Operacion
         public virtual List<NotaOpcionUsuario> NotaOpcionUsuario { get; set; }
         [DataMember]
         public virtual List<NotaOpcionGrupo> NotaOpcionGrupo { get; set; }
+        [DataMember]
+        public virtual List<Frecuencia> Frecuencia { get; set; }
+        [DataMember]
+        public string Tipificacion { get; set; }
+        [DataMember]
+        public int Nivel { get; set; }
     }
 }

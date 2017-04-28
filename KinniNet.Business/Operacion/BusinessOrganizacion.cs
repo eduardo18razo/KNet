@@ -61,14 +61,8 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result =
-                    db.Organizacion.Where(w => w.IdHolding == idHolding)
-                        .SelectMany(
-                            organizacion =>
-                                db.Compañia.Where(
-                                    w =>
-                                        w.IdTipoUsuario == idTipoUsuario && w.Id == organizacion.IdCompania &&
-                                        w.Habilitado))
+                result = db.Organizacion.Where(w => w.IdHolding == idHolding)
+                        .SelectMany(organizacion => db.Compañia.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == organizacion.IdCompania && w.Habilitado))
                         .Distinct()
                         .OrderBy(o => o.Descripcion)
                         .ToList();
@@ -101,12 +95,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result =
                     db.Organizacion.Where(w => w.IdCompania == idCompañia)
-                        .SelectMany(
-                            organizacion =>
-                                db.Direccion.Where(
-                                    w =>
-                                        w.IdTipoUsuario == idTipoUsuario && w.Id == organizacion.IdDireccion &&
-                                        w.Habilitado))
+                        .SelectMany(organizacion => db.Direccion.Where(w => w.IdTipoUsuario == idTipoUsuario && w.Id == organizacion.IdDireccion && w.Habilitado))
                         .Distinct()
                         .OrderBy(o => o.Descripcion)
                         .ToList();
@@ -1019,7 +1008,7 @@ namespace KinniNet.Core.Operacion
                 Organizacion org = db.Organizacion.SingleOrDefault(w => w.Id == idOrganizacion);
                 if (org != null)
                 {
-                    if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any())
+                    if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any() && !habilitado)
                         throw new Exception("La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
                     org.Habilitado = habilitado;
 
@@ -1031,12 +1020,27 @@ namespace KinniNet.Core.Operacion
                         qry = qry.Where(w => w.IdNivelOrganizacion > org.IdNivelOrganizacion && w.Habilitado);
                         foreach (Organizacion source in qry.OrderBy(o => o.Id))
                         {
-                            if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any())
+                            if (source.HitConsulta.Any() || source.Ticket.Any() || source.Usuario.Any() && !habilitado)
                                 throw new Exception(
                                     "La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
                             switch (org.IdNivelOrganizacion)
                             {
                                 case 1:
+                                    if (source.IdHolding == org.IdHolding)
+                                    {
+                                        source.Compania.Habilitado = false;
+                                        if (source.IdDireccion.HasValue)
+                                            source.Direccion.Habilitado = false;
+                                        if (source.IdSubDireccion.HasValue)
+                                            source.SubDireccion.Habilitado = false;
+                                        if (source.IdGerencia.HasValue)
+                                            source.Gerencia.Habilitado = false;
+                                        if (source.IdSubGerencia.HasValue)
+                                            source.SubGerencia.Habilitado = false;
+                                        if (source.IdJefatura.HasValue)
+                                            source.Jefatura.Habilitado = false;
+                                        source.Habilitado = false;
+                                    }
                                     break;
                                 case 2:
                                     if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania)
@@ -1129,9 +1133,8 @@ namespace KinniNet.Core.Operacion
                     else
                     {
                         qry = qry.Where(w => w.IdNivelOrganizacion < org.IdNivelOrganizacion && !w.Habilitado);
-                        if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any())
-                            throw new Exception(
-                                "La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
+                        if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any() && !habilitado)
+                            throw new Exception("La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
                         switch (org.IdNivelOrganizacion)
                         {
                             case 1:
@@ -1174,7 +1177,7 @@ namespace KinniNet.Core.Operacion
                             qry = qry.Where(w => w.IdCompania == org.IdCompania);
                         foreach (Organizacion source in qry.OrderBy(o => o.Id))
                         {
-                            if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any())
+                            if (source.HitConsulta.Any() || source.Ticket.Any() || source.Usuario.Any())
                                 throw new Exception(
                                     "La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
                             switch (source.IdNivelOrganizacion)
@@ -1277,6 +1280,7 @@ namespace KinniNet.Core.Operacion
                 result = db.Organizacion.SingleOrDefault(w => w.Id == idOrganizacion);
                 if (result != null)
                 {
+                    db.LoadProperty(result, "TipoUsuario");
                     db.LoadProperty(result, "Holding");
                     db.LoadProperty(result, "Compania");
                     db.LoadProperty(result, "Direccion");

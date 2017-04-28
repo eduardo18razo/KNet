@@ -8,6 +8,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
 {
     public class ServiceDiasHorario : IServiceDiasHorario
     {
+        #region Horarios
         public List<Horario> ObtenerHorarioDefault(bool insertarSeleccion)
         {
             try
@@ -67,5 +68,114 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+        #endregion Horarios
+
+        #region Dias Feriados
+        public List<DiaFestivoDefault> ObtenerDiasDefault(bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessDiasHorario negocio = new BusinessDiasHorario())
+                {
+                    return negocio.ObtenerDiasDefault(insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void AgregarDiaFeriado(DiaFeriado dia)
+        {
+            try
+            {
+                using (BusinessDiasHorario negocio = new BusinessDiasHorario())
+                {
+                    negocio.AgregarDiaFeriado(dia);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public DiaFeriado ObtenerDiaFeriado(int id)
+        {
+            try
+            {
+                using (BusinessDiasHorario negocio = new BusinessDiasHorario())
+                {
+                    return negocio.ObtenerDiaFeriado(id);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<DiaFeriado> ObtenerDiasFeriados(bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessDiasHorario negocio = new BusinessDiasHorario())
+                {
+                    return negocio.ObtenerDiasFeriados(insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void CrearDiasFestivos(DiasFeriados item)
+        {
+            try
+            {
+                using (BusinessDiasHorario negocio = new BusinessDiasHorario())
+                {
+                    negocio.CrearDiasFestivos(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<DiasFeriados> ObtenerDiasFeriadosUser(bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessDiasHorario negocio = new BusinessDiasHorario())
+                {
+                    return negocio.ObtenerDiasFeriadosUser(insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public DiasFeriados ObtenerDiasFeriadosUserById(int idCatalogo)
+        {
+            try
+            {
+                using (BusinessDiasHorario negocio = new BusinessDiasHorario())
+                {
+                    return negocio.ObtenerDiasFeriadosUserById(idCatalogo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        #endregion Dias Feriados
     }
 }

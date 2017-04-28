@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
@@ -36,8 +38,8 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public int? IdPuesto { get; set; }
         [DataMember]
         public bool Vip { get; set; }
-        //[DataMember]
-        //public byte[] Foto { get; set; }
+        [DataMember]
+        public byte[] Foto { get; set; }
         [DataMember]
         public bool Habilitado { get; set; }
         [DataMember]
@@ -103,6 +105,8 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public virtual List<NotaOpcionGrupo> NotaOpcionGrupo { get; set; }
         [DataMember]
         public virtual List<TicketConversacion> TicketConversacion { get; set; }
+        [DataMember]
+        public virtual List<BitacoraAcceso> BitacoraAcceso { get; set; }
         #endregion Mapeo
 
         public bool Supervisor { get; set; }
@@ -115,6 +119,44 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public string UbicacionCompleta { get; set; }
 
         public string UbicacionFinal { get; set; }
+
+        public string FechaUltimoAccesoExito
+        {
+            get
+            {
+                string fecha;
+                CultureInfo ci = new CultureInfo("Es-Es");
+                var days = (DateTime.Now - BitacoraAcceso.Last(l => l.Success).Fecha).TotalDays;
+                switch (int.Parse(Math.Abs(Math.Round(days)).ToString()))
+                {
+                    case 0:
+                        fecha = "Hoy";
+                        break;
+                    case 1:
+                        fecha = "Ayer";
+                        break;
+                    case 2:
+                        fecha = ci.DateTimeFormat.GetDayName(BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                        break;
+                    case 3:
+                        fecha = ci.DateTimeFormat.GetDayName(BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                        break;
+                    case 4:
+                        fecha = ci.DateTimeFormat.GetDayName(BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                        break;
+                    case 5:
+                        fecha = ci.DateTimeFormat.GetDayName(BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                        break;
+                    case 6:
+                        fecha = ci.DateTimeFormat.GetDayName(BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                        break;
+                    default:
+                        fecha = BitacoraAcceso.Last(l => l.Success).Fecha.ToString("dd-MM-yy");
+                        break;
+                }
+                return string.Format("{0} {1} hrs.", fecha, BitacoraAcceso.Last(l => l.Success).Fecha.ToString("HH:mm"));
+            }
+        }
 
 
     }

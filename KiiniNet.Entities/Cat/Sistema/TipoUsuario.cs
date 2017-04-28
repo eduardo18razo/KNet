@@ -97,6 +97,8 @@ namespace KiiniNet.Entities.Cat.Sistema
         public virtual List<AliasOrganizacion> AliasOrganizacion { get; set; }
         [DataMember]
         public virtual List<AliasUbicacion> AliasUbicacion { get; set; }
+        [DataMember]
+        public virtual List<Frecuencia> Frecuencia { get; set; }
 
     }
 }

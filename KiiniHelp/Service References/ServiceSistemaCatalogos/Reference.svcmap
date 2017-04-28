@@ -40,7 +40,7 @@
     <MetadataFile FileName="ServiceCatalogos14.xsd" MetadataType="Schema" ID="a2d9fcde-3e71-4977-95df-186becde3028" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd14" />
     <MetadataFile FileName="ServiceCatalogos11.xsd" MetadataType="Schema" ID="f4246501-9786-4aa8-beb8-f18e073de2b9" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd4" />
     <MetadataFile FileName="ServiceCatalogos12.xsd" MetadataType="Schema" ID="6756cad4-9c38-4ec0-9cdb-6b9b95776e43" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd9" />
-    <MetadataFile FileName="ServiceCatalogos15.xsd" MetadataType="Schema" ID="b475ec4b-2723-43d7-93bc-7fd5951ef898" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd15" />
+    <MetadataFile FileName="ServiceCatalogos16.xsd" MetadataType="Schema" ID="8e500ccd-b250-4002-a359-dce768f58edf" SourceId="1" SourceUrl="http://localhost:15277/Sistema/ServiceCatalogos.svc?xsd=xsd15" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

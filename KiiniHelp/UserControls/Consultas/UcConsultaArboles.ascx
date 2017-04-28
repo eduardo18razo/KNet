@@ -1,99 +1,159 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaArboles.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaArboles" %>
+<%@ Import Namespace="KinniNet.Business.Utils" %>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<style>
+		a img{border: none;}
+		ol li{list-style: decimal outside;}
+		div#container{width: 780px;margin: 0 auto;padding: 1em 0;}
+		div.side-by-side{width: 100%;margin-bottom: 1em;}
+		div.side-by-side > div{float: left;width: 50%;}
+		div.side-by-side > div > em{margin-bottom: 10px;display: block;}
+		.clearfix:after{content: "\0020";display: block;height: 0;clear: both;overflow: hidden;visibility: hidden;}
+		
+	</style>
+
 <div style="height: 100%;">
-    <script>
-        function dbClic(e) {
-            $('#tblHeader').find('tr').dblclick(function (e) {
-                alert(e.target.parentElement.id);
-            });
-        };
-
-        function ContextMenu() {
-            var $contextMenu = $("#contextMenuArbol");
-            $("body").on("click", function (e) {
-                $contextMenu.hide();
-                var table = $("#tblHeader");
-                table.find('tr').each(function (i, ev) {
-                    $(this).css('background', "transparent");
-                });
-            });
-            $("body").on("contextmenu", "table tr", function (e) {
-                $contextMenu.css({
-                    display: "block",
-                    left: e.pageX,
-                    top: e.pageY
-                });
-                var baja = false;
-                var alta;
-                var parent = e.target.parentElement;
-                var nodos = parent.parentElement.childNodes;
-                for (var fondo = 0; fondo < nodos.length; fondo++) {
-                    if (nodos[fondo].nodeType === 1)
-                        parent.parentElement.childNodes[fondo].removeAttribute("style");
-                }
-
-                parent.parentElement.parentElement.style.background = 'transparent';
-                parent.style.background = "gray";
-                var columnas = e.target.parentElement.childNodes;
-                for (var z = 0; z < columnas.length; z++) {
-                    if (columnas[z].id === "colHabilitado") {
-                        baja = (columnas[z].textContent === 'SI');
-                    }
-                }
-                alta = !baja;
-                document.getElementById("<%= FindControl("btnBaja").ClientID %>").style.display = baja ? 'block' : 'none';
-                document.getElementById("<%= FindControl("btnAlta").ClientID %>").style.display = alta ? 'block' : 'none';
-                var elementId = document.getElementById("<%= FindControl("hfId").ClientID %>");
-                elementId.value = e.target.parentElement.id;
-                return false;
-            });
-
-            $contextMenu.on("click", "button", function () {
-                debugger;
-                $contextMenu.hide();
-            });
-        };
-    </script>
     <asp:UpdatePanel runat="server" style="height: 100%">
         <ContentTemplate>
-            <div id="contextMenuArbol" class="panel-heading contextMenu">
-                <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfModal" />
-                <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
-                <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Baja" ID="btnBaja" OnClick="btnBaja_OnClick" />
+            <br>
+            <h3 class="h6">
+                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
+                / Configuración de Menú </h3>
+            <hr />
+            <section class="module">
+                <div class="row">
+                    <div class="col-lg-8 col-md-9">
+                        <div class="module-inner">
+                            <div class="module-heading">
+                                <h3 class="module-title">
+                                    <asp:Label runat="server" ID="lblBranding"></asp:Label></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="module-inner">
+                            <asp:LinkButton runat="server" CssClass="btn btn-success fa fa-plus" Text="Crear Nueva Area" OnClick="btnNew_OnClick" />
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Alta" ID="btnAlta" OnClick="btnAlta_OnClick" />
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="module-inner">
+                            CONSULTA OPCIONES DE MENÚ:<br />
+                            <div class="search-box form-inline margin-bottom-lg">
+                                <label class="sr-only" for="txtFiltro">Buscar</label>
+                                <div class="form-group">
+                                    <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control help_search_form" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" placeholder="Busca con una palabra clave..." />
+                                    <asp:LinkButton runat="server" class="btn btn-primary btn-single-icon fa fa-search" OnClick="btnBuscar_OnClick"></asp:LinkButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <div class="module-inner">
+                            ... o consulta por Categoría y Tipo de Usuario<br />
+
+                            <asp:DropDownList runat="server" ID="ddlArea" CssClass="form-control" Style="width: 30%; display: inline-block" OnSelectedIndexChanged="ddlArea_OnSelectedIndexChanged" AutoPostBack="true" autocompletemode="SuggestAppend" casesensitive="false" />
+                            <asp:DropDownList runat="server" ID="ddlTipoUsuario" CssClass="form-control" Style="width: 30%; display: inline-block; margin-left: 25px" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" AutoPostBack="true" />
+                            CssClass="form-control"
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="side-by-side clearfix">
+
+                <div>
+
+                    <asp:DropDownList data-placeholder="Selecciona..." runat="server" ID="cboCountry" class="chzn-select" Style="width: 350px;">
+                        <asp:ListItem Text="" Value=""></asp:ListItem>
+                        <asp:ListItem Text="Opcion 1" Value="United States"></asp:ListItem>
+                        <asp:ListItem Text="opcion 2" Value="United Kingdom"></asp:ListItem>
+                        <asp:ListItem Text="opcion 3" Value="United Kingdom"></asp:ListItem>
+                    </asp:DropDownList><%--<asp:Button runat="server" ID="btnSelect" Text="Get Selected" OnClick="btnSelect_Click" />--%>
 
                 </div>
-                <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" />
-                </div>
-                <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" />
+            </div>
+            <%--<script src="Scripts/jquery.min.js" type="text/javascript"></script>--%>
+            
+            
+            <div id="masonry" class="row">
+                <div class="module-wrapper masonry-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <section class="module module-headings">
+                        <div class="module-inner">
+                            <div class="module-heading">
+                                <ul class="actions list-inline">
+                                    <li><a class="collapse-module" data-toggle="collapse" href="#content-1" aria-expanded="false" aria-controls="content-1"><span aria-hidden="true" class="icon arrow_carrot-up"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class="module-content collapse in" id="content-1">
+                                <div class="module-content-inner no-padding-bottom">
+                                    <div class="table-responsive">
+                                        <asp:Repeater runat="server" ID="rptResultados">
+                                            <HeaderTemplate>
+                                                <table class="table table-striped display" id="tblResults">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                <asp:Label runat="server">Tipo Usuario</asp:Label></th>
+                                                            <th>
+                                                                <asp:Label runat="server">Titulo</asp:Label></th>
+                                                            <th>
+                                                                <asp:Label runat="server">Categoría</asp:Label></th>
+                                                            <th>
+                                                                <asp:Label runat="server">Tipificación</asp:Label></th>
+                                                            <th>
+                                                                <asp:Label runat="server">Tipo</asp:Label></th>
+                                                            <th>
+                                                                <asp:Label runat="server">Nivel</asp:Label></th>
+
+                                                            <th>
+                                                                <asp:Label runat="server">Activo</asp:Label></th>
+                                                            <%--<th>Editar</th>--%>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <tr id='<%# Eval("Id")%>'>
+                                                    <td>
+                                                        <button type="button" class='<%# 
+int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Empleado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoPersonaFisica ? "btn btn-default-alt btn-square-usuario empleado" : 
+int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Cliente || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClientaPersonaFisica ? "btn btn-default-alt btn-square-usuario cliente" : 
+int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Proveedor || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorPersonaFisica ? "btn btn-default-alt btn-square-usuario proveedor" : "btn btn-default-alt btn-square-usuario" %>'>
+                                                            <%# Eval("TipoUsuario.Descripcion").ToString().Substring(0,1) %></button></td>
+                                                    <td><%# Eval("Tipificacion")%></td>
+                                                    <td><%# Eval("Area.Descripcion")%></td>
+                                                    <td><%# Eval("TipoArbolAcceso.Descripcion")%></td>
+                                                    <td><%# (bool)Eval("EsTerminal") ? "OPCIÓN" : "SECCIÓN"%></td>
+                                                    <td><%# Eval("Nivel")%></td>
+
+
+
+                                                    <td id="colHabilitado">
+                                                        <ul class="list list-unstyled hidden" id="hiddenEnabled">
+                                                            <li>
+                                                                <asp:CheckBox runat="server" AutoPostBack="true" Checked='<%# (bool) Eval("Habilitado") %>' CssClass="chkIphone" Width="30px" data-id='<%# Eval("Id")%>' Text='<%# (bool) Eval("Habilitado") ? "SI" : "NO"%>' OnCheckedChanged="OnCheckedChanged" />
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                            <FooterTemplate>
+                                                </tbody>
+                                            </table>
+                                            </FooterTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
-            <div class="modal-header" id="panelAlertaGeneral" runat="server" visible="false">
-                <div class="alert alert-danger" role="alert">
-                    <div>
-                        <div style="float: left">
-                            <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
-                        </div>
-                        <div style="float: left">
-                            <h3>Error</h3>
-                        </div>
-                        <div class="clearfix clear-fix"></div>
-                    </div>
-                    <hr />
-                    <asp:Repeater runat="server" ID="rptErrorGeneral">
-                        <ItemTemplate>
-                            <ul>
-                                <li><%# Container.DataItem %></li>
-                            </ul>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-            </div>
-            <div class="panel panel-primary">
+
+            <%--<div class="panel panel-primary">
                 <div class="panel-heading">
                     <asp:Label runat="server" ID="lbotest"></asp:Label>
                     <h3>Opciones de menú</h3>
@@ -119,8 +179,8 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <asp:DropDownList runat="server" Width="16%" ID="ddlArea" CssClass="DropSelect" OnSelectedIndexChanged="ddlArea_OnSelectedIndexChanged" AutoPostBack="true" />
-                                                <asp:DropDownList runat="server" Width="16%" CssClass="DropSelect" ID="ddlTipoUsuario" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" AutoPostBack="true" />
+
+
                                                 <asp:DropDownList runat="server" Width="16%" CssClass="DropSelect" ID="ddlTipoArbol" OnSelectedIndexChanged="ddlTipoArbol_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
                                             </div>
                                             <div class="form-group">
@@ -154,62 +214,12 @@
 
                         <div class="panel panel-primary">
                             <div class="panel-body">
-                                <asp:Repeater runat="server" ID="rptResultados">
-                                    <HeaderTemplate>
-                                        <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader" style="table-layout: fixed">
-                                            <thead>
-                                                <tr align="center">
-                                                    <td><asp:Label runat="server">Producto</asp:Label></td>
-                                                    <td><asp:Label runat="server">Tipo Usuario</asp:Label></td>
-                                                    <td><asp:Label runat="server">Tipo Servicio</asp:Label></td>
-                                                    <td><asp:Label runat="server">Nivel 1</asp:Label></td>
-                                                    <td><asp:Label runat="server">Nivel 2</asp:Label></td>
-                                                    <td><asp:Label runat="server">Nivel 3</asp:Label></td>
-                                                    <td><asp:Label runat="server">Nivel 4</asp:Label></td>
-                                                    <td><asp:Label runat="server">Nivel 5</asp:Label></td>
-                                                    <td><asp:Label runat="server">Nivel 6</asp:Label></td>
-                                                    <td><asp:Label runat="server">Nivel 7</asp:Label></td>
-                                                    <td><asp:Label runat="server">Tipo Opcion</asp:Label></td>
-                                                    <td><asp:Label runat="server">Habilitado</asp:Label></td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                    </HeaderTemplate>
-                                    <ItemTemplate>
-                                        <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Area.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("TipoUsuario.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("TipoArbolAcceso.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel1.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel2.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel3.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel4.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel5.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel6.Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# Eval("Nivel7.Descripcion")%></td>
-                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()"><%# (bool) Eval("EsTerminal") ? "Opcion" : "Menu"%></td>
-                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="ContextMenu()" ondblclick="dbClic()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
-                                        </tr>
-                                    </ItemTemplate>
-                                    <FooterTemplate>
-                                        </tbody>
-                                            </table>
-                                    </FooterTemplate>
-                                </asp:Repeater>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--%>
         </ContentTemplate>
     </asp:UpdatePanel>
-</div>
-
-<%--MODAL CATALOGOS--%>
-<div class="modal fade" id="editOpcion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-    <asp:UpdatePanel ID="upOcion" runat="server" UpdateMode="Conditional">
-        <ContentTemplate>
-            <%--<uc1:UcAltaArbolAcceso runat="server" ID="UcAltaArbolAcceso" />--%>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+    <script type="text/javascript"> $(".chzn-select").chosen(); $(".chzn-select-deselect").chosen({ allow_single_deselect: true }); </script>
 </div>

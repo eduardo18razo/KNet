@@ -15,6 +15,7 @@ namespace KiiniHelp.UserControls.Filtros.Graficos
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         private readonly ServiceUbicacionClient _servicioUbicacion = new ServiceUbicacionClient();
         private readonly ServiceOrganizacionClient _servicioOrganizacion = new ServiceOrganizacionClient();

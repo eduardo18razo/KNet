@@ -1,17 +1,22 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Usuarios.master.cs" Inherits="KiiniHelp.UsuariosMaster" %>
+<%@ Register Src="~/UserControls/Temporal/UcTicketPortal.ascx" TagPrefix="uc1" TagName="UcTicketPortal" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-
     <title></title>
     <link rel='stylesheet' href="assets/css/font.css" />
     <link rel="stylesheet" href="assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/css/pe-7-icons.css" />
+    <link rel="stylesheet" href="assets/css/pe-7-icons.css" />
+
     <link rel="stylesheet" href="assets/css/bootstrap.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" type="text/css" href="bootstrap/MainMenu/css/menuStyle.css" />
-
+    <link rel="stylesheet" href="assets/css/menuStyle.css" />
+    <link rel="stylesheet" href="assets/css/divs.css" />
+    <link href="assets/css/checkBox.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/tmp/chosen.css" />
     <style>
         body {
             font-size: 12px;
@@ -24,12 +29,14 @@
     <script type="text/javascript">
         var win;
         function MostrarPopup(modalName) {
-            debugger;
+            
             $(modalName).on('shown.bs.modal', function () {
+                //$('.modal-backdrop').remove();
                 $(this).find('[autofocus]').focus();
             });
             $(modalName).modal({ backdrop: 'static', keyboard: false });
             $(modalName).modal({ show: true });
+
             return true;
         };
         function CierraPopup(modalName) {
@@ -40,7 +47,7 @@
             window.open(url, "test", 'type=fullWindow, fullscreen, height=700,width=760');
         };
         function sum() {
-            debugger;
+            
             var totaldias = 0, totalhoras = 0, totalminutos = 0, totalsegundos = 0;
             $("#tblHeader > tbody > tr").each(function (indexRow) {
                 var control;
@@ -121,53 +128,156 @@
 
             $("#test").html(src_str);
         }
+        function SuccsessAlert(title, msg) {
+            $.notify({
+                // options
+                icon: 'glyphicon glyphicon-ok',
+                title: title,
+                message: msg,
+                target: '_blank'
+            }, {
+                // settings
+                element: 'body',
+                position: null,
+                type: "success",
+                allow_dismiss: true,
+                newest_on_top: false,
+                showProgressbar: false,
+                placement: {
+                    from: "top",
+                    align: "right"
+                },
+                offset: 20,
+                spacing: 10,
+                z_index: 1031,
+                delay: 5000,
+                timer: 1000,
+                url_target: '_blank',
+                mouse_over: null,
+                animate: {
+                    enter: 'animated fadeInDown',
+                    exit: 'animated fadeOutUp'
+                },
+                onShow: null,
+                onShown: null,
+                onClose: null,
+                onClosed: null,
+                icon_type: 'class',
+                template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                    '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                    '<span data-notify="icon"></span> ' +
+                    '<span data-notify="title">{1}</span> ' +
+                    '<span data-notify="message">{2}</span>' +
+                    '<div class="progress" data-notify="progressbar">' +
+                        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                    '</div>' +
+                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                '</div>'
+            });
+        }
+        function ErrorAlert(title, msg) {
+            $.notify({
+                // options
+                icon: 'glyphicon glyphicon-warning-sign',
+                title: title,
+                message: msg,
+                target: '_blank'
+            }, {
+                // settings
+                element: 'body',
+                position: null,
+                type: "danger",
+                allow_dismiss: false,
+                newest_on_top: false,
+                showProgressbar: false,
+                placement: {
+                    from: "top",
+                    align: "right"
+                },
+                offset: 20,
+                spacing: 10,
+                z_index: 99999,
+                delay: 5000,
+                timer: 1000,
+                url_target: '_blank',
+                mouse_over: null,
+                animate: {
+                    enter: 'animated fadeInDown',
+                    exit: 'animated fadeOutUp'
+                },
+                onShow: null,
+                onShown: null,
+                onClose: null,
+                onClosed: null,
+                icon_type: 'class',
+                template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert" style="z-index=9999999">' +
+                    '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                    '<span data-notify="icon"></span> ' +
+                    '<span data-notify="title">{1}</span> ' +
+                    '<span data-notify="message">{2}</span>' +
+                    '<div class="progress" data-notify="progressbar">' +
+                        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                    '</div>' +
+                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                '</div>'
+            });
+        }
+        function hidden() {
+            $('#tblResults tr').on('mouseover', function () {
+                $(this).find('#colHabilitado').find('#hiddenEnabled').removeClass("hidden");
+                $(this).find('#colEditar').find('#hiddenEdit').removeClass("hidden");
+            }).on('mouseout', function () {
+                $(this).find('#colHabilitado').find('#hiddenEnabled').addClass("hidden");
+                $(this).find('#colEditar').find('#hiddenEdit').addClass("hidden");
+            });
+        }
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body style="background: white">
+<body class="preload">
     <div id="full">
-        <form id="form1" runat="server" enctype="multipart/form-data">
+        <form runat="server" id="form1" enctype="multipart/form-data">
             <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
                 <Scripts>
                     <asp:ScriptReference Path="~/assets/js/jquery.js" />
                     <asp:ScriptReference Path="~/assets/js/bootstrap.js" />
-                    <asp:ScriptReference Path="assets/js/imagesloaded.js" />
-                    <asp:ScriptReference Path="assets/js/masonry.js" />
-                    <asp:ScriptReference Path="assets/js/main.js" />
-                    <asp:ScriptReference Path="~/BootStrap/MainMenu/js/modernizr.custom.js" />
-                    <asp:ScriptReference Path="~/BootStrap/MainMenu/js/pmenu.js" />
+                    <asp:ScriptReference Path="~/assets/js/imagesloaded.js" />
+                    <asp:ScriptReference Path="~/assets/js/masonry.js" />
+                    <asp:ScriptReference Path="~/assets/js/main.js" />
+                    <asp:ScriptReference Path="~/assets/js/modernizr.custom.js" />
+                    <asp:ScriptReference Path="~/assets/js/pmenu.js" />
+                    <asp:ScriptReference Path="~/assets/js/bootstrap-notify.js" />
+                    <asp:ScriptReference Path="~/assets/js/bootstrap-notify.min.js" />
+                    <asp:ScriptReference Path="~/assets/tmp/chosen.jquery.js" />
+                    <asp:ScriptReference Path="~/assets/js/validation.js" />
                 </Scripts>
             </asp:ScriptManager>
-            <asp:UpdateProgress ID="updateProgress" runat="server">
+            <%--<asp:UpdateProgress ID="updateProgress" runat="server">
                 <ProgressTemplate>
                     <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #000000; opacity: 1.0;">
                         <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="~/Images/loading.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="padding: 10px; position: fixed; top: 25%; left: 35%; border: 10px;" />
                     </div>
                 </ProgressTemplate>
-            </asp:UpdateProgress>
-            <!--INICIA HEADER-->
+            </asp:UpdateProgress>--%>
+
             <header class="header">
                 <div class="branding ">
                     <h1 class="logo text-center">
                         <asp:HyperLink NavigateUrl="~/Default.aspx" runat="server">
-                         <asp:Image class="logo-icon" ImageUrl="~/assets/images/logo-icon.svg" alt="icon"  runat="server"/> 
-                        <span class="nav-label"> <span class="h3"><strong>Bancremex</strong></span></span> 
+                            <asp:Image class="logo-icon" ImageUrl="~/assets/images/logo-icon.svg" alt="icon" runat="server" />
+                            <span class="nav-label"><span class="h3"><strong>
+                                <asp:Label runat="server" ID="lblBranding" /></strong></span></span>
                         </asp:HyperLink>
                     </h1>
                 </div>
 
                 <div class="topbar bg_w_header">
-                    <!--INICIA MENU COLAPSABLE-->
-                    <span id="trigger" class="menu-trigger" style="z-index: 9999">menu</span>
-                    <a><span>
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </span></a>
-                    <!--TERMINA MENU COLAPSABLE-->
-                    <!--INICIA BUSCADOR-->
+                    <div style="margin-left: 0; float: left; position: relative; display: block; margin-top: -7px">
+                        <div>
+                            <span id="trigger" class="menu-trigger" style="z-index: 9999"></span>
+                        </div>
+                    </div>
                     <div class="search-container">
                         <div id="main-search">
                             <i id="main-search-toggle" class="fa fa-search icon"></i>
@@ -176,27 +286,22 @@
                                 <span id="clear-search" aria-hidden="true" class="fs1 icon icon_close_alt2 clear-search"></span>
                             </div>
                         </div>
-                        <!--TERMINA BUSCADOR-->
                     </div>
-                    <!--INICIA HERRAMIENTAS-->
                     <div class="navbar-tools">
                         <div class="utilities-container">
                             <div class="utilities">
                             </div>
                             <div>
-
-                                <!--INGRESA TICKETS-->
                                 <div class="item item-tour hidden-xs tour-trigger" data-toggle="tooltip" data-placement="bottom">
                                     <span class="sr-only">Hola, Rubén González Camarena</span>
                                     <p class="name">
                                         Hola,
                                         <asp:Label runat="server" ID="lblUsuario" Style="font-size: x-small" />
                                         <strong class="text-theme">/
-                                            <asp:Label runat="server" ID="lblTipoUsr" Style="font-size: x-small" /></strong>
+                                            <asp:Label runat="server" ID="lblAreaSeleccionada" Style="font-size: x-small"></asp:Label>
+                                            <asp:Label runat="server" ID="lblTipoUsr" Style="font-size: x-small" Visible="False" /></strong>
                                     </p>
                                 </div>
-                                <!-- /INGRESA TICKETS-->
-                                <!--TICKET-->
                                 <div class="item item-notifications">
                                     <div class="dropdown-toggle" id="dropdownMenu-notifications" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Tickets</span> <span class="pe-icon fa fa-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Tickets"></span></div>
                                     <ul class="dropdown-menu wdropdown-ticket" role="menu" aria-labelledby="dropdownMenu-user">
@@ -204,16 +309,12 @@
                                         <li><a role="menuitem" href="guest_ticket_con.html"><span class="pe-icon pe-7s-look icon"></span>Consultar ticket</a></li>
                                     </ul>
                                 </div>
-                                <!--/TICKET-->
-                                <!--ROLES-->
                                 <div class="item item-side-panel">
                                     <i id="side-panel-toggle" class="side-panel-toggle panel-hide icon fa fa-users icon" data-toggle="tooltip" data-placement="bottom" title="Roles">
                                         <span class="badge badge-circle badge-info">
                                             <asp:Label runat="server" ID="lblBadgeRoles"></asp:Label></span>
                                     </i>
                                 </div>
-                                <!--/ROLES-->
-                                <!-- TICKETS-->
                                 <div class="item item-notifications">
                                     <div class="dropdown-toggle" id="dropdownMenu-notifications" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Tickets</span> <span class="pe-icon pe-7s-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Tickets"></span><span class="badge badge-circle badge-danger">3</span> </div>
                                     <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-notifications">
@@ -244,13 +345,68 @@
                                         <div class="dropdown-footer"><a href="#">Ver todos los tickets</a> </div>
                                     </div>
                                 </div>
-                                <!--/TICKETS-->
-                                <!--MENSAJES-->
                                 <div class="item item-messages dropdown">
                                     <div class="dropdown-toggle" id="dropdownMenu-messages" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Mensajes</span> <span class="pe-icon pe-7s-mail icon" data-toggle="tooltip" data-placement="bottom" title="Messages"></span><span class="badge badge-circle badge-success">5</span> </div>
-                                    <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-messages">
+                                    <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-messages" >
                                         <span class="arrow"></span>
-                                        <div class="message-items no-overflow">
+                                        <div class="message-items no-overflow" style="height: 420px;overflow-y: auto">
+                                            <div class="item media">
+                                                <div class="media-left profile">
+                                                    <img class="profile" src="assets/images/profiles/profile-1.png" alt="" />
+                                                </div>
+                                                <div class="media-body"><a href="#"><span class="sender display-block">Nombre</span> <span class="message-title display-block">Titulo del mensjae</span> <span class="excerpt display-block">"Vista previa del mensaje..."</span> </a></div>
+                                                <div class="meta">Ene 6 </div>
+                                            </div>
+                                            <div class="item media">
+                                                <div class="media-left profile">
+                                                    <img class="profile" src="assets/images/profiles/profile-1.png" alt="" />
+                                                </div>
+                                                <div class="media-body"><a href="#"><span class="sender display-block">Nombre</span> <span class="message-title display-block">Titulo del mensjae</span> <span class="excerpt display-block">"Vista previa del mensaje..."</span> </a></div>
+                                                <div class="meta">Ene 6 </div>
+                                            </div>
+                                            <div class="item media">
+                                                <div class="media-left profile">
+                                                    <img class="profile" src="assets/images/profiles/profile-1.png" alt="" />
+                                                </div>
+                                                <div class="media-body"><a href="#"><span class="sender display-block">Nombre</span> <span class="message-title display-block">Titulo del mensjae</span> <span class="excerpt display-block">"Vista previa del mensaje..."</span> </a></div>
+                                                <div class="meta">Ene 6 </div>
+                                            </div>
+                                            <div class="item media">
+                                                <div class="media-left profile">
+                                                    <img class="profile" src="assets/images/profiles/profile-1.png" alt="" />
+                                                </div>
+                                                <div class="media-body"><a href="#"><span class="sender display-block">Nombre</span> <span class="message-title display-block">Titulo del mensjae</span> <span class="excerpt display-block">"Vista previa del mensaje..."</span> </a></div>
+                                                <div class="meta">Ene 6 </div>
+                                            </div>
+                                            <div class="item media">
+                                                <div class="media-left profile">
+                                                    <img class="profile" src="assets/images/profiles/profile-1.png" alt="" />
+                                                </div>
+                                                <div class="media-body"><a href="#"><span class="sender display-block">Nombre</span> <span class="message-title display-block">Titulo del mensjae</span> <span class="excerpt display-block">"Vista previa del mensaje..."</span> </a></div>
+                                                <div class="meta">Ene 6 </div>
+                                            </div>
+                                            <%--Borrar--%>
+                                            <div class="item media">
+                                                <div class="media-left profile">
+                                                    <img class="profile" src="assets/images/profiles/profile-1.png" alt="" />
+                                                </div>
+                                                <div class="media-body"><a href="#"><span class="sender display-block">Nombre</span> <span class="message-title display-block">Titulo del mensjae</span> <span class="excerpt display-block">"Vista previa del mensaje..."</span> </a></div>
+                                                <div class="meta">Ene 6 </div>
+                                            </div>
+                                            <div class="item media">
+                                                <div class="media-left profile">
+                                                    <img class="profile" src="assets/images/profiles/profile-1.png" alt="" />
+                                                </div>
+                                                <div class="media-body"><a href="#"><span class="sender display-block">Nombre</span> <span class="message-title display-block">Titulo del mensjae</span> <span class="excerpt display-block">"Vista previa del mensaje..."</span> </a></div>
+                                                <div class="meta">Ene 6 </div>
+                                            </div>
+                                            <div class="item media">
+                                                <div class="media-left profile">
+                                                    <img class="profile" src="assets/images/profiles/profile-1.png" alt="" />
+                                                </div>
+                                                <div class="media-body"><a href="#"><span class="sender display-block">Nombre</span> <span class="message-title display-block">Titulo del mensjae</span> <span class="excerpt display-block">"Vista previa del mensaje..."</span> </a></div>
+                                                <div class="meta">Ene 6 </div>
+                                            </div>
                                             <div class="item media">
                                                 <div class="media-left profile">
                                                     <img class="profile" src="assets/images/profiles/profile-1.png" alt="" />
@@ -290,7 +446,6 @@
                                         <div class="dropdown-footer"><a href="#">Ver todos los mensajes</a> </div>
                                     </div>
                                 </div>
-                                <!--/MENSAJES-->
                                 <div class="item item-more dropdown">
                                     <div class="dropdown-toggle" id="dropdownMenu-more" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Acceso Rápido</span> <span aria-hidden="true" class="fs1 icon icon_grid-3x3" data-toggle="tooltip" data-placement="bottom" title="Acceso Rápido"></span></div>
                                     <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-more">
@@ -318,19 +473,20 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <!--/ACCESO RAPIDO-->
                             </div>
                         </div>
-                        <!--TERMINA HERRAMIENTAS-->
 
-                        <!--INICIA PERFIL-->
                         <div class="user-container dropdown">
                             <div class="dropdown-toggle" id="dropdownMenu-user" data-toggle="dropdown" aria-expanded="true" role="button">
                                 <asp:Image ImageUrl="~/assets/images/profiles/profile-1.png" alt="" runat="server" />
                                 <i class="fa fa-caret-down"></i>
                             </div>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-user">
-                                <li><span class="arrow"></span><a role="menuitem" href="#"><span class="pe-icon pe-7s-user icon"></span>Mi perfil</a></li>
+                                <li>
+                                    <asp:LinkButton role="menuitem" NavigateUrl="~/Users/Administracion/Usuarios/FrmEdicionUsuario.aspx?Detail=1" ID="btnMiPerfil" OnClick="btnMiPerfil_OnClick" runat="server">
+                                    <span class="pe-icon pe-7s-user icon"></span>Mi perfil
+                                    </asp:LinkButton>
+                                </li>
                                 <li>
                                     <asp:LinkButton role="menuitem" NavigateUrl="~/Default.aspx" runat="server" OnClick="btnsOut_OnClick">
                                     <span class="fa fa-sign-out icon"></span>Salir
@@ -338,69 +494,14 @@
                                 </li>
                             </ul>
                         </div>
-                        <!--TERMINA PERFIL-->
                     </div>
                 </div>
             </header>
-            <!--TERMINA HEADER-->
 
-            <div id="headerNav" style="vertical-align: central">
-                <%--<span id="trigger" class="menu-trigger"></span>--%>
-                <div class="logo" id="logo">
-                    <div id="headerNavInfoDiv">
-                        <div style="float: left; width: 350px">
-                            <div>
-                            </div>
-                            <div>
-                                <asp:Label runat="server" Style="font-size: x-small" />
-                            </div>
-                        </div>
-                        <div style="float: left; width: 220px">
-                            <asp:UpdatePanel runat="server">
-                                <ContentTemplate>
-                                    <div class="MenuHorizontalArea">
-                                        <asp:Button runat="server" Style="cursor: pointer" ID="btnSwitchRol" OnClick="btnSwitchRol_OnClick" Text="Rol Activo" />
-
-                                    </div>
-                                    <asp:Label runat="server" ID="lblAreaSeleccionada"></asp:Label>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
-                    </div>
-
-                    <span id="top-nav" style="position: absolute; margin: 12px 0 0 12px; top: 0; right: 5%">
-                        <asp:Button runat="server" CssClass="btn btn-sm btn-success" ID="btnsOut" Text="Cerrar Sesion" OnClick="btnsOut_OnClick" Style="margin-left: 10px; margin-right: 10px" />
-                    </span>
-                </div>
-            </div>
             <div id="content-wrapper" class="content-wrapper" style="padding-top: 0">
                 <div class="container-fluid" style="padding-left: 0">
                     <div class="divMainMenu" id="divMainMenu" style="margin-top: 80px;">
                         <asp:HiddenField runat="server" ID="hfCargaInicial" Value="False" />
-                        <header id="panelAlert" runat="server" visible="False">
-                            <div class="alert alert-danger">
-                                <div>
-                                    <div style="float: left">
-                                        <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
-                                    </div>
-                                    <div style="float: left">
-                                        <h3>Error</h3>
-                                    </div>
-                                    <div class="clearfix clear-fix"></div>
-                                </div>
-                                <hr />
-                                <asp:Repeater runat="server" ID="rptHeaderError">
-                                    <ItemTemplate>
-                                        <%# Container.DataItem %>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </div>
-                        </header>
-                        <script type="text/javascript" src="<%= ResolveUrl("~/BootStrap/js/validation.js") %>"></script>
-
-
-
-
                         <nav id="pMenu" class="pMenu">
                             <div class="menuLevel">
                                 <h2 class="icon icon-shop">Inicio</h2>
@@ -535,65 +636,71 @@
                             </div>
                         </nav>
 
-                        <div class="scroller" style="padding-left: 30px">
-                            <div style="margin-top: 0; height: 100%;">
-                                <asp:LinkButton runat="server" CssClass="close" ID="lnkBtnCerrar" OnClick="lnkBtnCerrar_OnClick" Visible="False">
+                    </div>
+                    <div class="scroller" id="scroller" style="padding-left: 30px">
+                        <div style="margin-top: 0; height: 100%;">
+                            <asp:LinkButton runat="server" CssClass="close" ID="lnkBtnCerrar" OnClick="lnkBtnCerrar_OnClick" Visible="False">
                         <span class="glyphicon glyphicon-remove"></span>
-                                </asp:LinkButton>
-                                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                                </asp:ContentPlaceHolder>
-                            </div>
+                            </asp:LinkButton>
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
                         </div>
                     </div>
                 </div>
             </div>
 
 
+            <footer id="footer" class="site-footer">
+                <div class="copyright">Kiinisupport &copy; 2017 - <a href="http://www.kiininet.com" target="_blank">Powered by Kiinenet</a> - <a href="terminos.html">Términos y condiciones</a></div>
+            </footer>
 
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    debugger;
-                    var elementId = document.getElementById("<%= this.FindControl("hfCargaInicial").ClientID %>");
-                    if (elementId.value === "False") {
-                        $('#modalRol').modal({ backdrop: 'static', keyboard: false });
-                        $('#modalRol').modal({ show: true });
-                        elementId.value = "true";
-                    }
-
-                });
-            </script>
-            <script>
-                new PMenu(document.getElementById('pMenu'), document.getElementById('trigger'), {
-                    type: 'overlap'
-                });
-            </script>
-
-            <div id="inferior">
-                <img src="../Images/logoKiininet.jpg" height="150" style="float: right; opacity: .6" />
-            </div>
-            <div class="modal fade" id="modalRol" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+            <div class="modal fade" id="modal-new-ticket" tabindex="-1" role="dialog" aria-labelledby="modal-new-ticket-label">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <%--<asp:UpdatePanel runat="server">
-                            <ContentTemplate>--%>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3>Cambio de Rol</h3>
-                            </div>
-                            <div class="panel-body">
-                                <asp:Repeater runat="server" ID="rptRoles">
-                                    <ItemTemplate>
-                                        <asp:LinkButton runat="server" Text='<%# Eval("Descripcion") %>' CssClass="btn btn-default" CommandArgument='<%# Eval("Id") %>' ID="lnkBtnRol" OnClick="lnkBtnRol_OnClick" Style="height: 75px;" />
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </div>
-                            <div class="panel-footer"></div>
+                        <div class="modal-header">
+                            <asp:LinkButton class="close" runat="server" ID="btnCerrarTicket" OnClick="btnCerrarTicket_OnClick"><span aria-hidden="true">&times;</span></asp:LinkButton>
+                            <h4 class="modal-title" id="modal-new-ticket-label">
+                                <br />
+                                Crear Ticket Nuevo</h4>
                         </div>
-                        <%--    </ContentTemplate>
-                        </asp:UpdatePanel>--%>
+                        <div class="modal-body">
+                            <uc1:UcTicketPortal runat="server" id="ucTicketPortal" />
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="modalExitoTicket" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <asp:LinkButton class="close" runat="server" ID="btnCerrarExito" OnClick="btnCerrarExito_OnClick"><span aria-hidden="true">&times;</span></asp:LinkButton>
+                            <h3 class="modal-title" id="myModalLabel">
+                                <br />
+                                Tu ticket se creo con éxito</h3>
+                        </div>
+                        <div class="modal-body">
+                            <asp:UpdatePanel runat="server">
+                                <ContentTemplate>
+                                    <hr />
+                                    <p class="h4">
+                                        <strong>Tu no. de ticket:
+                                        <asp:Label runat="server" ID="lblNoTicket" /></strong><br>
+                                    </p>
+                                    <p class="h4">
+                                        <strong>Clave de registro:
+                                    <asp:Label runat="server" ID="lblRandom" /></strong>
+                                    </p>
+                                    <hr />
+                                    En breve recibirás un correo con los datos de tu ticket para que puedas dar seguimiento.
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                        <div class="modal-footer"></div>
+                    </div>
+                </div>
+            </div>
+
             <div id="side-panel" class="side-panel">
                 <div class="side-panel-inner">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -618,6 +725,21 @@
                     </div>
                 </div>
             </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    
+                    var elementId = document.getElementById("<%= this.FindControl("hfCargaInicial").ClientID %>");
+                    if (elementId.value === "False") {
+                        //$('#modalRol').modal({ backdrop: 'static', keyboard: false });
+                        //$('#modalRol').modal({ show: true });
+                        $('#side-panel-toggle').click();
+                    }
+                });
+                new mlPushMenu(document.getElementById('pMenu'), document.getElementById('trigger'), {
+                    type: 'overlap'
+                });
+            </script>
         </form>
     </div>
 </body>

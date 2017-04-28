@@ -47,12 +47,14 @@
     <Compile Include="Operacion\Implementacion\ServiceArea.cs" />
     <Compile Include="Operacion\Implementacion\ServiceConsultas.cs" />
     <Compile Include="Operacion\Implementacion\ServiceDiasHorario.cs" />
+    <Compile Include="Operacion\Implementacion\ServiceFrecuencia.cs" />
     <Compile Include="Operacion\Implementacion\ServiceNota.cs" />
     <Compile Include="Operacion\Implementacion\ServicePuesto.cs" />
     <Compile Include="Operacion\Implementacion\ServiceTicket.cs" />
     <Compile Include="Operacion\Interface\IServiceArea.cs" />
     <Compile Include="Operacion\Interface\IServiceConsultas.cs" />
     <Compile Include="Operacion\Interface\IServiceDiasHorario.cs" />
+    <Compile Include="Operacion\Interface\IServiceFrecuencia.cs" />
     <Compile Include="Operacion\Interface\IServiceNota.cs" />
     <Compile Include="Operacion\Interface\IServicePuesto.cs" />
     <Compile Include="Operacion\Interface\IServiceTicket.cs" />

@@ -434,7 +434,7 @@ namespace KiiniHelp.UserControls.Temporal
                     return;
                 string extension = Path.GetExtension(e.FileName);
                 if (extension == null) return;
-                string filename = string.Format("{0}_{1}_{2}{3}{4}", e.FileName.Replace(extension, string.Empty), "ticketid", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), extension);
+                string filename = string.Format("{0}_{1}_{2}{3}{4}{5}{6}{7}{8}", e.FileName.Replace(extension, string.Empty), "ticketid", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second, extension);
                 AsyncFileUpload uploadControl = (AsyncFileUpload)sender;
                 if (!Directory.Exists(BusinessVariables.Directorios.RepositorioTemporalMascara))
                     Directory.CreateDirectory(BusinessVariables.Directorios.RepositorioTemporalMascara);
@@ -607,8 +607,10 @@ namespace KiiniHelp.UserControls.Temporal
         {
             try
             {
+
                 for (int i = 0; i < ((List<string>)Session["Files"]).Count; i++)
                 {
+                    File.Move(BusinessVariables.Directorios.RepositorioTemporalMascara + ((List<string>)Session["Files"])[i], BusinessVariables.Directorios.RepositorioTemporalMascara + ((List<string>)Session["Files"])[i].Replace("ticketid", idTicket.ToString()));
                     ((List<string>)Session["Files"])[i] = ((List<string>)Session["Files"])[i].Replace("ticketid", idTicket.ToString());
                 }
                 if (Session["Files"] != null)

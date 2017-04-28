@@ -40,13 +40,13 @@ namespace KiiniHelp {
         protected global::System.Web.UI.ScriptManager scripMain;
         
         /// <summary>
-        /// Control updateProgress.
+        /// Control lblBranding.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress updateProgress;
+        protected global::System.Web.UI.WebControls.Label lblBranding;
         
         /// <summary>
         /// Control main_search_input.
@@ -67,6 +67,15 @@ namespace KiiniHelp {
         protected global::System.Web.UI.WebControls.Label lblUsuario;
         
         /// <summary>
+        /// Control lblAreaSeleccionada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAreaSeleccionada;
+        
+        /// <summary>
         /// Control lblTipoUsr.
         /// </summary>
         /// <remarks>
@@ -85,31 +94,13 @@ namespace KiiniHelp {
         protected global::System.Web.UI.WebControls.Label lblBadgeRoles;
         
         /// <summary>
-        /// Control btnSwitchRol.
+        /// Control btnMiPerfil.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSwitchRol;
-        
-        /// <summary>
-        /// Control lblAreaSeleccionada.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAreaSeleccionada;
-        
-        /// <summary>
-        /// Control btnsOut.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnsOut;
+        protected global::System.Web.UI.WebControls.LinkButton btnMiPerfil;
         
         /// <summary>
         /// Control hfCargaInicial.
@@ -119,24 +110,6 @@ namespace KiiniHelp {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfCargaInicial;
-        
-        /// <summary>
-        /// Control panelAlert.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlert;
-        
-        /// <summary>
-        /// Control rptHeaderError.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptHeaderError;
         
         /// <summary>
         /// Control rptMenu.
@@ -166,13 +139,49 @@ namespace KiiniHelp {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
         
         /// <summary>
-        /// Control rptRoles.
+        /// Control btnCerrarTicket.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptRoles;
+        protected global::System.Web.UI.WebControls.LinkButton btnCerrarTicket;
+        
+        /// <summary>
+        /// Control ucTicketPortal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Temporal.UcTicketPortal ucTicketPortal;
+        
+        /// <summary>
+        /// Control btnCerrarExito.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCerrarExito;
+        
+        /// <summary>
+        /// Control lblNoTicket.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNoTicket;
+        
+        /// <summary>
+        /// Control lblRandom.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRandom;
         
         /// <summary>
         /// Control rptRolesPanel.

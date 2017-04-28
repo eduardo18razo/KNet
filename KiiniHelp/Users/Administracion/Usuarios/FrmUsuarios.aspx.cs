@@ -235,12 +235,12 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                 UcAltaPuesto.OnAceptarModal += UcAltaPuestoOnOnAceptarModal;
                 UcAltaPuesto.OnCancelarModal += UcAltaPuestoOnOnCancelarModal;
                 //UcConsultaOrganizacion.OnAceptarModal += ucOrganizacion_OnAceptarModal;
-                UcConsultaOrganizacion.Modal = true;
-                UcConsultaOrganizacion.OnSeleccionOrganizacionModal += ucOrganizacion_OnAceptarModal;
-                UcConsultaUbicaciones.Modal = true;
+                //UcConsultaOrganizacion.Modal = true;
+                //UcConsultaOrganizacion.OnSeleccionOrganizacionModal += ucOrganizacion_OnAceptarModal;
+                //UcConsultaUbicaciones.Modal = true;
                 UcConsultaOrganizacion.OnCancelarModal += ucOrganizacion_OnCancelarModal;
                 //UcConsultaUbicaciones.OnAceptarModal += UcUbicacion_OnAceptarModal;
-                UcConsultaUbicaciones.OnSeleccionUbicacionModal += UcUbicacion_OnAceptarModal;
+                //UcConsultaUbicaciones.OnSeleccionUbicacionModal += UcUbicacion_OnAceptarModal;
                 UcConsultaUbicaciones.OnCancelarModal += UcUbicacion_OnCancelarModal;
 
                 AsociarGrupoUsuario.AsignacionAutomatica = false;
@@ -425,7 +425,7 @@ namespace KiiniHelp.Users.Administracion.Usuarios
                 }
 
                 usuario.IdOrganizacion = UcConsultaOrganizacion.OrganizacionSeleccionada;
-                usuario.IdUbicacion = UcConsultaUbicaciones.UbicacionSeleccionada;
+                //usuario.IdUbicacion = UcConsultaUbicaciones.UbicacionSeleccionada;
 
                 #region Rol
                 usuario.UsuarioRol = new List<UsuarioRol>();

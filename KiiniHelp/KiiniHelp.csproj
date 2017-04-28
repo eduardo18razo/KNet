@@ -57,6 +57,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="Winthusiasm.HtmlEditor, Version=1.9.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -64,121 +65,59 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\css\account.css" />
-    <Content Include="assets\css\authentication.css" />
-    <Content Include="assets\css\bootstrap-datepicker.css" />
+    <Content Include="assets\carouselImage\slide-1.jpg" />
+    <Content Include="assets\carouselImage\slide-2.jpg" />
+    <Content Include="assets\carouselImage\slide-3.jpg" />
+    <Content Include="assets\carouselImage\slide-4.jpg" />
+    <Content Include="assets\carouselImage\slide-5.jpg" />
     <Content Include="assets\css\bootstrap-markdown.css" />
-    <Content Include="assets\css\bootstrap-switch.css" />
     <Content Include="assets\css\bootstrap.css" />
-    <Content Include="assets\css\chosen.css" />
-    <Content Include="assets\css\dashboard-health.css" />
-    <Content Include="assets\css\discussion.css" />
+    <Content Include="assets\css\checkBox.css" />
+    <Content Include="assets\css\divs.css" />
     <Content Include="assets\css\elegant-icons.css" />
     <Content Include="assets\css\font-awesome.css" />
-    <Content Include="assets\css\help.css" />
-    <Content Include="assets\css\jasny-bootstrap.css" />
-    <Content Include="assets\css\jquery-steps.css" />
-    <Content Include="assets\css\jquery.mmenu.all.css" />
-    <Content Include="assets\css\jstree-default.css" />
-    <Content Include="assets\css\metisMenu.css" />
-    <Content Include="assets\css\mmenu.css" />
+    <Content Include="assets\css\menuStyle.css" />
     <Content Include="assets\css\pe-7-icons-helper.css" />
     <Content Include="assets\css\pe-7-icons.css" />
     <Content Include="assets\css\styles.css" />
-    <Content Include="assets\css\switchery.css" />
-    <Content Include="assets\css\tether-shepherd.css" />
-    <Content Include="assets\fonts\ElegantIcons.svg" />
-    <Content Include="assets\fonts\flexslider-icon.svg" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="assets\fonts\Pe-icon-7-stroke.svg" />
-    <Content Include="assets\fonts\weathericons-regular-webfont.svg" />
-    <Content Include="assets\images\32px.png" />
-    <Content Include="assets\images\40px.png" />
-    <Content Include="assets\images\bg.png" />
+    <Content Include="assets\fonts\Pe-icon-7-strokebb1d.svg" />
+    <Content Include="assets\images\profiles\profile-square-1.png" />
+    <Content Include="assets\images\step1.png" />
     <Content Include="assets\images\carousels\slide-1.jpg" />
     <Content Include="assets\images\carousels\slide-2.jpg" />
     <Content Include="assets\images\carousels\slide-3.jpg" />
     <Content Include="assets\images\carousels\slide-4.jpg" />
     <Content Include="assets\images\carousels\slide-5.jpg" />
-    <Content Include="assets\images\favicon.ico" />
-    <Content Include="assets\images\grey%402x.png" />
-    <Content Include="assets\images\grey.png" />
-    <Content Include="assets\images\icons.png" />
     <Content Include="assets\images\icons\new_org.png" />
-    <Content Include="assets\images\icons\new_place.png" />
-    <Content Include="assets\images\icons\new_ticket.png" />
-    <Content Include="assets\images\icons\ok.png" />
-    <Content Include="assets\images\loading.gif" />
-    <Content Include="assets\images\logo-icon.svg" />
-    <Content Include="assets\images\profiles\profile-1.png" />
-    <Content Include="assets\images\profiles\profile-square-1-lg.png" />
-    <Content Include="assets\images\profiles\profile-square-1.png" />
-    <Content Include="assets\images\profiles\profile.png" />
-    <Content Include="assets\images\stock\admin_org.png" />
-    <Content Include="assets\images\throbber.gif" />
+    <Content Include="assets\images\step2.png" />
+    <Content Include="assets\images\step3.png" />
+    <Content Include="assets\images\step4.png" />
+    <Content Include="assets\images\step5.png" />
+    <Content Include="assets\images\step6.png" />
+    <Content Include="assets\images\step7.png" />
     <Content Include="assets\images\users_icon\usuario_1.jpg" />
     <Content Include="assets\images\users_icon\usuario_2.jpg" />
     <Content Include="assets\images\users_icon\usuario_3.jpg" />
-    <Content Include="assets\images\users_icon\usuario_4.jpg" />
-    <Content Include="assets\js\bootstrap-datepicker.js" />
     <Content Include="assets\js\bootstrap-markdown.js" />
-    <Content Include="assets\js\bootstrap-switch.js" />
+    <Content Include="assets\js\bootstrap-notify.js" />
+    <Content Include="assets\js\bootstrap-notify.min.js" />
     <Content Include="assets\js\bootstrap.js" />
-    <Content Include="assets\js\charts-morris.js" />
-    <Content Include="assets\js\charts-peity.js" />
-    <Content Include="assets\js\chosen-jquery.js" />
-    <Content Include="assets\js\dashboard-health.js" />
-    <Content Include="assets\js\draggable.js" />
-    <Content Include="assets\js\forms-bootstrap-switch.js" />
-    <Content Include="assets\js\forms-chosen.js" />
-    <Content Include="assets\js\forms-switchery.js" />
-    <Content Include="assets\js\forms-wizard.js" />
     <Content Include="assets\js\imagesloaded.js" />
-    <Content Include="assets\js\jquery-data-tables-bs3.js" />
-    <Content Include="assets\js\jquery-data-tables.js" />
-    <Content Include="assets\js\jquery-peity.js" />
-    <Content Include="assets\js\jquery-steps.js" />
-    <Content Include="assets\js\jquery-ui.js" />
     <Content Include="assets\js\jquery.js" />
-    <Content Include="assets\js\jquery.mmenu.all.min.js" />
     <Content Include="assets\js\main.js" />
-    <Content Include="assets\js\markdown-js.js" />
     <Content Include="assets\js\masonry.js" />
-    <Content Include="assets\js\metisMenu.js" />
-    <Content Include="assets\js\moment.js" />
-    <Content Include="assets\js\pace.js" />
-    <Content Include="assets\js\raphael.js" />
-    <Content Include="assets\js\switchery.js" />
-    <Content Include="assets\js\tables.js" />
-    <Content Include="assets\js\tether-shepherd.js" />
-    <Content Include="assets\js\tether.js" />
-    <Content Include="assets\js\to-markdown.js" />
-    <Content Include="assets\tpl\day.html" />
-    <Content Include="assets\tpl\events-list.html" />
-    <Content Include="assets\tpl\modal.html" />
-    <Content Include="assets\tpl\month-day.html" />
-    <Content Include="assets\tpl\month.html" />
-    <Content Include="assets\tpl\week-days.html" />
-    <Content Include="assets\tpl\week.html" />
-    <Content Include="assets\tpl\year-month.html" />
-    <Content Include="assets\tpl\year.html" />
-    <Content Include="BootStrap\MainMenu\css\component.css" />
-    <Content Include="BootStrap\MainMenu\css\menuStyle.css" />
-    <Content Include="BootStrap\MainMenu\css\icons.css" />
-    <Content Include="BootStrap\MainMenu\css\normalize.css" />
-    <Content Include="BootStrap\MainMenu\Fonts\codropsicons\codropsicons.svg" />
-    <Content Include="BootStrap\MainMenu\Fonts\codropsicons\license.txt" />
-    <Content Include="BootStrap\MainMenu\Fonts\linecons\license.txt" />
-    <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.dev.svg" />
-    <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.svg" />
-    <Content Include="BootStrap\MainMenu\Fonts\linecons\lte-ie7.js" />
-    <Content Include="BootStrap\MainMenu\Fonts\linecons\Read Me.txt" />
-    <Content Include="BootStrap\MainMenu\js\pmenu.js" />
-    <Content Include="BootStrap\MainMenu\js\modernizr.custom.js" />
+    <Content Include="assets\js\modernizr.custom.js" />
+    <Content Include="assets\js\pmenu.js" />
+    <Content Include="assets\js\validation.js" />
+    <Content Include="assets\tmp\chosen.css" />
+    <Content Include="assets\tmp\chosen.jquery.js" />
     <Content Include="ConfirmacionCuenta.aspx" />
     <Content Include="Default.aspx" />
-    <Content Include="DefaultUserSelect.aspx" />
+    <Content Include="Publico\FrmCategoria.aspx" />
+    <Content Include="Publico\FrmServiceArea.aspx" />
+    <Content Include="Publico\FrmUserSelect.aspx" />
     <Content Include="Downloads\FrmDownloads.aspx" />
     <Content Include="Downloads\FrmPreviewImage.aspx" />
     <Content Include="FrmRecuperar.aspx" />
@@ -196,43 +135,26 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperNotasUsuario.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperNotasOpcion.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperArbolAcceso.datasource" />
-    <Content Include="BootStrap\MainMenu\Fonts\codropsicons\.DS_Store" />
-    <Content Include="BootStrap\MainMenu\Fonts\codropsicons\codropsicons.eot" />
-    <Content Include="BootStrap\MainMenu\Fonts\codropsicons\codropsicons.ttf" />
-    <Content Include="BootStrap\MainMenu\Fonts\codropsicons\codropsicons.woff" />
-    <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.eot" />
-    <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.ttf" />
-    <Content Include="BootStrap\MainMenu\Fonts\linecons\linecons.woff" />
-    <Content Include="assets\.DS_Store" />
-    <Content Include="assets\css\.DS_Store" />
-    <Content Include="assets\data\visitor-data.json" />
-    <Content Include="assets\fonts\ElegantIcons.eot" />
-    <Content Include="assets\fonts\ElegantIcons.ttf" />
-    <Content Include="assets\fonts\ElegantIcons.woff" />
-    <Content Include="assets\fonts\flexslider-icon.eot" />
-    <Content Include="assets\fonts\flexslider-icon.ttf" />
-    <Content Include="assets\fonts\flexslider-icon.woff" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperFrecuencia.datasource" />
+    <Content Include="assets\images\carousels\.DS_Store" />
     <Content Include="assets\fonts\fontawesome-webfont.eot" />
     <Content Include="assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="assets\fonts\fontawesome-webfont.woff" />
     <Content Include="assets\fonts\fontawesome-webfont.woff2" />
     <Content Include="assets\fonts\FontAwesome.otf" />
-    <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="assets\fonts\Pe-icon-7-stroke.eot" />
-    <Content Include="assets\fonts\Pe-icon-7-stroke.ttf" />
-    <Content Include="assets\fonts\Pe-icon-7-stroke.woff" />
-    <Content Include="assets\fonts\weathericons-regular-webfont.eot" />
-    <Content Include="assets\fonts\weathericons-regular-webfont.ttf" />
-    <Content Include="assets\fonts\weathericons-regular-webfont.woff" />
-    <Content Include="assets\fonts\WeatherIcons-Regular.otf" />
-    <Content Include="assets\images\.DS_Store" />
-    <Content Include="assets\images\carousels\.DS_Store" />
-    <Content Include="assets\images\profiles\.DS_Store" />
-    <Content Include="assets\images\stock\.DS_Store" />
-    <Content Include="assets\js\.DS_Store" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.DiaFestivoDefault.datasource" />
+    <Content Include="assets\fonts\Pe-icon-7-strokebb1d.eot" />
+    <Content Include="assets\fonts\Pe-icon-7-strokebb1d.ttf" />
+    <Content Include="assets\fonts\Pe-icon-7-strokebb1d.woff" />
+    <Content Include="assets\fonts\Pe-icon-7-stroked41d.eot" />
+    <Content Include="DisplayImages.ashx" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.DiasFeriados.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.DiasFeriadosDetalle.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.DiaFeriado.datasource" />
     <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso14.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -277,6 +199,19 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario9.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceFrecuencia\ServiceFrecuencia.wsdl" />
+    <None Include="Service References\ServiceFrecuencia\ServiceFrecuencia.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceFrecuencia\ServiceFrecuencia1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceFrecuencia\ServiceFrecuencia2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta15.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceNota\ServiceNota.wsdl" />
@@ -340,6 +275,52 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Publico\Consultas\FrmConsultaTicket.aspx" />
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos16.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono.wsdl" />
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono9.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSitemaTipoNota\ServiceTipoNota.disco" />
     <None Include="Service References\ServiceSitemaTipoNota\configuration91.svcinfo" />
     <None Include="Service References\ServiceSitemaTipoNota\configuration.svcinfo" />
@@ -354,9 +335,25 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\ServiceFrecuencia\ServiceFrecuencia.disco" />
+    <None Include="Service References\ServiceFrecuencia\configuration91.svcinfo" />
+    <None Include="Service References\ServiceFrecuencia\configuration.svcinfo" />
+    <None Include="Service References\ServiceFrecuencia\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono.disco" />
+    <None Include="Service References\ServiceSistemaTipoTelefono\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoTelefono\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaTipoTelefono\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Test\FrmTestMain.aspx" />
     <Content Include="Test\FrmTestMenu.aspx" />
     <Content Include="Test\FrmTestMenuCu.aspx" />
+    <Content Include="UserControls\Altas\Organizaciones\UcAltaOrganizaciones.ascx" />
+    <Content Include="UserControls\Altas\Ubicaciones\UcAltaUbicaciones.ascx" />
     <Content Include="UserControls\Altas\UcAltaNivelArbol.ascx" />
     <Content Include="UserControls\Altas\UcAltaCatalogo.ascx" />
     <Content Include="UserControls\Altas\UcAltaNota.ascx" />
@@ -364,7 +361,7 @@
     <Content Include="UserControls\Altas\UcAltaNotaOpcion.ascx" />
     <Content Include="UserControls\Altas\UcAltaPreticket.ascx" />
     <Content Include="UserControls\Altas\UcCargaCatalgo.ascx" />
-    <Content Include="UserControls\Altas\Usuarios\UcAltaUsuarioMoral.ascx" />
+    <Content Include="UserControls\Altas\Usuarios\UcAltaUsuario.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaCatalogos.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaAreas.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaCatalogo.ascx" />
@@ -380,6 +377,11 @@
     <Content Include="UserControls\Filtros\UcFiltroCatalogos.ascx" />
     <Content Include="UserControls\Operacion\UcCambiarContrasena.ascx" />
     <Content Include="UserControls\Operacion\UcRegistroCatalogo.ascx" />
+    <Content Include="UserControls\Seleccion\UcCategoria.ascx" />
+    <Content Include="UserControls\Seleccion\UcRolGrupo.ascx" />
+    <Content Include="UserControls\Seleccion\UcServiceArea.ascx" />
+    <Content Include="UserControls\Seleccion\UcUserSelect.ascx" />
+    <Content Include="UserControls\Temporal\UcTicketPortal.ascx" />
     <Content Include="UserControls\UcLogCopia.ascx" />
     <Content Include="Users\Administracion\Area\FrmConsultaAreas.aspx" />
     <Content Include="Users\Administracion\Area\GetImageDatafromDB.aspx" />
@@ -390,6 +392,7 @@
     <Content Include="Users\Administracion\Notas\FrmConsultaNotasUsuario.aspx" />
     <Content Include="Users\Administracion\Puestos\FrmConsultaPuestos.aspx" />
     <Content Include="Users\Administracion\Usuarios\FrmCambiarContrasena.aspx" />
+    <Content Include="Users\Administracion\Usuarios\FrmEdicionUsuario.aspx" />
     <Content Include="Users\Consultas\FrmConsulta.aspx" />
     <Content Include="FrmCloseWindow.aspx" />
     <Content Include="Users\Graficos\FrmGeoChart.aspx" />
@@ -483,9 +486,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceImpactourgencia\ServiceImpactoUrgencia9.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceInformacionConsulta\ServiceInformacionConsulta15.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceNotificacion\ServiceNotificacion.wsdl" />
@@ -695,7 +695,6 @@
     <Content Include="Users\Operacion\FrmLevantaTicketAgente.aspx" />
     <Content Include="Users\Operacion\FrmOperacionTickets.aspx" />
     <Content Include="packages.config" />
-    <Content Include="BootStrap\Web.config" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Organizacion.Compania.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Organizacion.Direccion.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Organizacion.Gerencia.datasource" />
@@ -1112,9 +1111,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos14.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos15.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos2.xsd">
@@ -1783,7 +1779,7 @@
     <None Include="Service References\ServiceTicket\ServiceTicket4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceUbicacion\Arrays1.xsd">
+    <None Include="Service References\ServiceUbicacion\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceUbicacion\KiiniNet.Entities.Cat.Arbol.Nodos1.xsd">
@@ -2301,12 +2297,29 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DefaultUserSelect.aspx.cs">
-      <DependentUpon>DefaultUserSelect.aspx</DependentUpon>
+    <Compile Include="DisplayImages.ashx.cs">
+      <DependentUpon>DisplayImages.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Publico\FrmCategoria.aspx.cs">
+      <DependentUpon>FrmCategoria.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="DefaultUserSelect.aspx.designer.cs">
-      <DependentUpon>DefaultUserSelect.aspx</DependentUpon>
+    <Compile Include="Publico\FrmCategoria.aspx.designer.cs">
+      <DependentUpon>FrmCategoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Publico\FrmServiceArea.aspx.cs">
+      <DependentUpon>FrmServiceArea.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publico\FrmServiceArea.aspx.designer.cs">
+      <DependentUpon>FrmServiceArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Publico\FrmUserSelect.aspx.cs">
+      <DependentUpon>FrmUserSelect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publico\FrmUserSelect.aspx.designer.cs">
+      <DependentUpon>FrmUserSelect.aspx</DependentUpon>
     </Compile>
     <Compile Include="Downloads\FrmDownloads.aspx.cs">
       <DependentUpon>FrmDownloads.aspx</DependentUpon>
@@ -2357,12 +2370,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ServiceFrecuencia\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ServiceNota\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceSistemaCanal\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaTipoTelefono\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -2392,6 +2415,20 @@
     </Compile>
     <Compile Include="Test\FrmTestMenuCu.aspx.designer.cs">
       <DependentUpon>FrmTestMenuCu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\Organizaciones\UcAltaOrganizaciones.ascx.cs">
+      <DependentUpon>UcAltaOrganizaciones.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\Organizaciones\UcAltaOrganizaciones.ascx.designer.cs">
+      <DependentUpon>UcAltaOrganizaciones.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\Ubicaciones\UcAltaUbicaciones.ascx.cs">
+      <DependentUpon>UcAltaUbicaciones.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\Ubicaciones\UcAltaUbicaciones.ascx.designer.cs">
+      <DependentUpon>UcAltaUbicaciones.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Altas\UcAltaNivelArbol.ascx.cs">
       <DependentUpon>UcAltaNivelArbol.ascx</DependentUpon>
@@ -2442,12 +2479,12 @@
     <Compile Include="UserControls\Altas\UcCargaCatalgo.ascx.designer.cs">
       <DependentUpon>UcCargaCatalgo.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Altas\Usuarios\UcAltaUsuarioMoral.ascx.cs">
-      <DependentUpon>UcAltaUsuarioMoral.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\Usuarios\UcAltaUsuario.ascx.cs">
+      <DependentUpon>UcAltaUsuario.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Altas\Usuarios\UcAltaUsuarioMoral.ascx.designer.cs">
-      <DependentUpon>UcAltaUsuarioMoral.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\Usuarios\UcAltaUsuario.ascx.designer.cs">
+      <DependentUpon>UcAltaUsuario.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaCatalogos.ascx.cs">
       <DependentUpon>UcConsultaCatalogos.ascx</DependentUpon>
@@ -2554,6 +2591,41 @@
     <Compile Include="UserControls\Operacion\UcRegistroCatalogo.ascx.designer.cs">
       <DependentUpon>UcRegistroCatalogo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Seleccion\UcCategoria.ascx.cs">
+      <DependentUpon>UcCategoria.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Seleccion\UcCategoria.ascx.designer.cs">
+      <DependentUpon>UcCategoria.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Seleccion\UcRolGrupo.ascx.cs">
+      <DependentUpon>UcRolGrupo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Seleccion\UcRolGrupo.ascx.designer.cs">
+      <DependentUpon>UcRolGrupo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Seleccion\UcServiceArea.ascx.cs">
+      <DependentUpon>UcServiceArea.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Seleccion\UcServiceArea.ascx.designer.cs">
+      <DependentUpon>UcServiceArea.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Seleccion\UcUserSelect.ascx.cs">
+      <DependentUpon>UcUserSelect.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Seleccion\UcUserSelect.ascx.designer.cs">
+      <DependentUpon>UcUserSelect.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Temporal\UcTicketPortal.ascx.cs">
+      <DependentUpon>UcTicketPortal.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Temporal\UcTicketPortal.ascx.designer.cs">
+      <DependentUpon>UcTicketPortal.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UcLogCopia.ascx.cs">
       <DependentUpon>UcLogCopia.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2623,6 +2695,13 @@
     </Compile>
     <Compile Include="Users\Administracion\Usuarios\FrmCambiarContrasena.aspx.designer.cs">
       <DependentUpon>FrmCambiarContrasena.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\Usuarios\FrmEdicionUsuario.aspx.cs">
+      <DependentUpon>FrmEdicionUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Usuarios\FrmEdicionUsuario.aspx.designer.cs">
+      <DependentUpon>FrmEdicionUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Consultas\FrmConsulta.aspx.cs">
       <DependentUpon>FrmConsulta.aspx</DependentUpon>
@@ -3477,6 +3556,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="assets\data\" />
+    <Folder Include="assets\tpl\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KiiniNet.Entities\KiiniNet.Entities.csproj">
@@ -3497,6 +3578,7 @@
     <WCFMetadataStorage Include="Service References\ServiceConsultas\" />
     <WCFMetadataStorage Include="Service References\ServiceDiasHorario\" />
     <WCFMetadataStorage Include="Service References\ServiceEncuesta\" />
+    <WCFMetadataStorage Include="Service References\ServiceFrecuencia\" />
     <WCFMetadataStorage Include="Service References\ServiceGrupoUsuario\" />
     <WCFMetadataStorage Include="Service References\ServiceImpactourgencia\" />
     <WCFMetadataStorage Include="Service References\ServiceInformacionConsulta\" />
@@ -3519,6 +3601,7 @@
     <WCFMetadataStorage Include="Service References\ServiceSistemaTipoEncuesta\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaTipoGrupo\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaTipoInformacionConsulta\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaTipoTelefono\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaTipoUsuario\" />
     <WCFMetadataStorage Include="Service References\ServiceSitemaTipoNota\" />
     <WCFMetadataStorage Include="Service References\ServiceSla\" />

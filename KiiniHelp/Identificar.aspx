@@ -5,69 +5,60 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Recuperar Cuenta</title>
-    <link href="BootStrap/css/bootstrap.css" rel="stylesheet" />
-    <link href="BootStrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="BootStrap/css/CheckBoxStyle.css" rel="stylesheet" />
-    <link href="BootStrap/css/Calendar.css" rel="stylesheet" />
-    <link href="BootStrap/css/DropDown.css" rel="stylesheet" />
-    <link href="BootStrap/css/divs.css" rel="stylesheet" />
-    <link href="BootStrap/css/FileInput.css" rel="stylesheet" />
-    <link href="BootStrap/css/Headers.css" rel="stylesheet" />
-    <link href="BootStrap/css/stylemainmenu.css" rel="stylesheet" />
+    <title>Kiinisupport</title>
+    <link rel='stylesheet' href="assets/css/font.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.css" />
+    <link href="assets/css/elegant-icons.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap-markdown.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
 </head>
-<body>
+<body class="layout_no_leftnav">
     <form id="form1" runat="server">
         <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
             <Scripts>
-                <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
-                <asp:ScriptReference Path="~/BootStrap/js/bootstrap.min.js" />
+                <asp:ScriptReference Path="~/assets/js/jquery.js" />
+                <asp:ScriptReference Path="~/assets/js/bootstrap.js" />
             </Scripts>
         </asp:ScriptManager>
         <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <header class="" id="panelAlertaGeneral" runat="server" visible="False">
-                    <div class="alert alert-danger">
-                        <div>
-                            <div style="float: left">
-                                <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
-                            </div>
-                            <div style="float: left">
-                                <h3>Error</h3>
-                            </div>
-                            <div class="clearfix clear-fix" />
-                        </div>
-                        <hr />
-                        <asp:Repeater runat="server" ID="rptErrorGeneral">
-                            <ItemTemplate>
-                                <%# Eval("Detalle")  %>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </div>
-                </header>
-                <div class="panel panel-primary" style="width: 750px; margin: 0 auto">
-                    <div class="panel-heading">
-                        Recuperar cuenta
-                    </div>
+                <section class="login-section auth-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="form-box col-md-8 col-sm-12 col-xs-12 col-md-offset-2 col-sm-offset-0 xs-offset-0">
+                                <h1 class="form-box-heading logo text-center"><span class="highlight">SOPORTE <% Response.Write(ConfigurationManager.AppSettings["Brand"]); %></span> </h1>
+                                <div class="form-box-inner">
+                                    <h2 class="title text-center">¿Olvidaste tu contraseña?</h2>
+                                    <div class="row">
+                                        <div class="form-container col-md-6 col-sm-12 col-xs-12">
+                                            <div data-parsley-validate id="" class="form-horizontal">
+                                                <div class="form-group email" style="top: 15px">
+                                                    <div><span>Ingresa tu nombre de usuario, correo o celular:</span></div>
+                                                </div>
+                                                <div class="form-group email" style="top: 15px">
+                                                    <label class="sr-only" for="login-email">Email or username</label>
+                                                    <span class="fa fa-user icon"></span>
+                                                    <asp:TextBox runat="server" ID="txtUserName" CssClass="form-control login-email" Style="text-transform: none" placeholder="Nombre de usuario, correo o celular" />
+                                                </div>
+                                                <div class="form-group email" style="top: 15px">
+                                                    <asp:Button CssClass="btn btn-block btn-primary" Text="Enviar" runat="server" Style="margin-top: 30px" OnClick="btnBuscar_OnClick" />
 
-                    <div class="panel-body">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <asp:Label runat="server" Text="Correo electrónico, teléfono, nombre de usuario" CssClass="col-sm-4" />
-                                <div class="col-sm-5">
-                                    <asp:TextBox runat="server" ID="txtUserName" CssClass="form-control" Style="text-transform: none" />
+                                                    <%--<p class="alt-path"><a class="signup-link" href="login.html">Regresar a acceder a mi cuenta</a></p>--%>
+                                                    <p class="alt-path">
+                                                        <asp:HyperLink CssClass="signup-link" NavigateUrl="~/Default.aspx" runat="server">Regresar al inicio</asp:HyperLink>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <asp:Button runat="server" ID="btnBuscar" Text="Buscar" CssClass="btn btn-success" OnClick="btnBuscar_OnClick" />
-                            </div>
-                            <div class="form-horizontal">
-                                <asp:RadioButtonList runat="server" ID="rbtnLstUsuarios" OnSelectedIndexChanged="rbtnLstUsuarios_OnSelectedIndexChanged" AutoPostBack="True" />
                             </div>
                         </div>
+                        <div class="copyright text-center">&copy; 2017 - Powered by Kiininet</div>
                     </div>
-                    <div class="panel-footer">
-                        <asp:Button runat="server" ID="btnCancelar" Text="Cancelar" CssClass="btn btn-danger" OnClick="btnCancelar_OnClick" />
-                    </div>
-                </div>
+                </section>
             </ContentTemplate>
         </asp:UpdatePanel>
     </form>

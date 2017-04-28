@@ -187,14 +187,14 @@
                             <div style="border-bottom: 1px">
                                 <div class="form-group">
                                     <asp:Label runat="server" Text="Contenido del Campo" />
-                                    <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control obligatorio"></asp:TextBox>
                                 </div>
                                 <div class="form-group">
                                     <asp:CheckBox runat="server" ID="chkRequerido" AutoPostBack="False" Text="Campo obligatorio" />
                                 </div>
                                 <div class="form-group" runat="server" id="divMascara" visible="False">
                                     <asp:Label runat="server" Text="Formato del campo" />
-                                    <asp:TextBox runat="server" ID="txtMascara" CssClass="form-control obligatorio" onkeypress="return ValidaCampo(this,1)"></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="txtMascara" CssClass="form-control obligatorio" ></asp:TextBox>
                                 </div>
                                 <div class="form-group" runat="server" id="divLongitudes" visible="False">
                                     <asp:Label runat="server" Text="Longitud mínima" />

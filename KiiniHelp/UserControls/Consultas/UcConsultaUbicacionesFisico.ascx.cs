@@ -27,7 +27,7 @@ namespace KiiniHelp.UserControls.Consultas
 
         private List<string> _lstError = new List<string>();
         public delegate void DelegateSeleccionUbicacionModal();
-        public event UcConsultaUbicaciones.DelegateSeleccionUbicacionModal OnSeleccionUbicacionModal;
+        //public event UcConsultaUbicaciones.DelegateSeleccionUbicacionModal OnSeleccionUbicacionModal;
 
         public bool Modal
         {
@@ -956,8 +956,8 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                if (OnSeleccionUbicacionModal != null)
-                    OnSeleccionUbicacionModal();
+                //if (OnSeleccionUbicacionModal != null)
+                //    OnSeleccionUbicacionModal();
             }
             catch (Exception ex)
             {
@@ -1237,8 +1237,8 @@ namespace KiiniHelp.UserControls.Consultas
         private void Seleccionar(int id)
         {
             ViewState["UbicacionSeleccionada"] = id;
-            if (OnSeleccionUbicacionModal != null)
-                OnSeleccionUbicacionModal();
+            //if (OnSeleccionUbicacionModal != null)
+            //    OnSeleccionUbicacionModal();
         }
 
         #endregion Campus
@@ -1355,5 +1355,6 @@ namespace KiiniHelp.UserControls.Consultas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
     }
 }

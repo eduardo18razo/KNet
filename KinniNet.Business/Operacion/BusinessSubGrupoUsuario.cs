@@ -52,7 +52,12 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.SubGrupoUsuario.Where(w => w.IdGrupoUsuario == idGrupoUsuario).Select(s => new HelperSubGurpoUsuario { Id = s.Id, Descripcion = "CAMBIAR ESTA DESCRIPCION" }).ToList();
+                var subgpos = from sgu in db.SubGrupoUsuario
+                    join sr in db.SubRol on sgu.IdSubRol equals sr.Id
+                    where sgu.IdGrupoUsuario == idGrupoUsuario
+                    select new {sgu, sr};
+                result = subgpos.Select(s => new HelperSubGurpoUsuario {Id = s.sgu.Id, Descripcion = s.sr.Descripcion}).ToList();
+                //result = db.SubGrupoUsuario.Where(w => w.IdGrupoUsuario == idGrupoUsuario).Select(s => new HelperSubGurpoUsuario { Id = s.Id, Descripcion = "CAMBIAR ESTA DESCRIPCION" }).ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione, new HelperSubGurpoUsuario { Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione, Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione });
 

@@ -2,180 +2,275 @@
 <%@ Register Src="~/UserControls/Detalles/UcDetalleUbicacion.ascx" TagPrefix="uc1" TagName="UcDetalleUbicacion" %>
 <%@ Register Src="~/UserControls/Detalles/UcDetalleOrganizacion.ascx" TagPrefix="uc1" TagName="UcDetalleOrganizacion" %>
 <%@ Register Src="~/UserControls/Detalles/UcDetalleGrupoUsuario.ascx" TagPrefix="uc1" TagName="UcDetalleGrupoUsuario" %>
-<asp:UpdatePanel runat="server">
-    <ContentTemplate>
-        <header class="modal-header" id="pnlAlertaGeneral" runat="server" visible="false">
-            <div class="alert alert-danger">
-                <div>
-                    <div style="float: left">
-                        <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
+<style>
+    .texto-normal {
+        text-transform: none;
+    }
+    /* adapted from http://maxwells.github.io/bootstrap-tags.html */
+    .tag {
+        font-size: 14px;
+        padding: .3em .4em .4em;
+        margin: 0 .1em;
+        background-color: transparent;
+        border-color: #e6e7ea;
+        color: #e6e7ea;
+    }
+
+        .tag a {
+            color: #bbb;
+            cursor: pointer;
+            opacity: 0.6;
+        }
+
+            .tag a:hover {
+                opacity: 1.0;
+            }
+
+        .tag .remove {
+            vertical-align: bottom;
+            top: 0;
+        }
+
+        .tag a {
+            margin: 0 0 0 .3em;
+        }
+
+            .tag a .glyphicon-white {
+                margin-bottom: 2px;
+                color: #3aa7aa;
+            }
+</style>
+<div style="height: 100%;">
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+            <br>
+            <h3 class="h6">
+                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
+                / Empleado / Mi perfil</h3>
+            <hr>
+            <section class="module">
+                <div class="row">
+                    <div class="col-lg-8 col-md-9">
+                        <div class="module-inner">
+                            <div class="module-heading">
+                                <h3 class="module-title">
+                                    <asp:Label runat="server" Text="Mi Perfil"></asp:Label></h3>
+                            </div>
+                        </div>
                     </div>
-                    <div style="float: left">
-                        <h3>Error</h3>
-                    </div>
-                    <div class="clearfix clear-fix" />
                 </div>
-                <hr />
-                <asp:Repeater runat="server" ID="rptErrorGeneral">
-                    <ItemTemplate>
-                        <ul>
-                            <li><%# Container.DataItem %></li>
-                        </ul>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </div>
-        </header>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3>
-                    <asp:Label runat="server" ID="lblUserName"></asp:Label></h3>
-            </div>
-            <div class="panel-body">
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <asp:Label runat="server" CssClass="col-sm-2 control-label" Text="Nombre:"></asp:Label>
-                        <div class="col-sm-10 ">
-                            <asp:Label runat="server" CssClass="form-control" ID="lblNombre" Enabled="False"></asp:Label>
+                <div class="module">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="module-inner">
+                                <div class="form-group avatar">
+                                    <figure class="figure col-md-1 col-sm-2 col-xs-12 center-content-div">
+                                        <asp:Image CssClass="img-rounded img-responsive" ImageUrl="~/assets/images/profiles/profile-square-1.png" alt="" runat="server" />
+                                        <asp:LinkButton runat="server" Text="Cambiar"></asp:LinkButton>
+                                    </figure>
+                                    <div class="form-group col-sm-10">
+                                        <h2>
+                                            <asp:Label runat="server" ID="lblnombreCompleto" CssClass="col-sm-11" />
+                                        </h2>
+                                        <asp:LinkButton runat="server" Text="Editar" CssClass="btn btn-primary " />
+                                    </div>
+                                    <div class="form-group col-sm-10">
+                                        <asp:Label runat="server" Text="Ultimo Acceso" CssClass="col-md-12"></asp:Label>
+                                        <asp:Label runat="server" ID="lblFechaUltimoAcceso" Text="Fecha Ultimo Acceso" CssClass="col-md-12"></asp:Label>
+                                    </div>
+                                    
+                                <hr />
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" CssClass="col-sm-2 control-label" Text="Usuario:"></asp:Label>
-                        <div class="col-sm-10 ">
-                            <asp:Label runat="server" CssClass="form-control" ID="lblUsuario" Enabled="False"></asp:Label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" CssClass="col-sm-2 control-label" Text="Puesto:"></asp:Label>
-                        <div class="col-sm-10 ">
-                            <asp:Label runat="server" CssClass="form-control" ID="lblPuesto"></asp:Label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2 ">
-                            <asp:CheckBox runat="server" ID="chkVip" Text="Vip" Enabled="False" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" CssClass="col-sm-3 control-label" Text="Datos Adicionales"></asp:Label>
-                    </div>
-                    <%--TELEFONOS--%>
-                    <div class="form-group">
-                        <div class="col-sm-10 ">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading" role="tab" id="headingTelefono">
-                                    <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTelefonos" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer">
-                                        <div class="col-xs-6 col-sm-3">Telefono</div>
-                                        <div class="col-xs-6 col-sm-3">
-                                            Numero telefono
+                    <!--GRUPO DATOS GENERALES -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <!--TÍTULO DATOS GENERALES-->
+                            <div class="module-inner">
+                                <div class="module-heading">
+                                    <h3 class="module-title">DATOS GENERALES</h3>
+                                </div>
+                                <br />
+
+                                <!--FILA 1-->
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3">
+                                        <asp:TextBox ID="txtAp" runat="server" CssClass="form-control" placeholder="Apellido paterno" MaxLength="32" />
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <asp:TextBox ID="txtAm" runat="server" CssClass="form-control" placeholder="Apellido materno" MaxLength="32" />
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Nombre" MaxLength="32" />
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control texto-normal" MaxLength="12" Style="text-transform: none" />
+                                    </div>
+                                </div>
+
+                                <!--FILA 2-->
+                                <div class="row">
+                                    <br />
+                                    <div class="col-lg-3 col-md-3" runat="server" id="divPuesto">
+                                        Puesto*
+                                    <asp:DropDownList runat="server" ID="ddlPuesto" CssClass="form-control" />
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <br />
+                                        <div class="form-inline">
+                                            <label for="chkVip" class="col-lg-10 col-md-10">VIP</label>
+                                            <asp:CheckBox runat="server" Text="VIP" ID="chkVip" CssClass="chkIphone col-lg-2 col-md-2" />
                                         </div>
-                                        <div class="col-xs-6 col-sm-3">
-                                            Extensiones
+                                        <div class="form-inline">
+                                            <label for="chkVip" class="col-lg-10 col-md-10">Directorio activo</label>
+                                            <asp:CheckBox runat="server" Text="Directorio Activo " ID="chkDirectoriActivo" CssClass="chkIphone col-lg-2 col-md-2" />
                                         </div>
                                     </div>
                                 </div>
-                                <div id="collapseTelefonos" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTelefono">
-                                    <div class="panel-body">
-                                        <asp:Repeater runat="server" ID="rptTelefonos">
-                                            <ItemTemplate>
-                                                <div style="border-radius: 20px; margin-bottom: 5px; height: auto">
-                                                    <div class="row">
-                                                        <div class="col-xs-5 col-md-3">
-                                                            <asp:Label runat="server"><%# Eval("TipoTelefono.Descripcion") %></asp:Label>
-                                                        </div>
-                                                        <div class="col-xs-5 col-md-3">
-                                                            <asp:Label runat="server" ID="txtNumero" Text='<%# Eval("Numero") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="10" />
-                                                        </div>
-                                                        <div class="col-xs-4 col-md-3" runat="server" visible='<%# Eval("TipoTelefono.Extension") %>'>
-                                                            <asp:Label runat="server" ID="txtExtension" Text='<%# Eval("Extension") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="40" />
-                                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/GRUPO DATOS GENERALES -->
+
+                    <hr />
+
+                    <!--GRUPO TELÉFONOS DE CONTACTO -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <!--TÍTULO DATOS GENERALES-->
+                            <div class="module-inner">
+                                <div class="module-heading">
+                                    <h3 class="module-title">TELÉFONOS DE CONTACTO</h3>
+                                </div>
+                                <br />
+                                <!--FILA 1-->
+                                <div class="row">
+                                    <asp:Repeater runat="server" ID="rptTelefonos" OnItemDataBound="rptTelefonos_OnItemDataBound">
+                                        <ItemTemplate>
+                                            <div style="border-radius: 20px; margin-bottom: 5px; height: auto">
+                                                <div class="row">
+                                                    <div class="col-xs-5 col-md-3">
+                                                        <asp:Label runat="server" ID="txtNumero" Text='<%# Eval("Numero") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,2)" MaxLength="10" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3" runat="server" id="divExtension">
+                                                        <asp:TextBox runat="server" ID="TextBox1" Text='<%# Eval("Extension") %>' CssClass="form-control" onkeypress="return ValidaCampo(this,15)" MaxLength="40" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <asp:DropDownList runat="server" ID="ddlTipoTelefono" CssClass="form-control" AutoPostBack="true" />
                                                     </div>
                                                 </div>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/GRUPO TELÉFONOS DE CONTACTO -->
+                    <hr />
+
+                    <!--GRUPO CORREO ELECTRÓNICO -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <!--TÍTULO DATOS GENERALES-->
+                            <div class="module-inner">
+                                <div class="module-heading">
+                                    <h3 class="module-title">CORREO ELECTRÓNICO</h3>
+                                </div>
+                                <br />
+                                <!--FILA 1-->
+                                <div class="row">
+                                    <asp:Repeater runat="server" ID="rptCorreos">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" CssClass="form-control" Text='<%# Eval("Correo") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/GRUPO CORREO ELECTRÓNICO -->
+                    <hr />
+
+                    <!--GRUPO ORGANIZACIÓN -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <!--TÍTULO ORGANIZACIÓN-->
+                            <div class="module-inner">
+                                <div class="module-heading">
+                                    <h3 class="module-title">ORGANIZACIÓN</h3>
+                                </div>
+                                <br />
+
+                                <!--FILA 1-->
+                                <div class="row">
+                                    <div>
+                                        <div class="table-responsive">
+                                            <uc1:UcDetalleOrganizacion runat="server" ID="UcDetalleOrganizacion" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <%--CORREOS--%>
-                    <div class="form-group">
-                        <div class="col-sm-10 ">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading" role="tab" id="headingCorreos">
-                                    <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseCorreos" aria-expanded="false" aria-controls="collapseTwo" style="cursor: pointer">
-                                        <div class="col-xs-6 col-sm-3">Correo</div>
-                                    </div>
+                    <!--/GRUPO ORGANIZACIÓN -->
+                    <hr />
+
+                    <!--GRUPO UBICACIÓN -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                            <!--TÍTULO UBICACIÓN-->
+                            <div class="module-inner">
+                                <div class="module-heading">
+                                    <h3 class="module-title">UBICACIÓN</h3>
                                 </div>
-                                <div id="collapseCorreos" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingCorreos">
-                                    <div class="panel-body">
-                                        <asp:Repeater runat="server" ID="rptCorreos">
-                                            <ItemTemplate>
-                                                <asp:Label runat="server" CssClass="form-control" Text='<%# Eval("Correo") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <%--ORGANIZACION--%>
-                    <div class="form-group">
-                        <div class="col-sm-10 ">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading" role="tab" id="headingOrganizacion">
-                                    <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOrganizacion" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer">
-                                        <div class="col-xs-6 col-sm-3">Organizacion</div>
-                                    </div>
-                                </div>
-                                <div id="collapseOrganizacion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOrganizacion">
-                                    <div class="panel-body">
-                                        <uc1:UcDetalleOrganizacion runat="server" ID="UcDetalleOrganizacion" />
+                                <br />
+
+                                <!--FILA 1-->
+
+                                <div class="row">
+                                    <div>
+                                        <div class="table-responsive">
+                                            <uc1:UcDetalleUbicacion runat="server" ID="UcDetalleUbicacion" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <%--UBICACION--%>
-                    <div class="form-group">
-                        <div class="col-sm-10 ">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading" role="tab" id="headingUbicacion">
-                                    <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseUbicacion" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer">
-                                        <div class="col-xs-6 col-sm-3">Ubicación</div>
-                                    </div>
+                    <!--/GRUPO UBICACIÓN -->
+                    <hr />
+
+                    <!-- ROLES Y GRUPOS -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                            <!--TÍTULO ROLES Y GRUPOS-->
+                            <div class="module-inner">
+                                <div class="module-heading">
+                                    <h3 class="module-title">ROLES Y GRUPOS</h3>
                                 </div>
-                                <div id="collapseUbicacion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingUbicacion">
-                                    <div class="panel-body">
-                                        <uc1:UcDetalleUbicacion runat="server" ID="UcDetalleUbicacion" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <%--GRUPOS--%>
-                    <div class="form-group">
-                        <div class="col-sm-10 ">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading" role="tab" id="headingGrupos">
-                                    <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseGrupos" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer">
-                                        <div class="col-xs-6 col-sm-3">Roles y Grupos</div>
-                                    </div>
-                                </div>
-                                <div id="collapseGrupos" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingGrupos">
-                                    <div class="panel-body">
-                                        <uc1:UcDetalleGrupoUsuario runat="server" ID="UcDetalleGrupoUsuario" />
-                                    </div>
+                                <hr />
+                                <div class="row">
+                                    <uc1:UcDetalleGrupoUsuario runat="server" ID="UcDetalleGrupoUsuario" />
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="panel-footer" style="text-align: center">
-                    <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarModal" Text="Cerrar" OnClick="btnCerrarModal_OnClick" />
-                    <%--
+            </section>
+ <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnCerrarModal" Text="Cerrar" OnClick="btnCerrarModal_OnClick" Visible="False" />
+            <%--<div class="panel-footer" style="text-align: center">--%>
+               
+                <%--
                     <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="btnModificar" Text="Cerrar" OnClick="btnCerrarModal_OnClick" />
                     <asp:Button runat="server" CssClass="btn btn-lg btn-danger" ID="Button2" Text="Cerrar" OnClick="btnCerrarModal_OnClick" />--%>
-                </div>
-            </div>
-    </ContentTemplate>
-</asp:UpdatePanel>
+            <%--</div>--%>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+</div>

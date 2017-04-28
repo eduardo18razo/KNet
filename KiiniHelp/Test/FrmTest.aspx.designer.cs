@@ -31,21 +31,12 @@ namespace KiiniHelp.Test {
         protected global::System.Web.UI.ScriptManager scripMain;
         
         /// <summary>
-        /// Control txtMsg.
+        /// Control AltaGrupoUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMsg;
-        
-        /// <summary>
-        /// Control lstParameter.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstParameter;
+        protected global::KiiniHelp.UserControls.Altas.AltaGrupoUsuario AltaGrupoUsuario;
     }
 }

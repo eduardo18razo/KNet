@@ -67,6 +67,10 @@ namespace KinniNet.Data.Help
                 _tipoLink = CreateObjectSet<TipoLink>();
                 _canal = CreateObjectSet<Canal>();
                 _tipoNota = CreateObjectSet<TipoNota>();
+                _diaFestivoDefault = CreateObjectSet<DiaFestivoDefault>();
+                _diaFeriado = CreateObjectSet<DiaFeriado>();
+                _diasFeriados = CreateObjectSet<DiasFeriados>();
+                _diasFeriadosDetalle = CreateObjectSet<DiasFeriadosDetalle>();
 
                 //Parametros
                 _subRolEscalacionPermitida = CreateObjectSet<SubRolEscalacionPermitida>();
@@ -109,6 +113,7 @@ namespace KinniNet.Data.Help
 
                 //Operacion
                 _usuario = CreateObjectSet<Usuario>();
+                _bitacoraAcceso = CreateObjectSet<BitacoraAcceso>();
                 _ubicacion = CreateObjectSet<Ubicacion>();
                 _organizacion = CreateObjectSet<Organizacion>();
                 _domicilio = CreateObjectSet<Domicilio>();
@@ -158,6 +163,7 @@ namespace KinniNet.Data.Help
                 _notaOpcionGrupo = CreateObjectSet<NotaOpcionGrupo>();
                 _ticketConversacion = CreateObjectSet<TicketConversacion>();
                 _conversacionArchivo = CreateObjectSet<ConversacionArchivo>();
+                _frecuencia = CreateObjectSet<Frecuencia>();
                 _puesto = CreateObjectSet<Puesto>();
 
             }
@@ -230,6 +236,13 @@ namespace KinniNet.Data.Help
             get
             {
                 return _usuario;
+            }
+        }
+        public ObjectSet<BitacoraAcceso> BitacoraAcceso
+        {
+            get
+            {
+                return _bitacoraAcceso;
             }
         }
 
@@ -601,10 +614,18 @@ namespace KinniNet.Data.Help
                 return _conversacionArchivo;
             }
         }
+        public ObjectSet<Frecuencia> Frecuencia
+        {
+            get
+            {
+                return _frecuencia;
+            }
+        }
 
 
 
         private readonly ObjectSet<Usuario> _usuario;
+        private readonly ObjectSet<BitacoraAcceso> _bitacoraAcceso;
         private readonly ObjectSet<Ubicacion> _ubicacion;
         private readonly ObjectSet<Organizacion> _organizacion;
         private readonly ObjectSet<Domicilio> _domicilio;
@@ -653,6 +674,7 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<NotaOpcionGrupo> _notaOpcionGrupo;
         private readonly ObjectSet<TicketConversacion> _ticketConversacion;
         private readonly ObjectSet<ConversacionArchivo> _conversacionArchivo;
+        private readonly ObjectSet<Frecuencia> _frecuencia;
 
         #region Mascara
         public ObjectSet<Mascara> Mascara
@@ -933,6 +955,37 @@ namespace KinniNet.Data.Help
             }
         }
 
+        public ObjectSet<DiaFestivoDefault> DiaFestivoDefault
+        {
+            get
+            {
+                return _diaFestivoDefault;
+            }
+        }
+        public ObjectSet<DiaFeriado> DiaFeriado
+        {
+            get
+            {
+                return _diaFeriado;
+            }
+        }
+
+        public ObjectSet<DiasFeriados> DiasFeriados
+        {
+            get
+            {
+                return _diasFeriados;
+            }
+        }
+
+        public ObjectSet<DiasFeriadosDetalle> DiasFeriadosDetalle
+        {
+            get
+            {
+                return _diasFeriadosDetalle;
+            }
+        }
+
 
         private readonly ObjectSet<TipoUsuario> _tipoUsuario;
         private readonly ObjectSet<Pais> _pais;
@@ -969,6 +1022,10 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<Horario> _horario;
         private readonly ObjectSet<HorarioDetalle> _horarioDetalle;
         private readonly ObjectSet<TipoNota> _tipoNota;
+        private readonly ObjectSet<DiaFestivoDefault> _diaFestivoDefault;
+        private readonly ObjectSet<DiaFeriado> _diaFeriado;
+        private readonly ObjectSet<DiasFeriados> _diasFeriados;
+        private readonly ObjectSet<DiasFeriadosDetalle> _diasFeriadosDetalle;
 
         #endregion Systema
 

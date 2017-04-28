@@ -13,6 +13,7 @@ namespace KiiniHelp.UserControls.Filtros.Componentes
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         private readonly ServiceEstatusClient _servicioEstatus = new ServiceEstatusClient();
         private List<string> _lstError = new List<string>();

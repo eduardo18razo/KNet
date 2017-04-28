@@ -30,6 +30,12 @@ namespace KiiniHelp.ServiceUsuario {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ActualizarUsuario", ReplyAction="http://tempuri.org/IServiceUsuarios/ActualizarUsuarioResponse")]
         void ActualizarUsuario(int idUsuario, KiiniNet.Entities.Operacion.Usuarios.Usuario usuario);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/GuardarFoto", ReplyAction="http://tempuri.org/IServiceUsuarios/GuardarFotoResponse")]
+        void GuardarFoto(int idUsuario, byte[] imagen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/ObtenerFoto", ReplyAction="http://tempuri.org/IServiceUsuarios/ObtenerFotoResponse")]
+        byte[] ObtenerFoto(int idUsuario);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuarios/HabilitarUsuario", ReplyAction="http://tempuri.org/IServiceUsuarios/HabilitarUsuarioResponse")]
         void HabilitarUsuario(int idUsuario, bool habilitado);
         
@@ -115,6 +121,14 @@ namespace KiiniHelp.ServiceUsuario {
         
         public void ActualizarUsuario(int idUsuario, KiiniNet.Entities.Operacion.Usuarios.Usuario usuario) {
             base.Channel.ActualizarUsuario(idUsuario, usuario);
+        }
+        
+        public void GuardarFoto(int idUsuario, byte[] imagen) {
+            base.Channel.GuardarFoto(idUsuario, imagen);
+        }
+        
+        public byte[] ObtenerFoto(int idUsuario) {
+            return base.Channel.ObtenerFoto(idUsuario);
         }
         
         public void HabilitarUsuario(int idUsuario, bool habilitado) {

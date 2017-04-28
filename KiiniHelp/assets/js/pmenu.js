@@ -114,6 +114,7 @@
 			this.open = false;
 			this.level = 0;
 			this.wrapper = document.getElementById('divMainMenu');
+			this.scroller = document.getElementById('scroller');
 			this.levels = Array.prototype.slice.call(this.el.querySelectorAll('div.menuLevel'));
 			var self = this;
 			this.levels.forEach(function (el, i) { el.setAttribute('data-level', getLevelDepth(el, self.el.id, 'menuLevel')); });
@@ -187,11 +188,15 @@
 		},
 		_openMenu : function( subLevel ) {
 			++this.level;
-
+			$(".divMainMenu").css("width", "85%");
+			$(".divMainMenu").css("z-index", "1");
 			var levelFactor = ( this.level - 1 ) * this.options.levelSpacing,
 				translateVal = this.options.type === 'overlap' ? this.el.offsetWidth + levelFactor : this.el.offsetWidth;
 			
-			this._setTransform( 'translate3d(' + translateVal + 'px,0,0)' );
+			this._setTransform('translate3d(' + translateVal + 'px,0,0)');
+		    $('#scroller').css({
+		        transform: "translate3d(" +translateVal +"px, 0, 0)"
+		    });
 
 			if( subLevel ) {
 				this._setTransform( '', subLevel );
@@ -203,14 +208,19 @@
 				}
 			}
 			if( this.level === 1 ) {
-				classie.add( this.wrapper, 'menuPushed' );
+			    classie.add(this.wrapper, 'menuPushed');
 				this.open = true;
 			}
 			classie.add(subLevel || this.levels[0], 'menuLevel-open');
 		    classie.add(trigger, 'active');
 		},
-		_resetMenu : function() {
-			this._setTransform('translate3d(0,0,0)');
+		_resetMenu: function () {
+		    $(".divMainMenu").css("width", "0%");
+		    this._setTransform('translate3d(0,0,0)');
+		    $('#scroller').css({
+		        transform: "translate3d(0, 0, 0)"
+		    });
+		    $("#scroller").css({ "transform": "" });
 			this.level = 0;
 			classie.remove(this.wrapper, 'menuPushed');
 			classie.remove(trigger, 'active');
@@ -219,7 +229,11 @@
 		},
 		_closeMenu : function() {
 			var translateVal = this.options.type === 'overlap' ? this.el.offsetWidth + ( this.level - 1 ) * this.options.levelSpacing : this.el.offsetWidth;
-			this._setTransform( 'translate3d(' + translateVal + 'px,0,0)' );
+			this._setTransform('translate3d(' + translateVal + 'px,0,0)');
+			$('#scroller').css({
+			    transform: "translate3d(" + translateVal + "px, 0, 0)"
+			});
+			$("#scroller").css({ "transform": "" });
 			this._toggleLevels();
 		},
 		_setTransform : function( val, el ) {
@@ -242,5 +256,5 @@
 		}
 	}
     
-	window.PMenu = mlPushMenu;
+	window.mlPushMenu = mlPushMenu;
 })(window);

@@ -379,6 +379,22 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public List<HelperArbolAcceso> ObtenerArbolesAccesoTerminalAllTipificacion(int? idArea, int? idTipoUsuario, int? idTipoArbol, int? nivel1,
+            int? nivel2, int? nivel3, int? nivel4, int? nivel5, int? nivel6, int? nivel7)
+        {
+            try
+            {
+                using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
+                {
+                    return negocio.ObtenerArbolesAccesoTerminalAllTipificacion(idArea, idTipoUsuario, idTipoArbol, nivel1, nivel2, nivel3, nivel4, nivel5, nivel6, nivel7);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<HelperArbolAcceso> ObtenerArbolesAccesoTerminalByIdUsuario(int idUsuario, bool insertarSeleccion)
         {
             try

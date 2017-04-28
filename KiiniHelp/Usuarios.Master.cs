@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using KiiniHelp.ServiceArea;
 using KiiniHelp.ServiceParametrosSistema;
 using KiiniHelp.ServiceSeguridad;
 using KiiniNet.Entities.Cat.Sistema;
-using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 using Menu = KiiniNet.Entities.Cat.Sistema.Menu;
@@ -19,19 +18,20 @@ namespace KiiniHelp
     public partial class UsuariosMaster : MasterPage
     {
         private readonly ServiceSecurityClient _servicioSeguridad = new ServiceSecurityClient();
-        private readonly ServiceAreaClient _servicioArea = new ServiceAreaClient();
         private readonly ServiceParametrosClient _servicioParametros = new ServiceParametrosClient();
 
         private List<string> _lstError = new List<string>();
 
-        private List<string> AlertaGeneral
+        private List<string> Alerta
         {
             set
             {
-                panelAlert.Visible = value.Any();
-                if (!panelAlert.Visible) return;
-                rptHeaderError.DataSource = value;
-                rptHeaderError.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -47,8 +47,6 @@ namespace KiiniHelp
                 }
                 if (Session["RolSeleccionado"] != null) lblAreaSeleccionada.Text =
                         lstRoles.Single(s => s.Id == int.Parse(Session["RolSeleccionado"].ToString())).Descripcion;
-                rptRoles.DataSource = lstRoles;
-                rptRoles.DataBind();
                 rptRolesPanel.DataSource = lstRoles;
                 rptRolesPanel.DataBind();
                 lblBadgeRoles.Text = lstRoles.Count.ToString();
@@ -60,10 +58,29 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
+        private void UcTicketPortal_OnAceptarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptClose", "CierraPopup(\"#modal-new-ticket\");", true);
 
+                lblNoTicket.Text = ucTicketPortal.TicketGenerado.ToString();
+                lblRandom.Text = ucTicketPortal.RandomGenerado;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptOpen", "MostrarPopup(\"#modalExitoTicket\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -73,24 +90,26 @@ namespace KiiniHelp
                 //{
                 //    Response.Redirect(ResolveUrl("~/Default.aspx"));
                 //}
+                lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
+                ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;
 
                 if (Session["UserData"] != null && HttpContext.Current.Request.Url.Segments[HttpContext.Current.Request.Url.Segments.Count() - 1] != "FrmCambiarContrasena.aspx")
                     if (_servicioSeguridad.CaducaPassword(((Usuario)Session["UserData"]).Id))
                         Response.Redirect(ResolveUrl("~/Users/Administracion/Usuarios/FrmCambiarContrasena.aspx"));
                 lnkBtnCerrar.Visible = !ContentPlaceHolder1.Page.ToString().ToUpper().Contains("DASHBOARD");
-                
+
                 if (!IsPostBack && Session["UserData"] != null)
                 {
                     bool administrador = false;
                     Usuario usuario = ((Usuario)Session["UserData"]);
-                    if (usuario.UsuarioRol.Any(rol => rol.RolTipoUsuario.IdRol == (int) BusinessVariables.EnumRoles.Administrador))
+                    if (usuario.UsuarioRol.Any(rol => rol.RolTipoUsuario.IdRol == (int)BusinessVariables.EnumRoles.Administrador))
                     {
                         administrador = true;
                     }
                     if (administrador)
                         Session["CargaInicialModal"] = true.ToString();
                     hfCargaInicial.Value = (Session["CargaInicialModal"] ?? "False").ToString();
-                    btnSwitchRol.Visible = !administrador;
+                    //btnSwitchRol.Visible = !administrador;
                     lblUsuario.Text = usuario.NombreCompleto;
                     lblTipoUsr.Text = usuario.TipoUsuario.Descripcion;
                     ObtenerAreas();
@@ -110,9 +129,11 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
+
+
 
         protected void rptMenu_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -133,7 +154,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -155,7 +176,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
 
         }
@@ -178,7 +199,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -200,7 +221,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -222,7 +243,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -244,7 +265,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -266,7 +287,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -287,13 +308,25 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
         protected void lnkBtnCerrar_OnClick(object sender, EventArgs e)
         {
-            Response.Redirect(ResolveUrl("~/Users/DashBoard.aspx"));
+            try
+            {
+                Response.Redirect(ResolveUrl("~/Users/DashBoard.aspx"));
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
         }
 
         protected void lnkBtnRol_OnClick(object sender, EventArgs e)
@@ -321,7 +354,7 @@ namespace KiiniHelp
                         _lstError = new List<string>();
                     }
                     _lstError.Add(ex.Message);
-                    AlertaGeneral = _lstError;
+                    Alerta = _lstError;
                 }
             }
             catch (Exception ex)
@@ -331,7 +364,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -348,7 +381,56 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnCerrarTicket_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ucTicketPortal.Limpiar();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptClose", "CierraPopup(\"#modal-new-ticket\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnCerrarExito_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ucTicketPortal.Limpiar();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptOpen", "MostrarPopup(\"#modalExitoTicket\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnMiPerfil_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("~/Users/Administracion/Usuarios/FrmEdicionUsuario.aspx?Detail=1");
+            }
+            catch (Exception)
+            {
+                
+                throw;
             }
         }
     }

@@ -244,12 +244,13 @@ namespace KinniNet.Core.Operacion
                 mascara.NoCampos = mascara.CampoMascara.Count;
                 foreach (CampoMascara campoMascara in mascara.CampoMascara)
                 {
-                    campoMascara.Descripcion = campoMascara.Descripcion.Trim().ToUpper();
-                    campoMascara.NombreCampo = campoMascara.Descripcion.Trim().ToUpper().Replace(" ", "");
+                    campoMascara.Descripcion = campoMascara.Descripcion.Trim();
+                    campoMascara.NombreCampo = BusinessCadenas.Cadenas.FormatoBaseDatos(campoMascara.Descripcion.Trim()).Replace(" ", "").ToUpper();
                     campoMascara.SimboloMoneda = campoMascara.SimboloMoneda == null ? null : campoMascara.SimboloMoneda.Trim().ToUpper();
                     campoMascara.TipoCampoMascara = null;
                 }
-                mascara.NombreTabla = (BusinessVariables.ParametrosMascaraCaptura.PrefijoTabla + mascara.Descripcion).Replace(" ", string.Empty).ToUpper();
+                
+                mascara.NombreTabla = (BusinessVariables.ParametrosMascaraCaptura.PrefijoTabla + BusinessCadenas.Cadenas.FormatoBaseDatos(mascara.Descripcion.Trim())).Replace(" ", string.Empty).ToUpper();
                 mascara.ComandoInsertar = (BusinessVariables.ParametrosMascaraCaptura.PrefijoComandoInsertar + mascara.Descripcion).Replace(" ", string.Empty).ToUpper();
                 mascara.ComandoActualizar = (BusinessVariables.ParametrosMascaraCaptura.PrefijoComandoActualizar + mascara.Descripcion).Replace(" ", string.Empty).ToUpper();
                 mascara.Habilitado = true;

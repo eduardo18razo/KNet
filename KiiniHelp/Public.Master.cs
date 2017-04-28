@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using KiiniHelp.ServiceArea;
 using KiiniHelp.ServiceSeguridad;
 using KinniNet.Business.Utils;
 using Menu = KiiniNet.Entities.Cat.Sistema.Menu;
@@ -13,41 +13,20 @@ namespace KiiniHelp
     public partial class Public : MasterPage
     {
         private readonly ServiceSecurityClient _servicioSeguridad = new ServiceSecurityClient();
-        private readonly ServiceAreaClient _servicioArea = new ServiceAreaClient();
 
 
         private List<string> _lstError = new List<string>();
 
-        private List<string> AlertaGeneral
+        private List<string> Alerta
         {
             set
             {
-                panelAlert.Visible = value.Any();
-                if (!panelAlert.Visible) return;
-                rptHeaderError.DataSource = value;
-                rptHeaderError.DataBind();
-            }
-        }
-
-        private void ObtenerAreas()
-        {
-            try
-            {
-                //rptClientes.DataSource = _servicioArea.ObtenerAreasTipoUsuario((int)BusinessVariables.EnumTiposUsuario.ClienteInvitado, false);
-                //rptClientes.DataBind();
-                //rptEmpleados.DataSource = _servicioArea.ObtenerAreasTipoUsuario((int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado, false);
-                //rptEmpleados.DataBind();
-                //rptProveedores.DataSource = _servicioArea.ObtenerAreasTipoUsuario((int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado, false);
-                //rptProveedores.DataBind();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
+                if (value.Any())
                 {
-                    _lstError = new List<string>();
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
                 }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
             }
         }
 
@@ -55,8 +34,10 @@ namespace KiiniHelp
         {
             try
             {
+                lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
                 UcLogIn.OnAceptarModal += UcLogInOnOnCancelarModal;
                 UcLogIn.OnCancelarModal += UcLogInOnOnCancelarModal;
+                ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;
                 if (Request.Params["userTipe"] != null)
                 {
                     int areaSeleccionada;
@@ -88,10 +69,6 @@ namespace KiiniHelp
                     }
 
                 }
-                if (!IsPostBack)
-                {
-                    ObtenerAreas();
-                }
             }
             catch (Exception ex)
             {
@@ -100,9 +77,10 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
+
 
         private void UcLogInOnOnCancelarModal()
         {
@@ -117,10 +95,31 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
+        private void UcTicketPortal_OnAceptarModal()
+        {
+            try
+            {
+                //Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "CierraPopup(\"#modal-new-ticket\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptClose", "CierraPopup(\"#modal-new-ticket\");", true);
 
+                lblNoTicket.Text = ucTicketPortal.TicketGenerado.ToString();
+                lblRandom.Text = ucTicketPortal.RandomGenerado;
+                //Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MostrarPopup(\"#modalExitoTicket\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptOpen", "MostrarPopup(\"#modalExitoTicket\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
         protected void rptMenu_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             try
@@ -128,7 +127,7 @@ namespace KiiniHelp
                 Repeater rptSubMenu = ((Repeater)e.Item.FindControl("rptSubMenu1"));
                 if (rptSubMenu != null)
                 {
-                    rptSubMenu.DataSource = ((KiiniNet.Entities.Cat.Sistema.Menu)e.Item.DataItem).Menu1;
+                    rptSubMenu.DataSource = ((Menu)e.Item.DataItem).Menu1;
                     rptSubMenu.DataBind();
                 }
 
@@ -140,9 +139,11 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
+
+
 
         protected void rptSubMenu1_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -151,7 +152,7 @@ namespace KiiniHelp
                 Repeater rptSubMenu = ((Repeater)e.Item.FindControl("rptSubMenu2"));
                 if (rptSubMenu != null)
                 {
-                    rptSubMenu.DataSource = ((KiiniNet.Entities.Cat.Sistema.Menu)e.Item.DataItem).Menu1;
+                    rptSubMenu.DataSource = ((Menu)e.Item.DataItem).Menu1;
                     rptSubMenu.DataBind();
                 }
             }
@@ -162,7 +163,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
 
         }
@@ -174,7 +175,7 @@ namespace KiiniHelp
                 Repeater rptSubMenu = ((Repeater)e.Item.FindControl("rptSubMenu3"));
                 if (rptSubMenu != null)
                 {
-                    rptSubMenu.DataSource = ((KiiniNet.Entities.Cat.Sistema.Menu)e.Item.DataItem).Menu1;
+                    rptSubMenu.DataSource = ((Menu)e.Item.DataItem).Menu1;
                     rptSubMenu.DataBind();
                 }
             }
@@ -185,7 +186,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -196,7 +197,7 @@ namespace KiiniHelp
                 Repeater rptSubMenu = ((Repeater)e.Item.FindControl("rptSubMenu4"));
                 if (rptSubMenu != null)
                 {
-                    rptSubMenu.DataSource = ((KiiniNet.Entities.Cat.Sistema.Menu)e.Item.DataItem).Menu1;
+                    rptSubMenu.DataSource = ((Menu)e.Item.DataItem).Menu1;
                     rptSubMenu.DataBind();
                 }
             }
@@ -207,7 +208,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -218,7 +219,7 @@ namespace KiiniHelp
                 Repeater rptSubMenu = ((Repeater)e.Item.FindControl("rptSubMenu5"));
                 if (rptSubMenu != null)
                 {
-                    rptSubMenu.DataSource = ((KiiniNet.Entities.Cat.Sistema.Menu)e.Item.DataItem).Menu1;
+                    rptSubMenu.DataSource = ((Menu)e.Item.DataItem).Menu1;
                     rptSubMenu.DataBind();
                 }
             }
@@ -229,7 +230,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -240,7 +241,7 @@ namespace KiiniHelp
                 Repeater rptSubMenu = ((Repeater)e.Item.FindControl("rptSubMenu6"));
                 if (rptSubMenu != null)
                 {
-                    rptSubMenu.DataSource = ((KiiniNet.Entities.Cat.Sistema.Menu)e.Item.DataItem).Menu1;
+                    rptSubMenu.DataSource = ((Menu)e.Item.DataItem).Menu1;
                     rptSubMenu.DataBind();
                 }
             }
@@ -251,7 +252,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -273,7 +274,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -294,7 +295,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -315,7 +316,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -336,7 +337,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -353,7 +354,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -370,7 +371,43 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnCerrarTicket_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ucTicketPortal.Limpiar();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptClose", "CierraPopup(\"#modal-new-ticket\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnCerrarExito_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ucTicketPortal.Limpiar();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptOpen", "MostrarPopup(\"#modalExitoTicket\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
     }

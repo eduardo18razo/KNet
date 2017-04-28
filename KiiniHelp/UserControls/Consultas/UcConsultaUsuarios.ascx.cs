@@ -18,14 +18,16 @@ namespace KiiniHelp.UserControls.Consultas
         readonly ServiceUsuariosClient _servicioUsuarios = new ServiceUsuariosClient();
         private List<string> _lstError = new List<string>();
 
-        public List<string> AlertaGeneral
+        public List<string> Alerta
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
         private void LlenaCombos()
@@ -52,18 +54,11 @@ namespace KiiniHelp.UserControls.Consultas
                 LimpiarUsuarios();
                 if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
-                    btnNew.Visible = false;
                     return;
-                }
-
-                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexTodos)
-                {
-                    btnNew.Visible = false;
                 }
                 if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
                 {
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
-                    btnNew.Visible = true;
                 }
 
                 rptResultados.DataSource = _servicioUsuarios.ObtenerUsuarios(idTipoUsuario);
@@ -82,8 +77,8 @@ namespace KiiniHelp.UserControls.Consultas
                 UcDetalleUsuario1.FromModal = true;
                 UcDetalleUsuario1.OnCancelarModal += UcDetalleUsuario1OnOnCancelarModal;
 
-                ucAltaUsuarioMoral.OnAceptarModal += UcAltaUsuarioMoral_OnAceptarModal;
-                ucAltaUsuarioMoral.OnCancelarModal += UcAltaUsuarioMoral_OnCancelarModal;
+                //ucAltaUsuarioMoral.OnAceptarModal += UcAltaUsuarioMoral_OnAceptarModal;
+                //ucAltaUsuarioMoral.OnCancelarModal += UcAltaUsuarioMoral_OnCancelarModal;
 
                 //ucAltaUsuarioFisico.OnAceptarModal += UcAltaUsuarioFisico_OnAceptarModal;
                 //ucAltaUsuarioFisico.OnCancelarModal += UcAltaUsuarioFisico_OnCancelarModal;
@@ -100,7 +95,7 @@ namespace KiiniHelp.UserControls.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -180,60 +175,26 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        protected void btnBaja_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioUsuarios.HabilitarUsuario(Convert.ToInt32(hfId.Value), false);
-                LlenaUsuarios();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
-
-        protected void btnAlta_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioUsuarios.HabilitarUsuario(Convert.ToInt32(hfId.Value), true);
-                LlenaUsuarios();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
-
         protected void btnEditar_OnClick(object sender, EventArgs e)
         {
             try
             {
-                Usuario user = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(hfId.Value));
-                if (user == null) return;
-                //if (user.TipoUsuario.EsMoral)
-                //{
-                ucAltaUsuarioMoral.IdUsuario = user.Id;
-                ucAltaUsuarioMoral.Alta = false;
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalPersonaMoral\");", true);
-                //}
-                //else
-                //{
-                //    ucAltaUsuarioFisico.IdUsuario = user.Id;
-                //    ucAltaUsuarioFisico.Alta = false;
-                //    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalPersonaFisica\");", true);
-                //}
+                // TODO: eDICION DE USUARIO
+                Response.Redirect("~/Users/Administracion/Usuarios/FrmEdicionUsuario.aspx?IdUsuario=" + ((Button)sender).CommandArgument);
+                //Usuario user = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(hfId.Value));
+                //if (user == null) return;
+                ////if (user.TipoUsuario.EsMoral)
+                ////{
+                //ucAltaUsuarioMoral.IdUsuario = user.Id;
+                //ucAltaUsuarioMoral.Alta = false;
+                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalPersonaMoral\");", true);
+                ////}
+                ////else
+                ////{
+                ////    ucAltaUsuarioFisico.IdUsuario = user.Id;
+                ////    ucAltaUsuarioFisico.Alta = false;
+                ////    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalPersonaFisica\");", true);
+                ////}
             }
             catch (Exception ex)
             {
@@ -242,7 +203,7 @@ namespace KiiniHelp.UserControls.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -250,18 +211,20 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                //if (_servicioSistemaTipoUsuario.ObtenerTipoUsuarioById(int.Parse(ddlTipoUsuario.SelectedValue)).EsMoral)
-                //{
-                    ucAltaUsuarioMoral.Alta = true;
-                    ucAltaUsuarioMoral.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
-                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalPersonaMoral\");", true);
-                //}
-                //else
-                //{
-                //    ucAltaUsuarioFisico.Alta = true;
-                //    ucAltaUsuarioFisico.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
-                //    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalPersonaFisica\");", true);
-                //}
+                //TODO: ALTA USUARIO
+                Response.Redirect("~/Users/Administracion/Usuarios/FrmEdicionUsuario.aspx");
+                ////if (_servicioSistemaTipoUsuario.ObtenerTipoUsuarioById(int.Parse(ddlTipoUsuario.SelectedValue)).EsMoral)
+                ////{
+                //    ucAltaUsuarioMoral.Alta = true;
+                //    ucAltaUsuarioMoral.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
+                //    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalPersonaMoral\");", true);
+                ////}
+                ////else
+                ////{
+                ////    ucAltaUsuarioFisico.Alta = true;
+                ////    ucAltaUsuarioFisico.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
+                ////    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalPersonaFisica\");", true);
+                ////}
 
 
             }
@@ -272,7 +235,7 @@ namespace KiiniHelp.UserControls.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -302,7 +265,42 @@ namespace KiiniHelp.UserControls.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnBuscar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LlenaUsuarios();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _servicioUsuarios.HabilitarUsuario(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+                LlenaUsuarios();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
     }

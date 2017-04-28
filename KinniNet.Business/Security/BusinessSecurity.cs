@@ -40,25 +40,43 @@ namespace KinniNet.Core.Security
                 DataBaseModelContext db = new DataBaseModelContext();
                 try
                 {
+                    Usuario usuario;
                     string hashedPdw = SecurityUtils.CreateShaHash(password);
                     result = db.Usuario.Any(w => w.NombreUsuario == user && w.Password == hashedPdw && w.FechaBloqueo == null && w.Habilitado && w.Activo);
+                    usuario = db.Usuario.Single(s => s.NombreUsuario == user);
+                    if (usuario != null)
+                    {
+                        db.BitacoraAcceso.AddObject(new BitacoraAcceso
+                        {
+                            IdUsuario = usuario.Id,
+                            Fecha = DateTime.ParseExact(DateTime.Now.AddMinutes(db.ParametroPassword.First().TimeoutFail).ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
+                            Success = result
+                        });
+                        db.SaveChanges();
+                    }
                     if (db.ParametrosGenerales.First().StrongPassword)
                         if (db.ParametroPassword.First().Fail)
                         {
-                            Usuario usuario = db.Usuario.Single(s => s.NombreUsuario == user);
+                            usuario = db.Usuario.Single(s => s.NombreUsuario == user);
                             if (!result && usuario != null)
                             {
+
                                 if (usuario.FechaBloqueo == null)
                                 {
                                     if (db.ParametroPassword.First().Fail)
                                     {
                                         usuario.Tries++;
                                         if (usuario.Tries >= db.ParametroPassword.First().Tries)
-                                            usuario.FechaBloqueo = DateTime.ParseExact(DateTime.Now.AddMinutes(db.ParametroPassword.First().TimeoutFail).ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                                            usuario.FechaBloqueo =
+                                                DateTime.ParseExact(
+                                                    DateTime.Now.AddMinutes(db.ParametroPassword.First().TimeoutFail)
+                                                        .ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff",
+                                                    CultureInfo.InvariantCulture);
                                     }
                                 }
                                 else
-                                    throw new Exception(string.Format("Usuario bloqueado espere {0} minutos", db.ParametroPassword.First().TimeoutFail));
+                                    throw new Exception(string.Format("Usuario bloqueado espere {0} minutos",
+                                        db.ParametroPassword.First().TimeoutFail));
                             }
                             else if (usuario != null)
                             {
@@ -69,7 +87,10 @@ namespace KinniNet.Core.Security
                         }
                     if (db.Usuario.Any(s => s.NombreUsuario == user))
                         if (db.Usuario.Single(s => s.NombreUsuario == user).FechaBloqueo != null)
-                            throw new Exception(string.Format("Usuario bloqueado espere {0} minutos", db.ParametroPassword.First().TimeoutFail));
+                            throw new Exception(string.Format("Usuario bloqueado espere {0} minutos",
+                                db.ParametroPassword.First().TimeoutFail));
+
+                    
                 }
                 catch (Exception ex)
                 {

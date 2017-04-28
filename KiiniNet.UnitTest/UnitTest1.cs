@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 using KinniNet.Core.Demonio;
@@ -18,19 +20,22 @@ namespace KiiniNet.UnitTest
         {
             try
             {
-                Area area = new BusinessArea().ObtenerAreaById(1);
+                string textoOriginal = "¿Cuál es tu solicitud?";//transformación UNICODE
+                //textoOriginal = QuitAccents(textoOriginal);
+                var tmp = BusinessCadenas.Cadenas.FormatoBaseDatos(textoOriginal);
+                //var tmp = Regex.Replace(BusinessCadenas.Cadenas.ReemplazaAcentos(textoOriginal), "[^0-9a-zA-Z]+", "");
+                //Area area = new BusinessArea().ObtenerAreaById(1);
 
-                List<InfoClass> contenClass = ObtenerPropiedadesObjeto(area);
+                //List<InfoClass> contenClass = ObtenerPropiedadesObjeto(area);
 
-                string formatoArea = NamedFormat.Format("El Area {Descripcion} tiene el identificador {Id}", area);
-                new BusinessTicketMailService().RecibeCorreos();
+                //string formatoArea = NamedFormat.Format("El Area {Descripcion} tiene el identificador {Id}", area);
+                //new BusinessTicketMailService().RecibeCorreos();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-
         public List<InfoClass> ObtenerPropiedadesObjeto(object obj)
         {
             List<InfoClass> result;

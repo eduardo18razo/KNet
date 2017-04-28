@@ -7,6 +7,7 @@ using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Helper;
+using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Tickets;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
@@ -184,6 +185,26 @@ namespace KinniNet.Core.Operacion
                                 "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
                     }
                 };
+                DateTime fechaTicket = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                Frecuencia frecuencia = db.Frecuencia.SingleOrDefault(s => s.IdTipoUsuario == ticket.IdTipoUsuario && s.IdTipoArbolAcceso == ticket.IdTipoArbolAcceso && s.IdArbolAcceso == ticket.IdArbolAcceso && s.Fecha == fechaTicket);
+                if (frecuencia == null)
+                {
+                    frecuencia = new Frecuencia
+                    {
+                        IdTipoUsuario = ticket.IdTipoUsuario,
+                        IdTipoArbolAcceso = ticket.IdTipoArbolAcceso,
+                        IdArbolAcceso = ticket.IdArbolAcceso,
+                        NumeroVisitas = 1,
+                        Fecha = fechaTicket,
+                        UltimaVisita = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture)
+                    };
+                    db.Frecuencia.AddObject(frecuencia);
+                }
+                else
+                {
+                    frecuencia.NumeroVisitas++;
+                    frecuencia.UltimaVisita = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                }
 
                 db.Ticket.AddObject(ticket);
                 db.SaveChanges();
@@ -192,7 +213,7 @@ namespace KinniNet.Core.Operacion
                 bool contieneArchivo = false;
                 foreach (HelperCampoMascaraCaptura helperCampoMascaraCaptura in lstCaptura)
                 {
-                    if (mascara.CampoMascara.Any(s => s.Id == helperCampoMascaraCaptura.IdCampo && s.TipoCampoMascara.Descripcion == "ARCHIVO ADJUNTO"))
+                    if (mascara.CampoMascara.Any(s => s.NombreCampo == helperCampoMascaraCaptura.NombreCampo && s.TipoCampoMascara.Descripcion == "ARCHIVO ADJUNTO"))
                     {
 
                         store += string.Format("'{0}',", helperCampoMascaraCaptura.Valor.Replace("ticketid", ticket.Id.ToString()));

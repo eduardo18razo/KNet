@@ -57,6 +57,15 @@
     <Property Name="IdUsuarioModifico" Type="int" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="BitacoraAcceso">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdUsuario" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Success" Type="bit" />
+  </EntityType>
   <EntityType Name="CampoMascara">
     <Key>
       <PropertyRef Name="Id" />
@@ -138,14 +147,51 @@
     <Property Name="Correo" Type="nvarchar" MaxLength="150" />
     <Property Name="Obligatorio" Type="bit" />
   </EntityType>
+  <EntityType Name="DiaFeriado">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DiaFestivoDefault">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dia" Type="int" Nullable="false" />
+    <Property Name="Mes" Type="int" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="DiaFestivoSubGrupo">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdSubGrupoUsuario" Type="int" Nullable="false" />
+    <Property Name="IdDiasFeriados" Type="int" />
     <Property Name="Fecha" Type="datetime" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="DiasFeriados">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DiasFeriadosDetalle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdDiasFeriados" Type="int" Nullable="false" />
+    <Property Name="Dia" Type="datetime" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Direccion">
     <Key>
@@ -275,6 +321,18 @@
     <Property Name="LevantaTicket" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
+  <EntityType Name="Frecuencia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoUsuario" Type="int" Nullable="false" />
+    <Property Name="IdTipoArbolAcceso" Type="int" Nullable="false" />
+    <Property Name="IdArbolAcceso" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="date" Nullable="false" />
+    <Property Name="NumeroVisitas" Type="int" Nullable="false" />
+    <Property Name="UltimaVisita" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="Gerencia">
     <Key>
       <PropertyRef Name="Id" />
@@ -344,7 +402,6 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdGrupoSolicito" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
@@ -1431,6 +1488,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_BitacoraAcceso_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="BitacoraAcceso" Type="Self.BitacoraAcceso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BitacoraAcceso">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Campus_TipoUsuario">
     <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
     <End Role="Campus" Type="Self.Campus" Multiplicity="*" />
@@ -1488,6 +1557,30 @@
       </Principal>
       <Dependent Role="CorreoUsuario">
         <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DiaFestivoSubGrupo_DiasFeriados">
+    <End Role="DiasFeriados" Type="Self.DiasFeriados" Multiplicity="0..1" />
+    <End Role="DiaFestivoSubGrupo" Type="Self.DiaFestivoSubGrupo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiasFeriados">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DiaFestivoSubGrupo">
+        <PropertyRef Name="IdDiasFeriados" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DiasFeriadosDetalle_DiasFeriados">
+    <End Role="DiasFeriados" Type="Self.DiasFeriados" Multiplicity="1" />
+    <End Role="DiasFeriadosDetalle" Type="Self.DiasFeriadosDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DiasFeriados">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DiasFeriadosDetalle">
+        <PropertyRef Name="IdDiasFeriados" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1827,6 +1920,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Frecuencia_ArbolAcceso">
+    <End Role="ArbolAcceso" Type="Self.ArbolAcceso" Multiplicity="1" />
+    <End Role="Frecuencia" Type="Self.Frecuencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArbolAcceso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Frecuencia">
+        <PropertyRef Name="IdArbolAcceso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Frecuencia_TipoArbolAcceso">
+    <End Role="TipoArbolAcceso" Type="Self.TipoArbolAcceso" Multiplicity="1" />
+    <End Role="Frecuencia" Type="Self.Frecuencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoArbolAcceso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Frecuencia">
+        <PropertyRef Name="IdTipoArbolAcceso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Frecuencia_TipoUsuario">
+    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+    <End Role="Frecuencia" Type="Self.Frecuencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Frecuencia">
+        <PropertyRef Name="IdTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Gerencia_TipoUsuario">
     <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
     <End Role="Gerencia" Type="Self.Gerencia" Multiplicity="*" />
@@ -1992,18 +2121,6 @@
       </Principal>
       <Dependent Role="Holding">
         <PropertyRef Name="IdTipoUsuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Horario_GrupoUsuario">
-    <End Role="GrupoUsuario" Type="Self.GrupoUsuario" Multiplicity="0..1" />
-    <End Role="Horario" Type="Self.Horario" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GrupoUsuario">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Horario">
-        <PropertyRef Name="IdGrupoSolicito" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3728,6 +3845,7 @@
     <EntitySet Name="AliasUbicacion" EntityType="Self.AliasUbicacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArbolAcceso" EntityType="Self.ArbolAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BitacoraAcceso" EntityType="Self.BitacoraAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CampoMascara" EntityType="Self.CampoMascara" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Campus" EntityType="Self.Campus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Canal" EntityType="Self.Canal" Schema="dbo" store:Type="Tables" />
@@ -3736,7 +3854,11 @@
     <EntitySet Name="Compania" EntityType="Self.Compania" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ConversacionArchivo" EntityType="Self.ConversacionArchivo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CorreoUsuario" EntityType="Self.CorreoUsuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DiaFeriado" EntityType="Self.DiaFeriado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DiaFestivoDefault" EntityType="Self.DiaFestivoDefault" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DiaFestivoSubGrupo" EntityType="Self.DiaFestivoSubGrupo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DiasFeriados" EntityType="Self.DiasFeriados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DiasFeriadosDetalle" EntityType="Self.DiasFeriadosDetalle" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Domicilio" EntityType="Self.Domicilio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Encuesta" EntityType="Self.Encuesta" Schema="dbo" store:Type="Tables" />
@@ -3748,6 +3870,7 @@
     <EntitySet Name="EstatusTicket" EntityType="Self.EstatusTicket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstatusTicketSubRolGeneral" EntityType="Self.EstatusTicketSubRolGeneral" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstatusTicketSubRolGeneralDefault" EntityType="Self.EstatusTicketSubRolGeneralDefault" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Frecuencia" EntityType="Self.Frecuencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Gerencia" EntityType="Self.Gerencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoUsuario" EntityType="Self.GrupoUsuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoUsuarioInventarioArbol" EntityType="Self.GrupoUsuarioInventarioArbol" Schema="dbo" store:Type="Tables" />
@@ -3895,6 +4018,10 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Area" EntitySet="Area" />
     </AssociationSet>
+    <AssociationSet Name="FK_BitacoraAcceso_Usuario" Association="Self.FK_BitacoraAcceso_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="BitacoraAcceso" EntitySet="BitacoraAcceso" />
+    </AssociationSet>
     <AssociationSet Name="FK_Campus_TipoUsuario" Association="Self.FK_Campus_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Campus" EntitySet="Campus" />
@@ -3914,6 +4041,14 @@
     <AssociationSet Name="FK_CorreoUsuario_Usuario" Association="Self.FK_CorreoUsuario_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="CorreoUsuario" EntitySet="CorreoUsuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DiaFestivoSubGrupo_DiasFeriados" Association="Self.FK_DiaFestivoSubGrupo_DiasFeriados">
+      <End Role="DiasFeriados" EntitySet="DiasFeriados" />
+      <End Role="DiaFestivoSubGrupo" EntitySet="DiaFestivoSubGrupo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DiasFeriadosDetalle_DiasFeriados" Association="Self.FK_DiasFeriadosDetalle_DiasFeriados">
+      <End Role="DiasFeriados" EntitySet="DiasFeriados" />
+      <End Role="DiasFeriadosDetalle" EntitySet="DiasFeriadosDetalle" />
     </AssociationSet>
     <AssociationSet Name="FK_DiasFestivosSubGrupo_SubGrupoUsuario" Association="Self.FK_DiasFestivosSubGrupo_SubGrupoUsuario">
       <End Role="SubGrupoUsuario" EntitySet="SubGrupoUsuario" />
@@ -4027,6 +4162,18 @@
       <End Role="SubRol" EntitySet="SubRol" />
       <End Role="EstatusTicketSubRolGeneralDefault" EntitySet="EstatusTicketSubRolGeneralDefault" />
     </AssociationSet>
+    <AssociationSet Name="FK_Frecuencia_ArbolAcceso" Association="Self.FK_Frecuencia_ArbolAcceso">
+      <End Role="ArbolAcceso" EntitySet="ArbolAcceso" />
+      <End Role="Frecuencia" EntitySet="Frecuencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Frecuencia_TipoArbolAcceso" Association="Self.FK_Frecuencia_TipoArbolAcceso">
+      <End Role="TipoArbolAcceso" EntitySet="TipoArbolAcceso" />
+      <End Role="Frecuencia" EntitySet="Frecuencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Frecuencia_TipoUsuario" Association="Self.FK_Frecuencia_TipoUsuario">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+      <End Role="Frecuencia" EntitySet="Frecuencia" />
+    </AssociationSet>
     <AssociationSet Name="FK_Gerencia_TipoUsuario" Association="Self.FK_Gerencia_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Gerencia" EntitySet="Gerencia" />
@@ -4082,10 +4229,6 @@
     <AssociationSet Name="FK_Holding_TipoUsuario" Association="Self.FK_Holding_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Holding" EntitySet="Holding" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Horario_GrupoUsuario" Association="Self.FK_Horario_GrupoUsuario">
-      <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
-      <End Role="Horario" EntitySet="Horario" />
     </AssociationSet>
     <AssociationSet Name="FK_HorarioDetalle_Horario" Association="Self.FK_HorarioDetalle_Horario">
       <End Role="Horario" EntitySet="Horario" />

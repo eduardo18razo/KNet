@@ -4,7 +4,7 @@
   <xs:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" />
   <xs:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
   <xs:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
-  <xs:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" />
   <xs:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="ArrayOfUsuario">
     <xs:sequence>
@@ -17,10 +17,12 @@
       <xs:element minOccurs="0" name="Activo" type="xs:boolean" />
       <xs:element minOccurs="0" name="ApellidoMaterno" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ApellidoPaterno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BitacoraAcceso" nillable="true" type="tns:ArrayOfBitacoraAcceso" />
       <xs:element minOccurs="0" name="CorreoUsuario" nillable="true" type="tns:ArrayOfCorreoUsuario" />
       <xs:element minOccurs="0" name="DirectorioActivo" type="xs:boolean" />
       <xs:element minOccurs="0" name="FechaBloqueo" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="FechaUpdate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Foto" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="HitConsulta" nillable="true" type="q1:ArrayOfHitConsulta" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
@@ -63,6 +65,24 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Usuario" nillable="true" type="tns:Usuario" />
+  <xs:complexType name="ArrayOfBitacoraAcceso">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BitacoraAcceso" nillable="true" type="tns:BitacoraAcceso" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBitacoraAcceso" nillable="true" type="tns:ArrayOfBitacoraAcceso" />
+  <xs:complexType name="BitacoraAcceso">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Fecha" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Usuario" nillable="true" type="tns:Usuario" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="BitacoraAcceso" nillable="true" type="tns:BitacoraAcceso" />
   <xs:complexType name="ArrayOfCorreoUsuario">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="CorreoUsuario" nillable="true" type="tns:CorreoUsuario" />

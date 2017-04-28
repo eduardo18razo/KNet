@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="jQNQP4M8Z6SQCJH4WXl/cxGchvo=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="MR9IfyJ4Dwr4zMnDKBGXOz6gzag=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="EndPointSeguridad1">
+    <bindingConfiguration bindingType="basicHttpBinding" name="EndPointSeguridad9">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EndPointSeguridad1</serializedValue>
+          <serializedValue>EndPointSeguridad9</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="EndPointSeguridad1" contract="ServiceSistemaTipoArbolAcceso.IServiceTipoArbolAcceso" bindingType="basicHttpBinding" address="http://localhost:15277/Sistema/ServiceTipoArbolAcceso.svc" bindingConfiguration="EndPointSeguridad1">
+    <endpoint name="EndPointSeguridad9" contract="ServiceSistemaTipoArbolAcceso.IServiceTipoArbolAcceso" bindingType="basicHttpBinding" address="http://localhost:15277/Sistema/ServiceTipoArbolAcceso.svc" bindingConfiguration="EndPointSeguridad9">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:15277/Sistema/ServiceTipoArbolAcceso.svc</serializedValue>
@@ -124,7 +124,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EndPointSeguridad1</serializedValue>
+          <serializedValue>EndPointSeguridad9</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServiceSistemaTipoArbolAcceso.IServiceTipoArbolAcceso</serializedValue>
@@ -187,7 +187,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EndPointSeguridad1</serializedValue>
+          <serializedValue>EndPointSeguridad9</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
+using System.Web.UI.WebControls;
+using KiiniHelp.ServiceSistemaTipoTelefono;
 using KiiniHelp.ServiceUsuario;
 using KiiniNet.Entities.Operacion.Usuarios;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Detalles
 {
     public partial class UcDetalleUsuario : UserControl, IControllerModal
     {
+
+        private readonly ServiceTipoTelefonoClient _servicioTipoTelefono = new ServiceTipoTelefonoClient();
+
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         private List<string> _lstError = new List<string>();
 
@@ -30,29 +37,46 @@ namespace KiiniHelp.UserControls.Detalles
             set
             {
                 Usuario userDetail = new ServiceUsuariosClient().ObtenerDetalleUsuario(value);
-                lblUserName.Text = userDetail.NombreCompleto;
-                lblNombre.Text = userDetail.NombreCompleto;
-                lblUsuario.Text = userDetail.NombreUsuario;
-                lblPuesto.Text = userDetail.Puesto == null ? "" : userDetail.Puesto.Descripcion;
-                chkVip.Checked = userDetail.Vip;
-                rptCorreos.DataSource = userDetail.CorreoUsuario;
-                rptCorreos.DataBind();
-                rptTelefonos.DataSource = userDetail.TelefonoUsuario;
-                rptTelefonos.DataBind();
-                UcDetalleOrganizacion.IdOrganizacion = userDetail.IdOrganizacion;
-                UcDetalleUbicacion.IdUbicacion = userDetail.IdUbicacion;
-                UcDetalleGrupoUsuario.IdUsuario = userDetail.Id;
-                ViewState["IdUsuario"] = value;
+                if(userDetail != null)
+                {
+                    ViewState["IdUsuario"] = value;
+                    IdTipoUsuario = userDetail.IdTipoUsuario;
+                    lblnombreCompleto.Text = userDetail.NombreCompleto;
+                    lblFechaUltimoAcceso.Text = userDetail.FechaUltimoAccesoExito;
+                    txtAp.Text = userDetail.ApellidoPaterno;
+                    txtAm.Text = userDetail.ApellidoMaterno;
+                    txtNombre.Text = userDetail.Nombre;
+                    txtUserName.Text = userDetail.NombreUsuario;
+                    ddlPuesto.SelectedValue = userDetail.IdPuesto.ToString();
+                    chkVip.Checked = userDetail.Vip;
+                    chkDirectoriActivo.Checked = userDetail.DirectorioActivo;
+                    rptCorreos.DataSource = userDetail.CorreoUsuario;
+                    rptCorreos.DataBind();
+                    rptTelefonos.DataSource = userDetail.TelefonoUsuario;
+                    rptTelefonos.DataBind();
+                    UcDetalleOrganizacion.IdOrganizacion = userDetail.IdOrganizacion;
+                    UcDetalleUbicacion.IdUbicacion = userDetail.IdUbicacion;
+                    UcDetalleGrupoUsuario.IdUsuario = userDetail.Id;
+                    
+                }
             }
+        }
+
+        private int IdTipoUsuario
+        {
+            get { return Convert.ToInt32(ViewState["IdTipoUsuario"].ToString()); }
+            set { ViewState["IdTipoUsuario"] = value; }
         }
         private List<string> AlertaGeneral
         {
             set
             {
-                pnlAlertaGeneral.Visible = value.Any();
-                if (!pnlAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -76,7 +100,40 @@ namespace KiiniHelp.UserControls.Detalles
                 AlertaGeneral = _lstError;
             }
         }
-
+        protected void rptTelefonos_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                DropDownList ddlTipoTelefono = (DropDownList)e.Item.FindControl("ddlTipoTelefono");
+                if (ddlTipoTelefono != null)
+                {
+                    ddlTipoTelefono.DataSource = _servicioTipoTelefono.ObtenerTiposTelefono(true);
+                    ddlTipoTelefono.DataTextField = "Descripcion";
+                    ddlTipoTelefono.DataValueField = "Id";
+                    ddlTipoTelefono.DataBind();
+                    if (((TelefonoUsuario)e.Item.DataItem).IdTipoTelefono == 0)
+                    {
+                        e.Item.FindControl("divExtension").Visible = false;
+                        ddlTipoTelefono.Enabled = true;
+                    }
+                    else
+                    {
+                        ddlTipoTelefono.SelectedValue = ((TelefonoUsuario)e.Item.DataItem).IdTipoTelefono.ToString();
+                        e.Item.FindControl("divExtension").Visible = ((TelefonoUsuario)e.Item.DataItem).IdTipoTelefono == (int)BusinessVariables.EnumTipoTelefono.Oficina;
+                        ddlTipoTelefono.Enabled = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
         protected void btnCerrarModal_OnClick(object sender, EventArgs e)
         {
             try

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Configuration;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
 using KiiniHelp.ServicePuesto;
 using KiiniHelp.ServiceSistemaTipoUsuario;
@@ -22,10 +24,12 @@ namespace KiiniHelp.UserControls.Consultas
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -44,11 +48,12 @@ namespace KiiniHelp.UserControls.Consultas
                 throw new Exception(e.Message);
             }
         }
-        private void LlenaPuestosConsulta(string filtro = "")
+        private void LlenaPuestosConsulta()
         {
             try
             {
                 int? idTipoUsuario = null;
+                string filtro = txtFiltro.Text.Trim().ToUpper();
                 if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
                 List<Puesto> ptos = _servicioPuestos.ObtenerPuestoConsulta(idTipoUsuario);
@@ -79,6 +84,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
@@ -86,6 +92,7 @@ namespace KiiniHelp.UserControls.Consultas
                 }
                 ucAltaPuesto.OnAceptarModal += AltaPuestoOnAceptarModal;
                 ucAltaPuesto.OnCancelarModal += AltaPuestoOnCancelarModal;
+                ucAltaPuesto.OnTerminarModal += UcAltaPuestoOnOnTerminarModal;
             }
             catch (Exception ex)
             {
@@ -97,6 +104,20 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = _lstError;
             }
         }
+
+        private void UcAltaPuestoOnOnTerminarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaPuesto\");", true);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private void AltaPuestoOnCancelarModal()
         {
             try
@@ -118,7 +139,6 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 LlenaPuestosConsulta();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaPuesto\");", true);
             }
             catch (Exception ex)
             {
@@ -137,45 +157,8 @@ namespace KiiniHelp.UserControls.Consultas
                 if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     LimpiarPuestos();
-                    btnNew.Visible = false;
                     return;
                 }
-                btnNew.Visible = ddlTipoUsuario.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexTodos;
-
-                LlenaPuestosConsulta();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-        protected void btnBaja_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioPuestos.Habilitar(Convert.ToInt32(hfId.Value), false);
-                LlenaPuestosConsulta();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-        protected void btnAlta_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioPuestos.Habilitar(Convert.ToInt32(hfId.Value), true);
                 LlenaPuestosConsulta();
             }
             catch (Exception ex)
@@ -192,8 +175,9 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                Button btn = (Button)sender;
                 ucAltaPuesto.EsAlta = false;
-                Puesto puesto = _servicioPuestos.ObtenerPuestoById(Convert.ToInt32(hfId.Value));
+                Puesto puesto = _servicioPuestos.ObtenerPuestoById(int.Parse(btn.CommandArgument));
                 if (puesto == null) return;
                 ddlTipoUsuario.SelectedValue = puesto.IdTipoUsuario.ToString();
                 ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
@@ -233,7 +217,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                LlenaPuestosConsulta(txtFiltro.Text.Trim().ToUpper());
+                LlenaPuestosConsulta();
             }
             catch (Exception ex)
             {
@@ -243,6 +227,20 @@ namespace KiiniHelp.UserControls.Consultas
                 }
                 _lstError.Add(ex.Message);
                 Alerta = _lstError;
+            }
+        }
+
+        protected void OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _servicioPuestos.Habilitar(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+                LlenaPuestosConsulta();
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }

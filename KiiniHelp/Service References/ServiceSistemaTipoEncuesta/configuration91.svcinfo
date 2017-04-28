@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="JRzcJSJmfxiMeVAvMbPSs4Xkgak=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="JfR9ilkDf2jaGaa1GO38fiiH5ys=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="EndPointSeguridad13">
+    <bindingConfiguration bindingType="basicHttpBinding" name="EndPointSeguridad12">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EndPointSeguridad13</serializedValue>
+          <serializedValue>EndPointSeguridad12</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="EndPointSeguridad12" contract="ServiceSistemaTipoEncuesta.IServiceTipoEncuesta" bindingType="basicHttpBinding" address="http://localhost:15277/Sistema/ServiceTipoEncuesta.svc" bindingConfiguration="EndPointSeguridad13">
+    <endpoint name="EndPointSeguridad12" contract="ServiceSistemaTipoEncuesta.IServiceTipoEncuesta" bindingType="basicHttpBinding" address="http://localhost:15277/Sistema/ServiceTipoEncuesta.svc" bindingConfiguration="EndPointSeguridad12">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:15277/Sistema/ServiceTipoEncuesta.svc</serializedValue>
@@ -124,7 +124,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EndPointSeguridad13</serializedValue>
+          <serializedValue>EndPointSeguridad12</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>ServiceSistemaTipoEncuesta.IServiceTipoEncuesta</serializedValue>

@@ -5,10 +5,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
 using KiiniHelp.ServiceGrupoUsuario;
-using KiiniHelp.ServiceOrganizacion;
 using KiiniHelp.ServiceSistemaTipoGrupo;
 using KiiniHelp.ServiceSistemaTipoUsuario;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Cat.Usuario;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Consultas
@@ -24,6 +24,7 @@ namespace KiiniHelp.UserControls.Consultas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         public int IdTipoUsuario
         {
@@ -31,14 +32,16 @@ namespace KiiniHelp.UserControls.Consultas
             set { ddlTipoUsuario.SelectedValue = value.ToString(); }
         }
 
-        public List<string> AlertaGrupos
+        public List<string> Alerta
         {
             set
             {
-                panelAlertaOrganizacion.Visible = value.Any();
-                if (!panelAlertaOrganizacion.Visible) return;
-                rptErrorOrganizacion.DataSource = value;
-                rptErrorOrganizacion.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -79,7 +82,6 @@ namespace KiiniHelp.UserControls.Consultas
                 int? idTipoGrupo = null;
                 if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
-                    btnNew.Visible = false;
                     LimpiarGrupos();
                     return;
                 }
@@ -89,8 +91,14 @@ namespace KiiniHelp.UserControls.Consultas
                 if (ddlTipoGrupo.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     idTipoGrupo = int.Parse(ddlTipoGrupo.SelectedValue);
 
-                rptResultados.DataSource = _servicioGrupoUsuario.ObtenerGruposUsuarioAll(idTipoUsuario, idTipoGrupo);
+                string filtro = txtFiltro.Text.Trim().ToUpper();
+                List<GrupoUsuario> gpos = _servicioGrupoUsuario.ObtenerGruposUsuarioAll(idTipoUsuario, idTipoGrupo);
+                if (filtro != string.Empty)
+                    gpos = gpos.Where(w => w.Descripcion.Contains(filtro)).ToList();
+
+                rptResultados.DataSource = gpos;
                 rptResultados.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
             }
             catch (Exception e)
             {
@@ -128,7 +136,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                AlertaGrupos = new List<string>();
+                Alerta = new List<string>();
                 if (!IsPostBack)
                 {
                     LlenaCombos();
@@ -144,7 +152,7 @@ namespace KiiniHelp.UserControls.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGrupos = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -161,7 +169,7 @@ namespace KiiniHelp.UserControls.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGrupos = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -179,7 +187,7 @@ namespace KiiniHelp.UserControls.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGrupos = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -192,21 +200,6 @@ namespace KiiniHelp.UserControls.Consultas
                 {
                     Metodos.LimpiarCombo(ddlTipoGrupo);
                     FiltraCombo(ddlTipoUsuario, ddlTipoGrupo, _servicioTipoGrupo.ObtenerTiposGruposByTipoUsuario(int.Parse(ddlTipoUsuario.SelectedValue), true));
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Grupo Empleados";
-                    btnNew.Text = "Agregar Grupo";
-                    btnNew.CommandArgument = "1";
-                }
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos && ddlTipoGrupo.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Grupo Empleados";
-                    btnNew.Text = "Agregar Grupo";
-                    btnNew.CommandArgument = "1";
-                }
-                else
-                {
-                    btnNew.Visible = false;
                 }
                 LlenaGrupos();
             }
@@ -217,7 +210,7 @@ namespace KiiniHelp.UserControls.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGrupos = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -225,17 +218,6 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione && ddlTipoGrupo.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                {
-                    btnNew.Visible = true;
-                    btnNew.CommandName = "Grupo Empleados";
-                    btnNew.Text = "Agregar Grupo";
-                    btnNew.CommandArgument = "1";
-                }
-                else
-                {
-                    btnNew.Visible = false;
-                }
                 LlenaGrupos();
             }
             catch (Exception ex)
@@ -245,43 +227,7 @@ namespace KiiniHelp.UserControls.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGrupos = _lstError;
-            }
-        }
-
-        protected void btnBaja_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioGrupoUsuario.HabilitarGrupo(Convert.ToInt32(hfId.Value), false);
-                LlenaGrupos();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGrupos = _lstError;
-            }
-        }
-
-        protected void btnAlta_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioGrupoUsuario.HabilitarGrupo(Convert.ToInt32(hfId.Value), true);
-                LlenaGrupos();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGrupos = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -289,7 +235,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                ucAltaGrupoUsuario.GrupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(Convert.ToInt32(hfId.Value));
+                ucAltaGrupoUsuario.GrupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(int.Parse(((Button)sender).CommandArgument));
                 ucAltaGrupoUsuario.Alta = false;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaGrupoUsuarios\");", true);
             }
@@ -300,22 +246,15 @@ namespace KiiniHelp.UserControls.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGrupos = _lstError;
+                Alerta = _lstError;
             }
         }
         protected void btnNew_OnClick(object sender, EventArgs e)
         {
             try
             {
-                Button btn = (Button)sender;
-                if (sender == null) return;
-                if (btn.CommandArgument != "0")
-                {
-                    ucAltaGrupoUsuario.IdTipoUsuario = IdTipoUsuario;
-                    ucAltaGrupoUsuario.IdTipoGrupo = int.Parse(ddlTipoGrupo.SelectedValue);
-                    ucAltaGrupoUsuario.Alta = true;
-                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaGrupoUsuarios\");", true);
-                }
+                ucAltaGrupoUsuario.Alta = true;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaGrupoUsuarios\");", true);
             }
             catch (Exception ex)
             {
@@ -324,7 +263,7 @@ namespace KiiniHelp.UserControls.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGrupos = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -366,7 +305,42 @@ namespace KiiniHelp.UserControls.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGrupos = _lstError;
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnBuscar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LlenaGrupos();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _servicioGrupoUsuario.HabilitarGrupo(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+                LlenaGrupos();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
 

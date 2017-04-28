@@ -73,15 +73,41 @@ namespace KinniNet.Business.Utils
         }
         public static class Imagenes
         {
-            public static byte[] ImageToByteArray(string image)
+            public static byte[] ImageToByteArray(Stream fileImage, int contentLenght)
             {
                 byte[] data = null;
-                image = BusinessVariables.Directorios.RepositorioTemporal + image;
-                FileInfo fInfo = new FileInfo(image);
-                long numBytes = fInfo.Length;
-                FileStream fStream = new FileStream(image, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fStream);
-                data = br.ReadBytes((int)numBytes);
+                try
+                {
+                    
+                    using (var binaryReader = new BinaryReader(fileImage))
+                    {
+                        data = binaryReader.ReadBytes(contentLenght);
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+                return data;
+
+            }
+            public static byte[] ImageToByteArray(string fileImage)
+            {
+                byte[] data = null;
+                try
+                {
+                    
+                    FileInfo fInfo = new FileInfo(fileImage);
+                    long numBytes = fInfo.Length;
+                    FileStream fStream = new FileStream(fileImage, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fStream);
+                    data = br.ReadBytes((int)numBytes);
+                    
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
                 return data;
             }
 
@@ -336,5 +362,6 @@ namespace KinniNet.Business.Utils
                 return dtSet;
             }
         }
+
     }
 }

@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using KiiniHelp.ServiceOrganizacion;
 using KiiniNet.Entities.Cat.Operacion;
 
@@ -15,28 +11,23 @@ namespace KiiniHelp.UserControls.Detalles
         {
             set
             {
-                Organizacion ub = new ServiceOrganizacionClient().ObtenerOrganizacionUsuario(value);
-                if (ub == null) return;
-                if (ub.Holding != null)
-                    lblPais.Text = ub.Holding.Descripcion;
-                if (ub.Compania != null)
-                    lblCampus.Text = ub.Compania.Descripcion;
-                if (ub.Direccion != null)
-                    lblTorre.Text = ub.Direccion.Descripcion;
-                if (ub.SubDireccion != null)
-                    lblPiso.Text = ub.SubDireccion.Descripcion;
-                if (ub.Gerencia != null)
-                    lblZona.Text = ub.Gerencia.Descripcion;
-                if (ub.SubGerencia != null)
-                    lblSubZona.Text = ub.SubGerencia.Descripcion;
-                if (ub.Jefatura != null)
-                    lblsite.Text = ub.Jefatura.Descripcion;
+                Organizacion ub = new ServiceOrganizacionClient().ObtenerOrganizacionById(value);
+                List<Organizacion> source = new List<Organizacion> {ub};
+                rptOrganizacion.DataSource = source;
+                rptOrganizacion.DataBind();
             }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

@@ -23,12 +23,11 @@
                         </p>
                     </div>
                     <div class="form-group">
-                        <asp:TextBox class="form-control" ID="txtCaptcha" runat="server"></asp:TextBox>
                         <asp:CustomValidator ErrorMessage="" OnServerValidate="OnServerValidate" runat="server" />
                         <cc1:CaptchaControl ID="Captcha1" runat="server" CaptchaBackgroundNoise="Low" CaptchaLength="4" CssClass="col-sm-2"
                             CaptchaHeight="60" CaptchaWidth="200" CaptchaMinTimeout="5" CaptchaMaxTimeout="240"
                             FontColor="#D20B0C" NoiseColor="#B1B1B1" />
-
+                        <asp:TextBox class="form-control" ID="txtCaptcha" runat="server"></asp:TextBox>
                     </div>
                     <asp:Button CssClass="btn btn-block btn-primary" ID="btnLogin" OnClick="btnLogin_Click" runat="server" Text="Entrar"></asp:Button>
                     <asp:CheckBox runat="server" Text="Recordarme" AutoPostBack="False" onclick="DontCloseMenu()" />

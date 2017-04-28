@@ -50,6 +50,18 @@
   <wsdl:message name="IServiceUsuarios_ActualizarUsuario_OutputMessage">
     <wsdl:part name="parameters" element="tns:ActualizarUsuarioResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_GuardarFoto_InputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarFoto" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_GuardarFoto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GuardarFotoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ObtenerFoto_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerFoto" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ObtenerFoto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerFotoResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceUsuarios_HabilitarUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:HabilitarUsuario" />
   </wsdl:message>
@@ -149,6 +161,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ActualizarUsuario" message="tns:IServiceUsuarios_ActualizarUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ActualizarUsuarioResponse" message="tns:IServiceUsuarios_ActualizarUsuario_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GuardarFoto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/GuardarFoto" message="tns:IServiceUsuarios_GuardarFoto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/GuardarFotoResponse" message="tns:IServiceUsuarios_GuardarFoto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerFoto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerFoto" message="tns:IServiceUsuarios_ObtenerFoto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerFotoResponse" message="tns:IServiceUsuarios_ObtenerFoto_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="HabilitarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/HabilitarUsuario" message="tns:IServiceUsuarios_HabilitarUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/HabilitarUsuarioResponse" message="tns:IServiceUsuarios_HabilitarUsuario_OutputMessage" />
@@ -242,6 +262,24 @@
     </wsdl:operation>
     <wsdl:operation name="ActualizarUsuario">
       <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ActualizarUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GuardarFoto">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/GuardarFoto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerFoto">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ObtenerFoto" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

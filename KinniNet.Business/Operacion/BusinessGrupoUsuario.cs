@@ -358,6 +358,7 @@ namespace KinniNet.Core.Operacion
                 //result = db.UsuarioGrupo.Where(w=>w.IdUsuario == idUsuario).Select(s=>s.GrupoUsuario).ToList();
                 foreach (UsuarioGrupo grupo in result)
                 {
+                    db.LoadProperty(grupo, "Rol");
                     db.LoadProperty(grupo, "GrupoUsuario");
                     db.LoadProperty(grupo.GrupoUsuario, "TipoGrupo");
                     db.LoadProperty(grupo, "SubGrupoUsuario");
@@ -735,7 +736,7 @@ namespace KinniNet.Core.Operacion
 
                     grupo.EstatusTicketSubRolGeneral = GeneraEstatusGrupoDefault(grupo);
                     grupo.EstatusAsignacionSubRolGeneral = GeneraEstatusAsignacionGrupoDefault(grupo);
-                    db.GrupoUsuario.AddObject(grupo);
+                    //db.GrupoUsuario.AddObject(grupo);
                 }
                 db.SaveChanges();
             }

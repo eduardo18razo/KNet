@@ -21,6 +21,7 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         private readonly ServiceTipoInfConsultaClient _servicioCatalogosSistema = new ServiceTipoInfConsultaClient();
         private readonly ServiceTipoDocumentoClient _servicioSistemaTipoDocumento = new ServiceTipoDocumentoClient();

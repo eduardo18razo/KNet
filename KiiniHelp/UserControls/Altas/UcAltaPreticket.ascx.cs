@@ -12,6 +12,7 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         private readonly ServiceTicketClient _servicioticket = new ServiceTicketClient();
         private List<string> _lstError = new List<string>();

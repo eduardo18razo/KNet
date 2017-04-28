@@ -18,16 +18,19 @@ namespace KiiniHelp
         private readonly ServiceSecurityClient _servicioSeguridad = new ServiceSecurityClient();
         private List<string> _lstError = new List<string>();
 
-        private List<string> AlertaGeneral
+        private List<string> Alerta
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value.Select(s => new { Detalle = s }).ToList();
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
+        
         private void ValidaCampos()
         {
             try
@@ -57,10 +60,14 @@ namespace KiiniHelp
                 Usuario userData = _servicioUsuario.ObtenerDetalleUsuario(int.Parse(QueryString.Decrypt(Request.Params["ldata"])));
                 if (rbtnCorreo.Checked)
                 {
-                    rbtnList.DataSource = userData.CorreoUsuario.ToList();
-                    rbtnList.DataTextField = "Correo";
-                    rbtnList.DataValueField = "Id";
-                    rbtnList.DataBind();
+                    //rbtnList.DataSource = userData.CorreoUsuario.ToList();
+                    //rbtnList.DataTextField = "Correo";
+                    //rbtnList.DataValueField = "Id";
+                    //rbtnList.DataBind();
+                    hfIdSend.Value = userData.CorreoUsuario.ToList().First().Id.ToString();
+                    hfValueSend.Value = userData.CorreoUsuario.ToList().First().Correo;
+                    hfValueNotivicacion.Value = _servicioUsuario.EnviaCodigoVerificacionCorreo(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, int.Parse(hfIdSend.Value));
+                   
                     divCodigoVerificacion.Visible = true;
                 }
                 else if (rbtnSms.Checked)
@@ -69,10 +76,13 @@ namespace KiiniHelp
                     {
 
                     }
-                    rbtnList.DataSource = userData.TelefonoUsuario.Where(w => w.Obligatorio).ToList();
-                    rbtnList.DataTextField = "Numero";
-                    rbtnList.DataValueField = "Id";
-                    rbtnList.DataBind();
+                    //rbtnList.DataSource = userData.TelefonoUsuario.Where(w => w.Obligatorio).ToList();
+                    //rbtnList.DataTextField = "Numero";
+                    //rbtnList.DataValueField = "Id";
+                    //rbtnList.DataBind();
+                    hfIdSend.Value = userData.TelefonoUsuario.Where(w => w.Obligatorio).ToList().First().Id.ToString();
+                    hfValueSend.Value = userData.TelefonoUsuario.Where(w => w.Obligatorio).ToList().First().Numero;
+                    _servicioUsuario.EnviaCodigoVerificacionSms(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, int.Parse(hfIdSend.Value));
                     divCodigoVerificacion.Visible = true;
                 }
                 else if (rbtnPreguntas.Checked)
@@ -88,11 +98,12 @@ namespace KiiniHelp
                 throw new Exception(ex.Message);
             }
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                AlertaGeneral = new List<string>();
+                Alerta = new List<string>();
                 if (!IsPostBack)
                     if (Request.Params["ldata"] != null)
                     {
@@ -113,7 +124,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -151,7 +162,7 @@ namespace KiiniHelp
                         string tiporecuperacion = rbtnCorreo.Checked ? "0" : rbtnSms.Checked ? "1" : rbtnPreguntas.Checked ? "2" : "fail";
                         if (rbtnCorreo.Checked)
                         {
-                            _servicioUsuario.ValidaCodigoVerificacionCorreo(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, hfValueNotivicacion.Value, int.Parse(rbtnList.SelectedValue), txtCodigo.Text.Trim());
+                            _servicioUsuario.ValidaCodigoVerificacionCorreo(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, hfValueNotivicacion.Value, int.Parse(hfIdSend.Value), txtCodigo.Text.Trim());
                             btncontinuar.CommandArgument = "0";
                             hfParametrosConfirmados.Value = true.ToString();
                             divQuestion.Visible = false;
@@ -161,7 +172,7 @@ namespace KiiniHelp
                         }
                         else if (rbtnSms.Checked)
                         {
-                            _servicioUsuario.ValidaCodigoVerificacionSms(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, int.Parse(rbtnList.SelectedValue), txtCodigo.Text.Trim());
+                            _servicioUsuario.ValidaCodigoVerificacionSms(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, int.Parse(hfIdSend.Value), txtCodigo.Text.Trim());
                             btncontinuar.CommandArgument = "1";
                             hfValueNotivicacion.Value = string.Empty;
                             hfParametrosConfirmados.Value = true.ToString();
@@ -196,10 +207,10 @@ namespace KiiniHelp
                             switch (btncontinuar.CommandArgument)
                             {
                                 case "0":
-                                    _servicioSeguridad.RecuperarCuenta(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, hfValueNotivicacion.Value, int.Parse(rbtnList.SelectedValue), txtCodigo.Text, txtContrasena.Text.Trim(), "0");
+                                    _servicioSeguridad.RecuperarCuenta(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, hfValueNotivicacion.Value, int.Parse(hfIdSend.Value), txtCodigo.Text, txtContrasena.Text.Trim(), "0");
                                     break;
                                 case "1":
-                                    _servicioSeguridad.RecuperarCuenta(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, hfValueNotivicacion.Value, int.Parse(rbtnList.SelectedValue), txtCodigo.Text, txtContrasena.Text.Trim(), "1");
+                                    _servicioSeguridad.RecuperarCuenta(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, hfValueNotivicacion.Value, int.Parse(hfIdSend.Value), txtCodigo.Text, txtContrasena.Text.Trim(), "1");
                                     break;
                                 case "2":
                                     _servicioSeguridad.RecuperarCuenta(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, hfValueNotivicacion.Value, -1, txtCodigo.Text, txtContrasena.Text, "2");
@@ -212,17 +223,12 @@ namespace KiiniHelp
             }
             catch (Exception ex)
             {
-                if (Request.Params["confirmacionCodigo"] != null && Request.Params["correo"] != null &&
-                    Request.Params["code"] != null)
-                {
-                    Response.Redirect("~/Default.aspx");
-                }
                 if (_lstError == null)
                 {
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -239,7 +245,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -256,7 +262,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -273,7 +279,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -283,11 +289,11 @@ namespace KiiniHelp
             {
                 if (rbtnCorreo.Checked)
                 {
-                    hfValueNotivicacion.Value = _servicioUsuario.EnviaCodigoVerificacionCorreo(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, int.Parse(rbtnList.SelectedValue));
+                    hfValueNotivicacion.Value = _servicioUsuario.EnviaCodigoVerificacionCorreo(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, int.Parse(hfIdSend.Value));
                 }
                 else if (rbtnSms.Checked)
                 {
-                    _servicioUsuario.EnviaCodigoVerificacionSms(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, int.Parse(rbtnList.SelectedValue));
+                    _servicioUsuario.EnviaCodigoVerificacionSms(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, int.Parse(hfIdSend.Value));
                 }
 
             }
@@ -298,25 +304,10 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
-        protected void btnCancelar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                Response.Redirect(ResolveUrl("~/Default.aspx"));
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
+        
     }
 }

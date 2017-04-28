@@ -26,6 +26,27 @@ namespace KiiniHelp.ServiceDiasHorario {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/Habilitar", ReplyAction="http://tempuri.org/IServiceDiasHorario/HabilitarResponse")]
         void Habilitar(int idHorario, bool habilitado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiasDefault", ReplyAction="http://tempuri.org/IServiceDiasHorario/ObtenerDiasDefaultResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFestivoDefault> ObtenerDiasDefault(bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/AgregarDiaFeriado", ReplyAction="http://tempuri.org/IServiceDiasHorario/AgregarDiaFeriadoResponse")]
+        void AgregarDiaFeriado(KiiniNet.Entities.Cat.Usuario.DiaFeriado dia);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiaFeriado", ReplyAction="http://tempuri.org/IServiceDiasHorario/ObtenerDiaFeriadoResponse")]
+        KiiniNet.Entities.Cat.Usuario.DiaFeriado ObtenerDiaFeriado(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriados", ReplyAction="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriadosResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFeriado> ObtenerDiasFeriados(bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/CrearDiasFestivos", ReplyAction="http://tempuri.org/IServiceDiasHorario/CrearDiasFestivosResponse")]
+        void CrearDiasFestivos(KiiniNet.Entities.Cat.Usuario.DiasFeriados item);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriadosUser", ReplyAction="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriadosUserResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiasFeriados> ObtenerDiasFeriadosUser(bool insertarSeleccion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriadosUserById", ReplyAction="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriadosUserByIdResponse")]
+        KiiniNet.Entities.Cat.Usuario.DiasFeriados ObtenerDiasFeriadosUserById(int idCatalogo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +90,34 @@ namespace KiiniHelp.ServiceDiasHorario {
         
         public void Habilitar(int idHorario, bool habilitado) {
             base.Channel.Habilitar(idHorario, habilitado);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFestivoDefault> ObtenerDiasDefault(bool insertarSeleccion) {
+            return base.Channel.ObtenerDiasDefault(insertarSeleccion);
+        }
+        
+        public void AgregarDiaFeriado(KiiniNet.Entities.Cat.Usuario.DiaFeriado dia) {
+            base.Channel.AgregarDiaFeriado(dia);
+        }
+        
+        public KiiniNet.Entities.Cat.Usuario.DiaFeriado ObtenerDiaFeriado(int id) {
+            return base.Channel.ObtenerDiaFeriado(id);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFeriado> ObtenerDiasFeriados(bool insertarSeleccion) {
+            return base.Channel.ObtenerDiasFeriados(insertarSeleccion);
+        }
+        
+        public void CrearDiasFestivos(KiiniNet.Entities.Cat.Usuario.DiasFeriados item) {
+            base.Channel.CrearDiasFestivos(item);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiasFeriados> ObtenerDiasFeriadosUser(bool insertarSeleccion) {
+            return base.Channel.ObtenerDiasFeriadosUser(insertarSeleccion);
+        }
+        
+        public KiiniNet.Entities.Cat.Usuario.DiasFeriados ObtenerDiasFeriadosUserById(int idCatalogo) {
+            return base.Channel.ObtenerDiasFeriadosUserById(idCatalogo);
         }
     }
 }

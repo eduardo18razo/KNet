@@ -43,9 +43,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ServiceFrecuencia.svc" />
     <Content Include="ServiceNota.svc" />
-    <Content Include="ServiceConsultas.svc" />
     <Content Include="ServiceDiasHorario.svc" />
+    <Content Include="ServiceConsultas.svc" />
     <Content Include="ServicePuesto.svc" />
     <Content Include="ServiceArea.svc" />
     <Content Include="ServiceTicket.svc" />

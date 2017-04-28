@@ -21,6 +21,7 @@ namespace KiiniHelp.UserControls.Filtros
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
         private readonly ServiceCatalogosClient _servicioCatalogo = new ServiceCatalogosClient();
         readonly ServiceMascarasClient _servicioMascaras = new ServiceMascarasClient();
         private List<Control> _lstControles;

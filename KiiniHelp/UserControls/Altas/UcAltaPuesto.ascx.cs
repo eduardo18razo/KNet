@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Configuration;
 using System.Web.UI;
 using KiiniHelp.Funciones;
 using KiiniHelp.ServicePuesto;
@@ -19,11 +20,16 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         public bool EsAlta
         {
             get { return Convert.ToBoolean(hfEsAlta.Value); }
-            set { hfEsAlta.Value = value.ToString(); }
+            set
+            {
+                hfEsAlta.Value = value.ToString();
+                lblOperacion.Text = value ? "ALTA DE PUESTO" : "EDITAR PUESTO";
+            }
         }
         public int IdTipoUsuario
         {
@@ -49,10 +55,12 @@ namespace KiiniHelp.UserControls.Altas
         {
             set
             {
-                panelAlerta.Visible = value.Any();
-                if (!panelAlerta.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -86,6 +94,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
@@ -168,5 +177,18 @@ namespace KiiniHelp.UserControls.Altas
         }
 
 
+        protected void btnTerminar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (OnTerminarModal != null)
+                    OnTerminarModal();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

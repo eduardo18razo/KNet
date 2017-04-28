@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Configuration;
 using System.Web.UI;
 using AjaxControlToolkit;
 using KiiniHelp.ServiceArea;
@@ -17,22 +18,29 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         private List<string> Alerta
         {
             set
             {
-                panelAlerta.Visible = value.Any();
-                if (!panelAlerta.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
         public bool EsAlta
         {
             get { return Convert.ToBoolean(hfEsAlta.Value); }
-            set { hfEsAlta.Value = value.ToString(); }
+            set
+            {
+                hfEsAlta.Value = value.ToString();
+                lblOperacion.Text = value ? "ALTA DE AREA" : "EDITAR AREA";
+            }
         }
 
         public int IdArea
@@ -64,6 +72,7 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 Alerta = new List<string>();
+                lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
             }
             catch (Exception ex)
             {
@@ -167,6 +176,24 @@ namespace KiiniHelp.UserControls.Altas
                 uploadControl.SaveAs(BusinessVariables.Directorios.RepositorioTemporal + e.FileName);
                 Session["ImagenArea"] = e.FileName;
                 //hfFileName.Value = e.FileName;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnTerminar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (OnTerminarModal != null)
+                    OnTerminarModal();
             }
             catch (Exception ex)
             {

@@ -157,10 +157,10 @@ namespace KiiniHelp.Test
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            Area area = _servicioArea.ObtenerAreaById(1);
+            //Area area = _servicioArea.ObtenerAreaById(1);
 
-            lstParameter.DataSource = ObtenerPropiedadesObjeto(area);
-            lstParameter.DataBind();
+            //lstParameter.DataSource = ObtenerPropiedadesObjeto(area);
+            //lstParameter.DataBind();
             //TcpClient tcpclient = new TcpClient();
             ////tcpclient.Connect("pop3.live.com", 995);
             //tcpclient.Connect("pop.gmail.com", 995);

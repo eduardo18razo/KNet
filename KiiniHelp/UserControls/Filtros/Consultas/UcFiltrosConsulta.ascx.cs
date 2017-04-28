@@ -464,7 +464,6 @@ namespace KiiniHelp.UserControls.Filtros.Consultas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
-
-        
+        public event DelegateTerminarModal OnTerminarModal;
     }
 }

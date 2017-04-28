@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
+using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
@@ -253,6 +254,45 @@ namespace KinniNet.Core.Operacion
             }
         }
 
+        public void GuardarFoto(int idUsuario, byte[] imagen)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Usuario inf = db.Usuario.SingleOrDefault(w => w.Id == idUsuario);
+                if (inf != null) inf.Foto = imagen;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public byte[] ObtenerFoto(int idUsuario)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            byte[] result;
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Usuario.Single(w => w.Id == idUsuario).Foto;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
         public void HabilitarUsuario(int idUsuario, bool habilitado)
         {
             DataBaseModelContext db = new DataBaseModelContext();
@@ -347,6 +387,7 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.Usuario.SingleOrDefault(s => s.Id == idUsuario);
+                db.LoadProperty(result, "BitacoraAcceso");
                 db.LoadProperty(result, "CorreoUsuario");
                 db.LoadProperty(result, "Puesto");
                 db.LoadProperty(result, "TelefonoUsuario");
@@ -356,13 +397,12 @@ namespace KinniNet.Core.Operacion
                 db.LoadProperty(result, "UsuarioGrupo");
                 if (result != null)
                 {
-                    result.OrganizacionFinal =
-                        new BusinessOrganizacion().ObtenerDescripcionOrganizacionUsuario(result.Id, true);
-                    result.OrganizacionCompleta =
-                        new BusinessOrganizacion().ObtenerDescripcionOrganizacionUsuario(result.Id, false);
+                    result.Organizacion = new BusinessOrganizacion().ObtenerOrganizacionById(result.IdOrganizacion);
+                    result.Ubicacion = new BusinessUbicacion().ObtenerUbicacionById(result.IdUbicacion);
+                    result.OrganizacionFinal = new BusinessOrganizacion().ObtenerDescripcionOrganizacionUsuario(result.Id, true);
+                    result.OrganizacionCompleta = new BusinessOrganizacion().ObtenerDescripcionOrganizacionUsuario(result.Id, false);
                     result.UbicacionFinal = new BusinessUbicacion().ObtenerDescripcionUbicacionUsuario(result.Id, true);
-                    result.UbicacionCompleta = new BusinessUbicacion().ObtenerDescripcionUbicacionUsuario(result.Id,
-                        false);
+                    result.UbicacionCompleta = new BusinessUbicacion().ObtenerDescripcionUbicacionUsuario(result.Id, false);
                     foreach (TelefonoUsuario telefono in result.TelefonoUsuario)
                     {
                         db.LoadProperty(telefono, "TipoTelefono");

@@ -461,6 +461,29 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerArbolesAccesoTerminalAllTipificacion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idArea" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoUsuario" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="idTipoArbol" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel1" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel2" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel3" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel4" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel5" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel6" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="nivel7" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerArbolesAccesoTerminalAllTipificacionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerArbolesAccesoTerminalAllTipificacionResult" nillable="true" type="q21:ArrayOfHelperArbolAcceso" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ObtenerArbolesAccesoTerminalByIdUsuario">
     <xs:complexType>
       <xs:sequence>
@@ -472,7 +495,7 @@
   <xs:element name="ObtenerArbolesAccesoTerminalByIdUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerArbolesAccesoTerminalByIdUsuarioResult" nillable="true" type="q21:ArrayOfHelperArbolAcceso" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerArbolesAccesoTerminalByIdUsuarioResult" nillable="true" type="q22:ArrayOfHelperArbolAcceso" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

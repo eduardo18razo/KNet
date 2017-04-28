@@ -12,14 +12,17 @@ namespace KiiniHelp
     {
         private readonly ServiceUsuariosClient _servicioUsuarios = new ServiceUsuariosClient();
         private List<string> _lstError = new List<string>();
-        private List<string> AlertaGeneral
+        
+        private List<string> Alerta
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value.Select(s => new { Detalle = s }).ToList();
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -27,13 +30,13 @@ namespace KiiniHelp
         {
             try
             {
-                AlertaGeneral = new List<string>();
+                Alerta = new List<string>();
                 if (Request.Params["confirmacionalta"] != null)
                 {
                     string[] values = Request.Params["confirmacionalta"].Split('_');
                     if (!_servicioUsuarios.ValidaConfirmacion(int.Parse(values[0]), values[1]))
                     {
-                        AlertaGeneral = new List<string> { "Link Invalido !!!" };
+                        Alerta = new List<string> { "Link Invalido !!!" };
                     }
                 }
             }
@@ -44,7 +47,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -55,10 +58,14 @@ namespace KiiniHelp
                 try
                 {
                     List<Usuario> usuarios = _servicioUsuarios.BuscarUsuarios(txtUserName.Text.Trim());
-                    rbtnLstUsuarios.DataSource = usuarios;
-                    rbtnLstUsuarios.DataTextField = "NombreCompleto";
-                    rbtnLstUsuarios.DataValueField = "Id";
-                    rbtnLstUsuarios.DataBind();
+                    if (usuarios.Any())
+                    {
+                        if (!_servicioUsuarios.ObtenerDetalleUsuario(usuarios.First().Id).Activo)
+                        {
+                            throw new Exception("Debe primero confirmar su cuenta");
+                        }
+                        Response.Redirect("~/FrmRecuperar.aspx?ldata=" + QueryString.Encrypt(usuarios.First().Id.ToString()));
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -67,7 +74,7 @@ namespace KiiniHelp
                         _lstError = new List<string>();
                     }
                     _lstError.Add(ex.Message);
-                    AlertaGeneral = _lstError;
+                    Alerta = _lstError;
                 }
             }
             catch (Exception ex)
@@ -77,46 +84,7 @@ namespace KiiniHelp
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
-
-        protected void btnCancelar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                Response.Redirect(ResolveUrl("~/Default.aspx"));
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
-
-        protected void rbtnLstUsuarios_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-
-                if (!_servicioUsuarios.ObtenerDetalleUsuario(int.Parse(rbtnLstUsuarios.SelectedValue)).Activo)
-                {
-                    throw new Exception("Debe primero confirmar su cuenta");
-                }
-                Response.Redirect("~/FrmRecuperar.aspx?ldata=" + QueryString.Encrypt(rbtnLstUsuarios.SelectedValue));
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
     }

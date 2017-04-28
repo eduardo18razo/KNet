@@ -83,6 +83,36 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public void GuardarFoto(int idUsuario, byte[] imagen)
+        {
+            try
+            {
+                using (BusinessUsuarios negocio = new BusinessUsuarios())
+                {
+                    negocio.GuardarFoto(idUsuario, imagen);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public byte[] ObtenerFoto(int idUsuario)
+        {
+            try
+            {
+                using (BusinessUsuarios negocio = new BusinessUsuarios())
+                {
+                    return negocio.ObtenerFoto(idUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void HabilitarUsuario(int idUsuario, bool habilitado)
         {
             try

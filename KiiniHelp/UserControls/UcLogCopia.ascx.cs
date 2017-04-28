@@ -17,6 +17,7 @@ namespace KiiniHelp.UserControls
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
         private bool ValidCaptcha = false;
         readonly ServiceSecurityClient _servicioSeguridad = new ServiceSecurityClient();
         private List<string> _lstError = new List<string>();
@@ -27,6 +28,8 @@ namespace KiiniHelp.UserControls
             try
             {
                 Usuario user = _servicioSeguridad.GetUserInvitadoDataAutenticate(idTipoUsuario);
+                if(user == null)
+                    Response.Redirect("~/Default.aspx");
                 Session["UserData"] = user;
                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, user.NombreUsuario, DateTime.Now, DateTime.Now.AddMinutes(30), true, Session["UserData"].ToString(), FormsAuthentication.FormsCookiePath);
                 string encTicket = FormsAuthentication.Encrypt(ticket);

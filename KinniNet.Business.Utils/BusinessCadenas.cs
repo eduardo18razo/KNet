@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace KinniNet.Business.Utils
 {
@@ -80,6 +81,30 @@ namespace KinniNet.Business.Utils
                     throw new Exception(ex.Message);
                 }
                 return result;
+            }
+        }
+        public static class Cadenas
+        {
+            public static string ReemplazaAcentos(string cadena)
+            {
+                Regex a = new Regex("[á|à|ä|â]", RegexOptions.Compiled);
+                Regex e = new Regex("[é|è|ë|ê]", RegexOptions.Compiled);
+                Regex i = new Regex("[í|ì|ï|î]", RegexOptions.Compiled);
+                Regex o = new Regex("[ó|ò|ö|ô]", RegexOptions.Compiled);
+                Regex u = new Regex("[ú|ù|ü|û]", RegexOptions.Compiled);
+                Regex n = new Regex("[ñ|Ñ]", RegexOptions.Compiled);
+                cadena = a.Replace(cadena, "a");
+                cadena = e.Replace(cadena, "e");
+                cadena = i.Replace(cadena, "i");
+                cadena = o.Replace(cadena, "o");
+                cadena = u.Replace(cadena, "u");
+                cadena = n.Replace(cadena, "n");
+                return cadena;
+            }
+
+            public static string FormatoBaseDatos(string cadena)
+            {
+                return Regex.Replace(ReemplazaAcentos(cadena), "[^0-9a-zA-Z]+", "");
             }
         }
         

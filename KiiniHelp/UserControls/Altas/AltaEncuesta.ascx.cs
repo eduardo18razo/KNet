@@ -17,6 +17,7 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         readonly ServiceTipoEncuestaClient _serviceSistemaTipoEncuesta = new ServiceTipoEncuestaClient();
         readonly ServiceEncuestaClient _servicioEncuesta = new ServiceEncuestaClient();

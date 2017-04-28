@@ -1,53 +1,48 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcAltaPuesto.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.UcAltaPuesto" %>
 <asp:UpdatePanel runat="server" ID="updateAltaAreas">
     <ContentTemplate>
-        <header id="panelAlerta" runat="server" visible="false">
-            <div class="alert alert-danger">
-                <div>
-                    <div style="float: left">
-                        <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
-                    </div>
-                    <div style="float: left">
-                        <h3>Error</h3>
-                    </div>
-                    <div class="clearfix clear-fix" />
-                </div>
-                <hr />
-                <asp:Repeater runat="server" ID="rptErrorGeneral">
-                    <ItemTemplate>
-                        <ul>
-                            <li><%# Container.DataItem %></li>
-                        </ul>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </div>
-        </header>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Agregar Puesto
-            </div>
-            <div class="panel-body">
-                <div class="form-horizontal">
-                    <asp:HiddenField runat="server" ID="hfEsAlta" />
-                    <asp:HiddenField runat="server" ID="hfIdPuesto" />
-                    <div class="form-group" runat="server" Visible="False">
-                        <asp:Label runat="server" Text="Tipo Usuario" CssClass="col-sm-2 control-label" />
-                        <div class="col-sm-10">
-                            <asp:DropDownList runat="server" ID="ddlTipoUsuario" CssClass="DropSelect" />
-                        </div>
-                    </div>
+        <asp:HiddenField runat="server" ID="hfEsAlta" />
+        <asp:HiddenField runat="server" ID="hfIdPuesto" />
+        <div class="modal-header">
+            <asp:LinkButton class="close" ID="btnClose" OnClick="btnCancelar_OnClick" runat="server" Text='&times;'/>
+            <h2 class="modal-title" id="modal-new-ticket-label">
+                <asp:Label runat="server" ID="lblBranding" /></h2>
+            <p class="text-center">
+                <asp:Label runat="server" ID="lblOperacion"></asp:Label>
+            </p>
+        </div>
+        <div class="modal-body">
+            
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    Tipo de usuario
+                            <br />
                     <div class="form-group">
-                        <asp:Label runat="server" Text="Descripción" CssClass="col-sm-2 control-label" />
-                        <div class="col-sm-10">
-                            <asp:TextBox runat="server" ID="txtDescripcionPuesto" CssClass="form-control obligatorio" onkeydown="return (event.keyCode!=13);" />
-                        </div>
+                        <asp:DropDownList runat="server" ID="ddlTipoUsuario" CssClass="form-control" />
                     </div>
                 </div>
             </div>
-            <div class="panel-footer" style="text-align: center">
-                <asp:Button runat="server" CssClass="btn btn-success" Text="Guardar" ID="btnGuardar" OnClick="btnGuardar_OnClick" />
-                <asp:Button runat="server" CssClass="btn btn-danger" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick" />
-                <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_OnClick" />
+            <hr />
+
+            <div class="row">
+                <div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="bg-grey">
+                            <h3 class="text-left">Editar Puesto</h3>
+                            <hr />
+                            <div class="form-group margin-top">
+                                Escribe el nombre del puesto*<br />
+                                <asp:TextBox runat="server" ID="txtDescripcionPuesto" CssClass="form-control" onkeydown="return (event.keyCode!=13);" />
+                            </div>
+                            <p class="margin-top-40">
+                                <asp:Button runat="server" CssClass="btn btn-primary" Text="Guardar" ID="btnGuardar" OnClick="btnGuardar_OnClick" />
+                            </p>
+                        </div>
+                        <p class="text-right margin-top-40">
+                            <asp:Button runat="server" CssClass="btn btn-success" Text="Terminar" ID="btnTerminar" OnClick="btnTerminar_OnClick"></asp:Button>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </ContentTemplate>

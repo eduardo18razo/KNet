@@ -21,5 +21,7 @@ namespace KiiniNet.Entities.Cat.Sistema
         public virtual List<Ticket> Ticket { get; set; }
         [DataMember]
         public virtual List<HitConsulta> HitConsulta { get; set; }
+        [DataMember]
+        public virtual List<Frecuencia> Frecuencia { get; set; }
     }
 }

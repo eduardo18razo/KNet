@@ -715,7 +715,16 @@ namespace KinniNet.Core.Operacion
                         ubicacion.Pais.Descripcion = ub.Pais.Descripcion.ToUpper();
 
                     if (ubicacion.Campus != null)
+                    {
                         ubicacion.Campus.Descripcion = ub.Campus.Descripcion.ToUpper();
+                        if (ub.Campus.Domicilio != null)
+                        {
+                            ubicacion.Campus.Domicilio[0].IdColonia = ub.Campus.Domicilio[0].IdColonia;
+                            ubicacion.Campus.Domicilio[0].Calle = ub.Campus.Domicilio[0].Calle;
+                            ubicacion.Campus.Domicilio[0].NoExt = ub.Campus.Domicilio[0].NoExt;
+                            ubicacion.Campus.Domicilio[0].NoInt = ub.Campus.Domicilio[0].NoInt;
+                        }
+                    }
 
                     if (ubicacion.Torre != null)
                         ubicacion.Torre.Descripcion = ub.Torre.Descripcion.ToUpper();
@@ -768,6 +777,7 @@ namespace KinniNet.Core.Operacion
                 result = db.Ubicacion.SingleOrDefault(w => w.Id == idUbicacion);
                 if (result != null)
                 {
+                    db.LoadProperty(result, "TipoUsuario");
                     db.LoadProperty(result, "Pais");
                     db.LoadProperty(result, "Campus");
                     db.LoadProperty(result, "Torre");
@@ -775,6 +785,14 @@ namespace KinniNet.Core.Operacion
                     db.LoadProperty(result, "Zona");
                     db.LoadProperty(result, "SubZona");
                     db.LoadProperty(result, "SiteRack");
+                    if (result.IdNivelUbicacion == 2)
+                    {
+                        db.LoadProperty(result.Campus, "Domicilio");
+                        foreach (Domicilio domicilio in result.Campus.Domicilio)
+                        {
+                            db.LoadProperty(domicilio, "Colonia");
+                        }
+                    }
                 }
             }
             catch (Exception ex)
