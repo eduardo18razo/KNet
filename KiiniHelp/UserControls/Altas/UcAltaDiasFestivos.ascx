@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcAltaDiasFestivos.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.UcAltaDiasFestivos" %>
 
-<asp:UpdatePanel runat="server" ID="updateAltaAreas">
+<asp:UpdatePanel runat="server" ID="updateAltaAreas" >
     <ContentTemplate>
         <asp:HiddenField runat="server" ID="hfIdSubRol" />
         <asp:HiddenField runat="server" ID="hfEsAlta" />

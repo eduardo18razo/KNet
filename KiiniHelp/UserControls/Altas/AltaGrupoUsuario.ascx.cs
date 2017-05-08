@@ -413,7 +413,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                
+                IdTipoGrupo = int.Parse(ddlTipoGrupo.SelectedValue);
             }
             catch (Exception ex)
             {

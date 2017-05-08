@@ -147,8 +147,9 @@ namespace KiiniHelp.UserControls.Altas
                 }
 
                 DiasFeriados = tmpSeleccionados;
-                ddlDiasFeriados.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 LlenaDias();
+                ddlDiasFeriados.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
+                
             }
             catch (Exception ex)
             {

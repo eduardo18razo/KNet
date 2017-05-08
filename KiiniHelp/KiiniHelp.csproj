@@ -83,6 +83,8 @@
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\fonts\Pe-icon-7-strokebb1d.svg" />
+    <Content Include="assets\images\logo-icon.svg" />
+    <Content Include="assets\images\profiles\profile-1.png" />
     <Content Include="assets\images\profiles\profile-square-1.png" />
     <Content Include="assets\images\step1.png" />
     <Content Include="assets\images\carousels\slide-1.jpg" />
@@ -115,6 +117,7 @@
     <Content Include="assets\tmp\chosen.jquery.js" />
     <Content Include="ConfirmacionCuenta.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="Images\orderedList2.png" />
     <Content Include="Publico\FrmCategoria.aspx" />
     <Content Include="Publico\FrmServiceArea.aspx" />
     <Content Include="Publico\FrmUserSelect.aspx" />
@@ -354,6 +357,7 @@
     <Content Include="Test\FrmTestMenuCu.aspx" />
     <Content Include="UserControls\Altas\Organizaciones\UcAltaOrganizaciones.ascx" />
     <Content Include="UserControls\Altas\Ubicaciones\UcAltaUbicaciones.ascx" />
+    <Content Include="UserControls\Altas\UcAltaArbolAcceso.ascx" />
     <Content Include="UserControls\Altas\UcAltaNivelArbol.ascx" />
     <Content Include="UserControls\Altas\UcAltaCatalogo.ascx" />
     <Content Include="UserControls\Altas\UcAltaNota.ascx" />
@@ -676,7 +680,6 @@
     <Content Include="Images\minus.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
     <Content Include="Images\orderedList3.png" />
     <Content Include="Images\orderedList4.png" />
     <Content Include="Images\orderedList5.png" />
@@ -2429,6 +2432,13 @@
     </Compile>
     <Compile Include="UserControls\Altas\Ubicaciones\UcAltaUbicaciones.ascx.designer.cs">
       <DependentUpon>UcAltaUbicaciones.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaArbolAcceso.ascx.cs">
+      <DependentUpon>UcAltaArbolAcceso.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\UcAltaArbolAcceso.ascx.designer.cs">
+      <DependentUpon>UcAltaArbolAcceso.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Altas\UcAltaNivelArbol.ascx.cs">
       <DependentUpon>UcAltaNivelArbol.ascx</DependentUpon>

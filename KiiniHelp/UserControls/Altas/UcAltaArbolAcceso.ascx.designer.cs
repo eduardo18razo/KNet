@@ -355,13 +355,13 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
         
         /// <summary>
-        /// Control UcSla.
+        /// Control UcAltaSla.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.AltaSla UcSla;
+        protected global::KiiniHelp.UserControls.Altas.UcAltaSla UcAltaSla;
         
         /// <summary>
         /// Control UpdatePanel6.

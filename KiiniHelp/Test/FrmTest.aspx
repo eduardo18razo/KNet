@@ -1,12 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmTest.aspx.cs" Inherits="KiiniHelp.Test.FrmTest" %>
-
-<%@ Register Src="~/UserControls/Altas/UcAltaNivelArbol.ascx" TagPrefix="uc1" TagName="UcAltaNivelArbol" %>
-<%@ Register Src="~/UserControls/Altas/Ubicaciones/UcAltaUbicaciones.ascx" TagPrefix="uc1" TagName="UcAltaUbicaciones" %>
-<%@ Register Src="~/UserControls/Altas/AltaGrupoUsuario.ascx" TagPrefix="uc1" TagName="AltaGrupoUsuario" %>
-
-
-
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -227,284 +219,665 @@
 <body class="preload" style="background: #fff">
     <div id="full">
         <form id="form1" runat="server" enctype="multipart/form-data">
-            <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
-                <Scripts>
-                    <asp:ScriptReference Path="~/assets/js/jquery.js" />
-                    <asp:ScriptReference Path="~/assets/js/bootstrap.js" />
-                    <asp:ScriptReference Path="~/assets/js/imagesloaded.js" />
-                    <asp:ScriptReference Path="~/assets/js/masonry.js" />
-                    <asp:ScriptReference Path="~/assets/js/main.js" />
-                    <asp:ScriptReference Path="~/assets/js/modernizr.custom.js" />
-                    <asp:ScriptReference Path="~/assets/js/pmenu.js" />
-                    <asp:ScriptReference Path="~/assets/js/bootstrap-notify.js" />
-                    <asp:ScriptReference Path="~/assets/js/bootstrap-notify.min.js" />
-                    <asp:ScriptReference Path="~/assets/js/validation.js" />
-                </Scripts>
-            </asp:ScriptManager>
-
-            <%--<asp:CheckBox runat="server" Text="prueba" />
-        <div class="wrapper">
-            <input type="checkbox" name="toggle" id="toggle">
-            <label for="toggle"></label>
-        </div>--%>
-
-            <%--<asp:TextBox ID="txtMsg" runat="server" TextMode="MultiLine" Rows="10" Columns="50" onclick="storeCur(this);" onkeyup="storeCur(this);" onselect="storeCur(this);"></asp:TextBox>
-
-        <asp:ListBox ID="lstParameter" runat="server" DataTextField="Name" DataValueField="Type" onmousedown="d = new drag(this)"
-            onmouseup="d.drop(this.form.txtMsg)" onmouseout="if (typeof d != 'undefined') d.setIndex()"></asp:ListBox>--%>
-            <%--<asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-                <asp:UpdatePanel runat="server">
-                    <ContentTemplate>
-                        <asp:Button runat="server" ID="btnAbrirModal" OnClick="btnAbrirModal_OnClick" Text="Abrir Modal" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-                <div class="modal fade" id="editNivel" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                    <asp:UpdatePanel ID="upCampus" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <uc1:UcAltaNivelArbol runat="server" id="ucAltaNivelArbol" />
+            <div class="span12">
+                <div class="pe-block pe-view-layout-block pe-view-layout-block-26 pe-view-layout-class-form">
+                    <form action="../wp-content/themes/oneup/uploadFisica.php" enctype="multipart/form-data" method="POST">
+                        <div class="bay form-horizontal">
+                            <div class="control-group">
+                                <span class="control-label" for="sender_name">NOMBRE</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_name" name="sender_name" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
                                 </div>
                             </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>--%>
-            <%--<asp:UpdatePanel runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-                <asp:Button OnClientClick="getSelectedHora();" runat="server" Text="muestra horas" />
-                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_rfc">RFC</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_rfc" name="sender_rfc" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_estadocivil">ESTADO CIVIL</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_estadocivil" name="sender_estadocivil" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_calleno">CALLE Y NUMERO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_calleno" name="sender_calleno" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_coliniapersona">COLONIA</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_coliniapersona" name="sender_coliniapersona" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_delegacionpersona">DELEGACION</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_delegacionpersona" name="sender_delegacionpersona" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_telefonopersonal">TELEFONO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_telefonopersonal" name="sender_telefonopersonal" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_celularpersonal">CELULAR</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_celularpersonal" name="sender_celularpersonal" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_emailpersonal">CORREO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_emailpersonal" name="sender_emailpersonal" type="email" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_profesion">PROFESIÓN</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_profesion" name="sender_profesion" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_ingreso">INGRESO MENSUAL COMPROBABLE</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_ingreso" name="sender_ingreso" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_empresa">EMPRESA DONDE TRABAJA</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_empresa" name="sender_empresa" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_antiguedad">ANTIGUEDAD</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_antiguedad" name="sender_antiguedad" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_puesto">PUESTO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_puesto" name="sender_puesto" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_telefonotrabajo">TELEFONO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_telefonotrabajo" name="sender_telefonotrabajo" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_horariotrabajo">HORARIO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_horariotrabajo" name="sender_horariotrabajo" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_callenotrabajo">DOMICILIO ACTUAL DEL TRABAJO CALLE Y NÚMERO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_callenotrabajo" name="sender_callenotrabajo" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_coloniatrabajo">COLONIA</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_coloniatrabajo" name="sender_coloniatrabajo" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_delegaciontrabajo">DELEGACIÓN O MUNICIPIO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_delegaciontrabajo" name="sender_delegaciontrabajo" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_giroempresa">GIRO DE LA EMPRESA</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_giroempresa" name="sender_giroempresa" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_paginaInternet">PÁGINA DE INTERNET</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_paginaInternet" name="sender_paginaInternet" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_jefeinmediato">JEFE INMEDIATO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_jefeinmediato" name="sender_jefeinmediato" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_puestojefe">PUESTO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_puestojefe" name="sender_puestojefe" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_correojefe">CORREO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_correojefe" name="sender_correojefe" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
 
-                        <table class="table table-bordered" id="our_table">
-                            <tbody>
-                                <tr id="1">
-                                    <td class="header">Lun</td>
-                                    <td class="tdHorario" id="lun0"></td>
-                                    <td class="tdHorario" id="lun1"></td>
-                                    <td class="tdHorario" id="lun2"></td>
-                                    <td class="tdHorario" id="lun3"></td>
-                                    <td class="tdHorario" id="lun4"></td>
-                                    <td class="tdHorario" id="lun5"></td>
-                                    <td class="tdHorario" id="lun6"></td>
-                                    <td class="tdHorario" id="lun7"></td>
-                                    <td class="tdHorario" id="lun8"></td>
-                                    <td class="tdHorario" id="lun9"></td>
-                                    <td class="tdHorario" id="lun10"></td>
-                                    <td class="tdHorario" id="lun11"></td>
-                                    <td class="tdHorario" id="lun12"></td>
-                                    <td class="tdHorario" id="lun13"></td>
-                                    <td class="tdHorario" id="lun14"></td>
-                                    <td class="tdHorario" id="lun15"></td>
-                                    <td class="tdHorario" id="lun16"></td>
-                                    <td class="tdHorario" id="lun17"></td>
-                                    <td class="tdHorario" id="lun18"></td>
-                                    <td class="tdHorario" id="lun19"></td>
-                                    <td class="tdHorario" id="lun20"></td>
-                                    <td class="tdHorario" id="lun21"></td>
-                                    <td class="tdHorario" id="lun22"></td>
-                                    <td class="tdHorario" id="lun23"></td>
-                                </tr>
-                                <tr id="2">
-                                    <td class="header">Mar</td>
-                                    <td class="tdHorario" id="mar0"></td>
-                                    <td class="tdHorario" id="mar1"></td>
-                                    <td class="tdHorario" id="mar2"></td>
-                                    <td class="tdHorario" id="mar3"></td>
-                                    <td class="tdHorario" id="mar4"></td>
-                                    <td class="tdHorario" id="mar5"></td>
-                                    <td class="tdHorario" id="mar6"></td>
-                                    <td class="tdHorario" id="mar7"></td>
-                                    <td class="tdHorario" id="mar8"></td>
-                                    <td class="tdHorario" id="mar9"></td>
-                                    <td class="tdHorario" id="mar10"></td>
-                                    <td class="tdHorario" id="mar11"></td>
-                                    <td class="tdHorario" id="mar12"></td>
-                                    <td class="tdHorario" id="mar13"></td>
-                                    <td class="tdHorario" id="mar14"></td>
-                                    <td class="tdHorario" id="mar15"></td>
-                                    <td class="tdHorario" id="mar16"></td>
-                                    <td class="tdHorario" id="mar17"></td>
-                                    <td class="tdHorario" id="mar18"></td>
-                                    <td class="tdHorario" id="mar19"></td>
-                                    <td class="tdHorario" id="mar20"></td>
-                                    <td class="tdHorario" id="mar21"></td>
-                                    <td class="tdHorario" id="mar22"></td>
-                                    <td class="tdHorario" id="mar23"></td>
-                                </tr>
-                                <tr id="3">
-                                    <td class="tdHorario" class="header">Mie</td>
-                                    <td class="tdHorario" id="mie0"></td>
-                                    <td class="tdHorario" id="mie1"></td>
-                                    <td class="tdHorario" id="mie2"></td>
-                                    <td class="tdHorario" id="mie3"></td>
-                                    <td class="tdHorario" id="mie4"></td>
-                                    <td class="tdHorario" id="mie5"></td>
-                                    <td class="tdHorario" id="mie6"></td>
-                                    <td class="tdHorario" id="mie7"></td>
-                                    <td class="tdHorario" id="mie8"></td>
-                                    <td class="tdHorario" id="mie9"></td>
-                                    <td class="tdHorario" id="mie10"></td>
-                                    <td class="tdHorario" id="mie11"></td>
-                                    <td class="tdHorario" id="mie12"></td>
-                                    <td class="tdHorario" id="mie13"></td>
-                                    <td class="tdHorario" id="mie14"></td>
-                                    <td class="tdHorario" id="mie15"></td>
-                                    <td class="tdHorario" id="mie16"></td>
-                                    <td class="tdHorario" id="mie17"></td>
-                                    <td class="tdHorario" id="mie18"></td>
-                                    <td class="tdHorario" id="mie19"></td>
-                                    <td class="tdHorario" id="mie20"></td>
-                                    <td class="tdHorario" id="mie21"></td>
-                                    <td class="tdHorario" id="mie22"></td>
-                                    <td class="tdHorario" id="mie23"></td>
-                                </tr>
-                                <tr id="4">
-                                    <td class="header">Jue</td>
-                                    <td class="tdHorario" id="jue0"></td>
-                                    <td class="tdHorario" id="jue1"></td>
-                                    <td class="tdHorario" id="jue2"></td>
-                                    <td class="tdHorario" id="jue3"></td>
-                                    <td class="tdHorario" id="jue4"></td>
-                                    <td class="tdHorario" id="jue5"></td>
-                                    <td class="tdHorario" id="jue6"></td>
-                                    <td class="tdHorario" id="jue7"></td>
-                                    <td class="tdHorario" id="jue8"></td>
-                                    <td class="tdHorario" id="jue9"></td>
-                                    <td class="tdHorario" id="jue10"></td>
-                                    <td class="tdHorario" id="jue11"></td>
-                                    <td class="tdHorario" id="jue12"></td>
-                                    <td class="tdHorario" id="jue13"></td>
-                                    <td class="tdHorario" id="jue14"></td>
-                                    <td class="tdHorario" id="jue15"></td>
-                                    <td class="tdHorario" id="jue16"></td>
-                                    <td class="tdHorario" id="jue17"></td>
-                                    <td class="tdHorario" id="jue18"></td>
-                                    <td class="tdHorario" id="jue19"></td>
-                                    <td class="tdHorario" id="jue20"></td>
-                                    <td class="tdHorario" id="jue21"></td>
-                                    <td class="tdHorario" id="jue22"></td>
-                                    <td class="tdHorario" id="jue23"></td>
-                                </tr>
-                                <tr id="5">
-                                    <td class="header">Vie</td>
-                                    <td class="tdHorario" id="vie0"></td>
-                                    <td class="tdHorario" id="vie1"></td>
-                                    <td class="tdHorario" id="vie2"></td>
-                                    <td class="tdHorario" id="vie3"></td>
-                                    <td class="tdHorario" id="vie4"></td>
-                                    <td class="tdHorario" id="vie5"></td>
-                                    <td class="tdHorario" id="vie6"></td>
-                                    <td class="tdHorario" id="vie7"></td>
-                                    <td class="tdHorario" id="vie8"></td>
-                                    <td class="tdHorario" id="vie9"></td>
-                                    <td class="tdHorario" id="vie10"></td>
-                                    <td class="tdHorario" id="vie11"></td>
-                                    <td class="tdHorario" id="vie12"></td>
-                                    <td class="tdHorario" id="vie13"></td>
-                                    <td class="tdHorario" id="vie14"></td>
-                                    <td class="tdHorario" id="vie15"></td>
-                                    <td class="tdHorario" id="vie16"></td>
-                                    <td class="tdHorario" id="vie17"></td>
-                                    <td class="tdHorario" id="vie18"></td>
-                                    <td class="tdHorario" id="vie19"></td>
-                                    <td class="tdHorario" id="vie20"></td>
-                                    <td class="tdHorario" id="vie21"></td>
-                                    <td class="tdHorario" id="vie22"></td>
-                                    <td class="tdHorario" id="vie23"></td>
-                                </tr>
-                                <tr id="6">
-                                    <td class="header">Sab</td>
-                                    <td class="tdHorario" id="sab0"></td>
-                                    <td class="tdHorario" id="sab1"></td>
-                                    <td class="tdHorario" id="sab2"></td>
-                                    <td class="tdHorario" id="sab3"></td>
-                                    <td class="tdHorario" id="sab4"></td>
-                                    <td class="tdHorario" id="sab5"></td>
-                                    <td class="tdHorario" id="sab6"></td>
-                                    <td class="tdHorario" id="sab7"></td>
-                                    <td class="tdHorario" id="sab8"></td>
-                                    <td class="tdHorario" id="sab9"></td>
-                                    <td class="tdHorario" id="sab10"></td>
-                                    <td class="tdHorario" id="sab11"></td>
-                                    <td class="tdHorario" id="sab12"></td>
-                                    <td class="tdHorario" id="sab13"></td>
-                                    <td class="tdHorario" id="sab14"></td>
-                                    <td class="tdHorario" id="sab15"></td>
-                                    <td class="tdHorario" id="sab16"></td>
-                                    <td class="tdHorario" id="sab17"></td>
-                                    <td class="tdHorario" id="sab18"></td>
-                                    <td class="tdHorario" id="sab19"></td>
-                                    <td class="tdHorario" id="sab20"></td>
-                                    <td class="tdHorario" id="sab21"></td>
-                                    <td class="tdHorario" id="sab22"></td>
-                                    <td class="tdHorario" id="sab23"></td>
-                                </tr>
-                                <tr id="0">
-                                    <td class="header">Dom</td>
-                                    <td class="tdHorario" id="dom0"></td>
-                                    <td class="tdHorario" id="dom1"></td>
-                                    <td class="tdHorario" id="dom2"></td>
-                                    <td class="tdHorario" id="dom3"></td>
-                                    <td class="tdHorario" id="dom4"></td>
-                                    <td class="tdHorario" id="dom5"></td>
-                                    <td class="tdHorario" id="dom6"></td>
-                                    <td class="tdHorario" id="dom7"></td>
-                                    <td class="tdHorario" id="dom8"></td>
-                                    <td class="tdHorario" id="dom9"></td>
-                                    <td class="tdHorario" id="dom10"></td>
-                                    <td class="tdHorario" id="dom11"></td>
-                                    <td class="tdHorario" id="dom12"></td>
-                                    <td class="tdHorario" id="dom13"></td>
-                                    <td class="tdHorario" id="dom14"></td>
-                                    <td class="tdHorario" id="dom15"></td>
-                                    <td class="tdHorario" id="dom16"></td>
-                                    <td class="tdHorario" id="dom17"></td>
-                                    <td class="tdHorario" id="dom18"></td>
-                                    <td class="tdHorario" id="dom19"></td>
-                                    <td class="tdHorario" id="dom20"></td>
-                                    <td class="tdHorario" id="dom21"></td>
-                                    <td class="tdHorario" id="dom22"></td>
-                                    <td class="tdHorario" id="dom23"></td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr class="footerHorario">
-                                    <td class="transparente"></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">00:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">01:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">02:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">03:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">04:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">05:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">06:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">07:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">08:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">09:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">10:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">11:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">12:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">13:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">14:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">15:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">16:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">17:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">18:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">19:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">20:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">21:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">22:00</span></td>
-                                    <td class="tdHorario no-border"><span class="footerLabel">23:00</span></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </ContentTemplate>
-        </asp:UpdatePanel>--%>
-            <uc1:AltaGrupoUsuario runat="server" id="AltaGrupoUsuario" />
+                            <div class="control-group">
+                                <span class="control-label span3" for="my_ife">Identificación oficial</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="my_ife" name="my_ife" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label span3" for="my_saldo">Comprobante de Ingresos</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="my_saldo" name="my_saldo" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label span3" for="my_carta">Carta Constancia de percepciones y antigüedad de la Empresa en que Trabaja</span>
+
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="my_carta" name="my_carta" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_nombrearrendador">NOMBRE DE SU ACTUAL ARRENDADOR</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_nombrearrendador" name="sender_nombrearrendador" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_telefonoarrendador">TELÉFONO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_telefonoarrendador" name="sender_telefonoarrendador" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_domicilioinmueblearrendado">DOMICILIO DEL INMUEBLE ARRENDADO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_domicilioinmueblearrendado" name="sender_domicilioinmueblearrendado" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_montorentaactual">MONTO DE RENTA ACTUAL $</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_montorentaactual" name="sender_montorentaactual" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_motivocambioinmueble">¿POR QUÉ DESEA CAMBIARSE DEL INMUEBLE?</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_motivocambioinmueble" name="sender_motivocambioinmueble" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_nombrereferencia1">NOMBRE DE TRES FAMILIARES (QUE NO VIVAN CON USTED).</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_nombrereferencia1">1. -</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_nombrereferencia1" name="sender_nombrereferencia1" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_telefonoreferencia1">TELEFONO </span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_telefonoreferencia1" name="sender_telefonoreferencia1" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_nombrereferencia2">2. -</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_nombrereferencia2" name="sender_nombrereferencia2" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_telefonoreferencia2">TELEFONO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_telefonoreferencia2" name="sender_telefonoreferencia2" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_nombrereferencia3">3. -</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_nombrereferencia3" name="sender_nombrereferencia3" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_telefonoreferencia3">TELEFONO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_telefonoreferencia3" name="sender_telefonoreferencia3" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_horariotrabajo">NOMBRE DE TRES CONOCIDOS (QUE NO SEAN FAMILIARES).</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_nombreconocido1">1. -</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_nombreconocido1" name="sender_nombreconocido1" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_telefonoconocido1">TELEFONO </span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_telefonoconocido1" name="sender_telefonoconocido1" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_nombreconocido2">2. -</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_nombreconocido2" name="sender_nombreconocido2" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_telefonoconocido2">TELEFONO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_telefonoconocido2" name="sender_telefonoconocido2" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_nombreconocido3">3. -</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_nombreconocido3" name="sender_nombreconocido3" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_telefonoconocido3">TELEFONO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_telefonoconocido3" name="sender_telefonoconocido3" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <span class="control-label" for="sender_personaocupa1">PERSONAS QUE OCUPARAN EL INMUEBLE.</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_personaocupa1">1. -</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_personaocupa1" name="sender_personaocupa1" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_personaocupaparentesco1">PARENTESCO </span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_personaocupaparentesco1" name="sender_personaocupaparentesco1" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_personaocupa2">2. -</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_personaocupa2" name="sender_personaocupa2" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_personaocupaparentesco2">PARENTESCO </span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_personaocupaparentesco2" name="sender_personaocupaparentesco2" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_personaocupa3">3. -</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_personaocupa3" name="sender_personaocupa3" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_personaocupaparentesco3">PARENTESCO </span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_personaocupaparentesco3" name="sender_personaocupaparentesco3" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_personaocupa4">4. -</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_personaocupa4" name="sender_personaocupa4" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_personaocupaparentesco4">PARENTESCO </span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_personaocupaparentesco4" name="sender_personaocupaparentesco4" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_personaocupa5">5. -</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_personaocupa5" name="sender_personaocupa5" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_personaocupaparentesco5">PARENTESCO </span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_personaocupaparentesco5" name="sender_personaocupaparentesco5" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="ddlcomprobante">REQUIERE DE COMPROBANTE  FISCAL DEL ARRENDAMIENTO</span>
+                                <div class="controls">
+                                    <select id="ddlcomprobante" name="ddlcomprobante">
+                                        <option value="volvo">SELECCIONE</option>
+                                        <option value="saab">SI</option>
+                                        <option value="opel">NO</option>
+                                    </select>
+                                    <span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_afianzado">HA ESTADO USTED AFIANZADO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_afianzado" name="sender_afianzado" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_afianzadora">¿CON QUÉ AFIANZADORA? </span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_afianzadora" name="sender_afianzadora" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <span class="control-label" for="sender_nombrefiador">FIADOR</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_nombrefiador">FIADOR (PERSONA FÍSICA).</span>
+                            </div>
+
+                            <div class="control-group">
+                                <span class="control-label" for="sender_nombrefiador">NOMBRE DE SU OBLIGADO SOLIDIARIO (FIADOR)</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_nombrefiador" name="sender_nombrefiador" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_parentescofiador">¿QUÉ PARENTESCO TIENE CON EL FIADOR?</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_parentescofiador" name="sender_parentescofiador" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_estadocivilfiador">ESTADO CIVIL DEL FIADOR</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_estadocivilfiador" name="sender_estadocivilfiador" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_callenofiador">DOMICILIO PARTICULAR  CALLE Y NÚMERO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_callenofiador" name="sender_callenofiador" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_coloniafiador">COLONIA </span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_coloniafiador" name="sender_coloniafiador" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_delegacionfiador">DELEGACIÓN ó MUNICIPIO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_delegacionfiador" name="sender_delegacionfiador" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_telfiador">TELEFONO </span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_telfiador" name="sender_horariotrabajo" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_celfiador">CELULAR</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_celfiador" name="sender_celfiador" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_correofiador">CORREO ELECTRÓNICO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_correofiador" name="sender_correofiador" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_correofiador">DOMICILIO DEL INMUEBLE EN GARANTIA</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <span class="control-label" for="sender_callenogarantia">CALLE Y NÚMERO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_callenogarantia" name="sender_callenogarantia" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_coloniagarantia">COLONIA </span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_coloniagarantia" name="sender_coloniagarantia" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_delegaciongarantia">DELEGACIÓN ó MUNICIPIO </span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_delegaciongarantia" name="sender_delegaciongarantia" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_profesiongarantia">PROFESIÓN, OCUPACIÓN U OFICIO</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_profesiongarantia" name="sender_profesiongarantia" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_empresagarantia">EMPRESA DONDE TRABAJA</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_empresagarantia" name="sender_empresagarantia" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_nombreconyugegarantia">NOMBRE DEL CÓNYUGE:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_nombreconyugegarantia" name="sender_nombreconyugegarantia" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <span class="control-label span3" for="ifefiador">Identificación oficial</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="ifefiador" name="ifefiador" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label span3" for="domiciliofiador">Comprobante de Domicilio</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="domiciliofiador" name="domiciliofiador" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label span3" for="escriturasfiador">Copia Simple de Escrituras del Inmueble en garantía con Datos del Registro Público de la Propiedad  (FOLIO REAL).</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="escriturasfiador" name="escriturasfiador" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label span3" for="pagopredialfiador">Copia del Último Pago Predial</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="pagopredialfiador" name="pagopredialfiador" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label span3" for="actamatrimonio">Copia del Acta de Matrimonio</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="actamatrimonio" name="actamatrimonio" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <span class="control-label" for="sender_fiadormoralrazonsocial">FIADOR (PERSONA MORAL).</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_fiadormoralrazonsocial">RAZÓN SOCIAL:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_fiadormoralrazonsocial" name="sender_fiadormoralrazonsocial" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_fiadormoralrfc">R.F.C.:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_fiadormoralrfc" name="sender_fiadormoralrfc" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_fiadormoralcalleno">DOMICILIO CALLE Y NÚMERO:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_fiadormoralcalleno" name="sender_fiadormoralcalleno" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_fiadormoralcolonia">COLONIA:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_fiadormoralcolonia" name="sender_fiadormoralcolonia" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_fiadormoraldelegacion">DELEGACIÓN ó MUNICIPIO:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_fiadormoraldelegacion" name="sender_fiadormoraldelegacion" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_fiadormoraltel">TELEFONO:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_fiadormoraltel" name="sender_fiadormoraltel" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_fiadormoralgiroempresa">GIRO DE LA EMPRESA:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_fiadormoralgiroempresa" name="sender_fiadormoralgiroempresa" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_fiadormoralpagina">PÁGINA DE INTERNET:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_fiadormoralpagina" name="sender_fiadormoralpagina" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_fiadormoralnombrerepresentantelegal">NOMBRE DEL REPRESENTANTE LEGAL:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_fiadormoralnombrerepresentantelegal" name="sender_fiadormoralnombrerepresentantelegal" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_fmPuesto">PUESTO:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_fmPuesto" name="sender_fmPuesto" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_actacons">ACTA CONSTITUTIVA No.:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_actacons" name="sender_actacons" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_poderrepno">PODER REP. LEGAL No.:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_poderrepno" name="sender_poderrepno" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_relcalleno">DOMICILIO PARTICULAR DEL REP. LEGAL DOMICILIO CALLE Y NÚMERO:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_relcalleno" name="sender_relcalleno" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_relcolonia">COLONIA:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_relcolonia" name="sender_relcolonia" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label" for="sender_reldelegacion">DELEGACIÓN ó MUNICIPIO:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_reldelegacion" name="sender_reldelegacion" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <span class="control-label" for="sender_reltelefono">TELÉFONO:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_reltelefono" name="sender_reltelefono" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <span class="control-label" for="sender_relcelular">CELULAR:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_relcelular" name="sender_relcelular" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <span class="control-label" for="sender_relcorreo">CORREO ELECTRÓNICO:</span>
+                                <div class="controls">
+                                    <input required class="required span9" id="sender_relcorreo" name="sender_relcorreo" type="text" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                                </div>
+                            </div>
+                           <div class="control-group">
+                                <span class="control-label span3" for="reldactaconstitutiva">Copia Simple de Acta Constitutiva de la Empresa</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="reldactaconstitutiva" name="reldactaconstitutiva" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label span3" for="reldrfc">Copia de R.F.C.</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="reldrfc" name="reldrfc" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label span3" for="reldpodernotarial">Copia Simple del Poder Notarial del Representante Legal de la Empresa.</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="reldpodernotarial" name="reldpodernotarial" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label span3" for="reldife">Identificación Oficial del Representante Legal.</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="reldife" name="reldife" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label span3" for="reldcomprobantedomicilio">Comprobante de Domicilio de la Empresa.</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="reldcomprobantedomicilio" name="reldcomprobantedomicilio" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label span3" for="reldescrituras">Copia Simple de Escrituras del Inmueble en garantía con Datos del Registro Público de la Propiedad.</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="reldescrituras" name="reldescrituras" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label span3" for="reldpagopredial">Copia del Último Pago Predial</span>
+                            </div>
+                            <div class="controls" style="margin-left: 0">
+                                <input required class="required span2" id="reldpagopredial" name="reldpagopredial" type="file" style="margin-left: 15px; display: inline-block; width: 90%" /><span class="help-inline" style="color: #1e73be; vertical-align: top; font-size: 13px; font-weight: 700">*</span>
+                            </div>
+                            <input name="button" type="submit" value="ENVIAR" class="contour-btn red" />
+                        </div>
+                    </form>
+                </div>
+            </div>
         </form>
     </div>
 </body>

@@ -63,6 +63,7 @@ namespace KiiniHelp.UserControls.Consultas
 
                 rptResultados.DataSource = _servicioUsuarios.ObtenerUsuarios(idTipoUsuario);
                 rptResultados.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
             }
             catch (Exception ex)
             {

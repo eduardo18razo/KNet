@@ -61,6 +61,7 @@ namespace KiiniHelp.UserControls.Consultas
                     ptos = ptos.Where(w => w.Descripcion.Contains(filtro)).ToList();
                 rptResultados.DataSource = ptos;
                 rptResultados.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
             }
             catch (Exception e)
             {

@@ -9,23 +9,47 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <_PublishTargetUrl>C:\Users\Eduardo Cerritos\Documents\KiiniNet\Servicios</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="bin/EAGetMail40.dll">
+      <publishTime>03/13/2017 17:22:29</publishTime>
+    </File>
+    <File Include="bin/EASendMail40.dll">
+      <publishTime>03/13/2017 17:22:42</publishTime>
+    </File>
     <File Include="bin/KiiniNet.Entities.dll">
-      <publishTime>02/08/2017 16:20:00</publishTime>
+      <publishTime>04/28/2017 11:45:26</publishTime>
+    </File>
+    <File Include="bin/KiiniNet.Entities.pdb">
+      <publishTime>04/28/2017 11:45:26</publishTime>
     </File>
     <File Include="bin/KiiniNet.Services.dll">
-      <publishTime>02/13/2017 16:26:25</publishTime>
+      <publishTime>04/28/2017 11:45:29</publishTime>
+    </File>
+    <File Include="bin/KiiniNet.Services.pdb">
+      <publishTime>04/28/2017 11:45:29</publishTime>
     </File>
     <File Include="bin/KiiniNet.Services.Web.dll">
-      <publishTime>02/13/2017 16:26:26</publishTime>
+      <publishTime>04/28/2017 11:45:30</publishTime>
+    </File>
+    <File Include="bin/KiiniNet.Services.Web.pdb">
+      <publishTime>04/28/2017 11:45:30</publishTime>
     </File>
     <File Include="bin/KinniNet.Business.Utils.dll">
-      <publishTime>02/08/2017 16:20:02</publishTime>
+      <publishTime>04/26/2017 17:01:12</publishTime>
+    </File>
+    <File Include="bin/KinniNet.Business.Utils.pdb">
+      <publishTime>04/26/2017 17:01:12</publishTime>
     </File>
     <File Include="bin/KinniNet.Core.dll">
-      <publishTime>02/13/2017 16:26:25</publishTime>
+      <publishTime>04/28/2017 11:45:29</publishTime>
+    </File>
+    <File Include="bin/KinniNet.Core.pdb">
+      <publishTime>04/28/2017 11:45:29</publishTime>
     </File>
     <File Include="bin/KinniNet.Data.dll">
-      <publishTime>02/08/2017 16:20:02</publishTime>
+      <publishTime>04/28/2017 11:45:27</publishTime>
+    </File>
+    <File Include="bin/KinniNet.Data.pdb">
+      <publishTime>04/28/2017 11:45:27</publishTime>
     </File>
     <File Include="ServiceArbolAcceso.svc">
       <publishTime>12/19/2016 18:59:52</publishTime>
@@ -46,10 +70,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>12/19/2016 18:59:52</publishTime>
     </File>
     <File Include="ServiceDiasHorario.svc">
-      <publishTime>12/19/2016 19:01:40</publishTime>
+      <publishTime>03/27/2017 12:36:48</publishTime>
     </File>
     <File Include="ServiceEncuesta.svc">
       <publishTime>12/19/2016 18:59:52</publishTime>
+    </File>
+    <File Include="ServiceFrecuencia.svc">
+      <publishTime>03/30/2017 18:28:32</publishTime>
     </File>
     <File Include="ServiceGrupoUsuario.svc">
       <publishTime>12/19/2016 18:59:52</publishTime>
@@ -59,6 +86,9 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     </File>
     <File Include="ServiceMascaras.svc">
       <publishTime>12/19/2016 18:59:52</publishTime>
+    </File>
+    <File Include="ServiceNota.svc">
+      <publishTime>03/27/2017 12:44:18</publishTime>
     </File>
     <File Include="ServiceOrganizacion.svc">
       <publishTime>12/19/2016 18:59:52</publishTime>
@@ -129,6 +159,9 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="Sistema/ServiceTipoInformacionConsulta.svc">
       <publishTime>12/19/2016 18:59:52</publishTime>
     </File>
+    <File Include="Sistema/ServiceTipoNota.svc">
+      <publishTime>02/28/2017 17:06:12</publishTime>
+    </File>
     <File Include="Sistema/ServiceTipoTelefono.svc">
       <publishTime>12/19/2016 18:59:52</publishTime>
     </File>
@@ -136,7 +169,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>12/19/2016 18:59:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/08/2017 16:20:39</publishTime>
+      <publishTime>05/03/2017 15:28:46</publishTime>
     </File>
   </ItemGroup>
 </Project>

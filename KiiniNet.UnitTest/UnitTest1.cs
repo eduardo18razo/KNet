@@ -8,6 +8,7 @@ using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 using KinniNet.Core.Demonio;
 using KinniNet.Core.Operacion;
+using KinniNet.Data.Help;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace KiiniNet.UnitTest
@@ -20,11 +21,12 @@ namespace KiiniNet.UnitTest
         {
             try
             {
-                string textoOriginal = "¿Cuál es tu solicitud?";//transformación UNICODE
-                //textoOriginal = QuitAccents(textoOriginal);
-                var tmp = BusinessCadenas.Cadenas.FormatoBaseDatos(textoOriginal);
+                DataBaseModelContext db = new DataBaseModelContext();
+                //string textoOriginal = "¿Cuál es tu solicitud?";//transformación UNICODE
+                ////textoOriginal = QuitAccents(textoOriginal);
+                //var tmp = BusinessCadenas.Cadenas.FormatoBaseDatos(textoOriginal);
                 //var tmp = Regex.Replace(BusinessCadenas.Cadenas.ReemplazaAcentos(textoOriginal), "[^0-9a-zA-Z]+", "");
-                //Area area = new BusinessArea().ObtenerAreaById(1);
+               Area area = new BusinessArea().ObtenerAreaById(1);
 
                 //List<InfoClass> contenClass = ObtenerPropiedadesObjeto(area);
 

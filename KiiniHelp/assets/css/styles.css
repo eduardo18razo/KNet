@@ -39,7 +39,6 @@ body {
     -ms-transition:all .3s linear;
     -o-transition:all .3s linear;
     transition:all .3s linear;
-    display: none;
 }
 :hover::-webkit-scrollbar {
     display: block;
@@ -56,16 +55,6 @@ body {
     border-radius: 10px;
 }
 
-::-webkit-scrollbar-track-piece {
-    /* 4 */
-    visibility: hidden;
-    background: transparent;
-}
-:hover::-webkit-scrollbar-track-piece {
-    /* 4 */
-    background: transparent;
-    visibility: visible;
-}
 
 ::-webkit-scrollbar-thumb {
     /* 5 */
@@ -76,15 +65,11 @@ body {
     transition:all .3s linear;
     background: #3aa7aa;
     background: rgba(58,167,170,0.8);
-    visibility: hidden;
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px #000000;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-:hover::-webkit-scrollbar-thumb {
-    visibility: visible;
-}
 
 ::-webkit-scrollbar-corner {
     /* 6 */

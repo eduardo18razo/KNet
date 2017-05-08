@@ -58,7 +58,7 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 txtDescripcion.Text = string.Empty;
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "SetTable();", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptHorario", "SetTable();", true);
             }
             catch (Exception e)
             {
@@ -112,7 +112,7 @@ namespace KiiniHelp.UserControls.Altas
             {
                 
                 Alerta = new List<string>();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "SetTable();", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptHorario", "SetTable();", true);
                 if (!IsPostBack)
                 {
                 }
@@ -268,7 +268,7 @@ namespace KiiniHelp.UserControls.Altas
                 LimpiarPantalla();
                 if (OnAceptarModal != null)
                     OnAceptarModal();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "SetTable();", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptHorario", "SetTable();", true);
             }
             catch (Exception ex)
             {

@@ -579,7 +579,7 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                 {
                     string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
                     error += "</ul>";
-                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                    ScriptManager.RegisterStartupScript(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
                 }
             }
         }

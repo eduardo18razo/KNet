@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Configuration;
 using System.Web.UI;
 using KiiniHelp.Funciones;
 using KiiniHelp.ServiceUsuario;
@@ -30,6 +31,7 @@ namespace KiiniHelp
         {
             try
             {
+                lblBrandingModal.Text = WebConfigurationManager.AppSettings["Brand"];
                 Alerta = new List<string>();
                 if (Request.Params["confirmacionalta"] != null)
                 {
@@ -66,6 +68,11 @@ namespace KiiniHelp
                         }
                         Response.Redirect("~/FrmRecuperar.aspx?ldata=" + QueryString.Encrypt(usuarios.First().Id.ToString()));
                     }
+                    else
+                    {
+                        throw new Exception("Usuario no valido !!!");
+                    }
+
                 }
                 catch (Exception ex)
                 {

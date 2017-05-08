@@ -817,11 +817,37 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
+                if (usuario.Trim() == string.Empty)
+                {
+                    throw new Exception("Especifique nombre de usuario");
+                }
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.Usuario.Join(db.CorreoUsuario, u => u.Id, cu => cu.IdUsuario, (u, cu) => new { u, cu })
-                    .Join(db.TelefonoUsuario, @t => @t.u.Id, tu => tu.IdUsuario, (@t, tu) => new { @t, tu })
-                    .Where(@t => @t.@t.cu.Correo == usuario || @t.tu.Numero == usuario || @t.@t.u.NombreUsuario == usuario)
-                    .Select(@t => @t.@t.u).Distinct().ToList();
+                result = new List<Usuario>();
+                int idUsuario;
+                if (db.Usuario.Any(a => a.NombreUsuario == usuario))
+                {
+                    result.Add(db.Usuario.First(a => a.NombreUsuario == usuario));
+                }
+                else if (db.CorreoUsuario.Any(a => a.Correo == usuario))
+                {
+                    idUsuario = db.CorreoUsuario.First(a => a.Correo == usuario).IdUsuario;
+                    result.Add(db.Usuario.First(f => f.Id == idUsuario));
+                }
+                else if (db.TelefonoUsuario.Any(a => a.Numero == usuario))
+                {
+                    idUsuario = db.TelefonoUsuario.First(a => a.Numero == usuario).IdUsuario;
+                    result.Add(db.Usuario.First(f => f.Id == idUsuario));
+                }
+                //var qry = from u in db.Usuario
+                //    join cu in db.CorreoUsuario on u.Id equals cu.IdUsuario
+                //    join tu in db.TelefonoUsuario on u.Id equals tu.IdUsuario
+                //    where u.NombreUsuario == usuario || cu.Correo == usuario || tu.Numero == usuario 
+
+                //;
+                //result = db.Usuario.Join(db.CorreoUsuario, u => u.Id, cu => cu.IdUsuario, (u, cu) => new { u, cu })
+                //    .Join(db.TelefonoUsuario, @t => @t.u.Id, tu => tu.IdUsuario, (@t, tu) => new { @t, tu })
+                //    .Where(@t => @t.@t.cu.Correo == usuario || @t.tu.Numero == usuario || @t.@t.u.NombreUsuario == usuario)
+                //    .Select(@t => @t.@t.u).Distinct().ToList();
             }
             catch (Exception ex)
             {

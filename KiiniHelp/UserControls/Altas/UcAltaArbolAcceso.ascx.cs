@@ -33,6 +33,7 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
+        public event DelegateTerminarModal OnTerminarModal;
 
         public int IdArbol
         {
@@ -258,9 +259,9 @@ namespace KiiniHelp.UserControls.Altas
                         ddlMascaraAcceso.SelectedValue = opcion.InventarioArbolAcceso.First().IdMascara.ToString();
                         Metodos.LlenaComboCatalogo(ddlEncuesta, _servicioEncuesta.ObtenerEncuestas(true));
                         ddlEncuesta.SelectedValue = opcion.InventarioArbolAcceso.First().IdEncuesta.ToString();
-                        UcSla.IdGrupo = opcion.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).GroupBy(g => g.IdGrupoUsuario).Single().Key;
+                        UcAltaSla.IdGrupo = opcion.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).GroupBy(g => g.IdGrupoUsuario).Single().Key;
                         int? idSla = opcion.InventarioArbolAcceso.First().IdSla;
-                        if (idSla != null) UcSla.IdSla = (int)idSla;
+                        if (idSla != null) UcAltaSla.IdSla = (int)idSla;
                         ucAltaTiempoEstimado.SetTiempoEstimado(opcion.TiempoInformeArbol);
                     }
 
@@ -324,7 +325,7 @@ namespace KiiniHelp.UserControls.Altas
             {
                 AsociarGrupoUsuario.AsignacionAutomatica = true;
                 UcAltaInformacionConsulta.EsAlta = true;
-                UcSla.FromModal = true;
+                UcAltaSla.FromModal = true;
 
                 UcAltaInformacionConsulta.OnAceptarModal += UcAltaInformacionConsulta_OnAceptarModal;
                 UcAltaInformacionConsulta.OnCancelarModal += UcAltaInformacionConsulta_OnCancelarModal;
@@ -332,8 +333,8 @@ namespace KiiniHelp.UserControls.Altas
                 UcAltaMascaraAcceso.OnAceptarModal += UcAltaMascaraAcceso_OnAceptarModal;
                 UcAltaMascaraAcceso.OnCancelarModal += UcAltaMascaraAcceso_OnCancelarModal;
 
-                UcSla.OnAceptarModal += UcSla_OnAceptarModal;
-                UcSla.OnCancelarModal += UcSla_OnCancelarModal;
+                UcAltaSla.OnAceptarModal += UcSla_OnAceptarModal;
+                UcAltaSla.OnCancelarModal += UcSla_OnCancelarModal;
 
                 UcImpactoUrgencia.OnAceptarModal += UcImpactoUrgencia_OnAceptarModal;
                 UcImpactoUrgencia.OnCancelarModal += UcImpactoUrgenciaOnOnCancelarModal;
@@ -693,7 +694,7 @@ namespace KiiniHelp.UserControls.Altas
                                 Convert.ToInt32(ddlMascaraAcceso.SelectedValue) == 0
                                     ? (int?)null
                                     : Convert.ToInt32(ddlMascaraAcceso.SelectedValue);
-                            arbol.InventarioArbolAcceso.First().Sla = UcSla.Sla;
+                            arbol.InventarioArbolAcceso.First().Sla = UcAltaSla.Sla;
                             arbol.InventarioArbolAcceso.First().IdEncuesta =
                                 Convert.ToInt32(ddlEncuesta.SelectedValue) == BusinessVariables.ComboBoxCatalogo.ValueSeleccione
                                     ? (int?)null

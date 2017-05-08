@@ -242,6 +242,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 ucAltaUbicaciones.EsAlta = true;
+                ucAltaUbicaciones.EsSeleccion = false;
                 ucAltaUbicaciones.Title = "ALTA DE UBICACIÓN";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoUbicacion\");", true);
             }

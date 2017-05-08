@@ -281,6 +281,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 ucAltaOrganizaciones.EsAlta = true;
+                ucAltaOrganizaciones.EsSeleccion = false;
                 ucAltaOrganizaciones.Title = "ALTA DE ORGANIZACIÓN";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoOrganizacion\");", true);
             }
