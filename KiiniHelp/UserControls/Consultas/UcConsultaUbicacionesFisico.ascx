@@ -23,7 +23,6 @@
                 });
             });
             $("body").on("contextmenu", "table tr", function (e) {
-                debugger;
                 if (document.getElementById("<%= this.FindControl("hfModal").ClientID %>").value.toLowerCase() === "true") {
                     if (e.pageX > 239)
                         positionx = e.pageX - 239;
@@ -68,7 +67,6 @@
             });
 
             $contextMenuUbicaciones.on("click", "button", function () {
-                debugger;
                 $contextMenuUbicaciones.hide();
             });
         };

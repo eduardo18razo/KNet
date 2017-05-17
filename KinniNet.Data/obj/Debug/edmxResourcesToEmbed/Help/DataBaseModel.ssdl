@@ -36,6 +36,7 @@
     <Property Name="IdNivel5" Type="int" />
     <Property Name="IdNivel6" Type="int" />
     <Property Name="IdNivel7" Type="int" />
+    <Property Name="Evaluacion" Type="bit" />
     <Property Name="EsTerminal" Type="bit" Nullable="false" />
     <Property Name="Sistema" Type="bit" />
     <Property Name="Habilitado" Type="bit" />

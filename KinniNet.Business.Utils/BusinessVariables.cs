@@ -49,6 +49,14 @@ namespace KinniNet.Business.Utils
 
         public static class EnumeradoresKiiniNet
         {
+            public enum EnumTiempoDuracion
+            {
+                Meses = 1,
+                Dias = 2,
+                Horas = 3,
+                Minutos = 4,
+
+            }
             public enum EnumEstatusTicket
             {
                 Abierto = 1,

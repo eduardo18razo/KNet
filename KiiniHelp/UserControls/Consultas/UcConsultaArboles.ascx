@@ -1,17 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaArboles.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaArboles" %>
 <%@ Import Namespace="KinniNet.Business.Utils" %>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-<style>
-		a img{border: none;}
-		ol li{list-style: decimal outside;}
-		div#container{width: 780px;margin: 0 auto;padding: 1em 0;}
-		div.side-by-side{width: 100%;margin-bottom: 1em;}
-		div.side-by-side > div{float: left;width: 50%;}
-		div.side-by-side > div > em{margin-bottom: 10px;display: block;}
-		.clearfix:after{content: "\0020";display: block;height: 0;clear: both;overflow: hidden;visibility: hidden;}
-		
-	</style>
+<%@ Register Src="~/UserControls/Altas/ArbolesAcceso/UcAltaAbrolAcceso.ascx" TagPrefix="uc1" TagName="UcAltaAbrolAcceso" %>
 
 <div style="height: 100%;">
     <asp:UpdatePanel runat="server" style="height: 100%">
@@ -21,6 +10,7 @@
                 <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
                 / Configuración de Menú </h3>
             <hr />
+
             <section class="module">
                 <div class="row">
                     <div class="col-lg-8 col-md-9">
@@ -37,7 +27,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="module-inner">
@@ -57,27 +46,11 @@
 
                             <asp:DropDownList runat="server" ID="ddlArea" CssClass="form-control" Style="width: 30%; display: inline-block" OnSelectedIndexChanged="ddlArea_OnSelectedIndexChanged" AutoPostBack="true" autocompletemode="SuggestAppend" casesensitive="false" />
                             <asp:DropDownList runat="server" ID="ddlTipoUsuario" CssClass="form-control" Style="width: 30%; display: inline-block; margin-left: 25px" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" AutoPostBack="true" />
-                            CssClass="form-control"
                         </div>
                     </div>
                 </div>
             </section>
-            <div class="side-by-side clearfix">
 
-                <div>
-
-                    <asp:DropDownList data-placeholder="Selecciona..." runat="server" ID="cboCountry" class="chzn-select" Style="width: 350px;">
-                        <asp:ListItem Text="" Value=""></asp:ListItem>
-                        <asp:ListItem Text="Opcion 1" Value="United States"></asp:ListItem>
-                        <asp:ListItem Text="opcion 2" Value="United Kingdom"></asp:ListItem>
-                        <asp:ListItem Text="opcion 3" Value="United Kingdom"></asp:ListItem>
-                    </asp:DropDownList><%--<asp:Button runat="server" ID="btnSelect" Text="Get Selected" OnClick="btnSelect_Click" />--%>
-
-                </div>
-            </div>
-            <%--<script src="Scripts/jquery.min.js" type="text/javascript"></script>--%>
-            
-            
             <div id="masonry" class="row">
                 <div class="module-wrapper masonry-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <section class="module module-headings">
@@ -152,74 +125,18 @@ int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposU
                     </section>
                 </div>
             </div>
-
-            <%--<div class="panel panel-primary">
-                <div class="panel-heading">
-                    <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Opciones de menú</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="panel panel-primary">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingFiltros">
-                                <h4 class="panel-title">
-                                    <div role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiltros" aria-expanded="true" aria-controls="collapseFiltros" style="cursor: pointer">
-                                        Ocultar/Mostrar Filtros
-                                    </div>
-                                </h4>
-                            </div>
-                            <div id="collapseFiltros" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFiltros">
-                                <div class="panel-body">
-                                    <div class="form-horizontal">
-                                        <div class="form-horizontal">
-                                            <div class="form-group">
-                                                <asp:Label Width="16%" runat="server" class="col-sm-3 control-label">Area de Atención</asp:Label>
-                                                <asp:Label Width="16%" runat="server" class="col-sm-3 control-label">Tipo de Usuario Autorizado</asp:Label>
-                                                <asp:Label Width="16%" runat="server" class="col-sm-3 control-label">Tipo de Servicio</asp:Label>
-                                            </div>
-
-                                            <div class="form-group">
-
-
-                                                <asp:DropDownList runat="server" Width="16%" CssClass="DropSelect" ID="ddlTipoArbol" OnSelectedIndexChanged="ddlTipoArbol_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                            </div>
-                                            <div class="form-group">
-
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 1</asp:Label>
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 2</asp:Label>
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 3</asp:Label>
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 4</asp:Label>
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 5</asp:Label>
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 6</asp:Label>
-                                                <asp:Label Width="14%" runat="server" class="col-sm-3 control-label">SubMenu/Opcion 7</asp:Label>
-                                            </div>
-                                            <div class="form-group">
-
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel1" OnSelectedIndexChanged="ddlNivel1_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel2" OnSelectedIndexChanged="ddlNivel2_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel3" OnSelectedIndexChanged="ddlNivel3_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel4" OnSelectedIndexChanged="ddlNivel4_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel5" OnSelectedIndexChanged="ddlNivel5_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel6" OnSelectedIndexChanged="ddlNivel6_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                                <asp:DropDownList runat="server" Width="14%" CssClass="DropSelect" ID="ddlNivel7" OnSelectedIndexChanged="ddlNivel7_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Button runat="server" CssClass="col-xs-1 btn btn-primary" ID="btnNew" Text="Agregar Holding" Width="14%" OnClick="btnNew_OnClick" Visible="False" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>--%>
         </ContentTemplate>
     </asp:UpdatePanel>
+    <div class="modal fade" id="modalAtaOpcion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="margin-top: 60px">
+        <asp:UpdatePanel ID="upAltaArea" runat="server">
+            <ContentTemplate>
+                <<div class="modal-dialog" style="height: 250px;">
+                    <div class="modal-content">
+                        <uc1:UcAltaAbrolAcceso runat="server" id="UcAltaAbrolAcceso" />
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
     <script type="text/javascript"> $(".chzn-select").chosen(); $(".chzn-select-deselect").chosen({ allow_single_deselect: true }); </script>
 </div>

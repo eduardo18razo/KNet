@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="KiiniHelp.Default1" %>
+
 <%@ Import Namespace="System.IO" %>
 
 <%@ Register Src="~/UserControls/UcLogCopia.ascx" TagPrefix="uc1" TagName="UcLogCopia" %>
@@ -42,7 +43,6 @@
             event.stopPropagation();
         };
         function load() {
-            debugger;
             var dir = "http://localhost:2802/assets/carouselImage/";
             var fileextension = ".jpg";
             $.ajax({
@@ -54,7 +54,7 @@
                     });
                 }
             });
-        }
+        } 
     </script>
 </head>
 
@@ -68,13 +68,19 @@
                 <asp:ScriptReference Path="assets/js/imagesloaded.js" />
                 <asp:ScriptReference Path="assets/js/masonry.js" />
                 <asp:ScriptReference Path="assets/js/main.js" />
+                <asp:ScriptReference Path="~/assets/js/bootstrap-notify.js" />
+                <asp:ScriptReference Path="~/assets/js/bootstrap-notify.min.js" />
+                <asp:ScriptReference Path="~/assets/js/Notificaciones.js" />
             </Scripts>
         </asp:ScriptManager>
         <header class="header">
             <div class="branding ">
                 <h1 class="logo text-center">
-                    <asp:HyperLink NavigateUrl="~/Default.aspx" runat="server"> <asp:Image class="logo-icon" ImageUrl="~/assets/images/logo-icon.svg" alt="icon"  runat="server"/>
-                         <span class="nav-label"> <span class="h3"><strong><asp:Label runat="server" ID="lblBranding" /></strong></span></span> </asp:HyperLink>
+                    <asp:HyperLink NavigateUrl="~/Default.aspx" runat="server">
+                        <asp:Image class="logo-icon" ImageUrl="~/assets/images/logo-icon.svg" alt="icon" runat="server" />
+                        <span class="nav-label"><span class="h3"><strong>
+                            <asp:Label runat="server" ID="lblBranding" /></strong></span></span>
+                    </asp:HyperLink>
                 </h1>
             </div>
             <div class="topbar bg_w_header">
@@ -232,7 +238,7 @@
                         </section>
                     </div>
                 </div>
-                <hr/>
+                <hr />
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <section class="module">
@@ -274,8 +280,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <asp:LinkButton class="close" runat="server" ID="btnCerrarTicket" OnClick="btnCerrarTicket_OnClick"><span aria-hidden="true">&times;</span></asp:LinkButton>
-                        <h4 class="modal-title" id="modal-new-ticket-label">
-                            Crear Ticket Nuevo</h4>
+                        <h4 class="modal-title" id="modal-new-ticket-label">Crear Ticket Nuevo</h4>
                     </div>
                     <div class="modal-body">
                         <uc1:UcTicketPortal runat="server" id="ucTicketPortal" />
@@ -301,8 +306,10 @@
                                     <strong>Tu no. de ticket:
                                         <asp:Label runat="server" ID="lblNoTicket" /></strong><br>
                                 </p>
-                                <p class="h4"><strong>Clave de registro:
-                                    <asp:Label runat="server" ID="lblRandom" /></strong></p>
+                                <p class="h4">
+                                    <strong>Clave de registro:
+                                    <asp:Label runat="server" ID="lblRandom" /></strong>
+                                </p>
                                 <hr />
                                 En breve recibirás un correo con los datos de tu ticket para que puedas dar seguimiento.
                             </ContentTemplate>

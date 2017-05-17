@@ -60,11 +60,12 @@ namespace KiiniHelp.UserControls.Altas
         {
             set
             {
-                panelAlertaInfoConsulta.Visible = value.Any();
-                if (!panelAlertaInfoConsulta.Visible) return;
-                rptErrorInfoConsulta.DataSource = value;
-                rptErrorInfoConsulta.DataBind();
-                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "UpScroll();", true);
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 

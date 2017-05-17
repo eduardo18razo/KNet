@@ -5,7 +5,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
      <script>
          function OpenWindow(url) {
-             debugger;
              window.open( url , "test", 'type=fullWindow, fullscreen, height=700,width=760');
          }
     </script>

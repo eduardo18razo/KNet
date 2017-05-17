@@ -51,7 +51,7 @@
                     </div>
                     </div>
 
-                    <div runat="server" id="divDetalle" Visible="False">
+                    <div runat="server" id="divDetalle" >
                         <asp:Repeater runat="server" ID="rptSubRoles">
                             <HeaderTemplate>
                                 <table class="table table-responsive" id="tblHeader">

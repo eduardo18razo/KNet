@@ -401,7 +401,6 @@ namespace KinniNet.Business.Utils
 
                 google.visualization.events.addListener(chart,
                 'regionClick',function(eventOption){
-                        debugger;
                         alert('Region : ' + eventOption.region);
                       }); 
                 chart.draw(data, options);

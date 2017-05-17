@@ -17,7 +17,6 @@
     <link href="BootStrap/css/stylemainmenu.css" rel="stylesheet" />
     <script>
         function CerrarVentana() {
-            debugger;
             window.close();
         }
     </script>

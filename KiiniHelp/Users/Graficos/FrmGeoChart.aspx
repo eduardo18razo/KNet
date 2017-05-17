@@ -9,7 +9,6 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
         function getValue(valor) {
-            debugger;
             var hf = parent.document.getElementById("ContentPlaceHolder1_hfRegion");
             hf.value = valor;
             parent.document.getElementById("ContentPlaceHolder1_btnDetalleGeografico").click();

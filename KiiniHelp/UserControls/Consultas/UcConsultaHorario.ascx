@@ -5,7 +5,6 @@
 <div style="height: 100%;">
     <script>
         function dbClic(e) {
-            debugger;
             $('#tblHeader').find('tr').dblclick(function (e) {
                 alert(e.target.parentElement.id);
             });
@@ -14,7 +13,6 @@
         function contextMenuHorarios() {
             var $contextMenuHorarios = $("#contextMenuHorarios");
             $("body").on("click", function (e) {
-                debugger;
                 $contextMenuHorarios.hide();
                 var table = $("#tblHeader");
                 table.find('tr').each(function (i, ev) {
@@ -22,7 +20,6 @@
                 });
             });
             $("body").on("contextmenu", "table tr", function (e) {
-                debugger;
                 $contextMenuHorarios.css({
                     display: "block",
                     left: e.pageX,
@@ -54,7 +51,6 @@
             });
 
             $contextMenuHorarios.on("click", "button", function () {
-                debugger;
                 $contextMenuHorarios.hide();
             });
         };

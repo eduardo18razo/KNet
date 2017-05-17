@@ -209,6 +209,7 @@
   <xs:element name="ObtenerNivel1">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="idArea" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
         <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
@@ -225,6 +226,7 @@
   <xs:element name="ObtenerNivel2">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="idArea" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
         <xs:element minOccurs="0" name="idNivel1" type="xs:int" />
@@ -242,6 +244,7 @@
   <xs:element name="ObtenerNivel3">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="idArea" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
         <xs:element minOccurs="0" name="idNivel2" type="xs:int" />
@@ -259,6 +262,7 @@
   <xs:element name="ObtenerNivel4">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="idArea" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
         <xs:element minOccurs="0" name="idNivel3" type="xs:int" />
@@ -276,6 +280,7 @@
   <xs:element name="ObtenerNivel5">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="idArea" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
         <xs:element minOccurs="0" name="idNivel4" type="xs:int" />
@@ -293,6 +298,7 @@
   <xs:element name="ObtenerNivel6">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="idArea" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
         <xs:element minOccurs="0" name="idNivel5" type="xs:int" />
@@ -310,6 +316,7 @@
   <xs:element name="ObtenerNivel7">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="idArea" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoArbol" type="xs:int" />
         <xs:element minOccurs="0" name="idTipoUsuario" type="xs:int" />
         <xs:element minOccurs="0" name="idNivel6" type="xs:int" />

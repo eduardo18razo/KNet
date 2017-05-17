@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.UI.WebControls;
@@ -16,11 +17,11 @@ namespace KiiniHelp.Funciones
                     throw new ArgumentException("Cadena vacia");
                 string[] cadena = input.Trim().Split(' ');
                 input = string.Empty;
-                foreach (string word  in cadena)
+                foreach (string word in cadena)
                 {
                     input += word.First().ToString().ToUpper() + word.Trim().Substring(1);
                 }
-                
+
                 return input;
             }
         }
@@ -29,7 +30,7 @@ namespace KiiniHelp.Funciones
         {
             public static T GetStringEnum<T>(string cadena)
             {
-                return (T) Enum.Parse(typeof (T), Strings.CastToEnum(cadena.ToLower()));
+                return (T)Enum.Parse(typeof(T), Strings.CastToEnum(cadena.ToLower()));
             }
             public static T GetValueEnumFromString<T>(string cadena)
             {
@@ -58,6 +59,17 @@ namespace KiiniHelp.Funciones
                 throw new Exception(ex.Message);
             }
         }
+        public static void LimpiarListBox(ListBox rbtnlst)
+        {
+            try
+            {
+                rbtnlst.Items.Clear();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public static void LlenaComboCatalogo(DropDownList ddl, object datos)
         {
             try
@@ -75,6 +87,34 @@ namespace KiiniHelp.Funciones
 
         }
 
+        public static void LlenaComboDuracionEnumerador(DropDownList ddl)
+        {
+            try
+            {
+                Dictionary<int, string> data = new Dictionary<int, string>();
+                data.Add(BusinessVariables.ComboBoxCatalogo.ValueSeleccione, BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione);
+                foreach (BusinessVariables.EnumeradoresKiiniNet.EnumTiempoDuracion foo in Enum.GetValues(typeof(BusinessVariables.EnumeradoresKiiniNet.EnumTiempoDuracion)))
+                {
+                    data.Add((int) foo, foo.ToString());
+                }
+                ddl.DataSource = data;
+                ddl.DataTextField = "Value";
+                ddl.DataValueField = "Key";
+                ddl.DataBind();
+                
+                //Array duraciones = Enum.GetValues(typeof(BusinessVariables.EnumeradoresKiiniNet.EnumTiempoDuracion));
+                
+                //foreach (BusinessVariables.EnumeradoresKiiniNet.EnumTiempoDuracion duracion in duraciones)
+                //{
+                //    ddl.Items.Add(new ListItem(duracion.ToString(), ((int)duracion).ToString()));
+                //}
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static void LlenaListBoxCatalogo(CheckBoxList chkLbx, object datos)
         {
             try
@@ -88,6 +128,27 @@ namespace KiiniHelp.Funciones
                 chkLbx.DataTextField = "Descripcion";
                 chkLbx.DataValueField = "Id";
                 chkLbx.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
+        public static void LlenaListBoxCatalogo(ListBox lbx, object datos)
+        {
+            try
+            {
+                if (lbx.DataSource != null)
+                {
+                    lbx.DataSource = null;
+                    lbx.DataBind();
+                }
+                lbx.DataSource = datos;
+                lbx.DataTextField = "Descripcion";
+                lbx.DataValueField = "Id";
+                lbx.DataBind();
 
             }
             catch (Exception ex)

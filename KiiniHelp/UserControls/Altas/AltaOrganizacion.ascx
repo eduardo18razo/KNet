@@ -4,27 +4,6 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <asp:HiddenField runat="server" ID="hfTipoUsuario" />
-                <div class="modal-header" id="panelAlertaOrganizacion" runat="server" visible="false">
-                    <div class="alert alert-danger" role="alert">
-                        <div>
-                            <div style="float: left">
-                                <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
-                            </div>
-                            <div style="float: left">
-                                <h3>Error</h3>
-                            </div>
-                            <div class="clearfix clear-fix"></div>
-                        </div>
-                        <hr />
-                        <asp:Repeater runat="server" ID="rptErrorOrganizacion">
-                            <ItemTemplate>
-                                <ul>
-                                    <li><%# Container.DataItem %></li>
-                                </ul>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </div>
-                </div>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         Organizacion

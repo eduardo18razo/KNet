@@ -160,13 +160,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<Nivel1> ObtenerNivel1(int idTipoArbol, int idTipoUsuario, bool insertarSeleccion)
+        public List<Nivel1> ObtenerNivel1(int idArea, int idTipoArbol, int idTipoUsuario, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
                 {
-                    return negocio.ObtenerNivel1(idTipoArbol, idTipoUsuario, insertarSeleccion);
+                    return negocio.ObtenerNivel1(idArea, idTipoArbol, idTipoUsuario, insertarSeleccion);
                 }
             }
             catch (Exception ex)
@@ -174,13 +174,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
-        public List<Nivel2> ObtenerNivel2(int idTipoArbol, int idTipoUsuario, int idNivel1, bool insertarSeleccion)
+        public List<Nivel2> ObtenerNivel2(int idArea, int idTipoArbol, int idTipoUsuario, int idNivel1, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
                 {
-                    return negocio.ObtenerNivel2(idTipoArbol, idTipoUsuario, idNivel1, insertarSeleccion);
+                    return negocio.ObtenerNivel2(idArea, idTipoArbol, idTipoUsuario, idNivel1, insertarSeleccion);
                 }
             }
             catch (Exception ex)
@@ -188,13 +188,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
-        public List<Nivel3> ObtenerNivel3(int idTipoArbol, int idTipoUsuario, int idNivel2, bool insertarSeleccion)
+        public List<Nivel3> ObtenerNivel3(int idArea, int idTipoArbol, int idTipoUsuario, int idNivel2, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
                 {
-                    return negocio.ObtenerNivel3(idTipoArbol, idTipoUsuario, idNivel2, insertarSeleccion);
+                    return negocio.ObtenerNivel3(idArea, idTipoArbol, idTipoUsuario, idNivel2, insertarSeleccion);
                 }
             }
             catch (Exception ex)
@@ -202,13 +202,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
-        public List<Nivel4> ObtenerNivel4(int idTipoArbol, int idTipoUsuario, int idNivel3, bool insertarSeleccion)
+        public List<Nivel4> ObtenerNivel4(int idArea, int idTipoArbol, int idTipoUsuario, int idNivel3, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
                 {
-                    return negocio.ObtenerNivel4(idTipoArbol, idTipoUsuario, idNivel3, insertarSeleccion);
+                    return negocio.ObtenerNivel4(idArea, idTipoArbol, idTipoUsuario, idNivel3, insertarSeleccion);
                 }
             }
             catch (Exception ex)
@@ -216,13 +216,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
-        public List<Nivel5> ObtenerNivel5(int idTipoArbol, int idTipoUsuario, int idNivel4, bool insertarSeleccion)
+        public List<Nivel5> ObtenerNivel5(int idArea, int idTipoArbol, int idTipoUsuario, int idNivel4, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
                 {
-                    return negocio.ObtenerNivel5(idTipoArbol, idTipoUsuario, idNivel4, insertarSeleccion);
+                    return negocio.ObtenerNivel5(idArea, idTipoArbol, idTipoUsuario, idNivel4, insertarSeleccion);
                 }
             }
             catch (Exception ex)
@@ -230,13 +230,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
-        public List<Nivel6> ObtenerNivel6(int idTipoArbol, int idTipoUsuario, int idNivel5, bool insertarSeleccion)
+        public List<Nivel6> ObtenerNivel6(int idArea, int idTipoArbol, int idTipoUsuario, int idNivel5, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
                 {
-                    return negocio.ObtenerNivel6(idTipoArbol, idTipoUsuario, idNivel5, insertarSeleccion);
+                    return negocio.ObtenerNivel6(idArea, idTipoArbol, idTipoUsuario, idNivel5, insertarSeleccion);
                 }
             }
             catch (Exception ex)
@@ -244,13 +244,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
-        public List<Nivel7> ObtenerNivel7(int idTipoArbol, int idTipoUsuario, int idNivel6, bool insertarSeleccion)
+        public List<Nivel7> ObtenerNivel7(int idArea, int idTipoArbol, int idTipoUsuario, int idNivel6, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessArbolAcceso negocio = new BusinessArbolAcceso())
                 {
-                    return negocio.ObtenerNivel7(idTipoArbol, idTipoUsuario, idNivel6, insertarSeleccion);
+                    return negocio.ObtenerNivel7(idArea, idTipoArbol, idTipoUsuario, idNivel6, insertarSeleccion);
                 }
             }
             catch (Exception ex)

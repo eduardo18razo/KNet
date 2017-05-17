@@ -6,7 +6,6 @@
 <style>
     .hideCheck {
     }
-
         .hideCheck input {
             left: -9999px;
             display: none;
@@ -29,7 +28,7 @@
             <h2 class="modal-title" id="modal-new-ticket-label">
                 <br />
                 NUEVO GRUPO</h2>
-            <asp:Label runat="server" Text="Alta Grupo de Usuario" ID="lblTitle"></asp:Label>
+            <asp:Label runat="server" Text="Alta Grupo de Usuario" ID="lblTitle" Visible="False"></asp:Label>
         </div>
         <hr />
         <div class="modal-body">

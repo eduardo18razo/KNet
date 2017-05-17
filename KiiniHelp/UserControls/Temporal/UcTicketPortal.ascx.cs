@@ -26,33 +26,71 @@ namespace KiiniHelp.UserControls.Temporal
         readonly ServiceTicketClient _servicioTicket = new ServiceTicketClient();
         readonly ServiceSecurityClient _servicioSeguridad = new ServiceSecurityClient();
         private List<Control> _lstControles;
+        private List<string> _lstError = new List<string>();
+        private List<string> Alerta
+        {
+            set
+            {
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
+            }
+        }
+
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            Control myControl = GetPostBackControl(Page);
-
-            if ((myControl != null))
+            try
             {
-                if ((myControl.ClientID == "btnAddTextBox"))
-                {
+                Control myControl = GetPostBackControl(Page);
 
+                if ((myControl != null))
+                {
+                    if ((myControl.ClientID == "btnAddTextBox"))
+                    {
+
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
         protected override void OnInit(EventArgs e)
         {
-            //TODO: Cambiar IdMascara por parametro base de datos
-            base.OnInit(e);
-            _lstControles = new List<Control>();
-            int? idMascara = 3;
-            IdMascara = (int)idMascara;
-            Mascara mascara = _servicioMascaras.ObtenerMascaraCaptura(IdMascara);
-            if (mascara != null)
+            try
             {
-                hfComandoInsertar.Value = mascara.ComandoInsertar;
-                hfComandoActualizar.Value = mascara.ComandoInsertar;
-                hfRandom.Value = mascara.Random.ToString();
-                PintaControles(mascara.CampoMascara);
-                Session["MascaraActiva"] = mascara;
+                //TODO: Cambiar IdMascara por parametro base de datos
+                base.OnInit(e);
+                _lstControles = new List<Control>();
+                int? idMascara = 3;
+                IdMascara = (int)idMascara;
+                Mascara mascara = _servicioMascaras.ObtenerMascaraCaptura(IdMascara);
+                if (mascara != null)
+                {
+                    hfComandoInsertar.Value = mascara.ComandoInsertar;
+                    hfComandoActualizar.Value = mascara.ComandoInsertar;
+                    hfRandom.Value = mascara.Random.ToString();
+                    PintaControles(mascara.CampoMascara);
+                    Session["MascaraActiva"] = mascara;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
 
@@ -467,16 +505,35 @@ namespace KiiniHelp.UserControls.Temporal
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
+                Alerta = new List<string>();
+                if (!IsPostBack)
+                {
 
 
+                }
             }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+
         }
 
         public void ValidaMascaraCaptura()
@@ -667,12 +724,12 @@ namespace KiiniHelp.UserControls.Temporal
             }
             catch (Exception ex)
             {
-                //if (_lstError == null)
-                //{
-                //    _lstError = new List<string>();
-                //}
-                //_lstError.Add(ex.Message);
-                //AlertaGeneral = _lstError;
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
 
@@ -683,7 +740,7 @@ namespace KiiniHelp.UserControls.Temporal
                 _lstControles = new List<Control>();
                 divControles.Controls.Clear();
                 OnInit(new EventArgs());
-                
+
             }
             catch (Exception)
             {

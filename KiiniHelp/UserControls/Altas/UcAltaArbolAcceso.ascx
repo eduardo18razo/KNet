@@ -106,28 +106,7 @@
                 <ContentTemplate>
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
-                            <div class="modal-header" id="panelAlertaInfoConsulta" runat="server" visible="false">
-                                <div class="alert alert-danger">
-                                    <div>
-                                        <div style="float: left">
-                                            <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
-                                        </div>
-                                        <div style="float: left">
-                                            <h3>Error</h3>
-                                        </div>
-                                        <div class="clearfix clear-fix" />
-                                    </div>
-                                    <asp:Repeater runat="server" ID="rptErrorInfoConsulta">
-                                        <ItemTemplate>
-                                            <div class="row">
-                                                <ul>
-                                                    <li><%# Container.DataItem %></li>
-                                                </ul>
-                                            </div>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </div>
-                            </div>
+                            
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
                                     <div class="col-sm-3 control-label">

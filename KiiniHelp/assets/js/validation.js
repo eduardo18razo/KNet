@@ -25,7 +25,6 @@ function ValidaRfc(rfcStr) {
 
 
 function ValidaCampo(objeto, tipo) {
-    debugger;
     var longitudValor = objeto.value.length + 1;
     var subCadena = String.fromCharCode(window.event.keyCode).toUpperCase();
     var tCadena = objeto.value;

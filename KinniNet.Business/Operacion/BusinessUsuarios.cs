@@ -416,6 +416,8 @@ namespace KinniNet.Core.Operacion
                     {
                         db.LoadProperty(grupo, "GrupoUsuario");
                         db.LoadProperty(grupo, "SubGrupoUsuario");
+                        if (grupo.SubGrupoUsuario != null)
+                            db.LoadProperty(grupo.SubGrupoUsuario, "SubRol");
                     }
 
                 }

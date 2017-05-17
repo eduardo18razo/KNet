@@ -45,7 +45,6 @@
             });
 
             $contextMenuEncuesta.on("click", "button", function () {
-                debugger;
                 $contextMenuEncuesta.hide();
             });
         };

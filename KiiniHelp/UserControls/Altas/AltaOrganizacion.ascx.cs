@@ -97,10 +97,12 @@ namespace KiiniHelp.UserControls.Altas
         {
             set
             {
-                panelAlertaOrganizacion.Visible = value.Any();
-                if (!panelAlertaOrganizacion.Visible) return;
-                rptErrorOrganizacion.DataSource = value;
-                rptErrorOrganizacion.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 

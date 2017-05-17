@@ -32,7 +32,6 @@
         SetSelection();
     }
     function SetSelection() {
-        debugger;
         var dayLun = document.getElementById("<%= FindControl("hfLunes").ClientID %>").value.split(',');
         var dayMar = document.getElementById("<%= FindControl("hfMartes").ClientID %>").value.split(',');
         var dayMie = document.getElementById("<%= FindControl("hfMiercoles").ClientID %>").value.split(',');

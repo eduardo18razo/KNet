@@ -15,14 +15,16 @@ namespace KiiniHelp.Publico.Consultas
 
         private List<string> _lstError = new List<string>();
 
-        private List<string> AlertaGeneral
+        private List<string> Alerta
         {
             set
             {
-                pnlAlertaGeneral.Visible = value.Any();
-                if (!pnlAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -30,9 +32,9 @@ namespace KiiniHelp.Publico.Consultas
         {
             try
             {
-                AlertaGeneral = new List<string>();
+                Alerta = new List<string>();
                 targetEditor.Attributes.Add("onfocus", "CargaEditor(\"#targetEditor\");");
-                
+
             }
             catch (Exception ex)
             {
@@ -41,7 +43,7 @@ namespace KiiniHelp.Publico.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -49,6 +51,10 @@ namespace KiiniHelp.Publico.Consultas
         {
             try
             {
+                if (txtTicket.Text.Trim() == string.Empty)
+                    throw new Exception("Ingrese número de ticket");
+                if (txtClave.Text.Trim() == string.Empty)
+                    throw new Exception("Ingrese clave de registro");
                 HelperDetalleTicket detalle = _servicioticket.ObtenerDetalleTicketNoRegistrado(int.Parse(txtTicket.Text.Trim()), txtClave.Text.Trim());
                 if (detalle != null)
                 {
@@ -70,7 +76,7 @@ namespace KiiniHelp.Publico.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -92,7 +98,7 @@ namespace KiiniHelp.Publico.Consultas
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
     }

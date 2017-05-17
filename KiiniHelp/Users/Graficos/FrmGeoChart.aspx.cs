@@ -42,7 +42,6 @@ namespace KiiniHelp.Users.Graficos
 
                             google.visualization.events.addListener(chart,
                             'regionClick',function(eventOption){
-                                    debugger;
                                     getValue(eventOption.region);
                                     alert('Region : ' + eventOption.region);
                                     }); 

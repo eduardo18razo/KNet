@@ -223,12 +223,12 @@ namespace KinniNet.Core.Operacion
                 try
                 {
                     db.ContextOptions.ProxyCreationEnabled = _proxy;
-                    List<int> lstAreas = (from a in db.Area
-                                       join aa in db.ArbolAcceso on a.Id equals aa.IdArea
-                                       where aa.IdTipoUsuario == idTipoUsuario
-                                       select a.Id).Distinct().ToList();
+                    //List<int> lstAreas = (from a in db.Area
+                    //                      join aa in db.ArbolAcceso on a.Id equals aa.IdArea
+                    //                      where aa.IdTipoUsuario == idTipoUsuario
+                    //                      select a.Id).Distinct().ToList();
 
-                    result = db.Area.Where(w => lstAreas.Contains(w.Id)).ToList();
+                    result = db.Area.Where(w => w.Habilitado).ToList();
                     if (insertarSeleccion)
                         result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                             new Area

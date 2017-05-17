@@ -50,7 +50,6 @@
             });
 
             $ContextMenuMascara.on("click", "button", function () {
-                debugger;
                 $ContextMenuMascara.hide();
             });
         };

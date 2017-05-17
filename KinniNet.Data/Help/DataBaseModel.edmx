@@ -41,6 +41,7 @@
           <Property Name="IdNivel5" Type="int" />
           <Property Name="IdNivel6" Type="int" />
           <Property Name="IdNivel7" Type="int" />
+          <Property Name="Evaluacion" Type="bit" />
           <Property Name="EsTerminal" Type="bit" Nullable="false" />
           <Property Name="Sistema" Type="bit" />
           <Property Name="Habilitado" Type="bit" />
@@ -7534,6 +7535,7 @@
           <Property Name="IdUsuarioAlta" Type="Int32" />
           <NavigationProperty Name="Area" Relationship="KiiniNet_v2Model.FK_ArbolAcceso_Area" FromRole="ArbolAcceso" ToRole="Area" />
           <NavigationProperty Name="Frecuencia" Relationship="KiiniNet_v2Model.FK_Frecuencia_ArbolAcceso" FromRole="ArbolAcceso" ToRole="Frecuencia" />
+          <Property Name="Evaluacion" Type="Boolean" />
           </EntityType>
         <Association Name="FK_ArbolAcceso_Nivel1">
           <End Type="KiiniNet_v2Model.Nivel1" Role="Nivel1" Multiplicity="1" />
@@ -10710,6 +10712,7 @@
           <EntitySetMapping Name="ArbolAcceso">
             <EntityTypeMapping TypeName="KiiniNet_v2Model.ArbolAcceso">
               <MappingFragment StoreEntitySet="ArbolAcceso">
+                <ScalarProperty Name="Evaluacion" ColumnName="Evaluacion" />
                 <ScalarProperty Name="IdUsuarioAlta" ColumnName="IdUsuarioAlta" />
                 <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
                 <ScalarProperty Name="Sistema" ColumnName="Sistema" />

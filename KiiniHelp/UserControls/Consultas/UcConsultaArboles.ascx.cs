@@ -138,6 +138,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAtaOpcion\");", true);
             }
             catch (Exception ex)
             {

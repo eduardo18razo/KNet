@@ -433,7 +433,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 Metodos.LimpiarCombo(ddlNivel7);
                 int idTipoArbol = Convert.ToInt32(ddlTipoArbol.SelectedValue);
                 int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
-                Metodos.LlenaComboCatalogo(ddlNivel1, _servicioArbolAcceso.ObtenerNivel1(idTipoArbol, idTipoUsuario, true));
+                Metodos.LlenaComboCatalogo(ddlNivel1, _servicioArbolAcceso.ObtenerNivel1(int.Parse(ddlArea.SelectedValue), idTipoArbol, idTipoUsuario, true));
                 if (ddlTipoArbol.SelectedIndex != BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
                     btnAgregarNivel1.Enabled = true;
@@ -482,7 +482,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 int idNivelFiltro = Convert.ToInt32(ddlNivel1.SelectedValue);
                 if (!_servicioArbolAcceso.EsNodoTerminal(idTipoUsuario, idTipoArbol, idNivelFiltro, null, null, null, null, null, null))
                 {
-                    Metodos.FiltraCombo(ddlNivel1, ddlNivel2, _servicioArbolAcceso.ObtenerNivel2(idTipoArbol, idTipoUsuario, idNivelFiltro, true));
+                    Metodos.FiltraCombo(ddlNivel1, ddlNivel2, _servicioArbolAcceso.ObtenerNivel2(int.Parse(ddlArea.SelectedValue), idTipoArbol, idTipoUsuario, idNivelFiltro, true));
                     btnAgregarNivel2.Enabled = true;
                     btnAgregarNivel3.Enabled = false;
                     btnAgregarNivel4.Enabled = false;
@@ -525,7 +525,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
 
                 if (!_servicioArbolAcceso.EsNodoTerminal(idTipoUsuario, idTipoArbol, Convert.ToInt32(ddlNivel1.SelectedValue), idNivelFiltro, null, null, null, null, null))
                 {
-                    Metodos.FiltraCombo(ddlNivel2, ddlNivel3, _servicioArbolAcceso.ObtenerNivel3(idTipoArbol, idTipoUsuario, idNivelFiltro, true));
+                    Metodos.FiltraCombo(ddlNivel2, ddlNivel3, _servicioArbolAcceso.ObtenerNivel3(int.Parse(ddlArea.SelectedValue), idTipoArbol, idTipoUsuario, idNivelFiltro, true));
                     btnAgregarNivel3.Enabled = true;
                     btnAgregarNivel4.Enabled = false;
                     btnAgregarNivel5.Enabled = false;
@@ -564,7 +564,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 int idNivelFiltro = Convert.ToInt32(ddlNivel3.SelectedValue);
                 if (!_servicioArbolAcceso.EsNodoTerminal(idTipoUsuario, idTipoArbol, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), null, null, null, null))
                 {
-                    Metodos.FiltraCombo(ddlNivel3, ddlNivel4, _servicioArbolAcceso.ObtenerNivel4(idTipoArbol, idTipoUsuario, idNivelFiltro, true));
+                    Metodos.FiltraCombo(ddlNivel3, ddlNivel4, _servicioArbolAcceso.ObtenerNivel4(int.Parse(ddlArea.SelectedValue), idTipoArbol, idTipoUsuario, idNivelFiltro, true));
                     btnAgregarNivel4.Enabled = true;
                     btnAgregarNivel5.Enabled = false;
                     btnAgregarNivel6.Enabled = false;
@@ -600,7 +600,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 int idNivelFiltro = Convert.ToInt32(ddlNivel4.SelectedValue);
                 if (!_servicioArbolAcceso.EsNodoTerminal(idTipoUsuario, idTipoArbol, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), idNivelFiltro, null, null, null))
                 {
-                    Metodos.FiltraCombo(ddlNivel4, ddlNivel5, _servicioArbolAcceso.ObtenerNivel5(idTipoArbol, idTipoUsuario, idNivelFiltro, true));
+                    Metodos.FiltraCombo(ddlNivel4, ddlNivel5, _servicioArbolAcceso.ObtenerNivel5(int.Parse(ddlArea.SelectedValue), idTipoArbol, idTipoUsuario, idNivelFiltro, true));
                     btnAgregarNivel5.Enabled = true;
                     btnAgregarNivel6.Enabled = false;
                     btnAgregarNivel7.Enabled = false;
@@ -633,7 +633,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 int idNivelFiltro = Convert.ToInt32(ddlNivel5.SelectedValue);
                 if (!_servicioArbolAcceso.EsNodoTerminal(idTipoUsuario, idTipoArbol, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), Convert.ToInt32(ddlNivel4.SelectedValue), idNivelFiltro, null, null))
                 {
-                    Metodos.FiltraCombo(ddlNivel5, ddlNivel6, _servicioArbolAcceso.ObtenerNivel6(idTipoArbol, idTipoUsuario, idNivelFiltro, true));
+                    Metodos.FiltraCombo(ddlNivel5, ddlNivel6, _servicioArbolAcceso.ObtenerNivel6(int.Parse(ddlArea.SelectedValue), idTipoArbol, idTipoUsuario, idNivelFiltro, true));
                     btnAgregarNivel6.Enabled = true;
                     btnAgregarNivel7.Enabled = false;
                 }
@@ -664,7 +664,7 @@ namespace KiiniHelp.Users.Administracion.ArbolesAcceso
                 int idNivelFiltro = Convert.ToInt32(ddlNivel6.SelectedValue);
                 if (!_servicioArbolAcceso.EsNodoTerminal(idTipoUsuario, idTipoArbol, Convert.ToInt32(ddlNivel1.SelectedValue), Convert.ToInt32(ddlNivel2.SelectedValue), Convert.ToInt32(ddlNivel3.SelectedValue), Convert.ToInt32(ddlNivel4.SelectedValue), Convert.ToInt32(ddlNivel5.SelectedValue), idNivelFiltro, null))
                 {
-                    Metodos.FiltraCombo(ddlNivel6, ddlNivel7, _servicioArbolAcceso.ObtenerNivel7(idTipoArbol, idTipoUsuario, idNivelFiltro, true));
+                    Metodos.FiltraCombo(ddlNivel6, ddlNivel7, _servicioArbolAcceso.ObtenerNivel7(int.Parse(ddlArea.SelectedValue), idTipoArbol, idTipoUsuario, idNivelFiltro, true));
                     btnAgregarNivel7.Enabled = true;
                 }
                 else

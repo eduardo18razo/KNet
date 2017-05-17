@@ -6,7 +6,6 @@
 <div style="height: 100%;">
     <script>
         function dbClic(e) {
-            debugger;
             $('#tblHeader').find('tr').dblclick(function (e) {
                 alert(e.target.parentElement.id);
             });
@@ -15,7 +14,6 @@
         function contextMenuCatalogos() {
             var $contextMenuCatalogos = $("#contextMenuCatalogos");
             $("body").on("click", function (e) {
-                debugger;
                 $contextMenuCatalogos.hide();
                 var table = $("#tblHeader");
                 table.find('tr').each(function (i, ev) {
@@ -23,7 +21,6 @@
                 });
             });
             $("body").on("contextmenu", "table tr", function (e) {
-                debugger;
                 $contextMenuCatalogos.css({
                     display: "block",
                     left: e.pageX,
@@ -55,7 +52,6 @@
             });
 
             $contextMenuCatalogos.on("click", "button", function () {
-                debugger;
                 $contextMenuCatalogos.hide();
             });
         };

@@ -34,13 +34,13 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label" for="">No. de ticket</label>
                                                         <div class="col-sm-10">
-                                                            <asp:TextBox required="required" runat="server" CssClass="form-control" ID="txtTicket" placeholder="Ingresa aquí" />
+                                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtTicket" placeholder="Ingresa aquí" />
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label" for="">Clave de registro</label>
                                                         <div class="col-sm-10">
-                                                            <asp:TextBox required="required" type="text" class="form-control" placeholder="Ingresa aquí" runat="server" ID="txtClave" />
+                                                            <asp:TextBox type="text" class="form-control" placeholder="Ingresa aquí" runat="server" ID="txtClave" />
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -214,27 +214,6 @@
                 <%--<script>
                 CargaEditor("#targetEditor");
             </script>--%>
-                <header class="modal-header" id="pnlAlertaGeneral" runat="server" visible="false">
-                    <div class="alert alert-danger">
-                        <div>
-                            <div style="float: left">
-                                <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
-                            </div>
-                            <div style="float: left">
-                                <h3>Error</h3>
-                            </div>
-                            <div class="clearfix clear-fix" />
-                        </div>
-                        <hr />
-                        <asp:Repeater runat="server" ID="rptErrorGeneral">
-                            <ItemTemplate>
-                                <ul>
-                                    <li><%# Container.DataItem %></li>
-                                </ul>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </div>
-                </header>
 
             </ContentTemplate>
         </asp:UpdatePanel>

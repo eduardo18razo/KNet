@@ -34,12 +34,13 @@ body {
     /* 1 */
     width: 10px;
     height: 10px;
-    -webkit-transition:all .3s linear;
-    -moz-transition:all .3s linear;
-    -ms-transition:all .3s linear;
-    -o-transition:all .3s linear;
-    transition:all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    -ms-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
 }
+
 :hover::-webkit-scrollbar {
     display: block;
 }
@@ -58,11 +59,11 @@ body {
 
 ::-webkit-scrollbar-thumb {
     /* 5 */
-    -webkit-transition:all .3s linear;
-    -moz-transition:all .3s linear;
-    -ms-transition:all .3s linear;
-    -o-transition:all .3s linear;
-    transition:all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    -ms-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
     background: #3aa7aa;
     background: rgba(58,167,170,0.8);
     border-radius: 10px;
@@ -80,8 +81,8 @@ body {
 }
 
 .hidden {
-            visibility: hidden;
-        }
+    visibility: hidden;
+}
 
 .video-container iframe {
     max-width: 100%;
@@ -1712,6 +1713,12 @@ a.btn {
         background: #f9f9fb;
         box-shadow: none;
     }
+
+
+.btn-default {
+    border-color: #3aa7aa;
+    color: #3aa7aa;
+}
 
 .btn-primary {
     background: #40babd;

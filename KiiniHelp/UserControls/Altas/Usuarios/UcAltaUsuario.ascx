@@ -47,7 +47,6 @@
 
     <script type="text/javascript">
         function UploadFile(fileUpload) {
-            debugger;
         if (fileUpload.value != '') {
             document.getElementById("<%=btnUpload.ClientID %>").click();
         }

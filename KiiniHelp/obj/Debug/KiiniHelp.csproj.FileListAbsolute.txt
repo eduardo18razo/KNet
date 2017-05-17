@@ -1,3 +1,4 @@
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\obj\Debug\KiiniHelp.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KiiniHelp.dll.config
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KiiniHelp.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KiiniHelp.pdb
@@ -5,6 +6,5 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KiiniNet.Entities.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KinniNet.Business.Utils.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KiiniNet.Entities.pdb
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KinniNet.Business.Utils.pdb
-C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\obj\Debug\KiiniHelp.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\obj\Debug\KiiniHelp.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\obj\Debug\KiiniHelp.pdb

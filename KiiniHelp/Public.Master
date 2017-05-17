@@ -32,6 +32,7 @@
         function CargaEditor(editorName) {
             $(editorName).markdown();
         }
+        
     </script>
     <style>
         body {
@@ -55,6 +56,7 @@
                     <asp:ScriptReference Path="~/assets/js/pmenu.js" />
                     <asp:ScriptReference Path="~/assets/js/bootstrap-notify.js" />
                     <asp:ScriptReference Path="~/assets/js/bootstrap-notify.min.js" />
+                    <asp:ScriptReference Path="~/assets/js/Notificaciones.js" />
                     <asp:ScriptReference Path="~/assets/tmp/chosen.jquery.js" />
                     <asp:ScriptReference Path="~/assets/js/validation.js" />
                 </Scripts>

@@ -83,6 +83,9 @@
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\fonts\Pe-icon-7-strokebb1d.svg" />
+    <Content Include="assets\images\icons\prioridadalta.png" />
+    <Content Include="assets\images\icons\prioridadbaja.png" />
+    <Content Include="assets\images\icons\prioridadmedia.png" />
     <Content Include="assets\images\logo-icon.svg" />
     <Content Include="assets\images\profiles\profile-1.png" />
     <Content Include="assets\images\profiles\profile-square-1.png" />
@@ -111,10 +114,13 @@
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\masonry.js" />
     <Content Include="assets\js\modernizr.custom.js" />
+    <Content Include="assets\js\Notificaciones.js" />
     <Content Include="assets\js\pmenu.js" />
     <Content Include="assets\js\validation.js" />
     <Content Include="assets\tmp\chosen.css" />
     <Content Include="assets\tmp\chosen.jquery.js" />
+    <Content Include="assets\tmp\jquery.sumoselect.min.js" />
+    <Content Include="assets\tmp\sumoselect.css" />
     <Content Include="ConfirmacionCuenta.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Images\orderedList2.png" />
@@ -355,6 +361,9 @@
     <Content Include="Test\FrmTestMain.aspx" />
     <Content Include="Test\FrmTestMenu.aspx" />
     <Content Include="Test\FrmTestMenuCu.aspx" />
+    <Content Include="UserControls\Altas\ArbolesAcceso\UcAltaAbrolAcceso.ascx" />
+    <Content Include="UserControls\Altas\ArbolesAcceso\UcAltaConsulta.ascx" />
+    <Content Include="UserControls\Altas\ArbolesAcceso\UcAltaServicio.ascx" />
     <Content Include="UserControls\Altas\Organizaciones\UcAltaOrganizaciones.ascx" />
     <Content Include="UserControls\Altas\Ubicaciones\UcAltaUbicaciones.ascx" />
     <Content Include="UserControls\Altas\UcAltaArbolAcceso.ascx" />
@@ -2418,6 +2427,27 @@
     </Compile>
     <Compile Include="Test\FrmTestMenuCu.aspx.designer.cs">
       <DependentUpon>FrmTestMenuCu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\ArbolesAcceso\UcAltaAbrolAcceso.ascx.cs">
+      <DependentUpon>UcAltaAbrolAcceso.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\ArbolesAcceso\UcAltaAbrolAcceso.ascx.designer.cs">
+      <DependentUpon>UcAltaAbrolAcceso.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\ArbolesAcceso\UcAltaConsulta.ascx.cs">
+      <DependentUpon>UcAltaConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\ArbolesAcceso\UcAltaConsulta.ascx.designer.cs">
+      <DependentUpon>UcAltaConsulta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\ArbolesAcceso\UcAltaServicio.ascx.cs">
+      <DependentUpon>UcAltaServicio.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\ArbolesAcceso\UcAltaServicio.ascx.designer.cs">
+      <DependentUpon>UcAltaServicio.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Altas\Organizaciones\UcAltaOrganizaciones.ascx.cs">
       <DependentUpon>UcAltaOrganizaciones.ascx</DependentUpon>
