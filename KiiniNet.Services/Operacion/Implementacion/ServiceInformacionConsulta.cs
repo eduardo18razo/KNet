@@ -54,13 +54,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public void GuardarInformacionConsulta(InformacionConsulta informacion, List<string> documentosDescarga)
+        public InformacionConsulta GuardarInformacionConsulta(InformacionConsulta informacion, List<string> documentosDescarga)
         {
             try
             {
                 using (BusinessInformacionConsulta negocio = new BusinessInformacionConsulta())
                 {
-                    negocio.GuardarInformacionConsulta(informacion, documentosDescarga);
+                    return negocio.GuardarInformacionConsulta(informacion, documentosDescarga);
                 }
             }
             catch (Exception ex)
@@ -69,13 +69,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public void ActualizarInformacionConsulta(int idInformacionConsulta, InformacionConsulta informacion)
+        public InformacionConsulta ActualizarInformacionConsulta(int idInformacionConsulta, InformacionConsulta informacion, List<string> documentosDescarga)
         {
             try
             {
                 using (BusinessInformacionConsulta negocio = new BusinessInformacionConsulta())
                 {
-                    negocio.ActualizarInformacionConsulta(idInformacionConsulta, informacion);
+                    return negocio.ActualizarInformacionConsulta(idInformacionConsulta, informacion, documentosDescarga);
                 }
             }
             catch (Exception ex)
@@ -99,13 +99,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<InformacionConsulta> ObtenerConsulta(int? idTipoInformacionConsulta, int? idTipoDocumento)
+        public List<InformacionConsulta> ObtenerConsulta(string descripcion)
         {
             try
             {
                 using (BusinessInformacionConsulta negocio = new BusinessInformacionConsulta())
                 {
-                    return negocio.ObtenerInformacionConsulta(idTipoInformacionConsulta, idTipoDocumento);
+                    return negocio.ObtenerInformacionConsulta(descripcion);
                 }
             }
             catch (Exception ex)

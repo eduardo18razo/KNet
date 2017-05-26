@@ -29,17 +29,17 @@ namespace KiiniHelp.ServiceInformacionConsulta {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/GuardarInformacionConsulta", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/GuardarInformacionConsultaResponse" +
             "")]
-        void GuardarInformacionConsulta(KiiniNet.Entities.Operacion.InformacionConsulta informacion, System.Collections.Generic.List<string> documentosDescarga);
+        KiiniNet.Entities.Operacion.InformacionConsulta GuardarInformacionConsulta(KiiniNet.Entities.Operacion.InformacionConsulta informacion, System.Collections.Generic.List<string> documentosDescarga);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/ActualizarInformacionConsulta", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/ActualizarInformacionConsultaRespo" +
             "nse")]
-        void ActualizarInformacionConsulta(int idInformacionConsulta, KiiniNet.Entities.Operacion.InformacionConsulta informacion);
+        KiiniNet.Entities.Operacion.InformacionConsulta ActualizarInformacionConsulta(int idInformacionConsulta, KiiniNet.Entities.Operacion.InformacionConsulta informacion, System.Collections.Generic.List<string> documentosDescarga);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/GuardarHit", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/GuardarHitResponse")]
         void GuardarHit(int idArbol, int idUsuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/ObtenerConsulta", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/ObtenerConsultaResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Operacion.InformacionConsulta> ObtenerConsulta(System.Nullable<int> idTipoInformacionConsulta, System.Nullable<int> idTipoDocumento);
+        System.Collections.Generic.List<KiiniNet.Entities.Operacion.InformacionConsulta> ObtenerConsulta(string descripcion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceInformacionConsulta/HabilitarInformacion", ReplyAction="http://tempuri.org/IServiceInformacionConsulta/HabilitarInformacionResponse")]
         void HabilitarInformacion(int idInformacion, bool habilitado);
@@ -84,20 +84,20 @@ namespace KiiniHelp.ServiceInformacionConsulta {
             return base.Channel.ObtenerInformacionConsultaById(idInformacion);
         }
         
-        public void GuardarInformacionConsulta(KiiniNet.Entities.Operacion.InformacionConsulta informacion, System.Collections.Generic.List<string> documentosDescarga) {
-            base.Channel.GuardarInformacionConsulta(informacion, documentosDescarga);
+        public KiiniNet.Entities.Operacion.InformacionConsulta GuardarInformacionConsulta(KiiniNet.Entities.Operacion.InformacionConsulta informacion, System.Collections.Generic.List<string> documentosDescarga) {
+            return base.Channel.GuardarInformacionConsulta(informacion, documentosDescarga);
         }
         
-        public void ActualizarInformacionConsulta(int idInformacionConsulta, KiiniNet.Entities.Operacion.InformacionConsulta informacion) {
-            base.Channel.ActualizarInformacionConsulta(idInformacionConsulta, informacion);
+        public KiiniNet.Entities.Operacion.InformacionConsulta ActualizarInformacionConsulta(int idInformacionConsulta, KiiniNet.Entities.Operacion.InformacionConsulta informacion, System.Collections.Generic.List<string> documentosDescarga) {
+            return base.Channel.ActualizarInformacionConsulta(idInformacionConsulta, informacion, documentosDescarga);
         }
         
         public void GuardarHit(int idArbol, int idUsuario) {
             base.Channel.GuardarHit(idArbol, idUsuario);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.InformacionConsulta> ObtenerConsulta(System.Nullable<int> idTipoInformacionConsulta, System.Nullable<int> idTipoDocumento) {
-            return base.Channel.ObtenerConsulta(idTipoInformacionConsulta, idTipoDocumento);
+        public System.Collections.Generic.List<KiiniNet.Entities.Operacion.InformacionConsulta> ObtenerConsulta(string descripcion) {
+            return base.Channel.ObtenerConsulta(descripcion);
         }
         
         public void HabilitarInformacion(int idInformacion, bool habilitado) {

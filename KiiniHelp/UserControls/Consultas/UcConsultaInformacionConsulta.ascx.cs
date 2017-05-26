@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
 using KiiniHelp.ServiceInformacionConsulta;
 using KiiniHelp.ServiceSistemaTipoInformacionConsulta;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Consultas
@@ -16,47 +18,28 @@ namespace KiiniHelp.UserControls.Consultas
         private readonly ServiceInformacionConsultaClient _servicioInformacionConsulta = new ServiceInformacionConsultaClient();
 
         private List<string> _lstError = new List<string>();
-
-        public event DelegateAceptarModal OnAceptarModal;
-        public event DelegateLimpiarModal OnLimpiarModal;
-        public event DelegateCancelarModal OnCancelarModal;
         
         public List<string> Alerta
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
-
-        private void LlenaCombos()
-        {
-            try
-            {
-                List<TipoInfConsulta> lstTipoInformacionConsultas = _servicioSistemaTipoInformacion.ObtenerTipoInformacionConsulta(true);
-                Metodos.LlenaComboCatalogo(ddlTipoInformacion, lstTipoInformacionConsultas);
-
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-
+        
         private void LlenaInformacionConsulta()
         {
             try
             {
-                int? idTipoInfotmacion = null;
-                if (ddlTipoInformacion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    idTipoInfotmacion = int.Parse(ddlTipoInformacion.SelectedValue);
-
-                rptResultados.DataSource = _servicioInformacionConsulta.ObtenerConsulta(idTipoInfotmacion, null);
+                string filtro = txtFiltro.Text;
+                rptResultados.DataSource = _servicioInformacionConsulta.ObtenerConsulta(filtro);
                 rptResultados.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
             }
             catch (Exception e)
             {
@@ -67,13 +50,8 @@ namespace KiiniHelp.UserControls.Consultas
         protected void Page_Load(object sender, EventArgs e)
         {
             Alerta = new List<string>();
-            if (!IsPostBack)
-            {
-                LlenaCombos();
-                LlenaInformacionConsulta();
-            }
-            AltaInformacionConsulta.OnAceptarModal += AltaInformacionConsultaOnAceptarModal;
-            AltaInformacionConsulta.OnCancelarModal += AltaInformacionConsultaOnCancelarModal;
+            ucAltaInformacionConsulta.OnAceptarModal += AltaInformacionConsultaOnAceptarModal;
+            ucAltaInformacionConsulta.OnCancelarModal += AltaInformacionConsultaOnCancelarModal;
         }
 
         private void AltaInformacionConsultaOnCancelarModal()
@@ -111,66 +89,12 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        protected void ddlTipoInformacion_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                LlenaInformacionConsulta();
-                btnNew.Visible = ddlTipoInformacion.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnBaja_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioInformacionConsulta.HabilitarInformacion(Convert.ToInt32(hfId.Value), false);
-                LlenaInformacionConsulta();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnAlta_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioInformacionConsulta.HabilitarInformacion(Convert.ToInt32(hfId.Value), true);
-                LlenaInformacionConsulta();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
+        
         protected void btnEditar_OnClick(object sender, EventArgs e)
         {
             try
             {
-                AltaInformacionConsulta.EsAlta = false;
-                AltaInformacionConsulta.IdInformacionConsulta = Convert.ToInt32(hfId.Value);
+                Response.Redirect("~/Users/Administracion/InformaciondeConsulta/FrmAltaInfConsulta.aspx?IdInformacionConsulta=" + ((Button)sender).CommandArgument);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaInformacion\");", true);
             }
             catch (Exception ex)
@@ -187,9 +111,41 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                AltaInformacionConsulta.IdTipoInformacion = int.Parse(ddlTipoInformacion.SelectedValue);
-                AltaInformacionConsulta.EsAlta = true;
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaInformacion\");", true);
+                Response.Redirect("~/Users/Administracion/InformaciondeConsulta/FrmAltaInfConsulta.aspx");
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnBuscar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LlenaInformacionConsulta();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+        protected void OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _servicioInformacionConsulta.HabilitarInformacion(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+                LlenaInformacionConsulta();
             }
             catch (Exception ex)
             {

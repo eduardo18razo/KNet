@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel.Configuration;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,13 +10,11 @@ using KiiniHelp.ServiceArea;
 using KiiniHelp.ServiceEncuesta;
 using KiiniHelp.ServiceGrupoUsuario;
 using KiiniHelp.ServiceImpactourgencia;
-using KiiniHelp.ServiceInformacionConsulta;
 using KiiniHelp.ServiceMascaraAcceso;
 using KiiniHelp.ServiceNotificacion;
 using KiiniHelp.ServiceSistemaTipoArbolAcceso;
 using KiiniHelp.ServiceSistemaTipoUsuario;
 using KiiniHelp.ServiceSubGrupoUsuario;
-using KiiniHelp.UserControls.Seleccion;
 using KiiniNet.Entities.Cat.Arbol.Nodos;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
@@ -297,7 +294,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 {
                     errors.Add("Seleccione grupo de Atencion.");
                 }
-                if (!lstGrupoEspecialConsulta.Items.Cast<ListItem>().Any(a => a.Selected))
+                if (!lstGrupoEspecialConsultaServicios.Items.Cast<ListItem>().Any(a => a.Selected))
                 {
                     errors.Add("Seleccione al menos un grupo Especial de consulta.");
                 }
@@ -323,7 +320,9 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
             try
             {
                 if (txtTiempoTotal.Text == string.Empty && !chkEstimado.Checked)
-                    throw new Exception("Debe especificar un tiempo al SLA.");
+                    throw new Exception("Debe especificar un tiempo de SLA.");
+                if (ddlTiempoTotal.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    throw new Exception("Debe especificar unidad de medida de tiempo de SLA.");
                 if (chkEstimado.Checked)
                     foreach (RepeaterItem item in rptSubRoles.Items)
                     {
@@ -408,28 +407,14 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
         {
             try
             {
-                StringBuilder sb = new StringBuilder();
-                if (ddlEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    sb.AppendLine("<li>Debe especificar una encuesta.</li>");
-                if (sb.ToString() != string.Empty)
-                {
-                    sb.Append("</ul>");
-                    sb.Insert(0, "<ul>");
-                    sb.Insert(0, "<h3>Ticket</h3>");
-                    throw new Exception(sb.ToString());
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-        private void ValidaCapturaPaso7()
-        {
-            try
-            {
-                var valida = IdArea;
-                valida = IdNivel1;
+                List<string> errors = new List<string>();
+                if(chkEncuestaActiva.Checked)
+                    if (ddlEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                        errors.Add("Debe especificar una encuesta");
+
+                _lstError = errors;
+                if (!_lstError.Any()) return;
+                throw new Exception();
             }
             catch (Exception e)
             {
@@ -493,10 +478,10 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 Metodos.LimpiarCombo(ddlGruporesponsableOperacion);
                 Metodos.LimpiarCombo(ddlGrupoResponsableDesarrollo);
                 Metodos.LimpiarCombo(ddlGrupoResponsableAtencion);
-                Metodos.LimpiarListBox(lstGrupoEspecialConsulta);
+                Metodos.LimpiarListBox(lstGrupoEspecialConsultaServicios);
                 Metodos.LimpiarCombo(ddlGrupoDuenoServicio);
                 Metodos.LimpiarCombo(ddlGrupoAgenteUniversal);
-
+                btnPaso_OnClick(new LinkButton { CommandArgument = "1" }, null);
 
             }
             catch (Exception e)
@@ -681,7 +666,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                         Metodos.LlenaComboCatalogo(ddlGruporesponsableOperacion, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.ResponsableDeOperación, IdTipoUsuario, true));
                         Metodos.LlenaComboCatalogo(ddlGrupoResponsableDesarrollo, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, IdTipoUsuario, true));
                         Metodos.LlenaComboCatalogo(ddlGrupoResponsableAtencion, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.ResponsableDeAtención, IdTipoUsuario, true));
-                        Metodos.LlenaListBoxCatalogo(lstGrupoEspecialConsulta, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.ConsultasEspeciales, IdTipoUsuario, true));
+                        Metodos.LlenaListBoxCatalogo(lstGrupoEspecialConsultaServicios, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.ConsultasEspeciales, IdTipoUsuario, true));
                         Metodos.LlenaComboCatalogo(ddlGrupoDuenoServicio, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.ResponsableServicio, IdTipoUsuario, true));
                         Metodos.LlenaComboCatalogo(ddlGrupoAgenteUniversal, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.AgenteUniversal, IdTipoUsuario, true));
                         btnPreview.Visible = false;
@@ -1249,7 +1234,44 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
         #endregion Configuracion
 
         #region Sla
+        public Sla ObtenerSla()
+        {
+            try
+            {
+                Sla sla = new Sla
+                {
+                    SlaDetalle = new List<SlaDetalle>(),
+                    Detallado = chkEstimado.Checked,
+                    Habilitado = true
+                };
+                decimal tDias = 0, tHoras = 0, tminutos = 0, tsegundos = 0;
+                foreach (RepeaterItem item in rptSubRoles.Items)
+                {
+                    var lblIdSubRol = (Label)item.FindControl("lblIdSubRol");
+                    var txtDias = (TextBox)item.FindControl("txtDias");
+                    SlaDetalle detalle = new SlaDetalle { IdSubRol = Convert.ToInt32(lblIdSubRol.Text.Trim()) };
+                    if (txtDias != null)
+                    {
+                        detalle.Dias = Convert.ToDecimal(txtDias.Text.Trim());
+                        tDias += detalle.Dias;
+                    }
+                    detalle.TiempoProceso = (detalle.Dias / 24) + detalle.Horas + (detalle.Minutos / 60) + ((detalle.Minutos / 60) / 60);
+                    sla.SlaDetalle.Add(detalle);
+                }
 
+                sla.Dias = tDias;
+                sla.Horas = tHoras;
+                sla.Minutos = tminutos;
+                sla.Segundos = tsegundos;
+                sla.TiempoHoraProceso = (tDias / 24) + tHoras + (tminutos / 60) + ((tsegundos / 60) / 60);
+                return sla;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
         protected void chkEstimado_OnCheckedChanged(object sender, EventArgs e)
         {
             try
@@ -1424,56 +1446,17 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
         }
         #endregion Encuestas
 
-        public Sla ObtenerSla()
-        {
-            try
-            {
-                Sla sla = new Sla
-                {
-                    SlaDetalle = new List<SlaDetalle>(),
-                    Detallado = chkEstimado.Checked,
-                    Habilitado = true
-                };
-                decimal tDias = 0, tHoras = 0, tminutos = 0, tsegundos = 0;
-                foreach (RepeaterItem item in rptSubRoles.Items)
-                {
-                    var lblIdSubRol = (Label)item.FindControl("lblIdSubRol");
-                    var txtDias = (TextBox)item.FindControl("txtDias");
-                    SlaDetalle detalle = new SlaDetalle { IdSubRol = Convert.ToInt32(lblIdSubRol.Text.Trim()) };
-                    if (txtDias != null)
-                    {
-                        detalle.Dias = Convert.ToDecimal(txtDias.Text.Trim());
-                        tDias += detalle.Dias;
-                    }
-                    detalle.TiempoProceso = (detalle.Dias / 24) + detalle.Horas + (detalle.Minutos / 60) + ((detalle.Minutos / 60) / 60);
-                    sla.SlaDetalle.Add(detalle);
-                }
-
-                sla.Dias = tDias;
-                sla.Horas = tHoras;
-                sla.Minutos = tminutos;
-                sla.Segundos = tsegundos;
-                sla.TiempoHoraProceso = (tDias / 24) + tHoras + (tminutos / 60) + ((tsegundos / 60) / 60);
-                return sla;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-        }
-
         protected void btnSaveAll_OnClick(object sender, EventArgs e)
         {
             try
             {
-                ValidaCapturaPaso7();
+                ValidaCapturaPaso6();
                 ArbolAcceso arbol = new ArbolAcceso
                 {
                     IdArea = IdArea,
                     IdTipoUsuario = IdTipoUsuario,
                     IdTipoArbolAcceso = TipoArbol,
-                    Evaluacion = false,
+                    Evaluacion = chkEncuestaActiva.Checked,
                     EsTerminal = true,
                     Habilitado = chkNivelHabilitado.Checked,
                     Sistema = false,
@@ -1486,11 +1469,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 arbol.InventarioArbolAcceso.First().IdEncuesta = Convert.ToInt32(ddlEncuesta.SelectedValue) == BusinessVariables.ComboBoxCatalogo.ValueSeleccione ? (int?)null : Convert.ToInt32(ddlEncuesta.SelectedValue);
                 arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol = new List<GrupoUsuarioInventarioArbol>();
                 arbol.TiempoInformeArbol = new List<TiempoInformeArbol>();
-
-
-
-
-
+                
                 var gpo = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(int.Parse(ddlGrupoAcceso.SelectedValue));
                 arbol.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Add(new GrupoUsuarioInventarioArbol
                 {
@@ -1603,7 +1582,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     });
                 }
 
-                foreach (ListItem item in lstGrupoEspecialConsulta.Items)
+                foreach (ListItem item in lstGrupoEspecialConsultaServicios.Items)
                 {
                     if (item.Selected)
                     {

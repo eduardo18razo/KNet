@@ -128,7 +128,7 @@ int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposU
         </ContentTemplate>
     </asp:UpdatePanel>
     <div class="modal fade" id="modalAtaOpcion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="margin-top: 60px">
-        <asp:UpdatePanel ID="upAltaArea" runat="server">
+        <asp:UpdatePanel ID="upAltaArea" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <<div class="modal-dialog" style="height: 250px;">
                     <div class="modal-content">

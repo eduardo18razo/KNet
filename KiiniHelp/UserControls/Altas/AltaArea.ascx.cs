@@ -96,7 +96,6 @@ namespace KiiniHelp.UserControls.Altas
                 if (Session["ImagenArea"] != null)
                     if (Session["ImagenArea"].ToString() != string.Empty)
                         area.Imagen = BusinessFile.Imagenes.ImageToByteArray(Session["ImagenArea"].ToString());
-                //TODO: Cambiar propiedad por valor de control
                 area.Habilitado = true;
                 if (EsAlta)
                 {

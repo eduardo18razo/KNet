@@ -18,16 +18,16 @@ namespace KiiniNet.Services.Operacion.Interface
         InformacionConsulta ObtenerInformacionConsultaById(int idInformacion);
 
         [OperationContract]
-        void GuardarInformacionConsulta(InformacionConsulta informacion, List<string> documentosDescarga);
+        InformacionConsulta GuardarInformacionConsulta(InformacionConsulta informacion, List<string> documentosDescarga);
 
         [OperationContract]
-        void ActualizarInformacionConsulta(int idInformacionConsulta, InformacionConsulta informacion);
+        InformacionConsulta ActualizarInformacionConsulta(int idInformacionConsulta, InformacionConsulta informacion, List<string> documentosDescarga);
 
         [OperationContract]
         void GuardarHit(int idArbol, int idUsuario);
 
         [OperationContract]
-        List<InformacionConsulta> ObtenerConsulta(int? idTipoInformacionConsulta, int? idTipoDocumento);
+        List<InformacionConsulta> ObtenerConsulta(string descripcion);
 
         [OperationContract]
         void HabilitarInformacion(int idInformacion, bool habilitado);

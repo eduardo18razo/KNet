@@ -144,11 +144,11 @@
                                 <asp:ListBox ID="lstGrupoEspecialConsulta" runat="server" SelectionMode="Multiple"></asp:ListBox>
                             </div>
                         </div>
-                        
+
                     </div>
                     <!--BTN-TERMINAR-->
                     <p class="text-right margin-top">
-                        <asp:Button runat="server" ID="btnPreview" Text="Previsualizar" CssClass="btn btn-default" Visible="False" />
+                        <asp:Button runat="server" ID="btnPreview" Text="Preview" CssClass="btn btn-default" Visible="False" OnClick="btnPreview_OnClick"/>
                         <asp:Button runat="server" CssClass="btn btn-primary" Text="Siguiente" ID="btnSiguiente" OnClick="btnSiguiente_OnClick" CommandArgument="1" />
                         <asp:Button runat="server" ID="btnSaveAll" Text="Guardar" CssClass="btn btn-primary" Visible="False" OnClick="btnSaveAll_OnClick" />
                     </p>
@@ -163,5 +163,23 @@
         </div>
         <!--/Filtro 1 ORGANIZACIÓN-->
         <!--/CONTAINER DERECHA-->
+        <script type="text/javascript">
+            //$(function () {
+            //    $('[id*=lstFruits]').multiselect({
+            //        includeSelectAllOption: true,
+            //        enableFiltering: false,
+            //        enableCaseInsensitiveFiltering: true,
+            //    });
+            //});
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+            prm.add_endRequest(function () {
+                $('[id*=lstGrupoEspecialConsulta]').multiselect({
+                    includeSelectAllOption: false,
+                    enableFiltering: false,
+                });
+            });
+
+        </script>
     </ContentTemplate>
 </asp:UpdatePanel>

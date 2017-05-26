@@ -448,8 +448,11 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdTipoInfConsulta" Type="int" />
-          <Property Name="IdTipoDocumento" Type="int" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaAlta" Type="datetime" />
+          <Property Name="IdUsuarioAlta" Type="int" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioModifico" Type="int" />
           <Property Name="Habilitado" Type="bit" />
         </EntityType>
         <EntityType Name="InformacionConsultaDatos">
@@ -458,18 +461,24 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdInformacionConsulta" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Orden" Type="int" />
-          <Property Name="IdPadre" Type="int" />
+          <Property Name="Datos" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Busqueda" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Tags" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Habilitado" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="InformacionConsultaDocumento">
+        <EntityType Name="InformacionConsultaDocumentos">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdInformacionConsulta" Type="int" />
+          <Property Name="IdTipoDocumento" Type="int" />
           <Property Name="Archivo" Type="nvarchar(max)" />
-          <Property Name="Fecha" Type="datetime" />
+          <Property Name="FechaAlta" Type="datetime" />
+          <Property Name="IdUsuarioAlta" Type="int" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioModifico" Type="int" />
+          <Property Name="Habilitado" Type="bit" />
         </EntityType>
         <EntityType Name="InventarioArbolAcceso">
           <Key>
@@ -2190,15 +2199,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_InformacionConsulta_TipoDocumento">
-          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
+        <Association Name="FK_InformacionConsulta_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="InformacionConsulta" Type="Self.InformacionConsulta" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TipoDocumento">
+            <Principal Role="Usuario">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="InformacionConsulta">
-              <PropertyRef Name="IdTipoDocumento" />
+              <PropertyRef Name="IdUsuarioAlta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformacionConsulta_Usuario1">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="InformacionConsulta" Type="Self.InformacionConsulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsulta">
+              <PropertyRef Name="IdUsuarioModifico" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2214,15 +2235,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_InformacionConsultaDocumento_InformacionConsulta">
+        <Association Name="FK_InformacionConsultaDocumentos_InformacionConsulta">
           <End Role="InformacionConsulta" Type="Self.InformacionConsulta" Multiplicity="0..1" />
-          <End Role="InformacionConsultaDocumento" Type="Self.InformacionConsultaDocumento" Multiplicity="*" />
+          <End Role="InformacionConsultaDocumentos" Type="Self.InformacionConsultaDocumentos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="InformacionConsulta">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="InformacionConsultaDocumento">
+            <Dependent Role="InformacionConsultaDocumentos">
               <PropertyRef Name="IdInformacionConsulta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformacionConsultaDocumentos_TipoDocumento">
+          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
+          <End Role="InformacionConsultaDocumentos" Type="Self.InformacionConsultaDocumentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsultaDocumentos">
+              <PropertyRef Name="IdTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformacionConsultaDocumentos_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="InformacionConsultaDocumentos" Type="Self.InformacionConsultaDocumentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsultaDocumentos">
+              <PropertyRef Name="IdUsuarioAlta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformacionConsultaDocumentos_Usuario1">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="InformacionConsultaDocumentos" Type="Self.InformacionConsultaDocumentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsultaDocumentos">
+              <PropertyRef Name="IdUsuarioModifico" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3889,7 +3946,7 @@
           <EntitySet Name="Impacto" EntityType="Self.Impacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InformacionConsulta" EntityType="Self.InformacionConsulta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InformacionConsultaDatos" EntityType="Self.InformacionConsultaDatos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InformacionConsultaDocumento" EntityType="Self.InformacionConsultaDocumento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InformacionConsultaDocumentos" EntityType="Self.InformacionConsultaDocumentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventarioArbolAcceso" EntityType="Self.InventarioArbolAcceso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventarioInfConsulta" EntityType="Self.InventarioInfConsulta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jefatura" EntityType="Self.Jefatura" Schema="dbo" store:Type="Tables" />
@@ -4256,17 +4313,33 @@
             <End Role="Urgencia" EntitySet="Urgencia" />
             <End Role="Impacto" EntitySet="Impacto" />
           </AssociationSet>
-          <AssociationSet Name="FK_InformacionConsulta_TipoDocumento" Association="Self.FK_InformacionConsulta_TipoDocumento">
-            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+          <AssociationSet Name="FK_InformacionConsulta_Usuario" Association="Self.FK_InformacionConsulta_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacionConsulta_Usuario1" Association="Self.FK_InformacionConsulta_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
             <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
           </AssociationSet>
           <AssociationSet Name="FK_InformacionConsultaDatos_InformacionConsulta" Association="Self.FK_InformacionConsultaDatos_InformacionConsulta">
             <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
             <End Role="InformacionConsultaDatos" EntitySet="InformacionConsultaDatos" />
           </AssociationSet>
-          <AssociationSet Name="FK_InformacionConsultaDocumento_InformacionConsulta" Association="Self.FK_InformacionConsultaDocumento_InformacionConsulta">
+          <AssociationSet Name="FK_InformacionConsultaDocumentos_InformacionConsulta" Association="Self.FK_InformacionConsultaDocumentos_InformacionConsulta">
             <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
-            <End Role="InformacionConsultaDocumento" EntitySet="InformacionConsultaDocumento" />
+            <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacionConsultaDocumentos_TipoDocumento" Association="Self.FK_InformacionConsultaDocumentos_TipoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacionConsultaDocumentos_Usuario" Association="Self.FK_InformacionConsultaDocumentos_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacionConsultaDocumentos_Usuario1" Association="Self.FK_InformacionConsultaDocumentos_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
           </AssociationSet>
           <AssociationSet Name="FK_InventarioArbolAcceso_Encuesta" Association="Self.FK_InventarioArbolAcceso_Encuesta">
             <End Role="Encuesta" EntitySet="Encuesta" />
@@ -4823,8 +4896,6 @@
           <EntitySet Name="EncuestaPregunta" EntityType="KiiniNet_v2Model.EncuestaPregunta" />
           <EntitySet Name="Gerencia" EntityType="KiiniNet_v2Model.Gerencia" />
           <EntitySet Name="Holding" EntityType="KiiniNet_v2Model.Holding" />
-          <EntitySet Name="InformacionConsulta" EntityType="KiiniNet_v2Model.InformacionConsulta" />
-          <EntitySet Name="InformacionConsultaDatos" EntityType="KiiniNet_v2Model.InformacionConsultaDatos" />
           <EntitySet Name="InventarioInfConsulta" EntityType="KiiniNet_v2Model.InventarioInfConsulta" />
           <EntitySet Name="Jefatura" EntityType="KiiniNet_v2Model.Jefatura" />
           <EntitySet Name="Municipio" EntityType="KiiniNet_v2Model.Municipio" />
@@ -4916,22 +4987,6 @@
           <AssociationSet Name="FK_Organizacion_Holding" Association="KiiniNet_v2Model.FK_Organizacion_Holding">
             <End Role="Holding" EntitySet="Holding" />
             <End Role="Organizacion" EntitySet="Organizacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InformacionConsulta_TipoDocumento" Association="KiiniNet_v2Model.FK_InformacionConsulta_TipoDocumento">
-            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
-            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InformacionConsultaDatos_InformacionConsulta" Association="KiiniNet_v2Model.FK_InformacionConsultaDatos_InformacionConsulta">
-            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
-            <End Role="InformacionConsultaDatos" EntitySet="InformacionConsultaDatos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InventarioInfConsulta_InformacionConsulta" Association="KiiniNet_v2Model.FK_InventarioInfConsulta_InformacionConsulta">
-            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
-            <End Role="InventarioInfConsulta" EntitySet="InventarioInfConsulta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblInformacionConsulta_tblCatTipoInfConsulta" Association="KiiniNet_v2Model.FK_tblInformacionConsulta_tblCatTipoInfConsulta">
-            <End Role="TipoInfConsulta" EntitySet="TipoInfConsulta" />
-            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
           </AssociationSet>
           <AssociationSet Name="FK_Jefatura_TipoUsuario" Association="KiiniNet_v2Model.FK_Jefatura_TipoUsuario">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
@@ -5303,12 +5358,6 @@
           <AssociationSet Name="FK_SlaDetalle_SLA" Association="KiiniNet_v2Model.FK_SlaDetalle_SLA">
             <End Role="Sla" EntitySet="Sla" />
             <End Role="SlaDetalle" EntitySet="SlaDetalle" />
-          </AssociationSet>
-          
-          <EntitySet Name="InformacionConsultaDocumento" EntityType="KiiniNet_v2Model.InformacionConsultaDocumento" />
-          <AssociationSet Name="FK_InformacionConsultaDocumento_InformacionConsulta" Association="KiiniNet_v2Model.FK_InformacionConsultaDocumento_InformacionConsulta">
-            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
-            <End Role="InformacionConsultaDocumento" EntitySet="InformacionConsultaDocumento" />
           </AssociationSet>
           <EntitySet Name="TipoCampoMascara" EntityType="KiiniNet_v2Model.TipoCampoMascara" />
           <EntitySet Name="Canal" EntityType="KiiniNet_v2Model.Canal" />
@@ -5776,6 +5825,45 @@
             <End Role="SubGrupoUsuario" EntitySet="SubGrupoUsuario" />
             <End Role="DiaFestivoSubGrupo" EntitySet="DiaFestivoSubGrupo" />
           </AssociationSet>
+          <EntitySet Name="InformacionConsultaDocumentos" EntityType="KiiniNet_v2Model.InformacionConsultaDocumentos" />
+          <AssociationSet Name="FK_InformacionConsultaDocumentos_TipoDocumento" Association="KiiniNet_v2Model.FK_InformacionConsultaDocumentos_TipoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacionConsultaDocumentos_Usuario" Association="KiiniNet_v2Model.FK_InformacionConsultaDocumentos_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacionConsultaDocumentos_Usuario1" Association="KiiniNet_v2Model.FK_InformacionConsultaDocumentos_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+          </AssociationSet>
+          <EntitySet Name="InformacionConsulta" EntityType="KiiniNet_v2Model.InformacionConsulta" />
+          <AssociationSet Name="FK_InformacionConsulta_Usuario" Association="KiiniNet_v2Model.FK_InformacionConsulta_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacionConsulta_Usuario1" Association="KiiniNet_v2Model.FK_InformacionConsulta_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacionConsultaDocumentos_InformacionConsulta" Association="KiiniNet_v2Model.FK_InformacionConsultaDocumentos_InformacionConsulta">
+            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
+            <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioInfConsulta_InformacionConsulta" Association="KiiniNet_v2Model.FK_InventarioInfConsulta_InformacionConsulta">
+            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
+            <End Role="InventarioInfConsulta" EntitySet="InventarioInfConsulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblInformacionConsulta_tblCatTipoInfConsulta" Association="KiiniNet_v2Model.FK_tblInformacionConsulta_tblCatTipoInfConsulta">
+            <End Role="TipoInfConsulta" EntitySet="TipoInfConsulta" />
+            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
+          </AssociationSet>
+          <EntitySet Name="InformacionConsultaDatos" EntityType="KiiniNet_v2Model.InformacionConsultaDatos" />
+          <AssociationSet Name="FK_InformacionConsultaDatos_InformacionConsulta" Association="KiiniNet_v2Model.FK_InformacionConsultaDatos_InformacionConsulta">
+            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
+            <End Role="InformacionConsultaDatos" EntitySet="InformacionConsultaDatos" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Campus">
           <Key>
@@ -5883,32 +5971,6 @@
           <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_Holding_TipoUsuario" FromRole="Holding" ToRole="TipoUsuario" />
           <NavigationProperty Name="Organizacion" Relationship="KiiniNet_v2Model.FK_Organizacion_Holding" FromRole="Holding" ToRole="Organizacion" />
         </EntityType>
-        <EntityType Name="InformacionConsulta">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdTipoInfConsulta" Type="Int32" />
-          <Property Name="IdTipoDocumento" Type="Int32" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Habilitado" Type="Boolean" />
-          <NavigationProperty Name="TipoDocumento" Relationship="KiiniNet_v2Model.FK_InformacionConsulta_TipoDocumento" FromRole="InformacionConsulta" ToRole="TipoDocumento" />
-          <NavigationProperty Name="InformacionConsultaDatos" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDatos_InformacionConsulta" FromRole="InformacionConsulta" ToRole="InformacionConsultaDatos" />
-          <NavigationProperty Name="InventarioInfConsulta" Relationship="KiiniNet_v2Model.FK_InventarioInfConsulta_InformacionConsulta" FromRole="InformacionConsulta" ToRole="InventarioInfConsulta" />
-          <NavigationProperty Name="TipoInfConsulta" Relationship="KiiniNet_v2Model.FK_tblInformacionConsulta_tblCatTipoInfConsulta" FromRole="InformacionConsulta" ToRole="TipoInfConsulta" />
-          <NavigationProperty Name="InformacionConsultaDocumento" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDocumento_InformacionConsulta" FromRole="InformacionConsulta" ToRole="InformacionConsultaDocumento" />
-        </EntityType>
-        <EntityType Name="InformacionConsultaDatos">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdInformacionConsulta" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Orden" Type="Int32" />
-          <Property Name="IdPadre" Type="Int32" />
-          <NavigationProperty Name="InformacionConsulta" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDatos_InformacionConsulta" FromRole="InformacionConsultaDatos" ToRole="InformacionConsulta" />
-        </EntityType>
         <EntityType Name="InventarioInfConsulta">
           <Key>
             <PropertyRef Name="Id" />
@@ -5916,8 +5978,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdInventario" Type="Int32" Nullable="false" />
           <Property Name="IdInfConsulta" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="InformacionConsulta" Relationship="KiiniNet_v2Model.FK_InventarioInfConsulta_InformacionConsulta" FromRole="InventarioInfConsulta" ToRole="InformacionConsulta" />
           <NavigationProperty Name="InventarioArbolAcceso" Relationship="KiiniNet_v2Model.FK_InventarioInfConsulta_InventarioArbolAcceso" FromRole="InventarioInfConsulta" ToRole="InventarioArbolAcceso" />
+          <NavigationProperty Name="InformacionConsulta" Relationship="KiiniNet_v2Model.FK_InventarioInfConsulta_InformacionConsulta" FromRole="InventarioInfConsulta" ToRole="InformacionConsulta" />
         </EntityType>
         <EntityType Name="Jefatura">
           <Key>
@@ -6182,9 +6244,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="InformacionConsulta" Relationship="KiiniNet_v2Model.FK_InformacionConsulta_TipoDocumento" FromRole="TipoDocumento" ToRole="InformacionConsulta" />
           <Property Name="Extension" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="InformacionConsultaDocumentos" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDocumentos_TipoDocumento" FromRole="TipoDocumento" ToRole="InformacionConsultaDocumentos" />
         </EntityType>
         <EntityType Name="TipoEncuesta">
           <Key>
@@ -6506,54 +6568,6 @@
             </Principal>
             <Dependent Role="Organizacion">
               <PropertyRef Name="IdHolding" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InformacionConsulta_TipoDocumento">
-          <End Type="KiiniNet_v2Model.TipoDocumento" Role="TipoDocumento" Multiplicity="0..1" />
-          <End Type="KiiniNet_v2Model.InformacionConsulta" Role="InformacionConsulta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDocumento">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="InformacionConsulta">
-              <PropertyRef Name="IdTipoDocumento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InformacionConsultaDatos_InformacionConsulta">
-          <End Type="KiiniNet_v2Model.InformacionConsulta" Role="InformacionConsulta" Multiplicity="1" />
-          <End Type="KiiniNet_v2Model.InformacionConsultaDatos" Role="InformacionConsultaDatos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InformacionConsulta">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="InformacionConsultaDatos">
-              <PropertyRef Name="IdInformacionConsulta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_InventarioInfConsulta_InformacionConsulta">
-          <End Type="KiiniNet_v2Model.InformacionConsulta" Role="InformacionConsulta" Multiplicity="1" />
-          <End Type="KiiniNet_v2Model.InventarioInfConsulta" Role="InventarioInfConsulta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InformacionConsulta">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="InventarioInfConsulta">
-              <PropertyRef Name="IdInfConsulta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tblInformacionConsulta_tblCatTipoInfConsulta">
-          <End Type="KiiniNet_v2Model.TipoInfConsulta" Role="TipoInfConsulta" Multiplicity="0..1" />
-          <End Type="KiiniNet_v2Model.InformacionConsulta" Role="InformacionConsulta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoInfConsulta">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="InformacionConsulta">
-              <PropertyRef Name="IdTipoInfConsulta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8073,29 +8087,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        
-        <EntityType Name="InformacionConsultaDocumento">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdInformacionConsulta" Type="Int32" />
-          <Property Name="Archivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="InformacionConsulta" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDocumento_InformacionConsulta" FromRole="InformacionConsultaDocumento" ToRole="InformacionConsulta" />
-        </EntityType>
-        <Association Name="FK_InformacionConsultaDocumento_InformacionConsulta">
-          <End Type="KiiniNet_v2Model.InformacionConsulta" Role="InformacionConsulta" Multiplicity="0..1" />
-          <End Type="KiiniNet_v2Model.InformacionConsultaDocumento" Role="InformacionConsultaDocumento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InformacionConsulta">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="InformacionConsultaDocumento">
-              <PropertyRef Name="IdInformacionConsulta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="TipoCampoMascara">
           <Key>
             <PropertyRef Name="Id" />
@@ -9557,6 +9548,10 @@
           <NavigationProperty Name="UsuarioLinkPassword" Relationship="KiiniNet_v2Model.FK_UsuarioLinkPassword_Usuario" FromRole="Usuario" ToRole="UsuarioLinkPassword" />
           <NavigationProperty Name="UsuarioPassword" Relationship="KiiniNet_v2Model.FK_UsuarioPassword_Usuario" FromRole="Usuario" ToRole="UsuarioPassword" />
           <NavigationProperty Name="UsuarioRol" Relationship="KiiniNet_v2Model.FK_UsuarioRol_Usuario" FromRole="Usuario" ToRole="UsuarioRol" />
+          <NavigationProperty Name="InformacionConsultaDocumentosAlta" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDocumentos_Usuario" FromRole="Usuario" ToRole="InformacionConsultaDocumentos" />
+          <NavigationProperty Name="InformacionConsultaDocumentosModifico" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDocumentos_Usuario1" FromRole="Usuario" ToRole="InformacionConsultaDocumentos" />
+          <NavigationProperty Name="InformacionConsultaAlta" Relationship="KiiniNet_v2Model.FK_InformacionConsulta_Usuario" FromRole="Usuario" ToRole="InformacionConsulta" />
+          <NavigationProperty Name="InformacionConsultaModifico" Relationship="KiiniNet_v2Model.FK_InformacionConsulta_Usuario1" FromRole="Usuario" ToRole="InformacionConsulta" />
         </EntityType>
         <Association Name="FK_ArbolAcceso_Usuario">
           <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -10030,6 +10025,163 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="InformacionConsultaDocumentos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdInformacionConsulta" Type="Int32" />
+          <Property Name="IdTipoDocumento" Type="Int32" />
+          <Property Name="Archivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAlta" Type="Int32" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModifico" Type="Int32" />
+          <Property Name="Habilitado" Type="Boolean" />
+          <NavigationProperty Name="TipoDocumento" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDocumentos_TipoDocumento" FromRole="InformacionConsultaDocumentos" ToRole="TipoDocumento" />
+          <NavigationProperty Name="UsuarioAlta" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDocumentos_Usuario" FromRole="InformacionConsultaDocumentos" ToRole="Usuario" />
+          <NavigationProperty Name="UsuarioModifico" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDocumentos_Usuario1" FromRole="InformacionConsultaDocumentos" ToRole="Usuario" />
+          <NavigationProperty Name="InformacionConsulta" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDocumentos_InformacionConsulta" FromRole="InformacionConsultaDocumentos" ToRole="InformacionConsulta" />
+        </EntityType>
+        <Association Name="FK_InformacionConsultaDocumentos_TipoDocumento">
+          <End Type="KiiniNet_v2Model.TipoDocumento" Role="TipoDocumento" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.InformacionConsultaDocumentos" Role="InformacionConsultaDocumentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsultaDocumentos">
+              <PropertyRef Name="IdTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformacionConsultaDocumentos_Usuario">
+          <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.InformacionConsultaDocumentos" Role="InformacionConsultaDocumentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsultaDocumentos">
+              <PropertyRef Name="IdUsuarioAlta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformacionConsultaDocumentos_Usuario1">
+          <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.InformacionConsultaDocumentos" Role="InformacionConsultaDocumentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsultaDocumentos">
+              <PropertyRef Name="IdUsuarioModifico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InformacionConsulta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoInfConsulta" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaAlta" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAlta" Type="Int32" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModifico" Type="Int32" />
+          <Property Name="Habilitado" Type="Boolean" />
+          <NavigationProperty Name="UsuarioAlta" Relationship="KiiniNet_v2Model.FK_InformacionConsulta_Usuario" FromRole="InformacionConsulta" ToRole="Usuario" />
+          <NavigationProperty Name="UsuarioModifico" Relationship="KiiniNet_v2Model.FK_InformacionConsulta_Usuario1" FromRole="InformacionConsulta" ToRole="Usuario" />
+          <NavigationProperty Name="InformacionConsultaDocumentos" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDocumentos_InformacionConsulta" FromRole="InformacionConsulta" ToRole="InformacionConsultaDocumentos" />
+          <NavigationProperty Name="InventarioInfConsulta" Relationship="KiiniNet_v2Model.FK_InventarioInfConsulta_InformacionConsulta" FromRole="InformacionConsulta" ToRole="InventarioInfConsulta" />
+          <NavigationProperty Name="TipoInfConsulta" Relationship="KiiniNet_v2Model.FK_tblInformacionConsulta_tblCatTipoInfConsulta" FromRole="InformacionConsulta" ToRole="TipoInfConsulta" />
+          <NavigationProperty Name="InformacionConsultaDatos" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDatos_InformacionConsulta" FromRole="InformacionConsulta" ToRole="InformacionConsultaDatos" />
+        </EntityType>
+        <Association Name="FK_InformacionConsulta_Usuario">
+          <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.InformacionConsulta" Role="InformacionConsulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsulta">
+              <PropertyRef Name="IdUsuarioAlta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformacionConsulta_Usuario1">
+          <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.InformacionConsulta" Role="InformacionConsulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsulta">
+              <PropertyRef Name="IdUsuarioModifico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformacionConsultaDocumentos_InformacionConsulta">
+          <End Type="KiiniNet_v2Model.InformacionConsulta" Role="InformacionConsulta" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.InformacionConsultaDocumentos" Role="InformacionConsultaDocumentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformacionConsulta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsultaDocumentos">
+              <PropertyRef Name="IdInformacionConsulta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioInfConsulta_InformacionConsulta">
+          <End Type="KiiniNet_v2Model.InformacionConsulta" Role="InformacionConsulta" Multiplicity="1" />
+          <End Type="KiiniNet_v2Model.InventarioInfConsulta" Role="InventarioInfConsulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformacionConsulta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventarioInfConsulta">
+              <PropertyRef Name="IdInfConsulta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblInformacionConsulta_tblCatTipoInfConsulta">
+          <End Type="KiiniNet_v2Model.TipoInfConsulta" Role="TipoInfConsulta" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.InformacionConsulta" Role="InformacionConsulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoInfConsulta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsulta">
+              <PropertyRef Name="IdTipoInfConsulta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InformacionConsultaDatos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdInformacionConsulta" Type="Int32" Nullable="false" />
+          <Property Name="Datos" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Busqueda" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tags" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="InformacionConsulta" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDatos_InformacionConsulta" FromRole="InformacionConsultaDatos" ToRole="InformacionConsulta" />
+        </EntityType>
+        <Association Name="FK_InformacionConsultaDatos_InformacionConsulta">
+          <End Type="KiiniNet_v2Model.InformacionConsulta" Role="InformacionConsulta" Multiplicity="1" />
+          <End Type="KiiniNet_v2Model.InformacionConsultaDatos" Role="InformacionConsultaDatos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformacionConsulta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsultaDatos">
+              <PropertyRef Name="IdInformacionConsulta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10125,28 +10277,6 @@
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InformacionConsulta">
-            <EntityTypeMapping TypeName="KiiniNet_v2Model.InformacionConsulta">
-              <MappingFragment StoreEntitySet="InformacionConsulta">
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
-                <ScalarProperty Name="IdTipoInfConsulta" ColumnName="IdTipoInfConsulta" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InformacionConsultaDatos">
-            <EntityTypeMapping TypeName="KiiniNet_v2Model.InformacionConsultaDatos">
-              <MappingFragment StoreEntitySet="InformacionConsultaDatos">
-                <ScalarProperty Name="IdPadre" ColumnName="IdPadre" />
-                <ScalarProperty Name="Orden" ColumnName="Orden" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdInformacionConsulta" ColumnName="IdInformacionConsulta" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -10906,17 +11036,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          
-          <EntitySetMapping Name="InformacionConsultaDocumento">
-            <EntityTypeMapping TypeName="KiiniNet_v2Model.InformacionConsultaDocumento">
-              <MappingFragment StoreEntitySet="InformacionConsultaDocumento">
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
-                <ScalarProperty Name="IdInformacionConsulta" ColumnName="IdInformacionConsulta" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TipoCampoMascara">
             <EntityTypeMapping TypeName="KiiniNet_v2Model.TipoCampoMascara">
               <MappingFragment StoreEntitySet="TipoCampoMascara">
@@ -11475,6 +11594,47 @@
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="IdDiasFeriados" ColumnName="IdDiasFeriados" />
                 <ScalarProperty Name="IdSubGrupoUsuario" ColumnName="IdSubGrupoUsuario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InformacionConsultaDocumentos">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.InformacionConsultaDocumentos">
+              <MappingFragment StoreEntitySet="InformacionConsultaDocumentos">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioAlta" ColumnName="IdUsuarioAlta" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="IdInformacionConsulta" ColumnName="IdInformacionConsulta" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InformacionConsulta">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.InformacionConsulta">
+              <MappingFragment StoreEntitySet="InformacionConsulta">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioAlta" ColumnName="IdUsuarioAlta" />
+                <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdTipoInfConsulta" ColumnName="IdTipoInfConsulta" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InformacionConsultaDatos">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.InformacionConsultaDatos">
+              <MappingFragment StoreEntitySet="InformacionConsultaDatos">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Busqueda" ColumnName="Busqueda" />
+                <ScalarProperty Name="Datos" ColumnName="Datos" />
+                <ScalarProperty Name="IdInformacionConsulta" ColumnName="IdInformacionConsulta" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

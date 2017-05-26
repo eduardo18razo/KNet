@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
 using KiiniHelp.ServiceArbolAcceso;
 using KiiniHelp.ServiceArea;
-using KiiniHelp.ServiceEncuesta;
 using KiiniHelp.ServiceGrupoUsuario;
 using KiiniHelp.ServiceInformacionConsulta;
 using KiiniHelp.ServiceSistemaTipoUsuario;
@@ -230,9 +228,9 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 {
                     errors.Add("Seleeccione grupo Responsable del contenido.");
                 }
-                if (lstGrupoEspecialConsulta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                if (!lstGrupoEspecialConsulta.Items.Cast<ListItem>().Any(a => a.Selected))
                 {
-                    errors.Add("Seleeccione al menos un grupo Especial de consulta.");
+                    errors.Add("Seleccione al menos un grupo Especial de consulta.");
                 }
                 _lstError = errors;
                 if (!_lstError.Any()) return;
@@ -300,6 +298,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 Metodos.LimpiarCombo(ddlDuenoServicio);
                 Metodos.LimpiarCombo(ddlGrupoResponsableMantenimiento);
                 Metodos.LimpiarListBox(lstGrupoEspecialConsulta);
+                btnPaso_OnClick(new LinkButton { CommandArgument = "1" }, null);
             }
             catch (Exception e)
             {
@@ -911,8 +910,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 Alerta = _lstError;
             }
         }
-
-
+        
         protected void btnSaveAll_OnClick(object sender, EventArgs e)
         {
             try
@@ -1065,6 +1063,23 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 LimpiarPantalla();
                 if (OnAceptarModal != null)
                     OnAceptarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null || !_lstError.Any())
+                {
+                    _lstError = new List<string> { ex.Message };
+                }
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnPreview_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Session["PreviewAltaDataConsulta"] = _servicioInformacionConsulta.ObtenerInformacionConsultaById(int.Parse(ddlConsultas.SelectedValue));
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('/Users/Administracion/ArbolesAcceso/FrmPreviewAltaOpcionConsulta.aspx?evaluacion=" + chkEvaluacion.Checked + "','_blank');", true);
             }
             catch (Exception ex)
             {

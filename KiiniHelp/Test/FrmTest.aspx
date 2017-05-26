@@ -1,7 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmTest.aspx.cs" Inherits="KiiniHelp.Test.FrmTest" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmTest.aspx.cs" ValidateRequest="false" Inherits="KiiniHelp.Test.FrmTest" %>
 
-<%@ Register Src="~/UserControls/Altas/ArbolesAcceso/UcAltaConsulta.ascx" TagPrefix="uc1" TagName="UcAltaConsulta" %>
-<%@ Register Src="~/UserControls/Altas/ArbolesAcceso/UcAltaServicio.ascx" TagPrefix="uc1" TagName="UcAltaServicio" %>
+<%@ Register Src="~/UserControls/Altas/UcAltaInformacionConsulta.ascx" TagPrefix="uc1" TagName="UcAltaInformacionConsulta" %>
+<%@ Register TagPrefix="ajax" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
+<%@ Register TagPrefix="ctrlExterno" Namespace="Winthusiasm.HtmlEditor" Assembly="Winthusiasm.HtmlEditor" %>
+
+
 
 
 <!DOCTYPE html>
@@ -10,16 +13,15 @@
 <head runat="server">
     <title></title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="../assets/tmp/jquery.sumoselect.min.js"></script>
-
     <link rel='stylesheet' href="../assets/css/font.css" />
     <link rel="stylesheet" href="../assets/css/font-awesome.css" />
     <link rel="stylesheet" href="../assets/css/bootstrap.css" />
     <link rel="stylesheet" href="../assets/css/styles.css" />
     <link rel="stylesheet" href="../assets/css/menuStyle.css" />
     <link rel="stylesheet" href="../assets/css/divs.css" />
-    <link rel="stylesheet" href="../assets/tmp/sumoselect.css" />
+    <link rel="stylesheet" href="../assets/css/sumoselect.css" />
     <link href="../assets/css/checkBox.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/tmp/jquery.tagsinput.min.css" />
     <%--<script type="text/javascript">
         $(document).ready(function () {
             $(<%=lstBoxTest.ClientID%>).SumoSelect({ placeholder: 'SELECCIONE', selectAll: true, csvDispCount: 1 });
@@ -29,34 +31,34 @@
         function sum() {
             debugger;
             var totaldias = 0, totalhoras = 0, totalminutos = 0, totalsegundos = 0;
-            $("#tblHeader > tbody > tr").each(function(indexRow) {
+            $("#tblHeader > tbody > tr").each(function (indexRow) {
                 var control;
-                $(this).children("td").each(function(indexColumn) {
+                $(this).children("td").each(function (indexColumn) {
                     switch (indexColumn) {
-                    case 2:
-                        control = $(this).find("input[id*=txtDias]");
-                        if (control != null) {
-                            totaldias = totaldias + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
-                        }
-                        break;
-                    case 3:
-                        control = $(this).find("input[id*=txtHoras]");
-                        if (control != null) {
-                            totalhoras = totalhoras + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
-                        }
-                        break;
-                    case 4:
-                        control = $(this).find("input[id*=txtMinutos]");
-                        if (control != null) {
-                            totalminutos = totalminutos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
-                        }
-                        break;
-                    case 5:
-                        control = $(this).find("input[id*=txtSegundos]");
-                        if (control != null) {
-                            totalsegundos = totalsegundos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
-                        }
-                        break;
+                        case 2:
+                            control = $(this).find("input[id*=txtDias]");
+                            if (control != null) {
+                                totaldias = totaldias + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                            }
+                            break;
+                        case 3:
+                            control = $(this).find("input[id*=txtHoras]");
+                            if (control != null) {
+                                totalhoras = totalhoras + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                            }
+                            break;
+                        case 4:
+                            control = $(this).find("input[id*=txtMinutos]");
+                            if (control != null) {
+                                totalminutos = totalminutos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                            }
+                            break;
+                        case 5:
+                            control = $(this).find("input[id*=txtSegundos]");
+                            if (control != null) {
+                                totalsegundos = totalsegundos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                            }
+                            break;
                     }
 
                 });
@@ -95,235 +97,240 @@
         }
 
         function UploadComplete(sender, args) {
-                __doPostBack('Refresh', '');
-            }
-            function MostrarPopup(modalName) {
-                $(modalName).modal({ backdrop: 'static', keyboard: false });
-                $(modalName).modal({ show: true });
-                return true;
-            };
-            function CierraPopup(modalName) {
-                $(modalName).modal('hide');
-                return true;
-            };
-            function HightSearch(content, serachText) {
-                var src_str = $("#" + content).html();
-                var term = serachText;
-                term = term.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
-                var pattern = new RegExp("(" + term + ")", "gi");
+            __doPostBack('Refresh', '');
+        }
+        function MostrarPopup(modalName) {
+            $(modalName).modal({ backdrop: 'static', keyboard: false });
+            $(modalName).modal({ show: true });
+            return true;
+        };
+        function CierraPopup(modalName) {
+            $(modalName).modal('hide');
+            return true;
+        };
+        function HightSearch(content, serachText) {
+            var src_str = $("#" + content).html();
+            var term = serachText;
+            term = term.replace(/(\s+)/, "(<[^>]+>)*$1(<[^>]+>)*");
+            var pattern = new RegExp("(" + term + ")", "gi");
 
-                //src_str = src_str.replace(pattern, '<span style="background-color:Yellow" >' + term + '</span>');
-                src_str = src_str.replace(pattern, "<mark>$1</mark>");
-                src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
+            //src_str = src_str.replace(pattern, '<span style="background-color:Yellow" >' + term + '</span>');
+            src_str = src_str.replace(pattern, "<mark>$1</mark>");
+            src_str = src_str.replace(/(<mark>[^<>]*)((<[^>]+>)+)([^<>]*<\/mark>)/, "$1</mark>$2<mark>$4");
 
-                $("#" + content).html(src_str);
-            }
+            $("#" + content).html(src_str);
+        }
 
-            var d;
-            function drag(objSource) {
-                this.select = objSource;
-            }
+        var d;
+        function drag(objSource) {
+            this.select = objSource;
+        }
 
-            function dragPrototypeDrop(objDest) {
-                if (!this.dragStart) return;
-                this.dest = objDest;
+        function dragPrototypeDrop(objDest) {
+            if (!this.dragStart) return;
+            this.dest = objDest;
 
-                var o = this.option.cloneNode(true);
-                this.dest.appendChild(o);
-                this.select.removeChild(this.option);
-            }
+            var o = this.option.cloneNode(true);
+            this.dest.appendChild(o);
+            this.select.removeChild(this.option);
+        }
 
-            function dragPrototypeSetIndex() {
-                var i = this.select.selectedIndex;
+        function dragPrototypeSetIndex() {
+            var i = this.select.selectedIndex;
 
-                //i returns -1 if no option is "truly" selected
-                window.status = "selectedIndex = " + i;
-                if (i == -1) return;
+            //i returns -1 if no option is "truly" selected
+            window.status = "selectedIndex = " + i;
+            if (i == -1) return;
 
-                this.option = this.select.options[i];
-                this.dragStart = true;
-            }
-            $(function () {
-                var isMouseDown = false,
-                    isHighlighted;
-                $("#our_table tbody td")
-                    .mousedown(function () {
-                        isMouseDown = true;
-                        $(this).toggleClass("highlighted");
-                        isHighlighted = $(this).hasClass("highlighted");
-                        return false; // prevent text selection
-                    })
-                    .mouseover(function () {
-                        if (isMouseDown) {
-                            $(this).toggleClass("highlighted", isHighlighted);
-                        }
-                    })
-                    .bind("selectstart", function () {
-                        return false;
-                    })
-
-                $(document)
-                    .mouseup(function () {
-                        isMouseDown = false;
-                    });
-            });
-
-            function getSelectedHora() {
-                var lunes = [];
-                var martes = [];
-                var miercoles = [];
-                var jueves = [];
-                var viernes = [];
-                var sabado = [];
-                var domingo = [];
-                $("#our_table tbody td.highlighted").each(function () {
-                    if ($(this).hasClass('highlighted')) {
-                        var id = $(this).attr("id");
-                        var dia = id.substring(0, 3);
-                        var hora = id.substring(3);
-                        switch (dia) {
-                            case "lun":
-                                lunes.push(parseInt(hora));
-                                break;
-                            case "mar":
-                                martes.push(parseInt(hora));
-                                break;
-                            case "mie":
-                                miercoles.push(parseInt(hora));
-                                break;
-                            case "jue":
-                                jueves.push(parseInt(hora));
-                                break;
-                            case "vie":
-                                viernes.push(parseInt(hora));
-                                break;
-                            case "sab":
-                                sabado.push(parseInt(hora));
-                                break;
-                            case "dom":
-                                domingo.push(parseInt(hora));
-                                break;
-                            default:
-                        }
-
+            this.option = this.select.options[i];
+            this.dragStart = true;
+        }
+        $(function () {
+            var isMouseDown = false,
+                isHighlighted;
+            $("#our_table tbody td")
+                .mousedown(function () {
+                    isMouseDown = true;
+                    $(this).toggleClass("highlighted");
+                    isHighlighted = $(this).hasClass("highlighted");
+                    return false; // prevent text selection
+                })
+                .mouseover(function () {
+                    if (isMouseDown) {
+                        $(this).toggleClass("highlighted", isHighlighted);
                     }
+                })
+                .bind("selectstart", function () {
+                    return false;
+                })
+
+            $(document)
+                .mouseup(function () {
+                    isMouseDown = false;
                 });
-                lunes.sort(function (a, b) { return a - b });
-                martes.sort(function (a, b) { return a - b });
-                miercoles.sort(function (a, b) { return a - b });
-                jueves.sort(function (a, b) { return a - b });
-                viernes.sort(function (a, b) { return a - b });
-                sabado.sort(function (a, b) { return a - b });
-                domingo.sort(function (a, b) { return a - b });
-                if (lunes.length > 0)
-                    alert("dia: Lunes" + "\nHora minima: " + lunes[0] + "\nHoraMaxima: " + (parseInt(lunes[lunes.length - 1]) + 1));
-                if (martes.length > 0)
-                    alert("dia: Martes" + "\nHora minima: " + martes[0] + "\nHoraMaxima: " + (parseInt(martes[martes.length - 1]) + 1));
-                if (miercoles.length > 0)
-                    alert("dia: Miercoles" + "\nHora minima: " + miercoles[0] + "\nHoraMaxima: " + (parseInt(miercoles[miercoles.length - 1]) + 1));
-                if (jueves.length > 0)
-                    alert("dia: Jueves" + "\nHora minima: " + jueves[0] + "\nHoraMaxima: " + (parseInt(jueves[jueves.length - 1]) + 1));
-                if (viernes.length > 0)
-                    alert("dia: Viernes" + "\nHora minima: " + viernes[0] + "\nHoraMaxima: " + (parseInt(viernes[viernes.length - 1]) + 1));
-                if (sabado.length > 0)
-                    alert("dia: Sabado" + "\nHora minima: " + sabado[0] + "\nHoraMaxima: " + (parseInt(sabado[sabado.length - 1]) + 1));
-                if (domingo.length > 0)
-                    alert("dia: Domingo" + "\nHora minima: " + domingo[0] + "\nHoraMaxima: " + (parseInt(domingo[domingo.length - 1]) + 1));
-            }
-            function SuccsessAlert(title, msg) {
-                $.notify({
-                    // options
-                    icon: 'glyphicon glyphicon-ok',
-                    title: title,
-                    message: msg,
-                    target: '_blank'
-                }, {
-                    // settings
-                    element: 'body',
-                    position: null,
-                    type: "success",
-                    allow_dismiss: true,
-                    newest_on_top: false,
-                    showProgressbar: false,
-                    placement: {
-                        from: "top",
-                        align: "right"
-                    },
-                    offset: 20,
-                    spacing: 10,
-                    z_index: 1031,
-                    delay: 5000,
-                    timer: 1000,
-                    url_target: '_blank',
-                    mouse_over: null,
-                    animate: {
-                        enter: 'animated fadeInDown',
-                        exit: 'animated fadeOutUp'
-                    },
-                    onShow: null,
-                    onShown: null,
-                    onClose: null,
-                    onClosed: null,
-                    icon_type: 'class',
-                    template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
-                        '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
-                        '<span data-notify="icon"></span> ' +
-                        '<span data-notify="title">{1}</span> ' +
-                        '<span data-notify="message">{2}</span>' +
-                        '<div class="progress" data-notify="progressbar">' +
-                        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-                        '</div>' +
-                        '<a href="{3}" target="{4}" data-notify="url"></a>' +
-                        '</div>'
-                });
-            };
-            function ErrorAlert(title, msg) {
-                $.notify({
-                    // options
-                    icon: 'glyphicon glyphicon-warning-sign',
-                    title: title,
-                    message: msg,
-                    target: '_blank'
-                }, {
-                    // settings
-                    element: 'body',
-                    position: null,
-                    type: "danger",
-                    allow_dismiss: false,
-                    newest_on_top: false,
-                    showProgressbar: false,
-                    placement: {
-                        from: "top",
-                        align: "right"
-                    },
-                    offset: 20,
-                    spacing: 10,
-                    z_index: 99999,
-                    delay: 5000,
-                    timer: 1000,
-                    url_target: '_blank',
-                    mouse_over: null,
-                    animate: {
-                        enter: 'animated fadeInDown',
-                        exit: 'animated fadeOutUp'
-                    },
-                    onShow: null,
-                    onShown: null,
-                    onClose: null,
-                    onClosed: null,
-                    icon_type: 'class',
-                    template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert" style="z-index=9999999">' +
-                        '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
-                        '<span data-notify="icon"></span> ' +
-                        '<span data-notify="title">{1}</span> ' +
-                        '<span data-notify="message">{2}</span>' +
-                        '<div class="progress" data-notify="progressbar">' +
-                        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-                        '</div>' +
-                        '<a href="{3}" target="{4}" data-notify="url"></a>' +
-                        '</div>'
-                });
-            };
+        });
+
+        function getSelectedHora() {
+            var lunes = [];
+            var martes = [];
+            var miercoles = [];
+            var jueves = [];
+            var viernes = [];
+            var sabado = [];
+            var domingo = [];
+            $("#our_table tbody td.highlighted").each(function () {
+                if ($(this).hasClass('highlighted')) {
+                    var id = $(this).attr("id");
+                    var dia = id.substring(0, 3);
+                    var hora = id.substring(3);
+                    switch (dia) {
+                        case "lun":
+                            lunes.push(parseInt(hora));
+                            break;
+                        case "mar":
+                            martes.push(parseInt(hora));
+                            break;
+                        case "mie":
+                            miercoles.push(parseInt(hora));
+                            break;
+                        case "jue":
+                            jueves.push(parseInt(hora));
+                            break;
+                        case "vie":
+                            viernes.push(parseInt(hora));
+                            break;
+                        case "sab":
+                            sabado.push(parseInt(hora));
+                            break;
+                        case "dom":
+                            domingo.push(parseInt(hora));
+                            break;
+                        default:
+                    }
+
+                }
+            });
+            lunes.sort(function (a, b) { return a - b });
+            martes.sort(function (a, b) { return a - b });
+            miercoles.sort(function (a, b) { return a - b });
+            jueves.sort(function (a, b) { return a - b });
+            viernes.sort(function (a, b) { return a - b });
+            sabado.sort(function (a, b) { return a - b });
+            domingo.sort(function (a, b) { return a - b });
+            if (lunes.length > 0)
+                alert("dia: Lunes" + "\nHora minima: " + lunes[0] + "\nHoraMaxima: " + (parseInt(lunes[lunes.length - 1]) + 1));
+            if (martes.length > 0)
+                alert("dia: Martes" + "\nHora minima: " + martes[0] + "\nHoraMaxima: " + (parseInt(martes[martes.length - 1]) + 1));
+            if (miercoles.length > 0)
+                alert("dia: Miercoles" + "\nHora minima: " + miercoles[0] + "\nHoraMaxima: " + (parseInt(miercoles[miercoles.length - 1]) + 1));
+            if (jueves.length > 0)
+                alert("dia: Jueves" + "\nHora minima: " + jueves[0] + "\nHoraMaxima: " + (parseInt(jueves[jueves.length - 1]) + 1));
+            if (viernes.length > 0)
+                alert("dia: Viernes" + "\nHora minima: " + viernes[0] + "\nHoraMaxima: " + (parseInt(viernes[viernes.length - 1]) + 1));
+            if (sabado.length > 0)
+                alert("dia: Sabado" + "\nHora minima: " + sabado[0] + "\nHoraMaxima: " + (parseInt(sabado[sabado.length - 1]) + 1));
+            if (domingo.length > 0)
+                alert("dia: Domingo" + "\nHora minima: " + domingo[0] + "\nHoraMaxima: " + (parseInt(domingo[domingo.length - 1]) + 1));
+        }
+        function SuccsessAlert(title, msg) {
+            $.notify({
+                // options
+                icon: 'glyphicon glyphicon-ok',
+                title: title,
+                message: msg,
+                target: '_blank'
+            }, {
+                // settings
+                element: 'body',
+                position: null,
+                type: "success",
+                allow_dismiss: true,
+                newest_on_top: false,
+                showProgressbar: false,
+                placement: {
+                    from: "top",
+                    align: "right"
+                },
+                offset: 20,
+                spacing: 10,
+                z_index: 1031,
+                delay: 5000,
+                timer: 1000,
+                url_target: '_blank',
+                mouse_over: null,
+                animate: {
+                    enter: 'animated fadeInDown',
+                    exit: 'animated fadeOutUp'
+                },
+                onShow: null,
+                onShown: null,
+                onClose: null,
+                onClosed: null,
+                icon_type: 'class',
+                template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                    '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                    '<span data-notify="icon"></span> ' +
+                    '<span data-notify="title">{1}</span> ' +
+                    '<span data-notify="message">{2}</span>' +
+                    '<div class="progress" data-notify="progressbar">' +
+                    '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                    '</div>' +
+                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                    '</div>'
+            });
+        };
+        function ErrorAlert(title, msg) {
+            $.notify({
+                // options
+                icon: 'glyphicon glyphicon-warning-sign',
+                title: title,
+                message: msg,
+                target: '_blank'
+            }, {
+                // settings
+                element: 'body',
+                position: null,
+                type: "danger",
+                allow_dismiss: false,
+                newest_on_top: false,
+                showProgressbar: false,
+                placement: {
+                    from: "top",
+                    align: "right"
+                },
+                offset: 20,
+                spacing: 10,
+                z_index: 99999,
+                delay: 5000,
+                timer: 1000,
+                url_target: '_blank',
+                mouse_over: null,
+                animate: {
+                    enter: 'animated fadeInDown',
+                    exit: 'animated fadeOutUp'
+                },
+                onShow: null,
+                onShown: null,
+                onClose: null,
+                onClosed: null,
+                icon_type: 'class',
+                template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert" style="z-index=9999999">' +
+                    '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                    '<span data-notify="icon"></span> ' +
+                    '<span data-notify="title">{1}</span> ' +
+                    '<span data-notify="message">{2}</span>' +
+                    '<div class="progress" data-notify="progressbar">' +
+                    '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                    '</div>' +
+                    '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                    '</div>'
+            });
+        };
+
+        function dopostback() {
+            debugger;
+            __doPostBack();
+        }
     </script>
     <style type="text/css">
         body {
@@ -378,6 +385,52 @@
             position: absolute;
             margin-top: 8px;
         }
+
+
+        .span-upload {
+            text-decoration-line: underline;
+            color: #40babd;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .FileUploadClass {
+            font-size: 5px;
+            z-index: 500;
+            position: relative;
+            z-index: 10;
+            color: #40babd;
+            width: 100%;
+            cursor: pointer;
+        }
+
+            .FileUploadClass input[type=file] {
+                background: transparent;
+                border: Dashed 2px #000000;
+                opacity: 0;
+                filter: alpha(opacity = 0);
+                position: absolute;
+                color: inherit;
+                width: 100%;
+                cursor: pointer;
+            }
+
+        .FakeFileUpload {
+            position: relative;
+            border: Solid 1px #000000;
+            width: 400px;
+            z-index: 1;
+            color: inherit;
+        }
+
+        .FakeFileUploadDiv {
+            position: absolute;
+            opacity: .5;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+            filter: alpha(opacity=50);
+            z-index: 5;
+            color: inherit;
+        }
     </style>
 </head>
 <body class="preload" style="background: #fff">
@@ -395,11 +448,49 @@
                     <asp:ScriptReference Path="~/assets/js/bootstrap-notify.js" />
                     <asp:ScriptReference Path="~/assets/js/bootstrap-notify.min.js" />
                     <asp:ScriptReference Path="~/assets/tmp/chosen.jquery.js" />
-                    <asp:ScriptReference Path="~/assets/tmp/jquery.sumoselect.min.js" />
+                    <asp:ScriptReference Path="~/assets/js/jquery.sumoselect.min.js" />
                     <asp:ScriptReference Path="~/assets/js/validation.js" />
+                    <asp:ScriptReference Path="~/assets/tmp/jquery.tagsinput.min.js" />
                 </Scripts>
             </asp:ScriptManager>
-            <script type="text/javascript">
+            <%--<div class="row">
+                <div class="col-lg-8 col-md-8">
+                    <div class="module-inner">
+                        <ctrlExterno:HtmlEditor runat="Server" ID="txtEditor" Height="350px" ToggleMode="ToggleButton" ColorScheme="VisualStudio" />
+                    </div>
+                </div>
+            </div>
+            <asp:Button runat="server" Text="Vista previa" OnClick="OnClick" />--%>
+            <uc1:UcAltaInformacionConsulta runat="server" id="UcAltaInformacionConsulta" />
+
+
+
+            <%--<asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                    <div class="form-group">
+                        <asp:Repeater runat="server" ID="rptFiles">
+                            <ItemTemplate>
+                                <div class="row col-lg-12 col-md-12 col-sm-12">
+                                    <span>
+                                        <asp:Label runat="server" ID="lblFile" CssClass="col-lg-10 col-md-10 col-sm-10" Text='<%# Container.DataItem %>' />
+                                        <asp:LinkButton runat="server" CssClass="col-lg-1 col-md-1 col-sm-1 fa fa-remove" />
+                                    </span>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <span class="span-upload">
+                            <ajax:AsyncFileUpload runat="server" ID="aUploadFiles" CssClass="FileUploadClass" OnUploadedComplete="aUploadFiles_OnUploadedComplete" OnClientUploadComplete="dopostback" />
+                            Cargar archivos (max 10 MB)
+                        </span>
+                        <div class="clearfix"></div>
+                    </div>
+                    <%--<ajax:AjaxFileUpload runat="server" ID="AsyncFileUpload1" />
+                </ContentTemplate>
+            </asp:UpdatePanel>--%>
+            <%--<script type="text/javascript">
                 $(function () {
                     $('[id*=lstFruits]').multiselect({
                         includeSelectAllOption: true,
@@ -416,7 +507,7 @@
                     });
                 });
 
-            </script>
+            </script>--%>
             <%--<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css"
                 rel="stylesheet" type="text/css" />--%>
             <%--<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css"
@@ -424,15 +515,16 @@
             <%--<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"
                 type="text/javascript"></script>--%>
 
-            <asp:ListBox ID="lstFruits" runat="server" SelectionMode="Multiple">
+            <%--<asp:ListBox ID="lstFruits" runat="server" SelectionMode="Multiple">
                 <asp:ListItem Text="Mango" Value="1" />
                 <asp:ListItem Text="Apple" Value="2" />
                 <asp:ListItem Text="Banana" Value="3" />
                 <asp:ListItem Text="Guava" Value="4" />
                 <asp:ListItem Text="Orange" Value="5" />
             </asp:ListBox>
+            --%>
             <%--<uc1:UcAltaConsulta runat="server" id="UcAltaConsulta" />--%>
-            <uc1:UcAltaServicio runat="server" id="UcAltaServicio" />
+            <%--<uc1:UcAltaServicio runat="server" id="UcAltaServicio" />--%>
             <%--<div class="span12">
                 <div class="pe-block pe-view-layout-block pe-view-layout-block-26 pe-view-layout-class-form">
                     <form action="../wp-content/themes/oneup/uploadFisica.php" enctype="multipart/form-data" method="POST">

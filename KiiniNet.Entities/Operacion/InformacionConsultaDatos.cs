@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
-using KiiniNet.Entities.Cat.Sistema;
+﻿using System.Runtime.Serialization;
 
 namespace KiiniNet.Entities.Operacion
 {
@@ -13,15 +9,14 @@ namespace KiiniNet.Entities.Operacion
         public int Id { get; set; }
         [DataMember]
         public int IdInformacionConsulta { get; set; }
-        
         [DataMember]
-        public string Descripcion { get; set; }
+        public string Datos { get; set; }
         [DataMember]
-        public int? Orden { get; set; }
-
+        public string Busqueda { get; set; }
         [DataMember]
-        public int? IdPadre { get; set; }
-
+        public string Tags { get; set; }
+        [DataMember]
+        public bool Habilitado { get; set; }
         [DataMember]
         public virtual InformacionConsulta InformacionConsulta { get; set; }
     }

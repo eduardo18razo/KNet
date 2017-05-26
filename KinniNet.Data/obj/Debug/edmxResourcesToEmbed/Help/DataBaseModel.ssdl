@@ -443,8 +443,11 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdTipoInfConsulta" Type="int" />
-    <Property Name="IdTipoDocumento" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="FechaAlta" Type="datetime" />
+    <Property Name="IdUsuarioAlta" Type="int" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModifico" Type="int" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="InformacionConsultaDatos">
@@ -453,18 +456,24 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdInformacionConsulta" Type="int" Nullable="false" />
-    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Orden" Type="int" />
-    <Property Name="IdPadre" Type="int" />
+    <Property Name="Datos" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Busqueda" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Tags" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
-  <EntityType Name="InformacionConsultaDocumento">
+  <EntityType Name="InformacionConsultaDocumentos">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdInformacionConsulta" Type="int" />
+    <Property Name="IdTipoDocumento" Type="int" />
     <Property Name="Archivo" Type="nvarchar(max)" />
-    <Property Name="Fecha" Type="datetime" />
+    <Property Name="FechaAlta" Type="datetime" />
+    <Property Name="IdUsuarioAlta" Type="int" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModifico" Type="int" />
+    <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="InventarioArbolAcceso">
     <Key>
@@ -2185,15 +2194,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_InformacionConsulta_TipoDocumento">
-    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
+  <Association Name="FK_InformacionConsulta_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="InformacionConsulta" Type="Self.InformacionConsulta" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TipoDocumento">
+      <Principal Role="Usuario">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="InformacionConsulta">
-        <PropertyRef Name="IdTipoDocumento" />
+        <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InformacionConsulta_Usuario1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="InformacionConsulta" Type="Self.InformacionConsulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformacionConsulta">
+        <PropertyRef Name="IdUsuarioModifico" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2209,15 +2230,51 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_InformacionConsultaDocumento_InformacionConsulta">
+  <Association Name="FK_InformacionConsultaDocumentos_InformacionConsulta">
     <End Role="InformacionConsulta" Type="Self.InformacionConsulta" Multiplicity="0..1" />
-    <End Role="InformacionConsultaDocumento" Type="Self.InformacionConsultaDocumento" Multiplicity="*" />
+    <End Role="InformacionConsultaDocumentos" Type="Self.InformacionConsultaDocumentos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="InformacionConsulta">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="InformacionConsultaDocumento">
+      <Dependent Role="InformacionConsultaDocumentos">
         <PropertyRef Name="IdInformacionConsulta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InformacionConsultaDocumentos_TipoDocumento">
+    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
+    <End Role="InformacionConsultaDocumentos" Type="Self.InformacionConsultaDocumentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformacionConsultaDocumentos">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InformacionConsultaDocumentos_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="InformacionConsultaDocumentos" Type="Self.InformacionConsultaDocumentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformacionConsultaDocumentos">
+        <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InformacionConsultaDocumentos_Usuario1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="InformacionConsultaDocumentos" Type="Self.InformacionConsultaDocumentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformacionConsultaDocumentos">
+        <PropertyRef Name="IdUsuarioModifico" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3884,7 +3941,7 @@
     <EntitySet Name="Impacto" EntityType="Self.Impacto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InformacionConsulta" EntityType="Self.InformacionConsulta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InformacionConsultaDatos" EntityType="Self.InformacionConsultaDatos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="InformacionConsultaDocumento" EntityType="Self.InformacionConsultaDocumento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InformacionConsultaDocumentos" EntityType="Self.InformacionConsultaDocumentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventarioArbolAcceso" EntityType="Self.InventarioArbolAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventarioInfConsulta" EntityType="Self.InventarioInfConsulta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Jefatura" EntityType="Self.Jefatura" Schema="dbo" store:Type="Tables" />
@@ -4251,17 +4308,33 @@
       <End Role="Urgencia" EntitySet="Urgencia" />
       <End Role="Impacto" EntitySet="Impacto" />
     </AssociationSet>
-    <AssociationSet Name="FK_InformacionConsulta_TipoDocumento" Association="Self.FK_InformacionConsulta_TipoDocumento">
-      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+    <AssociationSet Name="FK_InformacionConsulta_Usuario" Association="Self.FK_InformacionConsulta_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InformacionConsulta_Usuario1" Association="Self.FK_InformacionConsulta_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
       <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
     </AssociationSet>
     <AssociationSet Name="FK_InformacionConsultaDatos_InformacionConsulta" Association="Self.FK_InformacionConsultaDatos_InformacionConsulta">
       <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
       <End Role="InformacionConsultaDatos" EntitySet="InformacionConsultaDatos" />
     </AssociationSet>
-    <AssociationSet Name="FK_InformacionConsultaDocumento_InformacionConsulta" Association="Self.FK_InformacionConsultaDocumento_InformacionConsulta">
+    <AssociationSet Name="FK_InformacionConsultaDocumentos_InformacionConsulta" Association="Self.FK_InformacionConsultaDocumentos_InformacionConsulta">
       <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
-      <End Role="InformacionConsultaDocumento" EntitySet="InformacionConsultaDocumento" />
+      <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InformacionConsultaDocumentos_TipoDocumento" Association="Self.FK_InformacionConsultaDocumentos_TipoDocumento">
+      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+      <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InformacionConsultaDocumentos_Usuario" Association="Self.FK_InformacionConsultaDocumentos_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InformacionConsultaDocumentos_Usuario1" Association="Self.FK_InformacionConsultaDocumentos_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
     </AssociationSet>
     <AssociationSet Name="FK_InventarioArbolAcceso_Encuesta" Association="Self.FK_InventarioArbolAcceso_Encuesta">
       <End Role="Encuesta" EntitySet="Encuesta" />

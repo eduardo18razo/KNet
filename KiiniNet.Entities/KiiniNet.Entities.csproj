@@ -103,6 +103,7 @@
     <Compile Include="Helper\HelperDatosGrafica.cs" />
     <Compile Include="Helper\HelperDetalleTicket.cs" />
     <Compile Include="Helper\HelperEncuesta.cs" />
+    <Compile Include="Helper\HelperFiles.cs" />
     <Compile Include="Helper\HelperFiltroGrafico.cs" />
     <Compile Include="Helper\HelperFrecuencia.cs" />
     <Compile Include="Helper\HelperHits.cs" />
@@ -118,7 +119,7 @@
     <Compile Include="Operacion\HitGrupoUsuario.cs" />
     <Compile Include="Operacion\InformacionConsulta.cs" />
     <Compile Include="Operacion\InformacionConsultaDatos.cs" />
-    <Compile Include="Operacion\InformacionConsultaDocumento.cs" />
+    <Compile Include="Operacion\InformacionConsultaDocumentos.cs" />
     <Compile Include="Operacion\InventarioInfConsulta.cs" />
     <Compile Include="Operacion\NotaGeneral.cs" />
     <Compile Include="Operacion\NotaGeneralGrupo.cs">

@@ -16,8 +16,13 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/menuStyle.css" />
     <link rel="stylesheet" href="assets/css/divs.css" />
-    <link rel="stylesheet" href="assets/css/checkBox.css"  />
+    <link rel="stylesheet" href="assets/css/checkBox.css" />
     <link rel="stylesheet" href="assets/tmp/chosen.css" />
+    <link rel="stylesheet" href="assets/css/sumoselect.css" />
+    <link rel="stylesheet" href="assets/tmp/editor/ui/trumbowyg.css"/>
+    <link rel="stylesheet" href="assets/tmp/editor/ui/trumbowyg.min.css"/>
+    <link rel="stylesheet" href="assets/css/controls.css"/>
+    <link rel="stylesheet" href="assets/tmp/jquery.tagsinput.min.css"/>
     <style>
         body {
             font-size: 12px;
@@ -129,7 +134,7 @@
 
             $("#test").html(src_str);
         }
-        
+
         function hidden() {
             $('#tblResults tr').on('mouseover', function () {
                 //$(this).find('#colHabilitado').find('#hiddenEnabled').removeClass("hidden");
@@ -139,7 +144,10 @@
                 $(this).find('#colEditar').find('#hiddenEdit').addClass("hidden");
             });
         }
-
+        function dopostback() {
+            debugger;
+            __doPostBack();
+        }
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -160,6 +168,13 @@
                     <asp:ScriptReference Path="~/assets/js/bootstrap-notify.min.js" />
                     <asp:ScriptReference Path="~/assets/js/Notificaciones.js" />
                     <asp:ScriptReference Path="~/assets/tmp/chosen.jquery.js" />
+                    <asp:ScriptReference Path="~/assets/tmp/editor/trumbowyg.min.js" />
+                    <asp:ScriptReference Path="~/assets/tmp/editor/plugins/base64/trumbowyg.base64.min.js" />
+                    <asp:ScriptReference Path="~/assets/tmp/editor/plugins/upload/trumbowyg.upload.min.js" />
+                    <asp:ScriptReference Path="~/assets/tmp/jquery.tagsinput.min.js" />
+                    
+
+                    <asp:ScriptReference Path="~/assets/js/jquery.sumoselect.min.js" />
                     <asp:ScriptReference Path="~/assets/js/validation.js" />
                 </Scripts>
             </asp:ScriptManager>

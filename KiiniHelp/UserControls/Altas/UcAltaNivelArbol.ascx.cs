@@ -545,9 +545,9 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 AlertaNivel = new List<string>();
-                UcAltaInformacionConsulta.EsAlta = true;
-                UcAltaInformacionConsulta.OnAceptarModal += UcAltaInformacionConsulta_OnAceptarModal;
-                UcAltaInformacionConsulta.OnCancelarModal += UcAltaInformacionConsulta_OnCancelarModal;
+                ucAltaInformacionConsulta.EsAlta = true;
+                ucAltaInformacionConsulta.OnAceptarModal += UcAltaInformacionConsulta_OnAceptarModal;
+                ucAltaInformacionConsulta.OnCancelarModal += UcAltaInformacionConsulta_OnCancelarModal;
 
                 UcAltaMascaraAcceso.OnAceptarModal += UcAltaMascaraAcceso_OnAceptarModal;
                 UcAltaMascaraAcceso.OnCancelarModal += UcAltaMascaraAcceso_OnCancelarModal;

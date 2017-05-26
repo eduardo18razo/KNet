@@ -107,6 +107,17 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public virtual List<TicketConversacion> TicketConversacion { get; set; }
         [DataMember]
         public virtual List<BitacoraAcceso> BitacoraAcceso { get; set; }
+
+
+        [DataMember]
+        public virtual List<InformacionConsulta> InformacionConsultaAlta { get; set; }
+        [DataMember]
+        public virtual List<InformacionConsulta> InformacionConsultaModifico { get; set; }
+
+        [DataMember]
+        public virtual List<InformacionConsultaDocumentos> InformacionConsultaDocumentosAlta { get; set; }
+        [DataMember]
+        public virtual List<InformacionConsultaDocumentos> InformacionConsultaDocumentosModifico { get; set; }
         #endregion Mapeo
 
         public bool Supervisor { get; set; }

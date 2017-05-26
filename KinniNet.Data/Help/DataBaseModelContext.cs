@@ -126,9 +126,8 @@ namespace KinniNet.Data.Help
                 _tipoCampoMascara = CreateObjectSet<TipoCampoMascara>();
                 _arbolAcceso = CreateObjectSet<ArbolAcceso>();
                 _informacionConsulta = CreateObjectSet<InformacionConsulta>();
-                _informacionConsultaDocumento = CreateObjectSet<InformacionConsultaDocumento>();
-
                 _informacionConsultaDatos = CreateObjectSet<InformacionConsultaDatos>();
+                _informacionConsultaDocumentos = CreateObjectSet<InformacionConsultaDocumentos>();
                 _sla = CreateObjectSet<Sla>();
                 _slaDetalle = CreateObjectSet<SlaDetalle>();
                 _encuesta = CreateObjectSet<Encuesta>();
@@ -349,19 +348,20 @@ namespace KinniNet.Data.Help
                 return _informacionConsulta;
             }
         }
-        public ObjectSet<InformacionConsultaDocumento> InformacionConsultaDocumento
-        {
-            get
-            {
-                return _informacionConsultaDocumento;
-            }
-        }
 
         public ObjectSet<InformacionConsultaDatos> InformacionConsultaDatos
         {
             get
             {
                 return _informacionConsultaDatos;
+            }
+        }
+
+        public ObjectSet<InformacionConsultaDocumentos> InformacionConsultaDocumentos
+        {
+            get
+            {
+                return _informacionConsultaDocumentos;
             }
         }
 
@@ -639,8 +639,8 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<Catalogos> _catalogos;
         private readonly ObjectSet<ArbolAcceso> _arbolAcceso;
         private readonly ObjectSet<InformacionConsulta> _informacionConsulta;
-        private readonly ObjectSet<InformacionConsultaDocumento> _informacionConsultaDocumento;
         private readonly ObjectSet<InformacionConsultaDatos> _informacionConsultaDatos;
+        private readonly ObjectSet<InformacionConsultaDocumentos> _informacionConsultaDocumentos;
         private readonly ObjectSet<Sla> _sla;
         private readonly ObjectSet<SlaDetalle> _slaDetalle;
 

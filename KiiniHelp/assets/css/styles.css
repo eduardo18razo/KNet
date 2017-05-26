@@ -752,7 +752,7 @@ button.close:focus {
     padding-top: 30px;
     padding-bottom: 60px;
     /*min-height: 100%;*/
-    height: 94%;
+    height: 92%;
 }
 
 .compact .content-wrapper {
@@ -4601,6 +4601,9 @@ ul.sortable {
 .margin-left {
     margin: auto;
 }
+.margin-left-5 {
+    margin-left: 5px;
+}
 
 .wdropdown-ticket {
     max-width: 130px;
@@ -5610,6 +5613,15 @@ ul.sortable {
         margin-bottom: 15px;
     }
 
+    .file-uploader {
+        display: none;
+    }
+    .file-uploader-label {
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        text-decoration-line: underline;
+    }
     .view-account .mail-subject {
         max-width: 100px;
         white-space: nowrap;

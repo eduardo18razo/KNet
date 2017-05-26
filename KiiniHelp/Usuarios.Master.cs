@@ -34,7 +34,7 @@ namespace KiiniHelp
                 }
             }
         }
-
+        
         private void ObtenerAreas()
         {
             try

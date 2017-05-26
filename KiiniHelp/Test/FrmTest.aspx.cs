@@ -17,6 +17,7 @@ using AjaxControlToolkit;
 using KiiniHelp.ServiceArea;
 using KiiniHelp.ServiceSistemaCatalogos;
 using KiiniNet.Entities.Operacion;
+using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 using Font = System.Drawing.Font;
 using System.Text.RegularExpressions;
@@ -28,6 +29,7 @@ namespace KiiniHelp.Test
 
         private readonly ServiceCatalogosClient _servicioCatalogos = new ServiceCatalogosClient();
         private readonly ServiceAreaClient _servicioArea = new ServiceAreaClient();
+        private List<string> _lstError = new List<string>();
 
         //private void SendMessageAltiria()
         //{
@@ -73,6 +75,20 @@ namespace KiiniHelp.Test
         //            lblerrorMensaje.Text =  response;
         //    }
         //}
+        private List<string> AlertaGeneral
+        {
+            set
+            {
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
+            }
+        }
+
+
         public int IdCatalogo { get { return 10; } }
         protected void btnGetSelectedValues_Click(object sender, EventArgs e)
         {
@@ -483,33 +499,33 @@ namespace KiiniHelp.Test
         //    ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
         //}
 
-        protected void OnClick(object sender, EventArgs e)
-        {
+        //protected void OnClick(object sender, EventArgs e)
+        //{
 
-            //lblFormatWeek.Text = txtWeek.Text;
-            //lblFormatMonth.Text = txtMonth.Text;
+        //    //lblFormatWeek.Text = txtWeek.Text;
+        //    //lblFormatMonth.Text = txtMonth.Text;
 
-            //BusinessCadenas.Fechas.ObtenerRangoFechasNumeroSemana(Convert.ToInt32(txtWeek.Text.Split('-')[0]),
-            //    Convert.ToInt32(txtWeek.Text.Split('-')[1].Substring(1)));
-            //DateTime jan1 = new DateTime(Convert.ToInt32(txtWeek.Text.Split('-')[0]), 1, 1);
+        //    //BusinessCadenas.Fechas.ObtenerRangoFechasNumeroSemana(Convert.ToInt32(txtWeek.Text.Split('-')[0]),
+        //    //    Convert.ToInt32(txtWeek.Text.Split('-')[1].Substring(1)));
+        //    //DateTime jan1 = new DateTime(Convert.ToInt32(txtWeek.Text.Split('-')[0]), 1, 1);
 
-            //int daysOffset = DayOfWeek.Tuesday - jan1.DayOfWeek;
+        //    //int daysOffset = DayOfWeek.Tuesday - jan1.DayOfWeek;
 
-            //DateTime firstMonday = jan1.AddDays(daysOffset);
+        //    //DateTime firstMonday = jan1.AddDays(daysOffset);
 
-            //var cal = CultureInfo.CurrentCulture.Calendar;
+        //    //var cal = CultureInfo.CurrentCulture.Calendar;
 
-            //int firstWeek = cal.GetWeekOfYear(jan1, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        //    //int firstWeek = cal.GetWeekOfYear(jan1, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
-            //int weekNum = Convert.ToInt32(txtWeek.Text.Split('-')[1].Substring(1));
+        //    //int weekNum = Convert.ToInt32(txtWeek.Text.Split('-')[1].Substring(1));
 
-            //if (firstWeek <= 1)
-            //{
-            //    weekNum -= 1;
-            //}
+        //    //if (firstWeek <= 1)
+        //    //{
+        //    //    weekNum -= 1;
+        //    //}
 
-            //var result = firstMonday.AddDays(weekNum * 7 + 0 - 1);
-        }
+        //    //var result = firstMonday.AddDays(weekNum * 7 + 0 - 1);
+        //}
 
         protected void btnAbrirModal_OnClick(object sender, EventArgs e)
         {
@@ -526,6 +542,76 @@ namespace KiiniHelp.Test
 
                 throw new Exception(ex.Message);
             }
+        }
+
+        //private void LlenaArchivosCargados()
+        //{
+        //    try
+        //    {
+        //        rptFiles.DataSource = Session["selectedFiles"];
+        //        rptFiles.DataBind();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+
+        //protected void aUploadFiles_OnUploadedComplete(object sender, AsyncFileUploadEventArgs e)
+        //{
+        //    try
+        //    {
+        //        List<string> files = Session["selectedFiles"] == null ? new List<string>() : (List<string>)Session["selectedFiles"];
+        //        if (!files.Contains(aUploadFiles.FileName))
+        //        {
+        //            files.Add(aUploadFiles.FileName);
+        //            Session["selectedFiles"] = files;
+        //        }
+        //        LlenaArchivosCargados();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (_lstError == null)
+        //        {
+        //            _lstError = new List<string>();
+        //        }
+        //        _lstError.Add(ex.Message);
+        //        AlertaGeneral = _lstError;
+        //    }
+        //}
+        private InformacionConsulta ObtenerInformacionCapturada()
+        {
+            InformacionConsulta result;
+            try
+            {
+                result = new InformacionConsulta
+                {
+                    Descripcion = "Descripcion",
+                    Habilitado = true,
+                    IdTipoInfConsulta = (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido,
+                    IdUsuarioAlta = ((Usuario)Session["UserData"]).Id,
+                    InformacionConsultaDatos = new List<InformacionConsultaDatos>(),
+                    InformacionConsultaDocumentos = new List<InformacionConsultaDocumentos>()
+                };
+
+                InformacionConsultaDatos datos = new InformacionConsultaDatos();
+                datos.Datos = txtEditor.Text;
+                datos.Busqueda = "busqueda";
+                datos.Tags = "tags";
+                datos.Habilitado = true;
+                result.InformacionConsultaDatos.Add(datos);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return result;
+        }
+        protected void OnClick(object sender, EventArgs e)
+        {
+            
+            Session["PreviewDataConsulta"] = ObtenerInformacionCapturada();
+            ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('/Publico/Consultas/FrmPreviewConsulta.aspx','_blank');", true);
         }
     }
 }

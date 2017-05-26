@@ -71,67 +71,68 @@ namespace KiiniHelp.UserControls.Genericos
 
         protected void btnInformacion_OnClick(object sender, EventArgs e)
         {
-            try
-            {
-                Button btn = (Button)sender;
-                if (btn != null)
-                {
-                    InformacionConsulta ic = _servicioInformacionConsulta.ObtenerInformacionConsultaById(Convert.ToInt32(btn.CommandArgument));
-                    hfIdInformacion.Value = ic.Id.ToString();
-                    switch (ic.IdTipoInfConsulta)
-                    {
+            //TODO: CAMBIAR METODOS
+            //try
+            //{
+            //    Button btn = (Button)sender;
+            //    if (btn != null)
+            //    {
+            //        InformacionConsulta ic = _servicioInformacionConsulta.ObtenerInformacionConsultaById(Convert.ToInt32(btn.CommandArgument));
+            //        hfIdInformacion.Value = ic.Id.ToString();
+            //        switch (ic.IdTipoInfConsulta)
+            //        {
                             
-                        case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
-                            lblContenido.Text = string.Empty;
-                            foreach (InformacionConsultaDatos contenindo in ic.InformacionConsultaDatos.OrderBy(o => o.Orden))
-                            {
-                                lblContenido.Text += contenindo.Descripcion;
-                            }
-                            divPropuetario.Visible = true;
-                            divInfoDocto.Visible = false;
-                            if (btn.CommandName == "0")
-                            {
-                                _servicioInformacionConsulta.GuardarHit(IdArbol, ((Usuario)Session["UserData"]).Id);
-                                btn.CommandName = "1";
-                            }
-                            ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalMuestraInformacion\");", true);
-                            break;
-                        case (int)BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice:
-                            string nombreDocto = ic.InformacionConsultaDatos.OrderBy(o => o.Orden).Aggregate(string.Empty, (current, contenindo) => current + contenindo.Descripcion);
-                            ifDoctos.Attributes.Add("src", string.Format("../General/FrmMostrarDocumento.aspx?NombreDocumento={0}&TipoDocumento={1}", nombreDocto, ic.IdTipoDocumento));
-                            divPropuetario.Visible = false;
-                            divInfoDocto.Visible = true;
-                            if (btn.CommandName == "0")
-                            {
-                                _servicioInformacionConsulta.GuardarHit(IdArbol, ((Usuario)Session["UserData"]).Id);
-                                btn.CommandName = "1";
-                            }
-                            ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalMuestraInformacion\");", true);
-                            break;
-                        case (int)BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
-                            string url = ic.InformacionConsultaDatos.OrderBy(o => o.Orden).Aggregate(string.Empty, (current, contenindo) => current + contenindo.Descripcion);
-                            if (btn.CommandName == "0")
-                            {
-                                _servicioInformacionConsulta.GuardarHit(IdArbol, ((Usuario)Session["UserData"]).Id);
-                                btn.CommandName = "1";
-                            }
-                            ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "OpenWindow(\"" + url + "\");", true);
-                            break;
-                    }
-                    rptDownloads.DataSource = ic.InformacionConsultaDocumento;
-                    rptDownloads.DataBind();
+            //            case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
+            //                lblContenido.Text = string.Empty;
+            //                foreach (InformacionConsultaDatos contenindo in ic.InformacionConsultaDatos.OrderBy(o => o.Orden))
+            //                {
+            //                    lblContenido.Text += contenindo.Descripcion;
+            //                }
+            //                divPropuetario.Visible = true;
+            //                divInfoDocto.Visible = false;
+            //                if (btn.CommandName == "0")
+            //                {
+            //                    _servicioInformacionConsulta.GuardarHit(IdArbol, ((Usuario)Session["UserData"]).Id);
+            //                    btn.CommandName = "1";
+            //                }
+            //                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalMuestraInformacion\");", true);
+            //                break;
+            //            case (int)BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice:
+            //                string nombreDocto = ic.InformacionConsultaDatos.OrderBy(o => o.Orden).Aggregate(string.Empty, (current, contenindo) => current + contenindo.Descripcion);
+            //                ifDoctos.Attributes.Add("src", string.Format("../General/FrmMostrarDocumento.aspx?NombreDocumento={0}&TipoDocumento={1}", nombreDocto, ic.IdTipoDocumento));
+            //                divPropuetario.Visible = false;
+            //                divInfoDocto.Visible = true;
+            //                if (btn.CommandName == "0")
+            //                {
+            //                    _servicioInformacionConsulta.GuardarHit(IdArbol, ((Usuario)Session["UserData"]).Id);
+            //                    btn.CommandName = "1";
+            //                }
+            //                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalMuestraInformacion\");", true);
+            //                break;
+            //            case (int)BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
+            //                string url = ic.InformacionConsultaDatos.OrderBy(o => o.Orden).Aggregate(string.Empty, (current, contenindo) => current + contenindo.Descripcion);
+            //                if (btn.CommandName == "0")
+            //                {
+            //                    _servicioInformacionConsulta.GuardarHit(IdArbol, ((Usuario)Session["UserData"]).Id);
+            //                    btn.CommandName = "1";
+            //                }
+            //                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "OpenWindow(\"" + url + "\");", true);
+            //                break;
+            //        }
+            //        rptDownloads.DataSource = ic.InformacionConsultaDocumento;
+            //        rptDownloads.DataBind();
 
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    if (_lstError == null)
+            //    {
+            //        _lstError = new List<string>();
+            //    }
+            //    _lstError.Add(ex.Message);
+            //    AlertaGeneral = _lstError;
+            //}
         }
 
         protected void btnCerrarModalInfo_OnClick(object sender, EventArgs e)

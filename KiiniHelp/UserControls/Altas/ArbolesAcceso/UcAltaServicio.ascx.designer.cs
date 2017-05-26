@@ -571,13 +571,13 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso {
         protected global::System.Web.UI.WebControls.DropDownList ddlGrupoResponsableAtencion;
         
         /// <summary>
-        /// Control lstGrupoEspecialConsulta.
+        /// Control lstGrupoEspecialConsultaServicios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstGrupoEspecialConsulta;
+        protected global::System.Web.UI.WebControls.ListBox lstGrupoEspecialConsultaServicios;
         
         /// <summary>
         /// Control ddlGrupoDuenoServicio.

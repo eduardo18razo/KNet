@@ -13,12 +13,74 @@ namespace KinniNet.Business.Utils
 {
     public static class BusinessFile
     {
+        public static string ConvertirTamaño(string fileSize)
+        {
+            string result = null;
+            try
+            {
+                decimal tamano = decimal.Parse(fileSize) / 1024;
+                if (tamano <= 1024) //KB
+                {
+                    result = tamano.ToString("0.0") + " KB";
+                }
+                else if (tamano > 1024 && tamano <= 1024000) //MB
+                {
+                    result = (tamano / 1024).ToString("0.0") + " MB";
+                }
+                else if (tamano > 1024000 && tamano <= 1024000000) //GB
+                {
+                    result = ((tamano / 1024) / 1024).ToString("0.0") + " GB";
+                }
+                else if (tamano > 1024000000 && tamano <= 1024000000000) //TB
+                {
+                    result = (((tamano / 1024) / 1024) / 1024).ToString("0.0") + " TB";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return result;
+        }
+
         public static void CopiarArchivoDescarga(string rutaOrigen, string nombreArchivo, string rutaDestino)
         {
             try
             {
                 if (!File.Exists(rutaDestino + nombreArchivo))
                     File.Copy(rutaOrigen + nombreArchivo, rutaDestino + nombreArchivo);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static void EliminarArchivo(string ruta, string archivo)
+        {
+            try
+            {
+                if (File.Exists(ruta + archivo))
+                    File.Delete(ruta + archivo);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static void RenombrarArchivosConsulta(List<string> archivos, int id)
+        {
+            try
+            {
+                foreach (string archivo in archivos)
+                {
+                    if (!Directory.Exists(BusinessVariables.Directorios.RepositorioInformacionConsulta))
+                        Directory.CreateDirectory(BusinessVariables.Directorios.RepositorioInformacionConsulta);
+                    if (File.Exists(BusinessVariables.Directorios.RepositorioInformacionConsulta + id + archivo))
+                        File.Delete(BusinessVariables.Directorios.RepositorioInformacionConsulta + id + archivo);
+                    File.Move(BusinessVariables.Directorios.RepositorioInformacionConsulta + archivo, BusinessVariables.Directorios.RepositorioInformacionConsulta + id + archivo);
+                }
             }
             catch (Exception ex)
             {
@@ -78,7 +140,7 @@ namespace KinniNet.Business.Utils
                 byte[] data = null;
                 try
                 {
-                    
+
                     using (var binaryReader = new BinaryReader(fileImage))
                     {
                         data = binaryReader.ReadBytes(contentLenght);
@@ -96,13 +158,13 @@ namespace KinniNet.Business.Utils
                 byte[] data = null;
                 try
                 {
-                    
+
                     FileInfo fInfo = new FileInfo(fileImage);
                     long numBytes = fInfo.Length;
                     FileStream fStream = new FileStream(fileImage, FileMode.Open, FileAccess.Read);
                     BinaryReader br = new BinaryReader(fStream);
                     data = br.ReadBytes((int)numBytes);
-                    
+
                 }
                 catch (Exception e)
                 {
@@ -116,8 +178,9 @@ namespace KinniNet.Business.Utils
                 MemoryStream ms = new MemoryStream(byteArrayIn);
                 Image returnImage = Image.FromStream(ms);
                 return returnImage;
-            } 
+            }
         }
+
         public static void ConvertirWord(string nombrearchivo)
         {
             string logFile = BusinessVariables.Directorios.RepositorioRepositorio + @"LogArchivosWord.txt";

@@ -207,7 +207,7 @@ namespace KiiniHelp.UserControls.Altas
                     btnModalInforme.CssClass = "btn btn-primary";
                     btnModalEncuesta.CssClass = "btn btn-primary";
                     AsociarGrupoUsuario.AsignacionAutomatica = true;
-                    UcAltaInformacionConsulta.EsAlta = true;
+                    ucAltaInformacionConsulta.EsAlta = true;
                     List<TipoUsuario> lstTipoUsuario = _servicioSistemaTipoUsuario.ObtenerTiposUsuario(true);
                     Metodos.LlenaComboCatalogo(ddlTipoUsuarioNivel, lstTipoUsuario);
                     ddlTipoUsuarioNivel.SelectedValue = opcion.IdTipoUsuario.ToString();
@@ -325,11 +325,11 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 AsociarGrupoUsuario.AsignacionAutomatica = true;
-                UcAltaInformacionConsulta.EsAlta = true;
+                ucAltaInformacionConsulta.EsAlta = true;
                 UcAltaSla.FromModal = true;
 
-                UcAltaInformacionConsulta.OnAceptarModal += UcAltaInformacionConsulta_OnAceptarModal;
-                UcAltaInformacionConsulta.OnCancelarModal += UcAltaInformacionConsulta_OnCancelarModal;
+                ucAltaInformacionConsulta.OnAceptarModal += UcAltaInformacionConsulta_OnAceptarModal;
+                ucAltaInformacionConsulta.OnCancelarModal += UcAltaInformacionConsulta_OnCancelarModal;
 
                 UcAltaMascaraAcceso.OnAceptarModal += UcAltaMascaraAcceso_OnAceptarModal;
                 UcAltaMascaraAcceso.OnCancelarModal += UcAltaMascaraAcceso_OnCancelarModal;

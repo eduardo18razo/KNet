@@ -8,3 +8,5 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KiiniNet.Entities.pdb
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\KinniNet.Business.Utils.pdb
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\obj\Debug\KiiniHelp.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\obj\Debug\KiiniHelp.pdb
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\Winthusiasm.HtmlEditor.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\Winthusiasm.HtmlEditor.pdb

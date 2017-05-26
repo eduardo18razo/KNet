@@ -4,6 +4,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using KiiniNet.Entities.Cat.Operacion;
+using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
@@ -55,64 +57,47 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public void GuardarInformacionConsulta(InformacionConsulta informacion, List<string> documentosDescarga)
+        private int ObtenerTipoDocumento(string s)
+        {
+            int result = 0;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                string extension = s.Substring(s.Length - 3);
+                result = db.TipoDocumento.First(f => f.Extension.Contains(extension)).Id;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return result;
+        }
+        public InformacionConsulta GuardarInformacionConsulta(InformacionConsulta informacion, List<string> documentosDescarga)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 informacion.Descripcion = informacion.Descripcion.Trim().ToUpper();
-                switch (informacion.IdTipoInfConsulta)
-                {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
-                        if (!informacion.InformacionConsultaDatos.First().Descripcion.StartsWith("http://"))
-                            informacion.InformacionConsultaDatos.First().Descripcion = "http://" +
-                                                                                       informacion
-                                                                                           .InformacionConsultaDatos
-                                                                                           .First().Descripcion;
-                        break;
-                    //default:
-                    //    throw new Exception("Seleccione un tipo de información");
-                }
                 informacion.Habilitado = true;
-                informacion.InformacionConsultaDocumento = new List<InformacionConsultaDocumento>();
-                foreach (string s in documentosDescarga)
-                {
-                    informacion.InformacionConsultaDocumento.Add(new InformacionConsultaDocumento
-                    {
-                        Archivo = s,
-                        Fecha =
-                            DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"),
-                                "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
-                    });
-                }
+                informacion.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 if (informacion.Id == 0)
                     db.InformacionConsulta.AddObject(informacion);
                 db.SaveChanges();
-                if (informacion.IdTipoInfConsulta == (int)BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice)
+                informacion = db.InformacionConsulta.Single(s => s.Id == informacion.Id);
+                foreach (string s in documentosDescarga)
                 {
-                    switch (informacion.IdTipoDocumento)
+                    informacion.InformacionConsultaDocumentos.Add(new InformacionConsultaDocumentos
                     {
-                        case (int)BusinessVariables.EnumTiposDocumento.Word:
-                            BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta, BusinessVariables.Directorios.RepositorioInformacionConsulta, new List<string> { informacion.InformacionConsultaDatos.First().Descripcion });
-                            BusinessFile.ConvertirWord(informacion.InformacionConsultaDatos.First().Descripcion);
-                            break;
-                        case (int)BusinessVariables.EnumTiposDocumento.Excel:
-                            BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta, BusinessVariables.Directorios.RepositorioInformacionConsulta, new List<string> { informacion.InformacionConsultaDatos.First().Descripcion });
-                            BusinessFile.ConvertirExcel(informacion.InformacionConsultaDatos.First().Descripcion);
-                            break;
-                        case (int)BusinessVariables.EnumTiposDocumento.PowerPoint:
-                            BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta, BusinessVariables.Directorios.RepositorioInformacionConsulta, new List<string> { informacion.InformacionConsultaDatos.First().Descripcion });
-                            BusinessFile.ConvertirPowerPoint(informacion.InformacionConsultaDatos.First().Descripcion);
-                            break;
-                        case (int)BusinessVariables.EnumTiposDocumento.Pdf:
-                            BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta, BusinessVariables.Directorios.RepositorioInformacionConsulta, new List<string> { informacion.InformacionConsultaDatos.First().Descripcion });
-                            break;
-                        case (int)BusinessVariables.EnumTiposDocumento.Imagen:
-                            BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta, BusinessVariables.Directorios.RepositorioInformacionConsulta, new List<string> { informacion.InformacionConsultaDatos.First().Descripcion });
-                            break;
-                    }
+                        IdTipoDocumento = ObtenerTipoDocumento(s),
+                        Archivo = informacion.Id + s,
+                        FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
+                        IdUsuarioAlta = informacion.IdUsuarioAlta,
+                    });
                 }
+                db.SaveChanges();
+
+                BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta, BusinessVariables.Directorios.RepositorioInformacionConsulta, documentosDescarga);
             }
             catch (Exception ex)
             {
@@ -122,86 +107,65 @@ namespace KinniNet.Core.Operacion
             {
                 db.Dispose();
             }
+            return informacion;
         }
 
-        public void ActualizarInformacionConsulta(int idInformacionConsulta, InformacionConsulta informacion)
+        public InformacionConsulta ActualizarInformacionConsulta(int idInformacionConsulta, InformacionConsulta informacion, List<string> documentosDescarga)
         {
+            //TODO : Change method
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.LazyLoadingEnabled = true;
                 InformacionConsulta info = db.InformacionConsulta.SingleOrDefault(s => s.Id == idInformacionConsulta);
-                if (info == null) return;
+                if (info == null) return null;
                 info.Descripcion = informacion.Descripcion.Trim().ToUpper();
-                info.IdTipoInfConsulta = informacion.IdTipoInfConsulta;
-                info.IdTipoDocumento = informacion.IdTipoDocumento;
-                //TODO: Cambiar habilitado por el embebido
+                info.IdUsuarioModifico = informacion.IdUsuarioAlta;
+                info.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 info.Habilitado = true;
-                switch (informacion.IdTipoInfConsulta)
+                info.InformacionConsultaDatos.First().Datos = informacion.InformacionConsultaDatos.First().Datos;
+                info.InformacionConsultaDatos.First().Busqueda = informacion.InformacionConsultaDatos.First().Busqueda;
+                info.InformacionConsultaDatos.First().Tags = informacion.InformacionConsultaDatos.First().Tags;
+                info.InformacionConsultaDatos.First().Habilitado = informacion.InformacionConsultaDatos.First().Habilitado;
+
+                List<InformacionConsultaDocumentos> documentosEliminar = new List<InformacionConsultaDocumentos>();
+                List<string> archivosNuevos = new List<string>();
+                foreach (InformacionConsultaDocumentos doctoExist in info.InformacionConsultaDocumentos)
                 {
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido:
-                        for (int i = 0; i < info.InformacionConsultaDatos.Count; i++)
+                    if (!documentosDescarga.Any(a => a.Contains(doctoExist.Archivo) || (info.Id + a).Contains(doctoExist.Archivo)))
+                    {
+                        documentosEliminar.Add(doctoExist);
+                    }
+                }
+
+                foreach (string doctoNuevo in documentosDescarga)
+                {
+                    if (!info.InformacionConsultaDocumentos.Any(a => a.Archivo == doctoNuevo))
+                    {
+                        info.InformacionConsultaDocumentos.Add(new InformacionConsultaDocumentos
                         {
-                            info.InformacionConsultaDatos[i].Descripcion = informacion.InformacionConsultaDatos[i].Descripcion;
-                        }
-                        break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice:
-                        for (int i = 0; i < info.InformacionConsultaDatos.Count; i++)
-                        {
-                            info.InformacionConsultaDatos[i].Descripcion = informacion.InformacionConsultaDatos[i].Descripcion;
-                        }
-                        break;
-                    case (int)BusinessVariables.EnumTiposInformacionConsulta.DireccionWeb:
-                        for (int i = 0; i < info.InformacionConsultaDatos.Count; i++)
-                        {
-                            if (!informacion.InformacionConsultaDatos.First().Descripcion.StartsWith("http://"))
-                                info.InformacionConsultaDatos.First().Descripcion = "http://" + informacion.InformacionConsultaDatos.First().Descripcion;
-                        }
-                        break;
-                    default:
-                        throw new Exception("Seleccione un tipo de información");
+                            Archivo = info.Id + doctoNuevo,
+                            FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
+                            IdTipoDocumento = ObtenerTipoDocumento(doctoNuevo),
+                            IdUsuarioAlta = informacion.IdUsuarioAlta
+                        });
+                        archivosNuevos.Add(doctoNuevo);
+                    }
+                }
+
+                foreach (InformacionConsultaDocumentos documentos in documentosEliminar)
+                {
+                    db.InformacionConsultaDocumentos.DeleteObject(documentos);
                 }
                 db.SaveChanges();
-
-                if (informacion.IdTipoInfConsulta == (int)BusinessVariables.EnumTiposInformacionConsulta.DocumentoOffice)
+                foreach (InformacionConsultaDocumentos documentos in documentosEliminar)
                 {
-
-                    switch (informacion.IdTipoDocumento)
-                    {
-                        case (int)BusinessVariables.EnumTiposDocumento.Word:
-                            BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta, BusinessVariables.Directorios.RepositorioInformacionConsulta, new List<string> { informacion.InformacionConsultaDatos.First().Descripcion });
-
-                            BusinessFile.ConvertirWord(informacion.InformacionConsultaDatos.First().Descripcion);
-                            break;
-                        case (int)BusinessVariables.EnumTiposDocumento.Excel:
-                            BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta, BusinessVariables.Directorios.RepositorioInformacionConsulta, new List<string> { informacion.InformacionConsultaDatos.First().Descripcion });
-
-                            BusinessFile.ConvertirExcel(informacion.InformacionConsultaDatos.First().Descripcion);
-                            break;
-                        case (int)BusinessVariables.EnumTiposDocumento.PowerPoint:
-                            BusinessFile.MoverTemporales(
-                                BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta,
-                                BusinessVariables.Directorios.RepositorioInformacionConsulta,
-                                new List<string> { informacion.InformacionConsultaDatos.First().Descripcion });
-                            BusinessFile.ConvertirPowerPoint(
-                                informacion.InformacionConsultaDatos.First().Descripcion);
-                            break;
-                        case (int)BusinessVariables.EnumTiposDocumento.Pdf:
-                            BusinessFile.MoverTemporales(
-                                BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta,
-                                BusinessVariables.Directorios.RepositorioInformacionConsulta,
-                                new List<string> { informacion.InformacionConsultaDatos.First().Descripcion });
-                            break;
-                        case (int)BusinessVariables.EnumTiposDocumento.Imagen:
-                            BusinessFile.MoverTemporales(
-                                BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta,
-                                BusinessVariables.Directorios.RepositorioInformacionConsulta,
-                                new List<string> { informacion.InformacionConsultaDatos.First().Descripcion });
-                            break;
-                    }
-
-
+                    BusinessFile.EliminarArchivo(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta, documentos.Archivo);
+                    BusinessFile.EliminarArchivo(BusinessVariables.Directorios.RepositorioInformacionConsulta, documentos.Archivo);
                 }
+
+                BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioTemporalInformacionConsulta, BusinessVariables.Directorios.RepositorioInformacionConsulta, documentosDescarga);
+                BusinessFile.RenombrarArchivosConsulta(archivosNuevos, info.Id);
             }
             catch (Exception ex)
             {
@@ -211,6 +175,7 @@ namespace KinniNet.Core.Operacion
             {
                 db.Dispose();
             }
+            return informacion;
         }
 
         public List<InformacionConsulta> ObtenerInformacionConsultaArbol(int idArbol)
@@ -251,9 +216,8 @@ namespace KinniNet.Core.Operacion
                 result = db.InformacionConsulta.SingleOrDefault(w => w.Id == idInformacion);
                 if (result != null)
                 {
-                    db.LoadProperty(result, "TipoInfConsulta");
                     db.LoadProperty(result, "InformacionConsultaDatos");
-                    db.LoadProperty(result, "InformacionConsultaDocumento");
+                    db.LoadProperty(result, "InformacionConsultaDocumentos");
                 }
             }
             catch (Exception ex)
@@ -267,7 +231,7 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public List<InformacionConsulta> ObtenerInformacionConsulta(int? idTipoInformacionConsulta, int? idTipoDocumento)
+        public List<InformacionConsulta> ObtenerInformacionConsulta(string descripcion)
         {
             List<InformacionConsulta> result;
             DataBaseModelContext db = new DataBaseModelContext();
@@ -276,15 +240,14 @@ namespace KinniNet.Core.Operacion
 
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 IQueryable<InformacionConsulta> qry = db.InformacionConsulta;
-                if (idTipoInformacionConsulta != null)
-                    qry = qry.Where(w => w.IdTipoInfConsulta == idTipoInformacionConsulta);
-                if (idTipoDocumento != null)
-                    qry = qry.Where(w => w.IdTipoDocumento == idTipoDocumento);
+                descripcion = descripcion.Trim().ToUpper();
+                qry = qry.Where(w => w.Descripcion.Contains(descripcion));
                 result = qry.ToList();
                 foreach (InformacionConsulta consulta in result)
                 {
                     db.LoadProperty(consulta, "TipoInfConsulta");
-                    db.LoadProperty(consulta, "TipoDocumento");
+                    db.LoadProperty(consulta, "UsuarioAlta");
+
                 }
             }
             catch (Exception ex)
@@ -307,7 +270,7 @@ namespace KinniNet.Core.Operacion
                 ArbolAcceso arbol = new BusinessArbolAcceso().ObtenerArbolAcceso(idArbol);
                 HitConsulta hit = new HitConsulta
                 {
-                    IdTipoArbolAcceso =arbol.IdTipoArbolAcceso,
+                    IdTipoArbolAcceso = arbol.IdTipoArbolAcceso,
                     IdArbolAcceso = idArbol,
                     IdUsuario = idUsuario,
                     IdUbicacion =

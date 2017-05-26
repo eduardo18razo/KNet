@@ -19,6 +19,6 @@ namespace KiiniNet.Entities.Cat.Sistema
         public bool Habilitado { get; set; }
 
         [DataMember]
-        public List<InformacionConsulta> InformacionConsulta { get; set; }
+        public List<InformacionConsultaDocumentos> InformacionConsultaDocumentos { get; set; }
     }
 }

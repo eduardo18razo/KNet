@@ -517,13 +517,13 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.UpdatePanel upModalAltaInfCons;
         
         /// <summary>
-        /// Control UcAltaInformacionConsulta.
+        /// Control ucAltaInformacionConsulta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.AltaInformacionConsulta UcAltaInformacionConsulta;
+        protected global::KiiniHelp.UserControls.Altas.UcAltaInformacionConsulta ucAltaInformacionConsulta;
         
         /// <summary>
         /// Control UpdatePanel1.

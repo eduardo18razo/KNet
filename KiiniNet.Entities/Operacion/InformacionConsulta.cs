@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniNet.Entities.Operacion
 {
@@ -12,24 +14,30 @@ namespace KiiniNet.Entities.Operacion
         [DataMember]
         public int IdTipoInfConsulta { get; set; }
         [DataMember]
-        public int? IdTipoDocumento { get; set; }
-        [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
+        public DateTime FechaAlta { get; set; }
+        [DataMember]
+        public int IdUsuarioAlta { get; set; }
+        [DataMember]
+        public DateTime? FechaModificacion { get; set; }
+        [DataMember]
+        public int? IdUsuarioModifico { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
-        
+        [DataMember]
+        public Usuario UsuarioAlta { get; set; }
+        [DataMember]
+        public Usuario UsuarioModifico { get; set; }
         [DataMember]
         public virtual TipoInfConsulta TipoInfConsulta { get; set; }
 
         [DataMember]
-        public virtual TipoDocumento TipoDocumento { get; set; }
-
+        public virtual List<InventarioInfConsulta> InventarioInfConsulta { get; set; }
         [DataMember]
         public virtual List<InformacionConsultaDatos> InformacionConsultaDatos { get; set; }
         [DataMember]
-        public virtual List<InventarioInfConsulta> InventarioInfConsulta { get; set; }
-        [DataMember]
-        public virtual List<InformacionConsultaDocumento> InformacionConsultaDocumento { get; set; }
-        
+        public virtual List<InformacionConsultaDocumentos> InformacionConsultaDocumentos { get; set; }
+
     }
 }

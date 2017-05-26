@@ -14,6 +14,8 @@ namespace KinniNet.Business.Utils
             public static string RepositorioTemporal = ConfigurationManager.AppSettings["Repositorio"] + ConfigurationManager.AppSettings["CarpetaTemporal"];
             public static string RepositorioRepositorio = ConfigurationManager.AppSettings["Repositorio"];
             public static string RepositorioCorreo = ConfigurationManager.AppSettings["RepositorioCorreos"];
+            public static string Carpetaemporal = ConfigurationManager.AppSettings["siteUrl"] + ConfigurationManager.AppSettings["CarpetaTemporal"] ;
+
         }
 
         public static class ComboBoxCatalogo

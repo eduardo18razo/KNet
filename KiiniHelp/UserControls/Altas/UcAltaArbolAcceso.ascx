@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcAltaArbolAcceso.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.UcAltaArbolAcceso" %>
 
-<%@ Register Src="~/UserControls/Altas/AltaInformacionConsulta.ascx" TagPrefix="uc1" TagName="UcAltaInformacionConsulta" %>
+
 
 <%@ Register Src="~/UserControls/Altas/AltaMascaraAcceso.ascx" TagPrefix="uc" TagName="UcAltaMascaraAcceso" %>
 <%@ Register Src="~/UserControls/Altas/AltaEncuesta.ascx" TagPrefix="uc" TagName="UcEncuesta" %>
@@ -9,6 +9,8 @@
 <%@ Register Src="~/UserControls/Altas/AltaTiempoEstimado.ascx" TagPrefix="uc" TagName="AltaTiempoEstimado" %>
 <%@ Register Src="~/UserControls/Seleccion/UcImpactoUrgencia.ascx" TagPrefix="uc" TagName="UcImpactoUrgencia" %>
 <%@ Register Src="~/UserControls/Altas/UcAltaSla.ascx" TagPrefix="uc" TagName="UcAltaSla" %>
+<%@ Register Src="~/UserControls/Altas/UcAltaInformacionConsulta.ascx" TagPrefix="uc" TagName="UcAltaInformacionConsulta" %>
+
 
 <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
     <ContentTemplate>
@@ -351,7 +353,7 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-body">
-                                <uc1:UcAltaInformacionConsulta runat="server" ID="UcAltaInformacionConsulta" />
+                                <uc:UcAltaInformacionConsulta runat="server" id="ucAltaInformacionConsulta" />
                             </div>
                         </div>
                     </div>

@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="Winthusiasm.HtmlEditor, Version=1.9.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Winthusiasm.HtmlEditor.dll</HintPath>
+      <HintPath>..\..\..\Downloads\HtmlEditor.VS2010 (1)\ASP.NET 4.0\Winthusiasm.HtmlEditor\bin\Debug\Winthusiasm.HtmlEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +73,7 @@
     <Content Include="assets\css\bootstrap-markdown.css" />
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\checkBox.css" />
+    <Content Include="assets\css\controls.css" />
     <Content Include="assets\css\divs.css" />
     <Content Include="assets\css\elegant-icons.css" />
     <Content Include="assets\css\font-awesome.css" />
@@ -102,6 +103,8 @@
     <Content Include="assets\images\step5.png" />
     <Content Include="assets\images\step6.png" />
     <Content Include="assets\images\step7.png" />
+    <Content Include="assets\images\dontlike_S1.png" />
+    <Content Include="assets\images\like_S1.png" />
     <Content Include="assets\images\users_icon\usuario_1.jpg" />
     <Content Include="assets\images\users_icon\usuario_2.jpg" />
     <Content Include="assets\images\users_icon\usuario_3.jpg" />
@@ -119,11 +122,44 @@
     <Content Include="assets\js\validation.js" />
     <Content Include="assets\tmp\chosen.css" />
     <Content Include="assets\tmp\chosen.jquery.js" />
-    <Content Include="assets\tmp\jquery.sumoselect.min.js" />
-    <Content Include="assets\tmp\sumoselect.css" />
+    <Content Include="assets\js\jquery.sumoselect.min.js" />
+    <Content Include="assets\css\sumoselect.css" />
+    <Content Include="assets\tmp\editor\langs\es.min.js" />
+    <Content Include="assets\tmp\editor\plugins\base64\trumbowyg.base64.js" />
+    <Content Include="assets\tmp\editor\plugins\base64\trumbowyg.base64.min.js" />
+    <Content Include="assets\tmp\editor\plugins\cleanpaste\trumbowyg.cleanpaste.js" />
+    <Content Include="assets\tmp\editor\plugins\cleanpaste\trumbowyg.cleanpaste.min.js" />
+    <Content Include="assets\tmp\editor\plugins\colors\trumbowyg.colors.js" />
+    <Content Include="assets\tmp\editor\plugins\colors\trumbowyg.colors.min.js" />
+    <Content Include="assets\tmp\editor\plugins\colors\ui\trumbowyg.colors.css" />
+    <Content Include="assets\tmp\editor\plugins\colors\ui\trumbowyg.colors.min.css" />
+    <Content Include="assets\tmp\editor\plugins\emoji\trumbowyg.emoji.js" />
+    <Content Include="assets\tmp\editor\plugins\emoji\trumbowyg.emoji.min.js" />
+    <Content Include="assets\tmp\editor\plugins\insertaudio\trumbowyg.insertaudio.js" />
+    <Content Include="assets\tmp\editor\plugins\insertaudio\trumbowyg.insertaudio.min.js" />
+    <Content Include="assets\tmp\editor\plugins\noembed\trumbowyg.noembed.js" />
+    <Content Include="assets\tmp\editor\plugins\noembed\trumbowyg.noembed.min.js" />
+    <Content Include="assets\tmp\editor\plugins\pasteimage\trumbowyg.pasteimage.js" />
+    <Content Include="assets\tmp\editor\plugins\pasteimage\trumbowyg.pasteimage.min.js" />
+    <Content Include="assets\tmp\editor\plugins\preformatted\trumbowyg.preformatted.js" />
+    <Content Include="assets\tmp\editor\plugins\preformatted\trumbowyg.preformatted.min.js" />
+    <Content Include="assets\tmp\editor\plugins\table\trumbowyg.table.js" />
+    <Content Include="assets\tmp\editor\plugins\table\trumbowyg.table.min.js" />
+    <Content Include="assets\tmp\editor\plugins\template\trumbowyg.template.js" />
+    <Content Include="assets\tmp\editor\plugins\template\trumbowyg.template.min.js" />
+    <Content Include="assets\tmp\editor\plugins\upload\trumbowyg.upload.js" />
+    <Content Include="assets\tmp\editor\plugins\upload\trumbowyg.upload.min.js" />
+    <Content Include="assets\tmp\editor\trumbowyg.js" />
+    <Content Include="assets\tmp\editor\trumbowyg.min.js" />
+    <Content Include="assets\tmp\editor\ui\icons.svg" />
+    <Content Include="assets\tmp\editor\ui\trumbowyg.css" />
+    <Content Include="assets\tmp\editor\ui\trumbowyg.min.css" />
+    <Content Include="assets\tmp\jquery.tagsinput.min.css" />
+    <Content Include="assets\tmp\jquery.tagsinput.min.js" />
     <Content Include="ConfirmacionCuenta.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Images\orderedList2.png" />
+    <Content Include="Publico\Consultas\FrmPreviewConsulta.aspx" />
     <Content Include="Publico\FrmCategoria.aspx" />
     <Content Include="Publico\FrmServiceArea.aspx" />
     <Content Include="Publico\FrmUserSelect.aspx" />
@@ -164,6 +200,8 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.DiasFeriados.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.DiasFeriadosDetalle.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.DiaFeriado.datasource" />
+    <Content Include="assets\tmp\editor\ui\sass\trumbowyg.scss" />
+    <Content Include="assets\tmp\editor\plugins\colors\ui\sass\trumbowyg.colors.scss" />
     <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso14.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -390,17 +428,21 @@
     <Content Include="UserControls\Filtros\UcFiltroCatalogos.ascx" />
     <Content Include="UserControls\Operacion\UcCambiarContrasena.ascx" />
     <Content Include="UserControls\Operacion\UcRegistroCatalogo.ascx" />
+    <Content Include="UserControls\Preview\UcPreviewOpcionConsulta.ascx" />
     <Content Include="UserControls\Seleccion\UcCategoria.ascx" />
     <Content Include="UserControls\Seleccion\UcRolGrupo.ascx" />
     <Content Include="UserControls\Seleccion\UcServiceArea.ascx" />
     <Content Include="UserControls\Seleccion\UcUserSelect.ascx" />
+    <Content Include="UserControls\Preview\UcPreviewConsulta.ascx" />
     <Content Include="UserControls\Temporal\UcTicketPortal.ascx" />
     <Content Include="UserControls\UcLogCopia.ascx" />
+    <Content Include="Users\Administracion\ArbolesAcceso\FrmPreviewAltaOpcionConsulta.aspx" />
     <Content Include="Users\Administracion\Area\FrmConsultaAreas.aspx" />
     <Content Include="Users\Administracion\Area\GetImageDatafromDB.aspx" />
     <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogo.aspx" />
     <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogos.aspx" />
     <Content Include="Users\Administracion\Horarios\FrmConsultaHorarios.aspx" />
+    <Content Include="Users\Administracion\InformaciondeConsulta\FrmAltaInfConsulta.aspx" />
     <Content Include="Users\Administracion\Notas\FrmConsultaNotasOpcion.aspx" />
     <Content Include="Users\Administracion\Notas\FrmConsultaNotasUsuario.aspx" />
     <Content Include="Users\Administracion\Puestos\FrmConsultaPuestos.aspx" />
@@ -2018,7 +2060,7 @@
     <Content Include="UserControls\Detalles\UcDetalleUbicacion.ascx" />
     <Content Include="UserControls\Detalles\UcDetalleUsuario.ascx" />
     <Content Include="UserControls\Genericos\UcCatalogos.ascx" />
-    <Content Include="UserControls\Altas\AltaInformacionConsulta.ascx" />
+    <Content Include="UserControls\Altas\UcAltaInformacionConsulta.ascx" />
     <Content Include="UserControls\Genericos\UcInformacionConsulta.ascx" />
     <Content Include="UserControls\Genericos\UcMostrarArchivo.ascx" />
     <Content Include="UserControls\Operacion\UcCambiarEstatusAsignacion.ascx" />
@@ -2311,6 +2353,13 @@
     </Compile>
     <Compile Include="DisplayImages.ashx.cs">
       <DependentUpon>DisplayImages.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Publico\Consultas\FrmPreviewConsulta.aspx.cs">
+      <DependentUpon>FrmPreviewConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publico\Consultas\FrmPreviewConsulta.aspx.designer.cs">
+      <DependentUpon>FrmPreviewConsulta.aspx</DependentUpon>
     </Compile>
     <Compile Include="Publico\FrmCategoria.aspx.cs">
       <DependentUpon>FrmCategoria.aspx</DependentUpon>
@@ -2631,6 +2680,13 @@
     <Compile Include="UserControls\Operacion\UcRegistroCatalogo.ascx.designer.cs">
       <DependentUpon>UcRegistroCatalogo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Preview\UcPreviewOpcionConsulta.ascx.cs">
+      <DependentUpon>UcPreviewOpcionConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Preview\UcPreviewOpcionConsulta.ascx.designer.cs">
+      <DependentUpon>UcPreviewOpcionConsulta.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Seleccion\UcCategoria.ascx.cs">
       <DependentUpon>UcCategoria.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2659,6 +2715,13 @@
     <Compile Include="UserControls\Seleccion\UcUserSelect.ascx.designer.cs">
       <DependentUpon>UcUserSelect.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Preview\UcPreviewConsulta.ascx.cs">
+      <DependentUpon>UcPreviewConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Preview\UcPreviewConsulta.ascx.designer.cs">
+      <DependentUpon>UcPreviewConsulta.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Temporal\UcTicketPortal.ascx.cs">
       <DependentUpon>UcTicketPortal.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2672,6 +2735,13 @@
     </Compile>
     <Compile Include="UserControls\UcLogCopia.ascx.designer.cs">
       <DependentUpon>UcLogCopia.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\ArbolesAcceso\FrmPreviewAltaOpcionConsulta.aspx.cs">
+      <DependentUpon>FrmPreviewAltaOpcionConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\ArbolesAcceso\FrmPreviewAltaOpcionConsulta.aspx.designer.cs">
+      <DependentUpon>FrmPreviewAltaOpcionConsulta.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Administracion\Area\FrmConsultaAreas.aspx.cs">
       <DependentUpon>FrmConsultaAreas.aspx</DependentUpon>
@@ -2707,6 +2777,13 @@
     </Compile>
     <Compile Include="Users\Administracion\Horarios\FrmConsultaHorarios.aspx.designer.cs">
       <DependentUpon>FrmConsultaHorarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\InformaciondeConsulta\FrmAltaInfConsulta.aspx.cs">
+      <DependentUpon>FrmAltaInfConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\InformaciondeConsulta\FrmAltaInfConsulta.aspx.designer.cs">
+      <DependentUpon>FrmAltaInfConsulta.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Administracion\Notas\FrmConsultaNotasOpcion.aspx.cs">
       <DependentUpon>FrmConsultaNotasOpcion.aspx</DependentUpon>
@@ -3551,12 +3628,12 @@
     <Compile Include="UserControls\Genericos\UcCatalogos.ascx.designer.cs">
       <DependentUpon>UcCatalogos.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Altas\AltaInformacionConsulta.ascx.cs">
-      <DependentUpon>AltaInformacionConsulta.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\UcAltaInformacionConsulta.ascx.cs">
+      <DependentUpon>UcAltaInformacionConsulta.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Altas\AltaInformacionConsulta.ascx.designer.cs">
-      <DependentUpon>AltaInformacionConsulta.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\UcAltaInformacionConsulta.ascx.designer.cs">
+      <DependentUpon>UcAltaInformacionConsulta.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Seleccion\AsociarGrupoUsuario.ascx.cs">
       <DependentUpon>AsociarGrupoUsuario.ascx</DependentUpon>
@@ -3598,6 +3675,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="assets\data\" />
     <Folder Include="assets\tpl\" />
+    <Folder Include="tmp\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KiiniNet.Entities\KiiniNet.Entities.csproj">
