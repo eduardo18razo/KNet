@@ -163,7 +163,7 @@ namespace KinniNet.Core.Sistema
             return result;
         }
 
-        public void CrearCatalogo(string nombreCatalogo, bool esMascara)
+        public void CrearCatalogo(string nombreCatalogo, bool esMascara, List<string> registros)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
@@ -173,7 +173,7 @@ namespace KinniNet.Core.Sistema
                 Catalogos catalogo = new Catalogos
                 {
                     Descripcion = nombreCatalogo,
-                    Tabla = (BusinessVariables.ParametrosCatalogo.PrefijoTabla + nombreCatalogo).Replace(" ", string.Empty),
+                    Tabla = BusinessCadenas.Cadenas.FormatoBaseDatos((BusinessVariables.ParametrosCatalogo.PrefijoTabla + nombreCatalogo).Replace(" ", string.Empty)),
                     EsMascaraCaptura = esMascara,
                     Archivo = false,
                     Habilitado = true
@@ -182,6 +182,11 @@ namespace KinniNet.Core.Sistema
                 CreaEstructuraBaseDatos(catalogo.Tabla);
                 db.Catalogos.AddObject(catalogo);
                 db.SaveChanges();
+                if (registros.Count <= 0) return;
+                foreach (string registro in registros)
+                {
+                    AgregarRegistro(catalogo.Id, registro);
+                }
             }
             catch (Exception ex)
             {
@@ -255,14 +260,14 @@ namespace KinniNet.Core.Sistema
             }
         }
 
-        public List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo)
+        public List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion)
         {
             List<CatalogoGenerico> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 Catalogos cat = db.Catalogos.Single(s => s.Id == idCatalogo);
-                result = db.ExecuteStoreQuery<CatalogoGenerico>("ObtenerCatalogoSistema '" + cat.Tabla + "'").ToList();
+                result = db.ExecuteStoreQuery<CatalogoGenerico>("ObtenerCatalogoSistema '" + cat.Tabla + "'," + Convert.ToInt32(insertarSeleccion)).ToList();
             }
             catch (Exception ex)
             {
@@ -286,11 +291,11 @@ namespace KinniNet.Core.Sistema
                 Catalogos cat = db.Catalogos.Single(s => s.Id == idCatalogo);
                 List<CamposCatalogo> lstCampos = ObtenerCamposCatalogo(idCatalogo);
                 string sql = string.Format(" SELECT {0} Id, '{1}' as Descripcion \nUNION \nSELECT Id, ", BusinessVariables.ComboBoxCatalogo.ValueSeleccione, BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione);
-                foreach (CamposCatalogo campo in lstCampos.Where(w=>w.Descripcion != "Id" && w.Descripcion != "Habilitado"))
+                foreach (CamposCatalogo campo in lstCampos.Where(w => w.Descripcion != "Id" && w.Descripcion != "Habilitado"))
                 {
                     switch (campo.TipoDato)
                     {
-                        case"int":
+                        case "int":
                         case "float":
                             sql += string.Format("REPLACE(STR([{0}], {1}), SPACE(1), '0') + ' | ' +", campo.Descripcion, lenght);
                             break;

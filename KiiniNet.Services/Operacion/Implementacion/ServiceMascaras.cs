@@ -7,10 +7,24 @@ using KinniNet.Core.Operacion;
 
 namespace KiiniNet.Services.Operacion.Implementacion
 {
-    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "ServiceUsuarios" en el código y en el archivo de configuración a la vez.
     public class ServiceMascaras : IServiceMascaras
     {
         public void CrearMascara(Mascara mascara)
+        {
+            try
+            {
+                using (BusinessMascaras negocio = new BusinessMascaras())
+                {
+                    negocio.CrearMascara(mascara);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ActualizarMascara(Mascara mascara)
         {
             try
             {
@@ -70,13 +84,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla)
+        public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessMascaras negocio = new BusinessMascaras())
                 {
-                    return negocio.ObtenerCatalogoCampoMascara(tabla);
+                    return negocio.ObtenerCatalogoCampoMascara(tabla, insertarSeleccion);
                 }
             }
             catch (Exception ex)

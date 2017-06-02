@@ -2,7 +2,7 @@
  * KINNISUPPORT
  * Version: 1.0
 */
-/* default */
+
 html {
     height: 100%;
     background: #f9f9fb;
@@ -87,7 +87,9 @@ body {
 .video-container iframe {
     max-width: 100%;
 }
-
+.margin-top-5 {
+    margin-top: 5px;
+}
 .margin-top {
     margin-top: 20px;
 }
@@ -4598,6 +4600,9 @@ ul.sortable {
 }
 /* ======= CAMBIOS =======*/
 
+
+
+
 .margin-left {
     margin: auto;
 }
@@ -5739,3 +5744,22 @@ ul.sortable {
     }
 }
 /* Large devices (large desktops, 1200px and up) */
+
+/* default */
+.padding-20 {
+    padding: 20px !important;
+}
+
+.no-padding-left {
+    padding-left: 0 !important;
+}
+.no-padding-top {
+    padding-top: 0 !important;
+}
+.no-padding-right {
+    padding-right: 0 !important;
+}
+.no-padding-bottom {
+    padding-bottom: 0 !important;
+}
+

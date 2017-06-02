@@ -14,7 +14,7 @@ namespace KinniNet.Business.Utils
             public static string RepositorioTemporal = ConfigurationManager.AppSettings["Repositorio"] + ConfigurationManager.AppSettings["CarpetaTemporal"];
             public static string RepositorioRepositorio = ConfigurationManager.AppSettings["Repositorio"];
             public static string RepositorioCorreo = ConfigurationManager.AppSettings["RepositorioCorreos"];
-            public static string Carpetaemporal = ConfigurationManager.AppSettings["siteUrl"] + ConfigurationManager.AppSettings["CarpetaTemporal"] ;
+            public static string Carpetaemporal = ConfigurationManager.AppSettings["siteUrl"] + ConfigurationManager.AppSettings["CarpetaTemporal"];
 
         }
 
@@ -39,6 +39,8 @@ namespace KinniNet.Business.Utils
             public static string CampoRandom = NombreCampoRandom + " " + TipoCampoRandom;
             public static string CaracteresCampoRandom = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
             public static int LongitudRandom = 4;
+            public static string PrefijoFechaInicio = "Inicial";
+            public static string PrefijoFechaFin = "Final";
 
         }
 
@@ -51,6 +53,22 @@ namespace KinniNet.Business.Utils
 
         public static class EnumeradoresKiiniNet
         {
+            public enum EnumTiposCampo
+            {
+                Texto = 1,
+                TextoMultiLinea = 2,
+                RadioBoton = 3,
+                ListaDepledable = 4,
+                CasillaDeVerificación = 5,
+                NúmeroEntero = 6,
+                NúmeroDecimal = 7,
+                Logico = 8,
+                SelecciónCascada = 9,
+                Fecha = 10,
+                FechaRango = 11,
+                ExpresiónRegular = 12,
+                AdjuntarArchivo = 13,
+            }
             public enum EnumTiempoDuracion
             {
                 Meses = 1,

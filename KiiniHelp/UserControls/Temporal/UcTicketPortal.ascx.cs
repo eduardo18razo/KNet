@@ -159,38 +159,41 @@ namespace KiiniHelp.UserControls.Temporal
                 foreach (CampoMascara campo in mascara.CampoMascara)
                 {
                     bool campoTexto = true;
-                    switch (campo.TipoCampoMascara.Descripcion)
+                    switch (campo.TipoCampoMascara.Id)
                     {
-                        case "ALFANUMERICO":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Texto:
                             nombreControl = "txt" + campo.NombreCampo;
                             break;
-                        case "NUMERO DECIMAL":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.TextoMultiLinea:
                             nombreControl = "txt" + campo.NombreCampo;
                             break;
-                        case "NUMERO ENTERO":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroDecimal:
                             nombreControl = "txt" + campo.NombreCampo;
                             break;
-                        case "FECHA":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroEntero:
                             nombreControl = "txt" + campo.NombreCampo;
                             break;
-                        case "HORA":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Fecha:
                             nombreControl = "txt" + campo.NombreCampo;
                             break;
-                        case "MONEDA":
-                            nombreControl = "txt" + campo.NombreCampo;
-                            break;
-                        case "CATALOGO":
+                        //case "HORA":
+                        //    nombreControl = "txt" + campo.NombreCampo;
+                        //    break;
+                        //case "MONEDA":
+                        //    nombreControl = "txt" + campo.NombreCampo;
+                        //    break;
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ListaDepledable:
                             nombreControl = "ddl" + campo.NombreCampo;
                             campoTexto = false;
                             break;
-                        case "SI o NO":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Logico:
                             nombreControl = "chk" + campo.NombreCampo;
                             campoTexto = false;
                             break;
-                        case "CAMPO CON FORMATO":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ExpresiónRegular:
                             nombreControl = "txt" + campo.NombreCampo;
                             break;
-                        case "ARCHIVO ADJUNTO":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo:
                             nombreControl = "fu" + campo.NombreCampo;
                             campoTexto = false;
                             break;
@@ -235,9 +238,9 @@ namespace KiiniHelp.UserControls.Temporal
                     }
                     else if (!campoTexto)
                     {
-                        switch (campo.TipoCampoMascara.Descripcion)
+                        switch (campo.TipoCampoMascara.Id)
                         {
-                            case "CATALOGO":
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ListaDepledable:
                                 DropDownList ddl = (DropDownList)divControles.FindControl(nombreControl);
                                 if (ddl != null)
                                 {
@@ -249,7 +252,7 @@ namespace KiiniHelp.UserControls.Temporal
                                     lstCamposCapturados.Add(campoCapturado);
                                 }
                                 break;
-                            case "SI o NO":
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Logico:
                                 CheckBox chk = (CheckBox)divControles.FindControl(nombreControl);
                                 if (chk != null)
                                 {
@@ -261,7 +264,7 @@ namespace KiiniHelp.UserControls.Temporal
                                     lstCamposCapturados.Add(campoCapturado);
                                 }
                                 break;
-                            case "ARCHIVO ADJUNTO":
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo:
                                 AsyncFileUpload upload = (AsyncFileUpload)divControles.FindControl(nombreControl);
                                 if (upload != null)
                                 {
@@ -298,24 +301,39 @@ namespace KiiniHelp.UserControls.Temporal
                     createDiv.Attributes["class"] = "form-group clearfix";
                     //createDiv.InnerHtml = campo.Descripcion;
                     Label lbl = new Label { Text = campo.Descripcion, CssClass = "col-sm-12 control-label" };
-                    switch (campo.TipoCampoMascara.Descripcion)
+                    switch (campo.TipoCampoMascara.Id)
                     {
-                        case "ALFANUMERICO":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Texto:
 
                             //lbl.Attributes["for"] = "txt" + campo.NombreCampo;
                             //createDiv.Controls.Add(lbl);
-                            TextBox txtAlfanumerico = new TextBox
+                            TextBox txtSimple = new TextBox
                             {
                                 ID = "txt" + campo.NombreCampo,
                                 CssClass = "form-control",
 
                             };
-                            txtAlfanumerico.Attributes["MaxLength"] = campo.LongitudMaxima.ToString();
-                            txtAlfanumerico.Attributes["placeholder"] = campo.Descripcion;
-                            _lstControles.Add(txtAlfanumerico);
-                            createDiv.Controls.Add(txtAlfanumerico);
+                            txtSimple.Attributes["MaxLength"] = campo.TipoCampoMascara.LongitudMaxima.ToString();
+                            txtSimple.Attributes["placeholder"] = campo.Descripcion;
+                            _lstControles.Add(txtSimple);
+                            createDiv.Controls.Add(txtSimple);
                             break;
-                        case "CATALOGO":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.TextoMultiLinea:
+                            //lbl.Attributes["for"] = "txt" + campo.NombreCampo;
+                            //createDiv.Controls.Add(lbl);
+                            TextBox txtMultilinea = new TextBox
+                            {
+                                ID = "txt" + campo.NombreCampo,
+                                CssClass = "form-control",
+                                TextMode = TextBoxMode.MultiLine,
+                                Rows = 50
+                            };
+                            txtMultilinea.Attributes["MaxLength"] = campo.LongitudMaxima.ToString();
+                            txtMultilinea.Attributes["placeholder"] = campo.Descripcion;
+                            _lstControles.Add(txtMultilinea);
+                            createDiv.Controls.Add(txtMultilinea);
+                            break;
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ListaDepledable:
                             divControles.Controls.Add(new Literal() { Text = "<hr/>" });
 
                             lbl.Attributes["for"] = "txt" + campo.NombreCampo;
@@ -335,7 +353,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla))
+                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, true))
                                 {
                                     ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
                                 }
@@ -346,7 +364,7 @@ namespace KiiniHelp.UserControls.Temporal
                             //createDiv.Controls.Add(divFromDrop);
                             _lstControles.Add(ddlCatalogo);
                             break;
-                        case "NUMERO DECIMAL":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroDecimal:
                             lbl.Attributes["for"] = "txt" + campo.NombreCampo;
                             createDiv.Controls.Add(lbl);
                             TextBox txtDecimal = new TextBox
@@ -363,7 +381,7 @@ namespace KiiniHelp.UserControls.Temporal
                             createDiv.Controls.Add(txtDecimal);
                             _lstControles.Add(txtDecimal);
                             break;
-                        case "NUMERO ENTERO":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroEntero:
                             lbl.Attributes["for"] = "txt" + campo.NombreCampo;
                             createDiv.Controls.Add(lbl);
                             TextBox txtEntero = new TextBox
@@ -380,7 +398,7 @@ namespace KiiniHelp.UserControls.Temporal
                             createDiv.Controls.Add(txtEntero);
                             _lstControles.Add(txtEntero);
                             break;
-                        case "FECHA":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Fecha:
                             lbl.Attributes["for"] = "FECHA";
                             createDiv.Controls.Add(lbl);
                             TextBox txtFecha = new TextBox
@@ -395,42 +413,42 @@ namespace KiiniHelp.UserControls.Temporal
                             createDiv.Controls.Add(txtFecha);
                             _lstControles.Add(txtFecha);
                             break;
-                        case "HORA":
-                            lbl.Attributes["for"] = "txt" + campo.NombreCampo;
-                            createDiv.Controls.Add(lbl);
-                            TextBox txtHora = new TextBox
-                            {
-                                ID = "txt" + campo.NombreCampo,
-                                CssClass = "form-control"
-                            };
-                            txtHora.Attributes["placeholder"] = campo.Descripcion;
-                            txtHora.Attributes["min"] = "00:00";
-                            txtHora.Attributes["max"] = "23:59:59";
-                            txtHora.Attributes["step"] = "0";
-                            txtHora.Attributes["type"] = "time";
-                            createDiv.Controls.Add(txtHora);
-                            _lstControles.Add(txtHora);
-                            break;
-                        case "MONEDA":
-                            lbl.Attributes["for"] = "txt" + campo.NombreCampo;
-                            createDiv.Controls.Add(lbl);
-                            TextBox txtMoneda = new TextBox
-                            {
-                                ID = "txt" + campo.Descripcion.Replace(" ", string.Empty),
-                                CssClass = "form-control"
-                            };
-                            txtMoneda.Attributes["placeholder"] = campo.Descripcion;
-                            txtMoneda.Attributes["type"] = "number";
-                            txtMoneda.Attributes["step"] = "0.01";
-                            _lstControles.Add(txtMoneda);
-                            createDiv.Controls.Add(txtMoneda);
-                            break;
-                        case "SI o NO":
+                        //case "HORA":
+                        //    lbl.Attributes["for"] = "txt" + campo.NombreCampo;
+                        //    createDiv.Controls.Add(lbl);
+                        //    TextBox txtHora = new TextBox
+                        //    {
+                        //        ID = "txt" + campo.NombreCampo,
+                        //        CssClass = "form-control"
+                        //    };
+                        //    txtHora.Attributes["placeholder"] = campo.Descripcion;
+                        //    txtHora.Attributes["min"] = "00:00";
+                        //    txtHora.Attributes["max"] = "23:59:59";
+                        //    txtHora.Attributes["step"] = "0";
+                        //    txtHora.Attributes["type"] = "time";
+                        //    createDiv.Controls.Add(txtHora);
+                        //    _lstControles.Add(txtHora);
+                        //    break;
+                        //case "MONEDA":
+                        //    lbl.Attributes["for"] = "txt" + campo.NombreCampo;
+                        //    createDiv.Controls.Add(lbl);
+                        //    TextBox txtMoneda = new TextBox
+                        //    {
+                        //        ID = "txt" + campo.Descripcion.Replace(" ", string.Empty),
+                        //        CssClass = "form-control"
+                        //    };
+                        //    txtMoneda.Attributes["placeholder"] = campo.Descripcion;
+                        //    txtMoneda.Attributes["type"] = "number";
+                        //    txtMoneda.Attributes["step"] = "0.01";
+                        //    _lstControles.Add(txtMoneda);
+                        //    createDiv.Controls.Add(txtMoneda);
+                        //    break;
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Logico:
                             CheckBox chk = new CheckBox { ID = "chk" + campo.NombreCampo, Text = campo.Descripcion, ViewStateMode = ViewStateMode.Inherit };
                             _lstControles.Add(chk);
                             createDiv.Controls.Add(chk);
                             break;
-                        case "CAMPO CON FORMATO":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ExpresiónRegular:
                             lbl.Attributes["for"] = "txt" + campo.NombreCampo;
                             createDiv.Controls.Add(lbl);
                             TextBox txtMascara = new TextBox
@@ -456,7 +474,7 @@ namespace KiiniHelp.UserControls.Temporal
                             createDiv.Controls.Add(txtMascara);
                             _lstControles.Add(txtMascara);
                             break;
-                        case "ARCHIVO ADJUNTO":
+                        case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo:
                             divControles.Controls.Add(hr);
                             lbl.Attributes["for"] = "fu" + campo.NombreCampo;
                             createDiv.Controls.Add(lbl);

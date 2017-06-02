@@ -25,6 +25,12 @@
   <wsdl:message name="IServiceMascaras_CrearMascara_OutputMessage">
     <wsdl:part name="parameters" element="tns:CrearMascaraResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceMascaras_ActualizarMascara_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarMascara" />
+  </wsdl:message>
+  <wsdl:message name="IServiceMascaras_ActualizarMascara_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarMascaraResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceMascaras_ObtenerMascaraCaptura_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerMascaraCaptura" />
   </wsdl:message>
@@ -72,6 +78,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceMascaras/CrearMascara" message="tns:IServiceMascaras_CrearMascara_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceMascaras/CrearMascaraResponse" message="tns:IServiceMascaras_CrearMascara_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ActualizarMascara">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceMascaras/ActualizarMascara" message="tns:IServiceMascaras_ActualizarMascara_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceMascaras/ActualizarMascaraResponse" message="tns:IServiceMascaras_ActualizarMascara_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ObtenerMascaraCaptura">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceMascaras/ObtenerMascaraCaptura" message="tns:IServiceMascaras_ObtenerMascaraCaptura_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceMascaras/ObtenerMascaraCapturaResponse" message="tns:IServiceMascaras_ObtenerMascaraCaptura_OutputMessage" />
@@ -105,6 +115,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="CrearMascara">
       <soap:operation soapAction="http://tempuri.org/IServiceMascaras/CrearMascara" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarMascara">
+      <soap:operation soapAction="http://tempuri.org/IServiceMascaras/ActualizarMascara" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

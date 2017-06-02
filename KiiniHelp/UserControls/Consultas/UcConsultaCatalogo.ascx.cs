@@ -54,7 +54,7 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 if (ddlCatalogos.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
-                    List<CatalogoGenerico> lst = _servicioCatalogos.ObtenerRegistrosSistemaCatalogo(int.Parse(ddlCatalogos.SelectedValue)).Where(w=>w.Id != 0).ToList();
+                    List<CatalogoGenerico> lst = _servicioCatalogos.ObtenerRegistrosSistemaCatalogo(int.Parse(ddlCatalogos.SelectedValue), true).Where(w=>w.Id != 0).ToList();
                     rptResultados.DataSource = lst;
                 }
                 else

@@ -29,14 +29,5 @@ namespace KiiniHelp.Test {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager scripMain;
-        
-        /// <summary>
-        /// Control txtEditor.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::Winthusiasm.HtmlEditor.HtmlEditor txtEditor;
     }
 }

@@ -10,7 +10,7 @@ namespace KiiniNet.Services.Sistema.Interface
     public interface IServiceCatalogos
     {
         [OperationContract]
-        void CrearCatalogo(string nombreCatalogo, bool esMascara);
+        void CrearCatalogo(string nombreCatalogo, bool esMascara, List<string> registros);
 
         [OperationContract]
         Catalogos ObtenerCatalogo(int idCatalogo);
@@ -28,7 +28,7 @@ namespace KiiniNet.Services.Sistema.Interface
         void AgregarRegistro(int idCatalogo, string descripcion);
 
         [OperationContract]
-        List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo);
+        List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion);
         [OperationContract]
         DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo);
 

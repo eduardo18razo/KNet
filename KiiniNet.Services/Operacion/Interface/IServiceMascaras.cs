@@ -12,6 +12,9 @@ namespace KiiniNet.Services.Operacion.Interface
         void CrearMascara(Mascara mascara);
 
         [OperationContract]
+        void ActualizarMascara(Mascara mascara);
+
+        [OperationContract]
         Mascara ObtenerMascaraCaptura(int idMascara);
         [OperationContract]
         Mascara ObtenerMascaraCapturaByIdTicket(int idTicket);
@@ -19,7 +22,7 @@ namespace KiiniNet.Services.Operacion.Interface
         [OperationContract]
         List<Mascara> ObtenerMascarasAcceso(bool insertarSeleccion);
         [OperationContract]
-        List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla);
+        List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion);
 
         [OperationContract]
         List<Mascara> Consulta(string descripcion);

@@ -579,38 +579,38 @@ namespace KiiniHelp.Test
         //        AlertaGeneral = _lstError;
         //    }
         //}
-        private InformacionConsulta ObtenerInformacionCapturada()
-        {
-            InformacionConsulta result;
-            try
-            {
-                result = new InformacionConsulta
-                {
-                    Descripcion = "Descripcion",
-                    Habilitado = true,
-                    IdTipoInfConsulta = (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido,
-                    IdUsuarioAlta = ((Usuario)Session["UserData"]).Id,
-                    InformacionConsultaDatos = new List<InformacionConsultaDatos>(),
-                    InformacionConsultaDocumentos = new List<InformacionConsultaDocumentos>()
-                };
+        //private InformacionConsulta ObtenerInformacionCapturada()
+        //{
+        //    //InformacionConsulta result;
+        //    //try
+        //    //{
+        //    //    result = new InformacionConsulta
+        //    //    {
+        //    //        Descripcion = "Descripcion",
+        //    //        Habilitado = true,
+        //    //        IdTipoInfConsulta = (int)BusinessVariables.EnumTiposInformacionConsulta.EditorDeContenido,
+        //    //        IdUsuarioAlta = ((Usuario)Session["UserData"]).Id,
+        //    //        InformacionConsultaDatos = new List<InformacionConsultaDatos>(),
+        //    //        InformacionConsultaDocumentos = new List<InformacionConsultaDocumentos>()
+        //    //    };
 
-                InformacionConsultaDatos datos = new InformacionConsultaDatos();
-                datos.Datos = txtEditor.Text;
-                datos.Busqueda = "busqueda";
-                datos.Tags = "tags";
-                datos.Habilitado = true;
-                result.InformacionConsultaDatos.Add(datos);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            return result;
-        }
+        //    //    InformacionConsultaDatos datos = new InformacionConsultaDatos();
+        //    //    datos.Datos = txtEditor.Text;
+        //    //    datos.Busqueda = "busqueda";
+        //    //    datos.Tags = "tags";
+        //    //    datos.Habilitado = true;
+        //    //    result.InformacionConsultaDatos.Add(datos);
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    throw new Exception(ex.Message);
+        //    //}
+        //    //return result;
+        //}
         protected void OnClick(object sender, EventArgs e)
         {
             
-            Session["PreviewDataConsulta"] = ObtenerInformacionCapturada();
+            //Session["PreviewDataConsulta"] = ObtenerInformacionCapturada();
             ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('/Publico/Consultas/FrmPreviewConsulta.aspx','_blank');", true);
         }
     }

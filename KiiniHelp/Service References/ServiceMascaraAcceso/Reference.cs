@@ -18,6 +18,9 @@ namespace KiiniHelp.ServiceMascaraAcceso {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMascaras/CrearMascara", ReplyAction="http://tempuri.org/IServiceMascaras/CrearMascaraResponse")]
         void CrearMascara(KiiniNet.Entities.Cat.Mascaras.Mascara mascara);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMascaras/ActualizarMascara", ReplyAction="http://tempuri.org/IServiceMascaras/ActualizarMascaraResponse")]
+        void ActualizarMascara(KiiniNet.Entities.Cat.Mascaras.Mascara mascara);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMascaras/ObtenerMascaraCaptura", ReplyAction="http://tempuri.org/IServiceMascaras/ObtenerMascaraCapturaResponse")]
         KiiniNet.Entities.Cat.Mascaras.Mascara ObtenerMascaraCaptura(int idMascara);
         
@@ -28,7 +31,7 @@ namespace KiiniHelp.ServiceMascaraAcceso {
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Mascaras.Mascara> ObtenerMascarasAcceso(bool insertarSeleccion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMascaras/ObtenerCatalogoCampoMascara", ReplyAction="http://tempuri.org/IServiceMascaras/ObtenerCatalogoCampoMascaraResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla);
+        System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMascaras/Consulta", ReplyAction="http://tempuri.org/IServiceMascaras/ConsultaResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Mascaras.Mascara> Consulta(string descripcion);
@@ -71,6 +74,10 @@ namespace KiiniHelp.ServiceMascaraAcceso {
             base.Channel.CrearMascara(mascara);
         }
         
+        public void ActualizarMascara(KiiniNet.Entities.Cat.Mascaras.Mascara mascara) {
+            base.Channel.ActualizarMascara(mascara);
+        }
+        
         public KiiniNet.Entities.Cat.Mascaras.Mascara ObtenerMascaraCaptura(int idMascara) {
             return base.Channel.ObtenerMascaraCaptura(idMascara);
         }
@@ -83,8 +90,8 @@ namespace KiiniHelp.ServiceMascaraAcceso {
             return base.Channel.ObtenerMascarasAcceso(insertarSeleccion);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla) {
-            return base.Channel.ObtenerCatalogoCampoMascara(tabla);
+        public System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion) {
+            return base.Channel.ObtenerCatalogoCampoMascara(tabla, insertarSeleccion);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Mascaras.Mascara> Consulta(string descripcion) {

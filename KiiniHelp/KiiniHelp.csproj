@@ -45,8 +45,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="MSCaptcha">
-      <HintPath>..\..\..\Downloads\Captcha_Refresh_Button\Bin\MSCaptcha.dll</HintPath>
+    <Reference Include="MSCaptcha, Version=1.0.2832.11804, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Downloads\MSCaptcha.dll</HintPath>
+    </Reference>
+    <Reference Include="Recaptcha">
+      <HintPath>..\..\..\Downloads\recaptcha-dotnet-1.0.5.0-binary\Recaptcha.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -84,6 +88,18 @@
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\fonts\Pe-icon-7-strokebb1d.svg" />
+    <Content Include="assets\images\controls\attachment.png" />
+    <Content Include="assets\images\controls\calendario.png" />
+    <Content Include="assets\images\controls\cascade.png" />
+    <Content Include="assets\images\controls\checkbox.png" />
+    <Content Include="assets\images\controls\decimal.png" />
+    <Content Include="assets\images\controls\dropdown.png" />
+    <Content Include="assets\images\controls\expregular.png" />
+    <Content Include="assets\images\controls\entero.png" />
+    <Content Include="assets\images\controls\radiobutton.png" />
+    <Content Include="assets\images\controls\switch.png" />
+    <Content Include="assets\images\controls\textomultilinea.png" />
+    <Content Include="assets\images\controls\textosimple.png" />
     <Content Include="assets\images\icons\prioridadalta.png" />
     <Content Include="assets\images\icons\prioridadbaja.png" />
     <Content Include="assets\images\icons\prioridadmedia.png" />
@@ -322,6 +338,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Publico\Consultas\FrmConsultaTicket.aspx" />
+    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos15.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos16.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -441,6 +460,9 @@
     <Content Include="Users\Administracion\Area\GetImageDatafromDB.aspx" />
     <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogo.aspx" />
     <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogos.aspx" />
+    <Content Include="Users\Administracion\Formularios\FrmEdicionFormulario.aspx" />
+    <Content Include="UserControls\Altas\Formularios\UcPreviewFormulario.ascx" />
+    <Content Include="Users\Administracion\Formularios\FrmPreviewFormulario.aspx" />
     <Content Include="Users\Administracion\Horarios\FrmConsultaHorarios.aspx" />
     <Content Include="Users\Administracion\InformaciondeConsulta\FrmAltaInfConsulta.aspx" />
     <Content Include="Users\Administracion\Notas\FrmConsultaNotasOpcion.aspx" />
@@ -710,7 +732,7 @@
     <Content Include="Users\Administracion\Encuestas\FrmConsultaEncuestas.aspx" />
     <Content Include="Users\Administracion\Grupos\FrmConsultaGrupos.aspx" />
     <Content Include="Users\Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx" />
-    <Content Include="Users\Administracion\Mascaras\FrmConsultaMascaraAcceso.aspx" />
+    <Content Include="Users\Administracion\Formularios\FrmConsultaFormularios.aspx" />
     <Content Include="Users\Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx" />
     <Content Include="Users\Administracion\Ubicaciones\FrmConsultaUbicaciones.aspx" />
     <Content Include="Users\Administracion\Usuarios\FrmConsultaUsuarios.aspx" />
@@ -2050,7 +2072,7 @@
     <Content Include="UserControls\Consultas\UcConsultaEncuesta.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaGrupos.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaInformacionConsulta.ascx" />
-    <Content Include="UserControls\Consultas\UcConsultaMascaras.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaFormularios.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaOrganizacion.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaUsuarios.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaUbicaciones.ascx" />
@@ -2067,7 +2089,7 @@
     <Content Include="UserControls\Operacion\UcCambiarEstatusTicket.ascx" />
     <Content Include="UserControls\Seleccion\AsociarGrupoUsuario.ascx" />
     <Content Include="UserControls\Temporal\UcCatalogoNiveles.ascx" />
-    <Content Include="UserControls\Altas\AltaMascaraAcceso.ascx" />
+    <Content Include="UserControls\Altas\Formularios\UcAltaFormulario.ascx" />
     <Content Include="UserControls\Temporal\UcMascaraCaptura.ascx" />
     <Content Include="Users\Administracion\Usuarios\FrmUsuarios.aspx" />
     <Content Include="Web.config">
@@ -2771,6 +2793,27 @@
     <Compile Include="Users\Administracion\Catalogos\FrmConsultaCatalogos.aspx.designer.cs">
       <DependentUpon>FrmConsultaCatalogos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Users\Administracion\Formularios\FrmEdicionFormulario.aspx.cs">
+      <DependentUpon>FrmEdicionFormulario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Formularios\FrmEdicionFormulario.aspx.designer.cs">
+      <DependentUpon>FrmEdicionFormulario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\Formularios\UcPreviewFormulario.ascx.cs">
+      <DependentUpon>UcPreviewFormulario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\Formularios\UcPreviewFormulario.ascx.designer.cs">
+      <DependentUpon>UcPreviewFormulario.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\Formularios\FrmPreviewFormulario.aspx.cs">
+      <DependentUpon>FrmPreviewFormulario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Formularios\FrmPreviewFormulario.aspx.designer.cs">
+      <DependentUpon>FrmPreviewFormulario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Users\Administracion\Horarios\FrmConsultaHorarios.aspx.cs">
       <DependentUpon>FrmConsultaHorarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3225,12 +3268,12 @@
     <Compile Include="Users\Administracion\InformaciondeConsulta\FrmConsultaInformacion.aspx.designer.cs">
       <DependentUpon>FrmConsultaInformacion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Users\Administracion\Mascaras\FrmConsultaMascaraAcceso.aspx.cs">
-      <DependentUpon>FrmConsultaMascaraAcceso.aspx</DependentUpon>
+    <Compile Include="Users\Administracion\Formularios\FrmConsultaFormularios.aspx.cs">
+      <DependentUpon>FrmConsultaFormularios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Users\Administracion\Mascaras\FrmConsultaMascaraAcceso.aspx.designer.cs">
-      <DependentUpon>FrmConsultaMascaraAcceso.aspx</DependentUpon>
+    <Compile Include="Users\Administracion\Formularios\FrmConsultaFormularios.aspx.designer.cs">
+      <DependentUpon>FrmConsultaFormularios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Administracion\Organizaciones\FrmConsultaOrganizaciones.aspx.cs">
       <DependentUpon>FrmConsultaOrganizaciones.aspx</DependentUpon>
@@ -3509,12 +3552,12 @@
     <Compile Include="UserControls\Consultas\UcConsultaInformacionConsulta.ascx.designer.cs">
       <DependentUpon>UcConsultaInformacionConsulta.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Consultas\UcConsultaMascaras.ascx.cs">
-      <DependentUpon>UcConsultaMascaras.ascx</DependentUpon>
+    <Compile Include="UserControls\Consultas\UcConsultaFormularios.ascx.cs">
+      <DependentUpon>UcConsultaFormularios.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Consultas\UcConsultaMascaras.ascx.designer.cs">
-      <DependentUpon>UcConsultaMascaras.ascx</DependentUpon>
+    <Compile Include="UserControls\Consultas\UcConsultaFormularios.ascx.designer.cs">
+      <DependentUpon>UcConsultaFormularios.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaOrganizacion.ascx.cs">
       <DependentUpon>UcConsultaOrganizacion.ascx</DependentUpon>
@@ -3649,12 +3692,12 @@
     <Compile Include="UserControls\Temporal\UcCatalogoNiveles.ascx.designer.cs">
       <DependentUpon>UcCatalogoNiveles.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Altas\AltaMascaraAcceso.ascx.cs">
-      <DependentUpon>AltaMascaraAcceso.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\Formularios\UcAltaFormulario.ascx.cs">
+      <DependentUpon>UcAltaFormulario.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Altas\AltaMascaraAcceso.ascx.designer.cs">
-      <DependentUpon>AltaMascaraAcceso.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\Formularios\UcAltaFormulario.ascx.designer.cs">
+      <DependentUpon>UcAltaFormulario.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Temporal\UcMascaraCaptura.ascx.cs">
       <DependentUpon>UcMascaraCaptura.ascx</DependentUpon>

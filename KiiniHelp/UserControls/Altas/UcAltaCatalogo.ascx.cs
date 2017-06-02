@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using KiiniHelp.ServiceSistemaCatalogos;
 using KiiniNet.Entities.Cat.Sistema;
 
@@ -38,10 +40,12 @@ namespace KiiniHelp.UserControls.Altas
         {
             set
             {
-                panelAlerta.Visible = value.Any();
-                if (!panelAlerta.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -57,11 +61,30 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
+        private void LlenaRegistros()
+        {
+            try
+            {
+                rptRegistros.DataSource = Session["registrosCatalogos"];
+                rptRegistros.DataBind();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 Alerta = new List<string>();
+                if (!IsPostBack)
+                {
+                    Session["registrosCatalogos"] = new List<string>();
+                    LlenaRegistros();
+                }
+                
             }
             catch (Exception ex)
             {
@@ -74,6 +97,56 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
+        protected void btnBorrarRegistro_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton remover = (LinkButton)sender;
+                List<string> tmpList = Session["registrosCatalogos"] == null ? new List<string>() : (List<string>)Session["registrosCatalogos"];
+                tmpList.RemoveAt(int.Parse(remover.CommandArgument));
+                Session["registrosCatalogos"] = tmpList;
+                LlenaRegistros();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnAgregarRegistro_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton adder = (LinkButton) sender;
+                var itemFooter = adder.NamingContainer;
+                TextBox txtFooter = (TextBox) itemFooter.FindControl("txtRegistroNew");
+                if (txtFooter != null)
+                {
+                    if(txtFooter.Text.Trim() == string.Empty)
+                        throw new Exception("Ingrese una descripción.");
+                    List<string> tmpList = Session["registrosCatalogos"] == null ? new List<string>() : (List<string>)Session["registrosCatalogos"];
+                    tmpList.Add(txtFooter.Text.Trim().ToUpper());
+                    Session["registrosCatalogos"] = tmpList;
+                    LlenaRegistros();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+            
+        }
+
         protected void btnGuardar_OnClick(object sender, EventArgs e)
         {
             try
@@ -81,7 +154,7 @@ namespace KiiniHelp.UserControls.Altas
                 if (txtDescripcionCatalogo.Text.Trim() == string.Empty)
                     throw new Exception("Debe especificar una descripción");
                 if (EsAlta)
-                    _servicioCatalogo.CrearCatalogo(txtDescripcionCatalogo.Text.Trim(), true);
+                    _servicioCatalogo.CrearCatalogo(txtDescripcionCatalogo.Text.Trim(), true, (List<string>)Session["registrosCatalogos"]);
                 LimpiarCampos();
                 if (OnAceptarModal != null)
                     OnAceptarModal();

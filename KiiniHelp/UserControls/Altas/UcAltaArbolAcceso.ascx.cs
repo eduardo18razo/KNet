@@ -331,8 +331,8 @@ namespace KiiniHelp.UserControls.Altas
                 ucAltaInformacionConsulta.OnAceptarModal += UcAltaInformacionConsulta_OnAceptarModal;
                 ucAltaInformacionConsulta.OnCancelarModal += UcAltaInformacionConsulta_OnCancelarModal;
 
-                UcAltaMascaraAcceso.OnAceptarModal += UcAltaMascaraAcceso_OnAceptarModal;
-                UcAltaMascaraAcceso.OnCancelarModal += UcAltaMascaraAcceso_OnCancelarModal;
+                ucAltaFormulario.OnAceptarModal += UcAltaMascaraAcceso_OnAceptarModal;
+                ucAltaFormulario.OnCancelarModal += UcAltaMascaraAcceso_OnCancelarModal;
 
                 UcAltaSla.OnAceptarModal += UcSla_OnAceptarModal;
                 UcAltaSla.OnCancelarModal += UcSla_OnCancelarModal;

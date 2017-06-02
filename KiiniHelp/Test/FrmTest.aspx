@@ -1,12 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmTest.aspx.cs" ValidateRequest="false" Inherits="KiiniHelp.Test.FrmTest" %>
 
-<%@ Register Src="~/UserControls/Altas/UcAltaInformacionConsulta.ascx" TagPrefix="uc1" TagName="UcAltaInformacionConsulta" %>
-<%@ Register TagPrefix="ajax" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
-<%@ Register TagPrefix="ctrlExterno" Namespace="Winthusiasm.HtmlEditor" Assembly="Winthusiasm.HtmlEditor" %>
-
-
-
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -453,6 +446,12 @@
                     <asp:ScriptReference Path="~/assets/tmp/jquery.tagsinput.min.js" />
                 </Scripts>
             </asp:ScriptManager>
+            <div class="input-group input-daterange">
+                <input type="text" class="form-control" value="2012-04-05">
+                <div class="input-group-addon">to</div>
+                <input type="text" class="form-control" value="2012-04-19">
+            </div>
+
             <%--<div class="row">
                 <div class="col-lg-8 col-md-8">
                     <div class="module-inner">
@@ -461,9 +460,9 @@
                 </div>
             </div>
             <asp:Button runat="server" Text="Vista previa" OnClick="OnClick" />--%>
-            <uc1:UcAltaInformacionConsulta runat="server" id="UcAltaInformacionConsulta" />
+            <%--<uc1:UcAltaInformacionConsulta runat="server" id="UcAltaInformacionConsulta" />--%>
 
-
+            <%--<uc1:UcAltaCatalogo runat="server" id="UcAltaCatalogo" />--%>
 
             <%--<asp:UpdatePanel runat="server">
                 <ContentTemplate>

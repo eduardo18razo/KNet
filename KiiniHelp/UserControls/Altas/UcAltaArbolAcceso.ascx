@@ -2,7 +2,6 @@
 
 
 
-<%@ Register Src="~/UserControls/Altas/AltaMascaraAcceso.ascx" TagPrefix="uc" TagName="UcAltaMascaraAcceso" %>
 <%@ Register Src="~/UserControls/Altas/AltaEncuesta.ascx" TagPrefix="uc" TagName="UcEncuesta" %>
 <%@ Register Src="~/UserControls/Seleccion/AsociarGrupoUsuario.ascx" TagPrefix="uc" TagName="AsociarGrupoUsuario" %>
 <%@ Register Src="~/UserControls/Altas/AltaArea.ascx" TagPrefix="uc" TagName="AltaArea" %>
@@ -10,6 +9,9 @@
 <%@ Register Src="~/UserControls/Seleccion/UcImpactoUrgencia.ascx" TagPrefix="uc" TagName="UcImpactoUrgencia" %>
 <%@ Register Src="~/UserControls/Altas/UcAltaSla.ascx" TagPrefix="uc" TagName="UcAltaSla" %>
 <%@ Register Src="~/UserControls/Altas/UcAltaInformacionConsulta.ascx" TagPrefix="uc" TagName="UcAltaInformacionConsulta" %>
+<%@ Register Src="~/UserControls/Altas/Formularios/UcAltaFormulario.ascx" TagPrefix="uc" TagName="UcAltaFormulario" %>
+
+
 
 
 <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
@@ -367,7 +369,7 @@
                     <div class="modal-dialog modal-lg" style="width: 1300px; height: 500px">
                         <div class="modal-content" style="height: 100%">
                             <div class="modal-body">
-                                <uc:UcAltaMascaraAcceso runat="server" ID="UcAltaMascaraAcceso" />
+                                <uc:UcAltaFormulario runat="server" id="ucAltaFormulario" />
                             </div>
                         </div>
                     </div>

@@ -11,13 +11,13 @@ namespace KiiniNet.Services.Sistema.Implementacion
     
     public class ServiceCatalogos : IServiceCatalogos
     {
-        public void CrearCatalogo(string nombreCatalogo, bool esMascara)
+        public void CrearCatalogo(string nombreCatalogo, bool esMascara, List<string> registros)
         {
             try
             {
                 using (BusinessCatalogos negocio = new BusinessCatalogos())
                 {
-                    negocio.CrearCatalogo(nombreCatalogo, esMascara);
+                    negocio.CrearCatalogo(nombreCatalogo, esMascara, registros);
                 }
             }
             catch (Exception ex)
@@ -116,13 +116,13 @@ namespace KiiniNet.Services.Sistema.Implementacion
             }
         }
 
-        public List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo)
+        public List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion)
         {
             try
             {
                 using (BusinessCatalogos negocio = new BusinessCatalogos())
                 {
-                    return negocio.ObtenerRegistrosSistemaCatalogo(idCatalogo);
+                    return negocio.ObtenerRegistrosSistemaCatalogo(idCatalogo, insertarSeleccion);
                 }
             }
             catch (Exception ex)

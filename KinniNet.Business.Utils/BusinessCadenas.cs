@@ -102,9 +102,14 @@ namespace KinniNet.Business.Utils
                 return cadena;
             }
 
+            public static string RemoverCaracteresEspeciales(string str)
+            {
+                return Regex.Replace(str, "[^a-zA-Z0-9]+", "", RegexOptions.Compiled);
+            }
+
             public static string FormatoBaseDatos(string cadena)
             {
-                return Regex.Replace(ReemplazaAcentos(cadena), "[^0-9a-zA-Z]+", "");
+                return Regex.Replace(ReemplazaAcentos(RemoverCaracteresEspeciales(cadena)), "[^0-9a-zA-Z]+", "");
             }
         }
         

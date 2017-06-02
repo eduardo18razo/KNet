@@ -28,6 +28,12 @@ namespace KiiniNet.Entities.Cat.Mascaras
         [DataMember]
         public int IdUsuarioAlta { get; set; }
         [DataMember]
+        public DateTime? FechaModificacion { get; set; }
+        [DataMember]
+        public int? IdUsuarioModifico { get; set; }
+        [DataMember]
+        public bool Sistema { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
 
         [DataMember]
@@ -36,5 +42,9 @@ namespace KiiniNet.Entities.Cat.Mascaras
         public virtual List<InventarioArbolAcceso> InventarioArbolAcceso { get; set; }
         [DataMember]
         public virtual List<Ticket> Ticket { get; set; }
+        [DataMember]
+        public virtual Entities.Operacion.Usuarios.Usuario UsuarioAlta { get; set; }
+        [DataMember]
+        public virtual Entities.Operacion.Usuarios.Usuario UsuarioModifico { get; set; }
     }
 }

@@ -75,6 +75,9 @@
     <Property Name="IdMascara" Type="int" />
     <Property Name="IdTipoCampoMascara" Type="int" />
     <Property Name="IdCatalogo" Type="int" />
+    <Property Name="Multiple" Type="bit" />
+    <Property Name="CheckBox" Type="bit" />
+    <Property Name="RadioButton" Type="bit" />
     <Property Name="EsArchivo" Type="bit" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="150" />
     <Property Name="NombreCampo" Type="nvarchar" MaxLength="150" />
@@ -514,8 +517,11 @@
     <Property Name="ComandoInsertar" Type="nvarchar" MaxLength="250" />
     <Property Name="ComandoActualizar" Type="nvarchar" MaxLength="250" />
     <Property Name="Random" Type="bit" />
-    <Property Name="FechaAlta" Type="datetime" />
-    <Property Name="IdUsuarioAlta" Type="int" />
+    <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioAlta" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModifico" Type="int" />
+    <Property Name="Sistema" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="Menu">
@@ -1123,7 +1129,13 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DescripcionTexto" Type="nvarchar" MaxLength="250" />
+    <Property Name="LongitudMaximaPermitida" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="nvarchar" MaxLength="150" />
     <Property Name="TipoDatoSql" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Multiple" Type="bit" />
+    <Property Name="Checkbox" Type="bit" />
+    <Property Name="RadioButton" Type="bit" />
     <Property Name="LongitudMinima" Type="bit" Nullable="false" />
     <Property Name="LongitudMaxima" Type="bit" Nullable="false" />
     <Property Name="Entero" Type="bit" Nullable="false" />
@@ -2338,8 +2350,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Mascara_UsuarioAlta">
+  <Association Name="FK_Mascara_Usuario">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Mascara" Type="Self.Mascara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mascara">
+        <PropertyRef Name="IdUsuarioModifico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mascara_UsuarioAlta">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
     <End Role="Mascara" Type="Self.Mascara" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuario">
@@ -4355,6 +4379,10 @@
     <AssociationSet Name="FK_Jefatura_TipoUsuario" Association="Self.FK_Jefatura_TipoUsuario">
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Jefatura" EntitySet="Jefatura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mascara_Usuario" Association="Self.FK_Mascara_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Mascara" EntitySet="Mascara" />
     </AssociationSet>
     <AssociationSet Name="FK_Mascara_UsuarioAlta" Association="Self.FK_Mascara_UsuarioAlta">
       <End Role="Usuario" EntitySet="Usuario" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
+using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
@@ -118,6 +119,10 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         public virtual List<InformacionConsultaDocumentos> InformacionConsultaDocumentosAlta { get; set; }
         [DataMember]
         public virtual List<InformacionConsultaDocumentos> InformacionConsultaDocumentosModifico { get; set; }
+        [DataMember]
+        public virtual List<Mascara> MascaraAlta { get; set; }
+        [DataMember]
+        public virtual List<Mascara> MascaraModifico { get; set; }
         #endregion Mapeo
 
         public bool Supervisor { get; set; }

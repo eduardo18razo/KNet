@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
 
 namespace KiiniNet.Entities.Cat.Mascaras
 {
@@ -11,8 +10,22 @@ namespace KiiniNet.Entities.Cat.Mascaras
         public int Id { get; set; }
         [DataMember]
         public string Descripcion { get; set; }
+
+        [DataMember]
+        public string DescripcionTexto { get; set; }
+        [DataMember]
+        public string LongitudMaximaPermitida { get; set; }
+
+        [DataMember]
+        public string Image { get; set; }
         [DataMember]
         public string TipoDatoSql { get; set; }
+        [DataMember]
+        public bool Multiple { get; set; }
+        [DataMember]
+        public bool Checkbox { get; set; }
+        [DataMember]
+        public bool RadioButton { get; set; }
         [DataMember]
         public bool LongitudMinima { get; set; }
         [DataMember]

@@ -15,6 +15,12 @@ namespace KiiniNet.Entities.Cat.Mascaras
         [DataMember]
         public int? IdCatalogo { get; set; }
         [DataMember]
+        public bool Multiple { get; set; }
+        [DataMember]
+        public bool CheckBox { get; set; }
+        [DataMember]
+        public bool RadioButton { get; set; }
+        [DataMember]
         public bool EsArchivo { get; set; }
         [DataMember]
         public string Descripcion { get; set; }

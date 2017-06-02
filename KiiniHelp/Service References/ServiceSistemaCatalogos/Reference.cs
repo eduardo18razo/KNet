@@ -16,7 +16,7 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
     public interface IServiceCatalogos {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/CrearCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/CrearCatalogoResponse")]
-        void CrearCatalogo(string nombreCatalogo, bool esMascara);
+        void CrearCatalogo(string nombreCatalogo, bool esMascara, System.Collections.Generic.List<string> registros);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ObtenerCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/ObtenerCatalogoResponse")]
         KiiniNet.Entities.Cat.Sistema.Catalogos ObtenerCatalogo(int idCatalogo);
@@ -37,7 +37,7 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
         void AgregarRegistro(int idCatalogo, string descripcion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosSistemaCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosSistemaCatalogoResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo);
+        System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosArchivosCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosArchivosCatalogoResponse")]
         System.Data.DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo);
@@ -76,8 +76,8 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
                 base(binding, remoteAddress) {
         }
         
-        public void CrearCatalogo(string nombreCatalogo, bool esMascara) {
-            base.Channel.CrearCatalogo(nombreCatalogo, esMascara);
+        public void CrearCatalogo(string nombreCatalogo, bool esMascara, System.Collections.Generic.List<string> registros) {
+            base.Channel.CrearCatalogo(nombreCatalogo, esMascara, registros);
         }
         
         public KiiniNet.Entities.Cat.Sistema.Catalogos ObtenerCatalogo(int idCatalogo) {
@@ -104,8 +104,8 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
             base.Channel.AgregarRegistro(idCatalogo, descripcion);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo) {
-            return base.Channel.ObtenerRegistrosSistemaCatalogo(idCatalogo);
+        public System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion) {
+            return base.Channel.ObtenerRegistrosSistemaCatalogo(idCatalogo, insertarSeleccion);
         }
         
         public System.Data.DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo) {

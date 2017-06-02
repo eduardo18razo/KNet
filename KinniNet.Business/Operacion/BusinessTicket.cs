@@ -213,7 +213,7 @@ namespace KinniNet.Core.Operacion
                 bool contieneArchivo = false;
                 foreach (HelperCampoMascaraCaptura helperCampoMascaraCaptura in lstCaptura)
                 {
-                    if (mascara.CampoMascara.Any(s => s.NombreCampo == helperCampoMascaraCaptura.NombreCampo && s.TipoCampoMascara.Descripcion == "ARCHIVO ADJUNTO"))
+                    if (mascara.CampoMascara.Any(s => s.NombreCampo == helperCampoMascaraCaptura.NombreCampo && s.TipoCampoMascara.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo))
                     {
 
                         store += string.Format("'{0}',", helperCampoMascaraCaptura.Valor.Replace("ticketid", ticket.Id.ToString()));

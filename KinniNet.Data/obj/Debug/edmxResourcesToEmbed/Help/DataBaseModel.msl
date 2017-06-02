@@ -849,25 +849,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TipoCampoMascara">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.TipoCampoMascara">
-        <MappingFragment StoreEntitySet="TipoCampoMascara">
-          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="UploadFile" ColumnName="UploadFile" />
-          <ScalarProperty Name="Mask" ColumnName="Mask" />
-          <ScalarProperty Name="Catalogo" ColumnName="Catalogo" />
-          <ScalarProperty Name="SimboloMoneda" ColumnName="SimboloMoneda" />
-          <ScalarProperty Name="ValorMaximo" ColumnName="ValorMaximo" />
-          <ScalarProperty Name="Decimal" ColumnName="Decimal" />
-          <ScalarProperty Name="Entero" ColumnName="Entero" />
-          <ScalarProperty Name="LongitudMaxima" ColumnName="LongitudMaxima" />
-          <ScalarProperty Name="LongitudMinima" ColumnName="LongitudMinima" />
-          <ScalarProperty Name="TipoDatoSql" ColumnName="TipoDatoSql" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Canal">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.Canal">
         <MappingFragment StoreEntitySet="Canal">
@@ -974,25 +955,6 @@
           <ScalarProperty Name="EsMascaraCaptura" ColumnName="EsMascaraCaptura" />
           <ScalarProperty Name="Tabla" ColumnName="Tabla" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CampoMascara">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.CampoMascara">
-        <MappingFragment StoreEntitySet="CampoMascara">
-          <ScalarProperty Name="MascaraDetalle" ColumnName="MascaraDetalle" />
-          <ScalarProperty Name="ValorMaximo" ColumnName="ValorMaximo" />
-          <ScalarProperty Name="SimboloMoneda" ColumnName="SimboloMoneda" />
-          <ScalarProperty Name="LongitudMaxima" ColumnName="LongitudMaxima" />
-          <ScalarProperty Name="LongitudMinima" ColumnName="LongitudMinima" />
-          <ScalarProperty Name="Requerido" ColumnName="Requerido" />
-          <ScalarProperty Name="NombreCampo" ColumnName="NombreCampo" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="EsArchivo" ColumnName="EsArchivo" />
-          <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
-          <ScalarProperty Name="IdTipoCampoMascara" ColumnName="IdTipoCampoMascara" />
-          <ScalarProperty Name="IdMascara" ColumnName="IdMascara" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1265,22 +1227,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Mascara">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.Mascara">
-        <MappingFragment StoreEntitySet="Mascara">
-          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="IdUsuarioAlta" ColumnName="IdUsuarioAlta" />
-          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
-          <ScalarProperty Name="Random" ColumnName="Random" />
-          <ScalarProperty Name="ComandoActualizar" ColumnName="ComandoActualizar" />
-          <ScalarProperty Name="ComandoInsertar" ColumnName="ComandoInsertar" />
-          <ScalarProperty Name="NombreTabla" ColumnName="NombreTabla" />
-          <ScalarProperty Name="NoCampos" ColumnName="NoCampos" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ConversacionArchivo">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.ConversacionArchivo">
         <MappingFragment StoreEntitySet="ConversacionArchivo">
@@ -1448,6 +1394,72 @@
           <ScalarProperty Name="Busqueda" ColumnName="Busqueda" />
           <ScalarProperty Name="Datos" ColumnName="Datos" />
           <ScalarProperty Name="IdInformacionConsulta" ColumnName="IdInformacionConsulta" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mascara">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.Mascara">
+        <MappingFragment StoreEntitySet="Mascara">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Sistema" ColumnName="Sistema" />
+          <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioAlta" ColumnName="IdUsuarioAlta" />
+          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+          <ScalarProperty Name="Random" ColumnName="Random" />
+          <ScalarProperty Name="ComandoActualizar" ColumnName="ComandoActualizar" />
+          <ScalarProperty Name="ComandoInsertar" ColumnName="ComandoInsertar" />
+          <ScalarProperty Name="NombreTabla" ColumnName="NombreTabla" />
+          <ScalarProperty Name="NoCampos" ColumnName="NoCampos" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoCampoMascara">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.TipoCampoMascara">
+        <MappingFragment StoreEntitySet="TipoCampoMascara">
+          <ScalarProperty Name="RadioButton" ColumnName="RadioButton" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="UploadFile" ColumnName="UploadFile" />
+          <ScalarProperty Name="Mask" ColumnName="Mask" />
+          <ScalarProperty Name="Catalogo" ColumnName="Catalogo" />
+          <ScalarProperty Name="SimboloMoneda" ColumnName="SimboloMoneda" />
+          <ScalarProperty Name="ValorMaximo" ColumnName="ValorMaximo" />
+          <ScalarProperty Name="Decimal" ColumnName="Decimal" />
+          <ScalarProperty Name="Entero" ColumnName="Entero" />
+          <ScalarProperty Name="LongitudMaxima" ColumnName="LongitudMaxima" />
+          <ScalarProperty Name="LongitudMinima" ColumnName="LongitudMinima" />
+          <ScalarProperty Name="Checkbox" ColumnName="Checkbox" />
+          <ScalarProperty Name="Multiple" ColumnName="Multiple" />
+          <ScalarProperty Name="TipoDatoSql" ColumnName="TipoDatoSql" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="LongitudMaximaPermitida" ColumnName="LongitudMaximaPermitida" />
+          <ScalarProperty Name="DescripcionTexto" ColumnName="DescripcionTexto" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CampoMascara">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.CampoMascara">
+        <MappingFragment StoreEntitySet="CampoMascara">
+          <ScalarProperty Name="MascaraDetalle" ColumnName="MascaraDetalle" />
+          <ScalarProperty Name="ValorMaximo" ColumnName="ValorMaximo" />
+          <ScalarProperty Name="SimboloMoneda" ColumnName="SimboloMoneda" />
+          <ScalarProperty Name="LongitudMaxima" ColumnName="LongitudMaxima" />
+          <ScalarProperty Name="LongitudMinima" ColumnName="LongitudMinima" />
+          <ScalarProperty Name="Requerido" ColumnName="Requerido" />
+          <ScalarProperty Name="NombreCampo" ColumnName="NombreCampo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="EsArchivo" ColumnName="EsArchivo" />
+          <ScalarProperty Name="RadioButton" ColumnName="RadioButton" />
+          <ScalarProperty Name="CheckBox" ColumnName="CheckBox" />
+          <ScalarProperty Name="Multiple" ColumnName="Multiple" />
+          <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+          <ScalarProperty Name="IdTipoCampoMascara" ColumnName="IdTipoCampoMascara" />
+          <ScalarProperty Name="IdMascara" ColumnName="IdMascara" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

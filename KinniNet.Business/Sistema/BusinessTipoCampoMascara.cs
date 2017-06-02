@@ -25,7 +25,7 @@ namespace KinniNet.Core.Sistema
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.TipoCampoMascara.Where(w => w.Habilitado).OrderBy(o => o.Descripcion).ToList();
+                result = db.TipoCampoMascara.Where(w => w.Habilitado).OrderBy(o => o.Id).ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new TipoCampoMascara
