@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using AjaxControlToolkit;
 using KiiniHelp.ServiceSistemaCatalogos;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Helper;
+using KiiniNet.Entities.Operacion.Usuarios;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
 {
@@ -81,10 +86,10 @@ namespace KiiniHelp.UserControls.Altas
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
-                    Session["registrosCatalogos"] = new List<string>();
+                    Session["registrosCatalogos"] = new List<CatalogoGenerico>();
                     LlenaRegistros();
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -102,7 +107,7 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 LinkButton remover = (LinkButton)sender;
-                List<string> tmpList = Session["registrosCatalogos"] == null ? new List<string>() : (List<string>)Session["registrosCatalogos"];
+                List<CatalogoGenerico> tmpList = Session["registrosCatalogos"] == null ? new List<CatalogoGenerico>() : (List<CatalogoGenerico>)Session["registrosCatalogos"];
                 tmpList.RemoveAt(int.Parse(remover.CommandArgument));
                 Session["registrosCatalogos"] = tmpList;
                 LlenaRegistros();
@@ -122,15 +127,15 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                LinkButton adder = (LinkButton) sender;
+                LinkButton adder = (LinkButton)sender;
                 var itemFooter = adder.NamingContainer;
-                TextBox txtFooter = (TextBox) itemFooter.FindControl("txtRegistroNew");
+                TextBox txtFooter = (TextBox)itemFooter.FindControl("txtRegistroNew");
                 if (txtFooter != null)
                 {
-                    if(txtFooter.Text.Trim() == string.Empty)
+                    if (txtFooter.Text.Trim() == string.Empty)
                         throw new Exception("Ingrese una descripción.");
-                    List<string> tmpList = Session["registrosCatalogos"] == null ? new List<string>() : (List<string>)Session["registrosCatalogos"];
-                    tmpList.Add(txtFooter.Text.Trim().ToUpper());
+                    List<CatalogoGenerico> tmpList = Session["registrosCatalogos"] == null ? new List<CatalogoGenerico>() : (List<CatalogoGenerico>)Session["registrosCatalogos"];
+                    tmpList.Add(new CatalogoGenerico { Descripcion = txtFooter.Text.Trim().ToUpper() });
                     Session["registrosCatalogos"] = tmpList;
                     LlenaRegistros();
                 }
@@ -144,7 +149,7 @@ namespace KiiniHelp.UserControls.Altas
                 _lstError.Add(ex.Message);
                 Alerta = _lstError;
             }
-            
+
         }
 
         protected void btnGuardar_OnClick(object sender, EventArgs e)
@@ -153,8 +158,12 @@ namespace KiiniHelp.UserControls.Altas
             {
                 if (txtDescripcionCatalogo.Text.Trim() == string.Empty)
                     throw new Exception("Debe especificar una descripción");
+                Catalogos cat = new Catalogos();
+                cat.Descripcion = txtDescripcionCatalogo.Text;
+                cat.IdUsuarioAlta = ((Usuario)Session["UserData"]).Id;
+
                 if (EsAlta)
-                    _servicioCatalogo.CrearCatalogo(txtDescripcionCatalogo.Text.Trim(), true, (List<string>)Session["registrosCatalogos"]);
+                    _servicioCatalogo.CrearCatalogo(cat, true, (List<CatalogoGenerico>)Session["registrosCatalogos"]);
                 LimpiarCampos();
                 if (OnAceptarModal != null)
                     OnAceptarModal();

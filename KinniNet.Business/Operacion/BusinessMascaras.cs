@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using KiiniNet.Entities.Cat.Mascaras;
+using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Tickets;
 using KinniNet.Business.Utils;
@@ -90,10 +91,10 @@ namespace KinniNet.Core.Operacion
                             queryCamposTabla += String.Format("[{0}] {1} {2},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaFin, tmpTipoCampoMascara.TipoDatoSql, campoMascara.Requerido ? "NOT NULL" : "NULL");
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ExpresiónRegular:
-                            queryCamposTabla += String.Format("[{0}] {1} {2},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, campoMascara.Requerido ? "NOT NULL" : "NULL");
+                            queryCamposTabla += String.Format("[{0}] {1}({2}) {3},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, campoMascara.LongitudMaxima, campoMascara.Requerido ? "NOT NULL" : "NULL");
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo:
-                            queryCamposTabla += String.Format("[{0}] {1} {2},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, campoMascara.Requerido ? "NOT NULL" : "NULL");
+                            queryCamposTabla += String.Format("[{0}] {1}({2}) {3},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, campoMascara.LongitudMaxima, campoMascara.Requerido ? "NOT NULL" : "NULL");
                             break;
                     }
 
@@ -659,7 +660,39 @@ namespace KinniNet.Core.Operacion
                 if (mascara != null)
                 {
                     db.LoadProperty(mascara, "CampoMascara");
-                    string campos = mascara.CampoMascara.Aggregate(string.Empty, (current, campoMascara) => current + (campoMascara.NombreCampo + ", "));
+                    string campos = string.Empty;
+                    foreach (CampoMascara campoMascara in mascara.CampoMascara)
+                    {
+                        switch (campoMascara.IdTipoCampoMascara)
+                        {
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Texto:
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.TextoMultiLinea:
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.RadioBoton:
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ListaDepledable:
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroEntero:
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroDecimal:
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Logico:
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Fecha:
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ExpresiónRegular:
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo:
+                                campos += campoMascara.NombreCampo + ", ";
+                                break;
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación:
+                                if (campoMascara.IdCatalogo != null)
+                                {
+                                    Catalogos cat = new BusinessCatalogos().ObtenerCatalogo((int)campoMascara.IdCatalogo);
+                                    if (!cat.Archivo)
+                                        campos = new BusinessCatalogos().ObtenerRegistrosSistemaCatalogo(cat.Id, false).Aggregate(campos, (current, catalogoGenerico) => current + (campoMascara.NombreCampo + BusinessCadenas.Cadenas.FormatoBaseDatos(catalogoGenerico.Descripcion) + ", "));
+                                }
+                                break;
+                            case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.FechaRango:
+                                campos += campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaInicio + ", ";
+                                campos += campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaFin + ", ";
+                                break;
+                        }
+
+                    }
+                    //= mascara.CampoMascara.Aggregate(string.Empty, (current, campoMascara) => current + (campoMascara.NombreCampo + ", "));
                     if (mascara.Random)
                         campos += BusinessVariables.ParametrosMascaraCaptura.NombreCampoRandom;
                     else
@@ -711,4 +744,3 @@ namespace KinniNet.Core.Operacion
         }
     }
 }
-    

@@ -2,14 +2,17 @@
 
 
 
-<%@ Register Src="~/UserControls/Altas/AltaEncuesta.ascx" TagPrefix="uc" TagName="UcEncuesta" %>
+
 <%@ Register Src="~/UserControls/Seleccion/AsociarGrupoUsuario.ascx" TagPrefix="uc" TagName="AsociarGrupoUsuario" %>
 <%@ Register Src="~/UserControls/Altas/AltaArea.ascx" TagPrefix="uc" TagName="AltaArea" %>
 <%@ Register Src="~/UserControls/Altas/AltaTiempoEstimado.ascx" TagPrefix="uc" TagName="AltaTiempoEstimado" %>
 <%@ Register Src="~/UserControls/Seleccion/UcImpactoUrgencia.ascx" TagPrefix="uc" TagName="UcImpactoUrgencia" %>
 <%@ Register Src="~/UserControls/Altas/UcAltaSla.ascx" TagPrefix="uc" TagName="UcAltaSla" %>
 <%@ Register Src="~/UserControls/Altas/UcAltaInformacionConsulta.ascx" TagPrefix="uc" TagName="UcAltaInformacionConsulta" %>
-<%@ Register Src="~/UserControls/Altas/UcAltaMascaraAcceso.ascx" TagPrefix="uc" TagName="UcAltaMascaraAcceso" %>
+<%@ Register Src="~/UserControls/Altas/Formularios/UcAltaFormulario.ascx" TagPrefix="uc" TagName="UcAltaFormulario" %>
+<%@ Register Src="~/UserControls/Altas/Encuestas/UcAltaEncuesta.ascx" TagPrefix="uc" TagName="UcAltaEncuesta" %>
+
+
 
 
 
@@ -368,7 +371,7 @@
                     <div class="modal-dialog modal-lg" style="width: 1300px; height: 500px">
                         <div class="modal-content" style="height: 100%">
                             <div class="modal-body">
-                                <uc:UcAltaMascaraAcceso runat="server" id="ucAltaMascaraAcceso" />
+                                <uc:UcAltaFormulario runat="server" id="ucAltaFormulario" />
                             </div>
                         </div>
                     </div>
@@ -382,7 +385,7 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-body">
-                                <uc:UcEncuesta runat="server" ID="UcEncuesta" />
+                                <uc:UcAltaEncuesta runat="server" id="UcAltaEncuesta" />
                             </div>
                         </div>
                     </div>

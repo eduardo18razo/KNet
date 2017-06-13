@@ -63,6 +63,7 @@ namespace KiiniHelp.UserControls.Consultas
                 }
                 
                 rptResultados.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
             }
             catch (Exception e)
             {
@@ -78,14 +79,15 @@ namespace KiiniHelp.UserControls.Consultas
                 LlenaCombos();
                 LlenaCatalogoConsulta();
             }
-            ucRegistroCatalogo.OnAceptarModal += AltaPuestoOnAceptarModal;
-            ucRegistroCatalogo.OnCancelarModal += AltaPuestoOnCancelarModal;
+            ucRegistroCatalogo.OnAceptarModal += AltaRegistroCatalogoOnAceptarModal;
+            ucRegistroCatalogo.OnCancelarModal += AltaRegistroCatalogoOnCancelarModal;
         }
 
-        private void AltaPuestoOnCancelarModal()
+        private void AltaRegistroCatalogoOnCancelarModal()
         {
             try
             {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaRegistro\");", true);
             }
             catch (Exception ex)
@@ -99,7 +101,7 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        private void AltaPuestoOnAceptarModal()
+        private void AltaRegistroCatalogoOnAceptarModal()
         {
             try
             {

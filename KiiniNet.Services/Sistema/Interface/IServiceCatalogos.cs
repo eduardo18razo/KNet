@@ -10,7 +10,9 @@ namespace KiiniNet.Services.Sistema.Interface
     public interface IServiceCatalogos
     {
         [OperationContract]
-        void CrearCatalogo(string nombreCatalogo, bool esMascara, List<string> registros);
+        void CrearCatalogo(Catalogos catalogo, bool esMascara, List<CatalogoGenerico> registros);
+        [OperationContract]
+        void ActualizarCatalogo(Catalogos catalogo, bool esMascara, List<CatalogoGenerico> registros);
 
         [OperationContract]
         Catalogos ObtenerCatalogo(int idCatalogo);
@@ -33,9 +35,9 @@ namespace KiiniNet.Services.Sistema.Interface
         DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo);
 
         [OperationContract]
-        void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja);
+        void CrearCatalogoExcel(Catalogos catalogo, bool esMascara, string archivo, string hoja);
 
         [OperationContract]
-        void ActualizarCatalogoExcel(int idCatalogo, bool esMascara, string archivo, string hoja);
+        void ActualizarCatalogoExcel(Catalogos cat, bool esMascara, string archivo, string hoja);
     }
 }

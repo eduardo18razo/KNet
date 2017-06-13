@@ -1,5 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaMascaras.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaMascaras" %>
-<%@ Register Src="~/UserControls/Altas/UcAltaMascaraAcceso.ascx" TagPrefix="uc1" TagName="UcAltaMascaraAcceso" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaFormularios.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaFormularios" %>
 
 
 <div style="height: 100%;">
@@ -110,15 +109,7 @@
     </asp:UpdatePanel>
     <%--MODAL ALTA--%>
     <div class="modal fade" id="modalAltaMascara" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-        <asp:UpdatePanel ID="upAltaMascara" runat="server"  UpdateMode="Conditional">
-            <ContentTemplate>
-                <div class="modal-dialog modal-lg" style="width: 1100px; height: 600px">
-                    <div class="modal-content" >
-                        <uc1:UcAltaMascaraAcceso runat="server" id="ucAltaMascaraAcceso" />
-                    </div>
-                </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+       
     </div>
 </div>
 

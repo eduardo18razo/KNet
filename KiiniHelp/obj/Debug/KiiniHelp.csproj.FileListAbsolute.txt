@@ -13,3 +13,5 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\Winthusiasm.HtmlEditor.pdb
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\MSCaptcha.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\Recaptcha.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\Recaptcha.pdb
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\EPPlus.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniHelp\bin\EPPlus.xml

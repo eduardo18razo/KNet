@@ -8,10 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace KiiniHelp.UserControls.Altas.Formularios {
-
-
-    public partial class UcPreviewFormulario
-    {
+    
+    
+    public partial class UcPreviewFormulario {
         
         /// <summary>
         /// Control upMascara.
@@ -59,6 +58,15 @@ namespace KiiniHelp.UserControls.Altas.Formularios {
         protected global::System.Web.UI.WebControls.HiddenField hfRandom;
         
         /// <summary>
+        /// Control hfPreview.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfPreview;
+        
+        /// <summary>
         /// Control lblDescripcionMascara.
         /// </summary>
         /// <remarks>
@@ -66,6 +74,24 @@ namespace KiiniHelp.UserControls.Altas.Formularios {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDescripcionMascara;
+        
+        /// <summary>
+        /// Control btnCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        
+        /// <summary>
+        /// Control btnGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
         
         /// <summary>
         /// Control divControles.

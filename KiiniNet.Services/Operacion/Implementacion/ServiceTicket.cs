@@ -115,6 +115,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public HelperTicketDetalle ObtenerTicket(int idTicket, int idUsuario)
+        {
+            try
+            {
+                using (BusinessTicket negocio = new BusinessTicket())
+                {
+                    return negocio.ObtenerTicket(idTicket, idUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public HelperDetalleTicket ObtenerDetalleTicketNoRegistrado(int idTicket, string cveRegistro)
         {
             try

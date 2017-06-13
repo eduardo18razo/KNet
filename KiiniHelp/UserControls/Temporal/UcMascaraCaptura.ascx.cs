@@ -161,6 +161,7 @@ namespace KiiniHelp.UserControls.Temporal
                                     };
                                     lstCamposCapturados.Add(campoCapturado);
                                     break;
+
                                 case "NUMERO DECIMAL":
                                     campoCapturado = new HelperCampoMascaraCaptura
                                     {

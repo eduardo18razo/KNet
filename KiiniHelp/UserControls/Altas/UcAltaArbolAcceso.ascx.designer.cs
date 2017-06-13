@@ -481,13 +481,13 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
-        /// Control UcEncuesta.
+        /// Control UcAltaEncuesta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.AltaEncuesta UcEncuesta;
+        protected global::KiiniHelp.UserControls.Altas.Encuestas.UcAltaEncuesta UcAltaEncuesta;
         
         /// <summary>
         /// Control upModalAltaAreas.

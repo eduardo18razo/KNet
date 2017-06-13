@@ -395,6 +395,7 @@ namespace KinniNet.Core.Operacion
                 db.LoadProperty(result, "UsuarioRol");
                 db.LoadProperty(result, "TipoUsuario");
                 db.LoadProperty(result, "UsuarioGrupo");
+                db.LoadProperty(result, "TicketsLevantados");
                 if (result != null)
                 {
                     result.Organizacion = new BusinessOrganizacion().ObtenerOrganizacionById(result.IdOrganizacion);

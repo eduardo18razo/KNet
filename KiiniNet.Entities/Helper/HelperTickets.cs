@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Sistema;
 
@@ -27,5 +28,7 @@ namespace KiiniNet.Entities.Helper
         public bool EsPropietario { get; set; }
         public bool CambiaEstatus { get; set; }
         public bool Asigna { get; set; }
+
+        public List<HelperConversacionDetalle> ConversacionDetalle { get; set; }
     }
 }

@@ -1,159 +1,73 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaCatalogos.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaCatalogos" %>
-<%@ Register Src="~/UserControls/Altas/UcAltaCatalogo.ascx" TagPrefix="uc1" TagName="UcAltaCatalogo" %>
 <%@ Register Src="~/UserControls/Altas/UcCargaCatalgo.ascx" TagPrefix="uc1" TagName="UcCargaCatalgo" %>
+<%@ Register Src="~/UserControls/Altas/Catalogo/UcAltaCatalogos.ascx" TagPrefix="uc1" TagName="UcAltaCatalogos" %>
+
 
 
 <div style="height: 100%;">
-    <script>
-        function dbClic(e) {
-            $('#tblHeader').find('tr').dblclick(function (e) {
-                alert(e.target.parentElement.id);
-            });
-        };
-
-        function contextMenuCatalogos() {
-            var $contextMenuCatalogos = $("#contextMenuCatalogos");
-            $("body").on("click", function (e) {
-                $contextMenuCatalogos.hide();
-                var table = $("#tblHeader");
-                table.find('tr').each(function (i, ev) {
-                    $(this).css('background', "transparent");
-                });
-            });
-            $("body").on("contextmenu", "table tr", function (e) {
-                $contextMenuCatalogos.css({
-                    display: "block",
-                    left: e.pageX,
-                    top: e.pageY
-                });
-                var baja = false;
-                var alta = false;
-                var parent = e.target.parentElement;
-                var nodos = parent.parentElement.childNodes;
-                var columnArchivo = parent.childNodes[3];
-                for (var fondo = 0; fondo < nodos.length; fondo++) {
-                    if (nodos[fondo].nodeType === 1)
-                        parent.parentElement.childNodes[fondo].removeAttribute("style");
-                }
-
-                parent.parentElement.parentElement.style.background = 'transparent';
-                parent.style.background = "gray";
-                var columnas = e.target.parentElement.childNodes;
-                for (var z = 0; z < columnas.length; z++) {
-                    if (columnas[z].id === "colHabilitado") {
-                        baja = (columnas[z].textContent === 'SI');
-                    }
-                }
-                alta = !baja;
-                if (columnArchivo.textContent === "True") {
-                    document.getElementById("divEditar").style.visibility = 'visible';
-                    document.getElementById("divEditar").style.display = 'block';
-                }
-                else {
-                    document.getElementById("divEditar").style.visibility = 'hidden';
-                    document.getElementById("divEditar").style.display = 'none';
-                }
-                document.getElementById("<%= this.FindControl("btnBaja").ClientID %>").style.display = baja ? 'block' : 'none';
-                document.getElementById("<%= this.FindControl("btnAlta").ClientID %>").style.display = alta ? 'block' : 'none';
-                var elementId = document.getElementById("<%= this.FindControl("hfId").ClientID %>");
-                var elementEsArchivo = document.getElementById("<%= this.FindControl("hfEsArchivo").ClientID %>");
-                elementId.value = e.target.parentElement.id;
-                elementEsArchivo.value = columnArchivo.textContent;
-                return false;
-            });
-
-            $contextMenuCatalogos.on("click", "button", function () {
-                $contextMenuCatalogos.hide();
-            });
-        };
-    </script>
     <asp:UpdatePanel runat="server" style="height: 100%">
         <ContentTemplate>
-            <div id="contextMenuCatalogos" class="panel-heading contextMenu">
-                <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
-                <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfEsArchivo" />
-                <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Baja" ID="btnBaja" OnClick="btnBaja_OnClick" />
-                </div>
-                <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Alta" ID="btnAlta" OnClick="btnAlta_OnClick" />
-                </div>
-                <div class="form-group" id="divEditar">
-                    <asp:Button runat="server" CssClass="btn btn-primary" Text="Editar" ID="btnEditar" OnClick="btnEditar_OnClick" />
-                </div>
-                <div class="form-group">
-                    <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" />
-                </div>
-            </div>
-            <div class="modal-header" id="panelAlertaGeneral" runat="server" visible="false">
-                <div class="alert alert-danger" role="alert">
-                    <div>
-                        <div style="float: left">
-                            <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
-                        </div>
-                        <div style="float: left">
-                            <h3>Error</h3>
-                        </div>
-                        <div class="clearfix clear-fix"></div>
-                    </div>
-                    <hr />
-                    <asp:Repeater runat="server" ID="rptErrorGeneral">
-                        <ItemTemplate>
-                            <ul>
-                                <li><%# Container.DataItem %></li>
-                            </ul>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-            </div>
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <asp:Label runat="server" ID="lbotest"></asp:Label>
-                    <h3>Catálogos </h3>
-                </div>
-                <div class="panel-body">
-                    <div class="panel panel-primary">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingFiltros">
-                                <h4 class="panel-title">
-                                    <div role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiltros" aria-expanded="true" aria-controls="collapseFiltros" style="cursor: pointer">
-                                        Filtros
-                                    </div>
-                                </h4>
+            <br>
+            <h3 class="h6">
+                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
+                / Catálogo </h3>
+            <hr />
+            <section class="module">
+                <div class="row">
+                    <div class="col-lg-8 col-md-9">
+                        <div class="module-inner">
+                            <div class="module-heading">
+                                <h3 class="module-title">
+                                    <asp:Label runat="server" ID="lblBranding"></asp:Label></h3>
                             </div>
-                            <div id="collapseFiltros" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFiltros">
-                                <div class="panel-body">
-                                    <div class="form-horizontal">
-                                        <div class="form-group">
-                                            <asp:Label class="col-xs-1 control-label" runat="server">Catálogo</asp:Label>
-                                            <div class="col-xs-2">
-                                                <asp:DropDownList runat="server" ID="ddlCatalogos" CssClass="col-xs-1 DropSelect" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlCatalogos_OnSelectedIndexChanged" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-xs-1 control-label"></div>
-                                            <div class="col-xs-1">
-                                                <asp:Button runat="server" CssClass="btn btn-primary" ID="btnNew" Text="Agregar Catálogo" OnClick="btnNew_OnClick" />
-                                            </div>
-                                            <div style="width: 45px"></div>
-                                            <div class="col-xs-1">
-                                                <asp:Button runat="server" CssClass="btn btn-primary" ID="btnCargarCatalogo" Text="Cargar Catálogo" OnClick="btnCargarCatalogo_OnClick" />
-                                            </div>
-                                        </div>
-                                    </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="module-inner">
+                            <asp:LinkButton runat="server" CssClass="btn btn-success fa fa-plus" Text="Crear nueco catálogo" OnClick="btnNew_OnClick" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="module-inner">
+                            CONSULTA CATEGORIAS:<br />
+                            <div class="search-box form-inline margin-bottom-lg">
+                                <label class="sr-only" for="txtFiltro">Buscar</label>
+                                <div class="form-group">
+                                    <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control help_search_form" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" placeholder="Busca con una palabra clave..." />
+                                    <asp:LinkButton runat="server" class="btn btn-primary btn-single-icon fa fa-search" OnClick="btnBuscar_OnClick"></asp:LinkButton>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-lg-4 col-md-3">
+                        <div class="module-inner">
+                            <div class="form-group">
+                                <asp:LinkButton runat="server" CssClass="btn btn-primary fa fa-download" Text="  Descargar reporte" ID="btnDownload" OnClick="btnDownload_OnClick" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
+            <section class="module module-headings">
+                <div class="module-inner">
+                    <div class="module-content collapse in" id="content-1">
+                        <div class="module-content-inner no-padding-bottom">
+                            <div class="table-responsive">
                                 <asp:Repeater runat="server" ID="rptResultados">
                                     <HeaderTemplate>
-                                        <table border="1" class="table table-bordered table-hover table-responsive" id="tblHeader">
+                                        <table class="table table-striped display" id="tblResults">
                                             <thead>
-                                                <tr align="center">
+                                                <tr>
                                                     <td>
-                                                        <asp:Label runat="server">Descripción</asp:Label></td>
+                                                        <asp:Label runat="server">Nombre</asp:Label></td>
+                                                    <td>
+                                                        <asp:Label runat="server">Creación</asp:Label></td>
+                                                    <td>
+                                                        <asp:Label runat="server">Últ. edición</asp:Label></td>
                                                     <td>
                                                         <asp:Label runat="server">Habilitado</asp:Label></td>
                                                 </tr>
@@ -161,10 +75,24 @@
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <tr align="center" id='<%# Eval("Id")%>'>
-                                            <td style="padding: 0; text-align: left; font-size: 10px;" oncontextmenu="contextMenuCatalogos()"><%# Eval("Descripcion")%></td>
-                                            <td style="padding: 0; text-align: left; font-size: 10px; display: none" oncontextmenu="contextMenuCatalogos()" id="colArchivo"><%# Eval("Archivo")%></td>
-                                            <td style="padding: 0; font-size: 10px;" oncontextmenu="contextMenuCatalogos()" id="colHabilitado"><%# (bool) Eval("Habilitado") ? "SI" : "NO"%></td>
+                                        <tr>
+                                            <td><%# Eval("Descripcion")%></td>
+                                            <td><%# Eval("FechaAlta", "{0:d}")%></td>
+                                            <td><%# Eval("FechaModificacion", "{0:d}")%></td>
+                                            <td id="colHabilitado">
+                                                <ul class="list list-unstyled" id="hiddenEnabled">
+                                                    <li>
+                                                        <asp:CheckBox runat="server" AutoPostBack="true" Checked='<%# (bool) Eval("Habilitado") %>' CssClass="chkIphone" Width="30px" data-id='<%# Eval("Id")%>' Text='<%# (bool) Eval("Habilitado") ? "SI" : "NO"%>' OnCheckedChanged="OnCheckedChanged" />
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                            <td id="colEditar">
+                                                <ul class="list list-unstyled hidden" id="hiddenEdit">
+                                                    <li>
+                                                        <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Editar" CommandArgument='<%# Eval("Id")%>' OnClick="btnEditar_OnClick" />
+                                                    </li>
+                                                </ul>
+                                            </td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>
@@ -176,16 +104,27 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="btnDownload" />
+        </Triggers>
     </asp:UpdatePanel>
     <%--MODAL ALTA--%>
     <div class="modal fade" id="modalAltaCatalogo" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <asp:UpdatePanel ID="upAltaCatalogo" runat="server">
             <ContentTemplate>
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog">
                     <div class="modal-content">
-                        <uc1:UcAltaCatalogo runat="server" id="ucAltaCatalogo" />
+                        <div class="modal-header">
+                            <asp:LinkButton class="close" ID="btnClose" OnClick="btnClose_OnClick" runat="server" Text='&times;' />
+                            <h2 class="modal-title" id="modal-new-ticket-label">
+                                <asp:Label runat="server" ID="lblBrandingModal" Text="NUEVO CATÁLOGO" /></h2>
+                            <hr class="bordercolor" />
+                        </div>
+                        <div class="modal-body">
+                            <uc1:UcAltaCatalogos runat="server" id="ucAltaCatalogos" />
+                        </div>
                     </div>
                 </div>
             </ContentTemplate>

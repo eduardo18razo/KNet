@@ -180,6 +180,8 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                     if (Request.QueryString["idFormulario"] != null)
                     {
                         LlenaDatosMascara(int.Parse(Request.QueryString["idFormulario"]));
+                        if (Request.QueryString["Alta"] != null)
+                            EsAlta = bool.Parse(Request.QueryString["Alta"]);
                     }
                     else
                     {
@@ -240,23 +242,6 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 LimpiarMascara();
                 if (OnLimpiarModal != null)
                     OnLimpiarModal();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-        protected void btnCancelar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                LimpiarModalCampo();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAgregarCampoMascara\");", true);
             }
             catch (Exception ex)
             {
@@ -509,7 +494,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
 
                     TipoCampoMascara tipoCampo = _servicioSistemaTipoCampoMascara.TipoCampoMascaraId(Convert.ToInt32(hfTipoCampo.Value));
 
-                    tmpMascara.CampoMascara.Add(item: new CampoMascara
+                    tmpMascara.CampoMascara.Add(new CampoMascara
                     {
                         IdCatalogo = tipoCampo.Catalogo ? Convert.ToInt32(ddlCatalogosCampo.SelectedValue) : (int?)null,
                         IdTipoCampoMascara = tipoCampo.Id,
@@ -520,7 +505,9 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                         Descripcion = txtDescripcionCampo.Text.Trim(),
                         Requerido = chkRequerido.Checked,
                         LongitudMinima = tipoCampo.LongitudMinima ? Convert.ToInt32(txtLongitudMinima.Text.Trim()) : tipoCampo.Mask ? 1 : (int?)null,
-                        LongitudMaxima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMaxima.Text.Trim()) : tipoCampo.Mask ? txtMascara.Text.Trim().Length : (int?)null,
+                        LongitudMaxima = tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Texto ? int.Parse(tipoCampo.LongitudMaximaPermitida) :
+                                         tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo ? 3900 : 
+                                         tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMaxima.Text.Trim()) : tipoCampo.Mask ? txtMascara.Text.Trim().Length : (int?)null,
                         SimboloMoneda = tipoCampo.SimboloMoneda ? txtSimboloMoneda.Text.Trim().ToUpper() : null,
                         ValorMaximo = tipoCampo.ValorMaximo ? Convert.ToInt32(txtValorMaximo.Text.Trim()) : (int?)null,
                         MascaraDetalle = tipoCampo.Mask ? txtMascara.Text.Trim() : null,
@@ -558,6 +545,23 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 Alerta = _lstError;
             }
         }
+
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("~/Users/Administracion/Formularios/FrmConsultaFormularios.aspx");
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
         protected void btnGuardar_OnClick(object sender, EventArgs e)
         {
             try
@@ -565,13 +569,16 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 if (txtNombre.Text.Trim() == string.Empty)
                     throw new Exception("Debe especificar un nombre.");
                 Mascara nuevaMascara = ((Mascara)Session["MascaraAlta"]);
-                if (((Mascara)Session["MascaraAlta"]).CampoMascara.Count <= 0)
+                if (((Mascara)Session["MascaraAlta"]).CampoMascara != null && ((Mascara)Session["MascaraAlta"]).CampoMascara.Count <= 0)
                     throw new Exception("Debe al menos un campo.");
                 nuevaMascara.Descripcion = txtNombre.Text.Trim();
                 nuevaMascara.Random = chkClaveRegistro.Checked;
                 nuevaMascara.IdUsuarioAlta = ((Usuario)Session["UserData"]).Id;
                 if (EsAlta)
+                {
+                    nuevaMascara.Id = 0;
                     _servicioMascaras.CrearMascara(nuevaMascara);
+                }
                 else
                     _servicioMascaras.CrearMascara(nuevaMascara);
 
@@ -603,13 +610,16 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 nuevaMascara.IdUsuarioAlta = ((Usuario)Session["UserData"]).Id;
 
                 Session["PreviewDataFormulario"] = nuevaMascara;
-                Response.Write(String.Format("window.open('{0}','_blank')", ResolveUrl("~/Users/Administracion/Formularios/FrmPreviewFormulario.aspx")));
-                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('/Publico/Consultas/FrmPreviewConsulta.aspx','_blank');", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('/Users/Administracion/Formularios/FrmPreviewFormulario.aspx','_blank');", true);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
         protected void btnLimpiarCampo_OnClick(object sender, EventArgs e)

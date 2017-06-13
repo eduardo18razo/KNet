@@ -5746,6 +5746,14 @@ ul.sortable {
 /* Large devices (large desktops, 1200px and up) */
 
 /* default */
+.border-rounded {
+    border-radius: 25px;
+    border: 1px solid;
+}
+.padding-10 {
+    padding: 10px !important;
+}
+
 .padding-20 {
     padding: 20px !important;
 }
@@ -5763,3 +5771,14 @@ ul.sortable {
     padding-bottom: 0 !important;
 }
 
+.bordercolor {
+    border-color: #3aa7aa;
+}
+
+.borderright {
+    border-right: 1px solid #f3f3f7;
+}
+
+.bordered {
+    border: 1px solid #f3f3f7;
+}

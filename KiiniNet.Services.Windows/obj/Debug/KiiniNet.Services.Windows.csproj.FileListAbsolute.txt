@@ -48,3 +48,5 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Windows\obj\Debug\Kiini
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Windows\obj\Debug\KiiniNet.Services.Windows.csproj.GenerateResource.Cache
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Windows\obj\Debug\KiiniNet.Services.Windows.exe
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Windows\obj\Debug\KiiniNet.Services.Windows.pdb
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Windows\bin\Debug\EPPlus.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Windows\bin\Debug\EPPlus.xml

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Helper;
@@ -163,30 +164,66 @@ namespace KinniNet.Core.Sistema
             return result;
         }
 
-        public void CrearCatalogo(string nombreCatalogo, bool esMascara, List<string> registros)
+        public void CrearCatalogo(Catalogos catalogo, bool esMascara, List<CatalogoGenerico> registros)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                nombreCatalogo = nombreCatalogo.Trim().ToUpper();
-                Catalogos catalogo = new Catalogos
-                {
-                    Descripcion = nombreCatalogo,
-                    Tabla = BusinessCadenas.Cadenas.FormatoBaseDatos((BusinessVariables.ParametrosCatalogo.PrefijoTabla + nombreCatalogo).Replace(" ", string.Empty)),
-                    EsMascaraCaptura = esMascara,
-                    Archivo = false,
-                    Habilitado = true
-                };
+                catalogo.Descripcion = catalogo.Descripcion.Trim().ToUpper();
+                catalogo.DescripcionLarga = catalogo.DescripcionLarga.Trim().ToUpper();
+                catalogo.Tabla = BusinessCadenas.Cadenas.FormatoBaseDatos((BusinessVariables.ParametrosCatalogo.PrefijoTabla + catalogo.Descripcion.Trim().ToUpper()).Replace(" ", string.Empty));
+                catalogo.EsMascaraCaptura = esMascara;
+                catalogo.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                catalogo.Archivo = false;
+                catalogo.Habilitado = true;
+
                 ExisteMascara(catalogo.Tabla);
                 CreaEstructuraBaseDatos(catalogo.Tabla);
                 db.Catalogos.AddObject(catalogo);
                 db.SaveChanges();
                 if (registros.Count <= 0) return;
-                foreach (string registro in registros)
+                foreach (CatalogoGenerico registro in registros)
                 {
-                    AgregarRegistro(catalogo.Id, registro);
+                    AgregarRegistro(catalogo.Id, registro.Descripcion);
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public void ActualizarCatalogo(Catalogos catalogo, bool esMascara, List<CatalogoGenerico> registros)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
+                Catalogos catalogodb = db.Catalogos.SingleOrDefault(s => s.Id == catalogo.Id);
+                if (catalogodb != null)
+                {
+                    catalogodb.Descripcion = catalogo.Descripcion.Trim().ToUpper();
+                    catalogodb.DescripcionLarga = catalogo.DescripcionLarga.Trim().ToUpper();
+                    catalogodb.EsMascaraCaptura = esMascara;
+                    catalogodb.IdUsuarioModifico = catalogo.IdUsuarioModifico;
+                    catalogodb.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                    catalogodb.Archivo = false;
+                    catalogodb.Habilitado = true;
+                    
+                    db.SaveChanges();
+                }
+                
+                
+                //if (registros.Count <= 0) return;
+                //foreach (CatalogoGenerico registro in registros)
+                //{
+                //    AgregarRegistro(catalogo.Id, registro.Descripcion);
+                //}
             }
             catch (Exception ex)
             {
@@ -360,7 +397,7 @@ namespace KinniNet.Core.Sistema
                 throw new Exception(ex.Message);
             }
         }
-        public void ActualizarCatalogoExcel(int idCatalogo, bool esMascara, string archivo, string hoja)
+        public void ActualizarCatalogoExcel(Catalogos cat, bool esMascara, string archivo, string hoja)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             DataSet dsOriginales = null;
@@ -368,7 +405,7 @@ namespace KinniNet.Core.Sistema
             string nombreTabla = null;
             try
             {
-                Catalogos catalogo = db.Catalogos.SingleOrDefault(s => s.Id == idCatalogo);
+                Catalogos catalogo = db.Catalogos.SingleOrDefault(s => s.Id == cat.Id);
                 if (catalogo != null)
                 {
                     nombreTabla = catalogo.Tabla;
@@ -417,7 +454,8 @@ namespace KinniNet.Core.Sistema
                     }
                     new SqlCommandBuilder(da);
                     da.Update(ds.Tables[catalogo.Tabla]);
-
+                    catalogo.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                    db.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -428,20 +466,17 @@ namespace KinniNet.Core.Sistema
             }
             finally { db.Dispose(); }
         }
-        public void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja)
+        public void CrearCatalogoExcel(Catalogos catalogo, bool esMascara, string archivo, string hoja)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                nombreCatalogo = nombreCatalogo.ToUpper();
-                Catalogos catalogo = new Catalogos
-                {
-                    Descripcion = nombreCatalogo,
-                    Tabla = (BusinessVariables.ParametrosCatalogo.PrefijoTabla + nombreCatalogo).Replace(" ", string.Empty),
-                    EsMascaraCaptura = esMascara,
-                    Archivo = true,
-                    Habilitado = true
-                };
+                catalogo.Descripcion = catalogo.Descripcion.Trim().ToUpper();
+                catalogo.Tabla = (BusinessVariables.ParametrosCatalogo.PrefijoTabla + catalogo.Descripcion).Replace(" ", string.Empty);
+                catalogo.EsMascaraCaptura = esMascara;
+                catalogo.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                catalogo.Archivo = true;
+                catalogo.Habilitado = true;
                 ExisteMascara(catalogo.Tabla);
                 DataSet dtExcel = BusinessFile.ExcelManager.LeerHojaExcel(archivo, hoja);
                 string sqltable = CreateSqlTableFromDataTable(catalogo.Tabla, dtExcel.Tables["tablaPaso"]);
@@ -472,7 +507,7 @@ namespace KinniNet.Core.Sistema
             }
             catch (Exception ex)
             {
-                EliminarObjetoBaseDeDatos(nombreCatalogo, BusinessVariables.EnumTipoObjeto.Tabla);
+                EliminarObjetoBaseDeDatos(BusinessVariables.ParametrosCatalogo.PrefijoTabla + catalogo.Descripcion, BusinessVariables.EnumTipoObjeto.Tabla);
                 throw new Exception(ex.Message);
             }
             finally { db.Dispose(); }

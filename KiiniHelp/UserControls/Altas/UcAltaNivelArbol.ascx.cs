@@ -561,8 +561,8 @@ namespace KiiniHelp.UserControls.Altas
                 ucAltaTiempoEstimado.OnAceptarModal += AltaTiempoEstimadoOnOnAceptarModal;
                 ucAltaTiempoEstimado.OnCancelarModal += AltaTiempoEstimadoOnOnCancelarModal;
 
-                UcEncuesta.OnAceptarModal += UcEncuesta_OnAceptarModal;
-                UcEncuesta.OnCancelarModal += UcEncuesta_OnCancelarModal;
+                ucAltaEncuesta.OnAceptarModal += UcEncuesta_OnAceptarModal;
+                ucAltaEncuesta.OnCancelarModal += UcEncuesta_OnCancelarModal;
 
                 UcImpactoUrgencia.OnAceptarModal += UcImpactoUrgencia_OnAceptarModal;
                 UcImpactoUrgencia.OnCancelarModal += UcImpactoUrgenciaOnOnCancelarModal;

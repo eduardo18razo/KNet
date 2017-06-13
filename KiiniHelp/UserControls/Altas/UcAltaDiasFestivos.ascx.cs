@@ -45,6 +45,22 @@ namespace KiiniHelp.UserControls.Altas
             set { hfEsAlta.Value = value.ToString(); }
         }
 
+        public int IdDiaFeriado
+        {
+            get { return int.Parse(hdIdHorario.Value); }
+            set
+            {
+                hdIdHorario.Value = value.ToString();
+                DiasFeriados dia = _servicioDias.ObtenerDiasFeriadosUserById(value);
+                if (dia != null)
+                {
+                    txtDescripcionDias.Text = dia.Descripcion;
+                    DiasFeriados = dia.DiasFeriadosDetalle;
+                    LlenaDias();
+                }
+            }
+        }
+
         private void LimpiarPantalla()
         {
             try

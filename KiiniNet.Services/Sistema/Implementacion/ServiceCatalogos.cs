@@ -11,13 +11,28 @@ namespace KiiniNet.Services.Sistema.Implementacion
     
     public class ServiceCatalogos : IServiceCatalogos
     {
-        public void CrearCatalogo(string nombreCatalogo, bool esMascara, List<string> registros)
+        public void CrearCatalogo(Catalogos catalogo, bool esMascara, List<CatalogoGenerico> registros)
         {
             try
             {
                 using (BusinessCatalogos negocio = new BusinessCatalogos())
                 {
-                    negocio.CrearCatalogo(nombreCatalogo, esMascara, registros);
+                    negocio.CrearCatalogo(catalogo, esMascara, registros);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ActualizarCatalogo(Catalogos catalogo, bool esMascara, List<CatalogoGenerico> registros)
+        {
+            try
+            {
+                using (BusinessCatalogos negocio = new BusinessCatalogos())
+                {
+                    negocio.ActualizarCatalogo(catalogo, esMascara, registros);
                 }
             }
             catch (Exception ex)
@@ -146,13 +161,13 @@ namespace KiiniNet.Services.Sistema.Implementacion
             }
         }
 
-        public void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja)
+        public void CrearCatalogoExcel(Catalogos catalogo, bool esMascara, string archivo, string hoja)
         {
             try
             {
                 using (BusinessCatalogos negocio = new BusinessCatalogos())
                 {
-                    negocio.CrearCatalogoExcel(nombreCatalogo, esMascara, archivo, hoja);
+                    negocio.CrearCatalogoExcel(catalogo, esMascara, archivo, hoja);
                 }
             }
             catch (Exception ex)
@@ -161,13 +176,13 @@ namespace KiiniNet.Services.Sistema.Implementacion
             }
         }
 
-        public void ActualizarCatalogoExcel(int idCatalogo, bool esMascara, string archivo, string hoja)
+        public void ActualizarCatalogoExcel(Catalogos cat, bool esMascara, string archivo, string hoja)
         {
             try
             {
                 using (BusinessCatalogos negocio = new BusinessCatalogos())
                 {
-                    negocio.ActualizarCatalogoExcel(idCatalogo, esMascara, archivo, hoja);
+                    negocio.ActualizarCatalogoExcel(cat, esMascara, archivo, hoja);
                 }
             }
             catch (Exception ex)

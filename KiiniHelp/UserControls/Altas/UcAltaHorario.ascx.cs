@@ -6,10 +6,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceDiasHorario;
 using KiiniNet.Entities.Cat.Usuario;
+using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniHelp.UserControls.Altas
 {
-    //TODO: Eliminar comentarios
     public partial class UcAltaHorario : UserControl, IControllerModal
     {
         private readonly ServiceDiasHorarioClient _servicioHorario = new ServiceDiasHorarioClient();
@@ -39,20 +39,95 @@ namespace KiiniHelp.UserControls.Altas
             set
             {
                 hfEsAlta.Value = value.ToString();
-                Session["NuevoHorario"] = null;
             }
         }
 
-        public int IdSubRol
+        public int IdHorario
         {
-            get { return int.Parse(hfIdSubRol.Value); }
-            set { hfIdSubRol.Value = value.ToString(); }
+            get { return int.Parse(hdIdHorario.Value); }
+            set
+            {
+                hdIdHorario.Value = value.ToString();
+                Horario horario = _servicioHorario.ObtenerHorarioById(value);
+                if (horario != null)
+                {
+                    txtDescripcion.Text = horario.Descripcion;
+                    hfLunes.Value = string.Empty;
+                    hfMartes.Value = string.Empty;
+                    hfMiercoles.Value = string.Empty;
+                    hfJueves.Value = string.Empty;
+                    hfViernes.Value = string.Empty;
+                    hfSabado.Value = string.Empty;
+                    hfDomingo.Value = string.Empty;
+
+                    foreach (HorarioDetalle detalle in horario.HorarioDetalle.Where(w => w.Dia == 1))
+                    {
+                        for (int horainicio = DateTime.Parse(detalle.HoraInicio).Hour; horainicio <= (DateTime.Parse(detalle.HoraInicio).Hour == 23 ? DateTime.Parse(detalle.HoraInicio).Hour : DateTime.Parse(detalle.HoraFin).Hour); horainicio++)
+                        {
+                            hfLunes.Value += horainicio + ",";
+                        }
+                    }
+                    hfLunes.Value = hfLunes.Value.TrimEnd(',');
+                    foreach (HorarioDetalle detalle in horario.HorarioDetalle.Where(w => w.Dia == 2))
+                    {
+                        for (int horainicio = DateTime.Parse(detalle.HoraInicio).Hour;horainicio <=(DateTime.Parse(detalle.HoraInicio).Hour == 23? DateTime.Parse(detalle.HoraInicio).Hour: DateTime.Parse(detalle.HoraFin).Hour);
+                            horainicio++)
+                        {
+                            hfMartes.Value += horainicio + ",";
+                        }
+                    }
+                    hfMartes.Value = hfMartes.Value.TrimEnd(',');
+
+                    foreach (HorarioDetalle detalle in horario.HorarioDetalle.Where(w => w.Dia == 3))
+                    {
+                        for (int horainicio = DateTime.Parse(detalle.HoraInicio).Hour; horainicio <= (DateTime.Parse(detalle.HoraInicio).Hour == 23 ? DateTime.Parse(detalle.HoraInicio).Hour : DateTime.Parse(detalle.HoraFin).Hour); horainicio++)
+                        {
+                            hfMiercoles.Value += horainicio + ",";
+                        }
+                    }
+                    hfMiercoles.Value = hfMiercoles.Value.TrimEnd(',');
+
+                    foreach (HorarioDetalle detalle in horario.HorarioDetalle.Where(w => w.Dia == 4))
+                    {
+                        for (int horainicio = DateTime.Parse(detalle.HoraInicio).Hour; horainicio <= (DateTime.Parse(detalle.HoraInicio).Hour == 23 ? DateTime.Parse(detalle.HoraInicio).Hour : DateTime.Parse(detalle.HoraFin).Hour); horainicio++)
+                        {
+                            hfJueves.Value += horainicio + ",";
+                        }
+                    }
+                    hfJueves.Value = hfJueves.Value.TrimEnd(',');
+
+                    foreach (HorarioDetalle detalle in horario.HorarioDetalle.Where(w => w.Dia == 5))
+                    {
+                        for (int horainicio = DateTime.Parse(detalle.HoraInicio).Hour; horainicio <= (DateTime.Parse(detalle.HoraInicio).Hour == 23 ? DateTime.Parse(detalle.HoraInicio).Hour : DateTime.Parse(detalle.HoraFin).Hour); horainicio++)
+                        {
+                            hfViernes.Value += horainicio + ",";
+                        }
+                    }
+                    hfViernes.Value = hfViernes.Value.TrimEnd(',');
+
+                    foreach (HorarioDetalle detalle in horario.HorarioDetalle.Where(w => w.Dia == 6))
+                    {
+                        for (int horainicio = DateTime.Parse(detalle.HoraInicio).Hour; horainicio <= (DateTime.Parse(detalle.HoraInicio).Hour == 23 ? DateTime.Parse(detalle.HoraInicio).Hour : DateTime.Parse(detalle.HoraFin).Hour); horainicio++)
+                        {
+                            hfSabado.Value += horainicio + ",";
+                        }
+                    }
+                    hfSabado.Value = hfSabado.Value.TrimEnd(',');
+
+                    foreach (HorarioDetalle detalle in horario.HorarioDetalle.Where(w => w.Dia == 0))
+                    {
+                        for (int horainicio = DateTime.Parse(detalle.HoraInicio).Hour; horainicio <= (DateTime.Parse(detalle.HoraInicio).Hour == 23 ? DateTime.Parse(detalle.HoraInicio).Hour : DateTime.Parse(detalle.HoraFin).Hour); horainicio++)
+                        {
+                            hfDomingo.Value += horainicio + ",";
+                        }
+                    }
+                    hfDomingo.Value = hfDomingo.Value.TrimEnd(',');
+                }
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptHorario", "SetTable();", true);
+
+            }
         }
 
-        public RepeaterItemCollection HorariosSubRol
-        {
-            get { return rptHorarios.Items; }
-        }
         private void LimpiarCampos()
         {
             try
@@ -71,7 +146,6 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 LimpiarCampos();
-                Session["NuevoHorario"] = new List<HorarioDetalle>();
                 hfLunes.Value = string.Empty;
                 hfMartes.Value = string.Empty;
                 hfMiercoles.Value = string.Empty;
@@ -79,38 +153,18 @@ namespace KiiniHelp.UserControls.Altas
                 hfViernes.Value = string.Empty;
                 hfSabado.Value = string.Empty;
                 hfDomingo.Value = string.Empty;
-                MuestraHorarios((List<HorarioDetalle>)Session["NuevoHorario"]);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
-
-        private void MuestraHorarios(List<HorarioDetalle> lst)
-        {
-            try
-            {
-                if (Session["NuevoHorario"] == null && lst.Count <= 0)
-                {
-                    rptHorarios.DataSource = null;
-                    rptHorarios.DataBind();
-                    return;
-                }
-                Session["NuevoHorario"] = lst;
-                rptHorarios.DataSource = lst;
-                rptHorarios.DataBind();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                
+
                 Alerta = new List<string>();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptHorario", "SetTable();", true);
                 if (!IsPostBack)
@@ -131,32 +185,17 @@ namespace KiiniHelp.UserControls.Altas
         private void ValidaCapturaHorario()
         {
             StringBuilder sb = new StringBuilder();
-            if(txtDescripcion.Text == string.Empty)
+            if (txtDescripcion.Text == string.Empty)
                 sb.Append("Debe especificar un nombre.");
             if (hfLunes.Value == string.Empty && hfMartes.Value == string.Empty && hfMiercoles.Value == string.Empty && hfJueves.Value == string.Empty && hfViernes.Value == string.Empty && hfSabado.Value == string.Empty && hfDomingo.Value == string.Empty)
             {
                 sb.Append("Seleccione un rango de horas.");
             }
-            if(sb.ToString() != string.Empty)
-                throw new Exception(sb.ToString());
-        }
-
-        private void ValidDatosHorario()
-        {
-            StringBuilder sb = new StringBuilder();
-            if (txtDescripcion.Text.Trim() == string.Empty)
-                sb.AppendLine("Ingrese una descripción.");
-            if (rptHorarios.Items.Count <= 0)
-                sb.AppendLine("Ingrese al menos un horario.");
-
             if (sb.ToString() != string.Empty)
-            {
-                //sb.Insert(0, "<h3>Agregar Horario</h3>");
                 throw new Exception(sb.ToString());
-            }
         }
 
-        protected void btnAgregar_OnClick(object sender, EventArgs e)
+        protected void btnAceptar_OnClick(object sender, EventArgs e)
         {
             try
             {
@@ -171,7 +210,8 @@ namespace KiiniHelp.UserControls.Altas
                 Horario nuevoHorario = new Horario
                 {
                     Descripcion = txtDescripcion.Text,
-                    HorarioDetalle = new List<HorarioDetalle>()
+                    HorarioDetalle = new List<HorarioDetalle>(),
+                    IdUsuarioAlta = ((Usuario)Session["UserData"]).Id,
                 };
                 if (diasLun.Any())
                 {
@@ -181,7 +221,7 @@ namespace KiiniHelp.UserControls.Altas
                         {
                             Dia = 1,
                             HoraInicio = TimeSpan.FromHours(i).ToString(),
-                            HoraFin = TimeSpan.FromHours(i + 1).ToString()
+                            HoraFin = i == 23 ? "00:00:00" : TimeSpan.FromHours(i + 1).ToString()
                         };
                         nuevoHorario.HorarioDetalle.Add(detalle);
                     }
@@ -194,7 +234,7 @@ namespace KiiniHelp.UserControls.Altas
                         {
                             Dia = 2,
                             HoraInicio = TimeSpan.FromHours(i).ToString(),
-                            HoraFin = TimeSpan.FromHours(i + 1).ToString()
+                            HoraFin = i == 23 ? "00:00:00" : TimeSpan.FromHours(i + 1).ToString()
                         };
                         nuevoHorario.HorarioDetalle.Add(detalle);
                     }
@@ -207,7 +247,7 @@ namespace KiiniHelp.UserControls.Altas
                         {
                             Dia = 3,
                             HoraInicio = TimeSpan.FromHours(i).ToString(),
-                            HoraFin = TimeSpan.FromHours(i + 1).ToString()
+                            HoraFin = i == 23 ? "00:00:00" : TimeSpan.FromHours(i + 1).ToString()
                         };
                         nuevoHorario.HorarioDetalle.Add(detalle);
                     }
@@ -220,7 +260,7 @@ namespace KiiniHelp.UserControls.Altas
                         {
                             Dia = 4,
                             HoraInicio = TimeSpan.FromHours(i).ToString(),
-                            HoraFin = TimeSpan.FromHours(i + 1).ToString()
+                            HoraFin = i == 23 ? "00:00:00" : TimeSpan.FromHours(i + 1).ToString()
                         };
                         nuevoHorario.HorarioDetalle.Add(detalle);
                     }
@@ -233,7 +273,7 @@ namespace KiiniHelp.UserControls.Altas
                         {
                             Dia = 5,
                             HoraInicio = TimeSpan.FromHours(i).ToString(),
-                            HoraFin = TimeSpan.FromHours(i + 1).ToString()
+                            HoraFin = i == 23 ? "00:00:00" : TimeSpan.FromHours(i + 1).ToString()
                         };
                         nuevoHorario.HorarioDetalle.Add(detalle);
                     }
@@ -246,7 +286,7 @@ namespace KiiniHelp.UserControls.Altas
                         {
                             Dia = 6,
                             HoraInicio = TimeSpan.FromHours(i).ToString(),
-                            HoraFin = TimeSpan.FromHours(i + 1).ToString()
+                            HoraFin = i == 23 ? "00:00:00" : TimeSpan.FromHours(i + 1).ToString()
                         };
                         nuevoHorario.HorarioDetalle.Add(detalle);
                     }
@@ -259,80 +299,21 @@ namespace KiiniHelp.UserControls.Altas
                         {
                             Dia = 0,
                             HoraInicio = TimeSpan.FromHours(i).ToString(),
-                            HoraFin = TimeSpan.FromHours(i + 1).ToString()
+                            HoraFin = i == 23 ? "00:00:00" : TimeSpan.FromHours(i + 1).ToString()
                         };
                         nuevoHorario.HorarioDetalle.Add(detalle);
                     }
                 }
-                _servicioHorario.CrearHorario(nuevoHorario);
+                if (EsAlta)
+                    _servicioHorario.CrearHorario(nuevoHorario);
+                else
+                {
+                    nuevoHorario.IdUsuarioModifico = ((Usuario)Session["UserData"]).Id;
+                }
                 LimpiarPantalla();
                 if (OnAceptarModal != null)
                     OnAceptarModal();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptHorario", "SetTable();", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnEliminar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                List<HorarioDetalle> lst = (List<HorarioDetalle>)Session["NuevoHorario"];
-                lst.Remove(lst.Single(s => s.HoraInicio == ((Button)sender).CommandName && s.Dia == int.Parse(((Button)sender).CommandArgument)));
-                MuestraHorarios(lst);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnAceptar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                ValidDatosHorario();
-                Horario horario = new Horario
-                {
-                    Descripcion = txtDescripcion.Text.Trim(),
-                    Habilitado = true,
-                    HorarioDetalle = (List<HorarioDetalle>)Session["NuevoHorario"]
-                };
-                _servicioHorario.CrearHorario(horario);
-                
-                
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnLimpiar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                LimpiarPantalla();
-                if (OnLimpiarModal != null)
-                    OnLimpiarModal();
             }
             catch (Exception ex)
             {

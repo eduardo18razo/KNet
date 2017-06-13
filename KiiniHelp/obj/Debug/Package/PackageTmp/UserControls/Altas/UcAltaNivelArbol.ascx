@@ -2,12 +2,14 @@
 
 
 <%@ Register Src="~/UserControls/Altas/UcAltaSla.ascx" TagPrefix="uc" TagName="UcSla" %>
-<%@ Register Src="~/UserControls/Altas/AltaMascaraAcceso.ascx" TagPrefix="uc" TagName="UcAltaMascaraAcceso" %>
-<%@ Register Src="~/UserControls/Altas/AltaEncuesta.ascx" TagPrefix="uc" TagName="UcEncuesta" %>
 <%@ Register Src="~/UserControls/Seleccion/AsociarGrupoUsuario.ascx" TagPrefix="uc" TagName="AsociarGrupoUsuario" %>
 <%@ Register Src="~/UserControls/Altas/AltaTiempoEstimado.ascx" TagPrefix="uc" TagName="AltaTiempoEstimado" %>
 <%@ Register Src="~/UserControls/Seleccion/UcImpactoUrgencia.ascx" TagPrefix="uc" TagName="UcImpactoUrgencia" %>
 <%@ Register Src="~/UserControls/Altas/UcAltaInformacionConsulta.ascx" TagPrefix="uc" TagName="UcAltaInformacionConsulta" %>
+<%@ Register Src="~/UserControls/Altas/Formularios/UcAltaFormulario.ascx" TagPrefix="uc" TagName="UcAltaFormulario" %>
+<%@ Register Src="~/UserControls/Altas/Encuestas/UcAltaEncuesta.ascx" TagPrefix="uc" TagName="UcAltaEncuesta" %>
+
+
 
 
 
@@ -399,7 +401,7 @@
             <div class="modal-dialog modal-lg" style="width: 1300px; height: 500px">
                 <div class="modal-content" style="height: 100%">
                     <div class="modal-body">
-                        <uc:ucaltamascaraacceso runat="server" id="UcAltaMascaraAcceso" />
+                        <uc:UcAltaFormulario runat="server" id="ucAltaFormulario" />
                     </div>
                 </div>
             </div>
@@ -413,7 +415,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <uc:ucencuesta runat="server" id="UcEncuesta" />
+                        <uc:UcAltaEncuesta runat="server" id="ucAltaEncuesta" />
                     </div>
                 </div>
             </div>

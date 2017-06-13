@@ -2,23 +2,42 @@
 
 <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="upEncuestas">
     <ContentTemplate>
+        <br />
+        <br />
+        <section class="module">
 
+            <asp:HiddenField runat="server" ID="hfIdEncuesta" />
+            <asp:HiddenField runat="server" ID="hfIdTicket" />
+            <asp:HiddenField runat="server" ID="hfIdTipoServicio" />
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="module-inner">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lbltitulo"></asp:Label>
+                        </div>
+                        <hr />
 
-        <asp:HiddenField runat="server" ID="hfIdEncuesta" />
-        <asp:HiddenField runat="server" ID="hfIdTicket" />
-        <asp:HiddenField runat="server" ID="hfIdTipoServicio" />
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <asp:Label runat="server" ID="lblDescripcionMascara"></asp:Label>
-            </div>
-            <div class="panel-body">
-                <div runat="server" id="divControles">
+                        <div class="form-group">
+                            <asp:Label runat="server" ID="lblDescripcionCliente"></asp:Label>
+                        </div>
+                        <div class="form-group">
+                            <div runat="server" id="divControles">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="panel-footer" style="text-align: center">
-                <asp:Button runat="server" Text="Enviar" ID="btnAceptar" CssClass="btn btn-success" OnClick="btnAceptar_OnClick" />
-                <%--<asp:Button runat="server" Text="Enviar" ID="btnCancelar" CssClass="btn btn-danger" OnClick="btnCancelar_OnClick"/>--%>
-            </div>
+
+
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="module-inner text-right">
+                            <asp:Button runat="server" Text="Cancelar" ID="btnCancelar" CssClass="btn btn-default" />
+                            <asp:Button runat="server" Text="Aceptar" ID="btnAceptar" CssClass="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+        </section>
     </ContentTemplate>
     <Triggers>
         <asp:AsyncPostBackTrigger ControlID="btnAceptar" EventName="click" />

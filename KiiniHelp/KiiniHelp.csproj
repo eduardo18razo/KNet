@@ -45,6 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\..\Downloads\EPPlus 4.1\DotNet4\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="MSCaptcha, Version=1.0.2832.11804, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Downloads\MSCaptcha.dll</HintPath>
@@ -69,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Agente\FrmTickets.aspx" />
     <Content Include="assets\carouselImage\slide-1.jpg" />
     <Content Include="assets\carouselImage\slide-2.jpg" />
     <Content Include="assets\carouselImage\slide-3.jpg" />
@@ -100,9 +104,11 @@
     <Content Include="assets\images\controls\switch.png" />
     <Content Include="assets\images\controls\textomultilinea.png" />
     <Content Include="assets\images\controls\textosimple.png" />
+    <Content Include="assets\images\icons\ojo.png" />
     <Content Include="assets\images\icons\prioridadalta.png" />
     <Content Include="assets\images\icons\prioridadbaja.png" />
     <Content Include="assets\images\icons\prioridadmedia.png" />
+    <Content Include="assets\images\icons\vip.png" />
     <Content Include="assets\images\logo-icon.svg" />
     <Content Include="assets\images\profiles\profile-1.png" />
     <Content Include="assets\images\profiles\profile-square-1.png" />
@@ -218,6 +224,7 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Cat.Usuario.DiaFeriado.datasource" />
     <Content Include="assets\tmp\editor\ui\sass\trumbowyg.scss" />
     <Content Include="assets\tmp\editor\plugins\colors\ui\sass\trumbowyg.colors.scss" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperTicketDetalle.datasource" />
     <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso14.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -338,9 +345,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Publico\Consultas\FrmConsultaTicket.aspx" />
-    <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos15.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos16.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -421,6 +425,9 @@
     <Content Include="UserControls\Altas\ArbolesAcceso\UcAltaAbrolAcceso.ascx" />
     <Content Include="UserControls\Altas\ArbolesAcceso\UcAltaConsulta.ascx" />
     <Content Include="UserControls\Altas\ArbolesAcceso\UcAltaServicio.ascx" />
+    <Content Include="UserControls\Altas\Catalogo\UcAltaCatalogos.ascx" />
+    <Content Include="UserControls\Altas\Encuestas\UcPreviewEncuesta.ascx" />
+    <Content Include="UserControls\Altas\Formularios\UcFormulario.ascx" />
     <Content Include="UserControls\Altas\Organizaciones\UcAltaOrganizaciones.ascx" />
     <Content Include="UserControls\Altas\Ubicaciones\UcAltaUbicaciones.ascx" />
     <Content Include="UserControls\Altas\UcAltaArbolAcceso.ascx" />
@@ -435,12 +442,15 @@
     <Content Include="UserControls\Consultas\UcConsultaCatalogos.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaAreas.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaCatalogo.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaDiasFestivos.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaHorario.ascx" />
+    <Content Include="UserControls\Consultas\UcConsultaMisTickets.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaNotasOpcion.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaNotasUsuario.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaPuestos.ascx" />
     <Content Include="UserControls\Consultas\UcConsultaUbicacionesFisico.ascx" />
     <Content Include="UserControls\Detalles\UcMensajeValidacion.ascx" />
+    <Content Include="UserControls\Detalles\UcTicketDetalle.ascx" />
     <Content Include="UserControls\Filtros\Componentes\UcFiltroCanalApertura.ascx" />
     <Content Include="UserControls\Filtros\Graficos\UcFiltrosEficienciaTickets.ascx" />
     <Content Include="UserControls\Filtros\Graficos\UcFiltrosParametrosGraficoEficienciaTickets.ascx" />
@@ -460,6 +470,8 @@
     <Content Include="Users\Administracion\Area\GetImageDatafromDB.aspx" />
     <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogo.aspx" />
     <Content Include="Users\Administracion\Catalogos\FrmConsultaCatalogos.aspx" />
+    <Content Include="Users\Administracion\Encuestas\FrmPreview.aspx" />
+    <Content Include="Users\Administracion\Feriados\FrmConsultaFeriados.aspx" />
     <Content Include="Users\Administracion\Formularios\FrmEdicionFormulario.aspx" />
     <Content Include="UserControls\Altas\Formularios\UcPreviewFormulario.ascx" />
     <Content Include="Users\Administracion\Formularios\FrmPreviewFormulario.aspx" />
@@ -472,6 +484,7 @@
     <Content Include="Users\Administracion\Usuarios\FrmEdicionUsuario.aspx" />
     <Content Include="Users\Consultas\FrmConsulta.aspx" />
     <Content Include="FrmCloseWindow.aspx" />
+    <Content Include="Users\General\FrmMisTickets.aspx" />
     <Content Include="Users\Graficos\FrmGeoChart.aspx" />
     <Content Include="Users\Graficos\FrmGraficaEficienciaTickets.aspx" />
     <Content Include="Users\Graficos\FrmGraficaEncuestaNombre.aspx" />
@@ -2063,7 +2076,7 @@
     <Content Include="Users\Ticket\FrmTicket.aspx" />
     <Content Include="UserControls\Altas\AltaArea.ascx" />
     <Content Include="UserControls\Altas\AltaGrupoUsuario.ascx" />
-    <Content Include="UserControls\Altas\AltaEncuesta.ascx" />
+    <Content Include="UserControls\Altas\Encuestas\UcAltaEncuesta.ascx" />
     <Content Include="UserControls\Altas\AltaOrganizacion.ascx" />
     <Content Include="UserControls\Altas\AltaTiempoEstimado.ascx" />
     <Content Include="UserControls\Altas\UcAltaSla.ascx" />
@@ -2351,6 +2364,7 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Users\Ticket\Web.config" />
+    <Content Include="Agente.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2359,6 +2373,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agente\FrmTickets.aspx.cs">
+      <DependentUpon>FrmTickets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agente\FrmTickets.aspx.designer.cs">
+      <DependentUpon>FrmTickets.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ConfirmacionCuenta.aspx.cs">
       <DependentUpon>ConfirmacionCuenta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2520,6 +2541,27 @@
     <Compile Include="UserControls\Altas\ArbolesAcceso\UcAltaServicio.ascx.designer.cs">
       <DependentUpon>UcAltaServicio.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Altas\Catalogo\UcAltaCatalogos.ascx.cs">
+      <DependentUpon>UcAltaCatalogos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\Catalogo\UcAltaCatalogos.ascx.designer.cs">
+      <DependentUpon>UcAltaCatalogos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\Encuestas\UcPreviewEncuesta.ascx.cs">
+      <DependentUpon>UcPreviewEncuesta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\Encuestas\UcPreviewEncuesta.ascx.designer.cs">
+      <DependentUpon>UcPreviewEncuesta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\Formularios\UcFormulario.ascx.cs">
+      <DependentUpon>UcFormulario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\Formularios\UcFormulario.ascx.designer.cs">
+      <DependentUpon>UcFormulario.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Altas\Organizaciones\UcAltaOrganizaciones.ascx.cs">
       <DependentUpon>UcAltaOrganizaciones.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2618,12 +2660,26 @@
     <Compile Include="UserControls\Consultas\UcConsultaCatalogo.ascx.designer.cs">
       <DependentUpon>UcConsultaCatalogo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaDiasFestivos.ascx.cs">
+      <DependentUpon>UcConsultaDiasFestivos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaDiasFestivos.ascx.designer.cs">
+      <DependentUpon>UcConsultaDiasFestivos.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaHorario.ascx.cs">
       <DependentUpon>UcConsultaHorario.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaHorario.ascx.designer.cs">
       <DependentUpon>UcConsultaHorario.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaMisTickets.ascx.cs">
+      <DependentUpon>UcConsultaMisTickets.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Consultas\UcConsultaMisTickets.ascx.designer.cs">
+      <DependentUpon>UcConsultaMisTickets.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Consultas\UcConsultaNotasOpcion.ascx.cs">
       <DependentUpon>UcConsultaNotasOpcion.ascx</DependentUpon>
@@ -2659,6 +2715,13 @@
     </Compile>
     <Compile Include="UserControls\Detalles\UcMensajeValidacion.ascx.designer.cs">
       <DependentUpon>UcMensajeValidacion.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Detalles\UcTicketDetalle.ascx.cs">
+      <DependentUpon>UcTicketDetalle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Detalles\UcTicketDetalle.ascx.designer.cs">
+      <DependentUpon>UcTicketDetalle.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Filtros\Componentes\UcFiltroCanalApertura.ascx.cs">
       <DependentUpon>UcFiltroCanalApertura.ascx</DependentUpon>
@@ -2793,6 +2856,20 @@
     <Compile Include="Users\Administracion\Catalogos\FrmConsultaCatalogos.aspx.designer.cs">
       <DependentUpon>FrmConsultaCatalogos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Users\Administracion\Encuestas\FrmPreview.aspx.cs">
+      <DependentUpon>FrmPreview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Encuestas\FrmPreview.aspx.designer.cs">
+      <DependentUpon>FrmPreview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Administracion\Feriados\FrmConsultaFeriados.aspx.cs">
+      <DependentUpon>FrmConsultaFeriados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Administracion\Feriados\FrmConsultaFeriados.aspx.designer.cs">
+      <DependentUpon>FrmConsultaFeriados.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Users\Administracion\Formularios\FrmEdicionFormulario.aspx.cs">
       <DependentUpon>FrmEdicionFormulario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2876,6 +2953,13 @@
     </Compile>
     <Compile Include="FrmCloseWindow.aspx.designer.cs">
       <DependentUpon>FrmCloseWindow.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\General\FrmMisTickets.aspx.cs">
+      <DependentUpon>FrmMisTickets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\General\FrmMisTickets.aspx.designer.cs">
+      <DependentUpon>FrmMisTickets.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users\Graficos\FrmGeoChart.aspx.cs">
       <DependentUpon>FrmGeoChart.aspx</DependentUpon>
@@ -3643,6 +3727,13 @@
     <Compile Include="UserControls\Operacion\UcCambiarEstatusTicket.ascx.designer.cs">
       <DependentUpon>UcCambiarEstatusTicket.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Agente.Master.cs">
+      <DependentUpon>Agente.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agente.Master.designer.cs">
+      <DependentUpon>Agente.Master</DependentUpon>
+    </Compile>
     <Compile Include="Usuarios.Master.cs">
       <DependentUpon>Usuarios.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3657,12 +3748,12 @@
     <Compile Include="UserControls\Altas\AltaGrupoUsuario.ascx.designer.cs">
       <DependentUpon>AltaGrupoUsuario.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Altas\AltaEncuesta.ascx.cs">
-      <DependentUpon>AltaEncuesta.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\Encuestas\UcAltaEncuesta.ascx.cs">
+      <DependentUpon>UcAltaEncuesta.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Altas\AltaEncuesta.ascx.designer.cs">
-      <DependentUpon>AltaEncuesta.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\Encuestas\UcAltaEncuesta.ascx.designer.cs">
+      <DependentUpon>UcAltaEncuesta.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Genericos\UcCatalogos.ascx.cs">
       <DependentUpon>UcCatalogos.ascx</DependentUpon>

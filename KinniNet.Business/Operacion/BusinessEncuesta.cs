@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Usuario;
@@ -182,11 +183,41 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
+                encuesta.Titulo = encuesta.Titulo.ToUpper();
+                encuesta.TituloCliente = encuesta.TituloCliente.ToUpper();
                 encuesta.Descripcion = encuesta.Descripcion.ToUpper();
+                encuesta.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 //TODO: Cambiar habilitado por el embebido
                 encuesta.Habilitado = true;
                 if (encuesta.Id == 0)
                     db.Encuesta.AddObject(encuesta);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public void ActualizarEncuesta(Encuesta encuesta)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
+                Encuesta encuestaActualizar = db.Encuesta.SingleOrDefault(s => s.Id == encuesta.Id);
+                if (encuestaActualizar != null)
+                {
+                    encuestaActualizar.Titulo = encuesta.Titulo.Trim().ToUpper();
+                    encuestaActualizar.TituloCliente = encuesta.TituloCliente.Trim().ToUpper();
+                    encuestaActualizar.Descripcion = encuesta.Descripcion.Trim().ToUpper();
+                    encuestaActualizar.IdUsuarioModifico = encuesta.IdUsuarioModifico;
+                    encuestaActualizar.FechaModificacion= DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)

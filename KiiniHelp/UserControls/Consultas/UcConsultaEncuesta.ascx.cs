@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceEncuesta;
-using KiiniHelp.ServiceMascaraAcceso;
-using KiiniHelp.UserControls.Altas;
+using KiiniNet.Entities.Cat.Usuario;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Consultas
 {
@@ -19,21 +19,24 @@ namespace KiiniHelp.UserControls.Consultas
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
-        private void LlenaMascaras()
+        private void LlenaEncuestas()
         {
             try
             {
-                string descripcion = txtDescripcion.Text.Trim();
+                string descripcion = txtFiltro.Text.Trim();
 
                 rptResultados.DataSource = _servicioEncuestas.Consulta(descripcion);
                 rptResultados.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
             }
             catch (Exception e)
             {
@@ -48,7 +51,7 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
-                    LlenaMascaras();
+                    
                 }
                 ucAltaEncuesta.OnAceptarModal += AltaEncuestaOnAceptarModal;
                 ucAltaEncuesta.OnCancelarModal += AltaEncuestaOnCancelarModal;
@@ -68,6 +71,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                LlenaEncuestas();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaEncuesta\");", true);
             }
             catch (Exception ex)
@@ -85,7 +89,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                LlenaMascaras();
+                LlenaEncuestas();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaEncuesta\");", true);
             }
             catch (Exception ex)
@@ -99,65 +103,12 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        protected void btnBaja_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioEncuestas.HabilitarEncuesta(Convert.ToInt32(hfId.Value), false);
-                LlenaMascaras();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnAlta_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioEncuestas.HabilitarEncuesta(Convert.ToInt32(hfId.Value), true);
-                LlenaMascaras();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnEditar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                //AltaInformacionConsulta.GrupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(Convert.ToInt32(hfId.Value));
-                //ucAltaGrupoUsuario.Alta = false;
-                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaGrupoUsuarios\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
 
         protected void btnNew_OnClick(object sender, EventArgs e)
         {
             try
             {
+                ucAltaEncuesta.Alta = true;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaEncuesta\");", true);
             }
             catch (Exception ex)
@@ -175,7 +126,100 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                LlenaMascaras();
+                LlenaEncuestas();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnEditar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ucAltaEncuesta.IdEncuesta = int.Parse(((LinkButton)sender).CommandArgument);
+                ucAltaEncuesta.Alta = false;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaEncuesta\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnClonar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ucAltaEncuesta.IdEncuesta = int.Parse(((LinkButton)sender).CommandArgument);
+                ucAltaEncuesta.Alta = true;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaEncuesta\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _servicioEncuestas.HabilitarEncuesta(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+                LlenaEncuestas();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnDownload_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                string filtro = txtFiltro.Text.Trim().ToUpper();
+                List<Encuesta> lstEncuestas = _servicioEncuestas.Consulta(filtro);
+                if (filtro != string.Empty)
+                    lstEncuestas = lstEncuestas.Where(w => w.Descripcion.Contains(filtro)).ToList();
+
+                Response.Clear();
+                MemoryStream ms = new MemoryStream(BusinessFile.ExcelManager.ListToExcel(lstEncuestas.Select(
+                                s => new
+                                {
+                                    Titulo = s.Descripcion,
+                                    Tipo = s.TipoEncuesta.Descripcion,
+                                    Creación = s.FechaAlta.ToShortDateString().ToString(),
+                                    ultimaEdicion = s.FechaModificacion == null ? "" : s.FechaModificacion.Value.ToShortDateString().ToString(),
+                                    Habilitado = s.Habilitado ? "Si" : "No"
+                                })
+                                .ToList()).GetAsByteArray());
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;  filename=Encuestas.xlsx");
+                Response.Buffer = true;
+                ms.WriteTo(Response.OutputStream);
+                Response.End();
             }
             catch (Exception ex)
             {

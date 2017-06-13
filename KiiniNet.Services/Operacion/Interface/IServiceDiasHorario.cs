@@ -11,16 +11,22 @@ namespace KiiniNet.Services.Operacion.Interface
         [OperationContract]
         List<Horario> ObtenerHorarioDefault(bool insertarSeleccion);
         [OperationContract]
-        List<Horario> ObtenerHorarioConsulta(int? idGrupoSolicito);
-
+        List<Horario> ObtenerHorarioConsulta(string filtro);
         [OperationContract]
         void CrearHorario(Horario horario);
+        [OperationContract]
+        void Actualizar(Horario horario);
+        [OperationContract]
+        Horario ObtenerHorarioById(int idHorario);
 
         [OperationContract]
         void Habilitar(int idHorario, bool habilitado);
         #endregion Horarios
 
         #region Dias Feriados
+
+        [OperationContract]
+        List<DiasFeriados> ObtenerDiasFeriadosConsulta(string filtro);
         [OperationContract]
         List<DiaFestivoDefault> ObtenerDiasDefault(bool insertarSeleccion);
 

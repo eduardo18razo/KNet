@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using KiiniNet.Entities.Cat.Usuario;
 using KinniNet.Business.Utils;
@@ -47,7 +48,7 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public List<Horario> ObtenerHorarioConsulta(int? idGrupoSolicito)
+        public List<Horario> ObtenerHorarioConsulta(string filtro)
         {
             List<Horario> result;
             DataBaseModelContext db = new DataBaseModelContext();
@@ -55,7 +56,7 @@ namespace KinniNet.Core.Operacion
             {
 
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.Horario.ToList();
+                result = db.Horario.Where(w => w.Descripcion.Contains(filtro)).ToList();
             }
             catch (Exception ex)
             {
@@ -74,6 +75,8 @@ namespace KinniNet.Core.Operacion
             try
             {
                 horario.Descripcion = horario.Descripcion.ToUpper();
+                horario.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                horario.Habilitado = true;
                 if (db.Horario.Any(a => a.Descripcion == horario.Descripcion))
                     throw new Exception("Ya existe un horario con esta descripción");
                 db.Horario.AddObject(horario);
@@ -87,6 +90,50 @@ namespace KinniNet.Core.Operacion
             {
                 db.Dispose();
             }
+        }
+
+        public void Actualizar(Horario horario)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                horario.Descripcion = horario.Descripcion.ToUpper();
+                horario.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                if (db.Horario.Any(a => a.Descripcion == horario.Descripcion))
+                    throw new Exception("Ya existe un horario con esta descripción");
+                db.Horario.AddObject(horario);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public Horario ObtenerHorarioById(int idHorario)
+        {
+            Horario result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.Horario.SingleOrDefault(s => s.Id == idHorario);
+                if (result != null)
+                    db.LoadProperty(result, "HorarioDetalle");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
         }
 
         public void Habilitar(int idHorario, bool habilitado)
@@ -110,6 +157,54 @@ namespace KinniNet.Core.Operacion
         #endregion Horarios
 
         #region Dias Feriados
+
+        public List<DiasFeriados> ObtenerDiasFeriadosConsulta(string filtro)
+        {
+            List<DiasFeriados> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.DiasFeriados.Where(w => w.Descripcion.Contains(filtro)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+        public List<DiaFeriado> ObtenerDiasFeriados(bool insertarSeleccion)
+        {
+            List<DiaFeriado> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.DiaFeriado.Where(w => w.Habilitado).OrderBy(o => o.Descripcion).ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
+                        new DiaFeriado
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
         public List<DiaFestivoDefault> ObtenerDiasDefault(bool insertarSeleccion)
         {
             List<DiaFestivoDefault> result;
@@ -178,21 +273,23 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public List<DiaFeriado> ObtenerDiasFeriados(bool insertarSeleccion)
+        public void ActualizarDiasFestivos(DiasFeriados item)
         {
-            List<DiaFeriado> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.DiaFeriado.Where(w => w.Habilitado).OrderBy(o => o.Fecha).ToList();
-                if (insertarSeleccion)
-                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
-                        new DiaFeriado
-                        {
-                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
-                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
-                        });
+                DiasFeriados diadb = db.DiasFeriados.SingleOrDefault(s => s.Id == item.Id);
+                if (diadb != null)
+                {
+                    diadb.Descripcion = item.Descripcion;
+                    diadb.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                    foreach (DiasFeriadosDetalle detalle in diadb.DiasFeriadosDetalle)
+                    {
+                        db.DiasFeriadosDetalle.DeleteObject(detalle);
+                    }
+                    diadb.DiasFeriadosDetalle = item.DiasFeriadosDetalle;
+                    db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
@@ -202,9 +299,7 @@ namespace KinniNet.Core.Operacion
             {
                 db.Dispose();
             }
-            return result;
         }
-
         public void CrearDiasFestivos(DiasFeriados item)
         {
             DataBaseModelContext db = new DataBaseModelContext();

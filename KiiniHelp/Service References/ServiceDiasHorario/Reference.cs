@@ -19,13 +19,22 @@ namespace KiiniHelp.ServiceDiasHorario {
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Horario> ObtenerHorarioDefault(bool insertarSeleccion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ObtenerHorarioConsulta", ReplyAction="http://tempuri.org/IServiceDiasHorario/ObtenerHorarioConsultaResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Horario> ObtenerHorarioConsulta(System.Nullable<int> idGrupoSolicito);
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Horario> ObtenerHorarioConsulta(string filtro);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/CrearHorario", ReplyAction="http://tempuri.org/IServiceDiasHorario/CrearHorarioResponse")]
         void CrearHorario(KiiniNet.Entities.Cat.Usuario.Horario horario);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/Actualizar", ReplyAction="http://tempuri.org/IServiceDiasHorario/ActualizarResponse")]
+        void Actualizar(KiiniNet.Entities.Cat.Usuario.Horario horario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ObtenerHorarioById", ReplyAction="http://tempuri.org/IServiceDiasHorario/ObtenerHorarioByIdResponse")]
+        KiiniNet.Entities.Cat.Usuario.Horario ObtenerHorarioById(int idHorario);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/Habilitar", ReplyAction="http://tempuri.org/IServiceDiasHorario/HabilitarResponse")]
         void Habilitar(int idHorario, bool habilitado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriadosConsulta", ReplyAction="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriadosConsultaResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiasFeriados> ObtenerDiasFeriadosConsulta(string filtro);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiasDefault", ReplyAction="http://tempuri.org/IServiceDiasHorario/ObtenerDiasDefaultResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFestivoDefault> ObtenerDiasDefault(bool insertarSeleccion);
@@ -80,16 +89,28 @@ namespace KiiniHelp.ServiceDiasHorario {
             return base.Channel.ObtenerHorarioDefault(insertarSeleccion);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Horario> ObtenerHorarioConsulta(System.Nullable<int> idGrupoSolicito) {
-            return base.Channel.ObtenerHorarioConsulta(idGrupoSolicito);
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Horario> ObtenerHorarioConsulta(string filtro) {
+            return base.Channel.ObtenerHorarioConsulta(filtro);
         }
         
         public void CrearHorario(KiiniNet.Entities.Cat.Usuario.Horario horario) {
             base.Channel.CrearHorario(horario);
         }
         
+        public void Actualizar(KiiniNet.Entities.Cat.Usuario.Horario horario) {
+            base.Channel.Actualizar(horario);
+        }
+        
+        public KiiniNet.Entities.Cat.Usuario.Horario ObtenerHorarioById(int idHorario) {
+            return base.Channel.ObtenerHorarioById(idHorario);
+        }
+        
         public void Habilitar(int idHorario, bool habilitado) {
             base.Channel.Habilitar(idHorario, habilitado);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiasFeriados> ObtenerDiasFeriadosConsulta(string filtro) {
+            return base.Channel.ObtenerDiasFeriadosConsulta(filtro);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFestivoDefault> ObtenerDiasDefault(bool insertarSeleccion) {

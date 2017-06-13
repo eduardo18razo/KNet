@@ -160,6 +160,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                LlenaGrupos();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaGrupoUsuarios\");", true);
             }
             catch (Exception ex)

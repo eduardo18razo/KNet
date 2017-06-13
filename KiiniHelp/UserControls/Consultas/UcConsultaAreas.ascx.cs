@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceArea;
 using KiiniNet.Entities.Operacion;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Consultas
 {
@@ -157,6 +159,44 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 _servicioAreas.Habilitar(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
                 LlenaAreasConsulta();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnDownload_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                string filtro = txtFiltro.Text.Trim().ToUpper();
+                List<Area> lstAreas = _servicioAreas.ObtenerAreaConsulta(txtFiltro.Text.Trim());
+                if (filtro != string.Empty)
+                    lstAreas = lstAreas.Where(w => w.Descripcion.Contains(filtro)).ToList();
+
+                Response.Clear();
+                string ultimaEdicion = "Últ. edición";
+                MemoryStream ms =
+                    new MemoryStream(BusinessFile.ExcelManager.ListToExcel(lstAreas.Select(
+                                s => new
+                                {
+                                    Nombre = s.Descripcion,
+                                    Creación = s.FechaAlta.ToShortDateString().ToString(),
+                                    ultimaEdicion = s.FechaModificacion == null ? "" : s.FechaModificacion.Value.ToShortDateString().ToString(),
+                                    Habilitado = s.Habilitado ? "Si" : "No"
+                                })
+                                .ToList()).GetAsByteArray());
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;  filename=Catalgos.xlsx");
+                Response.Buffer = true;
+                ms.WriteTo(Response.OutputStream);
+                Response.End();
             }
             catch (Exception ex)
             {

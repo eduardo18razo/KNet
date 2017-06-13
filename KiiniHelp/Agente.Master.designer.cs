@@ -7,171 +7,171 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace KiiniHelp.UserControls.Altas {
+namespace KiiniHelp {
     
     
-    public partial class AltaEncuesta {
+    public partial class AgenteMaster {
         
         /// <summary>
-        /// Control upEncuesta.
+        /// Control head.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upEncuesta;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
-        /// Control panelAlerta.
+        /// Control form1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlerta;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Control rptErrorGrupoUsuario.
+        /// Control scripMain.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptErrorGrupoUsuario;
+        protected global::System.Web.UI.ScriptManager scripMain;
         
         /// <summary>
-        /// Control dfIdGrupo.
+        /// Control updateProgress.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField dfIdGrupo;
+        protected global::System.Web.UI.UpdateProgress updateProgress;
         
         /// <summary>
-        /// Control dfModalPadre.
+        /// Control hfAreaSeleccionada.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField dfModalPadre;
+        protected global::System.Web.UI.WebControls.HiddenField hfAreaSeleccionada;
         
         /// <summary>
-        /// Control ddlTipoEncuesta.
+        /// Control lblBranding.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoEncuesta;
+        protected global::System.Web.UI.WebControls.Label lblBranding;
         
         /// <summary>
-        /// Control txtDescripcionEncuesta.
+        /// Control lblBadgeRoles.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcionEncuesta;
+        protected global::System.Web.UI.WebControls.Label lblBadgeRoles;
         
         /// <summary>
-        /// Control chkPonderacion.
+        /// Control btnMiPerfil.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkPonderacion;
+        protected global::System.Web.UI.WebControls.LinkButton btnMiPerfil;
         
         /// <summary>
-        /// Control txtIdPregunta.
+        /// Control hfCargaInicial.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdPregunta;
+        protected global::System.Web.UI.WebControls.HiddenField hfCargaInicial;
         
         /// <summary>
-        /// Control Label4.
+        /// Control rptMenu.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Repeater rptMenu;
         
         /// <summary>
-        /// Control txtPregunta.
+        /// Control lnkBtnCerrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPregunta;
+        protected global::System.Web.UI.WebControls.LinkButton lnkBtnCerrar;
         
         /// <summary>
-        /// Control Label5.
+        /// Control ContentPlaceHolder1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
         
         /// <summary>
-        /// Control txtPonderacion.
+        /// Control btnCerrarTicket.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPonderacion;
+        protected global::System.Web.UI.WebControls.LinkButton btnCerrarTicket;
         
         /// <summary>
-        /// Control btnAddPregunta.
+        /// Control ucTicketPortal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddPregunta;
+        protected global::KiiniHelp.UserControls.Temporal.UcTicketPortal ucTicketPortal;
         
         /// <summary>
-        /// Control rptPreguntas.
+        /// Control btnCerrarExito.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptPreguntas;
+        protected global::System.Web.UI.WebControls.LinkButton btnCerrarExito;
         
         /// <summary>
-        /// Control btnGuardarEncuesta.
+        /// Control lblNoTicket.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardarEncuesta;
+        protected global::System.Web.UI.WebControls.Label lblNoTicket;
         
         /// <summary>
-        /// Control btnLimpiarEncuesta.
+        /// Control lblRandom.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLimpiarEncuesta;
+        protected global::System.Web.UI.WebControls.Label lblRandom;
         
         /// <summary>
-        /// Control btnCancelar.
+        /// Control rptRolesPanel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        protected global::System.Web.UI.WebControls.Repeater rptRolesPanel;
     }
 }

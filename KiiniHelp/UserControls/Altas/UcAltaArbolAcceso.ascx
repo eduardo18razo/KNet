@@ -2,7 +2,7 @@
 
 
 
-<%@ Register Src="~/UserControls/Altas/AltaEncuesta.ascx" TagPrefix="uc" TagName="UcEncuesta" %>
+
 <%@ Register Src="~/UserControls/Seleccion/AsociarGrupoUsuario.ascx" TagPrefix="uc" TagName="AsociarGrupoUsuario" %>
 <%@ Register Src="~/UserControls/Altas/AltaArea.ascx" TagPrefix="uc" TagName="AltaArea" %>
 <%@ Register Src="~/UserControls/Altas/AltaTiempoEstimado.ascx" TagPrefix="uc" TagName="AltaTiempoEstimado" %>
@@ -10,6 +10,8 @@
 <%@ Register Src="~/UserControls/Altas/UcAltaSla.ascx" TagPrefix="uc" TagName="UcAltaSla" %>
 <%@ Register Src="~/UserControls/Altas/UcAltaInformacionConsulta.ascx" TagPrefix="uc" TagName="UcAltaInformacionConsulta" %>
 <%@ Register Src="~/UserControls/Altas/Formularios/UcAltaFormulario.ascx" TagPrefix="uc" TagName="UcAltaFormulario" %>
+<%@ Register Src="~/UserControls/Altas/Encuestas/UcAltaEncuesta.ascx" TagPrefix="uc" TagName="UcAltaEncuesta" %>
+
 
 
 
@@ -383,7 +385,7 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-body">
-                                <uc:UcEncuesta runat="server" ID="UcEncuesta" />
+                                <uc:UcAltaEncuesta runat="server" id="UcAltaEncuesta" />
                             </div>
                         </div>
                     </div>

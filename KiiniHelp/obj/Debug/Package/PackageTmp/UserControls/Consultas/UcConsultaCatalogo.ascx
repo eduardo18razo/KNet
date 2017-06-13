@@ -103,7 +103,7 @@
                             <div class="panel-heading" role="tab" id="headingFiltros">
                                 <h4 class="panel-title">
                                     <div role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiltros" aria-expanded="true" aria-controls="collapseFiltros" style="cursor: pointer">
-                                        Filtros
+                                        Filtrossss
                                     </div>
                                 </h4>
                             </div>

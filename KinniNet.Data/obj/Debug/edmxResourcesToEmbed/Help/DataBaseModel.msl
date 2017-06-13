@@ -53,17 +53,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Encuesta">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.Encuesta">
-        <MappingFragment StoreEntitySet="Encuesta">
-          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="EsPonderacion" ColumnName="EsPonderacion" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="IdTipoEncuesta" ColumnName="IdTipoEncuesta" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="EncuestaPregunta">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.EncuestaPregunta">
         <MappingFragment StoreEntitySet="EncuestaPregunta">
@@ -858,19 +847,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ParametrosGenerales">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.ParametrosGenerales">
-        <MappingFragment StoreEntitySet="ParametrosGenerales">
-          <ScalarProperty Name="StrongPassword" ColumnName="StrongPassword" />
-          <ScalarProperty Name="MensajeValidacion" ColumnName="MensajeValidacion" />
-          <ScalarProperty Name="ValidaUsuario" ColumnName="ValidaUsuario" />
-          <ScalarProperty Name="LevantaTickets" ColumnName="LevantaTickets" />
-          <ScalarProperty Name="NumeroArchivo" ColumnName="NumeroArchivo" />
-          <ScalarProperty Name="TamanoDeArchivo" ColumnName="TamanoDeArchivo" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UsuarioPassword">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.UsuarioPassword">
         <MappingFragment StoreEntitySet="UsuarioPassword">
@@ -947,18 +923,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Catalogos">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.Catalogos">
-        <MappingFragment StoreEntitySet="Catalogos">
-          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
-          <ScalarProperty Name="EsMascaraCaptura" ColumnName="EsMascaraCaptura" />
-          <ScalarProperty Name="Tabla" ColumnName="Tabla" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="GrupoUsuario">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.GrupoUsuario">
         <MappingFragment StoreEntitySet="GrupoUsuario">
@@ -990,6 +954,7 @@
     <EntitySetMapping Name="EstatusTicket">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.EstatusTicket">
         <MappingFragment StoreEntitySet="EstatusTicket">
+          <ScalarProperty Name="Color" ColumnName="Color" />
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
           <ScalarProperty Name="Orden" ColumnName="Orden" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -1337,15 +1302,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Horario">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.Horario">
-        <MappingFragment StoreEntitySet="Horario">
-          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DiaFestivoSubGrupo">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.DiaFestivoSubGrupo">
         <MappingFragment StoreEntitySet="DiaFestivoSubGrupo">
@@ -1460,6 +1416,67 @@
           <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
           <ScalarProperty Name="IdTipoCampoMascara" ColumnName="IdTipoCampoMascara" />
           <ScalarProperty Name="IdMascara" ColumnName="IdMascara" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ParametrosGenerales">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.ParametrosGenerales">
+        <MappingFragment StoreEntitySet="ParametrosGenerales">
+          <ScalarProperty Name="FormularioPortal" ColumnName="FormularioPortal" />
+          <ScalarProperty Name="StrongPassword" ColumnName="StrongPassword" />
+          <ScalarProperty Name="MensajeValidacion" ColumnName="MensajeValidacion" />
+          <ScalarProperty Name="ValidaUsuario" ColumnName="ValidaUsuario" />
+          <ScalarProperty Name="LevantaTickets" ColumnName="LevantaTickets" />
+          <ScalarProperty Name="NumeroArchivo" ColumnName="NumeroArchivo" />
+          <ScalarProperty Name="TamanoDeArchivo" ColumnName="TamanoDeArchivo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Catalogos">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.Catalogos">
+        <MappingFragment StoreEntitySet="Catalogos">
+          <ScalarProperty Name="DescripcionLarga" ColumnName="DescripcionLarga" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioAlta" ColumnName="IdUsuarioAlta" />
+          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+          <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+          <ScalarProperty Name="EsMascaraCaptura" ColumnName="EsMascaraCaptura" />
+          <ScalarProperty Name="Tabla" ColumnName="Tabla" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Encuesta">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.Encuesta">
+        <MappingFragment StoreEntitySet="Encuesta">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioAlta" ColumnName="IdUsuarioAlta" />
+          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+          <ScalarProperty Name="EsPonderacion" ColumnName="EsPonderacion" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="TituloCliente" ColumnName="TituloCliente" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="IdTipoEncuesta" ColumnName="IdTipoEncuesta" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Horario">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.Horario">
+        <MappingFragment StoreEntitySet="Horario">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdUsuarioModifico" ColumnName="IdUsuarioModifico" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioAlta" ColumnName="IdUsuarioAlta" />
+          <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

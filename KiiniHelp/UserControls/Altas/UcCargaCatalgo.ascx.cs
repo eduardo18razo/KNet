@@ -182,11 +182,11 @@ namespace KiiniHelp.UserControls.Altas
                 ValidaCaptura();
                 if (EsAlta)
                 {
-                    _servicioCatalogo.CrearCatalogoExcel(txtDescripcionCatalogo.Text, true, hfFileName.Value, rbtnHojas.SelectedValue);
+                    //_servicioCatalogo.CrearCatalogoExcel(txtDescripcionCatalogo.Text, true, hfFileName.Value, rbtnHojas.SelectedValue);
                 }
                 else
                 {
-                    _servicioCatalogo.ActualizarCatalogoExcel(IdCatalogo, true, hfFileName.Value, rbtnHojas.SelectedValue);
+                    //_servicioCatalogo.ActualizarCatalogoExcel(IdCatalogo, true, hfFileName.Value, rbtnHojas.SelectedValue);
                 }
                 BusinessFile.LimpiarRepositorioTemporal(new List<string> { hfFileName.Value });
                 LimpiarPantalla();

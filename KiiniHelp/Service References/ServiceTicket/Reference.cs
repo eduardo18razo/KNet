@@ -36,6 +36,9 @@ namespace KiiniHelp.ServiceTicket {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicket", ReplyAction="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketResponse")]
         KiiniNet.Entities.Helper.HelperDetalleTicket ObtenerDetalleTicket(int idTicket);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/ObtenerTicket", ReplyAction="http://tempuri.org/IServiceTicket/ObtenerTicketResponse")]
+        KiiniNet.Entities.Helper.HelperTicketDetalle ObtenerTicket(int idTicket, int idUsuario);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketNoRegistrado", ReplyAction="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketNoRegistradoResponse")]
         KiiniNet.Entities.Helper.HelperDetalleTicket ObtenerDetalleTicketNoRegistrado(int idTicket, string cveRegistro);
         
@@ -96,6 +99,10 @@ namespace KiiniHelp.ServiceTicket {
         
         public KiiniNet.Entities.Helper.HelperDetalleTicket ObtenerDetalleTicket(int idTicket) {
             return base.Channel.ObtenerDetalleTicket(idTicket);
+        }
+        
+        public KiiniNet.Entities.Helper.HelperTicketDetalle ObtenerTicket(int idTicket, int idUsuario) {
+            return base.Channel.ObtenerTicket(idTicket, idUsuario);
         }
         
         public KiiniNet.Entities.Helper.HelperDetalleTicket ObtenerDetalleTicketNoRegistrado(int idTicket, string cveRegistro) {

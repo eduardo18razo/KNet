@@ -14,13 +14,14 @@
                     <div class="col-lg-8 col-md-9">
                         <div class="module-inner">
                             <div class="module-heading">
-                                <h3 class="module-title"><asp:Label runat="server" ID="lblBranding"></asp:Label></h3>
+                                <h3 class="module-title">
+                                    <asp:Label runat="server" ID="lblBranding"></asp:Label></h3>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="module-inner">
-                            <asp:LinkButton runat="server" CssClass="btn btn-success fa fa-plus" Text="Crear Nueva Area" OnClick="btnNew_OnClick"/>
+                            <asp:LinkButton runat="server" CssClass="btn btn-success fa fa-plus" Text="Crear Nueva Area" OnClick="btnNew_OnClick" />
                         </div>
                     </div>
                 </div>
@@ -35,6 +36,13 @@
                                     <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control help_search_form" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" placeholder="Busca con una palabra clave..." />
                                     <asp:LinkButton runat="server" class="btn btn-primary btn-single-icon fa fa-search" OnClick="btnBuscar_OnClick"></asp:LinkButton>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-3">
+                        <div class="module-inner">
+                            <div class="form-group">
+                                <asp:LinkButton runat="server" CssClass="btn btn-primary fa fa-download" Text="  Descargar reporte" ID="btnDownload" OnClick="btnDownload_OnClick" />
                             </div>
                         </div>
                     </div>
@@ -89,6 +97,9 @@
                 </div>
             </section>
         </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="btnDownload" />
+        </Triggers>
     </asp:UpdatePanel>
     <%--MODAL ALTA--%>
     <div class="modal fade" id="modalAltaArea" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="margin-top: 60px">

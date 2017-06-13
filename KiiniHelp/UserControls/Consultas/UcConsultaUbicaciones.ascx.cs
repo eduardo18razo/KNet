@@ -154,6 +154,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                LlenaUbicaciones();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoUbicacion\");", true);
             }
             catch (Exception ex)
@@ -171,6 +172,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                LlenaUbicaciones();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoUbicacion\");", true);
             }
             catch (Exception ex)

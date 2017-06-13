@@ -16,7 +16,10 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
     public interface IServiceCatalogos {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/CrearCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/CrearCatalogoResponse")]
-        void CrearCatalogo(string nombreCatalogo, bool esMascara, System.Collections.Generic.List<string> registros);
+        void CrearCatalogo(KiiniNet.Entities.Cat.Sistema.Catalogos catalogo, bool esMascara, System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> registros);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ActualizarCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/ActualizarCatalogoResponse")]
+        void ActualizarCatalogo(KiiniNet.Entities.Cat.Sistema.Catalogos catalogo, bool esMascara, System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> registros);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ObtenerCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/ObtenerCatalogoResponse")]
         KiiniNet.Entities.Cat.Sistema.Catalogos ObtenerCatalogo(int idCatalogo);
@@ -43,10 +46,10 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
         System.Data.DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/CrearCatalogoExcel", ReplyAction="http://tempuri.org/IServiceCatalogos/CrearCatalogoExcelResponse")]
-        void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja);
+        void CrearCatalogoExcel(KiiniNet.Entities.Cat.Sistema.Catalogos catalogo, bool esMascara, string archivo, string hoja);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ActualizarCatalogoExcel", ReplyAction="http://tempuri.org/IServiceCatalogos/ActualizarCatalogoExcelResponse")]
-        void ActualizarCatalogoExcel(int idCatalogo, bool esMascara, string archivo, string hoja);
+        void ActualizarCatalogoExcel(KiiniNet.Entities.Cat.Sistema.Catalogos cat, bool esMascara, string archivo, string hoja);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -76,8 +79,12 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
                 base(binding, remoteAddress) {
         }
         
-        public void CrearCatalogo(string nombreCatalogo, bool esMascara, System.Collections.Generic.List<string> registros) {
-            base.Channel.CrearCatalogo(nombreCatalogo, esMascara, registros);
+        public void CrearCatalogo(KiiniNet.Entities.Cat.Sistema.Catalogos catalogo, bool esMascara, System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> registros) {
+            base.Channel.CrearCatalogo(catalogo, esMascara, registros);
+        }
+        
+        public void ActualizarCatalogo(KiiniNet.Entities.Cat.Sistema.Catalogos catalogo, bool esMascara, System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> registros) {
+            base.Channel.ActualizarCatalogo(catalogo, esMascara, registros);
         }
         
         public KiiniNet.Entities.Cat.Sistema.Catalogos ObtenerCatalogo(int idCatalogo) {
@@ -112,12 +119,12 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
             return base.Channel.ObtenerRegistrosArchivosCatalogo(idCatalogo);
         }
         
-        public void CrearCatalogoExcel(string nombreCatalogo, bool esMascara, string archivo, string hoja) {
-            base.Channel.CrearCatalogoExcel(nombreCatalogo, esMascara, archivo, hoja);
+        public void CrearCatalogoExcel(KiiniNet.Entities.Cat.Sistema.Catalogos catalogo, bool esMascara, string archivo, string hoja) {
+            base.Channel.CrearCatalogoExcel(catalogo, esMascara, archivo, hoja);
         }
         
-        public void ActualizarCatalogoExcel(int idCatalogo, bool esMascara, string archivo, string hoja) {
-            base.Channel.ActualizarCatalogoExcel(idCatalogo, esMascara, archivo, hoja);
+        public void ActualizarCatalogoExcel(KiiniNet.Entities.Cat.Sistema.Catalogos cat, bool esMascara, string archivo, string hoja) {
+            base.Channel.ActualizarCatalogoExcel(cat, esMascara, archivo, hoja);
         }
     }
 }

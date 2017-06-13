@@ -7,7 +7,7 @@
             <br>
             <h3 class="h6">
                 <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
-                / Formularios </h3>
+                / Horarios </h3>
             <hr />
             
             <section class="module">
@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-9">
                         <div class="module-inner">
-                            CONSULTA FORMULARIOS:<br />
+                            CONSULTA HORARIOS:<br />
                             <div class="search-box form-inline margin-bottom-lg">
                                 <div class="form-group">
                                     <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control help_search_form" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" placeholder="Busca con una palabra clave..." />
@@ -43,7 +43,7 @@
                     <div class="col-lg-4 col-md-3">
                         <div class="module-inner">
                             <div class="form-group">
-                                    <asp:LinkButton runat="server" CssClass="btn btn-primary fa fa-download" Text="  Descargar reporte" />
+                                    <asp:LinkButton runat="server" CssClass="btn btn-primary fa fa-download" Text="  Descargar reporte" ID="btnDownload" OnClick="btnDownload_OnClick" />
                                 </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                                                 <ul class="list list-unstyled hidden" id="hiddenEdit">
                                                     <li>
                                                         <asp:LinkButton runat="server" Text="Editar" CommandArgument='<%# Eval("Id")%>' OnClick="btnEditar_OnClick"></asp:LinkButton> | 
-                                                        <asp:LinkButton runat="server" Text="Clonar" CommandArgument='<%# Eval("Id")%>'></asp:LinkButton>
+                                                        <asp:LinkButton runat="server" Text="Clonar" CommandArgument='<%# Eval("Id")%>' OnClick="OnClick"></asp:LinkButton>
                                                     </li>
                                                 </ul>
                                             </td>
@@ -106,10 +106,9 @@
             </section>
 
         </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="btnDownload" />
+        </Triggers>
     </asp:UpdatePanel>
-    <%--MODAL ALTA--%>
-    <div class="modal fade" id="modalAltaMascara" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-       
-    </div>
 </div>
 

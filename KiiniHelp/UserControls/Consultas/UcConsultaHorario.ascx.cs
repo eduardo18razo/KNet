@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.UI;
-using KiiniHelp.Funciones;
+using System.Web.UI.WebControls;
 using KiiniHelp.ServiceDiasHorario;
-using KiiniHelp.ServiceGrupoUsuario;
 using KiiniNet.Entities.Cat.Usuario;
 using KinniNet.Business.Utils;
 
@@ -13,7 +13,6 @@ namespace KiiniHelp.UserControls.Consultas
     public partial class UcConsultaHorario : UserControl
     {
         private readonly ServiceDiasHorarioClient _servicioHorarios = new ServiceDiasHorarioClient();
-        private readonly ServiceGrupoUsuarioClient _servicioGrupoUsuario = new ServiceGrupoUsuarioClient();
 
         private List<string> _lstError = new List<string>();
 
@@ -21,24 +20,12 @@ namespace KiiniHelp.UserControls.Consultas
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
-            }
-        }
-
-        private void LlenaCombos()
-        {
-            try
-            {
-                List<GrupoUsuario> lstGrupos = _servicioGrupoUsuario.ObtenerGrupos(true);
-                Metodos.LlenaComboCatalogo(ddlGrupoUsuario, lstGrupos);
-
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -47,12 +34,9 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                int? idTipoUsuario = null;
-                if (ddlGrupoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    idTipoUsuario = int.Parse(ddlGrupoUsuario.SelectedValue);
-
-                rptResultados.DataSource = _servicioHorarios.ObtenerHorarioConsulta(idTipoUsuario);
+                rptResultados.DataSource = _servicioHorarios.ObtenerHorarioConsulta(txtFiltro.Text.Trim());
                 rptResultados.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
             }
             catch (Exception e)
             {
@@ -67,8 +51,7 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
-                    LlenaCombos();
-                    LlenaHorariosConsulta();
+                    
                 }
                 ucAltaHorario.OnAceptarModal += AltaHorarioOnAceptarModal;
                 ucAltaHorario.OnCancelarModal += AltaHorarioOnCancelarModal;
@@ -88,6 +71,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                LlenaHorariosConsulta();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaHorario\");", true);
             }
             catch (Exception ex)
@@ -119,20 +103,12 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        protected void ddlGrupoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
+        protected void btnNew_OnClick(object sender, EventArgs e)
         {
             try
             {
-                LlenaHorariosConsulta();
-                if (ddlGrupoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                {
-                    btnNew.Visible = true;
-                    btnNew.Text = "Agregar Horario";
-                }
-                else
-                {
-                    btnNew.Visible = false;
-                }
+                ucAltaHorario.EsAlta = true;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaHorario\");", true);
             }
             catch (Exception ex)
             {
@@ -145,11 +121,10 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        protected void btnBaja_OnClick(object sender, EventArgs e)
+        protected void btnBuscar_OnClick(object sender, EventArgs e)
         {
             try
             {
-                _servicioHorarios.Habilitar(Convert.ToInt32(hfId.Value), false);
                 LlenaHorariosConsulta();
             }
             catch (Exception ex)
@@ -163,11 +138,49 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        protected void btnAlta_OnClick(object sender, EventArgs e)
+        protected void btnDownload_OnClick(object sender, EventArgs e)
         {
             try
             {
-                _servicioHorarios.Habilitar(Convert.ToInt32(hfId.Value), true);
+                string filtro = txtFiltro.Text.Trim().ToUpper();
+                List<Horario> lstcatalogos = _servicioHorarios.ObtenerHorarioConsulta(filtro);
+                if (filtro != string.Empty)
+                    lstcatalogos = lstcatalogos.Where(w => w.Descripcion.Contains(filtro)).ToList();
+
+                Response.Clear();
+                string ultimaEdicion = "Últ. edición";
+                MemoryStream ms =
+                    new MemoryStream(BusinessFile.ExcelManager.ListToExcel(lstcatalogos.Select(
+                                s => new
+                                {
+                                    Nombre = s.Descripcion,
+                                    Creación = s.FechaAlta.ToShortDateString().ToString(),
+                                    ultimaEdicion = s.FechaModificacion == null ? "" : s.FechaModificacion.Value.ToShortDateString().ToString(),
+                                    Habilitado = s.Habilitado ? "Si" : "No"
+                                })
+                                .ToList()).GetAsByteArray());
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;  filename=Horarios.xlsx");
+                Response.Buffer = true;
+                ms.WriteTo(Response.OutputStream);
+                Response.End();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _servicioHorarios.Habilitar(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
                 LlenaHorariosConsulta();
             }
             catch (Exception ex)
@@ -185,8 +198,9 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                //ucAltaHorario.EsAlta = false;
-                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaHorario\");", true);
+                ucAltaHorario.IdHorario = int.Parse(((LinkButton)sender).CommandArgument);
+                ucAltaHorario.EsAlta = false;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaHorario\");", true);
             }
             catch (Exception ex)
             {
@@ -198,7 +212,8 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = _lstError;
             }
         }
-        protected void btnNew_OnClick(object sender, EventArgs e)
+
+        protected void btnClonar_OnClick(object sender, EventArgs e)
         {
             try
             {

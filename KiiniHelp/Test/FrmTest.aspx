@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FrmTest.aspx.cs" ValidateRequest="false" Inherits="KiiniHelp.Test.FrmTest" %>
 
+<%@ Register Src="~/UserControls/Detalles/UcTicketDetalle.ascx" TagPrefix="uc1" TagName="UcTicketDetalle" %>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -451,7 +454,7 @@
                 <div class="input-group-addon">to</div>
                 <input type="text" class="form-control" value="2012-04-19">
             </div>
-
+            <uc1:UcTicketDetalle runat="server" id="UcTicketDetalle" />
             <%--<div class="row">
                 <div class="col-lg-8 col-md-8">
                     <div class="module-inner">

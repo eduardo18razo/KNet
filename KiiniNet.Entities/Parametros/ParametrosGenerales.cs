@@ -19,5 +19,7 @@ namespace KiiniNet.Entities.Parametros
         public string MensajeValidacion { get; set; }
         [DataMember]
         public bool StrongPassword { get; set; }
+        [DataMember]
+        public string FormularioPortal { get; set; }
     }
 }

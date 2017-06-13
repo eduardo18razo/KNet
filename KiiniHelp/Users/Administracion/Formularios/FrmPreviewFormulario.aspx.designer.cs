@@ -13,12 +13,12 @@ namespace KiiniHelp.Users.Administracion.Formularios {
     public partial class FrmPreviewFormulario1 {
         
         /// <summary>
-        /// Control UcPreviewFormulario.
+        /// Control ucPreviewFormulario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.Formularios.UcPreviewFormulario UcPreviewFormulario;
+        protected global::KiiniHelp.UserControls.Altas.Formularios.UcPreviewFormulario ucPreviewFormulario;
     }
 }

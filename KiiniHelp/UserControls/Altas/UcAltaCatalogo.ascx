@@ -3,14 +3,14 @@
     <ContentTemplate>
         <asp:HiddenField runat="server" ID="hfEsAlta" />
         <asp:HiddenField runat="server" ID="hfIdCatalogo" />
-        <section class="module no-border">
+        <section class="module no-border" style="border: none">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="module-inner">
                         <div class="form-group">
                             <asp:Label runat="server" Text="Catálogo" CssClass="col-lg-3 col-md-3 col-sm-3"></asp:Label>
                             <div class="col-lg-8 col-md-8 col-sm-8">
-                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                <div class="row col-lg-8 col-md-8 col-sm-8" style="width: 72.6%">
                                     <asp:TextBox runat="server" ID="txtDescripcionCatalogo" CssClass="form-control" placeholder="Nombre del catálogo" />
                                 </div>
                             </div>
@@ -27,9 +27,11 @@
                             <div class="col-lg-8 col-md-8 col-sm-8">
                                 <asp:Repeater runat="server" ID="rptRegistros">
                                     <ItemTemplate>
-                                        <div class="row margin-top-5">
-                                            <div class="col-lg-8 col-md-8 col-sm-8">
-                                                <asp:TextBox runat="server" ID="txtRegistro" Text='<%# Container.DataItem.ToString() %>' CssClass="form-control" />
+                                         <div class="row margin-top-5">
+                                            <asp:Label runat="server" ID="lblIdRegistro" Visible="False" Text='<%# Eval("Id") %>'/>
+                                            <div class="col-lg-10 col-md-10 col-sm-10">
+                                                <%--<asp:TextBox runat="server" ID="txtRegistro" Text='<%# Container.DataItem.ToString() %>' CssClass="form-control" />--%>
+                                                <asp:TextBox runat="server" ID="TextBox1" Text='<%# Eval("Descripcion") %>' CssClass="form-control" />
                                             </div>
                                             <asp:LinkButton runat="server" Text="Borrar" ID="btnBorrarRegistro" CommandArgument='<%# Container.ItemIndex %>' OnClick="btnBorrarRegistro_OnClick"></asp:LinkButton>
                                         </div>

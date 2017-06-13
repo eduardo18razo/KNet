@@ -94,7 +94,7 @@
 <div class="modal fade" id="modalAgregarCampoMascara" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <asp:UpdatePanel ID="upAgregarCampo" runat="server">
         <ContentTemplate>
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog">
                 <div class="modal-content">
 
                     <asp:HiddenField runat="server" ID="hfAltaCampo" Value="true" />

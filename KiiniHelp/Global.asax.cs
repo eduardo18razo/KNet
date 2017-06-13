@@ -20,6 +20,19 @@ namespace KiiniHelp
 
         void Application_Error(object sender, EventArgs e)
         {
+            Exception ex = this.Server.GetLastError();
+
+            if (ex is HttpException)
+            {
+                HttpException httpEx = (HttpException)ex;
+
+                if (httpEx.GetHttpCode() == 401)
+                {
+                    Response.Redirect("YourPage.aspx");
+                }
+            }
+        }
+        //{
             //// Código que se ejecuta cuando se produce un error no controlado
             //// Get last error from the server
             //Exception exc = Server.GetLastError();
@@ -65,7 +78,7 @@ namespace KiiniHelp
             //    // Clear the error from the server
             //    Server.ClearError();
             //}
-        }
+        //}
 
         void Session_End(object sender, EventArgs e)
         {

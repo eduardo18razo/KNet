@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceEncuesta;
 using KiiniNet.Entities.Helper;
@@ -33,6 +34,7 @@ namespace KiiniHelp.UserControls.Consultas
                     rptEncuestasPendientes.DataSource = lst;
                     rptEncuestasPendientes.DataBind();
                 }
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
             }
             catch (Exception e)
             {

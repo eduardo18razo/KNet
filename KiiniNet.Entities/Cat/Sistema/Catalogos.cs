@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Mascaras;
 
@@ -12,6 +13,8 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
+        public string DescripcionLarga { get; set; }
+        [DataMember]
         public string Tabla { get; set; }
         [DataMember]
         public string ComandoInsertar { get; set; }
@@ -22,10 +25,20 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public bool Archivo { get; set; }
         [DataMember]
+        public DateTime FechaAlta { get; set; }
+        [DataMember]
+        public int IdUsuarioAlta { get; set; }
+        [DataMember]
+        public DateTime? FechaModificacion { get; set; }
+        [DataMember]
+        public int? IdUsuarioModifico { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
         [DataMember]
         public virtual List<CampoMascara> CampoMascara { get; set; }
         [DataMember]
-        public virtual List<CampoCatalogo> CampoCatalogo { get; set; } 
+        public virtual List<CampoCatalogo> CampoCatalogo { get; set; }
+        [DataMember]
+        public virtual List<MascaraSeleccionCatalogo> MascaraSeleccionCatalogo { get; set; }
     }
 }

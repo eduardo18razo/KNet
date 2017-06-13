@@ -30,6 +30,9 @@ namespace KiiniNet.Services.Operacion.Interface
         HelperDetalleTicket ObtenerDetalleTicket(int idTicket);
 
         [OperationContract]
+        HelperTicketDetalle ObtenerTicket(int idTicket, int idUsuario);
+
+        [OperationContract]
         HelperDetalleTicket ObtenerDetalleTicketNoRegistrado(int idTicket, string cveRegistro);
 
         [OperationContract]

@@ -15,6 +15,8 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public int Orden { get; set; }
         [DataMember]
+        public string Color { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
         [DataMember]
         public List<Ticket> Ticket { get; set; }

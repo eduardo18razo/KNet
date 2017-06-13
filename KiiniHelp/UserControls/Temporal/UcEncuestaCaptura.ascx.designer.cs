@@ -49,13 +49,22 @@ namespace KiiniHelp.UserControls.Temporal {
         protected global::System.Web.UI.WebControls.HiddenField hfIdTipoServicio;
         
         /// <summary>
-        /// Control lblDescripcionMascara.
+        /// Control lbltitulo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescripcionMascara;
+        protected global::System.Web.UI.WebControls.Label lbltitulo;
+        
+        /// <summary>
+        /// Control lblDescripcionCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDescripcionCliente;
         
         /// <summary>
         /// Control divControles.
@@ -65,6 +74,15 @@ namespace KiiniHelp.UserControls.Temporal {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divControles;
+        
+        /// <summary>
+        /// Control btnCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
         
         /// <summary>
         /// Control btnAceptar.

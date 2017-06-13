@@ -4,7 +4,12 @@ using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using Microsoft.Office.Core;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using OfficeOpenXml.Table;
 using Word = Microsoft.Office.Interop.Word;
 using Excel = Microsoft.Office.Interop.Excel;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
@@ -423,6 +428,59 @@ namespace KinniNet.Business.Utils
                     }
                 }
                 return dtSet;
+            }
+
+            public static ExcelPackage ListToExcel<T>(List<T> query)
+            {
+                ExcelPackage result = null;
+                try
+                {
+                    ExcelPackage pck = new ExcelPackage();
+                    string celdaFinHeader = null;
+                    //Create the worksheet
+                    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Result");
+
+                    //get our column headings
+                    var t = typeof(T);
+                    var Headings = t.GetProperties();
+                    for (int i = 0; i < Headings.Count(); i++)
+                    {
+
+                        ws.Cells[1, i + 1].Value = Headings[i].Name;
+                        celdaFinHeader = ws.Cells[1, i + 1].Address;
+                    }
+
+            //        var mi = typeof(T)
+            //.GetProperties()
+            //.Select(pi => (MemberInfo)pi)
+            //.ToArray();
+                    
+                    //populate our Data
+                    if (query.Any())
+                    {
+
+                        ws.Cells["A2"].LoadFromCollection(query);
+                        //ws.Cells["A2"].LoadFromCollection(query, false, TableStyles.Custom, BindingFlags.Public, mi);
+
+                    }
+
+                    //Format the header
+                    using (ExcelRange rng = ws.Cells[string.Format("A1:{0}", celdaFinHeader)])
+                    {
+                        rng.AutoFitColumns();
+                        rng.Style.Font.Bold = true;
+                        rng.Style.Fill.PatternType = ExcelFillStyle.Solid;                      //Set Pattern for the background to Solid
+                        rng.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(79, 129, 189));  //Set color to dark blue
+                        rng.Style.Font.Color.SetColor(Color.White);
+                    }
+                    ws.Cells.AutoFitColumns();
+                    result = pck;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                return result;
             }
         }
 

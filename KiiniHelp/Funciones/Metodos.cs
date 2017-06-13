@@ -95,15 +95,15 @@ namespace KiiniHelp.Funciones
                 data.Add(BusinessVariables.ComboBoxCatalogo.ValueSeleccione, BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione);
                 foreach (BusinessVariables.EnumeradoresKiiniNet.EnumTiempoDuracion foo in Enum.GetValues(typeof(BusinessVariables.EnumeradoresKiiniNet.EnumTiempoDuracion)))
                 {
-                    data.Add((int) foo, foo.ToString());
+                    data.Add((int)foo, foo.ToString());
                 }
                 ddl.DataSource = data;
                 ddl.DataTextField = "Value";
                 ddl.DataValueField = "Key";
                 ddl.DataBind();
-                
+
                 //Array duraciones = Enum.GetValues(typeof(BusinessVariables.EnumeradoresKiiniNet.EnumTiempoDuracion));
-                
+
                 //foreach (BusinessVariables.EnumeradoresKiiniNet.EnumTiempoDuracion duracion in duraciones)
                 //{
                 //    ddl.Items.Add(new ListItem(duracion.ToString(), ((int)duracion).ToString()));

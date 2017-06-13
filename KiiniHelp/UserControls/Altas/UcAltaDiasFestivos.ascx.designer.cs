@@ -22,13 +22,13 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.UpdatePanel updateAltaAreas;
         
         /// <summary>
-        /// Control hfIdSubRol.
+        /// Control hdIdHorario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdSubRol;
+        protected global::System.Web.UI.WebControls.HiddenField hdIdHorario;
         
         /// <summary>
         /// Control hfEsAlta.
@@ -47,6 +47,15 @@ namespace KiiniHelp.UserControls.Altas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfEditando;
+        
+        /// <summary>
+        /// Control btnClose.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnClose;
         
         /// <summary>
         /// Control txtDescripcionDias.

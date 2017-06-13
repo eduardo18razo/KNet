@@ -24,13 +24,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<Horario> ObtenerHorarioConsulta(int? idGrupoSolicito)
+        public List<Horario> ObtenerHorarioConsulta(string filtro)
         {
             try
             {
                 using (BusinessDiasHorario negocio = new BusinessDiasHorario())
                 {
-                    return negocio.ObtenerHorarioConsulta(idGrupoSolicito);
+                    return negocio.ObtenerHorarioConsulta(filtro);
                 }
             }
             catch (Exception ex)
@@ -54,6 +54,36 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public void Actualizar(Horario horario)
+        {
+            try
+            {
+                using (BusinessDiasHorario negocio = new BusinessDiasHorario())
+                {
+                    negocio.CrearHorario(horario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Horario ObtenerHorarioById(int idHorario)
+        {
+            try
+            {
+                using (BusinessDiasHorario negocio = new BusinessDiasHorario())
+                {
+                    return negocio.ObtenerHorarioById(idHorario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Habilitar(int idHorario, bool habilitado)
         {
             try
@@ -68,9 +98,27 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        
+
         #endregion Horarios
 
         #region Dias Feriados
+
+        public List<DiasFeriados> ObtenerDiasFeriadosConsulta(string filtro)
+        {
+            try
+            {
+                using (BusinessDiasHorario negocio = new BusinessDiasHorario())
+                {
+                    return negocio.ObtenerDiasFeriadosConsulta(filtro);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public List<DiaFestivoDefault> ObtenerDiasDefault(bool insertarSeleccion)
         {
             try
