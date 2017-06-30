@@ -32,6 +32,8 @@ namespace KiiniNet.Entities.Cat.Operacion
         [DataMember]
         public int IdNivelOrganizacion { get; set; }
         [DataMember]
+        public bool Sistema { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
         
         [DataMember]

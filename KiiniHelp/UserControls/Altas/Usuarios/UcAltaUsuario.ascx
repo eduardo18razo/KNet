@@ -45,8 +45,8 @@
             }
 </style>
 
-    <script type="text/javascript">
-        function UploadFile(fileUpload) {
+<script type="text/javascript">
+    function UploadFile(fileUpload) {
         if (fileUpload.value != '') {
             document.getElementById("<%=btnUpload.ClientID %>").click();
         }
@@ -59,7 +59,7 @@
         <asp:UpdatePanel ID="upGeneral" runat="server">
 
             <Triggers>
-                <asp:PostBackTrigger  ControlID="btnUpload" />
+                <asp:PostBackTrigger ControlID="btnUpload" />
             </Triggers>
             <ContentTemplate>
                 <asp:HiddenField runat="server" ID="hfIdUsuario" />
@@ -67,6 +67,8 @@
                 <asp:HiddenField runat="server" ID="hfEsMoral" />
                 <asp:HiddenField runat="server" ID="hdEsDetalle" />
                 <asp:HiddenField runat="server" ID="hfEditaDetalle" />
+                <asp:HiddenField runat="server" ID="hfGeneraUsuario" Value="true" />
+                <asp:HiddenField runat="server" ID="hfConsultas" Value="false" />
 
                 <!--MIGAS DE PAN-->
                 <div class="row">
@@ -75,7 +77,8 @@
                             <asp:HyperLink NavigateUrl="~/Users/DashBoard.aspx" runat="server">Home</asp:HyperLink>
                             / Usuarios</h3>
                         <hr>
-                        <h2><asp:Label runat="server" ID="lblTitle"></asp:Label></h2>
+                        <h2>
+                            <asp:Label runat="server" ID="lblTitle"></asp:Label></h2>
                         <br />
                     </div>
                 </div>
@@ -84,16 +87,14 @@
                 <!--MÓDULO FORMULARIO-->
                 <div>
                     <section class="module">
-                        <asp:Button ID="btnUpload" Text="Upload" runat="server" OnClick="Upload" Style="display: none" ClientIDMode="Static"/>
+                        <asp:Button ID="btnUpload" Text="Upload" runat="server" OnClick="Upload" Style="display: none" ClientIDMode="Static" />
                         <div class="form-group avatar" runat="server" id="divAvatar" visible="False">
                             <figure class="figure col-md-1 col-sm-2 col-xs-12 center-content-div">
                                 <asp:Image CssClass="img-rounded img-responsive" ImageUrl="~/assets/images/profiles/profile-square-1.png" ID="imgPerfil" alt="" runat="server" />
-                                
+
                                 <asp:Panel ID="PnlFsAttch" runat="server" Style="position: relative; overflow: Hidden; cursor: pointer;">
                                     <asp:FileUpload runat="server" ID="FileUpload1" Style="position: absolute; left: -20px; z-index: 2; opacity: 0; filter: alpha(opacity=0); cursor: pointer" />
-                                    
                                     <asp:LinkButton runat="server" Text="Cambiar" ID="btnCambiarImagen" ClientIDMode="Static"></asp:LinkButton>
-                                    <%--<asp:Button ID="BtnFsAttch" BackColor="YellowGreen" ForeColor="Blue" runat="server" Text="Upload file" Font-Size="x-Small" Width="80px" Style="position: absolute; top: 0px; left: 0px; z-index: 1; font-style: italic" />--%>
                                 </asp:Panel>
                             </figure>
                             <div class="form-group col-sm-10">
@@ -136,15 +137,19 @@
                                     <!--FILA 1-->
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3">
+                                            <asp:Label runat="server" Text="Apellido Paterno" />
                                             <asp:TextBox ID="txtAp" runat="server" CssClass="form-control" placeholder="Apellido paterno" onkeypress="return ValidaCampo(this,1)" AutoPostBack="true" MaxLength="32" OnTextChanged="txtAp_OnTextChanged" />
                                         </div>
                                         <div class="col-lg-3 col-md-3">
+                                            <asp:Label runat="server" Text="Apellido Materno" />
                                             <asp:TextBox ID="txtAm" runat="server" CssClass="form-control" placeholder="Apellido materno" onkeypress="return ValidaCampo(this,1)" MaxLength="32" />
                                         </div>
                                         <div class="col-lg-3 col-md-3">
+                                            <asp:Label runat="server" Text="Nombre" />
                                             <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Nombre" onkeypress="return ValidaCampo(this,1)" AutoPostBack="true" MaxLength="32" OnTextChanged="txtAp_OnTextChanged" />
                                         </div>
                                         <div class="col-lg-3 col-md-3">
+                                            <asp:Label runat="server" Text="Nombre usuario" />
                                             <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control texto-normal" onkeypress="return ValidaCampo(this,14)" OnTextChanged="txtAp_OnTextChanged" MaxLength="12" Style="text-transform: none" AutoPostBack="True" />
                                         </div>
                                     </div>
@@ -163,12 +168,20 @@
                                         <div class="col-lg-3 col-md-3">
                                             <br />
                                             <div class="form-inline">
-                                                <label for="chkVip" class="col-lg-10 col-md-10">VIP</label>
-                                                <asp:CheckBox runat="server" Text="VIP" ID="chkVip" CssClass="chkIphone col-lg-2 col-md-2" />
+                                                <label for="chkVip" class="col-lg-10 col-md-10 col-sm-2">VIP</label>
+                                                <asp:CheckBox runat="server" Text="VIP" ID="chkVip" CssClass="chkIphone col-lg-2 col-md-2 col-sm-1" />
                                             </div>
                                             <div class="form-inline">
-                                                <label for="chkVip" class="col-lg-10 col-md-10">Directorio activo</label>
-                                                <asp:CheckBox runat="server" Text="Directorio Activo " ID="chkDirectoriActivo" CssClass="chkIphone col-lg-2 col-md-2" />
+                                                <label for="chkVip" class="col-lg-10 col-md-10 col-sm-2">Directorio activo</label>
+                                                <asp:CheckBox runat="server" Text="Directorio Activo " ID="chkDirectoriActivo" CssClass="chkIphone col-lg-2 col-md-2 col-sm-1" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-inline">
+                                                <label for="chkPersonaFisica" class="col-lg-10 col-md-10 col-sm-2">Persona Fisica</label>
+                                                <asp:CheckBox runat="server" Text="Persona Fisica" ID="chkPersonaFisica" CssClass="chkIphone col-lg-2 col-md-2 col-sm-1" />
                                             </div>
                                         </div>
                                     </div>
@@ -429,7 +442,7 @@
                                                         <div class="row col-lg-12 col-md-12">
                                                             <asp:Repeater runat="server" ID="rptGrupos" OnItemDataBound="rptGrupos_OnItemDataBound">
                                                                 <ItemTemplate>
-                                                                    <div class="row col-lg-4 col-md-4" style="padding: 5px">
+                                                                    <div class="form group col-lg-4 col-md-4" style="padding: 5px">
                                                                         <span class="tag label label-info">
                                                                             <div class="row col-lg-4 col-md-4" style="padding: 5px">
                                                                                 <span><%# Eval("DescripcionGrupo") %></span>
@@ -441,8 +454,7 @@
                                                                                         <%# Eval("Descripcion") %>
                                                                                     </ItemTemplate>
                                                                                 </asp:Repeater>
-                                                                                <asp:LinkButton runat="server" class="remove glyphicon glyphicon-remove-sign glyphicon-white" ID="btnRemove" OnClick="OnClick" CommandArgument='<%# Eval("IdGrupo") %>'></asp:LinkButton>
-                                                                                <%--<a><i  class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>--%>
+                                                                                <asp:LinkButton runat="server" class="remove glyphicon glyphicon-remove-sign glyphicon-white" ID="btnRemoveRol" OnClick="btnRemoveRol_OnClick" CommandName='<%# Eval("IdTipoGrupo") %>' CommandArgument='<%# Eval("IdGrupo") %>' />
                                                                             </div>
                                                                         </span>
                                                                     </div>
@@ -461,6 +473,7 @@
                             </div>
                         </div>
                         <div style="width: 100%; text-align: right">
+                            <asp:Button runat="server" Text="Cancelar" ID="btnCancelarEdicion" CssClass="btn btn-default margin-left" Style="margin-right: 45px" OnClick="btnCancelarEdicion_OnClick" />
                             <asp:Button runat="server" Text="Guardar" ID="btnGuardar" CssClass="btn btn-primary margin-left" Style="margin-right: 45px" OnClick="btnGuardar_OnClick" />
                         </div>
 

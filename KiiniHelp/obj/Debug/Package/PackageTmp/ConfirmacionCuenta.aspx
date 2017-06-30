@@ -6,26 +6,47 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Confirmacion Cuenta Usuario</title>
-    <link href="BootStrap/css/bootstrap.css" rel="stylesheet" />
-    <link href="BootStrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="BootStrap/css/CheckBoxStyle.css" rel="stylesheet" />
-    <link href="BootStrap/css/Calendar.css" rel="stylesheet" />
-    <link href="BootStrap/css/DropDown.css" rel="stylesheet" />
-    <link href="BootStrap/css/divs.css" rel="stylesheet" />
-    <link href="BootStrap/css/FileInput.css" rel="stylesheet" />
-    <link href="BootStrap/css/Headers.css" rel="stylesheet" />
-    <link href="BootStrap/css/stylemainmenu.css" rel="stylesheet" />
-    <link href="BootStrap/css/Defaults.css" rel="stylesheet" />
+    <link rel='stylesheet' href="assets/css/font.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/css/pe-7-icons.css" />
+    <link rel="stylesheet" href="assets/css/pe-7-icons.css" />
+
+    <link rel="stylesheet" href="assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/menuStyle.css" />
+    <link rel="stylesheet" href="assets/css/divs.css" />
+    <link rel="stylesheet" href="assets/css/checkBox.css" />
+    <link rel="stylesheet" href="assets/tmp/chosen.css" />
+    <link rel="stylesheet" href="assets/css/sumoselect.css" />
+    <link rel="stylesheet" href="assets/tmp/editor/ui/trumbowyg.css"/>
+    <link rel="stylesheet" href="assets/tmp/editor/ui/trumbowyg.min.css"/>
+    <link rel="stylesheet" href="assets/css/controls.css"/>
+    <link rel="stylesheet" href="assets/tmp/jquery.tagsinput.min.css"/>
 </head>
 <body>
     <form id="form1" runat="server">
         <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
             <Scripts>
-                <asp:ScriptReference Path="~/BootStrap/js/jquery-2.1.1.min.js" />
-                <asp:ScriptReference Path="~/BootStrap/js/bootstrap.min.js" />
-                <asp:ScriptReference Path="~/BootStrap/js/super-panel.js" />
-                <asp:ScriptReference Path="~/BootStrap/js/validation.js" />
-            </Scripts>
+                    <asp:ScriptReference Path="~/assets/js/jquery.js" />
+                    <asp:ScriptReference Path="~/assets/js/bootstrap.js" />
+                    <asp:ScriptReference Path="~/assets/js/imagesloaded.js" />
+                    <asp:ScriptReference Path="~/assets/js/masonry.js" />
+                    <asp:ScriptReference Path="~/assets/js/main.js" />
+                    <asp:ScriptReference Path="~/assets/js/modernizr.custom.js" />
+                    <asp:ScriptReference Path="~/assets/js/pmenu.js" />
+                    <asp:ScriptReference Path="~/assets/js/bootstrap-notify.js" />
+                    <asp:ScriptReference Path="~/assets/js/bootstrap-notify.min.js" />
+                    <asp:ScriptReference Path="~/assets/js/Notificaciones.js" />
+                    <asp:ScriptReference Path="~/assets/tmp/chosen.jquery.js" />
+                    <asp:ScriptReference Path="~/assets/tmp/editor/trumbowyg.min.js" />
+                    <asp:ScriptReference Path="~/assets/tmp/editor/plugins/base64/trumbowyg.base64.min.js" />
+                    <asp:ScriptReference Path="~/assets/tmp/editor/plugins/upload/trumbowyg.upload.min.js" />
+                    <asp:ScriptReference Path="~/assets/tmp/jquery.tagsinput.min.js" />
+                    
+
+                    <asp:ScriptReference Path="~/assets/js/jquery.sumoselect.min.js" />
+                    <asp:ScriptReference Path="~/assets/js/validation.js" />
+                </Scripts>
         </asp:ScriptManager>
         <asp:UpdatePanel ID="upGeneral" runat="server" UpdateMode="Conditional">
             <ContentTemplate>

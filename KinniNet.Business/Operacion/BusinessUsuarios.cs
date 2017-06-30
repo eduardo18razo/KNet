@@ -112,6 +112,10 @@ namespace KinniNet.Core.Operacion
                     userData.IdPuesto = usuario.IdPuesto;
                     userData.IdOrganizacion = usuario.IdOrganizacion;
                     userData.IdUbicacion = usuario.IdUbicacion;
+                    userData.Vip = usuario.Vip;
+                    userData.DirectorioActivo = usuario.DirectorioActivo;
+                    userData.PersonaFisica = usuario.PersonaFisica;
+
                     List<int> correoEliminar = (from correoUsuario in userData.CorreoUsuario
                                                 where !usuario.CorreoUsuario.Any(a => a.Correo == correoUsuario.Correo)
                                                 select correoUsuario.Id).ToList();
@@ -355,9 +359,10 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = (db.Usuario.Join(db.UsuarioGrupo, u => u.Id, ug => ug.IdUsuario, (u, ug) => new { u, ug })
+                List<int> idsUsuarios = (db.Usuario.Join(db.UsuarioGrupo, u => u.Id, ug => ug.IdUsuario, (u, ug) => new { u, ug })
                     .Where(@t => @t.ug.IdGrupoUsuario == idGrupo && @t.ug.SubGrupoUsuario.IdSubRol == idNivel)
-                    .Select(@t => @t.u)).Distinct().ToList();
+                    .Select(@t => @t.u.Id)).Distinct().ToList();
+                result = db.Usuario.Where(w => idsUsuarios.Contains(w.Id)).ToList();
                 //foreach (Usuario usuario in result)
                 //{
                 //    db.LoadProperty(usuario, "TipoUsuario");
@@ -366,6 +371,65 @@ namespace KinniNet.Core.Operacion
                 //    usuario.UbicacionFinal = new BusinessUbicacion().ObtenerDescripcionUbicacionUsuario(usuario.Id, true);
                 //    usuario.UbicacionCompleta = new BusinessUbicacion().ObtenerDescripcionUbicacionUsuario(usuario.Id, false);
                 //}
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public List<Usuario> ObtenerUsuariosByGrupoAtencion(int idGrupo, bool insertarSeleccion)
+        {
+            List<Usuario> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                var qry = from u in db.Usuario
+                          join ug in db.UsuarioGrupo on u.Id equals ug.IdUsuario
+                          where ug.IdGrupoUsuario == idGrupo
+                          select u;
+                result = new List<Usuario>();
+                foreach (Usuario usuario in qry)
+                {
+                    result.Add(new Usuario
+                    {
+                        Id = usuario.Id,
+                        Nombre = usuario.Nombre,
+                        ApellidoMaterno = usuario.ApellidoMaterno,
+                        ApellidoPaterno = usuario.ApellidoPaterno
+                    });
+                }
+                //result = qry.Select(s => new Usuario
+                //    {
+                //        Id = s.Id,
+                //        Nombre = s.Nombre,
+                //        ApellidoMaterno = s.ApellidoMaterno,
+                //        ApellidoPaterno = s.ApellidoPaterno
+                //    }).ToList();
+                //result = (db.Usuario.Join(db.UsuarioGrupo, u => u.Id, ug => ug.IdUsuario, (u, ug) => new { u, ug })
+                //    .Where(@t => @t.ug.IdGrupoUsuario == idGrupo)
+                //    .Select(@t => new Usuario
+                //    {
+                //        Id = @t.u.Id,
+                //        Nombre = @t.u.Nombre,
+                //        ApellidoMaterno = @t.u.ApellidoMaterno,
+                //        ApellidoPaterno = @t.u.ApellidoPaterno
+
+                //    })).Distinct().ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
+                        new Usuario
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Nombre = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
+                        });
 
             }
             catch (Exception ex)
@@ -884,6 +948,49 @@ namespace KinniNet.Core.Operacion
             {
                 db.Dispose();
             }
+        }
+
+        public string ObtenerFechaUltimoAcceso(Usuario usuario)
+        {
+            string fecha;
+            try
+            {
+                CultureInfo ci = new CultureInfo("Es-Es");
+                var days = (DateTime.Now - usuario.BitacoraAcceso.Last(l => l.Success).Fecha).TotalDays;
+                switch (int.Parse(Math.Abs(Math.Round(days)).ToString()))
+                {
+                    case 0:
+                        fecha = "Hoy";
+                        break;
+                    case 1:
+                        fecha = "Ayer";
+                        break;
+                    case 2:
+                        fecha = ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                        break;
+                    case 3:
+                        fecha = ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                        break;
+                    case 4:
+                        fecha = ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                        break;
+                    case 5:
+                        fecha = ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                        break;
+                    case 6:
+                        fecha = ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                        break;
+                    default:
+                        fecha = usuario.BitacoraAcceso.Last(l => l.Success).Fecha.ToString("dd-MM-yy");
+                        break;
+                }
+                
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return string.Format("{0} {1} hrs.", fecha, usuario.BitacoraAcceso.Last(l => l.Success).Fecha.ToString("HH:mm"));
         }
 
     }

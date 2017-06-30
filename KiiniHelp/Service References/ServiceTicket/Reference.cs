@@ -44,6 +44,9 @@ namespace KiiniHelp.ServiceTicket {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/GeneraPreticket", ReplyAction="http://tempuri.org/IServiceTicket/GeneraPreticketResponse")]
         KiiniNet.Entities.Operacion.Tickets.PreTicket GeneraPreticket(int idArbol, int idUsuarioSolicita, int idUsuarioLevanto, string observaciones);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/AgregarComentarioConversacionTicket", ReplyAction="http://tempuri.org/IServiceTicket/AgregarComentarioConversacionTicketResponse")]
+        void AgregarComentarioConversacionTicket(int idTicket, int idUsuario, string mensaje, bool sistema, System.Collections.Generic.List<string> archivos);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +114,10 @@ namespace KiiniHelp.ServiceTicket {
         
         public KiiniNet.Entities.Operacion.Tickets.PreTicket GeneraPreticket(int idArbol, int idUsuarioSolicita, int idUsuarioLevanto, string observaciones) {
             return base.Channel.GeneraPreticket(idArbol, idUsuarioSolicita, idUsuarioLevanto, observaciones);
+        }
+        
+        public void AgregarComentarioConversacionTicket(int idTicket, int idUsuario, string mensaje, bool sistema, System.Collections.Generic.List<string> archivos) {
+            base.Channel.AgregarComentarioConversacionTicket(idTicket, idUsuario, mensaje, sistema, archivos);
         }
     }
 }

@@ -44,6 +44,12 @@
   <wsdl:message name="IServiceUsuarios_ObtenerUsuariosByGrupo_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerUsuariosByGrupoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ObtenerUsuariosByGrupoAtencion_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUsuariosByGrupoAtencion" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUsuarios_ObtenerUsuariosByGrupoAtencion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerUsuariosByGrupoAtencionResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceUsuarios_ActualizarUsuario_InputMessage">
     <wsdl:part name="parameters" element="tns:ActualizarUsuario" />
   </wsdl:message>
@@ -157,6 +163,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosByGrupo" message="tns:IServiceUsuarios_ObtenerUsuariosByGrupo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosByGrupoResponse" message="tns:IServiceUsuarios_ObtenerUsuariosByGrupo_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ObtenerUsuariosByGrupoAtencion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosByGrupoAtencion" message="tns:IServiceUsuarios_ObtenerUsuariosByGrupoAtencion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosByGrupoAtencionResponse" message="tns:IServiceUsuarios_ObtenerUsuariosByGrupoAtencion_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ActualizarUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUsuarios/ActualizarUsuario" message="tns:IServiceUsuarios_ActualizarUsuario_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUsuarios/ActualizarUsuarioResponse" message="tns:IServiceUsuarios_ActualizarUsuario_OutputMessage" />
@@ -253,6 +263,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerUsuariosByGrupo">
       <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosByGrupo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUsuariosByGrupoAtencion">
+      <soap:operation soapAction="http://tempuri.org/IServiceUsuarios/ObtenerUsuariosByGrupoAtencion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

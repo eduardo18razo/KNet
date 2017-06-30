@@ -9,7 +9,7 @@
             <br>
             <h3 class="h6">
                 <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
-                / Formularios </h3>
+                / Días Feriados </h3>
             <hr />
             <section class="module">
                 <div class="row">
@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-9">
                         <div class="module-inner">
-                            CONSULTA FORMULARIOS:<br />
+                            CONSULTA DÍAS FERIADOS:<br />
                             <div class="search-box form-inline margin-bottom-lg">
                                 <div class="form-group">
                                     <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control help_search_form" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" placeholder="Busca con una palabra clave..." />

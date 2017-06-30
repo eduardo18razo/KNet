@@ -19,10 +19,10 @@
     <link rel="stylesheet" href="assets/css/checkBox.css" />
     <link rel="stylesheet" href="assets/tmp/chosen.css" />
     <link rel="stylesheet" href="assets/css/sumoselect.css" />
-    <link rel="stylesheet" href="assets/tmp/editor/ui/trumbowyg.css"/>
-    <link rel="stylesheet" href="assets/tmp/editor/ui/trumbowyg.min.css"/>
-    <link rel="stylesheet" href="assets/css/controls.css"/>
-    <link rel="stylesheet" href="assets/tmp/jquery.tagsinput.min.css"/>
+    <link rel="stylesheet" href="assets/tmp/editor/ui/trumbowyg.css" />
+    <link rel="stylesheet" href="assets/tmp/editor/ui/trumbowyg.min.css" />
+    <link rel="stylesheet" href="assets/css/controls.css" />
+    <link rel="stylesheet" href="assets/tmp/jquery.tagsinput.min.css" />
     <style>
         body {
             font-size: 12px;
@@ -38,7 +38,7 @@
 
             $(modalName).on('shown.bs.modal', function () {
                 //$('.modal-backdrop').remove();
-                $(this).find('[autofocus]').focus();
+                $(this).find('[autofocus]').focus(); t
             });
             $(modalName).modal({ backdrop: 'static', keyboard: false });
             $(modalName).modal({ show: true });
@@ -148,13 +148,26 @@
             debugger;
             __doPostBack();
         }
+
+        function search(evt) {
+            debugger;
+
+            if (evt.charCode == 13) {
+                this.__doPostBack(this.name, 'OnKeyPress');
+                evt.preventDefault();
+                return false; // returning false will prevent the event from bubbling up.
+            }
+            else {
+                return true;
+            }
+        }
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body class="preload">
     <div id="full">
-        <form runat="server" id="form1" enctype="multipart/form-data">
+        <form runat="server" id="form1" enctype="multipart/form-data" style="background-color: #FFF">
             <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
                 <Scripts>
                     <asp:ScriptReference Path="~/assets/js/jquery.js" />
@@ -172,7 +185,7 @@
                     <asp:ScriptReference Path="~/assets/tmp/editor/plugins/base64/trumbowyg.base64.min.js" />
                     <asp:ScriptReference Path="~/assets/tmp/editor/plugins/upload/trumbowyg.upload.min.js" />
                     <asp:ScriptReference Path="~/assets/tmp/jquery.tagsinput.min.js" />
-                    
+
 
                     <asp:ScriptReference Path="~/assets/js/jquery.sumoselect.min.js" />
                     <asp:ScriptReference Path="~/assets/js/validation.js" />
@@ -207,8 +220,12 @@
                         <div id="main-search">
                             <i id="main-search-toggle" class="fa fa-search icon"></i>
                             <div id="main_search_input_wrapper" class="main_search_input_wrapper">
-                                <asp:TextBox type="text" ID="main_search_input" class="main_search_input form-control" placeholder="Buscar por palabra clave..." runat="server" />
-                                <span id="clear-search" aria-hidden="true" class="fs1 icon icon_close_alt2 clear-search"></span>
+                                <asp:UpdatePanel runat="server">
+                                    <ContentTemplate>
+                                        <asp:TextBox type="text" ID="main_search_input" ClientIDMode="Static" class="main_search_input form-control" onkeypress="search(event)" placeholder="Buscar por palabra clave..." runat="server" on />
+                                        <span id="clear-search" aria-hidden="true" class="fs1 icon icon_close_alt2 clear-search"></span>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
                         </div>
                     </div>
@@ -228,10 +245,17 @@
                                     </p>
                                 </div>
                                 <div class="item item-notifications">
-                                    <div class="dropdown-toggle" id="dropdownMenu-notifications" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Tickets</span> <span class="pe-icon fa fa-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Tickets"></span></div>
+                                    <div class="dropdown-toggle" id="dropdownMenu-notifications" data-toggle="dropdown" aria-expanded="true" role="button">
+                                        <span class="sr-only">Tickets</span>
+                                        <span class="pe-icon fa fa-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Tickets"></span>
+                                    </div>
                                     <ul class="dropdown-menu wdropdown-ticket" role="menu" aria-labelledby="dropdownMenu-user">
                                         <li><span class="arrow"></span><a role="menuitem" data-toggle="modal" data-target="#modal-new-ticket"><span class="pe-icon pe-7s-plus icon"></span>Nuevo ticket</a></li>
-                                        <li><a role="menuitem" href="guest_ticket_con.html"><span class="pe-icon pe-7s-look icon"></span>Consultar ticket</a></li>
+                                        <li>
+                                            <asp:HyperLink role="menuitem" NavigateUrl="~/Publico/Consultas/FrmConsultaTicket.aspx" runat="server">
+                                            <span class="pe-icon pe-7s-look icon"></span>Consultar ticket
+                                            </asp:HyperLink>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="item item-side-panel">
@@ -240,8 +264,12 @@
                                             <asp:Label runat="server" ID="lblBadgeRoles"></asp:Label></span>
                                     </i>
                                 </div>
-                                <div class="item item-notifications">
-                                    <div class="dropdown-toggle" id="dropdownMenu-notifications" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Tickets</span> <span class="pe-icon pe-7s-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Tickets"></span><span class="badge badge-circle badge-danger">3</span> </div>
+                                <div class="item item-notifications" runat="server" ID="divTickets">
+                                    <div class="dropdown-toggle" id="dropdownMenu-notifications" data-toggle="dropdown" aria-expanded="true" role="button">
+                                        <span class="sr-only">Tickets</span>
+                                        <span class="pe-icon pe-7s-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Tickets"></span>
+                                        <span class="badge badge-circle badge-danger"><asp:Label runat="server" ID="lblNoTickets"></asp:Label> </span>
+                                    </div>
                                     <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-notifications">
                                         <span class="arrow"></span>
                                         <div class="notification-items no-overflow">
@@ -270,8 +298,12 @@
                                         <div class="dropdown-footer"><a href="#">Ver todos los tickets</a> </div>
                                     </div>
                                 </div>
-                                <div class="item item-messages dropdown">
-                                    <div class="dropdown-toggle" id="dropdownMenu-messages" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Mensajes</span> <span class="pe-icon pe-7s-mail icon" data-toggle="tooltip" data-placement="bottom" title="Messages"></span><span class="badge badge-circle badge-success">5</span> </div>
+                                <div class="item item-messages dropdown" runat="server" ID="divMensajes">
+                                    <div class="dropdown-toggle" id="dropdownMenu-messages" data-toggle="dropdown" aria-expanded="true" role="button">
+                                        <span class="sr-only">Mensajes</span> 
+                                        <span class="pe-icon pe-7s-mail icon" data-toggle="tooltip" data-placement="bottom" title="Messages"></span>
+                                        <span class="badge badge-circle badge-success"><asp:Label runat="server" ID="lblNoMensajes"></asp:Label> </span> 
+                                    </div>
                                     <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-messages">
                                         <span class="arrow"></span>
                                         <div class="message-items no-overflow" style="height: 420px; overflow-y: auto">
@@ -575,21 +607,30 @@
             </div>
 
             <footer id="footer" class="site-footer">
-                <div class="copyright">Kiinisupport &copy; 2017 - <a href="http://www.kiininet.com" target="_blank">Powered by Kiinenet</a> - <a href="terminos.html">Términos y condiciones</a></div>
+                <div class="copyright">
+                    Kiinisupport &copy; 2017 -
+                    <asp:HyperLink NavigateUrl="~/Users/DashBoard.aspx" Target="_blank" runat="server">Powered by Kiininet</asp:HyperLink>
+                    -
+                    <asp:HyperLink NavigateUrl="~/Users/DashBoard.aspx" runat="server">Términos y condiciones</asp:HyperLink>
+                </div>
             </footer>
 
             <div class="modal fade" id="modal-new-ticket" tabindex="-1" role="dialog" aria-labelledby="modal-new-ticket-label">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <asp:LinkButton class="close" runat="server" ID="btnCerrarTicket" OnClick="btnCerrarTicket_OnClick"><span aria-hidden="true">&times;</span></asp:LinkButton>
-                            <h4 class="modal-title" id="modal-new-ticket-label">
-                                <br />
-                                Crear Ticket Nuevo</h4>
-                        </div>
-                        <div class="modal-body">
-                            <uc1:UcTicketPortal runat="server" id="ucTicketPortal" />
-                        </div>
+                        <asp:UpdatePanel runat="server">
+                            <ContentTemplate>
+                                <div class="modal-header">
+                                    <asp:LinkButton class="close" runat="server" ID="btnCerrarTicket" OnClick="btnCerrarTicket_OnClick"><span aria-hidden="true">&times;</span></asp:LinkButton>
+                                    <h4 class="modal-title" id="modal-new-ticket-label">
+                                        <br />
+                                        Crear Ticket Nuevo</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <uc1:UcTicketPortal runat="server" id="ucTicketPortal" />
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
                 </div>
             </div>

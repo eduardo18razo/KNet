@@ -12,7 +12,7 @@
             <br>
             <h3 class="h6">
                 <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
-                / Catálogo </h3>
+                / Encuestas </h3>
             <hr />
             <section class="module">
                 <div class="row">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="module-inner">
-                            <asp:LinkButton runat="server" CssClass="btn btn-success fa fa-plus" Text="Crear nueco catálogo" OnClick="btnNew_OnClick" />
+                            <asp:LinkButton runat="server" CssClass="btn btn-success fa fa-plus" Text="Crear nguid encuesta" OnClick="btnNew_OnClick" />
                         </div>
                     </div>
                 </div>

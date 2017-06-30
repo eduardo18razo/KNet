@@ -1,10 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcAltaEncuesta.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.Encuestas.UcAltaEncuesta" %>
 <asp:UpdatePanel ID="upEncuesta" runat="server">
     <ContentTemplate>
-        <asp:HiddenField runat="server" ID="hfAlta" />
+        <asp:HiddenField runat="server" ID="hfAlta" Value="true" />
         <asp:HiddenField runat="server" ID="hfIdGrupo" />
-        <asp:HiddenField runat="server" ID="hfIdEncuesta" />
+        <asp:HiddenField runat="server" ID="hfIdEncuesta" Value="0"/>
         <asp:HiddenField runat="server" ID="hfModalPadre" />
+        <asp:HiddenField runat="server" ID="hfTotalPonderacion" />
         <div class="modal-header">
             <asp:LinkButton class="close" ID="btnClose" OnClick="btnClose_OnClick" runat="server" Text='&times;' />
             <h2 class="modal-title" id="modal-new-ticket-label">
@@ -26,7 +27,7 @@
                             <b>CONFIGURACIÓN PARA EL CLIENTE</b>
                         </div>
                         <div class="form-group">
-                            Assigna a esta encuesta que será visible para los clientes. Pueden agregar una breve descripción o instrucciones para facilitar su llenado.
+                            Asigna a esta encuesta que será visible para los clientes. Pueden agregar una breve descripción o instrucciones para facilitar su llenado.
                         </div>
                         <div class="form-group">
                             <asp:TextBox runat="server" ID="txtTituloCliente" placeholder="Titúlo de la encuesta" MaxLength="50" CssClass="form-control"></asp:TextBox>
@@ -41,7 +42,7 @@
                             Agrega las preguntas y su ponderación. Recuerda que la ponderación debe sumar 100.
                         </div>
                         <div class="form-group">
-                            <asp:Repeater runat="server" ID="rptPreguntas">
+                            <asp:Repeater runat="server" ID="rptPreguntas" OnItemDataBound="rptPreguntas_OnItemDataBound">
                                 <HeaderTemplate>
                                     <div class="row">
                                         <div class="col-xs-6 col-sm-5">Pregunta</div>
@@ -52,13 +53,13 @@
                                     <div class="row">
                                         <div class="margen-arriba">
                                             <div class="col-xs-6 col-md-5">
-                                                <asp:TextBox runat="server" ID="txtPregunta" CssClass="form-control" />
+                                                <asp:TextBox runat="server" ID="txtPregunta" CssClass="form-control" Text='<%# Eval("Pregunta") %>'/>
                                             </div>
                                             <div class="col-xs-5 col-md-2">
-                                                <asp:TextBox runat="server" ID="txtPonderacion" CssClass="form-control" />
+                                                <asp:TextBox runat="server" ID="txtPonderacion" CssClass="form-control" Text='<%# Eval("Ponderacion") %>' OnTextChanged="txtPonderacion_OnTextChanged" AutoPostBack="True"/>
                                             </div>
-                                            <asp:LinkButton runat="server" ID="btnSubir" CssClass="fa fa-angle-double-up" CommandArgument='<%# Eval("Id") %>' CommandName='<%# Container.ItemIndex %>' />
-                                            <asp:LinkButton runat="server" ID="btnBajar" CssClass="fa fa-angle-double-down" CommandArgument='<%# Eval("Id") %>' CommandName='<%# Container.ItemIndex %>'/>
+                                            <asp:LinkButton runat="server" ID="btnSubir" CssClass="fa fa-angle-double-up fa-20x" CommandArgument='<%# Eval("Id") %>' CommandName='<%# Container.ItemIndex %>' /><br/>
+                                            <asp:LinkButton runat="server" ID="btnBajar" CssClass="fa fa-angle-double-down fa-20x" CommandArgument='<%# Eval("Id") %>' CommandName='<%# Container.ItemIndex %>'/>
                                         </div>
                                     </div>
                                 </ItemTemplate>
@@ -74,10 +75,11 @@
                                 </FooterTemplate>
                             </asp:Repeater>
                         </div>
-                        <div class="form-group">
-                            <asp:Button ID="btnGuardarEncuesta" runat="server" CssClass="btn btn-lg btn-success" Text="Guardar" OnClick="btnGuardarEncuesta_OnClick" />
-                            <asp:Button ID="btnLimpiarEncuesta" runat="server" CssClass="btn btn-lg btn-danger" Text="Limpiar" OnClick="btnLimpiarEncuesta_OnClick" />
-                            <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-lg btn-danger" Text="Cancelar" OnClick="btnCancelar_OnClick" />
+                        <div class="form-group text-right">
+                            <asp:Button ID="btnLimpiarEncuesta" runat="server" CssClass="btn btn-lg btn-danger" Text="Limpiar" OnClick="btnLimpiarEncuesta_OnClick" Visible="False"/>
+                            <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-lg btn-danger" Text="Cancelar" OnClick="btnCancelar_OnClick" Visible="False"/>
+                            <asp:Button runat="server" ID="btnPreview" Text="Previsualizar" CssClass="btn btn-default" OnClick="btnPreview_OnClick"/>
+                            <asp:Button runat="server" ID="btnGuardarEncuesta" Text="Guardar" CssClass="btn btn-primary" OnClick="btnGuardarEncuesta_OnClick" />
                         </div>
                     </div>
                 </div>

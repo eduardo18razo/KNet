@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Services.Protocols;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -44,6 +45,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             {
                 ddlTipoUsuario.Enabled = value;
                 hfAlta.Value = value.ToString();
+                hfGeneraUsuario.Value = value.ToString();
                 if (!value)
                 {
                     btnModalOrganizacion.CssClass = "btn btn-primary";
@@ -95,7 +97,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 {
                     string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
                     error += "</ul>";
-                    ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "ScriptErrorAlert",
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert",
                         "ErrorAlert('Error','" + error + "');", true);
                 }
             }
@@ -165,27 +167,29 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                     imgPerfil.ImageUrl = user.Foto != null
                         ? "~/DisplayImages.ashx?id=" + user.Id
                         : "~/assets/images/profiles/profile-square-1.png";
+                    lblFechaUltimoAcceso.Text = user.FechaUltimoAccesoExito;
                     txtAp.Text = user.ApellidoPaterno;
                     txtAm.Text = user.ApellidoMaterno;
                     txtNombre.Text = user.Nombre;
-                    Metodos.LlenaComboCatalogo(ddlPuesto,
-                        _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true));
-                    if (user.IdPuesto != null)
+                    txtUserName.Text = user.NombreUsuario;
+                    txtUserName.ReadOnly = true;
+                    Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true)); if (user.IdPuesto != null)
                         ddlPuesto.SelectedValue = user.IdPuesto.ToString();
                     chkVip.Checked = user.Vip;
                     chkDirectoriActivo.Checked = user.DirectorioActivo;
+                    chkPersonaFisica.Checked = user.PersonaFisica;
                     int contadorCasa, contadorCel, contadorOficina;
                     foreach (TelefonoUsuario telefonoUsuario in user.TelefonoUsuario)
                     {
                         foreach (RepeaterItem item in rptTelefonos.Items)
                         {
-                            DropDownList ddlTipoTelefono = (DropDownList) item.FindControl("ddlTipoTelefono");
+                            DropDownList ddlTipoTelefono = (DropDownList)item.FindControl("ddlTipoTelefono");
                             if (telefonoUsuario.IdTipoTelefono == Convert.ToInt32(ddlTipoTelefono.SelectedValue))
                             {
-                                TextBox txtNumero = (TextBox) item.FindControl("txtNumero");
+                                TextBox txtNumero = (TextBox)item.FindControl("txtNumero");
                                 if (txtNumero.Text == string.Empty)
                                 {
-                                    TextBox txtExtencion = (TextBox) item.FindControl("txtExtension");
+                                    TextBox txtExtencion = (TextBox)item.FindControl("txtExtension");
                                     txtNumero.Text = telefonoUsuario.Numero;
                                     txtExtencion.Text = telefonoUsuario.Extension;
                                     break;
@@ -197,7 +201,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                     {
                         foreach (RepeaterItem item in rptCorreos.Items)
                         {
-                            TextBox txtCorreo = (TextBox) item.FindControl("txtCorreo");
+                            TextBox txtCorreo = (TextBox)item.FindControl("txtCorreo");
                             if (txtCorreo.Text != string.Empty) continue;
                             txtCorreo.Text = correoUsuario.Correo;
                             break;
@@ -209,7 +213,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                     MuestraUbicacion(new List<Ubicacion>());
 
                     List<HelperAsignacionRol> lstRoles =
-                        user.UsuarioGrupo.Select(s => new {s.IdRol, s.Rol.Descripcion})
+                        user.UsuarioGrupo.Select(s => new { s.IdRol, s.Rol.Descripcion })
                             .Distinct()
                             .Select(typeAnonymous => new HelperAsignacionRol
                             {
@@ -246,7 +250,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                                 grupoToAdd.SubGrupos = new List<HelperSubGurpoUsuario>();
                                 HelperSubGurpoUsuario subGpoToAdd = new HelperSubGurpoUsuario
                                 {
-                                    Id = (int) usuarioGrupo.IdSubGrupoUsuario,
+                                    Id = (int)usuarioGrupo.IdSubGrupoUsuario,
                                     Descripcion = usuarioGrupo.SubGrupoUsuario.SubRol.Descripcion
                                 };
                                 grupoToAdd.SubGrupos.Add(subGpoToAdd);
@@ -298,25 +302,25 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
 
         private void ValidaCapturaDatosGenerales()
         {
-            StringBuilder sb = new StringBuilder();
+            List<string> sb = new List<string>();
 
             if (txtAp.Text.Trim() == string.Empty)
-                sb.AppendLine("<li>Apellido Paterno es un campo obligatorio.</li>");
+                sb.Add("Apellido Paterno es un campo obligatorio.");
             if (txtAm.Text.Trim() == string.Empty)
-                sb.AppendLine("<li>Apellido Materno es un campo obligatorio.</li>");
+                sb.Add("Apellido Materno es un campo obligatorio.");
             if (txtNombre.Text.Trim() == string.Empty)
-                sb.AppendLine("<li>Nombre es un campo obligatorio.</li>");
+                sb.Add("Nombre es un campo obligatorio.");
             if (txtNombre.Text.Trim() == string.Empty)
-                sb.AppendLine("<li>Nombre de Usuario es un campo obligatorio.</li>");
+                sb.Add("Nombre de Usuario es un campo obligatorio.");
 
             List<ParametrosTelefonos> lstParamTelefonos =
                 _servicioParametros.TelefonosObligatorios(Convert.ToInt32(ddlTipoUsuario.SelectedValue));
             List<TelefonoUsuario> telefonoUsuario = new List<TelefonoUsuario>();
             foreach (RepeaterItem item in rptTelefonos.Items)
             {
-                DropDownList ddlTipoTelefono = (DropDownList) item.FindControl("ddlTipoTelefono");
-                TextBox numero = (TextBox) item.FindControl("txtNumero");
-                TextBox extension = (TextBox) item.FindControl("txtExtension");
+                DropDownList ddlTipoTelefono = (DropDownList)item.FindControl("ddlTipoTelefono");
+                TextBox numero = (TextBox)item.FindControl("txtNumero");
+                TextBox extension = (TextBox)item.FindControl("txtExtension");
                 if (ddlTipoTelefono != null && numero != null && extension != null)
                 {
                     telefonoUsuario.Add(new TelefonoUsuario
@@ -332,7 +336,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             {
                 if (telefono.Numero.Trim() != string.Empty && telefono.Numero.Length < 10)
                 {
-                    sb.Append(string.Format("<li>El telefono {0} debe ser de 10 digitos.</li>", telefono.Numero));
+                    sb.Add(string.Format("El telefono {0} debe ser de 10 digitos.", telefono.Numero));
                 }
                 ParametrosTelefonos parametroTipoTelefono =
                     lstParamTelefonos.Single(s => s.IdTipoTelefono == telefono.IdTipoTelefono);
@@ -341,7 +345,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                         c => c.IdTipoTelefono == telefono.IdTipoTelefono && c.Numero.Trim() != string.Empty) <
                     parametroTipoTelefono.Obligatorios)
                 {
-                    sb.AppendLine(String.Format("<li>Debe capturar al menos {0} telefono(s) de {1}.</li>",
+                    sb.Add(String.Format("Debe capturar al menos {0} telefono(s) de {1}.",
                         parametroTipoTelefono.Obligatorios, parametroTipoTelefono.TipoTelefono.Descripcion));
                     break;
                 }
@@ -349,7 +353,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             var sFormato = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
             List<TextBox> lstCorreos =
                 rptCorreos.Items.Cast<RepeaterItem>()
-                    .Select(item => (TextBox) item.FindControl("txtCorreo"))
+                    .Select(item => (TextBox)item.FindControl("txtCorreo"))
                     .Where(w => w.Text != string.Empty)
                     .ToList();
             foreach (TextBox txtMail in lstCorreos)
@@ -358,16 +362,16 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 {
                     if (Regex.Replace(txtMail.Text.Trim(), sFormato, String.Empty).Length != 0)
                     {
-                        sb.AppendLine(string.Format("Correo {0} con formato invalido", txtMail.Text.Trim()));
+                        sb.Add(string.Format("Correo {0} con formato invalido", txtMail.Text.Trim()));
                     }
                 }
             }
 
             List<CorreoUsuario> correos =
                 rptCorreos.Items.Cast<RepeaterItem>()
-                    .Select(item => (TextBox) item.FindControl("txtCorreo"))
+                    .Select(item => (TextBox)item.FindControl("txtCorreo"))
                     .Where(correo => correo != null & correo.Text.Trim() != string.Empty)
-                    .Select(correo => new CorreoUsuario {Correo = correo.Text.Trim()})
+                    .Select(correo => new CorreoUsuario { Correo = correo.Text.Trim() })
                     .ToList();
 
             //TODO: Implementar metodo unico
@@ -376,48 +380,45 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                     .SingleOrDefault(s => s.Id == int.Parse(ddlTipoUsuario.SelectedValue));
             if (paramCorreos != null &&
                 (correos.Count(c => c.Correo != string.Empty) < paramCorreos.CorreosObligatorios))
-                sb.AppendLine(String.Format("<li>Debe captura al menos {0} correo(s).</li>.",
+                sb.Add(String.Format("Debe captura al menos {0} correo(s).",
                     paramCorreos.CorreosObligatorios));
 
-            if (sb.ToString() != string.Empty)
+            if (sb.Count > 0)
             {
-                sb.Append("</ul>");
-                sb.Insert(0, "<ul>");
                 sb.Insert(0, "<h3>Datos Generales</h3>");
-                throw new Exception(sb.ToString());
+                _lstError = sb;
+                throw new Exception("");
             }
         }
 
         private void ValidaCapturaRoles()
         {
-            StringBuilder sb = new StringBuilder();
+            List<string> sb = new List<string>();
 
             if (!rptRoles.Items.Cast<RepeaterItem>().Any())
-                sb.AppendLine("<li>Debe seleccionar un Rol Grupo de usuario.</li>");
+                sb.Add("Debe seleccionar un Rol Grupo de usuario.");
 
-            if (sb.ToString() != string.Empty)
+            if (sb.Count > 0)
             {
-                sb.Append("</ul>");
-                sb.Insert(0, "<ul>");
                 sb.Insert(0, "<h3>Roles</h3>");
-                throw new Exception(sb.ToString());
+                _lstError = sb;
+                throw new Exception("");
             }
         }
 
         private void ValidaCapturaGrupos()
         {
-            StringBuilder sb = new StringBuilder();
+            List<string> sb = new List<string>();
 
 
             if (!ucRolGrupo.ValidaCapturaGrupos())
-                sb.AppendLine("<li>Debe asignar al menos un Grupo.</li>");
+                sb.Add("Debe asignar al menos un Grupo.");
 
-            if (sb.ToString() != string.Empty)
+            if (sb.Count > 0)
             {
-                sb.Append("</ul>");
-                sb.Insert(0, "<ul>");
                 sb.Insert(0, "<h3>Grupos</h3>");
-                throw new Exception(sb.ToString());
+                _lstError = sb;
+                throw new Exception("");
             }
         }
 
@@ -432,17 +433,18 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             txtNombre.ReadOnly = habilitado;
             txtAp.ReadOnly = habilitado;
             txtAm.ReadOnly = habilitado;
-            txtUserName.ReadOnly = habilitado;
+            txtUserName.ReadOnly = true;
             ddlPuesto.Enabled = !habilitado && !EditarDetalle;
             btnAddPuesto.Visible = !habilitado && !EditarDetalle;
             chkVip.Enabled = !habilitado;
             chkDirectoriActivo.Enabled = !habilitado;
+            chkPersonaFisica.Enabled = !habilitado;
             btnAddTelefono.Visible = !habilitado;
             foreach (RepeaterItem item in rptTelefonos.Items)
             {
-                DropDownList ddlTipoTelefono = (DropDownList) item.FindControl("ddlTipoTelefono");
-                TextBox numero = (TextBox) item.FindControl("txtNumero");
-                TextBox extension = (TextBox) item.FindControl("txtExtension");
+                DropDownList ddlTipoTelefono = (DropDownList)item.FindControl("ddlTipoTelefono");
+                TextBox numero = (TextBox)item.FindControl("txtNumero");
+                TextBox extension = (TextBox)item.FindControl("txtExtension");
                 if (ddlTipoTelefono != null && numero != null && extension != null)
                 {
                     ddlTipoTelefono.Enabled = !habilitado && !EditarDetalle;
@@ -453,19 +455,19 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             btnAddCorreo.Visible = !habilitado;
             foreach (RepeaterItem item in rptCorreos.Items)
             {
-                TextBox txt = (TextBox) item.FindControl("txtCorreo");
+                TextBox txt = (TextBox)item.FindControl("txtCorreo");
                 if (txt != null)
-                    txt.ReadOnly = habilitado; 
+                    txt.ReadOnly = habilitado;
             }
 
             foreach (RepeaterItem item in rptRoles.Items)
             {
-                Repeater rpt = (Repeater) item.FindControl("rptGrupos");
+                Repeater rpt = (Repeater)item.FindControl("rptGrupos");
                 if (rpt != null)
                 {
                     foreach (RepeaterItem gpoItem in rpt.Items)
                     {
-                        LinkButton btn = (LinkButton)gpoItem.FindControl("btnRemove");
+                        LinkButton btn = (LinkButton)gpoItem.FindControl("btnRemoveRol");
                         if (btn != null)
                             btn.Visible = !habilitado && !EditarDetalle;
                     }
@@ -474,6 +476,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             btnModalOrganizacion.Visible = !habilitado && !EditarDetalle;
             btnModalUbicacion.Visible = !habilitado && !EditarDetalle;
             btnModalRoles.Visible = !habilitado && !EditarDetalle;
+            btnCancelarEdicion.Visible = !habilitado;
             btnGuardar.Visible = !habilitado;
         }
 
@@ -494,11 +497,15 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 ucAltaUbicaciones.OnCancelarModal += UcUbicacion_OnCancelarModal;
 
                 ucRolGrupo.OnTerminarModal += UcRolGrupoOnTerminarModal;
-
+                ucRolGrupo.OnCancelarModal += UcRolGrupoOnOnCancelarModal;
                 ucRolGrupo.AsignacionAutomatica = false;
                 if (!IsPostBack)
                 {
                     EditarDetalle = false;
+                    if (Request.QueryString["Consulta"] != null)
+                    {
+                        hfConsultas.Value = bool.Parse(Request.QueryString["Consulta"]).ToString();
+                    }
                     if (Request.QueryString["IdUsuario"] != null && Request.QueryString["Detail"] == null)
                     {
                         IdUsuario = int.Parse(Request.QueryString["IdUsuario"]);
@@ -509,7 +516,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                     else if (Request.QueryString["Detail"] != null)
                     {
                         lblTitle.Text = "Mi Perfil";
-                        IdUsuario = ((Usuario) Session["UserData"]).Id;
+                        IdUsuario = ((Usuario)Session["UserData"]).Id;
                         EsDetalle = true;
                     }
                     else
@@ -534,31 +541,20 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
+
                 Alerta = _lstError;
             }
         }
 
-        private void MostrarGruposSeleccionados(List<HelperAsignacionRol> gruposAsignados)
+        protected void btnEditar_OnClick(object sender, EventArgs e)
         {
             try
             {
-                rptRoles.DataSource = gruposAsignados;
-                rptRoles.DataBind();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        private void UcRolGrupoOnTerminarModal()
-        {
-            try
-            {
-                //TODO: AGREGAR SUBGRUPO USUARIO
-                MostrarGruposSeleccionados(ucRolGrupo.GruposSeleccionados);
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script", "CierraPopup(\"#modalRoles\");",
-                    true);
+                hfGeneraUsuario.Value = false.ToString();
+                EditarDetalle = !((Usuario)Session["UserData"]).Administrador;
+                EsDetalle = false;
+                Alta = false;
+                HabilitaDetalle(EsDetalle);
             }
             catch (Exception ex)
             {
@@ -570,6 +566,41 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 Alerta = _lstError;
             }
         }
+
+        protected void btnCambiarImagen_OnClick(object sender, EventArgs e)
+        {
+            //try
+            //{
+            //    BusinessFile.Imagenes.ImageToByteArray()
+            //}
+            //catch (Exception ex)
+            //{
+            //    if (_lstError == null)
+            //    {
+            //        _lstError = new List<string>();
+            //    }
+            //    _lstError.Add(ex.Message);
+            //    Alerta = _lstError;
+            //}
+        }
+        protected void Upload(object sender, EventArgs e)
+        {
+            try
+            {
+                _servicioUsuarios.GuardarFoto(IdUsuario, FileUpload1.FileBytes);
+                imgPerfil.ImageUrl = "~/DisplayImages.ashx?id=" + IdUsuario;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
 
         protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
         {
@@ -631,6 +662,568 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             }
         }
 
+        protected void btnAddPuesto_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    throw new Exception("Seleccione el Tipo de usuario");
+                ucAltaPuesto.EsAlta = true;
+                ucAltaPuesto.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAreas\");",
+                    true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void txtAp_OnTextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!bool.Parse(hfGeneraUsuario.Value))
+                    return;
+                if (txtNombre.Text.Trim().Length <= 0)
+                    return;
+                string username = txtUserName.Text.Trim() == string.Empty
+                    ? (txtNombre.Text.Substring(0, 1).ToLower() + txtAp.Text.Trim().ToLower()).Replace(" ", string.Empty)
+                    : txtUserName.Text.Trim();
+                int limite = 2;
+                if (_servicioUsuarios.ValidaUserName(username))
+                {
+                    for (int i = 1; i < limite; i++)
+                    {
+                        string tmpUsername = username + i;
+                        if (!_servicioUsuarios.ValidaUserName(tmpUsername))
+                        {
+                            username = tmpUsername;
+                            break;
+                        }
+                        limite++;
+                    }
+                }
+                txtUserName.Text = username;
+                if (txtAp.ID == ((TextBox)sender).ID)
+                {
+                    txtAm.Focus();
+                }
+                else if (txtNombre.ID == ((TextBox)sender).ID)
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        
+
+        #region Delegados
+
+
+        private void UcAltaPuestoOnOnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAreas\");",
+                    true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        private void UcAltaPuestoOnOnAceptarModal()
+        {
+            try
+            {
+                Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true));
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAreas\");",
+                    true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        #endregion Delegados
+
+        protected void ddlTipoTelefono_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                DropDownList ddl = (DropDownList)sender;
+                if (sender != null)
+                {
+                    RepeaterItem item = (RepeaterItem)ddl.NamingContainer;
+                    item.FindControl("divExtension").Visible = false;
+                    if (int.Parse(ddl.SelectedValue) == (int)BusinessVariables.EnumTipoTelefono.Oficina)
+                    {
+                        item.FindControl("divExtension").Visible = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void rptTelefonos_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                DropDownList ddlTipoTelefono = (DropDownList)e.Item.FindControl("ddlTipoTelefono");
+                if (ddlTipoTelefono != null)
+                {
+                    ddlTipoTelefono.DataSource = _servicioTipoTelefono.ObtenerTiposTelefono(true);
+                    ddlTipoTelefono.DataTextField = "Descripcion";
+                    ddlTipoTelefono.DataValueField = "Id";
+                    ddlTipoTelefono.DataBind();
+                    if (((TelefonoUsuario)e.Item.DataItem).IdTipoTelefono == 0)
+                    {
+                        e.Item.FindControl("divExtension").Visible = false;
+                        ddlTipoTelefono.Enabled = true;
+                    }
+                    else
+                    {
+                        ddlTipoTelefono.SelectedValue = ((TelefonoUsuario)e.Item.DataItem).IdTipoTelefono.ToString();
+                        e.Item.FindControl("divExtension").Visible =
+                            ((TelefonoUsuario)e.Item.DataItem).IdTipoTelefono ==
+                            (int)BusinessVariables.EnumTipoTelefono.Oficina;
+                        ddlTipoTelefono.Enabled = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnAddTelefono_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                List<TelefonoUsuario> tmpTelefonos = new List<TelefonoUsuario>();
+                foreach (RepeaterItem item in rptTelefonos.Items)
+                {
+                    Label lblObligatorio = (Label)item.FindControl("lblObligatorio");
+                    TextBox txtNumero = (TextBox)item.FindControl("txtNumero");
+                    TextBox txtExtension = (TextBox)item.FindControl("txtExtension");
+                    DropDownList ddlTipoTelefono = (DropDownList)item.FindControl("ddlTipoTelefono");
+                    TelefonoUsuario tel = new TelefonoUsuario
+                    {
+                        Obligatorio = bool.Parse(lblObligatorio.Text),
+                        Numero = txtNumero.Text,
+                        Extension = txtExtension.Text,
+                        IdTipoTelefono = int.Parse(ddlTipoTelefono.SelectedValue)
+                    };
+                    tmpTelefonos.Add(tel);
+                }
+                tmpTelefonos.Add(new TelefonoUsuario());
+                Session["TelefonosUsuario"] = tmpTelefonos;
+                LlenaTelefonosUsuarios();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnAddCorreo_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                List<CorreoUsuario> tmpCorreos = new List<CorreoUsuario>();
+                foreach (RepeaterItem item in rptCorreos.Items)
+                {
+                    TextBox txtCorreo = (TextBox)item.FindControl("txtCorreo");
+                    CorreoUsuario correo = new CorreoUsuario
+                    {
+                        Correo = txtCorreo.Text
+                    };
+                    tmpCorreos.Add(correo);
+                }
+                tmpCorreos.Add(new CorreoUsuario());
+                Session["CorreoUsuario"] = tmpCorreos;
+                LlenaCorreosUsuarios();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        #region Organizacion
+
+        protected void btnModalOrganizacion_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    throw new Exception("Seleccione el Tipo de usuario");
+                ucAltaOrganizaciones.EsAlta = true;
+                ucAltaOrganizaciones.EsSeleccion = true;
+                if (rptOrganizacion.Items.Count > 0)
+                {
+                    ucAltaOrganizaciones.IdOrganizacion =
+                        int.Parse(((Label)rptOrganizacion.Items[0].FindControl("lblIdOrganizacion")).Text);
+                    ucAltaOrganizaciones.SetOrganizacionSeleccion();
+                }
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script",
+                    "MostrarPopup(\"#modalOrganizacion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        private void MuestraOrganizacion(List<Organizacion> org)
+        {
+            try
+            {
+                org.Add(ucAltaOrganizaciones.OrganizacionSeleccionada);
+                rptOrganizacion.DataSource = org;
+                rptOrganizacion.DataBind();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        private void ucOrganizacion_OnTerminarModal()
+        {
+            try
+            {
+                MuestraOrganizacion(new List<Organizacion>());
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script",
+                    "CierraPopup(\"#modalOrganizacion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+            }
+        }
+
+        private void ucOrganizacion_OnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script",
+                    "CierraPopup(\"#modalOrganizacion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        #endregion Organizacion
+
+        #region Ubicacion
+
+        protected void btnModalUbicacion_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    throw new Exception("Seleccione el Tipo de usuario");
+                ucAltaUbicaciones.EsAlta = true;
+                ucAltaUbicaciones.EsSeleccion = true;
+                if (rptUbicacion.Items.Count > 0)
+                {
+                    ucAltaUbicaciones.IdUbicacion =
+                        int.Parse(((Label)rptOrganizacion.Items[0].FindControl("lblIdUbicacion")).Text);
+                    ucAltaUbicaciones.SetUbicacionSeleccion();
+                }
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script",
+                    "MostrarPopup(\"#modalUbicacion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        private void MuestraUbicacion(List<Ubicacion> ub)
+        {
+            try
+            {
+                ub.Add(ucAltaUbicaciones.UbicacionSeleccionada);
+                rptUbicacion.DataSource = ub;
+                rptUbicacion.DataBind();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        private void UcUbicacion_OnTerminarModal()
+        {
+            try
+            {
+                MuestraUbicacion(new List<Ubicacion>());
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script",
+                    "CierraPopup(\"#modalUbicacion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+            }
+
+        }
+
+        private void UcUbicacion_OnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script",
+                    "CierraPopup(\"#modalUbicacion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                //UcUbicacion.AlertaUbicacion = _lstError;
+            }
+        }
+
+        #endregion Ubicacion
+
+        #region RolesGrupos
+
+        private void MostrarGruposSeleccionados(List<HelperAsignacionRol> gruposAsignados)
+        {
+            try
+            {
+                rptRoles.DataSource = gruposAsignados;
+                rptRoles.DataBind();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private void UcRolGrupoOnOnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalRoles\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        private void UcRolGrupoOnTerminarModal()
+        {
+            try
+            {
+                //TODO: AGREGAR SUBGRUPO USUARIO
+                MostrarGruposSeleccionados(ucRolGrupo.GruposSeleccionados);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalRoles\");",
+                    true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnModalRoles_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    throw new Exception("Seleccione el Tipo de usuario");
+                ucRolGrupo.AsignacionAutomatica = false;
+                ucRolGrupo.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalRoles\");",
+                    true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void rptRoles_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem) return;
+                Repeater rpt = (Repeater)e.Item.FindControl("rptGrupos");
+                rpt.DataSource = ((HelperAsignacionRol)e.Item.DataItem).Grupos;
+                rpt.DataBind();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void rptGrupos_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem) return;
+                Repeater rpt = (Repeater)e.Item.FindControl("rptSubGrupos");
+                rpt.DataSource = ((HelperAsignacionGrupoUsuarios)e.Item.DataItem).SubGrupos;
+                rpt.DataBind();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnRemoveRol_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (int.Parse(((LinkButton)sender).CommandArgument) == (int)BusinessVariables.EnumTiposGrupos.Administrador && ((Usuario)Session["UserData"]).Id == IdUsuario)
+                    throw new Exception("No puede eliminar este rol.");
+                ucRolGrupo.EliminarSeleccion(int.Parse(((LinkButton)sender).CommandArgument));
+                MostrarGruposSeleccionados(ucRolGrupo.GruposSeleccionados);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        #endregion RolesGrupos
+
+        protected void btnCancelarEdicion_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (bool.Parse(hfConsultas.Value))
+                {
+                    Response.Redirect("~/Users/Administracion/Usuarios/FrmConsultaUsuarios.aspx");
+                }
+                else
+                    Response.Redirect(Request.RawUrl);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
         protected void btnGuardar_OnClick(object sender, EventArgs e)
         {
             try
@@ -649,50 +1242,47 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                     DirectorioActivo = chkDirectoriActivo.Checked,
                     IdPuesto =
                         ddlPuesto.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione
-                            ? (int?) null
+                            ? (int?)null
                             : Convert.ToInt32(ddlPuesto.SelectedValue),
                     Vip = chkVip.Checked,
+                    PersonaFisica = chkPersonaFisica.Checked,
                     NombreUsuario = txtUserName.Text.Trim(),
                     Password = ResolveUrl("~/ConfirmacionCuenta.aspx"),
                     Habilitado = true
                 };
-                List<ParametrosTelefonos> lstParamTelefonos =
-                    _servicioParametros.TelefonosObligatorios(Convert.ToInt32(ddlTipoUsuario.SelectedValue));
-                int telefonosObligatoriosCasa =
-                    lstParamTelefonos.Count(w => w.IdTipoTelefono == (int) BusinessVariables.EnumTipoTelefono.Casa);
-                int telefonosObligatoriosCelular =
-                    lstParamTelefonos.Count(w => w.IdTipoTelefono == (int) BusinessVariables.EnumTipoTelefono.Celular);
-                int telefonosObligatoriosOficina =
-                    lstParamTelefonos.Count(w => w.IdTipoTelefono == (int) BusinessVariables.EnumTipoTelefono.Oficina);
+                List<ParametrosTelefonos> lstParamTelefonos = _servicioParametros.TelefonosObligatorios(Convert.ToInt32(ddlTipoUsuario.SelectedValue));
+                int telefonosObligatoriosCasa = lstParamTelefonos.Count(w => w.IdTipoTelefono == (int)BusinessVariables.EnumTipoTelefono.Casa);
+                int telefonosObligatoriosCelular = lstParamTelefonos.Count(w => w.IdTipoTelefono == (int)BusinessVariables.EnumTipoTelefono.Celular);
+                int telefonosObligatoriosOficina = lstParamTelefonos.Count(w => w.IdTipoTelefono == (int)BusinessVariables.EnumTipoTelefono.Oficina);
                 int contadorCasa = 0;
                 int contadorCelular = 0;
                 int contadorOficina = 0;
                 usuario.TelefonoUsuario = new List<TelefonoUsuario>();
                 foreach (RepeaterItem item in rptTelefonos.Items)
                 {
-                    DropDownList ddlTipoTelefono = (DropDownList) item.FindControl("ddlTipoTelefono");
-                    TextBox numero = (TextBox) item.FindControl("txtNumero");
-                    TextBox extension = (TextBox) item.FindControl("txtExtension");
+                    DropDownList ddlTipoTelefono = (DropDownList)item.FindControl("ddlTipoTelefono");
+                    TextBox numero = (TextBox)item.FindControl("txtNumero");
+                    TextBox extension = (TextBox)item.FindControl("txtExtension");
                     bool obligatorio = false;
                     if (ddlTipoTelefono != null && numero != null && extension != null)
                     {
                         switch (Convert.ToInt32(ddlTipoTelefono.SelectedValue.Trim()))
                         {
-                            case (int) BusinessVariables.EnumTipoTelefono.Casa:
+                            case (int)BusinessVariables.EnumTipoTelefono.Casa:
                                 if (contadorCasa < telefonosObligatoriosCasa)
                                 {
                                     obligatorio = true;
                                     contadorCasa++;
                                 }
                                 break;
-                            case (int) BusinessVariables.EnumTipoTelefono.Celular:
+                            case (int)BusinessVariables.EnumTipoTelefono.Celular:
                                 if (contadorCelular < telefonosObligatoriosCelular)
                                 {
                                     obligatorio = true;
                                     contadorCelular++;
                                 }
                                 break;
-                            case (int) BusinessVariables.EnumTipoTelefono.Oficina:
+                            case (int)BusinessVariables.EnumTipoTelefono.Oficina:
                                 if (contadorOficina < telefonosObligatoriosOficina)
                                 {
                                     obligatorio = true;
@@ -706,17 +1296,13 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                             IdTipoTelefono = Convert.ToInt32(ddlTipoTelefono.SelectedValue.Trim()),
                             Numero = numero.Text.Trim(),
                             Extension = extension.Text.Trim(),
-                            Obligatorio = numero.CssClass.Contains("obligatorio"),
+                            Obligatorio = obligatorio,
                             Confirmado = false
                         });
                     }
                 }
                 usuario.CorreoUsuario = new List<CorreoUsuario>();
-                foreach (
-                    TextBox correo in
-                        rptCorreos.Items.Cast<RepeaterItem>()
-                            .Select(item => (TextBox) item.FindControl("txtCorreo"))
-                            .Where(correo => correo != null & correo.Text.Trim() != string.Empty))
+                foreach (TextBox correo in rptCorreos.Items.Cast<RepeaterItem>().Select(item => (TextBox)item.FindControl("txtCorreo")).Where(correo => correo != null & correo.Text.Trim() != string.Empty))
                 {
                     usuario.CorreoUsuario.Add(new CorreoUsuario
                     {
@@ -794,7 +1380,13 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 }
 
                 LimpiarPantalla();
-                Response.Redirect("~/Users/Administracion/Usuarios/FrmConsultaUsuarios.aspx");
+                if (bool.Parse(hfConsultas.Value))
+                {
+                    Response.Redirect("~/Users/Administracion/Usuarios/FrmConsultaUsuarios.aspx");
+                }
+                else
+                    Response.Redirect(Request.RawUrl);
+
                 if (OnAceptarModal != null)
                     OnAceptarModal();
             }
@@ -803,8 +1395,8 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 if (_lstError == null)
                 {
                     _lstError = new List<string>();
+                    _lstError.Add(ex.Message);
                 }
-                _lstError.Add(ex.Message);
                 Alerta = _lstError;
             }
         }
@@ -817,656 +1409,6 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
                 if (OnCancelarModal != null)
                     OnCancelarModal();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnAddPuesto_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    throw new Exception("Seleccione el Tipo de usuario");
-                ucAltaPuesto.EsAlta = true;
-                ucAltaPuesto.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script", "MostrarPopup(\"#modalAreas\");",
-                    true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void txtAp_OnTextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtNombre.Text.Trim().Length <= 0)
-                    return;
-                string username = txtUserName.Text.Trim() == string.Empty
-                    ? (txtNombre.Text.Substring(0, 1).ToLower() + txtAp.Text.Trim().ToLower()).Replace(" ", string.Empty)
-                    : txtUserName.Text.Trim();
-                int limite = 2;
-                if (_servicioUsuarios.ValidaUserName(username))
-                {
-                    for (int i = 1; i < limite; i++)
-                    {
-                        string tmpUsername = username + i;
-                        if (!_servicioUsuarios.ValidaUserName(tmpUsername))
-                        {
-                            username = tmpUsername;
-                            break;
-                        }
-                        limite++;
-                    }
-                }
-                txtUserName.Text = username;
-                if (txtAp.ID == ((TextBox) sender).ID)
-                {
-                    txtAm.Focus();
-                }
-                else if (txtNombre.ID == ((TextBox) sender).ID)
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        #region botones cerrar Cancelar
-
-        protected void btnAceptarDatosGenerales_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                ValidaCapturaDatosGenerales();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnCerrarDatosGenerales_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script",
-                    "CierraPopup(\"#modalDatosGenerales\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnAceptarRoles_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                ValidaCapturaRoles();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script", "CierraPopup(\"#modalRoles\");",
-                    true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                //AlertaRoles = _lstError;
-            }
-        }
-
-        protected void btnCerrarRoles_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script", "CierraPopup(\"#modalRoles\");",
-                    true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                //AlertaRoles = _lstError;
-            }
-        }
-
-        protected void btnAceptarGrupos_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!ucRolGrupo.ValidaCapturaGrupos()) return;
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script", "CierraPopup(\"#modalGrupos\");",
-                    true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-
-            }
-        }
-
-        protected void btnCerrarGrupos_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script", "CierraPopup(\"#modalGrupos\");",
-                    true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-
-            }
-        }
-
-        #endregion botones cerrar Cancelar
-
-        #region Delegados
-
-
-        private void UcAltaPuestoOnOnCancelarModal()
-        {
-            try
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script", "CierraPopup(\"#modalAreas\");",
-                    true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        private void UcAltaPuestoOnOnAceptarModal()
-        {
-            try
-            {
-                Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true));
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script", "CierraPopup(\"#modalAreas\");",
-                    true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        #endregion Delegados
-
-        protected void ddlTipoTelefono_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                DropDownList ddl = (DropDownList) sender;
-                if (sender != null)
-                {
-                    RepeaterItem item = (RepeaterItem) ddl.NamingContainer;
-                    item.FindControl("divExtension").Visible = false;
-                    if (int.Parse(ddl.SelectedValue) == (int) BusinessVariables.EnumTipoTelefono.Oficina)
-                    {
-                        item.FindControl("divExtension").Visible = true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void rptTelefonos_OnItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            try
-            {
-                DropDownList ddlTipoTelefono = (DropDownList) e.Item.FindControl("ddlTipoTelefono");
-                if (ddlTipoTelefono != null)
-                {
-                    ddlTipoTelefono.DataSource = _servicioTipoTelefono.ObtenerTiposTelefono(true);
-                    ddlTipoTelefono.DataTextField = "Descripcion";
-                    ddlTipoTelefono.DataValueField = "Id";
-                    ddlTipoTelefono.DataBind();
-                    if (((TelefonoUsuario) e.Item.DataItem).IdTipoTelefono == 0)
-                    {
-                        e.Item.FindControl("divExtension").Visible = false;
-                        ddlTipoTelefono.Enabled = true;
-                    }
-                    else
-                    {
-                        ddlTipoTelefono.SelectedValue = ((TelefonoUsuario) e.Item.DataItem).IdTipoTelefono.ToString();
-                        e.Item.FindControl("divExtension").Visible =
-                            ((TelefonoUsuario) e.Item.DataItem).IdTipoTelefono ==
-                            (int) BusinessVariables.EnumTipoTelefono.Oficina;
-                        ddlTipoTelefono.Enabled = false;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnAddTelefono_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                List<TelefonoUsuario> tmpTelefonos = new List<TelefonoUsuario>();
-                foreach (RepeaterItem item in rptTelefonos.Items)
-                {
-                    Label lblObligatorio = (Label) item.FindControl("lblObligatorio");
-                    TextBox txtNumero = (TextBox) item.FindControl("txtNumero");
-                    TextBox txtExtension = (TextBox) item.FindControl("txtExtension");
-                    DropDownList ddlTipoTelefono = (DropDownList) item.FindControl("ddlTipoTelefono");
-                    TelefonoUsuario tel = new TelefonoUsuario
-                    {
-                        Obligatorio = bool.Parse(lblObligatorio.Text),
-                        Numero = txtNumero.Text,
-                        Extension = txtExtension.Text,
-                        IdTipoTelefono = int.Parse(ddlTipoTelefono.SelectedValue)
-                    };
-                    tmpTelefonos.Add(tel);
-                }
-                tmpTelefonos.Add(new TelefonoUsuario());
-                Session["TelefonosUsuario"] = tmpTelefonos;
-                LlenaTelefonosUsuarios();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        #region Organizacion
-
-        protected void btnModalOrganizacion_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    throw new Exception("Seleccione el Tipo de usuario");
-                ucAltaOrganizaciones.EsAlta = true;
-                ucAltaOrganizaciones.EsSeleccion = true;
-                if (rptOrganizacion.Items.Count > 0)
-                {
-                    ucAltaOrganizaciones.IdOrganizacion =
-                        int.Parse(((Label) rptOrganizacion.Items[0].FindControl("lblIdOrganizacion")).Text);
-                    ucAltaOrganizaciones.SetOrganizacionSeleccion();
-                }
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script",
-                    "MostrarPopup(\"#modalOrganizacion\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        private void MuestraOrganizacion(List<Organizacion> org)
-        {
-            try
-            {
-                org.Add(ucAltaOrganizaciones.OrganizacionSeleccionada);
-                rptOrganizacion.DataSource = org;
-                rptOrganizacion.DataBind();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-        private void ucOrganizacion_OnTerminarModal()
-        {
-            try
-            {
-                MuestraOrganizacion(new List<Organizacion>());
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script",
-                    "CierraPopup(\"#modalOrganizacion\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-            }
-        }
-
-        private void ucOrganizacion_OnCancelarModal()
-        {
-            try
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script",
-                    "CierraPopup(\"#modalOrganizacion\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        #endregion Organizacion
-
-        #region Ubicacion
-
-        protected void btnModalUbicacion_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    throw new Exception("Seleccione el Tipo de usuario");
-                ucAltaUbicaciones.EsAlta = true;
-                ucAltaUbicaciones.EsSeleccion = true;
-                if (rptUbicacion.Items.Count > 0)
-                {
-                    ucAltaUbicaciones.IdUbicacion =
-                        int.Parse(((Label) rptOrganizacion.Items[0].FindControl("lblIdUbicacion")).Text);
-                    ucAltaUbicaciones.SetUbicacionSeleccion();
-                }
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script",
-                    "MostrarPopup(\"#modalUbicacion\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        private void MuestraUbicacion(List<Ubicacion> ub)
-        {
-            try
-            {
-                ub.Add(ucAltaUbicaciones.UbicacionSeleccionada);
-                rptUbicacion.DataSource = ub;
-                rptUbicacion.DataBind();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-        private void UcUbicacion_OnTerminarModal()
-        {
-            try
-            {
-                MuestraUbicacion(new List<Ubicacion>());
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script",
-                    "CierraPopup(\"#modalUbicacion\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-            }
-
-        }
-
-        private void UcUbicacion_OnCancelarModal()
-        {
-            try
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script",
-                    "CierraPopup(\"#modalUbicacion\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                //UcUbicacion.AlertaUbicacion = _lstError;
-            }
-        }
-
-        #endregion Ubicacion
-
-        #region RolesGrupos
-
-        protected void btnModalRoles_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    throw new Exception("Seleccione el Tipo de usuario");
-                ucRolGrupo.AsignacionAutomatica = false;
-                ucRolGrupo.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
-                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script", "MostrarPopup(\"#modalRoles\");",
-                    true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void rptRoles_OnItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            try
-            {
-                if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem) return;
-                Repeater rpt = (Repeater) e.Item.FindControl("rptGrupos");
-                rpt.DataSource = ((HelperAsignacionRol) e.Item.DataItem).Grupos;
-                rpt.DataBind();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void rptGrupos_OnItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            try
-            {
-                if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem) return;
-                Repeater rpt = (Repeater) e.Item.FindControl("rptSubGrupos");
-                rpt.DataSource = ((HelperAsignacionGrupoUsuarios) e.Item.DataItem).SubGrupos;
-                rpt.DataBind();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                ucRolGrupo.EliminarSeleccion(int.Parse(((LinkButton) sender).CommandArgument));
-                MostrarGruposSeleccionados(ucRolGrupo.GruposSeleccionados);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        #endregion RolesGrupos
-
-        protected void btnAddCorreo_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                List<CorreoUsuario> tmpCorreos = new List<CorreoUsuario>();
-                foreach (RepeaterItem item in rptCorreos.Items)
-                {
-                    TextBox txtCorreo = (TextBox) item.FindControl("txtCorreo");
-                    CorreoUsuario correo = new CorreoUsuario
-                    {
-                        Correo = txtCorreo.Text
-                    };
-                    tmpCorreos.Add(correo);
-                }
-                tmpCorreos.Add(new CorreoUsuario());
-                Session["CorreoUsuario"] = tmpCorreos;
-                LlenaCorreosUsuarios();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnEditar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                EditarDetalle = true;
-                EsDetalle = false;
-                HabilitaDetalle(EsDetalle);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnCambiarImagen_OnClick(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    BusinessFile.Imagenes.ImageToByteArray()
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (_lstError == null)
-            //    {
-            //        _lstError = new List<string>();
-            //    }
-            //    _lstError.Add(ex.Message);
-            //    Alerta = _lstError;
-            //}
-        }
-        protected void Upload(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioUsuarios.GuardarFoto(IdUsuario, FileUpload1.FileBytes);
-                imgPerfil.ImageUrl = "~/DisplayImages.ashx?id=" + IdUsuario;
             }
             catch (Exception ex)
             {

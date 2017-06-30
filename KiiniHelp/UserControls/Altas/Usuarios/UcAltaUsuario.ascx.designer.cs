@@ -67,6 +67,24 @@ namespace KiiniHelp.UserControls.Altas.Usuarios {
         protected global::System.Web.UI.WebControls.HiddenField hfEditaDetalle;
         
         /// <summary>
+        /// Control hfGeneraUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfGeneraUsuario;
+        
+        /// <summary>
+        /// Control hfConsultas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfConsultas;
+        
+        /// <summary>
         /// Control lblTitle.
         /// </summary>
         /// <remarks>
@@ -256,6 +274,15 @@ namespace KiiniHelp.UserControls.Altas.Usuarios {
         protected global::System.Web.UI.WebControls.CheckBox chkDirectoriActivo;
         
         /// <summary>
+        /// Control chkPersonaFisica.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkPersonaFisica;
+        
+        /// <summary>
         /// Control rptTelefonos.
         /// </summary>
         /// <remarks>
@@ -344,6 +371,15 @@ namespace KiiniHelp.UserControls.Altas.Usuarios {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptRoles;
+        
+        /// <summary>
+        /// Control btnCancelarEdicion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarEdicion;
         
         /// <summary>
         /// Control btnGuardar.

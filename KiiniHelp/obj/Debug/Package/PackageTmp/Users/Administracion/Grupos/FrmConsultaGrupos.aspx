@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmConsultaGrupos.aspx.cs" Inherits="KiiniHelp.Users.Administracion.Grupos.FrmConsultaGrupos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="FrmConsultaGrupos.aspx.cs" Inherits="KiiniHelp.Users.Administracion.Grupos.FrmConsultaGrupos" %>
 
 <%@ Register Src="~/UserControls/Consultas/UcConsultaGrupos.ascx" TagPrefix="uc1" TagName="UcConsultaGrupos" %>
 

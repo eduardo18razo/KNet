@@ -51,6 +51,41 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
+
+        public List<GrupoUsuario> ObtenerGruposAtencionByIdUsuario(int idUsuario, bool insertarSeleccion)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            List<GrupoUsuario> result = null;
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                //bool supervisor = db.SubGrupoUsuario.Join(db.UsuarioGrupo, sgu => sgu.Id, ug => ug.IdSubGrupoUsuario, (sgu, ug) => new { sgu, ug })
+                //       .Any(@t => @t.sgu.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor && @t.ug.IdUsuario == idUsuario);
+                //if (supervisor)
+                //{
+                result = db.GrupoUsuario.Join(db.UsuarioGrupo, gu => gu.Id, ug => ug.IdGrupoUsuario, (gu, ug) => new { gu, ug })
+                    .Where(@t => @t.ug.IdUsuario == idUsuario && @t.gu.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención)
+                    .Select(@t => @t.gu).ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
+                        new GrupoUsuario
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
+                        });
+                //}
+                //else
+                //{
+
+                //}
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { db.Dispose(); }
+            return result;
+        }
         public List<GrupoUsuario> ObtenerGruposByIdUsuario(int idUsuario, bool insertarSeleccion)
         {
             List<GrupoUsuario> result;
@@ -421,7 +456,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                IQueryable<GrupoUsuario> qry = db.GrupoUsuario;
+                IQueryable<GrupoUsuario> qry = db.GrupoUsuario.Where(w=> !w.Sistema);
                 if (idTipoUsuario != null)
                     qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
 

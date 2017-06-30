@@ -67,6 +67,24 @@ namespace KiiniHelp.UserControls.Altas.Formularios {
         protected global::System.Web.UI.WebControls.HiddenField hfPreview;
         
         /// <summary>
+        /// Control hfTicketGenerado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfTicketGenerado;
+        
+        /// <summary>
+        /// Control hfRandomGenerado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfRandomGenerado;
+        
+        /// <summary>
         /// Control lblDescripcionMascara.
         /// </summary>
         /// <remarks>

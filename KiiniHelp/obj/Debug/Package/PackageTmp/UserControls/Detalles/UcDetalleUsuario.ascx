@@ -64,17 +64,17 @@
                         <div class="col-lg-12 col-md-12">
                             <div class="module-inner">
                                 <div class="form-group avatar">
-                                    <figure class="figure col-md-1 col-sm-2 col-xs-12 center-content-div">
+                                    <figure class="figure col-lg-1 col-md-2 col-sm-2 center-content-div">
                                         <asp:Image CssClass="img-rounded img-responsive" ImageUrl="~/assets/images/profiles/profile-square-1.png" alt="" runat="server" />
                                         <asp:LinkButton runat="server" Text="Cambiar"></asp:LinkButton>
                                     </figure>
-                                    <div class="form-group col-sm-10">
+                                    <div class="form-group col-lg-10 col-md-10 col-sm-10">
                                         <h2>
-                                            <asp:Label runat="server" ID="lblnombreCompleto" CssClass="col-sm-11" />
+                                            <asp:Label runat="server" ID="lblnombreCompleto" CssClass="col-lg-11 col-md-10 col-sm-10" />
                                         </h2>
                                         <asp:LinkButton runat="server" Text="Editar" CssClass="btn btn-primary " />
                                     </div>
-                                    <div class="form-group col-sm-10">
+                                    <div class="form-group col-lg-10 col-md-10 col-sm-10">
                                         <asp:Label runat="server" Text="Ultimo Acceso" CssClass="col-md-12"></asp:Label>
                                         <asp:Label runat="server" ID="lblFechaUltimoAcceso" Text="Fecha Ultimo Acceso" CssClass="col-md-12"></asp:Label>
                                     </div>
@@ -118,15 +118,15 @@
                                         Puesto*
                                     <asp:DropDownList runat="server" ID="ddlPuesto" CssClass="form-control" />
                                     </div>
-                                    <div class="col-lg-3 col-md-3">
+                                    <div class="col-lg-3 col-md-3 col-sm-3">
                                         <br />
                                         <div class="form-inline">
-                                            <label for="chkVip" class="col-lg-10 col-md-10">VIP</label>
-                                            <asp:CheckBox runat="server" Text="VIP" ID="chkVip" CssClass="chkIphone col-lg-2 col-md-2" />
+                                            <label for="chkVip" class="col-lg-10 col-md-8 col-sm-8">VIP</label>
+                                            <asp:CheckBox runat="server" Text="VIP" ID="chkVip" CssClass="chkIphone chkIphone col-lg-2 col-md-4 col-sm-4" />
                                         </div>
                                         <div class="form-inline">
-                                            <label for="chkVip" class="col-lg-10 col-md-10">Directorio activo</label>
-                                            <asp:CheckBox runat="server" Text="Directorio Activo " ID="chkDirectoriActivo" CssClass="chkIphone col-lg-2 col-md-2" />
+                                            <label for="chkVip" class="col-lg-10 col-md-8 col-sm-8">Directorio activo</label>
+                                            <asp:CheckBox runat="server" Text="Directorio Activo " ID="chkDirectoriActivo" CssClass="chkIphone chkIphone col-lg-2 col-md-4 col-sm-4" />
                                         </div>
                                     </div>
                                 </div>

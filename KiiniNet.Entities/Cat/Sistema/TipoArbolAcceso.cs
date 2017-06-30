@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Tickets;
@@ -13,6 +14,11 @@ namespace KiiniNet.Entities.Cat.Sistema
         public int Id { get; set; }
         [DataMember]
         public string Descripcion { get; set; }
+        [DataMember]
+        public string Abreviacion { get; set; }
+        [DataMember]
+        public string Color { get; set; }
+
         [DataMember]
         public bool Habilitado { get; set; }
         [DataMember]

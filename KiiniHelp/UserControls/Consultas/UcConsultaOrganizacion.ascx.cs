@@ -202,6 +202,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                LlenaOrganizaciones();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoOrganizacion\");", true);
             }
             catch (Exception ex)
@@ -219,6 +220,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                LlenaOrganizaciones();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#editCatalogoOrganizacion\");", true);
             }
             catch (Exception ex)
@@ -260,8 +262,8 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 ucAltaOrganizaciones.IdOrganizacion = int.Parse(((Button)sender).CommandArgument);
+                ucAltaOrganizaciones.EsSeleccion = false; 
                 ucAltaOrganizaciones.EsAlta = false;
-                ucAltaOrganizaciones.EsSeleccion = false;
                 ucAltaOrganizaciones.Title = "EDITAR ORGANIZACIÓN";
                 ucAltaOrganizaciones.SetOrganizacionActualizar();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoOrganizacion\");", true);
@@ -280,8 +282,8 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                ucAltaOrganizaciones.EsAlta = true;
                 ucAltaOrganizaciones.EsSeleccion = false;
+                ucAltaOrganizaciones.EsAlta = true;
                 ucAltaOrganizaciones.Title = "ALTA DE ORGANIZACIÓN";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoOrganizacion\");", true);
             }

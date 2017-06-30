@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" />
   <xs:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" />
+  <xs:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd15" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="CrearTicket">
     <xs:complexType>
       <xs:sequence>
@@ -158,6 +159,22 @@
       <xs:sequence>
         <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="GeneraPreticketResult" nillable="true" type="q8:PreTicket" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AgregarComentarioConversacionTicket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idTicket" type="xs:int" />
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="mensaje" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sistema" type="xs:boolean" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="archivos" nillable="true" type="q9:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AgregarComentarioConversacionTicketResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

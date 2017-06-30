@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using KiiniHelp.ServiceArbolAcceso;
+using KiiniHelp.ServiceSeguridad;
 using KiiniHelp.ServiceTicket;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Helper;
@@ -21,10 +22,12 @@ namespace KiiniHelp.Users.Ticket
         {
             set
             {
-                panelAlert.Visible = value.Any();
-                if (!panelAlert.Visible) return;
-                rptHeaderError.DataSource = value;
-                rptHeaderError.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
         public int? IdConsulta
@@ -57,7 +60,7 @@ namespace KiiniHelp.Users.Ticket
                 if (hfIdMascara.Value != string.Empty)
                     result = Convert.ToInt32(hfIdMascara.Value);
                 else
-                    result = (int)Session["IdMascaraTicket"];
+                    result = (int)ViewState["IdMascaraTicket"];
                 return result;
             }
             set
@@ -68,7 +71,7 @@ namespace KiiniHelp.Users.Ticket
                     Session.Remove("IdMascaraTicket");
                 }
                 else
-                    Session["IdMascaraTicket"] = value;
+                    ViewState["IdMascaraTicket"] = value;
             }
         }
 
@@ -209,32 +212,55 @@ namespace KiiniHelp.Users.Ticket
             try
             {
                 AlertaGeneral = new List<string>();
+                ucFormulario.OnAceptarModal += UcTicketPortal_OnAceptarModal;
+
                 if (!IsPostBack)
                 {
                     ArbolAcceso arbol = ((ArbolAcceso)Session["ArbolAcceso"]);
-                    UcInformacionConsulta.IdArbol = arbol.Id;
-                    lblTicketDescripcion.Text = "TICKET";
-                    if (arbol.Nivel1 != null)
-                        lblTicketDescripcion.Text += arbol.Nivel1.Descripcion;
-                    if (arbol.Nivel2 != null)
-                        lblTicketDescripcion.Text += " > " + arbol.Nivel2.Descripcion;
-                    if (arbol.Nivel3 != null)
-                        lblTicketDescripcion.Text += " > " + arbol.Nivel3.Descripcion;
-                    if (arbol.Nivel4 != null)
-                        lblTicketDescripcion.Text += " > " + arbol.Nivel4.Descripcion;
-                    if (arbol.Nivel5 != null)
-                        lblTicketDescripcion.Text += " > " + arbol.Nivel5.Descripcion;
-                    if (arbol.Nivel6 != null)
-                        lblTicketDescripcion.Text += " > " + arbol.Nivel6.Descripcion;
-                    if (arbol.Nivel7 != null)
-                        lblTicketDescripcion.Text += " > " + arbol.Nivel7.Descripcion;
-                    if (IdMascara == 0)
-                    {
-                        UcMascaraCaptura.Visible = false;
-                        btnGuardar.CommandArgument = UcMascaraCaptura.ComandoInsertar;
-                    }
-                    UcInformacionConsulta.Visible = arbol.InventarioArbolAcceso.First().InventarioInfConsulta.Any();
+                    //UcInformacionConsulta.IdArbol = arbol.Id;
+                    //lblTicketDescripcion.Text = "TICKET";
+                    //if (arbol.Nivel1 != null)
+                    //    lblTicketDescripcion.Text += arbol.Nivel1.Descripcion;
+                    //if (arbol.Nivel2 != null)
+                    //    lblTicketDescripcion.Text += " > " + arbol.Nivel2.Descripcion;
+                    //if (arbol.Nivel3 != null)
+                    //    lblTicketDescripcion.Text += " > " + arbol.Nivel3.Descripcion;
+                    //if (arbol.Nivel4 != null)
+                    //    lblTicketDescripcion.Text += " > " + arbol.Nivel4.Descripcion;
+                    //if (arbol.Nivel5 != null)
+                    //    lblTicketDescripcion.Text += " > " + arbol.Nivel5.Descripcion;
+                    //if (arbol.Nivel6 != null)
+                    //    lblTicketDescripcion.Text += " > " + arbol.Nivel6.Descripcion;
+                    //if (arbol.Nivel7 != null)
+                    //    lblTicketDescripcion.Text += " > " + arbol.Nivel7.Descripcion;
+                    //if (IdMascara == 0)
+                    //{
+                    //    ucMascaraCaptura.Visible = false;
+                    //    btnGuardar.CommandArgument = ucMascaraCaptura.ComandoInsertar;
+                    //}
+                    //UcInformacionConsulta.Visible = arbol.InventarioArbolAcceso.First().InventarioInfConsulta.Any();
                 }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        private void UcTicketPortal_OnAceptarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptClose", "CierraPopup(\"#modal-new-ticket\");", true);
+
+                //lblNoTicket.Text = ucFormulario.TicketGenerado.ToString();
+                //lblRandom.Text = ucFormulario.RandomGenerado;
+                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptOpen", "MostrarPopup(\"#modalExitoTicket\");", true);
             }
             catch (Exception ex)
             {
@@ -249,29 +275,29 @@ namespace KiiniHelp.Users.Ticket
 
         protected void btnGuardar_OnClick(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
 
-                List<HelperCampoMascaraCaptura> capturaMascara = UcMascaraCaptura.ObtenerCapturaMascara();
-                KiiniNet.Entities.Operacion.Tickets.Ticket result = _servicioTicket.CrearTicket(((Usuario)Session["UserData"]).Id, IdUsuarioSolicita, Convert.ToInt32(Request.QueryString["IdArbol"]), capturaMascara, IdCanal, UcMascaraCaptura.CampoRandom, EsTercero, false);
-                UcMascaraCaptura.ConfirmaArchivos(result.Id);
-                lblNoTicket.Text = result.Id.ToString();
-                lblDescRandom.Visible = UcMascaraCaptura.CampoRandom;
-                lblRandom.Visible = UcMascaraCaptura.CampoRandom;
-                if (UcMascaraCaptura.CampoRandom)
-                    lblRandom.Text = result.ClaveRegistro;
-                upConfirmacion.Update();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalExito\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
+            //    List<HelperCampoMascaraCaptura> capturaMascara = ucFormulario.ObtenerCapturaMascara();
+            //    KiiniNet.Entities.Operacion.Tickets.Ticket result = _servicioTicket.CrearTicket(((Usuario)Session["UserData"]).Id, IdUsuarioSolicita, Convert.ToInt32(Request.QueryString["IdArbol"]), capturaMascara, IdCanal, ucFormulario.CampoRandom, EsTercero, false);
+            //    ucFormulario.ConfirmaArchivos(result.Id);
+            //    lblNoTicket.Text = result.Id.ToString();
+            //    lblDescRandom.Visible = ucFormulario.CampoRandom;
+            //    lblRandom.Visible = ucFormulario.CampoRandom;
+            //    if (ucFormulario.CampoRandom)
+            //        lblRandom.Text = result.ClaveRegistro;
+            //    upConfirmacion.Update();
+            //    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalExito\");", true);
+            //}
+            //catch (Exception ex)
+            //{
+            //    if (_lstError == null)
+            //    {
+            //        _lstError = new List<string>();
+            //    }
+            //    _lstError.Add(ex.Message);
+            //    AlertaGeneral = _lstError;
+            //}
         }
 
         protected void btnCerrar_OnClick(object sender, EventArgs e)

@@ -81,7 +81,7 @@
                                                                 <asp:Label runat="server" ID="lblNivel7">Nivel 7</asp:Label></th>
                                                             <th>
                                                                 <asp:Label runat="server"></asp:Label></th>
-                                                        </tr>
+                                                        <%--</tr>--%>
                                                     </thead>
                                                     <tbody>
                                             </HeaderTemplate>
@@ -103,14 +103,14 @@ int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposU
                                                     <td id="colHabilitado">
                                                         <ul class="list list-unstyled" id="hiddenEnabled">
                                                             <li>
-                                                                <asp:CheckBox runat="server" AutoPostBack="true" Checked='<%# (bool) Eval("Habilitado") %>' CssClass="chkIphone" Width="30px" data-id='<%# Eval("Id")%>' Text='<%# (bool) Eval("Habilitado") ? "SI" : "NO"%>' OnCheckedChanged="OnCheckedChanged" />
+                                                                <asp:CheckBox runat="server" AutoPostBack="true" Checked='<%# (bool) Eval("Habilitado") %>'  Visible='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) != 1 %>' CssClass="chkIphone" Width="30px" data-id='<%# Eval("Id")%>' Text='<%# (bool) Eval("Habilitado") ? "SI" : "NO"%>' OnCheckedChanged="OnCheckedChanged" />
                                                             </li>
                                                         </ul>
                                                     </td>
                                                     <td id="colEditar">
                                                         <ul class="list list-unstyled hidden" id="hiddenEdit">
                                                             <li>
-                                                                <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Editar" CommandArgument='<%# Eval("Id")%>' OnClick="btnEditar_OnClick" />
+                                                                <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Editar" CommandArgument='<%# Eval("Id")%>' OnClick="btnEditar_OnClick" Visible='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) != 1 && (bool) Eval("Habilitado") %>'/>
                                                             </li>
                                                         </ul>
                                                     </td>

@@ -1,7 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AltaGrupoUsuario.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.AltaGrupoUsuario" %>
-<%@ Register Src="~/UserControls/Altas/UcAltaDiasFestivos.ascx" TagPrefix="uc1" TagName="UcAltaDiasFestivos" %>
-<%@ Register Src="~/UserControls/Altas/UcAltaHorario.ascx" TagPrefix="uc1" TagName="UcAltaHorario" %>
-
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcAltaGrupoUsuario.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.UcAltaGrupoUsuario" %>
 
 <style>
     .hideCheck {
@@ -18,7 +15,7 @@
             padding: 6px 12px;
         }
 </style>
-<asp:UpdatePanel ID="upGrupoUsuario" runat="server" UpdateMode="Conditional">
+<asp:UpdatePanel ID="upGrupoUsuario" runat="server">
     <ContentTemplate>
         <asp:HiddenField runat="server" ID="hfIdGrupo" />
         <asp:HiddenField runat="server" ID="hfFromOpcion" />
@@ -35,8 +32,8 @@
             <div class="row" style="margin-top: -30px">
                 <div>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                            <ContentTemplate>
+                       <%-- <asp:UpdatePanel runat="server" ID="upData" UpdateMode="Conditional">
+                            <ContentTemplate>--%>
                                 <div class="form-group">
                                     <asp:DropDownList runat="server" ID="ddlTipoUsuario" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" />
                                 </div>
@@ -46,17 +43,6 @@
                                 <div class="module-content-inner">
                                     <div class="faq-section text-center margin-bottom-lg">
                                         <div class="faqs-tabbed tabpanel" role="tabpanel">
-                                            <ul class="nav nav-tabs nav-tabs-theme-3 margin-bottom-lg" role="tablist">
-                                                <li role="presentation" class="active"><a href="#tabAltaGrupo" aria-controls="tabAltaGrupo" role="tab" data-toggle="tab"><span class="pe-icon fa fa-group icon"></span>
-                                                    <br>
-                                                    Crear Nuevo Grupo</a> </li>
-                                                <li role="presentation"><a href="#tablAltaHorario" aria-controls="tablAltaHorario" role="tab" data-toggle="tab"><span class="pe-icon fa fa-clock-o icon"></span>
-                                                    <br>
-                                                    Crear Nuevo Horario</a> </li>
-                                                <li role="presentation"><a href="#tabAltaDiasFestivos" aria-controls="tabAltaDiasFestivos" role="tab" data-toggle="tab"><span class="pe-icon fa fa-calendar icon"></span>
-                                                    <br>
-                                                    Crear Nuevo Horario</a> </li>
-                                            </ul>
 
                                             <div class="tab-content text-left">
 
@@ -119,31 +105,12 @@
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
                                                 </div>
-
-                                                <div role="tabpanel" class="tab-pane tab-pane fade in" id="tablAltaHorario">
-                                                    <div class="row">
-                                                        <asp:UpdatePanel runat="server" ID="upHorario" UpdateMode="Conditional">
-                                                            <ContentTemplate>
-                                                                <uc1:UcAltaHorario runat="server" id="ucAltaHorario" />
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane tab-pane fade in" id="tabAltaDiasFestivos">
-                                                    <div class="row">
-                                                        <asp:UpdatePanel runat="server" ID="upDias" UpdateMode="Conditional">
-                                                            <ContentTemplate>
-                                                                <uc1:UcAltaDiasFestivos runat="server" id="ucAltaDiasFestivos" />
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
+                            <%--</ContentTemplate>
+                        </asp:UpdatePanel>--%>
                     </div>
                     <asp:Label runat="server" ID="lblOperacion"></asp:Label>
                 </div>

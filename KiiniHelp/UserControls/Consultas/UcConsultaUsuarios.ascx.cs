@@ -52,7 +52,7 @@ namespace KiiniHelp.UserControls.Consultas
                 int? idTipoUsuario = null;
 
                 LimpiarUsuarios();
-                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione && txtFiltro.Text.Trim() == string.Empty)
                 {
                     return;
                 }
@@ -60,8 +60,10 @@ namespace KiiniHelp.UserControls.Consultas
                 {
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
                 }
-
-                rptResultados.DataSource = _servicioUsuarios.ObtenerUsuarios(idTipoUsuario);
+                List<Usuario> lstUsuarios = _servicioUsuarios.ObtenerUsuarios(idTipoUsuario);
+                if (txtFiltro.Text.Trim() != string.Empty)
+                    lstUsuarios = lstUsuarios.Where(w => w.NombreCompleto.Contains(txtFiltro.Text.Trim())).ToList();
+                rptResultados.DataSource = lstUsuarios;
                 rptResultados.DataBind();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
             }
@@ -181,7 +183,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 // TODO: eDICION DE USUARIO
-                Response.Redirect("~/Users/Administracion/Usuarios/FrmEdicionUsuario.aspx?IdUsuario=" + ((Button)sender).CommandArgument);
+                Response.Redirect("~/Users/Administracion/Usuarios/FrmEdicionUsuario.aspx?Consulta=true&IdUsuario=" + ((Button)sender).CommandArgument);
                 //Usuario user = _servicioUsuarios.ObtenerDetalleUsuario(int.Parse(hfId.Value));
                 //if (user == null) return;
                 ////if (user.TipoUsuario.EsMoral)
@@ -213,7 +215,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 //TODO: ALTA USUARIO
-                Response.Redirect("~/Users/Administracion/Usuarios/FrmEdicionUsuario.aspx");
+                Response.Redirect("~/Users/Administracion/Usuarios/FrmEdicionUsuario.aspx?Consulta=true");
                 ////if (_servicioSistemaTipoUsuario.ObtenerTipoUsuarioById(int.Parse(ddlTipoUsuario.SelectedValue)).EsMoral)
                 ////{
                 //    ucAltaUsuarioMoral.Alta = true;

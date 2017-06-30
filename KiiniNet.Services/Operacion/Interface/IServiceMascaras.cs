@@ -22,7 +22,7 @@ namespace KiiniNet.Services.Operacion.Interface
         [OperationContract]
         List<Mascara> ObtenerMascarasAcceso(bool insertarSeleccion);
         [OperationContract]
-        List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion);
+        List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion, bool filtraHabilitados);
 
         [OperationContract]
         List<Mascara> Consulta(string descripcion);

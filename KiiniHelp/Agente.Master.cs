@@ -21,6 +21,66 @@ namespace KiiniHelp
         private readonly ServiceParametrosClient _servicioParametros = new ServiceParametrosClient();
 
         private List<string> _lstError = new List<string>();
+        private class TicketSeleccionado
+        {
+            public int IdTicket { get; set; }
+            public string Title { get; set; }
+        }
+
+        private void LlenaTicketsAbiertos()
+        {
+            try
+            {
+                rptTicketsAbiertos.DataSource = TicketsAbiertos;
+                rptTicketsAbiertos.DataBind();
+                upTabsTickets.Update();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        private List<TicketSeleccionado> TicketsAbiertos
+        {
+            get
+            {
+                if (Session["TicketsAbiertos"] == null)
+                    Session["TicketsAbiertos"] = new List<TicketSeleccionado>();
+                return (List<TicketSeleccionado>)Session["TicketsAbiertos"];
+            }
+            set { Session["TicketsAbiertos"] = value; }
+        }
+        public void AddTicketOpen(int idTicket, string titulo)
+        {
+            try
+            {
+                if (!TicketsAbiertos.Any(a => a.IdTicket == idTicket))
+                    TicketsAbiertos.Add(new TicketSeleccionado { IdTicket = idTicket, Title = titulo });
+                LlenaTicketsAbiertos();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public bool CambiaTicket
+        {
+            get { return bool.Parse(hfCambiaTickes.Value); }
+            set { hfCambiaTickes.Value = value.ToString(); }
+        }
+        public void RemoveTicketOpen(int idTicket)
+        {
+            try
+            {
+                TicketsAbiertos.Remove(TicketsAbiertos.Single(s => s.IdTicket == idTicket));
+                LlenaTicketsAbiertos();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
         private List<string> Alerta
         {
@@ -34,7 +94,7 @@ namespace KiiniHelp
                 }
             }
         }
-        
+
         private void ObtenerAreas()
         {
             try
@@ -85,11 +145,11 @@ namespace KiiniHelp
         {
             try
             {
-                //HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-                //if (myCookie == null)
-                //{
-                //    Response.Redirect(ResolveUrl("~/Default.aspx"));
-                //}
+                HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                if (myCookie == null || Session["UserData"] == null)
+                {
+                    Response.Redirect(ResolveUrl("~/Default.aspx"));
+                }
                 lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
                 ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;
 
@@ -118,6 +178,7 @@ namespace KiiniHelp
                 }
 
                 Session["ParametrosGenerales"] = _servicioParametros.ObtenerParametrosGenerales();
+                LlenaTicketsAbiertos();
             }
             catch (Exception ex)
             {
@@ -423,6 +484,52 @@ namespace KiiniHelp
             try
             {
                 Response.Redirect("~/Users/Administracion/Usuarios/FrmEdicionUsuario.aspx?Detail=1");
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void lbtnTabTicket_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("~/Agente/FrmTicket.aspx?id=" + ((LinkButton)sender).CommandArgument);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnRemoveTab_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                int idTicket = int.Parse(((LinkButton)sender).CommandArgument);
+                int index = TicketsAbiertos.FindIndex(a => a.IdTicket == idTicket);
+
+                RemoveTicketOpen(idTicket);
+                if (CambiaTicket)
+                {
+                    if (index >= TicketsAbiertos.Count)
+                        index = TicketsAbiertos.Count - 1;
+                    if (index < 0)
+                        Response.Redirect("~/Agente/FrmBandejaTickets.aspx");
+                    else
+                        Response.Redirect("~/Agente/FrmTicket.aspx?id=" + TicketsAbiertos[index].IdTicket);
+                }
             }
             catch (Exception ex)
             {

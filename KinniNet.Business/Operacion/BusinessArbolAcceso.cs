@@ -874,7 +874,7 @@ namespace KinniNet.Core.Operacion
                                               join iac in db.InventarioArbolAcceso on ac.Id equals iac.IdArbolAcceso
                                               join guia in db.GrupoUsuarioInventarioArbol on iac.Id equals guia.IdInventarioArbolAcceso
                                               join ug in db.UsuarioGrupo on new { guia.IdRol, guia.IdGrupoUsuario, guia.IdSubGrupoUsuario } equals new { ug.IdRol, ug.IdGrupoUsuario, ug.IdSubGrupoUsuario }
-                                              where ac.IdTipoUsuario == idTipoUsuario && ac.IdTipoArbolAcceso == idTipoArbol && ac.IdArea == idArea
+                                              where ac.IdTipoUsuario == idTipoUsuario && ac.IdTipoArbolAcceso == idTipoArbol
                                               && guia.IdRol == (int)BusinessVariables.EnumRoles.Usuario
                                               select ac;
                 result = qry.ToList();

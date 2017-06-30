@@ -263,6 +263,19 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-
+        public List<GrupoUsuario> ObtenerGruposAtencionByIdUsuario(int idUsuario, bool insertarSeleccion)
+        {
+            try
+            {
+                using (BusinessGrupoUsuario negocio = new BusinessGrupoUsuario())
+                {
+                    return negocio.ObtenerGruposAtencionByIdUsuario(idUsuario, insertarSeleccion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

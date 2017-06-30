@@ -358,7 +358,8 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 Session["PreviewDataConsulta"] = ObtenerInformacionCapturada();
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('/Publico/Consultas/FrmPreviewConsulta.aspx','_blank');", true);
+                string url = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"; ;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('" + url + "Publico/Consultas/FrmPreviewConsulta.aspx','_blank');", true);
             }
             catch (Exception ex)
             {

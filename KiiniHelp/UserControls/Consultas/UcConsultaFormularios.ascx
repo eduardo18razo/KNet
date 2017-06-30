@@ -7,7 +7,7 @@
             <br>
             <h3 class="h6">
                 <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
-                / Horarios </h3>
+                / Formularios </h3>
             <hr />
             
             <section class="module">

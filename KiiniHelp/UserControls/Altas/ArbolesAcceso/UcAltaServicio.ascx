@@ -208,10 +208,6 @@
                                                                 <asp:Label runat="server">Tiemo</asp:Label></td>
                                                             <td>
                                                                 <asp:Label runat="server">Unidad</asp:Label></td>
-                                                            <%--<td>
-                                                        <asp:Label runat="server">Minutos</asp:Label></td>
-                                                    <td>
-                                                        <asp:Label runat="server">Segundos</asp:Label></td>--%>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -226,29 +222,12 @@
                                                         <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" ID="txtDias" Enabled="False" /></td>
                                                     <td>
                                                         <asp:DropDownList runat="server" ID="ddlDuracionRepeater" CssClass="form-control" Enabled="False" />
-                                                        <%--<asp:TextBox onkeyup="sum();" runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" name="txtHoras" ID="txtHoras" />--%>
                                                     </td>
-                                                    <%--<td>
-                                                <asp:TextBox onkeyup="sum();" runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" name="txtMinutos" ID="txtMinutos" /></td>
-                                            <td>
-                                                <asp:TextBox onkeyup="sum();" runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" name="txtSegundos" ID="txtSegundos" /></td>--%>
                                                 </tr>
                                             </ItemTemplate>
                                             <FooterTemplate>
                                                 </tbody>
                                <tfoot>
-                                   <%--   <tr align="center">
-                                        <td style="padding: 0; display: none"></td>
-                                        <td>Totales</td>
-                                        <td>
-                                            <asp:TextBox Enabled="False" runat="server" Text="0" CssClass="form-control" ID="txtTotalDias" /></td>
-                                        <td>
-                                            <asp:TextBox Enabled="False" runat="server" Text="0" CssClass="form-control" name="txtHoras" ID="txtTotalHoras" /></td>
-                                        <td>
-                                            <asp:TextBox Enabled="False" runat="server" Text="0" CssClass="form-control" name="txtMinutos" ID="txtTotalMinutos" /></td>
-                                        <td>
-                                            <asp:TextBox Enabled="False" runat="server" Text="0" CssClass="form-control" name="txtSegundos" ID="txtTotalSegundos" /></td>
-                                    </tr>--%>
                                </tfoot>
                                                 </table>
                                             </FooterTemplate>
@@ -324,7 +303,7 @@
                         </div>
                     </div>
                     <p class="text-right margin-top">
-                        <asp:Button runat="server" ID="btnPreview" Text="Previsualizar" CssClass="btn btn-default" Visible="False" />
+                        <asp:Button runat="server" ID="btnPreview" Text="Previsualizar" CssClass="btn btn-default" Visible="False" OnClick="btnPreview_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" Text="Siguiente" ID="btnSiguiente" OnClick="btnSiguiente_OnClick" CommandArgument="1" />
                         <asp:Button runat="server" ID="btnSaveAll" Text="Guardar" CssClass="btn btn-primary" Visible="False" OnClick="btnSaveAll_OnClick" />
                     </p>

@@ -121,6 +121,12 @@
   <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposUsuarioResponsablesByGruposTipoServicio_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerGruposUsuarioResponsablesByGruposTipoServicioResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposAtencionByIdUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerGruposAtencionByIdUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServiceGrupoUsuario_ObtenerGruposAtencionByIdUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerGruposAtencionByIdUsuarioResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceGrupoUsuario">
     <wsdl:operation name="ObtenerGruposUsuarioTipoUsuario">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioTipoUsuario" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuarioTipoUsuario_InputMessage" />
@@ -189,6 +195,10 @@
     <wsdl:operation name="ObtenerGruposUsuarioResponsablesByGruposTipoServicio">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioResponsablesByGruposTipoServicio" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuarioResponsablesByGruposTipoServicio_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioResponsablesByGruposTipoServicioResponse" message="tns:IServiceGrupoUsuario_ObtenerGruposUsuarioResponsablesByGruposTipoServicio_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerGruposAtencionByIdUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposAtencionByIdUsuario" message="tns:IServiceGrupoUsuario_ObtenerGruposAtencionByIdUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposAtencionByIdUsuarioResponse" message="tns:IServiceGrupoUsuario_ObtenerGruposAtencionByIdUsuario_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointAdministracion" type="tns:IServiceGrupoUsuario">
@@ -339,6 +349,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerGruposUsuarioResponsablesByGruposTipoServicio">
       <soap:operation soapAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposUsuarioResponsablesByGruposTipoServicio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerGruposAtencionByIdUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServiceGrupoUsuario/ObtenerGruposAtencionByIdUsuario" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

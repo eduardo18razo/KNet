@@ -222,8 +222,8 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 ucAltaUbicaciones.IdUbicacion = int.Parse(((Button)sender).CommandArgument);
-                ucAltaUbicaciones.EsAlta = false;
                 ucAltaUbicaciones.EsSeleccion = false;
+                ucAltaUbicaciones.EsAlta = false;
                 ucAltaUbicaciones.Title = "EDITAR UBICACIÓN";
                 ucAltaUbicaciones.SetUbicacionActualizar();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoUbicacion\");", true);
@@ -243,8 +243,8 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                ucAltaUbicaciones.EsAlta = true;
                 ucAltaUbicaciones.EsSeleccion = false;
+                ucAltaUbicaciones.EsAlta = true;
                 ucAltaUbicaciones.Title = "ALTA DE UBICACIÓN";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoUbicacion\");", true);
             }

@@ -11,6 +11,7 @@ namespace KiiniNet.Entities.Helper
         public int IdEstatusTicket { get; set; }
         public string CveRegistro { get; set; }
         public int IdEstatusAsignacion { get; set; }
+        public int IdUsuarioLevanto { get; set; }
         public string EstatusActual { get; set; }
         public string AsignacionActual { get; set; }
         public DateTime FechaCreacion { get; set; }

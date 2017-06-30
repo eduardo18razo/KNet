@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniNet.Entities.Helper
 {
@@ -29,6 +30,20 @@ namespace KiiniNet.Entities.Helper
         public bool CambiaEstatus { get; set; }
         public bool Asigna { get; set; }
 
-        public List<HelperConversacionDetalle> ConversacionDetalle { get; set; }
+        public bool DentroSla { get; set; }
+        public bool RecienCerrado { get; set; }
+
+
+        public string ImagenPrioridad { get; set; }
+        public string ImagenSla { get; set; }
+        public Usuario UsuarioSolicito { get; set; }
+        public string TipoTicketDescripcion { get; set; }
+
+        public string TipoTicketAbreviacion { get; set; }
+
+        public string Canal { get; set; }
+        public bool Vip { get; set; }
+
+    public List<HelperConversacionDetalle> ConversacionDetalle { get; set; }
     }
 }

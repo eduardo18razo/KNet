@@ -7,7 +7,7 @@
             <br>
             <h3 class="h6">
                 <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx" Text="Home" />
-                / Usaurios </h3>
+                / Usuarios </h3>
             <hr />
 
             <!--MÓDULO-->
@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="module-inner">
-                            CONSULTA PUESTOS:<br />
+                            CONSULTA USUARIOS:<br />
                             <div class="search-box form-inline margin-bottom-lg">
                                 <label class="sr-only" for="txtFiltro">Buscar</label>
                                 <div class="form-group">
@@ -61,7 +61,7 @@
                                     <div class="table-responsive">
                                         <asp:Repeater runat="server" ID="rptResultados">
                                             <HeaderTemplate>
-                                                <table class="table table-striped table-hover display" id="tblResults"> style="table-layout: fixed">
+                                                <table class="table table-striped table-hover display" id="tblResults"> 
                                                     <thead>
                                                         <tr>
                                                             <th>Tipo Usuario</th>
@@ -75,11 +75,8 @@
                                             <ItemTemplate>
                                                 <tr id='<%# Eval("Id")%>'>
                                                     <td>
-                                                <button type="button" class='<%# 
-int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Empleado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoPersonaFisica ? "btn btn-default-alt btn-square-usuario empleado" : 
-int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Cliente || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClientaPersonaFisica ? "btn btn-default-alt btn-square-usuario cliente" : 
-int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Proveedor || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorPersonaFisica ? "btn btn-default-alt btn-square-usuario proveedor" : "btn btn-default-alt btn-square-usuario"
-                                                        %>'><%# Eval("TipoUsuario.Descripcion").ToString().Substring(0,1) %></button></td>
+                                                        <button type="button" class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + Eval("TipoUsuario.Color") + " !important" %>'>
+                                                            <%# Eval("TipoUsuario.Abreviacion") %></button></td>
                                                     <td style="padding: 0; text-align: left; font-size: 10px;">
                                                         <asp:LinkButton Style="padding: 0;" runat="server" Text='<%#Eval("NombreCompleto") %>' ID="LinkButton1" OnClick="btnUsuario_OnClick" CommandArgument='<%#Eval("Id") %>' /></td>
                                                     <td id="colHabilitado">

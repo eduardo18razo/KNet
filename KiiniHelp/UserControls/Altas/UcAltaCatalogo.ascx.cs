@@ -160,6 +160,7 @@ namespace KiiniHelp.UserControls.Altas
                     throw new Exception("Debe especificar una descripción");
                 Catalogos cat = new Catalogos();
                 cat.Descripcion = txtDescripcionCatalogo.Text;
+                cat.DescripcionLarga = txtDescripcionCatalogo.Text;
                 cat.IdUsuarioAlta = ((Usuario)Session["UserData"]).Id;
 
                 if (EsAlta)

@@ -28,8 +28,10 @@
                                 <asp:Repeater runat="server" ID="rptRegistros">
                                     <ItemTemplate>
                                         <div class="row margin-top-5">
+                                            <asp:Label runat="server" ID="lblIdRegistro" Visible="False" Text='<%# Eval("Id") %>'/>
                                             <div class="col-lg-10 col-md-10 col-sm-10">
-                                                <asp:TextBox runat="server" ID="txtRegistro" Text='<%# Container.DataItem.ToString() %>' CssClass="form-control" />
+                                                <%--<asp:TextBox runat="server" ID="txtRegistro" Text='<%# Container.DataItem.ToString() %>' CssClass="form-control" />--%>
+                                                <asp:TextBox runat="server" ID="txtDescripcionRegistro" Text='<%# Eval("Descripcion") %>' CssClass="form-control" />
                                             </div>
                                             <asp:LinkButton runat="server" Text="Borrar" ID="btnBorrarRegistro" CommandArgument='<%# Container.ItemIndex %>' OnClick="btnBorrarRegistro_OnClick"></asp:LinkButton>
                                         </div>
@@ -60,7 +62,7 @@
 
                         <div class="form-group">
                             <asp:HiddenField runat="server" ID="hfFileName" />
-                            <ajax:AsyncFileUpload ID="afuArchivo" runat="server" Enabled="False" UploaderStyle="Traditional" OnUploadedComplete="afuArchivo_OnUploadedComplete" PersistFile="True" />
+                            <ajax:AsyncFileUpload ID="afuArchivo" runat="server" UploaderStyle="Traditional" OnUploadedComplete="afuArchivo_OnUploadedComplete" PersistFile="True" />
                         </div>
                         <div class="form-group">
                             <asp:LinkButton runat="server" Text="Obtener páginas" ID="btnLeerArchivo" OnClick="btnLeerArchivo_OnClick"></asp:LinkButton>
@@ -70,6 +72,15 @@
                             <asp:RadioButtonList runat="server" ID="rbtnHojas" />
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <p class="text-right margin-top-40">
+                        <asp:Button runat="server" CssClass="btn btn-primary" Text="Guardar" ID="btnGuardar" OnClick="btnGuardar_OnClick" />
+                        <asp:Button runat="server" CssClass="btn btn-danger" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick" Visible="False" />
+                        <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_OnClick" Visible="False" />
+                    </p>
                 </div>
             </div>
         </section>

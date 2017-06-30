@@ -10,7 +10,7 @@
 namespace KiiniHelp.UserControls.Altas {
     
     
-    public partial class AltaGrupoUsuario {
+    public partial class UcAltaGrupoUsuario {
         
         /// <summary>
         /// Control upGrupoUsuario.
@@ -164,42 +164,6 @@ namespace KiiniHelp.UserControls.Altas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGuardar;
-        
-        /// <summary>
-        /// Control upHorario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upHorario;
-        
-        /// <summary>
-        /// Control ucAltaHorario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.UcAltaHorario ucAltaHorario;
-        
-        /// <summary>
-        /// Control upDias.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upDias;
-        
-        /// <summary>
-        /// Control ucAltaDiasFestivos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::KiiniHelp.UserControls.Altas.UcAltaDiasFestivos ucAltaDiasFestivos;
         
         /// <summary>
         /// Control lblOperacion.

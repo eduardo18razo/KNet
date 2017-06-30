@@ -115,50 +115,50 @@ namespace KiiniHelp.UserControls.Operacion
                 if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.Supervisor))
                 {
                     lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo, (int)BusinessVariables.EnumSubRoles.Supervisor);
-                    rbtnlSupervisor.DataSource = lstUsuarios;
-                    rbtnlSupervisor.DataTextField = "NombreCompleto";
-                    rbtnlSupervisor.DataValueField = "Id";
-                    rbtnlSupervisor.DataBind();
+                    lstSupervisor.DataSource = lstUsuarios;
+                    lstSupervisor.DataTextField = "NombreCompleto";
+                    lstSupervisor.DataValueField = "Id";
+                    lstSupervisor.DataBind();
                     divUsuariosSupervisor.Visible = lstUsuarios.Count > 0;
                 }
                 if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.PrimererNivel))
                 {
                     lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo,
                         (int)BusinessVariables.EnumSubRoles.PrimererNivel);
-                    rbtnlUsuariosGrupoNivel1.DataSource = lstUsuarios;
-                    rbtnlUsuariosGrupoNivel1.DataTextField = "NombreCompleto";
-                    rbtnlUsuariosGrupoNivel1.DataValueField = "Id";
-                    rbtnlUsuariosGrupoNivel1.DataBind();
+                    lstUsuariosGrupoNivel1.DataSource = lstUsuarios;
+                    lstUsuariosGrupoNivel1.DataTextField = "NombreCompleto";
+                    lstUsuariosGrupoNivel1.DataValueField = "Id";
+                    lstUsuariosGrupoNivel1.DataBind();
                     divUsuariosNivel1.Visible = lstUsuarios.Count > 0;
                 }
                 if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.SegundoNivel))
                 {
                     lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo,
                         (int)BusinessVariables.EnumSubRoles.SegundoNivel);
-                    rbtnlUsuariosGrupoNivel2.DataSource = lstUsuarios;
-                    rbtnlUsuariosGrupoNivel2.DataTextField = "NombreCompleto";
-                    rbtnlUsuariosGrupoNivel2.DataValueField = "Id";
-                    rbtnlUsuariosGrupoNivel2.DataBind();
+                    lstUsuariosGrupoNivel2.DataSource = lstUsuarios;
+                    lstUsuariosGrupoNivel2.DataTextField = "NombreCompleto";
+                    lstUsuariosGrupoNivel2.DataValueField = "Id";
+                    lstUsuariosGrupoNivel2.DataBind();
                     divUsuariosNivel2.Visible = lstUsuarios.Count > 0;
                 }
                 if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.TercerNivel))
                 {
                     lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo,
                         (int)BusinessVariables.EnumSubRoles.TercerNivel);
-                    rbtnlUsuariosGrupoNivel3.DataSource = lstUsuarios;
-                    rbtnlUsuariosGrupoNivel3.DataTextField = "NombreCompleto";
-                    rbtnlUsuariosGrupoNivel3.DataValueField = "Id";
-                    rbtnlUsuariosGrupoNivel3.DataBind();
+                    lstUsuariosGrupoNivel3.DataSource = lstUsuarios;
+                    lstUsuariosGrupoNivel3.DataTextField = "NombreCompleto";
+                    lstUsuariosGrupoNivel3.DataValueField = "Id";
+                    lstUsuariosGrupoNivel3.DataBind();
                     divUsuariosNivel3.Visible = lstUsuarios.Count > 0;
                 }
                 if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.CuartoNivel))
                 {
                     lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo,
                         (int)BusinessVariables.EnumSubRoles.CuartoNivel);
-                    rbtnlUsuariosGrupoNivel4.DataSource = lstUsuarios;
-                    rbtnlUsuariosGrupoNivel4.DataTextField = "NombreCompleto";
-                    rbtnlUsuariosGrupoNivel4.DataValueField = "Id";
-                    rbtnlUsuariosGrupoNivel4.DataBind();
+                    lstUsuariosGrupoNivel4.DataSource = lstUsuarios;
+                    lstUsuariosGrupoNivel4.DataTextField = "NombreCompleto";
+                    lstUsuariosGrupoNivel4.DataValueField = "Id";
+                    lstUsuariosGrupoNivel4.DataBind();
                     divUsuariosNivel4.Visible = lstUsuarios.Count > 0;
                 }
             }
@@ -172,10 +172,12 @@ namespace KiiniHelp.UserControls.Operacion
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -184,16 +186,16 @@ namespace KiiniHelp.UserControls.Operacion
             int result = 0;
             try
             {
-                if (rbtnlSupervisor.SelectedItem != null)
-                    result = Convert.ToInt32(rbtnlSupervisor.SelectedValue);
-                if (rbtnlUsuariosGrupoNivel1.SelectedItem != null)
-                    result = Convert.ToInt32(rbtnlUsuariosGrupoNivel1.SelectedValue);
-                if (rbtnlUsuariosGrupoNivel2.SelectedItem != null)
-                    result = Convert.ToInt32(rbtnlUsuariosGrupoNivel2.SelectedValue);
-                if (rbtnlUsuariosGrupoNivel3.SelectedItem != null)
-                    result = Convert.ToInt32(rbtnlUsuariosGrupoNivel3.SelectedValue);
-                if (rbtnlUsuariosGrupoNivel4.SelectedItem != null)
-                    result = Convert.ToInt32(rbtnlUsuariosGrupoNivel4.SelectedValue);
+                if (lstSupervisor.SelectedItem != null)
+                    result = Convert.ToInt32(lstSupervisor.SelectedValue);
+                if (lstUsuariosGrupoNivel1.SelectedItem != null)
+                    result = Convert.ToInt32(lstUsuariosGrupoNivel1.SelectedValue);
+                if (lstUsuariosGrupoNivel2.SelectedItem != null)
+                    result = Convert.ToInt32(lstUsuariosGrupoNivel2.SelectedValue);
+                if (lstUsuariosGrupoNivel3.SelectedItem != null)
+                    result = Convert.ToInt32(lstUsuariosGrupoNivel3.SelectedValue);
+                if (lstUsuariosGrupoNivel4.SelectedItem != null)
+                    result = Convert.ToInt32(lstUsuariosGrupoNivel4.SelectedValue);
                 if (result == 0 && ddlEstatus.SelectedValue == ((int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Autoasignado).ToString())
                     result = ((Usuario)Session["UserData"]).Id;
                 else if (result == 0 && ddlEstatus.SelectedValue != ((int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Autoasignado).ToString())
@@ -214,11 +216,11 @@ namespace KiiniHelp.UserControls.Operacion
                 _lstError = new List<string>();
                 ddlEstatus.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 txtComentarios.Text = string.Empty;
-                rbtnlSupervisor.ClearSelection();
-                rbtnlUsuariosGrupoNivel1.ClearSelection();
-                rbtnlUsuariosGrupoNivel2.ClearSelection();
-                rbtnlUsuariosGrupoNivel3.ClearSelection();
-                rbtnlUsuariosGrupoNivel4.ClearSelection();
+                lstSupervisor.ClearSelection();
+                lstUsuariosGrupoNivel1.ClearSelection();
+                lstUsuariosGrupoNivel2.ClearSelection();
+                lstUsuariosGrupoNivel3.ClearSelection();
+                lstUsuariosGrupoNivel4.ClearSelection();
             }
             catch (Exception e)
             {
@@ -235,86 +237,6 @@ namespace KiiniHelp.UserControls.Operacion
                 {
 
                 }
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
-
-        protected void rbtnlUsuariosGrupoNivel1_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                rbtnlUsuariosGrupoNivel2.ClearSelection();
-                rbtnlUsuariosGrupoNivel3.ClearSelection();
-                rbtnlUsuariosGrupoNivel4.ClearSelection();
-                rbtnlSupervisor.ClearSelection();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
-
-        protected void rbtnlUsuariosGrupoNivel2_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                rbtnlUsuariosGrupoNivel1.ClearSelection();
-                rbtnlUsuariosGrupoNivel3.ClearSelection();
-                rbtnlUsuariosGrupoNivel4.ClearSelection();
-                rbtnlSupervisor.ClearSelection();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
-
-        protected void rbtnlUsuariosGrupoNivel3_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                rbtnlUsuariosGrupoNivel1.ClearSelection();
-                rbtnlUsuariosGrupoNivel2.ClearSelection();
-                rbtnlUsuariosGrupoNivel4.ClearSelection();
-                rbtnlSupervisor.ClearSelection();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
-
-        protected void rbtnlUsuariosGrupoNivel4_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                rbtnlUsuariosGrupoNivel1.ClearSelection();
-                rbtnlUsuariosGrupoNivel2.ClearSelection();
-                rbtnlUsuariosGrupoNivel3.ClearSelection();
-                rbtnlSupervisor.ClearSelection();
             }
             catch (Exception ex)
             {
@@ -346,25 +268,6 @@ namespace KiiniHelp.UserControls.Operacion
             }
         }
 
-        protected void rbtnlSupervisor_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                rbtnlUsuariosGrupoNivel1.ClearSelection();
-                rbtnlUsuariosGrupoNivel2.ClearSelection();
-                rbtnlUsuariosGrupoNivel3.ClearSelection();
-                rbtnlUsuariosGrupoNivel4.ClearSelection();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
 
         protected void btnAceptar_OnClick(object sender, EventArgs e)
         {
@@ -372,7 +275,7 @@ namespace KiiniHelp.UserControls.Operacion
             {
                 if (ddlEstatus.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     throw new Exception("Debe seleccionar un estatus");
-                if (((Usuario)Session["UserData"]).UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Select(s => s.SubGrupoUsuario).Where(subRol => _servicioEstatus.HasComentarioObligatorio(((Usuario) Session["UserData"]).Id, subRol.IdSubRol,IdEstatusAsignacionActual, Convert.ToInt32(ddlEstatus.SelectedValue), EsPropietario)).Any(subRol => txtComentarios.Text.Trim() == string.Empty))
+                if (((Usuario)Session["UserData"]).UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Select(s => s.SubGrupoUsuario).Where(subRol => _servicioEstatus.HasComentarioObligatorio(((Usuario)Session["UserData"]).Id, subRol.IdSubRol, IdEstatusAsignacionActual, Convert.ToInt32(ddlEstatus.SelectedValue), EsPropietario)).Any(subRol => txtComentarios.Text.Trim() == string.Empty))
                 {
                     throw new Exception("Debe agregar un comentario");
                 }
@@ -400,6 +303,106 @@ namespace KiiniHelp.UserControls.Operacion
             LimpiarPantalla();
             if (OnAceptarModal != null)
                 OnAceptarModal();
+        }
+
+        protected void lstSupervisor_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lstUsuariosGrupoNivel1.ClearSelection();
+                lstUsuariosGrupoNivel2.ClearSelection();
+                lstUsuariosGrupoNivel3.ClearSelection();
+                lstUsuariosGrupoNivel4.ClearSelection();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void lstUsuariosGrupoNivel1_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lstSupervisor.ClearSelection();
+                lstUsuariosGrupoNivel2.ClearSelection();
+                lstUsuariosGrupoNivel3.ClearSelection();
+                lstUsuariosGrupoNivel4.ClearSelection();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void lstUsuariosGrupoNivel2_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lstSupervisor.ClearSelection();
+                lstUsuariosGrupoNivel1.ClearSelection();
+                lstUsuariosGrupoNivel3.ClearSelection();
+                lstUsuariosGrupoNivel4.ClearSelection();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void lstUsuariosGrupoNivel3_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lstSupervisor.ClearSelection();
+                lstUsuariosGrupoNivel1.ClearSelection();
+                lstUsuariosGrupoNivel2.ClearSelection();
+                lstUsuariosGrupoNivel4.ClearSelection();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void lstUsuariosGrupoNivel4_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lstSupervisor.ClearSelection();
+                lstUsuariosGrupoNivel1.ClearSelection();
+                lstUsuariosGrupoNivel2.ClearSelection();
+                lstUsuariosGrupoNivel3.ClearSelection();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
         }
     }
 }

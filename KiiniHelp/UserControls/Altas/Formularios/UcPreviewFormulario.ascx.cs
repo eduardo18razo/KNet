@@ -132,7 +132,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 foreach (CampoMascara campo in lstControles)
                 {
                     HtmlGenericControl hr = new HtmlGenericControl("HR");
-                    HtmlGenericControl createDiv = new HtmlGenericControl("DIV") { ID = "createDiv" + campo.NombreCampo };
+                    HtmlGenericControl createDiv = new HtmlGenericControl("DIV") ;
                     createDiv.Attributes["class"] = "form-group clearfix";
                     //createDiv.InnerHtml = campo.Descripcion;
                     Label lbl = new Label { Text = campo.Descripcion, CssClass = "col-sm-12 control-label" };
@@ -186,7 +186,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false))
+                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false, true))
                                 {
                                     lstRadio.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
                                 }
@@ -211,7 +211,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, true))
+                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, true, true))
                                 {
                                     ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
                                 }
@@ -237,7 +237,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false))
+                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false, true))
                                 {
                                     chklist.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
                                 }

@@ -22,13 +22,25 @@ namespace KiiniHelp.UserControls
         readonly ServiceSecurityClient _servicioSeguridad = new ServiceSecurityClient();
         private List<string> _lstError = new List<string>();
 
+        private List<string> Alerta
+        {
+            set
+            {
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
+            }
+        }
 
         public void AutenticarUsuarioPublico(int idTipoUsuario)
         {
             try
             {
                 Usuario user = _servicioSeguridad.GetUserInvitadoDataAutenticate(idTipoUsuario);
-                if(user == null)
+                if (user == null)
                     Response.Redirect("~/Default.aspx");
                 Session["UserData"] = user;
                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, user.NombreUsuario, DateTime.Now, DateTime.Now.AddMinutes(30), true, Session["UserData"].ToString(), FormsAuthentication.FormsCookiePath);
@@ -52,20 +64,19 @@ namespace KiiniHelp.UserControls
         }
         private void ValidaCaptura()
         {
-            StringBuilder sb = new StringBuilder();
+            List<string> sb = new List<string>();
 
             if (txtUsuario.Text.Trim() == string.Empty)
-                sb.AppendLine("<li>Usuario es un campo obligatorio.</li>");
+                sb.Add("Usuario es un campo obligatorio.");
             if (txtpwd.Text.Trim() == string.Empty)
-                sb.AppendLine("<li>Contraseña es un campo obligatorio.</li>");
+                sb.Add("Contraseña es un campo obligatorio.");
             if (txtCaptcha.Text.Trim() == string.Empty)
-                sb.AppendLine("<li>Ingrese codigo Captcha.</li>");
-            if (sb.ToString() != string.Empty)
+                sb.Add("Ingrese codigo Captcha.");
+
+            if (sb.Count > 0)
             {
-                sb.Append("</ul>");
-                sb.Insert(0, "<ul>");
-                sb.Insert(0, "<h3>Acceso</h3>");
-                throw new Exception(sb.ToString());
+                _lstError = sb;
+                throw new Exception("");
             }
         }
 
@@ -99,6 +110,7 @@ namespace KiiniHelp.UserControls
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -117,7 +129,12 @@ namespace KiiniHelp.UserControls
                 Session["UserData"] = user;
                 FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, user.NombreUsuario, DateTime.Now, DateTime.Now.AddMinutes(15), true, Session["UserData"].ToString(), FormsAuthentication.FormsCookiePath);
                 string encTicket = FormsAuthentication.Encrypt(ticket);
-                Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+                Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName)
+                {
+                    Name = FormsAuthentication.FormsCookieName,
+                    Expires = DateTime.Now.AddMinutes(15),
+                    Value = encTicket
+                });
                 List<int> roles = user.UsuarioRol.Select(s => s.RolTipoUsuario.IdRol).ToList();
                 if (roles.Any(a => a == (int)BusinessVariables.EnumRoles.Administrador)) ;
                 LimpiarPantalla();
@@ -131,8 +148,9 @@ namespace KiiniHelp.UserControls
                 if (_lstError == null)
                 {
                     _lstError = new List<string>();
+                    _lstError.Add(ex.Message);
                 }
-                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
 
@@ -146,14 +164,12 @@ namespace KiiniHelp.UserControls
                 ValidCaptcha = e.IsValid;
                 if (!e.IsValid)
                 {
-                    StringBuilder sb = new StringBuilder();
-                    sb.AppendLine("<li>Captcha incorrecto.</li>");
-                    if (sb.ToString() != string.Empty)
+                    List<string> sb = new List<string>();
+                    sb.Add("Captcha incorrecto.");
+                    if (sb.Count > 0)
                     {
-                        sb.Append("</ul>");
-                        sb.Insert(0, "<ul>");
-                        sb.Insert(0, "<h3>Acceso</h3>");
-                        throw new Exception(sb.ToString());
+                        _lstError = sb;
+                        throw new Exception("");
                     }
                 }
             }
@@ -162,8 +178,10 @@ namespace KiiniHelp.UserControls
                 if (_lstError == null)
                 {
                     _lstError = new List<string>();
+                    _lstError.Add(ex.Message);
                 }
-                _lstError.Add(ex.Message);
+
+                Alerta = _lstError;
             }
         }
     }

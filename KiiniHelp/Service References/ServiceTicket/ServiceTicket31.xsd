@@ -16,6 +16,7 @@
   <xs:complexType name="Usuario">
     <xs:sequence>
       <xs:element minOccurs="0" name="Activo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Administrador" type="xs:boolean" />
       <xs:element minOccurs="0" name="ApellidoMaterno" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ApellidoPaterno" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="BitacoraAcceso" nillable="true" type="tns:ArrayOfBitacoraAcceso" />

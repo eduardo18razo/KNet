@@ -90,7 +90,7 @@ namespace KinniNet.Core.Security
                             throw new Exception(string.Format("Usuario bloqueado espere {0} minutos",
                                 db.ParametroPassword.First().TimeoutFail));
 
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -144,6 +144,7 @@ namespace KinniNet.Core.Security
                         db.LoadProperty(result, "Ubicacion");
                         db.LoadProperty(result, "TipoUsuario");
                         db.LoadProperty(result, "UsuarioRol");
+                        db.LoadProperty(result, "BitacoraAcceso");
                         foreach (UsuarioRol rol in result.UsuarioRol)
                         {
                             db.LoadProperty(rol, "RolTipoUsuario");
@@ -156,7 +157,8 @@ namespace KinniNet.Core.Security
                         }
                         result.Supervisor = db.SubGrupoUsuario.Join(db.UsuarioGrupo, sgu => sgu.Id, ug => ug.IdSubGrupoUsuario, (sgu, ug) => new { sgu, ug })
                        .Any(@t => @t.sgu.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor && @t.ug.IdUsuario == result.Id);
-
+                        result.Administrador = db.UsuarioRol.Any(a => a.RolTipoUsuario.IdRol == (int)BusinessVariables.EnumRoles.Administrador);
+                        result.FechaUltimoAccesoExito = new BusinessUsuarios().ObtenerFechaUltimoAcceso(result);
                         var levantaTicket = (from u in db.Usuario
                                              join ug in db.UsuarioGrupo on u.Id equals ug.IdUsuario
                                              join gu in db.GrupoUsuario on ug.IdGrupoUsuario equals gu.Id
@@ -842,25 +844,29 @@ namespace KinniNet.Core.Security
                             }
                         }
                     }
+
+                    List<int> areas = new BusinessArea().ObtenerAreasUsuarioPublicoByIdRol(new Autenticacion().GetUserInvitadoDataAutenticate(idTipoUsuario).Id, (int)BusinessVariables.EnumRoles.Usuario, false).Select(s => s.Id).Distinct().ToList();
                     if (arboles)
                         foreach (Menu menu in result)
                         {
 
                             List<ArbolAcceso> lstArboles = null;
-                            switch (menu.Id)
+                            foreach (int area in areas)
                             {
-                                case (int)BusinessVariables.EnumMenu.Consultas:
-                                    lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByTipoUsuarioTipoArbol(idTipoUsuario, (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion, idArea).Distinct().ToList();
-                                    GeneraSubMenus(menu, lstArboles, db, "~/Users/General/FrmNodoConsultas.aspx?IdArbol=");
-                                    break;
-                                case (int)BusinessVariables.EnumMenu.Servicio:
-                                    lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByTipoUsuarioTipoArbol(idTipoUsuario, (int)BusinessVariables.EnumTipoArbol.SolicitarServicio, idArea).Distinct().ToList();
-                                    GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?IdArbol=");
-                                    break;
-                                case (int)BusinessVariables.EnumMenu.Incidentes:
-                                    lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByTipoUsuarioTipoArbol(idTipoUsuario, (int)BusinessVariables.EnumTipoArbol.ReportarProblemas, idArea).Distinct().ToList();
-                                    GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?IdArbol=");
-                                    break;
+                                switch (menu.Id)
+                                {
+                                    case (int)BusinessVariables.EnumMenu.Consultas: lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByTipoUsuarioTipoArbol(idTipoUsuario, (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion, area).Distinct().ToList();
+                                        GeneraSubMenus(menu, lstArboles, db, "~/Users/General/FrmNodoConsultas.aspx?IdArbol=");
+                                        break;
+                                    case (int)BusinessVariables.EnumMenu.Servicio:
+                                        lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByTipoUsuarioTipoArbol(idTipoUsuario, (int)BusinessVariables.EnumTipoArbol.SolicitarServicio, area).Distinct().ToList();
+                                        GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Portal + "&IdArbol=");
+                                        break;
+                                    case (int)BusinessVariables.EnumMenu.Incidentes:
+                                        lstArboles = new BusinessArbolAcceso().ObtenerArbolesAccesoByTipoUsuarioTipoArbol(idTipoUsuario, (int)BusinessVariables.EnumTipoArbol.ReportarProblemas, area).Distinct().ToList();
+                                        GeneraSubMenus(menu, lstArboles, db, "~/Users/Ticket/FrmTicket.aspx?Canal=" + (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Portal + "&IdArbol=");
+                                        break;
+                                }
                             }
                         }
                     else

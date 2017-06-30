@@ -184,6 +184,7 @@
     <EntitySetMapping Name="Organizacion">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.Organizacion">
         <MappingFragment StoreEntitySet="Organizacion">
+          <ScalarProperty Name="Sistema" ColumnName="Sistema" />
           <ScalarProperty Name="IdNivelOrganizacion" ColumnName="IdNivelOrganizacion" />
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
           <ScalarProperty Name="IdJefatura" ColumnName="IdJefatura" />
@@ -307,15 +308,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TipoArbolAcceso">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.TipoArbolAcceso">
-        <MappingFragment StoreEntitySet="TipoArbolAcceso">
-          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TipoDocumento">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.TipoDocumento">
         <MappingFragment StoreEntitySet="TipoDocumento">
@@ -360,6 +352,8 @@
     <EntitySetMapping Name="TipoUsuario">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.TipoUsuario">
         <MappingFragment StoreEntitySet="TipoUsuario">
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Abreviacion" ColumnName="Abreviacion" />
           <ScalarProperty Name="EsMoral" ColumnName="EsMoral" />
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
           <ScalarProperty Name="CorreosObligatorios" ColumnName="CorreosObligatorios" />
@@ -383,6 +377,7 @@
     <EntitySetMapping Name="Ubicacion">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.Ubicacion">
         <MappingFragment StoreEntitySet="Ubicacion">
+          <ScalarProperty Name="Sistema" ColumnName="Sistema" />
           <ScalarProperty Name="IdNivelUbicacion" ColumnName="IdNivelUbicacion" />
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
           <ScalarProperty Name="IdSiteRack" ColumnName="IdSiteRack" />
@@ -1251,6 +1246,7 @@
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="PersonaFisica" ColumnName="PersonaFisica" />
           <ScalarProperty Name="FechaUpdate" ColumnName="FechaUpdate" />
           <ScalarProperty Name="FechaBloqueo" ColumnName="FechaBloqueo" />
           <ScalarProperty Name="Tries" ColumnName="Tries" />
@@ -1476,6 +1472,27 @@
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioAlta" ColumnName="IdUsuarioAlta" />
           <ScalarProperty Name="FechaAlta" ColumnName="FechaAlta" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MascaraSeleccionCatalogo">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.MascaraSeleccionCatalogo">
+        <MappingFragment StoreEntitySet="MascaraSeleccionCatalogo">
+          <ScalarProperty Name="Seleccionado" ColumnName="Seleccionado" />
+          <ScalarProperty Name="IdTicket" ColumnName="IdTicket" />
+          <ScalarProperty Name="IdRegistroCatalogo" ColumnName="IdRegistroCatalogo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoArbolAcceso">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.TipoArbolAcceso">
+        <MappingFragment StoreEntitySet="TipoArbolAcceso">
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Abreviacion" ColumnName="Abreviacion" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>

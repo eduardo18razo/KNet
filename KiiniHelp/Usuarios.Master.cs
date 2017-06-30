@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
@@ -34,7 +35,7 @@ namespace KiiniHelp
                 }
             }
         }
-        
+
         private void ObtenerAreas()
         {
             try
@@ -44,6 +45,12 @@ namespace KiiniHelp
                 {
                     Session["RolSeleccionado"] = lstRoles.First().Id;
                     Session["CargaInicialModal"] = "True";
+                    lnkBtnRol_OnClick(
+                        new LinkButton
+                        {
+                            CommandArgument = lstRoles.First().Id.ToString(),
+                            Text = lstRoles.First().Descripcion
+                        }, null);
                 }
                 if (Session["RolSeleccionado"] != null) lblAreaSeleccionada.Text =
                         lstRoles.Single(s => s.Id == int.Parse(Session["RolSeleccionado"].ToString())).Descripcion;
@@ -81,15 +88,16 @@ namespace KiiniHelp
                 Alerta = _lstError;
             }
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                //HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-                //if (myCookie == null)
-                //{
-                //    Response.Redirect(ResolveUrl("~/Default.aspx"));
-                //}
+                HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                if (myCookie == null || Session["UserData"] == null)
+                {
+                    Response.Redirect(ResolveUrl("~/Default.aspx"));
+                }
                 lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
                 ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;
 
@@ -118,6 +126,10 @@ namespace KiiniHelp
                         rolSeleccionado = int.Parse(Session["RolSeleccionado"].ToString());
                     rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, rolSeleccionado, rolSeleccionado != 0);
                     rptMenu.DataBind();
+                    divTickets.Visible = rolSeleccionado != (int)BusinessVariables.EnumRoles.Administrador;
+                    divMensajes.Visible = rolSeleccionado != (int)BusinessVariables.EnumRoles.Administrador;
+                    divTickets.Visible = rolSeleccionado == (int) BusinessVariables.EnumRoles.ResponsableDeAtención;
+                    divMensajes.Visible = rolSeleccionado == (int) BusinessVariables.EnumRoles.Usuario;
                 }
 
                 Session["ParametrosGenerales"] = _servicioParametros.ObtenerParametrosGenerales();
@@ -132,9 +144,6 @@ namespace KiiniHelp
                 Alerta = _lstError;
             }
         }
-
-
-
         protected void rptMenu_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             try
@@ -345,7 +354,9 @@ namespace KiiniHelp
                     rptMenu.DataBind();
                     Session["CargaInicialModal"] = "True";
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalRol\");", true);
-                    Response.Redirect("~/Users/DashBoard.aspx");
+                    //TODO: Tickets redirect
+                    //if (areaSeleccionada == (int)BusinessVariables.EnumRoles.ResponsableDeAtención)
+                    //    Response.Redirect("~/Agente/FrmBandejaTickets.aspx");
                 }
                 catch (Exception ex)
                 {
@@ -429,7 +440,7 @@ namespace KiiniHelp
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }

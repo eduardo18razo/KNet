@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -77,16 +78,19 @@ namespace KiiniHelp.UserControls.Temporal
                 _lstControles = new List<Control>();
 
                 ArbolAcceso arbol = _servicioArbolAccesoClient.ObtenerArbolAcceso(int.Parse(_serviciosParametros.ObtenerParametrosGenerales().FormularioPortal));
-                int? idMascara = arbol.InventarioArbolAcceso.First().IdMascara;
-                if (idMascara != null) IdMascara = (int)idMascara;
-                Mascara mascara = _servicioMascaras.ObtenerMascaraCaptura(IdMascara);
-                if (mascara != null)
+                if (arbol != null)
                 {
-                    hfComandoInsertar.Value = mascara.ComandoInsertar;
-                    hfComandoActualizar.Value = mascara.ComandoInsertar;
-                    hfRandom.Value = mascara.Random.ToString();
-                    PintaControles(mascara.CampoMascara);
-                    Session["PreviewDataFormulario"] = mascara;
+                    int? idMascara = arbol.InventarioArbolAcceso.First().IdMascara;
+                    if (idMascara != null) IdMascara = (int)idMascara;
+                    Mascara mascara = _servicioMascaras.ObtenerMascaraCaptura(IdMascara);
+                    if (mascara != null)
+                    {
+                        hfComandoInsertar.Value = mascara.ComandoInsertar;
+                        hfComandoActualizar.Value = mascara.ComandoInsertar;
+                        hfRandom.Value = mascara.Random.ToString();
+                        PintaControles(mascara.CampoMascara);
+                        Session["DataFormularioPortal"] = mascara;
+                    }
                 }
             }
             catch (Exception ex)
@@ -159,7 +163,7 @@ namespace KiiniHelp.UserControls.Temporal
             try
             {
                 ValidaMascaraCaptura();
-                Mascara mascara = (Mascara)Session["PreviewDataFormulario"];
+                Mascara mascara = (Mascara)Session["DataFormularioPortal"];
                 string nombreControl = null;
                 lstCamposCapturados = new List<HelperCampoMascaraCaptura>();
                 foreach (CampoMascara campo in mascara.CampoMascara)
@@ -412,7 +416,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false))
+                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false, true))
                                 {
                                     lstRadio.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
                                 }
@@ -439,7 +443,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, true))
+                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, true, true))
                                 {
                                     ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
                                 }
@@ -465,7 +469,7 @@ namespace KiiniHelp.UserControls.Temporal
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false))
+                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false, true))
                                 {
                                     chklist.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
                                 }
@@ -687,7 +691,7 @@ namespace KiiniHelp.UserControls.Temporal
         {
             try
             {
-                Mascara mascara = (Mascara)Session["PreviewDataFormulario"];
+                Mascara mascara = (Mascara)Session["DataFormularioPortal"];
                 foreach (CampoMascara campo in mascara.CampoMascara)
                 {
                     string nombreControl;

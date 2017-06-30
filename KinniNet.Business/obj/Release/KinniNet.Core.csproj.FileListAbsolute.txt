@@ -73,3 +73,5 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\obj\Release\KinniNet.Co
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\obj\Release\KinniNet.Core.pdb
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Release\EAGetMail40.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Release\EASendMail40.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Release\EPPlus.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business\bin\Release\EPPlus.xml

@@ -61,7 +61,7 @@
                                     <div class="table-responsive">
                                         <asp:Repeater runat="server" ID="rptResultados">
                                             <HeaderTemplate>
-                                                <table class="table table-striped table-hover display" id="tblResults"> style="table-layout: fixed">
+                                                <table class="table table-striped table-hover display" id="tblResults"> 
                                                     <thead>
                                                         <tr>
                                                             <th>Tipo Usuario</th>

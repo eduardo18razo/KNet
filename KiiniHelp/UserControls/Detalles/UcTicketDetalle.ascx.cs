@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
-using KiiniHelp.ServiceSistemaEstatus;
 using KiiniHelp.ServiceTicket;
-using KiiniHelp.ServiceUsuario;
-using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
 
@@ -19,9 +16,21 @@ namespace KiiniHelp.UserControls.Detalles
         public event DelegateTerminarModal OnTerminarModal;
 
         private readonly ServiceTicketClient _servicioTicket = new ServiceTicketClient();
-        private readonly ServiceUsuariosClient _servicioUsuario = new ServiceUsuariosClient();
+        private List<string> _lstError = new List<string>();
 
-        private readonly ServiceEstatusClient _servicioEstatus = new ServiceEstatusClient();
+        private List<string> Alerta
+        {
+            set
+            {
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
+            }
+        }
+
         public int IdEstatusAsignacionActual
         {
             get { return Convert.ToInt32(hfEstatusAsignacionActual.Value); }
@@ -41,12 +50,12 @@ namespace KiiniHelp.UserControls.Detalles
         {
             try
             {
-                HelperTicketDetalle ticket = _servicioTicket.ObtenerTicket(idTicket, 6);
+                HelperTicketDetalle ticket = _servicioTicket.ObtenerTicket(idTicket, ((Usuario)Session["UserData"]).Id);
                 if (ticket != null)
                 {
                     lblNoticket.Text = ticket.IdTicket.ToString();
                     lblTituloTicket.Text = ticket.Tipificacion;
-                    lblNombreCorreo.Text = string.Format("{0} <{1}>", ticket.UsuarioLevanto, ticket.DetalleUsuarioLevanto.CorreoUsuario.First().Correo);
+                    lblNombreCorreo.Text = string.Format("{0} {1}", ticket.UsuarioLevanto, ticket.DetalleUsuarioLevanto.CorreoUsuario.First().Correo);
                     lblFechaAlta.Text = ticket.FechaSolicitud.ToString();
                     imgPrioridad.ImageUrl = "~/assets/images/icons/prioridadalta.png";
                     imgSLA.ImageUrl = "~/assets/images/icons/prioridadbaja.png";
@@ -99,9 +108,24 @@ namespace KiiniHelp.UserControls.Detalles
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                LlenaTicket(49);
+                if (!IsPostBack)
+                {
+                    if (Request.QueryString["id"] != null)
+                    {
+                        LlenaTicket(int.Parse(Request.QueryString["id"]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
     }

@@ -4,7 +4,9 @@ using System.Linq;
 using KiiniNet.Entities.Cat.Arbol.Organizacion;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
+using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
+using KinniNet.Core.Parametros;
 using KinniNet.Data.Help;
 
 namespace KinniNet.Core.Operacion
@@ -329,7 +331,7 @@ namespace KinniNet.Core.Operacion
                 try
                 {
                     db.ContextOptions.ProxyCreationEnabled = _proxy;
-                    IQueryable<Organizacion> qry = db.Organizacion;
+                    IQueryable<Organizacion> qry = db.Organizacion.Where(w => !w.Sistema);
                     if (idTipoUsuario.HasValue)
                         qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
 
@@ -406,88 +408,62 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el embebido
                 organizacion.Habilitado = true;
+                organizacion.Sistema = false;
+                List<AliasOrganizacion> alias = new BusinessParametros().ObtenerAliasOrganizacion(organizacion.IdTipoUsuario);
                 if (organizacion.Holding != null)
                 {
                     organizacion.Holding.Descripcion = organizacion.Holding.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 1;
-                    if (
-                        db.Holding.Any(
-                            a =>
-                                a.Descripcion == organizacion.Holding.Descripcion &&
-                                a.IdTipoUsuario == organizacion.Holding.IdTipoUsuario))
-                        throw new Exception("Este Holding ya se encuetra registrado");
+                    if (db.Holding.Any(a => a.Descripcion == organizacion.Holding.Descripcion && a.IdTipoUsuario == organizacion.Holding.IdTipoUsuario))
+                        throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 1).Descripcion));
                 }
 
                 if (organizacion.Compania != null)
                 {
                     organizacion.Compania.Descripcion = organizacion.Compania.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 2;
-                    if (
-                        db.Compañia.Any(
-                            a =>
-                                a.Descripcion == organizacion.Compania.Descripcion &&
-                                a.IdTipoUsuario == organizacion.Compania.IdTipoUsuario))
-                        throw new Exception("Esta Compañia ya se encuetra registrada");
+                    if (db.Compañia.Any(a => a.Descripcion == organizacion.Compania.Descripcion && a.IdTipoUsuario == organizacion.Compania.IdTipoUsuario))
+                        throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 2).Descripcion));
                 }
 
                 if (organizacion.Direccion != null)
                 {
                     organizacion.Direccion.Descripcion = organizacion.Direccion.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 3;
-                    if (
-                        db.Direccion.Any(
-                            a =>
-                                a.Descripcion == organizacion.Direccion.Descripcion &&
-                                a.IdTipoUsuario == organizacion.Direccion.IdTipoUsuario))
-                        throw new Exception("Esta Direccion ya se encuetra registrada");
+                    if (db.Direccion.Any(a => a.Descripcion == organizacion.Direccion.Descripcion && a.IdTipoUsuario == organizacion.Direccion.IdTipoUsuario))
+                        throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 3).Descripcion));
                 }
 
                 if (organizacion.SubDireccion != null)
                 {
                     organizacion.SubDireccion.Descripcion = organizacion.SubDireccion.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 4;
-                    if (
-                        db.SubDireccion.Any(
-                            a =>
-                                a.Descripcion == organizacion.SubDireccion.Descripcion &&
-                                a.IdTipoUsuario == organizacion.SubDireccion.IdTipoUsuario))
-                        throw new Exception("Esta SubDireccion ya se encuetra registrada");
+                    if (db.SubDireccion.Any(a => a.Descripcion == organizacion.SubDireccion.Descripcion && a.IdTipoUsuario == organizacion.SubDireccion.IdTipoUsuario))
+                        throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 4).Descripcion));
                 }
 
                 if (organizacion.Gerencia != null)
                 {
                     organizacion.Gerencia.Descripcion = organizacion.Gerencia.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 5;
-                    if (
-                        db.Gerencia.Any(
-                            a =>
-                                a.Descripcion == organizacion.Gerencia.Descripcion &&
-                                a.IdTipoUsuario == organizacion.Gerencia.IdTipoUsuario))
-                        throw new Exception("Esta Gerencia ya se encuetra registrada");
+                    if (db.Gerencia.Any(a => a.Descripcion == organizacion.Gerencia.Descripcion && a.IdTipoUsuario == organizacion.Gerencia.IdTipoUsuario))
+                        throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 5).Descripcion));
                 }
 
                 if (organizacion.SubGerencia != null)
                 {
                     organizacion.SubGerencia.Descripcion = organizacion.SubGerencia.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 6;
-                    if (
-                        db.SubGerencia.Any(
-                            a =>
-                                a.Descripcion == organizacion.SubGerencia.Descripcion &&
-                                a.IdTipoUsuario == organizacion.SubGerencia.IdTipoUsuario))
-                        throw new Exception("Esta SubGerencia ya se encuetra registrada");
+                    if (db.SubGerencia.Any(a => a.Descripcion == organizacion.SubGerencia.Descripcion && a.IdTipoUsuario == organizacion.SubGerencia.IdTipoUsuario))
+                        throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 6).Descripcion));
                 }
 
                 if (organizacion.Jefatura != null)
                 {
                     organizacion.Jefatura.Descripcion = organizacion.Jefatura.Descripcion.ToUpper();
                     organizacion.IdNivelOrganizacion = 7;
-                    if (
-                        db.Jefatura.Any(
-                            a =>
-                                a.Descripcion == organizacion.Jefatura.Descripcion &&
-                                a.IdTipoUsuario == organizacion.Jefatura.IdTipoUsuario))
-                        throw new Exception("Esta Jefatura ya se encuetra registrada");
+                    if (db.Jefatura.Any(a => a.Descripcion == organizacion.Jefatura.Descripcion && a.IdTipoUsuario == organizacion.Jefatura.IdTipoUsuario))
+                        throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 8).Descripcion));
                 }
 
                 if (organizacion.Id == 0)
@@ -751,7 +727,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                IQueryable<Organizacion> qry = db.Organizacion;
+                IQueryable<Organizacion> qry = db.Organizacion.Where(w => !w.Sistema);
                 if (idTipoUsuario.HasValue)
                     qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
 
@@ -816,7 +792,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 IQueryable<Organizacion> qry = from o in db.Organizacion
                                                join gu in db.GrupoUsuario on o.IdTipoUsuario equals gu.IdTipoUsuario
-                                               where grupos.Contains(gu.Id)
+                                               where grupos.Contains(gu.Id) && !o.Sistema
                                                select o;
 
                 result = qry.Distinct().ToList();
@@ -1008,8 +984,8 @@ namespace KinniNet.Core.Operacion
                 Organizacion org = db.Organizacion.SingleOrDefault(w => w.Id == idOrganizacion);
                 if (org != null)
                 {
-                    if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any() && !habilitado)
-                        throw new Exception("La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
+                    //if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any() && !habilitado)
+                    //    throw new Exception("La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
                     org.Habilitado = habilitado;
 
 
@@ -1017,18 +993,20 @@ namespace KinniNet.Core.Operacion
                         db.Organizacion.Where(w => w.IdTipoUsuario == org.IdTipoUsuario && w.IdHolding == org.IdHolding);
                     if (!habilitado)
                     {
-                        qry = qry.Where(w => w.IdNivelOrganizacion > org.IdNivelOrganizacion && w.Habilitado);
+                        qry = qry.Where(w => w.IdNivelOrganizacion >= org.IdNivelOrganizacion && w.Habilitado);
                         foreach (Organizacion source in qry.OrderBy(o => o.Id))
                         {
-                            if (source.HitConsulta.Any() || source.Ticket.Any() || source.Usuario.Any() && !habilitado)
-                                throw new Exception(
-                                    "La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
+                            //if (source.HitConsulta.Any() || source.Ticket.Any() || source.Usuario.Any() && !habilitado)
+                            //    throw new Exception(
+                            //        "La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
                             switch (org.IdNivelOrganizacion)
                             {
                                 case 1:
                                     if (source.IdHolding == org.IdHolding)
                                     {
-                                        source.Compania.Habilitado = false;
+                                        source.Holding.Habilitado = false;
+                                        if (source.IdCompania.HasValue)
+                                            source.Compania.Habilitado = false;
                                         if (source.IdDireccion.HasValue)
                                             source.Direccion.Habilitado = false;
                                         if (source.IdSubDireccion.HasValue)
@@ -1060,8 +1038,7 @@ namespace KinniNet.Core.Operacion
                                     }
                                     break;
                                 case 3:
-                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
-                                        source.IdDireccion == org.IdDireccion)
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion)
                                     {
                                         source.Direccion.Habilitado = false;
                                         if (source.IdSubDireccion.HasValue)
@@ -1076,9 +1053,7 @@ namespace KinniNet.Core.Operacion
                                     }
                                     break;
                                 case 4:
-                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
-                                        source.IdDireccion == org.IdDireccion &&
-                                        source.IdSubDireccion == org.IdSubDireccion)
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion && source.IdSubDireccion == org.IdSubDireccion)
                                     {
                                         source.SubDireccion.Habilitado = false;
                                         if (source.IdGerencia.HasValue)
@@ -1091,10 +1066,7 @@ namespace KinniNet.Core.Operacion
                                     }
                                     break;
                                 case 5:
-                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
-                                        source.IdDireccion == org.IdDireccion &&
-                                        source.IdSubDireccion == org.IdSubDireccion &&
-                                        source.IdGerencia == org.IdGerencia)
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion && source.IdSubDireccion == org.IdSubDireccion && source.IdGerencia == org.IdGerencia)
                                     {
                                         source.Gerencia.Habilitado = false;
                                         if (source.IdSubGerencia.HasValue)
@@ -1105,10 +1077,7 @@ namespace KinniNet.Core.Operacion
                                     }
                                     break;
                                 case 6:
-                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
-                                        source.IdDireccion == org.IdDireccion &&
-                                        source.IdSubDireccion == org.IdSubDireccion &&
-                                        source.IdGerencia == org.IdGerencia && source.IdSubGerencia == org.IdSubGerencia)
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion && source.IdSubDireccion == org.IdSubDireccion && source.IdGerencia == org.IdGerencia && source.IdSubGerencia == org.IdSubGerencia)
                                     {
                                         source.SubGerencia.Habilitado = false;
                                         if (source.IdJefatura.HasValue)
@@ -1117,11 +1086,7 @@ namespace KinniNet.Core.Operacion
                                     }
                                     break;
                                 case 7:
-                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
-                                        source.IdDireccion == org.IdDireccion &&
-                                        source.IdSubDireccion == org.IdSubDireccion &&
-                                        source.IdGerencia == org.IdGerencia && source.IdSubGerencia == org.IdSubGerencia &&
-                                        source.IdJefatura == org.IdJefatura)
+                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania && source.IdDireccion == org.IdDireccion && source.IdSubDireccion == org.IdSubDireccion && source.IdGerencia == org.IdGerencia && source.IdSubGerencia == org.IdSubGerencia && source.IdJefatura == org.IdJefatura)
                                     {
                                         source.Jefatura.Habilitado = false;
                                         source.Habilitado = false;
@@ -1132,32 +1097,38 @@ namespace KinniNet.Core.Operacion
                     }
                     else
                     {
-                        qry = qry.Where(w => w.IdNivelOrganizacion < org.IdNivelOrganizacion && !w.Habilitado);
-                        if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any() && !habilitado)
-                            throw new Exception("La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
+                        qry = qry.Where(w => w.IdNivelOrganizacion <= org.IdNivelOrganizacion && !w.Habilitado);
+                        //if (org.HitConsulta.Any() || org.Ticket.Any() || org.Usuario.Any() && !habilitado)
+                        //    throw new Exception("La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
                         switch (org.IdNivelOrganizacion)
                         {
                             case 1:
+                                org.Holding.Habilitado = true;
                                 break;
                             case 2:
+                                org.Holding.Habilitado = true;
                                 org.Compania.Habilitado = true;
                                 break;
                             case 3:
+                                org.Holding.Habilitado = true;
                                 org.Compania.Habilitado = true;
                                 org.Direccion.Habilitado = true;
                                 break;
                             case 4:
+                                org.Holding.Habilitado = true;
                                 org.Compania.Habilitado = true;
                                 org.Direccion.Habilitado = true;
                                 org.SubDireccion.Habilitado = true;
                                 break;
                             case 5:
+                                org.Holding.Habilitado = true;
                                 org.Compania.Habilitado = true;
                                 org.Direccion.Habilitado = true;
                                 org.SubDireccion.Habilitado = true;
                                 org.Gerencia.Habilitado = true;
                                 break;
                             case 6:
+                                org.Holding.Habilitado = true;
                                 org.Compania.Habilitado = true;
                                 org.Direccion.Habilitado = true;
                                 org.SubDireccion.Habilitado = true;
@@ -1165,6 +1136,7 @@ namespace KinniNet.Core.Operacion
                                 org.SubGerencia.Habilitado = true;
                                 break;
                             case 7:
+                                org.Holding.Habilitado = true;
                                 org.Compania.Habilitado = true;
                                 org.Direccion.Habilitado = true;
                                 org.SubDireccion.Habilitado = true;
@@ -1173,88 +1145,89 @@ namespace KinniNet.Core.Operacion
                                 org.Jefatura.Habilitado = true;
                                 break;
                         }
+
                         if (org.IdCompania.HasValue)
                             qry = qry.Where(w => w.IdCompania == org.IdCompania);
                         foreach (Organizacion source in qry.OrderBy(o => o.Id))
                         {
                             if (source.HitConsulta.Any() || source.Ticket.Any() || source.Usuario.Any())
-                                throw new Exception(
-                                    "La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
-                            switch (source.IdNivelOrganizacion)
-                            {
-                                case 1:
-                                    break;
-                                case 2:
-                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania)
-                                    {
-                                        source.Compania.Habilitado = true;
-                                        source.Habilitado = true;
-                                    }
-                                    break;
-                                case 3:
-                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
-                                        source.IdDireccion == org.IdDireccion)
-                                    {
-                                        source.Compania.Habilitado = true;
-                                        source.Direccion.Habilitado = true;
-                                        source.Habilitado = true;
-                                    }
-                                    break;
-                                case 4:
-                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
-                                        source.IdDireccion == org.IdDireccion &&
-                                        source.IdSubDireccion == org.IdSubDireccion)
-                                    {
-                                        source.Compania.Habilitado = true;
-                                        source.Direccion.Habilitado = true;
-                                        source.SubDireccion.Habilitado = true;
-                                        source.Habilitado = true;
-                                    }
-                                    break;
-                                case 5:
-                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
-                                        source.IdDireccion == org.IdDireccion &&
-                                        source.IdSubDireccion == org.IdSubDireccion &&
-                                        source.IdGerencia == org.IdGerencia)
-                                    {
-                                        source.Compania.Habilitado = true;
-                                        source.Direccion.Habilitado = true;
-                                        source.SubDireccion.Habilitado = true;
-                                        source.Gerencia.Habilitado = true;
-                                        source.Habilitado = true;
-                                    }
-                                    break;
-                                case 6:
-                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
-                                        source.IdDireccion == org.IdDireccion &&
-                                        source.IdSubDireccion == org.IdSubDireccion &&
-                                        source.IdGerencia == org.IdGerencia && source.IdSubGerencia == org.IdSubGerencia)
-                                    {
-                                        source.Compania.Habilitado = true;
-                                        source.Direccion.Habilitado = true;
-                                        source.SubDireccion.Habilitado = true;
-                                        source.Gerencia.Habilitado = true;
-                                        source.SubGerencia.Habilitado = true;
-                                        source.Habilitado = true;
-                                    }
-                                    break;
-                                case 7:
-                                    if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
-                                        source.IdDireccion == org.IdDireccion &&
-                                        source.IdSubDireccion == org.IdSubDireccion &&
-                                        source.IdGerencia == org.IdGerencia && source.IdSubGerencia == org.IdSubGerencia &&
-                                        source.IdJefatura == org.IdJefatura)
-                                    {
-                                        source.Compania.Habilitado = true;
-                                        source.Direccion.Habilitado = true;
-                                        source.SubDireccion.Habilitado = true;
-                                        source.Gerencia.Habilitado = true;
-                                        source.SubGerencia.Habilitado = true;
-                                        source.Jefatura.Habilitado = true;
-                                        source.Habilitado = true;
-                                    }
-                                    break;
-                            }
+                                //throw new Exception(
+                                //    "La ubicacion ya se encuetra con datos asociasdos no puede ser eliminada");
+                                switch (source.IdNivelOrganizacion)
+                                {
+                                    case 1:
+                                        break;
+                                    case 2:
+                                        if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania)
+                                        {
+                                            source.Compania.Habilitado = true;
+                                            source.Habilitado = true;
+                                        }
+                                        break;
+                                    case 3:
+                                        if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
+                                            source.IdDireccion == org.IdDireccion)
+                                        {
+                                            source.Compania.Habilitado = true;
+                                            source.Direccion.Habilitado = true;
+                                            source.Habilitado = true;
+                                        }
+                                        break;
+                                    case 4:
+                                        if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
+                                            source.IdDireccion == org.IdDireccion &&
+                                            source.IdSubDireccion == org.IdSubDireccion)
+                                        {
+                                            source.Compania.Habilitado = true;
+                                            source.Direccion.Habilitado = true;
+                                            source.SubDireccion.Habilitado = true;
+                                            source.Habilitado = true;
+                                        }
+                                        break;
+                                    case 5:
+                                        if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
+                                            source.IdDireccion == org.IdDireccion &&
+                                            source.IdSubDireccion == org.IdSubDireccion &&
+                                            source.IdGerencia == org.IdGerencia)
+                                        {
+                                            source.Compania.Habilitado = true;
+                                            source.Direccion.Habilitado = true;
+                                            source.SubDireccion.Habilitado = true;
+                                            source.Gerencia.Habilitado = true;
+                                            source.Habilitado = true;
+                                        }
+                                        break;
+                                    case 6:
+                                        if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
+                                            source.IdDireccion == org.IdDireccion &&
+                                            source.IdSubDireccion == org.IdSubDireccion &&
+                                            source.IdGerencia == org.IdGerencia && source.IdSubGerencia == org.IdSubGerencia)
+                                        {
+                                            source.Compania.Habilitado = true;
+                                            source.Direccion.Habilitado = true;
+                                            source.SubDireccion.Habilitado = true;
+                                            source.Gerencia.Habilitado = true;
+                                            source.SubGerencia.Habilitado = true;
+                                            source.Habilitado = true;
+                                        }
+                                        break;
+                                    case 7:
+                                        if (source.IdHolding == org.IdHolding && source.IdCompania == org.IdCompania &&
+                                            source.IdDireccion == org.IdDireccion &&
+                                            source.IdSubDireccion == org.IdSubDireccion &&
+                                            source.IdGerencia == org.IdGerencia && source.IdSubGerencia == org.IdSubGerencia &&
+                                            source.IdJefatura == org.IdJefatura)
+                                        {
+                                            source.Compania.Habilitado = true;
+                                            source.Direccion.Habilitado = true;
+                                            source.SubDireccion.Habilitado = true;
+                                            source.Gerencia.Habilitado = true;
+                                            source.SubGerencia.Habilitado = true;
+                                            source.Jefatura.Habilitado = true;
+                                            source.Habilitado = true;
+                                        }
+                                        break;
+                                }
                         }
                     }
                 }
@@ -1307,29 +1280,59 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.LazyLoadingEnabled = true;
+
                 Organizacion organizacion = db.Organizacion.SingleOrDefault(s => s.Id == org.Id);
+
                 if (organizacion != null)
                 {
                     if (organizacion.Holding != null)
+                    {
+                        if (db.Holding.Any(a => a.Descripcion == org.Holding.Descripcion && a.IdTipoUsuario == org.Holding.IdTipoUsuario && a.Id != organizacion.Holding.Id))
+                            throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 1).Descripcion));
                         organizacion.Holding.Descripcion = org.Holding.Descripcion.ToUpper();
+                    }
 
                     if (organizacion.Compania != null)
+                    {
+                        if (db.Compañia.Any(a => a.Descripcion == org.Compania.Descripcion && a.IdTipoUsuario == org.Compania.IdTipoUsuario && a.Id != organizacion.Compania.Id))
+                            throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 2).Descripcion));
                         organizacion.Compania.Descripcion = org.Compania.Descripcion.ToUpper();
+                    }
 
                     if (organizacion.Direccion != null)
+                    {
+                        if (db.Direccion.Any(a => a.Descripcion == org.Direccion.Descripcion && a.IdTipoUsuario == org.Direccion.IdTipoUsuario && a.Id != organizacion.Direccion.Id))
+                            throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 3).Descripcion));
                         organizacion.Direccion.Descripcion = org.Direccion.Descripcion.ToUpper();
+                    }
 
                     if (organizacion.SubDireccion != null)
+                    {
+                        if (db.SubDireccion.Any(a => a.Descripcion == org.SubDireccion.Descripcion && a.IdTipoUsuario == org.SubDireccion.IdTipoUsuario && a.Id != organizacion.SubDireccion.Id))
+                            throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 4).Descripcion));
                         organizacion.SubDireccion.Descripcion = org.SubDireccion.Descripcion.ToUpper();
+                    }
 
                     if (organizacion.Gerencia != null)
+                    {
+                        if (db.Gerencia.Any(a => a.Descripcion == org.Gerencia.Descripcion && a.IdTipoUsuario == org.Gerencia.IdTipoUsuario && a.Id != organizacion.Gerencia.Id))
+                            throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 5).Descripcion));
                         organizacion.Gerencia.Descripcion = org.Gerencia.Descripcion.ToUpper();
+                    }
 
                     if (organizacion.SubGerencia != null)
+                    {
+                        if (db.SubGerencia.Any(a => a.Descripcion == org.SubGerencia.Descripcion && a.IdTipoUsuario == org.SubGerencia.IdTipoUsuario && a.Id != organizacion.SubGerencia.Id))
+                            throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 6).Descripcion));
                         organizacion.SubGerencia.Descripcion = org.SubGerencia.Descripcion.ToUpper();
+                    }
 
                     if (organizacion.Jefatura != null)
+                    {
+                        if (db.Jefatura.Any(a => a.Descripcion == org.Jefatura.Descripcion && a.IdTipoUsuario == org.Jefatura.IdTipoUsuario && a.Id != organizacion.Jefatura.Id))
+                            throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 7).Descripcion));
                         organizacion.Jefatura.Descripcion = org.Jefatura.Descripcion.ToUpper();
+                    }
 
                     if (organizacion.Id == 0)
                         db.Organizacion.AddObject(organizacion);

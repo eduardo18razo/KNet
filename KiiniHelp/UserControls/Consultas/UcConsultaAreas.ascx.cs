@@ -55,6 +55,11 @@ namespace KiiniHelp.UserControls.Consultas
                 Alerta = new List<string>();
                 ucAltaArea.OnAceptarModal += AltaAreaOnAceptarModal;
                 ucAltaArea.OnCancelarModal += AltaAreaOnCancelarModal;
+                ucAltaArea.OnTerminarModal += AltaAreaOnAceptarModal;
+                if (!IsPostBack)
+                {
+                    LlenaAreasConsulta();
+                }
             }
             catch (Exception ex)
             {

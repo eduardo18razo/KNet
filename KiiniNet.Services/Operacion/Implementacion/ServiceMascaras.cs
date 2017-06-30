@@ -30,7 +30,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             {
                 using (BusinessMascaras negocio = new BusinessMascaras())
                 {
-                    negocio.CrearMascara(mascara);
+                    negocio.ActualizarMascara(mascara);
                 }
             }
             catch (Exception ex)
@@ -84,13 +84,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion)
+        public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion, bool filtraHabilitados)
         {
             try
             {
                 using (BusinessMascaras negocio = new BusinessMascaras())
                 {
-                    return negocio.ObtenerCatalogoCampoMascara(tabla, insertarSeleccion);
+                    return negocio.ObtenerCatalogoCampoMascara(tabla, insertarSeleccion, filtraHabilitados);
                 }
             }
             catch (Exception ex)

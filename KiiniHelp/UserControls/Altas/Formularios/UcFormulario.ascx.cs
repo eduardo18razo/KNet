@@ -7,10 +7,12 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using AjaxControlToolkit;
+using KiiniHelp.ServiceArbolAcceso;
 using KiiniHelp.ServiceMascaraAcceso;
 using KiiniHelp.ServiceSistemaCatalogos;
 using KiiniHelp.ServiceTicket;
 using KiiniNet.Entities.Cat.Mascaras;
+using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
@@ -28,6 +30,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
         private readonly ServiceCatalogosClient _servicioCatalogos = new ServiceCatalogosClient();
         private readonly ServiceMascarasClient _servicioMascaras = new ServiceMascarasClient();
         private readonly ServiceTicketClient _servicioTicket = new ServiceTicketClient();
+        private readonly ServiceArbolAccesoClient _servicioArbolAccesoClient = new ServiceArbolAccesoClient();
         private List<Control> _lstControles;
         private List<string> _lstError = new List<string>();
         private List<string> Alerta
@@ -59,14 +62,26 @@ namespace KiiniHelp.UserControls.Altas.Formularios
         {
             base.OnInit(e);
             _lstControles = new List<Control>();
-            Mascara mascara = (Mascara)Session["PreviewDataFormulario"];
-            if (mascara != null)
+            ArbolAcceso arbol;
+            if (Request.QueryString["IdArbol"] != null)
+                arbol = _servicioArbolAccesoClient.ObtenerArbolAcceso(int.Parse(Request.QueryString["IdArbol"]));
+            else
+                arbol = (ArbolAcceso)Session["ArbolAcceso"];
+
+            if (arbol != null)
             {
-                hfComandoInsertar.Value = mascara.ComandoInsertar;
-                hfComandoActualizar.Value = mascara.ComandoInsertar;
-                hfRandom.Value = mascara.Random.ToString();
-                lblDescripcionMascara.Text = mascara.Descripcion;
-                PintaControles(mascara.CampoMascara);
+                
+                int? idMascara = arbol.InventarioArbolAcceso.First().IdMascara;
+                if (idMascara != null) IdMascara = (int)idMascara;
+                Mascara mascara = _servicioMascaras.ObtenerMascaraCaptura(IdMascara);
+                if (mascara != null)
+                {
+                    hfComandoInsertar.Value = mascara.ComandoInsertar;
+                    hfComandoActualizar.Value = mascara.ComandoInsertar;
+                    hfRandom.Value = mascara.Random.ToString();
+                    PintaControles(mascara.CampoMascara);
+                    Session["MascaraActiva"] = mascara;
+                }
             }
         }
 
@@ -114,6 +129,15 @@ namespace KiiniHelp.UserControls.Altas.Formularios
             get { return Convert.ToBoolean(hfRandom.Value); }
         }
 
+        public int TicketGenerado
+        {
+            get { return int.Parse(hfTicketGenerado.Value); }
+        }
+        public string RandomGenerado
+        {
+            get { return hfRandomGenerado.Value; }
+        }
+
         public bool Preview
         {
             get { return Convert.ToBoolean(hfPreview.Value); }
@@ -128,7 +152,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
         {
             try
             {
-                Mascara mascara = (Mascara)Session["PreviewDataFormulario"];
+                Mascara mascara = (Mascara)Session["MascaraActiva"];
                 foreach (CampoMascara campo in mascara.CampoMascara)
                 {
                     string nombreControl;
@@ -340,7 +364,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
             try
             {
                 ValidaMascaraCaptura();
-                Mascara mascara = (Mascara)Session["PreviewDataFormulario"];
+                Mascara mascara = (Mascara)Session["MascaraActiva"];
                 string nombreControl = null;
                 lstCamposCapturados = new List<HelperCampoMascaraCaptura>();
                 foreach (CampoMascara campo in mascara.CampoMascara)
@@ -592,7 +616,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false))
+                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false, true))
                                 {
                                     lstRadio.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
                                 }
@@ -617,7 +641,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, true))
+                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, true, true))
                                 {
                                     ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
                                 }
@@ -643,7 +667,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false))
+                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false, true))
                                 {
                                     chklist.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
                                 }
@@ -858,7 +882,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
 
                 //TODO: Cambiar id arbol por parametro
                 List<HelperCampoMascaraCaptura> capturaMascara = ObtenerCapturaMascara();
-                KiiniNet.Entities.Operacion.Tickets.Ticket result = _servicioTicket.CrearTicket(((Usuario)Session["UserData"]).Id, ((Usuario)Session["UserData"]).Id, 10, capturaMascara, (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Portal, CampoRandom, true, false);
+                KiiniNet.Entities.Operacion.Tickets.Ticket result = _servicioTicket.CrearTicket(((Usuario)Session["UserData"]).Id, ((Usuario)Session["UserData"]).Id, ((ArbolAcceso)Session["ArbolAcceso"]).Id, capturaMascara, (int)BusinessVariables.EnumeradoresKiiniNet.EnumCanal.Portal, CampoRandom, true, false);
                 lblNoTicket.Text = result.Id.ToString();
                 if (CampoRandom)
                     lblRandom.Text = result.ClaveRegistro;

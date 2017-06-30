@@ -1,4 +1,5 @@
 ﻿function SuccsessAlert(title, msg) {
+    debugger;
     $.notify({
         // options
         icon: 'glyphicon glyphicon-ok',
@@ -19,7 +20,7 @@
         },
         offset: 20,
         spacing: 10,
-        z_index: 1031,
+        z_index: 99999,
         delay: 5000,
         timer: 1000,
         url_target: '_blank',
@@ -33,7 +34,7 @@
         onClose: null,
         onClosed: null,
         icon_type: 'class',
-        template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+        template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert" style="z-index:9999999">' +
             '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
             '<span data-notify="icon"></span> ' +
             '<span data-notify="title">{1}</span> ' +
@@ -80,7 +81,7 @@ function ErrorAlert(title, msg) {
         onClose: null,
         onClosed: null,
         icon_type: 'class',
-        template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert" style="z-index=9999999">' +
+        template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert" style="z-index:9999999">' +
             '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
             '<span data-notify="icon"></span> ' +
             '<span data-notify="title">{1}</span> ' +

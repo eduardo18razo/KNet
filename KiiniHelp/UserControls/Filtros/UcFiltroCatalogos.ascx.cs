@@ -275,7 +275,7 @@ namespace KiiniHelp.UserControls.Filtros
                                 Text = campo.Descripcion,
                                 CssClass = "DropSelect"
                             };
-                            foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, true))
+                            foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, true, false))
                             {
                                 ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
                             }

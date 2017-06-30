@@ -35,3 +35,5 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Release\Offic
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Release\Microsoft.Office.Interop.Excel.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Release\Microsoft.Office.Interop.PowerPoint.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Release\Microsoft.Office.Interop.Word.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Release\EPPlus.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Release\EPPlus.xml

@@ -31,7 +31,7 @@ namespace KiiniHelp.UserControls.Preview
             }
         }
 
-        private void MuestraPreview(InformacionConsulta datos)
+        public void MuestraPreview(InformacionConsulta datos)
         {
             try
             {

@@ -10,14 +10,13 @@ using KiiniHelp.ServiceGrupoUsuario;
 using KiiniHelp.ServiceSistemaSubRol;
 using KiiniHelp.ServiceSistemaTipoGrupo;
 using KiiniHelp.ServiceSistemaTipoUsuario;
-using KiiniHelp.ServiceUsuario;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
 {
-    public partial class AltaGrupoUsuario : UserControl, IControllerModal
+    public partial class UcAltaGrupoUsuario : UserControl, IControllerModal
     {
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
@@ -64,47 +63,7 @@ namespace KiiniHelp.UserControls.Altas
             set
             {
                 ddlTipoGrupo.SelectedValue = value.ToString();
-                divParametros.Visible = false;
-                lblTitle.Text = "Agregar Grupo ";
-                switch (value)
-                {
-                    case (int)BusinessVariables.EnumTiposGrupos.Administrador:
-                        lblTitle.Text += "Administrador";
-                        break;
-                    case (int)BusinessVariables.EnumTiposGrupos.Usuario:
-                        lblTitle.Text += "Usuario";
-                        break;
-                    case (int)BusinessVariables.EnumTiposGrupos.ConsultasEspeciales:
-                        lblTitle.Text += "Consultas Especiales";
-                        break;
-                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención:
-                        lblTitle.Text += "Responsable de Atención";
-                        break;
-                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido:
-                        lblTitle.Text += "Responsable de Contenido";
-                        break;
-                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeOperación:
-                        lblTitle.Text += "Responsable de Operación";
-                        break;
-                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
-                        lblTitle.Text += "Responsable de Desarrollo";
-                        break;
-                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableServicio:
-                        lblTitle.Text += "Responsable de Servicio";
-                        break;
-                    case (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal:
-                        divParametros.Visible = true;
-                        lblTitle.Text = "Contac Center";
-                        break;
-                    default:
-                        return;
-                        break;
-                }
-                List<SubRol> lstRoles = _servicioSistemaSubRol.ObtenerSubRolesByTipoGrupo(value, false);
-                divSubRoles.Visible = lstRoles.Count > 0;
-
-                rptSubRoles.DataSource = lstRoles;
-                rptSubRoles.DataBind();
+                
             }
         }
 
@@ -120,6 +79,8 @@ namespace KiiniHelp.UserControls.Altas
             set
             {
                 ViewState["Alta"] = value.ToString();
+                ddlTipoUsuario.Enabled = value;
+                ddlTipoGrupo.Enabled = value;
             }
         }
 
@@ -178,61 +139,7 @@ namespace KiiniHelp.UserControls.Altas
                 }
             }
         }
-
-        private void CargaHorario()
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        private void CargaDias()
-        {
-            try
-            {
-                //Session["DiasSubRoles"] = Session["DiasSubRoles"] ?? new List<DiaFestivoSubGrupo>();
-                //foreach (RepeaterItem item in ucAltaDiasFestivos.DiasDescansoSubRol)
-                //{
-                //    List<DiaFestivoSubGrupo> tmpEliminar = ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Where(w => w.IdSubGrupoUsuario == ucAltaDiasFestivos.IdSubRol).ToList();
-                //    foreach (DiaFestivoSubGrupo dia in tmpEliminar)
-                //    {
-                //        ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Remove(dia);
-                //    }
-                //}
-
-                //foreach (RepeaterItem item in ucAltaDiasFestivos.DiasDescansoSubRol)
-                //{
-                //    Label lblFecha = (Label)item.FindControl("lblFecha");
-                //    Label lblDescripcion = (Label)item.FindControl("lblDescripcion");
-                //    DiaFestivoSubGrupo dia = new DiaFestivoSubGrupo
-                //    {
-                //        IdSubGrupoUsuario = ucAltaDiasFestivos.IdSubRol,
-                //        Fecha = Convert.ToDateTime(lblFecha.Text),
-                //        Descripcion = lblDescripcion.Text.Trim().ToUpper()
-                //    };
-                //    ((List<DiaFestivoSubGrupo>)Session["DiasSubRoles"]).Add(dia);
-                //}
-                //foreach (RepeaterItem itemSr in rptSubRoles.Items)
-                //{
-                //    Label lbl = (Label)itemSr.FindControl("lblId");
-                //    if (int.Parse(lbl.Text) == ucAltaDiasFestivos.IdSubRol)
-                //    {
-                //        Button btn = (Button)itemSr.FindControl("btnDiasDescanso");
-                //        btn.CssClass = "col-sm-3 btn btn-success";
-                //    }
-                //}
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
+        
         private void ValidaCapturaGrupoUsuario()
         {
             StringBuilder sb = new StringBuilder();
@@ -256,6 +163,8 @@ namespace KiiniHelp.UserControls.Altas
                 IdTipoUsuario = BusinessVariables.ComboBoxCatalogo.ValueSeleccione;
                 ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
                 txtDescripcionGrupoUsuario.Text = String.Empty;
+                divParametros.Visible = false;
+                divSubRoles.Visible = false;
                 rptSubRoles.DataSource = null;
                 rptSubRoles.DataBind();
                 if (Session["GrupoUsuarioEditar"] != null)
@@ -282,104 +191,11 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 Alerta = new List<string>();
-                ucAltaDiasFestivos.OnAceptarModal += UcAltaDiasFestivosOnOnAceptarModal;
-                ucAltaDiasFestivos.OnCancelarModal += UcAltaDiasFestivosOnOnCancelarModal;
-
-                ucAltaHorario.OnAceptarModal += UcHorarioOnOnAceptarModal;
-                ucAltaHorario.OnCancelarModal += UcHorarioOnOnCancelarModal;
                 if (!IsPostBack)
                 {
-                    Metodos.LlenaComboCatalogo(ddlTipoUsuario, _servicioSistemaTipoUsuario.ObtenerTiposUsuario(true));
+                    Metodos.LlenaComboCatalogo(ddlTipoUsuario, _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true));
 
                 }
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        private void UcHorarioOnOnAceptarModal()
-        {
-            try
-            {
-                foreach (RepeaterItem item in rptSubRoles.Items)
-                {
-                    CheckBox chk = (CheckBox)item.FindControl("chkSubRol");
-                    if (!chk.Checked) continue;
-                    DropDownList ddl = (DropDownList)item.FindControl("ddlHorario");
-                    ddl.DataSource = _servicioDiaHorario.ObtenerHorarioDefault(true);
-                    ddl.DataTextField = "Descripcion";
-                    ddl.DataValueField = "Id";
-                    ddl.DataBind();
-                    break;
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        private void UcHorarioOnOnCancelarModal()
-        {
-            try
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalHorarios\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        private void UcAltaDiasFestivosOnOnAceptarModal()
-        {
-            try
-            {
-                foreach (RepeaterItem item in rptSubRoles.Items)
-                {
-                    CheckBox chk = (CheckBox)item.FindControl("chkSubRol");
-                    if (!chk.Checked) continue;
-                    DropDownList ddl = (DropDownList)item.FindControl("ddlDiasFeriados");
-                    ddl.DataSource = _servicioDiaHorario.ObtenerDiasFeriadosUser(true);
-                    ddl.DataTextField = "Descripcion";
-                    ddl.DataValueField = "Id";
-                    ddl.DataBind();
-                    break;
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        private void UcAltaDiasFestivosOnOnCancelarModal()
-        {
-            try
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalDiasDescanso\");", true);
             }
             catch (Exception ex)
             {
@@ -414,6 +230,46 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 IdTipoGrupo = int.Parse(ddlTipoGrupo.SelectedValue);
+                divParametros.Visible = false;
+                lblTitle.Text = "Agregar Grupo ";
+                switch (IdTipoGrupo)
+                {
+                    case (int)BusinessVariables.EnumTiposGrupos.Administrador:
+                        lblTitle.Text += "Administrador";
+                        break;
+                    case (int)BusinessVariables.EnumTiposGrupos.Usuario:
+                        lblTitle.Text += "Usuario";
+                        break;
+                    case (int)BusinessVariables.EnumTiposGrupos.ConsultasEspeciales:
+                        lblTitle.Text += "Consultas Especiales";
+                        break;
+                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención:
+                        lblTitle.Text += "Responsable de Atención";
+                        break;
+                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido:
+                        lblTitle.Text += "Responsable de Contenido";
+                        break;
+                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeOperación:
+                        lblTitle.Text += "Responsable de Operación";
+                        break;
+                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo:
+                        lblTitle.Text += "Responsable de Desarrollo";
+                        break;
+                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableServicio:
+                        lblTitle.Text += "Responsable de Servicio";
+                        break;
+                    case (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal:
+                        divParametros.Visible = true;
+                        lblTitle.Text = "Contac Center";
+                        break;
+                    default:
+                        return;
+                }
+                List<SubRol> lstRoles = _servicioSistemaSubRol.ObtenerSubRolesByTipoGrupo(IdTipoGrupo, false);
+                divSubRoles.Visible = lstRoles.Count > 0;
+
+                rptSubRoles.DataSource = lstRoles;
+                rptSubRoles.DataBind();
             }
             catch (Exception ex)
             {

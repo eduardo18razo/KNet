@@ -540,6 +540,15 @@
     <Property Name="Sistema" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
+  <EntityType Name="MascaraSeleccionCatalogo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdRegistroCatalogo" Type="int" />
+    <Property Name="IdTicket" Type="int" />
+    <Property Name="Seleccionado" Type="bit" />
+  </EntityType>
   <EntityType Name="Menu">
     <Key>
       <PropertyRef Name="Id" />
@@ -703,6 +712,7 @@
     <Property Name="IdSubGerencia" Type="int" />
     <Property Name="IdJefatura" Type="int" />
     <Property Name="IdNivelOrganizacion" Type="int" />
+    <Property Name="Sistema" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="Pais">
@@ -1138,6 +1148,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Abreviacion" Type="nvarchar" MaxLength="3" />
+    <Property Name="Color" Type="nvarchar" MaxLength="10" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TipoCampoMascara">
@@ -1249,6 +1261,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Abreviacion" Type="nvarchar" MaxLength="5" />
+    <Property Name="Color" Type="nvarchar" MaxLength="20" />
     <Property Name="EsResidente" Type="bit" Nullable="false" />
     <Property Name="EsMoral" Type="bit" Nullable="false" />
     <Property Name="NumeroCorreos" Type="int" Nullable="false" />
@@ -1278,6 +1292,7 @@
     <Property Name="IdSubZona" Type="int" />
     <Property Name="IdSiteRack" Type="int" />
     <Property Name="IdNivelUbicacion" Type="int" />
+    <Property Name="Sistema" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Urgencia">
@@ -1305,6 +1320,7 @@
     <Property Name="IdPuesto" Type="int" />
     <Property Name="Vip" Type="bit" />
     <Property Name="Foto" Type="image" />
+    <Property Name="PersonaFisica" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
     <Property Name="Activo" Type="bit" />
     <Property Name="Tries" Type="int" />
@@ -2460,6 +2476,18 @@
       </Principal>
       <Dependent Role="Mascara">
         <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MascaraSeleccionCatalogo_Ticket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+    <End Role="MascaraSeleccionCatalogo" Type="Self.MascaraSeleccionCatalogo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MascaraSeleccionCatalogo">
+        <PropertyRef Name="IdTicket" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4059,6 +4087,7 @@
     <EntitySet Name="InventarioInfConsulta" EntityType="Self.InventarioInfConsulta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Jefatura" EntityType="Self.Jefatura" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mascara" EntityType="Self.Mascara" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MascaraSeleccionCatalogo" EntityType="Self.MascaraSeleccionCatalogo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Municipio" EntityType="Self.Municipio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Nivel1" EntityType="Self.Nivel1" Schema="dbo" store:Type="Tables" />
@@ -4500,6 +4529,10 @@
     <AssociationSet Name="FK_Mascara_UsuarioAlta" Association="Self.FK_Mascara_UsuarioAlta">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Mascara" EntitySet="Mascara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MascaraSeleccionCatalogo_Ticket" Association="Self.FK_MascaraSeleccionCatalogo_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="MascaraSeleccionCatalogo" EntitySet="MascaraSeleccionCatalogo" />
     </AssociationSet>
     <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
       <End Role="Menu" EntitySet="Menu" />

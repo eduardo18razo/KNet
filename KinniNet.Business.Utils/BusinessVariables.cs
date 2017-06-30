@@ -4,6 +4,28 @@ namespace KinniNet.Business.Utils
 {
     public static class BusinessVariables
     {
+        public static class AliasOrganizaciones
+        {
+            public static string Nivel1 = "Nivel 1";
+            public static string Nivel2 = "Nivel 2";
+            public static string Nivel3 = "Nivel 3";
+            public static string Nivel4 = "Nivel 4";
+            public static string Nivel5 = "Nivel 5";
+            public static string Nivel6 = "Nivel 6";
+            public static string Nivel7 = "Nivel 7";
+        }
+
+        public static class AliasUbicaciones
+        {
+            public static string Nivel1 = "Nivel 1";
+            public static string Nivel2 = "Nivel 2";
+            public static string Nivel3 = "Nivel 3";
+            public static string Nivel4 = "Nivel 4";
+            public static string Nivel5 = "Nivel 5";
+            public static string Nivel6 = "Nivel 6";
+            public static string Nivel7 = "Nivel 7";
+        }
+
         public static class Directorios
         {
             public static string RepositorioTemporalInformacionConsulta = ConfigurationManager.AppSettings["Repositorio"] + ConfigurationManager.AppSettings["RepositorioInfomracionConsultas"] + ConfigurationManager.AppSettings["CarpetaTemporal"];
@@ -144,11 +166,11 @@ namespace KinniNet.Business.Utils
             Cliente = 3,
             ClienteInvitado = 4,
             Proveedor = 5,
-            ProveedorInvitado = 6,
-            EmpleadoPersonaFisica = 7,
-            ClientaPersonaFisica = 8,
-            ProveedorPersonaFisica = 9,
-            NuestraInstitucion = 10
+            ProveedorInvitado = 6
+            //EmpleadoPersonaFisica = 7,
+            //ClientaPersonaFisica = 8,
+            //ProveedorPersonaFisica = 9,
+            //NuestraInstitucion = 10
         }
         public enum EnumTipoObjeto
         {

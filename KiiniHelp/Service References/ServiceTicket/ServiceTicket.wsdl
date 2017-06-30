@@ -17,6 +17,7 @@
       <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd12" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Mascaras" />
       <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd14" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
+      <xsd:import schemaLocation="http://localhost:15277/ServiceTicket.svc?xsd=xsd15" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceTicket_CrearTicket_InputMessage">
@@ -79,6 +80,12 @@
   <wsdl:message name="IServiceTicket_GeneraPreticket_OutputMessage">
     <wsdl:part name="parameters" element="tns:GeneraPreticketResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceTicket_AgregarComentarioConversacionTicket_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarComentarioConversacionTicket" />
+  </wsdl:message>
+  <wsdl:message name="IServiceTicket_AgregarComentarioConversacionTicket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarComentarioConversacionTicketResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceTicket">
     <wsdl:operation name="CrearTicket">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/CrearTicket" message="tns:IServiceTicket_CrearTicket_InputMessage" />
@@ -119,6 +126,10 @@
     <wsdl:operation name="GeneraPreticket">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/GeneraPreticket" message="tns:IServiceTicket_GeneraPreticket_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/GeneraPreticketResponse" message="tns:IServiceTicket_GeneraPreticket_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarComentarioConversacionTicket">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/AgregarComentarioConversacionTicket" message="tns:IServiceTicket_AgregarComentarioConversacionTicket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/AgregarComentarioConversacionTicketResponse" message="tns:IServiceTicket_AgregarComentarioConversacionTicket_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceTicket">
@@ -206,6 +217,15 @@
     </wsdl:operation>
     <wsdl:operation name="GeneraPreticket">
       <soap:operation soapAction="http://tempuri.org/IServiceTicket/GeneraPreticket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarComentarioConversacionTicket">
+      <soap:operation soapAction="http://tempuri.org/IServiceTicket/AgregarComentarioConversacionTicket" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -99,17 +99,18 @@ namespace KiiniHelp.UserControls.Altas
                 area.Habilitado = true;
                 if (EsAlta)
                 {
-                    area.IdUsuarioAlta = ((Usuario) Session["UserData"]).Id;
+                    area.IdUsuarioAlta = ((Usuario)Session["UserData"]).Id;
                     _servicioArea.Guardar(area);
                 }
                 else
                 {
-                    area.IdUsuarioModifico = ((Usuario) Session["UserData"]).Id;
+                    area.IdUsuarioModifico = ((Usuario)Session["UserData"]).Id;
                     _servicioArea.Actualizar(int.Parse(hfIdArea.Value), area);
                 }
                 LimpiarCampos();
-                if (OnAceptarModal != null)
-                    OnAceptarModal();
+                if (!EsAlta)
+                    if (OnAceptarModal != null)
+                        OnAceptarModal();
             }
             catch (Exception ex)
             {

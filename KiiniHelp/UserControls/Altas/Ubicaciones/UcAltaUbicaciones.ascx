@@ -35,7 +35,7 @@
                                 <asp:Label runat="server" ID="lblAliasNivel1" />
                                 <i class="fa fa-check text-success" aria-hidden="true" runat="server" id="succNivel1" visible="False"></i>
                                 <br />
-                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel1" OnClick="btnStatusNivel1_OnClick">
+                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel1" CommandArgument="1" OnClick="btnStatusNivel1_OnClick">
                                     <asp:Image ImageUrl="~/assets/images/step1.png" Width="20" Height="20" alt="" runat="server" />&nbsp;<asp:Label runat="server" ID="lblStepNivel1" />
                                 </asp:LinkButton>
                             </div>
@@ -46,7 +46,7 @@
                                 <asp:Label runat="server" ID="lblAliasNivel2" />
                                 <i class="fa fa-check text-success" aria-hidden="true" runat="server" id="succNivel2" visible="False"></i>
                                 <br />
-                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel2" OnClick="btnStatusNivel1_OnClick">
+                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel2" CommandArgument="2" OnClick="btnStatusNivel1_OnClick">
                                     <asp:Image ImageUrl="~/assets/images/step2.png" Width="20" Height="20" alt="" runat="server" />&nbsp;
                                         <asp:Label runat="server" ID="lblStepNivel2" />
                                 </asp:LinkButton>
@@ -58,7 +58,7 @@
                                 <asp:Label runat="server" ID="lblAliasNivel3" />
                                 <i class="fa fa-check text-success" aria-hidden="true" runat="server" id="succNivel3" visible="False"></i>
                                 <br />
-                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel3" OnClick="btnStatusNivel1_OnClick">
+                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel3" CommandArgument="3" OnClick="btnStatusNivel1_OnClick">
                                     <asp:Image ImageUrl="~/assets/images/step3.png" Width="20" Height="20" alt="" runat="server" />&nbsp;
                                         <asp:Label runat="server" ID="lblStepNivel3" />
                                 </asp:LinkButton>
@@ -70,7 +70,7 @@
                                 <asp:Label runat="server" ID="lblAliasNivel4" />
                                 <i class="fa fa-check text-success" aria-hidden="true" runat="server" id="succNivel4" visible="False"></i>
                                 <br />
-                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel4" OnClick="btnStatusNivel1_OnClick">
+                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel4" CommandArgument="4" OnClick="btnStatusNivel1_OnClick">
                                     <asp:Image ImageUrl="~/assets/images/step4.png" Width="20" Height="20" alt="" runat="server" />&nbsp;
                                         <asp:Label runat="server" ID="lblStepNivel4" />
                                 </asp:LinkButton>
@@ -82,7 +82,7 @@
                                 <asp:Label runat="server" ID="lblAliasNivel5" />
                                 <i class="fa fa-check text-success" aria-hidden="true" runat="server" id="succNivel5" visible="False"></i>
                                 <br />
-                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel5" OnClick="btnStatusNivel1_OnClick">
+                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel5" CommandArgument="5" OnClick="btnStatusNivel1_OnClick">
                                     <asp:Image ImageUrl="~/assets/images/step5.png" Width="20" Height="20" alt="" runat="server" />&nbsp;
                                         <asp:Label runat="server" ID="lblStepNivel5" />
                                 </asp:LinkButton>
@@ -94,7 +94,7 @@
                                 <asp:Label runat="server" ID="lblAliasNivel6" />
                                 <i class="fa fa-check text-success" aria-hidden="true" runat="server" id="succNivel6" visible="False"></i>
                                 <br />
-                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel6" OnClick="btnStatusNivel1_OnClick">
+                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel6" CommandArgument="6" OnClick="btnStatusNivel1_OnClick">
                                     <asp:Image ImageUrl="~/assets/images/step6.png" Width="20" Height="20" alt="" runat="server" />&nbsp;
                                         <asp:Label runat="server" ID="lblStepNivel6" />
                                 </asp:LinkButton>
@@ -106,7 +106,7 @@
                                 <asp:Label runat="server" ID="lblAliasNivel7" />
                                 <i class="fa fa-check text-success" aria-hidden="true" runat="server" id="succNivel7" visible="False"></i>
                                 <br />
-                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel7" OnClick="btnStatusNivel1_OnClick">
+                                <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel7" CommandArgument="7" OnClick="btnStatusNivel1_OnClick">
                                     <asp:Image ImageUrl="~/assets/images/step7.png" Width="20" Height="20" alt="" runat="server" />&nbsp;<asp:Label runat="server" ID="lblStepNivel7" />
                                 </asp:LinkButton>
                             </div>
@@ -128,7 +128,7 @@
                                     </div>
                                     <!--CAMPO-->
                                     <div class="form-group margin-top">
-                                        Nombre de la<asp:Label runat="server" ID="lblOperacionDescripcion" />*<br />
+                                        Nombre de <asp:Label runat="server" ID="lblOperacionDescripcion" />*<br />
                                         <asp:TextBox CssClass="form-control" ID="txtDescripcionCatalogo" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus" />
                                         <asp:CheckBox runat="server" ID="chkHabilitado" Checked="True" Visible="False" />
                                     </div>

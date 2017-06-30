@@ -30,13 +30,25 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 BusinessArbolAcceso bArbol = new BusinessArbolAcceso();
-                List<Frecuencia> frecuencias = db.Frecuencia.OrderByDescending(o => o.NumeroVisitas).Take(10).ToList();
-                result = frecuencias.Select(frecuencia => new HelperFrecuencia
-                {
-                    IdArbol = frecuencia.IdArbolAcceso,
-                    DescripcionOpcion = bArbol.ObtenerTipificacion(frecuencia.IdArbolAcceso)
-                }).ToList();
+                var frecuencias = (from f in db.Frecuencia
+                                   group f by f.IdArbolAcceso
+                                       into frec
+                                       orderby frec.Key
+                                       select new
+                                       {
+                                           IdArbolAcceso = frec.Key,
+                                           NumeroVisitas = frec.Sum(s => s.NumeroVisitas)
+                                       }).Take(10);
 
+                result = new List<HelperFrecuencia>();
+                foreach (var type in frecuencias.Distinct())
+                {
+                    result.Add(new HelperFrecuencia
+                    {
+                        IdArbol = type.IdArbolAcceso,
+                        DescripcionOpcion = bArbol.ObtenerTipificacion(type.IdArbolAcceso)
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -56,12 +68,37 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 BusinessArbolAcceso bArbol = new BusinessArbolAcceso();
-                List<Frecuencia> frecuencias = db.Frecuencia.Where(w => w.IdTipoArbolAcceso == (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion).OrderByDescending(o => o.NumeroVisitas).Take(10).ToList();
-                result = frecuencias.Select(frecuencia => new HelperFrecuencia
+                var frecuencias = (from f in db.Frecuencia
+                                   where f.IdTipoArbolAcceso == (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion
+                                   group f by f.IdArbolAcceso
+                                       into frec
+                                       orderby frec.Key
+                                       select new
+                                       {
+                                           IdArbolAcceso = frec.Key,
+                                           NumeroVisitas = frec.Sum(s => s.NumeroVisitas)
+                                       }).Take(10);
+
+                result = new List<HelperFrecuencia>();
+                foreach (var type in frecuencias.Distinct())
                 {
-                    IdArbol = frecuencia.IdArbolAcceso,
-                    DescripcionOpcion = bArbol.ObtenerTipificacion(frecuencia.IdArbolAcceso)
-                }).ToList();
+                    result.Add(new HelperFrecuencia
+                    {
+                        IdArbol = type.IdArbolAcceso,
+                        DescripcionOpcion = bArbol.ObtenerTipificacion(type.IdArbolAcceso)
+                    });
+                }
+
+                //List<Frecuencia> frecuencias = db.Frecuencia.Where(w => w.IdTipoArbolAcceso == (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion).OrderByDescending(o => o.NumeroVisitas).Take(10).ToList();
+                //foreach (var frecuencia in frecuencias.Select())
+                //{
+
+                //}
+                //result = frecuencias.Select(frecuencia => new HelperFrecuencia
+                //{
+                //    IdArbol = frecuencia.IdArbolAcceso,
+                //    DescripcionOpcion = bArbol.ObtenerTipificacion(frecuencia.IdArbolAcceso)
+                //}).ToList();
             }
             catch (Exception ex)
             {
@@ -81,13 +118,32 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 BusinessArbolAcceso bArbol = new BusinessArbolAcceso();
+                var frecuencias = (from f in db.Frecuencia
+                                   where f.IdTipoArbolAcceso == (int)BusinessVariables.EnumTipoArbol.SolicitarServicio
+                                   group f by f.IdArbolAcceso
+                                       into frec
+                                       orderby frec.Key
+                                       select new
+                                       {
+                                           IdArbolAcceso = frec.Key,
+                                           NumeroVisitas = frec.Sum(s => s.NumeroVisitas)
+                                       }).Take(10);
 
-                List<Frecuencia> frecuencias = db.Frecuencia.Where(w => w.IdTipoArbolAcceso == (int)BusinessVariables.EnumTipoArbol.SolicitarServicio).OrderByDescending(o => o.NumeroVisitas).Take(10).ToList();
-                result = frecuencias.Select(frecuencia => new HelperFrecuencia
+                result = new List<HelperFrecuencia>();
+                foreach (var type in frecuencias.Distinct())
                 {
-                    IdArbol = frecuencia.IdArbolAcceso,
-                    DescripcionOpcion = bArbol.ObtenerTipificacion(frecuencia.IdArbolAcceso)
-                }).ToList();
+                    result.Add(new HelperFrecuencia
+                    {
+                        IdArbol = type.IdArbolAcceso,
+                        DescripcionOpcion = bArbol.ObtenerTipificacion(type.IdArbolAcceso)
+                    });
+                }
+                //List<Frecuencia> frecuencias = db.Frecuencia.Where(w => w.IdTipoArbolAcceso == (int)BusinessVariables.EnumTipoArbol.SolicitarServicio).OrderByDescending(o => o.NumeroVisitas).Take(10).ToList();
+                //result = frecuencias.Select(frecuencia => new HelperFrecuencia
+                //{
+                //    IdArbol = frecuencia.IdArbolAcceso,
+                //    DescripcionOpcion = bArbol.ObtenerTipificacion(frecuencia.IdArbolAcceso)
+                //}).ToList();
             }
             catch (Exception ex)
             {
@@ -107,12 +163,32 @@ namespace KinniNet.Core.Operacion
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 BusinessArbolAcceso bArbol = new BusinessArbolAcceso();
-                List<Frecuencia> frecuencias = db.Frecuencia.Where(w => w.IdTipoArbolAcceso == (int)BusinessVariables.EnumTipoArbol.ReportarProblemas).OrderByDescending(o => o.NumeroVisitas).Take(10).ToList();
-                result = frecuencias.Select(frecuencia => new HelperFrecuencia
+                var frecuencias = (from f in db.Frecuencia
+                                   where f.IdTipoArbolAcceso == (int)BusinessVariables.EnumTipoArbol.ReportarProblemas
+                                   group f by f.IdArbolAcceso
+                                       into frec
+                                       orderby frec.Key
+                                       select new
+                                       {
+                                           IdArbolAcceso = frec.Key,
+                                           NumeroVisitas = frec.Sum(s => s.NumeroVisitas)
+                                       }).Take(10);
+
+                result = new List<HelperFrecuencia>();
+                foreach (var type in frecuencias.Distinct())
                 {
-                    IdArbol = frecuencia.IdArbolAcceso,
-                    DescripcionOpcion = bArbol.ObtenerTipificacion(frecuencia.IdArbolAcceso)
-                }).ToList();
+                    result.Add(new HelperFrecuencia
+                    {
+                        IdArbol = type.IdArbolAcceso,
+                        DescripcionOpcion = bArbol.ObtenerTipificacion(type.IdArbolAcceso)
+                    });
+                }
+                //List<Frecuencia> frecuencias = db.Frecuencia.Where(w => w.IdTipoArbolAcceso == (int)BusinessVariables.EnumTipoArbol.ReportarProblemas).OrderByDescending(o => o.NumeroVisitas).Take(10).ToList();
+                //result = frecuencias.Select(frecuencia => new HelperFrecuencia
+                //{
+                //    IdArbol = frecuencia.IdArbolAcceso,
+                //    DescripcionOpcion = bArbol.ObtenerTipificacion(frecuencia.IdArbolAcceso)
+                //}).ToList();
             }
             catch (Exception ex)
             {

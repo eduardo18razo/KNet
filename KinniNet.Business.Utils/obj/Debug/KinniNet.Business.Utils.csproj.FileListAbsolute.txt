@@ -26,6 +26,8 @@ C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business.Utils\obj\Debug
 C:\Users\Eduardo Cerritos\Desktop\KiiniNet\App\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Debug\KinniNet.Business.Utils.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Debug\KinniNet.Business.Utils.pdb
+C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Debug\EPPlus.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Debug\EPPlus.xml
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Debug\Office.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Debug\Microsoft.Office.Interop.Excel.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Debug\Microsoft.Office.Interop.PowerPoint.dll
@@ -33,6 +35,4 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Debug\Microso
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.csproj.ResolveComReference.cache
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.pdb
-C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Debug\EPPlus.dll
-C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\bin\Debug\EPPlus.xml
 C:\Users\Eduardo Cerritos\Desktop\Repo\KinniNet.Business.Utils\obj\Debug\KinniNet.Business.Utils.csprojResolveAssemblyReference.cache

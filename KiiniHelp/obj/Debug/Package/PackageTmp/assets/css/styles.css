@@ -177,6 +177,17 @@ button.close:focus {
     position: fixed;
 }
 
+.header-Tabs {
+    top: 80px;
+    background: #fff;
+    z-index: 10;
+    width: 100%;
+    height: 40px;
+    box-shadow: 0 0 4px #000000;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.05);
+    position: fixed;
+}
+
     .header .branding {
         background: #40babd;
         float: left;
@@ -5746,6 +5757,14 @@ ul.sortable {
 /* Large devices (large desktops, 1200px and up) */
 
 /* default */
+.border-rounded {
+    border-radius: 25px;
+    border: 1px solid;
+}
+.padding-10 {
+    padding: 10px !important;
+}
+
 .padding-20 {
     padding: 20px !important;
 }
@@ -5765,4 +5784,16 @@ ul.sortable {
 
 .bordercolor {
     border-color: #3aa7aa;
+}
+
+.borderright {
+    border-right: 1px solid #f3f3f7;
+}
+.borderbootom {
+    border-bottom: 1px solid #f3f3f7;
+}
+
+
+.bordered {
+    border: 1px solid #f3f3f7;
 }

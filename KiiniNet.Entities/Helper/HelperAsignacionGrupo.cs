@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using KiiniNet.Entities.Cat.Usuario;
 
 namespace KiiniNet.Entities.Helper
 {
@@ -17,6 +16,7 @@ namespace KiiniNet.Entities.Helper
     public class HelperAsignacionGrupoUsuarios
     {
         public int IdGrupo { get; set; }
+        public int IdTipoGrupo { get; set; }
         public string DescripcionGrupo { get; set; }
         public List<HelperSubGurpoUsuario> SubGrupos { get; set; }
     }

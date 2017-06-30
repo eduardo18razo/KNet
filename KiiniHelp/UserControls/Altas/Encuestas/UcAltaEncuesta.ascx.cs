@@ -381,7 +381,8 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
                 previewEncuesta.Descripcion = txtDescripcion.Text;
                 previewEncuesta.EncuestaPregunta = ObtenerPreguntas();
                 Session["PreviewEncuesta"] = previewEncuesta;
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('/Users/Administracion/Encuestas/FrmPreview.aspx','_blank');", true);
+                string url = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('" + url + "/Users/Administracion/Encuestas/FrmPreview.aspx','_blank');", true);
             }
             catch (Exception ex)
             {

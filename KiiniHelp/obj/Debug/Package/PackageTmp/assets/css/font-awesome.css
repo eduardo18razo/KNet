@@ -20,6 +20,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.fa-20x {
+    font-size: 20px
+}
+.fa-30x {
+    font-size: 30px
+}
 /* makes the font 33% larger relative to the icon container */
 .fa-lg {
     font-size: 1.33333333em;

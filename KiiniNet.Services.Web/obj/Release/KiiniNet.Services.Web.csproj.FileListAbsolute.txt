@@ -96,3 +96,5 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\obj\Release\KiiniNe
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\obj\Release\KiiniNet.Services.Web.pdb
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\EAGetMail40.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\EASendMail40.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\EPPlus.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\EPPlus.xml

@@ -15,7 +15,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             {
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
-                    
+
                     return negocio.CrearTicket(idUsuario, idUsuarioSolicito, idArbol, lstCaptura, idCanal, campoRandom, esTercero, esMail);
                 }
             }
@@ -152,6 +152,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
                     return negocio.GeneraPreticket(idArbol, idUsuarioSolicita, idUsuarioLevanto, observaciones);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void AgregarComentarioConversacionTicket(int idTicket, int idUsuario, string mensaje, bool sistema, List<string> archivos)
+        {
+            try
+            {
+                using (BusinessTicket negocio = new BusinessTicket())
+                {
+                    negocio.AgregarComentarioConversacionTicket(idTicket, idUsuario, mensaje, sistema, archivos);
                 }
             }
             catch (Exception ex)

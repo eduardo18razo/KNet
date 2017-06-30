@@ -101,6 +101,7 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\KiiniNet.Servic
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\KiiniNet.Entities.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\KinniNet.Business.Utils.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\KinniNet.Core.dll
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\EPPlus.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\EAGetMail40.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\EASendMail40.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\KinniNet.Data.dll
@@ -108,9 +109,8 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\KiiniNet.Servic
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\KiiniNet.Entities.pdb
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\KinniNet.Business.Utils.pdb
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\KinniNet.Core.pdb
+C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\EPPlus.xml
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\KinniNet.Data.pdb
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\obj\Debug\KiiniNet.Services.Web.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\obj\Debug\KiiniNet.Services.Web.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\obj\Debug\KiiniNet.Services.Web.pdb
-C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\EPPlus.dll
-C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services.Web\bin\EPPlus.xml

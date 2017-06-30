@@ -420,9 +420,9 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                         divStep3.Visible = true;
                         divStep3Data.Visible = true;
                         Metodos.LlenaComboCatalogo(ddlGrupoAcceso, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.Usuario, IdTipoUsuario, true));
-                        Metodos.LlenaComboCatalogo(ddlDuenoServicio, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.ResponsableServicio, IdTipoUsuario, true));
-                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableMantenimiento, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.ResponsableDeContenido, IdTipoUsuario, true));
-                        Metodos.LlenaListBoxCatalogo(lstGrupoEspecialConsulta, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.ConsultasEspeciales, IdTipoUsuario, false));
+                        Metodos.LlenaComboCatalogo(ddlDuenoServicio, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.ResponsableServicio, (int)BusinessVariables.EnumTiposUsuario.Empleado, true));
+                        Metodos.LlenaComboCatalogo(ddlGrupoResponsableMantenimiento, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.ResponsableDeContenido, (int)BusinessVariables.EnumTiposUsuario.Empleado, true));
+                        Metodos.LlenaListBoxCatalogo(lstGrupoEspecialConsulta, _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumRoles.ConsultasEspeciales, (int)BusinessVariables.EnumTiposUsuario.Empleado, false));
                         btnPreview.Visible = true;
                         btnSaveAll.Visible = true;
                         btnSiguiente.Visible = false;
@@ -1079,7 +1079,8 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
             try
             {
                 Session["PreviewAltaDataConsulta"] = _servicioInformacionConsulta.ObtenerInformacionConsultaById(int.Parse(ddlConsultas.SelectedValue));
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('/Users/Administracion/ArbolesAcceso/FrmPreviewAltaOpcionConsulta.aspx?evaluacion=" + chkEvaluacion.Checked + "','_blank');", true);
+                string url = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('" + url + "Users/Administracion/ArbolesAcceso/FrmPreviewAltaOpcionConsulta.aspx?evaluacion=" + chkEvaluacion.Checked + "','_blank');", true);
             }
             catch (Exception ex)
             {

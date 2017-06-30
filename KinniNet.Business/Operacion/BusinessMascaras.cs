@@ -65,10 +65,7 @@ namespace KinniNet.Core.Operacion
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación:
                             if (campoMascara.IdCatalogo != null)
-                                foreach (CatalogoGenerico generico in new BusinessCatalogos().ObtenerRegistrosSistemaCatalogo((int)campoMascara.IdCatalogo, false))
-                                {
-                                    queryCamposTabla += String.Format("[{0}] {1} {2},\n", campoMascara.NombreCampo + BusinessCadenas.Cadenas.FormatoBaseDatos(generico.Descripcion), tmpTipoCampoMascara.TipoDatoSql, campoMascara.Requerido ? "NOT NULL" : "NULL");
-                                }
+                                queryCamposTabla += String.Format("[{0}] {1} {2},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, campoMascara.Requerido ? "NOT NULL" : "NULL");
 
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroEntero:
@@ -174,12 +171,12 @@ namespace KinniNet.Core.Operacion
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación:
                             if (campoMascara.IdCatalogo != null)
-                                foreach (CatalogoGenerico generico in new BusinessCatalogos().ObtenerRegistrosSistemaCatalogo((int)campoMascara.IdCatalogo, false))
-                                {
-                                    queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo + BusinessCadenas.Cadenas.FormatoBaseDatos(generico.Descripcion), tmpTipoCampoMascara.TipoDatoSql);
-                                    queryCampos += String.Format("{0},\n", campoMascara.NombreCampo + BusinessCadenas.Cadenas.FormatoBaseDatos(generico.Descripcion));
-                                    queryValues += String.Format("@{0},\n", campoMascara.NombreCampo + BusinessCadenas.Cadenas.FormatoBaseDatos(generico.Descripcion));
-                                }
+                                //foreach (CatalogoGenerico generico in new BusinessCatalogos().ObtenerRegistrosSistemaCatalogo((int)campoMascara.IdCatalogo, false))
+                                //{
+                                queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
+                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
+                            //}
 
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroEntero:
@@ -311,11 +308,11 @@ namespace KinniNet.Core.Operacion
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación:
                             if (campoMascara.IdCatalogo != null)
-                                foreach (CatalogoGenerico generico in new BusinessCatalogos().ObtenerRegistrosSistemaCatalogo((int)campoMascara.IdCatalogo, false))
-                                {
-                                    queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo + BusinessCadenas.Cadenas.FormatoBaseDatos(generico.Descripcion), tmpTipoCampoMascara.TipoDatoSql);
-                                    queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo + BusinessCadenas.Cadenas.FormatoBaseDatos(generico.Descripcion));
-                                }
+                                //foreach (CatalogoGenerico generico in new BusinessCatalogos().ObtenerRegistrosSistemaCatalogo((int)campoMascara.IdCatalogo, false))
+                                //{
+                                queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
+                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            //}
 
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroEntero:
@@ -429,7 +426,7 @@ namespace KinniNet.Core.Operacion
                 {
                     campoMascara.Descripcion = campoMascara.Descripcion.Trim();
                     campoMascara.NombreCampo = BusinessCadenas.Cadenas.FormatoBaseDatos(campoMascara.Descripcion.Trim()).Replace(" ", "").ToUpper();
-                    campoMascara.SimboloMoneda = campoMascara.SimboloMoneda == null ? null : campoMascara.SimboloMoneda.Trim().ToUpper();
+                    campoMascara.SimboloMoneda = campoMascara.SimboloMoneda == null ? null : campoMascara.SimboloMoneda.Trim();
                     campoMascara.TipoCampoMascara = null;
                 }
 
@@ -589,13 +586,13 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion)
+        public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion, bool filtraHabilitados)
         {
             List<CatalogoGenerico> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                result = db.ExecuteStoreQuery<CatalogoGenerico>("ObtenerCatalogoSistema '" + tabla + "', " + Convert.ToInt32(insertarSeleccion)).ToList();
+                result = db.ExecuteStoreQuery<CatalogoGenerico>("ObtenerCatalogoSistema '" + tabla + "', " + Convert.ToInt32(insertarSeleccion) + ", " + Convert.ToInt32(filtraHabilitados)).ToList();
             }
             catch (Exception ex)
             {
@@ -678,12 +675,13 @@ namespace KinniNet.Core.Operacion
                                 campos += campoMascara.NombreCampo + ", ";
                                 break;
                             case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación:
-                                if (campoMascara.IdCatalogo != null)
-                                {
-                                    Catalogos cat = new BusinessCatalogos().ObtenerCatalogo((int)campoMascara.IdCatalogo);
-                                    if (!cat.Archivo)
-                                        campos = new BusinessCatalogos().ObtenerRegistrosSistemaCatalogo(cat.Id, false).Aggregate(campos, (current, catalogoGenerico) => current + (campoMascara.NombreCampo + BusinessCadenas.Cadenas.FormatoBaseDatos(catalogoGenerico.Descripcion) + ", "));
-                                }
+                                campos += campoMascara.NombreCampo + ", ";
+                                //if (campoMascara.IdCatalogo != null)
+                                //{
+                                //    Catalogos cat = new BusinessCatalogos().ObtenerCatalogo((int)campoMascara.IdCatalogo);
+                                //    if (!cat.Archivo)
+                                //        campos = new BusinessCatalogos().ObtenerRegistrosSistemaCatalogo(cat.Id, false).Aggregate(campos, (current, catalogoGenerico) => current + (campoMascara.NombreCampo + BusinessCadenas.Cadenas.FormatoBaseDatos(catalogoGenerico.Descripcion) + ", "));
+                                //}
                                 break;
                             case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.FechaRango:
                                 campos += campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaInicio + ", ";

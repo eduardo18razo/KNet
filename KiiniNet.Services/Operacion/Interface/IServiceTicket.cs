@@ -37,6 +37,9 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         PreTicket GeneraPreticket(int idArbol, int idUsuarioSolicita, int idUsuarioLevanto, string observaciones);
+
+        [OperationContract]
+        void AgregarComentarioConversacionTicket(int idTicket, int idUsuario, string mensaje, bool sistema,List<string> archivos);
     }
 
 }

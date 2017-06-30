@@ -163,6 +163,7 @@ namespace KinniNet.Data.Help
                 _ticketConversacion = CreateObjectSet<TicketConversacion>();
                 _conversacionArchivo = CreateObjectSet<ConversacionArchivo>();
                 _frecuencia = CreateObjectSet<Frecuencia>();
+                _mascaraSeleccionCatalogo = CreateObjectSet<MascaraSeleccionCatalogo>();
                 _puesto = CreateObjectSet<Puesto>();
 
             }
@@ -621,6 +622,13 @@ namespace KinniNet.Data.Help
                 return _frecuencia;
             }
         }
+        public ObjectSet<MascaraSeleccionCatalogo> MascaraSeleccionCatalogo
+        {
+            get
+            {
+                return _mascaraSeleccionCatalogo;
+            }
+        }
 
 
 
@@ -675,6 +683,7 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<TicketConversacion> _ticketConversacion;
         private readonly ObjectSet<ConversacionArchivo> _conversacionArchivo;
         private readonly ObjectSet<Frecuencia> _frecuencia;
+        private readonly ObjectSet<MascaraSeleccionCatalogo> _mascaraSeleccionCatalogo;
 
         #region Mascara
         public ObjectSet<Mascara> Mascara

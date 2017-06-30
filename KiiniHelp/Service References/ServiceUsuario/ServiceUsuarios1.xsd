@@ -58,11 +58,26 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerUsuariosByGrupoAtencion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idGrupo" type="xs:int" />
+        <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerUsuariosByGrupoAtencionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="ObtenerUsuariosByGrupoAtencionResult" nillable="true" type="q5:ArrayOfUsuario" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ActualizarUsuario">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="usuario" nillable="true" type="q5:Usuario" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="usuario" nillable="true" type="q6:Usuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -115,14 +130,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="encuestas" nillable="true" type="q6:ArrayOfNullableOfint" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="encuestas" nillable="true" type="q7:ArrayOfNullableOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ObtenerAtendedoresEncuestaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="ObtenerAtendedoresEncuestaResult" nillable="true" type="q7:ArrayOfUsuario" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="ObtenerAtendedoresEncuestaResult" nillable="true" type="q8:ArrayOfUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -205,8 +220,8 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
         <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="confirmaciones" nillable="true" type="q8:ArrayOfKeyValueOfintstring" />
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="pregunta" nillable="true" type="q9:ArrayOfPreguntaReto" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="confirmaciones" nillable="true" type="q9:ArrayOfKeyValueOfintstring" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="pregunta" nillable="true" type="q10:ArrayOfPreguntaReto" />
         <xs:element minOccurs="0" name="link" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -226,7 +241,7 @@
   <xs:element name="BuscarUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="BuscarUsuarioResult" nillable="true" type="q10:Usuario" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="BuscarUsuarioResult" nillable="true" type="q11:Usuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -240,7 +255,7 @@
   <xs:element name="BuscarUsuariosResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="BuscarUsuariosResult" nillable="true" type="q11:ArrayOfUsuario" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="BuscarUsuariosResult" nillable="true" type="q12:ArrayOfUsuario" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -280,7 +295,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
-        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="preguntasReto" nillable="true" type="q12:ArrayOfKeyValueOfintstring" />
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="preguntasReto" nillable="true" type="q13:ArrayOfKeyValueOfintstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -72,6 +72,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Agente\FrmBandejaTickets.aspx" />
+    <Content Include="Agente\FrmTicket.aspx" />
     <Content Include="Agente\FrmTickets.aspx" />
     <Content Include="assets\carouselImage\slide-1.jpg" />
     <Content Include="assets\carouselImage\slide-2.jpg" />
@@ -108,6 +110,9 @@
     <Content Include="assets\images\icons\prioridadalta.png" />
     <Content Include="assets\images\icons\prioridadbaja.png" />
     <Content Include="assets\images\icons\prioridadmedia.png" />
+    <Content Include="assets\images\icons\SLA_amarillo.png" />
+    <Content Include="assets\images\icons\SLA_rojo.png" />
+    <Content Include="assets\images\icons\SLA_verde.png" />
     <Content Include="assets\images\icons\vip.png" />
     <Content Include="assets\images\logo-icon.svg" />
     <Content Include="assets\images\profiles\profile-1.png" />
@@ -137,10 +142,12 @@
     <Content Include="assets\js\imagesloaded.js" />
     <Content Include="assets\js\jquery.js" />
     <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\markdown-js.js" />
     <Content Include="assets\js\masonry.js" />
     <Content Include="assets\js\modernizr.custom.js" />
     <Content Include="assets\js\Notificaciones.js" />
     <Content Include="assets\js\pmenu.js" />
+    <Content Include="assets\js\to-markdown.js" />
     <Content Include="assets\js\validation.js" />
     <Content Include="assets\tmp\chosen.css" />
     <Content Include="assets\tmp\chosen.jquery.js" />
@@ -422,6 +429,7 @@
     <Content Include="Test\FrmTestMain.aspx" />
     <Content Include="Test\FrmTestMenu.aspx" />
     <Content Include="Test\FrmTestMenuCu.aspx" />
+    <Content Include="Test\HtmlPage1.html" />
     <Content Include="UserControls\Altas\ArbolesAcceso\UcAltaAbrolAcceso.ascx" />
     <Content Include="UserControls\Altas\ArbolesAcceso\UcAltaConsulta.ascx" />
     <Content Include="UserControls\Altas\ArbolesAcceso\UcAltaServicio.ascx" />
@@ -750,7 +758,7 @@
     <Content Include="Users\Administracion\Ubicaciones\FrmConsultaUbicaciones.aspx" />
     <Content Include="Users\Administracion\Usuarios\FrmConsultaUsuarios.aspx" />
     <Content Include="Users\General\Web.config" />
-    <Content Include="Users\Administracion\Web.config">
+    <Content Include="Users\Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Users\General\FrmMostrarDocumento.aspx" />
@@ -1868,6 +1876,9 @@
     <None Include="Service References\ServiceTicket\ServiceTicket4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceTicket\ServiceTicket5.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceUbicacion\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2075,7 +2086,7 @@
     </None>
     <Content Include="Users\Ticket\FrmTicket.aspx" />
     <Content Include="UserControls\Altas\AltaArea.ascx" />
-    <Content Include="UserControls\Altas\AltaGrupoUsuario.ascx" />
+    <Content Include="UserControls\Altas\UcAltaGrupoUsuario.ascx" />
     <Content Include="UserControls\Altas\Encuestas\UcAltaEncuesta.ascx" />
     <Content Include="UserControls\Altas\AltaOrganizacion.ascx" />
     <Content Include="UserControls\Altas\AltaTiempoEstimado.ascx" />
@@ -2373,6 +2384,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agente\FrmBandejaTickets.aspx.cs">
+      <DependentUpon>FrmBandejaTickets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agente\FrmBandejaTickets.aspx.designer.cs">
+      <DependentUpon>FrmBandejaTickets.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Agente\FrmTicket.aspx.cs">
+      <DependentUpon>FrmTicket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agente\FrmTicket.aspx.designer.cs">
+      <DependentUpon>FrmTicket.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Agente\FrmTickets.aspx.cs">
       <DependentUpon>FrmTickets.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3741,12 +3766,12 @@
     <Compile Include="Usuarios.Master.designer.cs">
       <DependentUpon>Usuarios.Master</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Altas\AltaGrupoUsuario.ascx.cs">
-      <DependentUpon>AltaGrupoUsuario.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\UcAltaGrupoUsuario.ascx.cs">
+      <DependentUpon>UcAltaGrupoUsuario.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControls\Altas\AltaGrupoUsuario.ascx.designer.cs">
-      <DependentUpon>AltaGrupoUsuario.ascx</DependentUpon>
+    <Compile Include="UserControls\Altas\UcAltaGrupoUsuario.ascx.designer.cs">
+      <DependentUpon>UcAltaGrupoUsuario.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Altas\Encuestas\UcAltaEncuesta.ascx.cs">
       <DependentUpon>UcAltaEncuesta.ascx</DependentUpon>

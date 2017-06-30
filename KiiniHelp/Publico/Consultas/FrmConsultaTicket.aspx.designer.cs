@@ -58,6 +58,24 @@ namespace KiiniHelp.Publico.Consultas {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDetalle;
         
         /// <summary>
+        /// Control hfEstatusActual.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfEstatusActual;
+        
+        /// <summary>
+        /// Control hfIdUsuarioTicket.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdUsuarioTicket;
+        
+        /// <summary>
         /// Control lblticket.
         /// </summary>
         /// <remarks>
@@ -103,6 +121,24 @@ namespace KiiniHelp.Publico.Consultas {
         protected global::System.Web.UI.WebControls.Label lblestatus;
         
         /// <summary>
+        /// Control ucDetalleMascaraCaptura.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Detalles.UcDetalleMascaraCaptura ucDetalleMascaraCaptura;
+        
+        /// <summary>
+        /// Control btnCambiaEstatus.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCambiaEstatus;
+        
+        /// <summary>
         /// Control rptComentrios.
         /// </summary>
         /// <remarks>
@@ -119,5 +155,23 @@ namespace KiiniHelp.Publico.Consultas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox targetEditor;
+        
+        /// <summary>
+        /// Control btnComentar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnComentar;
+        
+        /// <summary>
+        /// Control UcCambiarEstatusTicket.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Operacion.UcCambiarEstatusTicket UcCambiarEstatusTicket;
     }
 }

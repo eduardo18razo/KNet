@@ -62,6 +62,24 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="CampoMascara" nillable="true" type="tns:CampoMascara" />
+  <xs:complexType name="ArrayOfMascaraSeleccionCatalogo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MascaraSeleccionCatalogo" nillable="true" type="tns:MascaraSeleccionCatalogo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMascaraSeleccionCatalogo" nillable="true" type="tns:ArrayOfMascaraSeleccionCatalogo" />
+  <xs:complexType name="MascaraSeleccionCatalogo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdRegistroCatalogo" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTicket" type="xs:int" />
+      <xs:element minOccurs="0" name="Seleccionado" type="xs:boolean" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="Ticket" nillable="true" type="q6:Ticket" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="MascaraSeleccionCatalogo" nillable="true" type="tns:MascaraSeleccionCatalogo" />
   <xs:complexType name="TipoCampoMascara">
     <xs:sequence>
       <xs:element minOccurs="0" name="CampoMascara" nillable="true" type="tns:ArrayOfCampoMascara" />

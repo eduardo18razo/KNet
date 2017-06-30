@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AsociarGrupoUsuario.ascx.cs" Inherits="KiiniHelp.UserControls.Seleccion.AsociarGrupoUsuario" %>
-<%@ Register TagPrefix="uc" TagName="AltaGrupoUsuario" Src="~/UserControls/Altas/AltaGrupoUsuario.ascx" %>
+
+<%@ Register Src="~/UserControls/Altas/UcAltaGrupoUsuario.ascx" TagPrefix="uc" TagName="UcAltaGrupoUsuario" %>
+
 
 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
     <ContentTemplate>
@@ -210,7 +212,7 @@
         <ContentTemplate>
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <uc:AltaGrupoUsuario runat="server" ID="ucAltaGrupoUsuario" />
+                    <uc:UcAltaGrupoUsuario runat="server" id="ucAltaGrupoUsuario" />
                 </div>
             </div>
         </ContentTemplate>

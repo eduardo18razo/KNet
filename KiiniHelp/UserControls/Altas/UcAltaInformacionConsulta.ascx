@@ -39,7 +39,7 @@
                     <div class="module-inner">
                         <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <ctrlExterno:HtmlEditor runat="Server" ID="txtEditor" Height="350px" ToggleMode="ToggleButton" ColorScheme="VisualStudio" />
+                                <ctrlExterno:HtmlEditor runat="Server" ID="txtEditor" Height="350px"  ColorScheme="VisualStudio" />
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
@@ -64,12 +64,12 @@
                                             <span class="col-lg-10 col-md-10 col-sm-10 fa fa-file-o">
                                                 <asp:Label runat="server" ID="lblFile" Text='<%# Eval("NombreArchivo")%>' />
                                             </span>
-                                            
+
                                             <asp:Label runat="server" ID="Label1" CssClass="col-lg-10 col-md-10 col-sm-10" Text='<%# Eval("Tamaño")%>' />
                                             <asp:LinkButton runat="server" CssClass="col-lg-1 col-md-1 col-sm-1 fa fa-remove" ID="btnRemoveFile" CommandArgument='<%# Eval("NombreArchivo")%>' OnClick="btnRemoveFile_OnClick" />
                                         </span>
-                                        <br/>
-                                        <hr/>
+                                        <br />
+                                        <hr />
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>
@@ -81,7 +81,7 @@
                                 Cargar archivos (max 10 MB)
                                                 <br />
                                 <br />
-                                <asp:Button ID="ReloadThePanel" runat="server" Text="hidden" OnClick="ReloadThePanel_OnClick" style="visibility: hidden" />
+                                <asp:Button ID="ReloadThePanel" runat="server" Text="hidden" OnClick="ReloadThePanel_OnClick" Style="visibility: hidden" />
                             </span>
                             <div class="clearfix"></div>
                         </div>
@@ -89,5 +89,16 @@
                 </div>
             </div>
         </section>
+        <script>
+            $(function () {
+                $('#txtBusqueda').tagsInput({ width: 'auto', defaultText: 'Agregar', delimiter: '|' });
+                $('#txtTags').tagsInput({ width: 'auto', defaultText: 'Agregar', delimiter: '|' });
+            });
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+            prm.add_endRequest(function () {
+                $('#txtBusqueda').tagsInput({ width: 'auto', defaultText: 'Agregar', delimiter: '|' });
+                $('#txtTags').tagsInput({ width: 'auto', defaultText: 'Agregar', delimiter: '|' });
+                });
+        </script>
     </ContentTemplate>
 </asp:UpdatePanel>

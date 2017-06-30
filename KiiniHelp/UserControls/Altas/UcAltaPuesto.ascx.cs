@@ -37,7 +37,6 @@ namespace KiiniHelp.UserControls.Altas
             set
             {
                 ddlTipoUsuario.SelectedValue = value.ToString();
-                ddlTipoUsuario.Enabled = false;
             }
         }
         public int IdPuesto
@@ -60,6 +59,17 @@ namespace KiiniHelp.UserControls.Altas
                     string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
                     error += "</ul>";
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
+            }
+        }
+
+        private string AlertaSucces
+        {
+            set
+            {
+                if (value.Trim() != string.Empty)
+                {
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "SuccsessAlert('Exito','" + value + "');", true);
                 }
             }
         }
@@ -124,8 +134,10 @@ namespace KiiniHelp.UserControls.Altas
                 else
                     _servicioPuesto.Actualizar(int.Parse(hfIdPuesto.Value), puesto);
                 LimpiarCampos();
-                if (OnAceptarModal != null)
-                    OnAceptarModal();
+                if (!EsAlta)
+                    if (OnAceptarModal != null)
+                        OnAceptarModal();
+                AlertaSucces = "Se guardo correctamente.";
             }
             catch (Exception ex)
             {

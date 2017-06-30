@@ -85,6 +85,7 @@ namespace KiiniHelp.UserControls.Seleccion
         {
             try
             {
+                ddlRol.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 rptGruposSub.DataSource = null;
                 rptGruposSub.DataBind();
             }
@@ -300,6 +301,7 @@ namespace KiiniHelp.UserControls.Seleccion
                     CheckBox chkGrupo = (CheckBox)item.FindControl("chkGrupo");
                     if (!chkGrupo.Checked) continue;
                     Label lblIdGrupo = (Label)item.FindControl("lblIdGrupo");
+                    Label lblTipoGrupo = (Label)item.FindControl("lblTipoGrupo");
 
                     if (rol.Grupos != null && rol.Grupos.Any(a => a.IdGrupo == int.Parse(lblIdGrupo.Text)))
                     {
@@ -308,6 +310,7 @@ namespace KiiniHelp.UserControls.Seleccion
                     HelperAsignacionGrupoUsuarios grupo = new HelperAsignacionGrupoUsuarios
                     {
                         IdGrupo = int.Parse(lblIdGrupo.Text),
+                        IdTipoGrupo = int.Parse(lblTipoGrupo.Text),
                         DescripcionGrupo = chkGrupo.Text,
                     };
                     if (item.FindControl("divSubGrupos").Visible)
@@ -340,7 +343,7 @@ namespace KiiniHelp.UserControls.Seleccion
                 }
                 lstFinal.AddRange(tmplst);
                 ViewState["GruposSeleccionados"] = lstFinal;
-
+                LimpiarSeleccion();
                 if (OnTerminarModal != null)
                     OnTerminarModal();
             }

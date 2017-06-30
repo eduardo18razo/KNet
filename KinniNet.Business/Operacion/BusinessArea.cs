@@ -54,6 +54,41 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        public List<Area> ObtenerAreasUsuarioPublicoByIdRol(int idUsuario, int idRol, bool insertarSeleccion)
+        {
+            List<Area> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                List<int> lstAreas = (from a in db.Area
+                                      join aa in db.ArbolAcceso on a.Id equals aa.IdArea
+                                      join iaa in db.InventarioArbolAcceso on aa.Id equals iaa.IdArbolAcceso
+                                      join guia in db.GrupoUsuarioInventarioArbol on iaa.Id equals guia.IdInventarioArbolAcceso
+                                      join gu in db.GrupoUsuario on guia.IdGrupoUsuario equals gu.Id
+                                      join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
+                                      join ur in db.UsuarioRol on ug.IdUsuario equals ur.IdUsuario
+                                      where guia.IdRol == idRol
+                                      select a.Id).Distinct().ToList();
+                result = db.Area.Where(w => lstAreas.Contains(w.Id)).ToList();
+                if (insertarSeleccion)
+                    result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
+                        new Area
+                        {
+                            Id = BusinessVariables.ComboBoxCatalogo.ValueSeleccione,
+                            Descripcion = BusinessVariables.ComboBoxCatalogo.DescripcionSeleccione
+                        });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
         public List<Area> ObtenerAreasUsuarioByIdRol(int idUsuario, int idRol, bool insertarSeleccion)
         {
             List<Area> result;

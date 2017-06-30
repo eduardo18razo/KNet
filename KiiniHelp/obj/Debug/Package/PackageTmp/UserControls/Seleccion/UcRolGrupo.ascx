@@ -6,7 +6,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <asp:LinkButton CssClass="close" runat="server" ID="btnClose" OnClick="btnClose_OnClick"></asp:LinkButton>
+                    <asp:LinkButton CssClass="close" runat="server" ID="btnClose" OnClick="btnClose_OnClick" Text='&times'></asp:LinkButton>
                     <h2 class="modal-title" id="modal-new-ticket-label">
                         <asp:Label runat="server" ID="lblBrandingModal" /></h2>
                     <p class="text-center">
@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
-                                <asp:DropDownList runat="server" ID="ddlRol" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlRol_OnSelectedIndexChanged" />
+                                <asp:DropDownList runat="server" ID="ddlRol" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlRol_OnSelectedIndexChanged" />
                             </div>
                         </div>
                     </div>

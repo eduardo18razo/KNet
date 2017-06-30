@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaGrupos.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaGrupos" %>
 <%@ Import Namespace="KinniNet.Business.Utils" %>
-<%@ Register TagPrefix="uc" TagName="altagrupousuario" Src="~/UserControls/Altas/AltaGrupoUsuario.ascx" %>
+<%@ Register Src="~/UserControls/Altas/UcAltaGrupoUsuario.ascx" TagPrefix="uc" TagName="UcAltaGrupoUsuario" %>
+
 
 <div style="height: 100%;">
     <asp:UpdatePanel runat="server" style="height: 100%">
@@ -130,7 +131,7 @@ int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposU
             <ContentTemplate>
                 <div class="modal-dialog" style="height: 250px;">
                     <div class="modal-content">
-                        <uc:altagrupousuario runat="server" ID="ucAltaGrupoUsuario" />
+                        <uc:UcAltaGrupoUsuario runat="server" id="ucAltaGrupoUsuario" />
                     </div>
                 </div>
             </ContentTemplate>

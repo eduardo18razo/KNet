@@ -110,12 +110,17 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                LlenaPuestosConsulta();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaPuesto\");", true);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
 
@@ -123,6 +128,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                LlenaPuestosConsulta();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaPuesto\");", true);
             }
             catch (Exception ex)
@@ -140,6 +146,7 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 LlenaPuestosConsulta();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAltaPuesto\");", true);
             }
             catch (Exception ex)
             {
@@ -201,7 +208,6 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 ucAltaPuesto.EsAlta = true;
-                ucAltaPuesto.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaPuesto\");", true);
             }
             catch (Exception ex)
@@ -238,10 +244,14 @@ namespace KiiniHelp.UserControls.Consultas
                 _servicioPuestos.Habilitar(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
                 LlenaPuestosConsulta();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
     }

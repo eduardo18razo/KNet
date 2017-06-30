@@ -27,9 +27,11 @@
                             <div class="col-lg-8 col-md-8 col-sm-8">
                                 <asp:Repeater runat="server" ID="rptRegistros">
                                     <ItemTemplate>
-                                        <div class="row margin-top-5">
-                                            <div class="col-lg-8 col-md-8 col-sm-8">
-                                                <asp:TextBox runat="server" ID="txtRegistro" Text='<%# Container.DataItem.ToString() %>' CssClass="form-control" />
+                                         <div class="row margin-top-5">
+                                            <asp:Label runat="server" ID="lblIdRegistro" Visible="False" Text='<%# Eval("Id") %>'/>
+                                            <div class="col-lg-10 col-md-10 col-sm-10">
+                                                <%--<asp:TextBox runat="server" ID="txtRegistro" Text='<%# Container.DataItem.ToString() %>' CssClass="form-control" />--%>
+                                                <asp:TextBox runat="server" ID="TextBox1" Text='<%# Eval("Descripcion") %>' CssClass="form-control" />
                                             </div>
                                             <asp:LinkButton runat="server" Text="Borrar" ID="btnBorrarRegistro" CommandArgument='<%# Container.ItemIndex %>' OnClick="btnBorrarRegistro_OnClick"></asp:LinkButton>
                                         </div>

@@ -10,6 +10,7 @@ using KiiniHelp.ServiceMascaraAcceso;
 using KiiniHelp.ServiceSistemaCatalogos;
 using KiiniHelp.ServiceSistemaTipoCampoMascara;
 using KiiniNet.Entities.Cat.Mascaras;
+using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
@@ -29,7 +30,6 @@ namespace KiiniHelp.UserControls.Altas.Formularios
         private List<string> _lstError = new List<string>();
 
         public int Ejemplo { get; set; }
-        #region Alertas
         private List<string> Alerta
         {
             set
@@ -42,7 +42,6 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 }
             }
         }
-        #endregion Alertas
 
         private bool EsAlta { get { return bool.Parse(hfEsAlta.Value); } set { hfEsAlta.Value = value.ToString(); } }
         private void LlenaCombos()
@@ -69,6 +68,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 txtSimboloMoneda.Text = string.Empty;
                 ddlCatalogosCampo.SelectedIndex = ddlCatalogosCampo.SelectedIndex >= 1 ? BusinessVariables.ComboBoxCatalogo.IndexSeleccione : -1;
                 hfAltaCampo.Value = true.ToString();
+
             }
             catch (Exception e)
             {
@@ -338,7 +338,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
             try
             {
                 Mascara tmpMascara = ((Mascara)Session["MascaraAlta"]);
-                Button btn = (Button)sender;
+                LinkButton btn = (LinkButton)sender;
                 RepeaterItem item = (RepeaterItem)btn.NamingContainer;
                 Label lblIdTipoCampo = (Label)item.FindControl("lblIdTipoCampoMascara");
                 Label lblDescripcion = (Label)item.FindControl("lblDescripcion");
@@ -368,7 +368,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
             try
             {
                 Mascara tmpMascara = ((Mascara)Session["MascaraAlta"]);
-                Button btn = (Button)sender;
+                LinkButton btn = (LinkButton)sender;
                 RepeaterItem item = (RepeaterItem)btn.NamingContainer;
                 Label lblIdTipoCampo = (Label)item.FindControl("lblIdTipoCampoMascara");
                 Label lblDescripcion = (Label)item.FindControl("lblDescripcion");
@@ -393,6 +393,26 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 Alerta = _lstError;
             }
         }
+        protected void rptTiposControles_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                if (e.Item.ItemType == ListItemType.Item)
+                {
+                    ((LinkButton) e.Item.FindControl("btnAgregarControl")).Enabled = EsAlta;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
         protected void rptControles_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             try
@@ -406,6 +426,13 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                         {
                             noRecordsDiv.Visible = true;
                         }
+                    
+                    }
+                    if (e.Item.ItemType == ListItemType.Item)
+                    {
+                        ((LinkButton)e.Item.FindControl("btnEliminarCampo")).Enabled = EsAlta;
+                        ((LinkButton)e.Item.FindControl("btnSubir")).Enabled = EsAlta;
+                        ((LinkButton)e.Item.FindControl("btnBajar")).Enabled = EsAlta;
                     }
                 }
             }
@@ -481,7 +508,9 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                     if (txtMascara.Text.Trim() == string.Empty)
                         throw new Exception("Debe especificar un Formulario de Cliente");
 
+                
                 Mascara tmpMascara = ((Mascara)Session["MascaraAlta"]);
+
                 if (bool.Parse(hfAltaCampo.Value))
                 {
                     if (tmpMascara.CampoMascara == null)
@@ -494,9 +523,16 @@ namespace KiiniHelp.UserControls.Altas.Formularios
 
                     TipoCampoMascara tipoCampo = _servicioSistemaTipoCampoMascara.TipoCampoMascaraId(Convert.ToInt32(hfTipoCampo.Value));
 
+                    Catalogos catalogo = null;
+                    if (tipoCampo.Id == (int) BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.RadioBoton
+                        || tipoCampo.Id == (int) BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ListaDepledable
+                        || tipoCampo.Id == (int) BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación)
+                        catalogo = new ServiceCatalogosClient().ObtenerCatalogo(int.Parse(ddlCatalogosCampo.SelectedValue));
+
                     tmpMascara.CampoMascara.Add(new CampoMascara
                     {
                         IdCatalogo = tipoCampo.Catalogo ? Convert.ToInt32(ddlCatalogosCampo.SelectedValue) : (int?)null,
+                        Catalogos = catalogo,
                         IdTipoCampoMascara = tipoCampo.Id,
                         Multiple = tipoCampo.Multiple,
                         CheckBox = tipoCampo.Checkbox,
@@ -517,13 +553,21 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 else
                 {
                     TipoCampoMascara tipoCampo = _servicioSistemaTipoCampoMascara.TipoCampoMascaraId(Convert.ToInt32(hfTipoCampo.Value));
+                    Catalogos catalogo = null;
+                    if (tipoCampo.Id == (int) BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.RadioBoton
+                        || tipoCampo.Id == (int) BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ListaDepledable
+                        ||
+                        tipoCampo.Id == (int) BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación)
+                        catalogo = new ServiceCatalogosClient().ObtenerCatalogo(int.Parse(ddlCatalogosCampo.SelectedValue));
+
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].IdCatalogo = tipoCampo.Catalogo ? Convert.ToInt32(ddlCatalogosCampo.SelectedValue) : (int?)null;
+                    tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].Catalogos = catalogo;
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].IdTipoCampoMascara = tipoCampo.Id;
-                    tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].Descripcion = txtDescripcionCampo.Text.Trim().ToUpper();
+                    tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].Descripcion = txtDescripcionCampo.Text.Trim();
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].Requerido = chkRequerido.Checked;
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].LongitudMinima = tipoCampo.LongitudMinima ? Convert.ToInt32(txtLongitudMinima.Text.Trim()) : tipoCampo.Mask ? 1 : (int?)null;
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].LongitudMaxima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMaxima.Text.Trim()) : tipoCampo.Mask ? txtMascara.Text.Trim().Length : (int?)null;
-                    tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].SimboloMoneda = tipoCampo.SimboloMoneda ? txtSimboloMoneda.Text.Trim().ToUpper() : null;
+                    tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].SimboloMoneda = tipoCampo.SimboloMoneda ? txtSimboloMoneda.Text.Trim() : null;
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].ValorMaximo = tipoCampo.ValorMaximo ? Convert.ToInt32(txtValorMaximo.Text.Trim()) : (int?)null;
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].MascaraDetalle = tipoCampo.Mask ? txtMascara.Text.Trim() : null;
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].TipoCampoMascara = tipoCampo;
@@ -543,6 +587,20 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 }
                 _lstError.Add(ex.Message);
                 Alerta = _lstError;
+            }
+        }
+
+        protected void btnCancelarModal_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LimpiarModalCampo();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAgregarCampoMascara\");", true);
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
@@ -580,7 +638,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                     _servicioMascaras.CrearMascara(nuevaMascara);
                 }
                 else
-                    _servicioMascaras.CrearMascara(nuevaMascara);
+                    _servicioMascaras.ActualizarMascara(nuevaMascara);
 
                 LimpiarMascara();
                 if (OnAceptarModal != null)
@@ -609,8 +667,10 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 nuevaMascara.Random = chkClaveRegistro.Checked;
                 nuevaMascara.IdUsuarioAlta = ((Usuario)Session["UserData"]).Id;
 
-                Session["PreviewDataFormulario"] = nuevaMascara;
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('/Users/Administracion/Formularios/FrmPreviewFormulario.aspx','_blank');", true);
+                Session["PreviewDataFormulario"] = nuevaMascara; ;
+                string url = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('" + url + "Users/Administracion/Formularios/FrmPreviewFormulario.aspx','_blank');", true);
             }
             catch (Exception ex)
             {
@@ -640,6 +700,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 Alerta = _lstError;
             }
         }
+
 
         
     }

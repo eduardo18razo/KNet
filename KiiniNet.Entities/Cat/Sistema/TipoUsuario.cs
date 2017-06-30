@@ -19,6 +19,10 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
+        public string Abreviacion { get; set; }
+        [DataMember]
+        public string Color { get; set; }
+        [DataMember]
         public bool EsResidente { get; set; }
         [DataMember]
         public bool EsMoral { get; set; }

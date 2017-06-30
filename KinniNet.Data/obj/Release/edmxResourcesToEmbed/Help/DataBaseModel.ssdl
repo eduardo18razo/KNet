@@ -36,6 +36,7 @@
     <Property Name="IdNivel5" Type="int" />
     <Property Name="IdNivel6" Type="int" />
     <Property Name="IdNivel7" Type="int" />
+    <Property Name="Evaluacion" Type="bit" />
     <Property Name="EsTerminal" Type="bit" Nullable="false" />
     <Property Name="Sistema" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
@@ -74,6 +75,9 @@
     <Property Name="IdMascara" Type="int" />
     <Property Name="IdTipoCampoMascara" Type="int" />
     <Property Name="IdCatalogo" Type="int" />
+    <Property Name="Multiple" Type="bit" />
+    <Property Name="CheckBox" Type="bit" />
+    <Property Name="RadioButton" Type="bit" />
     <Property Name="EsArchivo" Type="bit" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="150" />
     <Property Name="NombreCampo" Type="nvarchar" MaxLength="150" />
@@ -107,9 +111,14 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="DescripcionLarga" Type="nvarchar" MaxLength="300" />
     <Property Name="Tabla" Type="nvarchar" MaxLength="150" />
     <Property Name="EsMascaraCaptura" Type="bit" />
     <Property Name="Archivo" Type="bit" />
+    <Property Name="FechaAlta" Type="datetime" />
+    <Property Name="IdUsuarioAlta" Type="int" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModifico" Type="int" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="Colonia">
@@ -219,8 +228,14 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdTipoEncuesta" Type="int" Nullable="false" />
-    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Titulo" Type="nvarchar" MaxLength="50" />
+    <Property Name="TituloCliente" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="300" Nullable="false" />
     <Property Name="EsPonderacion" Type="bit" Nullable="false" />
+    <Property Name="FechaAlta" Type="datetime" />
+    <Property Name="IdUsuarioAlta" Type="int" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModifico" Type="int" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="EncuestaPregunta">
@@ -286,6 +301,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Orden" Type="int" />
+    <Property Name="Color" Type="nvarchar" MaxLength="10" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="EstatusTicketSubRolGeneral">
@@ -402,7 +418,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioAlta" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModifico" Type="int" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="HorarioDetalle">
@@ -442,8 +462,11 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdTipoInfConsulta" Type="int" />
-    <Property Name="IdTipoDocumento" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="FechaAlta" Type="datetime" />
+    <Property Name="IdUsuarioAlta" Type="int" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModifico" Type="int" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="InformacionConsultaDatos">
@@ -452,18 +475,24 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdInformacionConsulta" Type="int" Nullable="false" />
-    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Orden" Type="int" />
-    <Property Name="IdPadre" Type="int" />
+    <Property Name="Datos" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Busqueda" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Tags" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
-  <EntityType Name="InformacionConsultaDocumento">
+  <EntityType Name="InformacionConsultaDocumentos">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdInformacionConsulta" Type="int" />
+    <Property Name="IdTipoDocumento" Type="int" />
     <Property Name="Archivo" Type="nvarchar(max)" />
-    <Property Name="Fecha" Type="datetime" />
+    <Property Name="FechaAlta" Type="datetime" />
+    <Property Name="IdUsuarioAlta" Type="int" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModifico" Type="int" />
+    <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="InventarioArbolAcceso">
     <Key>
@@ -504,9 +533,21 @@
     <Property Name="ComandoInsertar" Type="nvarchar" MaxLength="250" />
     <Property Name="ComandoActualizar" Type="nvarchar" MaxLength="250" />
     <Property Name="Random" Type="bit" />
-    <Property Name="FechaAlta" Type="datetime" />
-    <Property Name="IdUsuarioAlta" Type="int" />
+    <Property Name="FechaAlta" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioAlta" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModifico" Type="int" />
+    <Property Name="Sistema" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
+  </EntityType>
+  <EntityType Name="MascaraSeleccionCatalogo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdRegistroCatalogo" Type="int" />
+    <Property Name="IdTicket" Type="int" />
+    <Property Name="Seleccionado" Type="bit" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -671,6 +712,7 @@
     <Property Name="IdSubGerencia" Type="int" />
     <Property Name="IdJefatura" Type="int" />
     <Property Name="IdNivelOrganizacion" Type="int" />
+    <Property Name="Sistema" Type="bit" />
     <Property Name="Habilitado" Type="bit" />
   </EntityType>
   <EntityType Name="Pais">
@@ -725,12 +767,13 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TamanoDeArchivo" Type="nvarchar" MaxLength="50" />
-    <Property Name="NumeroArchivo" Type="nvarchar" MaxLength="50" />
+    <Property Name="TamanoDeArchivo" Type="nvarchar(max)" />
+    <Property Name="NumeroArchivo" Type="nvarchar(max)" />
     <Property Name="LevantaTickets" Type="bit" />
     <Property Name="ValidaUsuario" Type="bit" />
     <Property Name="MensajeValidacion" Type="nvarchar(max)" />
     <Property Name="StrongPassword" Type="bit" />
+    <Property Name="FormularioPortal" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="ParametrosSla">
     <Key>
@@ -1105,6 +1148,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Abreviacion" Type="nvarchar" MaxLength="3" />
+    <Property Name="Color" Type="nvarchar" MaxLength="10" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TipoCampoMascara">
@@ -1113,7 +1158,13 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DescripcionTexto" Type="nvarchar" MaxLength="250" />
+    <Property Name="LongitudMaximaPermitida" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="nvarchar" MaxLength="150" />
     <Property Name="TipoDatoSql" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Multiple" Type="bit" />
+    <Property Name="Checkbox" Type="bit" />
+    <Property Name="RadioButton" Type="bit" />
     <Property Name="LongitudMinima" Type="bit" Nullable="false" />
     <Property Name="LongitudMaxima" Type="bit" Nullable="false" />
     <Property Name="Entero" Type="bit" Nullable="false" />
@@ -1239,6 +1290,7 @@
     <Property Name="IdSubZona" Type="int" />
     <Property Name="IdSiteRack" Type="int" />
     <Property Name="IdNivelUbicacion" Type="int" />
+    <Property Name="Sistema" Type="bit" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Urgencia">
@@ -1512,6 +1564,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Catalogos_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Catalogos">
+        <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Catalogos_Usuario1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Catalogos" Type="Self.Catalogos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Catalogos">
+        <PropertyRef Name="IdUsuarioModifico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Colonia_Municipio">
     <End Role="Municipio" Type="Self.Municipio" Multiplicity="0..1" />
     <End Role="Colonia" Type="Self.Colonia" Multiplicity="*" />
@@ -1629,6 +1705,30 @@
       </Principal>
       <Dependent Role="Domicilio">
         <PropertyRef Name="IdColonia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Encuesta_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Encuesta" Type="Self.Encuesta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Encuesta">
+        <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Encuesta_Usuario1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Encuesta" Type="Self.Encuesta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Encuesta">
+        <PropertyRef Name="IdUsuarioModifico" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2124,6 +2224,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Horario_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Horario" Type="Self.Horario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Horario">
+        <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Horario_Usuario1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Horario" Type="Self.Horario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Horario">
+        <PropertyRef Name="IdUsuarioModifico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_HorarioDetalle_Horario">
     <End Role="Horario" Type="Self.Horario" Multiplicity="0..1" />
     <End Role="HorarioDetalle" Type="Self.HorarioDetalle" Multiplicity="*" />
@@ -2184,15 +2308,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_InformacionConsulta_TipoDocumento">
-    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
+  <Association Name="FK_InformacionConsulta_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="InformacionConsulta" Type="Self.InformacionConsulta" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TipoDocumento">
+      <Principal Role="Usuario">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="InformacionConsulta">
-        <PropertyRef Name="IdTipoDocumento" />
+        <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InformacionConsulta_Usuario1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="InformacionConsulta" Type="Self.InformacionConsulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformacionConsulta">
+        <PropertyRef Name="IdUsuarioModifico" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2208,15 +2344,51 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_InformacionConsultaDocumento_InformacionConsulta">
+  <Association Name="FK_InformacionConsultaDocumentos_InformacionConsulta">
     <End Role="InformacionConsulta" Type="Self.InformacionConsulta" Multiplicity="0..1" />
-    <End Role="InformacionConsultaDocumento" Type="Self.InformacionConsultaDocumento" Multiplicity="*" />
+    <End Role="InformacionConsultaDocumentos" Type="Self.InformacionConsultaDocumentos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="InformacionConsulta">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="InformacionConsultaDocumento">
+      <Dependent Role="InformacionConsultaDocumentos">
         <PropertyRef Name="IdInformacionConsulta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InformacionConsultaDocumentos_TipoDocumento">
+    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
+    <End Role="InformacionConsultaDocumentos" Type="Self.InformacionConsultaDocumentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformacionConsultaDocumentos">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InformacionConsultaDocumentos_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="InformacionConsultaDocumentos" Type="Self.InformacionConsultaDocumentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformacionConsultaDocumentos">
+        <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InformacionConsultaDocumentos_Usuario1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="InformacionConsultaDocumentos" Type="Self.InformacionConsultaDocumentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformacionConsultaDocumentos">
+        <PropertyRef Name="IdUsuarioModifico" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2280,7 +2452,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Mascara_UsuarioAlta">
+  <Association Name="FK_Mascara_Usuario">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Mascara" Type="Self.Mascara" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2288,7 +2460,31 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Mascara">
+        <PropertyRef Name="IdUsuarioModifico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mascara_UsuarioAlta">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Mascara" Type="Self.Mascara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mascara">
         <PropertyRef Name="IdUsuarioAlta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MascaraSeleccionCatalogo_Ticket">
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+    <End Role="MascaraSeleccionCatalogo" Type="Self.MascaraSeleccionCatalogo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ticket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MascaraSeleccionCatalogo">
+        <PropertyRef Name="IdTicket" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3883,11 +4079,12 @@
     <EntitySet Name="Impacto" EntityType="Self.Impacto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InformacionConsulta" EntityType="Self.InformacionConsulta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InformacionConsultaDatos" EntityType="Self.InformacionConsultaDatos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="InformacionConsultaDocumento" EntityType="Self.InformacionConsultaDocumento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InformacionConsultaDocumentos" EntityType="Self.InformacionConsultaDocumentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventarioArbolAcceso" EntityType="Self.InventarioArbolAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InventarioInfConsulta" EntityType="Self.InventarioInfConsulta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Jefatura" EntityType="Self.Jefatura" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mascara" EntityType="Self.Mascara" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MascaraSeleccionCatalogo" EntityType="Self.MascaraSeleccionCatalogo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Municipio" EntityType="Self.Municipio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Nivel1" EntityType="Self.Nivel1" Schema="dbo" store:Type="Tables" />
@@ -4026,6 +4223,14 @@
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Campus" EntitySet="Campus" />
     </AssociationSet>
+    <AssociationSet Name="FK_Catalogos_Usuario" Association="Self.FK_Catalogos_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Catalogos" EntitySet="Catalogos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Catalogos_Usuario1" Association="Self.FK_Catalogos_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Catalogos" EntitySet="Catalogos" />
+    </AssociationSet>
     <AssociationSet Name="FK_Colonia_Municipio" Association="Self.FK_Colonia_Municipio">
       <End Role="Municipio" EntitySet="Municipio" />
       <End Role="Colonia" EntitySet="Colonia" />
@@ -4065,6 +4270,14 @@
     <AssociationSet Name="FK_Domicilio_Colonia" Association="Self.FK_Domicilio_Colonia">
       <End Role="Colonia" EntitySet="Colonia" />
       <End Role="Domicilio" EntitySet="Domicilio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Encuesta_Usuario" Association="Self.FK_Encuesta_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Encuesta" EntitySet="Encuesta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Encuesta_Usuario1" Association="Self.FK_Encuesta_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Encuesta" EntitySet="Encuesta" />
     </AssociationSet>
     <AssociationSet Name="FK_EncuestaPregunta_Encuesta" Association="Self.FK_EncuestaPregunta_Encuesta">
       <End Role="Encuesta" EntitySet="Encuesta" />
@@ -4230,6 +4443,14 @@
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Holding" EntitySet="Holding" />
     </AssociationSet>
+    <AssociationSet Name="FK_Horario_Usuario" Association="Self.FK_Horario_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Horario" EntitySet="Horario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Horario_Usuario1" Association="Self.FK_Horario_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Horario" EntitySet="Horario" />
+    </AssociationSet>
     <AssociationSet Name="FK_HorarioDetalle_Horario" Association="Self.FK_HorarioDetalle_Horario">
       <End Role="Horario" EntitySet="Horario" />
       <End Role="HorarioDetalle" EntitySet="HorarioDetalle" />
@@ -4250,17 +4471,33 @@
       <End Role="Urgencia" EntitySet="Urgencia" />
       <End Role="Impacto" EntitySet="Impacto" />
     </AssociationSet>
-    <AssociationSet Name="FK_InformacionConsulta_TipoDocumento" Association="Self.FK_InformacionConsulta_TipoDocumento">
-      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+    <AssociationSet Name="FK_InformacionConsulta_Usuario" Association="Self.FK_InformacionConsulta_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InformacionConsulta_Usuario1" Association="Self.FK_InformacionConsulta_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
       <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
     </AssociationSet>
     <AssociationSet Name="FK_InformacionConsultaDatos_InformacionConsulta" Association="Self.FK_InformacionConsultaDatos_InformacionConsulta">
       <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
       <End Role="InformacionConsultaDatos" EntitySet="InformacionConsultaDatos" />
     </AssociationSet>
-    <AssociationSet Name="FK_InformacionConsultaDocumento_InformacionConsulta" Association="Self.FK_InformacionConsultaDocumento_InformacionConsulta">
+    <AssociationSet Name="FK_InformacionConsultaDocumentos_InformacionConsulta" Association="Self.FK_InformacionConsultaDocumentos_InformacionConsulta">
       <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
-      <End Role="InformacionConsultaDocumento" EntitySet="InformacionConsultaDocumento" />
+      <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InformacionConsultaDocumentos_TipoDocumento" Association="Self.FK_InformacionConsultaDocumentos_TipoDocumento">
+      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+      <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InformacionConsultaDocumentos_Usuario" Association="Self.FK_InformacionConsultaDocumentos_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InformacionConsultaDocumentos_Usuario1" Association="Self.FK_InformacionConsultaDocumentos_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
     </AssociationSet>
     <AssociationSet Name="FK_InventarioArbolAcceso_Encuesta" Association="Self.FK_InventarioArbolAcceso_Encuesta">
       <End Role="Encuesta" EntitySet="Encuesta" />
@@ -4282,9 +4519,17 @@
       <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="Jefatura" EntitySet="Jefatura" />
     </AssociationSet>
+    <AssociationSet Name="FK_Mascara_Usuario" Association="Self.FK_Mascara_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Mascara" EntitySet="Mascara" />
+    </AssociationSet>
     <AssociationSet Name="FK_Mascara_UsuarioAlta" Association="Self.FK_Mascara_UsuarioAlta">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Mascara" EntitySet="Mascara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MascaraSeleccionCatalogo_Ticket" Association="Self.FK_MascaraSeleccionCatalogo_Ticket">
+      <End Role="Ticket" EntitySet="Ticket" />
+      <End Role="MascaraSeleccionCatalogo" EntitySet="MascaraSeleccionCatalogo" />
     </AssociationSet>
     <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
       <End Role="Menu" EntitySet="Menu" />

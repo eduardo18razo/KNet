@@ -81,7 +81,6 @@ namespace KiiniHelp
             }
         }
 
-
         private void UcLogInOnOnCancelarModal()
         {
             try
@@ -102,12 +101,10 @@ namespace KiiniHelp
         {
             try
             {
-                //Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "CierraPopup(\"#modal-new-ticket\");", true);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptClose", "CierraPopup(\"#modal-new-ticket\");", true);
 
                 lblNoTicket.Text = ucTicketPortal.TicketGenerado.ToString();
                 lblRandom.Text = ucTicketPortal.RandomGenerado;
-                //Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MostrarPopup(\"#modalExitoTicket\");", true);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptOpen", "MostrarPopup(\"#modalExitoTicket\");", true);
             }
             catch (Exception ex)
@@ -120,6 +117,7 @@ namespace KiiniHelp
                 Alerta = _lstError;
             }
         }
+
         protected void rptMenu_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             try
@@ -142,9 +140,6 @@ namespace KiiniHelp
                 Alerta = _lstError;
             }
         }
-
-
-
         protected void rptSubMenu1_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             try
@@ -299,6 +294,22 @@ namespace KiiniHelp
             }
         }
 
+        public void CargaPerfil(int idUsuario)
+        {
+            try
+            {
+                int areaSeleccionada = (int)BusinessVariables.EnumRoles.Usuario;
+                Session["AreaSeleccionada"] = areaSeleccionada;
+                rptMenu.DataSource = _servicioSeguridad.ObtenerMenuPublico(idUsuario, areaSeleccionada, areaSeleccionada != 0);
+                rptMenu.DataBind();
+                UcLogIn.AutenticarUsuarioPublico((int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
         protected void lbtnEmpleadoArea_OnClick(object sender, EventArgs e)
         {
             try

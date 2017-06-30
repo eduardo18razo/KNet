@@ -1,30 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcCambiarEstatusAsignacion.ascx.cs" Inherits="KiiniHelp.UserControls.Operacion.UcCambiarEstatusAsignacion" %>
 <asp:UpdatePanel runat="server">
     <ContentTemplate>
-        <header id="panelAlertaGeneral" runat="server" visible="false">
-            Cambiar Estatus...
-            <div class="alert alert-danger">
-
-                <div>
-                    <div style="float: left">
-                        <asp:Image runat="server" ImageUrl="~/Images/error.jpg" />
-                    </div>
-                    <div style="float: left">
-                        <h3>Error</h3>
-                    </div>
-                    <div class="clearfix clear-fix" />
-                </div>
-                <hr />
-                <asp:Repeater runat="server" ID="rptErrorGeneral">
-                    <ItemTemplate>
-                        <ul>
-                            <li><%# Container.DataItem %></li>
-                        </ul>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </div>
-
-        </header>
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3>Cambio de estatus</h3>
@@ -35,7 +11,7 @@
                     <div class="form-group">
                         <asp:Label runat="server" Text="Ticket" CssClass="col-xs-3" />
                         <div class="col-xs-8">
-                            <asp:Label runat="server" ID="lblIdticket" CssClass="form-control"/>
+                            <asp:Label runat="server" ID="lblIdticket" CssClass="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -53,82 +29,39 @@
                     </div>
 
                     <div class="form-group" runat="server" id="divUsuariosSupervisor" visible="False">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" role="tab" id="headingSupervisor">
-                                <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSupervisor" aria-expanded="false" aria-controls="collapseFive" style="cursor: pointer">
-                                    <div class="col-xs-12 col-sm-12">Usuarios Supervisor</div>
-                                </div>
-                            </div>
-                            <div id="collapseSupervisor" class="panel-collapse" role="tabpanel" aria-labelledby="headingSupervisor">
-                                <div class="panel-body">
-                                    <asp:RadioButtonList runat="server" SelectionMode="Single" ID="rbtnlSupervisor" OnSelectedIndexChanged="rbtnlSupervisor_OnSelectedIndexChanged" AutoPostBack="True" />
-                                </div>
-                            </div>
+                        <asp:Label runat="server" Text="Usuarios supervisor" CssClass="col-xs-3" />
+                        <div class="col-xs-8">
+                            <asp:ListBox SelectionMode="Single" runat="server" ID="lstSupervisor" OnSelectedIndexChanged="lstSupervisor_OnSelectedIndexChanged" AutoPostBack="True"/>
                         </div>
                     </div>
 
                     <div class="form-group" runat="server" id="divUsuariosNivel1" visible="False">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" role="tab" id="headingNivel1">
-                                <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNivel1" aria-expanded="false" aria-controls="collapseOne" style="cursor: pointer">
-                                    <div class="col-xs-12 col-sm-12">Usuarios Primer Nivel</div>
-                                </div>
-                            </div>
-                            <div id="collapseNivel1" class="panel-collapse" role="tabpanel" aria-labelledby="headingNivel1">
-                                <div class="panel-body">
-                                    <asp:RadioButtonList runat="server" SelectionMode="Single" ID="rbtnlUsuariosGrupoNivel1" OnSelectedIndexChanged="rbtnlUsuariosGrupoNivel1_OnSelectedIndexChanged" AutoPostBack="True" />
-                                </div>
-                            </div>
+                        <asp:Label runat="server" Text="Usuarios primer nivel" CssClass="col-xs-3" />
+                        <div class="col-xs-8">
+                            <asp:ListBox SelectionMode="Single" runat="server" ID="lstUsuariosGrupoNivel1" OnSelectedIndexChanged="lstUsuariosGrupoNivel1_OnSelectedIndexChanged" AutoPostBack="True"/>
                         </div>
                     </div>
 
                     <div class="form-group" runat="server" id="divUsuariosNivel2" visible="False">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" role="tab" id="headingNivel2">
-                                <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNivel2" aria-expanded="false" aria-controls="collapseTwo" style="cursor: pointer">
-                                    <div class="col-xs-12 col-sm-12">Usuarios Segundo Nivel</div>
-                                </div>
-                            </div>
-                            <div id="collapseNivel2" class="panel-collapse" role="tabpanel" aria-labelledby="headingNivel2">
-                                <div class="panel-body">
-                                    <asp:RadioButtonList runat="server" SelectionMode="Single" ID="rbtnlUsuariosGrupoNivel2" OnSelectedIndexChanged="rbtnlUsuariosGrupoNivel2_OnSelectedIndexChanged" AutoPostBack="True" />
-                                </div>
-                            </div>
+                        <asp:Label runat="server" Text="Usuarios segundo nivel" CssClass="col-xs-3" />
+                        <div class="col-xs-8">
+                            <asp:ListBox SelectionMode="Single" runat="server" ID="lstUsuariosGrupoNivel2" OnSelectedIndexChanged="lstUsuariosGrupoNivel2_OnSelectedIndexChanged" AutoPostBack="True"/>
                         </div>
                     </div>
 
                     <div class="form-group" runat="server" id="divUsuariosNivel3" visible="False">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" role="tab" id="headingNivel3">
-                                <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNivel3" aria-expanded="false" aria-controls="collapseThree" style="cursor: pointer">
-                                    <div class="col-xs-12 col-sm-12">Usuarios Tercer Nivel</div>
-                                </div>
-                            </div>
-                            <div id="collapseNivel3" class="panel-collapse" role="tabpanel" aria-labelledby="headingNivel3">
-                                <div class="panel-body">
-                                    <asp:RadioButtonList runat="server" SelectionMode="Single" ID="rbtnlUsuariosGrupoNivel3" OnSelectedIndexChanged="rbtnlUsuariosGrupoNivel3_OnSelectedIndexChanged" AutoPostBack="True" />
-                                </div>
-                            </div>
+                        <asp:Label runat="server" Text="Usuarios tercer nivel" CssClass="col-xs-3" />
+                        <div class="col-xs-8">
+                            <asp:ListBox SelectionMode="Single" runat="server" ID="lstUsuariosGrupoNivel3" OnSelectedIndexChanged="lstUsuariosGrupoNivel3_OnSelectedIndexChanged" AutoPostBack="True"/>
                         </div>
                     </div>
 
                     <div class="form-group" runat="server" id="divUsuariosNivel4" visible="False">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading" role="tab" id="headingNivel4">
-                                <div class="row collapsed panel-title" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNivel4" aria-expanded="false" aria-controls="collapseFour" style="cursor: pointer">
-                                    <div class="col-xs-12 col-sm-12">Usuarios Cuarto Nivel</div>
-                                </div>
-                            </div>
-                            <div id="collapseNivel4" class="panel-collapse" role="tabpanel" aria-labelledby="headingNivel4">
-                                <div class="panel-body">
-                                    <asp:RadioButtonList runat="server" SelectionMode="Single" ID="rbtnlUsuariosGrupoNivel4" OnSelectedIndexChanged="rbtnlUsuariosGrupoNivel4_OnSelectedIndexChanged" AutoPostBack="True" />
-                                </div>
-                            </div>
+                        <asp:Label runat="server" Text="Usuarios cuarto nivel" CssClass="col-xs-3" />
+                        <div class="col-xs-8">
+                            <asp:ListBox SelectionMode="Single" runat="server" ID="lstUsuariosGrupoNivel4" OnSelectedIndexChanged="lstUsuariosGrupoNivel4_OnSelectedIndexChanged" AutoPostBack="True"/>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
             <div class="panel-footer" style="text-align: center">
@@ -136,5 +69,79 @@
                 <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-danger" Text="Cancelar" OnClick="btnCancelar_OnClick" />
             </div>
         </div>
+        <script type="text/javascript">
+            $(function () {
+                $('[id*=lstSupervisor]').multiselect({
+                    includeSelectAllOption: false,
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                });
+            });
+            $(function () {
+                $('[id*=lstUsuariosGrupoNivel1]').multiselect({
+                    includeSelectAllOption: false,
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                });
+            });
+            $(function () {
+                $('[id*=lstUsuariosGrupoNivel2]').multiselect({
+                    includeSelectAllOption: false,
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                });
+            });
+            $(function () {
+                $('[id*=lstUsuariosGrupoNivel3]').multiselect({
+                    includeSelectAllOption: false,
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                });
+            });
+            $(function () {
+                $('[id*=lstUsuariosGrupoNivel4]').multiselect({
+                    includeSelectAllOption: false,
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                });
+            });
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+            prm.add_endRequest(function () {
+
+                $('[id*=lstSupervisor]').multiselect({
+                    includeSelectAllOption: false,
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                });
+
+                $('[id*=lstUsuariosGrupoNivel1]').multiselect({
+                    includeSelectAllOption: false,
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                });
+
+                $('[id*=lstUsuariosGrupoNivel2]').multiselect({
+                    includeSelectAllOption: false,
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                });
+
+                $('[id*=lstUsuariosGrupoNivel3]').multiselect({
+                    includeSelectAllOption: false,
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                });
+
+                $('[id*=lstUsuariosGrupoNivel4]').multiselect({
+                    includeSelectAllOption: false,
+                    enableFiltering: true,
+                    enableCaseInsensitiveFiltering: true,
+                });
+
+
+            });
+
+        </script>
     </ContentTemplate>
 </asp:UpdatePanel>
