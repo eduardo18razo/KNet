@@ -11,7 +11,7 @@
     <div style="height: 100%;">
         <asp:UpdatePanel runat="server" style="height: 100%">
             <ContentTemplate>
-                
+
                 <section class="module">
                     <div class="row">
                         <div class="col-lg-10 col-md-8 col-sm-8 no-padding-right borderright">
@@ -56,6 +56,7 @@
 
                                 <div class="row margin-top-5">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
+                                        
                                         <asp:GridView runat="server" CssClass="table table-striped display" ID="gvTickets" DataKeyNames="NumeroTicket" AllowSorting="True" AutoGenerateColumns="False" GridLines="None"
                                             OnRowCommand="gvTickets_OnRowCommand" OnSorting="gvTickets_OnSorting">
                                             <EmptyDataTemplate>
@@ -104,12 +105,12 @@
                                                     </HeaderTemplate>
                                                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" />
                                                     <ItemTemplate>
-                                                        <button type="button" class='<%# 
-int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Empleado || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoPersonaFisica ? "btn btn-default-alt btn-square-usuario empleado" : 
-int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Cliente || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClientaPersonaFisica ? "btn btn-default-alt btn-square-usuario cliente" : 
-int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Proveedor || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorPersonaFisica ? "btn btn-default-alt btn-square-usuario proveedor" : "btn btn-default-alt btn-square-usuario"
-                                                        %>'>
-                                                            <%# Eval("UsuarioSolicito.TipoUsuario.Descripcion").ToString().Substring(0,1) %></button>
+                                                        <%--<button type="button" class='<%# 
+int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Empleado || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado : 
+int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Cliente || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado  : 
+int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Proveedor || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado 
+                                                        %>'>--%>
+                                                        <%# Eval("UsuarioSolicito.TipoUsuario.Descripcion").ToString().Substring(0,1) %></button>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:TemplateField SortExpression="NumeroTicket">
@@ -192,28 +193,28 @@ int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVar
                                                         <asp:Label runat="server" Text='<%#Eval("GrupoAsignado") %>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                
+
                                                 <asp:TemplateField Visible="False">
                                                     <HeaderTemplate>
-                                                        <asp:Label runat="server" Text="EsPropietario"/>
+                                                        <asp:Label runat="server" Text="EsPropietario" />
                                                     </HeaderTemplate>
                                                     <ItemTemplate>
                                                         <asp:Label runat="server" Text='<%#Eval("EsPropietario") %>' ID="lblEsPropieatrio"></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                
+
                                                 <asp:TemplateField Visible="False">
                                                     <HeaderTemplate>
-                                                        <asp:Label runat="server" Text="IdGrupoAsignado"/>
+                                                        <asp:Label runat="server" Text="IdGrupoAsignado" />
                                                     </HeaderTemplate>
                                                     <ItemTemplate>
                                                         <asp:Label runat="server" Text='<%#Eval("IdGrupoAsignado") %>' ID="lblIdGrupoAsignado"></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
-                                                
+
                                                 <asp:TemplateField Visible="False">
                                                     <HeaderTemplate>
-                                                        <asp:Label runat="server" Text="EstatusAsignacionActual"/>
+                                                        <asp:Label runat="server" Text="EstatusAsignacionActual" />
                                                     </HeaderTemplate>
                                                     <ItemTemplate>
                                                         <asp:Label runat="server" Text='<%#Eval("EstatusAsignacion.Id") %>' ID="lblEstatusAsignacionActual"></asp:Label>

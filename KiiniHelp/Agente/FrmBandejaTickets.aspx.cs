@@ -479,8 +479,12 @@ namespace KiiniHelp.Agente
                     CheckBox chk = (CheckBox)row.FindControl("chkSelected");
                     if (chk.Checked)
                     {
-                        var t = gvTickets.DataKeys[row.RowIndex]["NumeroTicket"].ToString();
-                        _servicioTickets.AutoAsignarTicket(int.Parse(t), ((Usuario)Session["UserData"]).Id);
+                        DataKey dataKey = gvTickets.DataKeys[row.RowIndex];
+                        if (dataKey != null)
+                        {
+                            var t = dataKey["NumeroTicket"].ToString();
+                            _servicioTickets.AutoAsignarTicket(int.Parse(t), ((Usuario)Session["UserData"]).Id);
+                        }
                     }
                 }
             }

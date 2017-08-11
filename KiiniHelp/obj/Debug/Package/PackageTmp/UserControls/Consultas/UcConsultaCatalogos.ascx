@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="module-inner">
-                            CONSULTA CATEGORIAS:<br />
+                            CONSULTA CATÁLOGOS:<br />
                             <div class="search-box form-inline margin-bottom-lg">
                                 <label class="sr-only" for="txtFiltro">Buscar</label>
                                 <div class="form-group">
@@ -65,6 +65,8 @@
                                                     <td>
                                                         <asp:Label runat="server">Nombre</asp:Label></td>
                                                     <td>
+                                                        <asp:Label runat="server">Sistema</asp:Label></td>
+                                                    <td>
                                                         <asp:Label runat="server">Creación</asp:Label></td>
                                                     <td>
                                                         <asp:Label runat="server">Últ. edición</asp:Label></td>
@@ -77,19 +79,20 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td><%# Eval("Descripcion")%></td>
+                                            <td><%# (bool)Eval("Sistema") ? "Si" : "No"%></td>
                                             <td><%# Eval("FechaAlta", "{0:d}")%></td>
                                             <td><%# Eval("FechaModificacion", "{0:d}")%></td>
                                             <td id="colHabilitado">
                                                 <ul class="list list-unstyled" id="hiddenEnabled">
                                                     <li>
-                                                        <asp:CheckBox runat="server" AutoPostBack="true" Checked='<%# (bool) Eval("Habilitado") %>' CssClass="chkIphone" Width="30px" data-id='<%# Eval("Id")%>' Text='<%# (bool) Eval("Habilitado") ? "SI" : "NO"%>' OnCheckedChanged="OnCheckedChanged" />
+                                                        <asp:CheckBox runat="server" AutoPostBack="true" Checked='<%# (bool) Eval("Habilitado") %>' CssClass="chkIphone" Width="30px" Visible='<%# !(bool)Eval("Sistema") %>' data-id='<%# Eval("Id")%>' Text='<%# (bool) Eval("Habilitado") ? "SI" : "NO"%>' OnCheckedChanged="OnCheckedChanged" />
                                                     </li>
                                                 </ul>
                                             </td>
                                             <td id="colEditar">
                                                 <ul class="list list-unstyled hidden" id="hiddenEdit">
                                                     <li>
-                                                        <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Editar" CommandArgument='<%# Eval("Id")%>' OnClick="btnEditar_OnClick" />
+                                                        <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Editar" Visible='<%# !(bool)Eval("Sistema") %>' CommandArgument='<%# Eval("Id")%>' OnClick="btnEditar_OnClick" />
                                                     </li>
                                                 </ul>
                                             </td>
@@ -116,13 +119,6 @@
             <ContentTemplate>
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <asp:LinkButton class="close" ID="btnClose" OnClick="btnClose_OnClick" runat="server" Text='&times;' />
-                            <h2 class="modal-title" id="modal-new-ticket-label">
-                                <asp:Label runat="server" ID="lblBrandingModal" Text="NUEVO CATÁLOGO" /></h2>
-                            <hr class="bordercolor" />
-                        </div>
-                        <div class="modal-body">
                             <uc1:UcAltaCatalogos runat="server" id="ucAltaCatalogos" />
                         </div>
                     </div>
@@ -134,7 +130,7 @@
     <div class="modal fade" id="modalCargaCatalogo" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <asp:UpdatePanel ID="upCargaCatalogo" runat="server">
             <ContentTemplate>
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog">
                     <div class="modal-content">
                         <uc1:UcCargaCatalgo runat="server" id="ucCargaCatalgo" />
                     </div>

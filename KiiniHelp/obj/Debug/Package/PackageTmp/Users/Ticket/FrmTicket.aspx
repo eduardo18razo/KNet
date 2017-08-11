@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmTicket.aspx.cs" Inherits="KiiniHelp.Users.Ticket.FrmTicket" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmTicketPublico.aspx.cs" Inherits="KiiniHelp.Users.Ticket.FrmTicket" %>
 
 <%@ Register Src="~/UserControls/Altas/Formularios/UcFormulario.ascx" TagPrefix="uc1" TagName="UcFormulario" %>
 

@@ -3,13 +3,12 @@
 
 <asp:UpdatePanel runat="server">
     <ContentTemplate>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="modal-header">
+            <asp:LinkButton class="close" ID="btnClose" OnClick="btnClose_OnClick" runat="server"><span aria-hidden="true">&times;</span></asp:LinkButton>
                 <h3><asp:Label runat="server" ID="lblMensaje"/></h3>
-            </div>
-            <div class="panel-body">
-                <uc1:UcDetalleUsuario runat="server" id="ucDetalleUsuario" />
-            </div>
+        </div>
+        <div class="modal-body">
+            <uc1:UcDetalleUsuario runat="server" id="ucDetalleUsuario" />
         </div>
     </ContentTemplate>
 </asp:UpdatePanel>

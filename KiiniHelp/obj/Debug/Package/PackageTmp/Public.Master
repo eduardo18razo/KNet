@@ -33,7 +33,18 @@
         function CargaEditor(editorName) {
             $(editorName).markdown();
         }
-        
+        function search(evt) {
+            debugger;
+
+            if (evt.charCode == 13) {
+                this.__doPostBack(this.name, 'OnKeyPress');
+                evt.preventDefault();
+                return false; // returning false will prevent the event from bubbling up.
+            }
+            else {
+                return true;
+            }
+        }
     </script>
     <style>
         body {
@@ -93,7 +104,7 @@
                         <div id="main-search">
                             <i id="main-search-toggle" class="fa fa-search icon"></i>
                             <div id="main_search_input_wrapper" class="main_search_input_wrapper">
-                                <asp:TextBox type="text" ID="main_search_input" class="main_search_input form-control" placeholder="Buscar por palabra clave..." runat="server" />
+                                <asp:TextBox type="text" ID="main_search_input" ClientIDMode="Static" class="main_search_input form-control" onkeypress="search(event)" placeholder="Buscar por palabra clave..." runat="server" />
                                 <span id="clear-search" aria-hidden="true" class="fs1 icon icon_close_alt2 clear-search"></span>
                             </div>
                         </div>
@@ -286,8 +297,8 @@
                     </div>
                     <div class="scroller" id="scroller" style="padding-left: 30px">
                         <div style="margin-top: 0; height: 100%;">
-                            <asp:LinkButton runat="server" CssClass="close" ID="lnkBtnCerrar" Visible="False">
-                        <span class="glyphicon glyphicon-remove"></span>
+                            <%--<asp:LinkButton runat="server" CssClass="close" ID="lnkBtnCerrar" Visible="False">
+                        <span class="glyphicon glyphicon-remove"></span>--%>
                             </asp:LinkButton>
                             <asp:ContentPlaceHolder ID="ContentPlaceHolderPublic" runat="server">
                             </asp:ContentPlaceHolder>
@@ -297,7 +308,7 @@
             </div>
 
             <footer id="footer" class="site-footer">
-                <div class="copyright">Kiinisupport &copy; 2017 - <a href="http://www.kiininet.com" target="_blank">Powered by Kiinenet</a> - <a href="terminos.html">Términos y condiciones</a></div>
+                <div class="copyright">Kiinisupport &copy; 2017 - <a href="http://www.kiininet.com" target="_blank">Powered by Kiinenet</a></div>
             </footer>
 
             <div class="modal fade" id="modal-new-ticket" tabindex="-1" role="dialog" aria-labelledby="modal-new-ticket-label">

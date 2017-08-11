@@ -9,6 +9,8 @@ namespace KiiniNet.Entities.Cat.Mascaras
         [DataMember]
         public int Id { get; set; }
         [DataMember]
+        public string NombreCampoMascara { get; set; }
+        [DataMember]
         public int IdRegistroCatalogo { get; set; }
         [DataMember]
         public int IdTicket { get; set; }

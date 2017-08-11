@@ -102,7 +102,7 @@
         </Triggers>
     </asp:UpdatePanel>
     <%--MODAL ALTA--%>
-    <div class="modal fade" id="modalAltaArea" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="margin-top: 60px">
+    <div class="modal fade" id="modalAltaArea" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" >
         <asp:UpdatePanel ID="upAltaArea" runat="server">
             <ContentTemplate>
                 <div class="modal-dialog modal-lg">

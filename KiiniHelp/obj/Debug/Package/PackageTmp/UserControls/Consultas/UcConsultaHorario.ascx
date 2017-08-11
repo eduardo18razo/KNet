@@ -9,7 +9,7 @@
             <br>
             <h3 class="h6">
                 <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
-                / Formularios </h3>
+                / Horarios </h3>
             <hr />
             <section class="module">
                 <div class="row">
@@ -46,7 +46,7 @@
                             <div class="form-group">
                                 <asp:LinkButton runat="server" CssClass="btn btn-primary fa fa-download" Text="  Descargar reporte" ID="btnDownload" OnClick="btnDownload_OnClick" />
                             </div>
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </section>

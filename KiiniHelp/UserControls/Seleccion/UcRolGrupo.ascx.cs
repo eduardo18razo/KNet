@@ -132,6 +132,7 @@ namespace KiiniHelp.UserControls.Seleccion
             try
             {
                 ddlRol.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
+                ViewState["GruposSeleccionados"] = null;
                 GruposSeleccionados = null;
             }
             catch (Exception e)
@@ -140,7 +141,7 @@ namespace KiiniHelp.UserControls.Seleccion
             }
         }
 
-        public void EliminarSeleccion(int idGrupo)
+        public void EliminarSeleccion(int idGrupo, bool esSubGrupo)
         {
             try
             {

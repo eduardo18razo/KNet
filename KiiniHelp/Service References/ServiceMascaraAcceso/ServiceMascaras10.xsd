@@ -70,10 +70,12 @@
   <xs:element name="TipoArbolAcceso" nillable="true" type="tns:TipoArbolAcceso" />
   <xs:complexType name="TipoUsuario">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Abreviacion" nillable="true" type="xs:string" />
       <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="AliasOrganizacion" nillable="true" type="q7:ArrayOfAliasOrganizacion" />
       <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="AliasUbicacion" nillable="true" type="q8:ArrayOfAliasUbicacion" />
       <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ArbolAcceso" nillable="true" type="q9:ArrayOfArbolAcceso" />
       <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" minOccurs="0" name="Campus" nillable="true" type="q10:ArrayOfCampus" />
+      <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
       <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" minOccurs="0" name="Compania" nillable="true" type="q11:ArrayOfCompania" />
       <xs:element minOccurs="0" name="CorreosObligatorios" type="xs:int" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
@@ -477,4 +479,15 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Canal" nillable="true" type="tns:Canal" />
+  <xs:complexType name="NivelTicket">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element xmlns:q89="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="Ticket" nillable="true" type="q89:ArrayOfTicket" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="NivelTicket" nillable="true" type="tns:NivelTicket" />
 </xs:schema>

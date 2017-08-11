@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -359,8 +360,8 @@ namespace KinniNet.Core.Demonio
                 {
                     try
                     {
-                        //TODO: Cambiar IdArbol por dinamico
-                        arbol = new BusinessArbolAcceso().ObtenerArbolAcceso(1);
+                        int arbolParametro = int.Parse(ConfigurationManager.AppSettings["ServicioCorreo"]);
+                        arbol = new BusinessArbolAcceso().ObtenerArbolAcceso(arbolParametro);
                         int? idMascara = arbol.InventarioArbolAcceso.First().IdMascara;
                         if (idMascara != null)
                             mascara = new BusinessMascaras().ObtenerMascaraCaptura((int)idMascara);

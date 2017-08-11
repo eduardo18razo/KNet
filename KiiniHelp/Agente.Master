@@ -544,9 +544,9 @@
                     </div>
                     <div class="scroller" id="scroller" style="padding-left: 30px; margin-top: 120px">
                         <div style="margin-top: 0; height: 100%;">
-                            <asp:LinkButton runat="server" CssClass="close" ID="lnkBtnCerrar" OnClick="lnkBtnCerrar_OnClick" Visible="False">
+                            <%--<asp:LinkButton runat="server" CssClass="close" ID="lnkBtnCerrar" OnClick="lnkBtnCerrar_OnClick" Visible="False">
                         <span class="glyphicon glyphicon-remove"></span>
-                            </asp:LinkButton>
+                            </asp:LinkButton>--%>
                             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                             </asp:ContentPlaceHolder>
                         </div>
@@ -555,7 +555,7 @@
             </div>
 
             <footer id="footer" class="site-footer">
-                <div class="copyright">Kiinisupport &copy; 2017 - <a href="http://www.kiininet.com" target="_blank">Powered by Kiinenet</a> - <a href="terminos.html">Términos y condiciones</a></div>
+                <div class="copyright">Kiinisupport &copy; 2017 - <a href="http://www.kiininet.com" target="_blank">Powered by Kiinenet</a></div>
             </footer>
 
             <div class="modal fade" id="modal-new-ticket" tabindex="-1" role="dialog" aria-labelledby="modal-new-ticket-label">

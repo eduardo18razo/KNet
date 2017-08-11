@@ -59,6 +59,7 @@
     <Compile Include="Cat\Sistema\Impacto.cs" />
     <Compile Include="Cat\Sistema\Menu.cs" />
     <Compile Include="Cat\Sistema\NivelOrganizacion.cs" />
+    <Compile Include="Cat\Sistema\NivelTicket.cs" />
     <Compile Include="Cat\Sistema\NivelUbicacion.cs" />
     <Compile Include="Cat\Sistema\Prioridad.cs" />
     <Compile Include="Cat\Sistema\RespuestaTipoEncuesta.cs" />

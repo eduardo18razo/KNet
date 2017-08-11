@@ -143,7 +143,7 @@ namespace KiiniNet.Entities.Operacion.Usuarios
         [DataMember]
         public string FechaUltimoAccesoExito
         {
-             get; set; 
+            get; set; 
             //get
             //{
             //    string fecha;

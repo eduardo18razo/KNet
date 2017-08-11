@@ -84,13 +84,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion, bool filtraHabilitados)
+        public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(int idCatalogo, bool insertarSeleccion, bool filtraHabilitados)
         {
             try
             {
                 using (BusinessMascaras negocio = new BusinessMascaras())
                 {
-                    return negocio.ObtenerCatalogoCampoMascara(tabla, insertarSeleccion, filtraHabilitados);
+                    return negocio.ObtenerCatalogoCampoMascara(idCatalogo, insertarSeleccion, filtraHabilitados);
                 }
             }
             catch (Exception ex)

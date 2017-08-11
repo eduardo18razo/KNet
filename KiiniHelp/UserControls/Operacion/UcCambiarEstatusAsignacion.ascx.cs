@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Configuration;
 using System.Web.UI;
 using KiiniHelp.ServiceGrupoUsuario;
 using KiiniHelp.ServiceSistemaEstatus;
@@ -61,23 +62,35 @@ namespace KiiniHelp.UserControls.Operacion
             }
         }
 
+        public int IdNivelEstatusAsignacionActual
+        {
+            get { return int.Parse(hfNivelAsignacion.Value); }
+            set { hfNivelAsignacion.Value = value.ToString(); }
+        }
+
+        public int IdSubRolActual
+        {
+            get { return int.Parse(hfSubRolActual.Value); }
+            set { hfSubRolActual.Value = value.ToString(); }
+        }
+
         public bool EsPropietario
         {
-            get { return Convert.ToBoolean(lblEsPropietrio.Text); }
-            set { lblEsPropietrio.Text = value.ToString(); }
+            get { return Convert.ToBoolean(hfEsPropietario.Value); }
+            set { hfEsPropietario.Value = value.ToString(); }
         }
 
         private void LLenaEstatus()
         {
             try
             {
-                List<EstatusAsignacion> lstEstatus = new List<EstatusAsignacion>();
-                foreach (SubGrupoUsuario subRol in ((Usuario)Session["UserData"]).UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Select(s => s.SubGrupoUsuario))
-                {
-                    lstEstatus.AddRange(_servicioEstatus.ObtenerEstatusAsignacionUsuario(IdUsuario, subRol.IdSubRol, IdEstatusAsignacionActual, EsPropietario, true));
-                }
-                lstEstatus = lstEstatus.Distinct().ToList();
-                ddlEstatus.DataSource = lstEstatus;
+                //List<EstatusAsignacion> lstEstatus = new List<EstatusAsignacion>();
+                //foreach (SubGrupoUsuario subRol in ((Usuario)Session["UserData"]).UsuarioGrupo.Where(w => w.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención && w.SubGrupoUsuario != null).Select(s => s.SubGrupoUsuario))
+                //{
+                //    lstEstatus.AddRange(_servicioEstatus.ObtenerEstatusAsignacionUsuario(IdUsuario, subRol.IdSubRol, IdEstatusAsignacionActual, EsPropietario, true));
+                //}
+                //lstEstatus = _servicioEstatus.ObtenerEstatusAsignacionUsuario(IdUsuario, 0, IdEstatusAsignacionActual, EsPropietario, true);
+                ddlEstatus.DataSource = _servicioEstatus.ObtenerEstatusAsignacionUsuario(IdUsuario, 0, IdEstatusAsignacionActual, EsPropietario, true);
                 ddlEstatus.DataTextField = "Descripcion";
                 ddlEstatus.DataValueField = "Id";
                 ddlEstatus.DataBind();
@@ -98,23 +111,39 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
+                divUsuariosSupervisor.Visible = false;
                 divUsuariosNivel1.Visible = false;
                 divUsuariosNivel2.Visible = false;
                 divUsuariosNivel3.Visible = false;
                 divUsuariosNivel4.Visible = false;
-                divUsuariosSupervisor.Visible = false;
                 List<int> lstSubRoles = ((Usuario)Session["UserData"]).UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Select(s => s.SubGrupoUsuario).Select(subRol => subRol.IdSubRol).ToList();
                 var supervisor = lstSubRoles.Contains((int)BusinessVariables.EnumSubRoles.Supervisor);
                 //if (!EsPropietario && !supervisor) return;
                 List<Usuario> lstUsuarios;
                 List<SubRolEscalacionPermitida> lstAsignacionesPermitidas = new List<SubRolEscalacionPermitida>();
-                foreach (int subRol in lstSubRoles)
+                switch (int.Parse(ddlEstatus.SelectedValue))
                 {
-                    lstAsignacionesPermitidas.AddRange(_servicioSubRol.ObtenerEscalacion(subRol, int.Parse(ddlEstatus.SelectedValue)));
+                    case (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Asignado:
+                        foreach (int subRol in lstSubRoles)
+                        {
+                            lstAsignacionesPermitidas.AddRange(_servicioSubRol.ObtenerEscalacion(subRol, int.Parse(ddlEstatus.SelectedValue), null));
+                        }
+
+                        break;
+                    case (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.ReAsignado:
+                        lstAsignacionesPermitidas.AddRange(_servicioSubRol.ObtenerEscalacion(IdSubRolActual, int.Parse(ddlEstatus.SelectedValue), IdNivelEstatusAsignacionActual));
+                        break;
+                    case (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Escalado:
+                        foreach (int subRol in lstSubRoles)
+                        {
+                            lstAsignacionesPermitidas.AddRange(_servicioSubRol.ObtenerEscalacion(subRol, int.Parse(ddlEstatus.SelectedValue), IdNivelEstatusAsignacionActual));
+                        }
+                        break;
                 }
+                int idUsuario = ((Usuario)Session["UserData"]).Id;
                 if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.Supervisor))
                 {
-                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo, (int)BusinessVariables.EnumSubRoles.Supervisor);
+                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo, (int)BusinessVariables.EnumSubRoles.Supervisor).Where(w => w.Id != idUsuario).ToList();
                     lstSupervisor.DataSource = lstUsuarios;
                     lstSupervisor.DataTextField = "NombreCompleto";
                     lstSupervisor.DataValueField = "Id";
@@ -123,8 +152,7 @@ namespace KiiniHelp.UserControls.Operacion
                 }
                 if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.PrimererNivel))
                 {
-                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo,
-                        (int)BusinessVariables.EnumSubRoles.PrimererNivel);
+                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo, (int)BusinessVariables.EnumSubRoles.PrimererNivel).Where(w => w.Id != idUsuario).ToList();
                     lstUsuariosGrupoNivel1.DataSource = lstUsuarios;
                     lstUsuariosGrupoNivel1.DataTextField = "NombreCompleto";
                     lstUsuariosGrupoNivel1.DataValueField = "Id";
@@ -133,8 +161,7 @@ namespace KiiniHelp.UserControls.Operacion
                 }
                 if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.SegundoNivel))
                 {
-                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo,
-                        (int)BusinessVariables.EnumSubRoles.SegundoNivel);
+                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo, (int)BusinessVariables.EnumSubRoles.SegundoNivel).Where(w => w.Id != idUsuario).ToList();
                     lstUsuariosGrupoNivel2.DataSource = lstUsuarios;
                     lstUsuariosGrupoNivel2.DataTextField = "NombreCompleto";
                     lstUsuariosGrupoNivel2.DataValueField = "Id";
@@ -143,8 +170,7 @@ namespace KiiniHelp.UserControls.Operacion
                 }
                 if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.TercerNivel))
                 {
-                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo,
-                        (int)BusinessVariables.EnumSubRoles.TercerNivel);
+                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo, (int)BusinessVariables.EnumSubRoles.TercerNivel).Where(w => w.Id != idUsuario).ToList();
                     lstUsuariosGrupoNivel3.DataSource = lstUsuarios;
                     lstUsuariosGrupoNivel3.DataTextField = "NombreCompleto";
                     lstUsuariosGrupoNivel3.DataValueField = "Id";
@@ -153,8 +179,7 @@ namespace KiiniHelp.UserControls.Operacion
                 }
                 if (lstAsignacionesPermitidas.Any(a => a.IdSubRolPermitido == (int)BusinessVariables.EnumSubRoles.CuartoNivel))
                 {
-                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo,
-                        (int)BusinessVariables.EnumSubRoles.CuartoNivel);
+                    lstUsuarios = _servicioUsuarios.ObtenerUsuariosByGrupo(IdGrupo, (int)BusinessVariables.EnumSubRoles.CuartoNivel).Where(w => w.Id != idUsuario).ToList();
                     lstUsuariosGrupoNivel4.DataSource = lstUsuarios;
                     lstUsuariosGrupoNivel4.DataTextField = "NombreCompleto";
                     lstUsuariosGrupoNivel4.DataValueField = "Id";
@@ -168,7 +193,7 @@ namespace KiiniHelp.UserControls.Operacion
             }
         }
 
-        private List<string> AlertaGeneral
+        private List<string> Alerta
         {
             set
             {
@@ -209,6 +234,34 @@ namespace KiiniHelp.UserControls.Operacion
             return result;
         }
 
+        public int IdNivelAsignacion()
+        {
+            int result = 0;
+            try
+            {
+                if (lstSupervisor.SelectedItem != null)
+                    result = (int)BusinessVariables.EnumeradoresKiiniNet.EnumeradorNivelAsignacion.Supervisor;
+                if (lstUsuariosGrupoNivel1.SelectedItem != null)
+                    result = (int)BusinessVariables.EnumeradoresKiiniNet.EnumeradorNivelAsignacion.PrimerNivel;
+                if (lstUsuariosGrupoNivel2.SelectedItem != null)
+                    result = (int)BusinessVariables.EnumeradoresKiiniNet.EnumeradorNivelAsignacion.SegundoNivel;
+                if (lstUsuariosGrupoNivel3.SelectedItem != null)
+                    result = (int)BusinessVariables.EnumeradoresKiiniNet.EnumeradorNivelAsignacion.TercerNivel;
+                if (lstUsuariosGrupoNivel4.SelectedItem != null)
+                    result = (int)BusinessVariables.EnumeradoresKiiniNet.EnumeradorNivelAsignacion.CuartoNivel;
+                if (result == 0 && ddlEstatus.SelectedValue == ((int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Autoasignado).ToString())
+                    result = ((Usuario)Session["UserData"]).Id;
+                else if (result == 0 && ddlEstatus.SelectedValue != ((int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Autoasignado).ToString())
+                    throw new Exception("Seleccione un usuario");
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+            return result;
+        }
+
         private void LimpiarPantalla()
         {
             try
@@ -232,7 +285,8 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
-                AlertaGeneral = new List<string>();
+                Alerta = new List<string>();
+                lblBrandingModal.Text = WebConfigurationManager.AppSettings["Brand"];
                 if (!IsPostBack)
                 {
 
@@ -245,7 +299,7 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -264,7 +318,7 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -275,13 +329,14 @@ namespace KiiniHelp.UserControls.Operacion
             {
                 if (ddlEstatus.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     throw new Exception("Debe seleccionar un estatus");
-                if (((Usuario)Session["UserData"]).UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Select(s => s.SubGrupoUsuario).Where(subRol => _servicioEstatus.HasComentarioObligatorio(((Usuario)Session["UserData"]).Id, subRol.IdSubRol, IdEstatusAsignacionActual, Convert.ToInt32(ddlEstatus.SelectedValue), EsPropietario)).Any(subRol => txtComentarios.Text.Trim() == string.Empty))
+
+                if (((Usuario)Session["UserData"]).UsuarioGrupo.Where(w => w.SubGrupoUsuario != null && w.SubGrupoUsuario.IdSubRol == IdNivelAsignacion()).Select(s => s.SubGrupoUsuario).Where(subRol => _servicioEstatus.HasComentarioObligatorio(((Usuario)Session["UserData"]).Id, subRol.IdSubRol, IdEstatusAsignacionActual, Convert.ToInt32(ddlEstatus.SelectedValue), EsPropietario)).Any(subRol => txtComentarios.Text.Trim() == string.Empty))
                 {
                     throw new Exception("Debe agregar un comentario");
                 }
                 if (ddlEstatus.SelectedValue != BusinessVariables.ComboBoxCatalogo.ValueSeleccione.ToString())
                 {
-                    _servicioTicketClient.CambiarAsignacionTicket(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuarioSeleccionado(), ((Usuario)Session["UserData"]).Id, txtComentarios.Text);
+                    _servicioTicketClient.CambiarAsignacionTicket(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuarioSeleccionado(), IdNivelAsignacion(), ((Usuario)Session["UserData"]).Id, txtComentarios.Text);
                 }
                 LimpiarPantalla();
                 if (OnAceptarModal != null)
@@ -294,7 +349,7 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -321,7 +376,7 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -341,7 +396,7 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -361,7 +416,7 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -381,7 +436,7 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -401,7 +456,7 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
     }

@@ -59,6 +59,8 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 txtDescripcionCatalogo.Text = String.Empty;
+                Session["registrosCatalogos"] = new List<CatalogoGenerico>();
+                LlenaRegistros();
             }
             catch (Exception ex)
             {

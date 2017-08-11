@@ -23,6 +23,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public void GuardarUsuarioAdicional(string nombre, string ap, string correo, string celular, string edad, string numeroTarjeta, string fechavto, string cvv)
+        {
+            try
+            {
+                using (BusinessUsuarios negocio = new BusinessUsuarios())
+                {
+                    negocio.GuardarUsuarioAdicional(nombre, ap, correo, celular, edad, numeroTarjeta, fechavto, cvv);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<Usuario> ObtenerUsuarios(int? idTipoUsuario)
         {
             try
@@ -299,7 +314,7 @@ namespace KiiniNet.Services.Operacion.Implementacion
             {
                 using (BusinessUsuarios negocio = new BusinessUsuarios())
                 {
-                    negocio.ValidaCodigoVerificacionCorreo(idUsuario, idTipoNotificacion,link, idCorreo, codigo);
+                    negocio.ValidaCodigoVerificacionCorreo(idUsuario, idTipoNotificacion, link, idCorreo, codigo);
                 }
             }
             catch (Exception ex)

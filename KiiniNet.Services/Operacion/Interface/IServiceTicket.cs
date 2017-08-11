@@ -9,6 +9,12 @@ namespace KiiniNet.Services.Operacion.Interface
     public interface IServiceTicket
     {
         [OperationContract]
+        Ticket CrearTicketAndroid(int idUsuario, int idUsuarioSolicito, int idArbol, string latitudinicio,
+            string longitudinicio,
+            string fechaalta,
+            string latitudfin,
+            string longitudfin, string costo, int idCanal, bool campoRandom, bool esTercero, bool esMail);
+        [OperationContract]
         Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero, bool esMail);
 
         [OperationContract]
@@ -21,10 +27,10 @@ namespace KiiniNet.Services.Operacion.Interface
         void CambiarEstatus(int idTicket, int idEstatus, int idUsuario, string comentario);
         
         [OperationContract]
-        void AutoAsignarTicket(int idTicket,  int idUsuario);
+        void AutoAsignarTicket(int idTicket, int idUsuario);
 
         [OperationContract]
-        void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idUsuarioAsigna, string comentario);
+        void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idNivelAsignado, int idUsuarioAsigna, string comentario);
 
         [OperationContract]
         HelperDetalleTicket ObtenerDetalleTicket(int idTicket);
@@ -40,6 +46,9 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         void AgregarComentarioConversacionTicket(int idTicket, int idUsuario, string mensaje, bool sistema,List<string> archivos);
+
+        [OperationContract]
+        List<int> CapturaCasillaTicket(int idTicket, string nombreCampo);
     }
 
 }

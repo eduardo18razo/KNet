@@ -29,7 +29,7 @@
                                         <li role="presentation">
                                             <a href="#tabAltaForma" aria-controls="tabAltaForma" role="tab" data-toggle="tab"><span class="pe-icon fa fa-clock-o icon"></span>
                                                 <br>
-                                                Forma</a>
+                                                Servicio/Problema</a>
                                         </li>
                                     </ul>
 

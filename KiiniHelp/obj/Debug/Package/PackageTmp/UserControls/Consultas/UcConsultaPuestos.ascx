@@ -66,12 +66,8 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td>
-                                                <button type="button" class='<%# 
-int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Empleado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoPersonaFisica ? "btn btn-default-alt btn-square-usuario empleado" : 
-int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Cliente || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClientaPersonaFisica ? "btn btn-default-alt btn-square-usuario cliente" : 
-int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Proveedor || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorPersonaFisica ? "btn btn-default-alt btn-square-usuario proveedor" : "btn btn-default-alt btn-square-usuario"
-                                                        %>'>
-                                                    <%# Eval("TipoUsuario.Descripcion").ToString().Substring(0,1) %></button></td>
+                                                        <button type="button" class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + Eval("TipoUsuario.Color") + " !important" %>'>
+                                                            <%# Eval("TipoUsuario.Abreviacion") %></button></td>
                                             <td><%# Eval("Descripcion")%></td>
                                             <td id="colHabilitado">
                                                 <ul class="list list-unstyled" id="hiddenEnabled">
@@ -102,7 +98,7 @@ int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposU
 
         </ContentTemplate>
     </asp:UpdatePanel>
-    <div id="modalAltaPuesto" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" class="modal fade" style="margin-top: 60px">
+    <div id="modalAltaPuesto" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" class="modal fade">
         <asp:UpdatePanel ID="upAltaPuesto" runat="server">
             <ContentTemplate>
                 <div class="modal-dialog">

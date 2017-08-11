@@ -46,7 +46,7 @@
                             <div class="form-group">
                                 <asp:LinkButton runat="server" CssClass="btn btn-primary fa fa-download" Text="  Descargar reporte" ID="btnDownload" OnClick="btnDownload_OnClick" />
                             </div>
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </section>

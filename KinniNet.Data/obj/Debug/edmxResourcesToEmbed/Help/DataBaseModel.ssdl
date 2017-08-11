@@ -85,7 +85,8 @@
     <Property Name="LongitudMinima" Type="int" />
     <Property Name="LongitudMaxima" Type="int" />
     <Property Name="SimboloMoneda" Type="nvarchar" MaxLength="10" />
-    <Property Name="ValorMaximo" Type="int" />
+    <Property Name="ValorMinimo" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ValorMaximo" Type="decimal" Precision="18" Scale="2" />
     <Property Name="MascaraDetalle" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Campus">
@@ -115,6 +116,7 @@
     <Property Name="Tabla" Type="nvarchar" MaxLength="150" />
     <Property Name="EsMascaraCaptura" Type="bit" />
     <Property Name="Archivo" Type="bit" />
+    <Property Name="Sistema" Type="bit" />
     <Property Name="FechaAlta" Type="datetime" />
     <Property Name="IdUsuarioAlta" Type="int" />
     <Property Name="FechaModificacion" Type="datetime" />
@@ -545,6 +547,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreCampoMascara" Type="nvarchar" MaxLength="300" />
     <Property Name="IdRegistroCatalogo" Type="int" />
     <Property Name="IdTicket" Type="int" />
     <Property Name="Seleccionado" Type="bit" />
@@ -638,6 +641,14 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="Habilitado" Type="bit" />
+  </EntityType>
+  <EntityType Name="NivelTicket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="NivelUbicacion">
     <Key>
@@ -1015,6 +1026,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdRol" Type="int" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OrdenAsignacion" Type="int" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="SubRolEscalacionPermitida">
@@ -1067,6 +1079,7 @@
     <Property Name="IdSlaEstimadoTicket" Type="int" />
     <Property Name="IdEstatusTicket" Type="int" Nullable="false" />
     <Property Name="IdEstatusAsignacion" Type="int" Nullable="false" />
+    <Property Name="IdNivelTicket" Type="int" />
     <Property Name="FechaHoraAlta" Type="datetime" Nullable="false" />
     <Property Name="FechaHoraFinProceso" Type="datetime" />
     <Property Name="FechaTermino" Type="datetime" />
@@ -1169,6 +1182,7 @@
     <Property Name="LongitudMaxima" Type="bit" Nullable="false" />
     <Property Name="Entero" Type="bit" Nullable="false" />
     <Property Name="Decimal" Type="bit" Nullable="false" />
+    <Property Name="ValorMinimo" Type="bit" Nullable="false" />
     <Property Name="ValorMaximo" Type="bit" Nullable="false" />
     <Property Name="SimboloMoneda" Type="bit" Nullable="false" />
     <Property Name="Catalogo" Type="bit" Nullable="false" />
@@ -1321,7 +1335,7 @@
     <Property Name="Vip" Type="bit" />
     <Property Name="Foto" Type="image" />
     <Property Name="PersonaFisica" Type="bit" />
-    <Property Name="Habilitado" Type="bit" Nullable="false" />
+    <Property Name="Habilitado" Type="bit" />
     <Property Name="Activo" Type="bit" />
     <Property Name="Tries" Type="int" />
     <Property Name="FechaBloqueo" Type="datetime" />
@@ -3463,6 +3477,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Ticket_NivelTicket">
+    <End Role="NivelTicket" Type="Self.NivelTicket" Multiplicity="0..1" />
+    <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NivelTicket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdNivelTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Ticket_Organizacion">
     <End Role="Organizacion" Type="Self.Organizacion" Multiplicity="1" />
     <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
@@ -4098,6 +4124,7 @@
     <EntitySet Name="Nivel6" EntityType="Self.Nivel6" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Nivel7" EntityType="Self.Nivel7" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NivelOrganizacion" EntityType="Self.NivelOrganizacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NivelTicket" EntityType="Self.NivelTicket" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NivelUbicacion" EntityType="Self.NivelUbicacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NotaGeneral" EntityType="Self.NotaGeneral" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NotaGeneralGrupo" EntityType="Self.NotaGeneralGrupo" Schema="dbo" store:Type="Tables" />
@@ -4856,6 +4883,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Ticket_Mascara" Association="Self.FK_Ticket_Mascara">
       <End Role="Mascara" EntitySet="Mascara" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ticket_NivelTicket" Association="Self.FK_Ticket_NivelTicket">
+      <End Role="NivelTicket" EntitySet="NivelTicket" />
       <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>
     <AssociationSet Name="FK_Ticket_Organizacion" Association="Self.FK_Ticket_Organizacion">

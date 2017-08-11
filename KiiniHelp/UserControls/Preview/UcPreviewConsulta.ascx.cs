@@ -31,6 +31,12 @@ namespace KiiniHelp.UserControls.Preview
             }
         }
 
+        public bool MuestraEvaluacion
+        {
+            get { return bool.Parse(hfEvaluacion.Value); }
+            set { hfEvaluacion.Value = value.ToString(); } 
+        }
+
         public void MuestraPreview(InformacionConsulta datos)
         {
             try

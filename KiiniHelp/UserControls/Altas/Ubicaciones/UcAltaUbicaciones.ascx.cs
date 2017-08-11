@@ -282,6 +282,8 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
             {
                 Ubicacion org = _servicioUbicacion.ObtenerUbicacionById(IdUbicacion);
                 if (org == null) return;
+                IdTipoUsuario = org.IdTipoUsuario;
+                ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
                 btnSeleccionarModal.CommandArgument = org.IdNivelUbicacion.ToString();
                 Session["UbicacionSeleccionada"] = org;
                 hfCatalogo.Value = org.IdNivelUbicacion.ToString();
@@ -803,7 +805,7 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
             try
             {
                 if (ddlNivelSeleccionModal.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    return;
+                    throw new Exception("Debe seleccionar Nivel");
                 dataCampus.Visible = false;
                 switch (int.Parse(btnSeleccionarModal.CommandArgument))
                 {
@@ -906,8 +908,6 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                 switch (int.Parse(btnSeleccionarModal.CommandArgument))
                 {
                     case 1:
-
-                        btnSeleccionarModal.CssClass = "btn btn-danger btn-square";
                         lblStepNivel1.Text = "...";
                         hfNivel1.Value = ddlNivelSeleccionModal.SelectedValue;
                         succNivel1.Visible = false;
@@ -932,7 +932,12 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                         break;
 
                 }
-                throw new Exception(ex.Message);
+                if (_lstError == null || _lstError.Count <= 0)
+                {
+                    _lstError = new List<string>();
+                    _lstError.Add(ex.Message);
+                }
+                Alerta = _lstError;
             }
         }
         protected void txtCp_OnTextChanged(object sender, EventArgs e)
@@ -1014,6 +1019,31 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
             }
         }
 
+        public bool ValidaCapturaCatalogoCampus(int idTipoUsuario, string descripcion, int idColonia, string calle, string noExt, string noInt)
+        {
+            List<string> sb = new List<string>();
+            if (idTipoUsuario == BusinessVariables.ComboBoxCatalogo.ValueSeleccione)
+                sb.Add("Tipo de usuario es un campo obligatorio.<br>");
+            if (descripcion == string.Empty)
+                sb.Add("Descripción es un campo obligatorio.<br>");
+            if (txtCp.Text.Trim() == string.Empty)
+                sb.Add("Ingrese un Codigo Postal.<br>");
+            if (idColonia == BusinessVariables.ComboBoxCatalogo.ValueSeleccione)
+                sb.Add("Colonia es un campo obligatorio.<br>");
+            if (calle == string.Empty)
+                sb.Add("Calle es un campo obligatorio.<br>");
+            if (noExt == string.Empty)
+                sb.Add("Número Exterior es un campo obligatorio.<br>");
+            //if (noInt == string.Empty)
+            //    sb.AppendLine("Número Interior es un campo obligatorio.<br>");
+            if (sb.Count > 0)
+            {
+                _lstError = sb;
+                throw new Exception("");
+            }
+            return true;
+        }
+
         private void Guardar()
         {
             try
@@ -1023,7 +1053,7 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                 {
                     if (Convert.ToBoolean(hfAlta.Value))
                     {
-                        if (Metodos.ValidaCapturaCatalogoCampus(Convert.ToInt32(ddlTipoUsuario.SelectedValue), txtDescripcionCatalogo.Text, ddlColonia.SelectedValue == "" ? 0 : Convert.ToInt32(ddlColonia.SelectedValue), txtCalle.Text.Trim(), txtNoExt.Text.Trim(), txtNoInt.Text.Trim()))
+                        if (ValidaCapturaCatalogoCampus(Convert.ToInt32(ddlTipoUsuario.SelectedValue), txtDescripcionCatalogo.Text, ddlColonia.SelectedValue == "" ? 0 : Convert.ToInt32(ddlColonia.SelectedValue), txtCalle.Text.Trim(), txtNoExt.Text.Trim(), txtNoInt.Text.Trim()))
                         {
                             ubicacion = new Ubicacion
                             {
@@ -1066,7 +1096,6 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                     }
 
                     LimpiaCatalogoAltaCampus();
-                    btnSeleccionarModal.CommandArgument = "1";
                     btnSeleccionarModal_OnClick(btnSeleccionarModal, null);
                 }
                 else
@@ -1383,7 +1412,7 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                 //    LimpiaCatalogoNivel();
                 //    btnSeleccionarModal_OnClick(btnSeleccionarModal, null);
                 //}
-                
+
                 //if (OnAceptarModal != null)
                 //    OnAceptarModal();
             }
@@ -1392,8 +1421,8 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                 if (_lstError == null)
                 {
                     _lstError = new List<string>();
+                    _lstError.Add(ex.Message);
                 }
-                _lstError.Add(ex.Message);
                 Alerta = _lstError;
             }
         }

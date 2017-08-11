@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="module-inner">
-                            <asp:LinkButton runat="server" CssClass="btn btn-success fa fa-plus" Text="Crear nguid encuesta" OnClick="btnNew_OnClick" />
+                            <asp:LinkButton runat="server" CssClass="btn btn-success fa fa-plus" Text="Crear nueva encuesta" OnClick="btnNew_OnClick" />
                         </div>
                     </div>
                 </div>

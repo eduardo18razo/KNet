@@ -27,10 +27,12 @@ namespace KiiniHelp.Users.Operacion
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value.Select(s => new { Detalle = s }).ToList();
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 

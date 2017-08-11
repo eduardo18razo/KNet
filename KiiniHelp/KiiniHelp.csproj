@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Agente\FrmBandeja.aspx" />
     <Content Include="Agente\FrmBandejaTickets.aspx" />
     <Content Include="Agente\FrmTicket.aspx" />
     <Content Include="Agente\FrmTickets.aspx" />
@@ -190,7 +191,9 @@
     <Content Include="Images\orderedList2.png" />
     <Content Include="Publico\Consultas\FrmPreviewConsulta.aspx" />
     <Content Include="Publico\FrmCategoria.aspx" />
+    <Content Include="Publico\FrmConsulta.aspx" />
     <Content Include="Publico\FrmServiceArea.aspx" />
+    <Content Include="Publico\FrmTicketPublico.aspx" />
     <Content Include="Publico\FrmUserSelect.aspx" />
     <Content Include="Downloads\FrmDownloads.aspx" />
     <Content Include="Downloads\FrmPreviewImage.aspx" />
@@ -437,6 +440,7 @@
     <Content Include="UserControls\Altas\Encuestas\UcPreviewEncuesta.ascx" />
     <Content Include="UserControls\Altas\Formularios\UcFormulario.ascx" />
     <Content Include="UserControls\Altas\Organizaciones\UcAltaOrganizaciones.ascx" />
+    <Content Include="UserControls\Altas\Tickets\UcTicketAgente.ascx" />
     <Content Include="UserControls\Altas\Ubicaciones\UcAltaUbicaciones.ascx" />
     <Content Include="UserControls\Altas\UcAltaArbolAcceso.ascx" />
     <Content Include="UserControls\Altas\UcAltaNivelArbol.ascx" />
@@ -2384,6 +2388,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agente\FrmBandeja.aspx.cs">
+      <DependentUpon>FrmBandeja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Agente\FrmBandeja.aspx.designer.cs">
+      <DependentUpon>FrmBandeja.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Agente\FrmBandejaTickets.aspx.cs">
       <DependentUpon>FrmBandejaTickets.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2436,12 +2447,26 @@
     <Compile Include="Publico\FrmCategoria.aspx.designer.cs">
       <DependentUpon>FrmCategoria.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Publico\FrmConsulta.aspx.cs">
+      <DependentUpon>FrmConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publico\FrmConsulta.aspx.designer.cs">
+      <DependentUpon>FrmConsulta.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Publico\FrmServiceArea.aspx.cs">
       <DependentUpon>FrmServiceArea.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Publico\FrmServiceArea.aspx.designer.cs">
       <DependentUpon>FrmServiceArea.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Publico\FrmTicketPublico.aspx.cs">
+      <DependentUpon>FrmTicketPublico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publico\FrmTicketPublico.aspx.designer.cs">
+      <DependentUpon>FrmTicketPublico.aspx</DependentUpon>
     </Compile>
     <Compile Include="Publico\FrmUserSelect.aspx.cs">
       <DependentUpon>FrmUserSelect.aspx</DependentUpon>
@@ -2593,6 +2618,13 @@
     </Compile>
     <Compile Include="UserControls\Altas\Organizaciones\UcAltaOrganizaciones.ascx.designer.cs">
       <DependentUpon>UcAltaOrganizaciones.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Altas\Tickets\UcTicketAgente.ascx.cs">
+      <DependentUpon>UcTicketAgente.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Altas\Tickets\UcTicketAgente.ascx.designer.cs">
+      <DependentUpon>UcTicketAgente.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Altas\Ubicaciones\UcAltaUbicaciones.ascx.cs">
       <DependentUpon>UcAltaUbicaciones.ascx</DependentUpon>

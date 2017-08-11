@@ -15,6 +15,9 @@ namespace KiiniHelp.ServiceTicket {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceTicket.IServiceTicket")]
     public interface IServiceTicket {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/CrearTicketAndroid", ReplyAction="http://tempuri.org/IServiceTicket/CrearTicketAndroidResponse")]
+        KiiniNet.Entities.Operacion.Tickets.Ticket CrearTicketAndroid(int idUsuario, int idUsuarioSolicito, int idArbol, string latitudinicio, string longitudinicio, string fechaalta, string latitudfin, string longitudfin, int idCanal, bool campoRandom, bool esTercero, bool esMail);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/CrearTicket", ReplyAction="http://tempuri.org/IServiceTicket/CrearTicketResponse")]
         KiiniNet.Entities.Operacion.Tickets.Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero, bool esMail);
         
@@ -31,7 +34,7 @@ namespace KiiniHelp.ServiceTicket {
         void AutoAsignarTicket(int idTicket, int idUsuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/CambiarAsignacionTicket", ReplyAction="http://tempuri.org/IServiceTicket/CambiarAsignacionTicketResponse")]
-        void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idUsuarioAsigna, string comentario);
+        void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idNivelAsignado, int idUsuarioAsigna, string comentario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicket", ReplyAction="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketResponse")]
         KiiniNet.Entities.Helper.HelperDetalleTicket ObtenerDetalleTicket(int idTicket);
@@ -47,6 +50,9 @@ namespace KiiniHelp.ServiceTicket {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/AgregarComentarioConversacionTicket", ReplyAction="http://tempuri.org/IServiceTicket/AgregarComentarioConversacionTicketResponse")]
         void AgregarComentarioConversacionTicket(int idTicket, int idUsuario, string mensaje, bool sistema, System.Collections.Generic.List<string> archivos);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTicket/CapturaCasillaTicket", ReplyAction="http://tempuri.org/IServiceTicket/CapturaCasillaTicketResponse")]
+        System.Collections.Generic.List<int> CapturaCasillaTicket(int idTicket, string nombreCampo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -76,6 +82,10 @@ namespace KiiniHelp.ServiceTicket {
                 base(binding, remoteAddress) {
         }
         
+        public KiiniNet.Entities.Operacion.Tickets.Ticket CrearTicketAndroid(int idUsuario, int idUsuarioSolicito, int idArbol, string latitudinicio, string longitudinicio, string fechaalta, string latitudfin, string longitudfin, int idCanal, bool campoRandom, bool esTercero, bool esMail) {
+            return base.Channel.CrearTicketAndroid(idUsuario, idUsuarioSolicito, idArbol, latitudinicio, longitudinicio, fechaalta, latitudfin, longitudfin, idCanal, campoRandom, esTercero, esMail);
+        }
+        
         public KiiniNet.Entities.Operacion.Tickets.Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, System.Collections.Generic.List<KiiniNet.Entities.Helper.HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero, bool esMail) {
             return base.Channel.CrearTicket(idUsuario, idUsuarioSolicito, idArbol, lstCaptura, idCanal, campoRandom, esTercero, esMail);
         }
@@ -96,8 +106,8 @@ namespace KiiniHelp.ServiceTicket {
             base.Channel.AutoAsignarTicket(idTicket, idUsuario);
         }
         
-        public void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idUsuarioAsigna, string comentario) {
-            base.Channel.CambiarAsignacionTicket(idTicket, idEstatusAsignacion, idUsuarioAsignado, idUsuarioAsigna, comentario);
+        public void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idNivelAsignado, int idUsuarioAsigna, string comentario) {
+            base.Channel.CambiarAsignacionTicket(idTicket, idEstatusAsignacion, idUsuarioAsignado, idNivelAsignado, idUsuarioAsigna, comentario);
         }
         
         public KiiniNet.Entities.Helper.HelperDetalleTicket ObtenerDetalleTicket(int idTicket) {
@@ -118,6 +128,10 @@ namespace KiiniHelp.ServiceTicket {
         
         public void AgregarComentarioConversacionTicket(int idTicket, int idUsuario, string mensaje, bool sistema, System.Collections.Generic.List<string> archivos) {
             base.Channel.AgregarComentarioConversacionTicket(idTicket, idUsuario, mensaje, sistema, archivos);
+        }
+        
+        public System.Collections.Generic.List<int> CapturaCasillaTicket(int idTicket, string nombreCampo) {
+            return base.Channel.CapturaCasillaTicket(idTicket, nombreCampo);
         }
     }
 }

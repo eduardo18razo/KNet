@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using AjaxControlToolkit;
 using KiiniHelp.ServiceMascaraAcceso;
 using KiiniHelp.ServiceSistemaCatalogos;
+using KiiniHelp.ServiceTicket;
 using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Helper;
 using KinniNet.Business.Utils;
@@ -24,6 +25,7 @@ namespace KiiniHelp.UserControls.Detalles
 
         private readonly ServiceMascarasClient _servicioMascaras = new ServiceMascarasClient();
         private readonly ServiceCatalogosClient _servicioCatalogos = new ServiceCatalogosClient();
+        private readonly ServiceTicketClient _servicioTicket = new ServiceTicketClient();
         //protected void Page_PreInit(object sender, EventArgs e)
         //{
         //    Control myControl = GetPostBackControl(Page);
@@ -105,7 +107,7 @@ namespace KiiniHelp.UserControls.Detalles
         {
             try
             {
-                if(datosMascara == null)
+                if (datosMascara == null)
                     throw new Exception("Ticket con informacion incorrecta.");
                 divControles.Controls.Clear();
                 foreach (CampoMascara campo in lstControles)
@@ -174,10 +176,11 @@ namespace KiiniHelp.UserControls.Detalles
                             }
                             else
                             {
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false, false))
-                                {
-                                    lstRadio.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
-                                }
+                                if (campo.IdCatalogo != null)
+                                    foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara((int)campo.IdCatalogo, false, false))
+                                    {
+                                        lstRadio.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
+                                    }
                             }
                             lstRadio.SelectedValue = datosMascara.Single(s => s.Campo == campo.NombreCampo).Value;
                             HtmlGenericControl createDivRadio = new HtmlGenericControl("DIV");
@@ -206,10 +209,13 @@ namespace KiiniHelp.UserControls.Detalles
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, true, false))
-                                {
-                                    ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
-                                }
+                            {
+                                if (campo.IdCatalogo != null)
+                                    foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara((int)campo.IdCatalogo, true, false))
+                                    {
+                                        ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
+                                    }
+                            }
                             ddlCatalogo.SelectedValue = datosMascara.Single(s => s.Campo == campo.NombreCampo).Value;
                             HtmlGenericControl createDivDdl = new HtmlGenericControl("DIV");
                             createDivDdl.ID = "createDivDdl" + campo.NombreCampo;
@@ -237,10 +243,25 @@ namespace KiiniHelp.UserControls.Detalles
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false, false))
+                            {
+                                if (campo.IdCatalogo != null)
+                                    foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara((int)campo.IdCatalogo, false, false))
+                                    {
+                                        chklist.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
+                                    }
+                            }
+                            List<int> values = _servicioTicket.CapturaCasillaTicket(IdTicket, campo.NombreCampo);
+                            foreach (ListItem item in chklist.Items)
+                            {
+                                foreach (int value in values)
                                 {
-                                    chklist.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
+                                    if (item.Value == value.ToString())
+                                    {
+                                        item.Selected = true;
+                                        break;
+                                    }
                                 }
+                            }
                             HtmlGenericControl createDivchk = new HtmlGenericControl("DIV");
                             createDivchk.ID = "createDivchk" + campo.NombreCampo;
                             createDivchk.Attributes["class"] = "col-lg-12 col-md-12 col-sm-12";
@@ -355,7 +376,7 @@ namespace KiiniHelp.UserControls.Detalles
                             break;
 
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Logico:
-                            CheckBox chk = new CheckBox { ID = "chk" + campo.NombreCampo, Text = campo.Descripcion, ViewStateMode = ViewStateMode.Inherit, Enabled = false};
+                            CheckBox chk = new CheckBox { ID = "chk" + campo.NombreCampo, Text = campo.Descripcion, ViewStateMode = ViewStateMode.Inherit, Enabled = false };
                             HtmlGenericControl createDivCheck = new HtmlGenericControl("DIV");
                             createDivCheck.ID = "createDivCheck" + campo.NombreCampo;
                             createDivCheck.Attributes["class"] = "col-lg-12 col-md-12 col-sm-12";

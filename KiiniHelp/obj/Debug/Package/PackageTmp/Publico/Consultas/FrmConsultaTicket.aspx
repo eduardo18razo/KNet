@@ -1,9 +1,10 @@
 ﻿<%@ Page Title="Consulta Ticket" Language="C#" MasterPageFile="~/Public.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="FrmConsultaTicket.aspx.cs" Inherits="KiiniHelp.Publico.Consultas.FrmConsultaTicket" %>
 
-<%@ Import Namespace="KinniNet.Business.Utils" %>
+
 <%@ Register Src="~/UserControls/Operacion/UcCambiarEstatusTicket.ascx" TagPrefix="uc1" TagName="UcCambiarEstatusTicket" %>
 <%@ Register Src="~/UserControls/Detalles/UcDetalleMascaraCaptura.ascx" TagPrefix="uc1" TagName="UcDetalleMascaraCaptura" %>
-
+<%@ Import Namespace="KinniNet.Business.Utils" %>
+<%@ Register TagPrefix="ctrlExterno" Namespace="Winthusiasm.HtmlEditor" Assembly="Winthusiasm.HtmlEditor" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -29,7 +30,7 @@
                         <div class="module-wrapper">
                             <section class="module member-module module-no-heading module-no-footer">
                                 <div class="module-inner">
-                                    <div class="module-heading">
+                                    <div class="module-heading no-border" style="border: none !important">
                                         <h3 class="title">Consulta de tickets</h3>
                                         <p class="text-primary">Ingresa la siguiente información para consultar tu ticket.</p>
                                         <hr>
@@ -42,13 +43,13 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label" for="">No. de ticket</label>
                                                     <div class="col-sm-10">
-                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtTicket" placeholder="Ingresa aquí" />
+                                                        <asp:TextBox runat="server" CssClass="form-control" ID="txtTicket" placeholder="Ingresa aquí"  onkeydown="return (event.keyCode!=13);"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label" for="">Clave de registro</label>
                                                     <div class="col-sm-10">
-                                                        <asp:TextBox type="text" class="form-control" placeholder="Ingresa aquí" runat="server" ID="txtClave" />
+                                                        <asp:TextBox type="text" class="form-control" placeholder="Ingresa aquí" runat="server" ID="txtClave"  onkeydown="return (event.keyCode!=13);"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -98,7 +99,7 @@
                                                 <div class="topic-content-wrapper">
                                                     <a class="name"><strong>No. de ticket:</strong>
                                                         <asp:Label runat="server" ID="lblticket" /></a><br>
-                                                    <a class="name"><strong>Clave de registro:</strong><asp:Label runat="server" ID="lblCveRegistro" /></a>
+                                                    <%--<a class="name"><strong>Clave de registro:</strong><asp:Label runat="server" ID="lblCveRegistro" /></a>--%>
                                                     <hr>
                                                     <a class="name"><strong>Fecha:</strong>
                                                         <asp:Label runat="server" ID="lblfecha" /></a>
@@ -110,16 +111,38 @@
                                                         <strong>Estatus Actual:</strong>
                                                         <asp:Label runat="server" ID="lblestatus" />
                                                     </p>
+                                                    <asp:Button runat="server" Text="Estatus" ID="btnCambiaEstatus" OnClick="btnCambiaEstatus_OnClick" />
                                                     <hr>
-                                                    
+
                                                     <uc1:UcDetalleMascaraCaptura runat="server" id="ucDetalleMascaraCaptura" />
 
-                                                    <asp:Button runat="server" Text="Estatus" ID="btnCambiaEstatus" OnClick="btnCambiaEstatus_OnClick" Visible="False"/>
+                                                    
                                                 </div>
                                             </div>
                                             <hr>
                                             <!--INICIAN COMETARIOS-->
                                             <div class="comment-list">
+                                                <div class="reply-holder">
+                                                    <h4 class="title">Agregar Comentario</h4>
+                                                    <div class="reply-content">
+                                                        <div class="author">
+                                                            <asp:Image ImageUrl="~/assets/images/profiles/profile-1.png" alt="" runat="server" />
+                                                        </div>
+                                                        <div class="form-holder">
+                                                            <div class="margin-bottom-lg">
+                                                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
+                                                                    <ContentTemplate>
+                                                                        <ctrlexterno:htmleditor runat="Server" id="txtEditor" height="350px" ToggleMode="ToggleButton" colorscheme="VisualStudio" />
+                                                                    </ContentTemplate>
+                                                                </asp:UpdatePanel>
+                                                                <%--<asp:TextBox ID="targetEditor" ClientIDMode="Static" onclick="CargaEditor('#targetEditor')" data-provide="markdown" Rows="10" CssClass="form-control" TextMode="MultiLine" runat="server" Style="text-transform: none"></asp:TextBox>
+                                                                <asp:Button CssClass="btn btn-primary" runat="server" Text="Comentar" ID="btnComentar" OnClick="btnComentar_OnClick" />--%>
+                                                                <asp:Button CssClass="btn btn-primary" runat="server" Text="Comentar" ID="btnComentar"  OnClick="btnComentar_OnClick"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr />
                                                 <h3 class="title">Comentarios</h3>
                                                 <asp:Repeater runat="server" ID="rptComentrios" OnItemDataBound="rptComentrios_OnItemDataBound">
                                                     <ItemTemplate>
@@ -130,7 +153,7 @@
                                                                 </div>
                                                                 <div class="comment-body">
                                                                     <cite class="name"><%# Eval("Nombre") %></cite>
-                                                                    <p class="time"><%# Eval("FechaHora") %></p>
+                                                                    <p class="time"><%# Eval("FechaHora", "{0:MMM}").TrimEnd('.') + " " + Eval("FechaHora", "{0:dd}") + ", " +  Eval("FechaHora", "{0:yyyy}") + " " +  Eval("FechaHora", "{0:hh:MM tt}") %></p>
                                                                     <div class="content">
                                                                         <p><%# Eval("Comentario") %></p>
                                                                     </div>
@@ -142,40 +165,11 @@
                                                                             </div>
                                                                         </ItemTemplate>
                                                                     </asp:Repeater>
-                                                                    <a class="comment-reply-link btn btn-default" href="#">Responder</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
-
-                                                <%--<nav class="text-center pagination-wrapper">
-                                                    <p class="pagination-info">1-3 de 1</p>
-                                                    <ul class="pagination pagination-sm">
-                                                        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                                        <li><a href="#">2</a></li>
-                                                        <li><a href="#">3</a></li>
-                                                        <li><a href="#">4</a></li>
-                                                        <li><a href="#">5</a></li>
-                                                        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                                                    </ul>
-                                                </nav>--%>
-                                            </div>
-                                            <hr>
-                                            <div class="reply-holder">
-                                                <h4 class="title">Agregar Comentario</h4>
-                                                <div class="reply-content">
-                                                    <div class="author">
-                                                        <asp:Image ImageUrl="~/assets/images/profiles/profile-1.png" alt="" runat="server" />
-                                                    </div>
-                                                    <div class="form-holder">
-                                                        <div class="margin-bottom-lg">
-                                                            <asp:TextBox ID="targetEditor" ClientIDMode="Static" onclick="CargaEditor('#targetEditor')" data-provide="markdown" Rows="10" CssClass="form-control" TextMode="MultiLine" runat="server" style="text-transform: none"></asp:TextBox>
-                                                            <asp:Button CssClass="btn btn-primary" runat="server" Text="Comentar" ID="btnComentar" OnClick="btnComentar_OnClick"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -186,7 +180,7 @@
                 </div>
                 <!--TERMINA COMENTARIOS-->
             </div>
-            <script>
+            <%--<script>
                 $(function () {
                     CargaEditor("#<%=targetEditor.ClientID %>");
                 });
@@ -194,7 +188,7 @@
                 prm.add_endRequest(function () {
                     CargaEditor("#<%=targetEditor.ClientID %>");
                 });
-            </script>
+            </script>--%>
         </ContentTemplate>
     </asp:UpdatePanel>
     <div class="modal fade" id="modalEstatusCambio" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">

@@ -78,6 +78,8 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
+                if (db.InformacionConsulta.Any(a => a.Descripcion == informacion.Descripcion))
+                    throw new Exception("Este Artículo ya existe.");
                 informacion.Descripcion = informacion.Descripcion.Trim().ToUpper();
                 informacion.Habilitado = true;
                 informacion.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
@@ -116,6 +118,8 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
+                if (db.InformacionConsulta.Any(a => a.Descripcion == informacion.Descripcion && a.Id != idInformacionConsulta))
+                    throw new Exception("Este Artículo ya existe.");
                 db.ContextOptions.LazyLoadingEnabled = true;
                 InformacionConsulta info = db.InformacionConsulta.SingleOrDefault(s => s.Id == idInformacionConsulta);
                 if (info == null) return null;

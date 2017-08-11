@@ -416,10 +416,13 @@ namespace KiiniHelp.UserControls.Temporal
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false, true))
-                                {
-                                    lstRadio.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
-                                }
+                            {
+                                if (campo.IdCatalogo != null)
+                                    foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara((int)campo.IdCatalogo, false, true))
+                                    {
+                                        lstRadio.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
+                                    }
+                            }
                             createDiv.Controls.Add(lstRadio);
                             _lstControles.Add(lstRadio);
                             break;
@@ -443,10 +446,13 @@ namespace KiiniHelp.UserControls.Temporal
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, true, true))
-                                {
-                                    ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
-                                }
+                            {
+                                if (campo.IdCatalogo != null)
+                                    foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara((int)campo.IdCatalogo, true, true))
+                                    {
+                                        ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
+                                    }
+                            }
                             createDiv.Controls.Add(ddlCatalogo);
                             _lstControles.Add(ddlCatalogo);
                             break;
@@ -469,10 +475,13 @@ namespace KiiniHelp.UserControls.Temporal
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false, true))
-                                {
-                                    chklist.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
-                                }
+                            {
+                                if (campo.IdCatalogo != null)
+                                    foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara((int)campo.IdCatalogo, false, true))
+                                    {
+                                        chklist.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
+                                    }
+                            }
                             createDiv.Controls.Add(chklist);
                             _lstControles.Add(chklist);
                             break;

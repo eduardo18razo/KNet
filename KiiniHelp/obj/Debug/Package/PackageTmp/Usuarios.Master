@@ -27,7 +27,7 @@
         body {
             font-size: 12px;
         }
-
+        p
         .btn {
             font-size: 12px;
         }
@@ -38,7 +38,7 @@
 
             $(modalName).on('shown.bs.modal', function () {
                 //$('.modal-backdrop').remove();
-                $(this).find('[autofocus]').focus(); t
+                $(this).find('[autofocus]').focus();
             });
             $(modalName).modal({ backdrop: 'static', keyboard: false });
             $(modalName).modal({ show: true });
@@ -222,7 +222,7 @@
                             <div id="main_search_input_wrapper" class="main_search_input_wrapper">
                                 <asp:UpdatePanel runat="server">
                                     <ContentTemplate>
-                                        <asp:TextBox type="text" ID="main_search_input" ClientIDMode="Static" class="main_search_input form-control" onkeypress="search(event)" placeholder="Buscar por palabra clave..." runat="server" on />
+                                        <asp:TextBox type="text" ID="main_search_input" ClientIDMode="Static" class="main_search_input form-control" onkeypress="search(event)" placeholder="Buscar por palabra clave..." runat="server" />
                                         <span id="clear-search" aria-hidden="true" class="fs1 icon icon_close_alt2 clear-search"></span>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
@@ -596,9 +596,9 @@
                     </div>
                     <div class="scroller" id="scroller" style="padding-left: 30px">
                         <div style="margin-top: 0; height: 100%;">
-                            <asp:LinkButton runat="server" CssClass="close" ID="lnkBtnCerrar" OnClick="lnkBtnCerrar_OnClick" Visible="False">
+                            <%--<asp:LinkButton runat="server" CssClass="close" ID="lnkBtnCerrar" OnClick="lnkBtnCerrar_OnClick" Visible="False">
                         <span class="glyphicon glyphicon-remove"></span>
-                            </asp:LinkButton>
+                            </asp:LinkButton>--%>
                             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                             </asp:ContentPlaceHolder>
                         </div>
@@ -607,12 +607,7 @@
             </div>
 
             <footer id="footer" class="site-footer">
-                <div class="copyright">
-                    Kiinisupport &copy; 2017 -
-                    <asp:HyperLink NavigateUrl="~/Users/DashBoard.aspx" Target="_blank" runat="server">Powered by Kiininet</asp:HyperLink>
-                    -
-                    <asp:HyperLink NavigateUrl="~/Users/DashBoard.aspx" runat="server">Términos y condiciones</asp:HyperLink>
-                </div>
+                <div class="copyright">Kiinisupport &copy; 2017 - <a href="http://www.kiininet.com" target="_blank">Powered by Kiinenet</a></div>
             </footer>
 
             <div class="modal fade" id="modal-new-ticket" tabindex="-1" role="dialog" aria-labelledby="modal-new-ticket-label">
@@ -679,7 +674,7 @@
                                     </div>
                                     <div class="content-holder">
                                         <div class="subject-line">
-                                            <asp:LinkButton runat="server" CommandArgument='<%# Eval("Id") %>' OnClick="lnkBtnRol_OnClick">
+                                            <asp:LinkButton runat="server" CommandName='<%#Eval("Descripcion") %>' CommandArgument='<%# Eval("Id") %>' OnClick="lnkBtnRol_OnClick">
                                             <strong><%#Eval("Descripcion") %></strong> 
                                             </asp:LinkButton>
                                         </div>

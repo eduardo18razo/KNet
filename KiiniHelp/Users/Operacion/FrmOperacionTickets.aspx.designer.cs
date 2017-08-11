@@ -13,22 +13,13 @@ namespace KiiniHelp.Users.Operacion {
     public partial class FrmOperacionTickets {
         
         /// <summary>
-        /// Control pnlAlertaGeneral.
+        /// Control gvTickets.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlAlertaGeneral;
-        
-        /// <summary>
-        /// Control rptErrorGeneral.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptErrorGeneral;
+        protected global::System.Web.UI.WebControls.GridView gvTickets;
         
         /// <summary>
         /// Control hfTicketActivo.
@@ -38,24 +29,6 @@ namespace KiiniHelp.Users.Operacion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfTicketActivo;
-        
-        /// <summary>
-        /// Control rptTickets.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptTickets;
-        
-        /// <summary>
-        /// Control rptPager.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptPager;
         
         /// <summary>
         /// Control UcDetalleTicket.

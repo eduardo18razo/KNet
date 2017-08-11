@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmNodoConsultas.aspx.cs" Inherits="KiiniHelp.Users.General.FrmNodoConsultas" %>
 
-<%@ Register Src="~/UserControls/Genericos/UcInformacionConsulta.ascx" TagPrefix="uc1" TagName="UcInformacionConsulta" %>
 <%@ Register Src="~/UserControls/Preview/UcPreviewConsulta.ascx" TagPrefix="uc1" TagName="UcPreviewConsulta" %>
 
 

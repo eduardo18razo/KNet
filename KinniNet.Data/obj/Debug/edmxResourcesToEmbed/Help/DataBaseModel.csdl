@@ -920,21 +920,8 @@
       <End Role="Ticket" EntitySet="Ticket" />
     </AssociationSet>
     <EntitySet Name="TipoCampoMascara" EntityType="KiiniNet_v2Model.TipoCampoMascara" />
-    <EntitySet Name="CampoMascara" EntityType="KiiniNet_v2Model.CampoMascara" />
-    <AssociationSet Name="FK_tblCampoMascara_tblCatTipoCampoMascara" Association="KiiniNet_v2Model.FK_tblCampoMascara_tblCatTipoCampoMascara">
-      <End Role="TipoCampoMascara" EntitySet="TipoCampoMascara" />
-      <End Role="CampoMascara" EntitySet="CampoMascara" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tblCampoMascara_tblMascara" Association="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara">
-      <End Role="Mascara" EntitySet="Mascara" />
-      <End Role="CampoMascara" EntitySet="CampoMascara" />
-    </AssociationSet>
     <EntitySet Name="ParametrosGenerales" EntityType="KiiniNet_v2Model.ParametrosGenerales" />
     <EntitySet Name="Catalogos" EntityType="KiiniNet_v2Model.Catalogos" />
-    <AssociationSet Name="FK_tblCampoMascara_tblCatCatalogos" Association="KiiniNet_v2Model.FK_tblCampoMascara_tblCatCatalogos">
-      <End Role="Catalogos" EntitySet="Catalogos" />
-      <End Role="CampoMascara" EntitySet="CampoMascara" />
-    </AssociationSet>
     <EntitySet Name="Encuesta" EntityType="KiiniNet_v2Model.Encuesta" />
     <AssociationSet Name="FK_Catalogos_Usuario" Association="KiiniNet_v2Model.FK_Catalogos_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
@@ -1010,6 +997,24 @@
     <AssociationSet Name="FK_Ticket_TipoArbolAcceso" Association="KiiniNet_v2Model.FK_Ticket_TipoArbolAcceso">
       <End Role="TipoArbolAcceso" EntitySet="TipoArbolAcceso" />
       <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <EntitySet Name="NivelTicket" EntityType="KiiniNet_v2Model.NivelTicket" />
+    <AssociationSet Name="FK_Ticket_NivelTicket" Association="KiiniNet_v2Model.FK_Ticket_NivelTicket">
+      <End Role="NivelTicket" EntitySet="NivelTicket" />
+      <End Role="Ticket" EntitySet="Ticket" />
+    </AssociationSet>
+    <EntitySet Name="CampoMascara" EntityType="KiiniNet_v2Model.CampoMascara" />
+    <AssociationSet Name="FK_tblCampoMascara_tblCatCatalogos" Association="KiiniNet_v2Model.FK_tblCampoMascara_tblCatCatalogos">
+      <End Role="Catalogos" EntitySet="Catalogos" />
+      <End Role="CampoMascara" EntitySet="CampoMascara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCampoMascara_tblCatTipoCampoMascara" Association="KiiniNet_v2Model.FK_tblCampoMascara_tblCatTipoCampoMascara">
+      <End Role="TipoCampoMascara" EntitySet="TipoCampoMascara" />
+      <End Role="CampoMascara" EntitySet="CampoMascara" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCampoMascara_tblMascara" Association="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara">
+      <End Role="Mascara" EntitySet="Mascara" />
+      <End Role="CampoMascara" EntitySet="CampoMascara" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Campus">
@@ -2535,6 +2540,7 @@
     <NavigationProperty Name="EstatusTicketSubRolGeneralDefaultPertenece" Relationship="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_SubRolPertenece" FromRole="SubRol" ToRole="EstatusTicketSubRolGeneralDefault" />
     <NavigationProperty Name="EstatusTicketSubRolGeneralDefaultSolicita" Relationship="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_SubRolSolicita" FromRole="SubRol" ToRole="EstatusTicketSubRolGeneralDefault" />
     <NavigationProperty Name="EstatusAsignacionSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_SubRol1" FromRole="SubRol" ToRole="EstatusAsignacionSubRolGeneral" />
+    <Property Name="OrdenAsignacion" Type="Int32" />
   </EntityType>
   <Association Name="FK_EstatusAsignacionSubRolGeneralDefault_SubRol">
     <End Type="KiiniNet_v2Model.SubRol" Role="SubRol" Multiplicity="0..1" />
@@ -3737,6 +3743,7 @@
     <Property Name="IdMascara" Type="Int32" />
     <Property Name="IdEncuesta" Type="Int32" />
     <Property Name="IdCanal" Type="Int32" />
+    <Property Name="IdNivelTicket" Type="Int32" />
     <Property Name="IdSlaEstimadoTicket" Type="Int32" />
     <Property Name="IdEstatusTicket" Type="Int32" Nullable="false" />
     <Property Name="IdEstatusAsignacion" Type="Int32" Nullable="false" />
@@ -3774,6 +3781,7 @@
     <NavigationProperty Name="Encuesta" Relationship="KiiniNet_v2Model.FK_Ticket_Encuesta" FromRole="Ticket" ToRole="Encuesta" />
     <NavigationProperty Name="MascaraSeleccionCatalogo" Relationship="KiiniNet_v2Model.FK_MascaraSeleccionCatalogo_Ticket" FromRole="Ticket" ToRole="MascaraSeleccionCatalogo" />
     <NavigationProperty Name="TipoArbolAcceso" Relationship="KiiniNet_v2Model.FK_Ticket_TipoArbolAcceso" FromRole="Ticket" ToRole="TipoArbolAcceso" />
+    <NavigationProperty Name="NivelTicket" Relationship="KiiniNet_v2Model.FK_Ticket_NivelTicket" FromRole="Ticket" ToRole="NivelTicket" />
   </EntityType>
   <Association Name="FK_tblTicket_tblArbolAcceso">
     <End Type="KiiniNet_v2Model.ArbolAcceso" Role="ArbolAcceso" Multiplicity="1" />
@@ -4395,7 +4403,7 @@
     <Property Name="Vip" Type="Boolean" />
     <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="PersonaFisica" Type="Boolean" />
-    <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+    <Property Name="Habilitado" Type="Boolean" />
     <Property Name="Activo" Type="Boolean" />
     <Property Name="Tries" Type="Int32" />
     <Property Name="FechaBloqueo" Type="DateTime" Precision="3" />
@@ -5109,56 +5117,9 @@
     <Property Name="UploadFile" Type="Boolean" />
     <Property Name="Habilitado" Type="Boolean" Nullable="false" />
     <Property Name="RadioButton" Type="Boolean" />
+    <Property Name="ValorMinimo" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="CampoMascara" Relationship="KiiniNet_v2Model.FK_tblCampoMascara_tblCatTipoCampoMascara" FromRole="TipoCampoMascara" ToRole="CampoMascara" />
   </EntityType>
-  <EntityType Name="CampoMascara">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdMascara" Type="Int32" />
-    <Property Name="IdTipoCampoMascara" Type="Int32" />
-    <Property Name="IdCatalogo" Type="Int32" />
-    <Property Name="Multiple" Type="Boolean" />
-    <Property Name="CheckBox" Type="Boolean" />
-    <Property Name="RadioButton" Type="Boolean" />
-    <Property Name="EsArchivo" Type="Boolean" />
-    <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="NombreCampo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="Requerido" Type="Boolean" />
-    <Property Name="LongitudMinima" Type="Int32" />
-    <Property Name="LongitudMaxima" Type="Int32" />
-    <Property Name="SimboloMoneda" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="ValorMaximo" Type="Int32" />
-    <Property Name="MascaraDetalle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="TipoCampoMascara" Relationship="KiiniNet_v2Model.FK_tblCampoMascara_tblCatTipoCampoMascara" FromRole="CampoMascara" ToRole="TipoCampoMascara" />
-    <NavigationProperty Name="Mascara" Relationship="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara" FromRole="CampoMascara" ToRole="Mascara" />
-    <NavigationProperty Name="Catalogos" Relationship="KiiniNet_v2Model.FK_tblCampoMascara_tblCatCatalogos" FromRole="CampoMascara" ToRole="Catalogos" />
-  </EntityType>
-  <Association Name="FK_tblCampoMascara_tblCatTipoCampoMascara">
-    <End Type="KiiniNet_v2Model.TipoCampoMascara" Role="TipoCampoMascara" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.CampoMascara" Role="CampoMascara" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoCampoMascara">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CampoMascara">
-        <PropertyRef Name="IdTipoCampoMascara" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tblCampoMascara_tblMascara">
-    <End Type="KiiniNet_v2Model.Mascara" Role="Mascara" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.CampoMascara" Role="CampoMascara" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Mascara">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CampoMascara">
-        <PropertyRef Name="IdMascara" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="ParametrosGenerales">
     <Key>
       <PropertyRef Name="Id" />
@@ -5186,21 +5147,10 @@
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
     <Property Name="IdUsuarioModifico" Type="Int32" />
     <Property Name="Habilitado" Type="Boolean" />
-    <NavigationProperty Name="CampoMascara" Relationship="KiiniNet_v2Model.FK_tblCampoMascara_tblCatCatalogos" FromRole="Catalogos" ToRole="CampoMascara" />
     <Property Name="DescripcionLarga" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Sistema" Type="Boolean" />
+    <NavigationProperty Name="CampoMascara" Relationship="KiiniNet_v2Model.FK_tblCampoMascara_tblCatCatalogos" FromRole="Catalogos" ToRole="CampoMascara" />
   </EntityType>
-  <Association Name="FK_tblCampoMascara_tblCatCatalogos">
-    <End Type="KiiniNet_v2Model.Catalogos" Role="Catalogos" Multiplicity="0..1" />
-    <End Type="KiiniNet_v2Model.CampoMascara" Role="CampoMascara" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Catalogos">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CampoMascara">
-        <PropertyRef Name="IdCatalogo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Encuesta">
     <Key>
       <PropertyRef Name="Id" />
@@ -5401,6 +5351,7 @@
     <Property Name="IdTicket" Type="Int32" />
     <Property Name="Seleccionado" Type="Boolean" />
     <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_MascaraSeleccionCatalogo_Ticket" FromRole="MascaraSeleccionCatalogo" ToRole="Ticket" />
+    <Property Name="NombreCampoMascara" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_MascaraSeleccionCatalogo_Ticket">
     <End Type="KiiniNet_v2Model.Ticket" Role="Ticket" Multiplicity="0..1" />
@@ -5473,6 +5424,88 @@
       </Principal>
       <Dependent Role="Ticket">
         <PropertyRef Name="IdTipoArbolAcceso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="NivelTicket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Habilitado" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_Ticket_NivelTicket" FromRole="NivelTicket" ToRole="Ticket" />
+  </EntityType>
+  <Association Name="FK_Ticket_NivelTicket">
+    <End Type="KiiniNet_v2Model.NivelTicket" Role="NivelTicket" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.Ticket" Role="Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NivelTicket">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="IdNivelTicket" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CampoMascara">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdMascara" Type="Int32" />
+    <Property Name="IdTipoCampoMascara" Type="Int32" />
+    <Property Name="IdCatalogo" Type="Int32" />
+    <Property Name="Multiple" Type="Boolean" />
+    <Property Name="CheckBox" Type="Boolean" />
+    <Property Name="RadioButton" Type="Boolean" />
+    <Property Name="EsArchivo" Type="Boolean" />
+    <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="NombreCampo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Requerido" Type="Boolean" />
+    <Property Name="LongitudMinima" Type="Int32" />
+    <Property Name="LongitudMaxima" Type="Int32" />
+    <Property Name="SimboloMoneda" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ValorMinimo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ValorMaximo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MascaraDetalle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Catalogos" Relationship="KiiniNet_v2Model.FK_tblCampoMascara_tblCatCatalogos" FromRole="CampoMascara" ToRole="Catalogos" />
+    <NavigationProperty Name="TipoCampoMascara" Relationship="KiiniNet_v2Model.FK_tblCampoMascara_tblCatTipoCampoMascara" FromRole="CampoMascara" ToRole="TipoCampoMascara" />
+    <NavigationProperty Name="Mascara" Relationship="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara" FromRole="CampoMascara" ToRole="Mascara" />
+  </EntityType>
+  <Association Name="FK_tblCampoMascara_tblCatCatalogos">
+    <End Type="KiiniNet_v2Model.Catalogos" Role="Catalogos" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.CampoMascara" Role="CampoMascara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Catalogos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CampoMascara">
+        <PropertyRef Name="IdCatalogo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCampoMascara_tblCatTipoCampoMascara">
+    <End Type="KiiniNet_v2Model.TipoCampoMascara" Role="TipoCampoMascara" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.CampoMascara" Role="CampoMascara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoCampoMascara">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CampoMascara">
+        <PropertyRef Name="IdTipoCampoMascara" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCampoMascara_tblMascara">
+    <End Type="KiiniNet_v2Model.Mascara" Role="Mascara" Multiplicity="0..1" />
+    <End Type="KiiniNet_v2Model.CampoMascara" Role="CampoMascara" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mascara">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CampoMascara">
+        <PropertyRef Name="IdMascara" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

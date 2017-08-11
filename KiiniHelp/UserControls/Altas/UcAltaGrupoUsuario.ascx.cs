@@ -63,7 +63,7 @@ namespace KiiniHelp.UserControls.Altas
             set
             {
                 ddlTipoGrupo.SelectedValue = value.ToString();
-                
+
             }
         }
 
@@ -121,8 +121,10 @@ namespace KiiniHelp.UserControls.Altas
                                     if (chk.Checked)
                                     {
                                         OnCheckedChanged(chk, null);
-                                        ((DropDownList)item.FindControl("ddlHorario")).SelectedValue = subGrupo.HorarioSubGrupo.First(s => s.IdSubGrupoUsuario == subGrupo.Id).IdHorario.ToString();
-                                        ((DropDownList)item.FindControl("ddlDiasFeriados")).SelectedValue = subGrupo.DiaFestivoSubGrupo.First(s => s.IdSubGrupoUsuario == subGrupo.Id).IdDiasFeriados.ToString();
+                                        if (subGrupo.HorarioSubGrupo != null && subGrupo.HorarioSubGrupo.Count > 0)
+                                            ((DropDownList)item.FindControl("ddlHorario")).SelectedValue = subGrupo.HorarioSubGrupo.First(s => s.IdSubGrupoUsuario == subGrupo.Id).IdHorario.ToString();
+                                        if (subGrupo.DiaFestivoSubGrupo != null && subGrupo.DiaFestivoSubGrupo.Count > 0)
+                                            ((DropDownList)item.FindControl("ddlDiasFeriados")).SelectedValue = subGrupo.DiaFestivoSubGrupo.First(s => s.IdSubGrupoUsuario == subGrupo.Id).IdDiasFeriados.ToString();
                                         //CargaHorario();
                                         //ucAltaDiasFestivos.SetDiasFestivosSubRol(_servicioGrupoUsuario.ObtenerDiasByIdSubGrupo(subGrupo.Id), int.Parse(btnDias.CommandArgument));
                                         //CargaDias();
@@ -139,21 +141,24 @@ namespace KiiniHelp.UserControls.Altas
                 }
             }
         }
-        
+
         private void ValidaCapturaGrupoUsuario()
         {
-            StringBuilder sb = new StringBuilder();
+            List<string> sb = new List<string>();
 
             if (txtDescripcionGrupoUsuario.Text.Trim() == string.Empty)
-                sb.AppendLine("Descripcion es un campo obligatorio.<br>");
+                sb.Add("Descripcion es un campo obligatorio.<br>");
             if (IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.AgenteUniversal)
             {
                 if (!rbtnLevanta.Checked && !rbtnRecado.Checked)
-                    sb.AppendLine("Seleccione una opción para este grupo.<br>");
+                    sb.Add("Seleccione una opción para este grupo.<br>");
             }
 
-            if (sb.ToString() != string.Empty)
-                throw new Exception(sb.ToString());
+            if (sb.Count > 0)
+            {
+                _lstError = sb;
+                throw new Exception();
+            }
         }
 
         private void LimpiarCampos()
@@ -177,7 +182,7 @@ namespace KiiniHelp.UserControls.Altas
                 Session.Remove("HorariosSubRoles");
                 Session.Remove("DiasSubRoles");
                 Session.Remove("DiasFestivos");
-                
+
 
             }
             catch (Exception ex)
@@ -194,7 +199,6 @@ namespace KiiniHelp.UserControls.Altas
                 if (!IsPostBack)
                 {
                     Metodos.LlenaComboCatalogo(ddlTipoUsuario, _servicioSistemaTipoUsuario.ObtenerTiposUsuarioResidentes(true));
-
                 }
             }
             catch (Exception ex)
@@ -212,7 +216,8 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                Metodos.LlenaComboCatalogo(ddlTipoGrupo, _servicioTipoGrupo.ObtenerTiposGruposByTipoUsuario(IdTipoUsuario, true));
+                const int idTipogrupo = (int)BusinessVariables.EnumTiposGrupos.Administrador;
+                Metodos.LlenaComboCatalogo(ddlTipoGrupo, _servicioTipoGrupo.ObtenerTiposGruposByTipoUsuario(IdTipoUsuario, true).Where(w => w.Id != idTipogrupo));
             }
             catch (Exception ex)
             {
@@ -376,11 +381,12 @@ namespace KiiniHelp.UserControls.Altas
             }
             catch (Exception ex)
             {
-                if (_lstError == null)
+                if (_lstError == null || _lstError.Count <= 0)
                 {
                     _lstError = new List<string>();
+
+                    _lstError.Add(ex.Message);
                 }
-                _lstError.Add(ex.Message);
                 Alerta = _lstError;
             }
         }

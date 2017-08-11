@@ -156,7 +156,7 @@ namespace KiiniHelp
                 if (Session["UserData"] != null && HttpContext.Current.Request.Url.Segments[HttpContext.Current.Request.Url.Segments.Count() - 1] != "FrmCambiarContrasena.aspx")
                     if (_servicioSeguridad.CaducaPassword(((Usuario)Session["UserData"]).Id))
                         Response.Redirect(ResolveUrl("~/Users/Administracion/Usuarios/FrmCambiarContrasena.aspx"));
-                lnkBtnCerrar.Visible = !ContentPlaceHolder1.Page.ToString().ToUpper().Contains("DASHBOARD");
+                //lnkBtnCerrar.Visible = !ContentPlaceHolder1.Page.ToString().ToUpper().Contains("DASHBOARD");
 
                 if (!IsPostBack && Session["UserData"] != null)
                 {

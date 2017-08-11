@@ -54,7 +54,19 @@
                     });
                 }
             });
-        } 
+        }
+        function search(evt) {
+            debugger;
+
+            if (evt.charCode == 13) {
+                this.__doPostBack(this.name, 'OnKeyPress');
+                evt.preventDefault();
+                return false; // returning false will prevent the event from bubbling up.
+            }
+            else {
+                return true;
+            }
+        }
     </script>
 </head>
 
@@ -88,7 +100,7 @@
                     <div id="main-search">
                         <i id="main-search-toggle" class="fa fa-search icon"></i>
                         <div id="main_search_input_wrapper" class="main_search_input_wrapper">
-                            <asp:TextBox type="text" ID="main_search_input" class="main_search_input form-control" placeholder="Buscar por palabra clave..." runat="server" />
+                            <asp:TextBox type="text" ID="main_search_input" ClientIDMode="Static" class="main_search_input form-control" onkeypress="search(event)" placeholder="Buscar por palabra clave..." runat="server" />
                             <span id="clear-search" aria-hidden="true" class="fs1 icon icon_close_alt2 clear-search"></span>
                         </div>
                     </div>
@@ -251,7 +263,7 @@
                                                 <div role="form" class="search-box form-inline text-center">
                                                     <label class="sr-only" for="help_search_form">Buscar</label>
                                                     <div class="form-group">
-                                                        <asp:TextBox ID="help_search_form" name="search-form" type="text" class="form-control help-search-form" placeholder="Busca con una palabra clave..." runat="server"></asp:TextBox>
+                                                        <asp:TextBox ID="help_search_form" name="search-form" type="text" class="form-control help-search-form"  onkeydown="return (event.keyCode!=13);" placeholder="Busca con una palabra clave..." runat="server"></asp:TextBox>
                                                         <asp:LinkButton type="submit" CssClass="btn btn-primary btn-single-icon" runat="server"><i class="fa fa-search"></i></asp:LinkButton>
                                                     </div>
                                                 </div>

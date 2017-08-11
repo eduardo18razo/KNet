@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
@@ -219,14 +217,22 @@ namespace KinniNet.Core.Operacion
                             HelperCampoMascaraCaptura campo = lstCaptura.SingleOrDefault(w => w.NombreCampo == campoCasilla.NombreCampo);
                             if (campo != null)
                             {
-                                string[] values = campo.Valor.Split('|');
-                                foreach (string value in values)
+                                if (campo.Valor != string.Empty)
                                 {
-                                    ticket.MascaraSeleccionCatalogo.Add(new MascaraSeleccionCatalogo
+                                    string[] values = campo.Valor.Split('|');
+                                    foreach (string value in values)
                                     {
-                                        IdRegistroCatalogo = int.Parse(value),
-                                        Seleccionado = true
-                                    });
+                                        ticket.MascaraSeleccionCatalogo.Add(new MascaraSeleccionCatalogo
+                                        {
+                                            NombreCampoMascara = campo.NombreCampo,
+                                            IdRegistroCatalogo = int.Parse(value),
+                                            Seleccionado = true
+                                        });
+                                    }
+                                }
+                                else
+                                {
+
                                 }
                             }
                         }
@@ -420,6 +426,37 @@ namespace KinniNet.Core.Operacion
             }
         }
 
+        private int ObtenerNivelAutoAsignacion(int idUsuario, bool espropietario)
+        {
+            int result = (int)BusinessVariables.EnumeradoresKiiniNet.EnumeradorNivelAsignacion.Supervisor;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                SubRol subrol = (from ug in db.UsuarioGrupo
+                                 join gu in db.GrupoUsuario on ug.IdGrupoUsuario equals gu.Id
+                                 join sgu in db.SubGrupoUsuario on new { gpoid = ug.IdGrupoUsuario, subgpoid = (int)ug.IdSubGrupoUsuario } equals new { gpoid = sgu.IdGrupoUsuario, subgpoid = sgu.Id }
+                                 join sr in db.SubRol on new { rolid = ug.IdRol, subrolid = sgu.IdSubRol } equals new { rolid = sr.IdRol, subrolid = sr.Id }
+                                 join easrg in db.EstatusAsignacionSubRolGeneral on
+                                 new { usuarioidgrupo = ug.IdGrupoUsuario, grupousuarioid = gu.Id, usuariogrupoidrol = ug.IdRol, subrolidrol = sr.IdRol, subrolids = sr.Id, grupotienesupervisor = gu.TieneSupervisor, grupoid = gu.Id, subrolidprincipal = sr.Id } equals
+                                 new { usuarioidgrupo = easrg.IdGrupoUsuario, grupousuarioid = easrg.IdGrupoUsuario, usuariogrupoidrol = easrg.IdRol, subrolidrol = easrg.IdRol, subrolids = (int)easrg.IdSubRol, grupotienesupervisor = easrg.TieneSupervisor, grupoid = easrg.IdGrupoUsuario, subrolidprincipal = (int)easrg.IdSubRol }
+                                 where ug.IdUsuario == idUsuario && ug.IdRol == (int)BusinessVariables.EnumRoles.ResponsableDeAtención && easrg.Propietario == espropietario
+                                 && easrg.IdEstatusAsignacionActual == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar
+                                 && easrg.IdEstatusAsignacionAccion == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Autoasignado
+                                 && easrg.Habilitado
+                                 orderby sr.OrdenAsignacion
+                                 select sr).FirstOrDefault();
+                if (subrol != null)
+                {
+                    result = (int)((BusinessVariables.EnumeradoresKiiniNet.EnumeradorNivelAsignacion)(int)subrol.Id);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return result;
+        }
         public void AutoAsignarTicket(int idTicket, int idUsuario)
         {
             DataBaseModelContext db = new DataBaseModelContext();
@@ -428,6 +465,7 @@ namespace KinniNet.Core.Operacion
                 Ticket ticket = db.Ticket.SingleOrDefault(t => t.Id == idTicket);
                 if (ticket != null)
                 {
+                    ticket.IdNivelTicket = ObtenerNivelAutoAsignacion(idUsuario, false);
                     ticket.IdEstatusAsignacion = (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Autoasignado;
                     ticket.TicketAsignacion = new List<TicketAsignacion>{new TicketAsignacion
                     {
@@ -450,7 +488,7 @@ namespace KinniNet.Core.Operacion
             }
         }
 
-        public void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idUsuarioAsigna, string comentario)
+        public void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idNivelAsignado, int idUsuarioAsigna, string comentario)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
@@ -458,6 +496,7 @@ namespace KinniNet.Core.Operacion
                 Ticket ticket = db.Ticket.SingleOrDefault(t => t.Id == idTicket);
                 if (ticket != null)
                 {
+                    ticket.IdNivelTicket = idNivelAsignado;
                     ticket.IdEstatusAsignacion = idEstatusAsignacion;
                     ticket.TicketAsignacion = new List<TicketAsignacion>{new TicketAsignacion
                     {
@@ -481,6 +520,33 @@ namespace KinniNet.Core.Operacion
             }
         }
 
+        private int ObtenerSubRolAsignadoTicket(int? nivelAsignacion)
+        {
+            int result = 0;
+            if (nivelAsignacion != null)
+            {
+                switch (nivelAsignacion)
+                {
+                    case 1:
+                        result = (int)BusinessVariables.EnumSubRoles.Supervisor;
+                        break;
+                    case 2:
+                        result = (int)BusinessVariables.EnumSubRoles.PrimererNivel;
+                        break;
+                    case 3:
+                        result = (int)BusinessVariables.EnumSubRoles.SegundoNivel;
+                        break;
+                    case 4:
+                        result = (int)BusinessVariables.EnumSubRoles.TercerNivel;
+                        break;
+                    case 5:
+
+                        result = (int)BusinessVariables.EnumSubRoles.CuartoNivel;
+                        break;
+                }
+            }
+            return result;
+        }
         public List<HelperTickets> ObtenerTicketsUsuario(int idUsuario, int pageIndex, int pageSize)
         {
             DataBaseModelContext db = new DataBaseModelContext();
@@ -548,7 +614,10 @@ namespace KinniNet.Core.Operacion
                         hticket.EstatusAsignacion = ticket.EstatusAsignacion;
                         hticket.IdUsuarioAsignado = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.Id : 0;
                         hticket.UsuarioAsignado = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.NombreCompleto : "";
-                        hticket.NivelUsuarioAsignado = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Aggregate(nivelAsignado, (current, usuarioAsignado) => current + usuarioAsignado.SubGrupoUsuario.SubRol.Descripcion) : "";
+                        hticket.IdSubRolAsignado = ObtenerSubRolAsignadoTicket(ticket.IdNivelTicket);
+                        hticket.IdNivelAsignado = ticket.IdNivelTicket == null ? 0 : (int)ticket.IdNivelTicket;
+                        hticket.NivelUsuarioAsignado = ticket.IdNivelTicket != null ? ((BusinessVariables.EnumeradoresKiiniNet.EnumeradorNivelAsignacion)ticket.IdNivelTicket).ToString() : string.Empty;
+                        //ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Aggregate(nivelAsignado, (current, usuarioAsignado) => current + usuarioAsignado.SubGrupoUsuario.SubRol.Descripcion) : "";
                         hticket.EsPropietario = ticket.IdEstatusAsignacion == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar && supervisor ? true : idUsuario == ticket.TicketAsignacion.Last().IdUsuarioAsignado;
                         hticket.CambiaEstatus = hticket.IdUsuarioAsignado == idUsuario;
                         hticket.Asigna = ticket.IdEstatusAsignacion == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar && supervisor ? true : idUsuario == ticket.TicketAsignacion.Last().IdUsuarioAsignado && ticket.IdEstatusTicket < (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto;
@@ -672,6 +741,7 @@ namespace KinniNet.Core.Operacion
                         }
                     }
                 }
+                lstTickets = lstTickets.Distinct().ToList();
                 int totalRegistros = lstTickets.Count;
                 //TODO: Actualizar propiedades faltantes de asignacion
                 if (totalRegistros > 0)
@@ -726,7 +796,12 @@ namespace KinniNet.Core.Operacion
                         hticket.EstatusAsignacion = ticket.EstatusAsignacion;
                         hticket.IdUsuarioAsignado = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.Id : 0;
                         hticket.UsuarioAsignado = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.NombreCompleto : "";
-                        hticket.NivelUsuarioAsignado = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Aggregate(nivelAsignado, (current, usuarioAsignado) => current + usuarioAsignado.SubGrupoUsuario.SubRol.Descripcion) : "";
+                        hticket.IdSubRolAsignado = ObtenerSubRolAsignadoTicket(ticket.IdNivelTicket);
+                        hticket.IdNivelAsignado = ticket.IdNivelTicket == null ? 0 : (int)ticket.IdNivelTicket;
+                        hticket.NivelUsuarioAsignado = ticket.IdNivelTicket != null ? ((BusinessVariables.EnumeradoresKiiniNet.EnumeradorNivelAsignacion)ticket.IdNivelTicket).ToString() : string.Empty;
+                        hticket.NivelUsuarioAsignado = ticket.IdNivelTicket != null ? ((BusinessVariables.EnumeradoresKiiniNet.EnumeradorNivelAsignacion)ticket.IdNivelTicket).ToString() : string.Empty;
+                        //ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Aggregate(nivelAsignado, (current, usuarioAsignado) => current + usuarioAsignado.SubGrupoUsuario.SubRol.Descripcion) : "";
+                        //hticket.NivelUsuarioAsignado = ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado != null ? ticket.TicketAsignacion.OrderBy(o => o.Id).Last().UsuarioAsignado.UsuarioGrupo.Where(w => w.SubGrupoUsuario != null).Aggregate(nivelAsignado, (current, usuarioAsignado) => current + usuarioAsignado.SubGrupoUsuario.SubRol.Descripcion) : "";
                         hticket.EsPropietario = ticket.IdEstatusAsignacion == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar && supervisor ? true : idUsuario == ticket.TicketAsignacion.Last().IdUsuarioAsignado;
                         hticket.CambiaEstatus = hticket.IdUsuarioAsignado == idUsuario;
                         hticket.Asigna = grupoConSupervisor
@@ -808,10 +883,11 @@ namespace KinniNet.Core.Operacion
                     {
                         result.AsignacionesDetalle.Add(detalle);
                     }
-                    foreach (HelperConversacionDetalle comentario in ticket.TicketConversacion.Select(conversacion => new HelperConversacionDetalle { Id = conversacion.Id, Nombre = conversacion.Usuario.NombreCompleto, FechaHora = string.Format("{0}, {1} {2}", conversacion.FechaGeneracion.ToString("MMM"), conversacion.FechaGeneracion.ToString("YYYY"), conversacion.FechaGeneracion.ToString("HH:mm tt")), Comentario = conversacion.Mensaje }))
+                    foreach (HelperConversacionDetalle comentario in ticket.TicketConversacion.Select(conversacion => new HelperConversacionDetalle { Id = conversacion.Id, Nombre = conversacion.Usuario.NombreCompleto, FechaHora = conversacion.FechaGeneracion, Comentario = conversacion.Mensaje }))
                     {
                         result.ConversacionDetalle.Add(comentario);
                     }
+                    result.ConversacionDetalle = result.ConversacionDetalle.OrderByDescending(o => o.FechaHora).ToList();
                 }
             }
             catch (Exception ex)
@@ -882,10 +958,7 @@ namespace KinniNet.Core.Operacion
                         {
                             Id = comentario.Id,
                             Nombre = comentario.Usuario.NombreCompleto,
-                            FechaHora =
-                                string.Format("{0}, {1} {2}", comentario.FechaGeneracion.ToString("MMM"),
-                                    comentario.FechaGeneracion.ToString("YYYY"),
-                                    comentario.FechaGeneracion.ToString("HH:mm tt")),
+                            FechaHora = comentario.FechaGeneracion,
                             Comentario = comentario.Mensaje,
                         };
                         conversacion.Archivo = comentario.ConversacionArchivo.Any()
@@ -898,6 +971,7 @@ namespace KinniNet.Core.Operacion
                             }
                         result.ConversacionDetalle.Add(conversacion);
                     }
+                    result.ConversacionDetalle = result.ConversacionDetalle.OrderByDescending(o => o.FechaHora).ToList();
                 }
             }
             catch (Exception ex)
@@ -1101,7 +1175,7 @@ namespace KinniNet.Core.Operacion
 
                     result.GrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Distinct().First().GrupoUsuario;
                     result.ConversacionDetalle = new List<HelperConversacionDetalle>();
-                    foreach (HelperConversacionDetalle comentario in ticket.TicketConversacion.Select(conversacion => new HelperConversacionDetalle { Id = conversacion.Id, Nombre = conversacion.Usuario.NombreCompleto, FechaHora = string.Format("{0}, {1} {2}", conversacion.FechaGeneracion.ToString("MMM"), conversacion.FechaGeneracion.ToString("YYYY"), conversacion.FechaGeneracion.ToString("HH:mm tt")), Comentario = conversacion.Mensaje }))
+                    foreach (HelperConversacionDetalle comentario in ticket.TicketConversacion.Select(conversacion => new HelperConversacionDetalle { Id = conversacion.Id, Nombre = conversacion.Usuario.NombreCompleto, FechaHora = conversacion.FechaGeneracion, Comentario = conversacion.Mensaje }))
                     {
                         result.ConversacionDetalle.Add(comentario);
                     }
@@ -1115,6 +1189,23 @@ namespace KinniNet.Core.Operacion
             {
                 db.Dispose();
             }
+            return result;
+        }
+
+        public List<int> CapturaCasillaTicket(int idTicket, string nombreCampo)
+        {
+            List<int> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.MascaraSeleccionCatalogo.Where(w => w.IdTicket == idTicket && w.NombreCampoMascara == nombreCampo).Select(s => s.IdRegistroCatalogo).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { db.Dispose(); }
             return result;
         }
 

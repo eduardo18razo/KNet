@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaOrganizacion.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaOrganizacion" %>
-<%@ Import Namespace="KinniNet.Business.Utils" %>
 <%@ Register Src="~/UserControls/Altas/Organizaciones/UcAltaOrganizaciones.ascx" TagPrefix="uc1" TagName="UcAltaOrganizaciones" %>
 
 <div style="height: 100%;">
@@ -93,12 +92,8 @@
                                             <ItemTemplate>
                                                 <tr>
                                                     <td>
-                                                        <button type="button" class='<%# 
-int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Empleado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoPersonaFisica ? "btn btn-default-alt btn-square-usuario empleado" : 
-int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Cliente || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClientaPersonaFisica ? "btn btn-default-alt btn-square-usuario cliente" : 
-int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Proveedor || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorPersonaFisica ? "btn btn-default-alt btn-square-usuario proveedor" : "btn btn-default-alt btn-square-usuario"
-                                                        %>'>
-                                                            <%# Eval("TipoUsuario.Descripcion").ToString().Substring(0,1) %></button></td>
+                                                        <button type="button" class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + Eval("TipoUsuario.Color") + " !important" %>'>
+                                                            <%# Eval("TipoUsuario.Abreviacion") %></button></td>
                                                     <td><%# Eval("Holding.Descripcion")%></td>
                                                     <td><%# Eval("Compania.Descripcion")%></td>
                                                     <td><%# Eval("Direccion.Descripcion")%></td>
@@ -109,14 +104,14 @@ int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposU
                                                     <td id="colHabilitado">
                                                         <ul class="list list-unstyled" id="hiddenEnabled">
                                                             <li>
-                                                                <asp:CheckBox runat="server" AutoPostBack="true" Checked='<%# (bool) Eval("Habilitado") %>'  Visible='<%# int.Parse(Eval("IdNivelOrganizacion").ToString()) != 1 %>' CssClass="chkIphone" Width="30px" data-id='<%# Eval("Id")%>' Text='<%# (bool) Eval("Habilitado") ? "SI" : "NO"%>' OnCheckedChanged="OnCheckedChanged" />
+                                                                <asp:CheckBox runat="server" AutoPostBack="true" Checked='<%# (bool) Eval("Habilitado") %>' Visible='<%# int.Parse(Eval("IdNivelOrganizacion").ToString()) != 1 %>' CssClass="chkIphone" Width="30px" data-id='<%# Eval("Id")%>' Text='<%# (bool) Eval("Habilitado") ? "SI" : "NO"%>' OnCheckedChanged="OnCheckedChanged" />
                                                             </li>
                                                         </ul>
                                                     </td>
                                                     <td id="colEditar">
                                                         <ul class="list list-unstyled hidden" id="hiddenEdit">
                                                             <li>
-                                                                <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Editar" CommandArgument='<%# Eval("Id")%>'  Visible='<%# (bool) Eval("Habilitado") %>' OnClick="btnEditar_OnClick" />
+                                                                <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Editar" CommandArgument='<%# Eval("Id")%>' Visible='<%# (bool) Eval("Habilitado") %>' OnClick="btnEditar_OnClick" />
                                                             </li>
                                                         </ul>
                                                     </td>
@@ -149,7 +144,7 @@ int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposU
     </asp:UpdatePanel>
 
     <%--MODAL CATALOGOS--%>
-    <div class="modal fade" id="editCatalogoOrganizacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="margin-top: 60px">
+    <div class="modal fade" id="editCatalogoOrganizacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <asp:UpdatePanel ID="upCatlogos" runat="server">
             <ContentTemplate>
                 <uc1:UcAltaOrganizaciones runat="server" id="ucAltaOrganizaciones" />

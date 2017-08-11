@@ -213,6 +213,7 @@ namespace KiiniHelp.Users.Ticket
             {
                 AlertaGeneral = new List<string>();
                 ucFormulario.OnAceptarModal += UcTicketPortal_OnAceptarModal;
+                ucFormulario.OnCancelarModal += UcFormularioOnOnCancelarModal;
 
                 if (!IsPostBack)
                 {
@@ -240,6 +241,23 @@ namespace KiiniHelp.Users.Ticket
                     //}
                     //UcInformacionConsulta.Visible = arbol.InventarioArbolAcceso.First().InventarioInfConsulta.Any();
                 }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        private void UcFormularioOnOnCancelarModal()
+        {
+            try
+            {
+                Response.Redirect("~/Users/DashBoard.aspx");
             }
             catch (Exception ex)
             {

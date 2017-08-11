@@ -144,7 +144,7 @@
     </asp:UpdatePanel>
 
     <%--MODAL CATALOGOS--%>
-    <div class="modal fade" id="editCatalogoOrganizacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="margin-top: 60px">
+    <div class="modal fade" id="editCatalogoOrganizacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <asp:UpdatePanel ID="upCatlogos" runat="server">
             <ContentTemplate>
                 <uc1:UcAltaOrganizaciones runat="server" id="ucAltaOrganizaciones" />

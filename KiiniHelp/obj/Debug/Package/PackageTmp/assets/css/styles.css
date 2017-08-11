@@ -1563,21 +1563,6 @@ a.btn {
     text-align: left;
 }
 
-.empleado {
-    background: #D99259 !important;
-    border-color: #D99259 !important;
-}
-
-.cliente {
-    background: #72AD74 !important;
-    border-color: #72AD74 !important;
-}
-
-.proveedor {
-    background: #5cbd9f !important;
-    border-color: #5cbd9f !important;
-}
-
 .btn-circle {
     border-radius: 50%;
     background-clip: padding-box;

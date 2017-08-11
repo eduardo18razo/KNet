@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceSeguridad;
@@ -65,7 +64,7 @@ namespace KiiniHelp.Publico.Consultas
                     divConsulta.Visible = false;
                     divDetalle.Visible = true;
                     lblticket.Text = detalle.IdTicket.ToString();
-                    lblCveRegistro.Text = detalle.CveRegistro;
+                    //lblCveRegistro.Text = detalle.CveRegistro;
                     lblFechaActualiza.Text = detalle.AsignacionesDetalle.OrderBy(o => o.FechaMovimiento).First().FechaMovimiento.ToShortDateString();
                     lblestatus.Text = detalle.EstatusActual;
                     hfEstatusActual.Value = detalle.IdEstatusTicket.ToString();
@@ -133,15 +132,16 @@ namespace KiiniHelp.Publico.Consultas
         {
             try
             {
-                if (targetEditor.Text == string.Empty)
+                if (txtEditor.Text == string.Empty)
                     throw new Exception("Ingrese un comentario.");
-                _servicioticket.AgregarComentarioConversacionTicket(int.Parse(lblticket.Text), int.Parse(hfIdUsuarioTicket.Value), targetEditor.Text, false, null);
+                _servicioticket.AgregarComentarioConversacionTicket(int.Parse(lblticket.Text), int.Parse(hfIdUsuarioTicket.Value), txtEditor.Text, false, null);
                 HelperDetalleTicket detalle = _servicioticket.ObtenerDetalleTicketNoRegistrado(int.Parse(txtTicket.Text.Trim()), txtClave.Text.Trim());
                 if (detalle != null)
                 {
                     rptComentrios.DataSource = detalle.ConversacionDetalle;
                     rptComentrios.DataBind();
                 }
+                txtEditor.Text = string.Empty;
             }
             catch (Exception ex)
             {

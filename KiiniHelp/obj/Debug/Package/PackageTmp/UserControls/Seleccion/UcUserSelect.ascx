@@ -60,104 +60,15 @@
                                                                 <div class="panel panel-default">
                                                                     <div class="panel-heading panel-heading-theme-1">
                                                                         <h4 class="panel-title"><a
-                                                                            data-toggle="collapse" class="panel-toggle" href="#faq1-1"><i class="fa fa-plus-square"></i><%# Eval("DescripcionOpcion") %>  </a></h4>
+                                                                            data-toggle="collapse" class="panel-toggle" href='<%# "#faq_" + Eval("IdArbol") %>'><i class="fa fa-plus-square"></i><%# Eval("DescripcionOpcion") %>  </a></h4>
                                                                     </div>
-                                                                    <div class="panel-collapse  collapse" id="faq1-1">
+                                                                    <div class="panel-collapse  collapse" id='<%# "faq_" + Eval("IdArbol") %>'>
                                                                         <div class="panel-body">este es item de repetidor</div>
                                                                     </div>
                                                                 </div>
                                                             </ItemTemplate>
                                                         </asp:Repeater>
-                                                        <%--<div class="panel panel-default">
-                                                            <div class="panel-heading panel-heading-theme-1">
-                                                                <h4 class="panel-title"><a
-                                                                    data-toggle="collapse" class="panel-toggle" href="#faq1-1"><i class="fa fa-plus-square"></i>¿En que sección encuentro los documentos de RH 1? </a></h4>
-                                                            </div>
-                                                            <div class="panel-collapse  collapse" id="faq1-1">
-                                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sodales dolor, eu hendrerit lorem. Maecenas vestibulum, nulla eu fringilla rhoncus, sapien metus mollis lorem, ac pulvinar ligula velit quis eros. Suspendisse turpis orci, tempus ac sollicitudin a, ullamcorper quis orci. Nunc vel ullamcorper lorem, quis rutrum leo. Quisque facilisis turpis ac purus aliquam, a blandit augue vehicula. </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading panel-heading-theme-1">
-                                                                <h4 class="panel-title"><a
-                                                                    data-toggle="collapse" class="panel-toggle" href="#faq1-2"><i class="fa fa-plus-square"></i>¿En que sección encuentro los documentos de RH 2? <span class="label label-success">Actualizado</span> </a></h4>
-                                                            </div>
-                                                            <div class="panel-collapse collapse" id="faq1-2">
-                                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sodales dolor, eu hendrerit lorem. Maecenas vestibulum, nulla eu fringilla rhoncus, sapien metus mollis lorem, ac pulvinar ligula velit quis eros. Suspendisse turpis orci, tempus ac sollicitudin a, ullamcorper quis orci. Nunc vel ullamcorper lorem, quis rutrum leo. Quisque facilisis turpis ac purus aliquam, a blandit augue vehicula. </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading panel-heading-theme-1">
-                                                                <h4 class="panel-title"><a
-                                                                    data-toggle="collapse" class="panel-toggle" href="#faq1-3"><i class="fa fa-plus-square"></i>¿En que sección encuentro los documentos de RH 3? </a></h4>
-                                                            </div>
-                                                            <div class="panel-collapse collapse" id="faq1-3">
-                                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sodales dolor, eu hendrerit lorem. Maecenas vestibulum, nulla eu fringilla rhoncus, sapien metus mollis lorem, ac pulvinar ligula velit quis eros. Suspendisse turpis orci, tempus ac sollicitudin a, ullamcorper quis orci. Nunc vel ullamcorper lorem, quis rutrum leo. Quisque facilisis turpis ac purus aliquam, a blandit augue vehicula. </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading panel-heading-theme-1">
-                                                                <h4 class="panel-title"><a
-                                                                    data-toggle="collapse" class="panel-toggle" href="#faq1-4"><i class="fa fa-plus-square"></i>¿En que sección encuentro los documentos de RH 4? <span class="label label-success">Actualizado</span> </a></h4>
-                                                            </div>
-                                                            <div class="panel-collapse collapse" id="faq1-4">
-                                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sodales dolor, eu hendrerit lorem. Maecenas vestibulum, nulla eu fringilla rhoncus, sapien metus mollis lorem, ac pulvinar ligula velit quis eros. Suspendisse turpis orci, tempus ac sollicitudin a, ullamcorper quis orci. Nunc vel ullamcorper lorem, quis rutrum leo. Quisque facilisis turpis ac purus aliquam, a blandit augue vehicula. </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading panel-heading-theme-1">
-                                                                <h4 class="panel-title"><a
-                                                                    data-toggle="collapse" class="panel-toggle" href="#faq1-5"><i class="fa fa-plus-square"></i>¿En que sección encuentro los documentos de RH 5? </a></h4>
-                                                            </div>
-                                                            <div class="panel-collapse collapse" id="faq1-5">
-                                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sodales dolor, eu hendrerit lorem. Maecenas vestibulum, nulla eu fringilla rhoncus, sapien metus mollis lorem, ac pulvinar ligula velit quis eros. Suspendisse turpis orci, tempus ac sollicitudin a, ullamcorper quis orci. Nunc vel ullamcorper lorem, quis rutrum leo. Quisque facilisis turpis ac purus aliquam, a blandit augue vehicula. </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading panel-heading-theme-1">
-                                                                <h4 class="panel-title"><a
-                                                                    data-toggle="collapse" class="panel-toggle" href="#faq1-6"><i class="fa fa-plus-square"></i>¿En que sección encuentro los documentos de RH 6? </a></h4>
-                                                            </div>
-                                                            <div class="panel-collapse collapse" id="faq1-6">
-                                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sodales dolor, eu hendrerit lorem. Maecenas vestibulum, nulla eu fringilla rhoncus, sapien metus mollis lorem, ac pulvinar ligula velit quis eros. Suspendisse turpis orci, tempus ac sollicitudin a, ullamcorper quis orci. Nunc vel ullamcorper lorem, quis rutrum leo. Quisque facilisis turpis ac purus aliquam, a blandit augue vehicula. </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading panel-heading-theme-1">
-                                                                <h4 class="panel-title"><a
-                                                                    data-toggle="collapse" class="panel-toggle" href="#faq1-7"><i class="fa fa-plus-square"></i>¿En que sección encuentro los documentos de RH 7? </a></h4>
-                                                            </div>
-                                                            <div class="panel-collapse collapse" id="faq1-7">
-                                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sodales dolor, eu hendrerit lorem. Maecenas vestibulum, nulla eu fringilla rhoncus, sapien metus mollis lorem, ac pulvinar ligula velit quis eros. Suspendisse turpis orci, tempus ac sollicitudin a, ullamcorper quis orci. Nunc vel ullamcorper lorem, quis rutrum leo. Quisque facilisis turpis ac purus aliquam, a blandit augue vehicula. </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading panel-heading-theme-1">
-                                                                <h4 class="panel-title"><a
-                                                                    data-toggle="collapse" class="panel-toggle" href="#faq1-8"><i class="fa fa-plus-square"></i>¿En que sección encuentro los documentos de RH 8? </a></h4>
-                                                            </div>
-                                                            <div class="panel-collapse collapse" id="faq1-8">
-                                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sodales dolor, eu hendrerit lorem. Maecenas vestibulum, nulla eu fringilla rhoncus, sapien metus mollis lorem, ac pulvinar ligula velit quis eros. Suspendisse turpis orci, tempus ac sollicitudin a, ullamcorper quis orci. Nunc vel ullamcorper lorem, quis rutrum leo. Quisque facilisis turpis ac purus aliquam, a blandit augue vehicula. </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading panel-heading-theme-1">
-                                                                <h4 class="panel-title"><a
-                                                                    data-toggle="collapse" class="panel-toggle" href="#faq1-9"><i class="fa fa-plus-square"></i>¿En que sección encuentro los documentos de RH 9? </a></h4>
-                                                            </div>
-                                                            <div class="panel-collapse collapse" id="faq1-9">
-                                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sodales dolor, eu hendrerit lorem. Maecenas vestibulum, nulla eu fringilla rhoncus, sapien metus mollis lorem, ac pulvinar ligula velit quis eros. Suspendisse turpis orci, tempus ac sollicitudin a, ullamcorper quis orci. Nunc vel ullamcorper lorem, quis rutrum leo. Quisque facilisis turpis ac purus aliquam, a blandit augue vehicula. </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading panel-heading-theme-1">
-                                                                <h4 class="panel-title"><a
-                                                                    data-toggle="collapse" class="panel-toggle" href="#faq1-10"><i class="fa fa-plus-square"></i>¿En que sección encuentro los documentos de RH 10? </a></h4>
-                                                            </div>
-                                                            <div class="panel-collapse collapse" id="faq1-10">
-                                                                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sodales dolor, eu hendrerit lorem. Maecenas vestibulum, nulla eu fringilla rhoncus, sapien metus mollis lorem, ac pulvinar ligula velit quis eros. Suspendisse turpis orci, tempus ac sollicitudin a, ullamcorper quis orci. Nunc vel ullamcorper lorem, quis rutrum leo. Quisque facilisis turpis ac purus aliquam, a blandit augue vehicula. </div>
-                                                            </div>
-                                                        </div>--%>
+                                                        
                                                     </div>
                                                 </div>
                                                 <!--TERMINA TAB-1 10 MAS-->

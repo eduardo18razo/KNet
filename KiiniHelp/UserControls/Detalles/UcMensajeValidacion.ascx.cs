@@ -42,5 +42,19 @@ namespace KiiniHelp.UserControls.Detalles
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
         public event DelegateTerminarModal OnTerminarModal;
+
+        protected void btnClose_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (OnCancelarModal != null)
+                    OnCancelarModal();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }

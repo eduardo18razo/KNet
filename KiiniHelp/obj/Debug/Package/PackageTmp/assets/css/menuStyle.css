@@ -1,5 +1,17 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 @font-face {
+font-family: "FontAwesome";
+font-weight: normal;
+font-style : normal;
+       src : url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?v=4.3.0");
+       src : url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0") format("embedded-opentype"),
+             url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff2?v=4.3.0") format("woff2"),
+             url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff?v=4.3.0") format("woff"),
+             url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf?v=4.3.0") format("truetype"),
+             url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular") format("svg");
+}
+
+/*@font-face {
 	font-weight: normal;
 	font-style: normal;
 	font-family: 'codropsicons';
@@ -8,7 +20,7 @@
 		url('../fonts/codropsicons/codropsicons.woff') format('woff'),
 		url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
 		url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
-}
+}*/
 
 .pMenu a {
 	text-decoration: none;
@@ -382,9 +394,10 @@ html, body, .container, .scroller {
 }
 
 .menuBack::after {
-    font-family: 'linecons';
+    font-family: 'FontAwesome';
 	position: absolute;
-	content: "\e037";
+	/*content: "\e037";*/
+    content: "\f053";
 	right: 10px;
 	font-size: 1.3em;
     color: #000000;

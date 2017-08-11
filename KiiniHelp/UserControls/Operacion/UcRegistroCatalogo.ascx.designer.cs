@@ -22,33 +22,6 @@ namespace KiiniHelp.UserControls.Operacion {
         protected global::System.Web.UI.UpdatePanel upNivel;
         
         /// <summary>
-        /// Control panelAlertaGeneral.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl panelAlertaGeneral;
-        
-        /// <summary>
-        /// Control rptErrorGeneral.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptErrorGeneral;
-        
-        /// <summary>
-        /// Control lblTitle.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTitle;
-        
-        /// <summary>
         /// Control hfEsAlta.
         /// </summary>
         /// <remarks>
@@ -67,6 +40,33 @@ namespace KiiniHelp.UserControls.Operacion {
         protected global::System.Web.UI.WebControls.HiddenField hfIdCatalogo;
         
         /// <summary>
+        /// Control btnClose.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnClose;
+        
+        /// <summary>
+        /// Control lblBranding.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBranding;
+        
+        /// <summary>
+        /// Control lblTitle.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTitle;
+        
+        /// <summary>
         /// Control txtDescripcion.
         /// </summary>
         /// <remarks>
@@ -76,30 +76,21 @@ namespace KiiniHelp.UserControls.Operacion {
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
         
         /// <summary>
-        /// Control btnGuardar.
+        /// Control btnGuardarArea.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        protected global::System.Web.UI.WebControls.Button btnGuardarArea;
         
         /// <summary>
-        /// Control btnLimpiar.
+        /// Control btnTerminar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLimpiar;
-        
-        /// <summary>
-        /// Control btnCancelar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        protected global::System.Web.UI.WebControls.Button btnTerminar;
     }
 }

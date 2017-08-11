@@ -17,9 +17,11 @@ namespace KiiniNet.Entities.Helper
         public DateTime FechaHora { get; set; }
         public int NumeroTicket { get; set; }
         public string NombreUsuario { get; set; }
+        public int IdSubRolAsignado { get; set; }
         public string Tipificacion { get; set; }
         public string GrupoAsignado { get; set; }
         public string UsuarioAsignado { get; set; }
+        public int IdNivelAsignado { get; set; }
         public string NivelUsuarioAsignado { get; set; }
         public string Impacto { get; set; }
         public EstatusTicket EstatusTicket { get; set; }
@@ -44,6 +46,5 @@ namespace KiiniNet.Entities.Helper
         public string Canal { get; set; }
         public bool Vip { get; set; }
 
-    public List<HelperConversacionDetalle> ConversacionDetalle { get; set; }
     }
 }

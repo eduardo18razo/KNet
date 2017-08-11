@@ -116,12 +116,12 @@
                                 <asp:TextBox CssClass="form-control" ID="txtDescripcionN6" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
                                 <asp:LinkButton runat="server" ID="btnAgregarNivel6" CssClass="fa fa-plus-circle" OnClick="btnAgregarNivel_OnClick" CommandArgument="6" Enabled="False" />
                             </div>
-                            <div class="form-group" runat="server" id="divNivel7" visible="False">
+                            <%--<div class="form-group" runat="server" id="divNivel7" visible="False">
                                 Nivel 7<br />
                                 <asp:DropDownList runat="server" ID="ddlNivel7" CssClass="form-control" OnSelectedIndexChanged="ddlNivel7_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
                                 <asp:TextBox CssClass="form-control" ID="txtDescripcionN7" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
                                 <asp:LinkButton runat="server" ID="btnAgregarNivel7" CssClass="fa fa-plus-circle" OnClick="btnAgregarNivel_OnClick" CommandArgument="7" Enabled="False" />
-                            </div>
+                            </div>--%>
                         </div>
                         <div runat="server" id="divStep3Data" visible="False">
                             <div class="form-group">

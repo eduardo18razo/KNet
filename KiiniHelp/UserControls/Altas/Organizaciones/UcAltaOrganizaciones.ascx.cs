@@ -286,6 +286,8 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
             {
                 Organizacion org = _servicioOrganizacion.ObtenerOrganizacionById(IdOrganizacion);
                 if (org == null) return;
+                IdTipoUsuario = org.IdTipoUsuario;
+                ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
                 btnSeleccionarModal.CommandArgument = org.IdNivelOrganizacion.ToString();
                 Session["OrganizacionSeleccionada"] = org;
                 hfCatalogo.Value = org.IdNivelOrganizacion.ToString();
@@ -729,7 +731,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
             try
             {
                 if (ddlNivelSeleccionModal.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    return;
+                    throw new Exception("Debe seleccionar Nivel");
 
                 switch (int.Parse(btnSeleccionarModal.CommandArgument))
                 {
@@ -831,8 +833,6 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 switch (int.Parse(btnSeleccionarModal.CommandArgument))
                 {
                     case 1:
-
-                        btnSeleccionarModal.CssClass = "btn btn-danger btn-square";
                         lblStepNivel1.Text = "...";
                         hfNivel1.Value = ddlNivelSeleccionModal.SelectedValue;
                         succNivel1.Visible = false;
@@ -857,7 +857,12 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                         break;
 
                 }
-                throw new Exception(ex.Message);
+                if (_lstError == null || _lstError.Count <= 0)
+                {
+                    _lstError = new List<string>();
+                    _lstError.Add(ex.Message);
+                }
+                Alerta = _lstError;
             }
         }
         protected void ddlNivelSeleccionModal_OnSelectedIndexChanged(object sender, EventArgs e)

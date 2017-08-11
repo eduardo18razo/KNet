@@ -35,7 +35,9 @@ namespace KiiniNet.Entities.Cat.Mascaras
         [DataMember]
         public string SimboloMoneda { get; set; }
         [DataMember]
-        public int? ValorMaximo { get; set; }
+        public decimal? ValorMinimo { get; set; }
+        [DataMember]
+        public decimal? ValorMaximo { get; set; }
         [DataMember]
         public string MascaraDetalle { get; set; }
         [DataMember]

@@ -12,7 +12,7 @@
                     <div class="form-group email">
                         <label class="sr-only" for="login-email">Email or username</label>
                         <span class="fa fa-user icon"></span>
-                        <asp:TextBox class="form-control login-email" ID="txtUsuario" placeholder="Correo electrónico" runat="server" Style="text-transform: none" autofocus="autofocus"></asp:TextBox>
+                        <asp:TextBox class="form-control login-email" ID="txtUsuario" placeholder="Usuario" runat="server" Style="text-transform: none" autofocus="autofocus"></asp:TextBox>
                     </div>
                     <div class="form-group password">
                         <label class="sr-only" for="login-password">Password</label>

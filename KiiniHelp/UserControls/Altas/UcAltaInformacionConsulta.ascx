@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8">
                     <div class="module-inner">
-                        <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" placeholder="Título del Artículo" />
+                        <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" placeholder="Título del Artículo" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
                     </div>
                     <hr />
                 </div>
@@ -39,7 +39,7 @@
                     <div class="module-inner">
                         <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <ctrlExterno:HtmlEditor runat="Server" ID="txtEditor" Height="350px"  ColorScheme="VisualStudio" />
+                                <ctrlExterno:HtmlEditor runat="Server" ID="txtEditor" Height="350px" ToggleMode="ToggleButton" ColorScheme="VisualStudio" />
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>

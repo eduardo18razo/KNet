@@ -169,11 +169,19 @@
                                             <br />
                                             <div class="form-inline">
                                                 <label for="chkVip" class="col-lg-10 col-md-10 col-sm-2">VIP</label>
-                                                <asp:CheckBox runat="server" Text="VIP" ID="chkVip" CssClass="chkIphone col-lg-2 col-md-2 col-sm-1"/>
+                                                <asp:CheckBox runat="server" Text="VIP" ID="chkVip" CssClass="chkIphone col-lg-2 col-md-2 col-sm-1" />
                                             </div>
                                             <div class="form-inline">
                                                 <label for="chkVip" class="col-lg-10 col-md-10 col-sm-2">Directorio activo</label>
                                                 <asp:CheckBox runat="server" Text="Directorio Activo " ID="chkDirectoriActivo" CssClass="chkIphone col-lg-2 col-md-2 col-sm-1" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3">
+                                            <div class="form-inline">
+                                                <label for="chkPersonaFisica" class="col-lg-10 col-md-10 col-sm-2">Persona Fisica</label>
+                                                <asp:CheckBox runat="server" Text="Persona Fisica" ID="chkPersonaFisica" CssClass="chkIphone col-lg-2 col-md-2 col-sm-1" />
                                             </div>
                                         </div>
                                     </div>
@@ -424,40 +432,42 @@
                                             <asp:Button CssClass="btn btn-primary" runat="server" Text="Agregar" ID="btnModalRoles" OnClick="btnModalRoles_OnClick" />
                                         </div>
                                     </div>
-                                    <hr />
                                     <div class="row">
                                         <asp:Repeater runat="server" ID="rptRoles" OnItemDataBound="rptRoles_OnItemDataBound">
                                             <ItemTemplate>
-                                                <div class="row col-lg-12 col-md-12">
-                                                    <div runat="server" id="divRolesGrupos">
-                                                        <span><%# Eval("DescripcionRol") %></span>
-                                                        <div class="row col-lg-12 col-md-12">
-                                                            <asp:Repeater runat="server" ID="rptGrupos" OnItemDataBound="rptGrupos_OnItemDataBound">
-                                                                <ItemTemplate>
-                                                                    <div class="form group col-lg-4 col-md-4" style="padding: 5px">
-                                                                        <span class="tag label label-info">
-                                                                            <div class="row col-lg-4 col-md-4" style="padding: 5px">
-                                                                                <span><%# Eval("DescripcionGrupo") %></span>
-                                                                                <asp:Repeater runat="server" ID="rptSubGrupos">
-                                                                                    <HeaderTemplate>
-                                                                                        <br />
-                                                                                    </HeaderTemplate>
-                                                                                    <ItemTemplate>
-                                                                                        <%# Eval("Descripcion") %>
-                                                                                    </ItemTemplate>
-                                                                                </asp:Repeater>
-                                                                                <asp:LinkButton runat="server" class="remove glyphicon glyphicon-remove-sign glyphicon-white" ID="btnRemoveRol" OnClick="btnRemoveRol_OnClick" CommandName='<%# Eval("IdTipoGrupo") %>' CommandArgument='<%# Eval("IdGrupo") %>' />
-                                                                            </div>
-                                                                        </span>
-                                                                    </div>
-                                                                </ItemTemplate>
-                                                                <FooterTemplate>
-                                                                    <hr />
-                                                                </FooterTemplate>
-                                                            </asp:Repeater>
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <div runat="server" id="divRolesGrupos" class="col-lg-12 col-md-12">
+                                                            <asp:Label runat="server" Visible="False" ID="lblIdRol" Text='<%# Eval("IdRol") %>' />
+                                                            <span><%# Eval("DescripcionRol") %></span>
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <asp:Repeater runat="server" ID="rptGrupos" OnItemDataBound="rptGrupos_OnItemDataBound">
+                                                                    <ItemTemplate>
+                                                                        <asp:Label runat="server" Visible="False" ID="lblIdGrupo" Text='<%# Eval("IdGrupo") %>'></asp:Label>
+                                                                        <div class="form-group col-lg-4 col-md-4" style="padding: 5px">
+                                                                            <span class="tag label label-info">
+                                                                                <div class="row col-lg-4 col-md-4" style="padding: 5px">
+                                                                                    <span><%# Eval("DescripcionGrupo") %></span>
+                                                                                    <asp:Repeater runat="server" ID="rptSubGrupos">
+                                                                                        <HeaderTemplate>
+                                                                                            <br />
+                                                                                        </HeaderTemplate>
+                                                                                        <ItemTemplate>
+                                                                                            <%# Eval("Descripcion") %>
+                                                                                            <asp:LinkButton runat="server" class="remove glyphicon glyphicon-remove-sign glyphicon-white" ID="btnRemoveRolSub" OnClick="btnRemoveRolSub_OnClick" CommandName='<%# Container.ItemIndex %>' CommandArgument='<%# Eval("Id") %>' />
+                                                                                        </ItemTemplate>
+                                                                                    </asp:Repeater>
+                                                                                    <asp:LinkButton runat="server" class="remove glyphicon glyphicon-remove-sign glyphicon-white" ID="btnRemoveRol" OnClick="btnRemoveRol_OnClick" Visible='<%# Eval("SubGrupos") == null %>' CommandName='<%# Eval("IdTipoGrupo") %>' CommandArgument='<%# Eval("IdGrupo") %>' />
+                                                                                </div>
+                                                                            </span>
+                                                                        </div>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <hr />
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </div>
@@ -479,7 +489,7 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <%--PUESTOS--%>
-        <div class="modal fade" id="modalAreas" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: hidden; top: 60px">
+        <div class="modal fade" id="modalAreas" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: hidden;">
             <asp:UpdatePanel ID="upModalAltaAreas" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="modal-dialog modal-md">
@@ -491,7 +501,7 @@
             </asp:UpdatePanel>
         </div>
         <%--ORGANIZACIONES--%>
-        <div class="modal fade" id="modalOrganizacion" data-backdrop-limit="1" tabindex="-1" role="dialog" aria-labelledby="upload-avatar-title" aria-hidden="true" style="overflow: hidden; top: 60px">
+        <div class="modal fade" id="modalOrganizacion" data-backdrop-limit="1" tabindex="-1" role="dialog" aria-labelledby="upload-avatar-title" aria-hidden="true" style="overflow: hidden;">
             <asp:UpdatePanel ID="upOrganizacion" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <uc:UcAltaOrganizaciones runat="server" id="ucAltaOrganizaciones" />
@@ -500,7 +510,7 @@
         </div>
 
         <%--UBICACIONES--%>
-        <div class="modal fade" id="modalUbicacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: hidden; top: 60px">
+        <div class="modal fade" id="modalUbicacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: hidden;">
 
             <asp:UpdatePanel ID="upUbicacion" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
@@ -510,7 +520,7 @@
         </div>
 
         <%--ROLES--%>
-        <div class="modal fade" id="modalRoles" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: hidden; top: 60px">
+        <div class="modal fade" id="modalRoles" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="overflow: hidden;">
             <asp:UpdatePanel ID="upRoles" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <uc:UcRolGrupo runat="server" id="ucRolGrupo" />

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaArboles.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaArboles" %>
-<%@ Import Namespace="KinniNet.Business.Utils" %>
+
 <%@ Register Src="~/UserControls/Altas/ArbolesAcceso/UcAltaAbrolAcceso.ascx" TagPrefix="uc1" TagName="UcAltaAbrolAcceso" %>
 
 <div style="height: 100%;">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-lg-4 col-md-4">
                         <div class="module-inner">
-                            <asp:LinkButton runat="server" CssClass="btn btn-success fa fa-plus" Text="Crear Nueva Area" OnClick="btnNew_OnClick" />
+                            <asp:LinkButton runat="server" CssClass="btn btn-success fa fa-plus" Text="Crear Nueva Opción" OnClick="btnNew_OnClick" />
                         </div>
                     </div>
                 </div>
@@ -91,11 +91,8 @@
                                             <ItemTemplate>
                                                 <tr id='<%# Eval("Id")%>'>
                                                     <td>
-                                                        <button type="button" class='<%# 
-int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Empleado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoPersonaFisica ? "btn btn-default-alt btn-square-usuario empleado" : 
-int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Cliente || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClientaPersonaFisica ? "btn btn-default-alt btn-square-usuario cliente" : 
-int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Proveedor || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado || int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorPersonaFisica ? "btn btn-default-alt btn-square-usuario proveedor" : "btn btn-default-alt btn-square-usuario" %>'>
-                                                            <%# Eval("TipoUsuario.Descripcion").ToString().Substring(0,1) %></button></td>
+                                                        <button type="button" class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + Eval("TipoUsuario.Color") + " !important" %>'>
+                                                            <%# Eval("TipoUsuario.Abreviacion") %></button></td>
                                                     <td><%# Eval("Tipificacion")%></td>
                                                     <td><%# Eval("Area.Descripcion")%></td>
                                                     <td><%# Eval("TipoArbolAcceso.Descripcion")%></td>
@@ -127,7 +124,7 @@ int.Parse(Eval("IdTipoUsuario").ToString()) == (int)BusinessVariables.EnumTiposU
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <div class="modal fade" id="modalAtaOpcion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" style="margin-top: 60px">
+    <div class="modal fade" id="modalAtaOpcion" tabindex="-1" role="dialog" aria-labelledby="basicModal">
         <asp:UpdatePanel ID="upAltaArea" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <<div class="modal-dialog" style="height: 250px;">

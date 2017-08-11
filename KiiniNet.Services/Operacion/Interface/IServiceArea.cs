@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using KiiniNet.Entities.Operacion;
 
 namespace KiiniNet.Services.Operacion.Interface
@@ -7,6 +8,9 @@ namespace KiiniNet.Services.Operacion.Interface
     [ServiceContract]
     public interface IServiceArea
     {
+        [OperationContract]
+        void GuardarAreaAndroid(Area descripcion);
+        
         [OperationContract]
         List<Area> ObtenerAreasUsuario(int idUsuario, bool insertarSeleccion);
 

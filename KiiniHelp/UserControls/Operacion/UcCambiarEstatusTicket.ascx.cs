@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Configuration;
 using System.Web.UI;
 using KiiniHelp.ServiceSistemaEstatus;
 using KiiniHelp.ServiceTicket;
@@ -66,14 +67,16 @@ namespace KiiniHelp.UserControls.Operacion
             }
         }
 
-        private List<string> AlertaGeneral
+        private List<string> Alerta
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value.Select(s => new { Detalle = s }).ToList();
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -81,7 +84,8 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
-                AlertaGeneral = new List<string>();
+                Alerta = new List<string>();
+                lblBrandingModal.Text = WebConfigurationManager.AppSettings["Brand"];
                 if (!IsPostBack)
                 {
                     
@@ -94,7 +98,7 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -118,10 +122,9 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
-
 
         protected void btnCancelar_OnClick(object sender, EventArgs e)
         {
@@ -137,7 +140,7 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
     }

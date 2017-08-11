@@ -104,11 +104,11 @@
                                                     </HeaderTemplate>
                                                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Middle" />
                                                     <ItemTemplate>
-                                                        <button type="button" class='<%# 
-int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Empleado || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoPersonaFisica ? "btn btn-default-alt btn-square-usuario empleado" : 
-int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Cliente || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClientaPersonaFisica ? "btn btn-default-alt btn-square-usuario cliente" : 
-int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Proveedor || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorPersonaFisica ? "btn btn-default-alt btn-square-usuario proveedor" : "btn btn-default-alt btn-square-usuario"
-                                                        %>'>
+                                                        <%--<button type="button" class='<%# 
+int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Empleado || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado : 
+int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Cliente || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado  : 
+int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.Proveedor || int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado 
+                                                        %>'>--%>
                                                             <%# Eval("UsuarioSolicito.TipoUsuario.Descripcion").ToString().Substring(0,1) %></button>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>

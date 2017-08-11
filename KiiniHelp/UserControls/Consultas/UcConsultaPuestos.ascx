@@ -98,7 +98,7 @@
 
         </ContentTemplate>
     </asp:UpdatePanel>
-    <div id="modalAltaPuesto" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" class="modal fade" style="margin-top: 60px">
+    <div id="modalAltaPuesto" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" class="modal fade">
         <asp:UpdatePanel ID="upAltaPuesto" runat="server">
             <ContentTemplate>
                 <div class="modal-dialog">

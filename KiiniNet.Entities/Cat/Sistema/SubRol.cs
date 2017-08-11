@@ -16,6 +16,8 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
+        public int? OrdenAsignacion { get; set; }
+        [DataMember]
         public bool Habilitado { get; set; }
 
         [DataMember]

@@ -112,7 +112,7 @@ namespace KinniNet.Core.Sistema
             return result;
         }
 
-        public List<EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int idSubRol, int estatusAsignacionActual, bool esPropietario, bool insertarSeleccion)
+        public List<EstatusAsignacion> ObtenerEstatusAsignacionUsuario(int idUsuario, int estatusAsignacionActual, bool esPropietario, bool insertarSeleccion)
         {
             List<EstatusAsignacion> result;
             DataBaseModelContext db = new DataBaseModelContext();
@@ -123,9 +123,10 @@ namespace KinniNet.Core.Sistema
                           join ea in db.EstatusAsignacion on easg.IdEstatusAsignacionActual equals ea.Id
                           join ea1 in db.EstatusAsignacion on easg.IdEstatusAsignacionAccion equals ea1.Id
                           join ug in db.UsuarioGrupo on easg.IdGrupoUsuario equals ug.IdGrupoUsuario
-                          where ug.IdUsuario == idUsuario && easg.IdSubRol == idSubRol &&
+                          where ug.IdUsuario == idUsuario && easg.IdSubRol == ug.SubGrupoUsuario.IdSubRol &&
+                                easg.TieneSupervisor == ug.GrupoUsuario.TieneSupervisor &&
                                 easg.IdEstatusAsignacionActual == estatusAsignacionActual && easg.Habilitado && easg.Propietario == esPropietario
-                          select ea1).ToList();
+                          select ea1).Distinct().ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new EstatusAsignacion
@@ -157,7 +158,7 @@ namespace KinniNet.Core.Sistema
                           join ug in db.UsuarioGrupo on easg.IdGrupoUsuario equals ug.IdGrupoUsuario
                           where ug.IdUsuario == idUsuario && easg.IdSubRol == idSubRol &&
                                 easg.IdEstatusAsignacionActual == estatusAsignacionActual && easg.IdEstatusAsignacionAccion == estatusAsignar && easg.Propietario == esPropietario
-                          select easg.ComentarioObligado).Any();
+                          select easg.ComentarioObligado).First();
             }
             catch (Exception e)
             {

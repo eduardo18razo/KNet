@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.ServiceModel;
+using System.ServiceModel.Web;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
@@ -8,6 +11,22 @@ namespace KiiniNet.Services.Operacion.Implementacion
 {
     public  class ServiceArea : IServiceArea
     {
+        public void GuardarAreaAndroid(Area descripcion)
+        {
+            try
+            {
+                using (BusinessArea negocio = new BusinessArea())
+                {
+                    negocio.GuardarAreaAndroid(descripcion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        
         public List<Area> ObtenerAreasUsuario(int idUsuario, bool insertarSeleccion)
         {
             try
@@ -20,6 +39,22 @@ namespace KiiniNet.Services.Operacion.Implementacion
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        public List<Area> GetAll()
+        {
+            try
+            {
+                using (BusinessArea negocio = new BusinessArea())
+                {
+                    return negocio.ObtenerAreas(true);
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
             }
         }
 

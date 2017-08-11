@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
@@ -146,33 +145,35 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
             }
             set { ddlNivel6.SelectedValue = value.ToString(); }
         }
-        public int IdNivel7
-        {
-            get
-            {
-                if (ddlNivel7.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    throw new Exception("Seleccione nivel 7.");
-                return int.Parse(ddlNivel7.SelectedValue);
-            }
-            set { ddlNivel7.SelectedValue = value.ToString(); }
-        }
+        //public int IdNivel7
+        //{
+        //    get
+        //    {
+        //        if (ddlNivel7.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+        //            throw new Exception("Seleccione nivel 7.");
+        //        return int.Parse(ddlNivel7.SelectedValue);
+        //    }
+        //    set { ddlNivel7.SelectedValue = value.ToString(); }
+        //}
         public string Catalogo
         {
             get
             {
                 string result = "1";
-                if (ddlNivel2.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                if (ddlNivel1.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     result = "2";
-                if (ddlNivel3.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                if (ddlNivel2.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     result = "3";
-                if (ddlNivel4.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                if (ddlNivel3.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     result = "4";
-                if (ddlNivel5.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                if (ddlNivel4.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     result = "5";
-                if (ddlNivel6.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                if (ddlNivel5.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     result = "6";
-                if (ddlNivel7.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                if (ddlNivel6.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     result = "7";
+                //if (ddlNivel7.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                //    result = "7";
                 return result;
             }
         }
@@ -261,7 +262,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
             try
             {
                 var valida = IdArea;
-                valida = IdNivel1;
+                //valida = IdNivel1;
             }
             catch (Exception e)
             {
@@ -447,9 +448,9 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     case 6:
                         txt = txtDescripcionN6;
                         break;
-                    case 7:
-                        txt = txtDescripcionN7;
-                        break;
+                    //case 7:
+                    //    txt = txtDescripcionN7;
+                    //    break;
                 }
                 if (txt != null && txt.Text.Trim() == string.Empty)
                     throw new Exception("Debe capturar una descripción");
@@ -470,7 +471,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 txtDescripcionN4.Text = string.Empty;
                 txtDescripcionN5.Text = string.Empty;
                 txtDescripcionN6.Text = string.Empty;
-                txtDescripcionN7.Text = string.Empty;
+                //txtDescripcionN7.Text = string.Empty;
                 txtDescripcionArea.Text = string.Empty;
                 LlenaCombos();
                 Metodos.LimpiarCombo(ddlGrupoAcceso);
@@ -481,6 +482,12 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 Metodos.LimpiarListBox(lstGrupoEspecialConsultaServicios);
                 Metodos.LimpiarCombo(ddlGrupoDuenoServicio);
                 Metodos.LimpiarCombo(ddlGrupoAgenteUniversal);
+                txtTiempoTotal.Text = string.Empty;
+                ddlTiempoTotal.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
+                txtTiempoNotificacionDueno.Text = string.Empty;
+                txtTiempoNotificacionMtto.Text = string.Empty;
+                txtTiempoNotificacionDev.Text = string.Empty;
+                txtTiempoNotificacionConsulta.Text = string.Empty;
                 btnPaso_OnClick(new LinkButton { CommandArgument = "1" }, null);
 
             }
@@ -536,7 +543,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                         Metodos.LimpiarCombo(ddlNivel4);
                         Metodos.LimpiarCombo(ddlNivel5);
                         Metodos.LimpiarCombo(ddlNivel6);
-                        Metodos.LimpiarCombo(ddlNivel7);
+                        //Metodos.LimpiarCombo(ddlNivel7);
                         btnPreview.Visible = false;
                         btnSaveAll.Visible = false;
                         btnSiguiente.Visible = true;
@@ -648,7 +655,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                         Metodos.LimpiarCombo(ddlNivel4);
                         Metodos.LimpiarCombo(ddlNivel5);
                         Metodos.LimpiarCombo(ddlNivel6);
-                        Metodos.LimpiarCombo(ddlNivel7);
+                        //Metodos.LimpiarCombo(ddlNivel7);
                         Metodos.LlenaComboCatalogo(ddlArea, _servicioArea.ObtenerAreasTipoUsuario(IdTipoUsuario, true));
                         btnPreview.Visible = false;
                         btnSaveAll.Visible = false;
@@ -813,13 +820,13 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 Metodos.LimpiarCombo(ddlNivel4);
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
-                Metodos.LimpiarCombo(ddlNivel7);
+                //Metodos.LimpiarCombo(ddlNivel7);
                 divNivel2.Visible = false;
                 divNivel3.Visible = false;
                 divNivel4.Visible = false;
                 divNivel5.Visible = false;
                 divNivel6.Visible = false;
-                divNivel7.Visible = false;
+                //divNivel7.Visible = false;
                 if (((DropDownList)sender).SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     return;
                 if (!_servicioArbolAcceso.EsNodoTerminal(IdTipoUsuario, TipoArbol, IdNivel1, null, null, null, null, null, null))
@@ -830,13 +837,13 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     btnAgregarNivel4.Enabled = false;
                     btnAgregarNivel5.Enabled = false;
                     btnAgregarNivel6.Enabled = false;
-                    btnAgregarNivel7.Enabled = false;
+                    //btnAgregarNivel7.Enabled = false;
                     divNivel2.Visible = true;
                     divNivel3.Visible = false;
                     divNivel4.Visible = false;
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
-                    divNivel7.Visible = false;
+                    //divNivel7.Visible = false;
                 }
                 else
                 {
@@ -845,13 +852,13 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     btnAgregarNivel4.Enabled = false;
                     btnAgregarNivel5.Enabled = false;
                     btnAgregarNivel6.Enabled = false;
-                    btnAgregarNivel7.Enabled = false;
+                    //btnAgregarNivel7.Enabled = false;
                     divNivel2.Visible = false;
                     divNivel3.Visible = false;
                     divNivel4.Visible = false;
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
-                    divNivel7.Visible = false;
+                    //divNivel7.Visible = false;
                     btnSiguiente.Enabled = false;
                     throw new Exception("Para continuar seleccione un nivel no terminal.");
                 }
@@ -873,12 +880,12 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 Metodos.LimpiarCombo(ddlNivel4);
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
-                Metodos.LimpiarCombo(ddlNivel7);
+                //Metodos.LimpiarCombo(ddlNivel7);
                 divNivel3.Visible = false;
                 divNivel4.Visible = false;
                 divNivel5.Visible = false;
                 divNivel6.Visible = false;
-                divNivel7.Visible = false;
+                //divNivel7.Visible = false;
                 if (((DropDownList)sender).SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     return;
 
@@ -889,12 +896,12 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     btnAgregarNivel4.Enabled = false;
                     btnAgregarNivel5.Enabled = false;
                     btnAgregarNivel6.Enabled = false;
-                    btnAgregarNivel7.Enabled = false;
+                    //btnAgregarNivel7.Enabled = false;
                     divNivel3.Visible = true;
                     divNivel4.Visible = false;
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
-                    divNivel7.Visible = false;
+                    //divNivel7.Visible = false;
                 }
                 else
                 {
@@ -902,12 +909,12 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     btnAgregarNivel4.Enabled = false;
                     btnAgregarNivel5.Enabled = false;
                     btnAgregarNivel6.Enabled = false;
-                    btnAgregarNivel7.Enabled = false;
+                    //btnAgregarNivel7.Enabled = false;
                     divNivel3.Visible = false;
                     divNivel4.Visible = false;
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
-                    divNivel7.Visible = false;
+                    //divNivel7.Visible = false;
                     btnSiguiente.Enabled = false;
                     throw new Exception("Para continuar seleccione un nivel no terminal.");
                 }
@@ -928,11 +935,11 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 Metodos.LimpiarCombo(ddlNivel4);
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
-                Metodos.LimpiarCombo(ddlNivel7);
+                //Metodos.LimpiarCombo(ddlNivel7);
                 divNivel4.Visible = false;
                 divNivel5.Visible = false;
                 divNivel6.Visible = false;
-                divNivel7.Visible = false;
+                //divNivel7.Visible = false;
                 if (((DropDownList)sender).SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     return;
                 if (!_servicioArbolAcceso.EsNodoTerminal(IdTipoUsuario, TipoArbol, IdNivel1, IdNivel2, IdNivel3, null, null, null, null))
@@ -941,22 +948,22 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     btnAgregarNivel4.Enabled = true;
                     btnAgregarNivel5.Enabled = false;
                     btnAgregarNivel6.Enabled = false;
-                    btnAgregarNivel7.Enabled = false;
+                    //btnAgregarNivel7.Enabled = false;
                     divNivel4.Visible = true;
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
-                    divNivel7.Visible = false;
+                    //divNivel7.Visible = false;
                 }
                 else
                 {
                     btnAgregarNivel4.Enabled = false;
                     btnAgregarNivel5.Enabled = false;
                     btnAgregarNivel6.Enabled = false;
-                    btnAgregarNivel7.Enabled = false;
+                    //btnAgregarNivel7.Enabled = false;
                     divNivel4.Visible = false;
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
-                    divNivel7.Visible = false;
+                    //divNivel7.Visible = false;
                     btnSiguiente.Enabled = false;
                     throw new Exception("Para continuar seleccione un nivel no terminal.");
                 }
@@ -976,10 +983,10 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
             {
                 Metodos.LimpiarCombo(ddlNivel5);
                 Metodos.LimpiarCombo(ddlNivel6);
-                Metodos.LimpiarCombo(ddlNivel7);
+                //Metodos.LimpiarCombo(ddlNivel7);
                 divNivel5.Visible = false;
                 divNivel6.Visible = false;
-                divNivel7.Visible = false;
+                //divNivel7.Visible = false;
                 if (((DropDownList)sender).SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     return;
                 if (!_servicioArbolAcceso.EsNodoTerminal(IdTipoUsuario, TipoArbol, IdNivel1, IdNivel2, IdNivel3, IdNivel4, null, null, null))
@@ -987,19 +994,19 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     Metodos.FiltraCombo(ddlNivel4, ddlNivel5, _servicioArbolAcceso.ObtenerNivel5(IdArea, TipoArbol, IdTipoUsuario, IdNivel4, true));
                     btnAgregarNivel5.Enabled = true;
                     btnAgregarNivel6.Enabled = false;
-                    btnAgregarNivel7.Enabled = false;
+                    //btnAgregarNivel7.Enabled = false;
                     divNivel5.Visible = true;
                     divNivel6.Visible = false;
-                    divNivel7.Visible = false;
+                    //divNivel7.Visible = false;
                 }
                 else
                 {
                     btnAgregarNivel5.Enabled = false;
                     btnAgregarNivel6.Enabled = false;
-                    btnAgregarNivel7.Enabled = false;
+                    //btnAgregarNivel7.Enabled = false;
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
-                    divNivel7.Visible = false;
+                    //divNivel7.Visible = false;
                     btnSiguiente.Enabled = false;
                     throw new Exception("Para continuar seleccione un nivel no terminal.");
                 }
@@ -1018,26 +1025,26 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
             try
             {
                 Metodos.LimpiarCombo(ddlNivel6);
-                Metodos.LimpiarCombo(ddlNivel7);
+                //Metodos.LimpiarCombo(ddlNivel7);
                 divNivel6.Visible = false;
-                divNivel7.Visible = false;
+                //divNivel7.Visible = false;
                 if (((DropDownList)sender).SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     return;
                 if (!_servicioArbolAcceso.EsNodoTerminal(IdTipoUsuario, TipoArbol, IdNivel1, IdNivel2, IdNivel3, IdNivel4, IdNivel5, null, null))
                 {
                     Metodos.FiltraCombo(ddlNivel5, ddlNivel6, _servicioArbolAcceso.ObtenerNivel6(IdArea, TipoArbol, IdTipoUsuario, IdNivel5, true));
                     btnAgregarNivel6.Enabled = true;
-                    btnAgregarNivel7.Enabled = false;
+                    //btnAgregarNivel7.Enabled = false;
                     divNivel6.Visible = true;
-                    divNivel7.Visible = false;
+                    //divNivel7.Visible = false;
                 }
                 else
                 {
                     btnAgregarNivel5.Enabled = false;
                     btnAgregarNivel6.Enabled = false;
-                    btnAgregarNivel7.Enabled = false;
+                    //btnAgregarNivel7.Enabled = false;
                     divNivel6.Visible = false;
-                    divNivel7.Visible = false;
+                    //divNivel7.Visible = false;
                     btnSiguiente.Enabled = false;
                     throw new Exception("Para continuar seleccione un nivel no terminal.");
                 }
@@ -1055,20 +1062,21 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
         {
             try
             {
-                Metodos.LimpiarCombo(ddlNivel7);
-                divNivel7.Visible = false;
+                //Metodos.LimpiarCombo(ddlNivel7);
+                //divNivel7.Visible = false;
                 if (((DropDownList)sender).SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     return;
                 if (!_servicioArbolAcceso.EsNodoTerminal(IdTipoUsuario, TipoArbol, IdNivel1, IdNivel2, IdNivel3, IdNivel4, IdNivel5, IdNivel6, null))
                 {
-                    Metodos.FiltraCombo(ddlNivel6, ddlNivel7, _servicioArbolAcceso.ObtenerNivel7(IdArea, TipoArbol, IdTipoUsuario, IdNivel6, true));
-                    btnAgregarNivel7.Enabled = true;
-                    divNivel7.Visible = true;
+                    //Metodos.FiltraCombo(ddlNivel6, ddlNivel7, _servicioArbolAcceso.ObtenerNivel7(IdArea, TipoArbol, IdTipoUsuario, IdNivel6, true));
+                    //btnAgregarNivel7.Enabled = true;
+                    //divNivel7.Visible = true;
+                    btnSiguiente.Enabled = true;
                 }
                 else
                 {
-                    btnAgregarNivel7.Enabled = false;
-                    divNivel7.Visible = false;
+                    //btnAgregarNivel7.Enabled = false;
+                    //divNivel7.Visible = false;
                     btnSiguiente.Enabled = false;
                     throw new Exception("Para continuar seleccione un nivel no terminal.");
                 }
@@ -1086,11 +1094,11 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
         {
             try
             {
-                if (_servicioArbolAcceso.EsNodoTerminal(IdTipoUsuario, TipoArbol, IdNivel1, IdNivel2, IdNivel3, IdNivel4, IdNivel5, IdNivel6, IdNivel7))
-                {
-                    btnSiguiente.Enabled = false;
-                    throw new Exception("Para continuar seleccione un nivel no terminal.");
-                }
+                //if (_servicioArbolAcceso.EsNodoTerminal(IdTipoUsuario, TipoArbol, IdNivel1, IdNivel2, IdNivel3, IdNivel4, IdNivel5, IdNivel6, IdNivel7))
+                //{
+                //    btnSiguiente.Enabled = false;
+                //    throw new Exception("Para continuar seleccione un nivel no terminal.");
+                //}
             }
             catch (Exception ex)
             {
@@ -1202,23 +1210,23 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                         txtDescripcionN6.Text = string.Empty;
                         ddlNivel5_OnSelectedIndexChanged(ddlNivel5, null);
                         break;
-                    case 7:
-                        arbol.IdNivel1 = IdNivel1;
-                        arbol.IdNivel2 = IdNivel2;
-                        arbol.IdNivel3 = IdNivel3;
-                        arbol.IdNivel4 = IdNivel4;
-                        arbol.IdNivel5 = IdNivel5;
-                        arbol.IdNivel6 = IdNivel6;
-                        arbol.Nivel7 = new Nivel7
-                        {
-                            IdTipoUsuario = IdTipoUsuario,
-                            Descripcion = txtDescripcionN7.Text.Trim(),
-                            Habilitado = chkNivelHabilitado.Checked
-                        };
-                        _servicioArbolAcceso.GuardarArbol(arbol);
-                        txtDescripcionN7.Text = string.Empty;
-                        ddlNivel6_OnSelectedIndexChanged(ddlNivel6, null);
-                        break;
+                    //case 7:
+                    //    arbol.IdNivel1 = IdNivel1;
+                    //    arbol.IdNivel2 = IdNivel2;
+                    //    arbol.IdNivel3 = IdNivel3;
+                    //    arbol.IdNivel4 = IdNivel4;
+                    //    arbol.IdNivel5 = IdNivel5;
+                    //    arbol.IdNivel6 = IdNivel6;
+                    //    arbol.Nivel7 = new Nivel7
+                    //    {
+                    //        IdTipoUsuario = IdTipoUsuario,
+                    //        Descripcion = txtDescripcionN7.Text.Trim(),
+                    //        Habilitado = chkNivelHabilitado.Checked
+                    //    };
+                    //    _servicioArbolAcceso.GuardarArbol(arbol);
+                    //    txtDescripcionN7.Text = string.Empty;
+                    //    ddlNivel6_OnSelectedIndexChanged(ddlNivel6, null);
+                    //    break;
                 }
             }
             catch (Exception ex)
@@ -1488,7 +1496,8 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                             IdTipoGrupo = gpo.IdTipoGrupo,
                             IdGrupoUsuario = gpo.Id
                         };
-                        decimal dias = 0, horas = 0, minutos = 0, segundos = 0;
+                        decimal dias = 0, horas = 0, minutos = 0;
+                        const decimal segundos = 0;
 
                         switch (int.Parse(ddlNotificacionGrupoMtto.SelectedValue))
                         {
@@ -1538,7 +1547,8 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                         IdTipoGrupo = gpo.IdTipoGrupo,
                         IdGrupoUsuario = gpo.Id
                     };
-                    decimal dias = 0, horas = 0, minutos = 0, segundos = 0;
+                    decimal dias = 0, horas = 0, minutos = 0;
+                    const decimal segundos = 0;
 
                     switch (int.Parse(ddlNotificacionGrupoDev.SelectedValue))
                     {
@@ -1594,7 +1604,8 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                                 IdTipoGrupo = gpo.IdTipoGrupo,
                                 IdGrupoUsuario = gpo.Id
                             };
-                            decimal dias = 0, horas = 0, minutos = 0, segundos = 0;
+                            decimal dias = 0, horas = 0, minutos = 0;
+                            const decimal segundos = 0;
 
                             switch (int.Parse(ddlNotificacionGrupoConsulta.SelectedValue))
                             {
@@ -1639,7 +1650,8 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                         IdTipoGrupo = gpo.IdTipoGrupo,
                         IdGrupoUsuario = gpo.Id
                     };
-                    decimal dias = 0, horas = 0, minutos = 0, segundos = 0;
+                    decimal dias = 0, horas = 0, minutos = 0;
+                    const decimal segundos = 0;
 
                     switch (int.Parse(ddlNotificacionGrupoDueño.SelectedValue))
                     {
@@ -1790,15 +1802,21 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
         {
             try
             {
-                Session["PreviewDataFormulario"] = _servicioMascaras.ObtenerMascaraCaptura(Convert.ToInt32(ddlFormularios.SelectedValue)); ;
-                string url = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+                Session["PreviewDataFormulario"] = _servicioMascaras.ObtenerMascaraCaptura(Convert.ToInt32(ddlFormularios.SelectedValue));
+                if (Request.ApplicationPath != null)
+                {
+                    string url = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
 
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('" + url + "Users/Administracion/Formularios/FrmPreviewFormulario.aspx','_blank');", true);
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('" + url + "Users/Administracion/Formularios/FrmPreviewFormulario.aspx','_blank');", true);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                if (_lstError == null || !_lstError.Any())
+                {
+                    _lstError = new List<string> { ex.Message };
+                }
+                Alerta = _lstError;
             }
         }
     }
