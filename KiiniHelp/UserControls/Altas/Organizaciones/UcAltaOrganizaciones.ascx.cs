@@ -705,6 +705,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 divStep1.Visible = true;
                 if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos && int.Parse(ddlTipoUsuario.SelectedValue) != (int)BusinessVariables.EnumTiposUsuario.Empleado)
                 {
+                    btnGuardarCatalogo.Enabled = true;
                     LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerHoldings(int.Parse(ddlTipoUsuario.SelectedValue), true));
                 }
                 else

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Configuration;
 using System.Web.UI;
+using KiiniHelp.ServiceAtencionTicket;
 using KiiniHelp.ServiceSistemaEstatus;
-using KiiniHelp.ServiceTicket;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Operacion
@@ -12,7 +12,7 @@ namespace KiiniHelp.UserControls.Operacion
     public partial class UcCambiarEstatusTicket : UserControl, IControllerModal
     {
         private readonly ServiceEstatusClient _servicioEstatus = new ServiceEstatusClient();
-        private readonly ServiceTicketClient _servicioTicketClient = new ServiceTicketClient();
+        private readonly ServiceAtencionTicketClient _servicioAtencionTicket = new ServiceAtencionTicketClient();
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
@@ -109,7 +109,7 @@ namespace KiiniHelp.UserControls.Operacion
                 if (ddlEstatus.SelectedValue != BusinessVariables.ComboBoxCatalogo.ValueSeleccione.ToString())
                 {
                     CerroTicket = Convert.ToInt32(ddlEstatus.SelectedValue) == (int) BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado;
-                    _servicioTicketClient.CambiarEstatus(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuario, txtComentarios.Text.Trim());
+                    _servicioAtencionTicket.CambiarEstatus(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuario, txtComentarios.Text.Trim());
                 }
                 
                 if (OnAceptarModal != null)

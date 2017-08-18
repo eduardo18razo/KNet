@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using KinniNet.Business.Utils;
 
 namespace KiiniHelp.Agente
 {
-    public partial class FrmTicket : System.Web.UI.Page
+    public partial class FrmTicket : Page
     {
 
         private List<string> _lstError = new List<string>();

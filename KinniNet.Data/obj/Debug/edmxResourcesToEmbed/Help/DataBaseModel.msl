@@ -499,6 +499,7 @@
     <EntitySetMapping Name="TicketAsignacion">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.TicketAsignacion">
         <MappingFragment StoreEntitySet="TicketAsignacion">
+          <ScalarProperty Name="Visto" ColumnName="Visto" />
           <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
           <ScalarProperty Name="FechaAsignacion" ColumnName="FechaAsignacion" />
           <ScalarProperty Name="IdUsuarioAsignado" ColumnName="IdUsuarioAsignado" />
@@ -1201,6 +1202,7 @@
     <EntitySetMapping Name="TicketConversacion">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.TicketConversacion">
         <MappingFragment StoreEntitySet="TicketConversacion">
+          <ScalarProperty Name="Privado" ColumnName="Privado" />
           <ScalarProperty Name="FechaLectura" ColumnName="FechaLectura" />
           <ScalarProperty Name="Leido" ColumnName="Leido" />
           <ScalarProperty Name="Sistema" ColumnName="Sistema" />

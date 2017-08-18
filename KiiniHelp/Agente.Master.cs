@@ -57,6 +57,7 @@ namespace KiiniHelp
                 if (!TicketsAbiertos.Any(a => a.IdTicket == idTicket))
                     TicketsAbiertos.Add(new TicketSeleccionado { IdTicket = idTicket, Title = titulo });
                 LlenaTicketsAbiertos();
+                Response.Redirect("~/Agente/FrmTicket.aspx?id=" + idTicket);
             }
             catch (Exception e)
             {
@@ -530,6 +531,23 @@ namespace KiiniHelp
                     else
                         Response.Redirect("~/Agente/FrmTicket.aspx?id=" + TicketsAbiertos[index].IdTicket);
                 }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("~/Users/Operacion/FrmLevantaTicketAgente.aspx");
             }
             catch (Exception ex)
             {

@@ -163,15 +163,9 @@
                             </div>
                             <div>
                                 <div class="item item-notifications">
-                                    <div class="dropdown-toggle" id="dropdownMenu-notifications" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Tickets</span> <span class="pe-icon fa fa-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Tickets"></span></div>
-                                    <ul class="dropdown-menu wdropdown-ticket" role="menu" aria-labelledby="dropdownMenu-user">
-                                        <li><span class="arrow"></span><a role="menuitem" data-toggle="modal" data-target="#modal-new-ticket"><span class="pe-icon pe-7s-plus icon"></span>Nuevo ticket</a></li>
-                                        <li>
-                                            <asp:HyperLink role="menuitem" NavigateUrl="~/Publico/Consultas/FrmConsultaTicket.aspx" runat="server">
-                                            <span class="pe-icon pe-7s-look icon"></span>Consultar ticket
-                                            </asp:HyperLink>
-                                        </li>
-                                    </ul>
+                                    <asp:LinkButton class="dropdown-toggle" runat="server" OnClick="OnClick">
+                                        <span class="pe-icon fa fa-ticket icon" data-toggle="tooltip" data-placement="bottom" title="Generar Ticket"></span>
+                                    </asp:LinkButton>
                                 </div>
                                 <div class="item item-side-panel">
                                     <i id="side-panel-toggle" class="side-panel-toggle panel-hide icon fa fa-users icon" data-toggle="tooltip" data-placement="bottom" title="Roles">
@@ -209,7 +203,7 @@
                                         <div class="dropdown-footer"><a href="#">Ver todos los tickets</a> </div>
                                     </div>
                                 </div>
-                                <div class="item item-messages dropdown">
+                                <div class="item item-messages dropdown" style="display: none">
                                     <div class="dropdown-toggle" id="dropdownMenu-messages" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Mensajes</span> <span class="pe-icon pe-7s-mail icon" data-toggle="tooltip" data-placement="bottom" title="Messages"></span><span class="badge badge-circle badge-success">5</span> </div>
                                     <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-messages">
                                         <span class="arrow"></span>
@@ -310,7 +304,7 @@
                                         <div class="dropdown-footer"><a href="#">Ver todos los mensajes</a> </div>
                                     </div>
                                 </div>
-                                <div class="item item-more dropdown">
+                                <div class="item item-more dropdown" style="display: none">
                                     <div class="dropdown-toggle" id="dropdownMenu-more" data-toggle="dropdown" aria-expanded="true" role="button"><span class="sr-only">Acceso Rápido</span> <span aria-hidden="true" class="fs1 icon icon_grid-3x3" data-toggle="tooltip" data-placement="bottom" title="Acceso Rápido"></span></div>
                                     <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-more">
                                         <span class="arrow"></span>
@@ -364,7 +358,7 @@
             <header class="header header-Tabs">
                 <div class="branding " style="height: 40px">
                     <h1 class="logo text-center" style="padding-top: 0; font-size: 16px; margin-top: 10px">
-                        <asp:HyperLink NavigateUrl="~/Agente/FrmBandejaTickets.aspx" runat="server" CssClass="fa fa-envelope">
+                        <asp:HyperLink NavigateUrl="~/Agente/Bandeja.aspx" runat="server" CssClass="fa fa-envelope">
                         <span class="nav-label"><span class="h5"><strong>Bandeja de Tickets</strong></span></span>
                         </asp:HyperLink>
                     </h1>
@@ -407,7 +401,7 @@
                 <div class="container-fluid" style="padding-left: 0">
                     <div class="divMainMenu" id="divMainMenu" style="margin-top: 80px;">
                         <asp:HiddenField runat="server" ID="hfCargaInicial" Value="False" />
-                        <nav id="pMenu" class="pMenu">
+                        <nav id="pMenu" class="pMenu" style="top: 40px !important">
                             <div class="menuLevel">
                                 <h2 class="icon icon-shop">Inicio</h2>
                                 <ul>
@@ -568,7 +562,7 @@
                                 Crear Ticket Nuevo</h4>
                         </div>
                         <div class="modal-body">
-                            <uc1:UcTicketPortal runat="server" id="ucTicketPortal" />
+                            <uc1:UcTicketPortal runat="server" ID="ucTicketPortal" />
                         </div>
                     </div>
                 </div>
@@ -635,7 +629,7 @@
                     type: 'overlap'
                 });
             </script>
-</form>
+        </form>
     </div>
 </body>
 </html>

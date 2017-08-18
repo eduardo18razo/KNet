@@ -230,31 +230,31 @@ int.Parse(Eval("UsuarioSolicito.TipoUsuario.Id").ToString()) == (int)BusinessVar
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-4 no-padding-left">
                             <div class="module-inner">
-                                <div class="row borderbootom">
+                                <div class="row borderbootom" style="margin-top: 10px">
                                     <div class="form-group col-lg-12 no-padding-left verical-center">
                                         <asp:Label class="col-lg-10" runat="server" Text="Tickets Abiertos"></asp:Label>
                                         <asp:Label runat="server" ID="lblTicketsAbiertos">2</asp:Label>
                                     </div>
                                 </div>
-                                <div class="row borderbootom">
+                                <div class="row borderbootom" style="margin-top: 10px">
                                     <div class="form-group col-lg-12 no-padding-left verical-center">
                                         <asp:Label class="col-lg-10" runat="server" Text="Tickets sin asignar"></asp:Label>
                                         <asp:Label runat="server" ID="lblTicketsSinAsignar">2</asp:Label>
                                     </div>
                                 </div>
-                                <div class="row borderbootom">
+                                <div class="row borderbootom" style="margin-top: 10px">
                                     <div class="form-group col-lg-12 no-padding-left verical-center">
                                         <asp:Label class="col-lg-10" runat="server" Text="Tickets pendientes"></asp:Label>
                                         <asp:Label runat="server" ID="lblTicketsPendientes">2</asp:Label>
                                     </div>
                                 </div>
-                                <div class="row borderbootom">
+                                <div class="row borderbootom" style="margin-top: 10px">
                                     <div class="form-group col-lg-12 no-padding-left verical-center">
                                         <asp:Label class="col-lg-10" runat="server" Text="Tickets recien cerrados (36 hrs)"></asp:Label>
                                         <asp:Label runat="server" ID="lblTicketsRecienCerrados">2</asp:Label>
                                     </div>
                                 </div>
-                                <div class="row borderbootom">
+                                <div class="row borderbootom" style="margin-top: 10px">
                                     <div class="form-group col-lg-12 no-padding-left verical-center">
                                         <asp:Label class="col-lg-10" runat="server" Text="Tickets fuera de sla"></asp:Label>
                                         <asp:Label runat="server" ID="lblTicketsFueraSla">2</asp:Label>

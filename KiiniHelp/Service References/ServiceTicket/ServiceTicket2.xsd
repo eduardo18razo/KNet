@@ -132,6 +132,7 @@
       <xs:element minOccurs="0" name="Ticket" nillable="true" type="tns:Ticket" />
       <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="UsuarioAsignado" nillable="true" type="q23:Usuario" />
       <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="UsuarioAsigno" nillable="true" type="q24:Usuario" />
+      <xs:element minOccurs="0" name="Visto" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
@@ -176,6 +177,7 @@
       <xs:element minOccurs="0" name="IdUsuario" type="xs:int" />
       <xs:element minOccurs="0" name="Leido" nillable="true" type="xs:boolean" />
       <xs:element minOccurs="0" name="Mensaje" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Privado" nillable="true" type="xs:boolean" />
       <xs:element minOccurs="0" name="Sistema" type="xs:boolean" />
       <xs:element minOccurs="0" name="Ticket" nillable="true" type="tns:Ticket" />
       <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Usuarios" minOccurs="0" name="Usuario" nillable="true" type="q28:Usuario" />

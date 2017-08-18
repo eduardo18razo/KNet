@@ -70,6 +70,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 txtSimboloMoneda.Text = string.Empty;
                 ddlCatalogosCampo.SelectedIndex = ddlCatalogosCampo.SelectedIndex >= 1 ? BusinessVariables.ComboBoxCatalogo.IndexSeleccione : -1;
                 hfAltaCampo.Value = true.ToString();
+                ucAltaCatalogo.LimpiarCampos();
 
             }
             catch (Exception e)
@@ -107,7 +108,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 if (tipoCampo == null) return;
                 imgTitleImage.ImageUrl = "~/assets/images/controls/" + tipoCampo.Image;
                 lblTitleAgregarCampo.Text = "" + tipoCampo.Descripcion.ToUpper();
-
+                divValorMaximo.Visible = false;
                 lblDescripcion.Text = tipoCampo.DescripcionTexto;
 
                 txtLongitudMinima.Visible = tipoCampo.LongitudMinima;
@@ -131,7 +132,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                     {
                         txtValorMinimo.Attributes["min"] = "0";
                         txtValorMinimo.Attributes["step"] = "1";
-                        
+
                         txtValorMaximo.Attributes["min"] = "1";
                         txtValorMaximo.Attributes["step"] = "1";
                     }
@@ -173,7 +174,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 {
                     txtNombre.Text = formulario.Descripcion;
                     Session["MascaraAlta"] = formulario;
-                    if(EsAlta)
+                    if (EsAlta)
                         foreach (CampoMascara campo in formulario.CampoMascara)
                         {
                             campo.Id = 0;
@@ -528,6 +529,9 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                     if (txtLongitudMinima.Text.Trim() == string.Empty)
                         throw new Exception("Debe especificar una longitud minima");
                 }
+                if (divLongitudMinima.Visible && !divLongitudMaxima.Visible)
+                    if (int.Parse(txtLongitudMinima.Text) >= 100)
+                        throw new Exception("Debe especificar una longitud minima menor a 100");
 
                 if (divLongitudMaxima.Visible)
                 {

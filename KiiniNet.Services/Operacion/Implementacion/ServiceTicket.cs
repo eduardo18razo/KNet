@@ -64,58 +64,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize)
+        public List<HelperTickets> ObtenerTickets(int idUsuario, List<int> estatus, int pageIndex, int pageSize)
         {
             try
             {
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
-                    return negocio.ObtenerTickets(idUsuario, pageIndex, pageSize);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public void CambiarEstatus(int idTicket, int idEstatus, int idUsuario, string comentario)
-        {
-            try
-            {
-                using (BusinessTicket negocio = new BusinessTicket())
-                {
-                    negocio.CambiarEstatus(idTicket, idEstatus, idUsuario, comentario);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public void AutoAsignarTicket(int idTicket, int idUsuario)
-        {
-            try
-            {
-                using (BusinessTicket negocio = new BusinessTicket())
-                {
-                    negocio.AutoAsignarTicket(idTicket, idUsuario);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idNivelAsignado, int idUsuarioAsigna, string comentario)
-        {
-            try
-            {
-                using (BusinessTicket negocio = new BusinessTicket())
-                {
-                    negocio.CambiarAsignacionTicket(idTicket, idEstatusAsignacion, idUsuarioAsignado, idNivelAsignado, idUsuarioAsigna, comentario);
+                    return negocio.ObtenerTickets(idUsuario, estatus, pageIndex, pageSize);
                 }
             }
             catch (Exception ex)
@@ -176,21 +131,6 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
                     return negocio.GeneraPreticket(idArbol, idUsuarioSolicita, idUsuarioLevanto, observaciones);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public void AgregarComentarioConversacionTicket(int idTicket, int idUsuario, string mensaje, bool sistema, List<string> archivos)
-        {
-            try
-            {
-                using (BusinessTicket negocio = new BusinessTicket())
-                {
-                    negocio.AgregarComentarioConversacionTicket(idTicket, idUsuario, mensaje, sistema, archivos);
                 }
             }
             catch (Exception ex)

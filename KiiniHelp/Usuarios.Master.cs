@@ -40,12 +40,14 @@ namespace KiiniHelp
         {
             try
             {
+
                 List<Rol> lstRoles = _servicioSeguridad.ObtenerRolesUsuario(((Usuario)Session["UserData"]).Id);
                 if (lstRoles.Count > 0 && Session["RolSeleccionado"] == null)
                 {
                     Session["RolSeleccionado"] = lstRoles.First().Id;
                     Session["CargaInicialModal"] = "True";
-                    lnkBtnRol_OnClick(new LinkButton { CommandArgument = lstRoles.First().Id.ToString(), CommandName = lstRoles.First().Descripcion, Text = lstRoles.First().Descripcion }, null);
+                    if (MenuActivo == null)
+                        lnkBtnRol_OnClick(new LinkButton { CommandArgument = lstRoles.First().Id.ToString(), CommandName = lstRoles.First().Descripcion, Text = lstRoles.First().Descripcion }, null);
                 }
                 if (Session["RolSeleccionado"] != null)
                     lblAreaSeleccionada.Text = lstRoles.Single(s => s.Id == int.Parse(Session["RolSeleccionado"].ToString())).Descripcion;
@@ -84,6 +86,23 @@ namespace KiiniHelp
             }
         }
 
+        private List<Menu> MenuActivo
+        {
+            get { return (List<Menu>)Session["MenuRol"]; }
+            set { Session["MenuRol"] = value; }
+        }
+        private void LlenaMenu(int idUsuario, int idRolSeleccionado, bool arboles)
+        {
+            try
+            {
+                MenuActivo = _servicioSeguridad.ObtenerMenuUsuario(idUsuario, idRolSeleccionado, arboles);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -119,14 +138,16 @@ namespace KiiniHelp
                     int rolSeleccionado = 0;
                     if (Session["RolSeleccionado"] != null)
                         rolSeleccionado = int.Parse(Session["RolSeleccionado"].ToString());
-                    rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, rolSeleccionado, rolSeleccionado != 0);
-                    rptMenu.DataBind();
+                    if (MenuActivo == null)
+                        LlenaMenu(usuario.Id, rolSeleccionado, rolSeleccionado != 0);
+
                     divTickets.Visible = rolSeleccionado != (int)BusinessVariables.EnumRoles.Administrador;
                     divMensajes.Visible = rolSeleccionado != (int)BusinessVariables.EnumRoles.Administrador;
                     divTickets.Visible = rolSeleccionado == (int)BusinessVariables.EnumRoles.ResponsableDeAtención;
                     divMensajes.Visible = rolSeleccionado == (int)BusinessVariables.EnumRoles.Usuario;
                 }
-
+                rptMenu.DataSource = MenuActivo;
+                rptMenu.DataBind();
                 Session["ParametrosGenerales"] = _servicioParametros.ObtenerParametrosGenerales();
             }
             catch (Exception ex)
@@ -345,13 +366,17 @@ namespace KiiniHelp
                     int areaSeleccionada = 0;
                     if (Session["RolSeleccionado"] != null)
                         areaSeleccionada = int.Parse(Session["RolSeleccionado"].ToString());
-                    rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, areaSeleccionada, areaSeleccionada != 0);
+
+                    LlenaMenu(usuario.Id, areaSeleccionada, areaSeleccionada != 0);
+
+                    rptMenu.DataSource = MenuActivo;
                     rptMenu.DataBind();
                     Session["CargaInicialModal"] = "True";
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalRol\");", true);
                     //TODO: Tickets redirect
-                    //if (areaSeleccionada == (int)BusinessVariables.EnumRoles.ResponsableDeAtención)
-                    //    Response.Redirect("~/Agente/FrmBandejaTickets.aspx");
+                    if (areaSeleccionada == (int)BusinessVariables.EnumRoles.ResponsableDeAtención)
+                        Response.Redirect("~/Agente/Bandeja.aspx");
+                    //Response.Redirect("~/Agente/FrmBandejaTickets.aspx");
                     Response.Redirect("~/Users/DashBoard.aspx");
                 }
                 catch (Exception ex)

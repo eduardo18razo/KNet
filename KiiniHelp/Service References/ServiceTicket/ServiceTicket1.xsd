@@ -14,6 +14,7 @@
         <xs:element minOccurs="0" name="fechaalta" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="latitudfin" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="longitudfin" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="costo" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="idCanal" type="xs:int" />
         <xs:element minOccurs="0" name="campoRandom" type="xs:boolean" />
         <xs:element minOccurs="0" name="esTercero" type="xs:boolean" />
@@ -69,6 +70,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="estatus" nillable="true" type="q5:ArrayOfint" />
         <xs:element minOccurs="0" name="pageIndex" type="xs:int" />
         <xs:element minOccurs="0" name="pageSize" type="xs:int" />
       </xs:sequence>
@@ -77,53 +79,8 @@
   <xs:element name="ObtenerTicketsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerTicketsResult" nillable="true" type="q5:ArrayOfHelperTickets" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerTicketsResult" nillable="true" type="q6:ArrayOfHelperTickets" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CambiarEstatus">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="idTicket" type="xs:int" />
-        <xs:element minOccurs="0" name="idEstatus" type="xs:int" />
-        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
-        <xs:element minOccurs="0" name="comentario" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CambiarEstatusResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AutoAsignarTicket">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="idTicket" type="xs:int" />
-        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AutoAsignarTicketResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CambiarAsignacionTicket">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="idTicket" type="xs:int" />
-        <xs:element minOccurs="0" name="idEstatusAsignacion" type="xs:int" />
-        <xs:element minOccurs="0" name="idUsuarioAsignado" type="xs:int" />
-        <xs:element minOccurs="0" name="idNivelAsignado" type="xs:int" />
-        <xs:element minOccurs="0" name="idUsuarioAsigna" type="xs:int" />
-        <xs:element minOccurs="0" name="comentario" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CambiarAsignacionTicketResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="ObtenerDetalleTicket">
@@ -136,7 +93,7 @@
   <xs:element name="ObtenerDetalleTicketResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerDetalleTicketResult" nillable="true" type="q6:HelperDetalleTicket" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerDetalleTicketResult" nillable="true" type="q7:HelperDetalleTicket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -151,7 +108,7 @@
   <xs:element name="ObtenerTicketResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerTicketResult" nillable="true" type="q7:HelperTicketDetalle" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerTicketResult" nillable="true" type="q8:HelperTicketDetalle" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -166,7 +123,7 @@
   <xs:element name="ObtenerDetalleTicketNoRegistradoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerDetalleTicketNoRegistradoResult" nillable="true" type="q8:HelperDetalleTicket" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerDetalleTicketNoRegistradoResult" nillable="true" type="q9:HelperDetalleTicket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -183,24 +140,8 @@
   <xs:element name="GeneraPreticketResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="GeneraPreticketResult" nillable="true" type="q9:PreTicket" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="GeneraPreticketResult" nillable="true" type="q10:PreTicket" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AgregarComentarioConversacionTicket">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="idTicket" type="xs:int" />
-        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
-        <xs:element minOccurs="0" name="mensaje" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="sistema" type="xs:boolean" />
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="archivos" nillable="true" type="q10:ArrayOfstring" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AgregarComentarioConversacionTicketResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="CapturaCasillaTicket">

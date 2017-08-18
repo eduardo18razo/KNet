@@ -23,6 +23,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         [DataMember]
         public bool? Leido { get; set; }
         [DataMember]
+        public bool? Privado { get; set; }
+        [DataMember]
         public DateTime? FechaLectura { get; set; }
         [DataMember]
         public virtual Ticket Ticket { get; set; }

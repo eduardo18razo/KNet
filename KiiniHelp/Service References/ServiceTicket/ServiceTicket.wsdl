@@ -44,24 +44,6 @@
   <wsdl:message name="IServiceTicket_ObtenerTickets_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerTicketsResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceTicket_CambiarEstatus_InputMessage">
-    <wsdl:part name="parameters" element="tns:CambiarEstatus" />
-  </wsdl:message>
-  <wsdl:message name="IServiceTicket_CambiarEstatus_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CambiarEstatusResponse" />
-  </wsdl:message>
-  <wsdl:message name="IServiceTicket_AutoAsignarTicket_InputMessage">
-    <wsdl:part name="parameters" element="tns:AutoAsignarTicket" />
-  </wsdl:message>
-  <wsdl:message name="IServiceTicket_AutoAsignarTicket_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AutoAsignarTicketResponse" />
-  </wsdl:message>
-  <wsdl:message name="IServiceTicket_CambiarAsignacionTicket_InputMessage">
-    <wsdl:part name="parameters" element="tns:CambiarAsignacionTicket" />
-  </wsdl:message>
-  <wsdl:message name="IServiceTicket_CambiarAsignacionTicket_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CambiarAsignacionTicketResponse" />
-  </wsdl:message>
   <wsdl:message name="IServiceTicket_ObtenerDetalleTicket_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerDetalleTicket" />
   </wsdl:message>
@@ -86,12 +68,6 @@
   <wsdl:message name="IServiceTicket_GeneraPreticket_OutputMessage">
     <wsdl:part name="parameters" element="tns:GeneraPreticketResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceTicket_AgregarComentarioConversacionTicket_InputMessage">
-    <wsdl:part name="parameters" element="tns:AgregarComentarioConversacionTicket" />
-  </wsdl:message>
-  <wsdl:message name="IServiceTicket_AgregarComentarioConversacionTicket_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AgregarComentarioConversacionTicketResponse" />
-  </wsdl:message>
   <wsdl:message name="IServiceTicket_CapturaCasillaTicket_InputMessage">
     <wsdl:part name="parameters" element="tns:CapturaCasillaTicket" />
   </wsdl:message>
@@ -115,18 +91,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerTickets" message="tns:IServiceTicket_ObtenerTickets_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerTicketsResponse" message="tns:IServiceTicket_ObtenerTickets_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CambiarEstatus">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/CambiarEstatus" message="tns:IServiceTicket_CambiarEstatus_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/CambiarEstatusResponse" message="tns:IServiceTicket_CambiarEstatus_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="AutoAsignarTicket">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/AutoAsignarTicket" message="tns:IServiceTicket_AutoAsignarTicket_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/AutoAsignarTicketResponse" message="tns:IServiceTicket_AutoAsignarTicket_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="CambiarAsignacionTicket">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/CambiarAsignacionTicket" message="tns:IServiceTicket_CambiarAsignacionTicket_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/CambiarAsignacionTicketResponse" message="tns:IServiceTicket_CambiarAsignacionTicket_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="ObtenerDetalleTicket">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicket" message="tns:IServiceTicket_ObtenerDetalleTicket_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/ObtenerDetalleTicketResponse" message="tns:IServiceTicket_ObtenerDetalleTicket_OutputMessage" />
@@ -142,10 +106,6 @@
     <wsdl:operation name="GeneraPreticket">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/GeneraPreticket" message="tns:IServiceTicket_GeneraPreticket_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/GeneraPreticketResponse" message="tns:IServiceTicket_GeneraPreticket_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="AgregarComentarioConversacionTicket">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/AgregarComentarioConversacionTicket" message="tns:IServiceTicket_AgregarComentarioConversacionTicket_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceTicket/AgregarComentarioConversacionTicketResponse" message="tns:IServiceTicket_AgregarComentarioConversacionTicket_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CapturaCasillaTicket">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceTicket/CapturaCasillaTicket" message="tns:IServiceTicket_CapturaCasillaTicket_InputMessage" />
@@ -190,33 +150,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="CambiarEstatus">
-      <soap:operation soapAction="http://tempuri.org/IServiceTicket/CambiarEstatus" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="AutoAsignarTicket">
-      <soap:operation soapAction="http://tempuri.org/IServiceTicket/AutoAsignarTicket" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="CambiarAsignacionTicket">
-      <soap:operation soapAction="http://tempuri.org/IServiceTicket/CambiarAsignacionTicket" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ObtenerDetalleTicket">
       <soap:operation soapAction="http://tempuri.org/IServiceTicket/ObtenerDetalleTicket" style="document" />
       <wsdl:input>
@@ -246,15 +179,6 @@
     </wsdl:operation>
     <wsdl:operation name="GeneraPreticket">
       <soap:operation soapAction="http://tempuri.org/IServiceTicket/GeneraPreticket" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="AgregarComentarioConversacionTicket">
-      <soap:operation soapAction="http://tempuri.org/IServiceTicket/AgregarComentarioConversacionTicket" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

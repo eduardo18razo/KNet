@@ -1110,6 +1110,7 @@
           <Property Name="IdUsuarioAsignado" Type="int" />
           <Property Name="FechaAsignacion" Type="datetime" Nullable="false" />
           <Property Name="Comentarios" Type="nvarchar" MaxLength="150" />
+          <Property Name="Visto" Type="bit" />
         </EntityType>
         <EntityType Name="TicketConversacion">
           <Key>
@@ -1122,6 +1123,7 @@
           <Property Name="FechaGeneracion" Type="datetime" />
           <Property Name="Sistema" Type="bit" />
           <Property Name="Leido" Type="bit" />
+          <Property Name="Privado" Type="bit" />
           <Property Name="FechaLectura" Type="datetime" />
         </EntityType>
         <EntityType Name="TicketEstatus">
@@ -3590,54 +3592,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TicketAsignacion_EstatusAsignacion">
-          <End Role="EstatusAsignacion" Type="Self.EstatusAsignacion" Multiplicity="1" />
-          <End Role="TicketAsignacion" Type="Self.TicketAsignacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EstatusAsignacion">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TicketAsignacion">
-              <PropertyRef Name="IdEstatusAsignacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TicketAsignacion_Ticket">
-          <End Role="Ticket" Type="Self.Ticket" Multiplicity="1" />
-          <End Role="TicketAsignacion" Type="Self.TicketAsignacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ticket">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TicketAsignacion">
-              <PropertyRef Name="IdTicket" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TicketAsignacion_UsuarioAsignado">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="TicketAsignacion" Type="Self.TicketAsignacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TicketAsignacion">
-              <PropertyRef Name="IdUsuarioAsignado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TicketAsignacion_UsuarioAsigno">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="TicketAsignacion" Type="Self.TicketAsignacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TicketAsignacion">
-              <PropertyRef Name="IdUsuarioAsigno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TicketConversacion_Ticket">
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="1" />
           <End Role="TicketConversacion" Type="Self.TicketConversacion" Multiplicity="*" />
@@ -4925,22 +4879,6 @@
           <AssociationSet Name="FK_Ticket_Usuario2" Association="Self.FK_Ticket_Usuario2">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Ticket" EntitySet="Ticket" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TicketAsignacion_EstatusAsignacion" Association="Self.FK_TicketAsignacion_EstatusAsignacion">
-            <End Role="EstatusAsignacion" EntitySet="EstatusAsignacion" />
-            <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TicketAsignacion_Ticket" Association="Self.FK_TicketAsignacion_Ticket">
-            <End Role="Ticket" EntitySet="Ticket" />
-            <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TicketAsignacion_UsuarioAsignado" Association="Self.FK_TicketAsignacion_UsuarioAsignado">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TicketAsignacion_UsuarioAsigno" Association="Self.FK_TicketAsignacion_UsuarioAsigno">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="TicketAsignacion" EntitySet="TicketAsignacion" />
           </AssociationSet>
           <AssociationSet Name="FK_TicketConversacion_Ticket" Association="Self.FK_TicketConversacion_Ticket">
             <End Role="Ticket" EntitySet="Ticket" />
@@ -7391,6 +7329,7 @@
           <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_Ticket" FromRole="TicketAsignacion" ToRole="Ticket" />
           <NavigationProperty Name="UsuarioAsignado" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_UsuarioAsignado" FromRole="TicketAsignacion" ToRole="Usuario" />
           <NavigationProperty Name="UsuarioAsigno" Relationship="KiiniNet_v2Model.FK_TicketAsignacion_UsuarioAsigno" FromRole="TicketAsignacion" ToRole="Usuario" />
+          <Property Name="Visto" Type="Boolean" />
         </EntityType>
         <Association Name="FK_TicketAsignacion_EstatusAsignacion">
           <End Type="KiiniNet_v2Model.EstatusAsignacion" Role="EstatusAsignacion" Multiplicity="1" />
@@ -9393,6 +9332,7 @@
           <NavigationProperty Name="ConversacionArchivo" Relationship="KiiniNet_v2Model.FK_ConversacionArchivo_TicketConversacion" FromRole="TicketConversacion" ToRole="ConversacionArchivo" />
           <NavigationProperty Name="Ticket" Relationship="KiiniNet_v2Model.FK_TicketConversacion_Ticket" FromRole="TicketConversacion" ToRole="Ticket" />
           <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_TicketConversacion_Usuario" FromRole="TicketConversacion" ToRole="Usuario" />
+          <Property Name="Privado" Type="Boolean" />
         </EntityType>
         <Association Name="FK_ConversacionArchivo_TicketConversacion">
           <End Type="KiiniNet_v2Model.TicketConversacion" Role="TicketConversacion" Multiplicity="0..1" />
@@ -11104,6 +11044,7 @@
           <EntitySetMapping Name="TicketAsignacion">
             <EntityTypeMapping TypeName="KiiniNet_v2Model.TicketAsignacion">
               <MappingFragment StoreEntitySet="TicketAsignacion">
+                <ScalarProperty Name="Visto" ColumnName="Visto" />
                 <ScalarProperty Name="Comentarios" ColumnName="Comentarios" />
                 <ScalarProperty Name="FechaAsignacion" ColumnName="FechaAsignacion" />
                 <ScalarProperty Name="IdUsuarioAsignado" ColumnName="IdUsuarioAsignado" />
@@ -11806,6 +11747,7 @@
           <EntitySetMapping Name="TicketConversacion">
             <EntityTypeMapping TypeName="KiiniNet_v2Model.TicketConversacion">
               <MappingFragment StoreEntitySet="TicketConversacion">
+                <ScalarProperty Name="Privado" ColumnName="Privado" />
                 <ScalarProperty Name="FechaLectura" ColumnName="FechaLectura" />
                 <ScalarProperty Name="Leido" ColumnName="Leido" />
                 <ScalarProperty Name="Sistema" ColumnName="Sistema" />

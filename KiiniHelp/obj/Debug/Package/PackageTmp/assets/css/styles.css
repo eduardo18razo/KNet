@@ -5749,6 +5749,18 @@ ul.sortable {
 .padding-10 {
     padding: 10px !important;
 }
+.padding-10-left {
+    padding: 10px !important;
+}
+.padding-10-top {
+    padding: 10px !important;
+}
+.padding-10-right {
+    padding: 10px !important;
+}
+.padding-10-bottom {
+    padding: 10px !important;
+}
 
 .padding-20 {
     padding: 20px !important;

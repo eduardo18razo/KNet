@@ -566,7 +566,7 @@ namespace KinniNet.Core.Demonio
                                 att.SaveAs(String.Format("{0}{1}", BusinessVariables.Directorios.RepositorioTemporal, attname), true);
                             }
                         }
-                        new BusinessTicket().AgregarComentarioConversacionTicket(idticket, user.Id, respuesta, false, archivos);
+                        new BusinessAtencionTicket().AgregarComentarioConversacionTicket(idticket, user.Id, respuesta, false, archivos, false);
                         foreach (string archivo in archivos)
                         {
                             File.Move(BusinessVariables.Directorios.RepositorioTemporal + archivo, BusinessVariables.Directorios.RepositorioTemporal + archivo.Replace("ticketid", idticket.ToString()));
@@ -575,7 +575,7 @@ namespace KinniNet.Core.Demonio
                         }
                     }
                     else
-                        new BusinessTicket().AgregarComentarioConversacionTicket(idticket, user.Id, respuesta, false, null);
+                        new BusinessAtencionTicket().AgregarComentarioConversacionTicket(idticket, user.Id, respuesta, false, null, false);
 
 
 

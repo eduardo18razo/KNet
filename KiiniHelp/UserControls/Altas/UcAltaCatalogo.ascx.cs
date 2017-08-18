@@ -54,7 +54,7 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        private void LimpiarCampos()
+        public void LimpiarCampos()
         {
             try
             {

@@ -21,17 +21,8 @@ namespace KiiniNet.Services.Operacion.Interface
         List<HelperTickets> ObtenerTicketsUsuario(int idUsuario, int pageIndex, int pageSize);
 
         [OperationContract]
-        List<HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize);
-
-        [OperationContract]
-        void CambiarEstatus(int idTicket, int idEstatus, int idUsuario, string comentario);
+        List<HelperTickets> ObtenerTickets(int idUsuario, List<int> estatus, int pageIndex, int pageSize);
         
-        [OperationContract]
-        void AutoAsignarTicket(int idTicket, int idUsuario);
-
-        [OperationContract]
-        void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idNivelAsignado, int idUsuarioAsigna, string comentario);
-
         [OperationContract]
         HelperDetalleTicket ObtenerDetalleTicket(int idTicket);
 
@@ -43,9 +34,6 @@ namespace KiiniNet.Services.Operacion.Interface
 
         [OperationContract]
         PreTicket GeneraPreticket(int idArbol, int idUsuarioSolicita, int idUsuarioLevanto, string observaciones);
-
-        [OperationContract]
-        void AgregarComentarioConversacionTicket(int idTicket, int idUsuario, string mensaje, bool sistema,List<string> archivos);
 
         [OperationContract]
         List<int> CapturaCasillaTicket(int idTicket, string nombreCampo);

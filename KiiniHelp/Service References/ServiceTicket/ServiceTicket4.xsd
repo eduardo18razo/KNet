@@ -28,7 +28,6 @@
       <xs:element name="_x003C_Asigna_x003E_k__BackingField" type="xs:boolean" />
       <xs:element name="_x003C_CambiaEstatus_x003E_k__BackingField" type="xs:boolean" />
       <xs:element name="_x003C_Canal_x003E_k__BackingField" nillable="true" type="xs:string" />
-      <xs:element name="_x003C_ConversacionDetalle_x003E_k__BackingField" nillable="true" type="tns:ArrayOfHelperConversacionDetalle" />
       <xs:element name="_x003C_DentroSla_x003E_k__BackingField" type="xs:boolean" />
       <xs:element name="_x003C_EsPropietario_x003E_k__BackingField" type="xs:boolean" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Sistema" name="_x003C_EstatusAsignacion_x003E_k__BackingField" nillable="true" type="q1:EstatusAsignacion" />
@@ -37,6 +36,8 @@
       <xs:element name="_x003C_GrupoAsignado_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_IdGrupoAsignado_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_IdImpacto_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_IdNivelAsignado_x003E_k__BackingField" type="xs:int" />
+      <xs:element name="_x003C_IdSubRolAsignado_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_IdTicket_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_IdUsuarioAsignado_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_IdUsuario_x003E_k__BackingField" type="xs:int" />
@@ -57,35 +58,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="HelperTickets" nillable="true" type="tns:HelperTickets" />
-  <xs:complexType name="ArrayOfHelperConversacionDetalle">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="HelperConversacionDetalle" nillable="true" type="tns:HelperConversacionDetalle" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfHelperConversacionDetalle" nillable="true" type="tns:ArrayOfHelperConversacionDetalle" />
-  <xs:complexType name="HelperConversacionDetalle">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Archivo" nillable="true" type="tns:ArrayOfHelperConversacionArchivo" />
-      <xs:element minOccurs="0" name="Comentario" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="FechaHora" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="HelperConversacionDetalle" nillable="true" type="tns:HelperConversacionDetalle" />
-  <xs:complexType name="ArrayOfHelperConversacionArchivo">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="HelperConversacionArchivo" nillable="true" type="tns:HelperConversacionArchivo" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfHelperConversacionArchivo" nillable="true" type="tns:ArrayOfHelperConversacionArchivo" />
-  <xs:complexType name="HelperConversacionArchivo">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Archivo" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IdConversacion" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="HelperConversacionArchivo" nillable="true" type="tns:HelperConversacionArchivo" />
   <xs:complexType name="HelperDetalleTicket">
     <xs:sequence>
       <xs:element minOccurs="0" name="AsignacionActual" nillable="true" type="xs:string" />
@@ -117,6 +89,35 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="HelperAsignacionesDetalle" nillable="true" type="tns:HelperAsignacionesDetalle" />
+  <xs:complexType name="ArrayOfHelperConversacionDetalle">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HelperConversacionDetalle" nillable="true" type="tns:HelperConversacionDetalle" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHelperConversacionDetalle" nillable="true" type="tns:ArrayOfHelperConversacionDetalle" />
+  <xs:complexType name="HelperConversacionDetalle">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Archivo" nillable="true" type="tns:ArrayOfHelperConversacionArchivo" />
+      <xs:element minOccurs="0" name="Comentario" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaHora" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HelperConversacionDetalle" nillable="true" type="tns:HelperConversacionDetalle" />
+  <xs:complexType name="ArrayOfHelperConversacionArchivo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HelperConversacionArchivo" nillable="true" type="tns:HelperConversacionArchivo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHelperConversacionArchivo" nillable="true" type="tns:ArrayOfHelperConversacionArchivo" />
+  <xs:complexType name="HelperConversacionArchivo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Archivo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdConversacion" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HelperConversacionArchivo" nillable="true" type="tns:HelperConversacionArchivo" />
   <xs:complexType name="ArrayOfHelperEstatusDetalle">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="HelperEstatusDetalle" nillable="true" type="tns:HelperEstatusDetalle" />

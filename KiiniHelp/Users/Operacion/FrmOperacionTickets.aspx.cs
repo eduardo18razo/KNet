@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using KiiniHelp.ServiceAtencionTicket;
 using KiiniHelp.ServiceTicket;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
@@ -13,6 +14,7 @@ namespace KiiniHelp.Users.Operacion
     public partial class FrmOperacionTickets : Page
     {
         readonly ServiceTicketClient _servicioTickets = new ServiceTicketClient();
+        private readonly ServiceAtencionTicketClient _servicioAtencionTicket = new ServiceAtencionTicketClient();
         private List<string> _lstError = new List<string>();
         private int _pageSize = 1000;
         private List<string> Alerta
@@ -32,7 +34,8 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
-                List<HelperTickets> lst = _servicioTickets.ObtenerTickets(((Usuario)Session["UserData"]).Id, pageIndex, _pageSize);
+                //List<HelperTickets> lst = _servicioTickets.ObtenerTickets(((Usuario)Session["UserData"]).Id, pageIndex, _pageSize);
+                List<HelperTickets> lst = null;
                 if (lst != null)
                 {
                     foreach (KeyValuePair<string, string> filtro in filtros)
@@ -462,7 +465,7 @@ namespace KiiniHelp.Users.Operacion
         {
             try
             {
-                _servicioTickets.AutoAsignarTicket(Convert.ToInt32(((LinkButton)sender).CommandArgument), ((Usuario)Session["UserData"]).Id);
+                _servicioAtencionTicket.AutoAsignarTicket(Convert.ToInt32(((LinkButton)sender).CommandArgument), ((Usuario)Session["UserData"]).Id);
             }
             catch (Exception ex)
             {

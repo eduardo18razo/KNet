@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Configuration;
 using System.Web.UI;
-using KiiniHelp.ServiceGrupoUsuario;
+using KiiniHelp.ServiceAtencionTicket;
 using KiiniHelp.ServiceSistemaEstatus;
 using KiiniHelp.ServiceSistemaSubRol;
-using KiiniHelp.ServiceTicket;
 using KiiniHelp.ServiceUsuario;
-using KiiniNet.Entities.Cat.Sistema;
-using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
@@ -19,9 +16,9 @@ namespace KiiniHelp.UserControls.Operacion
     public partial class UcCambiarEstatusAsignacion : UserControl, IControllerModal
     {
         private readonly ServiceEstatusClient _servicioEstatus = new ServiceEstatusClient();
-        private readonly ServiceTicketClient _servicioTicketClient = new ServiceTicketClient();
         private readonly ServiceUsuariosClient _servicioUsuarios = new ServiceUsuariosClient();
         private readonly ServiceSubRolClient _servicioSubRol = new ServiceSubRolClient();
+        private readonly ServiceAtencionTicketClient _servicioAtencionTicket = new ServiceAtencionTicketClient(); 
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
@@ -336,7 +333,7 @@ namespace KiiniHelp.UserControls.Operacion
                 }
                 if (ddlEstatus.SelectedValue != BusinessVariables.ComboBoxCatalogo.ValueSeleccione.ToString())
                 {
-                    _servicioTicketClient.CambiarAsignacionTicket(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuarioSeleccionado(), IdNivelAsignacion(), ((Usuario)Session["UserData"]).Id, txtComentarios.Text);
+                    _servicioAtencionTicket.CambiarAsignacionTicket(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuarioSeleccionado(), IdNivelAsignacion(), ((Usuario)Session["UserData"]).Id, txtComentarios.Text);
                 }
                 LimpiarPantalla();
                 if (OnAceptarModal != null)

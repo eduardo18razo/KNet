@@ -218,7 +218,7 @@ namespace KinniNet.Core.Operacion
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo:
-                            queryParametros += String.Format("@[{0}] {1}({2}),\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, campoMascara.LongitudMaxima);
+                            queryParametros += String.Format("@{0} {1}({2}),\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, campoMascara.LongitudMaxima);
                             queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             break;

@@ -22,13 +22,22 @@ namespace KiiniHelp.UserControls.Detalles {
         protected global::System.Web.UI.WebControls.HiddenField hfTicketActivo;
         
         /// <summary>
-        /// Control hfEstatusAsignacionActual.
+        /// Control hfIdEstatusAsignacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfEstatusAsignacionActual;
+        protected global::System.Web.UI.WebControls.HiddenField hfIdEstatusAsignacion;
+        
+        /// <summary>
+        /// Control hfIdEstatusTicket.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdEstatusTicket;
         
         /// <summary>
         /// Control hfEsPropietario.
@@ -38,6 +47,15 @@ namespace KiiniHelp.UserControls.Detalles {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfEsPropietario;
+        
+        /// <summary>
+        /// Control hfGrupoAsignado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfGrupoAsignado;
         
         /// <summary>
         /// Control lblNoticket.
@@ -130,13 +148,49 @@ namespace KiiniHelp.UserControls.Detalles {
         protected global::System.Web.UI.WebControls.Label lblEstatus;
         
         /// <summary>
-        /// Control TextBox1.
+        /// Control btnAutoasignar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.LinkButton btnAutoasignar;
+        
+        /// <summary>
+        /// Control btnAsignar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAsignar;
+        
+        /// <summary>
+        /// Control rbtnPublics.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnPublics;
+        
+        /// <summary>
+        /// Control rbtnPrivate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnPrivate;
+        
+        /// <summary>
+        /// Control txtConversacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtConversacion;
         
         /// <summary>
         /// Control btnSendPublic.
@@ -299,5 +353,23 @@ namespace KiiniHelp.UserControls.Detalles {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblfechaUltimaActualizacion;
+        
+        /// <summary>
+        /// Control ucCambiarEstatusAsignacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Operacion.UcCambiarEstatusAsignacion ucCambiarEstatusAsignacion;
+        
+        /// <summary>
+        /// Control UcCambiarEstatusTicket.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::KiiniHelp.UserControls.Operacion.UcCambiarEstatusTicket UcCambiarEstatusTicket;
     }
 }

@@ -32,7 +32,8 @@ namespace KiiniHelp.Agente
         {
             try
             {
-                List<HelperTickets> lst = _servicioTickets.ObtenerTickets(((Usuario)Session["UserData"]).Id, pageIndex, _pageSize);
+                //List<HelperTickets> lst = _servicioTickets.ObtenerTickets(((Usuario)Session["UserData"]).Id, pageIndex, _pageSize);
+                List<HelperTickets> lst = null;
                 if (lst != null)
                 {
                     foreach (KeyValuePair<string, string> filtro in filtros)

@@ -48,6 +48,9 @@
     <Reference Include="EPPlus">
       <HintPath>..\..\..\Downloads\EPPlus 4.1\DotNet4\EPPlus.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="MSCaptcha, Version=1.0.2832.11804, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Downloads\MSCaptcha.dll</HintPath>
@@ -66,16 +69,22 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telerik.Web.UI, Version=2017.2.711.45, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Telerik\UI for ASP.NET AJAX R2 2017\Bin40\Telerik.Web.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI.Skins">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Telerik\UI for ASP.NET AJAX R2 2017\Bin40\Telerik.Web.UI.Skins.dll</HintPath>
+    </Reference>
     <Reference Include="Winthusiasm.HtmlEditor, Version=1.9.6.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Downloads\HtmlEditor.VS2010 (1)\ASP.NET 4.0\Winthusiasm.HtmlEditor\bin\Debug\Winthusiasm.HtmlEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Agente\FrmBandeja.aspx" />
+    <Content Include="Agente\Bandeja.aspx" />
     <Content Include="Agente\FrmBandejaTickets.aspx" />
     <Content Include="Agente\FrmTicket.aspx" />
-    <Content Include="Agente\FrmTickets.aspx" />
     <Content Include="assets\carouselImage\slide-1.jpg" />
     <Content Include="assets\carouselImage\slide-2.jpg" />
     <Content Include="assets\carouselImage\slide-3.jpg" />
@@ -235,7 +244,21 @@
     <Content Include="assets\tmp\editor\ui\sass\trumbowyg.scss" />
     <Content Include="assets\tmp\editor\plugins\colors\ui\sass\trumbowyg.colors.scss" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperTicketDetalle.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperticketEnAtencion.datasource" />
     <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso14.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceAtencionTicket\ServiceAtencionTicket.wsdl" />
+    <None Include="Service References\ServiceAtencionTicket\SetviceAtencionTicket.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceAtencionTicket\SetviceAtencionTicket1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceAtencionTicket\SetviceAtencionTicket2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceAtencionTicket\SetviceAtencionTicket3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceDiasHorario\ServiceDiasHorario.wsdl" />
@@ -426,6 +449,13 @@
     <None Include="Service References\ServiceSistemaTipoTelefono\configuration91.svcinfo" />
     <None Include="Service References\ServiceSistemaTipoTelefono\configuration.svcinfo" />
     <None Include="Service References\ServiceSistemaTipoTelefono\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceAtencionTicket\SetviceAtencionTicket.disco" />
+    <None Include="Service References\ServiceAtencionTicket\configuration91.svcinfo" />
+    <None Include="Service References\ServiceAtencionTicket\configuration.svcinfo" />
+    <None Include="Service References\ServiceAtencionTicket\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -794,7 +824,6 @@
     <Content Include="Users\DashBoard.aspx" />
     <Content Include="FrmEncuesta.aspx" />
     <Content Include="Users\Operacion\FrmLevantaTicketAgente.aspx" />
-    <Content Include="Users\Operacion\FrmOperacionTickets.aspx" />
     <Content Include="packages.config" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Organizacion.Compania.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Catalogos.Arbol.Organizacion.Direccion.datasource" />
@@ -2388,12 +2417,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agente\FrmBandeja.aspx.cs">
-      <DependentUpon>FrmBandeja.aspx</DependentUpon>
+    <Compile Include="Agente\Bandeja.aspx.cs">
+      <DependentUpon>Bandeja.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Agente\FrmBandeja.aspx.designer.cs">
-      <DependentUpon>FrmBandeja.aspx</DependentUpon>
+    <Compile Include="Agente\Bandeja.aspx.designer.cs">
+      <DependentUpon>Bandeja.aspx</DependentUpon>
     </Compile>
     <Compile Include="Agente\FrmBandejaTickets.aspx.cs">
       <DependentUpon>FrmBandejaTickets.aspx</DependentUpon>
@@ -2408,13 +2437,6 @@
     </Compile>
     <Compile Include="Agente\FrmTicket.aspx.designer.cs">
       <DependentUpon>FrmTicket.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Agente\FrmTickets.aspx.cs">
-      <DependentUpon>FrmTickets.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Agente\FrmTickets.aspx.designer.cs">
-      <DependentUpon>FrmTickets.aspx</DependentUpon>
     </Compile>
     <Compile Include="ConfirmacionCuenta.aspx.cs">
       <DependentUpon>ConfirmacionCuenta.aspx</DependentUpon>
@@ -2518,6 +2540,11 @@
     </Compile>
     <Compile Include="Publico\Consultas\FrmConsultaTicket.aspx.designer.cs">
       <DependentUpon>FrmConsultaTicket.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceAtencionTicket\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceDiasHorario\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -3485,13 +3512,6 @@
     <Compile Include="Users\Operacion\FrmLevantaTicketAgente.aspx.designer.cs">
       <DependentUpon>FrmLevantaTicketAgente.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Users\Operacion\FrmOperacionTickets.aspx.cs">
-      <DependentUpon>FrmOperacionTickets.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Users\Operacion\FrmOperacionTickets.aspx.designer.cs">
-      <DependentUpon>FrmOperacionTickets.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\ServiceArbolAcceso\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -3884,6 +3904,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ServiceArbolAcceso\" />
     <WCFMetadataStorage Include="Service References\ServiceArea\" />
+    <WCFMetadataStorage Include="Service References\ServiceAtencionTicket\" />
     <WCFMetadataStorage Include="Service References\ServiceConsultas\" />
     <WCFMetadataStorage Include="Service References\ServiceDiasHorario\" />
     <WCFMetadataStorage Include="Service References\ServiceEncuesta\" />
@@ -3919,6 +3940,9 @@
     <WCFMetadataStorage Include="Service References\ServiceUbicacion\" />
     <WCFMetadataStorage Include="Service References\ServiceUsuario\" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -3942,6 +3966,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

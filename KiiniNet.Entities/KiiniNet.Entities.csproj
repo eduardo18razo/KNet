@@ -115,7 +115,10 @@
     <Compile Include="Helper\HelperReportesTicket.cs" />
     <Compile Include="Helper\HelperSubGurpoUsuario.cs" />
     <Compile Include="Helper\HelperTicketDetalle.cs" />
+    <Compile Include="Helper\HelperticketEnAtencion.cs" />
     <Compile Include="Helper\HelperTickets.cs" />
+    <Compile Include="Helper\HelperTicketsUsuario.cs" />
+    <Compile Include="Helper\HelperUsuario.cs" />
     <Compile Include="Operacion\Area.cs" />
     <Compile Include="Operacion\Frecuencia.cs" />
     <Compile Include="Operacion\HitConsulta.cs" />
