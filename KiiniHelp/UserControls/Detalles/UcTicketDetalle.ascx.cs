@@ -71,6 +71,34 @@ namespace KiiniHelp.UserControls.Detalles
             set { hfGrupoAsignado.Value = value.ToString(); }
         }
 
+        private List<HelperConversacionDetalle> ConversacionTicketActivo
+        {
+            get { return (List<HelperConversacionDetalle>)Session["ConversacionTicketActivo"]; }
+            set { Session["ConversacionTicketActivo"] = value; }
+        }
+
+        private void LlenaConversacion(int tipoConversacion)
+        {
+            try
+            {
+                List<HelperConversacionDetalle> lst = ConversacionTicketActivo;
+                switch (tipoConversacion)
+                {
+                    case 1:
+                        lst = lst.Where(w => !w.Privado).ToList();
+                        break;
+                    case 2:
+                        lst = lst.Where(w => w.Privado).ToList();
+                        break;
+                }
+                rptConversaciones.DataSource = lst;
+                rptConversaciones.DataBind();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         public void LlenaTicket(int idTicket)
         {
             try
@@ -97,9 +125,8 @@ namespace KiiniHelp.UserControls.Detalles
 
 
                     LlenaDatosUsuario(ticket.UsuarioLevanto);
-
-                    rptConversaciones.DataSource = ticket.Conversaciones;
-                    rptConversaciones.DataBind();
+                    ConversacionTicketActivo = ticket.Conversaciones;
+                    LlenaConversacion(0);
                     UcDetalleMascaraCaptura.IdTicket = idTicket;
                 }
 
@@ -109,7 +136,6 @@ namespace KiiniHelp.UserControls.Detalles
                 throw new Exception(e.Message);
             }
         }
-
         private void LlenaDatosUsuario(HelperUsuario usuario)
         {
             try
@@ -144,6 +170,7 @@ namespace KiiniHelp.UserControls.Detalles
                 throw new Exception(e.Message);
             }
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -160,6 +187,8 @@ namespace KiiniHelp.UserControls.Detalles
                         LlenaTicket(int.Parse(Request.QueryString["id"]));
                     }
                 }
+                else
+                    UcDetalleMascaraCaptura.IdTicket = IdTicket;
             }
             catch (Exception ex)
             {
@@ -214,7 +243,6 @@ namespace KiiniHelp.UserControls.Detalles
                 Alerta = _lstError;
             }
         }
-
         void UcCambiarEstatusAsignacionOnCancelarModal()
         {
             try
@@ -231,7 +259,6 @@ namespace KiiniHelp.UserControls.Detalles
                 Alerta = _lstError;
             }
         }
-
         void UcCambiarEstatusAsignacion_OnAceptarModal()
         {
             try
@@ -252,7 +279,6 @@ namespace KiiniHelp.UserControls.Detalles
                 Alerta = _lstError;
             }
         }
-
         protected void btnAsignar_OnClick(object sender, EventArgs e)
         {
             try
@@ -274,7 +300,6 @@ namespace KiiniHelp.UserControls.Detalles
                 Alerta = _lstError;
             }
         }
-
         protected void btnCambiarEstatus_OnClick(object sender, EventArgs e)
         {
             try
@@ -295,7 +320,6 @@ namespace KiiniHelp.UserControls.Detalles
                 Alerta = _lstError;
             }
         }
-
         protected void rbtnPublics_OnCheckedChanged(object sender, EventArgs e)
         {
             try
@@ -312,12 +336,11 @@ namespace KiiniHelp.UserControls.Detalles
                 Alerta = _lstError;
             }
         }
-
         protected void rbtnPrivate_OnCheckedChanged(object sender, EventArgs e)
         {
             try
             {
-                txtConversacion.BackColor = Color.PaleGoldenrod;
+                txtConversacion.BackColor = Color.FromArgb(254, 246, 159);
             }
             catch (Exception ex)
             {
@@ -329,7 +352,6 @@ namespace KiiniHelp.UserControls.Detalles
                 Alerta = _lstError;
             }
         }
-
         protected void btnSendPublic_OnClick(object sender, EventArgs e)
         {
             try
@@ -339,6 +361,54 @@ namespace KiiniHelp.UserControls.Detalles
                 _servicioAtencionTicket.AgregarComentarioConversacionTicket(IdTicket, ((Usuario)Session["UserData"]).Id, txtConversacion.Text, false, null, rbtnPrivate.Checked);
                 LlenaTicket(IdTicket);
                 txtConversacion.Text = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+        protected void rbtnConversacionTodos_OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LlenaConversacion(0);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+        protected void rbtnConversacionPublico_OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LlenaConversacion(1);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+        protected void rbtnConversacionPrivado_OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LlenaConversacion(2);
             }
             catch (Exception ex)
             {

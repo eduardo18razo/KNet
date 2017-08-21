@@ -37,6 +37,14 @@
 #full, #form1 {
     height: 100%;
 }
+.private {
+    background: #fef69f;
+    background: rgba(254, 246, 159, 0.47);
+}
+
+.public {
+    background: #ffffff;   
+}
 
 
 @media \0screen {
