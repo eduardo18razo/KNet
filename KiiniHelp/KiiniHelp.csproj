@@ -46,14 +46,11 @@
       <HintPath>bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus">
-      <HintPath>..\..\..\Downloads\EPPlus 4.1\DotNet4\EPPlus.dll</HintPath>
+      <HintPath>..\..\..\Downloads\DotNet4\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="MSCaptcha, Version=1.0.2832.11804, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Downloads\MSCaptcha.dll</HintPath>
-    </Reference>
-    <Reference Include="Recaptcha">
-      <HintPath>..\..\..\Downloads\recaptcha-dotnet-1.0.5.0-binary\Recaptcha.dll</HintPath>
+      <HintPath>..\packages\MSCaptcha.1.0.0\lib\MSCaptcha.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -188,6 +185,8 @@
     <Content Include="ConfirmacionCuenta.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Images\orderedList2.png" />
+    <Content Include="Politicas\frmPoliticasAsignacion.aspx" />
+    <Content Include="Politicas\frmPoliticasEstatusTicket.aspx" />
     <Content Include="Publico\Consultas\FrmPreviewConsulta.aspx" />
     <Content Include="Publico\FrmCategoria.aspx" />
     <Content Include="Publico\FrmServiceArea.aspx" />
@@ -232,6 +231,9 @@
     <Content Include="assets\tmp\editor\ui\sass\trumbowyg.scss" />
     <Content Include="assets\tmp\editor\plugins\colors\ui\sass\trumbowyg.colors.scss" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperTicketDetalle.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneral.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneralDefault.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneralDefault.datasource" />
     <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso14.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -355,6 +357,49 @@
     <None Include="Service References\ServiceSistemaCatalogos\ServiceCatalogos16.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas.wsdl" />
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas12.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas13.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas9.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono.wsdl" />
     <None Include="Service References\ServiceSistemaTipoTelefono\ServiceTipoTelefono.xsd">
       <SubType>Designer</SubType>
@@ -423,6 +468,13 @@
     <None Include="Service References\ServiceSistemaTipoTelefono\configuration91.svcinfo" />
     <None Include="Service References\ServiceSistemaTipoTelefono\configuration.svcinfo" />
     <None Include="Service References\ServiceSistemaTipoTelefono\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceSistemaPoliticas\ServicePoliticas.disco" />
+    <None Include="Service References\ServiceSistemaPoliticas\configuration91.svcinfo" />
+    <None Include="Service References\ServiceSistemaPoliticas\configuration.svcinfo" />
+    <None Include="Service References\ServiceSistemaPoliticas\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -2422,6 +2474,20 @@
     <Compile Include="DisplayImages.ashx.cs">
       <DependentUpon>DisplayImages.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Politicas\frmPoliticasAsignacion.aspx.cs">
+      <DependentUpon>frmPoliticasAsignacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Politicas\frmPoliticasAsignacion.aspx.designer.cs">
+      <DependentUpon>frmPoliticasAsignacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Politicas\frmPoliticasEstatusTicket.aspx.cs">
+      <DependentUpon>frmPoliticasEstatusTicket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Politicas\frmPoliticasEstatusTicket.aspx.designer.cs">
+      <DependentUpon>frmPoliticasEstatusTicket.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Publico\Consultas\FrmPreviewConsulta.aspx.cs">
       <DependentUpon>FrmPreviewConsulta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2510,6 +2576,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceSistemaCanal\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceSistemaPoliticas\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -3870,6 +3941,7 @@
     <WCFMetadataStorage Include="Service References\ServiceSistemaCatalogos\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaDomicilio\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaEstatus\" />
+    <WCFMetadataStorage Include="Service References\ServiceSistemaPoliticas\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaRol\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaSubRol\" />
     <WCFMetadataStorage Include="Service References\ServiceSistemaTipoArbolAcceso\" />

@@ -31,9 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EAGetMail40, Version=4.6.2.2, Culture=neutral, PublicKeyToken=e10a0812eb29cf94, processorArchitecture=MSIL">
-      <HintPath>..\packages\EAGetMail.4.6.2.2\lib\net40\EAGetMail40.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="EAGetMail40">
+      <HintPath>..\packages\EAGetMail.4.6.3.2\lib\net40\EAGetMail40.dll</HintPath>
     </Reference>
     <Reference Include="EASendMail40, Version=7.3.1.2, Culture=neutral, PublicKeyToken=88adb80ecd66540b, processorArchitecture=MSIL">
       <HintPath>..\packages\EASendMail.7.3.1.2\lib\net40\EASendMail40.dll</HintPath>
@@ -78,6 +77,7 @@
     <Compile Include="Operacion\BusinessDiasHorario.cs" />
     <Compile Include="Sistema\BusinessImpactoUrgencia.cs" />
     <Compile Include="Sistema\BusinessNotificacion.cs" />
+    <Compile Include="Sistema\BusinessPoliticas.cs" />
     <Compile Include="Sistema\BusinessRoles.cs" />
     <Compile Include="Sistema\BusinessSubRol.cs" />
     <Compile Include="Sistema\BusinessTipoArbolAcceso.cs" />

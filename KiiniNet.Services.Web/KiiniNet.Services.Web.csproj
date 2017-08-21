@@ -63,6 +63,7 @@
     <Content Include="ServiceMascaras.svc" />
     <Content Include="ServiceSecurity.svc" />
     <Content Include="ServiceUsuarios.svc" />
+    <Content Include="Sistema\ServicePoliticas.svc" />
     <Content Include="Sistema\ServiceCatalogos.svc" />
     <Content Include="Sistema\ServiceCanal.svc" />
     <Content Include="Sistema\ServiceEstatus.svc" />

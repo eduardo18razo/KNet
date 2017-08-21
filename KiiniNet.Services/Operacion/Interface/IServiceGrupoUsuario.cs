@@ -2,6 +2,7 @@
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Usuarios;
+using KiiniNet.Entities.Parametros;
 
 namespace KiiniNet.Services.Operacion.Interface
 {

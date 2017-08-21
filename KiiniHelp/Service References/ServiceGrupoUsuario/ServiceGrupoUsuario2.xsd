@@ -110,10 +110,12 @@
   <xs:element name="TipoArbolAcceso" nillable="true" type="tns:TipoArbolAcceso" />
   <xs:complexType name="TipoUsuario">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Abreviacion" nillable="true" type="xs:string" />
       <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="AliasOrganizacion" nillable="true" type="q36:ArrayOfAliasOrganizacion" />
       <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="AliasUbicacion" nillable="true" type="q37:ArrayOfAliasUbicacion" />
       <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Operacion" minOccurs="0" name="ArbolAcceso" nillable="true" type="q38:ArrayOfArbolAcceso" />
       <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" minOccurs="0" name="Campus" nillable="true" type="q39:ArrayOfCampus" />
+      <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
       <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" minOccurs="0" name="Compania" nillable="true" type="q40:ArrayOfCompania" />
       <xs:element minOccurs="0" name="CorreosObligatorios" type="xs:int" />
       <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />

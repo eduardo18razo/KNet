@@ -22,16 +22,18 @@ namespace KiiniNet.Entities.Parametros
         public bool TieneSupervisor { get; set; }
         [DataMember]
         public bool Propietario { get; set; }
+
         [DataMember]
         public bool Habilitado { get; set; }
 
         [DataMember]
-        public EstatusAsignacion EstatusAsignacionActual { get; set; }
+        public virtual EstatusAsignacion EstatusAsignacionActual { get; set; }
         [DataMember]
-        public EstatusAsignacion EstatusAsignacionAccion { get; set; }
+        public virtual EstatusAsignacion EstatusAsignacionAccion { get; set; }
         [DataMember]
-        public Rol Rol { get; set; }
+        public virtual Rol Rol { get; set; }
         [DataMember]
-        public SubRol SubRol { get; set; }
+        public virtual SubRol SubRol { get; set; }
+
     }
 }

@@ -58,7 +58,9 @@
     <Compile Include="Operacion\Interface\IServiceNota.cs" />
     <Compile Include="Operacion\Interface\IServicePuesto.cs" />
     <Compile Include="Operacion\Interface\IServiceTicket.cs" />
+    <Compile Include="Sistema\Implementacion\ServicePoliticas.cs" />
     <Compile Include="Sistema\Implementacion\ServiceTipoNota.cs" />
+    <Compile Include="Sistema\Interface\IServicePoliticas.cs" />
     <Compile Include="Sistema\Interface\IServiceTipoNota.cs" />
     <Compile Include="Sistema\Implementacion\ServiceCanal.cs" />
     <Compile Include="Sistema\Implementacion\ServiceImpactoUrgencia.cs" />

@@ -839,7 +839,7 @@ namespace KinniNet.Core.Operacion
             finally { db.Dispose(); }
             return result;
         }
-        private List<EstatusAsignacionSubRolGeneral> GeneraEstatusAsignacionGrupoDefault(GrupoUsuario grupo)
+        public List<EstatusAsignacionSubRolGeneral> GeneraEstatusAsignacionGrupoDefault(GrupoUsuario grupo)
         {
             List<EstatusAsignacionSubRolGeneral> result = new List<EstatusAsignacionSubRolGeneral>();
             DataBaseModelContext db = new DataBaseModelContext();
@@ -858,6 +858,23 @@ namespace KinniNet.Core.Operacion
                                     Propietario = statusDefault.Propietario,
                                     Habilitado = statusDefault.Habilitado
                                 });
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally { db.Dispose(); }
+            return result;
+        }
+
+        public List<EstatusAsignacionSubRolGeneralDefault> GeneraEstatusAsignacionGrupoDefault()
+        {
+            List<EstatusAsignacionSubRolGeneralDefault> result = new List<EstatusAsignacionSubRolGeneralDefault>();
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.EstatusAsignacionSubRolGeneralDefault.ToList();
             }
             catch (Exception e)
             {
