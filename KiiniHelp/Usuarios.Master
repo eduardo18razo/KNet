@@ -298,7 +298,7 @@
                                         <div class="dropdown-footer"><a href="#">Ver todos los tickets</a> </div>
                                     </div>
                                 </div>
-                                <div class="item item-messages dropdown" runat="server" ID="divMensajes">
+                                <div class="item item-messages dropdown" runat="server" id="divMensajes">
                                     <div class="dropdown-toggle" id="dropdownMenu-messages" data-toggle="dropdown" aria-expanded="true" role="button">
                                         <span class="sr-only">Mensajes</span> 
                                         <span class="pe-icon pe-7s-mail icon" data-toggle="tooltip" data-placement="bottom" title="Messages"></span>

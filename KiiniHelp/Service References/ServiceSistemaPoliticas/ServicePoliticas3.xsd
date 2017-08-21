@@ -56,7 +56,8 @@
       <xs:element minOccurs="0" name="Requerido" type="xs:boolean" />
       <xs:element minOccurs="0" name="SimboloMoneda" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TipoCampoMascara" nillable="true" type="tns:TipoCampoMascara" />
-      <xs:element minOccurs="0" name="ValorMaximo" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ValorMaximo" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorMinimo" nillable="true" type="xs:decimal" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
@@ -73,6 +74,7 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="IdRegistroCatalogo" type="xs:int" />
       <xs:element minOccurs="0" name="IdTicket" type="xs:int" />
+      <xs:element minOccurs="0" name="NombreCampoMascara" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Seleccionado" type="xs:boolean" />
       <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="Ticket" nillable="true" type="q6:Ticket" />
     </xs:sequence>
@@ -102,6 +104,7 @@
       <xs:element minOccurs="0" name="TipoDatoSql" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UploadFile" type="xs:boolean" />
       <xs:element minOccurs="0" name="ValorMaximo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ValorMinimo" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
