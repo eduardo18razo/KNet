@@ -50,6 +50,7 @@
     <Compile Include="Demonio\BusinessDemonioSms.cs" />
     <Compile Include="Demonio\BusinessTicketMailService.cs" />
     <Compile Include="Demonio\Imap4Mail.cs" />
+    <Compile Include="Operacion\BusinessAtencionTicket.cs" />
     <Compile Include="Operacion\BusinessConsultas.cs" />
     <Compile Include="Demonio\BusinessDemonio.cs" />
     <Compile Include="Operacion\BusinessArea.cs" />

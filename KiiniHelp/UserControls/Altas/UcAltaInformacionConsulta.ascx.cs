@@ -119,7 +119,7 @@ namespace KiiniHelp.UserControls.Altas
                 {
                     if (!File.Exists(BusinessVariables.Directorios.RepositorioInformacionConsulta + docto.Archivo))
                     {
-                        AlertaGeneral = new List<string>{string.Format("El archivo {0} no esta disponible.", docto.Archivo)};
+                        AlertaGeneral = new List<string> { string.Format("El archivo {0} no esta disponible.", docto.Archivo) };
                         continue;
                     }
                     HelperFiles hf = new HelperFiles
@@ -176,6 +176,22 @@ namespace KiiniHelp.UserControls.Altas
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        private bool ValidaCaptura()
+        {
+            try
+            {
+                if (txtDescripcion.Text.Trim() == string.Empty)
+                    throw new Exception("Ingrese un Título");
+                if (txtEditor.Text.Trim() == string.Empty)
+                    throw new Exception("Debe ingresar información para mostrar.");
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return true;
         }
 
         private InformacionConsulta ObtenerInformacionCapturada()
@@ -328,19 +344,22 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                InformacionConsulta informacion = ObtenerInformacionCapturada();
-                List<HelperFiles> lstArchivos = (List<HelperFiles>)Session["selectedFiles"];
-                if (EsAlta)
+                if (ValidaCaptura())
                 {
-                    informacion = _servicioInformacionConsulta.GuardarInformacionConsulta(informacion, lstArchivos.Select(s => s.NombreArchivo).ToList());
-                    RenombraArchivos(lstArchivos.Select(s => s.NombreArchivo).ToList(), informacion.Id);
-                }
-                else
-                    informacion = _servicioInformacionConsulta.ActualizarInformacionConsulta(IdInformacionConsulta, informacion, lstArchivos.Select(s => s.NombreArchivo).ToList());
+                    InformacionConsulta informacion = ObtenerInformacionCapturada();
+                    List<HelperFiles> lstArchivos = (List<HelperFiles>)Session["selectedFiles"];
+                    if (EsAlta)
+                    {
+                        informacion = _servicioInformacionConsulta.GuardarInformacionConsulta(informacion, lstArchivos.Select(s => s.NombreArchivo).ToList());
+                        RenombraArchivos(lstArchivos.Select(s => s.NombreArchivo).ToList(), informacion.Id);
+                    }
+                    else
+                        informacion = _servicioInformacionConsulta.ActualizarInformacionConsulta(IdInformacionConsulta, informacion, lstArchivos.Select(s => s.NombreArchivo).ToList());
 
-                LimpiarCampos();
-                if (OnAceptarModal != null)
-                    OnAceptarModal();
+                    LimpiarCampos();
+                    if (OnAceptarModal != null)
+                        OnAceptarModal();
+                }
             }
             catch (Exception ex)
             {

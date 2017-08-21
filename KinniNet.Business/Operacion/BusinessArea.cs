@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
@@ -319,6 +320,8 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
+                if (db.Area.Any(a => a.Descripcion == area.Descripcion))
+                    throw new Exception("Esta Area ya existe.");
                 //TODO: Cambiar habilitado por el embebido
                 area.Habilitado = true;
                 area.Descripcion = area.Descripcion.Trim().ToUpper();
@@ -336,6 +339,32 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
         }
+
+        public void GuardarAreaAndroid(Area descripcion)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                //TODO: Cambiar habilitado por el embebido
+                Area area = new Area();
+                area.Habilitado = true;
+                area.Descripcion = descripcion.Descripcion.Trim().ToUpper();
+                area.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                if (area.Id == 0)
+                    db.Area.AddObject(area);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
 
         public void Actualizar(int idArea, Area area)
         {

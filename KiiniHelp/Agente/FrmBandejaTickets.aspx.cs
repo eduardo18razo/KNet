@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
+using KiiniHelp.ServiceAtencionTicket;
 using KiiniHelp.ServiceGrupoUsuario;
 using KiiniHelp.ServiceTicket;
 using KiiniHelp.ServiceUsuario;
-using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
@@ -17,10 +16,9 @@ namespace KiiniHelp.Agente
 {
     public partial class FrmBandejaTickets : Page
     {
-
-        private readonly ServiceTicketClient _servicioTickets = new ServiceTicketClient();
         private readonly ServiceGrupoUsuarioClient _servicioGrupos = new ServiceGrupoUsuarioClient();
         private readonly ServiceUsuariosClient _servicioUsuarios = new ServiceUsuariosClient();
+        private readonly ServiceAtencionTicketClient _servicioAtencionTicket = new ServiceAtencionTicketClient();
         private List<string> _lstError = new List<string>();
         private const int PageSize = 1000;
 
@@ -93,7 +91,8 @@ namespace KiiniHelp.Agente
         {
             try
             {
-                List<HelperTickets> lst = _servicioTickets.ObtenerTickets(((Usuario)Session["UserData"]).Id, pageIndex, PageSize);
+                //List<HelperTickets> lst = _servicioTickets.ObtenerTickets(((Usuario)Session["UserData"]).Id, pageIndex, PageSize);
+                List<HelperTickets> lst = null;
                 if (lst != null)
                 {
                     if (ddlGrupo.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
@@ -479,8 +478,12 @@ namespace KiiniHelp.Agente
                     CheckBox chk = (CheckBox)row.FindControl("chkSelected");
                     if (chk.Checked)
                     {
-                        var t = gvTickets.DataKeys[row.RowIndex]["NumeroTicket"].ToString();
-                        _servicioTickets.AutoAsignarTicket(int.Parse(t), ((Usuario)Session["UserData"]).Id);
+                        DataKey dataKey = gvTickets.DataKeys[row.RowIndex];
+                        if (dataKey != null)
+                        {
+                            var t = dataKey["NumeroTicket"].ToString();
+                            _servicioAtencionTicket.AutoAsignarTicket(int.Parse(t), ((Usuario)Session["UserData"]).Id);
+                        }
                     }
                 }
             }

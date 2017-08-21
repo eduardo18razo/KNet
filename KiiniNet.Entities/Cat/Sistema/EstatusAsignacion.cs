@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Operacion.Tickets;
 using KiiniNet.Entities.Parametros;
 
 namespace KiiniNet.Entities.Cat.Sistema
 {
+    [Serializable]
     [DataContract(IsReference = true)]
     public class EstatusAsignacion
     {

@@ -50,7 +50,8 @@ namespace KiiniHelp.UserControls.Detalles
                         grupoToAdd = new HelperAsignacionGrupoUsuarios
                         {
                             IdGrupo = usuarioGrupo.IdGrupoUsuario,
-                            DescripcionGrupo = usuarioGrupo.GrupoUsuario.Descripcion
+                            DescripcionGrupo = usuarioGrupo.GrupoUsuario.Descripcion,
+                            SubGrupos = usuarioGrupo.SubGrupoUsuario == null ? null :  new List<HelperSubGurpoUsuario> { new HelperSubGurpoUsuario { Id = (int)usuarioGrupo.IdSubGrupoUsuario } },
                         };
                     if (usuarioGrupo.IdSubGrupoUsuario != null)
                     {

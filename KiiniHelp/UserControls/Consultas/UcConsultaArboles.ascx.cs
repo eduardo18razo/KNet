@@ -79,9 +79,27 @@ namespace KiiniHelp.UserControls.Consultas
         protected void Page_Load(object sender, EventArgs e)
         {
             lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
+            UcAltaAbrolAcceso.OnCancelarModal += UcAltaAbrolAccesoOnOnCancelarModal;
             if (!IsPostBack)
             {
                 LlenaCombos();
+            }
+        }
+
+        private void UcAltaAbrolAccesoOnOnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAtaOpcion\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
 
@@ -121,7 +139,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editOpcion\");", true);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAtaOpcion\");", true);
             }
             catch (Exception ex)
             {

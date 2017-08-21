@@ -59,7 +59,7 @@ namespace KiiniNet.Services.Sistema.Implementacion
             {
                 using (BusinessEstatus negocio = new BusinessEstatus())
                 {
-                    return negocio.ObtenerEstatusAsignacionUsuario(idUsuario,  idSubRol,  estatusAsignacionActual,  esPropietario,  insertarSeleccion);
+                    return negocio.ObtenerEstatusAsignacionUsuario(idUsuario,  estatusAsignacionActual,  esPropietario,  insertarSeleccion);
                 }
             }
             catch (Exception ex)

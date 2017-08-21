@@ -121,6 +121,15 @@ namespace KiiniHelp.UserControls.Altas.Encuestas {
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
         
         /// <summary>
+        /// Control divPreguntas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPreguntas;
+        
+        /// <summary>
         /// Control rptPreguntas.
         /// </summary>
         /// <remarks>
@@ -128,6 +137,24 @@ namespace KiiniHelp.UserControls.Altas.Encuestas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptPreguntas;
+        
+        /// <summary>
+        /// Control divNps.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divNps;
+        
+        /// <summary>
+        /// Control txtPregunta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPregunta;
         
         /// <summary>
         /// Control btnLimpiarEncuesta.

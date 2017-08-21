@@ -9,23 +9,20 @@ namespace KiiniNet.Services.Operacion.Interface
     public interface IServiceTicket
     {
         [OperationContract]
+        Ticket CrearTicketAndroid(int idUsuario, int idUsuarioSolicito, int idArbol, string latitudinicio,
+            string longitudinicio,
+            string fechaalta,
+            string latitudfin,
+            string longitudfin, string costo, int idCanal, bool campoRandom, bool esTercero, bool esMail);
+        [OperationContract]
         Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero, bool esMail);
 
         [OperationContract]
         List<HelperTickets> ObtenerTicketsUsuario(int idUsuario, int pageIndex, int pageSize);
 
         [OperationContract]
-        List<HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize);
-
-        [OperationContract]
-        void CambiarEstatus(int idTicket, int idEstatus, int idUsuario, string comentario);
+        List<HelperTickets> ObtenerTickets(int idUsuario, List<int> estatus, int pageIndex, int pageSize);
         
-        [OperationContract]
-        void AutoAsignarTicket(int idTicket,  int idUsuario);
-
-        [OperationContract]
-        void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idUsuarioAsigna, string comentario);
-
         [OperationContract]
         HelperDetalleTicket ObtenerDetalleTicket(int idTicket);
 
@@ -39,7 +36,7 @@ namespace KiiniNet.Services.Operacion.Interface
         PreTicket GeneraPreticket(int idArbol, int idUsuarioSolicita, int idUsuarioLevanto, string observaciones);
 
         [OperationContract]
-        void AgregarComentarioConversacionTicket(int idTicket, int idUsuario, string mensaje, bool sistema,List<string> archivos);
+        List<int> CapturaCasillaTicket(int idTicket, string nombreCampo);
     }
 
 }

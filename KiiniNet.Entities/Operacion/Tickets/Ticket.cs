@@ -9,6 +9,7 @@ using KiiniNet.Entities.Operacion.Usuarios;
 
 namespace KiiniNet.Entities.Operacion.Tickets
 {
+    [Serializable]
     [DataContract(IsReference = true)]
     public class Ticket
     {
@@ -40,6 +41,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         public int IdEstatusTicket { get; set; }
         [DataMember]
         public int IdCanal { get; set; }
+        [DataMember]
+        public int? IdNivelTicket { get; set; }
         [DataMember]
         public int IdEstatusAsignacion { get; set; }
         [DataMember]
@@ -97,6 +100,8 @@ namespace KiiniNet.Entities.Operacion.Tickets
         public virtual EstatusTicket EstatusTicket { get; set; }
         [DataMember]
         public virtual Canal Canal { get; set; }
+        [DataMember]
+        public virtual NivelTicket NivelTicket { get; set; }
         [DataMember]
         public virtual EstatusAsignacion EstatusAsignacion { get; set; }
         [DataMember]

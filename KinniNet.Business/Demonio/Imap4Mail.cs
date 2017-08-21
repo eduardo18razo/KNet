@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -359,8 +360,8 @@ namespace KinniNet.Core.Demonio
                 {
                     try
                     {
-                        //TODO: Cambiar IdArbol por dinamico
-                        arbol = new BusinessArbolAcceso().ObtenerArbolAcceso(1);
+                        int arbolParametro = int.Parse(ConfigurationManager.AppSettings["ServicioCorreo"]);
+                        arbol = new BusinessArbolAcceso().ObtenerArbolAcceso(arbolParametro);
                         int? idMascara = arbol.InventarioArbolAcceso.First().IdMascara;
                         if (idMascara != null)
                             mascara = new BusinessMascaras().ObtenerMascaraCaptura((int)idMascara);
@@ -565,7 +566,7 @@ namespace KinniNet.Core.Demonio
                                 att.SaveAs(String.Format("{0}{1}", BusinessVariables.Directorios.RepositorioTemporal, attname), true);
                             }
                         }
-                        new BusinessTicket().AgregarComentarioConversacionTicket(idticket, user.Id, respuesta, false, archivos);
+                        new BusinessAtencionTicket().AgregarComentarioConversacionTicket(idticket, user.Id, respuesta, false, archivos, false);
                         foreach (string archivo in archivos)
                         {
                             File.Move(BusinessVariables.Directorios.RepositorioTemporal + archivo, BusinessVariables.Directorios.RepositorioTemporal + archivo.Replace("ticketid", idticket.ToString()));
@@ -574,7 +575,7 @@ namespace KinniNet.Core.Demonio
                         }
                     }
                     else
-                        new BusinessTicket().AgregarComentarioConversacionTicket(idticket, user.Id, respuesta, false, null);
+                        new BusinessAtencionTicket().AgregarComentarioConversacionTicket(idticket, user.Id, respuesta, false, null, false);
 
 
 

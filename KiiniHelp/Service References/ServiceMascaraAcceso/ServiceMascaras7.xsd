@@ -50,6 +50,7 @@
       <xs:element minOccurs="0" name="OrganizacionCompleta" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OrganizacionFinal" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PersonaFisica" type="xs:boolean" />
       <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="PreTicketLevantado" nillable="true" type="q12:ArrayOfPreTicket" />
       <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion.Tickets" minOccurs="0" name="PreTicketSolicitado" nillable="true" type="q13:ArrayOfPreTicket" />
       <xs:element minOccurs="0" name="PreguntaReto" nillable="true" type="tns:ArrayOfPreguntaReto" />

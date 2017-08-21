@@ -30,6 +30,9 @@ namespace KiiniHelp.ServiceEncuesta {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/GuardarEncuesta", ReplyAction="http://tempuri.org/IServiceEncuesta/GuardarEncuestaResponse")]
         void GuardarEncuesta(KiiniNet.Entities.Cat.Usuario.Encuesta encuesta);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/ActualizarEncuesta", ReplyAction="http://tempuri.org/IServiceEncuesta/ActualizarEncuestaResponse")]
+        void ActualizarEncuesta(KiiniNet.Entities.Cat.Usuario.Encuesta encuesta);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceEncuesta/Consulta", ReplyAction="http://tempuri.org/IServiceEncuesta/ConsultaResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Encuesta> Consulta(string descripcion);
         
@@ -94,6 +97,10 @@ namespace KiiniHelp.ServiceEncuesta {
         
         public void GuardarEncuesta(KiiniNet.Entities.Cat.Usuario.Encuesta encuesta) {
             base.Channel.GuardarEncuesta(encuesta);
+        }
+        
+        public void ActualizarEncuesta(KiiniNet.Entities.Cat.Usuario.Encuesta encuesta) {
+            base.Channel.ActualizarEncuesta(encuesta);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.Encuesta> Consulta(string descripcion) {

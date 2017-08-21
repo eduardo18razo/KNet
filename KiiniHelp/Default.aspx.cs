@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Configuration;
 using System.Web.UI;
+using KiiniHelp.ServiceTicket;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp
@@ -55,7 +56,9 @@ namespace KiiniHelp
                 ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;
                 if(UcLogCopia.Fail)
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "OpenDropLogin();", true);
-            }
+
+                
+                }
             catch (Exception ex)
             {
                 if (_lstError == null)

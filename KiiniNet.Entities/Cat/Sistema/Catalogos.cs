@@ -25,6 +25,8 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public bool Archivo { get; set; }
         [DataMember]
+        public bool Sistema { get; set; }
+        [DataMember]
         public DateTime FechaAlta { get; set; }
         [DataMember]
         public int IdUsuarioAlta { get; set; }

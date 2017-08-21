@@ -85,15 +85,6 @@ namespace KiiniHelp.Publico.Consultas {
         protected global::System.Web.UI.WebControls.Label lblticket;
         
         /// <summary>
-        /// Control lblCveRegistro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCveRegistro;
-        
-        /// <summary>
         /// Control lblfecha.
         /// </summary>
         /// <remarks>
@@ -121,15 +112,6 @@ namespace KiiniHelp.Publico.Consultas {
         protected global::System.Web.UI.WebControls.Label lblestatus;
         
         /// <summary>
-        /// Control ucDetalleMascaraCaptura.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::KiiniHelp.UserControls.Detalles.UcDetalleMascaraCaptura ucDetalleMascaraCaptura;
-        
-        /// <summary>
         /// Control btnCambiaEstatus.
         /// </summary>
         /// <remarks>
@@ -139,22 +121,22 @@ namespace KiiniHelp.Publico.Consultas {
         protected global::System.Web.UI.WebControls.Button btnCambiaEstatus;
         
         /// <summary>
-        /// Control rptComentrios.
+        /// Control ucDetalleMascaraCaptura.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptComentrios;
+        protected global::KiiniHelp.UserControls.Detalles.UcDetalleMascaraCaptura ucDetalleMascaraCaptura;
         
         /// <summary>
-        /// Control targetEditor.
+        /// Control txtEditor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox targetEditor;
+        protected global::Winthusiasm.HtmlEditor.HtmlEditor txtEditor;
         
         /// <summary>
         /// Control btnComentar.
@@ -164,6 +146,15 @@ namespace KiiniHelp.Publico.Consultas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnComentar;
+        
+        /// <summary>
+        /// Control rptComentrios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptComentrios;
         
         /// <summary>
         /// Control UcCambiarEstatusTicket.

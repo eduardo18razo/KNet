@@ -72,6 +72,18 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ActualizarEncuesta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="encuesta" nillable="true" type="q6:Encuesta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualizarEncuestaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="Consulta">
     <xs:complexType>
       <xs:sequence>
@@ -82,7 +94,7 @@
   <xs:element name="ConsultaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ConsultaResult" nillable="true" type="q6:ArrayOfEncuesta" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ConsultaResult" nillable="true" type="q7:ArrayOfEncuesta" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -109,14 +121,14 @@
   <xs:element name="ObtenerEncuestasPendientesUsuarioResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerEncuestasPendientesUsuarioResult" nillable="true" type="q7:ArrayOfHelperEncuesta" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Helper" minOccurs="0" name="ObtenerEncuestasPendientesUsuarioResult" nillable="true" type="q8:ArrayOfHelperEncuesta" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ContestaEncuesta">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="encuestaRespondida" nillable="true" type="q8:ArrayOfRespuestaEncuesta" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Operacion" minOccurs="0" name="encuestaRespondida" nillable="true" type="q9:ArrayOfRespuestaEncuesta" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -135,14 +147,14 @@
   <xs:element name="ObtenerEncuestasContestadasResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerEncuestasContestadasResult" nillable="true" type="q9:ArrayOfEncuesta" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerEncuestasContestadasResult" nillable="true" type="q10:ArrayOfEncuesta" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ObtenerEncuestaByGrupos">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q10:ArrayOfint" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="grupos" nillable="true" type="q11:ArrayOfint" />
         <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
@@ -150,7 +162,7 @@
   <xs:element name="ObtenerEncuestaByGruposResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerEncuestaByGruposResult" nillable="true" type="q11:ArrayOfEncuesta" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerEncuestaByGruposResult" nillable="true" type="q12:ArrayOfEncuesta" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

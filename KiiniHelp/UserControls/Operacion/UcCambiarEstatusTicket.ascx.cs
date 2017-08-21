@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Configuration;
 using System.Web.UI;
+using KiiniHelp.ServiceAtencionTicket;
 using KiiniHelp.ServiceSistemaEstatus;
-using KiiniHelp.ServiceTicket;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Operacion
@@ -11,7 +12,7 @@ namespace KiiniHelp.UserControls.Operacion
     public partial class UcCambiarEstatusTicket : UserControl, IControllerModal
     {
         private readonly ServiceEstatusClient _servicioEstatus = new ServiceEstatusClient();
-        private readonly ServiceTicketClient _servicioTicketClient = new ServiceTicketClient();
+        private readonly ServiceAtencionTicketClient _servicioAtencionTicket = new ServiceAtencionTicketClient();
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
@@ -66,14 +67,16 @@ namespace KiiniHelp.UserControls.Operacion
             }
         }
 
-        private List<string> AlertaGeneral
+        private List<string> Alerta
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value.Select(s => new { Detalle = s }).ToList();
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -81,7 +84,8 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
-                AlertaGeneral = new List<string>();
+                Alerta = new List<string>();
+                lblBrandingModal.Text = WebConfigurationManager.AppSettings["Brand"];
                 if (!IsPostBack)
                 {
                     
@@ -94,7 +98,7 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
 
@@ -105,7 +109,7 @@ namespace KiiniHelp.UserControls.Operacion
                 if (ddlEstatus.SelectedValue != BusinessVariables.ComboBoxCatalogo.ValueSeleccione.ToString())
                 {
                     CerroTicket = Convert.ToInt32(ddlEstatus.SelectedValue) == (int) BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado;
-                    _servicioTicketClient.CambiarEstatus(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuario, txtComentarios.Text.Trim());
+                    _servicioAtencionTicket.CambiarEstatus(IdTicket, Convert.ToInt32(ddlEstatus.SelectedValue), IdUsuario, txtComentarios.Text.Trim());
                 }
                 
                 if (OnAceptarModal != null)
@@ -118,10 +122,9 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
-
 
         protected void btnCancelar_OnClick(object sender, EventArgs e)
         {
@@ -137,7 +140,7 @@ namespace KiiniHelp.UserControls.Operacion
                     _lstError = new List<string>();
                 }
                 _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
+                Alerta = _lstError;
             }
         }
     }

@@ -57,6 +57,7 @@ namespace KiiniHelp
                 if (!TicketsAbiertos.Any(a => a.IdTicket == idTicket))
                     TicketsAbiertos.Add(new TicketSeleccionado { IdTicket = idTicket, Title = titulo });
                 LlenaTicketsAbiertos();
+                Response.Redirect("~/Agente/FrmTicket.aspx?id=" + idTicket);
             }
             catch (Exception e)
             {
@@ -156,7 +157,7 @@ namespace KiiniHelp
                 if (Session["UserData"] != null && HttpContext.Current.Request.Url.Segments[HttpContext.Current.Request.Url.Segments.Count() - 1] != "FrmCambiarContrasena.aspx")
                     if (_servicioSeguridad.CaducaPassword(((Usuario)Session["UserData"]).Id))
                         Response.Redirect(ResolveUrl("~/Users/Administracion/Usuarios/FrmCambiarContrasena.aspx"));
-                lnkBtnCerrar.Visible = !ContentPlaceHolder1.Page.ToString().ToUpper().Contains("DASHBOARD");
+                //lnkBtnCerrar.Visible = !ContentPlaceHolder1.Page.ToString().ToUpper().Contains("DASHBOARD");
 
                 if (!IsPostBack && Session["UserData"] != null)
                 {
@@ -530,6 +531,23 @@ namespace KiiniHelp
                     else
                         Response.Redirect("~/Agente/FrmTicket.aspx?id=" + TicketsAbiertos[index].IdTicket);
                 }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("~/Users/Operacion/FrmLevantaTicketAgente.aspx");
             }
             catch (Exception ex)
             {

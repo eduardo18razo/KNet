@@ -65,7 +65,7 @@ namespace KinniNet.Core.Operacion
                 //{
                 result = db.GrupoUsuario.Join(db.UsuarioGrupo, gu => gu.Id, ug => ug.IdGrupoUsuario, (gu, ug) => new { gu, ug })
                     .Where(@t => @t.ug.IdUsuario == idUsuario && @t.gu.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención)
-                    .Select(@t => @t.gu).ToList();
+                    .Select(@t => @t.gu).Distinct().ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new GrupoUsuario

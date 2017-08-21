@@ -324,12 +324,8 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_Mascara_UsuarioAlta" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_Mascara" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.TipoCampoMascara" Width="1.5" PointX="0.75" PointY="9" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.CampoMascara" Width="1.5" PointX="21" PointY="71.5" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_tblCampoMascara_tblCatTipoCampoMascara" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.ParametrosGenerales" Width="1.5" PointX="3.375" PointY="8.75" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Catalogos" Width="1.5" PointX="5.375" PointY="9" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_tblCampoMascara_tblCatCatalogos" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Encuesta" Width="1.5" PointX="26" PointY="113.625" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Catalogos_Usuario" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Catalogos_Usuario1" />
@@ -352,6 +348,12 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_Frecuencia_TipoArbolAcceso" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_HitConsulta_TipoArbolAcceso" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_TipoArbolAcceso" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.NivelTicket" Width="1.5" PointX="9.375" PointY="3.875" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_Ticket_NivelTicket" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.CampoMascara" Width="1.5" PointX="21" PointY="38.125" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_tblCampoMascara_tblCatCatalogos" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_tblCampoMascara_tblCatTipoCampoMascara" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

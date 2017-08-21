@@ -52,17 +52,13 @@ namespace KiiniHelp.UserControls.Consultas
                 int? idTipoUsuario = null;
 
                 LimpiarUsuarios();
-                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione && txtFiltro.Text.Trim() == string.Empty)
-                {
-                    return;
-                }
                 if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
                 {
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
                 }
                 List<Usuario> lstUsuarios = _servicioUsuarios.ObtenerUsuarios(idTipoUsuario);
                 if (txtFiltro.Text.Trim() != string.Empty)
-                    lstUsuarios = lstUsuarios.Where(w => w.NombreCompleto.Contains(txtFiltro.Text.Trim())).ToList();
+                    lstUsuarios = lstUsuarios.Where(w => w.ApellidoPaterno.Contains(txtFiltro.Text.ToUpper().Trim()) || w.ApellidoPaterno.Contains(txtFiltro.Text.ToUpper().Trim()) || w.Nombre.Contains(txtFiltro.Text.ToUpper().Trim())).ToList();
                 rptResultados.DataSource = lstUsuarios;
                 rptResultados.DataBind();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);

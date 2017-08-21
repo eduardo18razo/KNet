@@ -59,6 +59,7 @@
     <Compile Include="Cat\Sistema\Impacto.cs" />
     <Compile Include="Cat\Sistema\Menu.cs" />
     <Compile Include="Cat\Sistema\NivelOrganizacion.cs" />
+    <Compile Include="Cat\Sistema\NivelTicket.cs" />
     <Compile Include="Cat\Sistema\NivelUbicacion.cs" />
     <Compile Include="Cat\Sistema\Prioridad.cs" />
     <Compile Include="Cat\Sistema\RespuestaTipoEncuesta.cs" />
@@ -114,7 +115,10 @@
     <Compile Include="Helper\HelperReportesTicket.cs" />
     <Compile Include="Helper\HelperSubGurpoUsuario.cs" />
     <Compile Include="Helper\HelperTicketDetalle.cs" />
+    <Compile Include="Helper\HelperticketEnAtencion.cs" />
     <Compile Include="Helper\HelperTickets.cs" />
+    <Compile Include="Helper\HelperTicketsUsuario.cs" />
+    <Compile Include="Helper\HelperUsuario.cs" />
     <Compile Include="Operacion\Area.cs" />
     <Compile Include="Operacion\Frecuencia.cs" />
     <Compile Include="Operacion\HitConsulta.cs" />

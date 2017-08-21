@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web.UI;
+using System.Web.UI.WebControls;
+using KiiniHelp.ServiceAtencionTicket;
 using KiiniHelp.ServiceTicket;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Detalles
 {
@@ -16,6 +20,7 @@ namespace KiiniHelp.UserControls.Detalles
         public event DelegateTerminarModal OnTerminarModal;
 
         private readonly ServiceTicketClient _servicioTicket = new ServiceTicketClient();
+        private readonly ServiceAtencionTicketClient _servicioAtencionTicket = new ServiceAtencionTicketClient();
         private List<string> _lstError = new List<string>();
 
         private List<string> Alerta
@@ -31,12 +36,26 @@ namespace KiiniHelp.UserControls.Detalles
             }
         }
 
-        public int IdEstatusAsignacionActual
+        private int IdTicket
         {
-            get { return Convert.ToInt32(hfEstatusAsignacionActual.Value); }
+            get { return int.Parse(hfTicketActivo.Value); }
+            set { hfTicketActivo.Value = value.ToString(); }
+        }
+
+        public int IdEstatusAsignacion
+        {
+            get { return Convert.ToInt32(hfIdEstatusAsignacion.Value); }
             set
             {
-                hfEstatusAsignacionActual.Value = value.ToString();
+                hfIdEstatusAsignacion.Value = value.ToString();
+            }
+        }
+        public int IdEstatusTicket
+        {
+            get { return Convert.ToInt32(hfIdEstatusTicket.Value); }
+            set
+            {
+                hfIdEstatusTicket.Value = value.ToString();
             }
         }
 
@@ -46,27 +65,40 @@ namespace KiiniHelp.UserControls.Detalles
             set { hfEsPropietario.Value = value.ToString(); }
         }
 
+        private int IdGrupoAsignado
+        {
+            get { return Convert.ToInt32(hfGrupoAsignado.Value); }
+            set { hfGrupoAsignado.Value = value.ToString(); }
+        }
+
         public void LlenaTicket(int idTicket)
         {
             try
             {
-                HelperTicketDetalle ticket = _servicioTicket.ObtenerTicket(idTicket, ((Usuario)Session["UserData"]).Id);
+                HelperticketEnAtencion ticket = _servicioAtencionTicket.ObtenerTicketEnAtencion(idTicket, ((Usuario)Session["UserData"]).Id);
+                //HelperTicketDetalle ticket = _servicioTicket.ObtenerTicket(idTicket, ((Usuario)Session["UserData"]).Id);
                 if (ticket != null)
                 {
+                    IdTicket = ticket.IdTicket;
+                    EsPropietario = ticket.EsPropietario;
+                    IdEstatusAsignacion = ticket.IdEstatusAsignacion;
+                    IdEstatusTicket = ticket.IdEstatusTicket;
+                    IdGrupoAsignado = ticket.IdGrupoAsignado;
+
                     lblNoticket.Text = ticket.IdTicket.ToString();
                     lblTituloTicket.Text = ticket.Tipificacion;
-                    lblNombreCorreo.Text = string.Format("{0} {1}", ticket.UsuarioLevanto, ticket.DetalleUsuarioLevanto.CorreoUsuario.First().Correo);
-                    lblFechaAlta.Text = ticket.FechaSolicitud.ToString();
-                    imgPrioridad.ImageUrl = "~/assets/images/icons/prioridadalta.png";
-                    imgSLA.ImageUrl = "~/assets/images/icons/prioridadbaja.png";
-                    lblTiempoRestanteSLa.Text = ticket.DiferenciaSla;
-                    divEstatus.Style.Add("background-color", ticket.EstatusTicket.Color);
-                    lblEstatus.Text = ticket.EstatusTicket.Descripcion;
+                    lblNombreCorreo.Text = string.Format("{0} {1}", ticket.UsuarioLevanto.NombreCompleto, ticket.CorreoTicket);
+                    lblFechaAlta.Text = ticket.FechaLevanto;
+                    imgPrioridad.ImageUrl = "~/assets/images/icons/" + ticket.Impacto;
+                    imgSLA.ImageUrl = ticket.DentroSla ? "~/assets/images/icons/SLA_verde.png" : "~/assets/images/icons/SLA_rojo.png";
+                    lblTiempoRestanteSLa.Text = "Diferencia";
+                    divEstatus.Style.Add("background-color", ticket.ColorEstatus);
+                    lblEstatus.Text = ticket.DescripcionEstatusTicket;
 
-                    LlenaDatosUsuario(ticket.DetalleUsuarioLevanto);
-                    lblFechaAltaDetalle.Text = ticket.FechaSolicitud.ToShortDateString();
-                    lblfechaUltimaActualizacion.Text = ticket.UltimaActualizacion.ToShortDateString();
-                    rptConversaciones.DataSource = ticket.ConversacionDetalle;
+
+                    LlenaDatosUsuario(ticket.UsuarioLevanto);
+
+                    rptConversaciones.DataSource = ticket.Conversaciones;
                     rptConversaciones.DataBind();
                     UcDetalleMascaraCaptura.IdTicket = idTicket;
                 }
@@ -78,27 +110,33 @@ namespace KiiniHelp.UserControls.Detalles
             }
         }
 
-        private void LlenaDatosUsuario(Usuario usuario)
+        private void LlenaDatosUsuario(HelperUsuario usuario)
         {
             try
             {
                 if (usuario != null)
                 {
                     lblNombreDetalle.Text = usuario.NombreCompleto;
-                    lblTipoUsuarioDetalle.Text = usuario.TipoUsuario.Descripcion.Substring(0, 1);
+                    lblTipoUsuarioDetalle.Text = usuario.TipoUsuarioDescripcion.Substring(0, 1);
                     imgVip.Visible = usuario.Vip;
-                    lblFechaUltimaconexion.Text = usuario.BitacoraAcceso.Last().Fecha.ToString();
-                    ddlTicketUsuario.DataSource = usuario.TicketsLevantados;
-                    ddlTicketUsuario.DataTextField = "Id";
-                    ddlTicketUsuario.DataValueField = "Id";
+                    lblFechaUltimaconexion.Text = usuario.FechaUltimoLogin;
+                    ddlTicketUsuario.DataSource = usuario.TicketsAbiertos;
+                    ddlTicketUsuario.DataTextField = "Tipificacion";
+                    ddlTicketUsuario.DataValueField = "IdTicket";
                     ddlTicketUsuario.DataBind();
 
-                    lblPuesto.Text = usuario.Puesto != null ? usuario.Puesto.Descripcion : string.Empty;
-                    lblCorreoPrincipal.Text = usuario.CorreoUsuario.FirstOrDefault(s => s.Obligatorio) != null ? usuario.CorreoUsuario.First(s => s.Obligatorio).Correo : string.Empty;
-                    lblTelefonoPrincipal.Text = usuario.TelefonoUsuario.FirstOrDefault(s => s.Obligatorio) != null ? usuario.TelefonoUsuario.First(s => s.Obligatorio).Numero : string.Empty;
-                    lblOrganizacion.Text = usuario.OrganizacionCompleta;
-                    lblUbicacion.Text = usuario.UbicacionCompleta;
-                    
+                    lblPuesto.Text = usuario.Puesto;
+                    // usuario.FirstOrDefault(s => s.Obligatorio) != null ? usuario.CorreoUsuario.First(s => s.Obligatorio).Correo : string.Empty;
+                    //TODO: Cambia a correo principal
+                    lblCorreoPrincipal.Text = usuario.Correos.First();
+                    //usuario.TelefonoUsuario.FirstOrDefault(s => s.Obligatorio) != null ? usuario.TelefonoUsuario.First(s => s.Obligatorio).Numero : string.Empty;
+                    //TODO: Cambia a telefono principal
+                    lblTelefonoPrincipal.Text = usuario.Telefonos.First();
+                    lblOrganizacion.Text = usuario.Organizacion;
+                    lblUbicacion.Text = usuario.Ubicacion;
+                    lblFechaAltaDetalle.Text = usuario.Creado;
+                    lblfechaUltimaActualizacion.Text = usuario.UltimaActualizacion;
+
                 }
             }
             catch (Exception e)
@@ -110,6 +148,11 @@ namespace KiiniHelp.UserControls.Detalles
         {
             try
             {
+                UcCambiarEstatusTicket.OnAceptarModal += UcCambiarEstatusTicket_OnAceptarModal;
+                UcCambiarEstatusTicket.OnCancelarModal += UcCambiarEstatusTicketOnCancelarModal;
+
+                ucCambiarEstatusAsignacion.OnAceptarModal += UcCambiarEstatusAsignacion_OnAceptarModal;
+                ucCambiarEstatusAsignacion.OnCancelarModal += UcCambiarEstatusAsignacionOnCancelarModal;
                 if (!IsPostBack)
                 {
                     if (Request.QueryString["id"] != null)
@@ -117,6 +160,185 @@ namespace KiiniHelp.UserControls.Detalles
                         LlenaTicket(int.Parse(Request.QueryString["id"]));
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        void UcCambiarEstatusTicket_OnAceptarModal()
+        {
+            try
+            {
+
+                LlenaTicket(IdTicket);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEstatusCambio\");", true);
+                if (UcCambiarEstatusTicket.CerroTicket)
+                {
+                    string url = ResolveUrl("~/FrmEncuesta.aspx?IdTipoServicio=" + (int)BusinessVariables.EnumTipoArbol.SolicitarServicio + "IdTicket=" + hfTicketActivo.Value);
+                    //string s = "window.open('" + url + "', 'popup_window', 'width=600,height=600,left=300,top=100,resizable=yes');";
+                    //ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptEncuesta", "OpenWindow(\"" + url + "\");", true);
+                }
+                hfTicketActivo.Value = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+        void UcCambiarEstatusTicketOnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEstatusCambio\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        void UcCambiarEstatusAsignacionOnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAsignacionCambio\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        void UcCambiarEstatusAsignacion_OnAceptarModal()
+        {
+            try
+            {
+                AgenteMaster master = Parent.Page.Master as AgenteMaster;
+                if (master != null)
+                {
+                    master.RemoveTicketOpen(IdTicket);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnAsignar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ucCambiarEstatusAsignacion.IdEstatusAsignacionActual = IdEstatusAsignacion;
+                ucCambiarEstatusAsignacion.EsPropietario = EsPropietario;
+                ucCambiarEstatusAsignacion.IdTicket = IdTicket;
+                ucCambiarEstatusAsignacion.IdGrupo = IdGrupoAsignado;
+                ucCambiarEstatusAsignacion.IdUsuario = ((Usuario)Session["UserData"]).Id;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAsignacionCambio\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnCambiarEstatus_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                UcCambiarEstatusTicket.EsPropietario = EsPropietario;
+                UcCambiarEstatusTicket.IdTicket = IdTicket;
+                UcCambiarEstatusTicket.IdEstatusActual = IdEstatusTicket;
+                UcCambiarEstatusTicket.IdUsuario = ((Usuario)Session["UserData"]).Id;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalEstatusCambio\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void rbtnPublics_OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtConversacion.BackColor = Color.White;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void rbtnPrivate_OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtConversacion.BackColor = Color.PaleGoldenrod;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnSendPublic_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtConversacion.Text == string.Empty)
+                    throw new Exception("Ingrese un comentario.");
+                _servicioAtencionTicket.AgregarComentarioConversacionTicket(IdTicket, ((Usuario)Session["UserData"]).Id, txtConversacion.Text, false, null, rbtnPrivate.Checked);
+                LlenaTicket(IdTicket);
+                txtConversacion.Text = string.Empty;
             }
             catch (Exception ex)
             {

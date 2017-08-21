@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System.ComponentModel;
+using System.Configuration;
 
 namespace KinniNet.Business.Utils
 {
@@ -72,9 +73,25 @@ namespace KinniNet.Business.Utils
             public static string PrefijoComandoInsertar = "InsertCatalogoSistema";
             public static string PrefijoComandoActualizar = "UpdateCatalogoSistema";
         }
-
+        public static class EnumImpacto
+        {
+            public const string Alto = "ALTO";
+            public const string Medio = "MEDIO";
+            public const string Bajo = "BAJO";
+        }
         public static class EnumeradoresKiiniNet
         {
+            public enum EnumeradorNivelAsignacion
+            {
+                Supervisor = 1,
+                PrimerNivel = 2,
+                SegundoNivel = 3,
+                TercerNivel = 4,
+                CuartoNivel = 5,
+            }
+
+
+
             public enum EnumTiposCampo
             {
                 Texto = 1,
@@ -270,7 +287,8 @@ namespace KinniNet.Business.Utils
         {
             SiNo = 1,
             Calificacion = 2,
-            OpcionMultiple = 3
+            OpcionMultiple = 3,
+            PromotorScore = 4
         }
 
         public enum EnumTipoCorreo

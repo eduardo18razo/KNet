@@ -64,10 +64,13 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 chkRequerido.Checked = false;
                 txtLongitudMinima.Text = string.Empty;
                 txtLongitudMaxima.Text = string.Empty;
+                txtValorMinimo.Text = string.Empty;
                 txtValorMaximo.Text = string.Empty;
+                txtMascara.Text = string.Empty;
                 txtSimboloMoneda.Text = string.Empty;
                 ddlCatalogosCampo.SelectedIndex = ddlCatalogosCampo.SelectedIndex >= 1 ? BusinessVariables.ComboBoxCatalogo.IndexSeleccione : -1;
                 hfAltaCampo.Value = true.ToString();
+                ucAltaCatalogo.LimpiarCampos();
 
             }
             catch (Exception e)
@@ -105,7 +108,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 if (tipoCampo == null) return;
                 imgTitleImage.ImageUrl = "~/assets/images/controls/" + tipoCampo.Image;
                 lblTitleAgregarCampo.Text = "" + tipoCampo.Descripcion.ToUpper();
-
+                divValorMaximo.Visible = false;
                 lblDescripcion.Text = tipoCampo.DescripcionTexto;
 
                 txtLongitudMinima.Visible = tipoCampo.LongitudMinima;
@@ -115,10 +118,29 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 divLongitudMaxima.Visible = tipoCampo.LongitudMaxima;
 
                 divMoneda.Visible = tipoCampo.SimboloMoneda;
-                divValorMaximo.Visible = tipoCampo.ValorMaximo;
+                if (tipoCampo.ValorMaximo)
+                {
+                    divValorMaximo.Visible = tipoCampo.ValorMaximo;
+                    if (tipoCampo.Decimal)
+                    {
+                        txtValorMinimo.Attributes["min"] = "0.01";
+                        txtValorMinimo.Attributes["step"] = "0.01";
+                        txtValorMaximo.Attributes["min"] = "0.01";
+                        txtValorMaximo.Attributes["step"] = "0.01";
+                    }
+                    else
+                    {
+                        txtValorMinimo.Attributes["min"] = "0";
+                        txtValorMinimo.Attributes["step"] = "1";
+
+                        txtValorMaximo.Attributes["min"] = "1";
+                        txtValorMaximo.Attributes["step"] = "1";
+                    }
+                }
                 divCatalgo.Visible = tipoCampo.Catalogo;
                 divMascara.Visible = tipoCampo.Mask;
                 btnAgregarCampo.Visible = !tipoCampo.Catalogo;
+                chkRequerido.Visible = !(tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Logico);
                 if (tipoCampo.Catalogo)
                 {
 
@@ -152,9 +174,13 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 {
                     txtNombre.Text = formulario.Descripcion;
                     Session["MascaraAlta"] = formulario;
+                    if (EsAlta)
+                        foreach (CampoMascara campo in formulario.CampoMascara)
+                        {
+                            campo.Id = 0;
+                        }
                     rptControles.DataSource = formulario.CampoMascara;
                     rptControles.DataBind();
-                    EsAlta = false;
                 }
             }
             catch (Exception ex)
@@ -179,15 +205,16 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 {
                     if (Request.QueryString["idFormulario"] != null)
                     {
-                        LlenaDatosMascara(int.Parse(Request.QueryString["idFormulario"]));
                         if (Request.QueryString["Alta"] != null)
                             EsAlta = bool.Parse(Request.QueryString["Alta"]);
+                        LlenaDatosMascara(int.Parse(Request.QueryString["idFormulario"]));
                     }
                     else
                     {
                         EsAlta = true;
                     }
                 }
+                divAgregarCampos.Visible = EsAlta;
             }
             catch (Exception ex)
             {
@@ -271,26 +298,46 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 GeneraControl(int.Parse(hfTipoCampo.Value));
                 chkRequerido.Checked = campoEditar.Requerido;
                 txtDescripcionCampo.Text = campoEditar.Descripcion;
+
+                chkRequerido.Enabled = EsAlta;
+
                 if (divLongitudMinima.Visible)
                 {
+                    //txtLongitudMinima.Enabled = EsAlta;
                     txtLongitudMinima.Text = campoEditar.LongitudMinima.ToString();
                 }
 
                 if (divLongitudMaxima.Visible)
                 {
+                    //txtLongitudMaxima.Enabled = EsAlta;
                     txtLongitudMaxima.Text = campoEditar.LongitudMaxima.ToString();
                 }
 
                 if (divCatalgo.Visible)
+                {
+                    ddlCatalogosCampo.Enabled = EsAlta;
+                    ucAltaCatalogo.Visible = EsAlta;
                     ddlCatalogosCampo.SelectedValue = campoEditar.IdCatalogo.ToString();
+                }
 
                 if (divMoneda.Visible)
+                {
+                    //txtSimboloMoneda.Enabled = EsAlta;
                     txtSimboloMoneda.Text = campoEditar.SimboloMoneda;
+                }
 
                 if (divValorMaximo.Visible)
+                {
+                    //txtValorMinimo.Enabled = EsAlta;
+                    //txtValorMaximo.Enabled = true;
+                    txtValorMinimo.Text = campoEditar.ValorMinimo.ToString();
                     txtValorMaximo.Text = campoEditar.ValorMaximo.ToString();
+                }
                 if (divMascara.Visible)
+                {
+                    //txtMascara.Enabled = EsAlta;
                     txtMascara.Text = campoEditar.MascaraDetalle;
+                }
                 GeneraControl(int.Parse(hfTipoCampo.Value));
                 hfAltaCampo.Value = false.ToString();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAgregarCampoMascara\");", true);
@@ -310,13 +357,13 @@ namespace KiiniHelp.UserControls.Altas.Formularios
             try
             {
                 Mascara tmpMascara = ((Mascara)Session["MascaraAlta"]);
-                Button btn = (Button)sender;
+                LinkButton btn = (LinkButton)sender;
                 RepeaterItem item = (RepeaterItem)btn.NamingContainer;
                 Label lblIdTipoCampo = (Label)item.FindControl("lblIdTipoCampoMascara");
                 Label lblDescripcion = (Label)item.FindControl("lblDescripcion");
                 Label lblRequerido = (Label)item.FindControl("lblRequerido");
 
-                CampoMascara campoEditar = tmpMascara.CampoMascara.SingleOrDefault(s => s.IdTipoCampoMascara == int.Parse(lblIdTipoCampo.Text) && s.Descripcion == lblDescripcion.Text && s.Requerido == (lblRequerido.Text == "SI"));
+                CampoMascara campoEditar = tmpMascara.CampoMascara.SingleOrDefault(s => s.IdTipoCampoMascara == int.Parse(lblIdTipoCampo.Text) && s.Descripcion == lblDescripcion.Text && s.Requerido == bool.Parse(lblRequerido.Text));
                 if (campoEditar == null) return;
                 tmpMascara.CampoMascara.Remove(campoEditar);
                 rptControles.DataSource = tmpMascara.CampoMascara;
@@ -344,9 +391,10 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 Label lblDescripcion = (Label)item.FindControl("lblDescripcion");
                 Label lblRequerido = (Label)item.FindControl("lblRequerido");
 
-                CampoMascara campoEditar = tmpMascara.CampoMascara.SingleOrDefault(s => s.IdTipoCampoMascara == int.Parse(lblIdTipoCampo.Text) && s.Descripcion == lblDescripcion.Text && s.Requerido == (lblRequerido.Text == "SI"));
+                CampoMascara campoEditar = tmpMascara.CampoMascara.SingleOrDefault(s => s.IdTipoCampoMascara == int.Parse(lblIdTipoCampo.Text) && s.Descripcion == lblDescripcion.Text && s.Requerido == bool.Parse(lblRequerido.Text));
                 if (campoEditar == null) return;
                 int indexActual = tmpMascara.CampoMascara.IndexOf(campoEditar);
+                if (indexActual == 0) return;
                 tmpMascara.CampoMascara.Remove(campoEditar);
                 tmpMascara.CampoMascara.Insert(indexActual - 1, campoEditar);
                 rptControles.DataSource = tmpMascara.CampoMascara;
@@ -374,7 +422,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 Label lblDescripcion = (Label)item.FindControl("lblDescripcion");
                 Label lblRequerido = (Label)item.FindControl("lblRequerido");
 
-                CampoMascara campoEditar = tmpMascara.CampoMascara.SingleOrDefault(s => s.IdTipoCampoMascara == int.Parse(lblIdTipoCampo.Text) && s.Descripcion == lblDescripcion.Text && s.Requerido == (lblRequerido.Text == "SI"));
+                CampoMascara campoEditar = tmpMascara.CampoMascara.SingleOrDefault(s => s.IdTipoCampoMascara == int.Parse(lblIdTipoCampo.Text) && s.Descripcion == lblDescripcion.Text && s.Requerido == bool.Parse(lblRequerido.Text));
                 if (campoEditar == null) return;
                 int indexActual = tmpMascara.CampoMascara.IndexOf(campoEditar);
                 tmpMascara.CampoMascara.Remove(campoEditar);
@@ -399,7 +447,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
             {
                 if (e.Item.ItemType == ListItemType.Item)
                 {
-                    ((LinkButton) e.Item.FindControl("btnAgregarControl")).Enabled = EsAlta;
+                    ((LinkButton)e.Item.FindControl("btnAgregarControl")).Enabled = EsAlta;
                 }
             }
             catch (Exception ex)
@@ -426,14 +474,15 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                         {
                             noRecordsDiv.Visible = true;
                         }
-                    
+
                     }
-                    if (e.Item.ItemType == ListItemType.Item)
-                    {
-                        ((LinkButton)e.Item.FindControl("btnEliminarCampo")).Enabled = EsAlta;
-                        ((LinkButton)e.Item.FindControl("btnSubir")).Enabled = EsAlta;
-                        ((LinkButton)e.Item.FindControl("btnBajar")).Enabled = EsAlta;
-                    }
+                }
+                if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+                {
+                    e.Item.FindControl("btnEliminarCampo").Visible = EsAlta;
+                    e.Item.FindControl("btnSubir").Visible = EsAlta;
+                    e.Item.FindControl("btnBajar").Visible = EsAlta;
+                    e.Item.FindControl("lblSeparador").Visible = EsAlta;
                 }
             }
             catch (Exception ex)
@@ -480,6 +529,9 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                     if (txtLongitudMinima.Text.Trim() == string.Empty)
                         throw new Exception("Debe especificar una longitud minima");
                 }
+                if (divLongitudMinima.Visible && !divLongitudMaxima.Visible)
+                    if (int.Parse(txtLongitudMinima.Text) >= 100)
+                        throw new Exception("Debe especificar una longitud minima menor a 100");
 
                 if (divLongitudMaxima.Visible)
                 {
@@ -502,13 +554,19 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                         throw new Exception("Debe especificar una descripcion de moneda");
 
                 if (divValorMaximo.Visible)
+                {
+                    if (txtValorMinimo.Text.Trim() == string.Empty)
+                        throw new Exception("Debe especificar un valor minimo");
                     if (txtValorMaximo.Text.Trim() == string.Empty)
                         throw new Exception("Debe especificar un valor maximo");
+                    if (double.Parse(txtValorMinimo.Text) > double.Parse(txtValorMaximo.Text))
+                        throw new Exception("El valor Minimo no debe ser mayor a valor Maximo");
+                }
                 if (divMascara.Visible)
                     if (txtMascara.Text.Trim() == string.Empty)
                         throw new Exception("Debe especificar un Formulario de Cliente");
 
-                
+
                 Mascara tmpMascara = ((Mascara)Session["MascaraAlta"]);
 
                 if (bool.Parse(hfAltaCampo.Value))
@@ -524,15 +582,14 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                     TipoCampoMascara tipoCampo = _servicioSistemaTipoCampoMascara.TipoCampoMascaraId(Convert.ToInt32(hfTipoCampo.Value));
 
                     Catalogos catalogo = null;
-                    if (tipoCampo.Id == (int) BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.RadioBoton
-                        || tipoCampo.Id == (int) BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ListaDepledable
-                        || tipoCampo.Id == (int) BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación)
+                    if (tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.RadioBoton
+                        || tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ListaDepledable
+                        || tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación)
                         catalogo = new ServiceCatalogosClient().ObtenerCatalogo(int.Parse(ddlCatalogosCampo.SelectedValue));
 
                     tmpMascara.CampoMascara.Add(new CampoMascara
                     {
                         IdCatalogo = tipoCampo.Catalogo ? Convert.ToInt32(ddlCatalogosCampo.SelectedValue) : (int?)null,
-                        Catalogos = catalogo,
                         IdTipoCampoMascara = tipoCampo.Id,
                         Multiple = tipoCampo.Multiple,
                         CheckBox = tipoCampo.Checkbox,
@@ -542,10 +599,11 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                         Requerido = chkRequerido.Checked,
                         LongitudMinima = tipoCampo.LongitudMinima ? Convert.ToInt32(txtLongitudMinima.Text.Trim()) : tipoCampo.Mask ? 1 : (int?)null,
                         LongitudMaxima = tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Texto ? int.Parse(tipoCampo.LongitudMaximaPermitida) :
-                                         tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo ? 3900 : 
+                                         tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo ? 3900 :
                                          tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMaxima.Text.Trim()) : tipoCampo.Mask ? txtMascara.Text.Trim().Length : (int?)null,
                         SimboloMoneda = tipoCampo.SimboloMoneda ? txtSimboloMoneda.Text.Trim().ToUpper() : null,
-                        ValorMaximo = tipoCampo.ValorMaximo ? Convert.ToInt32(txtValorMaximo.Text.Trim()) : (int?)null,
+                        ValorMinimo = tipoCampo.ValorMinimo ? decimal.Parse(txtValorMinimo.Text.Trim()) : (decimal?)null,
+                        ValorMaximo = tipoCampo.ValorMaximo ? decimal.Parse(txtValorMaximo.Text.Trim()) : (decimal?)null,
                         MascaraDetalle = tipoCampo.Mask ? txtMascara.Text.Trim() : null,
                         TipoCampoMascara = tipoCampo
                     });
@@ -554,10 +612,10 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 {
                     TipoCampoMascara tipoCampo = _servicioSistemaTipoCampoMascara.TipoCampoMascaraId(Convert.ToInt32(hfTipoCampo.Value));
                     Catalogos catalogo = null;
-                    if (tipoCampo.Id == (int) BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.RadioBoton
-                        || tipoCampo.Id == (int) BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ListaDepledable
+                    if (tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.RadioBoton
+                        || tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ListaDepledable
                         ||
-                        tipoCampo.Id == (int) BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación)
+                        tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación)
                         catalogo = new ServiceCatalogosClient().ObtenerCatalogo(int.Parse(ddlCatalogosCampo.SelectedValue));
 
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].IdCatalogo = tipoCampo.Catalogo ? Convert.ToInt32(ddlCatalogosCampo.SelectedValue) : (int?)null;
@@ -568,7 +626,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].LongitudMinima = tipoCampo.LongitudMinima ? Convert.ToInt32(txtLongitudMinima.Text.Trim()) : tipoCampo.Mask ? 1 : (int?)null;
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].LongitudMaxima = tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMaxima.Text.Trim()) : tipoCampo.Mask ? txtMascara.Text.Trim().Length : (int?)null;
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].SimboloMoneda = tipoCampo.SimboloMoneda ? txtSimboloMoneda.Text.Trim() : null;
-                    tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].ValorMaximo = tipoCampo.ValorMaximo ? Convert.ToInt32(txtValorMaximo.Text.Trim()) : (int?)null;
+                    tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].ValorMaximo = tipoCampo.ValorMaximo ? decimal.Parse(txtValorMaximo.Text.Trim()) : (decimal?)null;
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].MascaraDetalle = tipoCampo.Mask ? txtMascara.Text.Trim() : null;
                     tmpMascara.CampoMascara[int.Parse(hfCampoEditado.Value)].TipoCampoMascara = tipoCampo;
                 }
@@ -702,6 +760,6 @@ namespace KiiniHelp.UserControls.Altas.Formularios
         }
 
 
-        
+
     }
 }

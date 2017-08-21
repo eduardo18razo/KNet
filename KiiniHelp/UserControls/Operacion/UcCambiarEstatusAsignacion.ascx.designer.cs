@@ -13,13 +13,40 @@ namespace KiiniHelp.UserControls.Operacion {
     public partial class UcCambiarEstatusAsignacion {
         
         /// <summary>
-        /// Control lblEsPropietrio.
+        /// Control hfEsPropietario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEsPropietrio;
+        protected global::System.Web.UI.WebControls.HiddenField hfEsPropietario;
+        
+        /// <summary>
+        /// Control hfNivelAsignacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfNivelAsignacion;
+        
+        /// <summary>
+        /// Control hfSubRolActual.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfSubRolActual;
+        
+        /// <summary>
+        /// Control lblBrandingModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBrandingModal;
         
         /// <summary>
         /// Control lblIdticket.

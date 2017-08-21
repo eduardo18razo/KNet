@@ -5,6 +5,7 @@ using KiiniNet.Entities.Cat.Sistema;
 
 namespace KiiniNet.Entities.Helper
 {
+    [Serializable]
     public class HelperDetalleTicket
     {
         public int IdTicket { get; set; }
@@ -19,22 +20,23 @@ namespace KiiniNet.Entities.Helper
         public List<HelperAsignacionesDetalle> AsignacionesDetalle { get; set; }
         public List<HelperConversacionDetalle> ConversacionDetalle { get; set; }
     }
-
+    [Serializable]
     public class HelperConversacionDetalle
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string FechaHora { get; set; }
+        public DateTime FechaHora { get; set; }
 
         public string Comentario { get; set; }
         public List<HelperConversacionArchivo> Archivo { get; set; }
     }
-
+    [Serializable]
     public class HelperConversacionArchivo
     {
         public int IdConversacion { get; set; }
         public string Archivo { get; set; }
     }
+    [Serializable]
     public class HelperAsignacionesDetalle
     {
         public string Descripcion { get; set; }
@@ -43,7 +45,7 @@ namespace KiiniNet.Entities.Helper
         public DateTime FechaMovimiento { get; set; }
 
     }
-
+    [Serializable]
     public class HelperEstatusDetalle
     {
         public string Descripcion { get; set; }

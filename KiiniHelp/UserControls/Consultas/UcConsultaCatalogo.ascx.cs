@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web.Configuration;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
 using KiiniHelp.ServiceMascaraAcceso;
 using KiiniHelp.ServiceSistemaCatalogos;
@@ -26,10 +29,12 @@ namespace KiiniHelp.UserControls.Consultas
         {
             set
             {
-                panelAlertaGeneral.Visible = value.Any();
-                if (!panelAlertaGeneral.Visible) return;
-                rptErrorGeneral.DataSource = value;
-                rptErrorGeneral.DataBind();
+                if (value.Any())
+                {
+                    string error = value.Aggregate("<ul>", (current, s) => current + ("<li>" + s + "</li>"));
+                    error += "</ul>";
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "ErrorAlert('Error','" + error + "');", true);
+                }
             }
         }
 
@@ -37,7 +42,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                List<Catalogos> lstCatalogosConsultas = _servicioCatalogos.ObtenerCatalogosMascaraCaptura(true);
+                List<Catalogos> lstCatalogosConsultas = _servicioCatalogos.ObtenerCatalogosMascaraCaptura(true).Where(w => !w.Sistema).ToList();
                 Metodos.LlenaComboCatalogo(ddlCatalogos, lstCatalogosConsultas);
 
             }
@@ -54,14 +59,14 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 if (ddlCatalogos.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
-                    List<CatalogoGenerico> lst = _servicioCatalogos.ObtenerRegistrosSistemaCatalogo(int.Parse(ddlCatalogos.SelectedValue), true).Where(w=>w.Id != 0).ToList();
+                    List<CatalogoGenerico> lst = _servicioCatalogos.ObtenerRegistrosSistemaCatalogo(int.Parse(ddlCatalogos.SelectedValue), true).Where(w => w.Id != 0).ToList();
                     rptResultados.DataSource = lst;
                 }
                 else
                 {
                     rptResultados.DataSource = null;
                 }
-                
+
                 rptResultados.DataBind();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
             }
@@ -73,6 +78,7 @@ namespace KiiniHelp.UserControls.Consultas
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
             Alerta = new List<string>();
             if (!IsPostBack)
             {
@@ -136,41 +142,6 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        protected void btnBaja_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioCatalogos.Habilitar(Convert.ToInt32(hfId.Value), false);
-                LlenaCatalogoConsulta();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnAlta_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                _servicioCatalogos.Habilitar(Convert.ToInt32(hfId.Value), true);
-                LlenaCatalogoConsulta();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
 
         protected void btnNew_OnClick(object sender, EventArgs e)
         {
@@ -179,6 +150,62 @@ namespace KiiniHelp.UserControls.Consultas
                 ucRegistroCatalogo.EsAlta = true;
                 ucRegistroCatalogo.IdCatalogo = int.Parse(ddlCatalogos.SelectedValue);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaRegistro\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void OnCheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _servicioCatalogos.Habilitar(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+                LlenaCatalogoConsulta();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnDownload_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                List<CatalogoGenerico> lstRegistros = null;
+                if (ddlCatalogos.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                {
+                    lstRegistros = _servicioCatalogos.ObtenerRegistrosSistemaCatalogo(int.Parse(ddlCatalogos.SelectedValue), true).Where(w => w.Id != 0).ToList();
+                    rptResultados.DataSource = lstRegistros;
+                }
+                if (lstRegistros == null)
+                    throw new Exception("Seleccione un catálogo.");
+                Response.Clear();
+                string ultimaEdicion = "Últ. edición";
+                MemoryStream ms =
+                    new MemoryStream(BusinessFile.ExcelManager.ListToExcel(lstRegistros.Select(
+                                s => new
+                                {
+                                    Nombre = s.Descripcion
+                                })
+                                .ToList()).GetAsByteArray());
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;  filename=Catalgos.xlsx");
+                Response.Buffer = true;
+                ms.WriteTo(Response.OutputStream);
+                Response.End();
             }
             catch (Exception ex)
             {

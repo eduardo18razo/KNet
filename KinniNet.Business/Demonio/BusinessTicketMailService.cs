@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using KinniNet.Business.Utils;
 
 namespace KinniNet.Core.Demonio

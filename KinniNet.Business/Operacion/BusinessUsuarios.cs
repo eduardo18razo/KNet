@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
+using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
@@ -44,7 +46,81 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public void GuardarUsuario(Usuario usuario)
+        public void GuardarUsuarioAdicional(string nombre, string ap, string correo, string celular, string edad, string numeroTarjeta, string fechavto, string cvv)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+
+                const int idMascara = 3;
+                Usuario user = new Usuario();
+                user.IdTipoUsuario = (int) BusinessVariables.EnumTiposUsuario.Cliente;
+                user.IdOrganizacion = 1;
+                user.IdUbicacion = 1;
+                user.Nombre = nombre;
+                user.ApellidoMaterno = "";
+                user.ApellidoPaterno = ap;
+                user.Habilitado = true;
+                user.NombreUsuario = (user.Nombre.Substring(0, 1).ToLower() + user.ApellidoPaterno.Trim().ToLower()).Replace(" ",string.Empty);
+                user.Password = "/Portal/ConfirmacionCuenta.aspx";
+                int limite = 9999;
+                if (ValidaUserName(user.Nombre))
+                {
+                    for (int i = 1; i < limite; i++)
+                    {
+                        string tmpUsername = user.Nombre + i;
+                        if (!ValidaUserName(tmpUsername))
+                        {
+                            user.Nombre = tmpUsername;
+                            break;
+                        }
+                        limite++;
+                    }
+                }
+                
+
+                user.TelefonoUsuario = new List<TelefonoUsuario>();
+                TelefonoUsuario tu = new TelefonoUsuario { Numero = celular, Obligatorio = true, IdTipoTelefono = (int)BusinessVariables.EnumTipoTelefono.Celular };
+                user.TelefonoUsuario.Add(tu);
+
+                user.CorreoUsuario = new List<CorreoUsuario>();
+                CorreoUsuario cu = new CorreoUsuario { Correo = correo, Obligatorio = true };
+                user.CorreoUsuario.Add(cu);
+                user.UsuarioRol = new List<UsuarioRol>();
+                user.UsuarioRol.Add(new UsuarioRol
+                {
+                    RolTipoUsuario = (new BusinessRoles().ObtenerRolTipoUsuario((int)BusinessVariables.EnumTiposUsuario.Cliente, (int)BusinessVariables.EnumRoles.Usuario)),
+                });
+
+                user.UsuarioGrupo = new List<UsuarioGrupo>();
+
+                UsuarioGrupo ug = new UsuarioGrupo
+                {
+                    IdGrupoUsuario = (new BusinessGrupoUsuario().ObtenerGruposUsuarioByIdRolTipoUsuario(
+                        (int)BusinessVariables.EnumRoles.Usuario, (int)BusinessVariables.EnumTiposUsuario.Cliente,
+                        false)).First().Id,
+                    IdRol = (int)BusinessVariables.EnumRoles.Usuario
+                };
+                user.UsuarioGrupo.Add(ug);
+
+
+                int idUsuario = GuardarUsuario(user);
+                Mascara mascara = new BusinessMascaras().ObtenerMascaraCaptura(idMascara);
+                string store = string.Format("USPINSERTDATOSADICIONALESUSUARIO {0}, '{1}', '{2}', '{3}', '{4}'", idUsuario, edad, numeroTarjeta, fechavto, cvv);
+
+                db.ExecuteStoreCommand(store);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public int GuardarUsuario(Usuario usuario)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
@@ -95,6 +171,7 @@ namespace KinniNet.Core.Operacion
             {
                 db.Dispose();
             }
+            return usuario.Id;
         }
 
         public void ActualizarUsuario(int idUsuario, Usuario usuario)
@@ -166,8 +243,7 @@ namespace KinniNet.Core.Operacion
                                              select usuarioRol.Id).ToList();
                     foreach (UsuarioRol rol in usuario.UsuarioRol)
                     {
-                        if (
-                            !db.UsuarioRol.Any(a => a.IdUsuario == idUsuario && a.IdRolTipoUsuario == rol.IdRolTipoUsuario))
+                        if (!db.UsuarioRol.Any(a => a.IdUsuario == idUsuario && a.IdRolTipoUsuario == rol.IdRolTipoUsuario))
                             userData.UsuarioRol.Add(new UsuarioRol
                             {
                                 IdUsuario = idUsuario,
@@ -185,21 +261,12 @@ namespace KinniNet.Core.Operacion
                     {
                         if (ugpoDb.IdSubGrupoUsuario == null)
                         {
-                            if (
-                                !usuario.UsuarioGrupo.Any(
-                                    a =>
-                                        a.IdUsuario == idUsuario && a.IdRol == ugpoDb.IdRol &&
-                                        a.IdGrupoUsuario == ugpoDb.IdGrupoUsuario))
+                            if (!usuario.UsuarioGrupo.Any(a => a.IdUsuario == idUsuario && a.IdRol == ugpoDb.IdRol && a.IdGrupoUsuario == ugpoDb.IdGrupoUsuario))
                                 gruposEliminar.Add(ugpoDb.Id);
                         }
                         else
                         {
-                            if (
-                                !usuario.UsuarioGrupo.Any(
-                                    a =>
-                                        a.IdUsuario == idUsuario && a.IdRol == ugpoDb.IdRol &&
-                                        a.IdGrupoUsuario == ugpoDb.IdGrupoUsuario &&
-                                        a.IdSubGrupoUsuario == ugpoDb.IdSubGrupoUsuario))
+                            if (!usuario.UsuarioGrupo.Any(a => a.IdUsuario == idUsuario && a.IdRol == ugpoDb.IdRol && a.IdGrupoUsuario == ugpoDb.IdGrupoUsuario && a.IdSubGrupoUsuario == ugpoDb.IdSubGrupoUsuario))
                                 gruposEliminar.Add(ugpoDb.Id);
                         }
                     }
@@ -207,11 +274,7 @@ namespace KinniNet.Core.Operacion
                     {
                         if (grupo.IdSubGrupoUsuario == null)
                         {
-                            if (
-                                !db.UsuarioGrupo.Any(
-                                    a =>
-                                        a.IdUsuario == idUsuario && a.IdRol == grupo.IdRol &&
-                                        a.IdGrupoUsuario == grupo.IdGrupoUsuario))
+                            if (!db.UsuarioGrupo.Any(a => a.IdUsuario == idUsuario && a.IdRol == grupo.IdRol && a.IdGrupoUsuario == grupo.IdGrupoUsuario))
                                 userData.UsuarioGrupo.Add(new UsuarioGrupo
                                 {
                                     IdUsuario = idUsuario,
@@ -222,12 +285,7 @@ namespace KinniNet.Core.Operacion
                         }
                         else
                         {
-                            if (
-                                !db.UsuarioGrupo.Any(
-                                    a =>
-                                        a.IdUsuario == idUsuario && a.IdRol == grupo.IdRol &&
-                                        a.IdGrupoUsuario == grupo.IdGrupoUsuario &&
-                                        a.IdSubGrupoUsuario == grupo.IdSubGrupoUsuario))
+                            if (!db.UsuarioGrupo.Any(a => a.IdUsuario == idUsuario && a.IdRol == grupo.IdRol && a.IdGrupoUsuario == grupo.IdGrupoUsuario && a.IdSubGrupoUsuario == grupo.IdSubGrupoUsuario))
                                 userData.UsuarioGrupo.Add(new UsuarioGrupo
                                 {
                                     IdUsuario = idUsuario,
@@ -484,7 +542,7 @@ namespace KinniNet.Core.Operacion
                         if (grupo.SubGrupoUsuario != null)
                             db.LoadProperty(grupo.SubGrupoUsuario, "SubRol");
                     }
-
+                    result.FechaUltimoAccesoExito = new BusinessUsuarios().ObtenerFechaUltimoAcceso(result);
                 }
             }
             catch (Exception ex)
@@ -952,45 +1010,53 @@ namespace KinniNet.Core.Operacion
 
         public string ObtenerFechaUltimoAcceso(Usuario usuario)
         {
-            string fecha;
+            string fecha  = "Hoy";
             try
             {
                 CultureInfo ci = new CultureInfo("Es-Es");
-                var days = (DateTime.Now - usuario.BitacoraAcceso.Last(l => l.Success).Fecha).TotalDays;
-                switch (int.Parse(Math.Abs(Math.Round(days)).ToString()))
+                if (usuario.BitacoraAcceso.Any())
                 {
-                    case 0:
-                        fecha = "Hoy";
-                        break;
-                    case 1:
-                        fecha = "Ayer";
-                        break;
-                    case 2:
-                        fecha = ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
-                        break;
-                    case 3:
-                        fecha = ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
-                        break;
-                    case 4:
-                        fecha = ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
-                        break;
-                    case 5:
-                        fecha = ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
-                        break;
-                    case 6:
-                        fecha = ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
-                        break;
-                    default:
-                        fecha = usuario.BitacoraAcceso.Last(l => l.Success).Fecha.ToString("dd-MM-yy");
-                        break;
+                    var days = (DateTime.Now - usuario.BitacoraAcceso.Last(l => l.Success).Fecha).TotalDays;
+                    switch (int.Parse(Math.Abs(Math.Round(days)).ToString()))
+                    {
+                        case 0:
+                            fecha = "Hoy";
+                            break;
+                        case 1:
+                            fecha = "Ayer";
+                            break;
+                        case 2:
+                            fecha =
+                                ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                            break;
+                        case 3:
+                            fecha =
+                                ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                            break;
+                        case 4:
+                            fecha =
+                                ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                            break;
+                        case 5:
+                            fecha =
+                                ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                            break;
+                        case 6:
+                            fecha =
+                                ci.DateTimeFormat.GetDayName(usuario.BitacoraAcceso.Last(l => l.Success).Fecha.DayOfWeek).ToString();
+                            break;
+                        default:
+                            fecha = usuario.BitacoraAcceso.Last(l => l.Success).Fecha.ToString("dd-MM-yy");
+                            break;
+                    }
                 }
-                
+
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return string.Format("{0} {1} hrs.", fecha, usuario.BitacoraAcceso.Last(l => l.Success).Fecha.ToString("HH:mm"));
+            return string.Format("{0} {1} hrs.", fecha, usuario.BitacoraAcceso.Any() ? usuario.BitacoraAcceso.Last(l => l.Success).Fecha.ToString("HH:mm") : DateTime.Now.ToString("HH:mm"));
         }
 
     }

@@ -21,6 +21,6 @@ namespace KiiniNet.Services.Sistema.Interface
         List<SubRol> ObtenerTipoSubRol(int idTipoGrupo, bool insertarSeleccion);
 
         [OperationContract]
-        List<SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol, int idEstatusAsignacion);
+        List<SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol, int idEstatusAsignacion, int? nivelActual);
     }
 }

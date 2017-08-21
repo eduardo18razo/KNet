@@ -60,13 +60,13 @@ namespace KiiniNet.Services.Sistema.Implementacion
             return null;
         }
 
-        public List<SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol, int idEstatusAsignacion)
+        public List<SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol, int idEstatusAsignacion, int? nivelActual)
         {
             try
             {
                 using (BusinessSubRol negocio = new BusinessSubRol())
                 {
-                    return negocio.ObtenerEscalacion(idSubRol, idEstatusAsignacion);
+                    return negocio.ObtenerEscalacion(idSubRol, idEstatusAsignacion, nivelActual);
                 }
             }
             catch (Exception ex)

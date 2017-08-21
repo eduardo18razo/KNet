@@ -40,20 +40,17 @@ namespace KiiniHelp
         {
             try
             {
+
                 List<Rol> lstRoles = _servicioSeguridad.ObtenerRolesUsuario(((Usuario)Session["UserData"]).Id);
-                if (lstRoles.Count == 1)
+                if (lstRoles.Count > 0 && Session["RolSeleccionado"] == null)
                 {
                     Session["RolSeleccionado"] = lstRoles.First().Id;
                     Session["CargaInicialModal"] = "True";
-                    lnkBtnRol_OnClick(
-                        new LinkButton
-                        {
-                            CommandArgument = lstRoles.First().Id.ToString(),
-                            Text = lstRoles.First().Descripcion
-                        }, null);
+                    if (MenuActivo == null)
+                        lnkBtnRol_OnClick(new LinkButton { CommandArgument = lstRoles.First().Id.ToString(), CommandName = lstRoles.First().Descripcion, Text = lstRoles.First().Descripcion }, null);
                 }
-                if (Session["RolSeleccionado"] != null) lblAreaSeleccionada.Text =
-                        lstRoles.Single(s => s.Id == int.Parse(Session["RolSeleccionado"].ToString())).Descripcion;
+                if (Session["RolSeleccionado"] != null)
+                    lblAreaSeleccionada.Text = lstRoles.Single(s => s.Id == int.Parse(Session["RolSeleccionado"].ToString())).Descripcion;
                 rptRolesPanel.DataSource = lstRoles;
                 rptRolesPanel.DataBind();
                 lblBadgeRoles.Text = lstRoles.Count.ToString();
@@ -89,22 +86,39 @@ namespace KiiniHelp
             }
         }
 
+        private List<Menu> MenuActivo
+        {
+            get { return (List<Menu>)Session["MenuRol"]; }
+            set { Session["MenuRol"] = value; }
+        }
+        private void LlenaMenu(int idUsuario, int idRolSeleccionado, bool arboles)
+        {
+            try
+            {
+                MenuActivo = _servicioSeguridad.ObtenerMenuUsuario(idUsuario, idRolSeleccionado, arboles);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-                HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-                if (myCookie == null || Session["UserData"] == null)
-                {
-                    Response.Redirect(ResolveUrl("~/Default.aspx"));
-                }
+                //HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                //if (myCookie == null || Session["UserData"] == null)
+                //{
+                //    Response.Redirect(ResolveUrl("~/Default.aspx"));
+                //}
                 lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
                 ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;
 
                 if (Session["UserData"] != null && HttpContext.Current.Request.Url.Segments[HttpContext.Current.Request.Url.Segments.Count() - 1] != "FrmCambiarContrasena.aspx")
                     if (_servicioSeguridad.CaducaPassword(((Usuario)Session["UserData"]).Id))
                         Response.Redirect(ResolveUrl("~/Users/Administracion/Usuarios/FrmCambiarContrasena.aspx"));
-                lnkBtnCerrar.Visible = !ContentPlaceHolder1.Page.ToString().ToUpper().Contains("DASHBOARD");
+                //lnkBtnCerrar.Visible = !ContentPlaceHolder1.Page.ToString().ToUpper().Contains("DASHBOARD");
 
                 if (!IsPostBack && Session["UserData"] != null)
                 {
@@ -124,14 +138,16 @@ namespace KiiniHelp
                     int rolSeleccionado = 0;
                     if (Session["RolSeleccionado"] != null)
                         rolSeleccionado = int.Parse(Session["RolSeleccionado"].ToString());
-                    rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, rolSeleccionado, rolSeleccionado != 0);
-                    rptMenu.DataBind();
+                    if (MenuActivo == null)
+                        LlenaMenu(usuario.Id, rolSeleccionado, rolSeleccionado != 0);
+
                     divTickets.Visible = rolSeleccionado != (int)BusinessVariables.EnumRoles.Administrador;
                     divMensajes.Visible = rolSeleccionado != (int)BusinessVariables.EnumRoles.Administrador;
-                    divTickets.Visible = rolSeleccionado == (int) BusinessVariables.EnumRoles.ResponsableDeAtención;
-                    divMensajes.Visible = rolSeleccionado == (int) BusinessVariables.EnumRoles.Usuario;
+                    divTickets.Visible = rolSeleccionado == (int)BusinessVariables.EnumRoles.ResponsableDeAtención;
+                    divMensajes.Visible = rolSeleccionado == (int)BusinessVariables.EnumRoles.Usuario;
                 }
-
+                rptMenu.DataSource = MenuActivo;
+                rptMenu.DataBind();
                 Session["ParametrosGenerales"] = _servicioParametros.ObtenerParametrosGenerales();
             }
             catch (Exception ex)
@@ -346,17 +362,22 @@ namespace KiiniHelp
                 {
                     Usuario usuario = ((Usuario)Session["UserData"]);
                     Session["RolSeleccionado"] = ((LinkButton)sender).CommandArgument;
-                    lblAreaSeleccionada.Text = ((LinkButton)sender).Text;
+                    lblAreaSeleccionada.Text = ((LinkButton)sender).CommandName;
                     int areaSeleccionada = 0;
                     if (Session["RolSeleccionado"] != null)
                         areaSeleccionada = int.Parse(Session["RolSeleccionado"].ToString());
-                    rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, areaSeleccionada, areaSeleccionada != 0);
+
+                    LlenaMenu(usuario.Id, areaSeleccionada, areaSeleccionada != 0);
+
+                    rptMenu.DataSource = MenuActivo;
                     rptMenu.DataBind();
                     Session["CargaInicialModal"] = "True";
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalRol\");", true);
                     //TODO: Tickets redirect
-                    //if (areaSeleccionada == (int)BusinessVariables.EnumRoles.ResponsableDeAtención)
-                    //    Response.Redirect("~/Agente/FrmBandejaTickets.aspx");
+                    if (areaSeleccionada == (int)BusinessVariables.EnumRoles.ResponsableDeAtención)
+                        Response.Redirect("~/Agente/Bandeja.aspx");
+                    //Response.Redirect("~/Agente/FrmBandejaTickets.aspx");
+                    Response.Redirect("~/Users/DashBoard.aspx");
                 }
                 catch (Exception ex)
                 {

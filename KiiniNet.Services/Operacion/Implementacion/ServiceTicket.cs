@@ -9,6 +9,30 @@ namespace KiiniNet.Services.Operacion.Implementacion
 {
     public class ServiceTicket : IServiceTicket
     {
+        public Ticket CrearTicketAndroid(int idUsuario, int idUsuarioSolicito, int idArbol, string latitudinicio, string longitudinicio,
+            string fechaalta, string latitudfin, string longitudfin, string costo, int idCanal, bool campoRandom, bool esTercero, bool esMail)
+        {
+            try
+            {
+                using (BusinessTicket negocio = new BusinessTicket())
+                {
+                    List<HelperCampoMascaraCaptura> campos = new List<HelperCampoMascaraCaptura>();
+                    campos.Add(new HelperCampoMascaraCaptura { IdCampo = 17, NombreCampo = "LATITUDINICIO", Valor = latitudinicio });
+                    campos.Add(new HelperCampoMascaraCaptura { IdCampo = 18, NombreCampo = "LONGITUDINICIO", Valor = longitudinicio });
+                    campos.Add(new HelperCampoMascaraCaptura { IdCampo = 19, NombreCampo = "FECHAALTA", Valor = DateTime.Now.ToString("yyyy-MM-dd") });
+                    campos.Add(new HelperCampoMascaraCaptura { IdCampo = 20, NombreCampo = "LATITUDFIN", Valor = latitudfin });
+                    campos.Add(new HelperCampoMascaraCaptura { IdCampo = 21, NombreCampo = "LONGITUDFIN", Valor = latitudfin });
+                    campos.Add(new HelperCampoMascaraCaptura { IdCampo = 22, NombreCampo = "COSTO", Valor = costo });
+
+                    return negocio.CrearTicket(idUsuario, idUsuarioSolicito, idArbol, campos, idCanal, campoRandom, esTercero, esMail);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero, bool esMail)
         {
             try
@@ -40,58 +64,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public List<HelperTickets> ObtenerTickets(int idUsuario, int pageIndex, int pageSize)
+        public List<HelperTickets> ObtenerTickets(int idUsuario, List<int> estatus, int pageIndex, int pageSize)
         {
             try
             {
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
-                    return negocio.ObtenerTickets(idUsuario, pageIndex, pageSize);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public void CambiarEstatus(int idTicket, int idEstatus, int idUsuario, string comentario)
-        {
-            try
-            {
-                using (BusinessTicket negocio = new BusinessTicket())
-                {
-                    negocio.CambiarEstatus(idTicket, idEstatus, idUsuario, comentario);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public void AutoAsignarTicket(int idTicket, int idUsuario)
-        {
-            try
-            {
-                using (BusinessTicket negocio = new BusinessTicket())
-                {
-                    negocio.AutoAsignarTicket(idTicket, idUsuario);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public void CambiarAsignacionTicket(int idTicket, int idEstatusAsignacion, int idUsuarioAsignado, int idUsuarioAsigna, string comentario)
-        {
-            try
-            {
-                using (BusinessTicket negocio = new BusinessTicket())
-                {
-                    negocio.CambiarAsignacionTicket(idTicket, idEstatusAsignacion, idUsuarioAsignado, idUsuarioAsigna, comentario);
+                    return negocio.ObtenerTickets(idUsuario, estatus, pageIndex, pageSize);
                 }
             }
             catch (Exception ex)
@@ -160,13 +139,13 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
-        public void AgregarComentarioConversacionTicket(int idTicket, int idUsuario, string mensaje, bool sistema, List<string> archivos)
+        public List<int> CapturaCasillaTicket(int idTicket, string nombreCampo)
         {
             try
             {
                 using (BusinessTicket negocio = new BusinessTicket())
                 {
-                    negocio.AgregarComentarioConversacionTicket(idTicket, idUsuario, mensaje, sistema, archivos);
+                    return negocio.CapturaCasillaTicket(idTicket, nombreCampo);
                 }
             }
             catch (Exception ex)

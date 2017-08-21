@@ -8,6 +8,7 @@ using KiiniHelp.ServicePuesto;
 using KiiniHelp.ServiceSistemaTipoUsuario;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
 {
@@ -92,6 +93,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                ddlTipoUsuario.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 txtDescripcionPuesto.Text = String.Empty;
             }
             catch (Exception ex)
@@ -126,8 +128,10 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                if(ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    throw new Exception("Debe seleccionar Tipo de Usuario.");
                 if (txtDescripcionPuesto.Text.Trim() == string.Empty)
-                    throw new Exception("Debe especificar una descripción");
+                    throw new Exception("Debe especificar una descripción.");
                 Puesto puesto = new Puesto { IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue), Descripcion = txtDescripcionPuesto.Text.Trim(), Habilitado = true };
                 if (EsAlta)
                     _servicioPuesto.Guardar(puesto);
@@ -193,13 +197,18 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
+                LimpiarCampos();
                 if (OnTerminarModal != null)
                     OnTerminarModal();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
     }

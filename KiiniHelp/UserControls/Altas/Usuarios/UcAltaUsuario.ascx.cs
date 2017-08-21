@@ -21,6 +21,7 @@ using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical;
 
 namespace KiiniHelp.UserControls.Altas.Usuarios
 {
@@ -103,7 +104,106 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             }
         }
 
+        private List<HelperAsignacionRol> GruposUsuario
+        {
+            get
+            {
+                if (Session["GruposUsuario"] == null)
+                    Session["GruposUsuario"] = new List<HelperAsignacionRol>();
+                return (List<HelperAsignacionRol>)Session["GruposUsuario"];
+            }
+            set { Session["GruposUsuario"] = value; }
+        }
+
         #region Metodos
+
+        private void AgregarGrupo(List<HelperAsignacionRol> grupoAgregar)
+        {
+            try
+            {
+                foreach (HelperAsignacionRol asignacionNueva in grupoAgregar)
+                {
+                    if (GruposUsuario.Any(a => a.DescripcionRol == asignacionNueva.DescripcionRol))
+                    {
+                        HelperAsignacionRol rolExistente = GruposUsuario.Single(a => a.DescripcionRol == asignacionNueva.DescripcionRol);
+                        if (rolExistente != null)
+                        {
+                            foreach (HelperAsignacionGrupoUsuarios gpoNuevo in asignacionNueva.Grupos)
+                            {
+                                if (rolExistente.Grupos.Any(a => a.IdGrupo == gpoNuevo.IdGrupo))
+                                {
+                                    HelperAsignacionGrupoUsuarios grupoExistente = rolExistente.Grupos.Single(a => a.IdGrupo == gpoNuevo.IdGrupo);
+                                    if (gpoNuevo.SubGrupos != null)
+                                        foreach (HelperSubGurpoUsuario subgrupoNuevo in gpoNuevo.SubGrupos)
+                                        {
+                                            if (!grupoExistente.SubGrupos.Any(a => a.Id == subgrupoNuevo.Id))
+                                            {
+                                                grupoExistente.SubGrupos.Add(new HelperSubGurpoUsuario
+                                                {
+                                                    Id = subgrupoNuevo.Id,
+                                                    Descripcion = subgrupoNuevo.Descripcion
+                                                });
+                                            }
+                                        }
+                                }
+                                else
+                                {
+                                    rolExistente.Grupos.Add(gpoNuevo);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        GruposUsuario.Add(asignacionNueva);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        private void EliminarRol(int idRol)
+        {
+            try
+            {
+                GruposUsuario.Remove(GruposUsuario.Single(s => s.IdRol == idRol));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        private void EliminarGrupo(int idRol, int idGrupo, int? idSubGrupo, bool esSubGrupo)
+        {
+            try
+            {
+                if (esSubGrupo)
+                {
+                    HelperSubGurpoUsuario rolEliminar = GruposUsuario.Single(s => s.IdRol == idRol).Grupos.Single(s => s.IdGrupo == idGrupo).SubGrupos.Single(s => s.Id == idSubGrupo);
+                    if (rolEliminar != null)
+                    {
+                        GruposUsuario.Single(s => s.IdRol == idRol).Grupos.Single(s => s.IdGrupo == idGrupo).SubGrupos.Remove(rolEliminar);
+                    }
+                }
+                else
+                {
+                    HelperAsignacionGrupoUsuarios grupoEliminar = GruposUsuario.Single(s => s.IdRol == idRol).Grupos.Single(s => s.IdGrupo == idGrupo);
+                    if (grupoEliminar != null)
+                    {
+                        GruposUsuario.Single(s => s.IdRol == idRol).Grupos.Remove(grupoEliminar);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
         private void LlenaCombos(bool usuariosResidentes)
         {
@@ -162,22 +262,26 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 if (user != null)
                 {
                     LlenaCombos(false);
+
                     ddlTipoUsuario.SelectedValue = user.IdTipoUsuario.ToString();
                     ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
-                    imgPerfil.ImageUrl = user.Foto != null
-                        ? "~/DisplayImages.ashx?id=" + user.Id
-                        : "~/assets/images/profiles/profile-square-1.png";
+                    imgPerfil.ImageUrl = user.Foto != null ? "~/DisplayImages.ashx?id=" + user.Id : "~/assets/images/profiles/profile-square-1.png";
                     lblFechaUltimoAcceso.Text = user.FechaUltimoAccesoExito;
                     txtAp.Text = user.ApellidoPaterno;
                     txtAm.Text = user.ApellidoMaterno;
                     txtNombre.Text = user.Nombre;
                     txtUserName.Text = user.NombreUsuario;
                     txtUserName.ReadOnly = true;
-                    Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true)); if (user.IdPuesto != null)
+                    Session["TelefonosUsuario"] = user.TelefonoUsuario.OrderBy(o=>o.IdTipoTelefono);
+                    Session["CorreoUsuario"] = user.CorreoUsuario;
+                    Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true));
+                    if (user.IdPuesto != null)
                         ddlPuesto.SelectedValue = user.IdPuesto.ToString();
                     chkVip.Checked = user.Vip;
                     chkDirectoriActivo.Checked = user.DirectorioActivo;
                     chkPersonaFisica.Checked = user.PersonaFisica;
+                    LlenaTelefonosUsuarios();
+                    LlenaCorreosUsuarios();
                     int contadorCasa, contadorCel, contadorOficina;
                     foreach (TelefonoUsuario telefonoUsuario in user.TelefonoUsuario)
                     {
@@ -212,15 +316,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                     ucAltaUbicaciones.UbicacionSeleccionada = user.Ubicacion;
                     MuestraUbicacion(new List<Ubicacion>());
 
-                    List<HelperAsignacionRol> lstRoles =
-                        user.UsuarioGrupo.Select(s => new { s.IdRol, s.Rol.Descripcion })
-                            .Distinct()
-                            .Select(typeAnonymous => new HelperAsignacionRol
-                            {
-                                IdRol = typeAnonymous.IdRol,
-                                DescripcionRol = typeAnonymous.Descripcion,
-                                Grupos = new List<HelperAsignacionGrupoUsuarios>()
-                            }).ToList();
+                    List<HelperAsignacionRol> lstRoles = user.UsuarioGrupo.Select(s => new { s.IdRol, s.Rol.Descripcion }).Distinct().Select(typeAnonymous => new HelperAsignacionRol { IdRol = typeAnonymous.IdRol, DescripcionRol = typeAnonymous.Descripcion, Grupos = new List<HelperAsignacionGrupoUsuarios>() }).ToList();
                     foreach (UsuarioGrupo usuarioGrupo in user.UsuarioGrupo)
                     {
 
@@ -228,15 +324,14 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                         HelperAsignacionGrupoUsuarios grupoToAdd;
                         if (rolActivo.Grupos.Any(s => s.IdGrupo == usuarioGrupo.IdGrupoUsuario))
                         {
-                            grupoToAdd =
-                                rolActivo.Grupos[
-                                    rolActivo.Grupos.FindIndex(s => s.IdGrupo == usuarioGrupo.IdGrupoUsuario)];
+                            grupoToAdd = rolActivo.Grupos[rolActivo.Grupos.FindIndex(s => s.IdGrupo == usuarioGrupo.IdGrupoUsuario)];
                         }
                         else
                         {
                             grupoToAdd = new HelperAsignacionGrupoUsuarios
                             {
                                 IdGrupo = usuarioGrupo.IdGrupoUsuario,
+                                IdTipoGrupo = usuarioGrupo.GrupoUsuario.IdTipoGrupo,
                                 DescripcionGrupo = usuarioGrupo.GrupoUsuario.Descripcion,
                             };
 
@@ -247,7 +342,8 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                                 grupoToAdd.SubGrupos = new List<HelperSubGurpoUsuario>();
                             if (!grupoToAdd.SubGrupos.Any(a => a.Id == usuarioGrupo.IdSubGrupoUsuario))
                             {
-                                grupoToAdd.SubGrupos = new List<HelperSubGurpoUsuario>();
+                                if (grupoToAdd.SubGrupos == null)
+                                    grupoToAdd.SubGrupos = new List<HelperSubGurpoUsuario>();
                                 HelperSubGurpoUsuario subGpoToAdd = new HelperSubGurpoUsuario
                                 {
                                     Id = (int)usuarioGrupo.IdSubGrupoUsuario,
@@ -255,14 +351,17 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                                 };
                                 grupoToAdd.SubGrupos.Add(subGpoToAdd);
                             }
+                            rolActivo.Grupos = rolActivo.Grupos ?? new List<HelperAsignacionGrupoUsuarios>();
                         }
-                        rolActivo.Grupos.Add(grupoToAdd);
+                        if (!rolActivo.Grupos.Any(a => a.IdGrupo == grupoToAdd.IdGrupo))
+                            rolActivo.Grupos.Add(grupoToAdd);
 
 
 
                     }
-                    ucRolGrupo.GruposSeleccionados = lstRoles;
-                    MostrarGruposSeleccionados(ucRolGrupo.GruposSeleccionados);
+                    GruposUsuario = lstRoles;
+                    //ucRolGrupo.GruposSeleccionados = lstRoles;
+                    MostrarGruposSeleccionados();
                 }
 
             }
@@ -411,7 +510,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             List<string> sb = new List<string>();
 
 
-            if (!ucRolGrupo.ValidaCapturaGrupos())
+            if (rptRoles.Items.Count <= 0)
                 sb.Add("Debe asignar al menos un Grupo.");
 
             if (sb.Count > 0)
@@ -460,14 +559,30 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                     txt.ReadOnly = habilitado;
             }
 
-            foreach (RepeaterItem item in rptRoles.Items)
+            foreach (RepeaterItem itemRol in rptRoles.Items)
             {
-                Repeater rpt = (Repeater)item.FindControl("rptGrupos");
-                if (rpt != null)
+                Repeater rptGrupo = (Repeater)itemRol.FindControl("rptGrupos");
+                if (rptGrupo != null)
                 {
-                    foreach (RepeaterItem gpoItem in rpt.Items)
+                    foreach (RepeaterItem gpoItem in rptGrupo.Items)
                     {
+                        Repeater rptSubGpo = (Repeater)gpoItem.FindControl("rptSubGrupos");
+                        bool btnVisible;
                         LinkButton btn = (LinkButton)gpoItem.FindControl("btnRemoveRol");
+                        if (rptSubGpo != null)
+                        {
+                            if (rptSubGpo.Items.Count > 0)
+                            {
+                                btn.Visible = false;
+                                btn = null;
+                                foreach (RepeaterItem itemSubGpo in rptSubGpo.Items)
+                                {
+                                    LinkButton lnkbtnSubRol = (LinkButton)itemSubGpo.FindControl("btnRemoveRolSub");
+                                    if (lnkbtnSubRol != null)
+                                        lnkbtnSubRol.Visible = !habilitado && !EditarDetalle;
+                                }
+                            }
+                        }
                         if (btn != null)
                             btn.Visible = !habilitado && !EditarDetalle;
                     }
@@ -478,6 +593,44 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             btnModalRoles.Visible = !habilitado && !EditarDetalle;
             btnCancelarEdicion.Visible = !habilitado;
             btnGuardar.Visible = !habilitado;
+        }
+
+        protected void btnCambiarImagen_OnClick(object sender, EventArgs e)
+        {
+            //try
+            //{
+            //    BusinessFile.Imagenes.ImageToByteArray()
+            //}
+            //catch (Exception ex)
+            //{
+            //    if (_lstError == null)
+            //    {
+            //        _lstError = new List<string>();
+            //    }
+            //    _lstError.Add(ex.Message);
+            //    Alerta = _lstError;
+            //}
+        }
+
+        protected void btnEditar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                hfGeneraUsuario.Value = false.ToString();
+                EditarDetalle = !((Usuario)Session["UserData"]).Administrador;
+                EsDetalle = false;
+                Alta = false;
+                HabilitaDetalle(EsDetalle);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -546,15 +699,15 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             }
         }
 
-        protected void btnEditar_OnClick(object sender, EventArgs e)
+        #region Delegados
+
+
+        private void UcAltaPuestoOnOnCancelarModal()
         {
             try
             {
-                hfGeneraUsuario.Value = false.ToString();
-                EditarDetalle = !((Usuario)Session["UserData"]).Administrador;
-                EsDetalle = false;
-                Alta = false;
-                HabilitaDetalle(EsDetalle);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAreas\");",
+                    true);
             }
             catch (Exception ex)
             {
@@ -567,22 +720,27 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             }
         }
 
-        protected void btnCambiarImagen_OnClick(object sender, EventArgs e)
+        private void UcAltaPuestoOnOnAceptarModal()
         {
-            //try
-            //{
-            //    BusinessFile.Imagenes.ImageToByteArray()
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (_lstError == null)
-            //    {
-            //        _lstError = new List<string>();
-            //    }
-            //    _lstError.Add(ex.Message);
-            //    Alerta = _lstError;
-            //}
+            try
+            {
+                Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true));
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAreas\");",
+                    true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
         }
+
+        #endregion Delegados
+
         protected void Upload(object sender, EventArgs e)
         {
             try
@@ -601,7 +759,6 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             }
         }
 
-
         protected void ddlTipoUsuario_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -617,12 +774,10 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                     ucAltaUbicaciones.EsAlta = true;
                     ucAltaUbicaciones.IdTipoUsuario = idTipoUsuario;
 
-                    Session["TelefonosUsuario"] =
-                        _servicioParametros.ObtenerTelefonosParametrosIdTipoUsuario(idTipoUsuario, false);
+                    Session["TelefonosUsuario"] = _servicioParametros.ObtenerTelefonosParametrosIdTipoUsuario(idTipoUsuario, false);
                     LlenaTelefonosUsuarios();
 
-                    rptCorreos.DataSource = _servicioParametros.ObtenerCorreosParametrosIdTipoUsuario(idTipoUsuario,
-                        false);
+                    rptCorreos.DataSource = _servicioParametros.ObtenerCorreosParametrosIdTipoUsuario(idTipoUsuario, false);
                     rptCorreos.DataBind();
 
                     ucRolGrupo.IdTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
@@ -695,7 +850,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 string username = txtUserName.Text.Trim() == string.Empty
                     ? (txtNombre.Text.Substring(0, 1).ToLower() + txtAp.Text.Trim().ToLower()).Replace(" ", string.Empty)
                     : txtUserName.Text.Trim();
-                int limite = 2;
+                int limite = 10;
                 if (_servicioUsuarios.ValidaUserName(username))
                 {
                     for (int i = 1; i < limite; i++)
@@ -729,50 +884,6 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 Alerta = _lstError;
             }
         }
-
-        
-
-        #region Delegados
-
-
-        private void UcAltaPuestoOnOnCancelarModal()
-        {
-            try
-            {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAreas\");",
-                    true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        private void UcAltaPuestoOnOnAceptarModal()
-        {
-            try
-            {
-                Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true));
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalAreas\");",
-                    true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        #endregion Delegados
 
         protected void ddlTipoTelefono_OnSelectedIndexChanged(object sender, EventArgs e)
         {
@@ -996,7 +1107,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 if (rptUbicacion.Items.Count > 0)
                 {
                     ucAltaUbicaciones.IdUbicacion =
-                        int.Parse(((Label)rptOrganizacion.Items[0].FindControl("lblIdUbicacion")).Text);
+                        int.Parse(((Label)rptUbicacion.Items[0].FindControl("lblIdUbicacion")).Text);
                     ucAltaUbicaciones.SetUbicacionSeleccion();
                 }
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script",
@@ -1068,11 +1179,11 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
 
         #region RolesGrupos
 
-        private void MostrarGruposSeleccionados(List<HelperAsignacionRol> gruposAsignados)
+        private void MostrarGruposSeleccionados()
         {
             try
             {
-                rptRoles.DataSource = gruposAsignados;
+                rptRoles.DataSource = GruposUsuario;
                 rptRoles.DataBind();
             }
             catch (Exception ex)
@@ -1103,7 +1214,9 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             try
             {
                 //TODO: AGREGAR SUBGRUPO USUARIO
-                MostrarGruposSeleccionados(ucRolGrupo.GruposSeleccionados);
+                AgregarGrupo(ucRolGrupo.GruposSeleccionados);
+                ucRolGrupo.Limpiar();
+                MostrarGruposSeleccionados();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalRoles\");",
                     true);
             }
@@ -1180,14 +1293,162 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             }
         }
 
+        private void ValidarRolVacio(int idrol, int idGrupo, bool esGrupo)
+        {
+            try
+            {
+                HelperAsignacionRol rol = GruposUsuario.Single(s => s.IdRol == idrol);
+                if (rol != null)
+                {
+                    List<HelperAsignacionGrupoUsuarios> gposRol = rol.Grupos;
+                    if (esGrupo)
+                    {
+                        if (!gposRol.Any())
+                            EliminarRol(idrol);
+                    }
+                    else
+                    {
+                        HelperAsignacionGrupoUsuarios gpo = gposRol.SingleOrDefault(w => w.IdGrupo == idGrupo);
+                        if (gpo != null)
+                        {
+
+                            bool containsSubGrpo = gposRol.Single(w => w.IdGrupo == idGrupo).SubGrupos.Count > 0;
+                            if (!containsSubGrpo)
+                            {
+                                EliminarGrupo(idrol, idGrupo, null, false);
+                                ValidarRolVacio(idrol, idGrupo, true);
+                            }
+                        }
+                    }
+                }
+
+                //foreach (RepeaterItem itemRol in rptRoles.Items)
+                //{
+                //    Label lblIdrol = (Label)itemRol.FindControl("lblIdRol");
+                //    if (lblIdrol != null)
+                //    {
+                //        if (idrol == int.Parse(lblIdrol.Text))
+                //        {
+                //            Repeater rptGrupos = (Repeater)itemRol.FindControl("rptGrupos");
+                //            if (rptGrupos != null)
+                //            {
+                //                if (rptGrupos.Items.Count <= 0)
+                //                {
+
+                //                    EliminarRol(idrol);
+                //                    break;
+                //                }
+                //                else
+                //                {
+                //                    Repeater rptSubgrupos = (Repeater)rptGrupos.FindControl("rptSubGrupos");
+                //                    if (rptSubgrupos != null)
+                //                    {
+                //                        if (rptSubgrupos.Items.Count <= 0)
+                //                        {
+                //                            EliminarRol(idrol);
+                //                        }
+                //                    }
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         protected void btnRemoveRol_OnClick(object sender, EventArgs e)
         {
             try
             {
-                if (int.Parse(((LinkButton)sender).CommandArgument) == (int)BusinessVariables.EnumTiposGrupos.Administrador && ((Usuario)Session["UserData"]).Id == IdUsuario)
-                    throw new Exception("No puede eliminar este rol.");
-                ucRolGrupo.EliminarSeleccion(int.Parse(((LinkButton)sender).CommandArgument));
-                MostrarGruposSeleccionados(ucRolGrupo.GruposSeleccionados);
+                LinkButton btn = (LinkButton)sender;
+                if (btn != null)
+                {
+                    if ((int)BusinessVariables.EnumTiposGrupos.Administrador == int.Parse(btn.CommandName) && IdUsuario == ((Usuario)Session["UserData"]).Id)
+                        throw new Exception("No puede eliminar este Rol");
+                    RepeaterItem itemGrupo = (RepeaterItem)btn.NamingContainer;
+                    if (itemGrupo != null)
+                    {
+
+                        Label lblIdGrupo = (Label)itemGrupo.FindControl("lblIdGrupo");
+                        if (lblIdGrupo != null)
+                        {
+                            Repeater rptGrupo = (Repeater)itemGrupo.NamingContainer;
+                            if (rptGrupo != null)
+                            {
+                                RepeaterItem itemRol = (RepeaterItem)rptGrupo.NamingContainer;
+                                if (itemRol != null)
+                                {
+                                    Label lblIdRol = (Label)itemRol.FindControl("lblIdRol");
+                                    if (lblIdRol != null)
+                                    {
+                                        int idRol = int.Parse(lblIdRol.Text);
+                                        int idGrupo = int.Parse(lblIdGrupo.Text);
+                                        EliminarGrupo(idRol, idGrupo, null, false);
+                                        ValidarRolVacio(idRol, idGrupo, true);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                MostrarGruposSeleccionados();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnRemoveRolSub_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton btn = (LinkButton)sender;
+                if (btn != null)
+                {
+                    RepeaterItem itemRepeater = (RepeaterItem)btn.NamingContainer;
+                    if (itemRepeater != null)
+                    {
+                        Repeater rptSubGrupos = (Repeater)itemRepeater.NamingContainer;
+                        if (rptSubGrupos != null)
+                        {
+                            RepeaterItem itemGrupo = (RepeaterItem)rptSubGrupos.NamingContainer;
+                            if (itemGrupo != null)
+                            {
+                                Label lblIdGrupo = (Label)itemGrupo.FindControl("lblIdGrupo");
+                                Repeater rptGrupo = (Repeater)itemGrupo.NamingContainer;
+                                if (rptGrupo != null)
+                                {
+                                    RepeaterItem itemRol = (RepeaterItem)rptGrupo.NamingContainer;
+                                    if (itemRol != null)
+                                    {
+                                        Label lblIdRol = (Label)itemRol.FindControl("lblIdRol");
+                                        if (lblIdRol != null)
+                                        {
+                                            if (lblIdGrupo != null)
+                                            {
+                                                int idRol = int.Parse(lblIdRol.Text);
+                                                int idGrupo = int.Parse(lblIdGrupo.Text);
+                                                EliminarGrupo(idRol, idGrupo, int.Parse(btn.CommandArgument), true);
+                                                ValidarRolVacio(idRol, idGrupo, false);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                MostrarGruposSeleccionados();
             }
             catch (Exception ex)
             {
@@ -1318,7 +1579,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
 
                 usuario.UsuarioRol = new List<UsuarioRol>();
                 //TODO: CAMBIAR ASIGNACION DE ROL
-                foreach (HelperAsignacionRol item in ucRolGrupo.GruposSeleccionados)
+                foreach (HelperAsignacionRol item in GruposUsuario)
                 {
                     usuario.UsuarioRol.Add(new UsuarioRol
                     {
@@ -1337,7 +1598,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
 
                 usuario.UsuarioGrupo = new List<UsuarioGrupo>();
 
-                foreach (HelperAsignacionRol item in ucRolGrupo.GruposSeleccionados)
+                foreach (HelperAsignacionRol item in GruposUsuario)
                 {
                     foreach (HelperAsignacionGrupoUsuarios grupoUsuarios in item.Grupos)
                     {

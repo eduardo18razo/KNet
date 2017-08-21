@@ -134,6 +134,12 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
                 ObtenerEncuesta();
             }
         }
+
+        public int IdTipoEncuesta
+        {
+            get { return int.Parse(ddlTipoEncuesta.SelectedValue); }
+            set { ddlTipoEncuesta.SelectedValue = value.ToString(); }
+        }
         public bool Alta
         {
             get { return bool.Parse(hfAlta.Value); }
@@ -190,6 +196,7 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
         {
             try
             {
+
                 foreach (RepeaterItem item in rptPreguntas.Items)
                 {
                     if (((TextBox)item.FindControl("txtPregunta")).Text == string.Empty)
@@ -204,102 +211,15 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
                     tmpEncuesta.EncuestaPregunta = new List<EncuestaPregunta>();
                 else
                     tmpEncuesta.EncuestaPregunta = ObtenerPreguntas();
+
+                if (int.Parse(ddlTipoEncuesta.SelectedValue) == (int)BusinessVariables.EnumTipoEncuesta.PromotorScore && tmpEncuesta.EncuestaPregunta.Count >= 1)
+                    throw new Exception("Solo puede agregar una pregunta a este tipo de encuesta.");
+
                 ObtieneTotalPonderacion();
 
                 tmpEncuesta.EncuestaPregunta.Add(new EncuestaPregunta());
                 Session["Encuesta"] = tmpEncuesta;
                 LlenaPreguntas();
-
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnGuardarEncuesta_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (ddlTipoEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    throw new Exception("Seleccione un tipo para la encuesta");
-                if (txtTitulo.Text == string.Empty)
-                    throw new Exception("Especifique un titúlo para la encuesta");
-                if (txtTituloCliente.Text == string.Empty)
-                    throw new Exception("Especifique un titúlo para el cliente.");
-                if (ObtieneTotalPonderacion() < 100 || ObtieneTotalPonderacion() > 100)
-                    throw new Exception("La ponderación total debe sumar 100.");
-                if (Alta)
-                {
-                    Encuesta nuevaEncuesta = ((Encuesta)Session["Encuesta"]);
-                    nuevaEncuesta.Id = 0;
-                    nuevaEncuesta.IdTipoEncuesta = int.Parse(ddlTipoEncuesta.SelectedValue);
-                    nuevaEncuesta.Titulo = txtTitulo.Text;
-                    nuevaEncuesta.TituloCliente = txtTituloCliente.Text;
-                    nuevaEncuesta.Descripcion = txtDescripcion.Text;
-                    nuevaEncuesta.EncuestaPregunta = ObtenerPreguntas();
-                    nuevaEncuesta.IdUsuarioAlta = ((Usuario)Session["UserData"]).Id;
-                    _servicioEncuesta.GuardarEncuesta(nuevaEncuesta);
-                }
-                else
-                {
-                    Encuesta encuestaActualizar = ((Encuesta)Session["Encuesta"]);
-                    encuestaActualizar.IdTipoEncuesta = int.Parse(ddlTipoEncuesta.SelectedValue);
-                    encuestaActualizar.Titulo = txtTitulo.Text;
-                    encuestaActualizar.TituloCliente = txtTituloCliente.Text;
-                    encuestaActualizar.Descripcion = txtDescripcion.Text;
-                    encuestaActualizar.EncuestaPregunta = ObtenerPreguntas();
-                    encuestaActualizar.IdUsuarioModifico = ((Usuario)Session["UserData"]).Id;
-                    _servicioEncuesta.GuardarEncuesta(encuestaActualizar);
-                }
-
-                LimpiarEncuesta();
-                if (OnAceptarModal != null)
-                    OnAceptarModal();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnLimpiarEncuesta_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                LimpiarEncuesta();
-                if (OnLimpiarModal != null)
-                    OnLimpiarModal();
-
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void btnCancelar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                LimpiarEncuesta();
-                if (OnCancelarModal != null)
-                    OnCancelarModal();
 
             }
             catch (Exception ex)
@@ -369,6 +289,84 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
             }
         }
 
+        protected void btnSubir_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Encuesta tmpMascara = ((Encuesta)Session["Encuesta"]);
+                LinkButton btn = (LinkButton)sender;
+                RepeaterItem item = (RepeaterItem)btn.NamingContainer;
+                Label txtPregunta = (Label)item.FindControl("txtPregunta");
+                Label txtPonderacion = (Label)item.FindControl("txtPonderacion");
+                decimal ponderacion = decimal.Parse(txtPonderacion.Text);
+                EncuestaPregunta campoEditar = txtPregunta.Text.Trim() == string.Empty ? tmpMascara.EncuestaPregunta.SingleOrDefault(s => s.Pregunta == null && s.Ponderacion == ponderacion) : tmpMascara.EncuestaPregunta.SingleOrDefault(s => s.Pregunta == txtPregunta.Text && s.Ponderacion == ponderacion);
+                if (campoEditar == null) return;
+                int indexActual = tmpMascara.EncuestaPregunta.IndexOf(campoEditar);
+                if (indexActual == 0) return;
+                tmpMascara.EncuestaPregunta.Remove(campoEditar);
+                tmpMascara.EncuestaPregunta.Insert(indexActual - 1, campoEditar);
+                Session["Encuesta"] = tmpMascara;
+                LlenaPreguntas();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnBajar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Encuesta tmpMascara = ((Encuesta)Session["Encuesta"]);
+                LinkButton btn = (LinkButton)sender;
+                RepeaterItem item = (RepeaterItem)btn.NamingContainer;
+                TextBox txtPregunta = (TextBox)item.FindControl("txtPregunta");
+                TextBox txtPonderacion = (TextBox)item.FindControl("txtPonderacion");
+                decimal ponderacion = decimal.Parse(txtPonderacion.Text);
+                EncuestaPregunta campoEditar = txtPregunta.Text.Trim() == string.Empty ? tmpMascara.EncuestaPregunta.SingleOrDefault(s => s.Pregunta == null && s.Ponderacion == ponderacion) : tmpMascara.EncuestaPregunta.SingleOrDefault(s => s.Pregunta == txtPregunta.Text && s.Ponderacion == ponderacion);
+                if (campoEditar == null) return;
+                int indexActual = tmpMascara.EncuestaPregunta.IndexOf(campoEditar);
+                if (indexActual == tmpMascara.EncuestaPregunta.Count - 1) return;
+                tmpMascara.EncuestaPregunta.Remove(campoEditar);
+                tmpMascara.EncuestaPregunta.Insert(indexActual + 1, campoEditar);
+                Session["Encuesta"] = tmpMascara;
+                LlenaPreguntas();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void ddlTipoEncuesta_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                divPreguntas.Visible = int.Parse(ddlTipoEncuesta.SelectedValue) != (int)BusinessVariables.EnumTipoEncuesta.PromotorScore;
+
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
         protected void btnPreview_OnClick(object sender, EventArgs e)
         {
             try
@@ -379,10 +377,153 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
                 previewEncuesta.Titulo = txtTitulo.Text;
                 previewEncuesta.TituloCliente = txtTituloCliente.Text;
                 previewEncuesta.Descripcion = txtDescripcion.Text;
-                previewEncuesta.EncuestaPregunta = ObtenerPreguntas();
+
+                if (int.Parse(ddlTipoEncuesta.SelectedValue) != (int)BusinessVariables.EnumTipoEncuesta.PromotorScore)
+                {
+                    List<EncuestaPregunta> preguntas = ObtenerPreguntas();
+                    preguntas.RemoveAll(w => w.Pregunta == string.Empty);
+                    previewEncuesta.EncuestaPregunta = preguntas;
+                }
+
+                else
+                {
+                    previewEncuesta.EncuestaPregunta = new List<EncuestaPregunta>
+                        {
+                            new EncuestaPregunta
+                            {
+                                Pregunta = "¿Cuán probable es que recomiende el producto o servicio a un familiar o amigo?",
+                                Ponderacion = 100
+                            }
+                        };
+                }
+                //previewEncuesta.EncuestaPregunta = ObtenerPreguntas();
                 Session["PreviewEncuesta"] = previewEncuesta;
                 string url = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "window.open('" + url + "/Users/Administracion/Encuestas/FrmPreview.aspx','_blank');", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnGuardarEncuesta_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ddlTipoEncuesta.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    throw new Exception("Seleccione un tipo para la encuesta");
+                if (txtTitulo.Text == string.Empty)
+                    throw new Exception("Especifique un titúlo para la encuesta");
+                if (txtTituloCliente.Text == string.Empty)
+                    throw new Exception("Especifique un titúlo para el cliente.");
+                if (int.Parse(ddlTipoEncuesta.SelectedValue) != (int)BusinessVariables.EnumTipoEncuesta.PromotorScore)
+                    if (ObtieneTotalPonderacion() < 100 || ObtieneTotalPonderacion() > 100)
+                        throw new Exception("La ponderación total debe sumar 100.");
+                if (Alta)
+                {
+                    Encuesta nuevaEncuesta = ((Encuesta)Session["Encuesta"]);
+                    nuevaEncuesta.TipoEncuesta = null;
+                    nuevaEncuesta.Id = 0;
+                    nuevaEncuesta.IdTipoEncuesta = int.Parse(ddlTipoEncuesta.SelectedValue);
+                    nuevaEncuesta.Titulo = txtTitulo.Text;
+                    nuevaEncuesta.TituloCliente = txtTituloCliente.Text;
+                    nuevaEncuesta.Descripcion = txtDescripcion.Text;
+                    if (int.Parse(ddlTipoEncuesta.SelectedValue) != (int)BusinessVariables.EnumTipoEncuesta.PromotorScore)
+                    {
+                        List<EncuestaPregunta> preguntas = ObtenerPreguntas();
+                        preguntas.RemoveAll(w => w.Pregunta == string.Empty);
+                        nuevaEncuesta.EncuestaPregunta = preguntas;
+                        //nuevaEncuesta.EncuestaPregunta = ObtenerPreguntas();
+                    }
+                    else
+                    {
+                        nuevaEncuesta.EncuestaPregunta = new List<EncuestaPregunta>
+                        {
+                            new EncuestaPregunta
+                            {
+                                Pregunta = "¿Cuán probable es que recomiende el producto o servicio a un familiar o amigo?",
+                                Ponderacion = 100
+                            }
+                        };
+                    }
+                    nuevaEncuesta.IdUsuarioAlta = ((Usuario)Session["UserData"]).Id;
+                    _servicioEncuesta.GuardarEncuesta(nuevaEncuesta);
+                }
+                else
+                {
+                    Encuesta encuestaActualizar = ((Encuesta)Session["Encuesta"]);
+                    encuestaActualizar.TipoEncuesta = null;
+                    encuestaActualizar.IdTipoEncuesta = int.Parse(ddlTipoEncuesta.SelectedValue);
+                    encuestaActualizar.Titulo = txtTitulo.Text;
+                    encuestaActualizar.TituloCliente = txtTituloCliente.Text;
+                    encuestaActualizar.Descripcion = txtDescripcion.Text;
+                    if (int.Parse(ddlTipoEncuesta.SelectedValue) != (int)BusinessVariables.EnumTipoEncuesta.PromotorScore)
+                        encuestaActualizar.EncuestaPregunta = ObtenerPreguntas();
+                    else
+                    {
+                        encuestaActualizar.EncuestaPregunta = new List<EncuestaPregunta>
+                        {
+                            new EncuestaPregunta
+                            {
+                                Pregunta =
+                                    "¿Cuán probable es que recomiende el producto o servicio a un familiar o amigo?",
+                                Ponderacion = 100
+                            }
+                        };
+                    }
+                    encuestaActualizar.IdUsuarioModifico = ((Usuario)Session["UserData"]).Id;
+                    _servicioEncuesta.ActualizarEncuesta(encuestaActualizar);
+                }
+
+                LimpiarEncuesta();
+                if (OnAceptarModal != null)
+                    OnAceptarModal();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnLimpiarEncuesta_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LimpiarEncuesta();
+                if (OnLimpiarModal != null)
+                    OnLimpiarModal();
+
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnCancelar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LimpiarEncuesta();
+                if (OnCancelarModal != null)
+                    OnCancelarModal();
+
             }
             catch (Exception ex)
             {

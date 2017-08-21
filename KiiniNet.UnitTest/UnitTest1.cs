@@ -103,7 +103,6 @@ namespace KiiniNet.UnitTest
         {
             try
             {
-
                 new DataBaseModelContext();
                 //CompilerResults compilerResults = null;
 

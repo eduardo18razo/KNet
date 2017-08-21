@@ -70,7 +70,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
 
             if (arbol != null)
             {
-                
+
                 int? idMascara = arbol.InventarioArbolAcceso.First().IdMascara;
                 if (idMascara != null) IdMascara = (int)idMascara;
                 Mascara mascara = _servicioMascaras.ObtenerMascaraCaptura(IdMascara);
@@ -166,10 +166,20 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 if (campo.Requerido)
                                     if (txtSimple.Text.Trim() == String.Empty)
                                         throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
-                                if (txtSimple.Text.Trim().Length < campo.LongitudMinima)
-                                    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (txtSimple.Text.Trim().Length > campo.LongitudMaxima)
-                                    throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+                                    else
+                                    {
+                                        if (txtSimple.Text.Trim().Length < campo.LongitudMinima)
+                                            throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
+                                        if (txtSimple.Text.Trim().Length > campo.LongitudMaxima)
+                                            throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+                                    }
+                                if (!campo.Requerido && txtSimple.Text.Trim() != string.Empty)
+                                {
+                                    if (txtSimple.Text.Trim().Length < campo.LongitudMinima)
+                                        throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
+                                    if (txtSimple.Text.Trim().Length > campo.LongitudMaxima)
+                                        throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+                                }
 
                             }
                             break;
@@ -181,10 +191,21 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 if (campo.Requerido)
                                     if (txtMultilinea.Text.Trim() == String.Empty)
                                         throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
-                                if (txtMultilinea.Text.Trim().Length < campo.LongitudMinima)
-                                    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (txtMultilinea.Text.Trim().Length > campo.LongitudMaxima)
-                                    throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+                                    else
+                                    {
+                                        if (txtMultilinea.Text.Trim().Length < campo.LongitudMinima)
+                                            throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
+                                        if (txtMultilinea.Text.Trim().Length > campo.LongitudMaxima)
+                                            throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+                                    }
+                                if (!campo.Requerido && txtMultilinea.Text.Trim() != string.Empty)
+                                {
+                                    if (txtMultilinea.Text.Trim().Length < campo.LongitudMinima)
+                                        throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
+                                    if (txtMultilinea.Text.Trim().Length > campo.LongitudMaxima)
+                                        throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+                                }
+
 
                             }
                             break;
@@ -226,12 +247,20 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 if (campo.Requerido)
                                     if (txtEntero.Text.Trim() == String.Empty)
                                         throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
-                                //TODO: AGREGAR VALOR MINIMO A ESQUEMA
-                                //if (txtEntero.Text.Trim().Length < campo.LongitudMinima)
-                                //    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (int.Parse(txtEntero.Text.Trim()) > campo.ValorMaximo)
-                                    throw new Exception(string.Format("Campo {0} debe se menor o igual a {1}", campo.Descripcion, campo.ValorMaximo));
-
+                                    else
+                                    {
+                                        if (int.Parse(txtEntero.Text.Trim()) < campo.ValorMinimo)
+                                            throw new Exception(string.Format("Campo {0} debe se mayor o igual a {1}", campo.Descripcion, campo.ValorMinimo));
+                                        if (int.Parse(txtEntero.Text.Trim()) > campo.ValorMaximo)
+                                            throw new Exception(string.Format("Campo {0} debe se menor o igual a {1}", campo.Descripcion, campo.ValorMaximo));
+                                    }
+                                if (!campo.Requerido && txtEntero.Text.Trim() != string.Empty)
+                                {
+                                    if (int.Parse(txtEntero.Text.Trim()) < campo.ValorMinimo)
+                                        throw new Exception(string.Format("Campo {0} debe se mayor o igual a {1}", campo.Descripcion, campo.ValorMinimo));
+                                    if (int.Parse(txtEntero.Text.Trim()) > campo.ValorMaximo)
+                                        throw new Exception(string.Format("Campo {0} debe se menor o igual a {1}", campo.Descripcion, campo.ValorMaximo));
+                                }
                             }
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroDecimal:
@@ -242,12 +271,20 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 if (campo.Requerido)
                                     if (txtDecimal.Text.Trim() == String.Empty)
                                         throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
-                                //TODO: AGREGAR VALOR MINIMO A ESQUEMA
-                                //if (decimal.Parse(txtDecimal.Text.Trim()) < campo.LongitudMinima)
-                                //    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (decimal.Parse(txtDecimal.Text.Trim().Replace('_', '0')) > campo.ValorMaximo)
-                                    throw new Exception(string.Format("Campo {0} debe se menor o igual a {1}", campo.Descripcion, campo.ValorMaximo));
-
+                                    else
+                                    {
+                                        if (decimal.Parse(txtDecimal.Text.Trim().Replace('_', '0')) < campo.ValorMinimo)
+                                            throw new Exception(string.Format("Campo {0} debe se mayor o igual a {1}", campo.Descripcion, campo.ValorMinimo));
+                                        if (decimal.Parse(txtDecimal.Text.Trim().Replace('_', '0')) > campo.ValorMaximo)
+                                            throw new Exception(string.Format("Campo {0} debe se menor o igual a {1}", campo.Descripcion, campo.ValorMaximo));
+                                    }
+                                if (!campo.Requerido && txtDecimal.Text.Trim() != string.Empty)
+                                {
+                                    if (decimal.Parse(txtDecimal.Text.Trim().Replace('_', '0')) < campo.ValorMinimo)
+                                        throw new Exception(string.Format("Campo {0} debe se mayor o igual a {1}", campo.Descripcion, campo.ValorMinimo));
+                                    if (decimal.Parse(txtDecimal.Text.Trim().Replace('_', '0')) > campo.ValorMaximo)
+                                        throw new Exception(string.Format("Campo {0} debe se menor o igual a {1}", campo.Descripcion, campo.ValorMaximo));
+                                }
                             }
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Logico:
@@ -306,10 +343,20 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 if (campo.Requerido)
                                     if (txtMascara.Text.Trim() == String.Empty)
                                         throw new Exception(string.Format("Campo {0} es obligatorio", campo.Descripcion));
-                                if (txtMascara.Text.Trim().Length < campo.LongitudMinima)
-                                    throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
-                                if (txtMascara.Text.Trim().Length > campo.LongitudMaxima)
-                                    throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+                                    else
+                                    {
+                                        if (txtMascara.Text.Trim().Length < campo.LongitudMinima)
+                                            throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
+                                        if (txtMascara.Text.Trim().Length > campo.LongitudMaxima)
+                                            throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+                                    }
+                                if (!campo.Requerido && txtMascara.Text.Trim() != string.Empty)
+                                {
+                                    if (txtMascara.Text.Trim().Length < campo.LongitudMinima)
+                                        throw new Exception(string.Format("Campo {0} debe tener al menos {1} caracteres", campo.Descripcion, campo.LongitudMinima));
+                                    if (txtMascara.Text.Trim().Length > campo.LongitudMaxima)
+                                        throw new Exception(string.Format("Campo {0} debe no puede tener mas de {1} caracteres", campo.Descripcion, campo.LongitudMaxima));
+                                }
 
                             }
                             break;
@@ -455,7 +502,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                         campoCapturado = new HelperCampoMascaraCaptura
                                         {
                                             NombreCampo = campo.NombreCampo,
-                                            Valor = txt.Text.Trim().Replace('_', '0')
+                                            Valor = campo.Requerido ? txt.Text.Trim().Replace('_', '0') : txt.Text.Trim() == string.Empty ? "0" : txt.Text.Trim().Replace('_', '0')
                                         };
                                         lstCamposCapturados.Add(campoCapturado);
                                         break;
@@ -464,7 +511,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                         campoCapturado = new HelperCampoMascaraCaptura
                                         {
                                             NombreCampo = campo.NombreCampo,
-                                            Valor = txt.Text.Trim().ToUpper()
+                                            Valor = campo.Requerido ? txt.Text.Trim().ToUpper() : txt.Text.Trim() == string.Empty ? "0" : txt.Text.Trim().ToUpper()
                                         };
                                         lstCamposCapturados.Add(campoCapturado);
                                         break;
@@ -512,6 +559,15 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                         {
                                             NombreCampo = campo.NombreCampo,
                                             Valor = valores
+                                        };
+                                        lstCamposCapturados.Add(campoCapturado);
+                                    }
+                                    else
+                                    {
+                                        HelperCampoMascaraCaptura campoCapturado = new HelperCampoMascaraCaptura
+                                        {
+                                            NombreCampo = campo.NombreCampo,
+                                            Valor = string.Empty
                                         };
                                         lstCamposCapturados.Add(campoCapturado);
                                     }
@@ -577,6 +633,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 CssClass = "form-control",
 
                             };
+                            txtSimple.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             txtSimple.Attributes["MaxLength"] = campo.TipoCampoMascara.LongitudMaxima.ToString();
                             txtSimple.Attributes["placeholder"] = campo.Descripcion;
                             _lstControles.Add(txtSimple);
@@ -592,6 +649,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 TextMode = TextBoxMode.MultiLine,
                                 Rows = 10
                             };
+                            txtMultilinea.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             txtMultilinea.Attributes["MaxLength"] = campo.LongitudMaxima.ToString();
                             txtMultilinea.Attributes["placeholder"] = campo.Descripcion;
                             _lstControles.Add(txtMultilinea);
@@ -616,10 +674,13 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false, true))
-                                {
-                                    lstRadio.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
-                                }
+                            {
+                                if (campo.IdCatalogo != null)
+                                    foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara((int)campo.IdCatalogo, false, true))
+                                    {
+                                        lstRadio.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
+                                    }
+                            }
                             createDiv.Controls.Add(lstRadio);
                             _lstControles.Add(lstRadio);
                             break;
@@ -641,10 +702,13 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, true, true))
-                                {
-                                    ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
-                                }
+                            {
+                                if (campo.IdCatalogo != null)
+                                    foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara((int)campo.IdCatalogo, true, true))
+                                    {
+                                        ddlCatalogo.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
+                                    }
+                            }
                             createDiv.Controls.Add(ddlCatalogo);
                             _lstControles.Add(ddlCatalogo);
                             break;
@@ -667,10 +731,13 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 }
                             }
                             else
-                                foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara(campo.Catalogos.Tabla, false, true))
-                                {
-                                    chklist.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
-                                }
+                            {
+                                if (campo.IdCatalogo != null)
+                                    foreach (CatalogoGenerico cat in _servicioMascaras.ObtenerCatalogoCampoMascara((int)campo.IdCatalogo, false, true))
+                                    {
+                                        chklist.Items.Add(new ListItem(cat.Descripcion, cat.Id.ToString()));
+                                    }
+                            }
                             createDiv.Controls.Add(chklist);
                             _lstControles.Add(chklist);
                             break;
@@ -683,10 +750,12 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 Text = campo.Descripcion,
                                 CssClass = "form-control"
                             };
+                            txtDecimal.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             txtDecimal.Attributes["placeholder"] = campo.Descripcion;
-                            txtDecimal.Attributes["max"] = campo.ValorMaximo.ToString();
                             txtDecimal.Attributes["type"] = "number";
                             txtDecimal.Attributes["step"] = "0.01";
+                            txtDecimal.Attributes["min"] = campo.ValorMinimo.ToString();
+                            txtDecimal.Attributes["max"] = campo.ValorMaximo.ToString();
                             txtDecimal.Attributes["for"] = "DECIMAL";
                             createDiv.Controls.Add(txtDecimal);
                             _lstControles.Add(txtDecimal);
@@ -700,10 +769,11 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 Text = campo.NombreCampo,
                                 CssClass = "form-control"
                             };
+                            txtEntero.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             txtEntero.Attributes["placeholder"] = campo.NombreCampo;
                             txtEntero.Attributes["type"] = "number";
                             txtEntero.Attributes["step"] = "1";
-                            txtEntero.Attributes["min"] = "1";
+                            txtEntero.Attributes["min"] = campo.ValorMinimo.ToString();
                             txtEntero.Attributes["max"] = campo.ValorMaximo.ToString();
                             createDiv.Controls.Add(txtEntero);
                             _lstControles.Add(txtEntero);
@@ -720,6 +790,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 ID = "txt" + campo.NombreCampo,
                                 CssClass = "form-control"
                             };
+                            txtFecha.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             txtFecha.Attributes["placeholder"] = campo.Descripcion;
                             txtFecha.Attributes["for"] = "FECHA";
                             txtFecha.Attributes["type"] = "date";
@@ -733,7 +804,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                             createDiv.Controls.Add(lbl);
 
                             HtmlGenericControl createDivGrupoFechas = new HtmlGenericControl("DIV");
-                            createDivGrupoFechas.ID = "createDivGrupoFechas";
+                            createDivGrupoFechas.ID = "createDivGrupoFechas" + campo.NombreCampo;
                             createDivGrupoFechas.Attributes["class"] = "form-group";
 
                             Label lblDe = new Label { Text = "De:", CssClass = "" };
@@ -745,6 +816,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 ID = "txt" + campo.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaInicio,
                                 CssClass = "form-control"
                             };
+                            txtFechaInicio.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             txtFechaInicio.Attributes["placeholder"] = campo.Descripcion;
                             txtFechaInicio.Attributes["for"] = "FECHAINICIO";
                             txtFechaInicio.Attributes["type"] = "date";
@@ -760,6 +832,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 ID = "txt" + campo.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaFin,
                                 CssClass = "form-control"
                             };
+                            txtFechaFin.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             txtFechaFin.Attributes["placeholder"] = campo.Descripcion;
                             txtFechaFin.Attributes["for"] = "FECHAFIN";
                             txtFechaFin.Attributes["type"] = "date";
@@ -767,7 +840,6 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                             createDivGrupoFechas.Controls.Add(txtFechaFin);
 
                             HtmlGenericControl createDivFormFechas = new HtmlGenericControl("DIV");
-                            createDivFormFechas.ID = "createDivFormFechas";
                             createDivFormFechas.Attributes["class"] = "form-inline";
                             createDivFormFechas.Controls.Add(createDivGrupoFechas);
                             createDiv.Controls.Add(createDivFormFechas);
@@ -803,6 +875,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 AcceptAMPM = false,
                                 AcceptNegative = MaskedEditShowSymbol.None,
                             };
+                            txtMascara.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             createDiv.Controls.Add(meeMascara);
                             createDiv.Controls.Add(txtMascara);
                             _lstControles.Add(txtMascara);

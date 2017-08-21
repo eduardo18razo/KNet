@@ -18,6 +18,56 @@ namespace KinniNet.Core.Operacion
     public class BusinessMascaras : IDisposable
     {
         private bool _proxy;
+
+        public bool ValidaEstructuraMascara(Mascara mascara)
+        {
+            bool result = false;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                var pTableName = new SqlParameter { ParameterName = "@STORENAME", Value = mascara.NombreTabla };
+                var pResult = new SqlParameter { ParameterName = "@STORENAME", Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int };
+                //Tabla
+                db.ExecuteStoreCommand("exec ExisteStore @STORENAME, @OUTER output", pTableName, pResult);
+                result = (int)pResult.Value == 1;
+                if (result)
+                {
+                    //Comando Insertar
+                    pTableName = new SqlParameter {ParameterName = "@STORENAME", Value = mascara.ComandoInsertar};
+                    pResult = new SqlParameter
+                    {
+                        ParameterName = "@STORENAME",
+                        Direction = ParameterDirection.Output,
+                        SqlDbType = SqlDbType.Int
+                    };
+                    db.ExecuteStoreCommand("exec ExisteStore @STORENAME, @OUTER output", pTableName, pResult);
+                    result = (int) pResult.Value == 1;
+                    if (result)
+                    {
+                        //Comando actualizar
+                        pTableName = new SqlParameter {ParameterName = "@STORENAME", Value = mascara.ComandoActualizar};
+                        pResult = new SqlParameter
+                        {
+                            ParameterName = "@STORENAME",
+                            Direction = ParameterDirection.Output,
+                            SqlDbType = SqlDbType.Int
+                        };
+                        db.ExecuteStoreCommand("exec ExisteStore @STORENAME, @OUTER output", pTableName, pResult);
+                        result = (int) pResult.Value == 1;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
         public BusinessMascaras(bool proxy = false)
         {
             _proxy = proxy;
@@ -150,23 +200,23 @@ namespace KinniNet.Core.Operacion
                     {
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Texto:
                             queryParametros += String.Format("@{0} {1}({2}),\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, tmpTipoCampoMascara.LongitudMaximaPermitida);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.TextoMultiLinea:
                             queryParametros += String.Format("@{0} {1}({2}),\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, campoMascara.LongitudMaxima);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
 
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.RadioBoton:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ListaDepledable:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación:
@@ -174,52 +224,52 @@ namespace KinniNet.Core.Operacion
                                 //foreach (CatalogoGenerico generico in new BusinessCatalogos().ObtenerRegistrosSistemaCatalogo((int)campoMascara.IdCatalogo, false))
                                 //{
                                 queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             //}
 
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroEntero:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroDecimal:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Logico:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.SelecciónCascada:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Fecha:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.FechaRango:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaInicio, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaInicio);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaInicio);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaInicio);
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaFin, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaFin);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaFin);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaFin);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ExpresiónRegular:
                             queryParametros += String.Format("@{0} {1}({2}),\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, campoMascara.LongitudMaxima);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo:
                             queryParametros += String.Format("@{0} {1}({2}),\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql, campoMascara.LongitudMaxima);
-                            queryCampos += String.Format("{0},\n", campoMascara.NombreCampo);
+                            queryCampos += String.Format("[{0}],\n", campoMascara.NombreCampo);
                             queryValues += String.Format("@{0},\n", campoMascara.NombreCampo);
                             break;
                     }
@@ -292,63 +342,63 @@ namespace KinniNet.Core.Operacion
                     {
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Texto:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.TextoMultiLinea:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.RadioBoton:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ListaDepledable:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.CasillaDeVerificación:
                             if (campoMascara.IdCatalogo != null)
                                 //foreach (CatalogoGenerico generico in new BusinessCatalogos().ObtenerRegistrosSistemaCatalogo((int)campoMascara.IdCatalogo, false))
                                 //{
                                 queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo);
                             //}
 
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroEntero:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.NúmeroDecimal:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Logico:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.SelecciónCascada:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Fecha:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.FechaRango:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaInicio, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaInicio);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaInicio);
 
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaFin, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaFin);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo + BusinessVariables.ParametrosMascaraCaptura.PrefijoFechaFin);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.ExpresiónRegular:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo:
                             queryParametros += String.Format("@{0} {1},\n", campoMascara.NombreCampo, tmpTipoCampoMascara.TipoDatoSql);
-                            queryCamposValues += String.Format("{0} = @{0},\n", campoMascara.NombreCampo);
+                            queryCamposValues += String.Format("[{0}] = @{0},\n", campoMascara.NombreCampo);
                             break;
                     }
 
@@ -431,8 +481,8 @@ namespace KinniNet.Core.Operacion
                 }
 
                 mascara.NombreTabla = (BusinessVariables.ParametrosMascaraCaptura.PrefijoTabla + BusinessCadenas.Cadenas.FormatoBaseDatos(mascara.Descripcion.Trim())).Replace(" ", string.Empty).ToUpper();
-                mascara.ComandoInsertar = (BusinessVariables.ParametrosMascaraCaptura.PrefijoComandoInsertar + mascara.Descripcion).Replace(" ", string.Empty).ToUpper();
-                mascara.ComandoActualizar = (BusinessVariables.ParametrosMascaraCaptura.PrefijoComandoActualizar + mascara.Descripcion).Replace(" ", string.Empty).ToUpper();
+                mascara.ComandoInsertar = (BusinessVariables.ParametrosMascaraCaptura.PrefijoComandoInsertar + BusinessCadenas.Cadenas.FormatoBaseDatos(mascara.Descripcion.Trim())).Replace(" ", string.Empty).ToUpper();
+                mascara.ComandoActualizar = (BusinessVariables.ParametrosMascaraCaptura.PrefijoComandoActualizar + BusinessCadenas.Cadenas.FormatoBaseDatos(mascara.Descripcion.Trim())).Replace(" ", string.Empty).ToUpper();
                 mascara.Habilitado = true;
 
                 ExisteMascara(mascara);
@@ -464,6 +514,12 @@ namespace KinniNet.Core.Operacion
                     foreach (CampoMascara campoMascara in dbMascara.CampoMascara)
                     {
                         campoMascara.Descripcion = mascara.CampoMascara.Single(s => s.Id == campoMascara.Id).Descripcion;
+                        campoMascara.LongitudMinima = mascara.CampoMascara.Single(s => s.Id == campoMascara.Id).LongitudMinima;
+                        campoMascara.LongitudMaxima = mascara.CampoMascara.Single(s => s.Id == campoMascara.Id).LongitudMaxima;
+                        campoMascara.ValorMinimo = mascara.CampoMascara.Single(s => s.Id == campoMascara.Id).ValorMinimo;
+                        campoMascara.ValorMaximo = mascara.CampoMascara.Single(s => s.Id == campoMascara.Id).ValorMaximo;
+                        campoMascara.SimboloMoneda = mascara.CampoMascara.Single(s => s.Id == campoMascara.Id).SimboloMoneda;
+                        campoMascara.MascaraDetalle = mascara.CampoMascara.Single(s => s.Id == campoMascara.Id).MascaraDetalle;
                     }
                     dbMascara.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                     dbMascara.IdUsuarioModifico = mascara.IdUsuarioAlta;
@@ -586,13 +642,17 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
-        public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion, bool filtraHabilitados)
+        public List<CatalogoGenerico> ObtenerCatalogoCampoMascara(int idCatalogo, bool insertarSeleccion, bool filtraHabilitados)
         {
-            List<CatalogoGenerico> result;
+            List<CatalogoGenerico> result = null;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                result = db.ExecuteStoreQuery<CatalogoGenerico>("ObtenerCatalogoSistema '" + tabla + "', " + Convert.ToInt32(insertarSeleccion) + ", " + Convert.ToInt32(filtraHabilitados)).ToList();
+                Catalogos catalogo = db.Catalogos.SingleOrDefault(s => s.Id == idCatalogo);
+                if (catalogo != null)
+                {
+                    result = db.ExecuteStoreQuery<CatalogoGenerico>("ObtenerCatalogoSistema '" + catalogo.Tabla + "', " + Convert.ToInt32(insertarSeleccion) + ", " + Convert.ToInt32(filtraHabilitados)).ToList();
+                }
             }
             catch (Exception ex)
             {

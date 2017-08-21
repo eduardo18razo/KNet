@@ -54,11 +54,13 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        private void LimpiarCampos()
+        public void LimpiarCampos()
         {
             try
             {
                 txtDescripcionCatalogo.Text = String.Empty;
+                Session["registrosCatalogos"] = new List<CatalogoGenerico>();
+                LlenaRegistros();
             }
             catch (Exception ex)
             {

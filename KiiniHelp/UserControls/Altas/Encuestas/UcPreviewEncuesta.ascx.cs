@@ -71,6 +71,28 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
                 int contador = 0;
                 switch (tipoEncuesta)
                 {
+                    case (int)BusinessVariables.EnumTipoEncuesta.PromotorScore:
+                        foreach (EncuestaPregunta pregunta in lstControles)
+                        {
+                            HtmlGenericControl createDiv = new HtmlGenericControl("DIV");
+                            createDiv.Attributes["class"] = "form-group";
+                            Label lbl = new Label { Text = string.Format("{0}", pregunta.Pregunta.ToUpper()), CssClass = "control-label" };
+                            createDiv.Controls.Add(lbl);
+                            divControles.Controls.Add(createDiv);
+                            createDiv = new HtmlGenericControl("DIV");
+                            createDiv.Attributes["class"] = "form-group";
+                            for (int i = 0; i <= 10; i++)
+                            {
+
+                                RadioButton rb = new RadioButton();
+                                rb.Text = i.ToString();
+                                rb.Style.Add("padding", "10px");
+                                createDiv.Controls.Add(rb);
+                            }
+                            divControles.Controls.Add(createDiv);
+                        }
+                        break;
+
                     case (int)BusinessVariables.EnumTipoEncuesta.SiNo:
                         foreach (EncuestaPregunta pregunta in lstControles)
                         {

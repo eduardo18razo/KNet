@@ -85,6 +85,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public void ActualizarEncuesta(Encuesta encuesta)
+        {
+            try
+            {
+                using (BusinessEncuesta negocio = new BusinessEncuesta())
+                {
+                    negocio.ActualizarEncuesta(encuesta);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public List<Encuesta> Consulta(string descripcion)
         {
             try

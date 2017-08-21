@@ -71,7 +71,7 @@
   <xs:element name="ObtenerCatalogoCampoMascara">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="tabla" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idCatalogo" type="xs:int" />
         <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
         <xs:element minOccurs="0" name="filtraHabilitados" type="xs:boolean" />
       </xs:sequence>

@@ -31,7 +31,7 @@ namespace KiiniHelp.ServiceMascaraAcceso {
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Mascaras.Mascara> ObtenerMascarasAcceso(bool insertarSeleccion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMascaras/ObtenerCatalogoCampoMascara", ReplyAction="http://tempuri.org/IServiceMascaras/ObtenerCatalogoCampoMascaraResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion, bool filtraHabilitados);
+        System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerCatalogoCampoMascara(int idCatalogo, bool insertarSeleccion, bool filtraHabilitados);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMascaras/Consulta", ReplyAction="http://tempuri.org/IServiceMascaras/ConsultaResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Mascaras.Mascara> Consulta(string descripcion);
@@ -90,8 +90,8 @@ namespace KiiniHelp.ServiceMascaraAcceso {
             return base.Channel.ObtenerMascarasAcceso(insertarSeleccion);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerCatalogoCampoMascara(string tabla, bool insertarSeleccion, bool filtraHabilitados) {
-            return base.Channel.ObtenerCatalogoCampoMascara(tabla, insertarSeleccion, filtraHabilitados);
+        public System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerCatalogoCampoMascara(int idCatalogo, bool insertarSeleccion, bool filtraHabilitados) {
+            return base.Channel.ObtenerCatalogoCampoMascara(idCatalogo, insertarSeleccion, filtraHabilitados);
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Mascaras.Mascara> Consulta(string descripcion) {
