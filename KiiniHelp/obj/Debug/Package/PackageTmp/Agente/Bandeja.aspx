@@ -55,7 +55,7 @@
                                         <asp:LinkButton runat="server" CssClass="btn fa fa-long-arrow-right" Text="Asignar" ID="btnAsignar" OnClick="btnAsignar_OnClick" />
                                     </div>
                                     <div class="col-lg-1 col-md-2 col-sm-2">
-                                        <asp:LinkButton runat="server" CssClass="btn fa fa-long-arrow-right" Text="Escalar" ID="btnEscalar" OnClick="btnEscalar_OnClick" />
+                                        <asp:LinkButton runat="server" CssClass="btn fa fa-long-arrow-right" Text="Escalar" ID="btnEscalar" OnClick="btnEscalar_OnClick" Visible="False"/>
                                     </div>
                                     <div class="col-lg-1 col-md-2 col-sm-2">
                                         <asp:LinkButton runat="server" CssClass="btn fa fa-long-arrow-right" Text="Cambiar Estatus" ID="btnCambiarEstatus" OnClick="btnCambiarEstatus_OnClick" />
@@ -153,12 +153,13 @@
                                             <tc:GridBoundColumn DataField="IdGrupoAsignado" HeaderText="Id Grupo Asignado" Display="False" UniqueName="IdGrupoAsignado"></tc:GridBoundColumn>
                                             <tc:GridBoundColumn DataField="EstatusTicket.Id" HeaderText="Estatus Ticket" Display="False" UniqueName="IdEstatusTicket"></tc:GridBoundColumn>
                                             <tc:GridBoundColumn DataField="EstatusAsignacion.Id" HeaderText="Estatus Asignacion" Display="False" UniqueName="IdEstatusAsignacion"></tc:GridBoundColumn>
+                                            <tc:GridBoundColumn DataField="Asigna" HeaderText="PuedeAsignar" Display="False" UniqueName="puedeasignar"></tc:GridBoundColumn>
 
 
                                         </Columns>
                                     </MasterTableView>
                                     <ClientSettings EnableAlternatingItems="True" EnableRowHoverStyle="True" EnablePostBackOnRowClick="True">
-                                        <Selecting AllowRowSelect="True" UseClientSelectColumnOnly="True"></Selecting>
+                                        <Selecting AllowRowSelect="True" ></Selecting>
                                         <Resizing AllowResizeToFit="True"></Resizing>
                                     </ClientSettings>
                                 </tc:RadGrid>

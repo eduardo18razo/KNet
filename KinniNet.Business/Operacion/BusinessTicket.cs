@@ -92,6 +92,8 @@ namespace KinniNet.Core.Operacion
                 Mascara mascara = new BusinessMascaras().ObtenerMascaraCaptura(arbol.InventarioArbolAcceso.First().IdMascara ?? 0);
                 Encuesta encuesta = new BusinessEncuesta().ObtenerEncuestaById(arbol.InventarioArbolAcceso.First().IdEncuesta ?? 0);
                 Sla sla = new BusinessSla().ObtenerSla(arbol.InventarioArbolAcceso.First().IdSla ?? 0);
+                if(!new BusinessMascaras().ValidaEstructuraMascara(mascara))
+                    throw new Exception("Datos Invalidos Consulte a su administrador");
                 Ticket ticket = new Ticket
                 {
                     IdTipoUsuario = usuario.IdTipoUsuario,

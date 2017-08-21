@@ -454,7 +454,7 @@
                 <div class="input-group-addon">to</div>
                 <input type="text" class="form-control" value="2012-04-19">
             </div>
-            <uc1:UcTicketDetalle runat="server" id="UcTicketDetalle" />
+            <uc1:UcTicketDetalle runat="server" ID="UcTicketDetalle" />
             <%--<div class="row">
                 <div class="col-lg-8 col-md-8">
                     <div class="module-inner">
@@ -1185,6 +1185,20 @@
                         </div>
                     </form>
                 </div>
+            </div>--%>
+            <%--<asp:Label runat="server">kjshkjahsfkjhaskfjhakjsfh</asp:Label>
+            <div data-delay="7" data-transition="fade" class="visible scale">
+
+                <div class="peCaption" data-orig-width="940" data-orig-height="500">
+                    <div class="peCaptionLayer pe-caption-white pe-caption-small " data-transition="fadeInUpBig" data-duration="1" data-delay="0.5" data-x="0" data-y="90"></div>
+                    <div class="peCaptionLayer pe-caption-white pe-caption-small " data-transition="fadeInUpBig" data-duration="1" data-delay="1" data-x="0" data-y="90"></div>
+                    <div class="peCaptionLayer pe-caption-white pe-caption-large " style="color: black; font-weight: 300;" data-transition="fadeInDownBig" data-duration="1" data-delay="0" data-x="143" data-y="69">ASESORÍA Y</div>
+                    <div class="peCaptionLayer pe-caption-white pe-caption-large " style="color: black; font-weight: 300;" data-transition="fadeInDownBig" data-duration="1" data-delay="0.2" data-x="143" data-y="120">REPRESENTACIÓN LEGAL</div>
+                    <div class="peCaptionLayer pe-caption-white pe-caption-large " style="color: black; font-weight: 300;" data-transition="fadeInDownBig" data-duration="1" data-delay="0.4" data-x="143" data-y="170">EN ARRENDAMIENTO Y</div>
+                    <div class="peCaptionLayer pe-caption-white pe-caption-large " style="color: black; font-weight: 300;" data-transition="fadeInDownBig" data-duration="1" data-delay="0.6" data-x="143" data-y="220">ADQUISICIONES INMOBILIARIAS</div>
+                </div>
+                <img class="peLazyLoading" src="/iStock-176807844.jpg"
+                    data-original="iStock-176807844.jpg" data-original-hires="/iStock-176807844.jpg" style="width: 100%; opacity: 1; background-image: url('')" height="598" alt="" />
             </div>--%>
         </form>
     </div>

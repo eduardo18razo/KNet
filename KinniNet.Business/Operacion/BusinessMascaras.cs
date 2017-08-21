@@ -18,6 +18,56 @@ namespace KinniNet.Core.Operacion
     public class BusinessMascaras : IDisposable
     {
         private bool _proxy;
+
+        public bool ValidaEstructuraMascara(Mascara mascara)
+        {
+            bool result = false;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                var pTableName = new SqlParameter { ParameterName = "@STORENAME", Value = mascara.NombreTabla };
+                var pResult = new SqlParameter { ParameterName = "@STORENAME", Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int };
+                //Tabla
+                db.ExecuteStoreCommand("exec ExisteStore @STORENAME, @OUTER output", pTableName, pResult);
+                result = (int)pResult.Value == 1;
+                if (result)
+                {
+                    //Comando Insertar
+                    pTableName = new SqlParameter {ParameterName = "@STORENAME", Value = mascara.ComandoInsertar};
+                    pResult = new SqlParameter
+                    {
+                        ParameterName = "@STORENAME",
+                        Direction = ParameterDirection.Output,
+                        SqlDbType = SqlDbType.Int
+                    };
+                    db.ExecuteStoreCommand("exec ExisteStore @STORENAME, @OUTER output", pTableName, pResult);
+                    result = (int) pResult.Value == 1;
+                    if (result)
+                    {
+                        //Comando actualizar
+                        pTableName = new SqlParameter {ParameterName = "@STORENAME", Value = mascara.ComandoActualizar};
+                        pResult = new SqlParameter
+                        {
+                            ParameterName = "@STORENAME",
+                            Direction = ParameterDirection.Output,
+                            SqlDbType = SqlDbType.Int
+                        };
+                        db.ExecuteStoreCommand("exec ExisteStore @STORENAME, @OUTER output", pTableName, pResult);
+                        result = (int) pResult.Value == 1;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
         public BusinessMascaras(bool proxy = false)
         {
             _proxy = proxy;
