@@ -16,6 +16,7 @@ namespace KiiniMaster
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            //KiiniHelp.UserControls.UcLogCopia ec = new KiiniHelp.UserControls.UcLogCopia();
             // The code below helps to protect against XSRF attacks
             var requestCookie = Request.Cookies[AntiXsrfTokenKey];
             Guid requestCookieGuidValue;

@@ -5,7 +5,7 @@ namespace KiiniMaster.Configuracion
 {
     public partial class FrmConfiguracion : Page
     {
-        private BusinessCatalogosUsuario _nCatalogos = new BusinessCatalogosUsuario();
+        //private BusinessCatalogosUsuario _nCatalogos = new BusinessCatalogosUsuario();
         private void Source()
         {
             //try

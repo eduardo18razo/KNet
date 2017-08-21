@@ -27,6 +27,12 @@ namespace KiiniHelp.ServiceSistemaPoliticas {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEstatus", ReplyAction="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEstatusResponse")]
         void HabilitarPoliticaEstatus(int idArea, bool habilitado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/GeneraSubRolEscalacionPermitida", ReplyAction="http://tempuri.org/IServicePoliticas/GeneraSubRolEscalacionPermitidaResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Parametros.SubRolEscalacionPermitida> GeneraSubRolEscalacionPermitida();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEscalacion", ReplyAction="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEscalacionResponse")]
+        void HabilitarPoliticaEscalacion(int idEscalacion, bool habilitado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -70,6 +76,14 @@ namespace KiiniHelp.ServiceSistemaPoliticas {
         
         public void HabilitarPoliticaEstatus(int idArea, bool habilitado) {
             base.Channel.HabilitarPoliticaEstatus(idArea, habilitado);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.SubRolEscalacionPermitida> GeneraSubRolEscalacionPermitida() {
+            return base.Channel.GeneraSubRolEscalacionPermitida();
+        }
+        
+        public void HabilitarPoliticaEscalacion(int idEscalacion, bool habilitado) {
+            base.Channel.HabilitarPoliticaEscalacion(idEscalacion, habilitado);
         }
     }
 }

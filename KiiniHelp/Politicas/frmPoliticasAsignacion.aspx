@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <br />
-                                <div class="form-horizontal col-lg-12">
+                               <%-- <div class="form-horizontal col-lg-12">
                                     <div class="form-group">
                                         CONSULTA ESTATUS ASIGNACION:<br />
                                         <div class="search-box form-inline margin-bottom-lg">
@@ -55,7 +55,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>--%>
 
 
 
@@ -70,7 +70,7 @@
                         <div class="module-content collapse in" id="content-1">
                             <div class="module-content-inner no-padding-bottom">
                                 <div class="table-responsive">
-                                    <asp:Repeater ID="rptResultados" runat="server">
+                                    <asp:Repeater ID="rptResultados" runat="server" >
                                         <HeaderTemplate>
                                             <table class="table table-striped display" id="tblResults">
                                                 <thead>

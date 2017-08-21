@@ -100,7 +100,6 @@ C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services\bin\Debug\KinniNet.Data
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services\obj\Debug\KiiniNet.Services.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services\obj\Debug\KiiniNet.Services.dll
 C:\Users\Eduardo Cerritos\Desktop\Repo\KiiniNet.Services\obj\Debug\KiiniNet.Services.pdb
-C:\Users\Win 10\Documents\GitHub\KiiniNet.Services\obj\Debug\KiiniNet.Services.csprojResolveAssemblyReference.cache
 C:\Users\Win 10\Documents\GitHub\KiiniNet.Services\bin\Debug\KiiniNet.Services.dll.config
 C:\Users\Win 10\Documents\GitHub\KiiniNet.Services\bin\Debug\KiiniNet.Services.dll
 C:\Users\Win 10\Documents\GitHub\KiiniNet.Services\bin\Debug\KiiniNet.Services.pdb
@@ -116,5 +115,6 @@ C:\Users\Win 10\Documents\GitHub\KiiniNet.Services\bin\Debug\KinniNet.Business.U
 C:\Users\Win 10\Documents\GitHub\KiiniNet.Services\bin\Debug\KinniNet.Core.pdb
 C:\Users\Win 10\Documents\GitHub\KiiniNet.Services\bin\Debug\EPPlus.xml
 C:\Users\Win 10\Documents\GitHub\KiiniNet.Services\bin\Debug\KinniNet.Data.pdb
+C:\Users\Win 10\Documents\GitHub\KiiniNet.Services\obj\Debug\KiiniNet.Services.csprojResolveAssemblyReference.cache
 C:\Users\Win 10\Documents\GitHub\KiiniNet.Services\obj\Debug\KiiniNet.Services.dll
 C:\Users\Win 10\Documents\GitHub\KiiniNet.Services\obj\Debug\KiiniNet.Services.pdb

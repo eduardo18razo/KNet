@@ -21,6 +21,12 @@ namespace KiiniNet.Services.Sistema.Interface
         [OperationContract]
         void HabilitarPoliticaEstatus(int idArea, bool habilitado);
 
+
+        [OperationContract]
+        List<SubRolEscalacionPermitida> GeneraSubRolEscalacionPermitida();
+
+        [OperationContract]
+        void HabilitarPoliticaEscalacion(int idEscalacion, bool habilitado);
     }
 
      

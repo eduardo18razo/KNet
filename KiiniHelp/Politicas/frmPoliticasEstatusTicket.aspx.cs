@@ -75,25 +75,7 @@ namespace KiiniHelp.Politicas
 
         protected void btnBuscar_OnClick(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    int? idTipoUsuario = null;
-            //    if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
-            //        idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
-
-            //    rptResultados.DataSource = _servicioOrganizacion.BuscarPorPalabra(idTipoUsuario, null, null, null, null, null, null, null, txtFiltroDecripcion.Text.Trim());
-            //    rptResultados.DataBind();
-            //    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (_lstError == null)
-            //    {
-            //        _lstError = new List<string>();
-            //    }
-            //    _lstError.Add(ex.Message);
-            //    AlertaOrganizacion = _lstError;
-            //}
+            
         }
         protected void ddlTipoRol_OnSelectedIndexChanged(object sender, EventArgs e)
         {
@@ -105,6 +87,7 @@ namespace KiiniHelp.Politicas
                 ddlSubRolSolicita.DataTextField = "Descripcion";
                 ddlSubRolSolicita.DataValueField = "Id";
                 ddlSubRolSolicita.DataBind();
+                CargaDatos();
             }
             catch (Exception ex)
             {
@@ -118,6 +101,45 @@ namespace KiiniHelp.Politicas
         }
 
         protected void ddlSubRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                CargaDatos();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void ddlRolPertenece_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {                
+                ddlSubRolPertenece.DataSource = _servicioSubRoles.ObtenerSubRolesByTipoGrupo(int.Parse(ddlRolPertenece.SelectedValue), true);
+                ddlSubRolPertenece.DataTextField = "Descripcion";
+                ddlSubRolPertenece.DataValueField = "Id";
+                ddlSubRolPertenece.DataBind();
+
+                CargaDatos();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void ddlSubRolPertenece_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -191,6 +213,16 @@ namespace KiiniHelp.Politicas
                 {
                     lstResult = lstResult.Where(w => w.IdSubRolSolicita == idSubRolSolicita).ToList();
                 }
+
+                if (idRolPertenece != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdRolPertenece == idRolPertenece).ToList();
+                }
+                if (idSubRolPertenece != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdSubRolPertenece == idSubRolPertenece).ToList();
+                }
+
                 if (idEstatusActual != null)
                 {
                     lstResult = lstResult.Where(w => w.IdEstatusTicketActual == idEstatusActual).ToList();
@@ -275,43 +307,7 @@ namespace KiiniHelp.Politicas
             }
         }
        
-        protected void ddlRolPertenece_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                ddlSubRolPertenece.DataSource = null;
-                ddlSubRolPertenece.DataSource = _servicioSubRoles.ObtenerSubRolesByTipoGrupo(int.Parse(ddlRolPertenece.SelectedValue), true);
-                ddlSubRolPertenece.DataTextField = "Descripcion";
-                ddlSubRolPertenece.DataValueField = "Id";
-                ddlSubRolPertenece.DataBind();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
-
-        protected void ddlSubRolPertenece_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                CargaDatos();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
-        }
+       
 
         protected void Page_Load(object sender, EventArgs e)
         {

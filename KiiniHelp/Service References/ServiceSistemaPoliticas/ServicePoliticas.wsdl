@@ -42,6 +42,18 @@
   <wsdl:message name="IServicePoliticas_HabilitarPoliticaEstatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:HabilitarPoliticaEstatusResponse" />
   </wsdl:message>
+  <wsdl:message name="IServicePoliticas_GeneraSubRolEscalacionPermitida_InputMessage">
+    <wsdl:part name="parameters" element="tns:GeneraSubRolEscalacionPermitida" />
+  </wsdl:message>
+  <wsdl:message name="IServicePoliticas_GeneraSubRolEscalacionPermitida_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GeneraSubRolEscalacionPermitidaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicePoliticas_HabilitarPoliticaEscalacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarPoliticaEscalacion" />
+  </wsdl:message>
+  <wsdl:message name="IServicePoliticas_HabilitarPoliticaEscalacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarPoliticaEscalacionResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServicePoliticas">
     <wsdl:operation name="GeneraEstatusAsignacionGrupoDefault">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/GeneraEstatusAsignacionGrupoDefault" message="tns:IServicePoliticas_GeneraEstatusAsignacionGrupoDefault_InputMessage" />
@@ -58,6 +70,14 @@
     <wsdl:operation name="HabilitarPoliticaEstatus">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEstatus" message="tns:IServicePoliticas_HabilitarPoliticaEstatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEstatusResponse" message="tns:IServicePoliticas_HabilitarPoliticaEstatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GeneraSubRolEscalacionPermitida">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/GeneraSubRolEscalacionPermitida" message="tns:IServicePoliticas_GeneraSubRolEscalacionPermitida_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/GeneraSubRolEscalacionPermitidaResponse" message="tns:IServicePoliticas_GeneraSubRolEscalacionPermitida_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HabilitarPoliticaEscalacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEscalacion" message="tns:IServicePoliticas_HabilitarPoliticaEscalacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEscalacionResponse" message="tns:IServicePoliticas_HabilitarPoliticaEscalacion_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServicePoliticas" type="tns:IServicePoliticas">
@@ -91,6 +111,24 @@
     </wsdl:operation>
     <wsdl:operation name="HabilitarPoliticaEstatus">
       <soap:operation soapAction="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEstatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GeneraSubRolEscalacionPermitida">
+      <soap:operation soapAction="http://tempuri.org/IServicePoliticas/GeneraSubRolEscalacionPermitida" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HabilitarPoliticaEscalacion">
+      <soap:operation soapAction="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEscalacion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

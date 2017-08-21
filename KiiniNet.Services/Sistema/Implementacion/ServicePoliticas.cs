@@ -70,5 +70,36 @@ namespace KiiniNet.Services.Sistema.Implementacion
             }
         }
 
+        public List<SubRolEscalacionPermitida> GeneraSubRolEscalacionPermitida()
+        {
+            try
+            {
+                using (BusinessPoliticas negocio = new BusinessPoliticas())
+                {
+                    return negocio.GeneraSubRolEscalacionPermitida();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void HabilitarPoliticaEscalacion(int idEscalacion, bool habilitado)
+        {
+            try
+            {
+                using (BusinessPoliticas negocio = new BusinessPoliticas())
+                {
+                    negocio.HabilitarPoliticaEscalacion(idEscalacion, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
     }
 }

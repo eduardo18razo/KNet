@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FrmConfiguracion.aspx.cs" Inherits="KiiniMaster.Configuracion.FrmConfiguracion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FrmConfiguracion.aspx.cs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript">
@@ -26,6 +26,21 @@
             <li role="presentation">
                 <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
             </li>
+            <li role="presentation">
+                <a href="#polAsignacionDefault" aria-controls="" role="tab" data-toggle="tab">Politicas Asignación</a>
+            </li>
+            <li role="presentation">
+                <a href="#polAsignacionGrupo" aria-controls="messages" role="tab" data-toggle="tab">Politicas Asignación Grupo</a>
+            </li>
+            <li role="presentation">
+                <a href="#polEstTicketDefault" aria-controls="settings" role="tab" data-toggle="tab">P Estatus Ticket</a>
+            </li>
+            <li role="presentation">
+                <a href="#polEstTicketGrupo" aria-controls="profile" role="tab" data-toggle="tab">P Estatus Ticket grupo</a>
+            </li>
+            <li role="presentation">
+                <a href="#polEscalacion" aria-controls="messages" role="tab" data-toggle="tab">Politicas Escalación</a>
+            </li>            
         </ul>
 
         <!-- Tab panes -->
@@ -103,6 +118,11 @@
                 </asp:Repeater>
             </div>
             <div role="tabpanel" class="tab-pane" id="settings">sett</div>
+             <div role="tabpanel" class="tab-pane slide" id="polAsignacionDefault"></div>
+                  <div role="tabpanel" class="tab-pane slide" id="polAsignacionGrupo"></div>
+                  <div role="tabpanel" class="tab-pane slide" id="polEstTicketDefault"></div>
+                  <div role="tabpanel" class="tab-pane slide" id="polEstTicketGrupo"></div>
+                  <div role="tabpanel" class="tab-pane slide" id="polEscalacion"></div>
         </div>
 
     </div>

@@ -28,7 +28,6 @@ C:\Users\Win 10\Documents\GitHub\KiiniHelp\bin\Telerik.Web.UI.dll
 C:\Users\Win 10\Documents\GitHub\KiiniHelp\bin\Telerik.Web.UI.Skins.dll
 C:\Users\Win 10\Documents\GitHub\KiiniHelp\bin\KiiniNet.Entities.pdb
 C:\Users\Win 10\Documents\GitHub\KiiniHelp\bin\KinniNet.Business.Utils.pdb
-C:\Users\Win 10\Documents\GitHub\KiiniHelp\bin\EPPlus.xml
 C:\Users\Win 10\Documents\GitHub\KiiniHelp\bin\Telerik.Web.UI.xml
 C:\Users\Win 10\Documents\GitHub\KiiniHelp\obj\Debug\KiiniHelp.csprojResolveAssemblyReference.cache
 C:\Users\Win 10\Documents\GitHub\KiiniHelp\obj\Debug\KiiniHelp.dll.licenses

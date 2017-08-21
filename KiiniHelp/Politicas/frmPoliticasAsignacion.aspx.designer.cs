@@ -58,15 +58,6 @@ namespace KiiniHelp.Politicas {
         protected global::System.Web.UI.WebControls.DropDownList ddlEstatusAccion;
         
         /// <summary>
-        /// Control txtFiltroDecripcion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFiltroDecripcion;
-        
-        /// <summary>
         /// Control rptResultados.
         /// </summary>
         /// <remarks>

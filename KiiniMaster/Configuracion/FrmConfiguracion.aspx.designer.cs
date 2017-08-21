@@ -7,27 +7,25 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace KiiniMaster.Configuracion {
+
+
+public partial class  {
     
+    /// <summary>
+    /// Control rptAplicaciones.
+    /// </summary>
+    /// <remarks>
+    /// Campo generado automáticamente.
+    /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Repeater rptAplicaciones;
     
-    public partial class FrmConfiguracion {
-        
-        /// <summary>
-        /// Control rptAplicaciones.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptAplicaciones;
-        
-        /// <summary>
-        /// Control rptTipoUsuairio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptTipoUsuairio;
-    }
+    /// <summary>
+    /// Control rptTipoUsuairio.
+    /// </summary>
+    /// <remarks>
+    /// Campo generado automáticamente.
+    /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    /// </remarks>
+    protected global::System.Web.UI.WebControls.Repeater rptTipoUsuairio;
 }
