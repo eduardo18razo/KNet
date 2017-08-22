@@ -28,6 +28,7 @@ namespace KiiniNet.Entities.Helper
         public DateTime FechaHora { get; set; }
 
         public string Comentario { get; set; }
+        public bool Privado { get; set; }
         public List<HelperConversacionArchivo> Archivo { get; set; }
     }
     [Serializable]

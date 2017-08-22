@@ -202,6 +202,33 @@ namespace KiiniHelp.UserControls.Detalles {
         protected global::System.Web.UI.WebControls.Button btnSendPublic;
         
         /// <summary>
+        /// Control rbtnConversacionTodos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnConversacionTodos;
+        
+        /// <summary>
+        /// Control rbtnConversacionPublico.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnConversacionPublico;
+        
+        /// <summary>
+        /// Control rbtnConversacionPrivado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnConversacionPrivado;
+        
+        /// <summary>
         /// Control rptConversaciones.
         /// </summary>
         /// <remarks>
