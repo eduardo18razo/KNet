@@ -103,6 +103,8 @@ namespace KiiniNet.Entities.Cat.Sistema
         public virtual List<AliasUbicacion> AliasUbicacion { get; set; }
         [DataMember]
         public virtual List<Frecuencia> Frecuencia { get; set; }
+        [DataMember]
+        public virtual List<RolMenu> RolMenu { get; set; }
 
     }
 }

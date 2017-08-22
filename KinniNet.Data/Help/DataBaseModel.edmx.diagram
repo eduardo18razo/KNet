@@ -99,8 +99,6 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolTipoGrupo_Rol" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolTipoUsuario_Rol" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_UsuarioGrupo_Rol" />
-        <EntityTypeShape EntityType="KiiniNet_v2Model.RolMenu" Width="1.5" PointX="9" PointY="52.5" IsExpanded="true" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_Rol" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.HitGrupoUsuario" Width="1.5" PointX="26" PointY="96.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.InventarioArbolAcceso" Width="1.5" PointX="23.25" PointY="114.5" IsExpanded="true" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_InventarioArbolAcceso" />
@@ -237,7 +235,6 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_TicketEstatus_Ticket" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.Menu" Width="1.5" PointX="6.75" PointY="47.125" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_Menu_Menu" />
-        <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_Menu" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.AliasOrganizacion" Width="1.5" PointX="3" PointY="143.875" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_AliasOrganizacion_TipoUsuario" />
         <EntityTypeShape EntityType="KiiniNet_v2Model.AliasUbicacion" Width="1.5" PointX="3" PointY="74.5" />
@@ -354,6 +351,10 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_tblCampoMascara_tblCatCatalogos" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_tblCampoMascara_tblCatTipoCampoMascara" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.RolMenu" Width="1.5" PointX="9" PointY="75.25" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_Menu" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_Rol" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_TipoUsuario" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -899,6 +899,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdRol" Type="int" Nullable="false" />
           <Property Name="IdMenu" Type="int" Nullable="false" />
+          <Property Name="IdTipoUsuario" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RolTipoGrupo">
           <Key>
@@ -2980,6 +2981,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RolMenu_TipoUsuario">
+          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+          <End Role="RolMenu" Type="Self.RolMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolMenu">
+              <PropertyRef Name="IdTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RolTipoGrupo_Rol">
           <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
           <End Role="RolTipoGrupo" Type="Self.RolTipoGrupo" Multiplicity="*" />
@@ -4676,6 +4689,10 @@
             <End Role="Rol" EntitySet="Rol" />
             <End Role="RolMenu" EntitySet="RolMenu" />
           </AssociationSet>
+          <AssociationSet Name="FK_RolMenu_TipoUsuario" Association="Self.FK_RolMenu_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="RolMenu" EntitySet="RolMenu" />
+          </AssociationSet>
           <AssociationSet Name="FK_RolTipoGrupo_Rol" Association="Self.FK_RolTipoGrupo_Rol">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="RolTipoGrupo" EntitySet="RolTipoGrupo" />
@@ -5272,11 +5289,6 @@
             <End Role="Rol" EntitySet="Rol" />
             <End Role="UsuarioGrupo" EntitySet="UsuarioGrupo" />
           </AssociationSet>
-          <EntitySet Name="RolMenu" EntityType="KiiniNet_v2Model.RolMenu" />
-          <AssociationSet Name="FK_RolMenu_Rol" Association="KiiniNet_v2Model.FK_RolMenu_Rol">
-            <End Role="Rol" EntitySet="Rol" />
-            <End Role="RolMenu" EntitySet="RolMenu" />
-          </AssociationSet>
           <EntitySet Name="HitGrupoUsuario" EntityType="KiiniNet_v2Model.HitGrupoUsuario" />
           <EntitySet Name="InventarioArbolAcceso" EntityType="KiiniNet_v2Model.InventarioArbolAcceso" />
           <AssociationSet Name="FK_GrupoUsuarioInventarioArbol_InventarioArbolAcceso" Association="KiiniNet_v2Model.FK_GrupoUsuarioInventarioArbol_InventarioArbolAcceso">
@@ -5676,10 +5688,6 @@
             <End Role="Menu" EntitySet="Menu" />
             <End Role="Menu1" EntitySet="Menu" />
           </AssociationSet>
-          <AssociationSet Name="FK_RolMenu_Menu" Association="KiiniNet_v2Model.FK_RolMenu_Menu">
-            <End Role="Menu" EntitySet="Menu" />
-            <End Role="RolMenu" EntitySet="RolMenu" />
-          </AssociationSet>
           <EntitySet Name="AliasOrganizacion" EntityType="KiiniNet_v2Model.AliasOrganizacion" />
           <AssociationSet Name="FK_AliasOrganizacion_TipoUsuario" Association="KiiniNet_v2Model.FK_AliasOrganizacion_TipoUsuario">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
@@ -6044,6 +6052,19 @@
           <AssociationSet Name="FK_tblCampoMascara_tblMascara" Association="KiiniNet_v2Model.FK_tblCampoMascara_tblMascara">
             <End Role="Mascara" EntitySet="Mascara" />
             <End Role="CampoMascara" EntitySet="CampoMascara" />
+          </AssociationSet>
+          <EntitySet Name="RolMenu" EntityType="KiiniNet_v2Model.RolMenu" />
+          <AssociationSet Name="FK_RolMenu_Menu" Association="KiiniNet_v2Model.FK_RolMenu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="RolMenu" EntitySet="RolMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolMenu_Rol" Association="KiiniNet_v2Model.FK_RolMenu_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="RolMenu" EntitySet="RolMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolMenu_TipoUsuario" Association="KiiniNet_v2Model.FK_RolMenu_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="RolMenu" EntitySet="RolMenu" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Campus">
@@ -6483,6 +6504,7 @@
           <Property Name="EsMoral" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Frecuencia" Relationship="KiiniNet_v2Model.FK_Frecuencia_TipoUsuario" FromRole="TipoUsuario" ToRole="Frecuencia" />
           <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
+          <NavigationProperty Name="RolMenu" Relationship="KiiniNet_v2Model.FK_RolMenu_TipoUsuario" FromRole="TipoUsuario" ToRole="RolMenu" />
         </EntityType>
         <EntityType Name="Torre">
           <Key>
@@ -7143,7 +7165,6 @@
           <NavigationProperty Name="RolTipoGrupo" Relationship="KiiniNet_v2Model.FK_RolTipoGrupo_Rol" FromRole="Rol" ToRole="RolTipoGrupo" />
           <NavigationProperty Name="RolTipoUsuario" Relationship="KiiniNet_v2Model.FK_RolTipoUsuario_Rol" FromRole="Rol" ToRole="RolTipoUsuario" />
           <NavigationProperty Name="UsuarioGrupo" Relationship="KiiniNet_v2Model.FK_UsuarioGrupo_Rol" FromRole="Rol" ToRole="UsuarioGrupo" />
-          <NavigationProperty Name="RolMenu" Relationship="KiiniNet_v2Model.FK_RolMenu_Rol" FromRole="Rol" ToRole="RolMenu" />
           <NavigationProperty Name="EstatusAsignacionSubRolGeneralDefault" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneralDefault_Rol" FromRole="Rol" ToRole="EstatusAsignacionSubRolGeneralDefault" />
           <NavigationProperty Name="SubRol" Relationship="KiiniNet_v2Model.FK_SubRol_Rol" FromRole="Rol" ToRole="SubRol" />
           <NavigationProperty Name="EstatusTicketSubRolGeneralPertenece" Relationship="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneral_RolPertenece" FromRole="Rol" ToRole="EstatusTicketSubRolGeneral" />
@@ -7151,6 +7172,7 @@
           <NavigationProperty Name="EstatusTicketSubRolGeneralDefaultPertenece" Relationship="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_RolPertenece" FromRole="Rol" ToRole="EstatusTicketSubRolGeneralDefault" />
           <NavigationProperty Name="EstatusTicketSubRolGeneralDefaultSolicita" Relationship="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_RolSolicita" FromRole="Rol" ToRole="EstatusTicketSubRolGeneralDefault" />
           <NavigationProperty Name="EstatusAsignacionSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_Rol" FromRole="Rol" ToRole="EstatusAsignacionSubRolGeneral" />
+          <NavigationProperty Name="RolMenu" Relationship="KiiniNet_v2Model.FK_RolMenu_Rol" FromRole="Rol" ToRole="RolMenu" />
           </EntityType>
         <Association Name="FK_GrupoUsuarioInventarioArbol_Rol">
           <End Type="KiiniNet_v2Model.Rol" Role="Rol" Multiplicity="1" />
@@ -7196,28 +7218,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="UsuarioGrupo">
-              <PropertyRef Name="IdRol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="RolMenu">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdRol" Type="Int32" Nullable="false" />
-          <Property Name="IdMenu" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Rol" Relationship="KiiniNet_v2Model.FK_RolMenu_Rol" FromRole="RolMenu" ToRole="Rol" />
-          <NavigationProperty Name="Menu" Relationship="KiiniNet_v2Model.FK_RolMenu_Menu" FromRole="RolMenu" ToRole="Menu" />
-        </EntityType>
-        <Association Name="FK_RolMenu_Rol">
-          <End Type="KiiniNet_v2Model.Rol" Role="Rol" Multiplicity="1" />
-          <End Type="KiiniNet_v2Model.RolMenu" Role="RolMenu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rol">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RolMenu">
               <PropertyRef Name="IdRol" />
             </Dependent>
           </ReferentialConstraint>
@@ -9021,18 +9021,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RolMenu_Menu">
-          <End Type="KiiniNet_v2Model.Menu" Role="Menu" Multiplicity="1" />
-          <End Type="KiiniNet_v2Model.RolMenu" Role="RolMenu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Menu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RolMenu">
-              <PropertyRef Name="IdMenu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="AliasOrganizacion">
           <Key>
             <PropertyRef Name="Id" />
@@ -10540,6 +10528,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="RolMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRol" Type="Int32" Nullable="false" />
+          <Property Name="IdMenu" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menu" Relationship="KiiniNet_v2Model.FK_RolMenu_Menu" FromRole="RolMenu" ToRole="Menu" />
+          <NavigationProperty Name="Rol" Relationship="KiiniNet_v2Model.FK_RolMenu_Rol" FromRole="RolMenu" ToRole="Rol" />
+          <NavigationProperty Name="TipoUsuario" Relationship="KiiniNet_v2Model.FK_RolMenu_TipoUsuario" FromRole="RolMenu" ToRole="TipoUsuario" />
+        </EntityType>
+        <Association Name="FK_RolMenu_Menu">
+          <End Type="KiiniNet_v2Model.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="KiiniNet_v2Model.RolMenu" Role="RolMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolMenu">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolMenu_Rol">
+          <End Type="KiiniNet_v2Model.Rol" Role="Rol" Multiplicity="1" />
+          <End Type="KiiniNet_v2Model.RolMenu" Role="RolMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolMenu">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolMenu_TipoUsuario">
+          <End Type="KiiniNet_v2Model.TipoUsuario" Role="TipoUsuario" Multiplicity="1" />
+          <End Type="KiiniNet_v2Model.RolMenu" Role="RolMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RolMenu">
+              <PropertyRef Name="IdTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10985,15 +11021,6 @@
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="EsUnico" ColumnName="EsUnico" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RolMenu">
-            <EntityTypeMapping TypeName="KiiniNet_v2Model.RolMenu">
-              <MappingFragment StoreEntitySet="RolMenu">
-                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -12056,6 +12083,16 @@
                 <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
                 <ScalarProperty Name="IdTipoCampoMascara" ColumnName="IdTipoCampoMascara" />
                 <ScalarProperty Name="IdMascara" ColumnName="IdMascara" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolMenu">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.RolMenu">
+              <MappingFragment StoreEntitySet="RolMenu">
+                <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
+                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

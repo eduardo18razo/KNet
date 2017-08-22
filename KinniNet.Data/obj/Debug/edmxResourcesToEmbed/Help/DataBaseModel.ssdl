@@ -894,6 +894,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdRol" Type="int" Nullable="false" />
     <Property Name="IdMenu" Type="int" Nullable="false" />
+    <Property Name="IdTipoUsuario" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RolTipoGrupo">
     <Key>
@@ -2975,6 +2976,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_RolMenu_TipoUsuario">
+    <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="1" />
+    <End Role="RolMenu" Type="Self.RolMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoUsuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RolMenu">
+        <PropertyRef Name="IdTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_RolTipoGrupo_Rol">
     <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
     <End Role="RolTipoGrupo" Type="Self.RolTipoGrupo" Multiplicity="*" />
@@ -4669,6 +4682,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_RolMenu_Rol" Association="Self.FK_RolMenu_Rol">
       <End Role="Rol" EntitySet="Rol" />
+      <End Role="RolMenu" EntitySet="RolMenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolMenu_TipoUsuario" Association="Self.FK_RolMenu_TipoUsuario">
+      <End Role="TipoUsuario" EntitySet="TipoUsuario" />
       <End Role="RolMenu" EntitySet="RolMenu" />
     </AssociationSet>
     <AssociationSet Name="FK_RolTipoGrupo_Rol" Association="Self.FK_RolTipoGrupo_Rol">
