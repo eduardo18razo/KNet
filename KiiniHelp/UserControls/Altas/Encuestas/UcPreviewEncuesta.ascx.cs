@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using KiiniHelp.ServiceEncuesta;
 using KiiniNet.Entities.Cat.Usuario;
-using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas.Encuestas

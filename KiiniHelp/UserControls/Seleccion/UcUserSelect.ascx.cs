@@ -2,8 +2,6 @@
 using System.Web.UI;
 using KiiniHelp.ServiceFrecuencia;
 using KiiniNet.Entities.Operacion.Usuarios;
-using KinniNet.Business.Utils;
-using Microsoft.Win32;
 
 namespace KiiniHelp.UserControls.Seleccion
 {

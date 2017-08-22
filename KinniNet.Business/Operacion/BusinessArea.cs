@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Security.Cryptography;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;

@@ -5,7 +5,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceOrganizacion;
 using KiiniHelp.ServiceUbicacion;
-using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Helper;
 
 namespace KiiniHelp.UserControls.Detalles

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion;

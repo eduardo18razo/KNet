@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using KiiniHelp.Funciones;
 using KiiniHelp.ServiceInformacionConsulta;
 using KiiniHelp.ServiceSistemaTipoInformacionConsulta;
-using KiiniNet.Entities.Cat.Sistema;
-using KiiniNet.Entities.Operacion;
-using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Consultas
 {

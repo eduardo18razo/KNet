@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using KiiniNet.Entities.Cat.Operacion;
-using KiiniNet.Entities.Cat.Sistema;
-using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;

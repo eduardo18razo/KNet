@@ -1,8 +1,6 @@
 ﻿using KiiniNet.Services.Sistema.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using KinniNet.Core.Sistema;
 using KiiniNet.Entities.Parametros;
 

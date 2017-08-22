@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.DynamicData;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using KiiniHelp.ServiceArbolAcceso;
 using KiiniHelp.ServiceInformacionConsulta;
 using KiiniNet.Entities.Cat.Operacion;
-using KiiniNet.Entities.Operacion;
-using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Genericos

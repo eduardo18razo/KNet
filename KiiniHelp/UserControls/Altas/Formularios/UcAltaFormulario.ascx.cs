@@ -11,7 +11,6 @@ using KiiniHelp.ServiceSistemaCatalogos;
 using KiiniHelp.ServiceSistemaTipoCampoMascara;
 using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Cat.Sistema;
-using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 

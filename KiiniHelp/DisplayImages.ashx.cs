@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web;
 using KiiniHelp.ServiceUsuario;
-using KinniNet.Business.Utils;
 
 namespace KiiniHelp
 {

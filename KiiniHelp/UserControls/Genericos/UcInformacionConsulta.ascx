@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcInformacionConsulta.ascx.cs" Inherits="KiiniHelp.UserControls.Genericos.UcInformacionConsulta" %>
 <%@ Import Namespace="KinniNet.Business.Utils" %>
-<%@ Register TagPrefix="ajax" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=16.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
     <ContentTemplate>
         <header class="modal-header" id="pnlAlertaGeneral" runat="server" visible="false">

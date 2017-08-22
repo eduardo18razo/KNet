@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using AjaxControlToolkit;
 using KiiniHelp.ServiceSistemaCatalogos;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
-using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Altas
 {

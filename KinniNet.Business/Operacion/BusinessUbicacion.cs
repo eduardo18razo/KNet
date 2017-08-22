@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
 using KiiniNet.Entities.Cat.Arbol.Ubicaciones;
 using KiiniNet.Entities.Cat.Arbol.Ubicaciones.Domicilio;
 using KiiniNet.Entities.Cat.Operacion;

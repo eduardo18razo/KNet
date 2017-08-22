@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web.UI;
@@ -14,7 +13,6 @@ using KiiniHelp.ServiceParametrosSistema;
 using KiiniHelp.ServiceSeguridad;
 using KiiniHelp.ServiceSistemaCatalogos;
 using KiiniHelp.ServiceTicket;
-using KiiniHelp.Users.Ticket;
 using KiiniNet.Entities.Cat.Mascaras;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Helper;

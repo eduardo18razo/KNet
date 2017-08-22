@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Helper;
-using KiiniNet.Entities.Operacion;
 using KinniNet.Business.Utils;
 using KinniNet.Data.Help;
 
