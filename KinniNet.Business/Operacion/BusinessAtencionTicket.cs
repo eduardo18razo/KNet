@@ -383,7 +383,12 @@ namespace KinniNet.Core.Operacion
                     result.EsPropietario = idUsuario == ticket.TicketAsignacion.Last().IdUsuarioAsignado;
                     result.IdGrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Distinct().First().IdGrupoUsuario;
 
+<<<<<<< HEAD
                     if (result.UsuarioLevanto != null)
+=======
+
+                    if (ticket.UsuarioLevanto != null)
+>>>>>>> origin/S2_Inicial
                     {
                         result.UsuarioLevanto = new HelperUsuario();
 
@@ -392,10 +397,16 @@ namespace KinniNet.Core.Operacion
                         result.UsuarioLevanto.TipoUsuarioDescripcion = ticket.UsuarioLevanto.TipoUsuario.Descripcion;
                         result.UsuarioLevanto.Vip = ticket.UsuarioLevanto.Vip;
                         result.UsuarioLevanto.FechaUltimoLogin = ticket.UsuarioLevanto.BitacoraAcceso != null && ticket.UsuarioLevanto.BitacoraAcceso.Count > 0 ? ticket.UsuarioLevanto.BitacoraAcceso.Last().Fecha.ToString("dd/MM/yyyy HH:mm") : "";
+<<<<<<< HEAD
                         if (ticket.UsuarioLevanto.TicketsLevantados != null)
                         {
                             result.UsuarioLevanto.NumeroTicketsAbiertos = ticket.UsuarioLevanto.TicketsLevantados != null ? ticket.UsuarioLevanto.TicketsLevantados.Count : 0;
                             result.UsuarioLevanto.TicketsAbiertos = ticket.UsuarioLevanto.TicketsLevantados.Count > 0 ? new List<HelperTicketsUsuario>() : null;
+=======
+                        result.UsuarioLevanto.NumeroTicketsAbiertos = ticket.UsuarioLevanto.TicketsLevantados != null ? ticket.UsuarioLevanto.TicketsLevantados.Count : 0;
+                        result.UsuarioLevanto.TicketsAbiertos = ticket.UsuarioLevanto.TicketsLevantados != null && ticket.UsuarioLevanto.TicketsLevantados.Count > 0 ? new List<HelperTicketsUsuario>() : null;
+                        if (ticket.UsuarioLevanto.TicketsLevantados != null)
+>>>>>>> origin/S2_Inicial
                             if (result.UsuarioLevanto.TicketsAbiertos != null)
                                 foreach (Ticket t in ticket.UsuarioLevanto.TicketsLevantados)
                                 {
@@ -404,9 +415,13 @@ namespace KinniNet.Core.Operacion
                                         IdTicket = t.Id,
                                         Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(t.IdArbolAcceso)
                                     });
+<<<<<<< HEAD
 
                                 }
                         }
+=======
+                                }
+>>>>>>> origin/S2_Inicial
 
                         result.UsuarioLevanto.Puesto = ticket.UsuarioLevanto.Puesto != null ? ticket.UsuarioLevanto.Puesto.Descripcion : string.Empty;
                         result.UsuarioLevanto.Correos = ticket.UsuarioLevanto.CorreoUsuario != null ? ticket.UsuarioLevanto.CorreoUsuario.Select(s => s.Correo).ToList() : null;

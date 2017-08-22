@@ -2,6 +2,7 @@ KiiniHelp/obj/Debug/build.force
 KiiniNet.Services/obj/Debug/build.force
 KinniNet.Data/obj/Debug/build.force
 KinniNet.Business/obj/Debug/build.force
+<<<<<<< HEAD
 KiiniHelp/bin/KiiniHelp_REMOTE_15136.dll
 KiiniHelp/bin/KiiniHelp_BACKUP_15136.dll
 KiiniHelp/bin/KiiniHelp_BASE_15136.dll
@@ -78,6 +79,15 @@ KiiniHelp/bin/KiiniHelp.dll
 .gitignore_REMOTE_15188
 .gitignore_LOCAL_5996
 .gitignore_LOCAL_412
+=======
+KiiniHelp/obj/Debug/Package/PackageTmp/assets/tmp/editor/ui/trumbowyg.css
+bin/
+.gitignore_LOCAL_5996
+.gitignore_LOCAL_412
+.gitignore_REMOTE_5996
+.gitignore_REMOTE_412
+.gitignore_REMOTE_15188
+>>>>>>> origin/S2_Inicial
 .gitignore_LOCAL_15188
 .gitignore_BASE_5996
 .gitignore_BASE_412
