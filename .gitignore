@@ -102,3 +102,11 @@ bin/
 .gitignore_BACKUP_5996
 .gitignore_BACKUP_412
 .gitignore_BACKUP_15188
+KiiniNet.Services/obj/Debug/KiiniNet.Services.csproj.FileListAbsolute.txt
+KiiniNet.Services.Windows/obj/Debug/KiiniNet.Services.Windows.csproj.FileListAbsolute.txt
+KiiniNet.Services.Web/obj/Debug/KiiniNet.Services.Web.csproj.FileListAbsolute.txt
+KiiniHelp/obj/Debug/KiiniHelp.csproj.FileListAbsolute.txt
+KinniNet.Business.Utils/obj/Debug/KinniNet.Business.Utils.csproj.FileListAbsolute.txt
+KiiniNet.UnitTest/obj/Debug/KiiniNet.UnitTestData.csproj.FileListAbsolute.txt
+KinniNet.Data/obj/Debug/KinniNet.Data.csproj.FileListAbsolute.txt
+KinniNet.Business/obj/Debug/KinniNet.Core.csproj.FileListAbsolute.txt
