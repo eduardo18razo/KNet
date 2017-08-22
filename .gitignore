@@ -116,3 +116,10 @@ KiiniHelp/obj/Debug/kiinihelp.dll.licenses
 KiiniNet.Entities/obj/Debug/KiiniNet.Entities.csproj.FileListAbsolute.txt
 KinniNet.Data/obj/Debug/edmxResourcesToEmbed/Help/DataBaseModel.msl
 KiiniNet.Services.Windows/obj/Debug/KiiniNet.Services.Windows.InstallerSettings.resources
+KiiniNet.Services.Web/obj/Debug/build.force
+KiiniNet.UnitTest/obj/Debug/build.force
+KiiniNet.Services.Windows/obj/Debug/build.force
+KiiniMaster/obj/Debug/build.force
+KiiniMaster/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+KiiniMaster/obj/Debug/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+KiiniMaster/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
