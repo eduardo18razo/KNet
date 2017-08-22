@@ -26,21 +26,7 @@
             <li role="presentation">
                 <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
             </li>
-            <li role="presentation">
-                <a href="#polAsignacionDefault" aria-controls="" role="tab" data-toggle="tab">Politicas Asignación</a>
-            </li>
-            <li role="presentation">
-                <a href="#polAsignacionGrupo" aria-controls="messages" role="tab" data-toggle="tab">Politicas Asignación Grupo</a>
-            </li>
-            <li role="presentation">
-                <a href="#polEstTicketDefault" aria-controls="settings" role="tab" data-toggle="tab">P Estatus Ticket</a>
-            </li>
-            <li role="presentation">
-                <a href="#polEstTicketGrupo" aria-controls="profile" role="tab" data-toggle="tab">P Estatus Ticket grupo</a>
-            </li>
-            <li role="presentation">
-                <a href="#polEscalacion" aria-controls="messages" role="tab" data-toggle="tab">Politicas Escalación</a>
-            </li>            
+            
         </ul>
 
         <!-- Tab panes -->

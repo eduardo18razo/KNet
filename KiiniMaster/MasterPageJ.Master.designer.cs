@@ -9,7 +9,7 @@
 
 
 
-public partial class  {
+public partial class Public {
     
     /// <summary>
     /// Control head.

@@ -57,6 +57,9 @@
     <Content Include="BootStrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="BootStrap\js\bootstrap.js" />
     <Content Include="BootStrap\js\bootstrap.min.js" />
+    <Content Include="Configuracion\Politicas\frmPoliticasAsignacion.aspx" />
+    <Content Include="Configuracion\Politicas\FrmPoliticasEscalacionPermitida.aspx" />
+    <Content Include="Configuracion\Politicas\frmPoliticasEstatusTicket.aspx" />
     <Content Include="WebForm1.aspx" />
     <None Include="BootStrap\js\jquery-1.4.1-vsdoc.js" />
     <Content Include="BootStrap\js\jquery-1.4.1.js" />
@@ -64,7 +67,6 @@
     <Content Include="BootStrap\js\jquery-1.5.2.min.js" />
     <Content Include="BootStrap\js\jquery-2.1.1.min.js" />
     <Content Include="Configuracion\FrmConfiguracion.aspx" />
-    <Content Include="Configuracion\Politicas\FrmPoliticasAsignacion.aspx" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -193,12 +195,26 @@
     <Compile Include="Configuracion\FrmConfiguracion.aspx.designer.cs">
       <DependentUpon>FrmConfiguracion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Configuracion\Politicas\FrmPoliticasAsignacion.aspx.cs">
-      <DependentUpon>FrmPoliticasAsignacion.aspx</DependentUpon>
+    <Compile Include="Configuracion\Politicas\frmPoliticasAsignacion.aspx.cs">
+      <DependentUpon>frmPoliticasAsignacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Configuracion\Politicas\FrmPoliticasAsignacion.aspx.designer.cs">
-      <DependentUpon>FrmPoliticasAsignacion.aspx</DependentUpon>
+    <Compile Include="Configuracion\Politicas\frmPoliticasAsignacion.aspx.designer.cs">
+      <DependentUpon>frmPoliticasAsignacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracion\Politicas\FrmPoliticasEscalacionPermitida.aspx.cs">
+      <DependentUpon>FrmPoliticasEscalacionPermitida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracion\Politicas\FrmPoliticasEscalacionPermitida.aspx.designer.cs">
+      <DependentUpon>FrmPoliticasEscalacionPermitida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracion\Politicas\frmPoliticasEstatusTicket.aspx.cs">
+      <DependentUpon>frmPoliticasEstatusTicket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuracion\Politicas\frmPoliticasEstatusTicket.aspx.designer.cs">
+      <DependentUpon>frmPoliticasEstatusTicket.aspx</DependentUpon>
     </Compile>
     <Compile Include="FrmPoliticasAsignacionMasterJ.aspx.cs">
       <DependentUpon>FrmPoliticasAsignacionMasterJ.aspx</DependentUpon>
@@ -252,6 +268,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KiiniHelp\KiiniHelp.csproj">
+      <Project>{1577a609-84be-4949-9868-f54df4eba60b}</Project>
+      <Name>KiiniHelp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KiiniNet.Entities\KiiniNet.Entities.csproj">
+      <Project>{c003d316-9b3c-44ef-b6b4-48c98936b0a7}</Project>
+      <Name>KiiniNet.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KiiniNet.Services.Web\KiiniNet.Services.Web.csproj">
+      <Project>{6d405ffc-f7d2-45ca-95be-e1e243fcecfe}</Project>
+      <Name>KiiniNet.Services.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KiiniNet.Services\KiiniNet.Services.csproj">
+      <Project>{7cd92c6e-7151-422b-a274-b51b977a48e1}</Project>
+      <Name>KiiniNet.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KinniNet.Business.Utils\KinniNet.Business.Utils.csproj">
+      <Project>{911050f0-aacf-4706-8eef-94754856737f}</Project>
+      <Name>KinniNet.Business.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

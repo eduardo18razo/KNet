@@ -298,8 +298,8 @@
                     <div class="scroller" id="scroller" style="padding-left: 30px">
                         <div style="margin-top: 0; height: 100%;">
                             <%--<asp:LinkButton runat="server" CssClass="close" ID="lnkBtnCerrar" Visible="False">
-                        <span class="glyphicon glyphicon-remove"></span>--%>
-                            </asp:LinkButton>
+                        <span class="glyphicon glyphicon-remove"></span>
+                            </asp:LinkButton>--%>
                             <asp:ContentPlaceHolder ID="ContentPlaceHolderPublic" runat="server">
                             </asp:ContentPlaceHolder>
                         </div>
