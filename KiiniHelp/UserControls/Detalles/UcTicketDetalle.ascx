@@ -115,13 +115,13 @@
                                 </div>
                             </div>
                             <div class="row bordered">
-                                <div class="col-lg-2 col-md-2 col-sm-2">
+                                <div class="col-lg-1 col-md-2 col-sm-12">
                                     <asp:Image runat="server" ImageUrl="~/assets/images/profiles/profile-1.png" />
                                 </div>
-                                <div class="col-lg-10 col-md-10 col-sm-10">
+                                <div class="col-lg-11 col-md-10 col-sm-12">
 
                                     <div class="row">
-                                        <asp:RadioButton runat="server" ID="rbtnPublics" GroupName="tipoConversacion" AutoPostBack="True" Text="Respuesta pública" CssClass="selectConver" Checked="True"  OnCheckedChanged="rbtnPublics_OnCheckedChanged"/>
+                                        <asp:RadioButton runat="server" ID="rbtnPublics" GroupName="tipoConversacion" AutoPostBack="True" Text="Respuesta pública" CssClass="selectConver" Checked="True" OnCheckedChanged="rbtnPublics_OnCheckedChanged" />
                                         <asp:RadioButton runat="server" ID="rbtnPrivate" GroupName="tipoConversacion" AutoPostBack="True" Text="Respuesta privada" CssClass="selectConver" OnCheckedChanged="rbtnPrivate_OnCheckedChanged" />
                                     </div>
 
@@ -137,32 +137,33 @@
 
                             </div>
                             <div class="row margin-top-5">
-                                <div class="col-lg-1">
-                                    <asp:DropDownList runat="server" CssClass="form-control" />
+                                <div class="col-lg-2 col-md-3 col-sm-3 borderright" style="border-color: #000000">
+                                    <asp:DropDownList runat="server" CssClass="form-control" >
+                                        <asp:ListItem Text="Historial" Value="1"></asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
-                                <div class="col-lg-1">|</div>
-                                <asp:RadioButton runat="server" GroupName="tipoConversacionPreview" Text="Todas" CssClass="selectConver" Checked="True" />
-                                <asp:RadioButton runat="server" GroupName="tipoConversacionPreview" Text="Pública" CssClass="selectConver" />
-                                <asp:RadioButton runat="server" GroupName="tipoConversacionPreview" Text="Interna" CssClass="selectConver" />
+                                <asp:RadioButton runat="server" GroupName="tipoConversacionPreview" AutoPostBack="True" ID="rbtnConversacionTodos"   Text="Todas"   CssClass="selectConver" OnCheckedChanged="rbtnConversacionTodos_OnCheckedChanged" Checked="True"/>
+                                <asp:RadioButton runat="server" GroupName="tipoConversacionPreview" AutoPostBack="True" ID="rbtnConversacionPublico" Text="Pública" CssClass="selectConver" OnCheckedChanged="rbtnConversacionPublico_OnCheckedChanged" />
+                                <asp:RadioButton runat="server" GroupName="tipoConversacionPreview" AutoPostBack="True" ID="rbtnConversacionPrivado" Text="Interna" CssClass="selectConver" OnCheckedChanged="rbtnConversacionPrivado_OnCheckedChanged" />
                             </div>
                             <div class="row margin-top-5">
                                 <asp:Repeater runat="server" ID="rptConversaciones">
                                     <ItemTemplate>
                                         <div class="row" style="border-top: 1px solid #f3f3f7; border-bottom: 1px solid #f3f3f7">
-                                            <div class="col-lg-1 col-md-1 col-sm-1">
+                                            <div class="col-lg-1 col-md-2 col-sm-2">
                                                 <asp:Image runat="server" ImageUrl="~/assets/images/profiles/profile-1.png" />
                                             </div>
-                                            <div class="col-lg-10 col-md-10 col-sm-10">
+                                            <div class='<%# (bool) Eval("Privado") ? "col-lg-11 col-md-10 col-sm-10 private" : "col-lg-11 col-md-10 col-sm-10 public" %>'>
                                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                                     <h1>
-                                                        <asp:Label runat="server" ID="lblNombre" Text="Gabriela Vega"></asp:Label></h1>
+                                                        <asp:Label runat="server" ID="lblNombre" Text='<%# Eval("Nombre") %>'></asp:Label></h1>
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <asp:Label runat="server" ID="lblFecha" Text="Ayer 14/04/2017, 10:54 PM"></asp:Label>
+                                                    <asp:Label runat="server" ID="lblFecha" Text='<%# Eval("FechaHora") %>'></asp:Label>
                                                 </div>
 
                                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <asp:Label runat="server" ID="lblMensaje" Text="Buenas tarde, \n Necesito ayuda con mi password."></asp:Label>
+                                                    <asp:Label runat="server" ID="lblMensaje" Text='<%# Eval("Comentario") %>'></asp:Label>
                                                 </div>
 
                                             </div>
@@ -206,55 +207,63 @@
 
                             <div class="row bordered padding-10-top padding-10-bottom">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <strong><asp:Label runat="server" Text="Puesto" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
+                                    <strong>
+                                        <asp:Label runat="server" Text="Puesto" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
                                     <asp:Label runat="server" ID="lblPuesto" CssClass="col-lg-12 col-md-12 col-sm-12" />
                                 </div>
                             </div>
                             <div class="row bordered padding-10-top padding-10-bottom">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <strong><asp:Label runat="server" Text="correo electornico principal" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
+                                    <strong>
+                                        <asp:Label runat="server" Text="correo electornico principal" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
                                     <asp:Label runat="server" ID="lblCorreoPrincipal" CssClass="col-lg-12 col-md-12 col-sm-12" />
                                 </div>
                             </div>
 
                             <div class="row bordered padding-10-top padding-10-bottom">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <strong><asp:Label runat="server" Text="telefono principal" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
+                                    <strong>
+                                        <asp:Label runat="server" Text="telefono principal" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
                                     <asp:Label runat="server" ID="lblTelefonoPrincipal" CssClass="col-lg-12 col-md-12 col-sm-12" />
                                 </div>
                             </div>
 
-                            <div class="row bordered padding-10-top padding-10-bottom">
+                            <div class="row bordered padding-10-top padding-10-bottom" style="display: none">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <strong><asp:Label runat="server" Text="Facebook" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
+                                    <strong>
+                                        <asp:Label runat="server" Text="Facebook" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
                                     <asp:Label runat="server" ID="lblFacebook" CssClass="col-lg-12 col-md-12 col-sm-12" />
                                 </div>
                             </div>
 
-                            <div class="row bordered padding-10-top padding-10-bottom">
+                            <div class="row bordered padding-10-top padding-10-bottom" style="display: none">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <strong><asp:Label runat="server" Text="twitter" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
+                                    <strong>
+                                        <asp:Label runat="server" Text="twitter" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
                                     <asp:Label runat="server" ID="lbltwitter" CssClass="col-lg-12 col-md-12 col-sm-12" />
                                 </div>
                             </div>
 
                             <div class="row bordered padding-10-top padding-10-bottom">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <strong><asp:Label runat="server" Text="Organización" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
+                                    <strong>
+                                        <asp:Label runat="server" Text="Organización" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
                                     <asp:Label runat="server" ID="lblOrganizacion" CssClass="col-lg-12 col-md-12 col-sm-12" />
                                 </div>
                             </div>
 
                             <div class="row bordered padding-10-top padding-10-bottom">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <strong><asp:Label runat="server" Text="Ubicación" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
+                                    <strong>
+                                        <asp:Label runat="server" Text="Ubicación" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
                                     <asp:Label runat="server" ID="lblUbicacion" CssClass="col-lg-12 col-md-12 col-sm-12" />
                                 </div>
                             </div>
 
                             <div class="row bordered padding-10-top padding-10-bottom">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <strong><asp:Label runat="server" Text="Etiquetas" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
+                                    <strong>
+                                        <asp:Label runat="server" Text="Etiquetas" CssClass="col-lg-12 col-md-12 col-sm-12"></asp:Label></strong>
                                     <asp:Repeater runat="server" ID="rptEtiquetas">
                                         <ItemTemplate>
                                             <asp:Label runat="server" ID="lblEtiquetas" CssClass="col-lg-12 col-md-12 col-sm-12" />
@@ -266,7 +275,8 @@
 
                             <div class="row bordered padding-10-top padding-10-bottom">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <strong><asp:Label runat="server" Text="Creado" CssClass="col-lg-12 col-md-12 col-sm-12" /></strong>
+                                    <strong>
+                                        <asp:Label runat="server" Text="Creado" CssClass="col-lg-12 col-md-12 col-sm-12" /></strong>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <asp:Label runat="server" ID="lblFechaAltaDetalle" CssClass="col-lg-12 col-md-12 col-sm-12" />
@@ -274,7 +284,8 @@
                             </div>
                             <div class="row bordered padding-10-top padding-10-bottom">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <strong><asp:Label runat="server" Text="Ultima Actualizacion" CssClass="col-lg-12 col-md-12 col-sm-12" /></strong>
+                                    <strong>
+                                        <asp:Label runat="server" Text="Ultima Actualizacion" CssClass="col-lg-12 col-md-12 col-sm-12" /></strong>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <asp:Label runat="server" ID="lblfechaUltimaActualizacion" CssClass="col-lg-12 col-md-12 col-sm-12" />

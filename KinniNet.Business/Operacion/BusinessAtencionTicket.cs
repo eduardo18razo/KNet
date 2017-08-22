@@ -359,7 +359,7 @@ namespace KinniNet.Core.Operacion
                     result = new HelperticketEnAtencion();
                     result.IdTicket = ticket.Id;
                     result.Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(ticket.IdArbolAcceso);
-                    result.CorreoTicket = ticket.UsuarioLevanto.CorreoUsuario != null && ticket.UsuarioLevanto.CorreoUsuario.Count > 0 ? ticket.UsuarioLevanto.CorreoUsuario.First().Correo  : "";
+                    result.CorreoTicket = ticket.UsuarioLevanto.CorreoUsuario != null && ticket.UsuarioLevanto.CorreoUsuario.Count > 0 ? ticket.UsuarioLevanto.CorreoUsuario.First().Correo : "";
                     result.FechaLevanto = ticket.FechaHoraAlta.ToString("dd/MM/yyyy HH:mm");
                     switch (ticket.Impacto.Descripcion.Trim())
                     {
@@ -383,37 +383,43 @@ namespace KinniNet.Core.Operacion
                     result.EsPropietario = idUsuario == ticket.TicketAsignacion.Last().IdUsuarioAsignado;
                     result.IdGrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Distinct().First().IdGrupoUsuario;
 
-                    result.UsuarioLevanto = new HelperUsuario();
-                    result.UsuarioLevanto.IdUsuario = ticket.IdUsuarioLevanto;
-                    result.UsuarioLevanto.NombreCompleto = string.Format("{0} {1} {2}", ticket.UsuarioLevanto.ApellidoPaterno, ticket.UsuarioLevanto.ApellidoMaterno, ticket.UsuarioLevanto.Nombre);
-                    result.UsuarioLevanto.TipoUsuarioDescripcion = ticket.UsuarioLevanto.TipoUsuario.Descripcion;
-                    result.UsuarioLevanto.Vip = ticket.UsuarioLevanto.Vip;
-                    result.UsuarioLevanto.FechaUltimoLogin = ticket.UsuarioLevanto.BitacoraAcceso != null && ticket.UsuarioLevanto.BitacoraAcceso.Count > 0 ? ticket.UsuarioLevanto.BitacoraAcceso.Last().Fecha.ToString("dd/MM/yyyy HH:mm") : "";
-                    result.UsuarioLevanto.NumeroTicketsAbiertos = ticket.UsuarioLevanto.TicketsLevantados != null ? ticket.UsuarioLevanto.TicketsLevantados.Count : 0;
-                    result.UsuarioLevanto.TicketsAbiertos = ticket.UsuarioLevanto.TicketsLevantados.Count > 0 ? new List<HelperTicketsUsuario>() : null;
-                    if (result.UsuarioLevanto.TicketsAbiertos != null)
-                        foreach (Ticket t in ticket.UsuarioLevanto.TicketsLevantados)
-                        {
-                            result.UsuarioLevanto.TicketsAbiertos.Add(new HelperTicketsUsuario
-                            {
-                                IdTicket = t.Id,
-                                Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(t.IdArbolAcceso)
-                            });
+                    if (result.UsuarioLevanto != null)
+                    {
+                        result.UsuarioLevanto = new HelperUsuario();
 
+                        result.UsuarioLevanto.IdUsuario = ticket.IdUsuarioLevanto;
+                        result.UsuarioLevanto.NombreCompleto = string.Format("{0} {1} {2}", ticket.UsuarioLevanto.ApellidoPaterno, ticket.UsuarioLevanto.ApellidoMaterno, ticket.UsuarioLevanto.Nombre);
+                        result.UsuarioLevanto.TipoUsuarioDescripcion = ticket.UsuarioLevanto.TipoUsuario.Descripcion;
+                        result.UsuarioLevanto.Vip = ticket.UsuarioLevanto.Vip;
+                        result.UsuarioLevanto.FechaUltimoLogin = ticket.UsuarioLevanto.BitacoraAcceso != null && ticket.UsuarioLevanto.BitacoraAcceso.Count > 0 ? ticket.UsuarioLevanto.BitacoraAcceso.Last().Fecha.ToString("dd/MM/yyyy HH:mm") : "";
+                        if (ticket.UsuarioLevanto.TicketsLevantados != null)
+                        {
+                            result.UsuarioLevanto.NumeroTicketsAbiertos = ticket.UsuarioLevanto.TicketsLevantados != null ? ticket.UsuarioLevanto.TicketsLevantados.Count : 0;
+                            result.UsuarioLevanto.TicketsAbiertos = ticket.UsuarioLevanto.TicketsLevantados.Count > 0 ? new List<HelperTicketsUsuario>() : null;
+                            if (result.UsuarioLevanto.TicketsAbiertos != null)
+                                foreach (Ticket t in ticket.UsuarioLevanto.TicketsLevantados)
+                                {
+                                    result.UsuarioLevanto.TicketsAbiertos.Add(new HelperTicketsUsuario
+                                    {
+                                        IdTicket = t.Id,
+                                        Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(t.IdArbolAcceso)
+                                    });
+
+                                }
                         }
 
-                    result.UsuarioLevanto.Puesto = ticket.UsuarioLevanto.Puesto != null ? ticket.UsuarioLevanto.Puesto.Descripcion : string.Empty;
-                    result.UsuarioLevanto.Correos = ticket.UsuarioLevanto.CorreoUsuario.Select(s => s.Correo).ToList();
-                    result.UsuarioLevanto.Telefonos = ticket.UsuarioLevanto.TelefonoUsuario.Select(s => s.Numero).ToList();
-                    result.UsuarioLevanto.Organizacion = new BusinessOrganizacion().ObtenerDescripcionOrganizacionById(ticket.UsuarioLevanto.IdOrganizacion, true);
-                    result.UsuarioLevanto.Ubicacion = new BusinessUbicacion().ObtenerDescripcionUbicacionById(ticket.UsuarioLevanto.IdUbicacion, true);
-                    TimeSpan ts = DateTime.Now - DateTime.Now.AddDays(-50);
-                    result.UsuarioLevanto.Creado = ts.Days.ToString();
-                    result.UsuarioLevanto.UltimaActualizacion = DateTime.Now.AddDays(-21).ToString("dd/MM/yyyy HH:mm");
-
+                        result.UsuarioLevanto.Puesto = ticket.UsuarioLevanto.Puesto != null ? ticket.UsuarioLevanto.Puesto.Descripcion : string.Empty;
+                        result.UsuarioLevanto.Correos = ticket.UsuarioLevanto.CorreoUsuario != null ? ticket.UsuarioLevanto.CorreoUsuario.Select(s => s.Correo).ToList() : null;
+                        result.UsuarioLevanto.Telefonos = ticket.UsuarioLevanto.TelefonoUsuario.Select(s => s.Numero).ToList();
+                        result.UsuarioLevanto.Organizacion = new BusinessOrganizacion().ObtenerDescripcionOrganizacionById(ticket.UsuarioLevanto.IdOrganizacion, true);
+                        result.UsuarioLevanto.Ubicacion = new BusinessUbicacion().ObtenerDescripcionUbicacionById(ticket.UsuarioLevanto.IdUbicacion, true);
+                        TimeSpan ts = DateTime.Now - DateTime.Now.AddDays(-50);
+                        result.UsuarioLevanto.Creado = ts.Days.ToString();
+                        result.UsuarioLevanto.UltimaActualizacion = DateTime.Now.AddDays(-21).ToString("dd/MM/yyyy HH:mm");
+                    }
                     result.Conversaciones = ticket.TicketConversacion != null ? new List<HelperConversacionDetalle>() : null;
                     if (result.Conversaciones != null && ticket.TicketConversacion != null)
-                        foreach (TicketConversacion conversacion in ticket.TicketConversacion.OrderBy(o => o.FechaGeneracion))
+                        foreach (TicketConversacion conversacion in ticket.TicketConversacion.OrderByDescending(o => o.FechaGeneracion))
                         {
 
                             result.Conversaciones.Add(new HelperConversacionDetalle
@@ -422,6 +428,7 @@ namespace KinniNet.Core.Operacion
                                 Nombre = conversacion.Usuario.NombreCompleto,
                                 FechaHora = conversacion.FechaGeneracion,
                                 Comentario = conversacion.Mensaje,
+                                Privado = (bool)conversacion.Privado,
                             });
                         }
                 }
