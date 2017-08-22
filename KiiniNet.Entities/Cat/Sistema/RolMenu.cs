@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
 namespace KiiniNet.Entities.Cat.Sistema
 {

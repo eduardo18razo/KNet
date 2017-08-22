@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
-using KiiniNet.Entities.Cat.Usuario;
+﻿using System.Runtime.Serialization;
 
 namespace KiiniNet.Entities.Cat.Sistema
 {

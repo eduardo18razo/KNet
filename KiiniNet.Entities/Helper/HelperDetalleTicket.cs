@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using KiiniNet.Entities.Cat.Sistema;
 
 namespace KiiniNet.Entities.Helper
 {

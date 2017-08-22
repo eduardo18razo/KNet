@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Tickets;

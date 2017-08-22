@@ -31,12 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Build.Framework" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Cat\Arbol\Nodos\Nivel1.cs" />
     <Compile Include="Cat\Arbol\Nodos\Nivel3.cs" />
     <Compile Include="Cat\Arbol\Nodos\Nivel4.cs" />
@@ -187,7 +181,9 @@
     <Compile Include="Operacion\Usuarios\Usuario.cs" />
     <Compile Include="Operacion\Usuarios\UsuarioRol.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

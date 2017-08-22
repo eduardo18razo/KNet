@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 using KiiniNet.Entities.Cat.Operacion;
 using KiiniNet.Entities.Cat.Sistema;
-using Microsoft.Build.Framework;
 
 namespace KiiniNet.Entities.Cat.Arbol.Ubicaciones
 {
@@ -14,7 +13,6 @@ namespace KiiniNet.Entities.Cat.Arbol.Ubicaciones
         [DataMember]
         public int IdTipoUsuario { get; set; }
         [DataMember]
-        [Required]
         public string Descripcion { get; set; }
         [DataMember]
         public bool Habilitado { get; set; }
