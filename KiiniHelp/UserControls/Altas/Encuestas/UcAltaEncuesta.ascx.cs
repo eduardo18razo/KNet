@@ -9,7 +9,6 @@ using KiiniHelp.ServiceSistemaTipoEncuesta;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 
 namespace KiiniHelp.UserControls.Altas.Encuestas
 {

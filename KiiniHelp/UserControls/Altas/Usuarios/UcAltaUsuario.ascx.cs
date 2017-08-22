@@ -21,7 +21,6 @@ using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical;
 
 namespace KiiniHelp.UserControls.Altas.Usuarios
 {
