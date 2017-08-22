@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace KiiniNet.Entities.Cat.Sistema
@@ -15,8 +16,12 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public int IdMenu { get; set; }
         [DataMember]
+        public int IdTipoUsuario { get; set; }
+        [DataMember]
         public virtual Rol Rol { get; set; }
         [DataMember]
         public virtual Menu Menu { get; set; }
+        [DataMember]
+        public virtual TipoUsuario TipoUsuario { get; set; }
     }
 }

@@ -444,15 +444,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RolMenu">
-      <EntityTypeMapping TypeName="KiiniNet_v2Model.RolMenu">
-        <MappingFragment StoreEntitySet="RolMenu">
-          <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
-          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="HitGrupoUsuario">
       <EntityTypeMapping TypeName="KiiniNet_v2Model.HitGrupoUsuario">
         <MappingFragment StoreEntitySet="HitGrupoUsuario">
@@ -1511,6 +1502,16 @@
           <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
           <ScalarProperty Name="IdTipoCampoMascara" ColumnName="IdTipoCampoMascara" />
           <ScalarProperty Name="IdMascara" ColumnName="IdMascara" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RolMenu">
+      <EntityTypeMapping TypeName="KiiniNet_v2Model.RolMenu">
+        <MappingFragment StoreEntitySet="RolMenu">
+          <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
+          <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
