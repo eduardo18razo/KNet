@@ -143,3 +143,4 @@ KiiniNet.UnitTest/obj/Debug/KiiniNet.UnitTest.pdb
 KiiniNet.Services.Windows/obj/Debug/KiiniNet.Services.Windows.exe
 KiiniNet.Services.Windows/obj/Debug/KiiniNet.Services.Windows.csproj.GenerateResource.Cache
 KiiniNet.UnitTest/obj/Debug/KiiniNet.UnitTestData.csprojResolveAssemblyReference.cache
+KiiniHelp/Libs/EPPlus.xml
