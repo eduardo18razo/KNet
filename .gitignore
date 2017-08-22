@@ -110,3 +110,9 @@ KinniNet.Business.Utils/obj/Debug/KinniNet.Business.Utils.csproj.FileListAbsolut
 KiiniNet.UnitTest/obj/Debug/KiiniNet.UnitTestData.csproj.FileListAbsolute.txt
 KinniNet.Data/obj/Debug/KinniNet.Data.csproj.FileListAbsolute.txt
 KinniNet.Business/obj/Debug/KinniNet.Core.csproj.FileListAbsolute.txt
+KinniNet.Data/obj/Debug/edmxResourcesToEmbed/Help/DataBaseModel.csdl
+KinniNet.Data/obj/Debug/edmxResourcesToEmbed/Help/DataBaseModel.ssdl
+KiiniHelp/obj/Debug/kiinihelp.dll.licenses
+KiiniNet.Entities/obj/Debug/KiiniNet.Entities.csproj.FileListAbsolute.txt
+KinniNet.Data/obj/Debug/edmxResourcesToEmbed/Help/DataBaseModel.msl
+KiiniNet.Services.Windows/obj/Debug/KiiniNet.Services.Windows.InstallerSettings.resources
