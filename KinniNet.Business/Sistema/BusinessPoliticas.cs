@@ -18,24 +18,101 @@ namespace KinniNet.Core.Sistema
         {
 
         }
-        public List<EstatusAsignacionSubRolGeneralDefault> GeneraEstatusAsignacionGrupoDefault()
+
+        public List<EstatusAsignacionSubRolGeneralDefault> EstatusAsignacionSubRolGeneralDefault()
         {
-            List<EstatusAsignacionSubRolGeneralDefault> result = new List<EstatusAsignacionSubRolGeneralDefault>();
+            List<EstatusAsignacionSubRolGeneralDefault> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 result = db.EstatusAsignacionSubRolGeneralDefault.ToList();
-                if (result != null)
+                foreach (EstatusAsignacionSubRolGeneralDefault data in result)
                 {
-                    foreach (EstatusAsignacionSubRolGeneralDefault data in result)
-                    {
-                        db.LoadProperty(data, "Rol");
-                        db.LoadProperty(data, "SubRol");
-                        db.LoadProperty(data, "EstatusAsignacionActual");
-                        db.LoadProperty(data, "EstatusAsignacionAccion");
+                    db.LoadProperty(data, "Rol");
+                    db.LoadProperty(data, "SubRol");
+                    db.LoadProperty(data, "EstatusAsignacionActual");
+                    db.LoadProperty(data, "EstatusAsignacionAccion");
 
-                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally { db.Dispose(); }
+            return result;
+        }
+
+        public List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefault()
+        {
+            List<EstatusTicketSubRolGeneralDefault> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.EstatusTicketSubRolGeneralDefault.ToList();
+                foreach (EstatusTicketSubRolGeneralDefault data in result)
+                {
+                    db.LoadProperty(data, "EstatusTicketActual");
+                    db.LoadProperty(data, "EstatusTicketAccion");
+                    db.LoadProperty(data, "RolSolicita");
+                    db.LoadProperty(data, "SubSolicita");
+                    db.LoadProperty(data, "RolPertenece");
+                    db.LoadProperty(data, "SubRolPertenece");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally { db.Dispose(); }
+            return result;
+        }
+
+        public List<EstatusAsignacionSubRolGeneral> EstatusAsignacionSubRolGeneral()
+        {
+            List<EstatusAsignacionSubRolGeneral> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.EstatusAsignacionSubRolGeneral.ToList();
+                foreach (EstatusAsignacionSubRolGeneral data in result)
+                {
+                    db.LoadProperty(data, "GrupoUsuario");
+                    db.LoadProperty(data, "Rol");
+                    db.LoadProperty(data, "SubRol");
+                    db.LoadProperty(data, "EstatusAsignacionActual");
+                    db.LoadProperty(data, "EstatusAsignacionAccion");
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally { db.Dispose(); }
+            return result;
+        }
+
+        public List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneral()
+        {
+            List<EstatusTicketSubRolGeneral> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.EstatusTicketSubRolGeneral.ToList();
+                foreach (EstatusTicketSubRolGeneral data in result)
+                {
+                    db.LoadProperty(data, "GrupoUsuario");
+                    db.LoadProperty(data, "EstatusTicketActual");
+                    db.LoadProperty(data, "EstatusTicketAccion");
+                    db.LoadProperty(data, "RolSolicita");
+                    db.LoadProperty(data, "SubSolicita");
+                    db.LoadProperty(data, "RolPertenece");
+                    db.LoadProperty(data, "SubRolPertenece");
                 }
             }
             catch (Exception e)
@@ -65,34 +142,6 @@ namespace KinniNet.Core.Sistema
             }
         }
 
-        public List<EstatusTicketSubRolGeneralDefault> GeneraEstatusTicketSubRolGeneralDefault()
-        {
-            List<EstatusTicketSubRolGeneralDefault> result = new List<EstatusTicketSubRolGeneralDefault>();
-            DataBaseModelContext db = new DataBaseModelContext();
-            try
-            {
-                db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.EstatusTicketSubRolGeneralDefault.ToList();
-                if (result != null)
-                {
-                    foreach (EstatusTicketSubRolGeneralDefault data in result)
-                    {
-                        db.LoadProperty(data, "EstatusTicketActual");
-                        db.LoadProperty(data, "EstatusTicketAccion");
-                        db.LoadProperty(data, "RolSolicita");
-                        db.LoadProperty(data, "SubSolicita");
-                        db.LoadProperty(data, "RolPertenece");
-                        db.LoadProperty(data, "SubRolPertenece");
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            finally { db.Dispose(); }
-            return result;
-        }
         //Modificar
         public void HabilitarPoliticaEstatus(int idAsignacion, bool habilitado)
         {
@@ -112,52 +161,6 @@ namespace KinniNet.Core.Sistema
                 db.Dispose();
             }
         }
-
-        public List<SubRolEscalacionPermitida> GeneraSubRolEscalacionPermitida()
-        {
-            List<SubRolEscalacionPermitida> result = new List<SubRolEscalacionPermitida>();
-            DataBaseModelContext db = new DataBaseModelContext();
-            try
-            {
-                db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.SubRolEscalacionPermitida.ToList();
-                if (result != null)
-                {
-                    foreach (SubRolEscalacionPermitida data in result)
-                    {
-                        db.LoadProperty(data, "SubRol");
-                        db.LoadProperty(data, "SubRolPermitido");
-                        db.LoadProperty(data, "EstatusAsignacion");                    
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            finally { db.Dispose(); }
-            return result;
-        }
-
-        public void HabilitarPoliticaEscalacion(int idEscalacion, bool habilitado)
-        {
-            DataBaseModelContext db = new DataBaseModelContext();
-            try
-            {
-                SubRolEscalacionPermitida inf = db.SubRolEscalacionPermitida.SingleOrDefault(w => w.Id == idEscalacion);
-                if (inf != null) inf.Habilitado = habilitado;
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                db.Dispose();
-            }
-        }
-
     }
 
 

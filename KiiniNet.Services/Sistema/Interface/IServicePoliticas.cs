@@ -8,23 +8,20 @@ namespace KiiniNet.Services.Sistema.Interface
     public interface IServicePoliticas
     {
         [OperationContract]
-        List<EstatusAsignacionSubRolGeneralDefault> GeneraEstatusAsignacionGrupoDefault();
+        List<EstatusAsignacionSubRolGeneralDefault> EstatusAsignacionSubRolGeneralDefault();
+        [OperationContract]
+        List<EstatusTicketSubRolGeneralDefault> EstatusTicketSubRolGeneralDefault();
+
+        [OperationContract]
+        List<EstatusAsignacionSubRolGeneral> EstatusAsignacionSubRolGeneral();
+        [OperationContract]
+        List<EstatusTicketSubRolGeneral> EstatusTicketSubRolGeneral();
 
         [OperationContract]
         void HabilitarPoliticaAsignacion(int idArea, bool habilitado);
         [OperationContract]
-        List<EstatusTicketSubRolGeneralDefault> GeneraEstatusTicketSubRolGeneralDefault();
-
-        [OperationContract]
         void HabilitarPoliticaEstatus(int idArea, bool habilitado);
-
-
-        [OperationContract]
-        List<SubRolEscalacionPermitida> GeneraSubRolEscalacionPermitida();
-
-        [OperationContract]
-        void HabilitarPoliticaEscalacion(int idEscalacion, bool habilitado);
     }
 
-     
+
 }

@@ -78,4 +78,29 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="HabilitarEscalacion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idEscalacion" type="xs:int" />
+        <xs:element minOccurs="0" name="habilitado" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HabilitarEscalacionResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GeneraSubRolEscalacionPermitida">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GeneraSubRolEscalacionPermitidaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="GeneraSubRolEscalacionPermitidaResult" nillable="true" type="q6:ArrayOfSubRolEscalacionPermitida" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

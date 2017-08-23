@@ -22,5 +22,11 @@ namespace KiiniNet.Services.Sistema.Interface
 
         [OperationContract]
         List<SubRolEscalacionPermitida> ObtenerEscalacion(int idSubRol, int idEstatusAsignacion, int? nivelActual);
+
+        [OperationContract]
+        void HabilitarEscalacion(int idEscalacion, bool habilitado);
+
+        [OperationContract]
+        List<SubRolEscalacionPermitida> GeneraSubRolEscalacionPermitida();
     }
 }

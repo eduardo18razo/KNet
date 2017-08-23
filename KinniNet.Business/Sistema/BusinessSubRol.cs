@@ -8,7 +8,7 @@ using KinniNet.Data.Help;
 
 namespace KinniNet.Core.Sistema
 {
-    public class BusinessSubRol: IDisposable
+    public class BusinessSubRol : IDisposable
     {
         private bool _proxy;
         public BusinessSubRol(bool proxy = false)
@@ -47,7 +47,7 @@ namespace KinniNet.Core.Sistema
             }
             return result;
         }
-        
+
         public SubRol ObtenerSubRolById(int idSubRol)
         {
             SubRol result;
@@ -165,6 +165,48 @@ namespace KinniNet.Core.Sistema
                 db.Dispose();
             }
             return result;
+        }
+
+        public List<SubRolEscalacionPermitida> GeneraSubRolEscalacionPermitida()
+        {
+            List<SubRolEscalacionPermitida> result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.SubRolEscalacionPermitida.ToList();
+                foreach (SubRolEscalacionPermitida data in result)
+                {
+                    db.LoadProperty(data, "SubRol");
+                    db.LoadProperty(data, "SubRolPermitido");
+                    db.LoadProperty(data, "EstatusAsignacion");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally { db.Dispose(); }
+            return result;
+        }
+
+        public void HabilitarEscalacion(int idEscalacion, bool habilitado)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                SubRolEscalacionPermitida inf = db.SubRolEscalacionPermitida.SingleOrDefault(w => w.Id == idEscalacion);
+                if (inf != null) inf.Habilitado = habilitado;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
         }
     }
 }
