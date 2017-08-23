@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="frmPoliticasEstatusTicket.aspx.cs" Inherits="KiiniHelp.Politicas.frmPoliticasEstatusTicket" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmPoliticasEstatusTicket.aspx.cs" Inherits="KiiniMaster.Configuracion.Politicas.frmPoliticasEstatusTicket" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -8,7 +8,7 @@
             <ContentTemplate>
                 <br>
                 <h3 class="h6">
-                    <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
+                        <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
                     / Politica de Estatus Ticket Default </h3>
                 <hr />
                 <section class="module">

@@ -4,16 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using KiiniHelp.ServiceGrupoUsuario;
-using KiiniHelp.ServiceSistemaPoliticas;
-using KiiniHelp.ServiceSistemaRol;
-using KiiniHelp.ServiceSistemaSubRol;
 using KinniNet.Business.Utils;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Parametros;
-using KiiniHelp.ServiceSistemaEstatus;
+using KiiniMaster.ServiceSistemaPoliticas;
+using KiiniMaster.ServiceSistemaRoles;
+using KiiniMaster.ServiceSistemaSubRol;
+using KiiniMaster.ServiceSistemaEstatus;
 
-namespace KiiniHelp.Politicas
+namespace KiiniMaster.Configuracion.Politicas
 {
     public partial class FrmPoliticasEscalacionPermitida : System.Web.UI.Page
     {        

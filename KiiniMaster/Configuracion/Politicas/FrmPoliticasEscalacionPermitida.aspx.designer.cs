@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace KiiniHelp.Politicas {
+namespace KiiniMaster.Configuracion.Politicas {
     
     
     public partial class FrmPoliticasEscalacionPermitida {

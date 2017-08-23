@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmPoliticasEscalacionPermitida.aspx.cs" Inherits="KiiniHelp.Politicas.FrmPoliticasEscalacionPermitida" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FrmPoliticasEscalacionPermitida.aspx.cs" Inherits="KiiniMaster.Configuracion.Politicas.FrmPoliticasEscalacionPermitida" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

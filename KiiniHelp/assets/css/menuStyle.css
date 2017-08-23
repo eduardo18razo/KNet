@@ -74,7 +74,7 @@ html, body, .container, .scroller {
 	/*position: fixed;*/
     width: 100%;
     overflow-x: hidden;
-    height: 68% !important;
+    height: 99% !important;
     margin-top: 80px
 
 }

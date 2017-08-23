@@ -4,15 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using KiiniHelp.ServiceSistemaPoliticas;
-using KiiniHelp.ServiceSistemaRol;
-using KiiniHelp.ServiceSistemaSubRol;
-using KiiniHelp.ServiceSistemaEstatus;
+using KiiniMaster.ServiceSistemaRoles;
+using KiiniMaster.ServiceSistemaPoliticas;
+using KiiniMaster.ServiceSistemaSubRol;
+using KiiniMaster.ServiceSistemaEstatus;
+
+
 using KinniNet.Business.Utils;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Parametros;
 
-namespace KiiniHelp.Politicas
+
+namespace KiiniMaster.Configuracion.Politicas
 {
     public partial class frmPoliticasEstatusTicket : System.Web.UI.Page
     {
