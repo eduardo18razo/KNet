@@ -16,6 +16,7 @@ using KiiniMaster.ServiceSistemaEstatus;
 
 namespace KiiniMaster.Configuracion.Politicas
 {
+    //JGB
     public partial class frmPoliticasAsignacionGrupo : System.Web.UI.Page
     {
         private readonly ServicePoliticasClient _servicePoliticasAsignacion = new ServicePoliticasClient();
