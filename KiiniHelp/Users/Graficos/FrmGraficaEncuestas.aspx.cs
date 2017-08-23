@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceConsultas;
-using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;

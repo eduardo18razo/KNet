@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using KiiniHelp.ServiceOrganizacion;
 using KiiniHelp.ServiceUbicacion;
-using KiiniNet.Entities.Helper;
 
 namespace KiiniHelp.UserControls.Filtros.Graficos
 {

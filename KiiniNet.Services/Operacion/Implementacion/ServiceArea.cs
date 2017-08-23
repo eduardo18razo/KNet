@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.ServiceModel;
-using System.ServiceModel.Web;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;

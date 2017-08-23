@@ -7,13 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using KiiniNet.Entities.Operacion;
-using KinniNet.Business.Utils;
 using KinniNet.Core.Demonio;
-using KinniNet.Core.Operacion;
 using KinniNet.Data.Help;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

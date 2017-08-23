@@ -10,7 +10,6 @@ using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Tickets;
 using KinniNet.Business.Utils;
-using KinniNet.Core.Sistema;
 using KinniNet.Data.Help;
 
 namespace KinniNet.Core.Operacion

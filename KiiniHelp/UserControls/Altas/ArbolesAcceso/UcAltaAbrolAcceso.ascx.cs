@@ -2,15 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using KiiniHelp.ServiceArbolAcceso;
-using KiiniHelp.ServiceEncuesta;
-using KiiniHelp.ServiceGrupoUsuario;
-using KiiniHelp.ServiceInformacionConsulta;
-using KiiniHelp.ServiceMascaraAcceso;
-using KiiniHelp.ServiceSistemaTipoInformacionConsulta;
-using KiiniHelp.ServiceSistemaTipoUsuario;
-using KiiniNet.Entities.Cat.Operacion;
 
 namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
 {

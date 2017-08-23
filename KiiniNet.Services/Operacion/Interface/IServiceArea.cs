@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.ServiceModel.Web;
 using KiiniNet.Entities.Operacion;
 
 namespace KiiniNet.Services.Operacion.Interface

@@ -6,7 +6,6 @@ using System.Web.UI.WebControls;
 using KiiniHelp.Funciones;
 using KiiniHelp.ServiceAtencionTicket;
 using KiiniHelp.ServiceGrupoUsuario;
-using KiiniHelp.ServiceTicket;
 using KiiniHelp.ServiceUsuario;
 using KiiniNet.Entities.Helper;
 using KiiniNet.Entities.Operacion.Usuarios;

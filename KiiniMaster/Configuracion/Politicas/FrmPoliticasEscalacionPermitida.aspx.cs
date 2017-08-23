@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+<<<<<<< HEAD
+=======
+using KiiniHelp.ServiceSistemaPoliticas;
+using KiiniHelp.ServiceSistemaRol;
+using KiiniHelp.ServiceSistemaSubRol;
+>>>>>>> c73ba50b6cad9f9b5b01dab05cec55a96299702e
 using KinniNet.Business.Utils;
-using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Parametros;
 using KiiniMaster.ServiceSistemaPoliticas;
 using KiiniMaster.ServiceSistemaRoles;

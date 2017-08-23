@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniMaster.ServiceSistemaRoles;
@@ -11,7 +10,6 @@ using KiiniMaster.ServiceSistemaEstatus;
 
 
 using KinniNet.Business.Utils;
-using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Parametros;
 
 

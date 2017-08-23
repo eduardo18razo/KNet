@@ -4,7 +4,6 @@ using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Services.Operacion.Interface;
 using KinniNet.Core.Operacion;
-using KiiniNet.Entities.Parametros;
 
 namespace KiiniNet.Services.Operacion.Implementacion
 {

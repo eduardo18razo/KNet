@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using KiiniHelp.ServiceGrupoUsuario;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Usuarios;
-using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Filtros.Componentes
 {

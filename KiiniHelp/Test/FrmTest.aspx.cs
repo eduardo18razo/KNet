@@ -4,11 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net.Mail;
-using System.Net.Security;
-using System.Net.Sockets;
 using System.Reflection;
-using System.ServiceModel.Channels;
 using System.Text.RegularExpressions;
 using System.Web.UI;
 using System.Web.UI.DataVisualization.Charting;
@@ -16,11 +12,8 @@ using System.Web.UI.WebControls;
 using AjaxControlToolkit;
 using KiiniHelp.ServiceArea;
 using KiiniHelp.ServiceSistemaCatalogos;
-using KiiniNet.Entities.Operacion;
-using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 using Font = System.Drawing.Font;
-using System.Text.RegularExpressions;
 
 namespace KiiniHelp.Test
 {
