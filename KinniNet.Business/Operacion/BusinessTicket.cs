@@ -80,7 +80,7 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-
+        //ecl
         public Ticket CrearTicket(int idUsuario, int idUsuarioSolicito, int idArbol, List<HelperCampoMascaraCaptura> lstCaptura, int idCanal, bool campoRandom, bool esTercero, bool esMail)
         {
             DataBaseModelContext db = new DataBaseModelContext();
