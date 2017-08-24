@@ -378,15 +378,15 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h3 class="modal-title" id="myModalLabel">
-                            <img img-responsive margin-left src="assets/images/icons/ok.png" alt="" /><br>
-                            </i>Tu ticket se creo con éxito</h3>
+                            <%--<img img-responsive margin-left src="assets/images/icons/ok.png" alt="" /><br>  JGB --%> 
+                            Tu ticket se creo con éxito</h3>
                     </div>
                     <div class="modal-body">
-                        <hr>
-                        <p class="h4"><strong>Tu no. de ticket: 01</strong><br>
+                        <hr/>
+                        <p class="h4"><strong>Tu no. de ticket: 01</strong><br/>
                         </p>
                         <p class="h4"><strong>Clave de registro: 234D45</strong></p>
-                        <hr>
+                        <hr/>
                         En breve recibirás un correo con los datos de tu ticket para que puedas dar seguimiento.
 										
                     </div>

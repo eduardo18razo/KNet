@@ -31,13 +31,13 @@ namespace KiiniHelp.UserControls.Consultas {
         protected global::System.Web.UI.WebControls.HiddenField hfIdSeleccion;
         
         /// <summary>
-        /// Control lblBranding.
+        /// Control lblOrganización.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBranding;
+        protected global::System.Web.UI.WebControls.Label lblOrganización;
         
         /// <summary>
         /// Control btnNew.

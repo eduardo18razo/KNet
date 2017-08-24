@@ -11,15 +11,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <asp:LinkButton CssClass="close" runat="server" OnClick="btnCancelarCatalogo_OnClick" Text='&times'></asp:LinkButton>
-                    <h2 class="modal-title" id="modal-new-ticket-label">
-                        <asp:Label runat="server" ID="lblBrandingModal" /></h2>
-                    <p class="text-center"><asp:Label runat="server" ID="lblTitleCatalogo"/></p>
+                    <%--<h2 class="modal-title" id="modal-new-ticket-label">
+                        <asp:Label runat="server" ID="lblBrandingModal" /></h2> jgb --%>
+                    <%--<p class="text-center">--%><h3 class="text-center"><asp:Label runat="server" ID="lblTitleCatalogo"/></h3><%--</p>--%>
                 </div>
                 <div class="modal-body">
                     <!-- TIPO DE USUARIO-->
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            TIPO DE USUARIO<br />
+                            Tipo de Usuario<br />
                             <div class="form-group">
                                 <asp:DropDownList runat="server" ID="ddlTipoUsuario" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" />
                             </div>

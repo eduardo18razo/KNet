@@ -160,7 +160,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
+               // lblBranding.Text = WebConfigurationManager.AppSettings["Brand"]; Etiqueta nombre organización
                 AlertaOrganizacion = new List<string>();
                 ucAltaOrganizaciones.OnAceptarModal += UcAltaOrganizacionesOnOnAceptarModal;
                 ucAltaOrganizaciones.OnCancelarModal += UcAltaOrganizacionesOnOnCancelarModal;
@@ -284,7 +284,7 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 ucAltaOrganizaciones.EsSeleccion = false;
                 ucAltaOrganizaciones.EsAlta = true;
-                ucAltaOrganizaciones.Title = "ALTA DE ORGANIZACIÓN";
+                ucAltaOrganizaciones.Title = "Nueva Organización";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoOrganizacion\");", true);
             }
             catch (Exception ex)

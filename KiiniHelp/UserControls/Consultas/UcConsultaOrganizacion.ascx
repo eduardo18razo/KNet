@@ -8,8 +8,8 @@
             <asp:HiddenField runat="server" ID="hfIdSeleccion" />
             <br>
             <h3 class="h6">
-                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
-                / Organizaciones </h3>
+                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Inicio</asp:HyperLink>
+                / Configuración / Organización </h3>
             <hr />
             <section class="module">
                 <div class="row">
@@ -17,7 +17,7 @@
                         <div class="module-inner">
                             <div class="module-heading">
                                 <h3 class="module-title">
-                                    <asp:Label runat="server" ID="lblBranding" /></h3>
+                                    <asp:Label runat="server" ID="lblOrganización" Text="Organización"/></h3>
                             </div>
                         </div>
                     </div>

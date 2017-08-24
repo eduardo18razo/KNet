@@ -46,7 +46,7 @@ namespace KinniNet.Business.Utils
             public static int IndexTodos = 1;
             public static int ValueSeleccione = 0;
             public static int ValueTodos = -1;
-            public static string DescripcionSeleccione = "==SELECCIONE==";
+            public static string DescripcionSeleccione = "-";
             public static string DescripcionTodos = "==TODOS==";
             public static bool Habilitado = false;
         }

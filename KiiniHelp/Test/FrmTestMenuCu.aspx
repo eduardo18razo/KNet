@@ -371,7 +371,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h3 class="modal-title" id="myModalLabel">
-                            <img img-responsive margin-left src="assets/images/icons/ok.png" alt="" /><br>
+                            <%--<img img-responsive margin-left src="assets/images/icons/ok.png" alt="" /><br> JGB --%> 
                             </i>Tu ticket se creo con éxito</h3>
                     </div>
                     <div class="modal-body">

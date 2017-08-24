@@ -307,7 +307,7 @@
                     <div class="modal-header">
                         <asp:LinkButton class="close" runat="server" ID="btnCerrarExito" OnClick="btnCerrarExito_OnClick"><span aria-hidden="true">&times;</span></asp:LinkButton>
                         <h3 class="modal-title" id="myModalLabel">
-                            <img img-responsive margin-left src="assets/images/icons/ok.png" alt="" /><br>
+                            <%--<img img-responsive margin-left src="assets/images/icons/ok.png" alt="" /><br>--%>
                             Tu ticket se creo con éxito</h3>
                     </div>
                     <div class="modal-body">

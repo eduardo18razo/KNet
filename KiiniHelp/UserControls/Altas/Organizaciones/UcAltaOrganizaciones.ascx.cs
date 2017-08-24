@@ -40,7 +40,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 }
             }
         }
-
+        
         public string Title
         {
             set { lblTitleCatalogo.Text = value; }
@@ -665,7 +665,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
         {
             try
             {
-                lblBrandingModal.Text = WebConfigurationManager.AppSettings["Brand"];
+                //lblBrandingModal.Text = WebConfigurationManager.AppSettings["Brand"];
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
