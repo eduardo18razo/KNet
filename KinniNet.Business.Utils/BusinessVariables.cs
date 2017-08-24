@@ -218,13 +218,8 @@ namespace KinniNet.Business.Utils
             ResponsableDeContenido = 5,
             ResponsableDeOperación = 6,
             ResponsableDeDesarrollo = 7,
-            ResponsableMantenimientoEmpleadoUbicacion = 8,
-            ResponsableMantenimientoEmpleadoOrganizacion = 9,
-            ResponsableMantenimientoEmpleadoUsuario = 10,
-            ResponsableMantenimientoCliente = 11,
-            ResponsableMantenimientoProveedor = 12,
-            ResponsableServicio = 13,
-            AgenteUniversal = 14
+            ResponsableServicio = 8,
+            AgenteUniversal = 9
         }
 
         public enum EnumRoles
@@ -236,13 +231,8 @@ namespace KinniNet.Business.Utils
             ResponsableDeContenido = 5,
             ResponsableDeOperación = 6,
             ResponsableDeDesarrollo = 7,
-            ResponsableMantenimientoEmpleadoUbicacion = 8,
-            ResponsableMantenimientoEmpleadoOrganizacion = 9,
-            ResponsableMantenimientoEmpleadoUsuario = 10,
-            ResponsableMantenimientoCliente = 11,
-            ResponsableMantenimientoProveedor = 12,
-            ResponsableServicio = 13,
-            AgenteUniversal = 14
+            ResponsableServicio = 8,
+            AgenteUniversal = 9
         }
 
         public enum EnumSubRoles
