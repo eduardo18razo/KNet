@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmPoliticasEstatusTicket.aspx.cs" Inherits="KiiniMaster.Configuracion.Politicas.frmPoliticasEstatusTicket" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmPoliticasEstatusTicketGrupo.aspx.cs" Inherits="KiiniMaster.Configuracion.Politicas.frmPoliticasEstatusTicketGrupo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -9,12 +9,22 @@
                 <br>
                 <h3 class="h6">
                         <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
-                    / Politica de Estatus Ticket Default </h3>
+                    / Politica de Estatus Ticket Grupo </h3>
                 <hr />
                 <section class="module">
                     <div class="row">
                         <div class="col-lg-12 col-md-6">
                             <div class="module-inner">
+
+                                <div class="form-horizontal col-lg-12">
+                                    <div class="form-group col-lg-4">
+                                        <asp:Label runat="server" CssClass="col-lg-4" Text="GrupoUsuario"></asp:Label>
+                                        <div class="col-lg-8">
+                                            <asp:DropDownList runat="server" ID="ddlGrupoUsuario" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="False" OnSelectedIndexChanged="ddlGrupoUsuario_SelectedIndexChanged" />
+                                        </div>
+                                    </div>                                    
+                                </div>
+
                                 <div class="form-horizontal col-lg-12">
                                     <div class="form-group col-lg-4">
                                         <asp:Label runat="server" CssClass="col-lg-4" Text="RolSolicita"></asp:Label>
@@ -59,7 +69,11 @@
                                             <asp:DropDownList runat="server" ID="ddlEstatusAccion" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="False" OnSelectedIndexChanged="ddlEstatusAccion_SelectedIndexChanged" />
                                         </div>
                                     </div>
-                                </div>                               
+                                </div>
+
+
+
+                                <br />
 
                             </div>
                         </div>

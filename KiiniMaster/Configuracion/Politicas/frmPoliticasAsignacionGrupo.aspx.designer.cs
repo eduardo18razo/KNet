@@ -22,13 +22,13 @@ namespace KiiniMaster.Configuracion.Politicas {
         protected global::System.Web.UI.UpdatePanel upGeneral;
         
         /// <summary>
-        /// Control ddlRol.
+        /// Control ddlGrupoUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRol;
+        protected global::System.Web.UI.WebControls.DropDownList ddlGrupoUsuario;
         
         /// <summary>
         /// Control ddlSubRol.
