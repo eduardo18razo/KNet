@@ -145,3 +145,35 @@ KiiniNet.Services.Windows/obj/Debug/KiiniNet.Services.Windows.csproj.GenerateRes
 KiiniNet.UnitTest/obj/Debug/KiiniNet.UnitTestData.csprojResolveAssemblyReference.cache
 KiiniHelp/Libs/EPPlus.xml
 KinniNet.v12.suo
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario14.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario13.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario12.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario11.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/Reference.cs
+KiiniMaster/Properties/DataSources/KiiniNet.Entities.Operacion.Usuarios.UsuarioGrupo.datasource
+KiiniMaster/Properties/DataSources/KiiniNet.Entities.Cat.Usuario.HorarioSubGrupo.datasource
+KiiniMaster/Properties/DataSources/KiiniNet.Entities.Cat.Usuario.GrupoUsuario.datasource
+KiiniMaster/Properties/DataSources/KiiniNet.Entities.Cat.Usuario.DiaFestivoSubGrupo.datasource
+KiiniMaster/Service References/ServiceGrupoUsuario/configuration91.svcinfo
+KiiniMaster/Service References/ServiceGrupoUsuario/configuration.svcinfo
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario1.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario.wsdl
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario.disco
+KiiniMaster/Service References/ServiceGrupoUsuario/Reference.svcmap
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario6.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario5.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario4.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario3.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario2.xsd
+KiiniMaster/obj/Debug/TempPE/Service References.ServiceGrupoUsuario.Reference.cs.dll
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario9.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario8.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario7.xsd
+KiiniMaster/Service References/ServiceGrupoUsuario/ServiceGrupoUsuario10.xsd
+KiiniMaster/obj/Debug/KiiniMaster.csprojResolveAssemblyReference.cache
+KiiniMaster/obj/Debug/KiiniMaster.pdb
+KiiniMaster/obj/Debug/KiiniMaster.dll
+KiiniHelp/obj/Debug/DesignTimeResolveAssemblyReferences.cache
+KiiniHelp/obj/Debug/TempPE/Service References.ServiceSistemaSubRol.Reference.cs.dll
+KiiniMaster/obj/Debug/KiiniMaster.csproj.FileListAbsolute.txt

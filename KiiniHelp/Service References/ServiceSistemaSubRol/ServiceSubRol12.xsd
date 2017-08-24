@@ -56,8 +56,8 @@
       <xs:element minOccurs="0" name="Requerido" type="xs:boolean" />
       <xs:element minOccurs="0" name="SimboloMoneda" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TipoCampoMascara" nillable="true" type="tns:TipoCampoMascara" />
-      <xs:element minOccurs="0" name="ValorMaximo" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="ValorMinimo" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorMaximo" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ValorMinimo" nillable="true" type="xs:int" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />

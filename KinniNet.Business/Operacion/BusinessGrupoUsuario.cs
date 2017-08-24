@@ -839,7 +839,7 @@ namespace KinniNet.Core.Operacion
             finally { db.Dispose(); }
             return result;
         }
-        private List<EstatusAsignacionSubRolGeneral> GeneraEstatusAsignacionGrupoDefault(GrupoUsuario grupo)
+        public List<EstatusAsignacionSubRolGeneral> GeneraEstatusAsignacionGrupoDefault(GrupoUsuario grupo)
         {
             List<EstatusAsignacionSubRolGeneral> result = new List<EstatusAsignacionSubRolGeneral>();
             DataBaseModelContext db = new DataBaseModelContext();

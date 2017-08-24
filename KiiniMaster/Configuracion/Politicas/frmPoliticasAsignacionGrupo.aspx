@@ -17,9 +17,9 @@
                             <div class="module-inner">
                                 <div class="form-horizontal col-lg-12">
                                     <div class="form-group col-lg-4">
-                                        <asp:Label runat="server" CssClass="col-lg-4" Text="Rol"></asp:Label>
+                                        <asp:Label runat="server" CssClass="col-lg-4" Text="Grupo Usuario"></asp:Label>
                                         <div class="col-lg-8">
-                                            <asp:DropDownList runat="server" ID="ddlRol" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoRol_OnSelectedIndexChanged" />
+                                            <asp:DropDownList runat="server" ID="ddlGrupoUsuario" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlGrupoUsuario_SelectedIndexChanged" />
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-4">
@@ -78,13 +78,15 @@
                                                         <th>
                                                             <asp:Label runat="server">Id</asp:Label></th>
                                                         <th>
-                                                            <asp:Label runat="server">IdRol</asp:Label></th>
+                                                            <asp:Label runat="server">GrupoUsuario</asp:Label></th>
                                                         <th>
-                                                            <asp:Label runat="server">IdSubRol</asp:Label></th>
+                                                            <asp:Label runat="server">Rol</asp:Label></th>
                                                         <th>
-                                                            <asp:Label runat="server">IdEstatusAsignacionActual</asp:Label></th>
+                                                            <asp:Label runat="server">SubRol</asp:Label></th>
                                                         <th>
-                                                            <asp:Label runat="server">IdEstatusAsignacionAccion</asp:Label></th>
+                                                            <asp:Label runat="server">EstatusAsignacionActual</asp:Label></th>
+                                                        <th>
+                                                            <asp:Label runat="server">EstatusAsignacionAccion</asp:Label></th>
                                                         <th>
                                                             <asp:Label runat="server">ComentarioObligado</asp:Label></th>
                                                         <th>
@@ -102,6 +104,7 @@
                                             <tr>
 
                                                 <td><%# Eval("Id")%></td>
+                                                <td><%# Eval("GrupoUsuario.Descripcion")%></td>
                                                 <td><%# Eval("Rol.Descripcion")%></td>
                                                 <td><%# Eval("SubRol.Descripcion")%></td>
                                                 <td><%# Eval("EstatusAsignacionActual.Descripcion")%></td>

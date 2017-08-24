@@ -48,18 +48,6 @@
   <wsdl:message name="IServiceSubRol_ObtenerEscalacion_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerEscalacionResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceSubRol_HabilitarEscalacion_InputMessage">
-    <wsdl:part name="parameters" element="tns:HabilitarEscalacion" />
-  </wsdl:message>
-  <wsdl:message name="IServiceSubRol_HabilitarEscalacion_OutputMessage">
-    <wsdl:part name="parameters" element="tns:HabilitarEscalacionResponse" />
-  </wsdl:message>
-  <wsdl:message name="IServiceSubRol_GeneraSubRolEscalacionPermitida_InputMessage">
-    <wsdl:part name="parameters" element="tns:GeneraSubRolEscalacionPermitida" />
-  </wsdl:message>
-  <wsdl:message name="IServiceSubRol_GeneraSubRolEscalacionPermitida_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GeneraSubRolEscalacionPermitidaResponse" />
-  </wsdl:message>
   <wsdl:portType name="IServiceSubRol">
     <wsdl:operation name="ObtenerSubRolesByTipoGrupo">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSubRol/ObtenerSubRolesByTipoGrupo" message="tns:IServiceSubRol_ObtenerSubRolesByTipoGrupo_InputMessage" />
@@ -80,14 +68,6 @@
     <wsdl:operation name="ObtenerEscalacion">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSubRol/ObtenerEscalacion" message="tns:IServiceSubRol_ObtenerEscalacion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceSubRol/ObtenerEscalacionResponse" message="tns:IServiceSubRol_ObtenerEscalacion_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="HabilitarEscalacion">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSubRol/HabilitarEscalacion" message="tns:IServiceSubRol_HabilitarEscalacion_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSubRol/HabilitarEscalacionResponse" message="tns:IServiceSubRol_HabilitarEscalacion_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GeneraSubRolEscalacionPermitida">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSubRol/GeneraSubRolEscalacionPermitida" message="tns:IServiceSubRol_GeneraSubRolEscalacionPermitida_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSubRol/GeneraSubRolEscalacionPermitidaResponse" message="tns:IServiceSubRol_GeneraSubRolEscalacionPermitida_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceSubRol">
@@ -130,24 +110,6 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerEscalacion">
       <soap:operation soapAction="http://tempuri.org/IServiceSubRol/ObtenerEscalacion" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HabilitarEscalacion">
-      <soap:operation soapAction="http://tempuri.org/IServiceSubRol/HabilitarEscalacion" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GeneraSubRolEscalacionPermitida">
-      <soap:operation soapAction="http://tempuri.org/IServiceSubRol/GeneraSubRolEscalacionPermitida" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
