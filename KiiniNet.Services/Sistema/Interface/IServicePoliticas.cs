@@ -18,11 +18,16 @@ namespace KiiniNet.Services.Sistema.Interface
         List<EstatusTicketSubRolGeneral> ObtenerEstatusTicketSubRolGeneral();
 
         [OperationContract]
-        void HabilitarPoliticaAsignacion(int idAsignacion, bool habilitado);
-        
+        void HabilitarEstatusAsignacionSubRolGeneralDefault(int idAsignacion, bool habilitado);
 
         [OperationContract]
-        void HabilitarPoliticaEstatus(int idAsignacion, bool habilitado);
+        void HabilitarEstatusTicketSubRolGeneralDefault(int idAsignacion, bool habilitado);
+
+        [OperationContract]
+        void HabilitarEstatusAsignacionSubRolGeneral(int idAsignacion, bool habilitado);
+        
+        [OperationContract]
+        void HabilitarEstatusTicketSubRolGeneral(int idAsignacion, bool habilitado);
 
 
         

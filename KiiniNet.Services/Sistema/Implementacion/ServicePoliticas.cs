@@ -68,13 +68,13 @@ namespace KiiniNet.Services.Sistema.Implementacion
             }
         }
 
-        public void HabilitarPoliticaAsignacion(int idAsignacion, bool habilitado)
+        public void HabilitarEstatusAsignacionSubRolGeneralDefault(int idAsignacion, bool habilitado)
         {
             try
             {
                 using (BusinessPoliticas negocio = new BusinessPoliticas())
                 {
-                    negocio.HabilitarPoliticaAsignacion(idAsignacion, habilitado);
+                    negocio.HabilitarEstatusAsignacionSubRolGeneralDefault(idAsignacion, habilitado);
                 }
             }
             catch (Exception ex)
@@ -83,13 +83,43 @@ namespace KiiniNet.Services.Sistema.Implementacion
             }
         }
 
-        public void HabilitarPoliticaEstatus(int idAsignacion, bool habilitado)
+        public void HabilitarEstatusTicketSubRolGeneralDefault(int idAsignacion, bool habilitado)
         {
             try
             {
                 using (BusinessPoliticas negocio = new BusinessPoliticas())
                 {
-                    negocio.HabilitarPoliticaEstatus(idAsignacion, habilitado);
+                    negocio.HabilitarEstatusTicketSubRolGeneralDefault(idAsignacion, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void HabilitarEstatusAsignacionSubRolGeneral(int idAsignacion, bool habilitado)
+        {
+            try
+            {
+                using (BusinessPoliticas negocio = new BusinessPoliticas())
+                {
+                    negocio.HabilitarEstatusAsignacionSubRolGeneral(idAsignacion, habilitado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void HabilitarEstatusTicketSubRolGeneral(int idAsignacion, bool habilitado)
+        {
+            try
+            {
+                using (BusinessPoliticas negocio = new BusinessPoliticas())
+                {
+                    negocio.HabilitarEstatusTicketSubRolGeneral(idAsignacion, habilitado);
                 }
             }
             catch (Exception ex)

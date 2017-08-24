@@ -127,8 +127,7 @@ namespace KinniNet.Core.Sistema
             finally { db.Dispose(); }
             return result;
         }
-
-        public void HabilitarPoliticaAsignacion(int idAsignacion, bool habilitado)
+        public void HabilitarEstatusAsignacionSubRolGeneralDefault(int idAsignacion, bool habilitado)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
@@ -147,12 +146,50 @@ namespace KinniNet.Core.Sistema
             }
         }
 
-        public void HabilitarPoliticaEstatus(int idAsignacion, bool habilitado)
+        public void HabilitarEstatusTicketSubRolGeneralDefault(int idAsignacion, bool habilitado)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 EstatusTicketSubRolGeneralDefault inf = db.EstatusTicketSubRolGeneralDefault.SingleOrDefault(w => w.Id == idAsignacion);
+                if (inf != null) inf.Habilitado = habilitado;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public void HabilitarEstatusAsignacionSubRolGeneral(int idAsignacion, bool habilitado)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                EstatusAsignacionSubRolGeneral inf = db.EstatusAsignacionSubRolGeneral.SingleOrDefault(w => w.Id == idAsignacion);
+                if (inf != null) inf.Habilitado = habilitado;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public void HabilitarEstatusTicketSubRolGeneral(int idAsignacion, bool habilitado)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                EstatusTicketSubRolGeneral inf = db.EstatusTicketSubRolGeneral.SingleOrDefault(w => w.Id == idAsignacion);
                 if (inf != null) inf.Habilitado = habilitado;
                 db.SaveChanges();
             }

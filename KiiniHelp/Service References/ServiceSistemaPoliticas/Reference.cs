@@ -31,11 +31,21 @@ namespace KiiniHelp.ServiceSistemaPoliticas {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneral", ReplyAction="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneralResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneral> ObtenerEstatusTicketSubRolGeneral();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaAsignacion", ReplyAction="http://tempuri.org/IServicePoliticas/HabilitarPoliticaAsignacionResponse")]
-        void HabilitarPoliticaAsignacion(int idAsignacion, bool habilitado);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/HabilitarEstatusAsignacionSubRolGeneralDefau" +
+            "lt", ReplyAction="http://tempuri.org/IServicePoliticas/HabilitarEstatusAsignacionSubRolGeneralDefau" +
+            "ltResponse")]
+        void HabilitarEstatusAsignacionSubRolGeneralDefault(int idAsignacion, bool habilitado);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEstatus", ReplyAction="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEstatusResponse")]
-        void HabilitarPoliticaEstatus(int idAsignacion, bool habilitado);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/HabilitarEstatusTicketSubRolGeneralDefault", ReplyAction="http://tempuri.org/IServicePoliticas/HabilitarEstatusTicketSubRolGeneralDefaultRe" +
+            "sponse")]
+        void HabilitarEstatusTicketSubRolGeneralDefault(int idAsignacion, bool habilitado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/HabilitarEstatusAsignacionSubRolGeneral", ReplyAction="http://tempuri.org/IServicePoliticas/HabilitarEstatusAsignacionSubRolGeneralRespo" +
+            "nse")]
+        void HabilitarEstatusAsignacionSubRolGeneral(int idAsignacion, bool habilitado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/HabilitarEstatusTicketSubRolGeneral", ReplyAction="http://tempuri.org/IServicePoliticas/HabilitarEstatusTicketSubRolGeneralResponse")]
+        void HabilitarEstatusTicketSubRolGeneral(int idAsignacion, bool habilitado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -81,12 +91,20 @@ namespace KiiniHelp.ServiceSistemaPoliticas {
             return base.Channel.ObtenerEstatusTicketSubRolGeneral();
         }
         
-        public void HabilitarPoliticaAsignacion(int idAsignacion, bool habilitado) {
-            base.Channel.HabilitarPoliticaAsignacion(idAsignacion, habilitado);
+        public void HabilitarEstatusAsignacionSubRolGeneralDefault(int idAsignacion, bool habilitado) {
+            base.Channel.HabilitarEstatusAsignacionSubRolGeneralDefault(idAsignacion, habilitado);
         }
         
-        public void HabilitarPoliticaEstatus(int idAsignacion, bool habilitado) {
-            base.Channel.HabilitarPoliticaEstatus(idAsignacion, habilitado);
+        public void HabilitarEstatusTicketSubRolGeneralDefault(int idAsignacion, bool habilitado) {
+            base.Channel.HabilitarEstatusTicketSubRolGeneralDefault(idAsignacion, habilitado);
+        }
+        
+        public void HabilitarEstatusAsignacionSubRolGeneral(int idAsignacion, bool habilitado) {
+            base.Channel.HabilitarEstatusAsignacionSubRolGeneral(idAsignacion, habilitado);
+        }
+        
+        public void HabilitarEstatusTicketSubRolGeneral(int idAsignacion, bool habilitado) {
+            base.Channel.HabilitarEstatusTicketSubRolGeneral(idAsignacion, habilitado);
         }
     }
 }
