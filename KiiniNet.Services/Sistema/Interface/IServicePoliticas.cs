@@ -4,6 +4,7 @@ using System.ServiceModel;
 
 namespace KiiniNet.Services.Sistema.Interface
 {
+    //
     [ServiceContract]
     public interface IServicePoliticas
     {
