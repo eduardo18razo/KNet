@@ -244,6 +244,8 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Helper.HelperticketEnAtencion.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneralDefault1.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneralDefault1.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneral1.datasource" />
+    <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneral.datasource" />
     <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso14.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -4042,7 +4044,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

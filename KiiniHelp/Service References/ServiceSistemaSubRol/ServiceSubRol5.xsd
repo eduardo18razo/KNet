@@ -149,6 +149,7 @@
       <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="ParametrosTelefonos" nillable="true" type="q56:ArrayOfParametrosTelefonos" />
       <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" minOccurs="0" name="Piso" nillable="true" type="q57:ArrayOfPiso" />
       <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="Puesto" nillable="true" type="q58:ArrayOfPuesto" />
+      <xs:element minOccurs="0" name="RolMenu" nillable="true" type="tns:ArrayOfRolMenu" />
       <xs:element minOccurs="0" name="RolTipoUsuario" nillable="true" type="tns:ArrayOfRolTipoUsuario" />
       <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Ubicaciones" minOccurs="0" name="SiteRack" nillable="true" type="q59:ArrayOfSiteRack" />
       <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Organizacion" minOccurs="0" name="SubDireccion" nillable="true" type="q60:ArrayOfSubDireccion" />
@@ -392,6 +393,48 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="NivelTicket" nillable="true" type="tns:NivelTicket" />
+  <xs:complexType name="ArrayOfRolMenu">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RolMenu" nillable="true" type="tns:RolMenu" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRolMenu" nillable="true" type="tns:ArrayOfRolMenu" />
+  <xs:complexType name="RolMenu">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdMenu" type="xs:int" />
+      <xs:element minOccurs="0" name="IdRol" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTipoUsuario" type="xs:int" />
+      <xs:element minOccurs="0" name="Menu" nillable="true" type="tns:Menu" />
+      <xs:element minOccurs="0" name="Rol" nillable="true" type="tns:Rol" />
+      <xs:element minOccurs="0" name="TipoUsuario" nillable="true" type="tns:TipoUsuario" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="RolMenu" nillable="true" type="tns:RolMenu" />
+  <xs:complexType name="Menu">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdPadre" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Menu1" nillable="true" type="tns:ArrayOfMenu" />
+      <xs:element minOccurs="0" name="Menu2" nillable="true" type="tns:Menu" />
+      <xs:element minOccurs="0" name="Orden" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="RolMenu" nillable="true" type="tns:ArrayOfRolMenu" />
+      <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Menu" nillable="true" type="tns:Menu" />
+  <xs:complexType name="ArrayOfMenu">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Menu" nillable="true" type="tns:Menu" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMenu" nillable="true" type="tns:ArrayOfMenu" />
   <xs:complexType name="ArrayOfRolTipoUsuario">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="RolTipoUsuario" nillable="true" type="tns:RolTipoUsuario" />
@@ -452,44 +495,4 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="TipoNotificacion" nillable="true" type="tns:TipoNotificacion" />
-  <xs:complexType name="ArrayOfRolMenu">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="RolMenu" nillable="true" type="tns:RolMenu" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfRolMenu" nillable="true" type="tns:ArrayOfRolMenu" />
-  <xs:complexType name="RolMenu">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IdMenu" type="xs:int" />
-      <xs:element minOccurs="0" name="IdRol" type="xs:int" />
-      <xs:element minOccurs="0" name="Menu" nillable="true" type="tns:Menu" />
-      <xs:element minOccurs="0" name="Rol" nillable="true" type="tns:Rol" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="RolMenu" nillable="true" type="tns:RolMenu" />
-  <xs:complexType name="Menu">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Habilitado" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IdPadre" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Menu1" nillable="true" type="tns:ArrayOfMenu" />
-      <xs:element minOccurs="0" name="Menu2" nillable="true" type="tns:Menu" />
-      <xs:element minOccurs="0" name="Orden" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="RolMenu" nillable="true" type="tns:ArrayOfRolMenu" />
-      <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="Menu" nillable="true" type="tns:Menu" />
-  <xs:complexType name="ArrayOfMenu">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Menu" nillable="true" type="tns:Menu" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfMenu" nillable="true" type="tns:ArrayOfMenu" />
 </xs:schema>

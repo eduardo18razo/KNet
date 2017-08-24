@@ -78,4 +78,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerSubRolEscalacionPermitida">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerSubRolEscalacionPermitidaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="ObtenerSubRolEscalacionPermitidaResult" nillable="true" type="q6:ArrayOfSubRolEscalacionPermitida" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
