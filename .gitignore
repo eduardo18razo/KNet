@@ -177,3 +177,5 @@ KiiniMaster/obj/Debug/KiiniMaster.dll
 KiiniHelp/obj/Debug/DesignTimeResolveAssemblyReferences.cache
 KiiniHelp/obj/Debug/TempPE/Service References.ServiceSistemaSubRol.Reference.cs.dll
 KiiniMaster/obj/Debug/KiiniMaster.csproj.FileListAbsolute.txt
+KiiniHelp/Properties/DataSources/KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneral1.datasource
+KiiniHelp/Properties/DataSources/KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneral.datasource
