@@ -8,9 +8,10 @@
 //------------------------------------------------------------------------------
 
 namespace KiiniMaster.Configuracion.Politicas {
-    
-    
-    public partial class frmPoliticasAsignacion {
+
+
+    public partial class FrmPoliticasAsignacionDefault
+    {
         
         /// <summary>
         /// Control upGeneral.

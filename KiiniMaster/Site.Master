@@ -221,9 +221,13 @@
 
                             <ul>
                                 <li runat="server">
-                                    <asp:HyperLink NavigateUrl="/Configuracion/Politicas/frmPoliticasAsignacion.aspx" runat="server" Text="Políticas Asignación" /></li>    
+                                    <asp:HyperLink NavigateUrl="~/Configuracion/Politicas/FrmPoliticasAsignacionDefault.aspx" runat="server" Text="Políticas Asignación Default" /></li>    
                                 <li runat="server">
-                                    <asp:HyperLink NavigateUrl="~/Configuracion/Politicas/frmPoliticasEstatusTicket.aspx" runat="server" Text="Políticas Estatus Ticket" /></li>   
+                                    <asp:HyperLink NavigateUrl="~/Configuracion/Politicas/FrmPoliticasEstatusTicketDefault.aspx" runat="server" Text="Políticas Estatus Ticket Default" /></li>   
+                                <li runat="server">
+                                    <asp:HyperLink NavigateUrl="~/Configuracion/Politicas/FrmPoliticasAsignacionGrupo.aspx" runat="server" Text="Políticas Asignación Grupo" /></li>    
+                                <li runat="server">
+                                    <asp:HyperLink NavigateUrl="~/Configuracion/Politicas/FrmPoliticasEstatusTicketGrupo.aspx" runat="server" Text="Políticas Estatus Ticket Grupo" /></li>   
                                  <li runat="server">
                                     <asp:HyperLink NavigateUrl="~/Configuracion/Politicas/FrmPoliticasEscalacionPermitida.aspx" runat="server" Text="Políticas Escalación" /></li>                                
                             </ul>

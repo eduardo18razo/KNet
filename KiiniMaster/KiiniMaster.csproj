@@ -79,11 +79,11 @@
     <Content Include="assets\js\pmenu.js" />
     <Content Include="assets\js\to-markdown.js" />
     <Content Include="assets\js\validation.js" />
-    <Content Include="Configuracion\Politicas\frmPoliticasAsignacionGrupo.aspx" />
-    <Content Include="Configuracion\Politicas\frmPoliticasAsignacion.aspx" />
+    <Content Include="Configuracion\Politicas\FrmPoliticasAsignacionGrupo.aspx" />
+    <Content Include="Configuracion\Politicas\FrmPoliticasAsignacionDefault.aspx" />
     <Content Include="Configuracion\Politicas\FrmPoliticasEscalacionPermitida.aspx" />
-    <Content Include="Configuracion\Politicas\frmPoliticasEstatusTicketGrupo.aspx" />
-    <Content Include="Configuracion\Politicas\frmPoliticasEstatusTicket.aspx" />
+    <Content Include="Configuracion\Politicas\FrmPoliticasEstatusTicketGrupo.aspx" />
+    <Content Include="Configuracion\Politicas\FrmPoliticasEstatusTicketDefault.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
@@ -377,19 +377,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuracion\Politicas\frmPoliticasAsignacionGrupo.aspx.cs">
-      <DependentUpon>frmPoliticasAsignacionGrupo.aspx</DependentUpon>
+    <Compile Include="Configuracion\Politicas\FrmPoliticasAsignacionGrupo.aspx.cs">
+      <DependentUpon>FrmPoliticasAsignacionGrupo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Configuracion\Politicas\frmPoliticasAsignacionGrupo.aspx.designer.cs">
-      <DependentUpon>frmPoliticasAsignacionGrupo.aspx</DependentUpon>
+    <Compile Include="Configuracion\Politicas\FrmPoliticasAsignacionGrupo.aspx.designer.cs">
+      <DependentUpon>FrmPoliticasAsignacionGrupo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Configuracion\Politicas\frmPoliticasAsignacion.aspx.cs">
-      <DependentUpon>frmPoliticasAsignacion.aspx</DependentUpon>
+    <Compile Include="Configuracion\Politicas\FrmPoliticasAsignacionDefault.aspx.cs">
+      <DependentUpon>FrmPoliticasAsignacionDefault.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Configuracion\Politicas\frmPoliticasAsignacion.aspx.designer.cs">
-      <DependentUpon>frmPoliticasAsignacion.aspx</DependentUpon>
+    <Compile Include="Configuracion\Politicas\FrmPoliticasAsignacionDefault.aspx.designer.cs">
+      <DependentUpon>FrmPoliticasAsignacionDefault.aspx</DependentUpon>
     </Compile>
     <Compile Include="Configuracion\Politicas\FrmPoliticasEscalacionPermitida.aspx.cs">
       <DependentUpon>FrmPoliticasEscalacionPermitida.aspx</DependentUpon>
@@ -398,19 +398,19 @@
     <Compile Include="Configuracion\Politicas\FrmPoliticasEscalacionPermitida.aspx.designer.cs">
       <DependentUpon>FrmPoliticasEscalacionPermitida.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Configuracion\Politicas\frmPoliticasEstatusTicketGrupo.aspx.cs">
-      <DependentUpon>frmPoliticasEstatusTicketGrupo.aspx</DependentUpon>
+    <Compile Include="Configuracion\Politicas\FrmPoliticasEstatusTicketGrupo.aspx.cs">
+      <DependentUpon>FrmPoliticasEstatusTicketGrupo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Configuracion\Politicas\frmPoliticasEstatusTicketGrupo.aspx.designer.cs">
-      <DependentUpon>frmPoliticasEstatusTicketGrupo.aspx</DependentUpon>
+    <Compile Include="Configuracion\Politicas\FrmPoliticasEstatusTicketGrupo.aspx.designer.cs">
+      <DependentUpon>FrmPoliticasEstatusTicketGrupo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Configuracion\Politicas\frmPoliticasEstatusTicket.aspx.cs">
-      <DependentUpon>frmPoliticasEstatusTicket.aspx</DependentUpon>
+    <Compile Include="Configuracion\Politicas\FrmPoliticasEstatusTicketDefault.aspx.cs">
+      <DependentUpon>FrmPoliticasEstatusTicketDefault.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Configuracion\Politicas\frmPoliticasEstatusTicket.aspx.designer.cs">
-      <DependentUpon>frmPoliticasEstatusTicket.aspx</DependentUpon>
+    <Compile Include="Configuracion\Politicas\FrmPoliticasEstatusTicketDefault.aspx.designer.cs">
+      <DependentUpon>FrmPoliticasEstatusTicketDefault.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

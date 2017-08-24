@@ -49,7 +49,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="HabilitarPoliticaAsignacion">
+  <xs:element name="HabilitarEstatusAsignacionSubRolGeneralDefault">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idAsignacion" type="xs:int" />
@@ -57,12 +57,12 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="HabilitarPoliticaAsignacionResponse">
+  <xs:element name="HabilitarEstatusAsignacionSubRolGeneralDefaultResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="HabilitarPoliticaEstatus">
+  <xs:element name="HabilitarEstatusTicketSubRolGeneralDefault">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idAsignacion" type="xs:int" />
@@ -70,7 +70,33 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="HabilitarPoliticaEstatusResponse">
+  <xs:element name="HabilitarEstatusTicketSubRolGeneralDefaultResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HabilitarEstatusAsignacionSubRolGeneral">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idAsignacion" type="xs:int" />
+        <xs:element minOccurs="0" name="habilitado" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HabilitarEstatusAsignacionSubRolGeneralResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HabilitarEstatusTicketSubRolGeneral">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idAsignacion" type="xs:int" />
+        <xs:element minOccurs="0" name="habilitado" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HabilitarEstatusTicketSubRolGeneralResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

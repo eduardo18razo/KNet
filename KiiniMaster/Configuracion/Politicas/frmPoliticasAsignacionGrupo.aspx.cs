@@ -18,7 +18,7 @@ using KiiniMaster.ServiceGrupoUsuario;
 namespace KiiniMaster.Configuracion.Politicas
 {
     //JGB
-    public partial class frmPoliticasAsignacionGrupo : System.Web.UI.Page
+    public partial class FrmPoliticasAsignacionGrupo : System.Web.UI.Page
     {
         private readonly ServicePoliticasClient _servicePoliticasAsignacion = new ServicePoliticasClient();
         private readonly ServiceRolesClient _servicioRoles = new ServiceRolesClient();
@@ -62,20 +62,20 @@ namespace KiiniMaster.Configuracion.Politicas
         }
         protected void OnCheckedChanged(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    _servicePoliticasAsignacion.HabilitarPoliticaAsignacion(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
-            //    CargaDatos();
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (_lstError == null)
-            //    {
-            //        _lstError = new List<string>();
-            //    }
-            //    _lstError.Add(ex.Message);
-            //    Alerta = _lstError;
-            //}
+            try
+            {
+                _servicePoliticasAsignacion.HabilitarEstatusAsignacionSubRolGeneral(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+                CargaDatos();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
         }
 
         protected void btnBuscar_OnClick(object sender, EventArgs e)

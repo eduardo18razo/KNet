@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmPoliticasEstatusTicket.aspx.cs" Inherits="KiiniMaster.Configuracion.Politicas.frmPoliticasEstatusTicket" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FrmPoliticasAsignacionDefault.aspx.cs" Inherits="KiiniMaster.Configuracion.Politicas.FrmPoliticasAsignacionDefault" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -8,8 +8,8 @@
             <ContentTemplate>
                 <br>
                 <h3 class="h6">
-                        <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
-                    / Politica de Estatus Ticket Default </h3>
+                    <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
+                    / Politica de Asignacion Default </h3>
                 <hr />
                 <section class="module">
                     <div class="row">
@@ -17,49 +17,48 @@
                             <div class="module-inner">
                                 <div class="form-horizontal col-lg-12">
                                     <div class="form-group col-lg-4">
-                                        <asp:Label runat="server" CssClass="col-lg-4" Text="RolSolicita"></asp:Label>
+                                        <asp:Label runat="server" CssClass="col-lg-4" Text="Rol"></asp:Label>
                                         <div class="col-lg-8">
-                                            <asp:DropDownList runat="server" ID="ddlRolSolicita" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="False" OnSelectedIndexChanged="ddlTipoRol_OnSelectedIndexChanged" />
+                                            <asp:DropDownList runat="server" ID="ddlRol" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoRol_OnSelectedIndexChanged" />
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-4">
-                                        <asp:Label runat="server" CssClass="col-lg-4" Text="SubRolSolicita"></asp:Label>
+                                        <asp:Label runat="server" CssClass="col-lg-4" Text="SubRol"></asp:Label>
                                         <div class="col-lg-8">
-                                            <asp:DropDownList runat="server" ID="ddlSubRolSolicita" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="False" OnSelectedIndexChanged="ddlSubRol_SelectedIndexChanged" />
+                                            <asp:DropDownList runat="server" ID="ddlSubRol" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlSubRol_SelectedIndexChanged" />
                                         </div>
                                     </div>
                                 </div>
-
-                                  <div class="form-horizontal col-lg-12">
-                                    <div class="form-group col-lg-4">
-                                        <asp:Label runat="server" CssClass="col-lg-4" Text="RolPertenece"></asp:Label>
-                                        <div class="col-lg-8">
-                                            <asp:DropDownList runat="server" ID="ddlRolPertenece" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="False" OnSelectedIndexChanged="ddlRolPertenece_SelectedIndexChanged" />
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-lg-4">
-                                        <asp:Label runat="server" CssClass="col-lg-4" Text="SubRolPertenece"></asp:Label>
-                                        <div class="col-lg-8">
-                                            <asp:DropDownList runat="server" ID="ddlSubRolPertenece" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="False" OnSelectedIndexChanged="ddlSubRolPertenece_SelectedIndexChanged" />
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="form-horizontal col-lg-12">
                                     <div class="form-group col-lg-4">
                                         <asp:Label runat="server" CssClass="col-lg-4" Text="Estatus Actual"></asp:Label>
                                         <div class="col-lg-8">
-                                            <asp:DropDownList runat="server" ID="ddlEstatusActual" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="False" OnSelectedIndexChanged="ddlEstatusActual_SelectedIndexChanged" />
+                                            <asp:DropDownList runat="server" ID="ddlEstatusActual" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlEstatusActual_SelectedIndexChanged" />
                                         </div>
                                     </div>
                                     <div class="form-group col-lg-4">
                                         <asp:Label runat="server" CssClass="col-lg-4" Text="Estatus Accion"></asp:Label>
                                         <div class="col-lg-8">
-                                            <asp:DropDownList runat="server" ID="ddlEstatusAccion" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="False" OnSelectedIndexChanged="ddlEstatusAccion_SelectedIndexChanged" />
+                                            <asp:DropDownList runat="server" ID="ddlEstatusAccion" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlEstatusAccion_SelectedIndexChanged" />
                                         </div>
                                     </div>
-                                </div>                               
+                                </div>
+                                <br />
+                               <%-- <div class="form-horizontal col-lg-12">
+                                    <div class="form-group">
+                                        CONSULTA ESTATUS ASIGNACION:<br />
+                                        <div class="search-box form-inline margin-bottom-lg">
+                                            <label class="sr-only" for="txtFiltro">Buscar</label>
+                                            <div class="form-group">
+                                                <asp:TextBox runat="server" ID="txtFiltroDecripcion" CssClass="form-control help_search_form" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" placeholder="Busca con una palabra clave..." />
+                                                <asp:LinkButton runat="server" class="btn btn-primary btn-single-icon fa fa-search" OnClick="btnBuscar_OnClick" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>--%>
+
+
+
 
                             </div>
                         </div>
@@ -71,7 +70,7 @@
                         <div class="module-content collapse in" id="content-1">
                             <div class="module-content-inner no-padding-bottom">
                                 <div class="table-responsive">
-                                    <asp:Repeater ID="rptResultados" runat="server">
+                                    <asp:Repeater ID="rptResultados" runat="server" >
                                         <HeaderTemplate>
                                             <table class="table table-striped display" id="tblResults">
                                                 <thead>
@@ -79,23 +78,19 @@
                                                         <th>
                                                             <asp:Label runat="server">Id</asp:Label></th>
                                                         <th>
-                                                            <asp:Label runat="server">IdRolSolicita</asp:Label></th>
+                                                            <asp:Label runat="server">IdRol</asp:Label></th>
                                                         <th>
-                                                            <asp:Label runat="server">IdSubRolSolicita</asp:Label></th>
+                                                            <asp:Label runat="server">IdSubRol</asp:Label></th>
                                                         <th>
-                                                            <asp:Label runat="server">IdRolPertenece</asp:Label></th>
+                                                            <asp:Label runat="server">IdEstatusAsignacionActual</asp:Label></th>
                                                         <th>
-                                                            <asp:Label runat="server">IdSubRolPertenece</asp:Label></th>
+                                                            <asp:Label runat="server">IdEstatusAsignacionAccion</asp:Label></th>
                                                         <th>
-                                                            <asp:Label runat="server">IdEstatusTicketActual</asp:Label></th>
-                                                        <th>
-                                                            <asp:Label runat="server">IdEstatusTicketAccion</asp:Label></th>
+                                                            <asp:Label runat="server">ComentarioObligado</asp:Label></th>
                                                         <th>
                                                             <asp:Label runat="server">TieneSupervisor</asp:Label></th>
                                                         <th>
                                                             <asp:Label runat="server">Propietario</asp:Label></th>
-                                                        <th>
-                                                            <asp:Label runat="server">LevantaTicket</asp:Label></th>
                                                         <th>
                                                             <asp:Label runat="server">Habilitado</asp:Label></th>
 
@@ -107,15 +102,13 @@
                                             <tr>
 
                                                 <td><%# Eval("Id")%></td>
-                                                <td><%# Eval("RolSolicita.Descripcion")%></td>
-                                                <td><%# Eval("SubSolicita.Descripcion")%></td>
-                                                <td><%# Eval("RolPertenece.Descripcion")%></td>
-                                                <td><%# Eval("SubRolPertenece.Descripcion")%></td>
-                                                <td><%# Eval("EstatusTicketActual.Descripcion")%></td>
-                                                <td><%# Eval("EstatusTicketAccion.Descripcion")%></td>
+                                                <td><%# Eval("Rol.Descripcion")%></td>
+                                                <td><%# Eval("SubRol.Descripcion")%></td>
+                                                <td><%# Eval("EstatusAsignacionActual.Descripcion")%></td>
+                                                <td><%# Eval("EstatusAsignacionAccion.Descripcion")%></td>
+                                                <td><%# Eval("ComentarioObligado")%></td>
                                                 <td><%# Eval("TieneSupervisor")%></td>
                                                 <td><%# Eval("Propietario")%></td>
-                                                <td><%# Eval("LevantaTicket")%></td>
 
                                                 <td id="colHabilitado">
                                                     <ul class="list list-unstyled" id="hiddenEnabled">

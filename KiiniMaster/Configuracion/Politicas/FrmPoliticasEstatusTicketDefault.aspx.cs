@@ -15,7 +15,7 @@ using KiiniNet.Entities.Parametros;
 
 namespace KiiniMaster.Configuracion.Politicas
 {
-    public partial class frmPoliticasEstatusTicket : System.Web.UI.Page
+    public partial class FrmPoliticasEstatusTicketDefault : System.Web.UI.Page
     {
         private readonly ServicePoliticasClient _servicePoliticasAsignacion = new ServicePoliticasClient();
         private readonly ServiceRolesClient _servicioRoles = new ServiceRolesClient();
@@ -60,7 +60,7 @@ namespace KiiniMaster.Configuracion.Politicas
         {
             try
             {
-                _servicePoliticasAsignacion.HabilitarPoliticaEstatus(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+                _servicePoliticasAsignacion.HabilitarEstatusTicketSubRolGeneralDefault(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
                 CargaDatos();
             }
             catch (Exception ex)

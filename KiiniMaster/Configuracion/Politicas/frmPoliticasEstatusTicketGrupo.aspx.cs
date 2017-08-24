@@ -16,7 +16,7 @@ using KiiniNet.Entities.Parametros;
 
 namespace KiiniMaster.Configuracion.Politicas
 {
-    public partial class frmPoliticasEstatusTicketGrupo : System.Web.UI.Page
+    public partial class FrmPoliticasEstatusTicketGrupo : System.Web.UI.Page
     {
         private readonly ServicePoliticasClient _servicePoliticasAsignacion = new ServicePoliticasClient();
         private readonly ServiceRolesClient _servicioRoles = new ServiceRolesClient();
@@ -60,20 +60,20 @@ namespace KiiniMaster.Configuracion.Politicas
         }
         protected void OnCheckedChanged(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    _servicePoliticasAsignacion.HabilitarPoliticaEstatus(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
-            //    CargaDatos();
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (_lstError == null)
-            //    {
-            //        _lstError = new List<string>();
-            //    }
-            //    _lstError.Add(ex.Message);
-            //    Alerta = _lstError;
-            //}
+            try
+            {
+                _servicePoliticasAsignacion.HabilitarEstatusTicketSubRolGeneral(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+                CargaDatos();
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
         }
 
         protected void btnBuscar_OnClick(object sender, EventArgs e)

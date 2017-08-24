@@ -10,7 +10,7 @@
 namespace KiiniMaster.Configuracion.Politicas {
     
     
-    public partial class frmPoliticasEstatusTicketGrupo {
+    public partial class FrmPoliticasEstatusTicketGrupo {
         
         /// <summary>
         /// Control upGeneral.

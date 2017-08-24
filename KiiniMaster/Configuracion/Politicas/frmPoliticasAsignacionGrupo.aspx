@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmPoliticasAsignacionGrupo.aspx.cs" Inherits="KiiniMaster.Configuracion.Politicas.frmPoliticasAsignacionGrupo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FrmPoliticasAsignacionGrupo.aspx.cs" Inherits="KiiniMaster.Configuracion.Politicas.FrmPoliticasAsignacionGrupo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
