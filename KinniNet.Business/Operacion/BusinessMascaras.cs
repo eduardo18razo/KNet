@@ -25,9 +25,9 @@ namespace KinniNet.Core.Operacion
             try
             {
                 var pTableName = new SqlParameter { ParameterName = "@STORENAME", Value = mascara.NombreTabla };
-                var pResult = new SqlParameter { ParameterName = "@STORENAME", Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int };
+                var pResult = new SqlParameter { ParameterName = "@OUTER", Direction = ParameterDirection.Output, SqlDbType = SqlDbType.Int };
                 //Tabla
-                db.ExecuteStoreCommand("exec ExisteStore @STORENAME, @OUTER output", pTableName, pResult);
+                db.ExecuteStoreCommand("exec ExisteTablaMascara @STORENAME, @OUTER output", pTableName, pResult);
                 result = (int)pResult.Value == 1;
                 if (result)
                 {
@@ -35,7 +35,7 @@ namespace KinniNet.Core.Operacion
                     pTableName = new SqlParameter {ParameterName = "@STORENAME", Value = mascara.ComandoInsertar};
                     pResult = new SqlParameter
                     {
-                        ParameterName = "@STORENAME",
+                        ParameterName = "@OUTER",
                         Direction = ParameterDirection.Output,
                         SqlDbType = SqlDbType.Int
                     };
@@ -47,7 +47,7 @@ namespace KinniNet.Core.Operacion
                         pTableName = new SqlParameter {ParameterName = "@STORENAME", Value = mascara.ComandoActualizar};
                         pResult = new SqlParameter
                         {
-                            ParameterName = "@STORENAME",
+                            ParameterName = "@OUTER",
                             Direction = ParameterDirection.Output,
                             SqlDbType = SqlDbType.Int
                         };
