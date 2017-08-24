@@ -18,11 +18,29 @@
       <xsd:import schemaLocation="http://localhost:15277/Sistema/ServicePoliticas.svc?xsd=xsd13" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Arbol.Nodos" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IServicePoliticas_GeneraEstatusAsignacionGrupoDefault_InputMessage">
-    <wsdl:part name="parameters" element="tns:GeneraEstatusAsignacionGrupoDefault" />
+  <wsdl:message name="IServicePoliticas_ObtenerEstatusAsignacionSubRolGeneralDefault_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEstatusAsignacionSubRolGeneralDefault" />
   </wsdl:message>
-  <wsdl:message name="IServicePoliticas_GeneraEstatusAsignacionGrupoDefault_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GeneraEstatusAsignacionGrupoDefaultResponse" />
+  <wsdl:message name="IServicePoliticas_ObtenerEstatusAsignacionSubRolGeneralDefault_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEstatusAsignacionSubRolGeneralDefaultResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicePoliticas_ObtenerEstatusTicketSubRolGeneralDefault_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEstatusTicketSubRolGeneralDefault" />
+  </wsdl:message>
+  <wsdl:message name="IServicePoliticas_ObtenerEstatusTicketSubRolGeneralDefault_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEstatusTicketSubRolGeneralDefaultResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicePoliticas_ObtenerEstatusAsignacionSubRolGeneral_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEstatusAsignacionSubRolGeneral" />
+  </wsdl:message>
+  <wsdl:message name="IServicePoliticas_ObtenerEstatusAsignacionSubRolGeneral_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEstatusAsignacionSubRolGeneralResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicePoliticas_ObtenerEstatusTicketSubRolGeneral_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEstatusTicketSubRolGeneral" />
+  </wsdl:message>
+  <wsdl:message name="IServicePoliticas_ObtenerEstatusTicketSubRolGeneral_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerEstatusTicketSubRolGeneralResponse" />
   </wsdl:message>
   <wsdl:message name="IServicePoliticas_HabilitarPoliticaAsignacion_InputMessage">
     <wsdl:part name="parameters" element="tns:HabilitarPoliticaAsignacion" />
@@ -30,60 +48,69 @@
   <wsdl:message name="IServicePoliticas_HabilitarPoliticaAsignacion_OutputMessage">
     <wsdl:part name="parameters" element="tns:HabilitarPoliticaAsignacionResponse" />
   </wsdl:message>
-  <wsdl:message name="IServicePoliticas_GeneraEstatusTicketSubRolGeneralDefault_InputMessage">
-    <wsdl:part name="parameters" element="tns:GeneraEstatusTicketSubRolGeneralDefault" />
-  </wsdl:message>
-  <wsdl:message name="IServicePoliticas_GeneraEstatusTicketSubRolGeneralDefault_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GeneraEstatusTicketSubRolGeneralDefaultResponse" />
-  </wsdl:message>
   <wsdl:message name="IServicePoliticas_HabilitarPoliticaEstatus_InputMessage">
     <wsdl:part name="parameters" element="tns:HabilitarPoliticaEstatus" />
   </wsdl:message>
   <wsdl:message name="IServicePoliticas_HabilitarPoliticaEstatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:HabilitarPoliticaEstatusResponse" />
   </wsdl:message>
-  <wsdl:message name="IServicePoliticas_GeneraSubRolEscalacionPermitida_InputMessage">
-    <wsdl:part name="parameters" element="tns:GeneraSubRolEscalacionPermitida" />
-  </wsdl:message>
-  <wsdl:message name="IServicePoliticas_GeneraSubRolEscalacionPermitida_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GeneraSubRolEscalacionPermitidaResponse" />
-  </wsdl:message>
-  <wsdl:message name="IServicePoliticas_HabilitarPoliticaEscalacion_InputMessage">
-    <wsdl:part name="parameters" element="tns:HabilitarPoliticaEscalacion" />
-  </wsdl:message>
-  <wsdl:message name="IServicePoliticas_HabilitarPoliticaEscalacion_OutputMessage">
-    <wsdl:part name="parameters" element="tns:HabilitarPoliticaEscalacionResponse" />
-  </wsdl:message>
   <wsdl:portType name="IServicePoliticas">
-    <wsdl:operation name="GeneraEstatusAsignacionGrupoDefault">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/GeneraEstatusAsignacionGrupoDefault" message="tns:IServicePoliticas_GeneraEstatusAsignacionGrupoDefault_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/GeneraEstatusAsignacionGrupoDefaultResponse" message="tns:IServicePoliticas_GeneraEstatusAsignacionGrupoDefault_OutputMessage" />
+    <wsdl:operation name="ObtenerEstatusAsignacionSubRolGeneralDefault">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusAsignacionSubRolGeneralDefault" message="tns:IServicePoliticas_ObtenerEstatusAsignacionSubRolGeneralDefault_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusAsignacionSubRolGeneralDefaultResponse" message="tns:IServicePoliticas_ObtenerEstatusAsignacionSubRolGeneralDefault_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEstatusTicketSubRolGeneralDefault">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneralDefault" message="tns:IServicePoliticas_ObtenerEstatusTicketSubRolGeneralDefault_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneralDefaultResponse" message="tns:IServicePoliticas_ObtenerEstatusTicketSubRolGeneralDefault_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEstatusAsignacionSubRolGeneral">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusAsignacionSubRolGeneral" message="tns:IServicePoliticas_ObtenerEstatusAsignacionSubRolGeneral_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusAsignacionSubRolGeneralResponse" message="tns:IServicePoliticas_ObtenerEstatusAsignacionSubRolGeneral_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEstatusTicketSubRolGeneral">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneral" message="tns:IServicePoliticas_ObtenerEstatusTicketSubRolGeneral_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneralResponse" message="tns:IServicePoliticas_ObtenerEstatusTicketSubRolGeneral_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="HabilitarPoliticaAsignacion">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaAsignacion" message="tns:IServicePoliticas_HabilitarPoliticaAsignacion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaAsignacionResponse" message="tns:IServicePoliticas_HabilitarPoliticaAsignacion_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GeneraEstatusTicketSubRolGeneralDefault">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/GeneraEstatusTicketSubRolGeneralDefault" message="tns:IServicePoliticas_GeneraEstatusTicketSubRolGeneralDefault_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/GeneraEstatusTicketSubRolGeneralDefaultResponse" message="tns:IServicePoliticas_GeneraEstatusTicketSubRolGeneralDefault_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="HabilitarPoliticaEstatus">
       <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEstatus" message="tns:IServicePoliticas_HabilitarPoliticaEstatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEstatusResponse" message="tns:IServicePoliticas_HabilitarPoliticaEstatus_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GeneraSubRolEscalacionPermitida">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/GeneraSubRolEscalacionPermitida" message="tns:IServicePoliticas_GeneraSubRolEscalacionPermitida_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/GeneraSubRolEscalacionPermitidaResponse" message="tns:IServicePoliticas_GeneraSubRolEscalacionPermitida_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="HabilitarPoliticaEscalacion">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEscalacion" message="tns:IServicePoliticas_HabilitarPoliticaEscalacion_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEscalacionResponse" message="tns:IServicePoliticas_HabilitarPoliticaEscalacion_OutputMessage" />
-    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServicePoliticas" type="tns:IServicePoliticas">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GeneraEstatusAsignacionGrupoDefault">
-      <soap:operation soapAction="http://tempuri.org/IServicePoliticas/GeneraEstatusAsignacionGrupoDefault" style="document" />
+    <wsdl:operation name="ObtenerEstatusAsignacionSubRolGeneralDefault">
+      <soap:operation soapAction="http://tempuri.org/IServicePoliticas/ObtenerEstatusAsignacionSubRolGeneralDefault" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEstatusTicketSubRolGeneralDefault">
+      <soap:operation soapAction="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneralDefault" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEstatusAsignacionSubRolGeneral">
+      <soap:operation soapAction="http://tempuri.org/IServicePoliticas/ObtenerEstatusAsignacionSubRolGeneral" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEstatusTicketSubRolGeneral">
+      <soap:operation soapAction="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneral" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -100,35 +127,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GeneraEstatusTicketSubRolGeneralDefault">
-      <soap:operation soapAction="http://tempuri.org/IServicePoliticas/GeneraEstatusTicketSubRolGeneralDefault" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="HabilitarPoliticaEstatus">
       <soap:operation soapAction="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEstatus" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GeneraSubRolEscalacionPermitida">
-      <soap:operation soapAction="http://tempuri.org/IServicePoliticas/GeneraSubRolEscalacionPermitida" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HabilitarPoliticaEscalacion">
-      <soap:operation soapAction="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEscalacion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

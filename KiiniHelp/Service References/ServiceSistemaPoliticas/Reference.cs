@@ -15,9 +15,10 @@ namespace KiiniHelp.ServiceSistemaPoliticas {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceSistemaPoliticas.IServicePoliticas")]
     public interface IServicePoliticas {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/GeneraEstatusAsignacionSubRolGeneralDefault", ReplyAction="http://tempuri.org/IServicePoliticas/GeneraEstatusAsignacionSubRolGeneralDefaultR" +
-            "esponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneralDefault> GeneraEstatusAsignacionSubRolGeneralDefault();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusAsignacionSubRolGeneralDefault" +
+            "", ReplyAction="http://tempuri.org/IServicePoliticas/ObtenerEstatusAsignacionSubRolGeneralDefault" +
+            "Response")]
+        System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneralDefault> ObtenerEstatusAsignacionSubRolGeneralDefault();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneralDefault", ReplyAction="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneralDefaultResp" +
             "onse")]
@@ -64,8 +65,8 @@ namespace KiiniHelp.ServiceSistemaPoliticas {
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneralDefault> GeneraEstatusAsignacionSubRolGeneralDefault() {
-            return base.Channel.GeneraEstatusAsignacionSubRolGeneralDefault();
+        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneralDefault> ObtenerEstatusAsignacionSubRolGeneralDefault() {
+            return base.Channel.ObtenerEstatusAsignacionSubRolGeneralDefault();
         }
         
         public System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneralDefault> ObtenerEstatusTicketSubRolGeneralDefault() {

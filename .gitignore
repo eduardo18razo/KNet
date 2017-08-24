@@ -179,3 +179,10 @@ KiiniHelp/obj/Debug/TempPE/Service References.ServiceSistemaSubRol.Reference.cs.
 KiiniMaster/obj/Debug/KiiniMaster.csproj.FileListAbsolute.txt
 KiiniHelp/Properties/DataSources/KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneral1.datasource
 KiiniHelp/Properties/DataSources/KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneral.datasource
+KiiniMaster/obj/Debug/TempPE/Service References.ServiceSistemaSubRol.Reference.cs.dll
+KiiniMaster/obj/Debug/TempPE/Service References.ServiceSistemaRoles.Reference.cs.dll
+KiiniMaster/obj/Debug/TempPE/Service References.ServiceSistemaPoliticas.Reference.cs.dll
+KiiniMaster/obj/Debug/DesignTimeResolveAssemblyReferences.cache
+KiiniMaster/Properties/DataSources/KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneral.datasource
+KiiniMaster/Properties/DataSources/KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneral.datasource
+KiiniHelp/obj/Debug/TempPE/Service References.ServiceSistemaPoliticas.Reference.cs.dll

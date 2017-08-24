@@ -195,7 +195,7 @@ namespace KiiniMaster.Configuracion.Politicas
         {
             try
             {               
-                List<EstatusTicketSubRolGeneralDefault> lstResult = _servicePoliticasAsignacion.GeneraEstatusTicketSubRolGeneralDefault();
+                List<EstatusTicketSubRolGeneralDefault> lstResult = _servicePoliticasAsignacion.ObtenerEstatusTicketSubRolGeneralDefault();
                
                 int? idRolSolicita = ddlRolSolicita.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlRolSolicita.SelectedValue);
                 int? idSubRolSolicita = ddlSubRolSolicita.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlSubRolSolicita.SelectedValue);

@@ -170,7 +170,7 @@ namespace KiiniMaster.Configuracion.Politicas
         {
             try
             {
-                List<EstatusAsignacionSubRolGeneralDefault> lstResult = _servicePoliticasAsignacion.GeneraEstatusAsignacionGrupoDefault();
+                List<EstatusAsignacionSubRolGeneralDefault> lstResult = _servicePoliticasAsignacion.ObtenerEstatusAsignacionSubRolGeneralDefault();
                 int? idSubRol = ddlSubRol.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlSubRol.SelectedValue);
                 int? idEstatusActual = ddlEstatusActual.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlEstatusActual.SelectedValue);
                 int? idEstatusAccion = ddlEstatusAccion.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlEstatusAccion.SelectedValue);

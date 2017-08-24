@@ -1,22 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:15277/Sistema/ServicePoliticas.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" />
-  <xs:element name="GeneraEstatusAsignacionGrupoDefault">
+  <xs:element name="ObtenerEstatusAsignacionSubRolGeneralDefault">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GeneraEstatusAsignacionGrupoDefaultResponse">
+  <xs:element name="ObtenerEstatusAsignacionSubRolGeneralDefaultResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="GeneraEstatusAsignacionGrupoDefaultResult" nillable="true" type="q1:ArrayOfEstatusAsignacionSubRolGeneralDefault" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="ObtenerEstatusAsignacionSubRolGeneralDefaultResult" nillable="true" type="q1:ArrayOfEstatusAsignacionSubRolGeneralDefault" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerEstatusTicketSubRolGeneralDefault">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerEstatusTicketSubRolGeneralDefaultResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="ObtenerEstatusTicketSubRolGeneralDefaultResult" nillable="true" type="q2:ArrayOfEstatusTicketSubRolGeneralDefault" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerEstatusAsignacionSubRolGeneral">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerEstatusAsignacionSubRolGeneralResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="ObtenerEstatusAsignacionSubRolGeneralResult" nillable="true" type="q3:ArrayOfEstatusAsignacionSubRolGeneral" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerEstatusTicketSubRolGeneral">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerEstatusTicketSubRolGeneralResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="ObtenerEstatusTicketSubRolGeneralResult" nillable="true" type="q4:ArrayOfEstatusTicketSubRolGeneral" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="HabilitarPoliticaAsignacion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="idArea" type="xs:int" />
+        <xs:element minOccurs="0" name="idAsignacion" type="xs:int" />
         <xs:element minOccurs="0" name="habilitado" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
@@ -26,52 +62,15 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GeneraEstatusTicketSubRolGeneralDefault">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GeneraEstatusTicketSubRolGeneralDefaultResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="GeneraEstatusTicketSubRolGeneralDefaultResult" nillable="true" type="q2:ArrayOfEstatusTicketSubRolGeneralDefault" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="HabilitarPoliticaEstatus">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="idArea" type="xs:int" />
+        <xs:element minOccurs="0" name="idAsignacion" type="xs:int" />
         <xs:element minOccurs="0" name="habilitado" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="HabilitarPoliticaEstatusResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GeneraSubRolEscalacionPermitida">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GeneraSubRolEscalacionPermitidaResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Parametros" minOccurs="0" name="GeneraSubRolEscalacionPermitidaResult" nillable="true" type="q3:ArrayOfSubRolEscalacionPermitida" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="HabilitarPoliticaEscalacion">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="idEscalacion" type="xs:int" />
-        <xs:element minOccurs="0" name="habilitado" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="HabilitarPoliticaEscalacionResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

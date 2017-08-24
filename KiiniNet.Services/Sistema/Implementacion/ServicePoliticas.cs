@@ -8,13 +8,13 @@ namespace KiiniNet.Services.Sistema.Implementacion
 {
     public class ServicePoliticas : IServicePoliticas
     {
-        public List<EstatusAsignacionSubRolGeneralDefault> GeneraEstatusAsignacionSubRolGeneralDefault()
+        public List<EstatusAsignacionSubRolGeneralDefault> ObtenerEstatusAsignacionSubRolGeneralDefault()
         {
             try
             {
                 using (BusinessPoliticas negocio = new BusinessPoliticas())
                 {
-                    return negocio.GeneraEstatusAsignacionSubRolGeneralDefault();
+                    return negocio.ObtenerEstatusAsignacionSubRolGeneralDefault();
                 }
             }
             catch (Exception ex)

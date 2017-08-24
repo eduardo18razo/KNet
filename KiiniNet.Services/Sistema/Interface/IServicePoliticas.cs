@@ -9,7 +9,7 @@ namespace KiiniNet.Services.Sistema.Interface
     public interface IServicePoliticas
     {
         [OperationContract]
-        List<EstatusAsignacionSubRolGeneralDefault> GeneraEstatusAsignacionSubRolGeneralDefault();
+        List<EstatusAsignacionSubRolGeneralDefault> ObtenerEstatusAsignacionSubRolGeneralDefault();
         [OperationContract]
         List<EstatusTicketSubRolGeneralDefault> ObtenerEstatusTicketSubRolGeneralDefault();
         [OperationContract]

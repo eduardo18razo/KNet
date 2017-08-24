@@ -18,7 +18,7 @@ namespace KinniNet.Core.Sistema
         {
 
         }
-        public List<EstatusAsignacionSubRolGeneralDefault> GeneraEstatusAsignacionSubRolGeneralDefault()
+        public List<EstatusAsignacionSubRolGeneralDefault> ObtenerEstatusAsignacionSubRolGeneralDefault()
         {
             List<EstatusAsignacionSubRolGeneralDefault> result = new List<EstatusAsignacionSubRolGeneralDefault>();
             DataBaseModelContext db = new DataBaseModelContext();

@@ -38,7 +38,7 @@ namespace KiiniMaster.Configuracion.Politicas
             {
                 try
                 {
-                    _servicePoliticas.HabilitarPoliticaEscalacion(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+                    _servicioSubRoles.HabilitarPoliticaEscalacion(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
                     CargaDatos();
                 }
                 catch (Exception ex)
@@ -111,7 +111,7 @@ namespace KiiniMaster.Configuracion.Politicas
             {
                 try
                 {
-                    List<SubRolEscalacionPermitida> lstResult = _servicePoliticas.GeneraSubRolEscalacionPermitida();
+                    List<SubRolEscalacionPermitida> lstResult = _servicioSubRoles.ObtenerSubRolEscalacionPermitida();
                     int? idSubRol = ddlSubRol.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlSubRol.SelectedValue);
                     int? idSubRolPermitido = ddlSubRolPermitido.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlSubRol.SelectedValue);
                     int? idEstatusAsignacion = ddlEstatusAsignacion.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlEstatusAsignacion.SelectedValue);

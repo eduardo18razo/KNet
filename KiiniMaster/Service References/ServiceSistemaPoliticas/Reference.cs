@@ -15,24 +15,27 @@ namespace KiiniMaster.ServiceSistemaPoliticas {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceSistemaPoliticas.IServicePoliticas")]
     public interface IServicePoliticas {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/GeneraEstatusAsignacionGrupoDefault", ReplyAction="http://tempuri.org/IServicePoliticas/GeneraEstatusAsignacionGrupoDefaultResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneralDefault> GeneraEstatusAsignacionGrupoDefault();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusAsignacionSubRolGeneralDefault" +
+            "", ReplyAction="http://tempuri.org/IServicePoliticas/ObtenerEstatusAsignacionSubRolGeneralDefault" +
+            "Response")]
+        System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneralDefault> ObtenerEstatusAsignacionSubRolGeneralDefault();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneralDefault", ReplyAction="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneralDefaultResp" +
+            "onse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneralDefault> ObtenerEstatusTicketSubRolGeneralDefault();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusAsignacionSubRolGeneral", ReplyAction="http://tempuri.org/IServicePoliticas/ObtenerEstatusAsignacionSubRolGeneralRespons" +
+            "e")]
+        System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneral> ObtenerEstatusAsignacionSubRolGeneral();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneral", ReplyAction="http://tempuri.org/IServicePoliticas/ObtenerEstatusTicketSubRolGeneralResponse")]
+        System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneral> ObtenerEstatusTicketSubRolGeneral();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaAsignacion", ReplyAction="http://tempuri.org/IServicePoliticas/HabilitarPoliticaAsignacionResponse")]
-        void HabilitarPoliticaAsignacion(int idArea, bool habilitado);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/GeneraEstatusTicketSubRolGeneralDefault", ReplyAction="http://tempuri.org/IServicePoliticas/GeneraEstatusTicketSubRolGeneralDefaultRespo" +
-            "nse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneralDefault> GeneraEstatusTicketSubRolGeneralDefault();
+        void HabilitarPoliticaAsignacion(int idAsignacion, bool habilitado);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEstatus", ReplyAction="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEstatusResponse")]
-        void HabilitarPoliticaEstatus(int idArea, bool habilitado);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/GeneraSubRolEscalacionPermitida", ReplyAction="http://tempuri.org/IServicePoliticas/GeneraSubRolEscalacionPermitidaResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Parametros.SubRolEscalacionPermitida> GeneraSubRolEscalacionPermitida();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEscalacion", ReplyAction="http://tempuri.org/IServicePoliticas/HabilitarPoliticaEscalacionResponse")]
-        void HabilitarPoliticaEscalacion(int idEscalacion, bool habilitado);
+        void HabilitarPoliticaEstatus(int idAsignacion, bool habilitado);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -62,28 +65,28 @@ namespace KiiniMaster.ServiceSistemaPoliticas {
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneralDefault> GeneraEstatusAsignacionGrupoDefault() {
-            return base.Channel.GeneraEstatusAsignacionGrupoDefault();
+        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneralDefault> ObtenerEstatusAsignacionSubRolGeneralDefault() {
+            return base.Channel.ObtenerEstatusAsignacionSubRolGeneralDefault();
         }
         
-        public void HabilitarPoliticaAsignacion(int idArea, bool habilitado) {
-            base.Channel.HabilitarPoliticaAsignacion(idArea, habilitado);
+        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneralDefault> ObtenerEstatusTicketSubRolGeneralDefault() {
+            return base.Channel.ObtenerEstatusTicketSubRolGeneralDefault();
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneralDefault> GeneraEstatusTicketSubRolGeneralDefault() {
-            return base.Channel.GeneraEstatusTicketSubRolGeneralDefault();
+        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneral> ObtenerEstatusAsignacionSubRolGeneral() {
+            return base.Channel.ObtenerEstatusAsignacionSubRolGeneral();
         }
         
-        public void HabilitarPoliticaEstatus(int idArea, bool habilitado) {
-            base.Channel.HabilitarPoliticaEstatus(idArea, habilitado);
+        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneral> ObtenerEstatusTicketSubRolGeneral() {
+            return base.Channel.ObtenerEstatusTicketSubRolGeneral();
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Parametros.SubRolEscalacionPermitida> GeneraSubRolEscalacionPermitida() {
-            return base.Channel.GeneraSubRolEscalacionPermitida();
+        public void HabilitarPoliticaAsignacion(int idAsignacion, bool habilitado) {
+            base.Channel.HabilitarPoliticaAsignacion(idAsignacion, habilitado);
         }
         
-        public void HabilitarPoliticaEscalacion(int idEscalacion, bool habilitado) {
-            base.Channel.HabilitarPoliticaEscalacion(idEscalacion, habilitado);
+        public void HabilitarPoliticaEstatus(int idAsignacion, bool habilitado) {
+            base.Channel.HabilitarPoliticaEstatus(idAsignacion, habilitado);
         }
     }
 }

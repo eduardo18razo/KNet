@@ -60,20 +60,20 @@ namespace KiiniMaster.Configuracion.Politicas
         }
         protected void OnCheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                _servicePoliticasAsignacion.HabilitarPoliticaEstatus(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
-                CargaDatos();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
+            //try
+            //{
+            //    _servicePoliticasAsignacion.HabilitarPoliticaEstatus(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+            //    CargaDatos();
+            //}
+            //catch (Exception ex)
+            //{
+            //    if (_lstError == null)
+            //    {
+            //        _lstError = new List<string>();
+            //    }
+            //    _lstError.Add(ex.Message);
+            //    Alerta = _lstError;
+            //}
         }
 
         protected void btnBuscar_OnClick(object sender, EventArgs e)
@@ -195,58 +195,58 @@ namespace KiiniMaster.Configuracion.Politicas
 
         private void CargaDatos()
         {
-            //try
-            //{               
-            //    List<EstatusTicketSubRolGeneral> lstResult = _servicePoliticasAsignacion.GeneraEstatusTicketSubRolGeneral();
-            //    int? idGrupo = ddlGrupoUsuario.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlGrupoUsuario.SelectedValue);
+            try
+            {
+                List<EstatusTicketSubRolGeneral> lstResult = _servicePoliticasAsignacion.ObtenerEstatusTicketSubRolGeneral();
+                int? idGrupoUsuario = ddlGrupoUsuario.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlGrupoUsuario.SelectedValue);
 
-            //    int? idRolSolicita = ddlRolSolicita.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlRolSolicita.SelectedValue);
-            //    int? idSubRolSolicita = ddlSubRolSolicita.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlSubRolSolicita.SelectedValue);
+                int? idRolSolicita = ddlRolSolicita.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlRolSolicita.SelectedValue);
+                int? idSubRolSolicita = ddlSubRolSolicita.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlSubRolSolicita.SelectedValue);
 
-            //    int? idRolPertenece = ddlRolPertenece.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlRolPertenece.SelectedValue);
-            //    int? idSubRolPertenece = ddlSubRolPertenece.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlSubRolPertenece.SelectedValue);
-                
-            //    int? idEstatusActual = ddlEstatusActual.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlEstatusActual.SelectedValue);
-            //    int? idEstatusAccion = ddlEstatusAccion.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlEstatusAccion.SelectedValue);
+                int? idRolPertenece = ddlRolPertenece.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlRolPertenece.SelectedValue);
+                int? idSubRolPertenece = ddlSubRolPertenece.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlSubRolPertenece.SelectedValue);
 
-            //    if (idGrupo != null)
-            //    {
-            //        lstResult = lstResult.Where(w => w.IdGrupo == idGrupo).ToList();
-            //    }
-            //    if (idRolSolicita != null)
-            //    {
-            //        lstResult = lstResult.Where(w => w.IdRolSolicita == idRolSolicita).ToList();
-            //    }
-            //    if (idSubRolSolicita != null)
-            //    {
-            //        lstResult = lstResult.Where(w => w.IdSubRolSolicita == idSubRolSolicita).ToList();
-            //    }
+                int? idEstatusActual = ddlEstatusActual.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlEstatusActual.SelectedValue);
+                int? idEstatusAccion = ddlEstatusAccion.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlEstatusAccion.SelectedValue);
 
-            //    if (idRolPertenece != null)
-            //    {
-            //        lstResult = lstResult.Where(w => w.IdRolPertenece == idRolPertenece).ToList();
-            //    }
-            //    if (idSubRolPertenece != null)
-            //    {
-            //        lstResult = lstResult.Where(w => w.IdSubRolPertenece == idSubRolPertenece).ToList();
-            //    }
+                if (idGrupoUsuario != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdGrupoUsuario == idGrupoUsuario).ToList();
+                }
+                if (idRolSolicita != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdRolSolicita == idRolSolicita).ToList();
+                }
+                if (idSubRolSolicita != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdSubRolSolicita == idSubRolSolicita).ToList();
+                }
 
-            //    if (idEstatusActual != null)
-            //    {
-            //        lstResult = lstResult.Where(w => w.IdEstatusTicketActual == idEstatusActual).ToList();
-            //    }
-            //    if (idEstatusAccion != null)
-            //    {
-            //        lstResult = lstResult.Where(w => w.IdEstatusTicketAccion == idEstatusAccion).ToList();
-            //    }
-            //    rptResultados.DataSource = lstResult;
-            //    rptResultados.DataBind();
-            //    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception(ex.Message);
-            //}
+                if (idRolPertenece != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdRolPertenece == idRolPertenece).ToList();
+                }
+                if (idSubRolPertenece != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdSubRolPertenece == idSubRolPertenece).ToList();
+                }
+
+                if (idEstatusActual != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdEstatusTicketActual == idEstatusActual).ToList();
+                }
+                if (idEstatusAccion != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdEstatusTicketAccion == idEstatusAccion).ToList();
+                }
+                rptResultados.DataSource = lstResult;
+                rptResultados.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         private void CargaCombos()

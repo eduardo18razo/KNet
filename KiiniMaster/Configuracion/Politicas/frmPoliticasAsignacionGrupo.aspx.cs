@@ -62,20 +62,20 @@ namespace KiiniMaster.Configuracion.Politicas
         }
         protected void OnCheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                _servicePoliticasAsignacion.HabilitarPoliticaAsignacion(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
-                CargaDatos();
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                Alerta = _lstError;
-            }
+            //try
+            //{
+            //    _servicePoliticasAsignacion.HabilitarPoliticaAsignacion(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+            //    CargaDatos();
+            //}
+            //catch (Exception ex)
+            //{
+            //    if (_lstError == null)
+            //    {
+            //        _lstError = new List<string>();
+            //    }
+            //    _lstError.Add(ex.Message);
+            //    Alerta = _lstError;
+            //}
         }
 
         protected void btnBuscar_OnClick(object sender, EventArgs e)
@@ -193,37 +193,37 @@ namespace KiiniMaster.Configuracion.Politicas
 
         private void CargaDatos()
         {
-            //try
-            //{
-            //    List<EstatusAsignacionSubRolGeneral> lstResult = _servicePoliticasAsignacion.GeneraEstatusAsignacionGrupo();
-            //    int? idGrupo = ddlGrupoUsuario.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlGrupoUsuario.SelectedValue);
-            //    int? idSubRol = ddlSubRol.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlSubRol.SelectedValue);
-            //    int? idEstatusActual = ddlEstatusActual.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlEstatusActual.SelectedValue);
-            //    int? idEstatusAccion = ddlEstatusAccion.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlEstatusAccion.SelectedValue);
-            //    if (idGrupo != null)
-            //    {
-            //        lstResult = lstResult.Where(w => w.IdGrupo == idGrupo).ToList();
-            //    }
-            //    if (idSubRol != null)
-            //    {
-            //        lstResult = lstResult.Where(w => w.IdSubRol == idSubRol).ToList();
-            //    }
-            //    if (idEstatusActual != null)
-            //    {
-            //        lstResult = lstResult.Where(w => w.IdEstatusAsignacionActual == idEstatusActual).ToList();
-            //    }
-            //    if (idEstatusAccion != null)
-            //    {
-            //        lstResult = lstResult.Where(w => w.IdEstatusAsignacionAccion == idEstatusAccion).ToList();
-            //    }
-            //    rptResultados.DataSource = lstResult;
-            //    rptResultados.DataBind();
-            //    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception(ex.Message);
-            //}
+            try
+            {
+                List<EstatusAsignacionSubRolGeneral> lstResult = _servicePoliticasAsignacion.ObtenerEstatusAsignacionSubRolGeneral();
+                int? idGrupo = ddlGrupoUsuario.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlGrupoUsuario.SelectedValue);
+                int? idSubRol = ddlSubRol.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlSubRol.SelectedValue);
+                int? idEstatusActual = ddlEstatusActual.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlEstatusActual.SelectedValue);
+                int? idEstatusAccion = ddlEstatusAccion.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione ? null : (int?)int.Parse(ddlEstatusAccion.SelectedValue);
+                if (idGrupo != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdGrupoUsuario == idGrupo).ToList();
+                }
+                if (idSubRol != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdSubRol == idSubRol).ToList();
+                }
+                if (idEstatusActual != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdEstatusAsignacionActual == idEstatusActual).ToList();
+                }
+                if (idEstatusAccion != null)
+                {
+                    lstResult = lstResult.Where(w => w.IdEstatusAsignacionAccion == idEstatusAccion).ToList();
+                }
+                rptResultados.DataSource = lstResult;
+                rptResultados.DataBind();
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptTable", "hidden();", true);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         private void CargaCombos()

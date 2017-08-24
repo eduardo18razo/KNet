@@ -192,9 +192,6 @@
     <Content Include="ConfirmacionCuenta.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Images\orderedList2.png" />
-    <Content Include="Politicas\frmPoliticasAsignacion.aspx" />
-    <Content Include="Politicas\FrmPoliticasEscalacionPermitida.aspx" />
-    <Content Include="Politicas\frmPoliticasEstatusTicket.aspx" />
     <Content Include="Publico\Consultas\FrmPreviewConsulta.aspx" />
     <Content Include="Publico\FrmCategoria.aspx" />
     <Content Include="Publico\FrmConsulta.aspx" />
@@ -2506,27 +2503,6 @@
     <Compile Include="DisplayImages.ashx.cs">
       <DependentUpon>DisplayImages.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Politicas\frmPoliticasAsignacion.aspx.cs">
-      <DependentUpon>frmPoliticasAsignacion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Politicas\frmPoliticasAsignacion.aspx.designer.cs">
-      <DependentUpon>frmPoliticasAsignacion.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Politicas\FrmPoliticasEscalacionPermitida.aspx.cs">
-      <DependentUpon>FrmPoliticasEscalacionPermitida.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Politicas\FrmPoliticasEscalacionPermitida.aspx.designer.cs">
-      <DependentUpon>FrmPoliticasEscalacionPermitida.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Politicas\frmPoliticasEstatusTicket.aspx.cs">
-      <DependentUpon>frmPoliticasEstatusTicket.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Politicas\frmPoliticasEstatusTicket.aspx.designer.cs">
-      <DependentUpon>frmPoliticasEstatusTicket.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Publico\Consultas\FrmPreviewConsulta.aspx.cs">
       <DependentUpon>FrmPreviewConsulta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4044,7 +4020,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

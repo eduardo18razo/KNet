@@ -54,6 +54,12 @@
   <wsdl:message name="IServiceSubRol_ObtenerSubRolEscalacionPermitida_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerSubRolEscalacionPermitidaResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceSubRol_HabilitarPoliticaEscalacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarPoliticaEscalacion" />
+  </wsdl:message>
+  <wsdl:message name="IServiceSubRol_HabilitarPoliticaEscalacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarPoliticaEscalacionResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceSubRol">
     <wsdl:operation name="ObtenerSubRolesByTipoGrupo">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSubRol/ObtenerSubRolesByTipoGrupo" message="tns:IServiceSubRol_ObtenerSubRolesByTipoGrupo_InputMessage" />
@@ -78,6 +84,10 @@
     <wsdl:operation name="ObtenerSubRolEscalacionPermitida">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceSubRol/ObtenerSubRolEscalacionPermitida" message="tns:IServiceSubRol_ObtenerSubRolEscalacionPermitida_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceSubRol/ObtenerSubRolEscalacionPermitidaResponse" message="tns:IServiceSubRol_ObtenerSubRolEscalacionPermitida_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HabilitarPoliticaEscalacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceSubRol/HabilitarPoliticaEscalacion" message="tns:IServiceSubRol_HabilitarPoliticaEscalacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceSubRol/HabilitarPoliticaEscalacionResponse" message="tns:IServiceSubRol_HabilitarPoliticaEscalacion_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceSubRol">
@@ -129,6 +139,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerSubRolEscalacionPermitida">
       <soap:operation soapAction="http://tempuri.org/IServiceSubRol/ObtenerSubRolEscalacionPermitida" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HabilitarPoliticaEscalacion">
+      <soap:operation soapAction="http://tempuri.org/IServiceSubRol/HabilitarPoliticaEscalacion" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="l5sPOw02bTcIJ9Pgyven4alkiY0=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="CUQAXX3c8ocXrlu1Ze8sgJ+9a/0=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="EndPointSeguridad4">
       <properties>
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="EndPointSeguridad17" contract="ServiceSistemaSubRol.IServiceSubRol" bindingType="basicHttpBinding" address="http://localhost:15277/Sistema/ServiceSubRol.svc" bindingConfiguration="EndPointSeguridad4">
+    <endpoint name="EndPointSeguridad23" contract="ServiceSistemaSubRol.IServiceSubRol" bindingType="basicHttpBinding" address="http://localhost:15277/Sistema/ServiceSubRol.svc" bindingConfiguration="EndPointSeguridad4">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:15277/Sistema/ServiceSubRol.svc</serializedValue>
@@ -187,7 +187,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EndPointSeguridad17</serializedValue>
+          <serializedValue>EndPointSeguridad23</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
