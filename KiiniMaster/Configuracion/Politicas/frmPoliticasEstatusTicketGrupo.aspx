@@ -93,6 +93,8 @@
                                                         <th>
                                                             <asp:Label runat="server">Id</asp:Label></th>
                                                         <th>
+                                                            <asp:Label runat="server">GrupoUsuario</asp:Label></th>
+                                                        <th>
                                                             <asp:Label runat="server">IdRolSolicita</asp:Label></th>
                                                         <th>
                                                             <asp:Label runat="server">IdSubRolSolicita</asp:Label></th>
@@ -120,7 +122,8 @@
                                         <ItemTemplate>
                                             <tr>
 
-                                                <td><%# Eval("Id")%></td>
+                                                <td><%# Eval("Id")%></td>                                                
+                                                <td><%# Eval("GrupoUsuario.Descripcion")%></td>
                                                 <td><%# Eval("RolSolicita.Descripcion")%></td>
                                                 <td><%# Eval("SubSolicita.Descripcion")%></td>
                                                 <td><%# Eval("RolPertenece.Descripcion")%></td>
