@@ -7,8 +7,8 @@
         <ContentTemplate>
             <br>
             <h3 class="h6">
-                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx" Text="Home" />
-                / Grupos </h3>
+                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx" Text="Inicio" />
+               / Configuración / Grupos </h3>
             <hr />
 
             <section class="module">
@@ -17,7 +17,7 @@
                         <div class="module-inner">
                             <div class="module-heading">
                                 <h3 class="module-title">
-                                    <asp:Label runat="server" ID="lblBranding" /></h3>
+                                    <asp:Label runat="server" ID="lblSeccion"  Text="GRUPOS"/></h3>
                             </div>
                         </div>
                     </div>

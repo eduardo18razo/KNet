@@ -5,8 +5,8 @@
         <asp:HiddenField runat="server" ID="hfIdPuesto" />
         <div class="modal-header">
             <asp:LinkButton class="close" ID="btnClose" OnClick="btnCancelar_OnClick" runat="server" Text='&times;'/>
-            <h2 class="modal-title" id="modal-new-ticket-label">
-                <asp:Label runat="server" ID="lblBranding" /></h2>
+            <%--<h2 class="modal-title" id="modal-new-ticket-label">
+                <asp:Label runat="server" ID="lblBranding" /></h2>--%>
             <p class="text-center">
                 <asp:Label runat="server" ID="lblOperacion"></asp:Label>
             </p>

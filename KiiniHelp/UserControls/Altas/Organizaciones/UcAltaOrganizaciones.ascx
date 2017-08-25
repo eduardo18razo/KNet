@@ -13,7 +13,8 @@
                     <asp:LinkButton CssClass="close" runat="server" OnClick="btnCancelarCatalogo_OnClick" Text='&times'></asp:LinkButton>
                     <%--<h2 class="modal-title" id="modal-new-ticket-label">
                         <asp:Label runat="server" ID="lblBrandingModal" /></h2> jgb --%>
-                    <%--<p class="text-center">--%><h3 class="text-center"><asp:Label runat="server" ID="lblTitleCatalogo"/></h3><%--</p>--%>
+                    <p class="text-center">
+                        <asp:Label runat="server" ID="lblTitleCatalogo" /></p>
                 </div>
                 <div class="modal-body">
                     <!-- TIPO DE USUARIO-->
@@ -49,7 +50,8 @@
                                 <br />
                                 <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel2" CommandArgument="2" OnClick="btnStatusNivel1_OnClick">
                                     <asp:Image ImageUrl="~/assets/images/step2.png" Width="20" Height="20" alt="" runat="server" />&nbsp;
-                                        <asp:Label runat="server" ID="lblStepNivel2" />
+                                       
+                                    <asp:Label runat="server" ID="lblStepNivel2" />
                                 </asp:LinkButton>
                             </div>
 
@@ -61,7 +63,8 @@
                                 <br />
                                 <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel3" CommandArgument="3" OnClick="btnStatusNivel1_OnClick">
                                     <asp:Image ImageUrl="~/assets/images/step3.png" Width="20" Height="20" alt="" runat="server" />&nbsp;
-                                        <asp:Label runat="server" ID="lblStepNivel3" />
+                                       
+                                    <asp:Label runat="server" ID="lblStepNivel3" />
                                 </asp:LinkButton>
                             </div>
 
@@ -73,7 +76,8 @@
                                 <br />
                                 <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel4" CommandArgument="4" OnClick="btnStatusNivel1_OnClick">
                                     <asp:Image ImageUrl="~/assets/images/step4.png" Width="20" Height="20" alt="" runat="server" />&nbsp;
-                                        <asp:Label runat="server" ID="lblStepNivel4" />
+                                       
+                                    <asp:Label runat="server" ID="lblStepNivel4" />
                                 </asp:LinkButton>
                             </div>
 
@@ -85,7 +89,8 @@
                                 <br />
                                 <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel5" CommandArgument="5" OnClick="btnStatusNivel1_OnClick">
                                     <asp:Image ImageUrl="~/assets/images/step5.png" Width="20" Height="20" alt="" runat="server" />&nbsp;
-                                        <asp:Label runat="server" ID="lblStepNivel5" />
+                                       
+                                    <asp:Label runat="server" ID="lblStepNivel5" />
                                 </asp:LinkButton>
                             </div>
 
@@ -97,7 +102,8 @@
                                 <br />
                                 <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel6" CommandArgument="6" OnClick="btnStatusNivel1_OnClick">
                                     <asp:Image ImageUrl="~/assets/images/step6.png" Width="20" Height="20" alt="" runat="server" />&nbsp;
-                                        <asp:Label runat="server" ID="lblStepNivel6" />
+                                       
+                                    <asp:Label runat="server" ID="lblStepNivel6" />
                                 </asp:LinkButton>
                             </div>
 
@@ -120,7 +126,8 @@
                         <div>
                             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                                 <div class="bg-grey">
-                                    <h3 class="text-left"><asp:Label runat="server" Text="Alta de "></asp:Label><asp:Label runat="server" ID="lblOperacion"></asp:Label></h3>
+                                    <h3 class="text-left">
+                                        <asp:Label runat="server" Text=""></asp:Label><asp:Label runat="server" ID="lblOperacion"></asp:Label></h3>
                                     <hr />
                                     <!--CAMPO-->
                                     <div class="form-group">
@@ -128,18 +135,24 @@
                                     </div>
 
                                     <!--CAMPO-->
-                                    <div class="form-group margin-top">
-                                        Nombre de <asp:Label runat="server" ID="lblOperacionDescripcion" />*<br />
-                                        <asp:TextBox CssClass="form-control" ID="txtDescripcionCatalogo" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus" />
-                                        <asp:LinkButton runat="server" ID="btnGuardarCatalogo" OnClick="btnGuardarCatalogo_OnClick" class="fa fa-plus-circle">
-                                        </asp:LinkButton>
-
-                                    </div>
-
-                                    <!--CAMPO-->
                                     <p class="margin-top-40">
                                         <asp:Button class="btn btn-primary" runat="server" Text="Siguiente" ID="btnSeleccionarModal" OnClick="btnSeleccionarModal_OnClick" />
                                     </p>
+
+                                    <hr />
+
+                                    <!--CAMPO-->
+                                    <asp:Panel runat="server" ID="pnlAltaOrganizacion" Visible="false">
+                                        <div class="form-group margin-top">
+                                            Nombre de
+                                            <asp:Label runat="server" ID="lblOperacionDescripcion" />*<br />
+                                            <asp:TextBox CssClass="form-control" ID="txtDescripcionCatalogo" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus" />
+                                            <asp:LinkButton runat="server" ID="btnGuardarCatalogo" OnClick="btnGuardarCatalogo_OnClick" class="fa fa-plus-circle">
+                                        </asp:LinkButton>
+                                        </div>
+                                    </asp:Panel>
+
+
                                 </div>
                                 <!--DIV que cierra el bg-grey -->
 

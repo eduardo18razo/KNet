@@ -127,11 +127,13 @@ namespace KiiniHelp.UserControls.Consultas
         private void LlenaOrganizaciones()
         {
             try
-            {
+            {        
+               
                 int? idTipoUsuario = null;
                 if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos)
                     idTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
                 List<Organizacion> lstOrganizaciones = _servicioOrganizacion.ObtenerOrganizaciones(idTipoUsuario, null, null, null, null, null, null, null);
+             
                 if (Modal)
                     lstOrganizaciones = lstOrganizaciones.Where(w => w.Habilitado == Modal).ToList();
                 rptResultados.DataSource = lstOrganizaciones;
@@ -168,6 +170,7 @@ namespace KiiniHelp.UserControls.Consultas
                 if (!IsPostBack)
                 {
                     LlenaCombos();
+                    LlenaOrganizaciones();
                 }
             }
             catch (Exception ex)

@@ -29,7 +29,7 @@ namespace KiiniHelp.UserControls.Altas
             set
             {
                 hfEsAlta.Value = value.ToString();
-                lblOperacion.Text = value ? "ALTA DE PUESTO" : "EDITAR PUESTO";
+                lblOperacion.Text = value ? "Nuevo Puesto" : "EDITAR PUESTO";
             }
         }
         public int IdTipoUsuario
@@ -106,7 +106,7 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
+                //lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {

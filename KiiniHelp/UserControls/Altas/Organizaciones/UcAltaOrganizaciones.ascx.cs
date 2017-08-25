@@ -40,6 +40,18 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 }
             }
         }
+
+        private string AlertaSucces
+        {
+            set
+            {
+                if (value.Trim() != string.Empty)
+                {
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "SuccsessAlert('Éxito: ','" + value + "');", true);
+                }
+            }
+        }
+
         
         public string Title
         {
@@ -55,13 +67,16 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 {
                     ddlTipoUsuario.Enabled = true;
                     btnSeleccionarModal.Visible = true;
-                    btnGuardarCatalogo.Visible = true;
+                    pnlAltaOrganizacion.Visible = true;
+                    //btnGuardarCatalogo.Visible = true; jgb
                 }
                 else
                 {
                     ddlTipoUsuario.Enabled = false;
                     btnSeleccionarModal.Visible = false;
-                    btnGuardarCatalogo.Visible = false;
+                    pnlAltaOrganizacion.Visible = false;
+
+                    //btnGuardarCatalogo.Visible = false;  jgb
                 }
             }
         }
@@ -72,7 +87,8 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
             {
                 hfEsSeleccion.Value = value.ToString();
                 btnSeleccionarModal.Visible = value;
-                btnGuardarCatalogo.Visible = value;
+                pnlAltaOrganizacion.Visible = value;
+                //btnGuardarCatalogo.Visible = value;  jgb
                 ddlTipoUsuario.Enabled = !value;
             }
         }
@@ -633,7 +649,8 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 btnStatusNivel6.CssClass = "btn btn-primary btn-square";
                 btnStatusNivel7.CssClass = "btn btn-primary btn-square";
                 btnSeleccionarModal.Visible = true;
-                btnGuardarCatalogo.Visible = true;
+                pnlAltaOrganizacion.Visible = true;
+                //btnGuardarCatalogo.Visible = true;
                 txtDescripcionCatalogo.Text = string.Empty;
             }
             catch (Exception ex)
@@ -705,11 +722,13 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 divStep1.Visible = true;
                 if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos && int.Parse(ddlTipoUsuario.SelectedValue) != (int)BusinessVariables.EnumTiposUsuario.Empleado)
                 {
+                    pnlAltaOrganizacion.Visible = true;
                     btnGuardarCatalogo.Enabled = true;
                     LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerHoldings(int.Parse(ddlTipoUsuario.SelectedValue), true));
                 }
                 else
                 {
+                    pnlAltaOrganizacion.Visible = false;
                     btnGuardarCatalogo.Enabled = false;
                     LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerHoldings(int.Parse(ddlTipoUsuario.SelectedValue), true));
                 }
@@ -749,6 +768,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                         divStep2.Visible = true;
                         lblStepNivel2.Text = "...";
                         btnStatusNivel2.CssClass = "btn btn-primary btn-square";
+                        pnlAltaOrganizacion.Visible = true;
                         btnGuardarCatalogo.Enabled = true;
                         break;
                     case 2:
@@ -923,6 +943,10 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 Habilitado = chkHabilitado.Checked
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
+                            if (OnAceptarModal != null)
+                                OnAceptarModal();
+                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";                           
+                            //incluye Alerta jgb
                             ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
                             break;
                         case 2:
@@ -932,8 +956,13 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue),
                                 Descripcion = txtDescripcionCatalogo.Text.Trim(),
                                 Habilitado = chkHabilitado.Checked
-                            };
+                            };                            
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
+
+                           if (OnAceptarModal != null)
+                                OnAceptarModal();
+                           AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";
+                            //incluye Alerta jgb
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerCompañias(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel1.Value), true));
                             break;
                         case 3:
@@ -946,6 +975,10 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 Habilitado = chkHabilitado.Checked
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
+                             if (OnAceptarModal != null)
+                                OnAceptarModal();
+                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
+                            //incluye Alerta jgb
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerDirecciones(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel2.Value), true));
                             break;
                         case 4:
@@ -959,6 +992,10 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 Habilitado = chkHabilitado.Checked
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
+                             if (OnAceptarModal != null)
+                                OnAceptarModal();
+                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
+                            //incluye Alerta jgb
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerSubDirecciones(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel3.Value), true));
                             break;
                         case 5:
@@ -973,6 +1010,10 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 Habilitado = chkHabilitado.Checked
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
+                             if (OnAceptarModal != null)
+                                OnAceptarModal();
+                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
+                            //incluye Alerta jgb
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerGerencias(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel4.Value), true));
                             break;
                         case 6:
@@ -988,6 +1029,10 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 Habilitado = chkHabilitado.Checked
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
+                             if (OnAceptarModal != null)
+                                OnAceptarModal();
+                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
+                            //incluye Alerta jgb
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerSubGerencias(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel5.Value), true));
                             break;
                         case 7:
@@ -1004,7 +1049,12 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 Habilitado = chkHabilitado.Checked
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
+                             if (OnAceptarModal != null)
+                                OnAceptarModal();
+                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
+                            //incluye Alerta jgb
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerJefaturas(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel6.Value), true));
+                           
                             break;
                     }
                 }

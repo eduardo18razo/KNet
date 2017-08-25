@@ -39,7 +39,7 @@
 
 
 
-            <p class="alt-path">¿No tienes una cuenta? <a class="signup-link" href="signup.html">Regístrate aquí</a></p>
+<%--            <p class="alt-path">¿No tienes una cuenta? <a class="signup-link" href="signup.html">Regístrate aquí</a></p> jgb  --%>
         </div>
     </div>
 </div>

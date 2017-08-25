@@ -85,7 +85,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
+                //lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];    jgb
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {

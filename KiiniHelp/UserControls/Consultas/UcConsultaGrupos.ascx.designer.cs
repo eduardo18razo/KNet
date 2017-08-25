@@ -13,13 +13,13 @@ namespace KiiniHelp.UserControls.Consultas {
     public partial class UcConsultaGrupos {
         
         /// <summary>
-        /// Control lblBranding.
+        /// Control lblSeccion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBranding;
+        protected global::System.Web.UI.WebControls.Label lblSeccion;
         
         /// <summary>
         /// Control btnNew.

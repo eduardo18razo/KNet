@@ -67,15 +67,6 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones {
         protected global::System.Web.UI.WebControls.HiddenField hfUbicacionSeleccionada;
         
         /// <summary>
-        /// Control lblBrandingModal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBrandingModal;
-        
-        /// <summary>
         /// Control lblTitleCatalogo.
         /// </summary>
         /// <remarks>
@@ -499,33 +490,6 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones {
         protected global::System.Web.UI.WebControls.DropDownList ddlNivelSeleccionModal;
         
         /// <summary>
-        /// Control lblOperacionDescripcion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOperacionDescripcion;
-        
-        /// <summary>
-        /// Control txtDescripcionCatalogo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcionCatalogo;
-        
-        /// <summary>
-        /// Control chkHabilitado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkHabilitado;
-        
-        /// <summary>
         /// Control dataCampus.
         /// </summary>
         /// <remarks>
@@ -623,6 +587,42 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSeleccionarModal;
+        
+        /// <summary>
+        /// Control pnlAltaOrganizacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAltaOrganizacion;
+        
+        /// <summary>
+        /// Control lblOperacionDescripcion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOperacionDescripcion;
+        
+        /// <summary>
+        /// Control txtDescripcionCatalogo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDescripcionCatalogo;
+        
+        /// <summary>
+        /// Control chkHabilitado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkHabilitado;
         
         /// <summary>
         /// Control btnTerminar.
