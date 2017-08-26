@@ -1,8 +1,8 @@
 ﻿function SuccsessAlert(title, msg) {
-    debugger;
     $.notify({
         // options
-        icon: 'glyphicon glyphicon-ok',
+        //icon: 'glyphicon glyphicon-ok', jgb
+        icon: 'glyphicon glyphicon-ok-circle',
         title: title,
         message: msg,
         target: '_blank'
@@ -36,9 +36,9 @@
         icon_type: 'class',
         template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert" style="z-index:9999999">' +
             '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
-            '<span data-notify="icon"></span> ' +
-            '<span data-notify="title">{1}</span> ' +
-            '<span data-notify="message">{2}</span>' +
+            '<span data-notify="icon" style="font-size: 22px !important"></span> ' +
+            '<span data-notify="title" style="position: absolute; padding-left: 5px; padding-top: 5px ">{1}</span> ' +
+            '<span data-notify="message" style="position: absolute; padding-left: 40px; padding-top: 5px">{2}</span>' +
             '<div class="progress" data-notify="progressbar">' +
             '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
             '</div>' +
@@ -49,7 +49,7 @@
 function ErrorAlert(title, msg) {
     $.notify({
         // options
-        icon: 'glyphicon glyphicon-warning-sign',
+        icon: 'glyphicon glyphicon-remove-circle',
         title: title,
         message: msg,
         target: '_blank'
@@ -83,9 +83,9 @@ function ErrorAlert(title, msg) {
         icon_type: 'class',
         template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert" style="z-index:9999999">' +
             '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
-            '<span data-notify="icon"></span> ' +
-            '<span data-notify="title">{1}</span> ' +
-            '<span data-notify="message">{2}</span>' +
+            '<span data-notify="icon" style="font-size: 22px !important"></span> ' +
+            '<span data-notify="title" style="position: absolute; padding-left: 5px; padding-top: 5px ">{1}</span> ' +
+            '<span data-notify="message" style="position: absolute; padding-left: 40px; padding-top: 5px">{2}</span>' +
             '<div class="progress" data-notify="progressbar">' +
             '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
             '</div>' +

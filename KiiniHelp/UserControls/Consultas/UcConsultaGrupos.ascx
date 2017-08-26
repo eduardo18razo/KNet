@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="module-inner">
-                            CONSULTA GRUPOS:<br />
+                            Consulta Grupos:<br />
                             <div class="search-box form-inline margin-bottom-lg ">
                                 <label class="sr-only" for="txtFiltro">Buscar</label>
                                 <div class="form-group">

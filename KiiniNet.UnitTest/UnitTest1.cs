@@ -18,6 +18,7 @@ namespace KiiniNet.UnitTest
     {
         private object GetProxyInstance(ref CompilerResults compilerResults)
         {
+            
             object proxyInstance = null;
 
             // Define the WSDL Get address, contract name and parameters, with this we can extract WSDL details any time
@@ -97,6 +98,7 @@ namespace KiiniNet.UnitTest
         {
             try
             {
+                var strings = KinniNet.Business.Utils.BusinessErrores.ObtenerMensajeByKey(KinniNet.Business.Utils.BusinessVariables.EnumMensajes.Exito);
                 new DataBaseModelContext();
                 //CompilerResults compilerResults = null;
 

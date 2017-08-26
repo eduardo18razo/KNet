@@ -54,6 +54,7 @@
     <Compile Include="BusinessCadenas.cs" />
     <Compile Include="BusinessCorreo.cs" />
     <Compile Include="BusinessDocumentos.cs" />
+    <Compile Include="BusinessErrores.cs" />
     <Compile Include="BusinessFile.cs" />
     <Compile Include="BusinessGraficoStack.cs" />
     <Compile Include="BusinessVariables.cs" />
@@ -109,6 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KiiniNet.Entities\KiiniNet.Entities.csproj">
+      <Project>{c003d316-9b3c-44ef-b6b4-48c98936b0a7}</Project>
+      <Name>KiiniNet.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
