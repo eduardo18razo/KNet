@@ -216,6 +216,7 @@
                             <span id="trigger" class="menu-trigger" style="z-index: 9999"></span>
                         </div>
                     </div>
+                    
                     <div class="search-container">
                         <div id="main-search">
                             <i id="main-search-toggle" class="fa fa-search icon"></i>
@@ -599,6 +600,7 @@
                             <%--<asp:LinkButton runat="server" CssClass="close" ID="lnkBtnCerrar" OnClick="lnkBtnCerrar_OnClick" Visible="False">
                         <span class="glyphicon glyphicon-remove"></span>
                             </asp:LinkButton>--%>
+                            
                             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                             </asp:ContentPlaceHolder>
                         </div>

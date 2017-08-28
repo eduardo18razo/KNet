@@ -7,8 +7,8 @@
         <ContentTemplate>
             <br>
             <h3 class="h6">
-                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx" Text="Home" />
-                / Grupos </h3>
+                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx" Text="Inicio" />
+               / Configuración / Grupos </h3>
             <hr />
 
             <section class="module">
@@ -17,7 +17,7 @@
                         <div class="module-inner">
                             <div class="module-heading">
                                 <h3 class="module-title">
-                                    <asp:Label runat="server" ID="lblBranding" /></h3>
+                                    <asp:Label runat="server" ID="lblSeccion"  Text="GRUPOS"/></h3>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="module-inner">
-                            CONSULTA GRUPOS:<br />
+                            Consulta Grupos:<br />
                             <div class="search-box form-inline margin-bottom-lg ">
                                 <label class="sr-only" for="txtFiltro">Buscar</label>
                                 <div class="form-group">

@@ -12,8 +12,8 @@
             <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
                         <br>
             <h3 class="h6">
-                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
-                / Ubicaciones </h3>
+                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Inicio</asp:HyperLink>
+                / Configuración / Ubicación </h3>
             <hr />
             <section class="module">
                 <div class="row">
@@ -21,7 +21,7 @@
                         <div class="module-inner">
                             <div class="module-heading">
                                 <h3 class="module-title">
-                                    <asp:Label runat="server" ID="lblBranding" /></h3>
+                                    <asp:Label runat="server" ID="lblSeccion" Text="Ubicación" /></h3>
                             </div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="module-inner">
-                            CONSULTA UBICACIÓN:<br />
+                            Consulta Ubicación:<br />
                             <div class="search-box form-inline margin-bottom-lg">
                                 <label class="sr-only" for="txtFiltroDecripcion">Buscar</label>
                                 <div class="form-group">

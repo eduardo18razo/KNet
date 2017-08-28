@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web.Configuration;
 using System.Web.UI;
 using KinniNet.Business.Utils;
+using KiiniNet.Entities.Helper;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace KiiniHelp
 {
@@ -53,11 +56,11 @@ namespace KiiniHelp
             {
                 lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
                 ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;
-                if(UcLogCopia.Fail)
+                if (UcLogCopia.Fail)
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "OpenDropLogin();", true);
 
-                
-                }
+
+            }
             catch (Exception ex)
             {
                 if (_lstError == null)
@@ -67,7 +70,7 @@ namespace KiiniHelp
                 _lstError.Add(ex.Message);
                 Alerta = _lstError;
             }
-            
+
         }
 
         protected void lnkBtnEmpleado_OnClick(object sender, EventArgs e)

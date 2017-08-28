@@ -142,12 +142,15 @@
                                             </asp:UpdatePanel>
                                         </div>
                                         <div class="social-btns col-md-12 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-sm-offset-0">
-                                            <div class="divider"><span>O ingresa con</span></div>
-                                            <ul class="list-unstyled social-login">
+                                            <div class="divider">
+                                               <%-- <span>O ingresa con</span>--%>
+
+                                            </div>
+                                           <%-- <ul class="list-unstyled social-login">   jgb
                                                 <li>
                                                     <button class="social-btn facebook-btn btn" type="button"><i class="fa fa-facebook"></i>Facebook</button>
                                                 </li>
-                                            </ul>
+                                            </ul>--%>
                                         </div>
                                     </div>
                                 </div>

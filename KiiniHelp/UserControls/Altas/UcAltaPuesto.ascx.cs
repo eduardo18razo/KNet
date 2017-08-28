@@ -9,6 +9,9 @@ using KiiniHelp.ServiceSistemaTipoUsuario;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KinniNet.Business.Utils;
+using System.Resources;
+using System.IO;
+using System.Reflection;
 
 namespace KiiniHelp.UserControls.Altas
 {
@@ -23,13 +26,21 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateCancelarModal OnCancelarModal;
         public event DelegateTerminarModal OnTerminarModal;
 
+        //Assembly _assembly;   
+        //Stream _imageStream;   
+        //StreamReader _textStreamReader;
+        
+       //ResourceManager _rM = new ResourceManager("Notificaciones", Assembly.GetExecutingAssembly());
+      
+
+        
         public bool EsAlta
         {
             get { return Convert.ToBoolean(hfEsAlta.Value); }
             set
             {
                 hfEsAlta.Value = value.ToString();
-                lblOperacion.Text = value ? "ALTA DE PUESTO" : "EDITAR PUESTO";
+                lblOperacion.Text = value ? "Nuevo Puesto" : "Editar Puesto";
             }
         }
         public int IdTipoUsuario
@@ -64,16 +75,17 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        private string AlertaSucces
-        {
-            set
-            {
-                if (value.Trim() != string.Empty)
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "SuccsessAlert('Exito','" + value + "');", true);
-                }
-            }
-        }
+        //private string AlertaSucces ()
+        //{
+        //    //set
+        //    //{
+        //    //    if (value.Trim() != string.Empty)
+        //    //    {
+        //            ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "SuccsessAlert('"+ value + "');", true);                    
+        //            //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "SuccsessAlert('Exito','" + value + "');", true);
+        //    //    }
+        //    //}
+        //}
 
         private void LlenaCombos()
         {
@@ -106,11 +118,13 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
+                //lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
+                
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
                     LlenaCombos();
+                   
                 }
             }
             catch (Exception ex)
@@ -141,7 +155,8 @@ namespace KiiniHelp.UserControls.Altas
                 if (!EsAlta)
                     if (OnAceptarModal != null)
                         OnAceptarModal();
-                AlertaSucces = "Se guardo correctamente.";
+               
+               // AlertaSucces();
             }
             catch (Exception ex)
             {

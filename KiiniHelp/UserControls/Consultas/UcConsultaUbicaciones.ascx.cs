@@ -28,6 +28,16 @@ namespace KiiniHelp.UserControls.Consultas
 
         private List<string> _lstError = new List<string>();
 
+        private string AlertaSucces
+        {
+            set
+            {
+                if (value.Trim() != string.Empty)
+                {
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "SuccsessAlert('Éxito: ','" + value + "');", true);
+                }
+            }
+        }
         public string ModalName
         {
             set { hfModalName.Value = value; }
@@ -111,7 +121,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
+                //lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
                 Alerta = new List<string>();
                 ucAltaUbicaciones.OnAceptarModal += UcAltaUbicacionesOnOnAceptarModal;
                 ucAltaUbicaciones.OnCancelarModal += UcAltaUbicacionesOnOnCancelarModal;
@@ -119,7 +129,7 @@ namespace KiiniHelp.UserControls.Consultas
                 if (!IsPostBack)
                 {
                     LlenaCombos();
-                    
+                    LlenaUbicaciones();                    
                 }
             }
             catch (Exception ex)
@@ -224,7 +234,7 @@ namespace KiiniHelp.UserControls.Consultas
                 ucAltaUbicaciones.IdUbicacion = int.Parse(((Button)sender).CommandArgument);
                 ucAltaUbicaciones.EsSeleccion = false;
                 ucAltaUbicaciones.EsAlta = false;
-                ucAltaUbicaciones.Title = "EDITAR UBICACIÓN";
+                ucAltaUbicaciones.Title = "Editar Ubicación";
                 ucAltaUbicaciones.SetUbicacionActualizar();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoUbicacion\");", true);
             }
@@ -245,7 +255,7 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 ucAltaUbicaciones.EsSeleccion = false;
                 ucAltaUbicaciones.EsAlta = true;
-                ucAltaUbicaciones.Title = "ALTA DE UBICACIÓN";
+                ucAltaUbicaciones.Title = "Nueva Ubicación";
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoUbicacion\");", true);
             }
             catch (Exception ex)
@@ -259,7 +269,6 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
         
-
         protected void rptResultados_OnItemCreated(object sender, RepeaterItemEventArgs e)
         {
             try

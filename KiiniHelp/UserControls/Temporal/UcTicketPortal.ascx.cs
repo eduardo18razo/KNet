@@ -929,6 +929,7 @@ namespace KiiniHelp.UserControls.Temporal
                 }
                 _lstError.Add(ex.Message);
                 Alerta = _lstError;
+
             }
         }
 

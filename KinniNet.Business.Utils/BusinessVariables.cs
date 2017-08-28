@@ -308,5 +308,15 @@ namespace KinniNet.Business.Utils
             Yahoo = 3,
             Other = 4
         }
+
+        public enum EnumMensajes
+        {
+
+            Exito,
+            Error,
+            FaltaTipoUsuario,
+            FaltaDescripcion,
+           
+        }
     }
 }

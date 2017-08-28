@@ -5,8 +5,8 @@
         <ContentTemplate>
             <br>
             <h3 class="h6">
-                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Home</asp:HyperLink>
-                / Puestos </h3>
+                <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Inicio</asp:HyperLink>
+                / Atención / Puestos </h3>
             <hr />
             <!--MÓDULO-->
             <section class="module">
@@ -15,7 +15,7 @@
                         <div class="module-inner">
                             <div class="module-heading">
                                 <h3 class="module-title">
-                                    <asp:Label runat="server" ID="lblBranding" /></h3>
+                                    <asp:Label runat="server" ID="lblSeccion" text="PUESTOS"/></h3>
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="module-inner">
-                            CONSULTA PUESTOS:<br />
+                            Consulta Puestos:<br />
                             <div class="search-box form-inline margin-bottom-lg">
                                 <label class="sr-only" for="txtFiltro">Buscar</label>
                                 <div class="form-group">

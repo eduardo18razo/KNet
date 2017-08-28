@@ -49,15 +49,6 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.WebControls.LinkButton btnClose;
         
         /// <summary>
-        /// Control lblBranding.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBranding;
-        
-        /// <summary>
         /// Control lblOperacion.
         /// </summary>
         /// <remarks>
@@ -65,6 +56,15 @@ namespace KiiniHelp.UserControls.Altas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOperacion;
+        
+        /// <summary>
+        /// Control Lbl1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Lbl1;
         
         /// <summary>
         /// Control ddlTipoUsuario.

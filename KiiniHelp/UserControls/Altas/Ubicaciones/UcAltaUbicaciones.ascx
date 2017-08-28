@@ -10,15 +10,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <asp:LinkButton CssClass="close" runat="server" OnClick="btnCancelarCatalogo_OnClick" Text='&times'></asp:LinkButton>
-                    <h2 class="modal-title" id="modal-new-ticket-label">
-                        <asp:Label runat="server" ID="lblBrandingModal" /></h2>
-                    <p class="text-center"><asp:Label runat="server" ID="lblTitleCatalogo"></asp:Label></p>
+                                        <p class="text-center"><asp:Label runat="server" ID="lblTitleCatalogo"></asp:Label></p>
                 </div>
                 <div class="modal-body">
                     <!-- TIPO DE USUARIO-->
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            TIPO DE USUARIO
+                            Tipo de Usuario
                                     <br />
                             <div class="form-group">
                                 <asp:DropDownList runat="server" ID="ddlTipoUsuario" CssClass="form-control" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlTipoUsuario_OnSelectedIndexChanged" />
@@ -127,11 +125,7 @@
                                         <asp:DropDownList runat="server" CssClass="form-control" ID="ddlNivelSeleccionModal" AutoPostBack="True" AppendDataBoundItems="True" OnSelectedIndexChanged="ddlNivelSeleccionModal_OnSelectedIndexChanged" />
                                     </div>
                                     <!--CAMPO-->
-                                    <div class="form-group margin-top">
-                                        Nombre de <asp:Label runat="server" ID="lblOperacionDescripcion" />*<br />
-                                        <asp:TextBox CssClass="form-control" ID="txtDescripcionCatalogo" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus" />
-                                        <asp:CheckBox runat="server" ID="chkHabilitado" Checked="True" Visible="False" />
-                                    </div>
+                                    
                                     <div runat="server" id="dataCampus" visible="False">
                                         <!--CP-->
                                         <div class="form-group margin-top">
@@ -192,11 +186,20 @@
                                         <asp:Button class="btn btn-primary" runat="server" Text="Siguiente" ID="btnSeleccionarModal" OnClick="btnSeleccionarModal_OnClick" />
                                     </p>
                                 </div>
+                                <hr />
                                 <!--DIV que cierra el bg-grey -->
                                 <!--BTN-TERMINAR-->
+                                <asp:Panel runat="server" ID="pnlAltaOrganizacion" Visible="true">
+                                <div class="form-group margin-top">
+                                        Nombre de <asp:Label runat="server" ID="lblOperacionDescripcion" />*<br />
+                                        <asp:TextBox CssClass="form-control" ID="txtDescripcionCatalogo" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus" />
+                                        <asp:CheckBox runat="server" ID="chkHabilitado" Checked="True" Visible="False" />
+                                 </div>
+
                                 <p class="text-right margin-top-40">
                                     <asp:Button CssClass="btn btn-success" ID="btnTerminar" runat="server" Text="Terminar" OnClick="btnTerminar_OnClick"></asp:Button>
                                 </p>
+                                </asp:Panel>
                                 <!--/BTN-TERMINAR-->
                             </div>
                         </div>

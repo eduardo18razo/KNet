@@ -5,10 +5,12 @@
         <asp:HiddenField runat="server" ID="hfIdPuesto" />
         <div class="modal-header">
             <asp:LinkButton class="close" ID="btnClose" OnClick="btnCancelar_OnClick" runat="server" Text='&times;'/>
-            <h2 class="modal-title" id="modal-new-ticket-label">
-                <asp:Label runat="server" ID="lblBranding" /></h2>
+            <%--<h2 class="modal-title" id="modal-new-ticket-label">
+                <asp:Label runat="server" ID="lblBranding" /></h2>--%>
             <p class="text-center">
                 <asp:Label runat="server" ID="lblOperacion"></asp:Label>
+                <asp:Label runat="server" ID="Lbl1" Text="5"></asp:Label>
+                
             </p>
         </div>
         <div class="modal-body">
@@ -16,6 +18,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     Tipo de usuario
+                   
                             <br />
                     <div class="form-group">
                         <asp:DropDownList runat="server" ID="ddlTipoUsuario" CssClass="form-control" />

@@ -32,6 +32,16 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
 
         private List<string> _lstError = new List<string>();
 
+        private string AlertaSucces
+        {
+            set
+            {
+                if (value.Trim() != string.Empty)
+                {
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "SuccsessAlert('Éxito: ','" + value + "');", true);
+                }
+            }
+        }
         public string Title
         {
             set { lblTitleCatalogo.Text = value; }
@@ -730,7 +740,6 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
         {
             try
             {
-                lblBrandingModal.Text = WebConfigurationManager.AppSettings["Brand"];
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
@@ -796,8 +805,6 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                 Alerta = _lstError;
             }
         }
-
-
 
 
         protected void btnSeleccionarModal_OnClick(object sender, EventArgs e)
@@ -1077,6 +1084,9 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                                 }
                             };
                             _servicioUbicacion.GuardarUbicacion(ubicacion);
+                            if (OnAceptarModal != null)
+                                OnAceptarModal();
+                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioUbicacion.ObtenerCampus(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel1.Value), true));
                         }
                     }

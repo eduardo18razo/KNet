@@ -34,7 +34,13 @@ namespace KiiniHelp
                 }
             }
         }
-
+                           //BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Exito)
+        private void AlertaSucces(string value)
+        {
+            value = value.Trim() == string.Empty ? BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Exito) : value;
+            ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "SuccsessAlert('" + value + "');", true);
+        
+        }
         private void ObtenerAreas()
         {
             try
