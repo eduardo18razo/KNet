@@ -77,7 +77,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 if (db.InformacionConsulta.Any(a => a.Descripcion == informacion.Descripcion))
                     throw new Exception("Este Artículo ya existe.");
-                informacion.Descripcion = informacion.Descripcion.Trim().ToUpper();
+                informacion.Descripcion = informacion.Descripcion.Trim();
                 informacion.Habilitado = true;
                 informacion.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 if (informacion.Id == 0)
@@ -120,7 +120,7 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.LazyLoadingEnabled = true;
                 InformacionConsulta info = db.InformacionConsulta.SingleOrDefault(s => s.Id == idInformacionConsulta);
                 if (info == null) return null;
-                info.Descripcion = informacion.Descripcion.Trim().ToUpper();
+                info.Descripcion = informacion.Descripcion.Trim();
                 info.IdUsuarioModifico = informacion.IdUsuarioAlta;
                 info.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 info.Habilitado = true;
@@ -241,7 +241,7 @@ namespace KinniNet.Core.Operacion
 
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 IQueryable<InformacionConsulta> qry = db.InformacionConsulta;
-                descripcion = descripcion.Trim().ToUpper();
+                descripcion = descripcion.Trim();
                 qry = qry.Where(w => w.Descripcion.Contains(descripcion));
                 result = qry.ToList();
                 foreach (InformacionConsulta consulta in result)

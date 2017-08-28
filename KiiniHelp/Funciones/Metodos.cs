@@ -19,7 +19,7 @@ namespace KiiniHelp.Funciones
                 input = string.Empty;
                 foreach (string word in cadena)
                 {
-                    input += word.First().ToString().ToUpper() + word.Trim().Substring(1);
+                    input += word.First().ToString() + word.Trim().Substring(1);
                 }
 
                 return input;

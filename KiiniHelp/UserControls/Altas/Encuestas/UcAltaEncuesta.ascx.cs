@@ -94,7 +94,7 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
                 {
                     result.Add(new EncuestaPregunta
                     {
-                        Pregunta = ((TextBox)item.FindControl("txtPregunta")).Text.Trim().ToUpper(),
+                        Pregunta = ((TextBox)item.FindControl("txtPregunta")).Text.Trim(),
                         Ponderacion = decimal.Parse(((TextBox)item.FindControl("txtPonderacion")).Text == string.Empty ? "0" : ((TextBox)item.FindControl("txtPonderacion")).Text)
                     });
                 }

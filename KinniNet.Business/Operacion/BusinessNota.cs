@@ -28,7 +28,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                notaGeneral.Nombre = notaGeneral.Nombre.ToUpper().Trim();
+                notaGeneral.Nombre = notaGeneral.Nombre.Trim();
                 notaGeneral.Fecha = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 notaGeneral.Habilitado = true;
                 if (notaGeneral.Compartida)

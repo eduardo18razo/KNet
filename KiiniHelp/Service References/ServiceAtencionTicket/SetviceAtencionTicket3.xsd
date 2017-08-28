@@ -34,6 +34,7 @@
       <xs:element name="_x003C_FechaHora_x003E_k__BackingField" type="xs:dateTime" />
       <xs:element name="_x003C_Id_x003E_k__BackingField" type="xs:int" />
       <xs:element name="_x003C_Nombre_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Privado_x003E_k__BackingField" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="HelperConversacionDetalle" nillable="true" type="tns:HelperConversacionDetalle" />

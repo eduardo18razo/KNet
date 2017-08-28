@@ -102,7 +102,7 @@ namespace KiiniHelp
                     if (Request.Params["confirmacionalta"] != null)
                     {
                         string[] values = Request.Params["confirmacionalta"].Split('_');
-                        if (!_servicioUsuarios.ValidaConfirmacion(int.Parse(values[0]), values[1].ToUpper()))
+                        if (!_servicioUsuarios.ValidaConfirmacion(int.Parse(values[0]), values[1]))
                         {
                             Response.Redirect(ResolveUrl("~/Default.aspx"));
                         }

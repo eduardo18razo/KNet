@@ -172,8 +172,8 @@ namespace KinniNet.Core.Sistema
                 if (db.Catalogos.Any(a => a.Id != catalogo.Id && a.Descripcion == catalogo.Descripcion))
                     throw new Exception("Ya existe un catálogo con este nombre.");
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                catalogo.Descripcion = catalogo.Descripcion.Trim().ToUpper();
-                catalogo.DescripcionLarga = catalogo.DescripcionLarga.Trim().ToUpper();
+                catalogo.Descripcion = catalogo.Descripcion.Trim();
+                catalogo.DescripcionLarga = catalogo.DescripcionLarga.Trim();
                 catalogo.Tabla = BusinessCadenas.Cadenas.FormatoBaseDatos((BusinessVariables.ParametrosCatalogo.PrefijoTabla + catalogo.Descripcion.Trim().ToUpper()).Replace(" ", string.Empty));
                 catalogo.EsMascaraCaptura = esMascara;
                 catalogo.Sistema = false;
@@ -212,8 +212,8 @@ namespace KinniNet.Core.Sistema
                 Catalogos catalogodb = db.Catalogos.SingleOrDefault(s => s.Id == catalogo.Id);
                 if (catalogodb != null)
                 {
-                    catalogodb.Descripcion = catalogo.Descripcion.Trim().ToUpper();
-                    catalogodb.DescripcionLarga = catalogo.DescripcionLarga.Trim().ToUpper();
+                    catalogodb.Descripcion = catalogo.Descripcion.Trim();
+                    catalogodb.DescripcionLarga = catalogo.DescripcionLarga.Trim();
                     catalogodb.EsMascaraCaptura = esMascara;
                     catalogodb.IdUsuarioModifico = catalogo.IdUsuarioModifico;
                     catalogodb.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
@@ -289,7 +289,7 @@ namespace KinniNet.Core.Sistema
             try
             {
                 Catalogos catalogo = db.Catalogos.Single(w => w.Id == idCatalogo);
-                string store = string.Format("{0} '{1}', '{2}'", BusinessVariables.ParametrosCatalogo.PrefijoComandoInsertar, catalogo.Tabla, descripcion.Trim().ToUpper());
+                string store = string.Format("{0} '{1}', '{2}'", BusinessVariables.ParametrosCatalogo.PrefijoComandoInsertar, catalogo.Tabla, descripcion.Trim());
                 db.ExecuteStoreCommand(store);
             }
             catch (Exception ex)
@@ -477,8 +477,8 @@ namespace KinniNet.Core.Sistema
             string tabla = null;
             try
             {
-                catalogo.Descripcion = catalogo.Descripcion.Trim().ToUpper();
-                catalogo.Tabla = (BusinessVariables.ParametrosCatalogo.PrefijoTabla + catalogo.Descripcion).Replace(" ", string.Empty);
+                catalogo.Descripcion = catalogo.Descripcion.Trim();
+                catalogo.Tabla = (BusinessVariables.ParametrosCatalogo.PrefijoTabla + catalogo.Descripcion).Replace(" ", string.Empty).ToUpper();
                 catalogo.EsMascaraCaptura = esMascara;
                 catalogo.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 catalogo.Archivo = true;

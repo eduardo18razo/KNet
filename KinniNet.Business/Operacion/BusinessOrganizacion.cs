@@ -358,7 +358,7 @@ namespace KinniNet.Core.Operacion
 
                     if (filtro.Trim() != string.Empty)
                     {
-                        filtro = filtro.ToUpper().Trim();
+                        filtro = filtro.Trim();
                         qry = qry.Where(w => w.Holding.Descripcion.Contains(filtro)
                                              || w.Compania.Descripcion.Contains(filtro)
                                              || w.Direccion.Descripcion.Contains(filtro)
@@ -413,7 +413,7 @@ namespace KinniNet.Core.Operacion
                 List<AliasOrganizacion> alias = new BusinessParametros().ObtenerAliasOrganizacion(organizacion.IdTipoUsuario);
                 if (organizacion.Holding != null)
                 {
-                    organizacion.Holding.Descripcion = organizacion.Holding.Descripcion.ToUpper();
+                    organizacion.Holding.Descripcion = organizacion.Holding.Descripcion.Trim();
                     organizacion.IdNivelOrganizacion = 1;
                     if (db.Holding.Any(a => a.Descripcion == organizacion.Holding.Descripcion && a.IdTipoUsuario == organizacion.Holding.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 1).Descripcion));
@@ -421,7 +421,7 @@ namespace KinniNet.Core.Operacion
 
                 if (organizacion.Compania != null)
                 {
-                    organizacion.Compania.Descripcion = organizacion.Compania.Descripcion.ToUpper();
+                    organizacion.Compania.Descripcion = organizacion.Compania.Descripcion.Trim();
                     organizacion.IdNivelOrganizacion = 2;
                     //if (db.Compañia.Any(a => a.Descripcion == organizacion.Compania.Descripcion && a.IdTipoUsuario == organizacion.Compania.IdTipoUsuario))
                     //throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 2).Descripcion));
@@ -432,7 +432,7 @@ namespace KinniNet.Core.Operacion
 
                 if (organizacion.Direccion != null)
                 {
-                    organizacion.Direccion.Descripcion = organizacion.Direccion.Descripcion.ToUpper();
+                    organizacion.Direccion.Descripcion = organizacion.Direccion.Descripcion.Trim();
                     organizacion.IdNivelOrganizacion = 3;
                     if (db.Organizacion.Where(w => w.IdHolding == organizacion.IdHolding).Any(a => a.Direccion.Descripcion == organizacion.Direccion.Descripcion && a.IdTipoUsuario == organizacion.Direccion.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 3).Descripcion));
@@ -440,7 +440,7 @@ namespace KinniNet.Core.Operacion
 
                 if (organizacion.SubDireccion != null)
                 {
-                    organizacion.SubDireccion.Descripcion = organizacion.SubDireccion.Descripcion.ToUpper();
+                    organizacion.SubDireccion.Descripcion = organizacion.SubDireccion.Descripcion.Trim();
                     organizacion.IdNivelOrganizacion = 4;
                     if (db.Organizacion.Where(w => w.IdHolding == organizacion.IdHolding).Any(a => a.SubDireccion.Descripcion == organizacion.SubDireccion.Descripcion && a.IdTipoUsuario == organizacion.SubDireccion.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 4).Descripcion));
@@ -448,7 +448,7 @@ namespace KinniNet.Core.Operacion
 
                 if (organizacion.Gerencia != null)
                 {
-                    organizacion.Gerencia.Descripcion = organizacion.Gerencia.Descripcion.ToUpper();
+                    organizacion.Gerencia.Descripcion = organizacion.Gerencia.Descripcion.Trim();
                     organizacion.IdNivelOrganizacion = 5;
                     if (db.Organizacion.Where(w => w.IdHolding == organizacion.IdHolding).Any(a => a.Gerencia.Descripcion == organizacion.Gerencia.Descripcion && a.IdTipoUsuario == organizacion.Gerencia.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 5).Descripcion));
@@ -456,7 +456,7 @@ namespace KinniNet.Core.Operacion
 
                 if (organizacion.SubGerencia != null)
                 {
-                    organizacion.SubGerencia.Descripcion = organizacion.SubGerencia.Descripcion.ToUpper();
+                    organizacion.SubGerencia.Descripcion = organizacion.SubGerencia.Descripcion.Trim();
                     organizacion.IdNivelOrganizacion = 6;
 
                     if (db.Organizacion.Where(w => w.IdHolding == organizacion.IdHolding).Any(a => a.SubGerencia.Descripcion == organizacion.SubGerencia.Descripcion && a.IdTipoUsuario == organizacion.SubGerencia.IdTipoUsuario))
@@ -465,7 +465,7 @@ namespace KinniNet.Core.Operacion
 
                 if (organizacion.Jefatura != null)
                 {
-                    organizacion.Jefatura.Descripcion = organizacion.Jefatura.Descripcion.ToUpper();
+                    organizacion.Jefatura.Descripcion = organizacion.Jefatura.Descripcion.Trim();
                     organizacion.IdNivelOrganizacion = 7;
                     if (db.Organizacion.Where(w => w.IdHolding == organizacion.IdHolding).Any(a => a.Jefatura.Descripcion == organizacion.Jefatura.Descripcion && a.IdTipoUsuario == organizacion.Jefatura.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 8).Descripcion));
@@ -490,7 +490,7 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                entidad.Descripcion = entidad.Descripcion.ToUpper();
+                entidad.Descripcion = entidad.Descripcion.Trim();
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el embebido
                 entidad.Habilitado = true;
@@ -520,7 +520,7 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                entidad.Descripcion = entidad.Descripcion.ToUpper();
+                entidad.Descripcion = entidad.Descripcion.Trim();
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el embebido
                 entidad.Habilitado = true;
@@ -550,7 +550,7 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                entidad.Descripcion = entidad.Descripcion.ToUpper();
+                entidad.Descripcion = entidad.Descripcion.Trim();
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el embebido
                 entidad.Habilitado = true;
@@ -580,7 +580,7 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                entidad.Descripcion = entidad.Descripcion.ToUpper();
+                entidad.Descripcion = entidad.Descripcion.Trim();
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el embebido
                 entidad.Habilitado = true;
@@ -610,7 +610,7 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                entidad.Descripcion = entidad.Descripcion.ToUpper();
+                entidad.Descripcion = entidad.Descripcion.Trim();
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el embebido
                 entidad.Habilitado = true;
@@ -640,7 +640,7 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                entidad.Descripcion = entidad.Descripcion.ToUpper();
+                entidad.Descripcion = entidad.Descripcion.Trim();
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el embebido
                 entidad.Habilitado = true;
@@ -670,7 +670,7 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                entidad.Descripcion = entidad.Descripcion.ToUpper();
+                entidad.Descripcion = entidad.Descripcion.Trim();
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 //TODO: Cambiar habilitado por el embebido
                 entidad.Habilitado = true;
@@ -1294,49 +1294,49 @@ namespace KinniNet.Core.Operacion
                     {
                         if (db.Holding.Any(a => a.Descripcion == org.Holding.Descripcion && a.IdTipoUsuario == org.Holding.IdTipoUsuario && a.Id != organizacion.Holding.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 1).Descripcion));
-                        organizacion.Holding.Descripcion = org.Holding.Descripcion.ToUpper();
+                        organizacion.Holding.Descripcion = org.Holding.Descripcion.Trim();
                     }
 
                     if (organizacion.Compania != null)
                     {
                         if (db.Compañia.Any(a => a.Descripcion == org.Compania.Descripcion && a.IdTipoUsuario == org.Compania.IdTipoUsuario && a.Id != organizacion.Compania.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 2).Descripcion));
-                        organizacion.Compania.Descripcion = org.Compania.Descripcion.ToUpper();
+                        organizacion.Compania.Descripcion = org.Compania.Descripcion.Trim();
                     }
 
                     if (organizacion.Direccion != null)
                     {
                         if (db.Direccion.Any(a => a.Descripcion == org.Direccion.Descripcion && a.IdTipoUsuario == org.Direccion.IdTipoUsuario && a.Id != organizacion.Direccion.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 3).Descripcion));
-                        organizacion.Direccion.Descripcion = org.Direccion.Descripcion.ToUpper();
+                        organizacion.Direccion.Descripcion = org.Direccion.Descripcion.Trim();
                     }
 
                     if (organizacion.SubDireccion != null)
                     {
                         if (db.SubDireccion.Any(a => a.Descripcion == org.SubDireccion.Descripcion && a.IdTipoUsuario == org.SubDireccion.IdTipoUsuario && a.Id != organizacion.SubDireccion.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 4).Descripcion));
-                        organizacion.SubDireccion.Descripcion = org.SubDireccion.Descripcion.ToUpper();
+                        organizacion.SubDireccion.Descripcion = org.SubDireccion.Descripcion.Trim();
                     }
 
                     if (organizacion.Gerencia != null)
                     {
                         if (db.Gerencia.Any(a => a.Descripcion == org.Gerencia.Descripcion && a.IdTipoUsuario == org.Gerencia.IdTipoUsuario && a.Id != organizacion.Gerencia.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 5).Descripcion));
-                        organizacion.Gerencia.Descripcion = org.Gerencia.Descripcion.ToUpper();
+                        organizacion.Gerencia.Descripcion = org.Gerencia.Descripcion.Trim();
                     }
 
                     if (organizacion.SubGerencia != null)
                     {
                         if (db.SubGerencia.Any(a => a.Descripcion == org.SubGerencia.Descripcion && a.IdTipoUsuario == org.SubGerencia.IdTipoUsuario && a.Id != organizacion.SubGerencia.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 6).Descripcion));
-                        organizacion.SubGerencia.Descripcion = org.SubGerencia.Descripcion.ToUpper();
+                        organizacion.SubGerencia.Descripcion = org.SubGerencia.Descripcion.Trim();
                     }
 
                     if (organizacion.Jefatura != null)
                     {
                         if (db.Jefatura.Any(a => a.Descripcion == org.Jefatura.Descripcion && a.IdTipoUsuario == org.Jefatura.IdTipoUsuario && a.Id != organizacion.Jefatura.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasOrganizacionNivel(organizacion.IdTipoUsuario, 7).Descripcion));
-                        organizacion.Jefatura.Descripcion = org.Jefatura.Descripcion.ToUpper();
+                        organizacion.Jefatura.Descripcion = org.Jefatura.Descripcion.Trim();
                     }
 
                     if (organizacion.Id == 0)

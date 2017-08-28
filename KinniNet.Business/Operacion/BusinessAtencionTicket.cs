@@ -180,7 +180,7 @@ namespace KinniNet.Core.Operacion
                             CultureInfo.InvariantCulture),
                             IdEstatus = idEstatus,
                             IdUsuarioMovimiento = idUsuario,
-                            Comentarios = comentario.Trim().ToUpper()
+                            Comentarios = comentario.Trim()
                     }};
                     if (idEstatus == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto)
                     {
@@ -196,7 +196,7 @@ namespace KinniNet.Core.Operacion
                                 FechaAsignacion =
                                     DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"),
                                         "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
-                                Comentarios = comentario.Trim().ToUpper()
+                                Comentarios = comentario.Trim()
                             }
                         };
                     }
@@ -211,7 +211,7 @@ namespace KinniNet.Core.Operacion
                                 IdUsuarioAsigno = idUsuario,
                                 IdUsuarioAsignado = null,
                                 FechaAsignacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
-                                Comentarios = comentario.Trim().ToUpper()
+                                Comentarios = comentario.Trim()
                             }
                         };
                     }
@@ -227,7 +227,7 @@ namespace KinniNet.Core.Operacion
                                 IdUsuarioAsigno = idUsuario,
                                 IdUsuarioAsignado = null,
                                 FechaAsignacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture),
-                                Comentarios = comentario.Trim().ToUpper()
+                                Comentarios = comentario.Trim()
                             }
                         };
                     }
@@ -438,6 +438,31 @@ namespace KinniNet.Core.Operacion
                             });
                         }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
+        public int ObtenerNumeroTicketsEnAtencionNuevos(int idUsuario)
+        {
+            int result = 0;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.LazyLoadingEnabled = true;
+                List<Ticket> tickets = db.Ticket.Where(s => s.IdEstatusAsignacion == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Asignado).ToList();
+                foreach (Ticket ticket in tickets)
+                {
+                    result = ticket.TicketAsignacion.Last().IdUsuarioAsignado == idUsuario && !ticket.TicketAsignacion.Last().Visto ? result + 1 : result;
+                }
+                
             }
             catch (Exception ex)
             {

@@ -534,7 +534,7 @@ namespace KinniNet.Core.Operacion
             try
             {
 
-                grupoUsuario.Descripcion = grupoUsuario.Descripcion.Trim().ToUpper();
+                grupoUsuario.Descripcion = grupoUsuario.Descripcion.Trim();
                 if (db.GrupoUsuario.Any(a => a.Descripcion == grupoUsuario.Descripcion && a.IdTipoGrupo == grupoUsuario.IdTipoGrupo))
                 {
                     throw new Exception("Ya existe un Grupo con esta descripcion");
@@ -566,7 +566,7 @@ namespace KinniNet.Core.Operacion
             try
             {
 
-                grupoUsuario.Descripcion = grupoUsuario.Descripcion.Trim().ToUpper();
+                grupoUsuario.Descripcion = grupoUsuario.Descripcion.Trim();
                 if (db.GrupoUsuario.Any(a => a.Descripcion == grupoUsuario.Descripcion && a.IdTipoGrupo == grupoUsuario.IdTipoGrupo))
                 {
                     throw new Exception("Ya existe un Grupo con esta descripcion");
@@ -635,7 +635,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.LazyLoadingEnabled = true;
-                gpo.Descripcion = gpo.Descripcion.Trim().ToUpper();
+                gpo.Descripcion = gpo.Descripcion.Trim();
                 if (db.GrupoUsuario.Any(a => a.Descripcion == gpo.Descripcion && a.IdTipoGrupo == gpo.IdTipoGrupo && a.Id != gpo.Id))
                 {
                     throw new Exception("Ya existe un Grupo con esta descripción");
@@ -756,7 +756,7 @@ namespace KinniNet.Core.Operacion
                             }
                     }
                     grupo.TieneSupervisor = grupo.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
-                    grupo.Descripcion = gpo.Descripcion.Trim().ToUpper();
+                    grupo.Descripcion = gpo.Descripcion.Trim();
 
                     List<EstatusTicketSubRolGeneral> lstEliminarPoliticaEstatus = db.EstatusTicketSubRolGeneral.Where(w => w.IdGrupoUsuario == grupo.Id).ToList();
                     List<EstatusAsignacionSubRolGeneral> lstEliminarPoliticaEstatusAsignacion = db.EstatusAsignacionSubRolGeneral.Where(w => w.IdGrupoUsuario == grupo.Id).ToList();

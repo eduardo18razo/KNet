@@ -25,5 +25,8 @@ namespace KiiniNet.Services.Operacion.Interface
         [OperationContract]
         HelperticketEnAtencion ObtenerTicketEnAtencion(int idTicket, int idUsuario);
 
+        [OperationContract]
+        int ObtenerNumeroTicketsEnAtencionNuevos(int idUsuario);
+
     }
 }

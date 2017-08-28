@@ -33,6 +33,10 @@ namespace KiiniHelp.ServiceAtencionTicket {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAtencionTicket/ObtenerTicketEnAtencion", ReplyAction="http://tempuri.org/IServiceAtencionTicket/ObtenerTicketEnAtencionResponse")]
         KiiniNet.Entities.Helper.HelperticketEnAtencion ObtenerTicketEnAtencion(int idTicket, int idUsuario);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAtencionTicket/ObtenerNumeroTicketsEnAtencionNuevos", ReplyAction="http://tempuri.org/IServiceAtencionTicket/ObtenerNumeroTicketsEnAtencionNuevosRes" +
+            "ponse")]
+        int ObtenerNumeroTicketsEnAtencionNuevos(int idUsuario);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -84,6 +88,10 @@ namespace KiiniHelp.ServiceAtencionTicket {
         
         public KiiniNet.Entities.Helper.HelperticketEnAtencion ObtenerTicketEnAtencion(int idTicket, int idUsuario) {
             return base.Channel.ObtenerTicketEnAtencion(idTicket, idUsuario);
+        }
+        
+        public int ObtenerNumeroTicketsEnAtencionNuevos(int idUsuario) {
+            return base.Channel.ObtenerNumeroTicketsEnAtencionNuevos(idUsuario);
         }
     }
 }

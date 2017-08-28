@@ -504,7 +504,7 @@ namespace KiiniHelp.UserControls.Altas
                 Button lbtn = (Button)sender;
                 if (sender == null) return;
                 ValidaSeleccion(lbtn.CommandArgument);
-                lblTitleCatalogo.Text = ObtenerRuta(lbtn.CommandArgument, lbtn.CommandName.ToUpper());
+                lblTitleCatalogo.Text = ObtenerRuta(lbtn.CommandArgument, lbtn.CommandName);
                 hfCatalogo.Value = lbtn.CommandArgument;
                 ddlTipoUsuarioCatalogo.SelectedValue = IdTipoUsuario.ToString();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoOrganizacion\");", true);

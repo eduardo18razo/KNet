@@ -44,6 +44,12 @@
   <wsdl:message name="IServiceAtencionTicket_ObtenerTicketEnAtencion_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerTicketEnAtencionResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceAtencionTicket_ObtenerNumeroTicketsEnAtencionNuevos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerNumeroTicketsEnAtencionNuevos" />
+  </wsdl:message>
+  <wsdl:message name="IServiceAtencionTicket_ObtenerNumeroTicketsEnAtencionNuevos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerNumeroTicketsEnAtencionNuevosResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceAtencionTicket">
     <wsdl:operation name="AutoAsignarTicket">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceAtencionTicket/AutoAsignarTicket" message="tns:IServiceAtencionTicket_AutoAsignarTicket_InputMessage" />
@@ -68,6 +74,10 @@
     <wsdl:operation name="ObtenerTicketEnAtencion">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceAtencionTicket/ObtenerTicketEnAtencion" message="tns:IServiceAtencionTicket_ObtenerTicketEnAtencion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceAtencionTicket/ObtenerTicketEnAtencionResponse" message="tns:IServiceAtencionTicket_ObtenerTicketEnAtencion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerNumeroTicketsEnAtencionNuevos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceAtencionTicket/ObtenerNumeroTicketsEnAtencionNuevos" message="tns:IServiceAtencionTicket_ObtenerNumeroTicketsEnAtencionNuevos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceAtencionTicket/ObtenerNumeroTicketsEnAtencionNuevosResponse" message="tns:IServiceAtencionTicket_ObtenerNumeroTicketsEnAtencionNuevos_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EndPointSeguridad" type="tns:IServiceAtencionTicket">
@@ -119,6 +129,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerTicketEnAtencion">
       <soap:operation soapAction="http://tempuri.org/IServiceAtencionTicket/ObtenerTicketEnAtencion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerNumeroTicketsEnAtencionNuevos">
+      <soap:operation soapAction="http://tempuri.org/IServiceAtencionTicket/ObtenerNumeroTicketsEnAtencionNuevos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

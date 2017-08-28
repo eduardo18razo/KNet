@@ -6,11 +6,13 @@ using System.Web.Configuration;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using KiiniHelp.ServiceAtencionTicket;
 using KiiniHelp.ServiceParametrosSistema;
 using KiiniHelp.ServiceSeguridad;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
+using Telerik.Web.UI;
 using Menu = KiiniNet.Entities.Cat.Sistema.Menu;
 
 namespace KiiniHelp
@@ -19,6 +21,7 @@ namespace KiiniHelp
     {
         private readonly ServiceSecurityClient _servicioSeguridad = new ServiceSecurityClient();
         private readonly ServiceParametrosClient _servicioParametros = new ServiceParametrosClient();
+        private readonly ServiceAtencionTicketClient _servicioAtencion = new ServiceAtencionTicketClient();
 
         private List<string> _lstError = new List<string>();
         private class TicketSeleccionado
@@ -142,6 +145,19 @@ namespace KiiniHelp
                 Alerta = _lstError;
             }
         }
+
+        private void ActualizaTicketsAsignados()
+        {
+            try
+            {
+                lblNoTicketsAsignados.Text = _servicioAtencion.ObtenerNumeroTicketsEnAtencionNuevos(((Usuario) Session["UserData"]).Id).ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -177,7 +193,7 @@ namespace KiiniHelp
                     rptMenu.DataSource = _servicioSeguridad.ObtenerMenuUsuario(usuario.Id, rolSeleccionado, rolSeleccionado != 0);
                     rptMenu.DataBind();
                 }
-
+                ActualizaTicketsAsignados();
                 Session["ParametrosGenerales"] = _servicioParametros.ObtenerParametrosGenerales();
                 LlenaTicketsAbiertos();
             }

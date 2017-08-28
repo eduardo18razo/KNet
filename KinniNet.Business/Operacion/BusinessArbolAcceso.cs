@@ -697,37 +697,37 @@ namespace KinniNet.Core.Operacion
                 List<GrupoUsuario> lstGrupoUsuario = null;
                 if (arbol.Nivel1 != null)
                 {
-                    arbol.Nivel1.Descripcion = arbol.Nivel1.Descripcion.ToUpper();
+                    arbol.Nivel1.Descripcion = arbol.Nivel1.Descripcion.Trim();
                     arbol.Nivel1.Habilitado = arbol.Nivel1.Habilitado;
                 }
                 if (arbol.Nivel2 != null)
                 {
-                    arbol.Nivel2.Descripcion = arbol.Nivel2.Descripcion.ToUpper();
+                    arbol.Nivel2.Descripcion = arbol.Nivel2.Descripcion.Trim();
                     arbol.Nivel2.Habilitado = arbol.Nivel2.Habilitado;
                 }
                 if (arbol.Nivel3 != null)
                 {
-                    arbol.Nivel3.Descripcion = arbol.Nivel3.Descripcion.ToUpper();
+                    arbol.Nivel3.Descripcion = arbol.Nivel3.Descripcion.Trim();
                     arbol.Nivel3.Habilitado = arbol.Nivel3.Habilitado;
                 }
                 if (arbol.Nivel4 != null)
                 {
-                    arbol.Nivel4.Descripcion = arbol.Nivel4.Descripcion.ToUpper();
+                    arbol.Nivel4.Descripcion = arbol.Nivel4.Descripcion.Trim();
                     arbol.Nivel4.Habilitado = arbol.Nivel4.Habilitado;
                 }
                 if (arbol.Nivel5 != null)
                 {
-                    arbol.Nivel5.Descripcion = arbol.Nivel5.Descripcion.ToUpper();
+                    arbol.Nivel5.Descripcion = arbol.Nivel5.Descripcion.Trim();
                     arbol.Nivel5.Habilitado = arbol.Nivel5.Habilitado;
                 }
                 if (arbol.Nivel6 != null)
                 {
-                    arbol.Nivel6.Descripcion = arbol.Nivel6.Descripcion.ToUpper();
+                    arbol.Nivel6.Descripcion = arbol.Nivel6.Descripcion.Trim();
                     arbol.Nivel6.Habilitado = arbol.Nivel6.Habilitado;
                 }
                 if (arbol.Nivel7 != null)
                 {
-                    arbol.Nivel7.Descripcion = arbol.Nivel7.Descripcion.ToUpper();
+                    arbol.Nivel7.Descripcion = arbol.Nivel7.Descripcion.Trim();
                     arbol.Nivel7.Habilitado = arbol.Nivel7.Habilitado;
                 }
                 if (arbol.EsTerminal && arbol.IdTipoArbolAcceso != (int)BusinessVariables.EnumTipoArbol.ConsultarInformacion)
@@ -1296,19 +1296,19 @@ namespace KinniNet.Core.Operacion
                     arbol.InventarioArbolAcceso.First().IdEncuesta = arbolAccesoActualizar.InventarioArbolAcceso.First().IdEncuesta;
 
                     if (arbol.Nivel7 != null)
-                        arbol.Nivel7.Descripcion = descripcion.Trim().ToUpper();
+                        arbol.Nivel7.Descripcion = descripcion.Trim();
                     else if (arbol.Nivel6 != null)
-                        arbol.Nivel6.Descripcion = descripcion.Trim().ToUpper();
+                        arbol.Nivel6.Descripcion = descripcion.Trim();
                     else if (arbol.Nivel5 != null)
-                        arbol.Nivel5.Descripcion = descripcion.Trim().ToUpper();
+                        arbol.Nivel5.Descripcion = descripcion.Trim();
                     else if (arbol.Nivel4 != null)
-                        arbol.Nivel4.Descripcion = descripcion.Trim().ToUpper();
+                        arbol.Nivel4.Descripcion = descripcion.Trim();
                     else if (arbol.Nivel3 != null)
-                        arbol.Nivel3.Descripcion = descripcion.Trim().ToUpper();
+                        arbol.Nivel3.Descripcion = descripcion.Trim();
                     else if (arbol.Nivel2 != null)
-                        arbol.Nivel2.Descripcion = descripcion.Trim().ToUpper();
+                        arbol.Nivel2.Descripcion = descripcion.Trim();
                     else if (arbol.Nivel1 != null)
-                        arbol.Nivel1.Descripcion = descripcion.Trim().ToUpper();
+                        arbol.Nivel1.Descripcion = descripcion.Trim();
 
                     db.SaveChanges();
                 }

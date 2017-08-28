@@ -74,7 +74,7 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                horario.Descripcion = horario.Descripcion.ToUpper();
+                horario.Descripcion = horario.Descripcion.Trim();
                 horario.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 horario.Habilitado = true;
                 if (db.Horario.Any(a => a.Descripcion == horario.Descripcion))
@@ -97,7 +97,7 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                horario.Descripcion = horario.Descripcion.ToUpper();
+                horario.Descripcion = horario.Descripcion.Trim();
                 horario.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 if (db.Horario.Any(a => a.Descripcion == horario.Descripcion))
                     throw new Exception("Ya existe un horario con esta descripción");
@@ -238,7 +238,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                dia.Descripcion = dia.Descripcion.ToUpper();
+                dia.Descripcion = dia.Descripcion.Trim();
                 dia.Habilitado = true;
                 db.DiaFeriado.AddObject(dia);
                 db.SaveChanges();
@@ -305,11 +305,11 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                item.Descripcion = item.Descripcion.ToUpper();
+                item.Descripcion = item.Descripcion.Trim();
                 item.Habilitado = true;
                 foreach (DiasFeriadosDetalle detalle in item.DiasFeriadosDetalle)
                 {
-                    detalle.Descripcion = detalle.Descripcion.ToUpper();
+                    detalle.Descripcion = detalle.Descripcion.Trim();
                     detalle.Habilitado = true;
                 }
                 db.DiasFeriados.AddObject(item);

@@ -72,7 +72,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 puesto.Habilitado = true;
-                puesto.Descripcion = puesto.Descripcion.Trim().ToUpper();
+                puesto.Descripcion = puesto.Descripcion.Trim();
                 if (db.Puesto.Any(a => a.Descripcion == puesto.Descripcion&& a.IdTipoUsuario == puesto.IdTipoUsuario))
                     throw new Exception("Este Puesto ya existe.");
                 if (puesto.Id == 0)
@@ -100,7 +100,7 @@ namespace KinniNet.Core.Operacion
                 Puesto pto = db.Puesto.SingleOrDefault(s => s.Id == idPuesto);
                 
                 if (pto == null) return;
-                pto.Descripcion = puesto.Descripcion.Trim().ToUpper();
+                pto.Descripcion = puesto.Descripcion.Trim();
 
                 db.SaveChanges();
             }

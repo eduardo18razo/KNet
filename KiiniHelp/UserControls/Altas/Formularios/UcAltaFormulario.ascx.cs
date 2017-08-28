@@ -106,7 +106,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 TipoCampoMascara tipoCampo = _servicioSistemaTipoCampoMascara.TipoCampoMascaraId(idTipoCampo);
                 if (tipoCampo == null) return;
                 imgTitleImage.ImageUrl = "~/assets/images/controls/" + tipoCampo.Image;
-                lblTitleAgregarCampo.Text = "" + tipoCampo.Descripcion.ToUpper();
+                lblTitleAgregarCampo.Text = "" + tipoCampo.Descripcion.Trim();
                 divValorMaximo.Visible = false;
                 lblDescripcion.Text = tipoCampo.DescripcionTexto;
 
@@ -600,7 +600,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                         LongitudMaxima = tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Texto ? int.Parse(tipoCampo.LongitudMaximaPermitida) :
                                          tipoCampo.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo ? 3900 :
                                          tipoCampo.LongitudMaxima ? Convert.ToInt32(txtLongitudMaxima.Text.Trim()) : tipoCampo.Mask ? txtMascara.Text.Trim().Length : (int?)null,
-                        SimboloMoneda = tipoCampo.SimboloMoneda ? txtSimboloMoneda.Text.Trim().ToUpper() : null,
+                        SimboloMoneda = tipoCampo.SimboloMoneda ? txtSimboloMoneda.Text.Trim() : null,
                         ValorMinimo = tipoCampo.ValorMinimo ? decimal.Parse(txtValorMinimo.Text.Trim()) : (decimal?)null,
                         ValorMaximo = tipoCampo.ValorMaximo ? decimal.Parse(txtValorMaximo.Text.Trim()) : (decimal?)null,
                         MascaraDetalle = tipoCampo.Mask ? txtMascara.Text.Trim() : null,

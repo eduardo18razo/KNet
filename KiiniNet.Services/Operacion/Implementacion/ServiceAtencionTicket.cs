@@ -97,5 +97,20 @@ namespace KiiniNet.Services.Operacion.Implementacion
                 throw new Exception(ex.Message);
             }
         }
+
+        public int ObtenerNumeroTicketsEnAtencionNuevos(int idUsuario)
+        {
+            try
+            {
+                using (BusinessAtencionTicket negocio = new BusinessAtencionTicket())
+                {
+                    return negocio.ObtenerNumeroTicketsEnAtencionNuevos(idUsuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

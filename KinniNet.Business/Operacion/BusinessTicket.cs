@@ -794,7 +794,7 @@ namespace KinniNet.Core.Operacion
                         DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff",
                             CultureInfo.InvariantCulture),
                     ClaveRegistro = GeneraCampoRandom(),
-                    Observaciones = observaciones.Trim().ToUpper()
+                    Observaciones = observaciones.Trim()
                 };
                 db.PreTicket.AddObject(result);
                 db.SaveChanges();

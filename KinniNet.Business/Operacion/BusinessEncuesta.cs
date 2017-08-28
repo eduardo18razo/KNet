@@ -183,9 +183,9 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                encuesta.Titulo = encuesta.Titulo.ToUpper();
-                encuesta.TituloCliente = encuesta.TituloCliente.ToUpper();
-                encuesta.Descripcion = encuesta.Descripcion.ToUpper();
+                encuesta.Titulo = encuesta.Titulo.Trim();
+                encuesta.TituloCliente = encuesta.TituloCliente.Trim();
+                encuesta.Descripcion = encuesta.Descripcion.Trim();
                 encuesta.FechaAlta = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 //TODO: Cambiar habilitado por el embebido
                 encuesta.Habilitado = true;
@@ -212,9 +212,9 @@ namespace KinniNet.Core.Operacion
                 Encuesta encuestaActualizar = db.Encuesta.SingleOrDefault(s => s.Id == encuesta.Id);
                 if (encuestaActualizar != null)
                 {
-                    encuestaActualizar.Titulo = encuesta.Titulo.Trim().ToUpper();
-                    encuestaActualizar.TituloCliente = encuesta.TituloCliente.Trim().ToUpper();
-                    encuestaActualizar.Descripcion = encuesta.Descripcion.Trim().ToUpper();
+                    encuestaActualizar.Titulo = encuesta.Titulo.Trim();
+                    encuestaActualizar.TituloCliente = encuesta.TituloCliente.Trim();
+                    encuestaActualizar.Descripcion = encuesta.Descripcion.Trim();
                     encuestaActualizar.IdUsuarioModifico = encuesta.IdUsuarioModifico;
                     encuestaActualizar.FechaModificacion= DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
                 }

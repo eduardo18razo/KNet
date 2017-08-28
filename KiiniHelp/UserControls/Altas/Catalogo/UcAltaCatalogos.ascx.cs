@@ -181,7 +181,7 @@ namespace KiiniHelp.UserControls.Altas.Catalogo
                     if (txtFooter.Text.Trim() == string.Empty)
                         throw new Exception("Ingrese una descripción.");
                     List<CatalogoGenerico> tmpList = Session["registrosCatalogos"] == null ? new List<CatalogoGenerico>() : (List<CatalogoGenerico>)Session["registrosCatalogos"];
-                    tmpList.Add(new CatalogoGenerico { Descripcion = txtFooter.Text.Trim().ToUpper() });
+                    tmpList.Add(new CatalogoGenerico { Descripcion = txtFooter.Text.Trim() });
                     Session["registrosCatalogos"] = tmpList;
                     LlenaRegistros();
                 }

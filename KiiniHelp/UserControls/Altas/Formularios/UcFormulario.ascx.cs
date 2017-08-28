@@ -511,7 +511,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                         campoCapturado = new HelperCampoMascaraCaptura
                                         {
                                             NombreCampo = campo.NombreCampo,
-                                            Valor = campo.Requerido ? txt.Text.Trim().ToUpper() : txt.Text.Trim() == string.Empty ? "0" : txt.Text.Trim().ToUpper()
+                                            Valor = campo.Requerido ? txt.Text.Trim() : txt.Text.Trim() == string.Empty ? "0" : txt.Text.Trim()
                                         };
                                         lstCamposCapturados.Add(campoCapturado);
                                         break;

@@ -126,9 +126,9 @@ namespace KinniNet.Core.Operacion
                 string tmpurl = usuario.Password;
                 Guid g = Guid.NewGuid();
                 ParametroCorreo correo = db.ParametroCorreo.SingleOrDefault(s => s.IdTipoCorreo == (int)BusinessVariables.EnumTipoCorreo.AltaUsuario && s.Habilitado);
-                usuario.ApellidoPaterno = usuario.ApellidoPaterno.ToUpper();
-                usuario.ApellidoMaterno = usuario.ApellidoMaterno.ToUpper();
-                usuario.Nombre = usuario.Nombre.ToUpper();
+                usuario.ApellidoPaterno = usuario.ApellidoPaterno.Trim();
+                usuario.ApellidoMaterno = usuario.ApellidoMaterno.Trim();
+                usuario.Nombre = usuario.Nombre.Trim();
                 usuario.Password = BusinessQueryString.Encrypt(ConfigurationManager.AppSettings["siteUrl"] + tmpurl + "?confirmacionalta=" + usuario.Id + "_" + g);
                 usuario.UsuarioLinkPassword = new List<UsuarioLinkPassword>
                 {
@@ -180,9 +180,9 @@ namespace KinniNet.Core.Operacion
                 db.ContextOptions.LazyLoadingEnabled = true;
                 if (userData != null)
                 {
-                    userData.ApellidoMaterno = usuario.ApellidoMaterno.Trim().ToUpper();
-                    userData.ApellidoPaterno = usuario.ApellidoPaterno.Trim().ToUpper();
-                    userData.Nombre = usuario.Nombre.Trim().ToUpper();
+                    userData.ApellidoMaterno = usuario.ApellidoMaterno.Trim();
+                    userData.ApellidoPaterno = usuario.ApellidoPaterno.Trim();
+                    userData.Nombre = usuario.Nombre.Trim().Trim();
                     userData.IdPuesto = usuario.IdPuesto;
                     userData.IdOrganizacion = usuario.IdOrganizacion;
                     userData.IdUbicacion = usuario.IdUbicacion;

@@ -73,7 +73,7 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
                         {
                             HtmlGenericControl createDiv = new HtmlGenericControl("DIV");
                             createDiv.Attributes["class"] = "form-group";
-                            Label lbl = new Label { Text = string.Format("{0}", pregunta.Pregunta.ToUpper()), CssClass = "control-label" };
+                            Label lbl = new Label { Text = string.Format("{0}", pregunta.Pregunta.Trim()), CssClass = "control-label" };
                             createDiv.Controls.Add(lbl);
                             divControles.Controls.Add(createDiv);
                             createDiv = new HtmlGenericControl("DIV");
@@ -95,7 +95,7 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
                         {
                             HtmlGenericControl createDiv = new HtmlGenericControl("DIV");
                             createDiv.Attributes["class"] = "form-group";
-                            Label lbl = new Label { Text = string.Format("{0}", pregunta.Pregunta.ToUpper()), CssClass = "control-label" };
+                            Label lbl = new Label { Text = string.Format("{0}", pregunta.Pregunta.Trim()), CssClass = "control-label" };
                             createDiv.Controls.Add(lbl);
                             divControles.Controls.Add(createDiv);
                             createDiv = new HtmlGenericControl("DIV");
@@ -119,7 +119,7 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
                         {
                             HtmlGenericControl createDiv = new HtmlGenericControl("DIV");
                             createDiv.Attributes["class"] = "form-group";
-                            Label lbl = new Label { Text = string.Format("{0}", pregunta.Pregunta.ToUpper()), CssClass = "control-label" };
+                            Label lbl = new Label { Text = string.Format("{0}", pregunta.Pregunta.Trim()), CssClass = "control-label" };
                             createDiv.Controls.Add(lbl);
                             divControles.Controls.Add(createDiv);
                             createDiv = new HtmlGenericControl("DIV");
@@ -140,7 +140,7 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
                         {
                             HtmlGenericControl createDiv = new HtmlGenericControl("DIV") ;
                             createDiv.Attributes["class"] = "form-group";
-                            Label lbl = new Label { Text = string.Format("{0}", pregunta.Pregunta.ToUpper()), CssClass = "control-label" };
+                            Label lbl = new Label { Text = string.Format("{0}", pregunta.Pregunta.Trim()), CssClass = "control-label" };
                             createDiv.Controls.Add(lbl);
                             divControles.Controls.Add(createDiv);
                             createDiv = new HtmlGenericControl("DIV");

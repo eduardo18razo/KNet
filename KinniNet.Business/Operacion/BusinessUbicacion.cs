@@ -230,12 +230,12 @@ namespace KinniNet.Core.Operacion
                 if (ubicacion.Campus != null)
                 {
                     ubicacion.IdNivelUbicacion = 2;
-                    ubicacion.Campus.Descripcion = ubicacion.Campus.Descripcion.ToUpper();
+                    ubicacion.Campus.Descripcion = ubicacion.Campus.Descripcion.Trim();
                     foreach (Domicilio domicilio in ubicacion.Campus.Domicilio)
                     {
-                        domicilio.Calle = domicilio.Calle.ToUpper();
-                        domicilio.NoExt = domicilio.NoExt.ToUpper();
-                        domicilio.NoInt = domicilio.NoInt.ToUpper();
+                        domicilio.Calle = domicilio.Calle.Trim();
+                        domicilio.NoExt = domicilio.NoExt.Trim();
+                        domicilio.NoInt = domicilio.NoInt.Trim();
                     }
                         if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais).Any(a => a.Campus.Descripcion == ubicacion.Campus.Descripcion && a.IdTipoUsuario == ubicacion.Campus.IdTipoUsuario))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 2).Descripcion));
@@ -243,7 +243,7 @@ namespace KinniNet.Core.Operacion
                 if (ubicacion.Torre != null)
                 {
                     ubicacion.IdNivelUbicacion = 3;
-                    ubicacion.Torre.Descripcion = ubicacion.Torre.Descripcion.ToUpper();
+                    ubicacion.Torre.Descripcion = ubicacion.Torre.Descripcion.Trim();
                     if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais).Any(a => a.Torre.Descripcion == ubicacion.Torre.Descripcion && a.IdTipoUsuario == ubicacion.Torre.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 3).Descripcion));
                 }
@@ -251,7 +251,7 @@ namespace KinniNet.Core.Operacion
                 if (ubicacion.Piso != null)
                 {
                     ubicacion.IdNivelUbicacion = 4;
-                    ubicacion.Piso.Descripcion = ubicacion.Piso.Descripcion.ToUpper();
+                    ubicacion.Piso.Descripcion = ubicacion.Piso.Descripcion.Trim();
                     if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais).Any(a => a.Piso.Descripcion == ubicacion.Piso.Descripcion && a.IdTipoUsuario == ubicacion.Piso.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 4).Descripcion));
                 }
@@ -259,7 +259,7 @@ namespace KinniNet.Core.Operacion
                 if (ubicacion.Zona != null)
                 {
                     ubicacion.IdNivelUbicacion = 5;
-                    ubicacion.Zona.Descripcion = ubicacion.Zona.Descripcion.ToUpper();
+                    ubicacion.Zona.Descripcion = ubicacion.Zona.Descripcion.Trim();
 
                     if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais).Any(a => a.Zona.Descripcion == ubicacion.Zona.Descripcion && a.IdTipoUsuario == ubicacion.Zona.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 5).Descripcion));
@@ -268,7 +268,7 @@ namespace KinniNet.Core.Operacion
                 if (ubicacion.SubZona != null)
                 {
                     ubicacion.IdNivelUbicacion = 6;
-                    ubicacion.SubZona.Descripcion = ubicacion.SubZona.Descripcion.ToUpper();
+                    ubicacion.SubZona.Descripcion = ubicacion.SubZona.Descripcion.Trim();
                     if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais).Any(a => a.SubZona.Descripcion == ubicacion.SubZona.Descripcion && a.IdTipoUsuario == ubicacion.SubZona.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 6).Descripcion));
                 }
@@ -276,7 +276,7 @@ namespace KinniNet.Core.Operacion
                 if (ubicacion.SiteRack != null)
                 {
                     ubicacion.IdNivelUbicacion = 7;
-                    ubicacion.SiteRack.Descripcion = ubicacion.SiteRack.Descripcion.ToUpper();
+                    ubicacion.SiteRack.Descripcion = ubicacion.SiteRack.Descripcion.Trim();
                     if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais).Any(a => a.SiteRack.Descripcion == ubicacion.SiteRack.Descripcion && a.IdTipoUsuario == ubicacion.SiteRack.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 7).Descripcion));
                 }
@@ -490,7 +490,7 @@ namespace KinniNet.Core.Operacion
 
                     if (filtro.Trim() != string.Empty)
                     {
-                        filtro = filtro.ToUpper().Trim();
+                        filtro = filtro.Trim();
                         qry = qry.Where(w => w.Pais.Descripcion.Contains(filtro)
                             || w.Campus.Descripcion.Contains(filtro)
                             || w.Torre.Descripcion.Contains(filtro)
@@ -692,7 +692,7 @@ namespace KinniNet.Core.Operacion
                     {
                         if (db.Pais.Any(a => a.Descripcion == ub.Pais.Descripcion && a.IdTipoUsuario == ub.Pais.IdTipoUsuario && a.Id != ubicacion.Pais.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 1).Descripcion));
-                        ubicacion.Pais.Descripcion = ub.Pais.Descripcion.ToUpper();
+                        ubicacion.Pais.Descripcion = ub.Pais.Descripcion.Trim();
                     }
 
                     if (ubicacion.Campus != null)
@@ -700,13 +700,13 @@ namespace KinniNet.Core.Operacion
                         if (db.Campus.Any(a => a.Descripcion == ub.Campus.Descripcion && a.IdTipoUsuario == ub.Campus.IdTipoUsuario && a.Id != ubicacion.Campus.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 2).Descripcion));
 
-                        ubicacion.Campus.Descripcion = ub.Campus.Descripcion.ToUpper();
+                        ubicacion.Campus.Descripcion = ub.Campus.Descripcion.Trim();
                         if (ub.Campus.Domicilio != null)
                         {
                             ubicacion.Campus.Domicilio[0].IdColonia = ub.Campus.Domicilio[0].IdColonia;
-                            ubicacion.Campus.Domicilio[0].Calle = ub.Campus.Domicilio[0].Calle;
-                            ubicacion.Campus.Domicilio[0].NoExt = ub.Campus.Domicilio[0].NoExt;
-                            ubicacion.Campus.Domicilio[0].NoInt = ub.Campus.Domicilio[0].NoInt;
+                            ubicacion.Campus.Domicilio[0].Calle = ub.Campus.Domicilio[0].Calle.Trim();
+                            ubicacion.Campus.Domicilio[0].NoExt = ub.Campus.Domicilio[0].NoExt.Trim();
+                            ubicacion.Campus.Domicilio[0].NoInt = ub.Campus.Domicilio[0].NoInt.Trim();
                         }
                     }
 
@@ -714,28 +714,28 @@ namespace KinniNet.Core.Operacion
                     {
                         if (db.Torre.Any(a => a.Descripcion == ub.Torre.Descripcion && a.IdTipoUsuario == ub.Torre.IdTipoUsuario && a.Id != ubicacion.Torre.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 3).Descripcion));
-                        ubicacion.Torre.Descripcion = ub.Torre.Descripcion.ToUpper();
+                        ubicacion.Torre.Descripcion = ub.Torre.Descripcion.Trim();
                     }
 
                     if (ubicacion.Piso != null)
                     {
                         if (db.Piso.Any(a => a.Descripcion == ub.Piso.Descripcion && a.IdTipoUsuario == ub.Piso.IdTipoUsuario && a.Id != ubicacion.Piso.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 4).Descripcion));
-                        ubicacion.Piso.Descripcion = ub.Piso.Descripcion.ToUpper();
+                        ubicacion.Piso.Descripcion = ub.Piso.Descripcion.Trim();
                     }
 
                     if (ubicacion.Zona != null)
                     {
                         if (db.Zona.Any(a => a.Descripcion == ub.Zona.Descripcion && a.IdTipoUsuario == ub.Zona.IdTipoUsuario && a.Id != ubicacion.Zona.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 5).Descripcion));
-                        ubicacion.Zona.Descripcion = ub.Zona.Descripcion.ToUpper();
+                        ubicacion.Zona.Descripcion = ub.Zona.Descripcion.Trim();
                     }
 
                     if (ubicacion.SubZona != null)
                     {
                         if (db.SubZona.Any(a => a.Descripcion == ub.SubZona.Descripcion && a.IdTipoUsuario == ub.SubZona.IdTipoUsuario && a.Id != ubicacion.SubZona.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 6).Descripcion));
-                        ubicacion.SubZona.Descripcion = ub.SubZona.Descripcion.ToUpper();
+                        ubicacion.SubZona.Descripcion = ub.SubZona.Descripcion.Trim();
                     }
 
                     if (ubicacion.SiteRack != null)
@@ -751,7 +751,7 @@ namespace KinniNet.Core.Operacion
                                        && @t.sr.Descripcion == ubicacion.SiteRack.Descripcion &&
                                        @t.sr.IdTipoUsuario == ubicacion.SiteRack.IdTipoUsuario && t.sr.Id != ubicacion.Id))
                             throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 7).Descripcion));
-                        ubicacion.SiteRack.Descripcion = ub.SiteRack.Descripcion.ToUpper();
+                        ubicacion.SiteRack.Descripcion = ub.SiteRack.Descripcion.Trim();
                     }
 
                     if (ubicacion.Id == 0)
