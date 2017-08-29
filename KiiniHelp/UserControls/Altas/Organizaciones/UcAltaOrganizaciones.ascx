@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcAltaOrganizaciones.ascx.cs" Inherits="KiiniHelp.UserControls.Altas.Organizaciones.UcAltaOrganizaciones" %>
+
 <asp:UpdatePanel ID="upCatlogos" runat="server">
     <ContentTemplate>
         <asp:HiddenField runat="server" ID="hfIdOrganizacion" />
@@ -142,7 +143,7 @@
                                     <hr />
 
                                     <!--CAMPO-->
-                                    <asp:Panel runat="server" ID="pnlAltaOrganizacion" Visible="false">
+                                    <asp:Panel runat="server" ID="pnlAltaOrganizacion" Visible="true">
                                         <div class="form-group margin-top">
                                             Nombre de
                                             <asp:Label runat="server" ID="lblOperacionDescripcion" />*<br />

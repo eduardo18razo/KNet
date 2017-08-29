@@ -14,6 +14,7 @@ using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Parametros;
 using KinniNet.Business.Utils;
 
+
 namespace KiiniHelp.UserControls.Altas.Organizaciones
 {
     public partial class UcAltaOrganizaciones : UserControl, IControllerModal
@@ -22,6 +23,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
         public event DelegateTerminarModal OnTerminarModal;
+        UsuariosMaster mp;
 
         readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
         readonly ServiceOrganizacionClient _servicioOrganizacion = new ServiceOrganizacionClient();
@@ -41,18 +43,6 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
             }
         }
 
-        private string AlertaSucces
-        {
-            set
-            {
-                if (value.Trim() != string.Empty)
-                {
-                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "SuccsessAlert('Éxito: ','" + value + "');", true);
-                }
-            }
-        }
-
-        
         public string Title
         {
             set { lblTitleCatalogo.Text = value; }
@@ -75,8 +65,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                     ddlTipoUsuario.Enabled = false;
                     btnSeleccionarModal.Visible = false;
                     pnlAltaOrganizacion.Visible = false;
-
-                    //btnGuardarCatalogo.Visible = false;  jgb
+                    btnGuardarCatalogo.Visible = false; // jgb
                 }
             }
         }
@@ -88,7 +77,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 hfEsSeleccion.Value = value.ToString();
                 btnSeleccionarModal.Visible = value;
                 pnlAltaOrganizacion.Visible = value;
-                //btnGuardarCatalogo.Visible = value;  jgb
+                btnGuardarCatalogo.Visible = !value;                 //jgb                
                 ddlTipoUsuario.Enabled = !value;
             }
         }
@@ -650,7 +639,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 btnStatusNivel7.CssClass = "btn btn-primary btn-square";
                 btnSeleccionarModal.Visible = true;
                 pnlAltaOrganizacion.Visible = true;
-                //btnGuardarCatalogo.Visible = true;
+                btnGuardarCatalogo.Visible = true;
                 txtDescripcionCatalogo.Text = string.Empty;
             }
             catch (Exception ex)
@@ -683,9 +672,11 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
             try
             {
                 //lblBrandingModal.Text = WebConfigurationManager.AppSettings["Brand"];
+                mp = (UsuariosMaster)Page.Master;
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
+
                     LlenaCombosModal();
                 }
             }
@@ -703,7 +694,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
         {
             try
             {
-                
+
                 Metodos.LimpiarCombo(ddlNivelSeleccionModal);
                 SetAliasModal();
                 btnStatusNivel1.CssClass = "btn btn-primary btn-square";
@@ -723,12 +714,14 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos && int.Parse(ddlTipoUsuario.SelectedValue) != (int)BusinessVariables.EnumTiposUsuario.Empleado)
                 {
                     pnlAltaOrganizacion.Visible = true;
+                    btnGuardarCatalogo.Visible = true;
                     btnGuardarCatalogo.Enabled = true;
                     LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerHoldings(int.Parse(ddlTipoUsuario.SelectedValue), true));
                 }
                 else
                 {
                     pnlAltaOrganizacion.Visible = false;
+                    btnGuardarCatalogo.Visible = false;
                     btnGuardarCatalogo.Enabled = false;
                     LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerHoldings(int.Parse(ddlTipoUsuario.SelectedValue), true));
                 }
@@ -739,6 +732,10 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                     btnSeleccionarModal.CommandArgument = "1";
                     lblStepNivel1.Text = "...";
                     hfCatalogo.Value = "1";
+                }
+                else
+                {
+                    btnGuardarCatalogo.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -769,6 +766,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                         lblStepNivel2.Text = "...";
                         btnStatusNivel2.CssClass = "btn btn-primary btn-square";
                         pnlAltaOrganizacion.Visible = true;
+                        btnGuardarCatalogo.Visible = true;
                         btnGuardarCatalogo.Enabled = true;
                         break;
                     case 2:
@@ -945,8 +943,6 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
                             if (OnAceptarModal != null)
                                 OnAceptarModal();
-                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";                           
-                            //incluye Alerta jgb
                             ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
                             break;
                         case 2:
@@ -956,13 +952,8 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue),
                                 Descripcion = txtDescripcionCatalogo.Text.Trim(),
                                 Habilitado = chkHabilitado.Checked
-                            };                            
-                            _servicioOrganizacion.GuardarOrganizacion(organizacion);
-
-                           if (OnAceptarModal != null)
-                                OnAceptarModal();
-                           AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";
-                            //incluye Alerta jgb
+                            };
+                            _servicioOrganizacion.GuardarOrganizacion(organizacion);                           
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerCompañias(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel1.Value), true));
                             break;
                         case 3:
@@ -974,11 +965,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 Descripcion = txtDescripcionCatalogo.Text.Trim(),
                                 Habilitado = chkHabilitado.Checked
                             };
-                            _servicioOrganizacion.GuardarOrganizacion(organizacion);
-                             if (OnAceptarModal != null)
-                                OnAceptarModal();
-                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
-                            //incluye Alerta jgb
+                            _servicioOrganizacion.GuardarOrganizacion(organizacion);                          
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerDirecciones(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel2.Value), true));
                             break;
                         case 4:
@@ -991,11 +978,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 Descripcion = txtDescripcionCatalogo.Text.Trim(),
                                 Habilitado = chkHabilitado.Checked
                             };
-                            _servicioOrganizacion.GuardarOrganizacion(organizacion);
-                             if (OnAceptarModal != null)
-                                OnAceptarModal();
-                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
-                            //incluye Alerta jgb
+                            _servicioOrganizacion.GuardarOrganizacion(organizacion);                                                      
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerSubDirecciones(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel3.Value), true));
                             break;
                         case 5:
@@ -1009,11 +992,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 Descripcion = txtDescripcionCatalogo.Text.Trim(),
                                 Habilitado = chkHabilitado.Checked
                             };
-                            _servicioOrganizacion.GuardarOrganizacion(organizacion);
-                             if (OnAceptarModal != null)
-                                OnAceptarModal();
-                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
-                            //incluye Alerta jgb
+                            _servicioOrganizacion.GuardarOrganizacion(organizacion);                           
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerGerencias(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel4.Value), true));
                             break;
                         case 6:
@@ -1028,11 +1007,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 Descripcion = txtDescripcionCatalogo.Text.Trim(),
                                 Habilitado = chkHabilitado.Checked
                             };
-                            _servicioOrganizacion.GuardarOrganizacion(organizacion);
-                             if (OnAceptarModal != null)
-                                OnAceptarModal();
-                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
-                            //incluye Alerta jgb
+                            _servicioOrganizacion.GuardarOrganizacion(organizacion);                           
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerSubGerencias(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel5.Value), true));
                             break;
                         case 7:
@@ -1049,14 +1024,13 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                                 Habilitado = chkHabilitado.Checked
                             };
                             _servicioOrganizacion.GuardarOrganizacion(organizacion);
-                             if (OnAceptarModal != null)
-                                OnAceptarModal();
-                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
-                            //incluye Alerta jgb
+                            if (OnAceptarModal != null)
+                                OnAceptarModal();                            
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerJefaturas(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel6.Value), true));
-                           
+
                             break;
                     }
+                    mp.AlertaSucces();
                 }
                 else
                 {
@@ -1100,7 +1074,9 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                             break;
                     }
                 }
-                txtDescripcionCatalogo.Text = string.Empty;
+                txtDescripcionCatalogo.Text = string.Empty;     
+                mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Actualizacion));
+                //mp.AlertaSucces("Se guardo el puesto correctamente");
             }
             catch (Exception ex)
             {

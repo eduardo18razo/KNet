@@ -8,9 +8,7 @@
             <%--<h2 class="modal-title" id="modal-new-ticket-label">
                 <asp:Label runat="server" ID="lblBranding" /></h2>--%>
             <p class="text-center">
-                <asp:Label runat="server" ID="lblOperacion"></asp:Label>
-                <asp:Label runat="server" ID="Lbl1" Text="5"></asp:Label>
-                
+                <asp:Label runat="server" ID="lblOperacion"></asp:Label>                              
             </p>
         </div>
         <div class="modal-body">

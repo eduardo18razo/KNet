@@ -90,6 +90,7 @@ namespace KiiniHelp.UserControls.Consultas
                 if (!IsPostBack)
                 {
                     LlenaCombos();
+                    LlenaPuestosConsulta();
                 }
                 ucAltaPuesto.OnAceptarModal += AltaPuestoOnAceptarModal;
                 ucAltaPuesto.OnCancelarModal += AltaPuestoOnCancelarModal;

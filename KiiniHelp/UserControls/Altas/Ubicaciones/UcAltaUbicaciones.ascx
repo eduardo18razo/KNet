@@ -117,7 +117,7 @@
                         <div runat="server">
                             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                                 <div class="bg-grey">
-                                    <h3 class="text-left">Alta de<asp:Label runat="server" ID="lblOperacion"></asp:Label></h3>
+                                    <h3 class="text-left">Alta de <asp:Label runat="server" ID="lblOperacion"></asp:Label></h3>
                                     <hr />
 
                                     <!--CAMPO-->
@@ -126,6 +126,10 @@
                                     </div>
                                     <!--CAMPO-->
                                     
+                                    <p class="margin-top-40">
+                                        <asp:Button class="btn btn-primary" runat="server" Text="Siguiente" ID="btnSeleccionarModal" OnClick="btnSeleccionarModal_OnClick" />
+                                    </p>
+                                    <hr />
                                     <div runat="server" id="dataCampus" visible="False">
                                         <!--CP-->
                                         <div class="form-group margin-top">
@@ -177,29 +181,32 @@
                                         </div>
 
                                         <!--BTN GUARDAR-->
-
+                                        
                                     </div>
-                                    <asp:LinkButton runat="server" ID="btnGuardarCatalogo" OnClick="btnGuardarCatalogo_OnClick" class="fa fa-plus-circle">
-                                    </asp:LinkButton>
+                                   
                                     <!--CAMPO-->
-                                    <p class="margin-top-40">
-                                        <asp:Button class="btn btn-primary" runat="server" Text="Siguiente" ID="btnSeleccionarModal" OnClick="btnSeleccionarModal_OnClick" />
-                                    </p>
-                                </div>
-                                <hr />
-                                <!--DIV que cierra el bg-grey -->
-                                <!--BTN-TERMINAR-->
-                                <asp:Panel runat="server" ID="pnlAltaOrganizacion" Visible="true">
+                                     
+                                     <hr />
+                                    <asp:Panel runat="server" ID="pnlAltaOrganizacion" Visible="true">
                                 <div class="form-group margin-top">
                                         Nombre de <asp:Label runat="server" ID="lblOperacionDescripcion" />*<br />
                                         <asp:TextBox CssClass="form-control" ID="txtDescripcionCatalogo" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus" />
                                         <asp:CheckBox runat="server" ID="chkHabilitado" Checked="True" Visible="False" />
+                                     <asp:LinkButton runat="server" ID="btnGuardarCatalogo" OnClick="btnGuardarCatalogo_OnClick" class="fa fa-plus-circle">
+                                    </asp:LinkButton>
+                                   
                                  </div>
+                                 </asp:Panel>
+                              
 
-                                <p class="text-right margin-top-40">
+                                </div>
+                                <hr />
+                                <!--DIV que cierra el bg-grey -->
+                                <!--BTN-TERMINAR-->
+                                  <p class="text-right margin-top-40">
                                     <asp:Button CssClass="btn btn-success" ID="btnTerminar" runat="server" Text="Terminar" OnClick="btnTerminar_OnClick"></asp:Button>
                                 </p>
-                                </asp:Panel>
+                                
                                 <!--/BTN-TERMINAR-->
                             </div>
                         </div>

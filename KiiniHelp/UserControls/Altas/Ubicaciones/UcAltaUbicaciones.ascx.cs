@@ -24,6 +24,7 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
         public event DelegateTerminarModal OnTerminarModal;
+        UsuariosMaster mp;
 
         private readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
         private readonly ServiceUbicacionClient _servicioUbicacion = new ServiceUbicacionClient();
@@ -741,6 +742,7 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
             try
             {
                 Alerta = new List<string>();
+                mp = (UsuariosMaster)Page.Master;
                 if (!IsPostBack)
                 {
                     LlenaCombosModal();
@@ -1086,9 +1088,10 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                             _servicioUbicacion.GuardarUbicacion(ubicacion);
                             if (OnAceptarModal != null)
                                 OnAceptarModal();
-                            AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
+                           // AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioUbicacion.ObtenerCampus(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel1.Value), true));
                         }
+                        mp.AlertaSucces();
                     }
                     else
                     {
@@ -1189,6 +1192,7 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                                 break;
                         }
 
+                        mp.AlertaSucces();
                     }
                     else
                     {
@@ -1229,6 +1233,7 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                                 break;
                         }
                     }
+                    mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Actualizacion));
                     LimpiaCatalogoNivel();
                     btnSeleccionarModal_OnClick(btnSeleccionarModal, null);
                 }
@@ -1433,7 +1438,7 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                     _lstError = new List<string>();
                     _lstError.Add(ex.Message);
                 }
-                Alerta = _lstError;
+                Alerta = _lstError;              
             }
         }
         protected void btnCancelarCatalogo_OnClick(object sender, EventArgs e)

@@ -20,6 +20,7 @@ namespace KiiniHelp.UserControls.Altas
         private readonly ServicePuestoClient _servicioPuesto = new ServicePuestoClient();
         private readonly ServiceTipoUsuarioClient _servicioTipoUsuario = new ServiceTipoUsuarioClient();
         private List<string> _lstError = new List<string>();
+        UsuariosMaster mp;
 
         public event DelegateAceptarModal OnAceptarModal;
         public event DelegateLimpiarModal OnLimpiarModal;
@@ -31,9 +32,7 @@ namespace KiiniHelp.UserControls.Altas
         //StreamReader _textStreamReader;
         
        //ResourceManager _rM = new ResourceManager("Notificaciones", Assembly.GetExecutingAssembly());
-      
-
-        
+             
         public bool EsAlta
         {
             get { return Convert.ToBoolean(hfEsAlta.Value); }
@@ -119,7 +118,7 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 //lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
-                
+                mp = (UsuariosMaster)Page.Master;
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
@@ -143,18 +142,23 @@ namespace KiiniHelp.UserControls.Altas
             try
             {
                 if(ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                    throw new Exception("Debe seleccionar Tipo de Usuario.");
+                   // throw new Exception("Debe seleccionar Tipo de Usuario.");                
+                mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.FaltaTipoUsuario));
                 if (txtDescripcionPuesto.Text.Trim() == string.Empty)
-                    throw new Exception("Debe especificar una descripción.");
+                   // throw new Exception("Debe especificar una descripción.");
+                mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.FaltaDescripcion));
                 Puesto puesto = new Puesto { IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue), Descripcion = txtDescripcionPuesto.Text.Trim(), Habilitado = true };
                 if (EsAlta)
+                {
                     _servicioPuesto.Guardar(puesto);
+                    mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Exito));
+                }
                 else
+                {
                     _servicioPuesto.Actualizar(int.Parse(hfIdPuesto.Value), puesto);
-                LimpiarCampos();
-                if (!EsAlta)
-                    if (OnAceptarModal != null)
-                        OnAceptarModal();
+                    mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Actualizacion));
+                    LimpiarCampos();
+                }
                
                // AlertaSucces();
             }

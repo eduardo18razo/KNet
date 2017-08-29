@@ -316,6 +316,7 @@ namespace KinniNet.Business.Utils
             Error,
             FaltaTipoUsuario,
             FaltaDescripcion,
+            Actualizacion,
            
         }
     }
