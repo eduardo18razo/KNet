@@ -54,17 +54,19 @@ namespace KinniNet.Core.Sistema
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = (from etsrg in db.EstatusTicketSubRolGeneral
-                        join et in db.EstatusTicket on etsrg.IdEstatusTicketAccion equals et.Id
-                        join ug in db.UsuarioGrupo on etsrg.IdGrupoUsuario equals ug.IdGrupoUsuario
-                        join sgu in db.SubGrupoUsuario on new { subgpo = ug.IdSubGrupoUsuario, sub = etsrg.IdSubRolSolicita } equals new { subgpo = (int?)sgu.Id, sub = (int?)sgu.IdSubRol }
-                        where ug.IdUsuario == idUsuario && etsrg.IdEstatusTicketActual == idEstatusActual && etsrg.Propietario == esPropietario && etsrg.Habilitado
-                        select et).Distinct().ToList();
-                //result = (db.EstatusTicketSubRolGeneral.Join(db.EstatusTicket, easg => easg.IdEstatusTicketActual, et => et.Id, (easg, et) => new { easg, et })
-                //    .Join(db.UsuarioGrupo, @t => @t.easg.IdGrupoUsuario, ug => ug.IdGrupoUsuario, (@t, ug) => new { @t, ug })
-                //    .Where(@t => @t.ug.IdUsuario == idUsuario && @t.@t.easg.Habilitado && @t.@t.easg.Propietario == esPropietario)
-                //    .OrderBy(o => o.t.easg.EstatusTicketAccion.Orden)
-                //    .Select(@t => @t.@t.et)).Distinct().ToList();
+                result = new List<EstatusTicket>();
+                result.AddRange((from etsrg in db.EstatusTicketSubRolGeneral
+                                 join et in db.EstatusTicket on etsrg.IdEstatusTicketAccion equals et.Id
+                                 join ug in db.UsuarioGrupo on etsrg.IdGrupoUsuario equals ug.IdGrupoUsuario
+                                 where ug.IdUsuario == idUsuario && etsrg.IdEstatusTicketActual == idEstatusActual &&
+                                        etsrg.Propietario == esPropietario && etsrg.Habilitado && ug.GrupoUsuario.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención
+                                 select et).Distinct().ToList());
+                result.AddRange((from etsrg in db.EstatusTicketSubRolGeneral
+                                 join et in db.EstatusTicket on etsrg.IdEstatusTicketAccion equals et.Id
+                                 join ug in db.UsuarioGrupo on etsrg.IdGrupoUsuario equals ug.IdGrupoUsuario
+                                 where ug.IdUsuario == idUsuario && etsrg.IdEstatusTicketActual == idEstatusActual &&
+                                        etsrg.Propietario == esPropietario && etsrg.Habilitado && ug.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención
+                                 select et).Distinct().ToList());
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
                         new EstatusTicket

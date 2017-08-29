@@ -127,6 +127,9 @@ namespace KiiniHelp.UserControls.Detalles
                     ConversacionTicketActivo = ticket.Conversaciones;
                     LlenaConversacion(0);
                     UcDetalleMascaraCaptura.IdTicket = idTicket;
+                    btnAsignar.Enabled = ticket.EsPropietario;
+                    btnCambiaEstatus.Enabled = ticket.EsPropietario;
+                    btnSendPublic.Enabled = ticket.EsPropietario;
                 }
 
             }

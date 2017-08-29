@@ -25,10 +25,14 @@
             <Scripts>
                 <asp:ScriptReference Path="~/assets/js/jquery.js" />
                 <asp:ScriptReference Path="~/assets/js/bootstrap.js" />
+                <asp:ScriptReference Path="~/assets/js/bootstrap-notify.js" />
+                <asp:ScriptReference Path="~/assets/js/bootstrap-notify.min.js" />
+                <asp:ScriptReference Path="~/assets/js/Notificaciones.js" />
+                <asp:ScriptReference Path="~/assets/js/validation.js" />
             </Scripts>
         </asp:ScriptManager>
-        <asp:UpdatePanel runat="server">
-            <ContentTemplate>
+     <%--   <asp:UpdatePanel runat="server">
+            <ContentTemplate>--%>
                 <asp:HiddenField runat="server" ID="hfEsLink" Value="false" />
                 <asp:HiddenField runat="server" ID="hfParametrosConfirmados" Value="false" />
                 <asp:HiddenField runat="server" ID="hfValueNotivicacion" Value="false" />
@@ -68,8 +72,8 @@
                                     <div class="form-box-inner">
                                         <h2 class="title text-center">¿Cómo quieres cambiar tu contraseña?</h2>
                                         <div class="row">
-                                            <asp:HiddenField runat="server" ID="hfIdSend"/>
-                                            <asp:HiddenField runat="server" ID="hfValueSend"/>
+                                            <asp:HiddenField runat="server" ID="hfIdSend" />
+                                            <asp:HiddenField runat="server" ID="hfValueSend" />
                                             <div class="form-container col-md-6 col-sm-12 col-xs-12">
                                                 <div data-parsley-validate id="" class="form-horizontal">
                                                     <div class="form-horizontal">
@@ -200,8 +204,8 @@
                         </div>
                     </section>
                 </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+            <%--</ContentTemplate>
+        </asp:UpdatePanel>--%>
 
 
     </form>

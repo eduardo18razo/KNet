@@ -111,7 +111,7 @@
                                                         <strong>Estatus Actual:</strong>
                                                         <asp:Label runat="server" ID="lblestatus" />
                                                     </p>
-                                                    <asp:Button runat="server" Text="Estatus" ID="btnCambiaEstatus" OnClick="btnCambiaEstatus_OnClick" />
+                                                    <asp:Button runat="server" Text="Estatus" ID="btnCambiaEstatus" CssClass="btn btn-primary" OnClick="btnCambiaEstatus_OnClick" />
                                                     <hr>
 
                                                     <uc1:UcDetalleMascaraCaptura runat="server" id="ucDetalleMascaraCaptura" />
@@ -196,7 +196,7 @@
             <ContentTemplate>
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <uc1:UcCambiarEstatusTicket runat="server" id="UcCambiarEstatusTicket" />
+                        <uc1:UcCambiarEstatusTicket runat="server" id="ucCambiarEstatusTicket" />
                     </div>
                 </div>
             </ContentTemplate>

@@ -157,12 +157,12 @@ namespace KiiniHelp.Publico.Consultas {
         protected global::System.Web.UI.WebControls.Repeater rptComentrios;
         
         /// <summary>
-        /// Control UcCambiarEstatusTicket.
+        /// Control ucCambiarEstatusTicket.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Operacion.UcCambiarEstatusTicket UcCambiarEstatusTicket;
+        protected global::KiiniHelp.UserControls.Operacion.UcCambiarEstatusTicket ucCambiarEstatusTicket;
     }
 }

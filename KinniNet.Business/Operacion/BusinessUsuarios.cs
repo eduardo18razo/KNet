@@ -663,7 +663,7 @@ namespace KinniNet.Core.Operacion
                 TelefonoUsuario telefono = db.TelefonoUsuario.Single(s => s.Id == idTelefono);
                 if (!db.SmsService.Any(a => a.IdUsuario == idUsuario && a.IdTipoLink == idTipoNotificacion && a.Numero == telefono.Numero && a.Mensaje == codigo && a.Enviado && a.Habilitado))
                 {
-                    throw new Exception(string.Format("Codigo incorrecto para Numero Telefonico {0}\n", telefono.Numero));
+                    throw new Exception(string.Format("Codigo incorrecto para Numero Telefonico {0}", telefono.Numero));
                 }
             }
             catch (Exception ex)
@@ -859,7 +859,7 @@ namespace KinniNet.Core.Operacion
                 Guid guidLink = Guid.Parse(link);
                 if (!db.UsuarioLinkPassword.Any(a => a.IdUsuario == idUsuario && a.IdTipoLink == idTipoNotificacion && a.Link == guidLink && a.Codigo == codigo && a.Activo))
                 {
-                    throw new Exception(string.Format("Codigo incorrecto {0}\n", telefono.Correo));
+                    throw new Exception(string.Format("Codigo incorrecto {0}", telefono.Correo));
                 }
             }
             catch (Exception ex)

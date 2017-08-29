@@ -64,6 +64,8 @@ namespace KiiniHelp
                     //rbtnList.DataTextField = "Correo";
                     //rbtnList.DataValueField = "Id";
                     //rbtnList.DataBind();
+                    if (userData.CorreoUsuario.Count <= 0)
+                        throw new Exception("No cuenta con correos registrados contacte a su Administrador.");
                     hfIdSend.Value = userData.CorreoUsuario.ToList().First().Id.ToString();
                     hfValueSend.Value = userData.CorreoUsuario.ToList().First().Correo;
                     hfValueNotivicacion.Value = _servicioUsuario.EnviaCodigoVerificacionCorreo(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, int.Parse(hfIdSend.Value));
@@ -80,6 +82,8 @@ namespace KiiniHelp
                     //rbtnList.DataTextField = "Numero";
                     //rbtnList.DataValueField = "Id";
                     //rbtnList.DataBind();
+                    if (userData.TelefonoUsuario.Count <= 0)
+                        throw new Exception("No cuenta con telefonos registrados contacte a su Administrador.");
                     hfIdSend.Value = userData.TelefonoUsuario.Where(w => w.Obligatorio).ToList().First().Id.ToString();
                     hfValueSend.Value = userData.TelefonoUsuario.Where(w => w.Obligatorio).ToList().First().Numero;
                     _servicioUsuario.EnviaCodigoVerificacionSms(int.Parse(QueryString.Decrypt(Request.Params["ldata"])), (int)BusinessVariables.EnumTipoLink.Reset, int.Parse(hfIdSend.Value));
@@ -87,6 +91,8 @@ namespace KiiniHelp
                 }
                 else if (rbtnPreguntas.Checked)
                 {
+                    if (userData.PreguntaReto.Count <= 0)
+                        throw new Exception("No cuenta con preguntas registradas contacte a su Administrador.");
                     rptPreguntas.DataSource = userData.PreguntaReto;
                     rptPreguntas.DataBind();
                     divPreguntas.Visible = true;

@@ -107,10 +107,10 @@
                                 <div class="row">
                                     <div class="col-sm-offset-1 col-lg-offset-1 col-lg-2 col-md-4 col-sm-3">
 
-                                        <asp:LinkButton runat="server" CssClass="btn fa fa-long-arrow-down" Text="Cambiar Asignacion" ID="btnAutoasignar" OnClick="btnAsignar_OnClick" />
+                                        <asp:LinkButton runat="server" CssClass="btn fa fa-long-arrow-down" Text="Cambiar Asignacion" ID="btnAsignar" OnClick="btnAsignar_OnClick" />
                                     </div>
                                     <div class="col-lg-1 col-md-2 col-sm-2">
-                                        <asp:LinkButton runat="server" CssClass="btn fa fa-long-arrow-right" Text="Cambiar Estatus" ID="btnAsignar" OnClick="btnCambiarEstatus_OnClick" />
+                                        <asp:LinkButton runat="server" CssClass="btn fa fa-long-arrow-right" Text="Cambiar Estatus" ID="btnCambiaEstatus" OnClick="btnCambiarEstatus_OnClick" />
                                     </div>
                                 </div>
                             </div>

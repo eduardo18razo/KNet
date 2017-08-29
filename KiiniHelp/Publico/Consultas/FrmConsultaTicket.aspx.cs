@@ -38,7 +38,49 @@ namespace KiiniHelp.Publico.Consultas
             try
             {
                 Alerta = new List<string>();
+                ucCambiarEstatusTicket.OnAceptarModal += UcCambiarEstatusTicket_OnAceptarModal;
+                ucCambiarEstatusTicket.OnCancelarModal += UcCambiarEstatusTicketOnCancelarModal;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
 
+        void UcCambiarEstatusTicket_OnAceptarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEstatusCambio\");", true);
+                if (ucCambiarEstatusTicket.CerroTicket)
+                {
+                    string url = ResolveUrl("~/FrmEncuesta.aspx?IdTipoServicio=" + (int)BusinessVariables.EnumTipoArbol.SolicitarServicio + "IdTicket=" + lblticket.Text);
+                    //string s = "window.open('" + url + "', 'popup_window', 'width=600,height=600,left=300,top=100,resizable=yes');";
+                    //ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptEncuesta", "OpenWindow(\"" + url + "\");", true);
+                }
+                lblticket.Text = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+        void UcCambiarEstatusTicketOnCancelarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEstatusCambio\");", true);
             }
             catch (Exception ex)
             {
@@ -74,6 +116,7 @@ namespace KiiniHelp.Publico.Consultas
                     lblfecha.Text = detalle.FechaCreacion.ToString(CultureInfo.InvariantCulture);
                     rptComentrios.DataSource = detalle.ConversacionDetalle;
                     rptComentrios.DataBind();
+                    btnCambiaEstatus.Visible = detalle.IdEstatusTicket ==(int) BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto;
                 }
             }
             catch (Exception ex)
@@ -113,10 +156,10 @@ namespace KiiniHelp.Publico.Consultas
         {
             try
             {
-                UcCambiarEstatusTicket.EsPropietario = true;
-                UcCambiarEstatusTicket.IdTicket = Convert.ToInt32(lblticket.Text);
-                UcCambiarEstatusTicket.IdEstatusActual = int.Parse(hfEstatusActual.Value);
-                UcCambiarEstatusTicket.IdUsuario = Session["UserData"] != null ? ((Usuario)Session["UserData"]).Id : new ServiceSecurityClient().GetUserInvitadoDataAutenticate((int)BusinessVariables.EnumTiposUsuario.ClienteInvitado).Id;
+                ucCambiarEstatusTicket.EsPropietario = true;
+                ucCambiarEstatusTicket.IdTicket = Convert.ToInt32(lblticket.Text);
+                ucCambiarEstatusTicket.IdEstatusActual = int.Parse(hfEstatusActual.Value);
+                ucCambiarEstatusTicket.IdUsuario = Session["UserData"] != null ? ((Usuario)Session["UserData"]).Id : new ServiceSecurityClient().GetUserInvitadoDataAutenticate((int)BusinessVariables.EnumTiposUsuario.ClienteInvitado).Id;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalEstatusCambio\");", true);
             }
             catch (Exception ex)
