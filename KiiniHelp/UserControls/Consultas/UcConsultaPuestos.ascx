@@ -54,20 +54,20 @@
                                         <table class="table table-striped display" id="tblResults">
                                             <thead>
                                                 <tr>
-                                                    <th>Tipo Usuario</th>
-                                                    <th>Puesto</th>
-                                                    <th>Activo</th>
-                                                    <th></th>
+                                                    <th style="width: 20%">Tipo Usuario</th>
+                                                    <th style="width: 40%">Puesto</th>
+                                                    <th style="width: 20%">Activo</th>
+                                                    <th style="width: 20%"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr>
-                                            <td>
-                                                        <button type="button" class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + Eval("TipoUsuario.Color") + " !important" %>'>
-                                                            <%# Eval("TipoUsuario.Abreviacion") %></button></td>
-                                            <td><%# Eval("Descripcion")%></td>
+                                            <td >
+                                            <button type="button" class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + Eval("TipoUsuario.Color") + " !important" %>'>
+                                             <%# Eval("TipoUsuario.Abreviacion") %></button></td>
+                                            <td ><%# Eval("Descripcion")%></td>
                                             <td id="colHabilitado">
                                                 <ul class="list list-unstyled" id="hiddenEnabled">
                                                     <li>
