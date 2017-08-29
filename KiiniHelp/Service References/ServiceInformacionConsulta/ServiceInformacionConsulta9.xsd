@@ -104,6 +104,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RateConsulta">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idConsulta" type="xs:int" />
+        <xs:element minOccurs="0" name="idUsuario" type="xs:int" />
+        <xs:element minOccurs="0" name="meGusta" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RateConsultaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="HabilitarInformacion">
     <xs:complexType>
       <xs:sequence>

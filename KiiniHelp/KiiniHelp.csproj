@@ -244,6 +244,7 @@
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneralDefault1.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.EstatusAsignacionSubRolGeneral1.datasource" />
     <Content Include="Properties\DataSources\KiiniNet.Entities.Parametros.EstatusTicketSubRolGeneral.datasource" />
+    <Content Include="UserControls\Preview\UcVisorConsultainformacion.ascx" />
     <Content Include="Xml\Notificaciones.xml" />
     <None Include="Service References\ServiceArbolAcceso\ServiceArbolAcceso14.xsd">
       <SubType>Designer</SubType>
@@ -2911,6 +2912,13 @@
     <Compile Include="UserControls\Preview\UcPreviewOpcionConsulta.ascx.designer.cs">
       <DependentUpon>UcPreviewOpcionConsulta.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Preview\UcVisorConsultainformacion.ascx.cs">
+      <DependentUpon>UcVisorConsultainformacion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Preview\UcVisorConsultainformacion.ascx.designer.cs">
+      <DependentUpon>UcVisorConsultainformacion.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Seleccion\UcCategoria.ascx.cs">
       <DependentUpon>UcCategoria.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4022,7 +4030,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -114,6 +114,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public void RateConsulta(int idConsulta, int idUsuario, bool meGusta)
+        {
+            try
+            {
+                using (BusinessInformacionConsulta negocio = new BusinessInformacionConsulta())
+                {
+                    negocio.RateConsulta(idConsulta, idUsuario, meGusta);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void HabilitarInformacion(int idInformacion, bool habilitado)
         {
             try

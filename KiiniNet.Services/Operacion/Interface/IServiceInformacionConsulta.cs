@@ -30,6 +30,9 @@ namespace KiiniNet.Services.Operacion.Interface
         List<InformacionConsulta> ObtenerConsulta(string descripcion);
 
         [OperationContract]
+        void RateConsulta(int idConsulta, int idUsuario, bool meGusta);
+
+        [OperationContract]
         void HabilitarInformacion(int idInformacion, bool habilitado);
 
     }

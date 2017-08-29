@@ -121,6 +121,7 @@
     <Compile Include="Operacion\InformacionConsulta.cs" />
     <Compile Include="Operacion\InformacionConsultaDatos.cs" />
     <Compile Include="Operacion\InformacionConsultaDocumentos.cs" />
+    <Compile Include="Operacion\InformacionConsultaRate.cs" />
     <Compile Include="Operacion\InventarioInfConsulta.cs" />
     <Compile Include="Operacion\NotaGeneral.cs" />
     <Compile Include="Operacion\NotaGeneralGrupo.cs">

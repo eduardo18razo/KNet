@@ -46,8 +46,8 @@ namespace KiiniHelp.UserControls.Consultas
         protected void Page_Load(object sender, EventArgs e)
         {
             Alerta = new List<string>();
-            ucAltaInformacionConsulta.OnAceptarModal += AltaInformacionConsultaOnAceptarModal;
-            ucAltaInformacionConsulta.OnCancelarModal += AltaInformacionConsultaOnCancelarModal;
+            //ucAltaInformacionConsulta.OnAceptarModal += AltaInformacionConsultaOnAceptarModal;
+            //ucAltaInformacionConsulta.OnCancelarModal += AltaInformacionConsultaOnCancelarModal;
         }
 
         private void AltaInformacionConsultaOnCancelarModal()

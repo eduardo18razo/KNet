@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Web;
 
 namespace KinniNet.Business.Utils
 {
@@ -36,7 +37,7 @@ namespace KinniNet.Business.Utils
             public static string RepositorioTemporal = ConfigurationManager.AppSettings["Repositorio"] + ConfigurationManager.AppSettings["CarpetaTemporal"];
             public static string RepositorioRepositorio = ConfigurationManager.AppSettings["Repositorio"];
             public static string RepositorioCorreo = ConfigurationManager.AppSettings["RepositorioCorreos"];
-            public static string Carpetaemporal = ConfigurationManager.AppSettings["siteUrl"] + ConfigurationManager.AppSettings["CarpetaTemporal"];
+            public static string Carpetaemporal = HttpRuntime.AppDomainAppPath + ConfigurationManager.AppSettings["CarpetaTemporal"];
 
         }
 
@@ -263,13 +264,18 @@ namespace KinniNet.Business.Utils
         public enum EnumMenu
         {
             MiActividad = 1,
-            Operacion = 2,
-            Consultas = 3,
-            Servicio = 4,
-            Incidentes = 5,
-            SolicitarMtto = 6,
-            Reportes = 7,
-            Mantenimiento = 8
+            Configuración = 2,
+            Tickets = 3,
+            LevantarTicket = 4,
+            Consultas = 5,
+            Reportes = 6,
+            Chat = 7,
+            CambiarContraseña = 8,
+            Servicio = 9,
+            Incidentes = 10,
+            SolicitudDeMantenimiento = 11,
+            Graficas = 12,
+            Notificaciones = 13,
         }
 
         public enum EnumTipoEncuesta
@@ -317,7 +323,7 @@ namespace KinniNet.Business.Utils
             FaltaTipoUsuario,
             FaltaDescripcion,
             Actualizacion,
-           
+
         }
     }
 }

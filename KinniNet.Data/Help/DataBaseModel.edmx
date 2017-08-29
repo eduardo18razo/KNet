@@ -501,6 +501,17 @@
           <Property Name="IdUsuarioModifico" Type="int" />
           <Property Name="Habilitado" Type="bit" />
         </EntityType>
+        <EntityType Name="InformacionConsultaRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdInformacionConsulta" Type="int" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="MeGusta" Type="bit" />
+          <Property Name="NoMeGusta" Type="bit" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="InventarioArbolAcceso">
           <Key>
             <PropertyRef Name="Id" />
@@ -2417,6 +2428,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_InformacionConsultaRate_InformacionConsulta">
+          <End Role="InformacionConsulta" Type="Self.InformacionConsulta" Multiplicity="0..1" />
+          <End Role="InformacionConsultaRate" Type="Self.InformacionConsultaRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformacionConsulta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsultaRate">
+              <PropertyRef Name="IdInformacionConsulta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformacionConsultaRate_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="InformacionConsultaRate" Type="Self.InformacionConsultaRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsultaRate">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_InventarioArbolAcceso_Encuesta">
           <End Role="Encuesta" Type="Self.Encuesta" Multiplicity="0..1" />
           <End Role="InventarioArbolAcceso" Type="Self.InventarioArbolAcceso" Multiplicity="*" />
@@ -4081,6 +4116,7 @@
           <EntitySet Name="InformacionConsulta" EntityType="Self.InformacionConsulta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InformacionConsultaDatos" EntityType="Self.InformacionConsultaDatos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InformacionConsultaDocumentos" EntityType="Self.InformacionConsultaDocumentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InformacionConsultaRate" EntityType="Self.InformacionConsultaRate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventarioArbolAcceso" EntityType="Self.InventarioArbolAcceso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventarioInfConsulta" EntityType="Self.InventarioInfConsulta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jefatura" EntityType="Self.Jefatura" Schema="dbo" store:Type="Tables" />
@@ -4500,6 +4536,14 @@
           <AssociationSet Name="FK_InformacionConsultaDocumentos_Usuario1" Association="Self.FK_InformacionConsultaDocumentos_Usuario1">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="InformacionConsultaDocumentos" EntitySet="InformacionConsultaDocumentos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacionConsultaRate_InformacionConsulta" Association="Self.FK_InformacionConsultaRate_InformacionConsulta">
+            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
+            <End Role="InformacionConsultaRate" EntitySet="InformacionConsultaRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacionConsultaRate_Usuario" Association="Self.FK_InformacionConsultaRate_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="InformacionConsultaRate" EntitySet="InformacionConsultaRate" />
           </AssociationSet>
           <AssociationSet Name="FK_InventarioArbolAcceso_Encuesta" Association="Self.FK_InventarioArbolAcceso_Encuesta">
             <End Role="Encuesta" EntitySet="Encuesta" />
@@ -6065,6 +6109,15 @@
           <AssociationSet Name="FK_RolMenu_TipoUsuario" Association="KiiniNet_v2Model.FK_RolMenu_TipoUsuario">
             <End Role="TipoUsuario" EntitySet="TipoUsuario" />
             <End Role="RolMenu" EntitySet="RolMenu" />
+          </AssociationSet>
+          <EntitySet Name="InformacionConsultaRate" EntityType="KiiniNet_v2Model.InformacionConsultaRate" />
+          <AssociationSet Name="FK_InformacionConsultaRate_InformacionConsulta" Association="KiiniNet_v2Model.FK_InformacionConsultaRate_InformacionConsulta">
+            <End Role="InformacionConsulta" EntitySet="InformacionConsulta" />
+            <End Role="InformacionConsultaRate" EntitySet="InformacionConsultaRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformacionConsultaRate_Usuario" Association="KiiniNet_v2Model.FK_InformacionConsultaRate_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="InformacionConsultaRate" EntitySet="InformacionConsultaRate" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Campus">
@@ -9458,6 +9511,7 @@
           <NavigationProperty Name="InformacionConsultaModifico" Relationship="KiiniNet_v2Model.FK_InformacionConsulta_Usuario1" FromRole="Usuario" ToRole="InformacionConsulta" />
           <NavigationProperty Name="MascaraModifico" Relationship="KiiniNet_v2Model.FK_Mascara_Usuario" FromRole="Usuario" ToRole="Mascara" />
           <NavigationProperty Name="MascaraAlta" Relationship="KiiniNet_v2Model.FK_Mascara_UsuarioAlta" FromRole="Usuario" ToRole="Mascara" />
+          <NavigationProperty Name="InformacionConsultaRate" Relationship="KiiniNet_v2Model.FK_InformacionConsultaRate_Usuario" FromRole="Usuario" ToRole="InformacionConsultaRate" />
         </EntityType>
         <Association Name="FK_ArbolAcceso_Usuario">
           <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -9957,6 +10011,7 @@
           <NavigationProperty Name="InventarioInfConsulta" Relationship="KiiniNet_v2Model.FK_InventarioInfConsulta_InformacionConsulta" FromRole="InformacionConsulta" ToRole="InventarioInfConsulta" />
           <NavigationProperty Name="TipoInfConsulta" Relationship="KiiniNet_v2Model.FK_tblInformacionConsulta_tblCatTipoInfConsulta" FromRole="InformacionConsulta" ToRole="TipoInfConsulta" />
           <NavigationProperty Name="InformacionConsultaDatos" Relationship="KiiniNet_v2Model.FK_InformacionConsultaDatos_InformacionConsulta" FromRole="InformacionConsulta" ToRole="InformacionConsultaDatos" />
+          <NavigationProperty Name="InformacionConsultaRate" Relationship="KiiniNet_v2Model.FK_InformacionConsultaRate_InformacionConsulta" FromRole="InformacionConsulta" ToRole="InformacionConsultaRate" />
         </EntityType>
         <Association Name="FK_InformacionConsulta_Usuario">
           <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
@@ -10573,6 +10628,43 @@
             </Principal>
             <Dependent Role="RolMenu">
               <PropertyRef Name="IdTipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InformacionConsultaRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdInformacionConsulta" Type="Int32" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="MeGusta" Type="Boolean" />
+          <Property Name="NoMeGusta" Type="Boolean" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="InformacionConsulta" Relationship="KiiniNet_v2Model.FK_InformacionConsultaRate_InformacionConsulta" FromRole="InformacionConsultaRate" ToRole="InformacionConsulta" />
+          <NavigationProperty Name="Usuario" Relationship="KiiniNet_v2Model.FK_InformacionConsultaRate_Usuario" FromRole="InformacionConsultaRate" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_InformacionConsultaRate_InformacionConsulta">
+          <End Type="KiiniNet_v2Model.InformacionConsulta" Role="InformacionConsulta" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.InformacionConsultaRate" Role="InformacionConsultaRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformacionConsulta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsultaRate">
+              <PropertyRef Name="IdInformacionConsulta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformacionConsultaRate_Usuario">
+          <End Type="KiiniNet_v2Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="KiiniNet_v2Model.InformacionConsultaRate" Role="InformacionConsultaRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformacionConsultaRate">
+              <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -12093,6 +12185,18 @@
                 <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
                 <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InformacionConsultaRate">
+            <EntityTypeMapping TypeName="KiiniNet_v2Model.InformacionConsultaRate">
+              <MappingFragment StoreEntitySet="InformacionConsultaRate">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="NoMeGusta" ColumnName="NoMeGusta" />
+                <ScalarProperty Name="MeGusta" ColumnName="MeGusta" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdInformacionConsulta" ColumnName="IdInformacionConsulta" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

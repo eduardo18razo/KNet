@@ -219,6 +219,7 @@ namespace KinniNet.Core.Operacion
                 {
                     db.LoadProperty(result, "InformacionConsultaDatos");
                     db.LoadProperty(result, "InformacionConsultaDocumentos");
+                    db.LoadProperty(result, "InformacionConsultaRate");
                 }
             }
             catch (Exception ex)
@@ -318,6 +319,42 @@ namespace KinniNet.Core.Operacion
 
                 if (hit.Id == 0)
                     db.HitConsulta.AddObject(hit);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public void RateConsulta(int idConsulta, int idUsuario, bool meGusta)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                InformacionConsultaRate rate = db.InformacionConsultaRate.SingleOrDefault(s => s.IdInformacionConsulta == idConsulta && s.IdUsuario == idUsuario);
+                if (rate == null)
+                {
+                    rate = new InformacionConsultaRate
+                    {
+                        IdInformacionConsulta = idConsulta,
+                        IdUsuario = idUsuario,
+                        MeGusta = meGusta
+                    };
+                    rate.NoMeGusta = !rate.MeGusta;
+                    rate.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                    db.InformacionConsultaRate.AddObject(rate);
+                }
+                else
+                {
+                    rate.MeGusta = meGusta;
+                    rate.NoMeGusta = !rate.MeGusta;
+                    rate.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)

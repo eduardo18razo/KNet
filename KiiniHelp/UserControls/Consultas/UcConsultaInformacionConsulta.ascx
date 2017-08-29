@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaInformacionConsulta.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaInformacionConsulta" %>
-<%@ Register Src="~/UserControls/Altas/UcAltaInformacionConsulta.ascx" TagPrefix="uc1" TagName="UcAltaInformacionConsulta" %>
+<%--<%@ Register Src="~/UserControls/Altas/UcAltaInformacionConsulta.ascx" TagPrefix="uc1" TagName="UcAltaInformacionConsulta" %>--%>
 
 
 <div style="height: 100%;">
@@ -110,7 +110,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     <%--MODAL ALTA--%>
-    <div class="modal fade" id="modalAltaInformacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <%--<div class="modal fade" id="modalAltaInformacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <asp:UpdatePanel ID="upAltaInformacion" runat="server">
             <ContentTemplate>
                 <div class="modal-dialog modal-lg">
@@ -120,5 +120,5 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-    </div>
+    </div>--%>
 </div>

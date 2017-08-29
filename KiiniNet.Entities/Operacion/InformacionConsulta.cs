@@ -38,6 +38,8 @@ namespace KiiniNet.Entities.Operacion
         public virtual List<InformacionConsultaDatos> InformacionConsultaDatos { get; set; }
         [DataMember]
         public virtual List<InformacionConsultaDocumentos> InformacionConsultaDocumentos { get; set; }
+        [DataMember]
+        public virtual List<InformacionConsultaRate> InformacionConsultaRate { get; set; }
 
     }
 }

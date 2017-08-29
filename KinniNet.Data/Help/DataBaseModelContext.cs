@@ -128,6 +128,7 @@ namespace KinniNet.Data.Help
                 _informacionConsulta = CreateObjectSet<InformacionConsulta>();
                 _informacionConsultaDatos = CreateObjectSet<InformacionConsultaDatos>();
                 _informacionConsultaDocumentos = CreateObjectSet<InformacionConsultaDocumentos>();
+                _informacionConsultaRate = CreateObjectSet<InformacionConsultaRate>();
                 _sla = CreateObjectSet<Sla>();
                 _slaDetalle = CreateObjectSet<SlaDetalle>();
                 _encuesta = CreateObjectSet<Encuesta>();
@@ -363,6 +364,13 @@ namespace KinniNet.Data.Help
             get
             {
                 return _informacionConsultaDocumentos;
+            }
+        }
+        public ObjectSet<InformacionConsultaRate> InformacionConsultaRate
+        {
+            get
+            {
+                return _informacionConsultaRate;
             }
         }
 
@@ -649,6 +657,7 @@ namespace KinniNet.Data.Help
         private readonly ObjectSet<InformacionConsulta> _informacionConsulta;
         private readonly ObjectSet<InformacionConsultaDatos> _informacionConsultaDatos;
         private readonly ObjectSet<InformacionConsultaDocumentos> _informacionConsultaDocumentos;
+        private readonly ObjectSet<InformacionConsultaRate> _informacionConsultaRate;
         private readonly ObjectSet<Sla> _sla;
         private readonly ObjectSet<SlaDetalle> _slaDetalle;
 

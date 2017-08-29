@@ -355,6 +355,9 @@
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_Menu" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_Rol" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_RolMenu_TipoUsuario" />
+        <EntityTypeShape EntityType="KiiniNet_v2Model.InformacionConsultaRate" Width="1.5" PointX="30" PointY="92" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_InformacionConsultaRate_InformacionConsulta" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_InformacionConsultaRate_Usuario" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

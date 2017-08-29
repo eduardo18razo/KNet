@@ -17,14 +17,15 @@ namespace KiiniHelp.Users.General
                 if (!IsPostBack)
                 {
                     int idArbol = Convert.ToInt32(Request.QueryString["IdArbol"]);
-                    UcPreviewConsulta.MuestraEvaluacion = _servicoArbol.ObtenerArbolAcceso(idArbol).Evaluacion;
-                    Session["PreviewAltaDataConsulta"] = new ServiceInformacionConsultaClient().ObtenerInformacionConsultaById(new ServiceArbolAccesoClient().ObtenerArbolAcceso(idArbol).InventarioArbolAcceso.First().InventarioInfConsulta.First().IdInfConsulta);
-                    UcPreviewConsulta.MuestraPreview((InformacionConsulta)Session["PreviewAltaDataConsulta"]);
+                    ucVisorConsultainformacion.MuestraEvaluacion = _servicoArbol.ObtenerArbolAcceso(idArbol).Evaluacion;
+                    ucVisorConsultainformacion.IdArbol = idArbol;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                UsuariosMaster master = (UsuariosMaster) Parent;
+                if(master != null)
+                    master.AlertaSucces(ex.Message);
             }
         }
     }
