@@ -490,6 +490,15 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones {
         protected global::System.Web.UI.WebControls.DropDownList ddlNivelSeleccionModal;
         
         /// <summary>
+        /// Control btnSeleccionarModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSeleccionarModal;
+        
+        /// <summary>
         /// Control dataCampus.
         /// </summary>
         /// <remarks>
@@ -571,24 +580,6 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones {
         protected global::System.Web.UI.WebControls.TextBox txtNoInt;
         
         /// <summary>
-        /// Control btnGuardarCatalogo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnGuardarCatalogo;
-        
-        /// <summary>
-        /// Control btnSeleccionarModal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSeleccionarModal;
-        
-        /// <summary>
         /// Control pnlAltaOrganizacion.
         /// </summary>
         /// <remarks>
@@ -623,6 +614,15 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkHabilitado;
+        
+        /// <summary>
+        /// Control btnGuardarCatalogo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnGuardarCatalogo;
         
         /// <summary>
         /// Control btnTerminar.

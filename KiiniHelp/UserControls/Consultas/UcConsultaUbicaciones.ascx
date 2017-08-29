@@ -67,23 +67,23 @@
                                                 <table class="table table-striped display" id="tblResults">
                                                     <thead>
                                                         <tr>
-                                                            <th>
+                                                            <th style="width: 8%">
                                                                 <asp:Label runat="server" ID="Label1">Tipo Usuario</asp:Label></th>
-                                                            <th>
+                                                            <th  style="width: 8%">
                                                                 <asp:Label runat="server" ID="lblNivel1">Nivel 1</asp:Label></th>
-                                                            <th>
+                                                            <th  style="width: 10%">
                                                                 <asp:Label runat="server" ID="lblNivel2">Nivel 2</asp:Label></th>
-                                                            <th>
+                                                            <th style="width: 10%">
                                                                 <asp:Label runat="server" ID="lblNivel3">Nivel 3</asp:Label></th>
-                                                            <th>
+                                                            <th style="width: 10%">
                                                                 <asp:Label runat="server" ID="lblNivel4">Nivel 4</asp:Label></th>
-                                                            <th>
+                                                            <th style="width: 10%">
                                                                 <asp:Label runat="server" ID="lblNivel5">Nivel 5</asp:Label></th>
-                                                            <th>
+                                                            <th style="width: 10%">
                                                                 <asp:Label runat="server" ID="lblNivel6">Nivel 6</asp:Label></th>
-                                                            <th>
+                                                            <th style="width: 10%">
                                                                 <asp:Label runat="server" ID="lblNivel7">Nivel 7</asp:Label></th>
-                                                            <th>
+                                                            <th style="width: 19%">
                                                                 <asp:Label runat="server"></asp:Label></th>
                                                         <%--</tr>--%>
                                                     </thead>

@@ -44,7 +44,6 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 }
             }
         }
-
         private int IdTipoUsuario
         {
             get
@@ -55,7 +54,6 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
             }
             set { ddlTipoUsuario.SelectedValue = value.ToString(); }
         }
-
         private int TipoArbol
         {
             get { return (int) BusinessVariables.EnumTipoArbol.ConsultarInformacion; }
@@ -893,8 +891,6 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 Alerta = _lstError;
             }
         }
-
-
         protected void ddlArea_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -911,8 +907,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 }
                 Alerta = _lstError;
             }
-        }
-        
+        }        
         protected void btnSaveAll_OnClick(object sender, EventArgs e)
         {
             try
@@ -1075,7 +1070,6 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 Alerta = _lstError;
             }
         }
-
         protected void btnPreview_OnClick(object sender, EventArgs e)
         {
             try

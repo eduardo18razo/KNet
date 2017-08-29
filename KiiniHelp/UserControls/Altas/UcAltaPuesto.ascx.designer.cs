@@ -58,15 +58,6 @@ namespace KiiniHelp.UserControls.Altas {
         protected global::System.Web.UI.WebControls.Label lblOperacion;
         
         /// <summary>
-        /// Control Lbl1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Lbl1;
-        
-        /// <summary>
         /// Control ddlTipoUsuario.
         /// </summary>
         /// <remarks>

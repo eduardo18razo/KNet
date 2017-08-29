@@ -35,11 +35,10 @@ namespace KiiniHelp
             }
         }
                            //BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Exito)
-        private void AlertaSucces(string value)
+        public void AlertaSucces(string value = "")
         {
             value = value.Trim() == string.Empty ? BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Exito) : value;
-            ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "SuccsessAlert('" + value + "');", true);
-        
+            ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptErrorAlert", "SuccsessAlert('','" + value + "');", true);
         }
         private void ObtenerAreas()
         {
@@ -68,6 +67,7 @@ namespace KiiniHelp
                 }
                 _lstError.Add(ex.Message);
                 Alerta = _lstError;
+                AlertaSucces(_lstError.ToString());
             }
         }
         private void UcTicketPortal_OnAceptarModal()
@@ -118,7 +118,8 @@ namespace KiiniHelp
                 //    Response.Redirect(ResolveUrl("~/Default.aspx"));
                 //}
                 lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
-                ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;
+                ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;   
+                
 
                 if (Session["UserData"] != null && HttpContext.Current.Request.Url.Segments[HttpContext.Current.Request.Url.Segments.Count() - 1] != "FrmCambiarContrasena.aspx")
                     if (_servicioSeguridad.CaducaPassword(((Usuario)Session["UserData"]).Id))

@@ -267,7 +267,7 @@ namespace KiiniHelp.UserControls.Consultas
                 ucAltaOrganizaciones.IdOrganizacion = int.Parse(((Button)sender).CommandArgument);
                 ucAltaOrganizaciones.EsSeleccion = false; 
                 ucAltaOrganizaciones.EsAlta = false;
-                ucAltaOrganizaciones.Title = "EDITAR ORGANIZACIÓN";
+                ucAltaOrganizaciones.Title = "Editar Organización";
                 ucAltaOrganizaciones.SetOrganizacionActualizar();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#editCatalogoOrganizacion\");", true);
             }

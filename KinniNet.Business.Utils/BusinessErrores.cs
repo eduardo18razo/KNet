@@ -19,10 +19,11 @@ namespace KinniNet.Business.Utils
                 if (File.Exists(fileNotificaciones))
                     File.Delete(fileNotificaciones);
                 List<HelperMensajes> lst = new List<HelperMensajes>();
-                lst.Add(new HelperMensajes { Key = "Exito", Value = "Se guardó el registro exitosamente" });
-                lst.Add(new HelperMensajes { Key = "Error", Value = "No se puede guardar el registro" });
+                lst.Add(new HelperMensajes { Key = "Exito", Value = "Se guardó el registro exitosamente." });
+                lst.Add(new HelperMensajes { Key = "Error", Value = "No se puede guardar el registro." });
                 lst.Add(new HelperMensajes { Key = "FaltaTipoUsuario", Value = "Debe seleccionar un Tipo de Usuario" });
-                lst.Add(new HelperMensajes { Key = "FaltaDescripcion", Value = "Debe especificar una descripción." });               
+                lst.Add(new HelperMensajes { Key = "FaltaDescripcion", Value = "Debe especificar una descripción." });
+                lst.Add(new HelperMensajes { Key = "Actualizacion", Value = "Se actualizó el registro exitosamente." });    
 
                 XmlSerializer ser = new XmlSerializer(typeof(List<HelperMensajes>));
                 XmlSerializer writer = new XmlSerializer(typeof(List<HelperMensajes>));
