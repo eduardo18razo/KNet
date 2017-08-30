@@ -271,9 +271,17 @@ namespace KinniNet.Core.Operacion
                     }
                     else if (mascara.CampoMascara.Any(s => s.NombreCampo == helperCampoMascaraCaptura.NombreCampo && s.TipoCampoMascara.Id == (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.FechaRango))
                     {
-                        string[] values = helperCampoMascaraCaptura.Valor.Split('|');
-                        store += string.Format("'{0}',", values[0]);
-                        store += string.Format("'{0}',", values[1]);
+                        if (helperCampoMascaraCaptura.Valor != string.Empty)
+                        {
+                            string[] values = helperCampoMascaraCaptura.Valor.Split('|');
+                            store += string.Format("'{0}',", values[0]);
+                            store += string.Format("'{0}',", values[1]);
+                        }
+                        else
+                        {
+                            store += string.Format("'{0}',", "");
+                            store += string.Format("'{0}',", "");
+                        }
                     }
                     else
                         store += string.Format("'{0}',", helperCampoMascaraCaptura.Valor);

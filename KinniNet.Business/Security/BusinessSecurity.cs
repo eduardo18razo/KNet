@@ -819,31 +819,33 @@ namespace KinniNet.Core.Security
                                            join rm in db.RolMenu on rtu.IdRol equals rm.IdRol
                                            join m in db.Menu on rm.IdMenu equals m.Id
                                            where rtu.IdTipoUsuario == idTipoUsuario && m.Habilitado
+                                           && (m.Id == (int)BusinessVariables.EnumMenu.Consultas || m.Id == (int)BusinessVariables.EnumMenu.Servicio
+                                           || m.Id == (int)BusinessVariables.EnumMenu.Incidentes)
                                            select m;
                     result = qry.OrderBy(o => o.Id).Distinct().ToList();
-                    foreach (Menu menu in result)
-                    {
-                        db.LoadProperty(menu, "Menu1");
-                        if (menu.Menu1.Count == 0) menu.Menu1 = null;
-                        if (menu.Menu1 == null) continue;
-                        foreach (Menu menu1 in menu.Menu1)
-                        {
-                            db.LoadProperty(menu1, "Menu1");
-                            if (menu1.Menu1.Count == 0) menu1.Menu1 = null;
-                            if (menu1.Menu1 == null) continue;
-                            foreach (Menu menu2 in menu1.Menu1)
-                            {
-                                db.LoadProperty(menu2, "Menu1");
-                                if (menu2.Menu1.Count == 0) menu2.Menu1 = null;
-                                if (menu2.Menu1 == null) continue;
-                                foreach (Menu menu3 in menu2.Menu1)
-                                {
-                                    db.LoadProperty(menu3, "Menu1");
-                                    if (menu3.Menu1.Count == 0) menu3.Menu1 = null;
-                                }
-                            }
-                        }
-                    }
+                    //foreach (Menu menu in result)
+                    //{
+                    //    db.LoadProperty(menu, "Menu1");
+                    //    if (menu.Menu1.Count == 0) menu.Menu1 = null;
+                    //    if (menu.Menu1 == null) continue;
+                    //    foreach (Menu menu1 in menu.Menu1)
+                    //    {
+                    //        db.LoadProperty(menu1, "Menu1");
+                    //        if (menu1.Menu1.Count == 0) menu1.Menu1 = null;
+                    //        if (menu1.Menu1 == null) continue;
+                    //        foreach (Menu menu2 in menu1.Menu1)
+                    //        {
+                    //            db.LoadProperty(menu2, "Menu1");
+                    //            if (menu2.Menu1.Count == 0) menu2.Menu1 = null;
+                    //            if (menu2.Menu1 == null) continue;
+                    //            foreach (Menu menu3 in menu2.Menu1)
+                    //            {
+                    //                db.LoadProperty(menu3, "Menu1");
+                    //                if (menu3.Menu1.Count == 0) menu3.Menu1 = null;
+                    //            }
+                    //        }
+                    //    }
+                    //}
 
                     List<int> areas = new BusinessArea().ObtenerAreasUsuarioPublicoByIdRol(new Autenticacion().GetUserInvitadoDataAutenticate(idTipoUsuario).Id, (int)BusinessVariables.EnumRoles.Usuario, false).Select(s => s.Id).Distinct().ToList();
                     if (arboles)

@@ -1,6 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Usuarios.Master" AutoEventWireup="true" CodeBehind="FrmConsulta.aspx.cs" Inherits="KiiniHelp.Publico.FrmConsulta" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Public.Master" AutoEventWireup="true" CodeBehind="FrmConsulta.aspx.cs" Inherits="KiiniHelp.Publico.FrmConsulta" %>
 
-<%@ Register Src="~/UserControls/Preview/UcPreviewConsulta.ascx" TagPrefix="uc1" TagName="UcPreviewConsulta" %>
+<%--<%@ Register Src="~/UserControls/Preview/UcPreviewConsulta.ascx" TagPrefix="uc1" TagName="UcPreviewConsulta" %>--%>
+<%@ Register Src="~/UserControls/Preview/UcVisorConsultainformacion.ascx" TagPrefix="uc1" TagName="UcVisorConsultainformacion" %>
+
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -10,6 +12,7 @@
          }
     </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <uc1:UcPreviewConsulta runat="server" id="UcPreviewConsulta" />
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderPublic" runat="server">
+    <%--<uc1:UcPreviewConsulta runat="server" id="UcPreviewConsulta" />--%>
+    <uc1:UcVisorConsultainformacion runat="server" ID="ucVisorConsultainformacion" />
 </asp:Content>

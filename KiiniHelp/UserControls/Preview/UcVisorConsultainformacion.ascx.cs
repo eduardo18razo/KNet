@@ -154,9 +154,9 @@ namespace KiiniHelp.UserControls.Preview
             try
             {
                 LinkButton btn = (LinkButton)sender;
-                BusinessFile.MoverTemporales(BusinessVariables.Directorios.RepositorioInformacionConsulta, BusinessVariables.Directorios.Carpetaemporal, new List<string> { btn.CommandArgument });
+                BusinessFile.CopiarSitioTemporal(BusinessVariables.Directorios.RepositorioInformacionConsulta, BusinessVariables.Directorios.Carpetaemporal, new List<string> { btn.CommandArgument });
 
-                string script = string.Format("window.open('https://docs.google.com/viewer?url={0}/tmp/{1}','_blank')", WebConfigurationManager.AppSettings["siteUrl"], btn.CommandArgument);
+                string script = string.Format("window.open('https://docs.google.com/viewer?url={0}{1}','_blank')", BusinessVariables.Directorios.CarpetaTemporalSitio, btn.CommandArgument);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptViewer", script, true);
             }
             catch (Exception ex)

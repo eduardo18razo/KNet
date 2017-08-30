@@ -38,6 +38,7 @@ namespace KinniNet.Business.Utils
             public static string RepositorioRepositorio = ConfigurationManager.AppSettings["Repositorio"];
             public static string RepositorioCorreo = ConfigurationManager.AppSettings["RepositorioCorreos"];
             public static string Carpetaemporal = HttpRuntime.AppDomainAppPath + ConfigurationManager.AppSettings["CarpetaTemporal"];
+            public static string CarpetaTemporalSitio = ConfigurationManager.AppSettings["siteUrlRemporal"];
 
         }
 

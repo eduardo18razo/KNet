@@ -300,7 +300,10 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                             {
                                 try
                                 {
-                                    var d = DateTime.Parse(txtFecha.Text.Trim());
+                                    if (txtFecha.Text.Trim() != String.Empty)
+                                    {
+                                        var d = DateTime.Parse(txtFecha.Text.Trim());
+                                    }
                                 }
                                 catch
                                 {
@@ -480,7 +483,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 campoCapturado = new HelperCampoMascaraCaptura
                                 {
                                     NombreCampo = campo.NombreCampo,
-                                    Valor = Convert.ToDateTime(txtFechaInicio.Text.Trim().ToUpper()).ToString("yyyy-MM-dd") + "|" + Convert.ToDateTime(txtFechaFin.Text.Trim().ToUpper()).ToString("yyyy-MM-dd"),
+                                    Valor = txtFechaFin.Text.Trim() == string.Empty ? "" : Convert.ToDateTime(txtFechaInicio.Text.Trim().ToUpper()).ToString("yyyy-MM-dd") + "|" + Convert.ToDateTime(txtFechaFin.Text.Trim().ToUpper()).ToString("yyyy-MM-dd"),
                                 };
                                 lstCamposCapturados.Add(campoCapturado);
                             }
@@ -491,7 +494,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                         campoCapturado = new HelperCampoMascaraCaptura
                                         {
                                             NombreCampo = campo.NombreCampo,
-                                            Valor = Convert.ToDateTime(txt.Text.Trim().ToUpper()).ToString("yyyy-MM-dd"),
+                                            Valor = txt.Text.Trim() == string.Empty ? string.Empty : Convert.ToDateTime(txt.Text.Trim().ToUpper()).ToString("yyyy-MM-dd"),
                                         };
                                         lstCamposCapturados.Add(campoCapturado);
                                         break;
@@ -860,7 +863,8 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                             {
                                 ID = "txt" + campo.NombreCampo,
                                 Text = campo.Descripcion,
-                                CssClass = "form-control"
+                                CssClass = "form-control",
+                                EnableViewState = true
                             };
                             //txtMascara.Attributes["placeholder"] = campo.Descripcion;
                             txtMascara.Attributes["max"] = campo.ValorMaximo.ToString();
@@ -868,6 +872,10 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                             MaskedEditExtender meeMascara = new MaskedEditExtender
                             {
                                 ID = "mee" + campo.NombreCampo,
+
+                                ClearTextOnInvalid = false,
+                                ClearMaskOnLostFocus = false,
+                                EnableViewState = true,
                                 TargetControlID = txtMascara.ID,
                                 InputDirection = MaskedEditInputDirection.LeftToRight,
                                 Mask = campo.MascaraDetalle,
@@ -879,6 +887,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                             createDiv.Controls.Add(meeMascara);
                             createDiv.Controls.Add(txtMascara);
                             _lstControles.Add(txtMascara);
+                            _lstControles.Add(meeMascara);
                             break;
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.AdjuntarArchivo:
                             lbl.Attributes["for"] = "fu" + campo.NombreCampo;

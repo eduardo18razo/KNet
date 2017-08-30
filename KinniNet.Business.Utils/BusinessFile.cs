@@ -108,6 +108,26 @@ namespace KinniNet.Business.Utils
                 throw new Exception(ex.Message);
             }
         }
+
+        public static void CopiarSitioTemporal(string folderOrigen, string folderDestino, List<string> archivos)
+        {
+            try
+            {
+                foreach (string archivo in archivos)
+                {
+                    if (!Directory.Exists(folderDestino))
+                        Directory.CreateDirectory(folderDestino);
+                    if (File.Exists(folderDestino + archivo))
+                        File.Delete(folderDestino + archivo);
+                    File.Copy(folderOrigen + archivo, folderDestino + archivo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static void LimpiarRepositorioTemporal(List<string> archivos)
         {
             try

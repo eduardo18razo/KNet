@@ -30,6 +30,27 @@ namespace KiiniHelp
             }
         }
 
+        private int TipoUsuario
+        {
+            get { return int.Parse(Session["TipoUsuario"].ToString()); }
+            set { Session["TipoUsuario"] = value.ToString(); }
+        }
+
+        private void ObtenerMenuPublico(int areaSeleccionada, bool arboles)
+        {
+            try
+            {
+                List<Menu> lstMenu = _servicioSeguridad.ObtenerMenuPublico(TipoUsuario, areaSeleccionada, arboles);
+                rptMenu.DataSource = lstMenu;
+                rptMenu.DataBind();
+                UcLogIn.AutenticarUsuarioPublico((int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado);
+                divMenuBtn.Visible = lstMenu.Count > 0;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -38,37 +59,39 @@ namespace KiiniHelp
                 UcLogIn.OnAceptarModal += UcLogInOnOnCancelarModal;
                 UcLogIn.OnCancelarModal += UcLogInOnOnCancelarModal;
                 ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;
-                if (Request.Params["userTipe"] != null)
-                {
-                    int areaSeleccionada;
-                    int tipoUsuario = int.Parse(Request.Params["userTipe"]);
-                    switch (tipoUsuario)
+                if (!IsPostBack)
+                    if (Request.Params["userTipe"] != null)
                     {
-                        case (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado:
-                            areaSeleccionada = 6;
-                            Session["AreaSeleccionada"] = areaSeleccionada;
-                            rptMenu.DataSource = _servicioSeguridad.ObtenerMenuPublico((int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado, areaSeleccionada, areaSeleccionada != 0);
-                            rptMenu.DataBind();
-                            UcLogIn.AutenticarUsuarioPublico((int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado);
-                            break;
-                        case (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado:
-                            areaSeleccionada = 6;
-                            Session["AreaSeleccionada"] = areaSeleccionada;
-                            rptMenu.DataSource = _servicioSeguridad.ObtenerMenuPublico((int)BusinessVariables.EnumTiposUsuario.ClienteInvitado, areaSeleccionada, areaSeleccionada != 0);
-                            rptMenu.DataBind();
-                            UcLogIn.AutenticarUsuarioPublico((int)BusinessVariables.EnumTiposUsuario.ClienteInvitado);
-                            break;
-                        case (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado:
-                            areaSeleccionada = 6;
-                            Session["AreaSeleccionada"] = areaSeleccionada;
-                            rptMenu.DataSource = _servicioSeguridad.ObtenerMenuPublico((int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado, areaSeleccionada, areaSeleccionada != 0);
-                            rptMenu.DataBind();
-                            UcLogIn.AutenticarUsuarioPublico((int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado);
-                            break;
+                        int areaSeleccionada;
+                        TipoUsuario = int.Parse(Request.Params["userTipe"]);
+                        switch (TipoUsuario)
+                        {
+                            case (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado:
+                                areaSeleccionada = 6;
+                                Session["AreaSeleccionada"] = areaSeleccionada;
+                                //ObtenerMenuPublico(areaSeleccionada, areaSeleccionada != 0);
+                                break;
+                            case (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado:
+                                areaSeleccionada = 6;
+                                Session["AreaSeleccionada"] = areaSeleccionada;
+                                //ObtenerMenuPublico(areaSeleccionada, areaSeleccionada != 0);
+                                //rptMenu.DataSource = _servicioSeguridad.ObtenerMenuPublico((int)BusinessVariables.EnumTiposUsuario.ClienteInvitado, areaSeleccionada, areaSeleccionada != 0);
+                                //rptMenu.DataBind();
+                                UcLogIn.AutenticarUsuarioPublico((int)BusinessVariables.EnumTiposUsuario.ClienteInvitado);
+                                break;
+                            case (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado:
+                                areaSeleccionada = 6;
+                                Session["AreaSeleccionada"] = areaSeleccionada;
+                                //ObtenerMenuPublico(areaSeleccionada, areaSeleccionada != 0);
+                                //rptMenu.DataSource = _servicioSeguridad.ObtenerMenuPublico((int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado, areaSeleccionada, areaSeleccionada != 0);
+                                //rptMenu.DataBind();
+                                UcLogIn.AutenticarUsuarioPublico((int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado);
+                                break;
 
+                        }
                     }
+                ObtenerMenuPublico( 6, 6 != 0);
 
-                }
             }
             catch (Exception ex)
             {
@@ -306,7 +329,7 @@ namespace KiiniHelp
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }

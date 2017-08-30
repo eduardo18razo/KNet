@@ -8,18 +8,17 @@
 //------------------------------------------------------------------------------
 
 namespace KiiniHelp.Publico {
-
-
-    public partial class FrmConsulta
-    {
+    
+    
+    public partial class FrmConsulta {
         
         /// <summary>
-        /// Control UcPreviewConsulta.
+        /// Control ucVisorConsultainformacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::KiiniHelp.UserControls.Preview.UcPreviewConsulta UcPreviewConsulta;
+        protected global::KiiniHelp.UserControls.Preview.UcVisorConsultainformacion ucVisorConsultainformacion;
     }
 }
