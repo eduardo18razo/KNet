@@ -1088,7 +1088,7 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                             _servicioUbicacion.GuardarUbicacion(ubicacion);
                             if (OnAceptarModal != null)
                                 OnAceptarModal();
-                           // AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
+                            // AlertaSucces = txtDescripcionCatalogo.Text + " se guardó correctamente.";  
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioUbicacion.ObtenerCampus(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel1.Value), true));
                         }
                         mp.AlertaSucces();
@@ -1107,7 +1107,6 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioUbicacion.ObtenerCampus(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel1.Value), true));
                         }
                     }
-
                     LimpiaCatalogoAltaCampus();
                     btnSeleccionarModal_OnClick(btnSeleccionarModal, null);
                 }
@@ -1232,12 +1231,10 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
                                 LlenaComboDinamico(ddlNivelSeleccionModal, _servicioUbicacion.ObtenerSiteRacks(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel6.Value), true));
                                 break;
                         }
+                        mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Actualizacion));
                     }
-                    mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Actualizacion));
-                    LimpiaCatalogoNivel();
-                    btnSeleccionarModal_OnClick(btnSeleccionarModal, null);
                 }
-
+                LimpiaCatalogoNivel();
                 if (OnAceptarModal != null)
                     OnAceptarModal();
             }
@@ -1434,11 +1431,9 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
             catch (Exception ex)
             {
                 if (_lstError == null)
-                {
                     _lstError = new List<string>();
-                    _lstError.Add(ex.Message);
-                }
-                Alerta = _lstError;              
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
             }
         }
         protected void btnCancelarCatalogo_OnClick(object sender, EventArgs e)

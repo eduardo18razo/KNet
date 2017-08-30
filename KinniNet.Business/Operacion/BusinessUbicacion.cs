@@ -244,7 +244,7 @@ namespace KinniNet.Core.Operacion
                 {
                     ubicacion.IdNivelUbicacion = 3;
                     ubicacion.Torre.Descripcion = ubicacion.Torre.Descripcion.Trim();
-                    if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais).Any(a => a.Torre.Descripcion == ubicacion.Torre.Descripcion && a.IdTipoUsuario == ubicacion.Torre.IdTipoUsuario))
+                    if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais && w.IdCampus == ubicacion.IdCampus).Any(a => a.Torre.Descripcion == ubicacion.Torre.Descripcion && a.IdTipoUsuario == ubicacion.Torre.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 3).Descripcion));
                 }
 
@@ -252,7 +252,7 @@ namespace KinniNet.Core.Operacion
                 {
                     ubicacion.IdNivelUbicacion = 4;
                     ubicacion.Piso.Descripcion = ubicacion.Piso.Descripcion.Trim();
-                    if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais).Any(a => a.Piso.Descripcion == ubicacion.Piso.Descripcion && a.IdTipoUsuario == ubicacion.Piso.IdTipoUsuario))
+                    if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais && w.IdTorre == ubicacion.IdTorre).Any(a => a.Piso.Descripcion == ubicacion.Piso.Descripcion && a.IdTipoUsuario == ubicacion.Piso.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 4).Descripcion));
                 }
 
@@ -261,7 +261,7 @@ namespace KinniNet.Core.Operacion
                     ubicacion.IdNivelUbicacion = 5;
                     ubicacion.Zona.Descripcion = ubicacion.Zona.Descripcion.Trim();
 
-                    if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais).Any(a => a.Zona.Descripcion == ubicacion.Zona.Descripcion && a.IdTipoUsuario == ubicacion.Zona.IdTipoUsuario))
+                    if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais && w.IdPiso == ubicacion.IdPiso).Any(a => a.Zona.Descripcion == ubicacion.Zona.Descripcion && a.IdTipoUsuario == ubicacion.Zona.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 5).Descripcion));
                 }
 
@@ -269,7 +269,7 @@ namespace KinniNet.Core.Operacion
                 {
                     ubicacion.IdNivelUbicacion = 6;
                     ubicacion.SubZona.Descripcion = ubicacion.SubZona.Descripcion.Trim();
-                    if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais).Any(a => a.SubZona.Descripcion == ubicacion.SubZona.Descripcion && a.IdTipoUsuario == ubicacion.SubZona.IdTipoUsuario))
+                    if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais && w.IdZona == ubicacion.IdZona).Any(a => a.SubZona.Descripcion == ubicacion.SubZona.Descripcion && a.IdTipoUsuario == ubicacion.SubZona.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 6).Descripcion));
                 }
 
@@ -277,7 +277,7 @@ namespace KinniNet.Core.Operacion
                 {
                     ubicacion.IdNivelUbicacion = 7;
                     ubicacion.SiteRack.Descripcion = ubicacion.SiteRack.Descripcion.Trim();
-                    if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais).Any(a => a.SiteRack.Descripcion == ubicacion.SiteRack.Descripcion && a.IdTipoUsuario == ubicacion.SiteRack.IdTipoUsuario))
+                    if (db.Ubicacion.Where(w => w.IdPais == ubicacion.IdPais && w.IdSubZona == ubicacion.IdSubZona).Any(a => a.SiteRack.Descripcion == ubicacion.SiteRack.Descripcion && a.IdTipoUsuario == ubicacion.SiteRack.IdTipoUsuario))
                         throw new Exception(string.Format("Este {0} se encuetra registrado", new BusinessParametros().ObtenerAliasUbicacionNivel(ubicacion.IdTipoUsuario, 7).Descripcion));
                 }
 
