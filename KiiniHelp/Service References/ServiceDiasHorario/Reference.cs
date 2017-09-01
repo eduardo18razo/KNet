@@ -42,6 +42,9 @@ namespace KiiniHelp.ServiceDiasHorario {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/AgregarDiaFeriado", ReplyAction="http://tempuri.org/IServiceDiasHorario/AgregarDiaFeriadoResponse")]
         void AgregarDiaFeriado(KiiniNet.Entities.Cat.Usuario.DiaFeriado dia);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiaByFecha", ReplyAction="http://tempuri.org/IServiceDiasHorario/ObtenerDiaByFechaResponse")]
+        KiiniNet.Entities.Cat.Usuario.DiaFeriado ObtenerDiaByFecha(System.DateTime fecha);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiaFeriado", ReplyAction="http://tempuri.org/IServiceDiasHorario/ObtenerDiaFeriadoResponse")]
         KiiniNet.Entities.Cat.Usuario.DiaFeriado ObtenerDiaFeriado(int id);
         
@@ -119,6 +122,10 @@ namespace KiiniHelp.ServiceDiasHorario {
         
         public void AgregarDiaFeriado(KiiniNet.Entities.Cat.Usuario.DiaFeriado dia) {
             base.Channel.AgregarDiaFeriado(dia);
+        }
+        
+        public KiiniNet.Entities.Cat.Usuario.DiaFeriado ObtenerDiaByFecha(System.DateTime fecha) {
+            return base.Channel.ObtenerDiaByFecha(fecha);
         }
         
         public KiiniNet.Entities.Cat.Usuario.DiaFeriado ObtenerDiaFeriado(int id) {

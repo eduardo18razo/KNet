@@ -66,7 +66,7 @@ namespace KinniNet.Core.Demonio
                     }
                     switch (informeArbol.IdTipoGrupo)
                     {
-                        case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención:
+                        case (int)BusinessVariables.EnumTiposGrupos.Agente:
                             informeDueño.AddRange(selectTickets.ToList().Distinct());
                             break;
                         case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido:
@@ -85,7 +85,7 @@ namespace KinniNet.Core.Demonio
                 informeDesarrollo = informeDesarrollo.Distinct().ToList();
                 informeConsulta = informeConsulta.Distinct().ToList();
 
-                EnviaNotificacion(informeDueño, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención);
+                EnviaNotificacion(informeDueño, (int)BusinessVariables.EnumTiposGrupos.Agente);
                 EnviaNotificacion(informeMantenimiento, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido);
                 EnviaNotificacion(informeDesarrollo, (int)BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo);
                 EnviaNotificacion(informeConsulta, (int)BusinessVariables.EnumTiposGrupos.ConsultasEspeciales);

@@ -247,7 +247,7 @@ namespace KiiniHelp.UserControls.Altas
                     case (int)BusinessVariables.EnumTiposGrupos.ConsultasEspeciales:
                         lblTitle.Text += "Consultas Especiales";
                         break;
-                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención:
+                    case (int)BusinessVariables.EnumTiposGrupos.Agente:
                         lblTitle.Text += "Responsable de Atención";
                         break;
                     case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido:
@@ -511,7 +511,7 @@ namespace KiiniHelp.UserControls.Altas
                 SubRol sbRol = (SubRol)e.Item.DataItem;
                 switch (IdTipoGrupo)
                 {
-                    case (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención:
+                    case (int)BusinessVariables.EnumTiposGrupos.Agente:
                         if (sbRol.Id == (int)BusinessVariables.EnumSubRoles.PrimererNivel)
                         {
                             ((CheckBox)((Repeater)sender).Controls[e.Item.ItemIndex].FindControl("chkSubRol")).Checked = true;

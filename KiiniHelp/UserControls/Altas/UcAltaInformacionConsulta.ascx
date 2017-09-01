@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8">
                     <div class="module-inner">
-                        <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" placeholder="Título del Artículo" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
+                        <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" placeholder="Título del Artículo" MaxLength="50" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
                     </div>
                     <hr />
                 </div>
@@ -48,11 +48,11 @@
                     <div class="module-inner">
                         Palabras de Búsqueda<hr />
                         <div class="form-group">
-                            <asp:TextBox runat="server" ID="txtBusqueda" ClientIDMode="Static" TextMode="MultiLine" Rows="5" CssClass="form-control" Style="width: 100%"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtBusqueda" ClientIDMode="Static" TextMode="MultiLine" Rows="5" CssClass="form-control" Style="width: 100%" MaxLength="500"></asp:TextBox>
                         </div>
                         Etiquetas<hr />
                         <div class="form-group">
-                            <asp:TextBox runat="server" ID="txtTags" ClientIDMode="Static" TextMode="MultiLine" Rows="5" CssClass="form-control" Style="width: 100%"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtTags" ClientIDMode="Static" TextMode="MultiLine" Rows="5" CssClass="form-control" Style="width: 100%" MaxLength="500"></asp:TextBox>
                         </div>
                         Adjuntos<br />
                         <hr />

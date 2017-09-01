@@ -48,7 +48,7 @@ namespace KiiniHelp.UserControls.Filtros.Componentes
                 {
                     (int) BusinessVariables.EnumTiposGrupos.ResponsableServicio,
                     (int) BusinessVariables.EnumTiposGrupos.ResponsableDeContenido,
-                    (int) BusinessVariables.EnumTiposGrupos.ResponsableDeAtención,
+                    (int) BusinessVariables.EnumTiposGrupos.Agente,
                     (int) BusinessVariables.EnumTiposGrupos.ResponsableDeOperación,
                     (int) BusinessVariables.EnumTiposGrupos.ResponsableDeDesarrollo,
                     (int) BusinessVariables.EnumTiposGrupos.ConsultasEspeciales

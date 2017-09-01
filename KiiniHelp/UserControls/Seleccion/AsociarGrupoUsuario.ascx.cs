@@ -69,7 +69,7 @@ namespace KiiniHelp.UserControls.Seleccion
         {
             get { return divGrupoRespAtencion.Visible; }
             set
-            { HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, value); }
+            { HabilitaGrupos((int)BusinessVariables.EnumRoles.Agente, value); }
         }
 
         public bool Mtto
@@ -175,7 +175,7 @@ namespace KiiniHelp.UserControls.Seleccion
                     if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.ConsultasEspeciales) <= 0)
                         sb.AppendLine("<li>Debe asignar al menos un grupo de Tipo Especial de consulta.</li>");
                 if (Atencion)
-                    if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.ResponsableDeAtención) <= 0)
+                    if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.Agente) <= 0)
                         sb.AppendLine("<li>Debe asignar al menos un grupo de Tipo Responsable de Atención.</li>");
                 if (Mtto)
                     if (GruposAsociados.Cast<RepeaterItem>().Select(item => (Label)item.FindControl("lblIdTipoSubGrupo")).Count(lblIdRol => int.Parse(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.ResponsableDeContenido) <= 0)
@@ -296,7 +296,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         if (visible)
                             Metodos.LlenaComboCatalogo(ddlGrupoEspecialConsulta, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
                         break;
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
+                    case (int)BusinessVariables.EnumRoles.Agente:
                         divGrupoRespAtencion.Visible = visible;
                         if (visible)
                             Metodos.LlenaComboCatalogo(ddlGrupoResponsableAtencion, AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
@@ -403,8 +403,8 @@ namespace KiiniHelp.UserControls.Seleccion
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
                         lstSubRoles = _servicioSubGrupoUsuario.ObtenerSubGruposUsuario(idGrupoUsuario, false);
                         break;
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
-                        idRol = (int)BusinessVariables.EnumRoles.ResponsableDeAtención;
+                    case (int)BusinessVariables.EnumRoles.Agente:
+                        idRol = (int)BusinessVariables.EnumRoles.Agente;
                         if (ddlGrupoResponsableAtencion.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                             throw new Exception("Seleccione un grupo valido");
                         idGrupoUsuario = Convert.ToInt32(ddlGrupoResponsableAtencion.SelectedItem.Value);
@@ -630,8 +630,8 @@ namespace KiiniHelp.UserControls.Seleccion
                         idGrupoUsuario = Convert.ToInt32(ddlGrupoEspecialConsulta.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
                         break;
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
-                        idRol = (int)BusinessVariables.EnumRoles.ResponsableDeAtención;
+                    case (int)BusinessVariables.EnumRoles.Agente:
+                        idRol = (int)BusinessVariables.EnumRoles.Agente;
                         idGrupoUsuario = Convert.ToInt32(ddlGrupoResponsableAtencion.SelectedItem.Value);
                         grupoUsuario = _servicioGrupoUsuario.ObtenerGrupoUsuarioById(idGrupoUsuario);
                         break;
@@ -698,7 +698,7 @@ namespace KiiniHelp.UserControls.Seleccion
                     case (int)BusinessVariables.EnumRoles.ConsultasEspeciales:
                         ddlGrupoEspecialConsulta.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                         break;
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
+                    case (int)BusinessVariables.EnumRoles.Agente:
                         ddlGrupoResponsableAtencion.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                         break;
                     case (int)BusinessVariables.EnumRoles.ResponsableDeContenido:
@@ -773,7 +773,7 @@ namespace KiiniHelp.UserControls.Seleccion
                         Metodos.LlenaComboCatalogo(ddlGrupoEspecialConsulta,
                             AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
                         break;
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
+                    case (int)BusinessVariables.EnumRoles.Agente:
                         divGrupoRespAtencion.Visible = true;
                         Metodos.LlenaComboCatalogo(ddlGrupoResponsableAtencion,
                             AsignacionAutomatica ? _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol(idRol, true) : _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario(idRol, IdTipoUsuario, true));
@@ -914,7 +914,7 @@ namespace KiiniHelp.UserControls.Seleccion
                 }
                 switch (int.Parse(hfOperacion.Value))
                 {
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
+                    case (int)BusinessVariables.EnumRoles.Agente:
                         bool permitir = chklbxSubRoles.Items.Cast<ListItem>().Any(item => int.Parse(item.Value) == (int)BusinessVariables.EnumSubRoles.Supervisor && item.Selected);
                         if (!permitir)
                             foreach (ListItem item in chklbxSubRoles.Items)

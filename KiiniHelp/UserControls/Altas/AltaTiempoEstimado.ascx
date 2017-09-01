@@ -56,13 +56,13 @@
                                     <td>
                                         <asp:Label runat="server" Text="DUEÑO DEL SERVICIO" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtDuenoDias" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtDuenoDias" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtDuenoHoras" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtDuenoHoras" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtDuenoMinutos" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtDuenoMinutos" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtDuenoSegundos" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtDuenoSegundos" /></td>
                                     <td>
                                         <asp:DropDownList runat="server" CssClass="DropSelect" ID="ddlDuenoVia" Enabled="False" /></td>
                                 </tr>
@@ -73,13 +73,13 @@
                                     <td>
                                         <asp:Label runat="server" Text="RESPONSABLE DE MTTO" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtMttoDias" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtMttoDias" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtMttoHoras" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtMttoHoras" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtMttoMinutos" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtMttoMinutos" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtMttoSegundos" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtMttoSegundos" /></td>
                                     <td>
                                         <asp:DropDownList runat="server" CssClass="DropSelect" ID="ddlMttoVia" Enabled="False" /></td>
                                 </tr>
@@ -92,13 +92,13 @@
                                         <asp:Label runat="server" Text="RESPONSABLE DESARROLLO" /></td>
                                     <%--onkeyup="sum();" --%>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtDesarrolloDias" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtDesarrolloDias" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtDesarrolloHoras" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtDesarrolloHoras" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtDesarrolloMinutos" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" CssClass="form-control" Enabled="False" ID="txtDesarrolloMinutos" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtDesarrolloSegundos" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" CssClass="form-control" Enabled="False" ID="txtDesarrolloSegundos" /></td>
                                     <td>
                                         <asp:DropDownList runat="server" CssClass="DropSelect" ID="ddlDesarrolloVia" Enabled="False" /></td>
                                 </tr>
@@ -109,13 +109,13 @@
                                         <asp:Label runat="server" Text="ESPECIAL DE CONSULTA" /></td>
                                     <%--onkeyup="sum();" --%>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtConsultaDias" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtConsultaDias" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtConsultaHoras" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtConsultaHoras" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtConsultaMinutos" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtConsultaMinutos" /></td>
                                     <td>
-                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" CssClass="form-control" Enabled="False" ID="txtConsultaSegundos" /></td>
+                                        <asp:TextBox runat="server" Text="0" onkeypress="return ValidaCampo(this, 2)" MaxLength="3" onkeydown="return (event.keyCode!=13);" CssClass="form-control" Enabled="False" ID="txtConsultaSegundos" /></td>
                                     <td>
                                         <asp:DropDownList runat="server" CssClass="DropSelect" ID="ddlConsultaVia" Enabled="False" /></td>
                                 </tr>

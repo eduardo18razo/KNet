@@ -35,7 +35,7 @@ namespace KinniNet.Core.Operacion
                 {
                     notaGeneral.Aprobada = true;
                     notaGeneral.NotaGeneralGrupo = new List<NotaGeneralGrupo>();
-                    foreach (GrupoUsuario grupoUsuario in new BusinessGrupoUsuario().ObtenerGruposByIdUsuario(notaGeneral.IdUsuario, false).Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeOperación))
+                    foreach (GrupoUsuario grupoUsuario in new BusinessGrupoUsuario().ObtenerGruposByIdUsuario(notaGeneral.IdUsuario, false).Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Agente || w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeOperación))
                     {
                         notaGeneral.NotaGeneralGrupo.Add(new NotaGeneralGrupo
                         {

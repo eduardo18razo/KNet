@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace KiiniNet.Entities.Cat.Usuario
 {
     [DataContract(IsReference = true)]
-    public class DiasFeriadosDetalle
+    public class    DiasFeriadosDetalle
     {
         [DataMember]
         public int Id { get; set; }

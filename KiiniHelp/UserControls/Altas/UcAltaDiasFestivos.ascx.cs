@@ -17,7 +17,6 @@ namespace KiiniHelp.UserControls.Altas
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
         public event DelegateTerminarModal OnTerminarModal;
-
         private List<string> _lstError = new List<string>();
 
         private List<string> Alerta
@@ -33,41 +32,66 @@ namespace KiiniHelp.UserControls.Altas
             }
         }
 
-        private List<DiasFeriadosDetalle> DiasFeriados
+        public int IdHorarioEditar
         {
-            get { return (List<DiasFeriadosDetalle>)Session["DiasSeleccionados"]; }
+            get { return int.Parse(hdIdHorario.Value); }
+            set
+            {
+                hdIdHorario.Value = value.ToString();
+                if (value != 0)
+                {
+                    DiasFeriados diasDescanso = _servicioDias.ObtenerDiasFeriadosUserById(value);
+                    if (diasDescanso != null)
+                    {
+                        txtDescripcionDias.Text = diasDescanso.Descripcion;
+                        foreach (DiasFeriadosDetalle detalle in diasDescanso.DiasFeriadosDetalle)
+                        {
+                            DiasFeriados = new List<DiaFeriado>();
+                            DiasFeriados.Add(_servicioDias.ObtenerDiaByFecha(detalle.Dia));
+                        }
+                        LlenaDias();
+                    }
+                    
+                }
+            }
+
+        }
+        private List<DiaFeriado> DiasFeriados
+        {
+            get { return (List<DiaFeriado>)Session["DiasSeleccionados"]; }
             set { Session["DiasSeleccionados"] = value; }
         }
 
         public bool EsAlta
         {
             get { return Convert.ToBoolean(hfEsAlta.Value); }
-            set { hfEsAlta.Value = value.ToString(); }
-        }
-
-        public int IdDiaFeriado
-        {
-            get { return int.Parse(hdIdHorario.Value); }
             set
             {
-                hdIdHorario.Value = value.ToString();
-                DiasFeriados dia = _servicioDias.ObtenerDiasFeriadosUserById(value);
+                hfEsAlta.Value = value.ToString();
+                IdHorarioEditar = value ? 0 : IdHorarioEditar;
+            }
+        }
+        public int IdDiaFeriado
+        {
+            get { return int.Parse(hfIdDiaFeriado.Value); }
+            set
+            {
+                hfIdDiaFeriado.Value = value.ToString();
+                DiaFeriado dia = _servicioDias.ObtenerDiaFeriado(value);
                 if (dia != null)
                 {
-                    txtDescripcionDias.Text = dia.Descripcion;
-                    DiasFeriados = dia.DiasFeriadosDetalle;
-                    LlenaDias();
+                    txtDescripcionDia.Text = dia.Descripcion;
+                    txtDate.Text = dia.Fecha.ToString("yyyy-MM-dd");
                 }
             }
         }
-
         private void LimpiarPantalla()
         {
             try
             {
                 txtDescripcionDias.Text = string.Empty;
                 LimpiaCapturaDias();
-                DiasFeriados = new List<DiasFeriadosDetalle>();
+                DiasFeriados = new List<DiaFeriado>();
                 LlenaDias();
             }
             catch (Exception e)
@@ -75,11 +99,11 @@ namespace KiiniHelp.UserControls.Altas
                 throw new Exception(e.Message);
             }
         }
-
         private void LimpiaCapturaDias()
         {
             try
             {
+                IdDiaFeriado = 0;
                 txtDescripcionDia.Text = string.Empty;
                 txtDate.Text = string.Empty;
             }
@@ -88,7 +112,6 @@ namespace KiiniHelp.UserControls.Altas
                 throw new Exception(e.Message);
             }
         }
-
         private void LlenaCombos()
         {
             try
@@ -100,12 +123,11 @@ namespace KiiniHelp.UserControls.Altas
                 throw new Exception(e.Message);
             }
         }
-
         private void LlenaDias()
         {
             try
             {
-                rptDias.DataSource = DiasFeriados.OrderBy(o => o.Dia).ToList();
+                rptDias.DataSource = DiasFeriados.OrderBy(o => o.Fecha).ToList();
                 rptDias.DataBind();
             }
             catch (Exception e)
@@ -126,7 +148,6 @@ namespace KiiniHelp.UserControls.Altas
                     txtDescripcionDias.Focus();
                     txtDate.Focus();
                 }
-
             }
             catch (Exception ex)
             {
@@ -138,34 +159,30 @@ namespace KiiniHelp.UserControls.Altas
                 Alerta = _lstError;
             }
         }
-
         protected void btnSeleccionar_OnClick(object sender, EventArgs e)
         {
             try
             {
+                if(ddlDiasFeriados.SelectedIndex<= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    throw new Exception();
                 int idDiaFeriado = int.Parse(ddlDiasFeriados.SelectedValue);
                 DiaFeriado selectedDay = _servicioDias.ObtenerDiaFeriado(idDiaFeriado);
-                List<DiasFeriadosDetalle> tmpSeleccionados = DiasFeriados ?? new List<DiasFeriadosDetalle>();
+                List<DiaFeriado> tmpSeleccionados = DiasFeriados ?? new List<DiaFeriado>();
                 if (hfEditando.Value != string.Empty)
                 {
-                    tmpSeleccionados.Single(a => a.Dia == selectedDay.Fecha).Descripcion = txtDescripcionDia.Text.ToUpper();
-                    tmpSeleccionados.Single(a => a.Dia == selectedDay.Fecha).Dia = Convert.ToDateTime(txtDate.Text);
+                    tmpSeleccionados.Single(a => a.Fecha == selectedDay.Fecha).Descripcion = txtDescripcionDia.Text.ToUpper();
+                    tmpSeleccionados.Single(a => a.Fecha == selectedDay.Fecha).Fecha = Convert.ToDateTime(txtDate.Text);
                 }
                 else
                 {
-                    if (tmpSeleccionados.Any(a => a.Dia == selectedDay.Fecha))
+                    if (tmpSeleccionados.Any(a => a.Fecha == selectedDay.Fecha))
                         throw new Exception("Ya se ha ingresado esta fecha");
-                    tmpSeleccionados.Add(new DiasFeriadosDetalle
-                    {
-                        Descripcion = selectedDay.Descripcion,
-                        Dia = selectedDay.Fecha
-                    });
+                    tmpSeleccionados.Add(selectedDay);
                 }
 
                 DiasFeriados = tmpSeleccionados;
                 LlenaDias();
                 ddlDiasFeriados.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
-                
             }
             catch (Exception ex)
             {
@@ -177,12 +194,10 @@ namespace KiiniHelp.UserControls.Altas
                 Alerta = _lstError;
             }
         }
-
         protected void btnAddDiaDescanso_OnClick(object sender, EventArgs e)
         {
             try
             {
-
                 if (txtDate.Text.Trim() == string.Empty)
                     throw new Exception("Ingrese una fecha");
                 if (txtDescripcionDia.Text.Trim() == string.Empty)
@@ -190,8 +205,11 @@ namespace KiiniHelp.UserControls.Altas
                 if (DateTime.Parse(txtDate.Text) < DateTime.Parse(DateTime.Now.ToShortDateString()))
                     throw new Exception("La fecha no puede ser anterior al dia actual");
 
-                DiaFeriado newDay = new DiaFeriado { Descripcion = txtDescripcionDia.Text, Fecha = Convert.ToDateTime(txtDate.Text) };
+                    DiaFeriado newDay = new DiaFeriado {Id = IdDiaFeriado == 0 ? 0 : IdDiaFeriado,  Descripcion = txtDescripcionDia.Text, Fecha = Convert.ToDateTime(txtDate.Text) };
                 _servicioDias.AgregarDiaFeriado(newDay);
+                UsuariosMaster master = (UsuariosMaster) Page.Master;
+                if(master != null)
+                    master.AlertaSucces();
                 LimpiaCapturaDias();
                 LlenaCombos();
             }
@@ -213,11 +231,12 @@ namespace KiiniHelp.UserControls.Altas
                 if (btn != null)
                 {
                     DateTime fecha = Convert.ToDateTime(btn.CommandArgument);
-                    hfEditando.Value = btn.CommandArgument;
-                    List<DiasFeriadosDetalle> tmpSeleccionados = DiasFeriados ?? new List<DiasFeriadosDetalle>();
-                    DiasFeriadosDetalle diaSeleccion = tmpSeleccionados.Single(f => f.Dia == fecha);
-                    txtDescripcionDia.Text = diaSeleccion.Descripcion;
-                    txtDate.Text = diaSeleccion.Dia.ToString("yyyy-MM-dd");
+                    IdDiaFeriado = _servicioDias.ObtenerDiaByFecha(fecha).Id;
+                    //hfEditando.Value = btn.CommandArgument;
+                    //List<DiasFeriadosDetalle> tmpSeleccionados = DiasFeriados ?? new List<DiasFeriadosDetalle>();
+                    //DiasFeriadosDetalle diaSeleccion = tmpSeleccionados.Single(f => f.Dia == fecha);
+                    //txtDescripcionDia.Text = diaSeleccion.Descripcion;
+                    //txtDate.Text = diaSeleccion.Dia.ToString("yyyy-MM-dd");
                 }
             }
             catch (Exception ex)
@@ -238,8 +257,8 @@ namespace KiiniHelp.UserControls.Altas
                 if (btn != null)
                 {
                     DateTime fecha = Convert.ToDateTime(btn.CommandArgument);
-                    List<DiasFeriadosDetalle> tmpSeleccionados = DiasFeriados ?? new List<DiasFeriadosDetalle>();
-                    tmpSeleccionados.Remove(tmpSeleccionados.Single(f => f.Dia == fecha));
+                    List<DiaFeriado> tmpSeleccionados = DiasFeriados ?? new List<DiaFeriado>();
+                    tmpSeleccionados.Remove(tmpSeleccionados.Single(f => f.Fecha == fecha));
                     DiasFeriados = tmpSeleccionados;
                     LlenaDias();
                 }
@@ -264,7 +283,20 @@ namespace KiiniHelp.UserControls.Altas
                     throw new Exception("Ingrese la menos un día");
                 DiasFeriados newDias = new DiasFeriados();
                 newDias.Descripcion = txtDescripcionDias.Text;
-                newDias.DiasFeriadosDetalle = DiasFeriados;
+                newDias.DiasFeriadosDetalle = new List<DiasFeriadosDetalle>();
+                foreach (DiaFeriado feriado in DiasFeriados)
+                {
+                    DiaFeriado day = _servicioDias.ObtenerDiaFeriado(feriado.Id);
+                    if (day != null)
+                    {
+                        newDias.DiasFeriadosDetalle.Add(new DiasFeriadosDetalle
+                        {
+                            Dia = day.Fecha,
+                            Descripcion = day.Descripcion,
+                            Habilitado = true
+                        });
+                    }
+                }
                 _servicioDias.CrearDiasFestivos(newDias);
                 LlenaCombos();
                 LimpiarPantalla();

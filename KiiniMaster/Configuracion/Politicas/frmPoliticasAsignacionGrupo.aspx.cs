@@ -124,7 +124,7 @@ namespace KiiniMaster.Configuracion.Politicas
         {
             try
             {
-                ddlSubRol.DataSource = _servicioSubRoles.ObtenerSubRolesByTipoGrupo((int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención, true);
+                ddlSubRol.DataSource = _servicioSubRoles.ObtenerSubRolesByTipoGrupo((int)BusinessVariables.EnumTiposGrupos.Agente, true);
                 ddlSubRol.DataTextField = "Descripcion";
                 ddlSubRol.DataValueField = "Id";
                 ddlSubRol.DataBind();
@@ -233,11 +233,11 @@ namespace KiiniMaster.Configuracion.Politicas
 
                 List<int> tiposGruposPermitidos = new List<int>();
                 tiposGruposPermitidos.Add(BusinessVariables.ComboBoxCatalogo.ValueSeleccione);
-                tiposGruposPermitidos.Add((int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención);
+                tiposGruposPermitidos.Add((int)BusinessVariables.EnumTiposGrupos.Agente);
 
 
                // ddlGrupoUsuario.DataSource = _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRolTipoUsuario((int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención, (int)BusinessVariables.EnumTiposUsuario.Empleado, true);
-                ddlGrupoUsuario.DataSource = _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol((int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención, true);
+                ddlGrupoUsuario.DataSource = _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol((int)BusinessVariables.EnumTiposGrupos.Agente, true);
                 ddlGrupoUsuario.DataTextField = "Descripcion";
                 ddlGrupoUsuario.DataValueField = "Id";
                 ddlGrupoUsuario.DataBind();

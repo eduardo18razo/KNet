@@ -92,5 +92,10 @@ namespace KiiniHelp
                 //FormsAuthentication.SignOut();
             }
         }
+
+        public void Terminar()
+        {
+            Session_End(null, null);
+        }
     }
 }

@@ -227,7 +227,7 @@ namespace KiiniHelp.Agente
 
             if (!IsPostBack)
             {
-                if (int.Parse(Session["RolSeleccionado"].ToString()) != (int)BusinessVariables.EnumRoles.ResponsableDeAtención)
+                if (int.Parse(Session["RolSeleccionado"].ToString()) != (int)BusinessVariables.EnumRoles.Agente)
                     Response.Redirect("~/Users/DashBoard.aspx");
                 Session["EstatusSeleccionado"] = EstatusAbierto;
                 ObtenerTicketsPage();

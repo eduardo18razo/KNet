@@ -33,7 +33,7 @@
                             <hr />
                             <div class="form-group margin-top">
                                 Escribe el nombre del puesto*<br />
-                                <asp:TextBox runat="server" ID="txtDescripcionPuesto" CssClass="form-control" onkeydown="return (event.keyCode!=13);" />
+                                <asp:TextBox runat="server" ID="txtDescripcionPuesto" CssClass="form-control" onkeydown="return (event.keyCode!=13);" MaxLength="50"/>
                             </div>
                             <p class="margin-top-40">
                                 <asp:Button runat="server" CssClass="btn btn-primary" Text="Guardar" ID="btnGuardar" OnClick="btnGuardar_OnClick" />

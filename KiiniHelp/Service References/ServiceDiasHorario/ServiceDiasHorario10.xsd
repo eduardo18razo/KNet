@@ -120,6 +120,20 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="ObtenerDiaByFecha">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fecha" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObtenerDiaByFechaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiaByFechaResult" nillable="true" type="q9:DiaFeriado" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ObtenerDiaFeriado">
     <xs:complexType>
       <xs:sequence>
@@ -130,7 +144,7 @@
   <xs:element name="ObtenerDiaFeriadoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiaFeriadoResult" nillable="true" type="q9:DiaFeriado" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiaFeriadoResult" nillable="true" type="q10:DiaFeriado" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -144,14 +158,14 @@
   <xs:element name="ObtenerDiasFeriadosResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiasFeriadosResult" nillable="true" type="q10:ArrayOfDiaFeriado" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiasFeriadosResult" nillable="true" type="q11:ArrayOfDiaFeriado" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CrearDiasFestivos">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="item" nillable="true" type="q11:DiasFeriados" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="item" nillable="true" type="q12:DiasFeriados" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -170,7 +184,7 @@
   <xs:element name="ObtenerDiasFeriadosUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiasFeriadosUserResult" nillable="true" type="q12:ArrayOfDiasFeriados" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiasFeriadosUserResult" nillable="true" type="q13:ArrayOfDiasFeriados" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -184,7 +198,7 @@
   <xs:element name="ObtenerDiasFeriadosUserByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiasFeriadosUserByIdResult" nillable="true" type="q13:DiasFeriados" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiasFeriadosUserByIdResult" nillable="true" type="q14:DiasFeriados" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

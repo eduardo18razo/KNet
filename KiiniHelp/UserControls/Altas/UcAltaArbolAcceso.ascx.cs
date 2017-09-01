@@ -260,7 +260,7 @@ namespace KiiniHelp.UserControls.Altas
                         ddlMascaraAcceso.SelectedValue = opcion.InventarioArbolAcceso.First().IdMascara.ToString();
                         Metodos.LlenaComboCatalogo(ddlEncuesta, _servicioEncuesta.ObtenerEncuestas(true));
                         ddlEncuesta.SelectedValue = opcion.InventarioArbolAcceso.First().IdEncuesta.ToString();
-                        UcAltaSla.IdGrupo = opcion.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).GroupBy(g => g.IdGrupoUsuario).Single().Key;
+                        UcAltaSla.IdGrupo = opcion.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Agente).GroupBy(g => g.IdGrupoUsuario).Single().Key;
                         int? idSla = opcion.InventarioArbolAcceso.First().IdSla;
                         if (idSla != null) UcAltaSla.IdSla = (int)idSla;
                         ucAltaTiempoEstimado.SetTiempoEstimado(opcion.TiempoInformeArbol);
@@ -956,7 +956,7 @@ namespace KiiniHelp.UserControls.Altas
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeContenido, false);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeOperación, false);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, false);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, false);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Agente, false);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ConsultasEspeciales, false);
                 if (hfIdTipoArbol.Value == ((int)BusinessVariables.EnumTipoArbol.ConsultarInformacion).ToString())
                 {
@@ -974,7 +974,7 @@ namespace KiiniHelp.UserControls.Altas
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeContenido, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeOperación, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, true);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Agente, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ConsultasEspeciales, true);
                 AsociarGrupoUsuario.Limpiar();
 
@@ -1074,7 +1074,7 @@ namespace KiiniHelp.UserControls.Altas
                 {
                     Label lblIdGrupoUsuario = (Label)item.FindControl("lblIdGrupoUsuario");
                     Label lblIdRol = (Label)item.FindControl("lblIdTipoSubGrupo");
-                    if (Convert.ToInt32(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.ResponsableDeAtención)
+                    if (Convert.ToInt32(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.Agente)
                         idGrupo = Convert.ToInt32(lblIdGrupoUsuario.Text);
                 }
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalGruposNodo\");", true);

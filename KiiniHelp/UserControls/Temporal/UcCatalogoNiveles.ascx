@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">Descripcion</label>
-                                        <asp:TextBox runat="server" ID="txtDescripcionNivel" placeholder="DESCRIPCION" class="form-control" />
+                                        <asp:TextBox runat="server" ID="txtDescripcionNivel" placeholder="DESCRIPCION" class="form-control"  onkeydown="return (event.keyCode!=13);" MaxLength="50" />
                                     </div>
                                     <div class="form-group">
                                         <asp:CheckBox runat="server" ID="chkNivelHabilitado" Text="Habilitado" Checked="True" Visible="False" />

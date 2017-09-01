@@ -2,6 +2,7 @@
 using System.Net;
 using System.Web;
 using System.Web.UI;
+using KinniNet.Business.Utils;
 
 namespace KiiniHelp.Downloads
 {
@@ -13,17 +14,21 @@ namespace KiiniHelp.Downloads
             {
                 if (Request.Params["file"] != null)
                 {
+
                     string[] values = Request.Params["file"].Split('~');
-                    WebClient req = new WebClient();
-                    HttpResponse response = HttpContext.Current.Response;
-                    response.Clear();
-                    response.ClearContent();
-                    response.ClearHeaders();
-                    response.Buffer = true;
-                    response.AddHeader("Content-Disposition", "attachment;filename=\"" + values[1] + "\"");
-                    byte[] data = req.DownloadData(values[0] + values[1]);
-                    response.BinaryWrite(data);
-                    response.End();
+                    //if (BusinessFile.ExisteArchivo(Server.MapPath(values[1])))
+                    //{
+                        WebClient req = new WebClient();
+                        HttpResponse response = HttpContext.Current.Response;
+                        response.Clear();
+                        response.ClearContent();
+                        response.ClearHeaders();
+                        response.Buffer = true;
+                        response.AddHeader("Content-Disposition", "attachment;filename=\"" + values[1] + "\"");
+                        byte[] data = req.DownloadData(values[0] + values[1]);
+                        response.BinaryWrite(data);
+                        response.End();
+                    //}
                 }
 
             }

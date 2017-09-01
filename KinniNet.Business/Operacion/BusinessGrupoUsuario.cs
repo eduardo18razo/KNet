@@ -64,7 +64,7 @@ namespace KinniNet.Core.Operacion
                 //if (supervisor)
                 //{
                 result = db.GrupoUsuario.Join(db.UsuarioGrupo, gu => gu.Id, ug => ug.IdGrupoUsuario, (gu, ug) => new { gu, ug })
-                    .Where(@t => @t.ug.IdUsuario == idUsuario && @t.gu.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención)
+                    .Where(@t => @t.ug.IdUsuario == idUsuario && @t.gu.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Agente)
                     .Select(@t => @t.gu).Distinct().ToList();
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,
@@ -493,7 +493,7 @@ namespace KinniNet.Core.Operacion
                           join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
                           join gu in db.GrupoUsuario on tgu.IdGrupoUsuario equals gu.Id
                           join ug in db.UsuarioGrupo on gu.Id equals ug.IdGrupoUsuario
-                          where gu.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención || gu.IdTipoUsuario == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido
+                          where gu.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Agente || gu.IdTipoUsuario == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeContenido
                           select new { t, gu, ug };
 
                 if (!supervisor)

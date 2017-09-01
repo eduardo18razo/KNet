@@ -282,7 +282,7 @@ namespace KiiniHelp.UserControls.Consultas
                 }
                 switch (int.Parse(hfOperacion.Value))
                 {
-                    case (int)BusinessVariables.EnumRoles.ResponsableDeAtención:
+                    case (int)BusinessVariables.EnumRoles.Agente:
                         bool permitir = chklbxSubRoles.Items.Cast<ListItem>().Any(item => int.Parse(item.Value) == (int)BusinessVariables.EnumSubRoles.Supervisor && item.Selected);
                         if (!permitir)
                             foreach (ListItem item in chklbxSubRoles.Items)

@@ -502,10 +502,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>12/08/2009 10:05:04</publishTime>
     </File>
     <File Include="bin/KiiniHelp.dll">
-      <publishTime>08/30/2017 11:30:35</publishTime>
+      <publishTime>08/30/2017 18:58:23</publishTime>
     </File>
     <File Include="bin/KiiniHelp.pdb">
-      <publishTime>08/30/2017 11:30:35</publishTime>
+      <publishTime>08/30/2017 18:58:23</publishTime>
     </File>
     <File Include="bin/KiiniNet.Entities.dll">
       <publishTime>08/30/2017 11:04:08</publishTime>

@@ -576,7 +576,7 @@ namespace KinniNet.Core.Operacion
                           join tgu in db.TicketGrupoUsuario on t.Id equals tgu.IdTicket
                           join gu in db.GrupoUsuario on tgu.IdGrupoUsuario equals gu.Id
                           join u in db.Usuario on t.IdUsuarioResolvio equals u.Id
-                          where gu.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención
+                          where gu.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Agente
                           select new { t, e, tgu, u };
                 if (!supervisor)
                     qry = from q in qry

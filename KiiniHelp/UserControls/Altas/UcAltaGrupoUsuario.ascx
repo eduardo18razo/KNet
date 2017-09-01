@@ -54,7 +54,7 @@
                                                                     Nombre del Nuevo grupo<br />
                                                                 </div>
                                                                 <div class="col-sm-6 col-lg-offset-3">
-                                                                    <asp:TextBox runat="server" ID="txtDescripcionGrupoUsuario" placeholder="DESCRIPCION" class="form-control col-sm-3" onkeydown="return (event.keyCode!=13);" />
+                                                                    <asp:TextBox runat="server" ID="txtDescripcionGrupoUsuario" placeholder="DESCRIPCION" class="form-control col-sm-3" MaxLength="50" onkeydown="return (event.keyCode!=13);" />
                                                                 </div>
                                                             </div>
                                                             <asp:CheckBox runat="server" ID="chkHabilitado" Checked="True" Visible="False" />

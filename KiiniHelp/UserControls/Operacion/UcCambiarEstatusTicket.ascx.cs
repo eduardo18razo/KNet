@@ -5,6 +5,7 @@ using System.Web.Configuration;
 using System.Web.UI;
 using KiiniHelp.ServiceAtencionTicket;
 using KiiniHelp.ServiceSistemaEstatus;
+using KiiniNet.Entities.Operacion.Usuarios;
 using KinniNet.Business.Utils;
 
 namespace KiiniHelp.UserControls.Operacion
@@ -80,6 +81,8 @@ namespace KiiniHelp.UserControls.Operacion
             }
         }
 
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -106,6 +109,9 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
+                if (ddlEstatus.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    throw new Exception("Debe seleccionar un estatus");
+
                 if (ddlEstatus.SelectedValue != BusinessVariables.ComboBoxCatalogo.ValueSeleccione.ToString())
                 {
                     CerroTicket = Convert.ToInt32(ddlEstatus.SelectedValue) == (int) BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Cerrado;

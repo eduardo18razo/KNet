@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-7 col-sm-7">
                             <div class="module-inner">
-                                <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control no-border" placeholder="Título del Formulario" MaxLength="30" style="text-transform: none" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
+                                <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control no-border" placeholder="Título del Formulario" MaxLength="50" style="text-transform: none" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
                                 <asp:CheckBox runat="server" ID="chkClaveRegistro" CssClass="form-control" Text="Clave de Registro" Visible="False" Checked="True" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                                 <div class="module-inner">
                                     <div class="form-group">
                                         <asp:Label runat="server" ID="lblDescripcion" /><br />
-                                        <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control" placeholder="Título del campo" style="text-transform: none" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
+                                        <asp:TextBox runat="server" ID="txtDescripcionCampo" CssClass="form-control" placeholder="Título del campo" MaxLength="50" style="text-transform: none" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@
                                     <div class="form-group">
                                         <asp:Label runat="server" Text="Longitud mínima" CssClass="col-lg-2 col-md-2 col-sm-3" />
                                         <div class="col-lg-3 col-md-3 col-sm-5">
-                                            <asp:TextBox runat="server" ID="txtLongitudMinima" type="number" min="1" CssClass="form-control" style="text-transform: none" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
+                                            <asp:TextBox runat="server" ID="txtLongitudMinima" type="number" min="1" max="99" CssClass="form-control" style="text-transform: none" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
                                         </div>
                                     </div>
                                 </div>
@@ -141,7 +141,7 @@
                                     <div class="form-group">
                                         <asp:Label runat="server" Text="Longitud máxima" CssClass="col-lg-2 col-md-2 col-sm-3" />
                                         <div class="col-lg-3 col-md-3 col-sm-5">
-                                            <asp:TextBox runat="server" ID="txtLongitudMaxima" type="number" min="1" CssClass="form-control" style="text-transform: none" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
+                                            <asp:TextBox runat="server" ID="txtLongitudMaxima" type="number" min="1" max="1000" CssClass="form-control" style="text-transform: none" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
                                         </div>
                                     </div>
                                 </div>
@@ -177,7 +177,7 @@
                                         <div class="form-inline margin-top-5">
                                             <asp:Label runat="server" Text="Min." CssClass="col-lg-2 col-md-2 col-sm-3" />
                                             <div class="col-lg-3 col-md-3 col-sm-5">
-                                                <asp:TextBox runat="server" ID="txtValorMinimo" type="number" min="1" CssClass="form-control" 
+                                                <asp:TextBox runat="server" ID="txtValorMinimo" type="number" min="1" max="999999" CssClass="form-control" onkeydown="return (event.keyCode!=13);"
                                                     style="text-transform: none" />
                                             </div>
                                             <div class="clearfix"></div>
@@ -186,7 +186,7 @@
                                         <div class="form-inline margin-top-5">
                                             <asp:Label runat="server" Text="Max." CssClass="col-lg-2 col-md-2 col-sm-3" />
                                             <div class="col-lg-3 col-md-3 col-sm-5">
-                                                <asp:TextBox runat="server" ID="txtValorMaximo" type="number" min="1" step="any" CssClass="form-control" style="text-transform: none" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
+                                                <asp:TextBox runat="server" ID="txtValorMaximo" type="number" min="1" max="999999" step="any" CssClass="form-control" style="text-transform: none" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
                                             </div>
                                         </div>
                                     </div>
@@ -200,7 +200,7 @@
                                 <div class="module-inner">
                                     <div class="form-group">
                                         <asp:Label runat="server" Text="Formato del campo" />
-                                        <asp:TextBox runat="server" ID="txtMascara" CssClass="form-control" data-toggle="tooltip" data-html="true" data-placement="right" ToolTip="None – No validation <br>Number – Number validation<br>Date – Date validation<br>Time – Time validation<br>DateTime – Date and time validation<br>Mask Characters and Delimiters<br><br>9 – Only a numeric character<br>L – Only a letter<br>$ – Only a letter or a space<br>C – Only a custom character (case sensitive)<br>A – Only a letter or a custom character<br>N – Only a numeric or custom character<br>? – Any character<br><br>/ – Date separator<br>: – Time separator<br>. – Decimal separator<br>, – Thousand separator<br>\ – Escape character<br>{ – Initial delimiter for repetition of masks<br>} – Final delimiter for repetition of masks'" style="text-transform: none" />
+                                        <asp:TextBox runat="server" ID="txtMascara" CssClass="form-control"  onkeydown="return (event.keyCode!=13);" data-toggle="tooltip" data-html="true" data-placement="right" ToolTip="None – No validation <br>Number – Number validation<br>Date – Date validation<br>Time – Time validation<br>DateTime – Date and time validation<br>Mask Characters and Delimiters<br><br>9 – Only a numeric character<br>L – Only a letter<br>$ – Only a letter or a space<br>C – Only a custom character (case sensitive)<br>A – Only a letter or a custom character<br>N – Only a numeric or custom character<br>? – Any character<br><br>/ – Date separator<br>: – Time separator<br>. – Decimal separator<br>, – Thousand separator<br>\ – Escape character<br>{ – Initial delimiter for repetition of masks<br>} – Final delimiter for repetition of masks'" style="text-transform: none" />
                                     </div>
                                 </div>
                             </div>
@@ -209,7 +209,7 @@
                                 <div class="module-inner">
                                     <div class="form-group">
                                         <asp:Label runat="server" Text="Simbolo de moneda" />
-                                        <asp:TextBox runat="server" ID="txtSimboloMoneda" Text="MXN" CssClass="form-control" style="text-transform: none" />
+                                        <asp:TextBox runat="server" ID="txtSimboloMoneda" Text="MXN" CssClass="form-control" style="text-transform: none"  onkeydown="return (event.keyCode!=13);"/>
                                     </div>
                                 </div>
                             </div>

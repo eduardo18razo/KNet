@@ -21,11 +21,11 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="module-inner">
                             <div class="form-group">
-                                <asp:TextBox runat="server" ID="txtNombreCatalogo" placeholder="Nombre del Catálogo" MaxLength="50" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtNombreCatalogo" placeholder="Nombre del Catálogo" MaxLength="50" onkeydown="return (event.keyCode!=13);"  CssClass="form-control"></asp:TextBox>
                             </div>
 
                             <div class="form-group">
-                                <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="Nombre del Catálogo" TextMode="MultiLine" Rows="3" MaxLength="250" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="Nombre del Catálogo" TextMode="MultiLine" Rows="3" MaxLength="250" onkeydown="return (event.keyCode!=13);" CssClass="form-control"></asp:TextBox>
                             </div>
 
                             <div class="form-group">
@@ -42,7 +42,7 @@
                                                 <asp:Label runat="server" ID="lblIdRegistro" Visible="False" Text='<%# Eval("Id") %>' />
                                                 <div class="col-lg-10 col-md-10 col-sm-10">
                                                     <%--<asp:TextBox runat="server" ID="txtRegistro" Text='<%# Container.DataItem.ToString() %>' CssClass="form-control" />--%>
-                                                    <asp:TextBox runat="server" ID="txtDescripcionRegistro" Text='<%# Eval("Descripcion") %>' CssClass="form-control" />
+                                                    <asp:TextBox runat="server" ID="txtDescripcionRegistro" Text='<%# Eval("Descripcion") %>' CssClass="form-control" MaxLength="50" onkeydown="return (event.keyCode!=13);"/>
                                                 </div>
                                                 <asp:LinkButton runat="server" Text="Borrar" ID="btnBorrarRegistro" CommandArgument='<%# Container.ItemIndex %>' OnClick="btnBorrarRegistro_OnClick"></asp:LinkButton>
                                             </div>
@@ -51,7 +51,7 @@
                                         <FooterTemplate>
                                             <div class="row margin-top-5">
                                                 <div class="col-lg-10 col-md-10 col-sm-10">
-                                                    <asp:TextBox runat="server" ID="txtRegistroNew" CssClass="form-control" />
+                                                    <asp:TextBox runat="server" ID="txtRegistroNew" CssClass="form-control" MaxLength="50"  onkeydown="return (event.keyCode!=13);"/>
                                                 </div>
                                                 <asp:LinkButton runat="server" CssClass="fa fa-plus-circle" ID="btnAgregarRegistro" OnClick="btnAgregarRegistro_OnClick" CommandArgument='<%# Container.ItemIndex %>' />
                                             </div>

@@ -634,7 +634,7 @@ namespace KiiniHelp.UserControls.Altas
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeContenido, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeOperación, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeDesarrollo, true);
-                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableDeAtención, true);
+                AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.Agente, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ConsultasEspeciales, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.ResponsableServicio, true);
                 AsociarGrupoUsuario.HabilitaGrupos((int)BusinessVariables.EnumRoles.AgenteUniversal, true);
@@ -1099,7 +1099,7 @@ namespace KiiniHelp.UserControls.Altas
                 {
                     Label lblIdGrupoUsuario = (Label)item.FindControl("lblIdGrupoUsuario");
                     Label lblIdRol = (Label)item.FindControl("lblIdTipoSubGrupo");
-                    if (Convert.ToInt32(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.ResponsableDeAtención)
+                    if (Convert.ToInt32(lblIdRol.Text) == (int)BusinessVariables.EnumRoles.Agente)
                         idGrupo = Convert.ToInt32(lblIdGrupoUsuario.Text);
                 }
                 if (idGrupo != 0)

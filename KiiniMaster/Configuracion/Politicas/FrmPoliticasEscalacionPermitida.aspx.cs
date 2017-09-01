@@ -158,12 +158,12 @@ namespace KiiniMaster.Configuracion.Politicas
                     //});
 
 
-                    ddlSubRol.DataSource = _servicioSubRoles.ObtenerSubRolesByTipoGrupo((int)BusinessVariables.EnumRoles.ResponsableDeAtención, true);
+                    ddlSubRol.DataSource = _servicioSubRoles.ObtenerSubRolesByTipoGrupo((int)BusinessVariables.EnumRoles.Agente, true);
                     ddlSubRol.DataTextField = "Descripcion";
                     ddlSubRol.DataValueField = "Id";
                     ddlSubRol.DataBind();
 
-                    ddlSubRolPermitido.DataSource = _servicioSubRoles.ObtenerSubRolesByTipoGrupo((int)BusinessVariables.EnumRoles.ResponsableDeAtención, true);
+                    ddlSubRolPermitido.DataSource = _servicioSubRoles.ObtenerSubRolesByTipoGrupo((int)BusinessVariables.EnumRoles.Agente, true);
                     ddlSubRolPermitido.DataTextField = "Descripcion";
                     ddlSubRolPermitido.DataValueField = "Id";
                     ddlSubRolPermitido.DataBind();

@@ -134,7 +134,7 @@
                                         <!--CP-->
                                         <div class="form-group margin-top">
                                             CP*<br />
-                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtCp" onkeydown="return (event.keyCode!=13);" AutoPostBack="True" OnTextChanged="txtCp_OnTextChanged" onkeypress="return ValidaCampo(this,2)"></asp:TextBox>
+                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtCp" MaxLength="5" onkeydown="return (event.keyCode!=13);" AutoPostBack="True" OnTextChanged="txtCp_OnTextChanged" onkeypress="return ValidaCampo(this,2)"></asp:TextBox>
                                         </div>
 
                                         <!--Ingresar datos-->
@@ -165,19 +165,19 @@
                                         <!--CALLE-->
                                         <div class="form-group margin-top">
                                             Calle*<br />
-                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtCalle" onkeydown="return (event.keyCode!=13);"></asp:TextBox>
+                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtCalle" onkeydown="return (event.keyCode!=13);" MaxLength="99"></asp:TextBox>
                                         </div>
 
                                         <!--NUM EXT-->
                                         <div class="form-group margin-top">
                                             Número Exterior*<br />
-                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtNoExt" onkeydown="return (event.keyCode!=13);"></asp:TextBox>
+                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtNoExt" onkeydown="return (event.keyCode!=13);" MaxLength="20"></asp:TextBox>
                                         </div>
 
                                         <!--NUM INT-->
                                         <div class="form-group margin-top">
                                             Número Interior<br />
-                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtNoInt" onkeydown="return (event.keyCode!=13);"></asp:TextBox>
+                                            <asp:TextBox runat="server" CssClass="form-control" ID="txtNoInt" onkeydown="return (event.keyCode!=13);" MaxLength="20"></asp:TextBox>
                                         </div>
 
                                         <!--BTN GUARDAR-->
@@ -190,7 +190,7 @@
                                     <asp:Panel runat="server" ID="pnlAltaOrganizacion" Visible="true">
                                 <div class="form-group margin-top">
                                         Nombre de <asp:Label runat="server" ID="lblOperacionDescripcion" />*<br />
-                                        <asp:TextBox CssClass="form-control" ID="txtDescripcionCatalogo" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus" />
+                                        <asp:TextBox CssClass="form-control" ID="txtDescripcionCatalogo" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus" MaxLength="50"/>
                                         <asp:CheckBox runat="server" ID="chkHabilitado" Checked="True" Visible="False" />
                                      <asp:LinkButton runat="server" ID="btnGuardarCatalogo" OnClick="btnGuardarCatalogo_OnClick" class="fa fa-plus-circle">
                                     </asp:LinkButton>

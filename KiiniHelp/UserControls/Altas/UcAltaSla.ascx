@@ -46,7 +46,7 @@
                         <div class="form-group">
                         <asp:Label runat="server" Text="Tiempo Total (horas)" CssClass="col-sm-2 control-label" />
                         <div class="col-sm-10">
-                            <asp:TextBox runat="server" ID="txtTiempoTotal" CssClass="form-control" />
+                            <asp:TextBox runat="server" ID="txtTiempoTotal" CssClass="form-control" MaxLength="6" />
                         </div>
                     </div>
                     </div>

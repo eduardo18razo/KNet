@@ -227,11 +227,9 @@ namespace KiiniHelp.Funciones
 
         public static bool ValidaCapturaCatalogo(string descripcion)
         {
-            StringBuilder sb = new StringBuilder();
             if (descripcion == string.Empty)
-                sb.AppendLine("Descripción es un campo obligatorio.<br>");
-            if (sb.ToString() != string.Empty)
-                throw new Exception(sb.ToString());
+                throw new Exception("Descripción es un campo obligatorio.");
+                
             return true;
         }
 

@@ -1042,11 +1042,12 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones
             if (calle == string.Empty)
                 sb.Add("Calle es un campo obligatorio.<br>");
             if (noExt == string.Empty)
-                sb.Add("Número Exterior es un campo obligatorio.<br>");
+                sb.Add("Número Exterior es un campo obligatorio.");
             //if (noInt == string.Empty)
             //    sb.AppendLine("Número Interior es un campo obligatorio.<br>");
             if (sb.Count > 0)
             {
+                sb.Insert(0, "<h3>Datos Generales</h3>");
                 _lstError = sb;
                 throw new Exception("");
             }

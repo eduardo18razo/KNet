@@ -261,7 +261,7 @@ namespace KiiniMaster.Configuracion.Politicas
                 //});
                 List<int> rolespermitidos = new List<int>();
                 rolespermitidos.Add(BusinessVariables.ComboBoxCatalogo.ValueSeleccione);
-                rolespermitidos.Add((int)BusinessVariables.EnumRoles.ResponsableDeAtención);
+                rolespermitidos.Add((int)BusinessVariables.EnumRoles.Agente);
                 rolespermitidos.Add((int)BusinessVariables.EnumRoles.Usuario);
 
                 

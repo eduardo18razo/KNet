@@ -59,13 +59,13 @@ namespace KinniNet.Core.Sistema
                                  join et in db.EstatusTicket on etsrg.IdEstatusTicketAccion equals et.Id
                                  join ug in db.UsuarioGrupo on etsrg.IdGrupoUsuario equals ug.IdGrupoUsuario
                                  where ug.IdUsuario == idUsuario && etsrg.IdEstatusTicketActual == idEstatusActual &&
-                                        etsrg.Propietario == esPropietario && etsrg.Habilitado && ug.GrupoUsuario.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención
+                                        etsrg.Propietario == esPropietario && etsrg.Habilitado && ug.GrupoUsuario.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Agente
                                  select et).Distinct().ToList());
                 result.AddRange((from etsrg in db.EstatusTicketSubRolGeneral
                                  join et in db.EstatusTicket on etsrg.IdEstatusTicketAccion equals et.Id
                                  join ug in db.UsuarioGrupo on etsrg.IdGrupoUsuario equals ug.IdGrupoUsuario
                                  where ug.IdUsuario == idUsuario && etsrg.IdEstatusTicketActual == idEstatusActual &&
-                                        etsrg.Propietario == esPropietario && etsrg.Habilitado && ug.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención
+                                        etsrg.Propietario == esPropietario && etsrg.Habilitado && ug.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Agente
                                  select et).Distinct().ToList());
                 if (insertarSeleccion)
                     result.Insert(BusinessVariables.ComboBoxCatalogo.IndexSeleccione,

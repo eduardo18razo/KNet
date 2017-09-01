@@ -46,6 +46,25 @@ namespace KinniNet.Business.Utils
             return result;
         }
 
+        /// <summary>
+        /// Devuelve si el archivo existe
+        /// </summary>
+        /// <param name="file">Ruta completa y nombre de archivo</param>
+        /// <returns></returns>
+        public static bool ExisteArchivo(string file)
+        {
+            bool result;
+            try
+            {
+                result = File.Exists(file);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error al validar archivo.");
+            }
+            return result;
+        }
+
         public static void CopiarArchivoDescarga(string rutaOrigen, string nombreArchivo, string rutaDestino)
         {
             try
@@ -122,8 +141,12 @@ namespace KinniNet.Business.Utils
                     File.Copy(folderOrigen + archivo, folderDestino + archivo);
                 }
             }
-            catch (Exception ex)
+            catch (FileNotFoundException ex)
             {
+                if (ex is FileNotFoundException)
+                {
+                    throw new Exception("El archivono se encuentra disponible");
+                }
                 throw new Exception(ex.Message);
             }
         }

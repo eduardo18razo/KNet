@@ -125,7 +125,7 @@
                                 <div class="form-group">
                                     <label for="txtDescripcionCatalogo" class="col-sm-2 control-label">Descripcion</label>
                                     <div class="col-sm-10">
-                                        <asp:TextBox runat="server" ID="txtDescripcionCatalogo" placeholder="DESCRIPCION" class="form-control obligatorio" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
+                                        <asp:TextBox runat="server" ID="txtDescripcionCatalogo" MaxLength="50" placeholder="DESCRIPCION" class="form-control obligatorio" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
                                     </div>
                                 </div>
                             </div>

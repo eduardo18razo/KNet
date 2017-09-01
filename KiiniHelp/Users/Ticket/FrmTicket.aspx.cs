@@ -210,8 +210,8 @@ namespace KiiniHelp.Users.Ticket
             try
             {
                 AlertaGeneral = new List<string>();
-                ucFormulario.OnAceptarModal += UcTicketPortal_OnAceptarModal;
-                ucFormulario.OnCancelarModal += UcFormularioOnOnCancelarModal;
+                ucFormulario.OnAceptarModal += UcFormulario_OnAceptarModal;
+                ucFormulario.OnCancelarModal += UcFormulario_OnCancelarModal;
 
                 if (!IsPostBack)
                 {
@@ -251,7 +251,7 @@ namespace KiiniHelp.Users.Ticket
             }
         }
 
-        private void UcFormularioOnOnCancelarModal()
+        private void UcFormulario_OnCancelarModal()
         {
             try
             {
@@ -268,90 +268,11 @@ namespace KiiniHelp.Users.Ticket
             }
         }
 
-        private void UcTicketPortal_OnAceptarModal()
+        private void UcFormulario_OnAceptarModal()
         {
             try
             {
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptClose", "CierraPopup(\"#modal-new-ticket\");", true);
-
-                //lblNoTicket.Text = ucFormulario.TicketGenerado.ToString();
-                //lblRandom.Text = ucFormulario.RandomGenerado;
-                //ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptOpen", "MostrarPopup(\"#modalExitoTicket\");", true);
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
-
-        protected void btnGuardar_OnClick(object sender, EventArgs e)
-        {
-            //try
-            //{
-
-            //    List<HelperCampoMascaraCaptura> capturaMascara = ucFormulario.ObtenerCapturaMascara();
-            //    KiiniNet.Entities.Operacion.Tickets.Ticket result = _servicioTicket.CrearTicket(((Usuario)Session["UserData"]).Id, IdUsuarioSolicita, Convert.ToInt32(Request.QueryString["IdArbol"]), capturaMascara, IdCanal, ucFormulario.CampoRandom, EsTercero, false);
-            //    ucFormulario.ConfirmaArchivos(result.Id);
-            //    lblNoTicket.Text = result.Id.ToString();
-            //    lblDescRandom.Visible = ucFormulario.CampoRandom;
-            //    lblRandom.Visible = ucFormulario.CampoRandom;
-            //    if (ucFormulario.CampoRandom)
-            //        lblRandom.Text = result.ClaveRegistro;
-            //    upConfirmacion.Update();
-            //    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalExito\");", true);
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (_lstError == null)
-            //    {
-            //        _lstError = new List<string>();
-            //    }
-            //    _lstError.Add(ex.Message);
-            //    AlertaGeneral = _lstError;
-            //}
-        }
-
-        protected void btnCerrar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalExito\");", true);
-                if(EsTercero)
-                    Response.Redirect("~/FrmCloseWindow.aspx");
-                Usuario userData = (Usuario)Session["UserData"];
-                if (userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado)
-                    Response.Redirect("~/Default.aspx");
-                else
-                    Response.Redirect("~/Users/DashBoard.aspx");
-            }
-            catch (Exception ex)
-            {
-                if (_lstError == null)
-                {
-                    _lstError = new List<string>();
-                }
-                _lstError.Add(ex.Message);
-                AlertaGeneral = _lstError;
-            }
-        }
-
-        protected void btnCancelar_OnClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (EsTercero)
-                    Response.Redirect("~/FrmCloseWindow.aspx");
-                Usuario userData = (Usuario)Session["UserData"];
-                if (userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado || userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado || userData.IdTipoUsuario == (int)BusinessVariables.EnumTiposUsuario.ProveedorInvitado)
-                    Response.Redirect("~/Default.aspx");
-                else
-                    Response.Redirect("~/Users/DashBoard.aspx");
+                Response.Redirect("~/Users/DashBoard.aspx");
             }
             catch (Exception ex)
             {

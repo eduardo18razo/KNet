@@ -257,11 +257,11 @@ namespace KiiniMaster.Configuracion.Politicas
                 
                 List<int> rolespermitidos = new List<int>();
                 rolespermitidos.Add(BusinessVariables.ComboBoxCatalogo.ValueSeleccione);
-                rolespermitidos.Add((int)BusinessVariables.EnumRoles.ResponsableDeAtención);
+                rolespermitidos.Add((int)BusinessVariables.EnumRoles.Agente);
                 rolespermitidos.Add((int)BusinessVariables.EnumRoles.Usuario);
 
 
-                ddlGrupoUsuario.DataSource = _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol((int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención, true);
+                ddlGrupoUsuario.DataSource = _servicioGrupoUsuario.ObtenerGruposUsuarioByIdRol((int)BusinessVariables.EnumTiposGrupos.Agente, true);
                 ddlGrupoUsuario.DataTextField = "Descripcion";
                 ddlGrupoUsuario.DataValueField = "Id";
                 ddlGrupoUsuario.DataBind();

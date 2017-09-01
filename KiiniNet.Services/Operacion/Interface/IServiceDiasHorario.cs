@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using KiiniNet.Entities.Cat.Usuario;
 
@@ -33,6 +34,8 @@ namespace KiiniNet.Services.Operacion.Interface
         [OperationContract]
         void AgregarDiaFeriado(DiaFeriado dia);
 
+        [OperationContract]
+        DiaFeriado ObtenerDiaByFecha(DateTime fecha);
         [OperationContract]
         DiaFeriado ObtenerDiaFeriado(int id);
 

@@ -147,7 +147,7 @@
                                         <div class="form-group margin-top">
                                             Nombre de
                                             <asp:Label runat="server" ID="lblOperacionDescripcion" />*<br />
-                                            <asp:TextBox CssClass="form-control" ID="txtDescripcionCatalogo" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus" />
+                                            <asp:TextBox CssClass="form-control" ID="txtDescripcionCatalogo" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" MaxLength="50" autofocus="autofocus" />
                                             <asp:LinkButton runat="server" ID="btnGuardarCatalogo" OnClick="btnGuardarCatalogo_OnClick" class="fa fa-plus-circle">
                                         </asp:LinkButton>
                                         </div>

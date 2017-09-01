@@ -149,6 +149,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public DiaFeriado ObtenerDiaByFecha(DateTime fecha)
+        {
+            try
+            {
+                using (BusinessDiasHorario negocio = new BusinessDiasHorario())
+                {
+                    return negocio.ObtenerDiaByFecha(fecha);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public DiaFeriado ObtenerDiaFeriado(int id)
         {
             try

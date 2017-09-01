@@ -669,6 +669,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 RepeatColumns = 5,
                                 RepeatDirection = RepeatDirection.Horizontal
                             };
+                            lstRadio.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             if (campo.EsArchivo)
                             {
                                 foreach (DataRow row in _servicioCatalogos.ObtenerRegistrosArchivosCatalogo(int.Parse(campo.IdCatalogo.ToString())).Rows)
@@ -697,6 +698,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 Text = campo.Descripcion,
                                 CssClass = "col-sm-10 form-control"
                             };
+                            ddlCatalogo.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             if (campo.EsArchivo)
                             {
                                 foreach (DataRow row in _servicioCatalogos.ObtenerRegistrosArchivosCatalogo(int.Parse(campo.IdCatalogo.ToString())).Rows)
@@ -726,6 +728,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 RepeatColumns = 5,
                                 RepeatDirection = RepeatDirection.Horizontal
                             };
+                            chklist.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             if (campo.EsArchivo)
                             {
                                 foreach (DataRow row in _servicioCatalogos.ObtenerRegistrosArchivosCatalogo(int.Parse(campo.IdCatalogo.ToString())).Rows)
@@ -853,6 +856,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
 
                         case (int)BusinessVariables.EnumeradoresKiiniNet.EnumTiposCampo.Logico:
                             CheckBox chk = new CheckBox { ID = "chk" + campo.NombreCampo, Text = campo.Descripcion, ViewStateMode = ViewStateMode.Inherit };
+                            chk.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             _lstControles.Add(chk);
                             createDiv.Controls.Add(chk);
                             break;
@@ -872,7 +876,6 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                             MaskedEditExtender meeMascara = new MaskedEditExtender
                             {
                                 ID = "mee" + campo.NombreCampo,
-
                                 ClearTextOnInvalid = false,
                                 ClearMaskOnLostFocus = false,
                                 EnableViewState = true,
@@ -899,6 +902,7 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                                 UploaderStyle = AsyncFileUploaderStyle.Traditional,
 
                             };
+                            asyncFileUpload.Attributes.Add("onkeydown", "return (event.keyCode!=13 && event.keyCode!=27);");
                             asyncFileUpload.Attributes["style"] = "margin-top: 25px";
                             asyncFileUpload.UploadedComplete += asyncFileUpload_UploadedComplete;
                             createDiv.Controls.Add(asyncFileUpload);
@@ -970,8 +974,6 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                     lblRandom.Text = result.ClaveRegistro;
                 if (Session["Files"] != null)
                     ConfirmaArchivos(result.Id);
-                if (OnAceptarModal != null)
-                    OnAceptarModal();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptOpen", "MostrarPopup(\"#modalExitoTicket\");", true);
             }
             catch (Exception ex)
@@ -1007,6 +1009,24 @@ namespace KiiniHelp.UserControls.Altas.Formularios
             {
                 //ucTicketPortal.Limpiar();
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptClose", "CierraPopup(\"#modal-new-ticket\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnCerrarExito_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (OnAceptarModal != null)
+                    OnAceptarModal();
             }
             catch (Exception ex)
             {

@@ -2,7 +2,8 @@
 
 <asp:UpdatePanel runat="server" ID="updateAltaAreas">
     <ContentTemplate>
-        <asp:HiddenField runat="server" ID="hdIdHorario" />
+        <asp:HiddenField runat="server" ID="hfIdDiaFeriado" Value="0" />
+        <asp:HiddenField runat="server" ID="hdIdHorario" Value="0" />
         <asp:HiddenField runat="server" ID="hfEsAlta" />
         <asp:HiddenField runat="server" ID="hfEditando" />
         <div class="modal-header">
@@ -18,7 +19,7 @@
                         Nombre del Nuevo grupo<br />
                     </div>
                     <div class="col-sm-6 col-lg-offset-3">
-                        <asp:TextBox runat="server" ID="txtDescripcionDias" placeholder="DESCRIPCION" class="form-control col-sm-3" onkeydown="return (event.keyCode!=13);" />
+                        <asp:TextBox runat="server" ID="txtDescripcionDias" placeholder="DESCRIPCION" MaxLength="50" class="form-control col-sm-3" onkeydown="return (event.keyCode!=13);" />
                     </div>
                     <div class="clearfix"></div>
                     <br />
@@ -40,13 +41,13 @@
                             <div class="form-group">
                                 <asp:Label runat="server" Text="Agregar un Día Feriado" CssClass="control-label col-lg-12 col-md-12" />
                                 <div class="col-lg-5 col-md-5">
-                                    <asp:TextBox ID="txtDescripcionDia" runat="server" CssClass="form-control" />
+                                    <asp:TextBox ID="txtDescripcionDia" runat="server" MaxLength="50" CssClass="form-control" onkeydown="return (event.keyCode!=13);" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <asp:Label runat="server" Text="Fecha" CssClass="control-label col-lg-12 col-md-12" />
                                 <div class="col-lg-5 col-md-5">
-                                    <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" type="date" step="1" />
+                                    <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" type="date" step="1"  onkeydown="return (event.keyCode!=13);"/>
                                 </div>
                                 <asp:LinkButton runat="server" CssClass="btn btn-primary fa fa-calendar " Visible="False"></asp:LinkButton>
                             </div>
@@ -65,12 +66,11 @@
                     <ItemTemplate>
                         <div class="row form-control" style="margin-top: 5px; height: 48px">
                             <asp:Label runat="server" ID="lblId" Text='<%# Eval("Id") %>' Visible="False" />
-                            <asp:Label runat="server" Text='<%# Eval("IdDiasFeriados") %>' ID="lblSubRol" Visible="False" />
-                            <asp:Label runat="server" Text='<%# Eval("Dia", "{0:d}") %>' ID="lblFecha" CssClass="col-lg-2 col-md-2 col-sm-2" style="padding-left: 0"/>
+                            <asp:Label runat="server" Text='<%# Eval("Fecha", "{0:d}") %>' ID="lblFecha" CssClass="col-lg-2 col-md-2 col-sm-2" style="padding-left: 0"/>
                             <asp:Label runat="server" Text='<%# Eval("Descripcion") %>' ID="lblDescripcion" CssClass="col-lg-6 col-md-6 col-sm-6" />
-                            <asp:LinkButton runat="server" Text="Editar" ID="lnkBtnEditar" CommandArgument='<%# Eval("Dia") %>' OnClick="lnkBtnEditar_OnClick" />
+                            <asp:LinkButton runat="server" Text="Editar" ID="lnkBtnEditar" CommandArgument='<%# Eval("Fecha") %>' OnClick="lnkBtnEditar_OnClick" />
                             | 
-                        <asp:LinkButton runat="server" Text="Borrar" ID="lbkBtnBorrar" CommandArgument='<%# Eval("Dia") %>' OnClick="lbkBtnBorrar_OnClick" />
+                        <asp:LinkButton runat="server" Text="Borrar" ID="lbkBtnBorrar" CommandArgument='<%# Eval("Fecha") %>' OnClick="lbkBtnBorrar_OnClick" />
                         </div>
                     </ItemTemplate>
                 </asp:Repeater>

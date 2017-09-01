@@ -21,7 +21,7 @@
                             <hr class="bordercolor" />
                         </div>
                         <div class="form-group">
-                            <asp:TextBox runat="server" ID="txtTitulo" placeholder="Titúlo de la encuesta" MaxLength="50" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtTitulo" placeholder="Titúlo de la encuesta" MaxLength="50" onkeydown="return (event.keyCode!=13);" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="form-group">
                             <b>CONFIGURACIÓN PARA EL CLIENTE</b>
@@ -30,10 +30,10 @@
                             Asigna a esta encuesta que será visible para los clientes. Pueden agregar una breve descripción o instrucciones para facilitar su llenado.
                         </div>
                         <div class="form-group">
-                            <asp:TextBox runat="server" ID="txtTituloCliente" placeholder="Titúlo de la encuesta" MaxLength="50" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtTituloCliente" placeholder="Titúlo de la encuesta" MaxLength="50" onkeydown="return (event.keyCode!=13);" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="form-group">
-                            <asp:TextBox runat="server" ID="txtDescripcion" placeholder="Descripcion" MaxLength="250" TextMode="MultiLine" Rows="5" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtDescripcion" placeholder="Descripcion" MaxLength="250" onkeydown="return (event.keyCode!=13);" TextMode="MultiLine" Rows="5" CssClass="form-control"></asp:TextBox>
                         </div>
                         <div class="form-group">
                             <b>PREGUNTAS</b>
@@ -53,10 +53,10 @@
                                     <div class="row">
                                         <div class="margen-arriba">
                                             <div class="col-xs-6 col-md-5">
-                                                <asp:TextBox runat="server" ID="txtPregunta" CssClass="form-control" Text='<%# Eval("Pregunta") %>' />
+                                                <asp:TextBox runat="server" ID="txtPregunta" CssClass="form-control" Text='<%# Eval("Pregunta") %>' MaxLength="50" onkeydown="return (event.keyCode!=13);"/>
                                             </div>
                                             <div class="col-xs-5 col-md-2">
-                                                <asp:TextBox runat="server" ID="txtPonderacion" CssClass="form-control" Text='<%# Eval("Ponderacion") %>' OnTextChanged="txtPonderacion_OnTextChanged" />
+                                                <asp:TextBox runat="server" ID="txtPonderacion" CssClass="form-control" Text='<%# Eval("Ponderacion") %>' MaxLength="6" onkeydown="return (event.keyCode!=13);" OnTextChanged="txtPonderacion_OnTextChanged" />
                                             </div>
                                             <asp:LinkButton runat="server" ID="btnSubir" CssClass="fa fa-angle-double-up fa-20x" CommandArgument='<%# Eval("Id") %>' CommandName='<%# Container.ItemIndex %>' OnClick="btnSubir_OnClick" /><br />
                                             <asp:LinkButton runat="server" ID="btnBajar" CssClass="fa fa-angle-double-down fa-20x" CommandArgument='<%# Eval("Id") %>' CommandName='<%# Container.ItemIndex %>' OnClick="btnBajar_OnClick" />
@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-group" runat="server" ID="divNps" Visible="False">
                             <div class="col-xs-6 col-md-5">
-                                <asp:TextBox runat="server" ID="txtPregunta" CssClass="form-control" Text='<%# Eval("Pregunta") %>' />
+                                <asp:TextBox runat="server" ID="txtPregunta" CssClass="form-control" Text='<%# Eval("Pregunta") %>' MaxLength="50" onkeydown="return (event.keyCode!=13);"/>
                             </div>
                         </div>
                         <div class="form-group text-right">

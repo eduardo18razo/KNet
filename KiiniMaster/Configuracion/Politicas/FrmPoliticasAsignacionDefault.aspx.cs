@@ -215,7 +215,7 @@ namespace KiiniMaster.Configuracion.Politicas
                 //});
                 List<int> rolespermitidos = new List<int>();
                 rolespermitidos.Add(BusinessVariables.ComboBoxCatalogo.ValueSeleccione);
-                rolespermitidos.Add((int)BusinessVariables.EnumRoles.ResponsableDeAtención);
+                rolespermitidos.Add((int)BusinessVariables.EnumRoles.Agente);
                 ddlRol.DataSource = _servicioRoles.ObtenerRoles((int)BusinessVariables.EnumTiposUsuario.Empleado, true).Where(w => rolespermitidos.Contains(w.Id));
                 ddlRol.DataTextField = "Descripcion";
                 ddlRol.DataValueField = "Id";

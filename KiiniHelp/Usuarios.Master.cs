@@ -149,7 +149,7 @@ namespace KiiniHelp
 
                     divTickets.Visible = rolSeleccionado != (int)BusinessVariables.EnumRoles.Administrador;
                     divMensajes.Visible = rolSeleccionado != (int)BusinessVariables.EnumRoles.Administrador;
-                    divTickets.Visible = rolSeleccionado == (int)BusinessVariables.EnumRoles.ResponsableDeAtención;
+                    divTickets.Visible = rolSeleccionado == (int)BusinessVariables.EnumRoles.Agente;
                     divMensajes.Visible = rolSeleccionado == (int)BusinessVariables.EnumRoles.Usuario;
                 }
                 rptMenu.DataSource = MenuActivo;
@@ -380,7 +380,7 @@ namespace KiiniHelp
                     Session["CargaInicialModal"] = "True";
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalRol\");", true);
                     //TODO: Tickets redirect
-                    if (areaSeleccionada == (int)BusinessVariables.EnumRoles.ResponsableDeAtención)
+                    if (areaSeleccionada == (int)BusinessVariables.EnumRoles.Agente)
                         Response.Redirect("~/Agente/Bandeja.aspx");
                     //Response.Redirect("~/Agente/FrmBandejaTickets.aspx");
                     Response.Redirect("~/Users/DashBoard.aspx");

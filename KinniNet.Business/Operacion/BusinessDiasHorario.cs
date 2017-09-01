@@ -237,10 +237,31 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
+
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
                 dia.Descripcion = dia.Descripcion.Trim();
                 dia.Habilitado = true;
-                db.DiaFeriado.AddObject(dia);
+                if (dia.Id == 0)
+                {
+                    if (db.DiaFeriado.Any(a => a.Fecha == dia.Fecha))
+                        throw new Exception("Esta fecha ya fue registrada anteriormente.");
+                    if (db.DiaFeriado.Any(a => a.Descripcion == dia.Descripcion.Trim()))
+                        throw new Exception("Esta Descripción ya fue registrada anteriormente.");
+                    db.DiaFeriado.AddObject(dia);
+                }
+                else
+                {
+                    if (db.DiaFeriado.Any(a => a.Fecha == dia.Fecha && a.Id != dia.Id))
+                        throw new Exception("Esta fecha ya fue registrada anteriormente.");
+                    if (db.DiaFeriado.Any(a => a.Descripcion == dia.Descripcion.Trim() && a.Id != dia.Id))
+                        throw new Exception("Esta Descripción ya fue registrada anteriormente.");
+                    DiaFeriado diaF = db.DiaFeriado.SingleOrDefault(s => s.Id == dia.Id);
+                    if (diaF != null)
+                    {
+                        diaF.Descripcion = dia.Descripcion;
+                        diaF.Fecha = dia.Fecha;
+                    }
+                }
                 db.SaveChanges();
             }
             catch (Exception ex)
@@ -251,6 +272,26 @@ namespace KinniNet.Core.Operacion
             {
                 db.Dispose();
             }
+        }
+
+        public DiaFeriado ObtenerDiaByFecha(DateTime fecha)
+        {
+            DiaFeriado result;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                result = db.DiaFeriado.SingleOrDefault(w => w.Fecha == fecha);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
         }
 
         public DiaFeriado ObtenerDiaFeriado(int id)
@@ -351,14 +392,14 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
-        public DiasFeriados ObtenerDiasFeriadosUserById(int idCatalogo)
+        public DiasFeriados ObtenerDiasFeriadosUserById(int id)
         {
             DiasFeriados result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                result = db.DiasFeriados.SingleOrDefault(w => w.Id == idCatalogo && w.Habilitado);
+                result = db.DiasFeriados.SingleOrDefault(w => w.Id == id && w.Habilitado);
                 if (result != null)
                     db.LoadProperty(result, "DiasFeriadosDetalle");
             }

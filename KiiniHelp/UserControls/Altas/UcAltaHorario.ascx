@@ -214,7 +214,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-6 col-lg-offset-3">
-                                        <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control col-sm-3" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
+                                        <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control col-sm-3" MaxLength="50" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
                                     </div>
                                 </div>
                                 <br />

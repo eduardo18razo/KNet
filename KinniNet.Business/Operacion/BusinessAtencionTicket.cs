@@ -82,7 +82,7 @@ namespace KinniNet.Core.Operacion
                                  join easrg in db.EstatusAsignacionSubRolGeneral on
                                  new { usuarioidgrupo = ug.IdGrupoUsuario, grupousuarioid = gu.Id, usuariogrupoidrol = ug.IdRol, subrolidrol = sr.IdRol, subrolids = sr.Id, grupotienesupervisor = gu.TieneSupervisor, grupoid = gu.Id, subrolidprincipal = sr.Id } equals
                                  new { usuarioidgrupo = easrg.IdGrupoUsuario, grupousuarioid = easrg.IdGrupoUsuario, usuariogrupoidrol = easrg.IdRol, subrolidrol = easrg.IdRol, subrolids = (int)easrg.IdSubRol, grupotienesupervisor = easrg.TieneSupervisor, grupoid = easrg.IdGrupoUsuario, subrolidprincipal = (int)easrg.IdSubRol }
-                                 where ug.IdUsuario == idUsuario && ug.IdRol == (int)BusinessVariables.EnumRoles.ResponsableDeAtención && easrg.Propietario == espropietario
+                                 where ug.IdUsuario == idUsuario && ug.IdRol == (int)BusinessVariables.EnumRoles.Agente && easrg.Propietario == espropietario
                                  && easrg.IdEstatusAsignacionActual == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.PorAsignar
                                  && easrg.IdEstatusAsignacionAccion == (int)BusinessVariables.EnumeradoresKiiniNet.EnumEstatusAsignacion.Autoasignado
                                  && easrg.Habilitado
@@ -156,7 +156,7 @@ namespace KinniNet.Core.Operacion
                         List<HorarioSubGrupo> lstHorarioGrupo = new List<HorarioSubGrupo>();
                         List<DiaFestivoSubGrupo> lstDiasFestivosGrupo = new List<DiaFestivoSubGrupo>();
                         foreach (SubGrupoUsuario sGpoUsuario in ticket.TicketGrupoUsuario.SelectMany(
-                            tgrupoUsuario => db.GrupoUsuario.Where(w => w.Id == tgrupoUsuario.IdGrupoUsuario && w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención)
+                            tgrupoUsuario => db.GrupoUsuario.Where(w => w.Id == tgrupoUsuario.IdGrupoUsuario && w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Agente)
                                 .SelectMany(gpoUsuario => gpoUsuario.SubGrupoUsuario)))
                         {
                             lstHorarioGrupo.AddRange(db.HorarioSubGrupo.Where(w => w.IdSubGrupoUsuario == sGpoUsuario.Id).ToList());
@@ -380,7 +380,7 @@ namespace KinniNet.Core.Operacion
                     result.IdEstatusAsignacion = ticket.IdEstatusAsignacion;
                     result.DescripcionEstatusAsignacion = ticket.EstatusAsignacion.Descripcion;
                     result.EsPropietario = idUsuario == ticket.TicketAsignacion.Last().IdUsuarioAsignado;
-                    result.IdGrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.ResponsableDeAtención).Distinct().First().IdGrupoUsuario;
+                    result.IdGrupoAsignado = ticket.ArbolAcceso.InventarioArbolAcceso.First().GrupoUsuarioInventarioArbol.Where(s => s.GrupoUsuario.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Agente).Distinct().First().IdGrupoUsuario;
                     if (ticket.UsuarioLevanto != null)
                     {
                         result.UsuarioLevanto = new HelperUsuario();

@@ -72,6 +72,12 @@
   <wsdl:message name="IServiceDiasHorario_AgregarDiaFeriado_OutputMessage">
     <wsdl:part name="parameters" element="tns:AgregarDiaFeriadoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceDiasHorario_ObtenerDiaByFecha_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerDiaByFecha" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDiasHorario_ObtenerDiaByFecha_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObtenerDiaByFechaResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceDiasHorario_ObtenerDiaFeriado_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerDiaFeriado" />
   </wsdl:message>
@@ -138,6 +144,10 @@
     <wsdl:operation name="AgregarDiaFeriado">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDiasHorario/AgregarDiaFeriado" message="tns:IServiceDiasHorario_AgregarDiaFeriado_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDiasHorario/AgregarDiaFeriadoResponse" message="tns:IServiceDiasHorario_AgregarDiaFeriado_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDiaByFecha">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiaByFecha" message="tns:IServiceDiasHorario_ObtenerDiaByFecha_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiaByFechaResponse" message="tns:IServiceDiasHorario_ObtenerDiaByFecha_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ObtenerDiaFeriado">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiaFeriado" message="tns:IServiceDiasHorario_ObtenerDiaFeriado_InputMessage" />
@@ -236,6 +246,15 @@
     </wsdl:operation>
     <wsdl:operation name="AgregarDiaFeriado">
       <soap:operation soapAction="http://tempuri.org/IServiceDiasHorario/AgregarDiaFeriado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerDiaByFecha">
+      <soap:operation soapAction="http://tempuri.org/IServiceDiasHorario/ObtenerDiaByFecha" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
