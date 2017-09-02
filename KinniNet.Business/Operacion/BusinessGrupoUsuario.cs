@@ -456,7 +456,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                IQueryable<GrupoUsuario> qry = db.GrupoUsuario.Where(w=> !w.Sistema);
+                IQueryable<GrupoUsuario> qry = db.GrupoUsuario.Where(w => !w.Sistema);
                 if (idTipoUsuario != null)
                     qry = qry.Where(w => w.IdTipoUsuario == idTipoUsuario);
 
@@ -679,12 +679,14 @@ namespace KinniNet.Core.Operacion
                         subGrupo.DiaFestivoSubGrupo = subGrupo.DiaFestivoSubGrupo ?? new List<DiaFestivoSubGrupo>();
                         subGrupo.HorarioSubGrupo.AddRange(lstHorarioGpo);
                         List<DiaFestivoSubGrupo> lstDiasDescanso = diasDescanso.SingleOrDefault(w => w.Key == horario.Key).Value;
-                        foreach (DiaFestivoSubGrupo dia in lstDiasDescanso)
+                        if (lstDiasDescanso != null)
                         {
-                            dia.IdSubGrupoUsuario = horario.Key;
+                            foreach (DiaFestivoSubGrupo dia in lstDiasDescanso)
+                            {
+                                dia.IdSubGrupoUsuario = horario.Key;
+                            }
+                            subGrupo.DiaFestivoSubGrupo.AddRange(lstDiasDescanso);
                         }
-                        subGrupo.DiaFestivoSubGrupo.AddRange(lstDiasDescanso);
-
                         sb.Add(subGrupo);
                     }
 
@@ -807,7 +809,6 @@ namespace KinniNet.Core.Operacion
                 db.Dispose();
             }
         }
-
         private List<EstatusTicketSubRolGeneral> GeneraEstatusGrupoDefault(GrupoUsuario grupo)
         {
 
@@ -866,7 +867,6 @@ namespace KinniNet.Core.Operacion
             finally { db.Dispose(); }
             return result;
         }
-
         public List<EstatusAsignacionSubRolGeneralDefault> GeneraEstatusAsignacionGrupoDefault()
         {
             List<EstatusAsignacionSubRolGeneralDefault> result = new List<EstatusAsignacionSubRolGeneralDefault>();

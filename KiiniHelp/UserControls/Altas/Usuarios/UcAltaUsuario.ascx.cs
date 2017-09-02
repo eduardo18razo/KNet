@@ -1014,12 +1014,14 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             {
                 if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     throw new Exception("Seleccione el Tipo de usuario");
-                ucAltaOrganizaciones.EsAlta = true;
+                int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 ucAltaOrganizaciones.EsSeleccion = true;
+                ucAltaOrganizaciones.EsAlta = true;
+                ucAltaOrganizaciones.IdTipoUsuario = idTipoUsuario;
+                
                 if (rptOrganizacion.Items.Count > 0)
                 {
-                    ucAltaOrganizaciones.IdOrganizacion =
-                        int.Parse(((Label)rptOrganizacion.Items[0].FindControl("lblIdOrganizacion")).Text);
+                    ucAltaOrganizaciones.IdOrganizacion = int.Parse(((Label)rptOrganizacion.Items[0].FindControl("lblIdOrganizacion")).Text);
                     ucAltaOrganizaciones.SetOrganizacionSeleccion();
                 }
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script",
@@ -1096,16 +1098,17 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
             {
                 if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     throw new Exception("Seleccione el Tipo de usuario");
-                ucAltaUbicaciones.EsAlta = true;
+                int idTipoUsuario = Convert.ToInt32(ddlTipoUsuario.SelectedValue);
                 ucAltaUbicaciones.EsSeleccion = true;
+                ucAltaUbicaciones.EsAlta = true;
+                ucAltaUbicaciones.IdTipoUsuario = idTipoUsuario;
                 if (rptUbicacion.Items.Count > 0)
                 {
-                    ucAltaUbicaciones.IdUbicacion =
-                        int.Parse(((Label)rptUbicacion.Items[0].FindControl("lblIdUbicacion")).Text);
+                    ucAltaUbicaciones.IdUbicacion = int.Parse(((Label)rptUbicacion.Items[0].FindControl("lblIdUbicacion")).Text);
                     ucAltaUbicaciones.SetUbicacionSeleccion();
                 }
-                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script",
-                    "MostrarPopup(\"#modalUbicacion\");", true);
+
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalUbicacion\");", true);
             }
             catch (Exception ex)
             {

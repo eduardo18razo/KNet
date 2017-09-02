@@ -227,7 +227,7 @@ namespace KiiniHelp.Funciones
 
         public static bool ValidaCapturaCatalogo(string descripcion)
         {
-            if (descripcion == string.Empty)
+            if (descripcion.Trim() == string.Empty)
                 throw new Exception("Descripción es un campo obligatorio.");
                 
             return true;
