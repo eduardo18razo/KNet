@@ -268,7 +268,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                     txtNombre.Text = user.Nombre;
                     txtUserName.Text = user.NombreUsuario;
                     txtUserName.ReadOnly = true;
-                    Session["TelefonosUsuario"] = user.TelefonoUsuario.OrderBy(o=>o.IdTipoTelefono);
+                    Session["TelefonosUsuario"] = user.TelefonoUsuario.OrderBy(o => o.IdTipoTelefono);
                     Session["CorreoUsuario"] = user.CorreoUsuario;
                     Metodos.LlenaComboCatalogo(ddlPuesto, _servicioPuesto.ObtenerPuestosByTipoUsuario(IdTipoUsuario, true));
                     if (user.IdPuesto != null)
@@ -650,6 +650,9 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 ucRolGrupo.AsignacionAutomatica = false;
                 if (!IsPostBack)
                 {
+                    Session["UsuarioTemporal"] = null;
+                    Session["UsuarioGrupo"] = null;
+                    GruposUsuario = null;
                     EditarDetalle = false;
                     if (Request.QueryString["Consulta"] != null)
                     {
@@ -679,9 +682,6 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                         LlenaCombos(false);
                     else
                         LlenaCombos(true);
-                    Session["UsuarioTemporal"] = null;
-                    Session["UsuarioGrupo"] = null;
-                    GruposUsuario = null;
                 }
             }
             catch (Exception ex)
@@ -847,13 +847,14 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 string username = txtUserName.Text.Trim() == string.Empty
                     ? (txtNombre.Text.Substring(0, 1).ToLower() + txtAp.Text.Trim().ToLower()).Replace(" ", string.Empty)
                     : txtUserName.Text.Trim();
+                username = username.PadRight(30).Substring(0, 30).Trim();
                 int limite = 10;
                 if (_servicioUsuarios.ValidaUserName(username))
                 {
                     for (int i = 1; i < limite; i++)
                     {
                         string tmpUsername = username + i;
-                        if (!_servicioUsuarios.ValidaUserName(tmpUsername))
+                        if (!_servicioUsuarios.ValidaUserName(tmpUsername.PadRight(30).Substring(0, 30).Trim()))
                         {
                             username = tmpUsername;
                             break;
@@ -1021,7 +1022,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                 ucAltaOrganizaciones.EsSeleccion = true;
                 ucAltaOrganizaciones.EsAlta = true;
                 ucAltaOrganizaciones.IdTipoUsuario = idTipoUsuario;
-                
+
                 if (rptOrganizacion.Items.Count > 0)
                 {
                     ucAltaOrganizaciones.IdOrganizacion = int.Parse(((Label)rptOrganizacion.Items[0].FindControl("lblIdOrganizacion")).Text);

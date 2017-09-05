@@ -41,8 +41,9 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
         private readonly ServiceImpactoUrgenciaClient _servicioImpactoUrgencia = new ServiceImpactoUrgenciaClient();
         private readonly ServiceNotificacionClient _servicioNotificacion = new ServiceNotificacionClient();
         private readonly ServiceEncuestaClient _servicioEncuesta = new ServiceEncuestaClient();
-
         private List<string> _lstError = new List<string>();
+        private UsuariosMaster _mp;
+
         private List<string> Alerta
         {
             set
@@ -365,13 +366,13 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 if (chkNotificacionMtto.Checked)
                 {
                     if (txtTiempoNotificacionMtto.Text == string.Empty)
-                        errors.Add("Ingrese tiempo de notificacion para el Grupo Responsable de Mantenimiento.");
+                        errors.Add("Ingrese tiempo de notificacion para el Grupo Responsable de Contenido.");
 
-                    if (ddlNotificacionGrupoDueño.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                        errors.Add("Seleccione unidad de medida para el Grupo Responsable de Mantenimiento");
+                    if (ddlNotificacionGrupoMtto.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                        errors.Add("Seleccione unidad de medida para el Grupo Responsable de Contenido");
 
                     if (ddlCanalMtto.SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                        errors.Add("Seleccione un canal de notificacion para Grupo Responsable de Mantenimiento.");
+                        errors.Add("Seleccione un canal de notificacion para Grupo Responsable de Contenido.");
                 }
                 if (chkNotificacionDesarrollo.Checked)
                 {
@@ -485,9 +486,17 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 txtTiempoTotal.Text = string.Empty;
                 ddlTiempoTotal.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 txtTiempoNotificacionDueno.Text = string.Empty;
+                ddlNotificacionGrupoDueño.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
+                ddlCanalDueño.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 txtTiempoNotificacionMtto.Text = string.Empty;
+                ddlNotificacionGrupoMtto.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
+                ddlCanalMtto.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 txtTiempoNotificacionDev.Text = string.Empty;
+                ddlNotificacionGrupoDev.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
+                ddlCanalDev.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 txtTiempoNotificacionConsulta.Text = string.Empty;
+                ddlNotificacionGrupoConsulta.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
+                ddlCanalConsulta.SelectedIndex = BusinessVariables.ComboBoxCatalogo.IndexSeleccione;
                 btnPaso_OnClick(new LinkButton { CommandArgument = "1" }, null);
 
             }
@@ -501,6 +510,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
         {
             try
             {
+                _mp = (UsuariosMaster)Page.Master;
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
@@ -1784,6 +1794,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                         break;
                 }
                 LimpiarPantalla();
+                _mp.AlertaSucces();
                 if (OnAceptarModal != null)
                     OnAceptarModal();
 

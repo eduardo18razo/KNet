@@ -330,11 +330,12 @@ namespace KiiniHelp.UserControls.Seleccion
                         if (!grupo.SubGrupos.Any())
                             throw new Exception("Seleccione un subGrupo");
                     }
-                    rol.Grupos.Add(grupo);
+                    if (rol.Grupos != null) 
+                        rol.Grupos.Add(grupo);
                 }
-                tmplst.Add(rol);
-                if (!tmplst.Any())
+                if (rol.Grupos == null || rol.Grupos.Count <= 0)
                     throw new Exception("Seleccione un Grupo");
+                tmplst.Add(rol);
                 foreach (HelperAsignacionRol asignacionRol in tmplst)
                 {
                     if (lstFinal.Any(a => a.IdRol == asignacionRol.IdRol))

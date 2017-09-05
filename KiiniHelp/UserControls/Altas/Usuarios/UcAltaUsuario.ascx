@@ -150,7 +150,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-3">
                                             <asp:Label runat="server" Text="Nombre usuario" />
-                                            <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control texto-normal" onkeypress="return ValidaCampo(this,14)" OnTextChanged="txtAp_OnTextChanged" MaxLength="12" Style="text-transform: none" AutoPostBack="True" />
+                                            <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control texto-normal" onkeypress="return ValidaCampo(this,14)" OnTextChanged="txtAp_OnTextChanged" MaxLength="30" Style="text-transform: none" AutoPostBack="True" />
                                         </div>
                                     </div>
 

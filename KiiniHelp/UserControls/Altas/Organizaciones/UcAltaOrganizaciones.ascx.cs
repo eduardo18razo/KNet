@@ -23,7 +23,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
         public event DelegateTerminarModal OnTerminarModal;
-        UsuariosMaster mp;
+        private UsuariosMaster _mp;
 
         readonly ServiceTipoUsuarioClient _servicioSistemaTipoUsuario = new ServiceTipoUsuarioClient();
         readonly ServiceOrganizacionClient _servicioOrganizacion = new ServiceOrganizacionClient();
@@ -669,7 +669,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
             try
             {
                 //lblBrandingModal.Text = WebConfigurationManager.AppSettings["Brand"];
-                mp = (UsuariosMaster)Page.Master;
+                _mp = (UsuariosMaster)Page.Master;
                 Alerta = new List<string>();
                 if (!IsPostBack)
                 {
@@ -1025,7 +1025,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
 
                             break;
                     }
-                    mp.AlertaSucces();
+                    _mp.AlertaSucces();
                 }
                 else
                 {
@@ -1070,7 +1070,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                     }
                 }
                 txtDescripcionCatalogo.Text = string.Empty;     
-                mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Actualizacion));
+                _mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Actualizacion));
                 //mp.AlertaSucces("Se guardo el puesto correctamente");
             }
             catch (Exception ex)
