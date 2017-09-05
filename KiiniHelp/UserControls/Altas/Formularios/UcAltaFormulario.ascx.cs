@@ -660,7 +660,6 @@ namespace KiiniHelp.UserControls.Altas.Formularios
                 throw;
             }
         }
-
         protected void btnCancelar_OnClick(object sender, EventArgs e)
         {
             try

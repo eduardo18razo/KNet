@@ -226,7 +226,9 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
         {
             try
             {
+                Session["UsuarioTemporal"] = null;
                 Session["UsuarioGrupo"] = null;
+                GruposUsuario = null;
                 txtAp.Text = string.Empty;
                 txtAm.Text = string.Empty;
                 txtNombre.Text = string.Empty;
@@ -679,6 +681,7 @@ namespace KiiniHelp.UserControls.Altas.Usuarios
                         LlenaCombos(true);
                     Session["UsuarioTemporal"] = null;
                     Session["UsuarioGrupo"] = null;
+                    GruposUsuario = null;
                 }
             }
             catch (Exception ex)

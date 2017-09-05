@@ -177,7 +177,7 @@
                                         <div class="form-inline margin-top-5">
                                             <asp:Label runat="server" Text="Min." CssClass="col-lg-2 col-md-2 col-sm-3" />
                                             <div class="col-lg-3 col-md-3 col-sm-5">
-                                                <asp:TextBox runat="server" ID="txtValorMinimo" type="number" min="1" max="999999" CssClass="form-control" onkeydown="return (event.keyCode!=13);"
+                                                <asp:TextBox runat="server" ID="txtValorMinimo" type="number" min="1" max="2147483646" CssClass="form-control" onkeydown="return (event.keyCode!=13);"
                                                     style="text-transform: none" />
                                             </div>
                                             <div class="clearfix"></div>
@@ -186,7 +186,7 @@
                                         <div class="form-inline margin-top-5">
                                             <asp:Label runat="server" Text="Max." CssClass="col-lg-2 col-md-2 col-sm-3" />
                                             <div class="col-lg-3 col-md-3 col-sm-5">
-                                                <asp:TextBox runat="server" ID="txtValorMaximo" type="number" min="1" max="999999" step="any" CssClass="form-control" style="text-transform: none" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
+                                                <asp:TextBox runat="server" ID="txtValorMaximo" type="number" min="1" max="2147483646" step="any" CssClass="form-control" style="text-transform: none" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
                                             </div>
                                         </div>
                                     </div>

@@ -204,7 +204,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
             try
             {
                 var valida = IdArea;
-                valida = IdNivel1;
+                //valida = IdNivel1;
             }
             catch (Exception e)
             {

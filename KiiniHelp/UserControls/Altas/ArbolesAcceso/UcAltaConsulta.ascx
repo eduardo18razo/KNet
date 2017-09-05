@@ -40,10 +40,9 @@
                 <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                     <div class="bg-grey">
                         <div runat="server" id="divStep1Data">
-
                             <div class="form-group">
                                 Escribe el titulo de la opción<br />
-                                <asp:TextBox runat="server" ID="txtDescripcionNivel" placeholder="DESCRIPCION" MaxLength="50" onkeydown="return (event.keyCode!=13);" class="form-control" onkeydown="return (event.keyCode!=13);" />
+                                <asp:TextBox runat="server" ID="txtDescripcionNivel" placeholder="DESCRIPCION" MaxLength="50" onkeydown="return (event.keyCode!=13);" class="form-control" />
                             </div>
                             <div class="form-group">
                                 Quien ve el contenido<br />
@@ -102,7 +101,6 @@
                                 <asp:DropDownList runat="server" ID="ddlNivel4" CssClass="form-control" OnSelectedIndexChanged="ddlNivel4_OnSelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" />
                                 <asp:TextBox CssClass="form-control" ID="txtDescripcionN4" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" MaxLength="50"/>
                                 <asp:LinkButton runat="server" ID="btnAgregarNivel4" CssClass="fa fa-plus-circle" OnClick="btnAgregarNivel_OnClick" CommandArgument="4" Enabled="False" />
-
                             </div>
                             <div class="form-group" runat="server" id="divNivel5" visible="False">
                                 Nivel 5<br />

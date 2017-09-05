@@ -15,7 +15,8 @@
                     <%--<h2 class="modal-title" id="modal-new-ticket-label">
                         <asp:Label runat="server" ID="lblBrandingModal" /></h2> jgb --%>
                     <p class="text-center">
-                        <asp:Label runat="server" ID="lblTitleCatalogo" /></p>
+                        <asp:Label runat="server" ID="lblTitleCatalogo" />
+                    </p>
                 </div>
                 <div class="modal-body">
                     <!-- TIPO DE USUARIO-->
@@ -50,9 +51,7 @@
                                 <i class="fa fa-check text-success" aria-hidden="true" runat="server" id="succNivel2" visible="False"></i>
                                 <br />
                                 <asp:LinkButton runat="server" CssClass="btn btn-primary btn-square" ID="btnStatusNivel2" CommandArgument="2" OnClick="btnStatusNivel1_OnClick">
-                                    <asp:Image ImageUrl="~/assets/images/step2.png" Width="20" Height="20" alt="" runat="server" />&nbsp;
-                                       
-                                    <asp:Label runat="server" ID="lblStepNivel2" />
+                                    <asp:Image ImageUrl="~/assets/images/step2.png" Width="20" Height="20" alt="" runat="server" />&nbsp;<asp:Label runat="server" ID="lblStepNivel2" />
                                 </asp:LinkButton>
                             </div>
 
@@ -141,17 +140,17 @@
                                     </p>
 
                                     <hr />
-
+                                    <div runat="server" ID="divClas"></div>
                                     <!--CAMPO-->
-                                    <asp:Panel runat="server" ID="pnlAltaOrganizacion" Visible="true">
+                                    <div runat="server" ID="pnlAlta" Visible="true">
                                         <div class="form-group margin-top">
                                             Nombre de
                                             <asp:Label runat="server" ID="lblOperacionDescripcion" />*<br />
                                             <asp:TextBox CssClass="form-control" ID="txtDescripcionCatalogo" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" MaxLength="50" autofocus="autofocus" />
-                                            <asp:LinkButton runat="server" ID="btnGuardarCatalogo" OnClick="btnGuardarCatalogo_OnClick" class="fa fa-plus-circle">
-                                        </asp:LinkButton>
+                                            <asp:LinkButton runat="server"  OnClick="btnGuardarCatalogo_OnClick" class="fa fa-plus-circle">
+                                            </asp:LinkButton>
                                         </div>
-                                    </asp:Panel>
+                                    </div>
 
 
                                 </div>

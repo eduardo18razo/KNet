@@ -57,15 +57,13 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 {
                     ddlTipoUsuario.Enabled = true;
                     btnSeleccionarModal.Visible = true;
-                    pnlAltaOrganizacion.Visible = true;
-                    //btnGuardarCatalogo.Visible = true; jgb
+                    pnlAlta.Visible = true;
                 }
                 else
                 {
                     ddlTipoUsuario.Enabled = false;
                     btnSeleccionarModal.Visible = false;
-                    pnlAltaOrganizacion.Visible = false;
-                    btnGuardarCatalogo.Visible = false; // jgb
+                    pnlAlta.Visible = false; 
                 }
             }
         }
@@ -76,8 +74,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
             {
                 hfEsSeleccion.Value = value.ToString();
                 btnSeleccionarModal.Visible = value;
-                pnlAltaOrganizacion.Visible = value;
-                btnGuardarCatalogo.Visible = !value;                 //jgb                
+                pnlAlta.Visible = value;                 //jgb                
                 ddlTipoUsuario.Enabled = !value;
             }
         }
@@ -303,6 +300,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 divStep5.Visible = false;
                 divStep6.Visible = false;
                 divStep7.Visible = false;
+                pnlAlta.Visible = EsAlta && EsSeleccion;
                 switch (org.IdNivelOrganizacion)
                 {
                     case 1:
@@ -638,8 +636,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 btnStatusNivel6.CssClass = "btn btn-primary btn-square";
                 btnStatusNivel7.CssClass = "btn btn-primary btn-square";
                 btnSeleccionarModal.Visible = true;
-                pnlAltaOrganizacion.Visible = true;
-                btnGuardarCatalogo.Visible = true;
+                pnlAlta.Visible = true;
                 txtDescripcionCatalogo.Text = string.Empty;
             }
             catch (Exception ex)
@@ -711,18 +708,17 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 }
                 divData.Visible = true;
                 divStep1.Visible = true;
-                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos && int.Parse(ddlTipoUsuario.SelectedValue) != (int)BusinessVariables.EnumTiposUsuario.Empleado)
+                int level = hfCatalogo.Value == string.Empty ? 0 : int.Parse(hfCatalogo.Value);
+                if (ddlTipoUsuario.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexTodos && int.Parse(ddlTipoUsuario.SelectedValue) != (int)BusinessVariables.EnumTiposUsuario.Empleado || level > 1)
                 {
-                    pnlAltaOrganizacion.Visible = true;
-                    btnGuardarCatalogo.Visible = true;
-                    btnGuardarCatalogo.Enabled = true;
+                    pnlAlta.Visible = true;
+                    //pnlAlta.Enabled = true;
                     LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerHoldings(int.Parse(ddlTipoUsuario.SelectedValue), true));
                 }
                 else
                 {
-                    pnlAltaOrganizacion.Visible = false;
-                    btnGuardarCatalogo.Visible = false;
-                    btnGuardarCatalogo.Enabled = false;
+                    pnlAlta.Visible = false;
+                    //pnlAlta.Enabled = false;
                     LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerHoldings(int.Parse(ddlTipoUsuario.SelectedValue), true));
                 }
                 if (EsAlta || EsSeleccion)
@@ -735,7 +731,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 }
                 else
                 {
-                    btnGuardarCatalogo.Visible = false;
+                    pnlAlta.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -765,9 +761,8 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                         divStep2.Visible = true;
                         lblStepNivel2.Text = "...";
                         btnStatusNivel2.CssClass = "btn btn-primary btn-square";
-                        pnlAltaOrganizacion.Visible = true;
-                        btnGuardarCatalogo.Visible = true;
-                        btnGuardarCatalogo.Enabled = true;
+                        pnlAlta.Visible = true;
+                        //pnlAlta.Enabled = true;
                         break;
                     case 2:
                         btnStatusNivel2.CssClass = "btn btn-success btn-square";
