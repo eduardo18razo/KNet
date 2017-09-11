@@ -276,6 +276,8 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                         lblOperacionDescripcion.Text = lblAliasNivel7.Text;
                         break;
                 }
+                pnlAlta.Visible = true;
+                btnGuardarCatalogo.Visible = false;
             }
             catch (Exception e)
             {
@@ -637,6 +639,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                 btnStatusNivel7.CssClass = "btn btn-primary btn-square";
                 btnSeleccionarModal.Visible = true;
                 pnlAlta.Visible = true;
+                btnGuardarCatalogo.Visible = true;
                 txtDescripcionCatalogo.Text = string.Empty;
             }
             catch (Exception ex)
@@ -1026,6 +1029,7 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                             break;
                     }
                     _mp.AlertaSucces();
+                    ddlNivelSeleccionModal.SelectedIndex = ddlNivelSeleccionModal.Items.IndexOf(ddlNivelSeleccionModal.Items.FindByText(txtDescripcionCatalogo.Text.Trim()));
                 }
                 else
                 {
@@ -1068,10 +1072,10 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
                             LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerJefaturas(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel6.Value), true));
                             break;
                     }
+                    _mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Actualizacion));
                 }
+                
                 txtDescripcionCatalogo.Text = string.Empty;     
-                _mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Actualizacion));
-                //mp.AlertaSucces("Se guardo el puesto correctamente");
             }
             catch (Exception ex)
             {
@@ -1083,152 +1087,6 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones
             try
             {
                 Guardar();
-                //if (!Metodos.ValidaCapturaCatalogo(txtDescripcionCatalogo.Text)) return;
-                //Organizacion organizacion;
-                //if (EsAlta)
-                //{
-                //    organizacion = new Organizacion
-                //    {
-                //        IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue)
-                //    };
-                //    switch (int.Parse(hfCatalogo.Value))
-                //    {
-                //        case 1:
-                //            organizacion.Holding = new Holding
-                //            {
-                //                IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue),
-                //                Descripcion = txtDescripcionCatalogo.Text.Trim(),
-                //                Habilitado = chkHabilitado.Checked
-                //            };
-                //            _servicioOrganizacion.GuardarOrganizacion(organizacion);
-                //            ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
-                //            break;
-                //        case 2:
-                //            organizacion.IdHolding = int.Parse(hfNivel1.Value);
-                //            organizacion.Compania = new Compania
-                //            {
-                //                IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue),
-                //                Descripcion = txtDescripcionCatalogo.Text.Trim(),
-                //                Habilitado = chkHabilitado.Checked
-                //            };
-                //            _servicioOrganizacion.GuardarOrganizacion(organizacion);
-                //            LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerCompañias(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel1.Value), true));
-                //            break;
-                //        case 3:
-                //            organizacion.IdHolding = int.Parse(hfNivel1.Value);
-                //            organizacion.IdCompania = int.Parse(hfNivel2.Value);
-                //            organizacion.Direccion = new Direccion
-                //            {
-                //                IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue),
-                //                Descripcion = txtDescripcionCatalogo.Text.Trim(),
-                //                Habilitado = chkHabilitado.Checked
-                //            };
-                //            _servicioOrganizacion.GuardarOrganizacion(organizacion);
-                //            LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerDirecciones(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel2.Value), true));
-                //            break;
-                //        case 4:
-                //            organizacion.IdHolding = int.Parse(hfNivel1.Value);
-                //            organizacion.IdCompania = int.Parse(hfNivel2.Value);
-                //            organizacion.IdDireccion = int.Parse(hfNivel3.Value);
-                //            organizacion.SubDireccion = new SubDireccion
-                //            {
-                //                IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue),
-                //                Descripcion = txtDescripcionCatalogo.Text.Trim(),
-                //                Habilitado = chkHabilitado.Checked
-                //            };
-                //            _servicioOrganizacion.GuardarOrganizacion(organizacion);
-                //            LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerSubDirecciones(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel3.Value), true));
-                //            break;
-                //        case 5:
-                //            organizacion.IdHolding = int.Parse(hfNivel1.Value);
-                //            organizacion.IdCompania = int.Parse(hfNivel2.Value);
-                //            organizacion.IdDireccion = int.Parse(hfNivel3.Value);
-                //            organizacion.IdSubDireccion = int.Parse(hfNivel4.Value);
-                //            organizacion.Gerencia = new Gerencia
-                //            {
-                //                IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue),
-                //                Descripcion = txtDescripcionCatalogo.Text.Trim(),
-                //                Habilitado = chkHabilitado.Checked
-                //            };
-                //            _servicioOrganizacion.GuardarOrganizacion(organizacion);
-                //            LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerGerencias(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel4.Value), true));
-                //            break;
-                //        case 6:
-                //            organizacion.IdHolding = int.Parse(hfNivel1.Value);
-                //            organizacion.IdCompania = int.Parse(hfNivel2.Value);
-                //            organizacion.IdDireccion = int.Parse(hfNivel3.Value);
-                //            organizacion.IdSubDireccion = int.Parse(hfNivel4.Value);
-                //            organizacion.IdGerencia = int.Parse(hfNivel5.Value);
-                //            organizacion.SubGerencia = new SubGerencia
-                //            {
-                //                IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue),
-                //                Descripcion = txtDescripcionCatalogo.Text.Trim(),
-                //                Habilitado = chkHabilitado.Checked
-                //            };
-                //            _servicioOrganizacion.GuardarOrganizacion(organizacion);
-                //            LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerSubGerencias(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel5.Value), true));
-                //            break;
-                //        case 7:
-                //            organizacion.IdHolding = int.Parse(hfNivel1.Value);
-                //            organizacion.IdCompania = int.Parse(hfNivel2.Value);
-                //            organizacion.IdDireccion = int.Parse(hfNivel3.Value);
-                //            organizacion.IdSubDireccion = int.Parse(hfNivel4.Value);
-                //            organizacion.IdGerencia = int.Parse(hfNivel5.Value);
-                //            organizacion.IdSubGerencia = int.Parse(hfNivel6.Value);
-                //            organizacion.Jefatura = new Jefatura
-                //            {
-                //                IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue),
-                //                Descripcion = txtDescripcionCatalogo.Text.Trim(),
-                //                Habilitado = chkHabilitado.Checked
-                //            };
-                //            _servicioOrganizacion.GuardarOrganizacion(organizacion);
-                //            LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerJefaturas(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel6.Value), true));
-                //            break;
-                //    }
-                //}
-                //else
-                //{
-                //    organizacion = (Organizacion)Session["OrganizacionSeleccionada"];
-                //    switch (int.Parse(hfCatalogo.Value))
-                //    {
-                //        case 1:
-                //            organizacion.Holding.Descripcion = txtDescripcionCatalogo.Text.Trim();
-                //            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
-                //            LlenaCombosModal();
-                //            break;
-                //        case 2:
-                //            organizacion.Compania.Descripcion = txtDescripcionCatalogo.Text.Trim();
-                //            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
-                //            LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerCompañias(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel1.Value), true));
-                //            break;
-                //        case 3:
-                //            organizacion.Direccion.Descripcion = txtDescripcionCatalogo.Text.Trim();
-                //            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
-                //            LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerDirecciones(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel2.Value), true));
-                //            break;
-                //        case 4:
-                //            organizacion.SubDireccion.Descripcion = txtDescripcionCatalogo.Text.Trim();
-                //            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
-                //            LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerSubDirecciones(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel3.Value), true));
-                //            break;
-                //        case 5:
-                //            organizacion.Gerencia.Descripcion = txtDescripcionCatalogo.Text.Trim();
-                //            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
-                //            LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerGerencias(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel4.Value), true));
-                //            break;
-                //        case 6:
-                //            organizacion.SubGerencia.Descripcion = txtDescripcionCatalogo.Text.Trim();
-                //            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
-                //            LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerSubGerencias(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel5.Value), true));
-                //            break;
-                //        case 7:
-                //            organizacion.Jefatura.Descripcion = txtDescripcionCatalogo.Text.Trim();
-                //            _servicioOrganizacion.ActualizarOrganizacion(organizacion);
-                //            LlenaComboDinamico(ddlNivelSeleccionModal, _servicioOrganizacion.ObtenerJefaturas(int.Parse(ddlTipoUsuario.SelectedValue), int.Parse(hfNivel6.Value), true));
-                //            break;
-                //    }
-                //}
-                //txtDescripcionCatalogo.Text = string.Empty;
             }
             catch (Exception ex)
             {

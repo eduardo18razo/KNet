@@ -27,10 +27,16 @@ namespace KiiniNet.Services.Sistema.Interface
         void Habilitar(int idCatalogo, bool habilitado);
 
         [OperationContract]
-        void AgregarRegistro(int idCatalogo, string descripcion);
+        void AgregarRegistroSistema(int idCatalogo, string descripcion);
 
         [OperationContract]
-        List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion);
+        void ActualizarRegistroSistema(int idCatalogo, string descripcion, int idRegistro);
+
+        [OperationContract]
+        void HabilitarRegistroSistema(int idCatalogo, bool habilitado, int idRegistro);
+
+        [OperationContract]
+        List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion, bool filtroHabilitado);
         [OperationContract]
         DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo);
 

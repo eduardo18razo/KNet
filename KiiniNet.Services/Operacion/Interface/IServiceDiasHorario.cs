@@ -30,19 +30,16 @@ namespace KiiniNet.Services.Operacion.Interface
         List<DiasFeriados> ObtenerDiasFeriadosConsulta(string filtro);
         [OperationContract]
         List<DiaFestivoDefault> ObtenerDiasDefault(bool insertarSeleccion);
-
         [OperationContract]
         void AgregarDiaFeriado(DiaFeriado dia);
-
         [OperationContract]
         DiaFeriado ObtenerDiaByFecha(DateTime fecha);
         [OperationContract]
         DiaFeriado ObtenerDiaFeriado(int id);
-
         [OperationContract]
         List<DiaFeriado> ObtenerDiasFeriados(bool insertarSeleccion);
-
-
+        [OperationContract]
+        void ActualizarDiasFestivos(DiasFeriados item);
         [OperationContract]
         void CrearDiasFestivos(DiasFeriados item);
 

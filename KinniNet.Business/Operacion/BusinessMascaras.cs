@@ -32,7 +32,7 @@ namespace KinniNet.Core.Operacion
                 if (result)
                 {
                     //Comando Insertar
-                    pTableName = new SqlParameter {ParameterName = "@STORENAME", Value = mascara.ComandoInsertar};
+                    pTableName = new SqlParameter { ParameterName = "@STORENAME", Value = mascara.ComandoInsertar };
                     pResult = new SqlParameter
                     {
                         ParameterName = "@OUTER",
@@ -40,11 +40,11 @@ namespace KinniNet.Core.Operacion
                         SqlDbType = SqlDbType.Int
                     };
                     db.ExecuteStoreCommand("exec ExisteStore @STORENAME, @OUTER output", pTableName, pResult);
-                    result = (int) pResult.Value == 1;
+                    result = (int)pResult.Value == 1;
                     if (result)
                     {
                         //Comando actualizar
-                        pTableName = new SqlParameter {ParameterName = "@STORENAME", Value = mascara.ComandoActualizar};
+                        pTableName = new SqlParameter { ParameterName = "@STORENAME", Value = mascara.ComandoActualizar };
                         pResult = new SqlParameter
                         {
                             ParameterName = "@OUTER",
@@ -52,7 +52,7 @@ namespace KinniNet.Core.Operacion
                             SqlDbType = SqlDbType.Int
                         };
                         db.ExecuteStoreCommand("exec ExisteStore @STORENAME, @OUTER output", pTableName, pResult);
-                        result = (int) pResult.Value == 1;
+                        result = (int)pResult.Value == 1;
                     }
                 }
 
@@ -477,6 +477,7 @@ namespace KinniNet.Core.Operacion
                     campoMascara.NombreCampo = BusinessCadenas.Cadenas.FormatoBaseDatos(campoMascara.Descripcion.Trim()).Replace(" ", "").ToUpper();
                     campoMascara.SimboloMoneda = campoMascara.SimboloMoneda == null ? null : campoMascara.SimboloMoneda.Trim();
                     campoMascara.TipoCampoMascara = null;
+                    campoMascara.Catalogos = null;
                 }
 
                 mascara.NombreTabla = (BusinessVariables.ParametrosMascaraCaptura.PrefijoTabla + BusinessCadenas.Cadenas.FormatoBaseDatos(mascara.Descripcion.Trim())).Replace(" ", string.Empty).ToUpper();
@@ -650,6 +651,7 @@ namespace KinniNet.Core.Operacion
                 Catalogos catalogo = db.Catalogos.SingleOrDefault(s => s.Id == idCatalogo);
                 if (catalogo != null)
                 {
+                    var x = "ObtenerCatalogoSistema '" + catalogo.Tabla + "', " + Convert.ToInt32(insertarSeleccion) + ", " + Convert.ToInt32(filtraHabilitados);
                     result = db.ExecuteStoreQuery<CatalogoGenerico>("ObtenerCatalogoSistema '" + catalogo.Tabla + "', " + Convert.ToInt32(insertarSeleccion) + ", " + Convert.ToInt32(filtraHabilitados)).ToList();
                 }
             }
@@ -671,7 +673,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                IQueryable<Mascara> qry = db.Mascara;
+                IQueryable<Mascara> qry = db.Mascara.Where(w => !w.Sistema);
                 if (descripcion.Trim() != string.Empty)
                     qry = qry.Where(w => w.Descripcion.Contains(descripcion));
                 result = qry.ToList();

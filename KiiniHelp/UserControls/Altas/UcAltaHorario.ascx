@@ -5,7 +5,6 @@
         SetTable();
     });
     function SetTable() {
-        debugger;
         var esalta = (document.getElementById("<%= FindControl("hfEsAlta").ClientID %>").value == 'True');
         if (esalta) {
 

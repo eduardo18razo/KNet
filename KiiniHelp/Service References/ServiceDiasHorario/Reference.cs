@@ -51,6 +51,9 @@ namespace KiiniHelp.ServiceDiasHorario {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriados", ReplyAction="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriadosResponse")]
         System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFeriado> ObtenerDiasFeriados(bool insertarSeleccion);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/ActualizarDiasFestivos", ReplyAction="http://tempuri.org/IServiceDiasHorario/ActualizarDiasFestivosResponse")]
+        void ActualizarDiasFestivos(KiiniNet.Entities.Cat.Usuario.DiasFeriados item);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDiasHorario/CrearDiasFestivos", ReplyAction="http://tempuri.org/IServiceDiasHorario/CrearDiasFestivosResponse")]
         void CrearDiasFestivos(KiiniNet.Entities.Cat.Usuario.DiasFeriados item);
         
@@ -134,6 +137,10 @@ namespace KiiniHelp.ServiceDiasHorario {
         
         public System.Collections.Generic.List<KiiniNet.Entities.Cat.Usuario.DiaFeriado> ObtenerDiasFeriados(bool insertarSeleccion) {
             return base.Channel.ObtenerDiasFeriados(insertarSeleccion);
+        }
+        
+        public void ActualizarDiasFestivos(KiiniNet.Entities.Cat.Usuario.DiasFeriados item) {
+            base.Channel.ActualizarDiasFestivos(item);
         }
         
         public void CrearDiasFestivos(KiiniNet.Entities.Cat.Usuario.DiasFeriados item) {

@@ -187,8 +187,8 @@
                                     <!--CAMPO-->
                                      
                                      <hr />
-                                    <asp:Panel runat="server" ID="pnlAltaOrganizacion" Visible="true">
-                                <div class="form-group margin-top">
+                                    
+                                <div class="form-group margin-top" runat="server" ID="divCapturaDescripcion">
                                         Nombre de <asp:Label runat="server" ID="lblOperacionDescripcion" />*<br />
                                         <asp:TextBox CssClass="form-control" ID="txtDescripcionCatalogo" runat="server" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" autofocus="autofocus" MaxLength="50"/>
                                         <asp:CheckBox runat="server" ID="chkHabilitado" Checked="True" Visible="False" />
@@ -196,7 +196,6 @@
                                     </asp:LinkButton>
                                    
                                  </div>
-                                 </asp:Panel>
                               
 
                                 </div>

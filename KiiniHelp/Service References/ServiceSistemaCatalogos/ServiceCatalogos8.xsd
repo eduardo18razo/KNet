@@ -99,7 +99,7 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="AgregarRegistro">
+  <xs:element name="AgregarRegistroSistema">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idCatalogo" type="xs:int" />
@@ -107,7 +107,35 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AgregarRegistroResponse">
+  <xs:element name="AgregarRegistroSistemaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualizarRegistroSistema">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idCatalogo" type="xs:int" />
+        <xs:element minOccurs="0" name="descripcion" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="idRegistro" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualizarRegistroSistemaResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HabilitarRegistroSistema">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idCatalogo" type="xs:int" />
+        <xs:element minOccurs="0" name="habilitado" type="xs:boolean" />
+        <xs:element minOccurs="0" name="idRegistro" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HabilitarRegistroSistemaResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -117,6 +145,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="idCatalogo" type="xs:int" />
         <xs:element minOccurs="0" name="insertarSeleccion" type="xs:boolean" />
+        <xs:element minOccurs="0" name="filtroHabilitado" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

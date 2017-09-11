@@ -62,11 +62,23 @@
   <wsdl:message name="IServiceCatalogos_Habilitar_OutputMessage">
     <wsdl:part name="parameters" element="tns:HabilitarResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceCatalogos_AgregarRegistro_InputMessage">
-    <wsdl:part name="parameters" element="tns:AgregarRegistro" />
+  <wsdl:message name="IServiceCatalogos_AgregarRegistroSistema_InputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarRegistroSistema" />
   </wsdl:message>
-  <wsdl:message name="IServiceCatalogos_AgregarRegistro_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AgregarRegistroResponse" />
+  <wsdl:message name="IServiceCatalogos_AgregarRegistroSistema_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AgregarRegistroSistemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCatalogos_ActualizarRegistroSistema_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarRegistroSistema" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCatalogos_ActualizarRegistroSistema_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarRegistroSistemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCatalogos_HabilitarRegistroSistema_InputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarRegistroSistema" />
+  </wsdl:message>
+  <wsdl:message name="IServiceCatalogos_HabilitarRegistroSistema_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HabilitarRegistroSistemaResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceCatalogos_ObtenerRegistrosSistemaCatalogo_InputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerRegistrosSistemaCatalogo" />
@@ -121,9 +133,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/Habilitar" message="tns:IServiceCatalogos_Habilitar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/HabilitarResponse" message="tns:IServiceCatalogos_Habilitar_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="AgregarRegistro">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/AgregarRegistro" message="tns:IServiceCatalogos_AgregarRegistro_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/AgregarRegistroResponse" message="tns:IServiceCatalogos_AgregarRegistro_OutputMessage" />
+    <wsdl:operation name="AgregarRegistroSistema">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/AgregarRegistroSistema" message="tns:IServiceCatalogos_AgregarRegistroSistema_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/AgregarRegistroSistemaResponse" message="tns:IServiceCatalogos_AgregarRegistroSistema_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarRegistroSistema">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/ActualizarRegistroSistema" message="tns:IServiceCatalogos_ActualizarRegistroSistema_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/ActualizarRegistroSistemaResponse" message="tns:IServiceCatalogos_ActualizarRegistroSistema_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HabilitarRegistroSistema">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/HabilitarRegistroSistema" message="tns:IServiceCatalogos_HabilitarRegistroSistema_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceCatalogos/HabilitarRegistroSistemaResponse" message="tns:IServiceCatalogos_HabilitarRegistroSistema_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ObtenerRegistrosSistemaCatalogo">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosSistemaCatalogo" message="tns:IServiceCatalogos_ObtenerRegistrosSistemaCatalogo_InputMessage" />
@@ -207,8 +227,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AgregarRegistro">
-      <soap:operation soapAction="http://tempuri.org/IServiceCatalogos/AgregarRegistro" style="document" />
+    <wsdl:operation name="AgregarRegistroSistema">
+      <soap:operation soapAction="http://tempuri.org/IServiceCatalogos/AgregarRegistroSistema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarRegistroSistema">
+      <soap:operation soapAction="http://tempuri.org/IServiceCatalogos/ActualizarRegistroSistema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HabilitarRegistroSistema">
+      <soap:operation soapAction="http://tempuri.org/IServiceCatalogos/HabilitarRegistroSistema" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

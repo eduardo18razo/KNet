@@ -34,8 +34,6 @@
             $(editorName).markdown();
         }
         function search(evt) {
-            debugger;
-
             if (evt.charCode == 13) {
                 this.__doPostBack(this.name, 'OnKeyPress');
                 evt.preventDefault();

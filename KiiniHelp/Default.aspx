@@ -56,8 +56,6 @@
             });
         }
         function search(evt) {
-            debugger;
-
             if (evt.charCode == 13) {
                 this.__doPostBack(this.name, 'OnKeyPress');
                 evt.preventDefault();
@@ -70,19 +68,19 @@
     </script>
 </head>
 
-<body class="layout_no_leftnav" data-trigger="">
+<body class="layout_no_leftnav" >
     <form runat="server">
         <asp:ScriptManager ID="scripMain" runat="server" EnablePageMethods="true">
             <Scripts>
                 <asp:ScriptReference Path="~/assets/js/jquery.js" />
-                <asp:ScriptReference Path="~/assets/js/bootstrap.js" />
-                <asp:ScriptReference Path="~/assets/js/bootstrap-markdown.js" />
-                <asp:ScriptReference Path="assets/js/imagesloaded.js" />
-                <asp:ScriptReference Path="assets/js/masonry.js" />
-                <asp:ScriptReference Path="assets/js/main.js" />
-                <asp:ScriptReference Path="~/assets/js/bootstrap-notify.js" />
-                <asp:ScriptReference Path="~/assets/js/bootstrap-notify.min.js" />
-                <asp:ScriptReference Path="~/assets/js/Notificaciones.js" />
+                    <asp:ScriptReference Path="~/assets/js/bootstrap.js" />
+                    <asp:ScriptReference Path="~/assets/js/bootstrap-markdown.js" />
+                    <asp:ScriptReference Path="assets/js/imagesloaded.js" />
+                    <asp:ScriptReference Path="assets/js/masonry.js" />
+                    <asp:ScriptReference Path="assets/js/main.js" />
+                    <asp:ScriptReference Path="~/assets/js/bootstrap-notify.js" />
+                    <asp:ScriptReference Path="~/assets/js/bootstrap-notify.min.js" />
+                    <asp:ScriptReference Path="~/assets/js/Notificaciones.js" />
             </Scripts>
         </asp:ScriptManager>
         <header class="header">
@@ -337,8 +335,8 @@
         <footer id="footer" class="site-footer">
             <div class="copyright">Kiinisuppor &copy; 2017 - <a href="http://www.kiininet.com" target="_blank">Powered by Kiinenet</a></div>
         </footer>
-        <script>
-            $('.carousel').carousel({
+        <script>            
+            $('.carousel').carousel({                
                 interval: 3000
             });
         </script>

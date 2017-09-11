@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
 using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Helper;
 using KinniNet.Business.Utils;
@@ -188,7 +189,7 @@ namespace KinniNet.Core.Sistema
                 if (registros.Count <= 0) return;
                 foreach (CatalogoGenerico registro in registros)
                 {
-                    AgregarRegistro(catalogo.Id, registro.Descripcion);
+                    AgregarRegistroSistema(catalogo.Id, registro.Descripcion);
                 }
             }
             catch (Exception ex)
@@ -283,7 +284,7 @@ namespace KinniNet.Core.Sistema
             }
         }
 
-        public void AgregarRegistro(int idCatalogo, string descripcion)
+        public void AgregarRegistroSistema(int idCatalogo, string descripcion)
         {
             DataBaseModelContext db = new DataBaseModelContext();
             try
@@ -302,14 +303,52 @@ namespace KinniNet.Core.Sistema
             }
         }
 
-        public List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion)
+        public void ActualizarRegistroSistema(int idCatalogo, string descripcion, int idRegistro)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Catalogos catalogo = db.Catalogos.Single(w => w.Id == idCatalogo);
+                string store = string.Format("{0} '{1}', '{2}', {3}", BusinessVariables.ParametrosCatalogo.PrefijoComandoActualizar, catalogo.Tabla, descripcion, idRegistro);
+                db.ExecuteStoreCommand(store);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public void HabilitarRegistroSistema(int idCatalogo, bool habilitado, int idRegistro)
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                Catalogos catalogo = db.Catalogos.Single(w => w.Id == idCatalogo);
+                string store = string.Format("{0} '{1}', '{2}', {3}", BusinessVariables.ParametrosCatalogo.PrefijoComandoHabilitar, catalogo.Tabla, habilitado, idRegistro);
+                db.ExecuteStoreCommand(store);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        public List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion, bool filtroHabilitado)
         {
             List<CatalogoGenerico> result;
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
                 Catalogos cat = db.Catalogos.Single(s => s.Id == idCatalogo);
-                result = db.ExecuteStoreQuery<CatalogoGenerico>("ObtenerCatalogoSistema '" + cat.Tabla + "'," + Convert.ToInt32(insertarSeleccion)).ToList();
+                result = db.ExecuteStoreQuery<CatalogoGenerico>("ObtenerCatalogoSistema '" + cat.Tabla + "'," + Convert.ToInt32(insertarSeleccion) + "," + Convert.ToInt32(filtroHabilitado)).ToList();
             }
             catch (Exception ex)
             {

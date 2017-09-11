@@ -68,7 +68,6 @@ jQuery.trumbowyg = {
     'use strict';
 
     $.fn.trumbowyg = function (options, params) {
-        debugger;
         var trumbowygDataName = 'trumbowyg';
         if (options === Object(options) || !options) {
             return this.each(function () {
@@ -130,7 +129,6 @@ jQuery.trumbowyg = {
 
     // @param: editorElem is the DOM element
     var Trumbowyg = function (editorElem, options) {
-        debugger;
         var t = this,
             trumbowygIconsId = 'trumbowyg-icons';
 

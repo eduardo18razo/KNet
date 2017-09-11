@@ -541,7 +541,7 @@ namespace KiiniHelp
                     if (index >= TicketsAbiertos.Count)
                         index = TicketsAbiertos.Count - 1;
                     if (index < 0)
-                        Response.Redirect("~/Agente/FrmBandejaTickets.aspx");
+                        Response.Redirect("~/Agente/Bandeja.aspx");
                     else
                         Response.Redirect("~/Agente/FrmTicket.aspx?id=" + TicketsAbiertos[index].IdTicket);
                 }

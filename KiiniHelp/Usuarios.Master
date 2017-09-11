@@ -53,36 +53,35 @@
             window.open(url, "test", 'type=fullWindow, fullscreen, height=700,width=760');
         };
         function sum() {
-            debugger;
             var totaldias = 0, totalhoras = 0, totalminutos = 0, totalsegundos = 0;
             $("#tblHeader > tbody > tr").each(function (indexRow) {
                 var control;
                 $(this).children("td").each(function (indexColumn) {
                     switch (indexColumn) {
-                        case 2:
-                            control = $(this).find("input[id*=txtDias]");
-                            if (control != null) {
-                                totaldias = totaldias + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
-                            }
-                            break;
-                        case 3:
-                            control = $(this).find("input[id*=txtHoras]");
-                            if (control != null) {
-                                totalhoras = totalhoras + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
-                            }
-                            break;
-                        case 4:
-                            control = $(this).find("input[id*=txtMinutos]");
-                            if (control != null) {
-                                totalminutos = totalminutos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
-                            }
-                            break;
-                        case 5:
-                            control = $(this).find("input[id*=txtSegundos]");
-                            if (control != null) {
-                                totalsegundos = totalsegundos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
-                            }
-                            break;
+                    case 2:
+                        control = $(this).find("input[id*=txtDias]");
+                        if (control != null) {
+                            totaldias = totaldias + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                        }
+                        break;
+                    case 3:
+                        control = $(this).find("input[id*=txtHoras]");
+                        if (control != null) {
+                            totalhoras = totalhoras + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                        }
+                        break;
+                    case 4:
+                        control = $(this).find("input[id*=txtMinutos]");
+                        if (control != null) {
+                            totalminutos = totalminutos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                        }
+                        break;
+                    case 5:
+                        control = $(this).find("input[id*=txtSegundos]");
+                        if (control != null) {
+                            totalsegundos = totalsegundos + parseInt(control.val() === "" || control.val() === undefined ? 0 : control.val());
+                        }
+                        break;
                     }
 
                 });
@@ -92,30 +91,30 @@
                 var control;
                 $(this).children("td").each(function (indexColumn) {
                     switch (indexColumn) {
-                        case 2:
-                            control = $(this).find("input[id*=txtTotalDias]");
-                            if (control != null) {
-                                control.val(totaldias);
-                            }
-                            break;
-                        case 3:
-                            control = $(this).find("input[id*=txtTotalHoras]");
-                            if (control != null) {
-                                control.val(totalhoras);
-                            }
-                            break;
-                        case 4:
-                            control = $(this).find("input[id*=txtTotalMinutos]");
-                            if (control != null) {
-                                control.val(totalminutos);
-                            }
-                            break;
-                        case 5:
-                            control = $(this).find("input[id*=txtTotalSegundos]");
-                            if (control != null) {
-                                control.val(totalsegundos);
-                            }
-                            break;
+                    case 2:
+                        control = $(this).find("input[id*=txtTotalDias]");
+                        if (control != null) {
+                            control.val(totaldias);
+                        }
+                        break;
+                    case 3:
+                        control = $(this).find("input[id*=txtTotalHoras]");
+                        if (control != null) {
+                            control.val(totalhoras);
+                        }
+                        break;
+                    case 4:
+                        control = $(this).find("input[id*=txtTotalMinutos]");
+                        if (control != null) {
+                            control.val(totalminutos);
+                        }
+                        break;
+                    case 5:
+                        control = $(this).find("input[id*=txtTotalSegundos]");
+                        if (control != null) {
+                            control.val(totalsegundos);
+                        }
+                        break;
                     }
                 });
             });
@@ -145,13 +144,10 @@
             });
         }
         function dopostback() {
-            debugger;
             __doPostBack();
         }
 
         function search(evt) {
-            debugger;
-
             if (evt.charCode == 13) {
                 this.__doPostBack(this.name, 'OnKeyPress');
                 evt.preventDefault();
@@ -202,7 +198,7 @@
             <header class="header">
                 <div class="branding ">
                     <h1 class="logo text-center">
-                        <asp:HyperLink NavigateUrl="~/Default.aspx" runat="server">
+                        <asp:HyperLink NavigateUrl="~/Users/DashBoard.aspx" runat="server">
                             <asp:Image class="logo-icon" ImageUrl="~/assets/images/logo-icon.svg" alt="icon" runat="server" />
                             <span class="nav-label"><span class="h3"><strong>
                                 <asp:Label runat="server" ID="lblBranding" /></strong></span></span>

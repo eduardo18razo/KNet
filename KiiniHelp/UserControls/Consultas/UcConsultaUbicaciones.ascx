@@ -10,7 +10,7 @@
             <asp:HiddenField runat="server" ID="hfIdSeleccion" />
             <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfModal" />
             <asp:HiddenField runat="server" ClientIDMode="Inherit" ID="hfId" />
-                        <br>
+            <br>
             <h3 class="h6">
                 <asp:HyperLink runat="server" NavigateUrl="~/Users/DashBoard.aspx">Inicio</asp:HyperLink>
                 / Configuración / Ubicación </h3>
@@ -39,7 +39,7 @@
                                 <label class="sr-only" for="txtFiltroDecripcion">Buscar</label>
                                 <div class="form-group">
                                     <asp:TextBox runat="server" ID="txtFiltroDecripcion" CssClass="form-control help_search_form" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" placeholder="Busca con una palabra clave..." />
-                                    <asp:LinkButton runat="server" ID="btnBuscar" CssClass="btn btn-primary btn-single-icon fa fa-search" OnClick="btnBuscar_OnClick"/>
+                                    <asp:LinkButton runat="server" ID="btnBuscar" CssClass="btn btn-primary btn-single-icon fa fa-search" OnClick="btnBuscar_OnClick" />
                                 </div>
                             </div>
                             <br />
@@ -69,9 +69,9 @@
                                                         <tr>
                                                             <th style="width: 8%">
                                                                 <asp:Label runat="server" ID="Label1">Tipo Usuario</asp:Label></th>
-                                                            <th  style="width: 8%">
+                                                            <th style="width: 8%">
                                                                 <asp:Label runat="server" ID="lblNivel1">Nivel 1</asp:Label></th>
-                                                            <th  style="width: 10%">
+                                                            <th style="width: 10%">
                                                                 <asp:Label runat="server" ID="lblNivel2">Nivel 2</asp:Label></th>
                                                             <th style="width: 10%">
                                                                 <asp:Label runat="server" ID="lblNivel3">Nivel 3</asp:Label></th>
@@ -85,14 +85,14 @@
                                                                 <asp:Label runat="server" ID="lblNivel7">Nivel 7</asp:Label></th>
                                                             <th style="width: 19%">
                                                                 <asp:Label runat="server"></asp:Label></th>
-                                                        <%--</tr>--%>
+                                                            <%--</tr>--%>
                                                     </thead>
                                                     <tbody>
                                             </HeaderTemplate>
                                             <ItemTemplate>
                                                 <tr>
                                                     <td>
-                                                <button type="button" class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + Eval("TipoUsuario.Color") + " !important" %>'>
+                                                        <button type="button" class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + Eval("TipoUsuario.Color") + " !important" %>'>
                                                             <%# Eval("TipoUsuario.Abreviacion") %></button></td>
                                                     <td><%# Eval("Pais.Descripcion")%></td>
                                                     <td><%# Eval("Campus.Descripcion")%></td>
@@ -104,14 +104,14 @@
                                                     <td id="colHabilitado">
                                                         <ul class="list list-unstyled" id="hiddenEnabled">
                                                             <li>
-                                                                <asp:CheckBox runat="server" AutoPostBack="true" Checked='<%# (bool) Eval("Habilitado") %>'  Visible='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) != 1 %>' CssClass="chkIphone" Width="30px" data-id='<%# Eval("Id")%>' Text='<%# (bool) Eval("Habilitado") ? "SI" : "NO"%>' OnCheckedChanged="OnCheckedChanged" />
+                                                                <asp:CheckBox runat="server" AutoPostBack="true" Checked='<%# (bool) Eval("Habilitado") %>' Visible='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) != 1 %>' CssClass="chkIphone" Width="30px" data-id='<%# Eval("Id")%>' Text='<%# (bool) Eval("Habilitado") ? "SI" : "NO"%>' OnCheckedChanged="OnCheckedChanged" />
                                                             </li>
                                                         </ul>
                                                     </td>
                                                     <td id="colEditar">
                                                         <ul class="list list-unstyled hidden" id="hiddenEdit">
                                                             <li>
-                                                                <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Editar" CommandArgument='<%# Eval("Id")%>' OnClick="btnEditar_OnClick" Visible='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) != 1 && (bool) Eval("Habilitado") %>'/>
+                                                                <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Editar" CommandArgument='<%# Eval("Id")%>' OnClick="btnEditar_OnClick" Visible='<%# int.Parse(Eval("IdNivelUbicacion").ToString()) != 1 && (bool) Eval("Habilitado") %>' />
                                                             </li>
                                                         </ul>
                                                     </td>
@@ -129,14 +129,19 @@
                     </section>
                 </div>
             </div>
+            <script type="text/javascript">
+                $(function () {
+                    hidden();
+                });
+            </script>
         </ContentTemplate>
     </asp:UpdatePanel>
 
     <%--MODAL CATALOGOS--%>
-    <div class="modal fade" id="editCatalogoUbicacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" >
+    <div class="modal fade" id="editCatalogoUbicacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <asp:UpdatePanel ID="upCatlogos" runat="server">
             <ContentTemplate>
-                <uc1:UcAltaUbicaciones runat="server" id="ucAltaUbicaciones" />
+                <uc1:UcAltaUbicaciones runat="server" ID="ucAltaUbicaciones" />
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>

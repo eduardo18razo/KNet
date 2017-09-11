@@ -853,7 +853,9 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     divNivel4.Visible = false;
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
+                    btnSiguiente.Enabled = true;
                     //divNivel7.Visible = false;
+                    btnSiguiente.Enabled = true;
                 }
                 else
                 {
@@ -912,6 +914,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
                     //divNivel7.Visible = false;
+                    btnSiguiente.Enabled = true;
                 }
                 else
                 {
@@ -963,6 +966,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
                     //divNivel7.Visible = false;
+                    btnSiguiente.Enabled = true;
                 }
                 else
                 {
@@ -1008,6 +1012,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     divNivel5.Visible = true;
                     divNivel6.Visible = false;
                     //divNivel7.Visible = false;
+                    btnSiguiente.Enabled = true;
                 }
                 else
                 {
@@ -1047,6 +1052,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     //btnAgregarNivel7.Enabled = false;
                     divNivel6.Visible = true;
                     //divNivel7.Visible = false;
+                    btnSiguiente.Enabled = true;
                 }
                 else
                 {

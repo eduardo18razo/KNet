@@ -688,6 +688,13 @@ namespace KinniNet.Core.Operacion
                             subGrupo.HorarioSubGrupo = subGrupo.HorarioSubGrupo ?? new List<HorarioSubGrupo>();
                             subGrupo.DiaFestivoSubGrupo = subGrupo.DiaFestivoSubGrupo ?? new List<DiaFestivoSubGrupo>();
                             subGrupo.HorarioSubGrupo.AddRange(lstHorarioGpo);
+
+                            List<DiaFestivoSubGrupo> diasDb = db.DiaFestivoSubGrupo.Where(w => w.IdSubGrupoUsuario == subGrupo.Id).ToList();
+                            foreach (DiaFestivoSubGrupo festivoSubGrupo in diasDb)
+                            {
+                                db.DiaFestivoSubGrupo.DeleteObject(festivoSubGrupo);
+                            }
+
                             List<DiaFestivoSubGrupo> lstDiasDescanso = diasDescanso.SingleOrDefault(w => w.Key == horario.Key).Value;
                             if (lstDiasDescanso != null)
                             {
@@ -705,6 +712,14 @@ namespace KinniNet.Core.Operacion
                             else
                             {
                                 grupo.SubGrupoUsuario.SingleOrDefault(s => s.IdGrupoUsuario == subGrupo.IdGrupoUsuario && s.IdSubRol == subGrupo.IdSubRol).HorarioSubGrupo = subGrupo.HorarioSubGrupo;
+
+                            }
+
+                            if (grupo.SubGrupoUsuario.SingleOrDefault(s => s.IdGrupoUsuario == subGrupo.IdGrupoUsuario && s.IdSubRol == subGrupo.IdSubRol) == null)
+                                grupo.SubGrupoUsuario.Add(subGrupo);
+                            else
+                            {
+                                grupo.SubGrupoUsuario.SingleOrDefault(s => s.IdGrupoUsuario == subGrupo.IdGrupoUsuario && s.IdSubRol == subGrupo.IdSubRol).DiaFestivoSubGrupo = subGrupo.DiaFestivoSubGrupo;
 
                             }
                             //sb.Add(subGrupo);
@@ -733,141 +748,8 @@ namespace KinniNet.Core.Operacion
                         grupo.LevantaTicket = gpo.LevantaTicket;
                         grupo.RecadoTicket = gpo.RecadoTicket;
                     }
-                    //foreach (KeyValuePair<int, int> horario in horarios)
-                    //{
-
-                    //    List<HorarioSubGrupo> lstHorarioGpo = new List<HorarioSubGrupo>();
-                    //    List<HorarioDetalle> detalle = db.HorarioDetalle.Where(w => w.IdHorario == horario.Value).ToList();
-                    //    foreach (HorarioDetalle horarioDetalle in detalle)
-                    //    {
-                    //        HorarioSubGrupo horarioGpo = new HorarioSubGrupo
-                    //        {
-                    //            IdHorario = horario.Value,
-                    //            IdSubGrupoUsuario = horario.Key,
-                    //            Dia = horarioDetalle.Dia,
-                    //            HoraInicio = horarioDetalle.HoraInicio,
-                    //            HoraFin = horarioDetalle.HoraFin
-                    //        };
-                    //        lstHorarioGpo.Add(horarioGpo);
-                    //    }
-
-                    //    SubGrupoUsuario subGrupo = new SubGrupoUsuario
-                    //    {
-                    //        Id = grupo.SubGrupoUsuario.FirstOrDefault(f => f.IdSubRol == horario.Key) != null ? grupo.SubGrupoUsuario.First(f => f.IdSubRol == horario.Key).Id : 0,
-                    //        IdGrupoUsuario = grupo.Id,
-                    //        IdSubRol = horario.Key,
-                    //        Habilitado = true
-                    //    };
-                    //    subGrupo.HorarioSubGrupo = subGrupo.HorarioSubGrupo ?? new List<HorarioSubGrupo>();
-                    //    subGrupo.DiaFestivoSubGrupo = subGrupo.DiaFestivoSubGrupo ?? new List<DiaFestivoSubGrupo>();
-                    //    subGrupo.HorarioSubGrupo.AddRange(lstHorarioGpo);
-                    //    List<DiaFestivoSubGrupo> lstDiasDescanso = diasDescanso.SingleOrDefault(w => w.Key == horario.Key).Value;
-                    //    if (lstDiasDescanso != null)
-                    //    {
-                    //        foreach (DiaFestivoSubGrupo dia in lstDiasDescanso)
-                    //        {
-                    //            dia.IdSubGrupoUsuario = horario.Key;
-                    //        }
-                    //        subGrupo.DiaFestivoSubGrupo.AddRange(lstDiasDescanso);
-                    //    }
-                    //    sb.Add(subGrupo);
-                    //}
-                    //List<DiaFestivoSubGrupo> diasEliminar = new List<DiaFestivoSubGrupo>();
-                    //foreach (SubGrupoUsuario sgu in sb)
-                    //{
-                    //    diasEliminar.AddRange(db.DiaFestivoSubGrupo.Where(w => w.IdSubGrupoUsuario == sgu.Id));
-                    //}
-
-                    //List<SubGrupoUsuario> sbGpoRemove = (grupo.SubGrupoUsuario.Select(sbGpo => new { sbGpo, sbDelete = sb.SingleOrDefault(s => s.IdGrupoUsuario == sbGpo.IdGrupoUsuario && s.IdSubRol == sbGpo.IdSubRol) }).Where(@t => @t.sbDelete == null).Select(@t => @t.sbGpo)).ToList();
-                    //foreach (SubGrupoUsuario subGrupoUsuario in sbGpoRemove)
-                    //{
-                    //    db.SubGrupoUsuario.DeleteObject(subGrupoUsuario);
-                    //}
-
-                    //foreach (SubGrupoUsuario sbGpoAdd in sb)
-                    //{
-                    //    if (!grupo.SubGrupoUsuario.Any(a => a.IdGrupoUsuario == sbGpoAdd.IdGrupoUsuario && a.IdSubRol == sbGpoAdd.IdSubRol))
-                    //        grupo.SubGrupoUsuario.Add(sbGpoAdd);
-                    //    else
-                    //    {
-                    //        List<HorarioSubGrupo> horariosEliminar = new List<HorarioSubGrupo>();
-                    //        foreach (SubGrupoUsuario sgu in sb)
-                    //        {
-                    //            horariosEliminar.AddRange(db.HorarioSubGrupo.Where(w => w.IdSubGrupoUsuario == sgu.Id));
-                    //        }
-                    //        grupo.SubGrupoUsuario.Single(a => a.IdGrupoUsuario == sbGpoAdd.IdGrupoUsuario && a.IdSubRol == sbGpoAdd.IdSubRol).HorarioSubGrupo = sbGpoAdd.HorarioSubGrupo;
-                    //    }
-                    //}
-
-                    //foreach (SubGrupoUsuario sgu in sb)
-                    //{
-                    //    SubGrupoUsuario sgu1 = sgu;
-                    //    foreach (DiaFestivoSubGrupo diaNuevo in db.DiaFestivoSubGrupo.Where(w => w.IdSubGrupoUsuario == sgu1.Id))
-                    //    {
-                    //            diasEliminar.Add(diaNuevo);
-                    //    }
-                    //}
-
-                    //foreach (DiaFestivoSubGrupo diaEliminar in diasEliminar)
-                    //{
-                    //    db.DiaFestivoSubGrupo.DeleteObject(diaEliminar);
-                    //}
-
-                    //foreach (HorarioSubGrupo horarioEliminar in horariosEliminar)
-                    //{
-                    //    db.HorarioSubGrupo.DeleteObject(horarioEliminar);
-                    //}
-
-                    //foreach (SubGrupoUsuario sbGpoDias in sb)
-                    //{
-                    //    if (sbGpoDias.DiaFestivoSubGrupo != null)
-                    //        foreach (DiaFestivoSubGrupo diaFestivoSubGrupo in sbGpoDias.DiaFestivoSubGrupo)
-                    //        {
-                    //            if (!grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoDias.IdGrupoUsuario && w.IdSubRol == sbGpoDias.IdSubRol).DiaFestivoSubGrupo.Any(a => a.Fecha == diaFestivoSubGrupo.Fecha))
-                    //                grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoDias.IdGrupoUsuario && w.IdSubRol == sbGpoDias.IdSubRol).DiaFestivoSubGrupo.Add(diaFestivoSubGrupo);
-                    //        }
-                    //}
-
-                    //foreach (SubGrupoUsuario sbGpoUsuario in sb)
-                    //{
-
-                    //}
-
-                    //foreach (SubGrupoUsuario sbGpoHorario in sb)
-                    //{
-                    //    if (sbGpoHorario.HorarioSubGrupo != null)
-                    //        foreach (HorarioSubGrupo horarioFestivoSubGrupo in sbGpoHorario.HorarioSubGrupo)
-                    //        {
-                    //            var sbg = grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoHorario.IdGrupoUsuario && w.IdSubRol == sbGpoHorario.IdSubRol && w.Id == 0);
-                    //            var horsbg = sbg.HorarioSubGrupo.Any(a => a.Dia == horarioFestivoSubGrupo.Dia && a.HoraInicio == horarioFestivoSubGrupo.HoraInicio && a.HoraFin == horarioFestivoSubGrupo.HoraFin);
-                    //            //if (!grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoHorario.IdGrupoUsuario && w.IdSubRol == sbGpoHorario.IdSubRol).HorarioSubGrupo.Any(a => a.Dia == horarioFestivoSubGrupo.Dia && a.HoraInicio == horarioFestivoSubGrupo.HoraInicio && a.HoraFin == horarioFestivoSubGrupo.HoraFin))
-                    //            //    grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoHorario.IdGrupoUsuario && w.IdSubRol == sbGpoHorario.IdSubRol).HorarioSubGrupo.Add(horarioFestivoSubGrupo);
-                    //            if (!grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoHorario.IdGrupoUsuario && w.IdSubRol == sbGpoHorario.IdSubRol).HorarioSubGrupo.Any(a => a.Dia == horarioFestivoSubGrupo.Dia && a.HoraInicio == horarioFestivoSubGrupo.HoraInicio && a.HoraFin == horarioFestivoSubGrupo.HoraFin && a.Id != 0))
-                    //                grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoHorario.IdGrupoUsuario && w.IdSubRol == sbGpoHorario.IdSubRol).HorarioSubGrupo.Add(horarioFestivoSubGrupo);
-                    //            else
-                    //            {
-                    //                grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoHorario.IdGrupoUsuario && w.IdSubRol == sbGpoHorario.IdSubRol).HorarioSubGrupo.Single(a => a.Dia == horarioFestivoSubGrupo.Dia).HoraInicio = horarioFestivoSubGrupo.HoraInicio;
-                    //                grupo.SubGrupoUsuario.Single(w => w.IdGrupoUsuario == sbGpoHorario.IdGrupoUsuario && w.IdSubRol == sbGpoHorario.IdSubRol).HorarioSubGrupo.Single(a => a.Dia == horarioFestivoSubGrupo.Dia).HoraFin = horarioFestivoSubGrupo.HoraFin;
-                    //            }
-
-                    //        }
-                    //}
                     grupo.TieneSupervisor = grupo.SubGrupoUsuario.Any(a => a.IdSubRol == (int)BusinessVariables.EnumSubRoles.Supervisor);
                     grupo.Descripcion = gpo.Descripcion.Trim();
-
-                    //List<EstatusTicketSubRolGeneral> lstEliminarPoliticaEstatus = db.EstatusTicketSubRolGeneral.Where(w => w.IdGrupoUsuario == grupo.Id).ToList();
-                    //List<EstatusAsignacionSubRolGeneral> lstEliminarPoliticaEstatusAsignacion = db.EstatusAsignacionSubRolGeneral.Where(w => w.IdGrupoUsuario == grupo.Id).ToList();
-                    //foreach (EstatusTicketSubRolGeneral politicaEstatus in lstEliminarPoliticaEstatus)
-                    //{
-                    //    db.EstatusTicketSubRolGeneral.DeleteObject(politicaEstatus);
-                    //}
-                    //foreach (EstatusAsignacionSubRolGeneral politicaAsignacion in lstEliminarPoliticaEstatusAsignacion)
-                    //{
-                    //    db.EstatusAsignacionSubRolGeneral.DeleteObject(politicaAsignacion);
-                    //}
-
-
-                    //db.GrupoUsuario.AddObject(grupo);
                 }
                 db.SaveChanges();
 

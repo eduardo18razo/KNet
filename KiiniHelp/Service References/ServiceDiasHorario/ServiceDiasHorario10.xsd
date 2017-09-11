@@ -162,10 +162,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="CrearDiasFestivos">
+  <xs:element name="ActualizarDiasFestivos">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="item" nillable="true" type="q12:DiasFeriados" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualizarDiasFestivosResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CrearDiasFestivos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="item" nillable="true" type="q13:DiasFeriados" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -184,7 +196,7 @@
   <xs:element name="ObtenerDiasFeriadosUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiasFeriadosUserResult" nillable="true" type="q13:ArrayOfDiasFeriados" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiasFeriadosUserResult" nillable="true" type="q14:ArrayOfDiasFeriados" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -198,7 +210,7 @@
   <xs:element name="ObtenerDiasFeriadosUserByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiasFeriadosUserByIdResult" nillable="true" type="q14:DiasFeriados" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KiiniNet.Entities.Cat.Usuario" minOccurs="0" name="ObtenerDiasFeriadosUserByIdResult" nillable="true" type="q15:DiasFeriados" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -94,7 +94,11 @@
                     </div>
                 </div>
             </section>
-
+            <script type="text/javascript">
+                $(function () {
+                    hidden();
+                });
+            </script>
         </ContentTemplate>
     </asp:UpdatePanel>
     <div id="modalAltaPuesto" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" class="modal fade">

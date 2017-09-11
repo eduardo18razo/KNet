@@ -58,7 +58,7 @@ namespace KiiniHelp.UserControls.Altas.Catalogo
                 rbtnHojas.Enabled = false;
                 if (!puesto.Archivo)
                 {
-                    Session["registrosCatalogos"] = _servicioCatalogo.ObtenerRegistrosSistemaCatalogo(value, false);
+                    Session["registrosCatalogos"] = _servicioCatalogo.ObtenerRegistrosSistemaCatalogo(value, false, true);
                     LlenaRegistros();
                 }
             }

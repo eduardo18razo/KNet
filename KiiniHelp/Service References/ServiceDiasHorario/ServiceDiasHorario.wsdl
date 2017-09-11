@@ -90,6 +90,12 @@
   <wsdl:message name="IServiceDiasHorario_ObtenerDiasFeriados_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObtenerDiasFeriadosResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceDiasHorario_ActualizarDiasFestivos_InputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarDiasFestivos" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDiasHorario_ActualizarDiasFestivos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ActualizarDiasFestivosResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceDiasHorario_CrearDiasFestivos_InputMessage">
     <wsdl:part name="parameters" element="tns:CrearDiasFestivos" />
   </wsdl:message>
@@ -156,6 +162,10 @@
     <wsdl:operation name="ObtenerDiasFeriados">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriados" message="tns:IServiceDiasHorario_ObtenerDiasFeriados_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriadosResponse" message="tns:IServiceDiasHorario_ObtenerDiasFeriados_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarDiasFestivos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDiasHorario/ActualizarDiasFestivos" message="tns:IServiceDiasHorario_ActualizarDiasFestivos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDiasHorario/ActualizarDiasFestivosResponse" message="tns:IServiceDiasHorario_ActualizarDiasFestivos_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CrearDiasFestivos">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDiasHorario/CrearDiasFestivos" message="tns:IServiceDiasHorario_CrearDiasFestivos_InputMessage" />
@@ -273,6 +283,15 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerDiasFeriados">
       <soap:operation soapAction="http://tempuri.org/IServiceDiasHorario/ObtenerDiasFeriados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarDiasFestivos">
+      <soap:operation soapAction="http://tempuri.org/IServiceDiasHorario/ActualizarDiasFestivos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

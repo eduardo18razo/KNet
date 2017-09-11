@@ -186,12 +186,7 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 Button btn = (Button)sender;
                 ucAltaPuesto.EsAlta = false;
-                Puesto puesto = _servicioPuestos.ObtenerPuestoById(int.Parse(btn.CommandArgument));
-                if (puesto == null) return;
-                ddlTipoUsuario.SelectedValue = puesto.IdTipoUsuario.ToString();
-                ddlTipoUsuario_OnSelectedIndexChanged(ddlTipoUsuario, null);
-                ucAltaPuesto.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
-                ucAltaPuesto.IdPuesto = puesto.Id;
+                ucAltaPuesto.IdPuesto = int.Parse(btn.CommandArgument);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaPuesto\");", true);
             }
             catch (Exception ex)

@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8">
                     <div class="module-inner">
-                        <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" placeholder="Título del Artículo" MaxLength="50" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);"/>
+                        <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" placeholder="Título del Artículo" MaxLength="50" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" />
                     </div>
                     <hr />
                 </div>
@@ -98,7 +98,7 @@
             prm.add_endRequest(function () {
                 $('#txtBusqueda').tagsInput({ width: 'auto', defaultText: 'Agregar', delimiter: '|' });
                 $('#txtTags').tagsInput({ width: 'auto', defaultText: 'Agregar', delimiter: '|' });
-                });
+            });
         </script>
     </ContentTemplate>
 </asp:UpdatePanel>

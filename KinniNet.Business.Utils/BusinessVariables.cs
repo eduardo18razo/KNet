@@ -73,6 +73,8 @@ namespace KinniNet.Business.Utils
             public static string PrefijoTabla = "USER_";
             public static string PrefijoComandoInsertar = "InsertCatalogoSistema";
             public static string PrefijoComandoActualizar = "UpdateCatalogoSistema";
+            public static string PrefijoComandoHabilitar = "HabilitarCatalogoSistema";
+
         }
         public static class EnumImpacto
         {

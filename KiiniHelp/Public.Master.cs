@@ -69,6 +69,7 @@ namespace KiiniHelp
                             case (int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado:
                                 areaSeleccionada = 6;
                                 Session["AreaSeleccionada"] = areaSeleccionada;
+                                UcLogIn.AutenticarUsuarioPublico((int)BusinessVariables.EnumTiposUsuario.EmpleadoInvitado);
                                 //ObtenerMenuPublico(areaSeleccionada, areaSeleccionada != 0);
                                 break;
                             case (int)BusinessVariables.EnumTiposUsuario.ClienteInvitado:
@@ -89,8 +90,9 @@ namespace KiiniHelp
                                 break;
 
                         }
+                        ObtenerMenuPublico(6, 6 != 0);
                     }
-                ObtenerMenuPublico( 6, 6 != 0);
+                
 
             }
             catch (Exception ex)

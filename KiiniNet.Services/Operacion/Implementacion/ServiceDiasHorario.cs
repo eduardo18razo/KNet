@@ -194,6 +194,21 @@ namespace KiiniNet.Services.Operacion.Implementacion
             }
         }
 
+        public void ActualizarDiasFestivos(DiasFeriados item)
+        {
+            try
+            {
+                using (BusinessDiasHorario negocio = new BusinessDiasHorario())
+                {
+                    negocio.ActualizarDiasFestivos(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void CrearDiasFestivos(DiasFeriados item)
         {
             try

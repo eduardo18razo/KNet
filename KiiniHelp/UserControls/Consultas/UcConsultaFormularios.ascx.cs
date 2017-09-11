@@ -62,8 +62,6 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        
-
         protected void btnNew_OnClick(object sender, EventArgs e)
         {
             try

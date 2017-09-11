@@ -580,13 +580,13 @@ namespace KiiniHelp.UserControls.Altas.Ubicaciones {
         protected global::System.Web.UI.WebControls.TextBox txtNoInt;
         
         /// <summary>
-        /// Control pnlAltaOrganizacion.
+        /// Control divCapturaDescripcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlAltaOrganizacion;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCapturaDescripcion;
         
         /// <summary>
         /// Control lblOperacionDescripcion.

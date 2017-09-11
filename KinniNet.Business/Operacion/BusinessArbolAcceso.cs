@@ -908,7 +908,7 @@ namespace KinniNet.Core.Operacion
             try
             {
                 db.ContextOptions.ProxyCreationEnabled = _proxy;
-                IQueryable<ArbolAcceso> qry = db.ArbolAcceso;
+                IQueryable<ArbolAcceso> qry = db.ArbolAcceso.Where(w => !w.Sistema);
                 if (idArea.HasValue)
                     qry = qry.Where(w => w.IdArea == idArea);
                 if (idTipoUsuario.HasValue)

@@ -217,6 +217,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                ucAltaHorario.IdHorario = int.Parse(((LinkButton)sender).CommandArgument);
                 ucAltaHorario.EsAlta = true;
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaHorario\");", true);
             }

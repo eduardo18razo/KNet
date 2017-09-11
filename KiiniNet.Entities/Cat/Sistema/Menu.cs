@@ -15,7 +15,7 @@ namespace KiiniNet.Entities.Cat.Sistema
         [DataMember]
         public int? IdPadre { get; set; }
         [DataMember]
-        public int Orden { get; set; }
+        public int? Orden { get; set; }
 
         [DataMember]
         public bool Habilitado { get; set; }

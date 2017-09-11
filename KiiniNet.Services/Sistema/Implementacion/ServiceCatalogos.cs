@@ -116,13 +116,13 @@ namespace KiiniNet.Services.Sistema.Implementacion
             }
         }
 
-        public void AgregarRegistro(int idCatalogo, string descripcion)
+        public void AgregarRegistroSistema(int idCatalogo, string descripcion)
         {
             try
             {
                 using (BusinessCatalogos negocio = new BusinessCatalogos())
                 {
-                    negocio.AgregarRegistro(idCatalogo, descripcion);
+                    negocio.AgregarRegistroSistema(idCatalogo, descripcion);
                 }
             }
             catch (Exception ex)
@@ -131,13 +131,43 @@ namespace KiiniNet.Services.Sistema.Implementacion
             }
         }
 
-        public List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion)
+        public void ActualizarRegistroSistema(int idCatalogo, string descripcion, int idRegistro)
         {
             try
             {
                 using (BusinessCatalogos negocio = new BusinessCatalogos())
                 {
-                    return negocio.ObtenerRegistrosSistemaCatalogo(idCatalogo, insertarSeleccion);
+                    negocio.ActualizarRegistroSistema(idCatalogo, descripcion, idRegistro);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void HabilitarRegistroSistema(int idCatalogo, bool habilitado, int idRegistro)
+        {
+            try
+            {
+                using (BusinessCatalogos negocio = new BusinessCatalogos())
+                {
+                    negocio.HabilitarRegistroSistema(idCatalogo, habilitado, idRegistro);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public List<CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion, bool filtroHabilitado)
+        {
+            try
+            {
+                using (BusinessCatalogos negocio = new BusinessCatalogos())
+                {
+                    return negocio.ObtenerRegistrosSistemaCatalogo(idCatalogo, insertarSeleccion, filtroHabilitado);
                 }
             }
             catch (Exception ex)

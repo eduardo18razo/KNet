@@ -717,6 +717,7 @@ namespace KinniNet.Core.Operacion
                     db.LoadProperty(ticket, "EstatusAsignacion");
                     db.LoadProperty(ticket, "TicketEstatus");
                     db.LoadProperty(ticket, "TicketConversacion");
+                    db.LoadProperty(ticket, "UsuarioLevanto");
                     foreach (TicketConversacion conversacion in ticket.TicketConversacion)
                     {
                         db.LoadProperty(conversacion, "ConversacionArchivo");
@@ -737,6 +738,7 @@ namespace KinniNet.Core.Operacion
                     {
                         IdTicket = ticket.Id,
                         IdEstatusTicket = ticket.IdEstatusTicket,
+                        IdTipoUsuarioLevanto =  ticket.UsuarioLevanto.IdTipoUsuario,
                         IdEstatusAsignacion = ticket.IdEstatusAsignacion,
                         IdUsuarioLevanto = ticket.IdUsuarioSolicito,
                         EstatusActual = ticket.EstatusTicket.Descripcion,

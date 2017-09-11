@@ -7,6 +7,7 @@ namespace KiiniNet.Entities.Helper
     public class HelperDetalleTicket
     {
         public int IdTicket { get; set; }
+        public int IdTipoUsuarioLevanto { get; set; }
         public int IdEstatusTicket { get; set; }
         public string CveRegistro { get; set; }
         public int IdEstatusAsignacion { get; set; }

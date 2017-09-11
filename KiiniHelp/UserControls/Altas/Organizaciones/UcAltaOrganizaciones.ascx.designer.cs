@@ -535,6 +535,15 @@ namespace KiiniHelp.UserControls.Altas.Organizaciones {
         protected global::System.Web.UI.WebControls.TextBox txtDescripcionCatalogo;
         
         /// <summary>
+        /// Control btnGuardarCatalogo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnGuardarCatalogo;
+        
+        /// <summary>
         /// Control btnTerminar.
         /// </summary>
         /// <remarks>

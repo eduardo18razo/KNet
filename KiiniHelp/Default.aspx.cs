@@ -31,12 +31,10 @@ namespace KiiniHelp
         {
             try
             {
-                //Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "CierraPopup(\"#modal-new-ticket\");", true);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptClose", "CierraPopup(\"#modal-new-ticket\");", true);
 
                 lblNoTicket.Text = ucTicketPortal.TicketGenerado.ToString();
                 lblRandom.Text = ucTicketPortal.RandomGenerado;
-                //Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "MostrarPopup(\"#modalExitoTicket\");", true);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptOpen", "MostrarPopup(\"#modalExitoTicket\");", true);
             }
             catch (Exception ex)
@@ -58,8 +56,6 @@ namespace KiiniHelp
                 ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;
                 if (UcLogCopia.Fail)
                     ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "OpenDropLogin();", true);
-
-
             }
             catch (Exception ex)
             {

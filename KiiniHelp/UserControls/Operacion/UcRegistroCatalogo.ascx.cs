@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Configuration;
 using System.Web.UI;
 using KiiniHelp.ServiceSistemaCatalogos;
+using KiiniNet.Entities.Helper;
 
 namespace KiiniHelp.UserControls.Operacion
 {
@@ -38,6 +39,19 @@ namespace KiiniHelp.UserControls.Operacion
         {
             get { return int.Parse(hfIdCatalogo.Value); }
             set { hfIdCatalogo.Value = value.ToString(); }
+        }
+        public int IdRegistro
+        {
+            get { return int.Parse(hfIdRegistro.Value); }
+            set
+            {
+                hfIdRegistro.Value = value.ToString();
+                CatalogoGenerico registro = _servicioCatalogo.ObtenerRegistrosSistemaCatalogo(IdCatalogo, false, true).SingleOrDefault(s => s.Id == value);
+                if (registro != null)
+                {
+                    txtDescripcion.Text = registro.Descripcion;
+                }
+            }
         }
 
         private void Limpiar()
@@ -74,12 +88,37 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
-                if(txtDescripcion.Text.Trim() == string.Empty)
+                if (txtDescripcion.Text.Trim() == string.Empty)
                     throw new Exception("Descripcion es campo obligatorio");
-                _servicioCatalogo.AgregarRegistro(IdCatalogo, txtDescripcion.Text);
+                if (EsAlta)
+                    _servicioCatalogo.AgregarRegistroSistema(IdCatalogo, txtDescripcion.Text);
+                else
+                    _servicioCatalogo.ActualizarRegistroSistema(IdCatalogo, txtDescripcion.Text, IdRegistro);
+                //_servicioCatalogo.ac
                 Limpiar();
                 if (OnAceptarModal != null)
                     OnAceptarModal();
+                if(!EsAlta)
+                    btnTerminar_OnClick(btnTerminar, null);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                AlertaGeneral = _lstError;
+            }
+        }
+
+        protected void btnTerminar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Limpiar();
+                if (OnTerminarModal != null)
+                    OnTerminarModal();
             }
             catch (Exception ex)
             {
@@ -115,6 +154,7 @@ namespace KiiniHelp.UserControls.Operacion
         {
             try
             {
+                Limpiar();
                 if (OnCancelarModal != null)
                     OnCancelarModal();
             }
@@ -133,5 +173,7 @@ namespace KiiniHelp.UserControls.Operacion
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
         public event DelegateTerminarModal OnTerminarModal;
+
+        
     }
 }

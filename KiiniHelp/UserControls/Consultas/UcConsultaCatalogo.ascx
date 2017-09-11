@@ -83,8 +83,7 @@
                                             <td id="colEditar">
                                                 <ul class="list list-unstyled hidden" id="hiddenEdit">
                                                     <li>
-                                                        <%--OnClick="btnEditar_OnClick"--%>
-                                                        <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Editar" CommandArgument='<%# Eval("Id")%>' />
+                                                        <asp:Button runat="server" CssClass="btn btn-sm btn-primary" Text="Editar" CommandArgument='<%# Eval("Id")%>' OnClick="btnEditar_OnClick"/>
                                                     </li>
                                                 </ul>
                                             </td>

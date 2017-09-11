@@ -36,11 +36,17 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/Habilitar", ReplyAction="http://tempuri.org/IServiceCatalogos/HabilitarResponse")]
         void Habilitar(int idCatalogo, bool habilitado);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/AgregarRegistro", ReplyAction="http://tempuri.org/IServiceCatalogos/AgregarRegistroResponse")]
-        void AgregarRegistro(int idCatalogo, string descripcion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/AgregarRegistroSistema", ReplyAction="http://tempuri.org/IServiceCatalogos/AgregarRegistroSistemaResponse")]
+        void AgregarRegistroSistema(int idCatalogo, string descripcion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ActualizarRegistroSistema", ReplyAction="http://tempuri.org/IServiceCatalogos/ActualizarRegistroSistemaResponse")]
+        void ActualizarRegistroSistema(int idCatalogo, string descripcion, int idRegistro);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/HabilitarRegistroSistema", ReplyAction="http://tempuri.org/IServiceCatalogos/HabilitarRegistroSistemaResponse")]
+        void HabilitarRegistroSistema(int idCatalogo, bool habilitado, int idRegistro);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosSistemaCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosSistemaCatalogoResponse")]
-        System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion);
+        System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion, bool filtroHabilitado);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosArchivosCatalogo", ReplyAction="http://tempuri.org/IServiceCatalogos/ObtenerRegistrosArchivosCatalogoResponse")]
         System.Data.DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo);
@@ -107,12 +113,20 @@ namespace KiiniHelp.ServiceSistemaCatalogos {
             base.Channel.Habilitar(idCatalogo, habilitado);
         }
         
-        public void AgregarRegistro(int idCatalogo, string descripcion) {
-            base.Channel.AgregarRegistro(idCatalogo, descripcion);
+        public void AgregarRegistroSistema(int idCatalogo, string descripcion) {
+            base.Channel.AgregarRegistroSistema(idCatalogo, descripcion);
         }
         
-        public System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion) {
-            return base.Channel.ObtenerRegistrosSistemaCatalogo(idCatalogo, insertarSeleccion);
+        public void ActualizarRegistroSistema(int idCatalogo, string descripcion, int idRegistro) {
+            base.Channel.ActualizarRegistroSistema(idCatalogo, descripcion, idRegistro);
+        }
+        
+        public void HabilitarRegistroSistema(int idCatalogo, bool habilitado, int idRegistro) {
+            base.Channel.HabilitarRegistroSistema(idCatalogo, habilitado, idRegistro);
+        }
+        
+        public System.Collections.Generic.List<KiiniNet.Entities.Helper.CatalogoGenerico> ObtenerRegistrosSistemaCatalogo(int idCatalogo, bool insertarSeleccion, bool filtroHabilitado) {
+            return base.Channel.ObtenerRegistrosSistemaCatalogo(idCatalogo, insertarSeleccion, filtroHabilitado);
         }
         
         public System.Data.DataTable ObtenerRegistrosArchivosCatalogo(int idCatalogo) {

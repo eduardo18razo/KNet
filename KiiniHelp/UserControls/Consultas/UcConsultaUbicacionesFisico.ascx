@@ -2,7 +2,6 @@
 <div style="height: 100%;">
     <script>
         function dbClicUbicacion(e) {
-            //debugger;
             //__doPostBack('SeleccionarOrganizacion', e.parentElement.id);
             var idSeleccion = document.getElementById("<%= this.FindControl("hfIdSeleccion").ClientID %>");
             idSeleccion.value = e.parentElement.id;
@@ -15,7 +14,6 @@
 
             var $contextMenuUbicaciones = $("#contextMenuUbicaciones");
             $("body").on("click", function (e) {
-                //debugger;
                 $contextMenuUbicaciones.hide();
                 var table = $("#tblHeader");
                 table.find('tr').each(function (i, ev) {

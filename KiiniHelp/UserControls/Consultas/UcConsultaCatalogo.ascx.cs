@@ -59,7 +59,7 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 if (ddlCatalogos.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
-                    List<CatalogoGenerico> lst = _servicioCatalogos.ObtenerRegistrosSistemaCatalogo(int.Parse(ddlCatalogos.SelectedValue), true).Where(w => w.Id != 0).ToList();
+                    List<CatalogoGenerico> lst = _servicioCatalogos.ObtenerRegistrosSistemaCatalogo(int.Parse(ddlCatalogos.SelectedValue), true, false).Where(w => w.Id != 0).ToList();
                     rptResultados.DataSource = lst;
                 }
                 else
@@ -78,15 +78,26 @@ namespace KiiniHelp.UserControls.Consultas
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
-            Alerta = new List<string>();
-            if (!IsPostBack)
+            try
             {
-                LlenaCombos();
-                LlenaCatalogoConsulta();
+                lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
+                Alerta = new List<string>();
+                if (!IsPostBack)
+                {
+                    LlenaCombos();
+                }
+                ucRegistroCatalogo.OnTerminarModal += AltaRegistroCatalogoOnTerminarModal;
+                ucRegistroCatalogo.OnCancelarModal += AltaRegistroCatalogoOnCancelarModal;
             }
-            ucRegistroCatalogo.OnAceptarModal += AltaRegistroCatalogoOnAceptarModal;
-            ucRegistroCatalogo.OnCancelarModal += AltaRegistroCatalogoOnCancelarModal;
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
         }
 
         private void AltaRegistroCatalogoOnCancelarModal()
@@ -107,7 +118,7 @@ namespace KiiniHelp.UserControls.Consultas
             }
         }
 
-        private void AltaRegistroCatalogoOnAceptarModal()
+        private void AltaRegistroCatalogoOnTerminarModal()
         {
             try
             {
@@ -147,8 +158,30 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
+                if(ddlCatalogos.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    throw new Exception("Seleccione un catalogo");
                 ucRegistroCatalogo.EsAlta = true;
                 ucRegistroCatalogo.IdCatalogo = int.Parse(ddlCatalogos.SelectedValue);
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaRegistro\");", true);
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnEditar_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                ucRegistroCatalogo.EsAlta = false;
+                ucRegistroCatalogo.IdCatalogo = int.Parse(ddlCatalogos.SelectedValue);
+                ucRegistroCatalogo.IdRegistro = int.Parse(((Button)sender).CommandArgument);
                 ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "MostrarPopup(\"#modalAltaRegistro\");", true);
             }
             catch (Exception ex)
@@ -166,7 +199,7 @@ namespace KiiniHelp.UserControls.Consultas
         {
             try
             {
-                _servicioCatalogos.Habilitar(int.Parse(((CheckBox)sender).Attributes["data-id"]), ((CheckBox)sender).Checked);
+                _servicioCatalogos.HabilitarRegistroSistema(int.Parse(ddlCatalogos.SelectedValue), ((CheckBox)sender).Checked, int.Parse(((CheckBox)sender).Attributes["data-id"]));
                 LlenaCatalogoConsulta();
             }
             catch (Exception ex)
@@ -187,7 +220,7 @@ namespace KiiniHelp.UserControls.Consultas
                 List<CatalogoGenerico> lstRegistros = null;
                 if (ddlCatalogos.SelectedIndex > BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                 {
-                    lstRegistros = _servicioCatalogos.ObtenerRegistrosSistemaCatalogo(int.Parse(ddlCatalogos.SelectedValue), true).Where(w => w.Id != 0).ToList();
+                    lstRegistros = _servicioCatalogos.ObtenerRegistrosSistemaCatalogo(int.Parse(ddlCatalogos.SelectedValue), true, false).Where(w => w.Id != 0).ToList();
                     rptResultados.DataSource = lstRegistros;
                 }
                 if (lstRegistros == null)

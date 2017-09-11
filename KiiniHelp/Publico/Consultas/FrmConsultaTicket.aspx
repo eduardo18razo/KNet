@@ -49,7 +49,7 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label" for="">Clave de registro</label>
                                                     <div class="col-sm-10">
-                                                        <asp:TextBox type="text" class="form-control" placeholder="Ingresa aquí" runat="server" ID="txtClave"  onkeydown="return (event.keyCode!=13);"/>
+                                                        <asp:TextBox type="text" class="form-control" placeholder="Ingresa aquí" runat="server" ID="txtClave"  onkeydown="return (event.keyCode!=13);" style="text-transform: uppercase"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">

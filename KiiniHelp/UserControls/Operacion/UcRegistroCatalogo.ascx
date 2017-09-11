@@ -3,6 +3,7 @@
     <ContentTemplate>
         <asp:HiddenField runat="server" ID="hfEsAlta" />
         <asp:HiddenField runat="server" ID="hfIdCatalogo" />
+        <asp:HiddenField runat="server" ID="hfIdRegistro" />
         <div class="modal-header">
             <asp:LinkButton class="close" ID="btnClose" OnClick="btnCancelar_OnClick" runat="server"><span aria-hidden="true">&times;</span></asp:LinkButton>
             <h2 class="modal-title" id="modal-new-ticket-label">
@@ -29,7 +30,7 @@
                             </p>
                         </div>
                         <p class="text-right margin-top-40">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Terminar" ID="btnTerminar" OnClick="btnGuardar_OnClick"></asp:Button>
+                            <asp:Button runat="server" CssClass="btn btn-success" Text="Terminar" ID="btnTerminar" OnClick="btnTerminar_OnClick"></asp:Button>
                         </p>
                     </div>
                 </div>

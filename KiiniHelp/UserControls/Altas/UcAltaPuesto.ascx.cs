@@ -30,9 +30,9 @@ namespace KiiniHelp.UserControls.Altas
         //Assembly _assembly;   
         //Stream _imageStream;   
         //StreamReader _textStreamReader;
-        
-       //ResourceManager _rM = new ResourceManager("Notificaciones", Assembly.GetExecutingAssembly());
-             
+
+        //ResourceManager _rM = new ResourceManager("Notificaciones", Assembly.GetExecutingAssembly());
+
         public bool EsAlta
         {
             get { return Convert.ToBoolean(hfEsAlta.Value); }
@@ -56,6 +56,7 @@ namespace KiiniHelp.UserControls.Altas
             set
             {
                 Puesto puesto = _servicioPuesto.ObtenerPuestoById(value);
+                IdTipoUsuario = puesto.IdTipoUsuario;
                 txtDescripcionPuesto.Text = puesto.Descripcion;
                 hfIdPuesto.Value = value.ToString();
             }
@@ -123,7 +124,7 @@ namespace KiiniHelp.UserControls.Altas
                 if (!IsPostBack)
                 {
                     LlenaCombos();
-                   
+
                 }
             }
             catch (Exception ex)
@@ -141,12 +142,10 @@ namespace KiiniHelp.UserControls.Altas
         {
             try
             {
-                if(ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
-                   // throw new Exception("Debe seleccionar Tipo de Usuario.");                
-                mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.FaltaTipoUsuario));
+                if (ddlTipoUsuario.SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
+                    mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.FaltaTipoUsuario));
                 if (txtDescripcionPuesto.Text.Trim() == string.Empty)
-                   // throw new Exception("Debe especificar una descripción.");
-                mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.FaltaDescripcion));
+                    mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.FaltaDescripcion));
                 Puesto puesto = new Puesto { IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue), Descripcion = txtDescripcionPuesto.Text.Trim(), Habilitado = true };
                 if (EsAlta)
                 {
@@ -157,10 +156,11 @@ namespace KiiniHelp.UserControls.Altas
                 {
                     _servicioPuesto.Actualizar(int.Parse(hfIdPuesto.Value), puesto);
                     mp.AlertaSucces(BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Actualizacion));
-                    LimpiarCampos();
                 }
-               
-               // AlertaSucces();
+                LimpiarCampos();
+                if (!EsAlta)
+                    btnTerminar_OnClick(btnTerminar, null);
+
             }
             catch (Exception ex)
             {

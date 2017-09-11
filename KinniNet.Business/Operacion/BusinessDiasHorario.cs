@@ -324,7 +324,8 @@ namespace KinniNet.Core.Operacion
                 {
                     diadb.Descripcion = item.Descripcion;
                     diadb.FechaModificacion = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff", CultureInfo.InvariantCulture);
-                    foreach (DiasFeriadosDetalle detalle in diadb.DiasFeriadosDetalle)
+                    List<DiasFeriadosDetalle> diasEliminar = db.DiasFeriadosDetalle.Where(w => w.IdDiasFeriados == diadb.Id).ToList();
+                    foreach (DiasFeriadosDetalle detalle in diasEliminar)
                     {
                         db.DiasFeriadosDetalle.DeleteObject(detalle);
                     }

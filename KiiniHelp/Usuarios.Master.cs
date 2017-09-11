@@ -34,7 +34,6 @@ namespace KiiniHelp
                 }
             }
         }
-                           //BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Exito)
         public void AlertaSucces(string value = "")
         {
             value = value.Trim() == string.Empty ? BusinessErrores.ObtenerMensajeByKey(BusinessVariables.EnumMensajes.Exito) : value;
@@ -44,7 +43,6 @@ namespace KiiniHelp
         {
             try
             {
-
                 List<Rol> lstRoles = _servicioSeguridad.ObtenerRolesUsuario(((Usuario)Session["UserData"]).Id);
                 if (lstRoles.Count > 0 && Session["RolSeleccionado"] == null)
                 {
@@ -112,14 +110,14 @@ namespace KiiniHelp
         {
             try
             {
-                //HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-                //if (myCookie == null || Session["UserData"] == null)
-                //{
-                //    Response.Redirect(ResolveUrl("~/Default.aspx"));
-                //}
+                HttpCookie myCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                if (myCookie == null || Session["UserData"] == null)
+                {
+                    Response.Redirect(ResolveUrl("~/Default.aspx"));
+                }
                 lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
-                ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;   
-                
+                ucTicketPortal.OnAceptarModal += UcTicketPortal_OnAceptarModal;
+
 
                 if (Session["UserData"] != null && HttpContext.Current.Request.Url.Segments[HttpContext.Current.Request.Url.Segments.Count() - 1] != "FrmCambiarContrasena.aspx")
                     if (_servicioSeguridad.CaducaPassword(((Usuario)Session["UserData"]).Id))

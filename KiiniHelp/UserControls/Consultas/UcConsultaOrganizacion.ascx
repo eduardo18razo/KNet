@@ -17,7 +17,7 @@
                         <div class="module-inner">
                             <div class="module-heading">
                                 <h3 class="module-title">
-                                    <asp:Label runat="server" ID="lblOrganización" Text="Organización"/></h3>
+                                    <asp:Label runat="server" ID="lblOrganización" Text="Organización" /></h3>
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,11 @@
                         OnClick="Page_Changed" OnClientClick='<%# !Convert.ToBoolean(Eval("Enabled")) ? "return false;" : "" %>'></asp:LinkButton>
                 </ItemTemplate>
             </asp:Repeater>
-
+            <script type="text/javascript">
+                $(function () {
+                    hidden();
+                });
+            </script>
         </ContentTemplate>
     </asp:UpdatePanel>
 
@@ -147,7 +151,7 @@
     <div class="modal fade" id="editCatalogoOrganizacion" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
         <asp:UpdatePanel ID="upCatlogos" runat="server">
             <ContentTemplate>
-                <uc1:UcAltaOrganizaciones runat="server" id="ucAltaOrganizaciones" />
+                <uc1:UcAltaOrganizaciones runat="server" ID="ucAltaOrganizaciones" />
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
