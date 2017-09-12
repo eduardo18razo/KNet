@@ -1095,6 +1095,7 @@ namespace KinniNet.Core.Operacion
                 IQueryable<GrupoUsuarioInventarioArbol> qry = from ac in db.ArbolAcceso
                                                               join iac in db.InventarioArbolAcceso on ac.Id equals iac.IdArbolAcceso
                                                               join guia in db.GrupoUsuarioInventarioArbol on iac.Id equals guia.IdInventarioArbolAcceso
+                                                              where ac.Id == idArbol 
                                                               select guia;
                 result = qry.Distinct().ToList();
             }
