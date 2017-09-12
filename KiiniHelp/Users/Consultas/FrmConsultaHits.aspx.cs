@@ -50,7 +50,7 @@ namespace KiiniHelp.Users.Consultas
 
                 if (lstHits != null)
                 {
-                    gvResult.DataSource = lstHits.Select(s => new { s.IdHit, s.Tipificacion, s.TipoServicio, s.NombreUsuario, s.Ubicacion, s.Organizacion, s.FechaHora, s.Total }).ToList();
+                    gvResult.DataSource = lstHits.Select(s => new { s.IdHit, s.Tipificacion, s.TipoServicio, s.NombreUsuario ,s.Ubicacion, s.Organizacion, s.FechaHora, s.Total }).ToList();
                     gvResult.DataBind();
                 }
             }
