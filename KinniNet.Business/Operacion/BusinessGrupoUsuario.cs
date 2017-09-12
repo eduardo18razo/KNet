@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using KiiniNet.Entities.Cat.Sistema;
 using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
@@ -376,6 +377,32 @@ namespace KinniNet.Core.Operacion
             }
             return result;
         }
+
+        public GrupoUsuario ObtenerGrupoDefaultRol(int idRol, int idTipoUsuario)
+        {
+            GrupoUsuario result = null;
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                RolTipoGrupo rolTipoGrupo = db.RolTipoGrupo.SingleOrDefault(w => w.IdRol == idRol);
+                if (rolTipoGrupo != null)
+                {
+                   result = db.GrupoUsuario.First(f => f.IdTipoGrupo == rolTipoGrupo.IdTipoGrupo && f.IdTipoUsuario == idTipoUsuario && f.Sistema);
+                   db.LoadProperty(result, "SubGrupoUsuario");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return result;
+        }
+
         public List<UsuarioGrupo> ObtenerGruposDeUsuario(int idUsuario)
         {
             List<UsuarioGrupo> result;

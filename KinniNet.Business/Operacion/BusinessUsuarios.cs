@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using KiiniNet.Entities.Cat.Mascaras;
+using KiiniNet.Entities.Cat.Usuario;
 using KiiniNet.Entities.Operacion;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Parametros;
@@ -51,14 +52,14 @@ namespace KinniNet.Core.Operacion
 
                 const int idMascara = 3;
                 Usuario user = new Usuario();
-                user.IdTipoUsuario = (int) BusinessVariables.EnumTiposUsuario.Cliente;
+                user.IdTipoUsuario = (int)BusinessVariables.EnumTiposUsuario.Cliente;
                 user.IdOrganizacion = 1;
                 user.IdUbicacion = 1;
                 user.Nombre = nombre;
                 user.ApellidoMaterno = "";
                 user.ApellidoPaterno = ap;
                 user.Habilitado = true;
-                user.NombreUsuario = (user.Nombre.Substring(0, 1).ToLower() + user.ApellidoPaterno.Trim().ToLower()).Replace(" ",string.Empty);
+                user.NombreUsuario = (user.Nombre.Substring(0, 1).ToLower() + user.ApellidoPaterno.Trim().ToLower()).Replace(" ", string.Empty);
                 user.Password = "/Portal/ConfirmacionCuenta.aspx";
                 int limite = 9999;
                 if (ValidaUserName(user.Nombre))
@@ -74,7 +75,7 @@ namespace KinniNet.Core.Operacion
                         limite++;
                     }
                 }
-                
+
 
                 user.TelefonoUsuario = new List<TelefonoUsuario>();
                 TelefonoUsuario tu = new TelefonoUsuario { Numero = celular, Obligatorio = true, IdTipoTelefono = (int)BusinessVariables.EnumTipoTelefono.Celular };
@@ -142,7 +143,24 @@ namespace KinniNet.Core.Operacion
                 };
                 foreach (UsuarioRol rol in usuario.UsuarioRol)
                 {
-                    rol.IdRolTipoUsuario = new BusinessRoles().ObtenerRolTipoUsuario(rol.RolTipoUsuario.IdTipoUsuario, rol.RolTipoUsuario.IdRol).Id;
+                    rol.IdRolTipoUsuario = new BusinessRoles().ObtenerRolTipoUsuario(usuario.IdTipoUsuario, rol.RolTipoUsuario.IdRol).Id;
+                    GrupoUsuario gu = new BusinessGrupoUsuario().ObtenerGrupoDefaultRol(rol.RolTipoUsuario.IdRol, usuario.IdTipoUsuario);
+                    if (gu != null)
+                    {
+                        if (usuario.UsuarioGrupo.All(a => a.IdGrupoUsuario != gu.Id))
+                            if (gu.SubGrupoUsuario != null && gu.SubGrupoUsuario.Count > 0)
+                            {
+                                foreach (SubGrupoUsuario subGpoUsuario in gu.SubGrupoUsuario)
+                                {
+                                    usuario.UsuarioGrupo.Add(new UsuarioGrupo { IdRol = rol.RolTipoUsuario.IdRol, IdGrupoUsuario = gu.Id, IdSubGrupoUsuario = subGpoUsuario.Id });
+                                }
+                            }
+                            else
+                            {
+                                usuario.UsuarioGrupo.Add(new UsuarioGrupo { IdRol = rol.RolTipoUsuario.IdRol, IdGrupoUsuario = gu.Id });
+                            }
+
+                    }
                     rol.RolTipoUsuario = null;
                 }
                 if (usuario.Id == 0)
@@ -1007,7 +1025,7 @@ namespace KinniNet.Core.Operacion
 
         public string ObtenerFechaUltimoAcceso(Usuario usuario)
         {
-            string fecha  = "Hoy";
+            string fecha = "Hoy";
             try
             {
                 CultureInfo ci = new CultureInfo("Es-Es");
