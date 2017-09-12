@@ -43,7 +43,7 @@ namespace KiiniHelp.UserControls.Filtros.Componentes
         {
             try
             {
-                rptGpos.DataSource = _servicioGrupoUsuario.ObtenerGruposByIdUsuario(((Usuario)Session["UserData"]).Id, false).Where(w => w.IdTipoGrupo != (int)BusinessVariables.EnumTiposGrupos.Usuario);
+                rptGpos.DataSource = _servicioGrupoUsuario.ObtenerGruposByIdUsuario(((Usuario)Session["UserData"]).Id, false).Where(w => w.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Usuario);
                 rptGpos.DataBind();
             }
             catch (Exception e)
