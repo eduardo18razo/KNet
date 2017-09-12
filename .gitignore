@@ -3,9 +3,6 @@ KiiniHelp/bin
 KiiniNet.Services/obj/Debug/build.force
 KinniNet.Data/obj/Debug/build.force
 KinniNet.Business/obj/Debug/build.force
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 KiiniHelp/bin/KiiniHelp_REMOTE_15136.dll
 KiiniHelp/bin/KiiniHelp_BACKUP_15136.dll
 KiiniHelp/bin/KiiniHelp_BASE_15136.dll
@@ -82,8 +79,6 @@ KiiniHelp/bin/KiiniHelp.dll
 .gitignore_REMOTE_15188
 .gitignore_LOCAL_5996
 .gitignore_LOCAL_412
-=======
->>>>>>> Tmp_ECL
 KiiniHelp/obj/Debug/Package/PackageTmp/assets/tmp/editor/ui/trumbowyg.css
 bin/
 .gitignore_LOCAL_5996
@@ -91,10 +86,6 @@ bin/
 .gitignore_REMOTE_5996
 .gitignore_REMOTE_412
 .gitignore_REMOTE_15188
-<<<<<<< HEAD
-=======
->>>>>>> origin/S2_Inicial
->>>>>>> Tmp_ECL
 .gitignore_LOCAL_15188
 .gitignore_BASE_5996
 .gitignore_BASE_412
@@ -775,4 +766,3 @@ KiiniMaster/obj/Debug/Package/PackageTmp/assets/fonts/fontawesome-webfont.eot
 KiiniHelp/obj/Debug/TempPE/Notificaciones.Designer.cs.dll
 KiiniHelp/obj/Debug/TempPE/App_GlobalResources.App_LocalResources.Notificaciones.Designer.cs.dll
 KiiniHelp/obj/Debug/CSC86D180893BFB426C8BEF219E996FD96.TMP
-KiiniHelp/Web.config
