@@ -286,7 +286,7 @@ namespace KinniNet.Core.Operacion
                         DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"), "yyyy-MM-dd HH:mm:ss:fff",
                             CultureInfo.InvariantCulture)
                 };
-                foreach (GrupoUsuarioInventarioArbol guia in new BusinessArbolAcceso().ObtenerGruposUsuarioArbol(idArbol).Where(w => w.IdRol == (int)KinniNet.Business.Utils.BusinessVariables.EnumRoles.Usuario))
+                foreach (GrupoUsuarioInventarioArbol guia in new BusinessArbolAcceso().ObtenerGruposUsuarioArbol(idArbol))
                 {
                     hit.HitGrupoUsuario.Add(new HitGrupoUsuario
                     {
