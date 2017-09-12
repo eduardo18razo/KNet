@@ -36,6 +36,7 @@
             </div>
             <div class="panel panel-primary">
                 <div class="panel-body">
+                    <asp:Panel runat="server" ScrollBars="Both" Width="100%" Height="180px">
                     <asp:GridView runat="server" ID="gvResult" CssClass="table table-bordered table-hover table-responsive" AutoGenerateColumns="false" >
                         <EmptyDataTemplate>
                                                 ¡No hay resultados para mostrar!
@@ -43,34 +44,42 @@
                         <Columns>
                             <asp:TemplateField>
                                 <HeaderTemplate>
-                                    <asp:Label runat="server" Text="IdHit"/>
+                                    <asp:Label runat="server" Text="Rol"/>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Label runat="server" Text='<%#Eval("IdHit") %>'/>
+                                    <asp:Label runat="server" Text=''/>
                                 </ItemTemplate>
-                            </asp:TemplateField>
+                            </asp:TemplateField>       
                             <asp:TemplateField>
                                 <HeaderTemplate>
-                                    <asp:Label runat="server" Text="Tipificación"/>
+                                    <asp:Label runat="server" Text="Grupos"/>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Label runat="server" Text='<%#Eval("Tipificacion") %>'/>
+                                    <asp:Label runat="server" Text=''/>
                                 </ItemTemplate>
-                            </asp:TemplateField>
-                             <asp:TemplateField>
+                            </asp:TemplateField>                       
+                             <%--<asp:TemplateField ControlStyle-Width="80px">
                                 <HeaderTemplate>
                                     <asp:Label runat="server" Text="Tipo de Servicio"/>
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%#Eval("TipoServicio") %>'/>
                                 </ItemTemplate>
-                            </asp:TemplateField>
+                            </asp:TemplateField>--%>
                              <asp:TemplateField>
                                 <HeaderTemplate>
                                     <asp:Label runat="server" Text="Nombre de Usuario"/>
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%#Eval("NombreUsuario") %>'/>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                             <asp:TemplateField ControlStyle-Width="500px">
+                                <HeaderTemplate>
+                                    <asp:Label runat="server" Text="Organización"/>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%#Eval("Organizacion") %>'/>
                                 </ItemTemplate>
                             </asp:TemplateField>
                              <asp:TemplateField>
@@ -81,12 +90,12 @@
                                     <asp:Label runat="server" Text='<%#Eval("Ubicacion") %>'/>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                             <asp:TemplateField ControlStyle-Width="500px">
+                              <asp:TemplateField ControlStyle-Width="80px">
                                 <HeaderTemplate>
-                                    <asp:Label runat="server" Text="Organización"/>
+                                    <asp:Label runat="server" Text="Tipificación"/>
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Label runat="server" Text='<%#Eval("Organizacion") %>'/>
+                                    <asp:Label runat="server" Text='<%#Eval("Tipificacion") %>'/>
                                 </ItemTemplate>
                             </asp:TemplateField>
                              <asp:TemplateField>
@@ -105,11 +114,20 @@
                                     <asp:Label runat="server" Text='<%#Eval("Total") %>'/>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                             <asp:TemplateField ControlStyle-Width="15px">
+                                <HeaderTemplate>
+                                    <asp:Label runat="server" Text="IdHit"/>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%#Eval("IdHit") %>'/>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+
                         </Columns>
 
                     </asp:GridView>
 
-
+                    </asp:Panel>
                 </div>
             </div>
         </ContentTemplate>
