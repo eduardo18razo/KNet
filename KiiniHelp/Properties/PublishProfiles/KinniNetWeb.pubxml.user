@@ -502,10 +502,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>12/08/2009 10:05:04</publishTime>
     </File>
     <File Include="bin/KiiniHelp.dll">
-      <publishTime>09/12/2017 10:33:41</publishTime>
+      <publishTime>09/12/2017 11:01:29</publishTime>
     </File>
     <File Include="bin/KiiniHelp.pdb">
-      <publishTime>09/12/2017 10:33:41</publishTime>
+      <publishTime>09/12/2017 11:01:26</publishTime>
     </File>
     <File Include="bin/KiiniNet.Entities.dll">
       <publishTime>09/08/2017 14:40:16</publishTime>
@@ -6802,7 +6802,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>12/19/2016 18:59:40</publishTime>
     </File>
     <File Include="Users/Consultas/FrmConsultaHits.aspx">
-      <publishTime>09/12/2017 09:50:23</publishTime>
+      <publishTime>09/12/2017 10:46:29</publishTime>
     </File>
     <File Include="Users/Consultas/FrmConsultaTickets.aspx">
       <publishTime>12/19/2016 18:59:40</publishTime>

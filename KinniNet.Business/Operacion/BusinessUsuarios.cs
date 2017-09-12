@@ -249,6 +249,23 @@ namespace KinniNet.Core.Operacion
                         {
                             rol.IdRolTipoUsuario = new BusinessRoles().ObtenerRolTipoUsuario(rol.RolTipoUsuario.IdTipoUsuario, rol.RolTipoUsuario.IdRol).Id;
                             rol.IdUsuario = idUsuario;
+                            GrupoUsuario gu = new BusinessGrupoUsuario().ObtenerGrupoDefaultRol(rol.RolTipoUsuario.IdRol, usuario.IdTipoUsuario);
+                            if (gu != null)
+                            {
+                                if (usuario.UsuarioGrupo.All(a => a.IdGrupoUsuario != gu.Id))
+                                    if (gu.SubGrupoUsuario != null && gu.SubGrupoUsuario.Count > 0)
+                                    {
+                                        foreach (SubGrupoUsuario subGpoUsuario in gu.SubGrupoUsuario)
+                                        {
+                                            usuario.UsuarioGrupo.Add(new UsuarioGrupo { IdUsuario = idUsuario, IdRol = rol.RolTipoUsuario.IdRol, IdGrupoUsuario = gu.Id, IdSubGrupoUsuario = subGpoUsuario.Id });
+                                        }
+                                    }
+                                    else
+                                    {
+                                        usuario.UsuarioGrupo.Add(new UsuarioGrupo { IdUsuario = idUsuario, IdRol = rol.RolTipoUsuario.IdRol, IdGrupoUsuario = gu.Id });
+                                    }
+
+                            }
                             rol.RolTipoUsuario = null;
                         }
                     }
