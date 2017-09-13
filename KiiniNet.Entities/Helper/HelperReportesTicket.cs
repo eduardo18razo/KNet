@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KiiniNet.Entities.Cat.Sistema;
+using System;
 
 namespace KiiniNet.Entities.Helper
 {
@@ -39,6 +40,7 @@ namespace KiiniNet.Entities.Helper
         public string FechaHora { get; set; }
 
         public string Respuesta { get; set; }
+  
         
     }
 }

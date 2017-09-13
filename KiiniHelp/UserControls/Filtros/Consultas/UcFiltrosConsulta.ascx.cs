@@ -465,5 +465,29 @@ namespace KiiniHelp.UserControls.Filtros.Consultas
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
         public event DelegateTerminarModal OnTerminarModal;
+
+        protected void btnConsultar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (OnAceptarModal != null)
+                {
+                    OnAceptarModal();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }        
+                       
+        }
+
+        
     }
 }

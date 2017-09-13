@@ -13,6 +13,15 @@ namespace KiiniHelp.Users.Consultas {
     public partial class FrmConsultaTickets {
         
         /// <summary>
+        /// Control pnlAlertaGral.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel pnlAlertaGral;
+        
+        /// <summary>
         /// Control pnlAlertaGeneral.
         /// </summary>
         /// <remarks>
@@ -38,15 +47,6 @@ namespace KiiniHelp.Users.Consultas {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::KiiniHelp.UserControls.Filtros.Consultas.UcFiltrosTicket ucFiltrosTicket;
-        
-        /// <summary>
-        /// Control btnConsultar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnConsultar;
         
         /// <summary>
         /// Control gvResult.

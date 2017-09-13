@@ -29,6 +29,7 @@ namespace KiiniHelp.Users.Consultas
             try
             {
                 AlertaGeneral = new List<string>();
+                UcFiltrosConsulta.OnAceptarModal += UcFiltrosConsulta_OnAceptarModal;
             }
             catch (Exception ex)
             {
@@ -41,17 +42,17 @@ namespace KiiniHelp.Users.Consultas
             }
         }
 
-        protected void btnConsultar_OnClick(object sender, EventArgs e)
+        private void UcFiltrosConsulta_OnAceptarModal()
         {
             try
             {
-
-                List<HelperHits> lstHits = _servicioConsultas.ConsultarHits(((Usuario)Session["UserData"]).Id, UcFiltrosConsulta.FiltroGrupos, UcFiltrosConsulta.FiltroTipoUsuario, UcFiltrosConsulta.FiltroOrganizaciones,UcFiltrosConsulta.FiltroUbicaciones, UcFiltrosConsulta.FiltroTipificaciones, UcFiltrosConsulta.FiltroVip, UcFiltrosConsulta.FiltroFechas, 0, 100000);
+                List<HelperHits> lstHits = _servicioConsultas.ConsultarHits(((Usuario)Session["UserData"]).Id, UcFiltrosConsulta.FiltroGrupos, UcFiltrosConsulta.FiltroTipoUsuario, UcFiltrosConsulta.FiltroOrganizaciones, UcFiltrosConsulta.FiltroUbicaciones, UcFiltrosConsulta.FiltroTipificaciones, UcFiltrosConsulta.FiltroVip, UcFiltrosConsulta.FiltroFechas, 0, 100000);
 
                 if (lstHits != null)
                 {
-                    gvResult.DataSource = lstHits.Select(s => new { s.IdHit, s.Tipificacion, s.TipoServicio, s.NombreUsuario ,s.Ubicacion, s.Organizacion, s.FechaHora, s.Total }).ToList();
+                    gvResult.DataSource = lstHits.Select(s => new { s.IdHit, s.Tipificacion, s.TipoServicio, s.NombreUsuario, s.Ubicacion, s.Organizacion, s.FechaHora, s.Total }).ToList();
                     gvResult.DataBind();
+                    pnlAlertaGral.Update();
                 }
             }
             catch (Exception ex)
@@ -64,5 +65,29 @@ namespace KiiniHelp.Users.Consultas
                 AlertaGeneral = _lstError;
             }
         }
+
+        //protected void btnConsultar_OnClick(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+
+        //        List<HelperHits> lstHits = _servicioConsultas.ConsultarHits(((Usuario)Session["UserData"]).Id, UcFiltrosConsulta.FiltroGrupos, UcFiltrosConsulta.FiltroTipoUsuario, UcFiltrosConsulta.FiltroOrganizaciones,UcFiltrosConsulta.FiltroUbicaciones, UcFiltrosConsulta.FiltroTipificaciones, UcFiltrosConsulta.FiltroVip, UcFiltrosConsulta.FiltroFechas, 0, 100000);
+
+        //        if (lstHits != null)
+        //        {
+        //            gvResult.DataSource = lstHits.Select(s => new { s.IdHit, s.Tipificacion, s.TipoServicio, s.NombreUsuario ,s.Ubicacion, s.Organizacion, s.FechaHora, s.Total }).ToList();
+        //            gvResult.DataBind();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (_lstError == null)
+        //        {
+        //            _lstError = new List<string>();
+        //        }
+        //        _lstError.Add(ex.Message);
+        //        AlertaGeneral = _lstError;
+        //    }
+        //}
     }
 }

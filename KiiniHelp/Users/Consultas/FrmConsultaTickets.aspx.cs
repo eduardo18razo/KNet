@@ -30,6 +30,7 @@ namespace KiiniHelp.Users.Consultas
             try
             {
                 AlertaGeneral = new List<string>();
+                ucFiltrosTicket.OnAceptarModal += ucFiltrosTicket_OnAceptarModal; 
             }
             catch (Exception ex)
             {
@@ -42,7 +43,7 @@ namespace KiiniHelp.Users.Consultas
             }
         }
 
-        protected void btnConsultar_OnClick(object sender, EventArgs e)
+        void ucFiltrosTicket_OnAceptarModal()
         {
             try
             {
@@ -53,9 +54,8 @@ namespace KiiniHelp.Users.Consultas
                     ucFiltrosTicket.FiltroUbicaciones, ucFiltrosTicket.FiltroTipoArbol, ucFiltrosTicket.FiltroTipificaciones,
                     ucFiltrosTicket.FiltroPrioridad, ucFiltrosTicket.FiltroEstatus, ucFiltrosTicket.FiltroSla, ucFiltrosTicket.FiltroVip, ucFiltrosTicket.FiltroFechas, 0, 1000);
                 gvResult.DataSource = lstConsulta;
-                gvResult.DataBind();
-
-                
+                gvResult.DataBind();               
+                pnlAlertaGral.Update();
             }
             catch (Exception ex)
             {
@@ -72,14 +72,7 @@ namespace KiiniHelp.Users.Consultas
         {
             try
             {
-                e.Row.Cells[0].Visible = false;
-                e.Row.Cells[7].Visible = false;
-                e.Row.Cells[9].Visible = false;
-                e.Row.Cells[10].Visible = false;
-                e.Row.Cells[12].Visible = false;
-                e.Row.Cells[13].Visible = false;
-                e.Row.Cells[15].Visible = false;
-                e.Row.Cells[20].Visible = false;
+                //e.Row.Cells[0].Visible = false;               
             }
             catch (Exception ex)
             {

@@ -57,8 +57,9 @@
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroVip" Text="Vip" OnClick="btnFiltroVip_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroFechas" Text="Fechas" OnClick="btnFiltroFechas_OnClick" />
                     </div>
-                    <div class="panel-footer">
-                    </div>
+                    <div class="panel-footer" style="text-align:center">
+                         <asp:Button runat="server" CssClass="btn btn-success" ID="btnConsultar" Text="Consultar" OnClick="btnConsultar_Click" />
+                    </div> <%-- jgb--%>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

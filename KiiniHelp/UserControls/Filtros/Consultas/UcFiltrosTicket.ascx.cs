@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KiiniHelp.ServiceConsultas;
+using KiiniNet.Entities.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
@@ -7,7 +9,7 @@ namespace KiiniHelp.UserControls.Filtros.Consultas
 {
     public partial class UcFiltrosTicket : UserControl, IControllerModal
     {
-        #region Propiedades publicas
+        #region Propiedades publicas      
         public List<int> FiltroGrupos
         {
             get { return ucFiltroGrupo.GruposSeleccionados; }
@@ -57,6 +59,10 @@ namespace KiiniHelp.UserControls.Filtros.Consultas
         {
             get { return ucFiltroFechasConsultas.RangoFechas; }
         }
+
+        //private readonly ServiceConsultasClient _servicioConsultas = new ServiceConsultasClient();
+        //public event DelegateAceptarModal btnConsultar_OnClick;
+
         #endregion Propiedades publicas
 
         private List<string> _lstError = new List<string>();
@@ -111,7 +117,8 @@ namespace KiiniHelp.UserControls.Filtros.Consultas
                 ucFiltroVip.OnCancelarModal += UcFiltroVipOnOnCancelarModal;
 
                 ucFiltroFechasConsultas.OnAceptarModal += ucFiltroFechas_OnAceptarModal;
-                ucFiltroFechasConsultas.OnCancelarModal += ucFiltroFechas_OnCancelarModal;
+                ucFiltroFechasConsultas.OnCancelarModal += ucFiltroFechas_OnCancelarModal;                
+
                 if (!IsPostBack)
                 {
                     ucFiltroServicioIncidente.EsTicket = true;
@@ -768,5 +775,27 @@ namespace KiiniHelp.UserControls.Filtros.Consultas
         public event DelegateLimpiarModal OnLimpiarModal;
         public event DelegateCancelarModal OnCancelarModal;
         public event DelegateTerminarModal OnTerminarModal;
+
+        protected void btnConsultar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (OnAceptarModal != null)
+                {
+                    OnAceptarModal();
+                  
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
     }
 }
