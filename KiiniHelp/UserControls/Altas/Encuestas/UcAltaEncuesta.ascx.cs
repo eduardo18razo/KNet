@@ -421,6 +421,8 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
                     throw new Exception("Especifique un titúlo para la encuesta");
                 if (txtTituloCliente.Text == string.Empty)
                     throw new Exception("Especifique un titúlo para el cliente.");
+                if (txtTituloCliente.Text == string.Empty)
+                    throw new Exception("Especifique una Descripción.");
                 if (int.Parse(ddlTipoEncuesta.SelectedValue) != (int)BusinessVariables.EnumTipoEncuesta.PromotorScore)
                     if (ObtieneTotalPonderacion() < 100 || ObtieneTotalPonderacion() > 100)
                         throw new Exception("La ponderación total debe sumar 100.");
@@ -432,6 +434,7 @@ namespace KiiniHelp.UserControls.Altas.Encuestas
                     nuevaEncuesta.IdTipoEncuesta = int.Parse(ddlTipoEncuesta.SelectedValue);
                     nuevaEncuesta.Titulo = txtTitulo.Text;
                     nuevaEncuesta.TituloCliente = txtTituloCliente.Text;
+                    //Todo: Cambiar al txt 
                     nuevaEncuesta.Descripcion = txtDescripcion.Text;
                     if (int.Parse(ddlTipoEncuesta.SelectedValue) != (int)BusinessVariables.EnumTipoEncuesta.PromotorScore)
                     {

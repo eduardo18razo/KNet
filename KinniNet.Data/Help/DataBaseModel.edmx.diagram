@@ -358,6 +358,8 @@
         <EntityTypeShape EntityType="KiiniNet_v2Model.InformacionConsultaRate" Width="1.5" PointX="30" PointY="92" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_InformacionConsultaRate_InformacionConsulta" />
         <AssociationConnector Association="KiiniNet_v2Model.FK_InformacionConsultaRate_Usuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_HitGrupoUsuario_GrupoUsuario" />
+        <AssociationConnector Association="KiiniNet_v2Model.FK_HitGrupoUsuario_Rol" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

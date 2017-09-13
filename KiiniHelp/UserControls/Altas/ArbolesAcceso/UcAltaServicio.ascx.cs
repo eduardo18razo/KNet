@@ -836,6 +836,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 divNivel4.Visible = false;
                 divNivel5.Visible = false;
                 divNivel6.Visible = false;
+                btnSiguiente.Enabled = true;
                 //divNivel7.Visible = false;
                 if (((DropDownList)sender).SelectedIndex <= BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     return;
@@ -853,9 +854,6 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     divNivel4.Visible = false;
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
-                    btnSiguiente.Enabled = true;
-                    //divNivel7.Visible = false;
-                    btnSiguiente.Enabled = true;
                 }
                 else
                 {
@@ -897,6 +895,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 divNivel4.Visible = false;
                 divNivel5.Visible = false;
                 divNivel6.Visible = false;
+                btnSiguiente.Enabled = true;
                 //divNivel7.Visible = false;
                 if (((DropDownList)sender).SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     return;
@@ -908,13 +907,10 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     btnAgregarNivel4.Enabled = false;
                     btnAgregarNivel5.Enabled = false;
                     btnAgregarNivel6.Enabled = false;
-                    //btnAgregarNivel7.Enabled = false;
                     divNivel3.Visible = true;
                     divNivel4.Visible = false;
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
-                    //divNivel7.Visible = false;
-                    btnSiguiente.Enabled = true;
                 }
                 else
                 {
@@ -952,6 +948,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 divNivel4.Visible = false;
                 divNivel5.Visible = false;
                 divNivel6.Visible = false;
+                btnSiguiente.Enabled = true;
                 //divNivel7.Visible = false;
                 if (((DropDownList)sender).SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     return;
@@ -966,7 +963,6 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     divNivel5.Visible = false;
                     divNivel6.Visible = false;
                     //divNivel7.Visible = false;
-                    btnSiguiente.Enabled = true;
                 }
                 else
                 {
@@ -1000,6 +996,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 //Metodos.LimpiarCombo(ddlNivel7);
                 divNivel5.Visible = false;
                 divNivel6.Visible = false;
+                btnSiguiente.Enabled = true;
                 //divNivel7.Visible = false;
                 if (((DropDownList)sender).SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     return;
@@ -1012,7 +1009,6 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     divNivel5.Visible = true;
                     divNivel6.Visible = false;
                     //divNivel7.Visible = false;
-                    btnSiguiente.Enabled = true;
                 }
                 else
                 {
@@ -1042,6 +1038,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 Metodos.LimpiarCombo(ddlNivel6);
                 //Metodos.LimpiarCombo(ddlNivel7);
                 divNivel6.Visible = false;
+                btnSiguiente.Enabled = true;
                 //divNivel7.Visible = false;
                 if (((DropDownList)sender).SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
                     return;
@@ -1052,7 +1049,6 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     //btnAgregarNivel7.Enabled = false;
                     divNivel6.Visible = true;
                     //divNivel7.Visible = false;
-                    btnSiguiente.Enabled = true;
                 }
                 else
                 {
@@ -1078,6 +1074,7 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
         {
             try
             {
+                btnSiguiente.Enabled = true;
                 //Metodos.LimpiarCombo(ddlNivel7);
                 //divNivel7.Visible = false;
                 if (((DropDownList)sender).SelectedIndex == BusinessVariables.ComboBoxCatalogo.IndexSeleccione)
@@ -1087,7 +1084,6 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                     //Metodos.FiltraCombo(ddlNivel6, ddlNivel7, _servicioArbolAcceso.ObtenerNivel7(IdArea, TipoArbol, IdTipoUsuario, IdNivel6, true));
                     //btnAgregarNivel7.Enabled = true;
                     //divNivel7.Visible = true;
-                    btnSiguiente.Enabled = true;
                 }
                 else
                 {
@@ -1110,6 +1106,8 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
         {
             try
             {
+
+                btnSiguiente.Enabled = true;
                 //if (_servicioArbolAcceso.EsNodoTerminal(IdTipoUsuario, TipoArbol, IdNivel1, IdNivel2, IdNivel3, IdNivel4, IdNivel5, IdNivel6, IdNivel7))
                 //{
                 //    btnSiguiente.Enabled = false;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Objects;
 using System.Globalization;
 using System.Linq;
 using KiiniNet.Entities.Cat.Operacion;
@@ -249,6 +250,8 @@ namespace KinniNet.Core.Operacion
                 }
                 var qry = from h in db.HitConsulta
                           join tgu in db.HitGrupoUsuario on h.Id equals tgu.IdHit
+                          join gu in db.GrupoUsuario on tgu.IdGrupoUsuario equals gu.Id
+                          join r in db.Rol on tgu.IdRol equals r.Id
                           join or in db.Organizacion on h.IdOrganizacion equals or.Id
                           join ub in db.Ubicacion on h.IdUbicacion equals ub.Id
                           select new { h, tgu };
@@ -305,23 +308,17 @@ namespace KinniNet.Core.Operacion
                         db.LoadProperty(hit, "TipoArbolAcceso");
                         db.LoadProperty(hit, "ArbolAcceso");
 
-                        HelperHits hHit = new HelperHits
+                        db.LoadProperty(hit, "HitGrupoUsuario");
+                        foreach (HitGrupoUsuario hgu in hit.HitGrupoUsuario)
                         {
-                            IdHit = hit.Id,
-                            IdTipoArbolAcceso = hit.IdTipoArbolAcceso,
-                            IdTipificacion = hit.IdArbolAcceso,
-                            IdUsuario = hit.IdUsuario,
-                            IdUbicacion = hit.IdUbicacion,
-                            IdOrganizacion = hit.IdOrganizacion,
-                            TipoServicio = hit.TipoArbolAcceso.Descripcion,
-                            Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(hit.IdArbolAcceso),
-                            NombreUsuario = hit.Usuario.NombreCompleto,
-                            Ubicacion = new BusinessUbicacion().ObtenerDescripcionUbicacionById(hit.IdUbicacion, false),
-                            Organizacion = new BusinessOrganizacion().ObtenerDescripcionOrganizacionById(hit.IdOrganizacion, false),
-                            FechaHora = hit.FechaHoraAlta.ToString("dd/MM/yyyy"),
-                            Total = lstHits.Count(c => c.IdArbolAcceso == hit.IdArbolAcceso && c.IdUsuario == hit.IdUsuario)
-                        };
-                        result.Add(hHit);
+                            db.LoadProperty(hgu, "Rol");
+                            db.LoadProperty(hgu, "GrupoUsuario");
+                        }
+                        var dateFilter = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd"),"yyyy-MM-dd",CultureInfo.InvariantCulture);
+                        result.AddRange(hit.HitGrupoUsuario.Select(hitGrupoUsuario => new HelperHits
+                        {
+                            Rol = hitGrupoUsuario.Rol.Descripcion, Grupo = hitGrupoUsuario.GrupoUsuario.Descripcion, TipoUsuarioAbreviacion = hit.Usuario.TipoUsuario.Abreviacion, TipoUsuarioColor = hit.Usuario.TipoUsuario.Color, IdOrganizacion = hit.IdOrganizacion, Organizacion = new BusinessOrganizacion().ObtenerDescripcionOrganizacionById(hit.IdOrganizacion, false), IdUbicacion = hit.IdUbicacion, Ubicacion = new BusinessUbicacion().ObtenerDescripcionUbicacionById(hit.IdUbicacion, false), Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(hit.IdArbolAcceso), TipoServicio = hit.TipoArbolAcceso.Descripcion, Vip = hit.Usuario.Vip, FechaHora = hit.FechaHoraAlta.ToString("dd/MM/yyyy"), Hora = hit.FechaHoraAlta.ToString("hh:mm:ss"), Total = lstHits.Count(c => c.IdArbolAcceso == hit.IdArbolAcceso && hit.FechaHoraAlta == dateFilter), IdHit = hit.Id, IdTipoArbolAcceso = hit.IdTipoArbolAcceso, IdTipificacion = hit.IdArbolAcceso, IdUsuario = hit.IdUsuario, NombreUsuario = hit.Usuario.NombreCompleto,
+                        }));
                     }
                 }
             }

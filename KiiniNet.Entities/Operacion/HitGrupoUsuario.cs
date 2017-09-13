@@ -1,4 +1,6 @@
 ﻿using System.Runtime.Serialization;
+using KiiniNet.Entities.Cat.Sistema;
+using KiiniNet.Entities.Cat.Usuario;
 
 namespace KiiniNet.Entities.Operacion
 {
@@ -17,5 +19,9 @@ namespace KiiniNet.Entities.Operacion
         public int? IdSubGrupoUsuario { get; set; }
         [DataMember]
         public virtual HitConsulta HitConsulta { get; set; }
+        [DataMember]
+        public virtual GrupoUsuario GrupoUsuario { get; set; }
+        [DataMember]
+        public virtual Rol Rol { get; set; }
     }
 }

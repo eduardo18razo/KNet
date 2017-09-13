@@ -65,5 +65,7 @@ namespace KiiniNet.Entities.Cat.Usuario
         public virtual List<TiempoInformeArbol> TiempoInformeArbol { get; set; }
         [DataMember]
         public virtual List<NotaGeneralGrupo> NotaGeneralGrupo { get; set; }
+        [DataMember]
+        public virtual List<HitGrupoUsuario> HitGrupoUsuario { get; set; } 
     }
 }

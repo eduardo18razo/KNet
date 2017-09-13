@@ -2236,6 +2236,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HitGrupoUsuario_GrupoUsuario">
+          <End Role="GrupoUsuario" Type="Self.GrupoUsuario" Multiplicity="1" />
+          <End Role="HitGrupoUsuario" Type="Self.HitGrupoUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HitGrupoUsuario">
+              <PropertyRef Name="IdGrupoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HitGrupoUsuario_HitConsulta">
           <End Role="HitConsulta" Type="Self.HitConsulta" Multiplicity="1" />
           <End Role="HitGrupoUsuario" Type="Self.HitGrupoUsuario" Multiplicity="*" />
@@ -2245,6 +2257,18 @@
             </Principal>
             <Dependent Role="HitGrupoUsuario">
               <PropertyRef Name="IdHit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HitGrupoUsuario_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="HitGrupoUsuario" Type="Self.HitGrupoUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HitGrupoUsuario">
+              <PropertyRef Name="IdRol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4473,8 +4497,16 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="HitConsulta" EntitySet="HitConsulta" />
           </AssociationSet>
+          <AssociationSet Name="FK_HitGrupoUsuario_GrupoUsuario" Association="Self.FK_HitGrupoUsuario_GrupoUsuario">
+            <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+            <End Role="HitGrupoUsuario" EntitySet="HitGrupoUsuario" />
+          </AssociationSet>
           <AssociationSet Name="FK_HitGrupoUsuario_HitConsulta" Association="Self.FK_HitGrupoUsuario_HitConsulta">
             <End Role="HitConsulta" EntitySet="HitConsulta" />
+            <End Role="HitGrupoUsuario" EntitySet="HitGrupoUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HitGrupoUsuario_Rol" Association="Self.FK_HitGrupoUsuario_Rol">
+            <End Role="Rol" EntitySet="Rol" />
             <End Role="HitGrupoUsuario" EntitySet="HitGrupoUsuario" />
           </AssociationSet>
           <AssociationSet Name="FK_Holding_TipoUsuario" Association="Self.FK_Holding_TipoUsuario">
@@ -6119,6 +6151,14 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="InformacionConsultaRate" EntitySet="InformacionConsultaRate" />
           </AssociationSet>
+          <AssociationSet Name="FK_HitGrupoUsuario_GrupoUsuario" Association="KiiniNet_v2Model.FK_HitGrupoUsuario_GrupoUsuario">
+            <End Role="GrupoUsuario" EntitySet="GrupoUsuario" />
+            <End Role="HitGrupoUsuario" EntitySet="HitGrupoUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HitGrupoUsuario_Rol" Association="KiiniNet_v2Model.FK_HitGrupoUsuario_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="HitGrupoUsuario" EntitySet="HitGrupoUsuario" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Campus">
           <Key>
@@ -7226,6 +7266,7 @@
           <NavigationProperty Name="EstatusTicketSubRolGeneralDefaultSolicita" Relationship="KiiniNet_v2Model.FK_EstatusTicketSubRolGeneralDefault_RolSolicita" FromRole="Rol" ToRole="EstatusTicketSubRolGeneralDefault" />
           <NavigationProperty Name="EstatusAsignacionSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_Rol" FromRole="Rol" ToRole="EstatusAsignacionSubRolGeneral" />
           <NavigationProperty Name="RolMenu" Relationship="KiiniNet_v2Model.FK_RolMenu_Rol" FromRole="Rol" ToRole="RolMenu" />
+          <NavigationProperty Name="HitGrupoUsuario" Relationship="KiiniNet_v2Model.FK_HitGrupoUsuario_Rol" FromRole="Rol" ToRole="HitGrupoUsuario" />
           </EntityType>
         <Association Name="FK_GrupoUsuarioInventarioArbol_Rol">
           <End Type="KiiniNet_v2Model.Rol" Role="Rol" Multiplicity="1" />
@@ -7285,6 +7326,8 @@
           <Property Name="IdGrupoUsuario" Type="Int32" Nullable="false" />
           <Property Name="IdSubGrupoUsuario" Type="Int32" />
           <NavigationProperty Name="HitConsulta" Relationship="KiiniNet_v2Model.FK_HitGrupoUsuario_HitConsulta" FromRole="HitGrupoUsuario" ToRole="HitConsulta" />
+          <NavigationProperty Name="GrupoUsuario" Relationship="KiiniNet_v2Model.FK_HitGrupoUsuario_GrupoUsuario" FromRole="HitGrupoUsuario" ToRole="GrupoUsuario" />
+          <NavigationProperty Name="Rol" Relationship="KiiniNet_v2Model.FK_HitGrupoUsuario_Rol" FromRole="HitGrupoUsuario" ToRole="Rol" />
         </EntityType>
         <EntityType Name="InventarioArbolAcceso">
           <Key>
@@ -8400,6 +8443,7 @@
           <NavigationProperty Name="EstatusTicketSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusSubRolGeneral_GrupoUsuario" FromRole="GrupoUsuario" ToRole="EstatusTicketSubRolGeneral" />
           <NavigationProperty Name="EstatusAsignacionSubRolGeneral" Relationship="KiiniNet_v2Model.FK_EstatusAsignacionSubRolGeneral_GrupoUsuario" FromRole="GrupoUsuario" ToRole="EstatusAsignacionSubRolGeneral" />
           <NavigationProperty Name="NotaGeneralGrupo" Relationship="KiiniNet_v2Model.FK_NotaGeneralGrupo_GrupoUsuario" FromRole="GrupoUsuario" ToRole="NotaGeneralGrupo" />
+          <NavigationProperty Name="HitGrupoUsuario" Relationship="KiiniNet_v2Model.FK_HitGrupoUsuario_GrupoUsuario" FromRole="GrupoUsuario" ToRole="HitGrupoUsuario" />
         </EntityType>
         <Association Name="FK_GrupoUsuario_TipoGrupo1">
           <End Type="KiiniNet_v2Model.TipoGrupo" Role="TipoGrupo" Multiplicity="0..1" />
@@ -10665,6 +10709,30 @@
             </Principal>
             <Dependent Role="InformacionConsultaRate">
               <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HitGrupoUsuario_GrupoUsuario">
+          <End Type="KiiniNet_v2Model.GrupoUsuario" Role="GrupoUsuario" Multiplicity="1" />
+          <End Type="KiiniNet_v2Model.HitGrupoUsuario" Role="HitGrupoUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HitGrupoUsuario">
+              <PropertyRef Name="IdGrupoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HitGrupoUsuario_Rol">
+          <End Type="KiiniNet_v2Model.Rol" Role="Rol" Multiplicity="1" />
+          <End Type="KiiniNet_v2Model.HitGrupoUsuario" Role="HitGrupoUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HitGrupoUsuario">
+              <PropertyRef Name="IdRol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
