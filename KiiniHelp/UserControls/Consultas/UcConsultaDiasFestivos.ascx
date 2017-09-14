@@ -37,7 +37,6 @@
                                     <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control help_search_form" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" placeholder="Busca con una palabra clave..." />
                                     <asp:LinkButton runat="server" CssClass="btn btn-primary btn-single-icon fa fa-search" OnClick="btnBuscar_OnClick" />
                                 </div>
-
                             </div>
                         </div>
                     </div>

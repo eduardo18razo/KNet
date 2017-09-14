@@ -12,6 +12,7 @@ namespace KiiniHelp.Users.Consultas
         private readonly ServiceConsultasClient _servicioConsultas = new ServiceConsultasClient();
 
         private List<string> _lstError = new List<string>();
+        
 
         private List<string> AlertaGeneral
         {
@@ -24,10 +25,13 @@ namespace KiiniHelp.Users.Consultas
             }
         }
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+                ucFiltrosEncuestas.OnAceptarModal += ucFiltrosEncuestas_OnAceptarModal;
+               
                 if (!IsPostBack)
                 {
                     
@@ -44,7 +48,7 @@ namespace KiiniHelp.Users.Consultas
             }
         }
 
-        protected void btnConsultar_OnClick(object sender, EventArgs e)
+        private void ucFiltrosEncuestas_OnAceptarModal()
         {
             try
             {
@@ -62,7 +66,26 @@ namespace KiiniHelp.Users.Consultas
                 _lstError.Add(ex.Message);
                 AlertaGeneral = _lstError;
             }
-        }
+        }        
+        //protected void btnConsultar_OnClick(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (!ucFiltrosEncuestas.FiltroGrupos.Any())
+        //            throw new Exception("Debe seleccionar al menos un grupo");
+        //        gvResult.DataSource = _servicioConsultas.ConsultarEncuestas(((Usuario)Session["UserData"]).Id, ucFiltrosEncuestas.FiltroGrupos, ucFiltrosEncuestas.FiltroTipoArbol, ucFiltrosEncuestas.FiltroResponsables, ucFiltrosEncuestas.FiltroEncuestas, ucFiltrosEncuestas.FiltroAtendedores, ucFiltrosEncuestas.FiltroFechas, ucFiltrosEncuestas.FiltroTipoUsuario, ucFiltrosEncuestas.FiltroPrioridad, ucFiltrosEncuestas.FiltroSla, ucFiltrosEncuestas.FiltroUbicaciones, ucFiltrosEncuestas.FiltroOrganizaciones, ucFiltrosEncuestas.FiltroVip, 0, 1000);
+        //        gvResult.DataBind();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (_lstError == null)
+        //        {
+        //            _lstError = new List<string>();
+        //        }
+        //        _lstError.Add(ex.Message);
+        //        AlertaGeneral = _lstError;
+        //    }
+        //}
 
         protected void gvResult_OnRowCreated(object sender, GridViewRowEventArgs e)
         {
@@ -87,5 +110,7 @@ namespace KiiniHelp.Users.Consultas
                 AlertaGeneral = _lstError;
             }
         }
+    
+    
     }
 }

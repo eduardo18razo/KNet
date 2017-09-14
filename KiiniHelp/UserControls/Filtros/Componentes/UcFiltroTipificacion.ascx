@@ -23,98 +23,109 @@
                 </asp:Repeater>
             </div>
         </header>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Tipificacion
-            </div>
-            <div class="panel-body">
+              
+        <div class="modal-header">           
+            <h2 class="modal-title">Tipificación</h2>
+            <hr class="bordercolor">
+        </div>
+
+        <div class="panel-body">
                 <%--ORIGEN--%>
                 <div class="panel panel-primary">
-                    <div class="panel-heading text-center text-primary">
+                    <div style="font-weight: bold">
                         Seleccione
                     </div>
+                    <asp:Panel runat="server" ScrollBars="Vertical" Width="100%" Height="140px">
                     <div class="panel-body">
                         <asp:Repeater runat="server" ID="rptArbol">
                             <HeaderTemplate>
-                                <div class="container-fluid">
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Producto" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Servicio/incidente" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 1" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 2" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 3" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 4" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 5" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 6" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 7" />
-                                </div>
+                                <div class="container-fluid"> 
+                                    <asp:Label runat="server" Text="" Width="90px"/>                       
+                                    <asp:Label runat="server" Text="Id" Visible="false"/>             
+                                    <asp:Label runat="server" Text="TU" Width="40px"/>
+                                    <asp:Label runat="server" Text="Producto" Width="100px"/>
+                                    <asp:Label runat="server" Text="Servicio/incidente" Width="140px"/>
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 1" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 2" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 3" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 4" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 5" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 6" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 7" />                                                                    
+                                </div>                       
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <div class="container-fluid" style="margin-top: 2px">
-                                    <asp:Label CssClass="col-sm-1" runat="server" Visible="False" ID="lblId" Text='<%# Eval("Id")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("TipoUsuario.Descripcion").ToString().Substring(0, 3)%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Area.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("TipoArbolAcceso.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel1.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel2.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel3.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel4.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel5.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel6.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel7.Descripcion")%>' />
-                                    <asp:Button runat="server" Text="Seleccionar" CssClass="btn btn-primary btn-sm" ID="btnSeleccionar" OnClick="btnSeleccionar_OnClick" />
+                                    <asp:Button runat="server" Text="Seleccionar" CssClass="btn btn-primary btn-sm" ID="btnSeleccionar" OnClick="btnSeleccionar_OnClick" />                                                                      
+                                    <asp:Label runat="server" Visible="False" ID="lblId" Text='<%# Eval("Id")%>' />
+                                    <asp:Label runat="server" Text='<%# Eval("TipoUsuario.Descripcion").ToString().Substring(0, 3)%>' Width="40px" />
+                                    <asp:Label runat="server" Text='<%# Eval("Area.Descripcion")%>' Width="100px" />
+                                    <asp:Label runat="server" Text='<%# Eval("TipoArbolAcceso.Descripcion")%>' Width="140px" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel1.Descripcion")%>' />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel2.Descripcion")%>' />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel3.Descripcion")%>' />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel4.Descripcion")%>' />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel5.Descripcion")%>' />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel6.Descripcion")%>' />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel7.Descripcion")%>' />                                                                    
                                 </div>
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
-                </div>
-                <br />
+                    </asp:Panel>
+                </div>                
                 <%--SELECCION--%>
                 <div class="panel panel-primary">
-                    <div class="panel-heading text-center text-primary">
+                    <div style="font-weight: bold"">
                         Seleccionados
                     </div>
+                    <asp:Panel runat="server" ScrollBars="Vertical" Width="100%" Height="140px">
                     <div class="panel-body">
                         <asp:Repeater runat="server" ID="rptArbolSeleccionado">
                             <HeaderTemplate>
                                 <div class="container-fluid">
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Producto" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Servicio/incidente" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 1" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 2" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 3" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 4" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 5" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 6" />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="Nivel 7" />
+                                    <asp:Label runat="server" Text="" Width="90px" />
+                                    <asp:Label runat="server" Text="Id" Visible="false"/>
+                                    <asp:Label runat="server" Text="TU" Width="40px"   />
+                                    <asp:Label runat="server" Text="Producto" Width="100px"/>
+                                    <asp:Label runat="server" Text="Servicio/incidente" Width="140px"/>
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 1" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 2" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 3" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 4" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 5" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 6" />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text="Nivel 7" />
                                 </div>
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <div class="container-fluid" style="margin-top: 2px">
-                                    <asp:Label CssClass="col-sm-1" runat="server" Visible="False" ID="lblId" Text='<%# Eval("Id")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("TipoUsuario.Descripcion").ToString().Substring(0, 3)%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Area.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("TipoArbolAcceso.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel1.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel2.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel3.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel4.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel5.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel6.Descripcion")%>' />
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text='<%# Eval("Nivel7.Descripcion")%>' />
-                                    <asp:Button runat="server" Text="Quitar" CssClass="btn btn-danger btn-sm" ID="btnQuitar" OnClick="btnQuitar_OnClick" />
+                                    <asp:Button runat="server" Text="Quitar" CssClass="btn btn-danger btn-sm" ID="btnQuitar" OnClick="btnQuitar_OnClick" Width="84px" />
+                                    <asp:Label runat="server" Visible="False" ID="lblId" Text='<%# Eval("Id")%>' />
+                                    <asp:Label runat="server" Text='<%# Eval("TipoUsuario.Descripcion").ToString().Substring(0, 3)%>' Width="40px" />
+                                    <asp:Label runat="server" Text='<%# Eval("Area.Descripcion")%>' Width="100px"/>
+                                    <asp:Label runat="server" Text='<%# Eval("TipoArbolAcceso.Descripcion")%>' Width="140px"/>
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel1.Descripcion")%>' />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel2.Descripcion")%>' />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel3.Descripcion")%>' />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel4.Descripcion")%>' />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel5.Descripcion")%>' />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel6.Descripcion")%>' />
+                                    <asp:Label CssClass="col-pe-1" runat="server" Text='<%# Eval("Nivel7.Descripcion")%>' />
+                                   
                                 </div>
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
+                    </asp:Panel>
                 </div>
             </div>
-            <div class="panel-footer text-center">
+        
+        <div class="text-center">
                 <asp:Button runat="server" CssClass="btn btn-success" Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_OnClick" />
                 <asp:Button runat="server" CssClass="btn btn-primary" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick" />
                 <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_OnClick" />
-            </div>
         </div>
+        <br />
     </ContentTemplate>
 </asp:UpdatePanel>

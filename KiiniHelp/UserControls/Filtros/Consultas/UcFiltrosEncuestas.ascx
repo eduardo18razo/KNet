@@ -38,9 +38,9 @@
                     </div>
                 </header>
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
+                    <%--<div class="panel-heading">
                         Filtros
-                    </div>
+                    </div>--%>
                     <div class="panel-body text-center">
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroGrupo" Text="Grupo" OnClick="btnFiltroGrupo_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroServicioIncidente" Text="Tipo Servicio" OnClick="btnFiltroServicioIncidente_OnClick" />
@@ -54,10 +54,11 @@
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroUbicacion" Text="Ubicación" OnClick="btnFiltroUbicacion_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroOrganizacion" Text="Organización" OnClick="btnFiltroOrganizacion_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroVip" Text="Vip" OnClick="btnFiltroVip_OnClick" />
-                        
+                         <asp:Label runat="server" Width="120px"></asp:Label>
+                        <asp:Button runat="server" CssClass="btn btn-success" ID="btnConsultar" Text="Consultar" OnClick="btnConsultar_Click" />
                     </div>
-                    <div class="panel-footer">
-                    </div>
+                   <%-- <div class="panel-footer">
+                    </div>--%>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

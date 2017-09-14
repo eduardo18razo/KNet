@@ -9,9 +9,9 @@
 
 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
     <ContentTemplate>
-        <asp:HiddenField runat="server" ID="hfTicket"/>
-        <asp:HiddenField runat="server" ID="hfConsulta"/>
-        <asp:HiddenField runat="server" ID="hfEncuesta"/>
+        <asp:HiddenField runat="server" ID="hfTicket" />
+        <asp:HiddenField runat="server" ID="hfConsulta" />
+        <asp:HiddenField runat="server" ID="hfEncuesta" />
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <header class="modal-header" id="panelAlerta" runat="server" visible="false">
@@ -36,9 +36,6 @@
                     </div>
                 </header>
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        Filtros
-                    </div>
                     <div class="panel-body text-center">
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroGrupo" Text="Grupo" OnClick="btnFiltroGrupo_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroTipoUsuario" Text="Tipo Usuario" OnClick="btnFiltroTipoUsuario_OnClick" />
@@ -47,8 +44,7 @@
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroTipificacion" Text="Tipificación" OnClick="btnFiltroTipificacion_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroVip" Text="Vip" OnClick="btnFiltroVip_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroFechas" Text="Fechas" OnClick="btnFiltroFechas_OnClick" />
-                    </div>
-                    <div class="panel-footer" style="text-align:center">
+                        <asp:Label runat="server" Width="120px"></asp:Label>
                         <asp:Button runat="server" CssClass="btn btn-success" ID="btnConsultar" Text="Consultar" OnClick="btnConsultar_Click" />
                     </div>
                 </div>
@@ -74,7 +70,7 @@
         <ContentTemplate>
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <uc1:UcFiltroTipoUsuario runat="server" id="ucFiltroTipoUsuario" />
+                    <uc1:UcFiltroTipoUsuario runat="server" ID="ucFiltroTipoUsuario" />
                 </div>
             </div>
         </ContentTemplate>
@@ -122,7 +118,7 @@
         <ContentTemplate>
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <uc1:UcFiltroVip runat="server" id="ucFiltroVip" />
+                    <uc1:UcFiltroVip runat="server" ID="ucFiltroVip" />
                 </div>
             </div>
         </ContentTemplate>
@@ -134,7 +130,7 @@
         <ContentTemplate>
             <div class="modal-dialog modal-lg" style="width: 450px">
                 <div class="modal-content" style="width: 450px">
-                    <uc1:UcFiltroFechasConsultas runat="server" id="ucFiltroFechasConsultas" />
+                    <uc1:UcFiltroFechasConsultas runat="server" ID="ucFiltroFechasConsultas" />
                 </div>
             </div>
         </ContentTemplate>

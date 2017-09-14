@@ -31,15 +31,6 @@ namespace KiiniHelp.UserControls.Filtros.Componentes {
         protected global::System.Web.UI.WebControls.Repeater rptError;
         
         /// <summary>
-        /// Control hfticket.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfticket;
-        
-        /// <summary>
         /// Control hfConsulta.
         /// </summary>
         /// <remarks>
@@ -56,6 +47,15 @@ namespace KiiniHelp.UserControls.Filtros.Componentes {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfEncuesta;
+        
+        /// <summary>
+        /// Control hfticket.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfticket;
         
         /// <summary>
         /// Control rptTipoArbol.

@@ -32,16 +32,16 @@
                     <uc1:UcFiltrosTicket runat="server" id="ucFiltrosTicket" />               
             <div class="panel panel-primary">
                 <div class="panel-body">
-                    <asp:Panel runat="server" ScrollBars="Both" Width="100%" Height="250px">
+                    <asp:Panel runat="server" ScrollBars="Both" Width="100%" Height="350px">
                         <asp:GridView runat="server" ID="gvResult" CssClass="table table-bordered table-hover table-responsive" Font-Size="11px"
                         OnRowCreated="gvResult_OnRowCreated" AutoGenerateColumns ="false">
                         <EmptyDataTemplate>
                                                 ¡No hay resultados para mostrar!
                         </EmptyDataTemplate>
-                        <Columns>
+                        <Columns>                           
                             <asp:TemplateField ControlStyle-Width="30px">
                                 <HeaderTemplate>
-                                    <asp:Label runat="server" Text="Canal"/>
+                                    <asp:Label runat="server" Text="Canal" Width="40px"/>
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%#Eval("Canal") %>'/>
@@ -49,14 +49,14 @@
                             </asp:TemplateField>  
                             <asp:TemplateField  ControlStyle-Width="30px">
                                 <HeaderTemplate>
-                                    <asp:Label runat="server" Text="TipoUsuario"/>
+                                    <asp:Label runat="server" Text="TU"/>
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <span class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + "green" + " !important" %>'>
                                             <%# Eval("TipoUsuario") %></span>                                    
                                 </ItemTemplate>
                             </asp:TemplateField>  
-                             <asp:TemplateField  ControlStyle-Width="50px">
+                             <asp:TemplateField  ControlStyle-Width="100px">
                                 <HeaderTemplate>
                                     <asp:Label runat="server" Text="GrupoEspecialConsulta"/>
                                 </HeaderTemplate>
@@ -88,7 +88,7 @@
                                     <asp:Label runat="server" Text='<%#Eval("GrupoDesarrollo") %>'/>
                                 </ItemTemplate>
                             </asp:TemplateField>  
-                             <asp:TemplateField  ControlStyle-Width="150px">
+                             <asp:TemplateField  ControlStyle-Width="700px">
                                 <HeaderTemplate>
                                     <asp:Label runat="server" Text="Organización"/>
                                 </HeaderTemplate>
@@ -96,7 +96,7 @@
                                     <asp:Label runat="server" Text='<%#Eval("Organizacion") %>'/>
                                 </ItemTemplate>
                             </asp:TemplateField>  
-                             <asp:TemplateField  ControlStyle-Width="150px">
+                             <asp:TemplateField  ControlStyle-Width="700px">
                                 <HeaderTemplate>
                                     <asp:Label runat="server" Text="Ubicación"/>
                                 </HeaderTemplate>
@@ -104,7 +104,7 @@
                                     <asp:Label runat="server" Text='<%#Eval("Ubicacion") %>'/>
                                 </ItemTemplate>
                             </asp:TemplateField>  
-                             <asp:TemplateField  ControlStyle-Width="40px">
+                             <asp:TemplateField  ControlStyle-Width="100px">
                                 <HeaderTemplate>
                                     <asp:Label runat="server" Text="ServicioIncidente"/>
                                 </HeaderTemplate>
@@ -112,7 +112,7 @@
                                     <asp:Label runat="server" Text='<%#Eval("ServicioIncidente") %>'/>
                                 </ItemTemplate>
                             </asp:TemplateField>  
-                             <asp:TemplateField ControlStyle-Width="40px">
+                             <asp:TemplateField ControlStyle-Width="120px">
                                 <HeaderTemplate>
                                     <asp:Label runat="server" Text="Tipificación"/>
                                 </HeaderTemplate>
@@ -120,7 +120,7 @@
                                     <asp:Label runat="server" Text='<%#Eval("Tipificacion") %>'/>
                                 </ItemTemplate>
                             </asp:TemplateField>  
-                             <asp:TemplateField ControlStyle-Width="40px">
+                             <asp:TemplateField ControlStyle-Width="60px">
                                 <HeaderTemplate>
                                     <asp:Label runat="server" Text="Prioridad"/>
                                 </HeaderTemplate>
@@ -128,7 +128,7 @@
                                     <asp:Label runat="server" Text='<%#Eval("Prioridad") %>'/>
                                 </ItemTemplate>
                             </asp:TemplateField>  
-                             <asp:TemplateField ControlStyle-Width="15px">
+                             <asp:TemplateField ControlStyle-Width="45px">
                                 <HeaderTemplate>
                                     <asp:Label runat="server" Text="Estatus"/>
                                 </HeaderTemplate>
@@ -143,20 +143,18 @@
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%#Eval("Sla") %>'/>
                                 </ItemTemplate>
-                            </asp:TemplateField>                               
-                             <asp:TemplateField>
+                            </asp:TemplateField>                                                           
+                             <asp:TemplateField ControlStyle-Width="30px">
                                 <HeaderTemplate>
                                     <asp:Label runat="server" Text="FechaHora"/>
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label runat="server" Text='<%#Eval("FechaHora") %>'/>
                                 </ItemTemplate>
-                            </asp:TemplateField>                                                         
+                            </asp:TemplateField>                                                                                       
                         </Columns> 
                        </asp:GridView>
                      </asp:Panel>
-
-
                    <%-- <asp:Panel runat="server" ScrollBars="Both" Width="100%" Height="250px">
                     <div class="table-responsive">
                         <asp:Repeater runat="server" ID="rptResultados" >
@@ -193,9 +191,7 @@
                                             <th>
                                                 <asp:Label runat="server">Sla</asp:Label></th>
                                             <th>
-                                                <asp:Label runat="server">FechaHora</asp:Label></th>
-
-                                          
+                                                <asp:Label runat="server">FechaHora</asp:Label></th>                                          
                                         </tr>
                                     </thead>
                                    
@@ -204,9 +200,9 @@
                                  <tbody>
                                 <tr id='<%# Eval("IdTicket")%>'>
                                     <td>--%>
-                                    <%--    <button type="button" class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + Eval("TipoUsuario.Color") + " !important" %>'>
-                                            <%# Eval("TipoUsuario.Abreviacion") %></button></td>--%>
-                                 <%--   <button type="button" class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + "green" + " !important" %>'>
+                   <%--    <button type="button" class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + Eval("TipoUsuario.Color") + " !important" %>'>
+                   <%# Eval("TipoUsuario.Abreviacion") %></button></td>--%>
+                   <%--   <button type="button" class="btn btn-default-alt btn-square-usuario" style='<%# "Border: none !important; Background: " + "green" + " !important" %>'>
                                             <%# Eval("TipoUsuario") %></button></td>
                                     <td><%# Eval("Tipificacion")%></td>
                                     <td><%# Eval("Canal")%></td>

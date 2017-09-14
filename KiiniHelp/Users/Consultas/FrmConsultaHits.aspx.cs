@@ -4,6 +4,7 @@ using System.Linq;
 using KiiniHelp.ServiceConsultas;
 using KiiniNet.Entities.Operacion.Usuarios;
 using KiiniNet.Entities.Helper;
+using System.Web.UI.WebControls;
 
 namespace KiiniHelp.Users.Consultas
 {
@@ -42,6 +43,15 @@ namespace KiiniHelp.Users.Consultas
             }
         }
 
+        protected void gvDistricts_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.RowIndex == 0)
+                    e.Row.Style.Add("height", "50px");
+            }
+        }
+
         private void UcFiltrosConsulta_OnAceptarModal()
         {
             try
@@ -50,7 +60,8 @@ namespace KiiniHelp.Users.Consultas
 
                 if (lstHits != null)
                 {
-                    gvResult.DataSource = lstHits.Select(s => new { s.IdHit, s.Tipificacion, s.TipoServicio, s.NombreUsuario, s.Ubicacion, s.Organizacion, s.FechaHora, s.Total }).ToList();
+                    var lst = lstHits.OrderBy(s => s.IdHit).ThenBy(s => s.FechaHora).Select(s => new { s.IdHit, s.Tipificacion, s.Vip, s.TipoServicio, s.TipoUsuarioAbreviacion, s.TipoUsuarioColor, s.Ubicacion, s.Organizacion, s.FechaHora, s.Hora, s.Total }).ToList();
+                    gvResult.DataSource = lst;
                     gvResult.DataBind();
                     pnlAlertaGral.Update();
                 }
@@ -64,30 +75,6 @@ namespace KiiniHelp.Users.Consultas
                 _lstError.Add(ex.Message);
                 AlertaGeneral = _lstError;
             }
-        }
-
-        //protected void btnConsultar_OnClick(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-
-        //        List<HelperHits> lstHits = _servicioConsultas.ConsultarHits(((Usuario)Session["UserData"]).Id, UcFiltrosConsulta.FiltroGrupos, UcFiltrosConsulta.FiltroTipoUsuario, UcFiltrosConsulta.FiltroOrganizaciones,UcFiltrosConsulta.FiltroUbicaciones, UcFiltrosConsulta.FiltroTipificaciones, UcFiltrosConsulta.FiltroVip, UcFiltrosConsulta.FiltroFechas, 0, 100000);
-
-        //        if (lstHits != null)
-        //        {
-        //            gvResult.DataSource = lstHits.Select(s => new { s.IdHit, s.Tipificacion, s.TipoServicio, s.NombreUsuario ,s.Ubicacion, s.Organizacion, s.FechaHora, s.Total }).ToList();
-        //            gvResult.DataBind();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        if (_lstError == null)
-        //        {
-        //            _lstError = new List<string>();
-        //        }
-        //        _lstError.Add(ex.Message);
-        //        AlertaGeneral = _lstError;
-        //    }
-        //}
+        }        
     }
 }
