@@ -22,16 +22,17 @@
                 </asp:Repeater>
             </div>
         </header>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Tipo de Usuario
-            </div>
+        <div class="modal-header">           
+            <h2 class="modal-title">Tipo de Usuario</h2>
+            <hr class="bordercolor">
+        </div>            
             <div class="panel-body">
                 <%--ORIGEN--%>
                 <div class="panel panel-primary">
-                    <div class="panel-heading text-center text-primary">
+                    <div style="font-weight: bold"> 
                         Seleccione
                     </div>
+                     <asp:Panel runat="server" ScrollBars="Vertical" Width="100%" Height="140px">
                     <div class="panel-body">
                         <asp:Repeater runat="server" ID="rptTipoUsuario">
                             <HeaderTemplate>
@@ -48,18 +49,19 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
-                </div>
-                <br />
+                    </asp:Panel>
+                </div>              
                 <%--SELECCION--%>
                 <div class="panel panel-primary">
-                    <div class="panel-heading text-center text-primary">
+                    <div style="font-weight: bold"> 
                         Seleccionados
                     </div>
+                     <asp:Panel runat="server" ScrollBars="Vertical" Width="100%" Height="140px">
                     <div class="panel-body">
                         <asp:Repeater runat="server" ID="rptTipoUsuarioSeleccionado">
                             <HeaderTemplate>
                                 <div class="container-fluid">
-                                    <asp:Label CssClass="col-sm-4 text-center" runat="server" Text="Tipo De Usuario" />
+                                    <asp:Label CssClass="col-sm-4 text-center" runat="server" Text="Tipo De Usuario" style="font-weight: bold !important" />
                                 </div>
                             </HeaderTemplate>
                             <ItemTemplate>
@@ -71,13 +73,14 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
+                    </asp:Panel>
                 </div>
             </div>
-            <div class="panel-footer text-center">
+            <div class="text-center"> 
                 <asp:Button runat="server" CssClass="btn btn-success" Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_OnClick" />
                 <asp:Button runat="server" CssClass="btn btn-primary" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick" />
                 <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_OnClick" />
             </div>
-        </div>
+        <br />        
     </ContentTemplate>
 </asp:UpdatePanel>

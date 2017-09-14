@@ -22,11 +22,13 @@
                 </asp:Repeater>
             </div>
         </header>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Rango de fechas
-            </div>
-            <div class="panel-body">
+        
+        <div class="modal-header">           
+            <h2 class="modal-title"> Rango de fechas</h2>
+            <hr class="bordercolor">
+        </div>                      
+        
+        <div class="panel-body">
                 <div class="form-horizontal">
                     <div class="form-group">
                         <asp:Label CssClass="col-sm-3" runat="server" Text="Fecha Inicio" />
@@ -42,11 +44,13 @@
                     </div>
                 </div>
             </div>
-            <div class="panel-footer text-center">
+        
+        <div class="text-center">
                 <asp:Button runat="server" CssClass="btn btn-success" Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_OnClick"/>
                 <asp:Button runat="server" CssClass="btn btn-primary" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick"/>
                 <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_OnClick"/>
             </div>
-        </div>
+        
+        <br />
     </ContentTemplate>
 </asp:UpdatePanel>

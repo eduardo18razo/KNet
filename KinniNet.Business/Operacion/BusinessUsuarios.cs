@@ -621,7 +621,7 @@ namespace KinniNet.Core.Operacion
                     qry = from q in qry
                           where encuestas.Contains(q.e.Id)
                           select q;
-                result = qry.Select(s => s.u).Distinct().ToList();
+                result = qry.Select(s => s.u).ToList();
                 foreach (Usuario usuario in result)
                 {
                     db.LoadProperty(usuario, "TipoUsuario");

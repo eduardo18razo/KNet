@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcFiltroEncuesta.ascx.cs" Inherits="KiiniHelp.UserControls.Filtros.Componentes.UcFiltroEncuesta" %>
 <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="upEncuestas">
     <ContentTemplate>
-        <asp:HiddenField runat="server" ID="hfTipoArbol"/>
+        <asp:HiddenField runat="server" ID="hfTipoArbol" />
         <header class="modal-header" id="panelAlerta" runat="server" visible="false">
             <div class="alert alert-danger">
                 <div>
@@ -23,22 +23,25 @@
                 </asp:Repeater>
             </div>
         </header>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Tipificacion
-            </div>
-            <div class="panel-body">
-                <%--ORIGEN--%>
-                <div class="panel panel-primary">
-                    <div class="panel-heading text-center text-primary">
-                        Seleccione
-                    </div>
+
+        <div class="modal-header">
+            <h2 class="modal-title">Tipificación</h2>
+            <hr class="bordercolor">
+        </div>
+
+        <div class="panel-body">
+            <%--ORIGEN--%>
+            <div class="panel panel-primary">
+                <div style="font-weight: bold">
+                    Seleccione                   
+                </div>
+                <asp:Panel runat="server" ScrollBars="Vertical" Width="100%" Height="140px">
                     <div class="panel-body">
                         <asp:Repeater runat="server" ID="rptEncuestas">
                             <HeaderTemplate>
                                 <div class="container-fluid">
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="" Visible="False"/>
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="" Visible="False"/>
+                                    <asp:Label CssClass="col-sm-1" runat="server" Text="" Visible="False" />
+                                    <asp:Label CssClass="col-sm-1" runat="server" Text="" Visible="False" />
                                     <asp:Label CssClass="col-sm-3" runat="server" Text="Tipo de Encuesta" />
                                     <asp:Label CssClass="col-sm-4" runat="server" Text="Encuesta" />
                                 </div>
@@ -54,19 +57,21 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
+                </asp:Panel>
+            </div>
+
+            <%--SELECCION--%>
+            <div class="panel panel-primary">
+                <div style="font-weight: bold">
+                    Seleccionados                   
                 </div>
-                <br />
-                <%--SELECCION--%>
-                <div class="panel panel-primary">
-                    <div class="panel-heading text-center text-primary">
-                        Seleccionados
-                    </div>
+                <asp:Panel runat="server" ScrollBars="Vertical" Width="100%" Height="140px">
                     <div class="panel-body">
                         <asp:Repeater runat="server" ID="rptEncuestasSeleccionadas">
                             <HeaderTemplate>
                                 <div class="container-fluid">
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="" Visible="False"/>
-                                    <asp:Label CssClass="col-sm-1" runat="server" Text="" Visible="False"/>
+                                    <asp:Label CssClass="col-sm-1" runat="server" Text="" Visible="False" />
+                                    <asp:Label CssClass="col-sm-1" runat="server" Text="" Visible="False" />
                                     <asp:Label CssClass="col-sm-3" runat="server" Text="Tipo de Encuesta" />
                                     <asp:Label CssClass="col-sm-4" runat="server" Text="Encuesta" />
                                 </div>
@@ -82,13 +87,14 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
-                </div>
-            </div>
-            <div class="panel-footer text-center">
-                <asp:Button runat="server" CssClass="btn btn-success" Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_OnClick" />
-                <asp:Button runat="server" CssClass="btn btn-primary" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick" />
-                <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_OnClick" />
+                </asp:Panel>
             </div>
         </div>
+        <div class="text-center">
+            <asp:Button runat="server" CssClass="btn btn-success" Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_OnClick" />
+            <asp:Button runat="server" CssClass="btn btn-primary" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick" />
+            <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_OnClick" />
+        </div>
+        <br />
     </ContentTemplate>
 </asp:UpdatePanel>

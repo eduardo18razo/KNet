@@ -39,10 +39,7 @@
                         </asp:Repeater>
                     </div>
                 </header>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        Filtros
-                    </div>
+                <div class="panel panel-primary">                    
                     <div class="panel-body text-center">
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroGrupo" Text="Grupo" OnClick="btnFiltroGrupo_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroCanal" Text="Canal Apertura" OnClick="btnFiltroCanal_OnClick" />
@@ -56,10 +53,9 @@
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroSla" Text="SLA" OnClick="btnFiltroSla_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroVip" Text="Vip" OnClick="btnFiltroVip_OnClick" />
                         <asp:Button runat="server" CssClass="btn btn-primary" ID="btnFiltroFechas" Text="Fechas" OnClick="btnFiltroFechas_OnClick" />
-                    </div>
-                    <div class="panel-footer" style="text-align:center">
-                         <asp:Button runat="server" CssClass="btn btn-success" ID="btnConsultar" Text="Consultar" OnClick="btnConsultar_Click" />
-                    </div> <%-- jgb--%>
+                        <asp:Label runat="server" Width="60px"></asp:Label>
+                        <asp:Button runat="server" CssClass="btn btn-success" ID="btnConsultar" Text="Consultar" OnClick="btnConsultar_Click" />
+                     </div>                    
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

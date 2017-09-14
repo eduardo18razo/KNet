@@ -22,16 +22,19 @@
                 </asp:Repeater>
             </div>
         </header>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                SLA
-            </div>
-            <div class="panel-body">
-                <%--ORIGEN--%>
-                <div class="panel panel-primary">
-                    <div class="panel-heading text-center text-primary">
-                        Seleccione
-                    </div>
+
+        <div class="modal-header">
+            <h2 class="modal-title">SLA</h2>
+            <hr class="bordercolor">
+        </div>
+
+        <div class="panel-body">
+            <%--ORIGEN--%>
+            <div class="panel panel-primary">
+                <div style="font-weight: bold">
+                    Seleccione                   
+                </div>
+                <asp:Panel runat="server" ScrollBars="None" Width="100%" Height="100px">
                     <div class="panel-body">
                         <asp:Repeater runat="server" ID="rptSla">
                             <HeaderTemplate>
@@ -48,13 +51,16 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
+                </asp:Panel>
+            </div>
+
+            <%--SELECCION--%>
+            <div class="panel panel-primary">
+                <div style="font-weight: bold">
+                    Seleccionados
+                   
                 </div>
-                <br />
-                <%--SELECCION--%>
-                <div class="panel panel-primary">
-                    <div class="panel-heading text-center text-primary">
-                        Seleccionados
-                    </div>
+                <asp:Panel runat="server" ScrollBars="None" Width="100%" Height="80px">
                     <div class="panel-body">
                         <asp:Repeater runat="server" ID="rptSlaSeleccionado">
                             <HeaderTemplate>
@@ -71,13 +77,15 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
-                </div>
-            </div>
-            <div class="panel-footer text-center">
-                <asp:Button runat="server" CssClass="btn btn-success" Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_OnClick" />
-                <asp:Button runat="server" CssClass="btn btn-primary" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick" />
-                <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_OnClick" />
+                </asp:Panel>
             </div>
         </div>
+
+        <div class="text-center">
+            <asp:Button runat="server" CssClass="btn btn-success" Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_OnClick" />
+            <asp:Button runat="server" CssClass="btn btn-primary" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick" />
+            <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_OnClick" />
+        </div>
+        <br />
     </ContentTemplate>
 </asp:UpdatePanel>

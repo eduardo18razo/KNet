@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcFiltroEstatus.ascx.cs" Inherits="KiiniHelp.UserControls.Filtros.Componentes.UcFiltroEstatus" %>
 <asp:UpdatePanel runat="server" UpdateMode="Conditional">
     <ContentTemplate>
+
         <header class="modal-header" id="panelAlerta" runat="server" visible="false">
             <div class="alert alert-danger">
                 <div>
@@ -22,16 +23,19 @@
                 </asp:Repeater>
             </div>
         </header>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Estatus
-            </div>
-            <div class="panel-body">
+               
+        <div class="modal-header">
+                    <h2 class="modal-title">Estatus</h2>
+                    <hr class="bordercolor">
+        </div>
+        
+        <div class="panel-body">
                 <%--ORIGEN--%>
                 <div class="panel panel-primary">
-                    <div class="panel-heading text-center text-primary">
+                    <div style="font-weight: bold">
                         Seleccione
                     </div>
+                     <asp:Panel runat="server" ScrollBars="Vertical" Width="100%" Height="140px">
                     <div class="panel-body">
                         <asp:Repeater runat="server" ID="rptEstatus">
                             <HeaderTemplate>
@@ -48,13 +52,15 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
+                    </asp:Panel>
                 </div>
-                <br />
+               
                 <%--SELECCION--%>
                 <div class="panel panel-primary">
-                    <div class="panel-heading text-center text-primary">
+                    <div style="font-weight: bold">
                         Seleccionados
                     </div>
+                     <asp:Panel runat="server" ScrollBars="Vertical" Width="100%" Height="140px">
                     <div class="panel-body">
                         <asp:Repeater runat="server" ID="rptEstatusSeleccionado">
                             <HeaderTemplate>
@@ -71,13 +77,16 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
+                    </asp:Panel>
                 </div>
             </div>
-            <div class="panel-footer text-center">
+        
+        <div class="text-center">
                 <asp:Button runat="server" CssClass="btn btn-success" Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_OnClick" />
                 <asp:Button runat="server" CssClass="btn btn-primary" Text="Limpiar" ID="btnLimpiar" OnClick="btnLimpiar_OnClick" />
                 <asp:Button runat="server" CssClass="btn btn-danger" Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_OnClick" />
-            </div>
-        </div>
+            </div>        
+         
+        <br />
     </ContentTemplate>
 </asp:UpdatePanel>
