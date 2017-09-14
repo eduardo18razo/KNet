@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using KiiniHelp.ServiceSeguridad;
 using KiiniHelp.ServiceSistemaEstatus;
 using KiiniHelp.ServiceTicket;
 using KiiniNet.Entities.Helper;
@@ -130,6 +131,7 @@ namespace KiiniHelp.UserControls.Consultas
             {
                 lblBranding.Text = WebConfigurationManager.AppSettings["Brand"];
                 Alerta = new List<string>();
+                ucCambiarEstatusTicket.OnAceptarModal += ucCambiarEstatusTicket_OnAceptarModal;
                 if (!IsPostBack)
                 {
                     ViewState["Column"] = "DateTime";
@@ -139,6 +141,31 @@ namespace KiiniHelp.UserControls.Consultas
                     LlenaEstatus();
                     ObtenerTicketsPage(int.Parse(ViewState["PageIndex"].ToString()), (Dictionary<string, string>)ViewState["Filtros"], true, ViewState["Sortorder"].ToString() == "ASC", ViewState["Column"].ToString());
                 }
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        void ucCambiarEstatusTicket_OnAceptarModal()
+        {
+            try
+            {
+                ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "CierraPopup(\"#modalEstatusCambio\");", true);
+                if (ucCambiarEstatusTicket.CerroTicket)
+                {
+                    string url = ResolveUrl("~/FrmEncuesta.aspx?IdTipoServicio=" + (int)BusinessVariables.EnumTipoArbol.SolicitarServicio + "&IdTicket=" + ucCambiarEstatusTicket.IdTicket);
+                    //string s = "window.open('" + url + "', 'popup_window', 'width=600,height=600,left=300,top=100,resizable=yes');";
+                    //ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
+                    ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "ScriptEncuesta", "OpenWindow(\"" + url + "\");", true);
+                }
+                ObtenerTicketsPage(int.Parse(ViewState["PageIndex"].ToString()), (Dictionary<string, string>)ViewState["Filtros"], true, ViewState["Sortorder"].ToString() == "ASC", ViewState["Column"].ToString());
             }
             catch (Exception ex)
             {
@@ -195,6 +222,29 @@ namespace KiiniHelp.UserControls.Consultas
             try
             {
                 ObtenerTicketsPage(int.Parse(ViewState["PageIndex"].ToString()), (Dictionary<string, string>)ViewState["Filtros"], true, ViewState["Sortorder"].ToString() == "ASC", ViewState["Column"].ToString());
+            }
+            catch (Exception ex)
+            {
+                if (_lstError == null)
+                {
+                    _lstError = new List<string>();
+                }
+                _lstError.Add(ex.Message);
+                Alerta = _lstError;
+            }
+        }
+
+        protected void btnCambiaEstatus_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btn = (Button) sender;
+                if (btn == null) return;
+                ucCambiarEstatusTicket.EsPropietario = true;
+                ucCambiarEstatusTicket.IdTicket = int.Parse(btn.CommandArgument);
+                ucCambiarEstatusTicket.IdEstatusActual = int.Parse(btn.CommandName);
+                ucCambiarEstatusTicket.IdUsuario = ((Usuario) Session["UserData"]).Id;
+                ScriptManager.RegisterClientScriptBlock(Page, typeof (Page), "Script","MostrarPopup(\"#modalEstatusCambio\");", true);
             }
             catch (Exception ex)
             {

@@ -388,8 +388,8 @@ namespace KinniNet.Core.Operacion
                 RolTipoGrupo rolTipoGrupo = db.RolTipoGrupo.SingleOrDefault(w => w.IdRol == idRol);
                 if (rolTipoGrupo != null)
                 {
-                   result = db.GrupoUsuario.First(f => f.IdTipoGrupo == rolTipoGrupo.IdTipoGrupo && f.IdTipoUsuario == idTipoUsuario && f.Sistema);
-                   db.LoadProperty(result, "SubGrupoUsuario");
+                    result = db.GrupoUsuario.First(f => f.IdTipoGrupo == rolTipoGrupo.IdTipoGrupo && f.IdTipoUsuario == idTipoUsuario && f.Sistema);
+                    db.LoadProperty(result, "SubGrupoUsuario");
                 }
             }
             catch (Exception ex)
@@ -820,22 +820,48 @@ namespace KinniNet.Core.Operacion
             DataBaseModelContext db = new DataBaseModelContext();
             try
             {
-                result.AddRange(from subgpo in grupo.SubGrupoUsuario
-                                where subgpo != null
-                                from statusDefault in db.EstatusTicketSubRolGeneralDefault.Where(w => w.IdSubRolSolicita == subgpo.IdSubRol && w.TieneSupervisor == grupo.TieneSupervisor)
-                                select new EstatusTicketSubRolGeneral
-                                {
-                                    IdRolSolicita = statusDefault.IdRolSolicita,
-                                    IdSubRolSolicita = statusDefault.IdSubRolSolicita,
-                                    IdRolPertenece = statusDefault.IdRolPertenece,
-                                    IdSubRolPertenece = statusDefault.IdSubRolPertenece,
-                                    IdEstatusTicketActual = statusDefault.IdEstatusTicketActual,
-                                    IdEstatusTicketAccion = statusDefault.IdEstatusTicketAccion,
-                                    TieneSupervisor = statusDefault.TieneSupervisor,
-                                    Propietario = statusDefault.Propietario,
-                                    LevantaTicket = statusDefault.LevantaTicket,
-                                    Habilitado = statusDefault.Habilitado
-                                });
+                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                if (grupo.IdTipoGrupo == (int)BusinessVariables.EnumTiposGrupos.Agente)
+                    result.AddRange(from subgpo in grupo.SubGrupoUsuario
+                                    where subgpo != null
+                                    from statusDefault in db.EstatusTicketSubRolGeneralDefault.Where(w => w.IdSubRolSolicita == subgpo.IdSubRol && w.TieneSupervisor == grupo.TieneSupervisor)
+                                    select new EstatusTicketSubRolGeneral
+                                    {
+                                        IdRolSolicita = statusDefault.IdRolSolicita,
+                                        IdSubRolSolicita = statusDefault.IdSubRolSolicita,
+                                        IdRolPertenece = statusDefault.IdRolPertenece,
+                                        IdSubRolPertenece = statusDefault.IdSubRolPertenece,
+                                        IdEstatusTicketActual = statusDefault.IdEstatusTicketActual,
+                                        IdEstatusTicketAccion = statusDefault.IdEstatusTicketAccion,
+                                        TieneSupervisor = statusDefault.TieneSupervisor,
+                                        Propietario = statusDefault.Propietario,
+                                        LevantaTicket = statusDefault.LevantaTicket,
+                                        Habilitado = statusDefault.Habilitado
+                                    });
+                else
+                {
+                    int idRol = (int) BusinessVariables.EnumRoles.Usuario;
+                    var qry = from statusDefault in db.EstatusTicketSubRolGeneralDefault.Where(
+                                w => w.IdRolSolicita == idRol && w.TieneSupervisor == grupo.TieneSupervisor)
+                        select statusDefault;
+
+                    foreach (EstatusTicketSubRolGeneralDefault generalDefault in qry.ToList())
+                    {
+                        result.Add(new EstatusTicketSubRolGeneral
+                              {
+                                  IdRolSolicita = generalDefault.IdRolSolicita,
+                                  IdSubRolSolicita = generalDefault.IdSubRolSolicita,
+                                  IdRolPertenece = generalDefault.IdRolPertenece,
+                                  IdSubRolPertenece = generalDefault.IdSubRolPertenece,
+                                  IdEstatusTicketActual = generalDefault.IdEstatusTicketActual,
+                                  IdEstatusTicketAccion = generalDefault.IdEstatusTicketAccion,
+                                  TieneSupervisor = generalDefault.TieneSupervisor,
+                                  Propietario = generalDefault.Propietario,
+                                  LevantaTicket = generalDefault.LevantaTicket,
+                                  Habilitado = generalDefault.Habilitado
+                              });
+                    }
+                }
             }
             catch (Exception e)
             {

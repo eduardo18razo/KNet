@@ -32,8 +32,8 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="module-inner text-right">
-                            <asp:Button runat="server" Text="Cancelar" ID="btnCancelar" CssClass="btn btn-default" />
-                            <asp:Button runat="server" Text="Aceptar" ID="btnAceptar" CssClass="btn btn-primary" />
+                            <asp:Button runat="server" Text="Cancelar" ID="btnCancelar" CssClass="btn btn-default" OnClick="btnCancelar_OnClick"/>
+                            <asp:Button runat="server" Text="Aceptar" ID="btnAceptar" CssClass="btn btn-primary" OnClick="btnAceptar_OnClick" />
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UcConsultaMisTickets.ascx.cs" Inherits="KiiniHelp.UserControls.Consultas.UcConsultaMisTickets" %>
+<%@ Import Namespace="KinniNet.Business.Utils" %>
+<%@ Register Src="~/UserControls/Operacion/UcCambiarEstatusTicket.ascx" TagPrefix="uc1" TagName="UcCambiarEstatusTicket" %>
+
 <div style="height: 100%;">
     <asp:UpdatePanel runat="server" style="height: 100%">
         <ContentTemplate>
@@ -31,7 +34,7 @@
                             <div class="search-box form-inline margin-bottom-lg">
                                 <label class="sr-only" for="txtFiltro">Buscar</label>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                    <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control help_search_form" style="width: 95%" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" placeholder="Busca con una palabra clave..." />
+                                    <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control help_search_form" Style="width: 95%" onkeydown="return (event.keyCode!=13 && event.keyCode!=27);" placeholder="Busca con una palabra clave..." />
                                     <asp:LinkButton runat="server" class="btn btn-primary btn-single-icon fa fa-search" OnClick="btnBuscar_OnClick"></asp:LinkButton>
                                 </div>
                             </div>
@@ -42,7 +45,7 @@
                             ... o consulta por estatus<br />
                             <div class="form-horizontal margin-bottom-lg">
                                 <div class="form-group col-lg-12">
-                                    <asp:DropDownList runat="server" ID="ddlEstatus" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlEstatus_OnSelectedIndexChanged"/>
+                                    <asp:DropDownList runat="server" ID="ddlEstatus" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlEstatus_OnSelectedIndexChanged" />
                                 </div>
                             </div>
                         </div>
@@ -79,9 +82,13 @@
                                             <td><%# Eval("FechaHora" , "{0:dd/MMM/yyyy}")%></td>
                                             <td class="text-center">
                                                 <div style='<%# "margin: auto; width: 50%; background-color: " + Eval("Estatusticket.Color") %>' class="text-center">
-                                                    <asp:Label runat="server"   Text='<%# Eval("Estatusticket.Descripcion")%>'></asp:Label>
+                                                    <asp:Label runat="server" Text='<%# Eval("Estatusticket.Descripcion")%>'></asp:Label>
                                                 </div>
-                                                
+
+                                            </td>
+                                            <td>
+                                                <asp:Button runat="server" Text="Estatus" ID="btnCambiaEstatus" CssClass="btn btn-primary" OnClick="btnCambiaEstatus_OnClick" CommandArgument='<%# Eval("IdTicket")%>' CommandName='<%# Eval("EstatusTicket.Id") %>'
+                                                    Visible='<%# int.Parse(Eval("Estatusticket.Id").ToString()) == (int) BusinessVariables.EnumeradoresKiiniNet.EnumEstatusTicket.Resuelto %>' />
                                             </td>
                                         </tr>
                                     </ItemTemplate>
@@ -92,9 +99,7 @@
                                 </asp:Repeater>
                                 <asp:Repeater ID="rptPager" runat="server">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="lnkPage" runat="server" Text='<%#Eval("Text") %>' CommandArgument='<%# Eval("Value") %>'
-                                            CssClass='<%# Convert.ToBoolean(Eval("Enabled")) ? "page_enabled" : "page_disabled" %>'
-                                            OnClientClick='<%# !Convert.ToBoolean(Eval("Enabled")) ? "return false;" : "" %>'></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkPage" runat="server" Text='<%#Eval("Text") %>' CommandArgument='<%# Eval("Value") %>' CssClass='<%# Convert.ToBoolean(Eval("Enabled")) ? "page_enabled" : "page_disabled" %>' OnClientClick='<%# !Convert.ToBoolean(Eval("Enabled")) ? "return false;" : "" %>'></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </div>
@@ -102,6 +107,19 @@
                     </div>
                 </div>
             </section>
+            <div class="modal fade" id="modalEstatusCambio" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <uc1:UcCambiarEstatusTicket runat="server" ID="ucCambiarEstatusTicket" />
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
         </ContentTemplate>
+
     </asp:UpdatePanel>
+
 </div>

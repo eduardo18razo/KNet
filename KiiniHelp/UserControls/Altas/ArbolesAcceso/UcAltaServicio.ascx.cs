@@ -206,17 +206,17 @@ namespace KiiniHelp.UserControls.Altas.ArbolesAcceso
                 if (result != null)
                 {
                     lblImpacto.Style.Remove("color");
-                    if (result.Descripcion == "ALTO")
+                    if (result.Descripcion.ToUpper() == "ALTO")
                     {
                         lblImpacto.Style.Add("color", "red");
                         imgImpacto.ImageUrl = "~/assets/images/icons/prioridadalta.png";
                     }
-                    if (result.Descripcion == "MEDIO")
+                    if (result.Descripcion.ToUpper() == "MEDIO")
                     {
                         lblImpacto.Style.Add("color", "blue");
                         imgImpacto.ImageUrl = "~/assets/images/icons/prioridadmedia.png";
                     }
-                    if (result.Descripcion == "BAJO")
+                    if (result.Descripcion.ToUpper() == "BAJO")
                     {
                         lblImpacto.Style.Add("color", "yellow");
                         imgImpacto.ImageUrl = "~/assets/images/icons/prioridadbaja.png";

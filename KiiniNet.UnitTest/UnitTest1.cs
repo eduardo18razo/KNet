@@ -8,6 +8,7 @@ using System.Reflection;
 using System.ServiceModel;
 using System.ServiceModel.Description;
 using KinniNet.Core.Demonio;
+using KinniNet.Core.Operacion;
 using KinniNet.Data.Help;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -98,6 +99,7 @@ namespace KiiniNet.UnitTest
         {
             try
             {
+                new BusinessConsultas().testConsulta();
                 var strings = KinniNet.Business.Utils.BusinessErrores.ObtenerMensajeByKey(KinniNet.Business.Utils.BusinessVariables.EnumMensajes.Exito);
                 new DataBaseModelContext();
                 //CompilerResults compilerResults = null;

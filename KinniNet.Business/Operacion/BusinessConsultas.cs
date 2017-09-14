@@ -59,15 +59,6 @@ namespace KinniNet.Core.Operacion
                           where grupos.Contains(q.tgu.IdGrupoUsuario)
                           select q;
 
-                //foreach (int grupo in grupos)
-                //{
-                //    qry = from q in qry
-                //          where q.TicketGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo)
-                //          select q;
-                //}
-
-                //qry = grupos.Aggregate(qry, (current, grupo) => (from q in current where q.TicketGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo) select q));
-
                 if (canales.Any())
                     qry = from q in qry
                           where canales.Contains(q.t.IdCanal)
@@ -234,6 +225,64 @@ namespace KinniNet.Core.Operacion
             return result;
         }
 
+        private string getorganizacion(int idorganizacion)
+        {
+            return new BusinessOrganizacion().ObtenerDescripcionOrganizacionById(idorganizacion, false);
+        }
+
+        private string getUbicacion(int idUbicacion)
+        {
+            return new BusinessUbicacion().ObtenerDescripcionUbicacionById(idUbicacion, false);
+        }
+        private string gettipificacion(int idArbol)
+        {
+            return new BusinessArbolAcceso().ObtenerTipificacion(idArbol);
+        }
+        public void testConsulta()
+        {
+            DataBaseModelContext db = new DataBaseModelContext();
+            try
+            {
+                var qry = from hc in db.HitConsulta
+                    join hgu in db.HitGrupoUsuario on hc.Id equals hgu.IdHit
+                    join r in db.Rol on hgu.IdRol equals r.Id
+                    join gu in db.GrupoUsuario on hgu.IdGrupoUsuario equals gu.Id
+                    join u in db.Usuario on hc.IdUsuario equals u.Id
+                    join tu in db.TipoUsuario on u.IdTipoUsuario equals tu.Id
+                    join aa in db.ArbolAcceso on hc.IdArbolAcceso equals aa.Id
+                    join taa in db.TipoArbolAcceso on aa.IdTipoArbolAcceso equals taa.Id
+                    join iaa in db.InventarioArbolAcceso on new {idArbolhit = hc.IdArbolAcceso, idArbol = aa.Id} equals new {idArbolhit = iaa.IdArbolAcceso, idArbol = iaa.IdArbolAcceso}
+                          select new HelperHits
+                    {
+                        Rol = r.Descripcion,
+                        Grupo = gu.Descripcion,
+                        TipoUsuarioAbreviacion = tu.Abreviacion,
+                        TipoUsuarioColor = tu.Color,
+                        IdOrganizacion = hc.IdOrganizacion,
+                        //Organizacion = getorganizacion(hc.IdOrganizacion),
+                        IdUbicacion = hc.IdUbicacion,
+                        //Ubicacion = getUbicacion(hc.IdUbicacion),
+                        //Tipificacion = gettipificacion(hc.IdArbolAcceso),
+                        TipoServicio = taa.Descripcion,
+                        Vip = u.Vip,
+                        //FechaHora = hc.FechaHoraAlta.ToString("dd/MM/yyyy"),
+                        //Hora = hc.FechaHoraAlta.ToString("hh:mm:ss"),
+                        IdHit = hc.Id,
+                        IdTipoArbolAcceso = taa.Id,
+                        IdTipificacion = aa.Id,
+                        IdUsuario = hc.IdUsuario,
+                        //NombreUsuario = u.NombreCompleto,
+                        
+                    };
+                var lst = qry.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { db.Dispose(); }
+        }
+
         public List<HelperHits> ConsultarHits(int idUsuario, List<int> grupos, List<int> tiposUsuario, List<int> organizaciones, List<int> ubicaciones, List<int> tipificacion, List<bool?> vip, Dictionary<string, DateTime> fechas, int pageIndex, int pageSize)
         {
             DataBaseModelContext db = new DataBaseModelContext();
@@ -241,7 +290,8 @@ namespace KinniNet.Core.Operacion
             DateTime fechaInicio = new DateTime();
             try
             {
-                db.ContextOptions.ProxyCreationEnabled = _proxy;
+                //db.ContextOptions.ProxyCreationEnabled = _proxy;
+                db.ContextOptions.LazyLoadingEnabled = true;
                 DateTime fechaFin = new DateTime();
                 if (fechas != null)
                 {
@@ -250,8 +300,8 @@ namespace KinniNet.Core.Operacion
                 }
                 var qry = from h in db.HitConsulta
                           join tgu in db.HitGrupoUsuario on h.Id equals tgu.IdHit
-                          join gu in db.GrupoUsuario on tgu.IdGrupoUsuario equals gu.Id
-                          join r in db.Rol on tgu.IdRol equals r.Id
+                          //join gu in db.GrupoUsuario on tgu.IdGrupoUsuario equals gu.Id
+                          //join r in db.Rol on tgu.IdRol equals r.Id
                           join or in db.Organizacion on h.IdOrganizacion equals or.Id
                           join ub in db.Ubicacion on h.IdUbicacion equals ub.Id
                           select new { h, tgu };
@@ -259,7 +309,6 @@ namespace KinniNet.Core.Operacion
                     qry = from q in qry
                           where grupos.Contains(q.tgu.IdGrupoUsuario)
                           select q;
-                //qry = grupos.Aggregate(qry, (current, grupo) => (from q in current where q.HitGrupoUsuario.Select(s => s.IdGrupoUsuario).Contains(grupo) select q));
 
                 if (tiposUsuario.Any())
                     qry = from q in qry
@@ -300,24 +349,42 @@ namespace KinniNet.Core.Operacion
                     result = new List<HelperHits>();
                     foreach (HitConsulta hit in lstHits.Skip(pageIndex * pageSize).Take(pageSize).OrderBy(o => o.IdArbolAcceso))
                     {
-                        db.LoadProperty(hit, "Usuario");
-                        db.LoadProperty(hit.Usuario, "TipoUsuario");
-                        db.LoadProperty(hit, "Organizacion");
-                        db.LoadProperty(hit, "Ubicacion");
-                        db.LoadProperty(hit, "HitGrupoUsuario");
-                        db.LoadProperty(hit, "TipoArbolAcceso");
-                        db.LoadProperty(hit, "ArbolAcceso");
+                        //db.LoadProperty(hit, "Usuario");
+                        //db.LoadProperty(hit.Usuario, "TipoUsuario");
+                        //db.LoadProperty(hit, "Organizacion");
+                        //db.LoadProperty(hit, "Ubicacion");
+                        //db.LoadProperty(hit, "HitGrupoUsuario");
+                        //db.LoadProperty(hit, "TipoArbolAcceso");
+                        //db.LoadProperty(hit, "ArbolAcceso");
 
-                        db.LoadProperty(hit, "HitGrupoUsuario");
-                        foreach (HitGrupoUsuario hgu in hit.HitGrupoUsuario)
-                        {
-                            db.LoadProperty(hgu, "Rol");
-                            db.LoadProperty(hgu, "GrupoUsuario");
-                        }
-                        var dateFilter = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd"),"yyyy-MM-dd",CultureInfo.InvariantCulture);
+                        //db.LoadProperty(hit, "HitGrupoUsuario");
+                        //foreach (HitGrupoUsuario hgu in hit.HitGrupoUsuario)
+                        //{
+                        //    db.LoadProperty(hgu, "Rol");
+                        //    db.LoadProperty(hgu, "GrupoUsuario");
+                        //}
+                        var dateFilter = DateTime.ParseExact(DateTime.Now.ToString("yyyy-MM-dd"), "yyyy-MM-dd", CultureInfo.InvariantCulture);
                         result.AddRange(hit.HitGrupoUsuario.Select(hitGrupoUsuario => new HelperHits
                         {
-                            Rol = hitGrupoUsuario.Rol.Descripcion, Grupo = hitGrupoUsuario.GrupoUsuario.Descripcion, TipoUsuarioAbreviacion = hit.Usuario.TipoUsuario.Abreviacion, TipoUsuarioColor = hit.Usuario.TipoUsuario.Color, IdOrganizacion = hit.IdOrganizacion, Organizacion = new BusinessOrganizacion().ObtenerDescripcionOrganizacionById(hit.IdOrganizacion, false), IdUbicacion = hit.IdUbicacion, Ubicacion = new BusinessUbicacion().ObtenerDescripcionUbicacionById(hit.IdUbicacion, false), Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(hit.IdArbolAcceso), TipoServicio = hit.TipoArbolAcceso.Descripcion, Vip = hit.Usuario.Vip, FechaHora = hit.FechaHoraAlta.ToString("dd/MM/yyyy"), Hora = hit.FechaHoraAlta.ToString("hh:mm:ss"), Total = lstHits.Count(c => c.IdArbolAcceso == hit.IdArbolAcceso && hit.FechaHoraAlta == dateFilter), IdHit = hit.Id, IdTipoArbolAcceso = hit.IdTipoArbolAcceso, IdTipificacion = hit.IdArbolAcceso, IdUsuario = hit.IdUsuario, NombreUsuario = hit.Usuario.NombreCompleto,
+                            Rol = hitGrupoUsuario.Rol.Descripcion,
+                            Grupo = hitGrupoUsuario.GrupoUsuario.Descripcion,
+                            TipoUsuarioAbreviacion = hit.Usuario.TipoUsuario.Abreviacion,
+                            TipoUsuarioColor = hit.Usuario.TipoUsuario.Color,
+                            IdOrganizacion = hit.IdOrganizacion,
+                            Organizacion = new BusinessOrganizacion().ObtenerDescripcionOrganizacionById(hit.IdOrganizacion, false),
+                            IdUbicacion = hit.IdUbicacion,
+                            Ubicacion = new BusinessUbicacion().ObtenerDescripcionUbicacionById(hit.IdUbicacion, false),
+                            Tipificacion = new BusinessArbolAcceso().ObtenerTipificacion(hit.IdArbolAcceso),
+                            TipoServicio = hit.TipoArbolAcceso.Descripcion,
+                            Vip = hit.Usuario.Vip,
+                            FechaHora = hit.FechaHoraAlta.ToString("dd/MM/yyyy"),
+                            Hora = hit.FechaHoraAlta.ToString("hh:mm:ss"),
+                            Total = lstHits.Count(c => c.IdArbolAcceso == hit.IdArbolAcceso && hit.FechaHoraAlta == dateFilter),
+                            IdHit = hit.Id,
+                            IdTipoArbolAcceso = hit.IdTipoArbolAcceso,
+                            IdTipificacion = hit.IdArbolAcceso,
+                            IdUsuario = hit.IdUsuario,
+                            NombreUsuario = hit.Usuario.NombreCompleto,
                         }));
                     }
                 }
